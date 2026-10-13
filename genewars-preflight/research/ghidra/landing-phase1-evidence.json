@@ -1,0 +1,14 @@
+{
+  "cases": 327680,
+  "timers": [
+    150,
+    50,
+    49,
+    2,
+    1
+  ],
+  "seed_cases": 65536,
+  "compared_bytes": 33095680,
+  "output_sha256": "3649d2fd36066fe9859a8073f39e52241dcf553cd426b85697e3c363b44e5b9e",
+  "source_sha256": "4f2ba6dcfa9f27bfb25618c8f86389b0074d8f50dc10e0ab13bc7f1a32dba939"
+}

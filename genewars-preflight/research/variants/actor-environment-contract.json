@@ -1,0 +1,162 @@
+{
+  "status": "passed-static-actor-environment-contract",
+  "utc": "2026-10-13T14:49:34.073980+00:00",
+  "native_implementation_compared": false,
+  "original_execution": false,
+  "gui_execution": false,
+  "instruction_pins": [
+    {
+      "private_path": "private/ghidra/terrain-map-refs/instructions-0008b520.txt",
+      "sha256": "37342106bfbee451f816f38ffbd92903d81b06fd534da2f6031e26c1be840e49"
+    },
+    {
+      "private_path": "private/ghidra/terrain-map-refs/instructions-0008b130.txt",
+      "sha256": "f2505f556f5a3a4f012cd375b6a43cc8029c3f03b5f1c37efe65b8a6cec2d52f"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-00074cc0.txt",
+      "sha256": "701ba3601cd73db82d86a57d1502d53d6ad2a8d5910833c28f6e89784bcf542b"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-00074160.txt",
+      "sha256": "abcc56f1c17963a69d68c85bc4c251b28929235b518cf4b696c18abfcb458c3b"
+    },
+    {
+      "private_path": "private/ghidra/command-resolver/instructions-00074270.txt",
+      "sha256": "0e6512bf106d649968285420fc325a0cf12afabecaa582ed4b6cc9a486b59a30"
+    },
+    {
+      "private_path": "private/ghidra/landing-contact/instructions-0008b460.txt",
+      "sha256": "968ab9a9db051de1ca9c5cadada0ebffc08b34dd0681cf33f5db51482258f1dd"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-0001ee10.txt",
+      "sha256": "67284531f9de18e252b503ec89522e7be59fad0a1128732c24c53705f64e1e72"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-0001ee20.txt",
+      "sha256": "0aa43dc30a3d2399e5d659215c01ed920605684839f5762cfba24f4c3c4b9d1f"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-0001f410.txt",
+      "sha256": "35c557c5e1042c57cbf5a4f2b90afadb232326d2477a2a6b03d41b367433294a"
+    },
+    {
+      "private_path": "private/ghidra/landing-contact/instructions-000874b0.txt",
+      "sha256": "3872c2cc79407473a77f62e50b66e4bae0d6cf59a5ff453abefe45a8bdfd7003"
+    },
+    {
+      "private_path": "private/ghidra/plant-command/instructions-00074a50.txt",
+      "sha256": "c44b051dc39fd5998975fecccd10798615d09cba01a10c6e909646373358861a"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e450.txt",
+      "sha256": "93a27ebe8f32681f4e476559ef905b49056bc913ab9c75415491269a191faa5d"
+    }
+  ],
+  "mission": {
+    "private_path": "private/integration/game-runtime/terrain/CONQ001.DAT",
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  },
+  "terrain_cases": 409600,
+  "terrain_actual_histogram": {
+    "0": 132613,
+    "1": 3602,
+    "7": 1404,
+    "4": 2808,
+    "3": 7029
+  },
+  "blocker_cells": 16384,
+  "initial_blocker_histogram": {
+    "0": 16344,
+    "10": 40
+  },
+  "map_obstacle_flag_clear_cells": 16384,
+  "typed_virtual_slots": [
+    {
+      "kind": 1,
+      "vtable_va": "0x111fec",
+      "slot": 16,
+      "target": "0x1ee20",
+      "sha256": "a5b79bde19a811815c5f366ad7688ff9a12bf59937a95b6e826563f49dbea681"
+    },
+    {
+      "kind": 2,
+      "vtable_va": "0x1120ac",
+      "slot": 16,
+      "target": "0x1f410",
+      "sha256": "a435cf8079934fdd8bb91e1ac446d4bed96b505533b5954132e878aa6e910ad4"
+    },
+    {
+      "kind": 3,
+      "vtable_va": "0x112194",
+      "slot": 16,
+      "target": "0x1ee20",
+      "sha256": "a5b79bde19a811815c5f366ad7688ff9a12bf59937a95b6e826563f49dbea681"
+    },
+    {
+      "kind": 5,
+      "vtable_va": "0x112254",
+      "slot": 16,
+      "target": "0x1f410",
+      "sha256": "a435cf8079934fdd8bb91e1ac446d4bed96b505533b5954132e878aa6e910ad4"
+    }
+  ],
+  "obstacle_neighbor_order": [
+    8,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    1,
+    255
+  ],
+  "obstacle_resolved_offsets": [
+    [
+      0,
+      0
+    ],
+    [
+      256,
+      0
+    ],
+    [
+      256,
+      256
+    ],
+    [
+      0,
+      256
+    ],
+    [
+      -256,
+      256
+    ],
+    [
+      -256,
+      0
+    ],
+    [
+      -256,
+      -256
+    ],
+    [
+      256,
+      -256
+    ],
+    [
+      7680,
+      0
+    ]
+  ],
+  "minimap_vectors": 23496,
+  "minimap_outside_vectors": 4,
+  "limits": [
+    "Current map bit11mask01 clear proves obstacleNULL for all existing owned states that preserve it",
+    "Nonclear obstacle-flag path and virtual-kind8 are not admitted by this first-mission contract",
+    "Native actor+7F/category1 exemption requires typed actor/blueprint and actual live plant identity",
+    "874B0 is minimap-only, no true terrain unprojection claim"
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/entity-shadow-panel/instructions-0007f3b0.txt",
+      "sha256": "6c128d79d263a395544aef8a99cac717c4b43bcebaf9271d742d4c1dfcff2034"
+    },
+    {
+      "private_path": "private/ghidra/mission-array-refs/instructions-00048790.txt",
+      "sha256": "840113f32e4845215dc107850ae4cf6218cd5558af2f2dbd1aae632654da533d"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0001f070.txt",
+      "sha256": "b890bd05c1566c3755c4a62dad58a937ee98d0119013e6f6fe11ef59b84f79c3"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-00049e90.txt",
+      "sha256": "55e976eb9c620d3cd6996d5dfd810532c8ca5c0a93fcb4a34239744049f9e001"
+    },
+    {
+      "private_path": "private/ghidra/plant-command/instructions-0004b630.txt",
+      "sha256": "1686608a6f95caf95f2f963ac824df9f02ecc2ed5d7a6d928fa85638b845ef76"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-0006df30.txt",
+      "sha256": "8afe40345a8ecb636ff3af67dd76b4fa4104596032270b0cc61ab26b2affe8b1"
+    },
+    {
+      "private_path": "private/ghidra/landing-contact/instructions-0007ac00.txt",
+      "sha256": "cc002c636ec832486e06fe90af6cfc68a0489d6acae6efcf83d5a5ce735706e1"
+    },
+    {
+      "private_path": "private/ghidra/command-resolver/instructions-00080ae0.txt",
+      "sha256": "f6abb34796b3a71a8443f62f35547b049f371968f15a7365dea2c367858739a6"
+    },
+    {
+      "private_path": "private/ghidra/plant-command/instructions-00074a50.txt",
+      "sha256": "c44b051dc39fd5998975fecccd10798615d09cba01a10c6e909646373358861a"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-00073e00.txt",
+      "sha256": "7869104854e5107e8d711b69704e8e1009dcba41892d0233c4daca72e8f0c5a0"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-0008ac60.txt",
+      "sha256": "6fd0ff082558f7bc94da0a908710fab78b8d477369a106e15f37f4922ee557fa"
+    },
+    {
+      "private_path": "private/ghidra/landing-contact/instructions-000a7120.txt",
+      "sha256": "d9c56cbf880776ad616caa7770043a77974eec02fdb504a076c1346ab935c53b"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0001e810.txt",
+      "sha256": "7a30b56a1ffc4b24228dcebdc978fc38c5c5f73757cdcf7727e38ee778a42c2f"
+    },
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-0007d090.txt",
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    },
+    {
+      "private_path": "private/ghidra/landing-contact/instructions-000a71c4.txt",
+      "sha256": "b198fab59957d87fdefe5ecb0f7a85376c6eadef9c9db7df7650f188d2da02d0"
+    },
+    {
+      "private_path": "private/ghidra/landing-contact/instructions-000c55d5.txt",
+      "sha256": "a8a519fd75dc67033aff994d9bafb36f158ef34a5890f5fe63cbf53f575ce8c7"
+    },
+    {
+      "private_path": "private/ghidra/landing-contact/instructions-000733a0.txt",
+      "sha256": "fca831c451b1c09a39d93188d8cf9428b04ae5b25d8f87f09ecceb87c5f3f736"
+    },
+    {
+      "private_path": "private/ghidra/command-resolver/instructions-000ae028.txt",
+      "sha256": "526b3f9cdc9b43ed6b330383417fad4b6c8acb41a917acf5571e4f01f0a6585b"
+    },
+    {
+      "private_path": "private/ghidra/terrain-map-refs/instructions-00049d30.txt",
+      "sha256": "9744e7af7b0870eb4c54ef2d695a1fc1904c59eb05ff1aee49aec0f87c44c227"
+    },
+    {
+      "private_path": "private/ghidra/mission-array-refs/instructions-0004b3b0.txt",
+      "sha256": "70d7c3c297a8693f4b7367eab89f440b850efac1e673f52addeeff45597591da"
+    },
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-00071b70.txt",
+      "sha256": "df0c9245caa952c20d3d319149413fc9d12382b8d65d036bba306ce8d7f19076"
+    },
+    {
+      "private_path": "private/ghidra/landing-contact/instructions-0001f030.txt",
+      "sha256": "eef54b7f64a559dca6e71631b5414dd8c274b1e9ff6029901cc8305ee91f29eb"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-0001f260.txt",
+      "sha256": "0f0c7ee7a26b87418a794e92c763f2dffb749d896335288aa052cfa40aba9ff2"
+    },
+    {
+      "private_path": "private/ghidra/entity-order-refs/instructions-0004e950.txt",
+      "sha256": "a661608b0b5e833aa178b7ab5548bf57c12a98318686adda79954d584403a2f2"
+    },
+    {
+      "private_path": "private/ghidra/panel-activation-refs/instructions-000724c0.txt",
+      "sha256": "588fd5fdf44fabe33a7e1f1df7c5cf5ab66edaf91f18cad6892015f252b47375"
+    }
+  ],
+  "factory": {
+    "entry": "7F3B0->48790",
+    "code_hex": "31",
+    "family": 4,
+    "native_type": 5,
+    "base": "1688AE",
+    "stride": 81,
+    "capacity": 200,
+    "admission": "Explicit freefirstslot/poolcount0..199; nofullpoolreplacement. Prior81bytesrequired. Owner0..3,positioni16pair,explicitterrainheight/shade.",
+    "writes": "See executablefactorymodel. Linkkindsnull/indexwordspreserved;position7,IDF,groundheight11,shade17,owner18;flags15word0020;animation1A..1D=[0,0,1,0],1Epreserved;physicalheight27=ground+6400hex;width2B16;velocity(0,0,-1088);acceleration0;angles(0,1024,1088);3F=-1;selector4531hex,phase460,timer4A=-1,childref47kind0/indexpreserved,4C0.1Fanimationtypedhandle49,vptr23preserved.",
+    "requests": [
+      "insertcellhead8AC60",
+      "INCfamily4countword11C2B4",
+      "saveplayer496={factoryID,kind5}",
+      "audiochannel50mode2volume127duration180",
+      "ifowner==selectedplayer,reveal75B00radius4096"
+    ],
+    "oldhead": "NextreferenceusesresolvedoldheadID/type, requireidentityconsistency or explicitresolvedrecord. Nullnextclearskindonly.",
+    "player_reference": "Savedplayer496type5persistsduringphase0/contact/80AE0; it is not cleared."
+  },
+  "effect_resource": {
+    "entry_id": "root/2/disc/59",
+    "input_sha256": "74c282b4aff35204da78399a3f2674cabda56b0a76dc9a9974635ae5ad878b8d",
+    "decoded_sha256": "f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253",
+    "decoded_size": 186726,
+    "descriptor_va": "1038E4",
+    "raw_slot": "116814",
+    "animation_slot": "116818",
+    "animation": 49,
+    "frame_count": 1,
+    "frame_flags": 0,
+    "frame_offset": 3486,
+    "frame_hold": 0,
+    "fresh_animation_identity": "7AC00 with1A..1E=[0,0,1,0,0] returns same fivebytes everycall; prior1E0required, actualinactiveCDsource1E0."
+  },
+  "phase0_contact": "Requiresactive5/code31/phase460, post6DF30physics+7AC00state andground7B140sample. Signedground>=physical27:27=ground,velocity2D/2F/31=0,phase461,timer4A150; ifchildref47kind4resolved, child3C=1/330; call80AE0ownerplayer; stopaudio50A7120,play51virtual44; tail75240followrequestifchildnonnull. Freshkind0branchadmittedbyexecutablemodel. ContactprefixconsumesnoRNGbeforeactivation. Unmentionedrecordfieldsincludingpostphysicsanglespreserved.",
+  "phase0_noncontact": "Signedground<physical27: threeE62Dsharedseedupdates, ring+3mod32,count+3u32wrap. Requesteffectfactorycode06 atsameposition/physicalheight,owner0,angles(high3*8,1024-high2%128,2560+64*(high1%10)),otherargs0. Successmarknewentityflags15mask01andreturncreatedcount1;failure0. Audio50volumeparameter=70+trunc0((wrapped(physical27-ground11)>>6)*110/400), plus98210volumeadjustrequest. Factory/audio/childfolloweffectsremainexplicit, notsilentlydiscarded; thismodeldoesnotclaimtheirtransitiveRNGfootprint.",
+  "physics_boundary_historical": "4B630callsfamily4virtual94=6DF30beforephase0. Freshverticalflight hasgravitydisabledbyflags15mask20 andvelocity-1088; airborneheightcandidate=physical27+(velocityZ>>3)=physical27-136.7B380refreshesgroundheight11/shade17. Fullcontact/bounce terrainnormal733A0/angleupdates andparity74270collisioncallbacksremainexplicitpostphysicsinputs; nofixed189frameorfullphysicsclaim. Explicitterrain>water+320/noobstacle gates canexcludeadditionalwater/collisioneffects, butmustnotinferlivegates.",
+  "associated_activation": "80AE0scansfive200Bslotsascendinginplayerpartition. Qualifyactive!=0&&71mask04; safeonlytype3. Clearword70mask0401thenOR01,byte16&F7. Ifplayer496kind5,resolve81Bfamily4IDandcenter73E00there; repeatedlydrawradius512until74CC0terrain/plantpredicateaccepts. SetactorpositionLANDINGCENTER, theninternalopcode3-like74A50movetargetacceptedcandidateunless71mask10; thatinhibitdoesnotpreventposition/link/blueprintupdates. Admitted82zero/57mask01clearavoid51E80. Acceptedcandidateisfarther64;NULL74270buildinglookupplusalreadyaccepted74CC0predicatesmakesresolverreturncandidate. InsertactoratCENTERcell,blueprint1B=18/20|2/1C++,optionalactor72=40forfirstcategory1use. AfterallfiveINCplayer49Dexactlyonce,includingzeroqualifying. Sharedblueprints/cellheadswritesmustbesequential. Landingreference496unchanged. No-associatedrouteinsteadcopiescandidatepositionanddoesnotsetmoveorder.",
+  "seed_provenance": "Missiontailcopiesseed5428to11878A, but7D090 subsequentlybranchesonRUNTIMEmode118968:mask80setsseed=(saved1169A0-1)mod65536;elsemask01useshosttimeorreceivedsynchronized2Bseed;otherwiseleavespost884D0seed. HosttimeA71C4->C55D5INT21AH2C; seed=(second+1+minute)*(centisecond+1)low16. Initial1D770alsoreadsruntimeclockandsets1169A0. ThusCDbytesalonecannotchoosecurrentseed/mode. Campaignskips8A9F0targetRNG;fresh7F580consumes64known draws oncecurrentseedknown. Subsequentordinaryfamily0/plant/effectcallbacksandphase0effectsconsume sharedstream; nofullschedulerclosure.",
+  "scratch_provenance": "7FAD0doesnotwrite18/1Bofreused36Bstackrecord;7F580copiesbothinto20blueprints. Noowningpriorwriter/stackhistoryhasbeenproved. Requireexplicitcallerpriorbytes, notzeroorCDresource-derivedvalues.",
+  "fixtures": {
+    "private_path": "private/ghidra/landing-contact/landing-fixtures.json",
+    "sha256": "f18d01ac05cf40f10d06613aa31c23257f91a2a6b2bff12b27bc97321d9a70b4",
+    "factory_vectors": 32,
+    "phase_vectors": 96,
+    "rng_vectors": 5
+  },
+  "independent_executable": {
+    "private_harness": "private/ghidra/landing-contact/landing-oracle.rs",
+    "harness_sha256": "715ba981e7a785804344e9b8c2be75827c7824a61f026a1c7b48833340ed536d",
+    "phase_cases": 8192,
+    "rng_seed_cases": 65536,
+    "compared_bytes": 1196032,
+    "output_sha256": "a7d9e0504b3a21012d17872b7eaa81a971cf1a7b9cfb4eaf0cf694b1464f1f14",
+    "scope": "Freshly authored Rust scalar/byte oracle compared to Python source-basedmodel; nooriginalmachinecodeexecution. Shippinglanding.rs APIs comparedagainstsameindependentfixtures,including32factoryvectors;6shippingmoduletestsrun."
+  },
+  "effect6_flight_comparison": {
+    "flight_cases": 2048,
+    "grounded_cases": 1024,
+    "animation_cases": 156,
+    "compared_bytes": 261624,
+    "output_sha256": "b64a1114d41029aefa27ce7c0ccfb412c6fccfdb175828f01f68c6e8928266b3",
+    "animation_frames": 13,
+    "animation_flags": 0,
+    "animation_all_holds": 0
+  },
+  "contact_effect_comparison": {
+    "contact_cases": 1024,
+    "effect6_factory_cases": 1024,
+    "compared_bytes": 167936,
+    "output_sha256": "fcdc3dfb89309da410d1b9649c10ec7000eade9e6411a95fe3fb4641216489b8",
+    "tables_sha256": "f03124f960c98b1448478427fe48bbfe77d9cda74a7bd6025be53a0e2430a29e"
+  },
+  "production_comparison": {
+    "source_sha256": "f8a43c4ac0a69d6579a20a034cbdb401b427ebff2a992bdc5029eac760678f12",
+    "harness_sha256": "fde94d1d5afdfa4b60bcf3dd67724689d5420961055b60434cfe9d8c8ec27999",
+    "compared_bytes": 1198624,
+    "output_sha256": "2b60db016a33abc55b3c17dd10c7fee167cfca81072a3843c70c455023ac7984",
+    "factory_cases": 32,
+    "phase_cases": 8192,
+    "rng_seed_cases": 65536
+  },
+  "lifecycle": {
+    "production_source_sha256": "f6032674e731dedd6bb40a79c0aeb3ea24bf130ad2691a200aad79db891e0161",
+    "tests": 3,
+    "retirement": "Code6rowchildFF:49D30mapunlink,724C0clearsmatchingreferenceKINDBYTESonlyin nativekind1refs4D/50/55/58/5B(kind1flags60&~2if5Bmatch),kind3refs4D/50/7F/7B,kind5ref47,kind7refs4D/50/57/5A,kind8ref59. UI25150requestifselected;409F0nine22Bpointerrecordsclearsdeadpointer;2C200activepanel193+19For1C4+1CCpointerclear. Thenkind6=0,count11C2B4--. NoRNG. NativeemptyUIisexplicitpolicy.",
+    "scheduler": "4E950primaryascending200activeflag1clear,sumu8callbackcreationreturns. Newbornascendingactiveflag1set,clearbitbeforecallback,remaining--,ignorecallbackreturn,stopremaining0. Unaccountedcreationcountrejectsinboundedport. Queueascendingactiveexceptselector46."
+  },
+  "mission_physics": {
+    "entry_id": "root/2/disc/152",
+    "source_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+    "gravity_i16_1C5D": 1024,
+    "serialized_water_i32_1C67": 2000,
+    "height_i16_1C63": 816,
+    "loaded_water_i32_1C67": 1632,
+    "writer": "71B70tail7245D..7246D doublesSIGNED1C63. Gravitypreserved;futureUIgravityeditsnotinferred."
+  },
+  "phase1_quiet": "plan_landing_phase1_quiet_grounded admitsfreshphase1/4C0/nochild,zeroV/A/fractions,physical=ground,ground>water320;sourcegroundphysicssets3B512/3D0,preservesyaw;timer150through50takes100passeswithoutRNG. Beforetimer50rejectsnext49journal802UI+806particle2Fbranch,not silently skipped.",
+  "first_contact_physics": "plan_landing_vertical_contact computesactual733A0triangle-normal/bouncecoefficient/AE028angles fromactual4nativeheightwords,actual8B520-indexed104530coefficientand257wordAE134table. Noobstacle/watergatesremainexplicit. Source6DF30firstimpactonly, freshverticalcode31.",
+  "effect6_factory": "Nullparent/freepoolfactory usesEFFanimation6, consumesoneadditionalE62Ddrawjournal21Dafterallocation; byte1D=1+high%3;acceleration37=-(gravity11A9BD>>6). Priorchild73/76preserved;flags20. Successparentmarkmask1external. Fullpoolreplacementunadmitted.",
+  "effect6_update": "plan_effect6_flight computesfractionalXY,airborneorfirstimpactnormalbounceandAE028orientation;actualcandidatepositionground/shade/corners/8B520coefficientrequired. Repeatedgroundcontact/water/nonnullobstacleunadmitted. EFF6 thirteenhold0framesflags0;delay1..3source7AC00;lastframe12counter0andt<0requests49D30retirement. Rowbyte3FFmeans4B3B0returns0andconsumesnochildRNG. Survivingselector4C3DDdamps15*v>>4withoutRNG. Hostmustexecutechangedcellunlink/relink/virtual88andretirement724C0cleanup/countdecrementtransactionally.",
+  "limits": [
+    "No original launch or full live scheduler/initialseed claim.",
+    "No fullpoolreplacement/nativepointer/resource/audioexecution.",
+    "Bounded contact model begins AFTERexplicitphysics; postcontactorientationnotinvented.",
+    "Acceptedplacement and resolver environment outcomesmustbevalidated, notassumed."
+  ]
+}

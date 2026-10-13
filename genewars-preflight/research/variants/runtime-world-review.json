@@ -1,13 +1,13 @@
 {
   "status": "passed-independent-native-runtime-world-review",
-  "utc": "2026-10-13T13:17:51.471741+00:00",
+  "utc": "2026-10-13T14:53:08.553736+00:00",
   "original_execution": false,
   "gui_execution": false,
   "source_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/world.rs",
-      "size": 43596,
-      "sha256": "f9d763553f7656c602bddc0a75ff0892d3945187eacc2a386d517bc19d782553"
+      "size": 45717,
+      "sha256": "f45b4357337724ac724711cbb9ddbe92a7764fe701d99f531be76bd072874c19"
     },
     {
       "path": "rust/crates/genewars-runtime/src/identity.rs",
@@ -16,8 +16,8 @@
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs",
-      "size": 7644,
-      "sha256": "8693f154843e29c4653e8ba591acad69c8c5423ab5d5d5c057a7965577c4d501"
+      "size": 13027,
+      "sha256": "a445be5a74bc52013b7869b2310b7414e49375206870057750410b1e57510343"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs",
@@ -43,8 +43,8 @@
     },
     {
       "path": "research/ghidra/plant-startup-evidence.json",
-      "size": 19158,
-      "sha256": "87794fcd86a131c8495b010d07ff63a5d2cb351c1b6a0ff1a0b76c49dd1a81f3"
+      "size": 19182,
+      "sha256": "cb9820bd590afd81b8b600edcd3b32c6f937afc7ebb0969d6cc662270aea55e1"
     }
   ],
   "unlink_pin": {
@@ -7867,12 +7867,12 @@
     {
       "steps": 0,
       "report": {
-        "path": "private/review/runtime-world/b50ae4c165b34e94b4698a0498bd0cff/ticks-0.json",
+        "path": "private/review/runtime-world/74351d8a8cd04f90b4783ea7e78bac9f/ticks-0.json",
         "size": 671,
         "sha256": "e9ef4dabe27c725c2b930a8f6f295bc3ece0be1b4cd76e1ef704380f93abdfd4"
       },
       "world": {
-        "path": "private/review/runtime-world/b50ae4c165b34e94b4698a0498bd0cff/ticks-0.bin",
+        "path": "private/review/runtime-world/74351d8a8cd04f90b4783ea7e78bac9f/ticks-0.bin",
         "size": 343958,
         "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
       },
@@ -7881,12 +7881,12 @@
     {
       "steps": 1,
       "report": {
-        "path": "private/review/runtime-world/b50ae4c165b34e94b4698a0498bd0cff/ticks-1.json",
+        "path": "private/review/runtime-world/74351d8a8cd04f90b4783ea7e78bac9f/ticks-1.json",
         "size": 1763,
         "sha256": "b1fd99d9bdafb1a89d439e48e1a8bcd05983ec4f182e4a636ce84f097e34a84c"
       },
       "world": {
-        "path": "private/review/runtime-world/b50ae4c165b34e94b4698a0498bd0cff/ticks-1.bin",
+        "path": "private/review/runtime-world/74351d8a8cd04f90b4783ea7e78bac9f/ticks-1.bin",
         "size": 343958,
         "sha256": "e425abac99b8dceeed0aba550d2f940d095d38adceedd6345c7b4f73afd5ff0a"
       },
@@ -7895,12 +7895,12 @@
     {
       "steps": 128,
       "report": {
-        "path": "private/review/runtime-world/b50ae4c165b34e94b4698a0498bd0cff/ticks-128.json",
+        "path": "private/review/runtime-world/74351d8a8cd04f90b4783ea7e78bac9f/ticks-128.json",
         "size": 97060,
         "sha256": "b36e1d98dce0948556284aa929a76bf3898ed1cae62f4e3cf9b4a11610878447"
       },
       "world": {
-        "path": "private/review/runtime-world/b50ae4c165b34e94b4698a0498bd0cff/ticks-128.bin",
+        "path": "private/review/runtime-world/74351d8a8cd04f90b4783ea7e78bac9f/ticks-128.bin",
         "size": 343958,
         "sha256": "01a8fbc0d14580fb2cc04e98876a2803225e707cde6dd611cbae23461f6c0cb4"
       },
@@ -7908,25 +7908,25 @@
     }
   ],
   "extreme_pointer_case": {
-    "path": "private/review/runtime-world/b50ae4c165b34e94b4698a0498bd0cff/extreme-pointer.json",
+    "path": "private/review/runtime-world/74351d8a8cd04f90b4783ea7e78bac9f/extreme-pointer.json",
     "size": 356,
     "sha256": "a792c57a13d56b9f25c28bb57af502a432131ecfa135138aa923dc67d06f0bcf"
   },
   "app_binary": {
     "path": "private/build/rust-target/debug/genewars-game.exe",
-    "size": 22484464,
-    "sha256": "bbf541ecb4b43d694a8e48575233e6b279eee4694be622c91caf2b50529ccfcd"
+    "size": 24603204,
+    "sha256": "13d7e52aecacf87a4242d502d3430b8da0b8cb8233a821b0b50cb624ff14136f"
   },
   "harness": {
     "path": "private/review/runtime-world/review.exe",
-    "size": 5283968,
-    "sha256": "c0b6137992ae2fadb9ead60707b81594df3e55c3cfe3528e19523400f228b8b7"
+    "size": 5496544,
+    "sha256": "3163ff3098015379d9fc086747c5d9d9b61b82f2d8cc65a4bfed0bfe6f77000f"
   },
   "review_sources": [
     {
       "path": "research/variants/runtime-world-review.py",
-      "size": 11152,
-      "sha256": "454710400d55dc9201e4a17eb793961c2f922e59fb2d6b9fdc684ca5a7c3f968"
+      "size": 11644,
+      "sha256": "7fbd6aefa08a6c01fe11b555b85d4e6ad2e6e3573577be7cfacce5817ab08a11"
     },
     {
       "path": "research/variants/runtime-world-review.rs",
@@ -7936,7 +7936,7 @@
   ],
   "resolved_findings": [
     "Retired ownlinks preserved; singleton headkind only cleared; raw NULL indices preserved",
-    "Zero-class fallback uses original floorcell",
+    "Zero-class fallback uses eight neighbors around original floorcell, excluding its center",
     "i32 headless hit subtraction safely rejects extreme coordinates"
   ],
   "limits": [

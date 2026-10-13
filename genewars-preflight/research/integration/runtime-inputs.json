@@ -155,8 +155,110 @@
       "sha256": "297a1da0e9c30d6d4cb7c88addb8234be260e0e93b7d4b2b1c4c3ad8b7df2b7c",
       "size": 384,
       "provenance": "CD-GW.EXE:0x126980..0x126B00"
+    },
+    {
+      "path": "actors/key-00.anb",
+      "sha256": "629a6471e4deabec794f0cffa34b513eea15013ee95927e67b02a4a7e6157b6a",
+      "size": 35497,
+      "provenance": "actor key 0; root/2/disc/361"
+    },
+    {
+      "path": "actors/key-01.anb",
+      "sha256": "4421b2f6570face0e323f0444e3d10b972f0f7705fe128bac54963e9e0911563",
+      "size": 26921,
+      "provenance": "actor key 1; root/2/disc/362"
+    },
+    {
+      "path": "actors/key-02.anb",
+      "sha256": "93e5aeb581d83ebd33ad55b8068adbe427fcb9a606e88a5f8bab079ea75be7cb",
+      "size": 38076,
+      "provenance": "actor key 2; root/2/disc/363"
+    },
+    {
+      "path": "actors/key-03.anb",
+      "sha256": "38d32a18a8b94bf2411a184506dbcbf76c344292fae8ef81971d2c02f91c4929",
+      "size": 35797,
+      "provenance": "actor key 3; root/2/disc/364"
+    },
+    {
+      "path": "actors/key-04.anb",
+      "sha256": "4a232c5debfef3fbef5a54647e6312cc325265fe996b00841b35f1511340bd73",
+      "size": 40742,
+      "provenance": "actor key 4; root/2/disc/357"
+    },
+    {
+      "path": "actors/key-05.anb",
+      "sha256": "8946c2d3dfd8fe059fb8c72a74a71d0eaab48d43015a28d563beec095e38023b",
+      "size": 28983,
+      "provenance": "actor key 5; root/2/disc/358"
+    },
+    {
+      "path": "actors/key-06.anb",
+      "sha256": "63a3623d75f761aa5e09737074e5f5ab4a9cc40bf85334d69863536241874184",
+      "size": 41317,
+      "provenance": "actor key 6; root/2/disc/359"
+    },
+    {
+      "path": "actors/key-07.anb",
+      "sha256": "6576a2ffc66893d8eacb21a44165ac11118dd7256f74237f6992210148dee847",
+      "size": 35249,
+      "provenance": "actor key 7; root/2/disc/360"
+    },
+    {
+      "path": "actors/key-08.anb",
+      "sha256": "03c147fb87ad0d30a2de2f4e91ee755575b07a2d63078c9c2bb5611ded2b040f",
+      "size": 39778,
+      "provenance": "actor key 8; root/2/disc/365"
+    },
+    {
+      "path": "actors/key-09.anb",
+      "sha256": "73cdf337d6ff63cc4d120bdd9c3e0b0dcc59c000a4193e40f8a98c3cf72d03d9",
+      "size": 32231,
+      "provenance": "actor key 9; root/2/disc/366"
+    },
+    {
+      "path": "actors/key-10.anb",
+      "sha256": "b4eb05c610c7d135dc9de8876608302032b0428b0afdcb052fc174b9bd2eea7a",
+      "size": 38301,
+      "provenance": "actor key 10; root/2/disc/367"
+    },
+    {
+      "path": "actors/key-11.anb",
+      "sha256": "b51ef5a703a89dcf00c2465ddc7666fe842a9ce726363c2a36b2f2f0ac1d6277",
+      "size": 35744,
+      "provenance": "actor key 11; root/2/disc/368"
+    },
+    {
+      "path": "actors/key-12.anb",
+      "sha256": "aef9ba878097884f64674c3273ae8de8139530c31155fbbf6d4db1db11e329c0",
+      "size": 37700,
+      "provenance": "actor key 12; root/2/disc/369"
+    },
+    {
+      "path": "actors/key-13.anb",
+      "sha256": "662b6358b87eff43624009881701ff9eec243d05800a79ed7478fc6736b724b0",
+      "size": 27293,
+      "provenance": "actor key 13; root/2/disc/370"
+    },
+    {
+      "path": "actors/key-14.anb",
+      "sha256": "9f4ef097c5db8ad10c41b8992345bb2b26b6b4045a30c96e03c867f2ef968f0d",
+      "size": 34865,
+      "provenance": "actor key 14; root/2/disc/371"
+    },
+    {
+      "path": "actors/key-15.anb",
+      "sha256": "6e6a81c03e5b8ec50706ca85c77161190183a9d44202dd155a9fc249043df559",
+      "size": 32699,
+      "provenance": "actor key 15; root/2/disc/372"
+    },
+    {
+      "path": "effects/EFF.ANB",
+      "sha256": "f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253",
+      "size": 186726,
+      "provenance": "root/2/disc/59; decoded RNC output"
     }
   ],
   "original_execution": false,
-  "catalog_sha256": "fdfd24ea0237b9851b2522a233e8f973531740df2223d1042592254acbd8de26"
+  "catalog_sha256": "dd84be2e7a01889f68fd5d8a9db8e7f7769b64e51609d8960b1dbeb27e91125e"
 }

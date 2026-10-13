@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-13T14:49:51.386790+00:00",
+  "sessions": 16,
+  "callbacks": 128,
+  "draws": 512,
+  "compared_bytes": 47562880,
+  "output_sha256": "0967f0059c42368e18daaa5340b2fb4242385910d2c72a6cfe7a02baabb96396",
+  "source_pins": [
+    {
+      "path": "private/integration/game-runtime/terrain/CONQ001.DAT",
+      "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+    },
+    {
+      "path": "scripts/ghidra/validate_landing_bridge.py",
+      "sha256": "90be59cb854388b8c8b2ac46c24051b51689900ad1a43246d2da2ed0563d5550"
+    }
+  ],
+  "implementation_pins": [
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "61523e25803399b5cd420be63f29f608cfe9c9f6c76031e5df30ec3417f6647d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
+      "sha256": "d22112307fb1ca75dd209b6f752353eea2ef14153accbef3637a6c9acfed734d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
+      "sha256": "055e8b1d5f5a3256ea4eb9bdea4ee3749960c03bafa0a4955263a7acb955c334"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing.rs",
+      "sha256": "f8a43c4ac0a69d6579a20a034cbdb401b427ebff2a992bdc5029eac760678f12"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
+      "sha256": "cc063773f1a08c161bb34aa03751e75dd3c74ea50e78d4d63c0d6a6ad844e685"
+    },
+    {
+      "path": "scripts/landing_step_probe.rs",
+      "sha256": "f383d49e12b75d7e6a2726b7dd3880dc19f419b9461b2b45482a41ccfd81c223"
+    },
+    {
+      "path": "scripts/validate_landing_steps.py",
+      "sha256": "ec6874909b01e93c86da81cca41d384d3e5cd9c544504a06e75c204e399be9cc"
+    }
+  ],
+  "scope": "Exact map and load-derived physics with explicit player/native-prior/RNG fixtures. Complete shared-state airborne phase0+smoke-factory comparisons. Other family callbacks and smoke updates intentionally absent; not a full scheduler or original startup trace."
+}

@@ -1,0 +1,47 @@
+{
+  "status": "Observed binary source; bounded wrapper contract, primitive clipping still explicitly pinned separately",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "pins": [
+    {
+      "path": "private/ghidra/actor-draw/instructions-00056f10.txt",
+      "sha256": "722b64990b18d0983082381221494a695f1f317a30cd27ec7593532877106301"
+    },
+    {
+      "path": "private/ghidra/actor-draw/instructions-00057050.txt",
+      "sha256": "2f3f7eefb5135976db5d892d7ee5faa050963b557f6390d3bc48d5a07b496643"
+    },
+    {
+      "path": "private/ghidra/actor-draw/instructions-00057070.txt",
+      "sha256": "1526c85bd083ac2632c1781f1a36fe5c2510df87cd34aed12b8a86334ac0a72b"
+    },
+    {
+      "path": "private/ghidra/actor-draw/instructions-0008f660.txt",
+      "sha256": "b5cf03c056dc153e6bb2919cd1fd7741f0c9382cd0fb79bb2d5249f0f09fe7b5"
+    },
+    {
+      "path": "private/ghidra/actor-draw/instructions-00095390.txt",
+      "sha256": "8ae130718f8bb1c699ccfc7e44a6a83fc9f41c10770fb5b9b4050efc96bfcfa5"
+    },
+    {
+      "path": "private/ghidra/actor-draw/instructions-00095e40.txt",
+      "sha256": "3982c16e3623879cc29ee2e5851cf429c760a57d79add30bbcd262103dedfeb5"
+    },
+    {
+      "path": "private/ghidra/actor-draw/instructions-00096870.txt",
+      "sha256": "3f9eb98b5a042f83896da8afca1b68fc8b7a5681ec4668ef4a6ccce568a2bc21"
+    },
+    {
+      "path": "private/ghidra/actor-draw/instructions-00096990.txt",
+      "sha256": "318a4d5f9fea633f859a291e7449239393e54f7c889eeb970cf9b4d3c229398c"
+    }
+  ],
+  "direct_entry": "57050 sets115B58=1, signextendsincomingDX/BX, callsactorvirtual24, clears115B58. No world projection computed here.",
+  "frame": "57070 resolves *(actor1F + u8actor19*10) + u8actor1B*14. Frame14B: components pointer+0, component count u8+B. Component10B: sprite pointer+0,signedoffsetX+4,signedoffsetY+6,flagsu8+8. Sprite dimensionsu8+4/+5.",
+  "placement": "Given origin from caller. If globalF&3==0: flagsF|componentflags,offsetsunchanged. Else flags=(F&FFFC)|componentflags; F&1 givesX=-width-offsetX,flags^=1; F&2 givesY=-height-offsetY,flags^=2. Addorigin; restoreFaftercomponents.",
+  "visibility": "If blueprint15==3 andactor73>=224, drawonlyowner==selectedplayer and(framecounter+actorIDlow)&1==0.",
+  "global_flags": "56F10initializesF0. blueprint15==3:actor73>=171 gives4;85..170 gives12. Then OR1 iff actor55==1 andactor70&4; actor55==7 andword70&104==104; otherwise blueprint16==0 requiresactor58&1,actor7E<=1or4,actor70&4; blueprint16==1 requiresword70&84==84; blueprint16==2 requiresactor82!=0,word70&84==84,actor59in13/14. OthercategoriesleaveFunchanged. 57070 additionallyOR4 whenactor15&10 and(framecounter+actorIDlow)&1!=0.",
+  "color": "palettebiasu8=owner18*16-64. If actor15&2==0 andshade17<30,96990usesexplicit256Brow188F48+(shade17+(virtualheight>>7))*256;else96870 owner recolor. Owner recolor replacespixelC0..CF with bias+(pixel&15), otherpixelsunchanged. Fade primitive applies row to same owner-recolored pixel.",
+  "height": "virtual+4 returnsheight. Normal115B58==0 subtractheight>>6fromoriginY andcalls96AC0shadowbeforemain. Direct57050path skipsboth. Shade rowstillincludesheight>>7inbothpaths.",
+  "primitive_flags": "95390/95E40 testlow1horizontalmirror andlowC blending. bit4 without8 usesblend18CF48[(destination<<8)+mappedsource]; bit8 usesblend18CF48[(mappedsource<<8)+destination]. bit2verticalflipin8F660. No high80test in these exports; 84/85 use sameblend4 paths but high80mustremainexplicituntil all clippingdependenciesverified. Requireexplicit65536Bblendtable for4/5/84/85; donot renderasordinarycopy.",
+  "unsupported": "Shadow96AC0, textlabels, otherprimitiveflags, map projection, missingfade/blendtables must reject orremainexplicit effects; direct57050 subset avoids shadow/labels."
+}

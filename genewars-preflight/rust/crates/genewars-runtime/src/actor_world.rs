@@ -14,8 +14,14 @@ use crate::actor_command::{self, Opcode3MoveOrderError, Opcode3MoveOrderResult, 
 use crate::actor_pool::{ActorPool, ActorPoolError, ActorHandleBindings};
 use crate::blueprint::{BlueprintRng, BlueprintNames, BlueprintGeneration};
 use crate::player_state::{ActorOriginSample, PlayerState, PlayerStateError};
+use crate::world::{MissionWorld, PlantStorage, PlantParameterTable, PlantTickReport, RuntimeError};
+use crate::effect_pool::{EffectPool, EffectPoolError, EffectAnimationBinding};
+use crate::landing::{self, LandingRecord, LandingError, LandingEvent};
 use genewars_assets::{ConqMissionSource, MissionRecordGroupLayout};
 use std::collections::HashSet;
+
+mod effect_updates;
+pub use effect_updates::{LandingPhysicsContext, LandingStepReceipt, EffectStepReceipt, LandingEffectCallback, LandingEffectPassReceipt};
 
 const MISSION_HASH: &str = "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2";
 const MAP_START: usize = 0x355E;
@@ -30,6 +36,16 @@ pub enum ActorWorldError {
     DuplicateLink([u8; 3]), AlreadyLinked(i16), MissingActorLink(i16),
     ActorOwner(i16), ActorNotCommandable(i16), AssociatedUnitUnsupported,
     EnvironmentUnavailable, StaleLink,
+    Plants(RuntimeError), PlantsNotAdmitted,
+    MissingBlueprintBinding(i16), InvalidBlueprintCategory(u8),
+    UnsupportedBlockerFamily(u8), UnsupportedBuildingQuery(usize),
+    Effects(EffectPoolError), EffectsNotAdmitted, EffectsAlreadyAdmitted,
+    EffectCountMismatch { declared: i16, active: usize }, Landing(LandingError),
+    LandingAlreadyAssociated(u8), Terrain(String),
+    Physics(crate::physics_tables::PhysicsTableError),
+    UnsupportedEffectEvent, MissingEffectLink(u16), EffectBinding(u16),
+    Lifecycle(crate::landing_effect_lifecycle::LifecycleError),
+    CleanupBeforeImage { kind:u8, slot:u16, offset:u16 },
     InvalidPortraitState { current: i8, count: i8 },
 }
 impl core::fmt::Display for ActorWorldError {
@@ -39,6 +55,15 @@ impl std::error::Error for ActorWorldError {}
 impl From<ActorPoolError> for ActorWorldError { fn from(e: ActorPoolError) -> Self { Self::Pool(e) } }
 impl From<PlayerStateError> for ActorWorldError { fn from(e: PlayerStateError) -> Self { Self::Player(e) } }
 impl From<ActorActivationError> for ActorWorldError { fn from(e: ActorActivationError) -> Self { Self::Activation(e) } }
+impl From<RuntimeError> for ActorWorldError { fn from(e: RuntimeError) -> Self { Self::Plants(e) } }
+impl From<EffectPoolError> for ActorWorldError { fn from(e: EffectPoolError) -> Self { Self::Effects(e) } }
+impl From<LandingError> for ActorWorldError { fn from(e: LandingError) -> Self { Self::Landing(e) } }
+impl From<crate::physics_tables::PhysicsTableError> for ActorWorldError {
+    fn from(e: crate::physics_tables::PhysicsTableError) -> Self { Self::Physics(e) }
+}
+impl From<crate::landing_effect_lifecycle::LifecycleError> for ActorWorldError {
+    fn from(e:crate::landing_effect_lifecycle::LifecycleError)->Self { Self::Lifecycle(e) }
+}
 
 /// Values returned by separately admitted terrain/blocker helpers at the
 /// supplied sampled point. The actor avoidance mask always comes from the
@@ -54,8 +79,8 @@ pub struct AssociatedPlacementEnvironment {
     pub obstacle_present: bool,
 }
 
-/// Ground-control branch inputs after module/hit dispatch and874B0 world
-/// projection. These are source packet/state fields, not invented UI events.
+/// Ground-control branch inputs after module/hit dispatch and its admitted
+/// target producer.874B0 applies only to the minimap control, not terrain.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct GroundMoveInput {
     pub buttons: u8,
@@ -85,12 +110,75 @@ pub struct ActivationBatchReceipt {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub struct LandingCreationReceipt {
+    pub slot: u16,
+    pub player: u8,
+    pub position: [i16; 2],
+    pub ground_height: i32,
+    pub shade: u8,
+    /// Factory audio and caller reveal operations retain source order.
+    /// These are still pending; this receipt does not mark startup complete.
+    pub pending_events: Vec<LandingEvent>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ActorWorld {
     backing: Vec<u8>,
     layouts: [MissionRecordGroupLayout; 8],
     actors: ActorPool,
     players: [PlayerState; 4],
     rng: BlueprintRng,
+    plants: Option<PlantSubsystem>,
+    effects: Option<EffectPool>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct PlantSubsystem { parameters: PlantParameterTable, tick_number: u64 }
+
+/// A temporary borrow of the world's sole backing and actor pool. Plant
+/// callbacks read and rewrite actor links directly in the native records;
+/// no packed actor mirror or second persistent map exists.
+struct SharedPlantStorage<'a> { backing: &'a mut Vec<u8>, actors: &'a mut ActorPool, effects: Option<&'a mut EffectPool> }
+impl core::ops::Deref for SharedPlantStorage<'_> {
+    type Target = [u8];
+    fn deref(&self) -> &[u8] { self.backing }
+}
+impl core::ops::DerefMut for SharedPlantStorage<'_> {
+    fn deref_mut(&mut self) -> &mut [u8] { self.backing }
+}
+impl PlantStorage for SharedPlantStorage<'_> {
+    fn common_record(&self, kind: u8, index: u16) -> Result<&[u8], RuntimeError> {
+        if kind == 3 {
+            return self.actors.record(usize::from(index)).map(|r| &r[..31])
+                .map_err(|_| RuntimeError::InvalidReference { cell: usize::MAX, index: index as i16, kind });
+        }
+        if kind == 5 {
+            if let Some(pool) = self.effects.as_ref() {
+                return pool.record(usize::from(index)).map(|r| &r[..31])
+                    .map_err(|_| RuntimeError::InvalidReference { cell: usize::MAX, index: index as i16, kind });
+            }
+        }
+        self.backing.common_record(kind, index)
+    }
+    fn write_common_reference(&mut self, kind: u8, index: u16, offset: usize, value: [u8; 3]) -> Result<(), RuntimeError> {
+        if offset != 0 && offset != 3 { return Err(RuntimeError::StorageInvariant("invalid actor link offset")); }
+        if kind == 5 {
+            if let Some(pool) = self.effects.as_mut() {
+                let before = *pool.record(usize::from(index)).map_err(|_| RuntimeError::StorageInvariant("invalid effect slot"))?;
+                let mut after = before;
+                after[offset..offset + 3].copy_from_slice(&value);
+                return pool.replace_record_checked(usize::from(index), &before, &after)
+                    .map_err(|_| RuntimeError::StorageInvariant("effect link replacement rejected"));
+            }
+        }
+        if kind != 3 { return self.backing.write_common_reference(kind, index, offset, value); }
+        let before = *self.actors.record(usize::from(index))
+            .map_err(|_| RuntimeError::InvalidReference { cell: usize::MAX, index: index as i16, kind })?;
+        let mut after = before;
+        after[offset..offset + 3].copy_from_slice(&value);
+        self.actors.replace_record_checked(usize::from(index), &before, &after)
+            .map_err(|_| RuntimeError::StorageInvariant("actor link replacement rejected"))
+    }
 }
 
 impl ActorWorld {
@@ -117,17 +205,179 @@ impl ActorWorld {
         }
         let groups = source.groups();
         let actors = ActorPool::from_packed_inactive(groups[2].bytes(), prior_native, prior_bindings)?;
-        let result = Self { backing: source.bytes().to_vec(), layouts: groups.map(|g| g.layout()), actors, players, rng };
+        let result = Self { backing: source.bytes().to_vec(), layouts: groups.map(|g| g.layout()), actors, players, rng, plants: None, effects: None };
         result.validate_links()?;
         Ok(result)
     }
 
     pub fn actors(&self) -> &ActorPool { &self.actors }
+    pub fn effects(&self) -> Option<&EffectPool> { self.effects.as_ref() }
+
+    /// Load the inactive family4 packed records into owned native storage,
+    /// keeping the caller's constructor/resource gap explicit.
+    pub fn admit_effects(&mut self, prior: &[LandingRecord; 200], bindings: [Option<EffectAnimationBinding>; 200]) -> Result<(), ActorWorldError> {
+        if self.effects.is_some() { return Err(ActorWorldError::EffectsAlreadyAdmitted); }
+        let group = self.layouts[4];
+        let pool = EffectPool::from_packed_inactive(&self.backing[group.file_offset..group.file_offset + group.count * group.packed_stride], prior, bindings)?;
+        let declared = word(&self.backing, 0x3554);
+        let active = pool.records().iter().filter(|r| r[6] != 0).count();
+        if declared < 0 || declared as usize != active { return Err(ActorWorldError::EffectCountMismatch { declared, active }); }
+        self.validate_links()?;
+        self.effects = Some(pool);
+        Ok(())
+    }
+
+    /// Commit the proved factory's record, count, map links and player
+    /// reference. Audio/reveal operations remain explicit pending events.
+    /// No descent/contact, actor readiness, RNG draw or full tick is implied.
+    pub fn create_landing_core(&mut self, player: u8, selected_player: u8) -> Result<LandingCreationReceipt, ActorWorldError> {
+        let state = self.player(player)?;
+        if state.bytes()[0x498] != 0 { return Err(ActorWorldError::LandingAlreadyAssociated(player)); }
+        let position = state.target();
+        self.validate_links()?;
+        let ground = genewars_core::cd_candidate::interpolate_height(self.map(), position[0], position[1]).map_err(|e| ActorWorldError::Terrain(e.to_string()))?;
+        let shade = genewars_core::cd_candidate::interpolate_entity_shade(self.map(), position[0], position[1]).map_err(|e| ActorWorldError::Terrain(e.to_string()))?;
+        let cell = floor_cell(position);
+        let old_raw = reference(self.map(), cell * 14 + 6);
+        let old_head = if old_raw[2] == 0 { None } else {
+            self.entity(old_raw)?;
+            Some(landing::ResolvedCellHead { identity: landing::LandingReference { index: word(&old_raw,0), kind: old_raw[2] } })
+        };
+        let pool = self.effects.as_ref().ok_or(ActorWorldError::EffectsNotAdmitted)?;
+        let declared = word(&self.backing, 0x3554);
+        let active = pool.records().iter().filter(|r| r[6] != 0).count();
+        if declared < 0 || declared as usize != active { return Err(ActorWorldError::EffectCountMismatch { declared, active }); }
+        let plan = landing::plan_landing_factory(pool.records(), declared, player, selected_player, position, ground, shade, old_head)?;
+        let mut staged = self.clone();
+        staged.effects.as_mut().unwrap().commit_landing_factory(&plan)?;
+        let raw = [(plan.slot & 255) as u8, (plan.slot >> 8) as u8, 5];
+        if old_raw[2] != 0 { staged.replace_previous(old_raw, raw)?; }
+        staged.backing[MAP_START + cell * 14 + 6..MAP_START + cell * 14 + 9].copy_from_slice(&raw);
+        staged.backing[0x3554..0x3556].copy_from_slice(&plan.pool_count_after.to_le_bytes());
+        staged.players[usize::from(player)].set_landing_reference(plan.slot);
+        staged.validate_links()?;
+        let pending_events = plan.events.into_iter().filter(|event| matches!(event, LandingEvent::PlayAudio(_) | LandingEvent::Reveal { .. })).collect();
+        *self = staged;
+        Ok(LandingCreationReceipt { slot: plan.slot, player, position, ground_height: ground, shade, pending_events })
+    }
+
+    /// Attach hash-admitted plant parameters to this existing world. This
+    /// does not reload the source, reset plants or replace any map links.
+    pub fn admit_plants(&mut self, parameter_bytes: &[u8]) -> Result<(), ActorWorldError> {
+        let parameters = PlantParameterTable::parse(parameter_bytes)?;
+        self.validate_links()?;
+        let tick_number = self.plants.as_ref().map_or(0, |p| p.tick_number);
+        MissionWorld::with_shared_storage(SharedPlantStorage { backing: &mut self.backing, actors: &mut self.actors, effects: self.effects.as_mut() }, parameters.clone(), tick_number)?;
+        self.plants = Some(PlantSubsystem { parameters, tick_number });
+        Ok(())
+    }
+
+    pub fn plant_tick_number(&self) -> Option<u64> { self.plants.as_ref().map(|p| p.tick_number) }
+
+    pub fn plant_render_records(&self) -> Result<Vec<crate::world::PlantRenderRecord>, ActorWorldError> {
+        Ok(crate::world::plant_render_records(&self.backing)?)
+    }
+
+    /// Run only the admitted plant scheduling pass against the shared map.
+    /// A rejected callback rolls back actor links, packed records and all
+    /// subsystem state together. This is not the full-family game scheduler.
+    pub fn tick_plants(&mut self) -> Result<PlantTickReport, ActorWorldError> {
+        let subsystem = self.plants.as_ref().ok_or(ActorWorldError::PlantsNotAdmitted)?.clone();
+        self.validate_links()?;
+        let mut staged = self.clone();
+        let mut view = MissionWorld::with_shared_storage(SharedPlantStorage { backing: &mut staged.backing, actors: &mut staged.actors, effects: staged.effects.as_mut() }, subsystem.parameters, subsystem.tick_number)?;
+        let report = view.tick_plants_inner()?;
+        staged.plants.as_mut().unwrap().tick_number = report.tick_number;
+        staged.validate_links()?;
+        *self = staged;
+        Ok(report)
+    }
     pub fn player(&self, player: u8) -> Result<&PlayerState, ActorWorldError> {
         self.players.get(usize::from(player)).ok_or(ActorWorldError::InvalidPlayer(player))
     }
     pub fn rng(&self) -> BlueprintRng { self.rng }
     pub fn map(&self) -> &[u8] { &self.backing[MAP_START..MAP_START + MAP_BYTES] }
+
+    pub fn terrain_class_at(&self, point: [i16; 2]) -> Result<u8, ActorWorldError> {
+        Ok(crate::world::map_terrain_class(self.map(), point)?)
+    }
+
+    /// Bounded74270/74160: map byte11 mask01 clear proves NULL before the
+    /// source touches any building, footprint or animation resources.
+    pub fn move_obstacle_at(&self, point: [i16; 2]) -> Result<bool, ActorWorldError> {
+        let cell = floor_cell(point);
+        if self.map()[cell * 14 + 11] & 1 != 0 { return Err(ActorWorldError::UnsupportedBuildingQuery(cell)); }
+        Ok(false)
+    }
+
+    /// Source8B130 for an owned type3 actor. The only weighted objects in
+    /// the admitted domain are plants; kinds1/3 have pure skip predicates.
+    /// Native plant+2E is serialized at packed+26, not packed+2E.
+    pub fn cell_plant_blocker(&self, id: i16, point: [i16; 2]) -> Result<i32, ActorWorldError> {
+        let own = [id as u8, (id as u16 >> 8) as u8, 3];
+        let actor = self.entity(own)?;
+        if actor[0x4A] & 8 != 0 { return Ok(0); }
+        let handle = self.actors.bindings(id as usize)?.blueprint.ok_or(ActorWorldError::MissingBlueprintBinding(id))?;
+        if handle.player_id != actor[0x18] { return Err(ActorWorldError::MissingBlueprintBinding(id)); }
+        let category = self.player(handle.player_id)?.blueprint(usize::from(handle.blueprint_index))?[0x16];
+        if category > 3 { return Err(ActorWorldError::InvalidBlueprintCategory(category)); }
+        let cell = floor_cell(point);
+        let nominated = if category == 1 && actor[0x81] == 2 {
+            let raw = reference(actor, 0x7F);
+            let plant = self.entity(raw)?;
+            if floor_cell([word(plant,7),word(plant,9)]) == cell { return Ok(0); }
+            Some(raw)
+        } else { None };
+        let mut raw = reference(self.map(), cell * 14 + 6);
+        let mut previous = [(cell & 255) as u8, (cell >> 8) as u8, 0];
+        let mut seen = HashSet::new();
+        let mut weight = 0;
+        while raw[2] != 0 {
+            if !seen.insert(raw) { return Err(ActorWorldError::DuplicateLink(raw)); }
+            let record = self.entity(raw)?;
+            if reference(record, 0) != previous { return Err(ActorWorldError::BrokenPrevious(raw)); }
+            if raw != own && Some(raw) != nominated {
+                match raw[2] {
+                    1 | 3 | 5 => (),
+                    2 => {
+                        let index = word(&raw,0) as usize;
+                        let offset = self.layouts[1].file_offset + index * self.layouts[1].packed_stride;
+                        if self.backing[offset + 0x26] & 8 == 0 { weight += 10; }
+                    },
+                    kind => return Err(ActorWorldError::UnsupportedBlockerFamily(kind)),
+                }
+            }
+            previous = raw;
+            raw = reference(record, 3);
+        }
+        Ok(weight)
+    }
+
+    pub fn placement_environment(&self, id: i16, point: [i16; 2]) -> Result<PlacementEnvironment, ActorWorldError> {
+        let actor = self.entity([id as u8, (id as u16 >> 8) as u8, 3])?;
+        let terrain_class = self.terrain_class_at(point)?;
+        // The source acceptance predicate short-circuits before8B130.
+        let blocker_weight = if actor[0x53] & (1 << terrain_class) != 0 { 0 } else { self.cell_plant_blocker(id, point)? };
+        Ok(PlacementEnvironment { terrain_class, blocker_weight })
+    }
+
+    pub fn activate_without_associated_unit_owned(&mut self, player: u8, tables: &TrigTables) -> Result<ActivationBatchReceipt, ActorWorldError> {
+        self.activate_without_associated_unit(player, tables, |world, slot, candidate| {
+            world.placement_environment(i16::from(player) * 5 + slot as i16, candidate.position_u15.map(|v| v as i16))
+        })
+    }
+
+    pub fn activate_associated_unit_owned(&mut self, player: u8, tables: &TrigTables) -> Result<ActivationBatchReceipt, ActorWorldError> {
+        self.activate_associated_unit(player, tables, |world, slot, candidate| {
+            let id = i16::from(player) * 5 + slot as i16;
+            let point = candidate.position_u15.map(|v| v as i16);
+            let placement = world.placement_environment(id, point)?;
+            let actor = world.actors.record(id as usize)?;
+            let accepted = actor[0x53] & (1 << placement.terrain_class) == 0 && placement.blocker_weight < 10;
+            let obstacle_present = if accepted && actor[0x71] & 0x10 == 0 { world.move_obstacle_at(point)? } else { false };
+            Ok(AssociatedPlacementEnvironment { placement, obstacle_present })
+        })
+    }
     /// Partial backing only; serializing this omits owned actors and players.
     pub fn backing_bytes(&self) -> &[u8] { &self.backing }
 
@@ -294,6 +544,33 @@ impl ActorWorld {
         &mut self, player: u8, id: i16, requested: [i16; 2], terrain_class: u8,
         obstacle_present: bool, blocker_weight: i32,
     ) -> Result<Opcode3MoveOrderResult, ActorWorldError> {
+        self.apply_move_with_query(player, id, requested, |_, _| {
+            Ok(ResolverEnvironment { terrain_class, actor_avoidance_mask: 0, obstacle_present, blocker_weight })
+        })
+    }
+
+    /// Resolve an order from current owned map/list fields. Setter no-op and
+    /// reinit gates precede queries. A near request queries the snapped current
+    /// point before returning it, preserving the source's helper call order.
+    pub fn apply_bounded_move_order_owned(&mut self, player: u8, id: i16, requested: [i16; 2]) -> Result<Opcode3MoveOrderResult, ActorWorldError> {
+        self.apply_move_with_query(player, id, requested, |world, actor| {
+            let current = [word(actor,7), word(actor,9)];
+            let delta = std::array::from_fn::<_,2,_>(|i| ((i32::from(current[i]) - i32::from(requested[i]) + 16384) & 32767) - 16384);
+            let mut environment = ResolverEnvironment { terrain_class: 0, actor_avoidance_mask: actor[0x53], obstacle_present: false, blocker_weight: 0 };
+            let probe = if delta[0] * delta[0] + delta[1] * delta[1] <= 4096 { current } else { requested };
+            environment.obstacle_present = world.move_obstacle_at(probe)?;
+            environment.terrain_class = world.terrain_class_at(probe)?;
+            if actor[0x53] & (1 << environment.terrain_class) == 0 {
+                environment.blocker_weight = world.cell_plant_blocker(id, probe)?;
+            }
+            Ok(environment)
+        })
+    }
+
+    fn apply_move_with_query(
+        &mut self, player: u8, id: i16, requested: [i16; 2],
+        query: impl FnOnce(&Self, &[u8; 200]) -> Result<ResolverEnvironment, ActorWorldError>,
+    ) -> Result<Opcode3MoveOrderResult, ActorWorldError> {
         self.player(player)?;
         let before = *self.actors.record(id as usize)?;
         if before[6] != 3 || before[0x18] != player || id / 5 != i16::from(player) {
@@ -309,8 +586,10 @@ impl ActorWorld {
         let noop = actor_command::apply_opcode3_move_order(id, &mut after, requested,
             actor_command::PrecomputedResolvedTarget::new(requested)).map_err(ActorWorldError::Command)?;
         if noop == Opcode3MoveOrderResult::NoopFlag71 { return Ok(noop); }
+        let mut environment = query(self, &before)?;
+        environment.actor_avoidance_mask = before[0x53];
         let resolved = actor_command::resolve_bounded_move_target([word(&before, 7), word(&before, 9)], requested,
-            ResolverEnvironment { terrain_class, actor_avoidance_mask: before[0x53], obstacle_present, blocker_weight })
+            environment)
             .map_err(ActorWorldError::Resolver)?;
         let result = actor_command::apply_opcode3_move_order(id, &mut after, requested, resolved).map_err(ActorWorldError::Command)?;
         self.actors.replace_record_checked(id as usize, &before, &after)?;
@@ -324,6 +603,19 @@ impl ActorWorld {
         &mut self, player: u8, input: GroundMoveInput, environment: PlacementEnvironment,
         obstacle_present: bool,
     ) -> Result<GroundMoveOutcome, ActorWorldError> {
+        let Some(id) = self.ground_move_actor(player, input)? else { return Ok(GroundMoveOutcome::Ignored); };
+        let result=self.apply_bounded_move_order(player,id,input.projected_point,environment.terrain_class,
+            obstacle_present,environment.blocker_weight)?;
+        Ok(GroundMoveOutcome::Dispatched { actor_id:id,opcode:3,result })
+    }
+
+    pub fn dispatch_ground_move_owned(&mut self, player: u8, input: GroundMoveInput) -> Result<GroundMoveOutcome, ActorWorldError> {
+        let Some(id) = self.ground_move_actor(player, input)? else { return Ok(GroundMoveOutcome::Ignored); };
+        let result = self.apply_bounded_move_order_owned(player, id, input.projected_point)?;
+        Ok(GroundMoveOutcome::Dispatched { actor_id:id,opcode:3,result })
+    }
+
+    fn ground_move_actor(&self, player: u8, input: GroundMoveInput) -> Result<Option<i16>, ActorWorldError> {
         let count=self.player(player)?.actor_count();
         if !(0..=5).contains(&count) || !(0..=4).contains(&input.current_portrait) {
             return Err(ActorWorldError::InvalidPortraitState { current:input.current_portrait,count });
@@ -331,16 +623,13 @@ impl ActorWorld {
         if input.buttons&8==0 || input.modifiers&0x0A!=0 || input.pause_flags&2!=0
             || input.group_word_526!=0 || input.group_byte_52f!=0
             || input.current_portrait>=count || input.selected[2]!=3 {
-            return Ok(GroundMoveOutcome::Ignored);
+            return Ok(None);
         }
         let selected=self.entity(input.selected)?;
         if selected[0x18]!=player || selected[0x70]&1==0 || (2..=5).contains(&(selected[0x55]as i8)) {
-            return Ok(GroundMoveOutcome::Ignored);
+            return Ok(None);
         }
-        let id=word(selected,15);
-        let result=self.apply_bounded_move_order(player,id,input.projected_point,environment.terrain_class,
-            obstacle_present,environment.blocker_weight)?;
-        Ok(GroundMoveOutcome::Dispatched { actor_id:id,opcode:3,result })
+        Ok(Some(word(selected,15)))
     }
 
     /// Common prefix lookup. Type3 always uses the native overlay; other
@@ -350,7 +639,8 @@ impl ActorWorld {
         if !(1..=8).contains(&raw[2]) || id < 0 { return Err(ActorWorldError::InvalidReference(raw)); }
         let layout = self.layouts[usize::from(raw[2] - 1)];
         if id as usize >= layout.count { return Err(ActorWorldError::InvalidReference(raw)); }
-        let record: &[u8] = if raw[2] == 3 { self.actors.record(id as usize)? } else {
+        let record: &[u8] = if raw[2] == 3 { self.actors.record(id as usize)? }
+        else if raw[2] == 5 && self.effects.is_some() { self.effects.as_ref().unwrap().record(id as usize)? } else {
             let start = layout.file_offset + id as usize * layout.packed_stride;
             &self.backing[start..start + 31]
         };
@@ -366,6 +656,12 @@ impl ActorWorld {
             let mut after = before;
             after[..3].copy_from_slice(&previous);
             self.actors.replace_record_checked(id as usize, &before, &after)?;
+        } else if raw[2] == 5 && self.effects.is_some() {
+            let pool = self.effects.as_mut().unwrap();
+            let before = *pool.record(id as usize)?;
+            let mut after = before;
+            after[..3].copy_from_slice(&previous);
+            pool.replace_record_checked(id as usize, &before, &after)?;
         } else {
             let layout = self.layouts[usize::from(raw[2] - 1)];
             let start = layout.file_offset + id as usize * layout.packed_stride;
@@ -401,6 +697,7 @@ impl ActorWorld {
 fn reference(bytes: &[u8], offset: usize) -> [u8; 3] { bytes[offset..offset + 3].try_into().unwrap() }
 fn word(bytes: &[u8], offset: usize) -> i16 { i16::from_le_bytes(bytes[offset..offset + 2].try_into().unwrap()) }
 fn cell_for(point: [u16; 2]) -> usize { usize::from(point[1] >> 8) * 128 + usize::from(point[0] >> 8) }
+fn floor_cell(point: [i16; 2]) -> usize { usize::from((point[1] as u16 >> 8) & 127) * 128 + usize::from((point[0] as u16 >> 8) & 127) }
 
 #[cfg(test)]
 mod tests {
@@ -426,6 +723,230 @@ mod tests {
     }
     fn accept(_: &ActorWorld, _: usize, _: PlacementCandidate) -> Result<PlacementEnvironment, ActorWorldError> {
         Ok(PlacementEnvironment { terrain_class: 1, blocker_weight: 0 })
+    }
+
+    fn shared_plant_fixture(order: &[[u8; 3]]) -> ActorWorld {
+        let mut world = fixture();
+        prepare(&mut world, 0);
+        world.activate_without_associated_unit(0, &TrigTables::generate_pinned().unwrap(), accept).unwrap();
+        let actor = *world.actors.record(0).unwrap();
+        let cell = cell_for([word(&actor, 7) as u16, word(&actor, 9) as u16]);
+        let cell_ref = [(cell & 255) as u8, (cell >> 8) as u8, 0];
+        let mut count = 0u16;
+        for (index, raw) in order.iter().copied().enumerate() {
+            let previous = if index == 0 { cell_ref } else { order[index - 1] };
+            let next = order.get(index + 1).copied().unwrap_or([0xA5, 0x5A, 0]);
+            if raw[2] == 3 {
+                let before = *world.actors.record(raw[0] as usize).unwrap();
+                let mut after = before;
+                after[..3].copy_from_slice(&previous);
+                after[3..6].copy_from_slice(&next);
+                world.actors.replace_record_checked(raw[0] as usize, &before, &after).unwrap();
+            } else {
+                let start = world.layouts[1].file_offset + usize::from(raw[0]) * 41;
+                let record = &mut world.backing[start..start + 41];
+                record[..3].copy_from_slice(&previous);
+                record[3..6].copy_from_slice(&next);
+                record[6] = 2;
+                record[7..11].copy_from_slice(&actor[7..11]);
+                record[15..17].copy_from_slice(&[raw[0], 0]);
+                record[24] = 4;
+                count += 1;
+            }
+        }
+        world.backing[MAP_START + cell * 14 + 6..MAP_START + cell * 14 + 9].copy_from_slice(&order[0]);
+        world.backing[0x3552..0x3554].copy_from_slice(&count.to_le_bytes());
+        world.plants = Some(PlantSubsystem { parameters: PlantParameterTable::fixture_for_shared_test(), tick_number: 0 });
+        world.validate_links().unwrap();
+        world
+    }
+
+    #[test]
+    fn shared_plant_retirement_rewrites_native_actor_neighbors_in_one_store() {
+        for order in [vec![[8,0,2],[1,0,3],[0,0,3]], vec![[1,0,3],[8,0,2],[0,0,3]], vec![[1,0,3],[0,0,3],[8,0,2]]] {
+            let mut world = shared_plant_fixture(&order);
+            let before = world.clone();
+            let report = world.tick_plants().unwrap();
+            assert_eq!(report.callbacks, [8]);
+            assert_eq!(report.active_plant_count_after, 0);
+            assert_eq!(world.plant_tick_number(), Some(1));
+            assert_eq!(world.validate_links().unwrap().len(), 2);
+            assert_eq!(reference(world.actors.record(1).unwrap(), 3), [0,0,3]);
+            assert_eq!(reference(world.actors.record(0).unwrap(), 0), [1,0,3]);
+            for id in [0,1] {
+                assert_eq!(&world.actors.record(id).unwrap()[6..], &before.actors.record(id).unwrap()[6..]);
+                assert_eq!(world.actors.bindings(id), before.actors.bindings(id));
+            }
+            let group = world.layouts[2];
+            assert_eq!(&world.backing[group.file_offset..group.file_offset + group.count * group.packed_stride],
+                       &before.backing[group.file_offset..group.file_offset + group.count * group.packed_stride], "no packed actor mirror is written");
+            assert_eq!(world.players, before.players);
+            assert_eq!(world.rng, before.rng);
+        }
+    }
+
+    #[test]
+    fn shared_plant_second_failure_rolls_back_first_retirement_and_actor_links() {
+        let mut world = shared_plant_fixture(&[[1,0,3],[8,0,2],[16,0,2],[0,0,3]]);
+        let second = world.layouts[1].file_offset + 16 * 41;
+        world.backing[second + 24] = 0;
+        let before = world.clone();
+        assert_eq!(world.tick_plants().unwrap_err(), ActorWorldError::Plants(RuntimeError::UnsupportedOwnerCounter { index: 16, owner: 0 }));
+        assert_eq!(world, before);
+    }
+
+    #[test]
+    fn shared_plant_growth_traverses_native_actors_without_changing_their_records() {
+        let mut world = shared_plant_fixture(&[[1,0,3],[8,0,2],[0,0,3]]);
+        let plant = world.layouts[1].file_offset + 8 * 41;
+        world.backing[plant + 36..plant + 38].copy_from_slice(&4_i16.to_le_bytes());
+        let actor = world.actors.record(0).unwrap();
+        let cell = cell_for([word(actor,7) as u16,word(actor,9) as u16]);
+        world.backing[MAP_START + cell * 14 + 13] = 1;
+        let actors = world.actors.clone();
+        let report = world.tick_plants().unwrap();
+        assert_eq!(report.active_plant_count_after, 1);
+        assert_eq!(word(&world.backing, plant + 36), 5);
+        assert_eq!(world.actors, actors);
+    }
+
+    #[test]
+    fn owned_blocker_reads_packed_flags_and_observes_plant_retirement() {
+        let mut world = shared_plant_fixture(&[[1,0,3],[8,0,2],[0,0,3]]);
+        let actor = world.actors.record(0).unwrap();
+        let point = [word(actor,7),word(actor,9)];
+        assert_eq!(world.cell_plant_blocker(0,point).unwrap(),10);
+        let plant = world.layouts[1].file_offset + 8 * 41;
+        world.backing[plant + 0x26] = 0x88;
+        assert_eq!(world.cell_plant_blocker(0,point).unwrap(),0);
+        world.backing[plant + 0x26] = 0x80;
+        assert_eq!(world.cell_plant_blocker(0,point).unwrap(),10, "retirement bit80 does not exempt a plant");
+        world.tick_plants().unwrap();
+        assert_eq!(world.cell_plant_blocker(0,point).unwrap(),0);
+    }
+
+    #[test]
+    fn owned_blocker_applies_actor_ignore_and_category_one_plant_exemption() {
+        let mut world = shared_plant_fixture(&[[1,0,3],[8,0,2],[0,0,3]]);
+        let before = *world.actors.record(0).unwrap();
+        let point = [word(&before,7),word(&before,9)];
+        let mut after = before;
+        after[0x4A] |= 8;
+        world.actors.replace_record_checked(0,&before,&after).unwrap();
+        assert_eq!(world.cell_plant_blocker(0,point).unwrap(),0);
+        world.actors.replace_record_checked(0,&after,&before).unwrap();
+        let mut player = *world.players[0].bytes();
+        player[0x16 + 0x16] = 1;
+        world.players[0] = PlayerState::from_record(&player).unwrap();
+        after = before;
+        after[0x7F..0x82].copy_from_slice(&[8,0,2]);
+        world.actors.replace_record_checked(0,&before,&after).unwrap();
+        assert_eq!(world.cell_plant_blocker(0,point).unwrap(),0);
+        let stale = after;
+        after[0x7F..0x82].copy_from_slice(&[9,0,2]);
+        world.actors.replace_record_checked(0,&stale,&after).unwrap();
+        assert!(matches!(world.cell_plant_blocker(0,point), Err(ActorWorldError::EntityIdentity(_))));
+    }
+
+    #[test]
+    fn owned_move_queries_respect_setter_gates_and_snapped_probe_point() {
+        let mut world = fixture();
+        prepare(&mut world,0);
+        world.activate_without_associated_unit(0,&TrigTables::generate_pinned().unwrap(),accept).unwrap();
+        let actor = *world.actors.record(0).unwrap();
+        let point = [word(&actor,7),word(&actor,9)];
+        let near = [point[0].wrapping_sub(1),point[1]];
+        assert_ne!(floor_cell(near),floor_cell(point));
+        world.backing[MAP_START + floor_cell(near) * 14 + 11] |= 1;
+        assert!(matches!(world.apply_bounded_move_order_owned(0,0,near).unwrap(), Opcode3MoveOrderResult::Applied { resolved, .. } if resolved == point));
+        world.backing[MAP_START + floor_cell(point) * 14 + 11] |= 1;
+        let before = world.clone();
+        assert_eq!(world.apply_bounded_move_order_owned(0,0,near).unwrap_err(), ActorWorldError::UnsupportedBuildingQuery(floor_cell(point)));
+        assert_eq!(world,before);
+        let far = [point[0].wrapping_add(1024),point[1]];
+        world.backing[MAP_START + floor_cell(far) * 14 + 11] |= 1;
+        let before = world.clone();
+        assert_eq!(world.apply_bounded_move_order_owned(0,0,far).unwrap_err(), ActorWorldError::UnsupportedBuildingQuery(floor_cell(far)));
+        assert_eq!(world,before);
+        let prior = *world.actors.record(0).unwrap();
+        let mut inhibited = prior;
+        inhibited[0x71] |= 0x10;
+        world.actors.replace_record_checked(0,&prior,&inhibited).unwrap();
+        let before = world.clone();
+        assert_eq!(world.apply_bounded_move_order_owned(0,0,far).unwrap(), Opcode3MoveOrderResult::NoopFlag71);
+        assert_eq!(world,before);
+    }
+
+    #[test]
+    fn owned_placement_short_circuits_rejected_terrain_before_blocker_lookup() {
+        let mut world = fixture();
+        prepare(&mut world,0);
+        // Code31 family5 has pure false virtual10 and contributes no weight.
+        let point = [0,0];
+        let offset = world.layouts[4].file_offset;
+        world.backing[offset + 6] = 5;
+        world.backing[MAP_START + 6..MAP_START + 9].copy_from_slice(&[0,0,5]);
+        assert_eq!(world.cell_plant_blocker(0,point).unwrap(),0);
+        // A family with an unclosed virtual predicate rejects only if queried.
+        world.backing[MAP_START + 6..MAP_START + 9].copy_from_slice(&[0,0,8]);
+        let offset = world.layouts[7].file_offset;
+        world.backing[offset + 6] = 8;
+        assert_eq!(world.placement_environment(0,point).unwrap(), PlacementEnvironment { terrain_class:0, blocker_weight:0 });
+        world.backing[MAP_START + 5] = 1;
+        assert_eq!(world.placement_environment(0,point).unwrap_err(), ActorWorldError::UnsupportedBlockerFamily(8));
+    }
+
+    #[test]
+    fn landing_factory_commits_native_pool_map_count_and_player_without_ready_actors() {
+        let mut world = fixture();
+        prepare(&mut world,0);
+        world.admit_effects(&[[0xA5;81];200],[None;200]).unwrap();
+        let before = world.clone();
+        let receipt = world.create_landing_core(0,0).unwrap();
+        assert_eq!(receipt.slot,0);
+        assert_eq!(receipt.position,[4096,4096]);
+        assert_eq!(world.players[0].bytes()[0x496..0x499],[0,0,5]);
+        assert_eq!(world.players[0].origin(),before.players[0].origin());
+        assert_eq!(word(&world.backing,0x3554),1);
+        let landing = world.entity([0,0,5]).unwrap();
+        assert_eq!(landing.len(),81);
+        assert_eq!(word(landing,7),4096);
+        assert_eq!(&landing[35..39],&[0xA5;4]);
+        assert_eq!(world.effects().unwrap().binding(0).unwrap(),Some(EffectAnimationBinding::EffAnimation49));
+        assert_eq!(world.actors,before.actors,"factory does not activate actors");
+        assert_eq!(world.rng,before.rng,"factory code31 does not draw RNG");
+        assert!(matches!(receipt.pending_events.as_slice(),[LandingEvent::PlayAudio(_),LandingEvent::Reveal{radius:4096,..}]));
+        let before = world.clone();
+        assert_eq!(world.create_landing_core(0,0),Err(ActorWorldError::LandingAlreadyAssociated(0)));
+        assert_eq!(world,before);
+    }
+
+    #[test]
+    fn landing_factory_late_stale_binding_failure_is_atomic() {
+        let mut world = fixture();
+        let mut bindings = [None;200];
+        bindings[0] = Some(EffectAnimationBinding::EffAnimation49);
+        world.admit_effects(&[[0;81];200],bindings).unwrap();
+        let before = world.clone();
+        assert_eq!(world.create_landing_core(0,0),Err(ActorWorldError::Effects(EffectPoolError::StaleBinding(0))));
+        assert_eq!(world,before);
+    }
+
+    #[test]
+    fn shared_retirement_updates_native_landing_neighbor_and_actor_link() {
+        let mut world = shared_plant_fixture(&[[8,0,2],[1,0,3],[0,0,3]]);
+        let mut player = *world.players[0].bytes();
+        player[9..13].copy_from_slice(&world.actors.record(0).unwrap()[7..11]);
+        world.players[0] = PlayerState::from_record(&player).unwrap();
+        world.admit_effects(&[[0;81];200],[None;200]).unwrap();
+        world.create_landing_core(0,0).unwrap();
+        assert_eq!(reference(world.entity([0,0,5]).unwrap(),3),[8,0,2]);
+        let before = *world.effects().unwrap().record(0).unwrap();
+        world.tick_plants().unwrap();
+        assert_eq!(reference(world.entity([0,0,5]).unwrap(),3),[1,0,3]);
+        assert_eq!(reference(world.entity([1,0,3]).unwrap(),0),[0,0,5]);
+        assert_eq!(&world.effects().unwrap().record(0).unwrap()[6..],&before[6..]);
+        assert_eq!(world.validate_links().unwrap().len(),3);
     }
 
     #[test]
@@ -662,5 +1183,136 @@ mod tests {
         assert!(world.validate_links().is_ok(),"terminal next index stays opaque");
         world.backing[start]^=1;
         assert_eq!(world.validate_links().unwrap_err(),ActorWorldError::BrokenPrevious([0,0,5]));
+    }
+
+    fn landing_update_fixture(stale_smoke_binding:bool)->ActorWorld {
+        let mut world=fixture();prepare(&mut world,0);
+        for cell in world.backing[MAP_START..MAP_START+MAP_BYTES].chunks_exact_mut(14) {
+            cell[2..4].copy_from_slice(&2048i16.to_le_bytes());cell[5]=1;
+        }
+        let mut bindings=[None;200];
+        if stale_smoke_binding { bindings[1]=Some(EffectAnimationBinding::EffAnimation6); }
+        world.admit_effects(&[[0xA5;81];200],bindings).unwrap();
+        world.create_landing_core(0,0).unwrap();world
+    }
+
+    #[test]
+    fn landing_step_commits_smoke_rng_and_native_links_together() {
+        let mut world=landing_update_fixture(false);
+        let before=world.clone();
+        let physics=crate::physics_tables::PhysicsTables::fixture();
+        let trig=TrigTables::generate_pinned().unwrap();
+        let event=world.step_landing_phase0(0,LandingPhysicsContext{water_height:0,gravity:1024},&physics,&trig).unwrap();
+        assert!(!event.contact);assert_eq!(event.created_effect,Some(1));assert_eq!(event.draws.len(),4);
+        assert_eq!(event.rng_after.draw_count,event.rng_before.draw_count.wrapping_add(4));
+        assert_eq!(word(&world.backing,0x3554),2);
+        let pool=world.effects().unwrap();
+        assert_eq!(pool.binding(1).unwrap(),Some(EffectAnimationBinding::EffAnimation6));
+        assert_eq!(pool.record(1).unwrap()[21]&1,1);
+        assert_eq!(word(pool.record(1).unwrap(),55),-16);
+        assert_eq!(reference(pool.record(0).unwrap(),0),[1,0,5]);
+        assert_eq!(reference(pool.record(1).unwrap(),3),[0,0,5]);
+        assert_eq!(reference(world.map(),floor_cell([4096,4096])*14+6),[1,0,5]);
+        assert_eq!(world.actors(),before.actors());
+        let packed=world.layouts[4];
+        assert_eq!(&world.backing[packed.file_offset..packed.file_offset+packed.count*packed.packed_stride],
+            &before.backing[packed.file_offset..packed.file_offset+packed.count*packed.packed_stride]);
+    }
+
+    #[test]
+    fn landing_late_smoke_failure_rolls_back_motion_links_and_all_four_draws() {
+        let mut world=landing_update_fixture(true);let before=world.clone();
+        let error=world.step_landing_phase0(0,LandingPhysicsContext{water_height:0,gravity:1024},
+            &crate::physics_tables::PhysicsTables::fixture(),&TrigTables::generate_pinned().unwrap()).unwrap_err();
+        assert_eq!(error,ActorWorldError::Effects(EffectPoolError::StaleBinding(1)));
+        assert_eq!(world,before);
+    }
+
+    #[test]
+    fn landing_callback_contact_activates_associated_actors_without_forcing_ready() {
+        let mut world=landing_update_fixture(false);
+        let physics=crate::physics_tables::PhysicsTables::fixture();let trig=TrigTables::generate_pinned().unwrap();
+        let context=LandingPhysicsContext{water_height:0,gravity:1024};
+        // Deliberately only code31 callbacks: smoke remains frozen. This is
+        // an integration fixture, not a claim about a complete frame sequence.
+        for _ in 0..188 { assert!(!world.step_landing_phase0(0,context,&physics,&trig).unwrap().contact); }
+        let seed_before=world.rng();
+        let contact=world.step_landing_phase0(0,context,&physics,&trig).unwrap();
+        assert!(contact.contact);assert_eq!(contact.created_effect,None);assert!(contact.draws.is_empty());
+        let activation=contact.activation.unwrap();assert_eq!(activation.activations.len(),2);
+        assert_eq!(activation.rng_before,seed_before);
+        assert_eq!(world.player(0).unwrap().activation_count(),1);
+        for slot in 0..2 {
+            let actor=world.actors().record(slot).unwrap();assert_eq!(actor[0x70]&1,1);
+            assert_eq!([word(actor,7),word(actor,9)],[4096,4096]);
+        }
+        assert_eq!(world.effects().unwrap().record(0).unwrap()[70],1);
+        assert_eq!(word(world.effects().unwrap().record(0).unwrap(),74),150);
+        let before=world.clone();assert!(world.step_landing_phase0(0,context,&physics,&trig).is_err());assert_eq!(world,before);
+    }
+
+    #[test]
+    fn smoke_retirement_moves_unlinks_and_clears_native_and_packed_references() {
+        let mut world=landing_update_fixture(false);
+        let physics=crate::physics_tables::PhysicsTables::fixture();let trig=TrigTables::generate_pinned().unwrap();
+        let context=LandingPhysicsContext{water_height:0,gravity:1024};
+        world.step_landing_phase0(0,context,&physics,&trig).unwrap();
+        let pool=world.effects.as_mut().unwrap();let before=*pool.record(1).unwrap();let mut smoke=before;
+        smoke[27]=12;smoke[30]=1;smoke[45..47].copy_from_slice(&18000i16.to_le_bytes());
+        smoke[71..74].copy_from_slice(&[1,0,5]);
+        pool.replace_record_checked(1,&before,&smoke).unwrap();
+        let before=*world.actors.record(0).unwrap();let mut actor=before;actor[0x7F..0x82].copy_from_slice(&[1,0,5]);
+        world.actors.replace_record_checked(0,&before,&actor).unwrap();
+        let start=world.layouts[0].file_offset;
+        world.backing[start+6]=1;world.backing[start+15..start+17].copy_from_slice(&0i16.to_le_bytes());
+        world.backing[start+0x5B-8..start+0x5E-8].copy_from_slice(&[1,0,5]);world.backing[start+0x60-8]=0xA7;
+        let rng=world.rng();
+        let event=world.step_effect6(1,context,&physics,&trig,&crate::landing_effect_lifecycle::RetirementUiState::native_empty()).unwrap();
+        assert!(event.changed_cell);assert!(event.retired);assert_eq!(event.cleaned_reference_bytes,4);
+        assert_eq!(world.rng(),rng);assert_eq!(word(&world.backing,0x3554),1);
+        let retired=world.effects().unwrap().record(1).unwrap();assert_eq!(retired[6],0);assert_eq!(&retired[71..74],&[1,0,0]);
+        assert_eq!(world.effects().unwrap().binding(1).unwrap(),None);
+        assert_eq!(&world.actors().record(0).unwrap()[0x7F..0x82],&[1,0,0]);
+        assert_eq!(&world.backing[start+0x5B-8..start+0x5E-8],&[1,0,0]);assert_eq!(world.backing[start+0x60-8],0xA5);
+        // Singleton removal retains map head's index1, clearing kind only.
+        let new_cell=floor_cell([word(retired,7),word(retired,9)]);
+        assert_eq!(reference(world.map(),new_cell*14+6),[1,0,0]);
+        assert_eq!(reference(world.map(),floor_cell([4096,4096])*14+6),[0,0,5]);
+        assert!(world.validate_links().is_ok());
+    }
+
+    #[test]
+    fn smoke_late_cleanup_identity_failure_rolls_back_motion_and_unlinks() {
+        let mut world=landing_update_fixture(false);let physics=crate::physics_tables::PhysicsTables::fixture();let trig=TrigTables::generate_pinned().unwrap();
+        let context=LandingPhysicsContext{water_height:0,gravity:1024};world.step_landing_phase0(0,context,&physics,&trig).unwrap();
+        let pool=world.effects.as_mut().unwrap();let before=*pool.record(1).unwrap();let mut smoke=before;smoke[27]=12;smoke[30]=1;
+        pool.replace_record_checked(1,&before,&smoke).unwrap();
+        // Unlinked active kind7 with the wrong native identity is discovered
+        // only by the all-pool retirement cleanup, after motion/animation.
+        let start=world.layouts[6].file_offset;world.backing[start+6]=7;world.backing[start+15..start+17].copy_from_slice(&9i16.to_le_bytes());
+        let before=world.clone();let result=world.step_effect6(1,context,&physics,&trig,&crate::landing_effect_lifecycle::RetirementUiState::native_empty());
+        assert_eq!(result.unwrap_err(),ActorWorldError::Lifecycle(crate::landing_effect_lifecycle::LifecycleError::RecordIdentity));assert_eq!(world,before);
+    }
+
+    #[test]
+    fn landing_effect_pass_updates_newborns_same_frame_and_reuses_retired_slots() {
+        let mut world=landing_update_fixture(false);let physics=crate::physics_tables::PhysicsTables::fixture();let trig=TrigTables::generate_pinned().unwrap();
+        let context=LandingPhysicsContext{water_height:0,gravity:1024};
+        let ui=crate::landing_effect_lifecycle::RetirementUiState::native_empty();
+        let first=world.step_landing_effect_callbacks(context,&physics,&trig,&ui).unwrap();
+        assert_eq!(first.primary.len(),1);assert_eq!(first.newborn.len(),1);
+        assert!(matches!(first.newborn[0],LandingEffectCallback::Smoke(_)));
+        let child=world.effects().unwrap().record(1).unwrap();assert_eq!(child[21]&1,0);assert_eq!(child[27],1);
+        let mut retirements=0;
+        for _ in 1..189 {
+            let event=world.step_landing_effect_callbacks(context,&physics,&trig,&ui).unwrap();
+            retirements+=event.primary.iter().chain(&event.newborn).filter(|c|matches!(c,LandingEffectCallback::Smoke(e) if e.retired)).count();
+            assert!(event.queue_candidates.len()<60);
+        }
+        assert!(retirements>100);assert_eq!(world.effects().unwrap().record(0).unwrap()[70],1);
+        assert_eq!(world.player(0).unwrap().activation_count(),1);
+        for _ in 0..100 { world.step_landing_effect_callbacks(context,&physics,&trig,&ui).unwrap(); }
+        assert_eq!(word(&world.backing,0x3554),1);assert_eq!(word(world.effects().unwrap().record(0).unwrap(),74),50);
+        let before=world.clone();assert!(world.step_landing_effect_callbacks(context,&physics,&trig,&ui).is_err());assert_eq!(world,before);
     }
 }

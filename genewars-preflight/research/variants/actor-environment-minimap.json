@@ -1,0 +1,40 @@
+{
+  "status": "passed-independent-native-minimap-review",
+  "utc": "2026-10-13T14:49:38.200641+00:00",
+  "cases": 532430,
+  "outside_cases": 188207,
+  "inside_cases": 344223,
+  "output_sha256": "3ce13b2838384a6f2ea04a6844a12b51de159b7e107a1c5a9b4aed9f26c1b96c",
+  "source": {
+    "path": "rust/crates/genewars-runtime/src/target_projection.rs",
+    "sha256": "455938c39b889e6e035e2821e74b7d5f4aae980786745c7861dc1aa5dbb38dc6"
+  },
+  "instructions": {
+    "path": "private/ghidra/landing-contact/instructions-000874b0.txt",
+    "sha256": "3872c2cc79407473a77f62e50b66e4bae0d6cf59a5ff453abefe45a8bdfd7003"
+  },
+  "harness": {
+    "path": "private/review/actor-environment-minimap/review.exe",
+    "sha256": "13cfcc58051842038a44f5a56d80e36cefee4c83520b5e90254285358063a5c9"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/actor-environment-minimap.py",
+      "sha256": "a6165a392d121fcd5c07e4afebeeabccdfe2481e8b504e27d61dea9c96812b7a"
+    },
+    {
+      "path": "research/variants/actor-environment-minimap.rs",
+      "sha256": "5cf41a2618f986dc7106187bebcaadee67b9019db64cc7cdfc6f5e720d7f4be2"
+    },
+    {
+      "path": "research/variants/actor-environment-contract.py",
+      "sha256": "2e84c3269c09758e104413e860d369c8948351cd4a2aa8d97ef7da1b43a775ee"
+    }
+  ],
+  "original_execution": false,
+  "gui_execution": false,
+  "limits": [
+    "Explicit context origin/mapbase; control0x12 minimap only",
+    "No fullscreen terrain picking or UI command dispatch"
+  ]
+}

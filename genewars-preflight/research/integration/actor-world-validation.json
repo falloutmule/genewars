@@ -1,9 +1,9 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T13:15:11.478541+00:00",
+  "verified_at": "2026-10-13T14:49:30.746676+00:00",
   "cases": 64,
-  "afterimages": 128,
-  "checked_bytes": 45463680,
+  "afterimages": 192,
+  "checked_bytes": 68195520,
   "rollback_cases": 128,
   "source_pins": [
     {
@@ -21,12 +21,18 @@
     {
       "path": "private/ghidra/actor-activation/instructions-0008ac60.txt",
       "sha256": "6fd0ff082558f7bc94da0a908710fab78b8d477369a106e15f37f4922ee557fa"
+    },
+    {
+      "path": "private/integration/game-runtime/plant-parameters.bin",
+      "sha256": "297a1da0e9c30d6d4cb7c88addb8234be260e0e93b7d4b2b1c4c3ad8b7df2b7c"
     }
   ],
+  "shared_plant_passes": 6144,
+  "shared_plant_callbacks": 448,
   "implementation_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "702cf18d8ec44dcdf6e04e53722aef60443cde819bfcb9077d0472546ad123ed"
+      "sha256": "61523e25803399b5cd420be63f29f608cfe9c9f6c76031e5df30ec3417f6647d"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
@@ -46,21 +52,29 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/player_state.rs",
-      "sha256": "6c2e36535278e906790ea8d5ca6e7a1b0de477fe010fbffd1431bea40c076348"
+      "sha256": "fe0196a5fda76b838102f563b9669a04cf4cb07199beaf9b7358e2553b2ee547"
     },
     {
       "path": "rust/crates/genewars-runtime/src/blueprint.rs",
       "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/world.rs",
+      "sha256": "f45b4357337724ac724711cbb9ddbe92a7764fe701d99f531be76bd072874c19"
+    },
+    {
       "path": "scripts/actor_world_probe.rs",
-      "sha256": "0661216fd19e3df568174b4dab79dd55d9af146f8f42b223c511db807593f9c4"
+      "sha256": "91784736d0b1f132cbe2e9307a6aa4cc7b7f14618b23db7cb7643a693a6c2702"
     },
     {
       "path": "scripts/validate_actor_world.py",
-      "sha256": "0251835caafc486a4243fcda91b87e57a414255ae6768bb6cc86b3e36eaaa31f"
+      "sha256": "0c4a8080fc317cd9525952e65e19d3b0a0baff4f98e7f9f78c43bb279c517f95"
+    },
+    {
+      "path": "research/variants/runtime-world-review.py",
+      "sha256": "7fbd6aefa08a6c01fe11b555b85d4e6ad2e6e3573577be7cfacce5817ab08a11"
     }
   ],
-  "output_sha256": "d26a8faf3e6a7df45adf3c8f9cc639bcf3b0c7e2e08a24c60d8b461c79cb6c42",
-  "scope": "Explicit fixture players/native gaps/live RNG/environments over the exact mission. Ordered no-associated activation and bounded pending command; no landing schedule, UI producer, movement or original execution."
+  "output_sha256": "6f635d3162290af3135961323d739215e3916905942c7f2bc2ab58218358c445",
+  "scope": "Explicit fixture players/native gaps/live RNG/environments over the exact mission. Ordered no-associated activation, bounded pending command and96 plant passes per session in the same backing/native actor store; no landing schedule, UI producer, movement or original execution."
 }

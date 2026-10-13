@@ -1,0 +1,260 @@
+{
+  "status": "passed-independent-native-actor-render-review",
+  "utc": "2026-10-13T14:49:46.951577+00:00",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "contract": {
+    "path": "research/ghidra/actor-draw-contract.json",
+    "sha256": "5f34b564f16f58aa402ef51510d6438e02b1593650c90f0cd09b229674f8daa6"
+  },
+  "source_pins": [
+    {
+      "path": "rust/crates/genewars-assets/src/lib.rs",
+      "sha256": "7a9571d30a1d3c229281a45223d277d908b61976ff21d27fe763966da7af133d"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/map_atlas.rs",
+      "sha256": "275facee7a4ad590ec68558bcd12016f2178eff73c058eb92d85864bc8aa30a7"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/mission_source.rs",
+      "sha256": "4c7d23930fb35483e7288af90845a28d64e3df228e7adaf2e5c7196c06ed313a"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/campaign.rs",
+      "sha256": "a610b74be9c65dd66ef9c84771b1c07422e1efea41d6e9895290a551d061bf78"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/construction.rs",
+      "sha256": "4866ff1f9bdd1bffbfb964bf03c495e5a1118d6bc24b0e3f8beea64ff780e5c0"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/custom_list.rs",
+      "sha256": "98955b9435e074518a2ee195e54e25779f96e7de7120f9620fdab1c89ea495c8"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/entity_draw_queue.rs",
+      "sha256": "b80d62724db689da242800705edfb34319bed786ac9ed91be1d4ffac7f203215"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/lib.rs",
+      "sha256": "1793d9674e9278dc0ea81ccabcf34c412bd0a925c126d9e47607a45764364f4c"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/menu_control.rs",
+      "sha256": "9def9eafcff361edeac28ff199ab1a241ada086c1bc4e826ba65fa6dbe28a472"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/mouse_packet.rs",
+      "sha256": "5763c082b5774e7e9042c3bff2cabf638b22ede7744f60e1c9904493527714fa"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/opaque_records.rs",
+      "sha256": "3019eb2459c8fab24c7f3aafdaf75a0d857229692f537881292a6614a293eba9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/plant_lifecycle.rs",
+      "sha256": "b9d38a54ec0dbaebbf86d3c27fed5933ba586cdb381904fbf302df9c5e8d2ac9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/player_creation.rs",
+      "sha256": "7ae09e8231c2c1b5f2d9d846db9edfd4a274a8df95e98834d665a543c04a63ee"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/terrain.rs",
+      "sha256": "5b906fdc3ed1809fefd078a1c60cca20cbca5a254df2fe386fe4608cf2450e6a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
+      "sha256": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_command.rs",
+      "sha256": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
+      "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
+      "sha256": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_render.rs",
+      "sha256": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_resources.rs",
+      "sha256": "8c94e8afb54d1dbcb0e33de471a9b7d4d4008d3a8782f970ff5b0e95194145a3"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "61523e25803399b5cd420be63f29f608cfe9c9f6c76031e5df30ec3417f6647d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/blueprint.rs",
+      "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/creature_world.rs",
+      "sha256": "52ce043d7af1b1bd3921e8977ca6f8c8477991501d1b47aecdf9489160a97fc3"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
+      "sha256": "055e8b1d5f5a3256ea4eb9bdea4ee3749960c03bafa0a4955263a7acb955c334"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/identity.rs",
+      "sha256": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing.rs",
+      "sha256": "f8a43c4ac0a69d6579a20a034cbdb401b427ebff2a992bdc5029eac760678f12"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
+      "sha256": "f6032674e731dedd6bb40a79c0aeb3ea24bf130ad2691a200aad79db891e0161"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/lib.rs",
+      "sha256": "99bcda5bcb0266b4049a24579ef828f9726ca46cb4dae971b77fc80c374a30e4"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
+      "sha256": "cc063773f1a08c161bb34aa03751e75dd3c74ea50e78d4d63c0d6a6ad844e685"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/player_state.rs",
+      "sha256": "fe0196a5fda76b838102f563b9669a04cf4cb07199beaf9b7358e2553b2ee547"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_projection.rs",
+      "sha256": "455938c39b889e6e035e2821e74b7d5f4aae980786745c7861dc1aa5dbb38dc6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/terrain_target.rs",
+      "sha256": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world.rs",
+      "sha256": "f45b4357337724ac724711cbb9ddbe92a7764fe701d99f531be76bd072874c19"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
+      "sha256": "d22112307fb1ca75dd209b6f752353eea2ef14153accbef3637a6c9acfed734d"
+    }
+  ],
+  "review_sources": [
+    {
+      "path": "research/variants/actor-render-review.py",
+      "sha256": "ad3d1cff50080029336adcf6f7d7774b8bd647117670c81f3796d9f12510b01f"
+    },
+    {
+      "path": "research/variants/actor-render-review.rs",
+      "sha256": "58f5044f03d61a8c2419eb49ccbfb2e6a1ecfe840033b0d447ccb324bf6c082c"
+    }
+  ],
+  "resource_pins": [
+    {
+      "path": "private/integration/actor-resources/key-00.anb",
+      "sha256": "629a6471e4deabec794f0cffa34b513eea15013ee95927e67b02a4a7e6157b6a"
+    },
+    {
+      "path": "private/integration/actor-resources/key-01.anb",
+      "sha256": "4421b2f6570face0e323f0444e3d10b972f0f7705fe128bac54963e9e0911563"
+    },
+    {
+      "path": "private/integration/actor-resources/key-02.anb",
+      "sha256": "93e5aeb581d83ebd33ad55b8068adbe427fcb9a606e88a5f8bab079ea75be7cb"
+    },
+    {
+      "path": "private/integration/actor-resources/key-03.anb",
+      "sha256": "38d32a18a8b94bf2411a184506dbcbf76c344292fae8ef81971d2c02f91c4929"
+    },
+    {
+      "path": "private/integration/actor-resources/key-04.anb",
+      "sha256": "4a232c5debfef3fbef5a54647e6312cc325265fe996b00841b35f1511340bd73"
+    },
+    {
+      "path": "private/integration/actor-resources/key-05.anb",
+      "sha256": "8946c2d3dfd8fe059fb8c72a74a71d0eaab48d43015a28d563beec095e38023b"
+    },
+    {
+      "path": "private/integration/actor-resources/key-06.anb",
+      "sha256": "63a3623d75f761aa5e09737074e5f5ab4a9cc40bf85334d69863536241874184"
+    },
+    {
+      "path": "private/integration/actor-resources/key-07.anb",
+      "sha256": "6576a2ffc66893d8eacb21a44165ac11118dd7256f74237f6992210148dee847"
+    },
+    {
+      "path": "private/integration/actor-resources/key-08.anb",
+      "sha256": "03c147fb87ad0d30a2de2f4e91ee755575b07a2d63078c9c2bb5611ded2b040f"
+    },
+    {
+      "path": "private/integration/actor-resources/key-09.anb",
+      "sha256": "73cdf337d6ff63cc4d120bdd9c3e0b0dcc59c000a4193e40f8a98c3cf72d03d9"
+    },
+    {
+      "path": "private/integration/actor-resources/key-10.anb",
+      "sha256": "b4eb05c610c7d135dc9de8876608302032b0428b0afdcb052fc174b9bd2eea7a"
+    },
+    {
+      "path": "private/integration/actor-resources/key-11.anb",
+      "sha256": "b51ef5a703a89dcf00c2465ddc7666fe842a9ce726363c2a36b2f2f0ac1d6277"
+    },
+    {
+      "path": "private/integration/actor-resources/key-12.anb",
+      "sha256": "aef9ba878097884f64674c3273ae8de8139530c31155fbbf6d4db1db11e329c0"
+    },
+    {
+      "path": "private/integration/actor-resources/key-13.anb",
+      "sha256": "662b6358b87eff43624009881701ff9eec243d05800a79ed7478fc6736b724b0"
+    },
+    {
+      "path": "private/integration/actor-resources/key-14.anb",
+      "sha256": "9f4ef097c5db8ad10c41b8992345bb2b26b6b4045a30c96e03c867f2ef968f0d"
+    },
+    {
+      "path": "private/integration/actor-resources/key-15.anb",
+      "sha256": "6e6a81c03e5b8ec50706ca85c77161190183a9d44202dd155a9fc249043df559"
+    }
+  ],
+  "resources": 16,
+  "sprite_records": 1552,
+  "sprite_index_mask_bytes": 1507004,
+  "animation_frame_records": 1982,
+  "frame_component_references": 2108,
+  "real_frame_comparisons": 7928,
+  "synthetic_draw_cases": 20480,
+  "atomic_rejections": 8,
+  "wrapper_policy_cases": 65536,
+  "compared_frame_bytes": 44626648,
+  "native_outputs": [
+    {
+      "path": "private/review/actor-render/sprites.bin",
+      "sha256": "19ddb39e270c8e77aba8ba1eb08e821f3e153cc21baea7942e769ff8da96940e"
+    },
+    {
+      "path": "private/review/actor-render/frames.bin",
+      "sha256": "b48b1e6d9a62d95133197cc9f586c37e97e91309a49d19fb7b225473c5050c81"
+    },
+    {
+      "path": "private/review/actor-render/synthetic.bin",
+      "sha256": "21686039ac23a04a457c56fbe6b3767cf5065fc9d3d733f7e6f2d507486c08ec"
+    },
+    {
+      "path": "private/review/actor-render/policies.bin",
+      "sha256": "cda351429872004a7dc5feedff491f940ae766d744c670c73237f5ffc6ce8c4e"
+    }
+  ],
+  "original_execution": false,
+  "gui_execution": false,
+  "limits": [
+    "Ordinary world shadow pass and source labels remain excluded; explicit compositor only",
+    "Synthetic fade/blend tables exercise ordering; no claim these are original table bytes",
+    "Public i32 extremes clip using widened arithmetic; source wrapping equivalence restricted to ordinary source screen domain",
+    "High flag bits reject transactionally; no unsupported source clipping path inferred",
+    "Strict decoded streams consume complete final EOL, stronger than original width-limited final-row return"
+  ]
+}

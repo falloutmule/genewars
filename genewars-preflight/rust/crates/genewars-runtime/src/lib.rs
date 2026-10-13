@@ -16,6 +16,15 @@ pub mod actor_activation;
 pub mod actor_initialization;
 pub mod actor_pool;
 pub mod actor_world;
+pub mod actor_resources;
+pub mod target_projection;
+pub mod actor_render;
+pub mod landing;
+pub mod effect_pool;
+pub mod terrain_target;
+pub mod physics_tables;
+pub mod landing_effect_lifecycle;
+pub mod creature_world;
 
 pub use world::{
     MissionWorld, PlantParameterTable, PlantParameters, PlantRenderRecord,

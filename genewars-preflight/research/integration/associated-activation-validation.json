@@ -8535,7 +8535,7 @@
     "sine_table_sha256": "84dfe6902e4c8947b75f4ff0a54d82fced478dd9682255eaa973a88cbf76cf3c",
     "cosine_table_sha256": "688e629369dc1c5379bae04b5e11100a4fd0aabd89745f2c0b5b6309ce0261c9",
     "activation_evidence_sha256": "da09aef3351027aac5629cad62ba21d2d40a3b7053325e1a2db1c067d13a06ef",
-    "move_order_evidence_sha256": "36e2eea9e63f8c77c7dee2c8f0173a313296c5a5e80d5d70e6776b446bc43465",
+    "move_order_evidence_sha256": "92b53fda8e62d0f54acfb1132a8aff18991bf5ae81d29d7ee97762993b4af1bc",
     "candidate_binary_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba"
   },
   "harness_source_sha256": "f8542e28fff777aeaadc722ca2dc86621a0879582c27418ca32c128d8067905d",

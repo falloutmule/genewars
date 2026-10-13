@@ -20,6 +20,7 @@ fn main() {
     let input=fs::read(dir.join("mission.bin")).unwrap();
     let source=ConqMissionSource::parse(&input).unwrap();
     let tables=TrigTables::generate_pinned().unwrap();
+    let parameters=fs::read(dir.join("parameters.bin")).unwrap();
     let mut out=BufWriter::new(fs::File::create(dir.join("actual.bin")).unwrap());
     let seeds=[0,1,5428,65535,256,32768,4191,55,3914,29111,8192,13,54676,16384,1929,8888];
     for case in 0..64_usize {
@@ -71,6 +72,10 @@ fn main() {
         let before=world.clone();
         assert!(world.apply_bounded_move_order(owner,i16::from(owner)*5,requested,1,true,0).is_err());
         assert_eq!(world,before);
+        world.admit_plants(&parameters).unwrap();
+        for _ in 0..96 { world.tick_plants().unwrap(); }
+        assert_eq!(world.plant_tick_number(),Some(96));
+        snapshot(&mut out,&world);
     }
     out.flush().unwrap();
 }

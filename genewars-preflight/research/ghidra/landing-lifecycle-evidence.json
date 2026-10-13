@@ -1,0 +1,9 @@
+{
+  "source_model": "Independent source724C0 matching-kind-byte cleanup with preservedindices; kind1reference5B clearsflag60mask2; inactiveopaque",
+  "cases": 2048,
+  "matched_references": 2632,
+  "output_bytes": 23017,
+  "output_sha256": "f75e71a197fc36dd16426aa3433d0c85b0adf6f179581557d1551932c17ff58c",
+  "harness_sha256": "d28ce57df5de2ac9b3a20da236af4b37da4ba59551b609ed80904bd4397e170a",
+  "production_sha256": "f6032674e731dedd6bb40a79c0aeb3ea24bf130ad2691a200aad79db891e0161"
+}

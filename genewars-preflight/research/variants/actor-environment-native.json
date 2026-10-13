@@ -1,0 +1,75 @@
+{
+  "status": "passed-independent-native-actor-environment-review",
+  "utc": "2026-10-13T14:49:37.439289+00:00",
+  "terrain_cases": 212992,
+  "obstacle_null_cases": 212992,
+  "blocker_cases": 32768,
+  "placement_environment_cases": 32768,
+  "invalid_actor_cases": 6,
+  "query_output_bytes": 720896,
+  "query_output_sha256": "303e51fc927c0c0b43d7ec56106952d117dd640605e6d251ddd874e41247b50a",
+  "source_pins": [
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "61523e25803399b5cd420be63f29f608cfe9c9f6c76031e5df30ec3417f6647d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
+      "sha256": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world.rs",
+      "sha256": "f45b4357337724ac724711cbb9ddbe92a7764fe701d99f531be76bd072874c19"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
+      "sha256": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/player_state.rs",
+      "sha256": "fe0196a5fda76b838102f563b9669a04cf4cb07199beaf9b7358e2553b2ee547"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
+      "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/blueprint.rs",
+      "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/identity.rs",
+      "sha256": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
+    }
+  ],
+  "mission": {
+    "path": "private/integration/game-runtime/terrain/CONQ001.DAT",
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  },
+  "harness": {
+    "path": "private/review/actor-environment-native/review.exe",
+    "sha256": "046a27b10fe7183900e79783ff95e4e0aabda2c211ef8fbdb25013cda01c13e2"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/actor-environment-native.py",
+      "sha256": "768e364b2306969dd93bd1055f7fb648041279b74879c77ab60c6418aa62522e"
+    },
+    {
+      "path": "research/variants/actor-environment-native.rs",
+      "sha256": "91a776e59ff252b2c6e86c8659d65f907843f2a346d610b49795013243897be1"
+    },
+    {
+      "path": "research/variants/actor-environment-contract.py",
+      "sha256": "2e84c3269c09758e104413e860d369c8948351cd4a2aa8d97ef7da1b43a775ee"
+    }
+  ],
+  "original_execution": false,
+  "gui_execution": false,
+  "limits": [
+    "Exact initial map/list fields with two independently prepared native actors/categories0/2",
+    "Fresh progress0 admission creates only categories0/2; category1 target exemption, actor-ignore bit and nonclear building flag require separately admitted fixtures; root unit tests separate",
+    "No true terrain unprojection or original consumption claim",
+    "Queries proved readonly by native whole ActorWorld equality"
+  ]
+}

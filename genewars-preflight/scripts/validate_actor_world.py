@@ -6,6 +6,7 @@ fixtures. This verifies a bounded transaction, not the original landing clock.
 from pathlib import Path
 from datetime import datetime, timezone
 import hashlib
+import importlib.util
 import json
 import math
 import shutil
@@ -125,6 +126,18 @@ def main():
         assert sha(path.read_bytes()) == expected
         pins.append(pin(path))
     shutil.copyfile(mission, WORK / 'mission.bin')
+    parameter_path=ROOT/'private/integration/game-runtime/plant-parameters.bin'
+    parameters=parameter_path.read_bytes()
+    assert sha(parameters)=='297a1da0e9c30d6d4cb7c88addb8234be260e0e93b7d4b2b1c4c3ad8b7df2b7c'
+    pins.append(pin(parameter_path))
+    shutil.copyfile(parameter_path,WORK/'parameters.bin')
+    oracle_path=ROOT/'research/variants/runtime-world-review.py'
+    spec=importlib.util.spec_from_file_location('independent_plant_oracle',oracle_path)
+    plant_oracle=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(plant_oracle)
+    # The independent geometric plant model operates on this full snapshot.
+    # Only reference addressing changes: kind3 occupies native200-byte slots.
+    plant_oracle.record=lambda reference: entity_offset(struct.pack('<hB',reference[1],reference[0]))
     built = run([sys.executable,'-B','scripts/cargo.py','build','-p','genewars-runtime',
                  '-p','genewars-assets','--offline','--locked','--message-format=json'],cwd=ROOT)
     # Use the artifacts from this exact Cargo invocation. Modification times
@@ -145,22 +158,30 @@ def main():
     run(command,cwd=ROOT,env=env)
     run([str(exe),str(WORK)],cwd=ROOT,env=env)
     actual = (WORK/'actual.bin').read_bytes()
-    assert len(actual) == 64 * 3 * SNAPSHOT
+    assert len(actual) == 64 * 4 * SNAPSHOT
     checked = 0
+    plant_callbacks=0
     for case in range(64):
-        start = case * 3 * SNAPSHOT
+        start = case * 4 * SNAPSHOT
         before = actual[start:start+SNAPSHOT]
         assert before[:MISSION_BYTES] == source
         activated, commanded = model(before,case)
         assert actual[start+SNAPSHOT:start+2*SNAPSHOT] == activated, f'activation mismatch case{case}'
         assert actual[start+2*SNAPSHOT:start+3*SNAPSHOT] == commanded, f'command mismatch case{case}'
-        checked += 2 * SNAPSHOT
+        stepped=commanded
+        for tick in range(96):
+            stepped,reason,details=plant_oracle.step(stepped,parameters)
+            assert reason is None,(case,tick,reason)
+            plant_callbacks+=len(details[0])
+        assert actual[start+3*SNAPSHOT:start+4*SNAPSHOT] == stepped,f'shared plant mismatch case{case}'
+        checked += 3 * SNAPSHOT
     sources = [pin(ROOT/'rust/crates/genewars-runtime/src'/name) for name in
-               ['actor_world.rs','actor_pool.rs','actor_activation.rs','actor_command.rs','actor_initialization.rs','player_state.rs','blueprint.rs']]
+               ['actor_world.rs','actor_pool.rs','actor_activation.rs','actor_command.rs','actor_initialization.rs','player_state.rs','blueprint.rs','world.rs']]
     report = dict(status='passed',verified_at=datetime.now(timezone.utc).isoformat(),cases=64,
-                  afterimages=128,checked_bytes=checked,rollback_cases=128,source_pins=pins,
-                  implementation_pins=sources+[pin(harness),pin(Path(__file__))],output_sha256=sha(actual),
-                  scope='Explicit fixture players/native gaps/live RNG/environments over the exact mission. Ordered no-associated activation and bounded pending command; no landing schedule, UI producer, movement or original execution.')
+                  afterimages=192,checked_bytes=checked,rollback_cases=128,source_pins=pins,
+                  shared_plant_passes=64*96,shared_plant_callbacks=plant_callbacks,
+                  implementation_pins=sources+[pin(harness),pin(Path(__file__)),pin(oracle_path)],output_sha256=sha(actual),
+                  scope='Explicit fixture players/native gaps/live RNG/environments over the exact mission. Ordered no-associated activation, bounded pending command and96 plant passes per session in the same backing/native actor store; no landing schedule, UI producer, movement or original execution.')
     (ROOT/'research/integration/actor-world-validation.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({key:report[key] for key in ['status','cases','afterimages','checked_bytes','rollback_cases']}))
 

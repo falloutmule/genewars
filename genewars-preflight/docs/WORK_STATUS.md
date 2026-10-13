@@ -2,6 +2,16 @@
 
 Active reconstruction; no complete playable game yet. Current priority is connecting the owned actor world to the real landing schedule and native scene; older counts below are dated checkpoints. The CD executable is a provisional analysis candidate, not established canonical retail.
 
+## Active shared-world integration — 2026-10-13
+
+ActorWorld now runs bounded plant passes against its sole map/native actor store. Mixed-family link retirement and late-failure rollback are tested. The exact-mission integration oracle compares192 after-images and68,195,520 bytes across64 explicit actor sessions, including6,144 shared plant passes. The corrected terrain fallback excludes the original floor center; the prior1,100-pass plant trajectory still matches.
+
+Owned terrain/blocker/obstacle queries and lazy command dispatch are implemented. Independent native environment and532,430 minimap comparisons pass. The true terrain picker passes4,032 independent cases. Actor pixels and wrapper policy pass44,626,648 framebuffer-byte comparisons across all16 resources, including7,928 real-frame composites and65,536 wrapper cases. The desktop shared renderer admits43 resources and preserves the earlier terrain/plant pixels; its explicit actor layer is exercised automatically. Actor queue ordering remains a labeled caller policy, and the default native screen has not yet switched to the new world.
+
+Landing factories, vertical descent/contact, four-draw smoke creation, smoke motion/animation/retirement and associated actor activation now execute as owned transactions. Factory and airborne callback integration each pass47,562,880-byte independent comparisons. The family4 primary/newborn pass updates new smoke in the same frame, relocates map links, and scans all five relevant pools for retirement references. Tests cover late-failure rollback and preserve raw null indices. Water uses the loader's twice-signed1C63 calculation (1632), not serialized1C67 (2000); gravity is1024. Quiet postcontact phase1 is admitted only through timer50. Later particle/message branches and preceding kind1 AI remain active implementation work.
+
+The expanded gate passed135 checks and301 Rust tests at2026-10-13T14:53:26.619378+00:00, with53,784 private files ignored, none tracked, and archive unchanged. The independent actor renderer harness was updated for the new virtual-height field before the successful rerun. Subsequent native creature storage admission and a physics integer-boundary repair also pass the focused104-test runtime suite; the creature AI is not yet admitted. Tested checkpoints are intermediate work, not completion of the requested game.
+
 ## Current owned actor-world checkpoint — 2026-10-13
 
 The runtime now owns native actors, typed handle bindings, player records, map links and explicit RNG state. Fresh actor preparation and ordered five-slot activation commit atomically; later failures leave every owned component unchanged. The normal associated-type5 branch places actors at the landing object and writes pending destinations toward sampled candidates. It does not teleport actors to those destinations. The separate no-associated path remains available with its correct semantics.

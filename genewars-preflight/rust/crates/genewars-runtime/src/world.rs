@@ -15,6 +15,7 @@ use genewars_core::cd_candidate::{
 };
 use std::collections::HashSet;
 use std::vec::Vec;
+use std::ops::{Deref, DerefMut};
 
 const MISSION_SHA256: &str = "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2";
 const PARAMETER_SHA256: &str = "297a1da0e9c30d6d4cb7c88addb8234be260e0e93b7d4b2b1c4c3ad8b7df2b7c";
@@ -57,6 +58,14 @@ pub struct PlantParameterTable {
 }
 
 impl PlantParameterTable {
+    #[cfg(test)]
+    pub(crate) fn fixture_for_shared_test() -> Self {
+        Self { records: [PlantParameters {
+            growth_deltas_i8: [1; 8], spread_period_u8: 4, random_walk_steps_u8: 0,
+            crowding_limit_u8: 10, check_threshold_u8: 1, retirement_delay_u8: 3,
+        }; PARAMETER_COUNT] }
+    }
+
     pub fn parse(bytes: &[u8]) -> Result<Self, RuntimeError> {
         if bytes.len() != PARAMETER_BYTES {
             return Err(RuntimeError::ParameterTableLength { expected: PARAMETER_BYTES, actual: bytes.len() });
@@ -110,6 +119,7 @@ pub enum RuntimeError {
     UnsupportedScheduledPlantState { index: usize, reason: &'static str },
     InsufficientEligibleSlots { expected: u16, found: u16 },
     AllocationFailed,
+    StorageInvariant(&'static str),
     Lifecycle(PlantLifecycleError),
 }
 
@@ -190,9 +200,36 @@ const SUSPENDED: SuspendedSubsystems = SuspendedSubsystems {
     ui_audio_reference_cleanup: true,
 };
 
+/// Storage operations needed by plant callbacks. An integrated world uses
+/// its native actor pool for kind3 references while retaining this same map.
+/// Implementations must preserve all bytes outside the requested link triple.
+pub trait PlantStorage: Deref<Target = [u8]> + DerefMut {
+    fn common_record(&self, kind: u8, index: u16) -> Result<&[u8], RuntimeError> {
+        let source = ConqMissionSource::parse(self)?;
+        let groups = source.groups();
+        let layout = groups.get(usize::from(kind.wrapping_sub(1)))
+            .ok_or(RuntimeError::InvalidReference { cell: usize::MAX, index: index as i16, kind })?.layout();
+        if usize::from(index) >= layout.count {
+            return Err(RuntimeError::InvalidReference { cell: usize::MAX, index: index as i16, kind });
+        }
+        let start = layout.file_offset + usize::from(index) * layout.packed_stride;
+        Ok(&self[start..start + 31])
+    }
+
+    fn write_common_reference(&mut self, kind: u8, index: u16, offset: usize, value: [u8; 3]) -> Result<(), RuntimeError> {
+        if offset != 0 && offset != 3 { return Err(RuntimeError::StorageInvariant("invalid link offset")); }
+        self.common_record(kind, index)?;
+        let layout = ConqMissionSource::parse(self)?.groups()[usize::from(kind - 1)].layout();
+        let start = layout.file_offset + usize::from(index) * layout.packed_stride + offset;
+        self[start..start + 3].copy_from_slice(&value);
+        Ok(())
+    }
+}
+impl PlantStorage for Vec<u8> {}
+
 #[derive(Debug, Clone)]
-pub struct MissionWorld {
-    bytes: Vec<u8>,
+pub struct MissionWorld<S = Vec<u8>> {
+    bytes: S,
     parameters: PlantParameterTable,
     tick_number: u64,
 }
@@ -219,6 +256,29 @@ impl MissionWorld {
         Ok(world)
     }
 
+    /// The owned plant-only route stages the complete backing before running.
+    pub fn tick_plants(&mut self) -> Result<PlantTickReport, RuntimeError> {
+        let mut candidate = self.clone_for_transaction()?;
+        let report = candidate.tick_plants_inner()?;
+        *self = candidate;
+        Ok(report)
+    }
+
+    fn clone_for_transaction(&self) -> Result<Self, RuntimeError> {
+        let mut bytes = Vec::new();
+        bytes.try_reserve_exact(self.bytes.len()).map_err(|_| RuntimeError::AllocationFailed)?;
+        bytes.extend_from_slice(&self.bytes);
+        Ok(Self { bytes, parameters: self.parameters.clone(), tick_number: self.tick_number })
+    }
+}
+
+impl<S: PlantStorage> MissionWorld<S> {
+    pub(crate) fn with_shared_storage(bytes: S, parameters: PlantParameterTable, tick_number: u64) -> Result<Self, RuntimeError> {
+        let world = Self { bytes, parameters, tick_number };
+        world.validate_loaded_plant_state()?;
+        Ok(world)
+    }
+
     pub fn source_bytes(&self) -> &[u8] { &self.bytes }
     pub fn parameter_table(&self) -> &PlantParameterTable { &self.parameters }
     pub fn tick_number(&self) -> u64 { self.tick_number }
@@ -230,48 +290,14 @@ impl MissionWorld {
     /// Shade is exposed exactly as currently stored; this method does not
     /// synthesize the later mission-entry shade refresh.
     pub fn render_records(&self) -> Result<Vec<PlantRenderRecord>, RuntimeError> {
-        let layout = self.layouts()[PLANT_GROUP];
-        let mut records = Vec::new();
-        records.try_reserve_exact(usize::from(self.plant_count())).map_err(|_| RuntimeError::AllocationFailed)?;
-        for index in 0..layout.count {
-            let start = layout.offset + index * layout.stride;
-            let bytes = &self.bytes[start..start + layout.stride];
-            if bytes[6] == 0 { continue; }
-            if bytes[6] != PLANT_FAMILY_KIND {
-                return Err(RuntimeError::InvalidPlantType { index, value: bytes[6] });
-            }
-            records.push(PlantRenderRecord {
-                record_index: index,
-                position_words: [read_i16(bytes, 7), read_i16(bytes, 9)],
-                owner_u8: bytes[24],
-                resource_selector_i8: bytes[35] as i8,
-                animation_u8: bytes[25],
-                frame_u8: bytes[27],
-                shade_u8: bytes[23],
-                shade_basis: ShadeBasis::SourceOrPreviouslyMutatedField,
-                flags_at_15: bytes[21],
-                flags_at_2e: bytes[38],
-                growth_i16: read_i16(bytes, 36),
-            });
-        }
-        if records.len() != usize::from(self.plant_count()) {
-            return Err(RuntimeError::InvalidPlantCount { declared: self.plant_count(), active: records.len() });
-        }
-        Ok(records)
+        plant_render_records(&self.bytes)
     }
 
     /// Run one deterministic, transactionally committed family-1 scheduling
     /// pass over the admitted no-RNG callback paths. A reproduction/RNG path
     /// or unavailable owner-count mutation rejects the entire pass without
     /// changing bytes, cursor, or tick number.
-    pub fn tick_plants(&mut self) -> Result<PlantTickReport, RuntimeError> {
-        let mut candidate = self.clone_for_transaction()?;
-        let report = candidate.tick_plants_inner()?;
-        *self = candidate;
-        Ok(report)
-    }
-
-    fn tick_plants_inner(&mut self) -> Result<PlantTickReport, RuntimeError> {
+    pub(crate) fn tick_plants_inner(&mut self) -> Result<PlantTickReport, RuntimeError> {
         let before_count = self.plant_count();
         let cursor_before = self.schedule_cursor();
         let slots = self.schedule_slots()?;
@@ -351,6 +377,7 @@ impl MissionWorld {
     fn validate_map_links(&self, active_plants: &[usize]) -> Result<(), RuntimeError> {
         let layouts = self.layouts();
         let mut seen: HashSet<(u8, usize)> = HashSet::new();
+        let mut plant_cells = vec![None; layouts[PLANT_GROUP].count];
         for cell_index in 0..MAP_CELLS {
             let cell_start = MAP_OFFSET + cell_index * MAP_CELL_BYTES;
             let mut current = read_reference(&self.bytes, cell_start + MAP_HEAD_OFFSET);
@@ -372,13 +399,14 @@ impl MissionWorld {
                 if index >= layout.count { return Err(RuntimeError::InvalidReference {
                     cell: cell_index, index: reference.index as i16, kind: reference.kind,
                 }); }
-                let start = layout.offset + index * layout.stride;
-                let actual_previous = read_reference(&self.bytes, start);
+                if reference.kind == PLANT_FAMILY_KIND { plant_cells[index] = Some([cell_index % MAP_SIDE, cell_index / MAP_SIDE]); }
+                let record = self.bytes.common_record(reference.kind, reference.index)?;
+                let actual_previous = read_reference(record, 0);
                 if actual_previous != previous {
                     return Err(RuntimeError::BrokenPreviousReference { kind: reference.kind, index });
                 }
                 previous = Some(reference);
-                current = read_reference(&self.bytes, start + 3);
+                current = read_reference(record, 3);
             }
         }
         for &index in active_plants {
@@ -386,22 +414,7 @@ impl MissionWorld {
             let start = layouts[PLANT_GROUP].offset + index * layouts[PLANT_GROUP].stride;
             let position = [read_i16(&self.bytes, start + 7), read_i16(&self.bytes, start + 9)];
             let expected = [usize::from(((position[0] as u16) >> 8) as u8 & 127), usize::from(((position[1] as u16) >> 8) as u8 & 127)];
-            let mut actual_cell = None;
-            for cell_index in 0..MAP_CELLS {
-                let cell_start = MAP_OFFSET + cell_index * MAP_CELL_BYTES;
-                let mut current = read_reference(&self.bytes, cell_start + MAP_HEAD_OFFSET);
-                while let Some(reference) = current {
-                    if reference.kind == PLANT_FAMILY_KIND && usize::from(reference.index) == index {
-                        actual_cell = Some([cell_index % MAP_SIDE, cell_index / MAP_SIDE]);
-                        break;
-                    }
-                    let layout = layouts[usize::from(reference.kind - 1)];
-                    let record_start = layout.offset + usize::from(reference.index) * layout.stride;
-                    current = read_reference(&self.bytes, record_start + 3);
-                }
-                if actual_cell.is_some() { break; }
-            }
-            let actual = actual_cell.ok_or(RuntimeError::MissingActivePlantLink(index))?;
+            let actual = plant_cells[index].ok_or(RuntimeError::MissingActivePlantLink(index))?;
             if actual != expected { return Err(RuntimeError::PlantInWrongCell { index, expected, actual }); }
         }
         Ok(())
@@ -577,9 +590,7 @@ impl MissionWorld {
                             count = count.wrapping_add(1);
                         }
                     }
-                    let layout = self.layouts()[usize::from(reference.kind - 1)];
-                    let start = layout.offset + usize::from(reference.index) * layout.stride;
-                    current = read_reference(&self.bytes, start + 3);
+                    current = read_reference(self.bytes.common_record(reference.kind, reference.index)?, 3);
                 }
             }
         }
@@ -587,27 +598,7 @@ impl MissionWorld {
     }
 
     fn terrain_class(&self, position: [i16; 2]) -> u8 {
-        let base_x = (position[0] as u16 >> 8) as u8 & 127;
-        let base_y = (position[1] as u16 >> 8) as u8 & 127;
-        let fx = position[0] as u8;
-        let fy = position[1] as u8;
-        let gx = usize::from(base_x.wrapping_add(u8::from(fx >= 128)) & 127);
-        let gy = usize::from(base_y.wrapping_add(u8::from(fy >= 128)) & 127);
-        let selector = self.map_texture_selector(gx, gy) & 7;
-        if selector != 0 { return selector; }
-        for dy in -1i16..=1 {
-            for dx in -1i16..=1 {
-                let xx = (i16::from(base_x) + dx).rem_euclid(128) as usize;
-                let yy = (i16::from(base_y) + dy).rem_euclid(128) as usize;
-                let nearby = self.map_texture_selector(xx, yy) & 7;
-                if nearby != 0 { return 1; }
-            }
-        }
-        0
-    }
-
-    fn map_texture_selector(&self, x: usize, y: usize) -> u8 {
-        self.bytes[MAP_OFFSET + (y * MAP_SIDE + x) * MAP_CELL_BYTES + 5]
+        map_terrain_class(self.map_cells(), position).expect("admitted map extent")
     }
 
     fn unlink_plant(&mut self, index: usize, cell_start: usize) -> Result<(), RuntimeError> {
@@ -632,17 +623,13 @@ impl MissionWorld {
             }
         } else {
             let prev = previous.unwrap();
-            let prev_layout = self.layouts()[usize::from(prev.kind - 1)];
-            let prev_start = prev_layout.offset + usize::from(prev.index) * prev_layout.stride;
-            if read_reference(&self.bytes, prev_start + 3) != Some(EntityRef { index: index as u16, kind: PLANT_FAMILY_KIND }) {
+            if read_reference(self.bytes.common_record(prev.kind, prev.index)?, 3) != Some(EntityRef { index: index as u16, kind: PLANT_FAMILY_KIND }) {
                 return Err(RuntimeError::MissingMapReference { kind: PLANT_FAMILY_KIND, index });
             }
-            self.bytes[prev_start + 3..prev_start + 6].copy_from_slice(&next_bytes);
+            self.bytes.write_common_reference(prev.kind, prev.index, 3, next_bytes)?;
         }
         if let Some(next_ref) = next {
-            let next_layout = self.layouts()[usize::from(next_ref.kind - 1)];
-            let next_start = next_layout.offset + usize::from(next_ref.index) * next_layout.stride;
-            self.bytes[next_start..next_start + 3].copy_from_slice(&previous_bytes);
+            self.bytes.write_common_reference(next_ref.kind, next_ref.index, 0, previous_bytes)?;
         }
         // The original helper rewrites neighboring triples, but does not
         // clear the retired record's own previous/next bytes.
@@ -661,12 +648,53 @@ impl MissionWorld {
         })
     }
 
-    fn clone_for_transaction(&self) -> Result<Self, RuntimeError> {
-        let mut bytes = Vec::new();
-        bytes.try_reserve_exact(self.bytes.len()).map_err(|_| RuntimeError::AllocationFailed)?;
-        bytes.extend_from_slice(&self.bytes);
-        Ok(Self { bytes, parameters: self.parameters.clone(), tick_number: self.tick_number })
+}
+
+/// Read-only presentation of the packed plant family, usable with either
+/// the plant-only or integrated world's sole backing store.
+pub fn plant_render_records(bytes: &[u8]) -> Result<Vec<PlantRenderRecord>, RuntimeError> {
+    let source = ConqMissionSource::parse(bytes)?;
+    let layout = source.groups()[PLANT_GROUP].layout();
+    let declared = read_u16(bytes, PLANT_COUNT_OFFSET);
+    let mut records = Vec::new();
+    records.try_reserve_exact(usize::from(declared)).map_err(|_| RuntimeError::AllocationFailed)?;
+    for index in 0..layout.count {
+        let start = layout.file_offset + index * layout.packed_stride;
+        let record = &bytes[start..start + layout.packed_stride];
+        if record[6] == 0 { continue; }
+        if record[6] != PLANT_FAMILY_KIND { return Err(RuntimeError::InvalidPlantType { index, value: record[6] }); }
+        records.push(PlantRenderRecord {
+            record_index: index,
+            position_words: [read_i16(record,7),read_i16(record,9)],
+            owner_u8: record[24], resource_selector_i8: record[35] as i8,
+            animation_u8: record[25], frame_u8: record[27], shade_u8: record[23],
+            shade_basis: ShadeBasis::SourceOrPreviouslyMutatedField,
+            flags_at_15: record[21], flags_at_2e: record[38], growth_i16: read_i16(record,36),
+        });
     }
+    if records.len() != usize::from(declared) { return Err(RuntimeError::InvalidPlantCount { declared, active: records.len() }); }
+    Ok(records)
+}
+
+/// Exact8B520 terrain-class lookup, shared by plants and actor placement.
+pub fn map_terrain_class(map: &[u8], position: [i16; 2]) -> Result<u8, RuntimeError> {
+    if map.len() != MAP_BYTES { return Err(RuntimeError::InvalidMapExtent { expected: MAP_BYTES, actual: map.len() }); }
+    let base_x = (position[0] as u16 >> 8) as u8 & 127;
+    let base_y = (position[1] as u16 >> 8) as u8 & 127;
+    let gx = usize::from(base_x.wrapping_add(u8::from(position[0] as u8 >= 128)) & 127);
+    let gy = usize::from(base_y.wrapping_add(u8::from(position[1] as u8 >= 128)) & 127);
+    let selector = map[(gy * MAP_SIDE + gx) * MAP_CELL_BYTES + 5] & 7;
+    if selector != 0 { return Ok(selector); }
+    for dy in -1i16..=1 {
+        for dx in -1i16..=1 {
+            // Eight neighbors of the ORIGINAL floor cell, not the rounded cell.
+            if dx == 0 && dy == 0 { continue; }
+            let x = (i16::from(base_x) + dx).rem_euclid(128) as usize;
+            let y = (i16::from(base_y) + dy).rem_euclid(128) as usize;
+            if map[(y * MAP_SIDE + x) * MAP_CELL_BYTES + 5] & 7 != 0 { return Ok(1); }
+        }
+    }
+    Ok(0)
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -748,6 +776,18 @@ mod tests {
         bytes[cell + 5] = 1;
         bytes[cell + MAP_CELL_COUNT_OFFSET] = 1;
         MissionWorld { bytes, parameters: test_parameters(crowding_limit), tick_number: 0 }
+    }
+
+    #[test]
+    fn terrain_fallback_excludes_floor_center_after_rounding() {
+        let mut world = synthetic_world(0, 2);
+        world.bytes[MAP_OFFSET + 5] = 2;
+        assert_eq!(world.terrain_class([0, 0]), 2);
+        assert_eq!(world.terrain_class([128, 0]), 0);
+        world.bytes[MAP_OFFSET + (127 * MAP_SIDE + 127) * MAP_CELL_BYTES + 5] = 4;
+        assert_eq!(world.terrain_class([128, 0]), 1);
+        world.bytes[MAP_OFFSET + MAP_CELL_BYTES + 5] = 6;
+        assert_eq!(world.terrain_class([128, 0]), 6);
     }
 
     #[test]

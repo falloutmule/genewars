@@ -25,3 +25,20 @@ plants/slot-10.anb	2df420abf6f02a8ccac648d0d345c6448136ae6e6ead0a16c0c6dca275f65
 plants/slot-11.anb	0800de6f06dbac6864808d98cc3be767c5e037c1cd5aec552e7acd008e6a30d5	4160	private/integration/plant-inputs/slot-11.anb	root/2/disc/343
 HDRCO1.DAT	5e1f382ea68f57f1cec03a3f7de2c4903ca127519481da98232a7f1c3a46aa11	699	private/integration/campaign-first/HDRCO1.DAT	root/2/disc/190
 plant-parameters.bin	297a1da0e9c30d6d4cb7c88addb8234be260e0e93b7d4b2b1c4c3ad8b7df2b7c	384	private/ghidra/plant-state/parameter-block.bin	CD-GW.EXE:0x126980..0x126B00
+actors/key-00.anb	629a6471e4deabec794f0cffa34b513eea15013ee95927e67b02a4a7e6157b6a	35497	private/integration/actor-resources/key-00.anb	actor key 0; root/2/disc/361
+actors/key-01.anb	4421b2f6570face0e323f0444e3d10b972f0f7705fe128bac54963e9e0911563	26921	private/integration/actor-resources/key-01.anb	actor key 1; root/2/disc/362
+actors/key-02.anb	93e5aeb581d83ebd33ad55b8068adbe427fcb9a606e88a5f8bab079ea75be7cb	38076	private/integration/actor-resources/key-02.anb	actor key 2; root/2/disc/363
+actors/key-03.anb	38d32a18a8b94bf2411a184506dbcbf76c344292fae8ef81971d2c02f91c4929	35797	private/integration/actor-resources/key-03.anb	actor key 3; root/2/disc/364
+actors/key-04.anb	4a232c5debfef3fbef5a54647e6312cc325265fe996b00841b35f1511340bd73	40742	private/integration/actor-resources/key-04.anb	actor key 4; root/2/disc/357
+actors/key-05.anb	8946c2d3dfd8fe059fb8c72a74a71d0eaab48d43015a28d563beec095e38023b	28983	private/integration/actor-resources/key-05.anb	actor key 5; root/2/disc/358
+actors/key-06.anb	63a3623d75f761aa5e09737074e5f5ab4a9cc40bf85334d69863536241874184	41317	private/integration/actor-resources/key-06.anb	actor key 6; root/2/disc/359
+actors/key-07.anb	6576a2ffc66893d8eacb21a44165ac11118dd7256f74237f6992210148dee847	35249	private/integration/actor-resources/key-07.anb	actor key 7; root/2/disc/360
+actors/key-08.anb	03c147fb87ad0d30a2de2f4e91ee755575b07a2d63078c9c2bb5611ded2b040f	39778	private/integration/actor-resources/key-08.anb	actor key 8; root/2/disc/365
+actors/key-09.anb	73cdf337d6ff63cc4d120bdd9c3e0b0dcc59c000a4193e40f8a98c3cf72d03d9	32231	private/integration/actor-resources/key-09.anb	actor key 9; root/2/disc/366
+actors/key-10.anb	b4eb05c610c7d135dc9de8876608302032b0428b0afdcb052fc174b9bd2eea7a	38301	private/integration/actor-resources/key-10.anb	actor key 10; root/2/disc/367
+actors/key-11.anb	b51ef5a703a89dcf00c2465ddc7666fe842a9ce726363c2a36b2f2f0ac1d6277	35744	private/integration/actor-resources/key-11.anb	actor key 11; root/2/disc/368
+actors/key-12.anb	aef9ba878097884f64674c3273ae8de8139530c31155fbbf6d4db1db11e329c0	37700	private/integration/actor-resources/key-12.anb	actor key 12; root/2/disc/369
+actors/key-13.anb	662b6358b87eff43624009881701ff9eec243d05800a79ed7478fc6736b724b0	27293	private/integration/actor-resources/key-13.anb	actor key 13; root/2/disc/370
+actors/key-14.anb	9f4ef097c5db8ad10c41b8992345bb2b26b6b4045a30c96e03c867f2ef968f0d	34865	private/integration/actor-resources/key-14.anb	actor key 14; root/2/disc/371
+actors/key-15.anb	6e6a81c03e5b8ec50706ca85c77161190183a9d44202dd155a9fc249043df559	32699	private/integration/actor-resources/key-15.anb	actor key 15; root/2/disc/372
+effects/EFF.ANB	f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253	186726	private/integration/rnc-decoded/74c282b4aff35204da78399a3f2674cabda56b0a76dc9a9974635ae5ad878b8d.bin	root/2/disc/59; decoded RNC output

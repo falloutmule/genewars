@@ -1,0 +1,53 @@
+{
+  "status": "passed-native-creature-storage-review",
+  "utc": "2026-10-13T14:55:47.218962+00:00",
+  "scope": "Exact first-mission native124B family0 copy and typedMule binding only; no AI/tick closure",
+  "records": 300,
+  "compared_bytes": 37500,
+  "active_records": 1,
+  "source": {
+    "path": "rust/crates/genewars-runtime/src/creature_world.rs",
+    "sha256": "52ce043d7af1b1bd3921e8977ca6f8c8477991501d1b47aecdf9489160a97fc3"
+  },
+  "mission": {
+    "path": "private/integration/game-runtime/terrain/CONQ001.DAT",
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/creature-world-review.py",
+      "sha256": "abd5566c2405fdf097abe54e0e8660cd3f20a2ce225c2ed8f936deb90f21db4c"
+    },
+    {
+      "path": "research/variants/creature-world-review.rs",
+      "sha256": "a839be10a522dd79c30585f2a50fd54b686a25c5c806b22dbf41ccce719a530b"
+    }
+  ],
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-0005a850.txt",
+      "sha256": "e264758a9f7059194b9eecd159732595833af28f16764ef484be1a11f7216a50"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-0006d490.txt",
+      "sha256": "5b9e8ac352751ec2e9dbda6bd5abfee4d61ab7602bd7cba97119663b17eb664e"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-0005a1c0.txt",
+      "sha256": "02f55f81e196715d686d5427c1475d280f0e4fbf13499355dd7974c629d989b9"
+    }
+  ],
+  "output": {
+    "path": "private/review/creature-world/pool.bin",
+    "sha256": "cdecdc2258453eba66a8b696e92b34c407f204d7fd067ab98cb8a419d0f3d5cc"
+  },
+  "tests": 2,
+  "original_execution": false,
+  "gui_execution": false,
+  "limits": [
+    "Explicit already-constructed priors; vtable bytes preserved and never dereferenced",
+    "Only active type1/state<26/selector4 admitted; otheractivebindings reject",
+    "Rawprior gap preserved except activeanimationpointerplaceholder; sourceartifact remains unchanged",
+    "No map, RNG or scheduling implemented by this storage API"
+  ]
+}

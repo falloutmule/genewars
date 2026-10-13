@@ -1,0 +1,66 @@
+{
+  "status": "passed-independent-native-terrain-target-review",
+  "utc": "2026-10-13T14:49:41.682848+00:00",
+  "cases": 4032,
+  "resolved": 3502,
+  "unresolved": 530,
+  "maps": [
+    {
+      "name": "exactCONQ001",
+      "map_sha256": "57300db747f5576c3939b95d4b0089d2347c1d525293171b866537935fdb39a6",
+      "cases": 1344,
+      "resolved": 1294,
+      "unresolved": 50
+    },
+    {
+      "name": "flatZero",
+      "map_sha256": "d2a23a7de3af6bf70d164a0ce45201371aca7624e30079d30cccab1cb6cf52e3",
+      "cases": 1344,
+      "resolved": 1284,
+      "unresolved": 60
+    },
+    {
+      "name": "syntheticFullI16",
+      "map_sha256": "3082bbb0b1cef9f81510bddf1b7028349197504355eb33fd4903b738652dda3f",
+      "cases": 1344,
+      "resolved": 924,
+      "unresolved": 420
+    }
+  ],
+  "source": {
+    "path": "rust/crates/genewars-runtime/src/terrain_target.rs",
+    "sha256": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/terrain-render-refs/instructions-0007b550.txt",
+      "sha256": "51323fdbc2469e26ae94d1377cb5a277b8879cca0aba628b55d4d5aa1597e73a"
+    },
+    {
+      "path": "private/ghidra/terrain-render-refs/instructions-0007ae20.txt",
+      "sha256": "148074624dbec8a425dc33cfa08553029ecd36eac1b7b3100a11bfaa360f9382"
+    }
+  ],
+  "output_sha256": "9e86f65bf6850d04cb355c96205d9f87b73638f527a14516a08785d67f3bbeef",
+  "harness": {
+    "path": "private/review/actor-environment-terrain-target/review.exe",
+    "sha256": "55acc86067b149366ec1fc31776e4b8354d4cc8464c1e01b4bf8c2442d8f6dde"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/actor-environment-terrain-target.py",
+      "sha256": "b1bd37810e18f3797ffcfb88dd42da33b5a7e179852c6230ff9ec9f101209a2d"
+    },
+    {
+      "path": "research/variants/actor-environment-terrain-target.rs",
+      "sha256": "03a1e3a3dffee3ec2cabaa4d350779982dcd2f9b6a4c1e8193946687ca7cc0cd"
+    }
+  ],
+  "original_execution": false,
+  "gui_execution": false,
+  "limits": [
+    "Exact admitted32/16/factor2 and640x480 domain",
+    "Unwritten-helper and40-step fallback return explicit error instead of caller prior bytes",
+    "No UI/controller command dispatch or complete original startup"
+  ]
+}

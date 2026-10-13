@@ -40,6 +40,20 @@ These inputs do not establish the original startup timeline.
   portrait and selected actor gates before applying the bounded opcode3
   setter. The target is already projected by the caller. Pending commands
   change destination/order fields; they do not move an actor immediately.
+- The plant subsystem borrows the same backing and native actor pool through
+  `PlantStorage`. Its traversals and unlink writes resolve kind3 directly in
+  native records. `admit_plants` attaches hash-bound parameters without a
+  reload; `tick_plants` commits the complete world only after validation.
+  No packed actor mirror or second persistent map is maintained.
+- Owned terrain, plant-blocker and bounded obstacle queries now replace
+  caller values in the `*_owned` activation/command APIs. Terrain uses the
+  corrected eight-neighbor fallback. Blockers honor native actor ignore bits,
+  typed category1 plant exemptions and the packed/native plant flag mapping.
+  Map byte11 mask01 clear proves the obstacle query returns NULL; set bits
+  reject until building footprints are implemented. Kind5's pure predicate
+  is admitted; unclosed family predicates remain explicit failures.
+- `MinimapContext::project` implements874B0 for its actual88x89 control.
+  It does not project ordinary terrain clicks; that producer calls7B550.
 
 The source listings are hash pinned in `actor-activation-evidence.json` and
 `move-order-evidence.json`. Relevant direct ranges are80B6B–80C65 for associated
@@ -51,8 +65,9 @@ original gameplay.
 
 `scripts/validate_actor_world.py` executes the production library over the
 verified mission with64 explicitly synthetic player/native-gap/RNG/environment
-fixtures. An independent Python model compares128 complete activation/command
-after-images,45,463,680 bytes. The probe also checks128 rollback cases. Real
+fixtures. An independent Python model compares192 complete activation/command/
+plant after-images,68,195,520 bytes. Each session runs96 plant passes after its
+order, totaling6,144 passes. The probe also checks128 rollback cases. Real
 mission bytes are used for map/family provenance; the fixture seed is never
 presented as the live landing seed.
 
@@ -63,19 +78,32 @@ associated-object placement/order separation, no-op precedence and controller
 gates. The associated planner has a separate independent validator and receipt
 at `associated-activation-validation.json`.
 
+Mixed-list tests retire plants at head/interior/tail around native actors,
+preserve all nonlink actor fields and handles, and reject a later callback
+without retaining an earlier retirement. Environment and minimap comparisons
+are recorded separately in `research/variants/actor-environment-*.json`.
+The16 hash-bound actor databases admit349 animations,1,982 frames and2,108
+components; the typed actor render adapter validates bindings and frame bounds.
+
 ## Remaining integration boundary
 
 The normal startup path retains the code31 landing object as the associated
 type5 reference. Calling the no-associated route would bypass that behavior.
-Neither activation API proves that landing has occurred. Factory creation,
-physics/contact, earlier effect/family callbacks and the shared live RNG
-schedule remain to be connected. Environmental results are explicit evidence
-inputs; world terrain/blocker/obstacle algorithms are not yet substituted.
+Neither activation API alone proves that landing has occurred. The newer
+owned factory/physics/contact adapter now invokes associated activation from
+the actual contact transition. Smoke creation, lifetime and reference cleanup
+share the same map and RNG. Earlier kind1 AI and the complete shared update
+schedule remain unfinished. See `landing-world-contract.md`. The explicit
+environment APIs remain useful for independent fixtures; owned queries use
+the current world state.
 
 The native application continues to use its plant-only `MissionWorld`.
-`ActorWorld` is a separate owned stage, not a concurrently synchronized copy.
-Its packed backing alone is not a save file: native actors and players live in
-separate overlays. Resource handles identify exact table slots, but the host
-has not yet resolved those handles into the16 source resources. Screen target
-projection, full movement/path search, unified updates and rendering of these
-actors remain unfinished. No complete playable game or milestoneC is claimed.
+`ActorWorld` now hosts shared plant/actor operations, but native scene startup
+has not yet switched to it.
+Its packed backing alone is not a save file: native actors/effects and players
+live in owned overlays. Resource handles resolve against16 exact databases.
+Ordinary terrain projection and actor composition now pass independent
+comparisons. The desktop adapter draws actors using explicit caller ordering;
+the original actor queue, full movement/path search, complete ordered updates
+and default scene integration remain unfinished. No complete playable game or
+milestoneC is claimed.

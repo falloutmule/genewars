@@ -73,7 +73,7 @@ def terrain_class(position):
  x,y=position;gx,gy=(x>>8)&127,(y>>8)&127
  t=region[cell(gx+(int(x&255>=128)),gy+(int(y&255>=128)))+5]&7
  if t:return t
- return int(any(region[cell(gx+dx,gy+dy)+5]&7 for dy in [-1,0,1] for dx in [-1,0,1]))
+ return int(any(region[cell(gx+dx,gy+dy)+5]&7 for dy in [-1,0,1] for dx in [-1,0,1] if dx or dy))
 
 def cursor_next(cursor):
  assert 0<=cursor<=512
@@ -167,7 +167,7 @@ receipt={'candidate_sha256':candidate,'instruction_contracts':pins,
  'retirement_slice':'Withadmittedfreshflags2E mask88clear:6C780 adds6tou8animation, setsgrowth0, flags2E|80 andcounter30=resourcecounter1D. Ifcounter>=4: subtract4andreturnactive. Ifcounter<4: immediatelyunlink; cell13 increasesby2 onlyifold<64 (63becomes65); owner0..3requestsDECwordatplayer+5FA, owner4skips; request724C0bookkeeping, cleartype6anddecrementplantcount. Immediatebranchdoesnotrenderanimation6 becauseactivebytecleared. Requestoldframe-dirtycheckinexplicitcurrentview; originalcallsvirtual70onlywhenprojectedpointinside[0,640-margin)x[0,480), andcachedframe27NULL suppressesitsbody.',
  'bookkeeping':'724C0 clears matching3-byte target-reference typebytes in activeotherfamilies (notplantgrowthfields), mayreactivatepanel ifremovedentityselected, andcalls409F0audio/objectnotification plus2C200UIselectioncleanup.409F0scans9attachmentrecordsstride16hex andclearsmatchingpointer+4;2C200onlyclearsmatchingpanelpointersR+19F/R+1CC. These areexplicitpendingrequests, notsilentlyexecutedbythepurestateplan. Actualworld/selection/audioinputsremaincallerresponsibility.',
  'unlink_byte_policy':'8ACC0 leaves removed entity own previous/next triples unchanged. In found-head singleton case previous.kind=next.kind=0, it clears only cell head kind byte+8 and preserves head index word+6. Otherwise it copies raw previous/next reference triples into neighbors/head, including null-kind reference index bytes; no canonical null normalization.',
- 'terrain_class':'8B520 samples cell+5low3 atpositionroundedupindependentlywhenfraction>=128. Ifthatclass0, return1ifany of3x3neighbors aroundunroundedfloorcellhasnonzerolow3, else0.128wrap. This is separatefromtextureUVorientation.',
+ 'terrain_class':'8B520 samples cell+5low3 atpositionroundedupindependentlywhenfraction>=128. Ifthatclass0, return1ifany ofeightneighbors aroundunroundedfloorcellhasnonzerolow3, excludingfloorcenter, else0.128wrap. This is separatefromtextureUVorientation.',
  'neighbor_contract':'8B300(mask0) establishesatleastone type2linkedentitypercell;8B6F0(mode0) countstype2whosevirtual68 returnsfalse.1EBD0 returnsgrowth<=0, socountpositivegrowth.6D390resolves3-byte signed16index/u8familyreferences. All40sourceplantmaplinksvalidatedexactlyonce andpositioncellconsistent.',
  'source_fixture':{'entry_id':'root/2/disc/152','source_sha256':sha(source),'active_family_counts':[g['active_raw_byte_nonzero'] for g in groups],'plant_links_before':len(plant_links),'plant_links_after':len(post_links),'scheduled_indices':scheduled,'cursor_after':cursor,'private_path':'private/ghidra/plant-startup/first-scheduled-fixture.json','fixture_sha256':sha(payload),'results_metadata':fixtures},
  'cursor_vectors':cursor_vectors,'growth_vectors':vectors,'retirement_vectors':retirement_vectors,'register_growth_cases':growth_cases,

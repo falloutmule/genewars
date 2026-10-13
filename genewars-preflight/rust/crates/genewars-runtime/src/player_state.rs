@@ -153,6 +153,10 @@ impl PlayerState {
     pub fn activation_count(&self) -> u32 {
         u32::from_le_bytes(self.bytes[0x49D..0x4A1].try_into().unwrap())
     }
+    pub(crate) fn set_landing_reference(&mut self, index: u16) {
+        self.bytes[0x496..0x498].copy_from_slice(&index.to_le_bytes());
+        self.bytes[0x498] = 5;
+    }
     pub(crate) fn finish_activation_batch(&mut self) {
         let count = self.activation_count().wrapping_add(1);
         self.bytes[0x49D..0x4A1].copy_from_slice(&count.to_le_bytes());

@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "utc": "2026-10-13T13:17:26.849871+00:00",
-  "binary_sha256": "bbf541ecb4b43d694a8e48575233e6b279eee4694be622c91caf2b50529ccfcd",
+  "utc": "2026-10-13T14:52:43.015223+00:00",
+  "binary_sha256": "13d7e52aecacf87a4242d502d3430b8da0b8cb8233a821b0b50cb624ff14136f",
   "sources": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
@@ -20,36 +20,72 @@
       "sha256": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/actor_render.rs",
+      "sha256": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_resources.rs",
+      "sha256": "8c94e8afb54d1dbcb0e33de471a9b7d4d4008d3a8782f970ff5b0e95194145a3"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "702cf18d8ec44dcdf6e04e53722aef60443cde819bfcb9077d0472546ad123ed"
+      "sha256": "61523e25803399b5cd420be63f29f608cfe9c9f6c76031e5df30ec3417f6647d"
     },
     {
       "path": "rust/crates/genewars-runtime/src/blueprint.rs",
       "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/creature_world.rs",
+      "sha256": "52ce043d7af1b1bd3921e8977ca6f8c8477991501d1b47aecdf9489160a97fc3"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
+      "sha256": "055e8b1d5f5a3256ea4eb9bdea4ee3749960c03bafa0a4955263a7acb955c334"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/identity.rs",
       "sha256": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/landing.rs",
+      "sha256": "f8a43c4ac0a69d6579a20a034cbdb401b427ebff2a992bdc5029eac760678f12"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
+      "sha256": "f6032674e731dedd6bb40a79c0aeb3ea24bf130ad2691a200aad79db891e0161"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/lib.rs",
-      "sha256": "ac7fac8417ef8ea763fa91e67ea5d0231313ec4bdf4189a3791439ebffa57660"
+      "sha256": "99bcda5bcb0266b4049a24579ef828f9726ca46cb4dae971b77fc80c374a30e4"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
+      "sha256": "cc063773f1a08c161bb34aa03751e75dd3c74ea50e78d4d63c0d6a6ad844e685"
     },
     {
       "path": "rust/crates/genewars-runtime/src/player_state.rs",
-      "sha256": "6c2e36535278e906790ea8d5ca6e7a1b0de477fe010fbffd1431bea40c076348"
+      "sha256": "fe0196a5fda76b838102f563b9669a04cf4cb07199beaf9b7358e2553b2ee547"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_projection.rs",
+      "sha256": "455938c39b889e6e035e2821e74b7d5f4aae980786745c7861dc1aa5dbb38dc6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/terrain_target.rs",
+      "sha256": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16"
     },
     {
       "path": "rust/crates/genewars-runtime/src/world.rs",
-      "sha256": "f9d763553f7656c602bddc0a75ff0892d3945187eacc2a386d517bc19d782553"
+      "sha256": "f45b4357337724ac724711cbb9ddbe92a7764fe701d99f531be76bd072874c19"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/genewars-game.rs",
-      "sha256": "88570a970faaf5e7a20deb427862825273142d7757054be1bc72e7f488fc0271"
+      "sha256": "d0c90e55c8afa41678d90b96dccea7643e74fe9b0e2c2a4e20721fca9336e8bb"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs",
-      "sha256": "8693f154843e29c4653e8ba591acad69c8c5423ab5d5d5c057a7965577c4d501"
+      "sha256": "a445be5a74bc52013b7869b2310b7414e49375206870057750410b1e57510343"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs",
@@ -69,7 +105,7 @@
     },
     {
       "path": "research/integration/runtime-resource-catalog.tsv",
-      "sha256": "fdfd24ea0237b9851b2522a233e8f973531740df2223d1042592254acbd8de26"
+      "sha256": "dd84be2e7a01889f68fd5d8a9db8e7f7769b64e51609d8960b1dbeb27e91125e"
     },
     {
       "path": "scripts/validate_runtime.py",
@@ -449,6 +485,108 @@
       "mission": null
     },
     {
+      "name": "corrupt-26",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-27",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-28",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-29",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-30",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-31",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-32",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-33",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-34",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-35",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-36",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-37",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-38",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-39",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-40",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-41",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-42",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
       "name": "missing-mission-return",
       "passed": true,
       "scene": "Menu",
@@ -459,8 +597,8 @@
       "passed": true
     }
   ],
-  "case_count": 41,
-  "private_output": "private/integration/runtime-validation/ab16d664c4ae41df961a6d21452825c4",
+  "case_count": 58,
+  "private_output": "private/integration/runtime-validation/933e6614046a42b6940d5ed2b5d2b5d6",
   "milestones": {
     "A": "bounded native menu-to-loaded-world route",
     "B": "transactional plant steps with actual pixel change",

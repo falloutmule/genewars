@@ -1,13 +1,13 @@
 {
   "status": "passed",
-  "utc": "2026-10-13T13:15:09.503241+00:00",
+  "utc": "2026-10-13T14:48:49.227481+00:00",
   "cases": 1024,
   "records_compared": 2048,
   "bytes_compared": 3696640,
   "sources": [
     {
       "path": "rust/crates/genewars-runtime/src/player_state.rs",
-      "sha256": "6c2e36535278e906790ea8d5ca6e7a1b0de477fe010fbffd1431bea40c076348"
+      "sha256": "fe0196a5fda76b838102f563b9669a04cf4cb07199beaf9b7358e2553b2ee547"
     },
     {
       "path": "rust/crates/genewars-core/src/player_creation.rs",
