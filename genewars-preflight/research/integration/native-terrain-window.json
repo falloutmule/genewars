@@ -1,13 +1,13 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T11:23:50.304654+00:00",
+  "checked_utc": "2026-10-13T12:27:43.214346+00:00",
   "current_binary": {
     "path": "private/build/rust-target/debug/genewars-terrain.exe",
     "bytes": 19586780,
-    "sha256": "5201ec5b1acfd8aed215e0a24e695a9441895a2d46902d475d2f3238b0db2ad2"
+    "sha256": "856d16c8ec95528914f60bf78dd74d17a252f91b6d641de6a62dc84653166930"
   },
   "current_bounded_run": {
-    "path": "private/integration/terrain-window-983c8fc57a18432c8fbe1bfb7e5129d8.json",
+    "path": "private/integration/terrain-window-9c798920c2934edc9d10fff96ebfb579.json",
     "bytes": 474,
     "sha256": "37ed922fc5daea698c864315a570c2a5c9585c66cfd0f6f3a48de0dd2822bc41"
   },

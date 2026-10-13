@@ -1,0 +1,519 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/campaign-refs/instructions-0007c870.txt",
+      "sha256": "f46fc13eef1df0bc64238de65ae7355f73a889194b4c870f0a6b50ac91e52f07"
+    },
+    {
+      "private_path": "private/ghidra/campaign-start/instructions-00080460.txt",
+      "sha256": "15cf464ceb31fc599bc455e1cf53063eae7368d57cd66ffcd088d2a85ca70ce2"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00080590.txt",
+      "sha256": "c454d8a02dd88524f21c3bc7381dc977804aabe214a5f3cdf56b6744757d44d6"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0007f580.txt",
+      "sha256": "456bf6a90497272367895c99d36f9e8e8a1c37fac1690388a0e6343667e9d305"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0007fad0.txt",
+      "sha256": "03967b02b2b15b977b81d3603bc886579c1db4427381ed65548e384e15d4833a"
+    },
+    {
+      "private_path": "private/ghidra/blueprint-init/instructions-0009a630.txt",
+      "sha256": "124fa66292c9ed1f435ac0951bae171c4d87e9f97c3e114effdf344c1daa132f"
+    },
+    {
+      "private_path": "private/ghidra/blueprint-init/instructions-000aebb1.txt",
+      "sha256": "3662760cc1fc487cbf64c6185974e3019e76163338ff446b28b80c02d36d2586"
+    },
+    {
+      "private_path": "private/ghidra/font-text/instructions-0001d770.txt",
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    },
+    {
+      "private_path": "private/ghidra/actor-resource-refs/instructions-0001e220.txt",
+      "sha256": "324e1df1fa255bab81ce817d6f4e1a6f97c08963d972d2aafb3033ec79d9d417"
+    },
+    {
+      "private_path": "private/ghidra/palette-functions/instructions-000154b0.txt",
+      "sha256": "fbbc626a1091a8bd8cef2128396a4246e9e7025065ef415ee1843ad5482ab93c"
+    },
+    {
+      "private_path": "private/ghidra/sprite-functions/instructions-00098a60.txt",
+      "sha256": "75b266f751d4c7d29dc4d5bf83493b821cdb38f7e10838403daa29ac1fdc4a8a"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0004fd30.txt",
+      "sha256": "0dfb420cafd52d6ebcf41de7e02299cf23938381f95ffc1ca1efaa0b91a29b60"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-00056e20.txt",
+      "sha256": "ea9f9732b2e32af849a86de57a4a416a565f2fe4c6809fed6587fc0dcc99baa0"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00080830.txt",
+      "sha256": "e9fda91b7c0fe5071443cf03bb73cd028996fdc32e7273e1a10f389d114c6973"
+    }
+  ],
+  "fresh_player": {
+    "record_bytes": 1805,
+    "scope": "Selected record cleared by7C870 then byte2=0 path80460; explicit selectedplayer0..3 and initialtarget input",
+    "label": {
+      "mapped_va": "0x10eade",
+      "bytes_with_nul": 7,
+      "sha256": "91a008024ce891726c1fea45e1f804c1d9bde27f3b62305ac1c2f1f6e40a9729",
+      "ascii_without_nul": "Player"
+    },
+    "stores": "byte0=2;1/4A1/6E2=player;6E3=0;target9=explicitwordpair;dword67E=1;freshentry6AE=4,count6E0=1,dword705=1;dword62A=11800;progress6E7=0;label6E9..6EF",
+    "restore_ranges": [
+      [
+        0,
+        1185
+      ],
+      [
+        1562,
+        1783
+      ]
+    ],
+    "restore_excludes": [
+      "4A1",
+      "705"
+    ],
+    "vectors": [
+      {
+        "player": 0,
+        "target": [
+          0,
+          0
+        ],
+        "after_sha256": "f761e0d287423a6b9d2fcf27cff97a450902c7963e73ef8bc76c6b6bf3c5a4ce"
+      },
+      {
+        "player": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "after_sha256": "664ffaa80fbff74932d572d4678c5fecfc1677dc6ce56d79acd8a0807c797a7a"
+      },
+      {
+        "player": 0,
+        "target": [
+          -32768,
+          32767
+        ],
+        "after_sha256": "81fe7c9f14b9fb53662fa2ddc8b734020b4c4e3ea25b6b9667c25d23d780efff"
+      },
+      {
+        "player": 1,
+        "target": [
+          0,
+          0
+        ],
+        "after_sha256": "6a42f7ba8d210b08150105552f2a04c2f1b096ae34aca38b66c47182b485929a"
+      },
+      {
+        "player": 1,
+        "target": [
+          20736,
+          13568
+        ],
+        "after_sha256": "750162e93601607848977f6edb722b3e4c1cc3794ebb17fb65935ec4c0eb3389"
+      },
+      {
+        "player": 1,
+        "target": [
+          -32768,
+          32767
+        ],
+        "after_sha256": "74da0997c270e37b7fd3d2c90679167014c9f264e3ba3e10947a8d105fee606d"
+      },
+      {
+        "player": 2,
+        "target": [
+          0,
+          0
+        ],
+        "after_sha256": "0f572d46e3a47d8b9bdc4b7e107ac52885834fba4cf46c77fb655f860f519429"
+      },
+      {
+        "player": 2,
+        "target": [
+          20736,
+          13568
+        ],
+        "after_sha256": "883a8ce44fab7b3e3e14ab4674645cd24484bf01d6403833782b9c4373fd6e08"
+      },
+      {
+        "player": 2,
+        "target": [
+          -32768,
+          32767
+        ],
+        "after_sha256": "ce1a4d8cc150f1fdce985d21ebbf42f04db203e02a5df38cdc05d029aa72ed67"
+      },
+      {
+        "player": 3,
+        "target": [
+          0,
+          0
+        ],
+        "after_sha256": "9435a889f613f9b008172544b7813108c8f0d00fe931d04dc850688f46cc49b9"
+      },
+      {
+        "player": 3,
+        "target": [
+          20736,
+          13568
+        ],
+        "after_sha256": "9758eff6c78baed0353304dd874670c323ee0c70e756ee983c58324f921796f9"
+      },
+      {
+        "player": 3,
+        "target": [
+          -32768,
+          32767
+        ],
+        "after_sha256": "a99e8c0a00b62377887d2115918dca135a6e4602893e11c4186b6b65f6be6394"
+      }
+    ]
+  },
+  "generator": {
+    "entry": "0x7f580",
+    "helper": "0x7fad0",
+    "player_count_byte": "player+15hex",
+    "list_base": "player+16hex",
+    "record_count": 32,
+    "stride": 36,
+    "written_records": 20,
+    "scratch_required_bytes": 36,
+    "preserved_scratch_offsets": [
+      24,
+      27
+    ],
+    "scratch_reused_for_all20": true,
+    "clear_policy": "Onlyrecordfirstbytefor32records, pluslistcount=0. Trailing12otherbytespreserved. First20slotsfilledascending.",
+    "rng": "Explicitcurrentu16seed,ring0..31,countu32. Eachdrawseed=(seed*E62D)&FFFF; highbyte=seed>>8; ring=(ring+1)&31;countwrap+1. Exactly64draws:onecategorystartthen3perrecord. Loggingcode/tick/stringwritesremainexplicitrequests.",
+    "style": "Forcategory0..3, start=nextHigh%100;ordinal0..4;style=(start+ordinal)%4. difficulty=0ifcampaign,elseordinal.",
+    "stat19": "min(5*difficulty+base[15,40,10,30][style]+nextHigh%mod[25,10,15,20][style],cap19[style])",
+    "stat17": "min(10*difficulty+25+nextHigh%10,cap17[style])",
+    "name_choice": "nextHigh%(32-currentactivecountwithsamestyle); rank-thnamefromstyle32-namegroupabsentamongall32recordsusingNULaware20-bytecomparison. Copy20byteswithNULpadding. Safeadmission128uniquenonemptyNUL-freenameslength1..19; originaldoesnotvalidatepool.",
+    "writes": "name0..13hex padded20;14=0;15style;16category;17stat17;19stat19;1Astat19;1C..23zero.18and1Bunchanged. Copyall36bytesincludingthoseopaquepriorbytes.",
+    "log_codes": {
+      "category_start": 86,
+      "style_stat19": [
+        196,
+        203,
+        210,
+        217
+      ],
+      "stat17": 230,
+      "name_rank": 239
+    }
+  },
+  "caps": {
+    "mapped_va": "0x104af0",
+    "file_offset": "0x1268f0",
+    "size": 64,
+    "sha256": "a0993946e1bfa1f883f6501962d7034953eb437bebfd4a0986db57cf665c68b3",
+    "private_path": "private/ghidra/blueprint-init/caps.bin",
+    "stride": 16,
+    "cap17_i32": [
+      100,
+      75,
+      75,
+      75
+    ],
+    "cap19_i32": [
+      70,
+      100,
+      65,
+      90
+    ],
+    "other8bytes_perrow": "opaque for this generator"
+  },
+  "name_source": {
+    "entry_id": "root/2/disc/592",
+    "source_sha256": "23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786",
+    "first_index": 0,
+    "count": 128,
+    "style_group_size": 32,
+    "max_name_bytes": 8,
+    "all_unique": true,
+    "encoding": "opaque originalbytes; do not inferUTF8"
+  },
+  "resources": [
+    {
+      "style": 0,
+      "category": 0,
+      "key": 0,
+      "descriptor_va": "0x104074",
+      "raw_slot": "0x1168f4",
+      "animation_slot": "0x116934",
+      "source_name": "data/spec/harch.anb",
+      "entry_id": "root/2/disc/361",
+      "input_sha256": "629a6471e4deabec794f0cffa34b513eea15013ee95927e67b02a4a7e6157b6a",
+      "size": 35497,
+      "decoded_sha256": "629a6471e4deabec794f0cffa34b513eea15013ee95927e67b02a4a7e6157b6a",
+      "decoded_size": 35497,
+      "animation_count": 18
+    },
+    {
+      "style": 0,
+      "category": 1,
+      "key": 1,
+      "descriptor_va": "0x1040a0",
+      "raw_slot": "0x1168f8",
+      "animation_slot": "0x116938",
+      "source_name": "data/spec/hfarm.anb",
+      "entry_id": "root/2/disc/362",
+      "input_sha256": "4421b2f6570face0e323f0444e3d10b972f0f7705fe128bac54963e9e0911563",
+      "size": 26921,
+      "decoded_sha256": "4421b2f6570face0e323f0444e3d10b972f0f7705fe128bac54963e9e0911563",
+      "decoded_size": 26921,
+      "animation_count": 16
+    },
+    {
+      "style": 0,
+      "category": 2,
+      "key": 2,
+      "descriptor_va": "0x1040cc",
+      "raw_slot": "0x1168fc",
+      "animation_slot": "0x11693c",
+      "source_name": "data/spec/hscie.anb",
+      "entry_id": "root/2/disc/363",
+      "input_sha256": "93e5aeb581d83ebd33ad55b8068adbe427fcb9a606e88a5f8bab079ea75be7cb",
+      "size": 38076,
+      "decoded_sha256": "93e5aeb581d83ebd33ad55b8068adbe427fcb9a606e88a5f8bab079ea75be7cb",
+      "decoded_size": 38076,
+      "animation_count": 23
+    },
+    {
+      "style": 0,
+      "category": 3,
+      "key": 3,
+      "descriptor_va": "0x1040f8",
+      "raw_slot": "0x116900",
+      "animation_slot": "0x116940",
+      "source_name": "data/spec/hshep.anb",
+      "entry_id": "root/2/disc/364",
+      "input_sha256": "38d32a18a8b94bf2411a184506dbcbf76c344292fae8ef81971d2c02f91c4929",
+      "size": 35797,
+      "decoded_sha256": "38d32a18a8b94bf2411a184506dbcbf76c344292fae8ef81971d2c02f91c4929",
+      "decoded_size": 35797,
+      "animation_count": 30
+    },
+    {
+      "style": 1,
+      "category": 0,
+      "key": 4,
+      "descriptor_va": "0x104124",
+      "raw_slot": "0x116904",
+      "animation_slot": "0x116944",
+      "source_name": "data/spec/carch.anb",
+      "entry_id": "root/2/disc/357",
+      "input_sha256": "4a232c5debfef3fbef5a54647e6312cc325265fe996b00841b35f1511340bd73",
+      "size": 40742,
+      "decoded_sha256": "4a232c5debfef3fbef5a54647e6312cc325265fe996b00841b35f1511340bd73",
+      "decoded_size": 40742,
+      "animation_count": 18
+    },
+    {
+      "style": 1,
+      "category": 1,
+      "key": 5,
+      "descriptor_va": "0x104150",
+      "raw_slot": "0x116908",
+      "animation_slot": "0x116948",
+      "source_name": "data/spec/cfarm.anb",
+      "entry_id": "root/2/disc/358",
+      "input_sha256": "8946c2d3dfd8fe059fb8c72a74a71d0eaab48d43015a28d563beec095e38023b",
+      "size": 28983,
+      "decoded_sha256": "8946c2d3dfd8fe059fb8c72a74a71d0eaab48d43015a28d563beec095e38023b",
+      "decoded_size": 28983,
+      "animation_count": 16
+    },
+    {
+      "style": 1,
+      "category": 2,
+      "key": 6,
+      "descriptor_va": "0x10417c",
+      "raw_slot": "0x11690c",
+      "animation_slot": "0x11694c",
+      "source_name": "data/spec/cscie.anb",
+      "entry_id": "root/2/disc/359",
+      "input_sha256": "63a3623d75f761aa5e09737074e5f5ab4a9cc40bf85334d69863536241874184",
+      "size": 41317,
+      "decoded_sha256": "63a3623d75f761aa5e09737074e5f5ab4a9cc40bf85334d69863536241874184",
+      "decoded_size": 41317,
+      "animation_count": 23
+    },
+    {
+      "style": 1,
+      "category": 3,
+      "key": 7,
+      "descriptor_va": "0x1041a8",
+      "raw_slot": "0x116910",
+      "animation_slot": "0x116950",
+      "source_name": "data/spec/cshep.anb",
+      "entry_id": "root/2/disc/360",
+      "input_sha256": "6576a2ffc66893d8eacb21a44165ac11118dd7256f74237f6992210148dee847",
+      "size": 35249,
+      "decoded_sha256": "6576a2ffc66893d8eacb21a44165ac11118dd7256f74237f6992210148dee847",
+      "decoded_size": 35249,
+      "animation_count": 31
+    },
+    {
+      "style": 2,
+      "category": 0,
+      "key": 8,
+      "descriptor_va": "0x1041d4",
+      "raw_slot": "0x116914",
+      "animation_slot": "0x116954",
+      "source_name": "data/spec/march.anb",
+      "entry_id": "root/2/disc/365",
+      "input_sha256": "03c147fb87ad0d30a2de2f4e91ee755575b07a2d63078c9c2bb5611ded2b040f",
+      "size": 39778,
+      "decoded_sha256": "03c147fb87ad0d30a2de2f4e91ee755575b07a2d63078c9c2bb5611ded2b040f",
+      "decoded_size": 39778,
+      "animation_count": 18
+    },
+    {
+      "style": 2,
+      "category": 1,
+      "key": 9,
+      "descriptor_va": "0x104200",
+      "raw_slot": "0x116918",
+      "animation_slot": "0x116958",
+      "source_name": "data/spec/mfarm.anb",
+      "entry_id": "root/2/disc/366",
+      "input_sha256": "73cdf337d6ff63cc4d120bdd9c3e0b0dcc59c000a4193e40f8a98c3cf72d03d9",
+      "size": 32231,
+      "decoded_sha256": "73cdf337d6ff63cc4d120bdd9c3e0b0dcc59c000a4193e40f8a98c3cf72d03d9",
+      "decoded_size": 32231,
+      "animation_count": 16
+    },
+    {
+      "style": 2,
+      "category": 2,
+      "key": 10,
+      "descriptor_va": "0x10422c",
+      "raw_slot": "0x11691c",
+      "animation_slot": "0x11695c",
+      "source_name": "data/spec/mscie.anb",
+      "entry_id": "root/2/disc/367",
+      "input_sha256": "b4eb05c610c7d135dc9de8876608302032b0428b0afdcb052fc174b9bd2eea7a",
+      "size": 38301,
+      "decoded_sha256": "b4eb05c610c7d135dc9de8876608302032b0428b0afdcb052fc174b9bd2eea7a",
+      "decoded_size": 38301,
+      "animation_count": 23
+    },
+    {
+      "style": 2,
+      "category": 3,
+      "key": 11,
+      "descriptor_va": "0x104258",
+      "raw_slot": "0x116920",
+      "animation_slot": "0x116960",
+      "source_name": "data/spec/mshep.anb",
+      "entry_id": "root/2/disc/368",
+      "input_sha256": "b51ef5a703a89dcf00c2465ddc7666fe842a9ce726363c2a36b2f2f0ac1d6277",
+      "size": 35744,
+      "decoded_sha256": "b51ef5a703a89dcf00c2465ddc7666fe842a9ce726363c2a36b2f2f0ac1d6277",
+      "decoded_size": 35744,
+      "animation_count": 30
+    },
+    {
+      "style": 3,
+      "category": 0,
+      "key": 12,
+      "descriptor_va": "0x104284",
+      "raw_slot": "0x116924",
+      "animation_slot": "0x116964",
+      "source_name": "data/spec/yarch.anb",
+      "entry_id": "root/2/disc/369",
+      "input_sha256": "aef9ba878097884f64674c3273ae8de8139530c31155fbbf6d4db1db11e329c0",
+      "size": 37700,
+      "decoded_sha256": "aef9ba878097884f64674c3273ae8de8139530c31155fbbf6d4db1db11e329c0",
+      "decoded_size": 37700,
+      "animation_count": 18
+    },
+    {
+      "style": 3,
+      "category": 1,
+      "key": 13,
+      "descriptor_va": "0x1042b0",
+      "raw_slot": "0x116928",
+      "animation_slot": "0x116968",
+      "source_name": "data/spec/yfarm.anb",
+      "entry_id": "root/2/disc/370",
+      "input_sha256": "662b6358b87eff43624009881701ff9eec243d05800a79ed7478fc6736b724b0",
+      "size": 27293,
+      "decoded_sha256": "662b6358b87eff43624009881701ff9eec243d05800a79ed7478fc6736b724b0",
+      "decoded_size": 27293,
+      "animation_count": 16
+    },
+    {
+      "style": 3,
+      "category": 2,
+      "key": 14,
+      "descriptor_va": "0x1042dc",
+      "raw_slot": "0x11692c",
+      "animation_slot": "0x11696c",
+      "source_name": "data/spec/yscie.anb",
+      "entry_id": "root/2/disc/371",
+      "input_sha256": "9f4ef097c5db8ad10c41b8992345bb2b26b6b4045a30c96e03c867f2ef968f0d",
+      "size": 34865,
+      "decoded_sha256": "9f4ef097c5db8ad10c41b8992345bb2b26b6b4045a30c96e03c867f2ef968f0d",
+      "decoded_size": 34865,
+      "animation_count": 23
+    },
+    {
+      "style": 3,
+      "category": 3,
+      "key": 15,
+      "descriptor_va": "0x104308",
+      "raw_slot": "0x116930",
+      "animation_slot": "0x116970",
+      "source_name": "data/spec/yshep.anb",
+      "entry_id": "root/2/disc/372",
+      "input_sha256": "6e6a81c03e5b8ec50706ca85c77161190183a9d44202dd155a9fc249043df559",
+      "size": 32699,
+      "decoded_sha256": "6e6a81c03e5b8ec50706ca85c77161190183a9d44202dd155a9fc249043df559",
+      "decoded_size": 32699,
+      "animation_count": 30
+    }
+  ],
+  "resource_contract": "1E220 loads44-byte descriptors104074..104334 via154B0 when1168F4NULL, then98A60 extracts animation pointers.56E20 uses signedstyle+15/signedcategory+16: key=4*style+category, database1168F4[key],animation116934[key]. Safe0..3both. Bind opaque Rust resource key, not native pointer or wholeactor. No rendering codec claim here.",
+  "actor_init": "4FD30 partialwrites actorprior200B: kindbytes2/5=0(indicespreserved),type6=3,owner18,globalIDF,position7=explicit112D10,terrainheight11/shade17 sampledTHERE,destinationBzero,flags15=0280,anim19/frame1B/subframe1A/delay1Dzero,state1C1,angles39=(0,512,0),velocity2D/2F/31zero,acceleration33/35/37zero,physicalheight270,width2B50,avoid53=1,byte54=0,oldbyte4A&3B,blueprintindex74,flags700,field680,blueprintC0handle. Unmentionedbytespreserved.56E20 zeroes94..BF,setsinternalB0handleC4andC4database/1Fanimationhandlesfromstyle/category.80830 no-unit placement overwritespositiontarget,sets16mask08and71mask04,binds56E20,animation8/frame0/state1C1/delay1D0; doesnotrecomputeheight11. Later72960shade refresh is separate.",
+  "fixtures": {
+    "synthetic_private_path": "private/ghidra/blueprint-init/synthetic-vectors.json",
+    "synthetic_sha256": "d2708aeede68d604900bc2bdce8767a6a9acaf7d2b95bb16574f6f071d6d8d27",
+    "synthetic_vectors": 8,
+    "actual_names_private_path": "private/ghidra/blueprint-init/english-explicit-seed-fixture.json",
+    "actual_names_fixture_sha256": "f080cf0ba3b7c064d484a24546d90d76335fa32b38afad542824eeb03233ada3",
+    "actual_fixture_scope": "Explicitseed5428/priorpatterns/scratch, notobservedliveinitialstate"
+  },
+  "full_generator_cases": 256,
+  "native_production_comparison": {
+    "production_path": "rust/crates/genewars-runtime/src/blueprint.rs",
+    "production_sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558",
+    "harness_private_path": "private/ghidra/blueprint-init/native-blueprint-check.rs",
+    "harness_sha256": "27d7f0fc13a79db3998ee2baed9272e92aa83bae1fd336873d88d75bfd283b5f",
+    "cases": 528,
+    "complete_record_bytes_per_case": 1152,
+    "rng_draws_per_case": 64,
+    "compared_bytes": 1036992,
+    "output_sha256": "ce68b952e88ca49625bb87c40ce44cf8ffeafd7d8a045bef80b1c5692d0bc2cd",
+    "scope": "Actual Rust module direct import; full32records/scratch/metadata/rngstates/all64drawdetails compared to independent Python model; synthetic and pinnedEnglish names. No original code execution."
+  },
+  "limits": [
+    "No assumed currentseed/RNGlogring/profile/scratchbytes.",
+    "Generation and resourcebinding do not setactorreadybit. Landingactivationremainsseparate.",
+    "Actual namebytes, decoded resources and native afterimage fixture stayprivate.",
+    "No whole startup or actor movement tick."
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "status": "bounded-command-eligibility-audit-blocked-on-controller-consumer",
-  "utc": "2026-10-13T11:26:32.502408+00:00",
+  "utc": "2026-10-13T12:30:23.088970+00:00",
   "original_execution": false,
   "source_mission": {
     "path": "private/ghidra/campaign-resources/152.dat",

@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-terrain-modes-review",
-  "checked_utc": "2026-10-13T11:25:06.759405+00:00",
+  "checked_utc": "2026-10-13T12:28:59.047180+00:00",
   "original_or_gui_execution": false,
   "native_mode6_spans": 71289,
   "mode6_samples_compared": 688378,
@@ -72,7 +72,7 @@
   "harness": {
     "path": "private/review/terrain-modes/review.exe",
     "size": 5135374,
-    "sha256": "049c8427995841977fc639bc22fbebc48cc26b902f87866f32676bc3746c725d"
+    "sha256": "fd741964697a58f31e1f70e73e6e859696ca3619b63554f80132e010adc7c9c0"
   },
   "private_resources": [
     {

@@ -1,11 +1,23 @@
 {
   "status": "passed",
-  "utc": "2026-10-13T11:30:27.425477+00:00",
-  "binary_sha256": "a59a3cf62928830007e8ca95f23140a5a2d9437e3424341180490c9ade870e3f",
+  "utc": "2026-10-13T12:29:58.447400+00:00",
+  "binary_sha256": "8d50d1b3196925b17e72ee052fe83efea8c81cb9ea23663094034532812a5357",
   "sources": [
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
+      "sha256": "fd28caad70c98333cd3bc2ff278e11c5562e237d84a2493251617601a4ba52bf"
+    },
     {
       "path": "rust/crates/genewars-runtime/src/actor_command.rs",
       "sha256": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
+      "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/blueprint.rs",
+      "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
     },
     {
       "path": "rust/crates/genewars-runtime/src/identity.rs",
@@ -13,7 +25,11 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/lib.rs",
-      "sha256": "a9ac8f4b0569766ce47326333158835593d100438631fe34d624b2c212903cee"
+      "sha256": "e63b6cb6843bae0b6d841ea9e4a1b0531b4fe32a8bec8e139b79458f121e266c"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/player_state.rs",
+      "sha256": "bd0d46605d9dc76960e35e6ec55ff298f5d45f2772f020a0514d6d9e6b7c5f8a"
     },
     {
       "path": "rust/crates/genewars-runtime/src/world.rs",
@@ -436,7 +452,7 @@
     }
   ],
   "case_count": 41,
-  "private_output": "private/integration/runtime-validation/48a48257373544dbbbc5bcbafe8052ee",
+  "private_output": "private/integration/runtime-validation/a30a24f8febd4c658316ee74e0737a4d",
   "milestones": {
     "A": "bounded native menu-to-loaded-world route",
     "B": "transactional plant steps with actual pixel change",

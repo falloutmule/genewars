@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-plant-lifecycle-review",
-  "utc": "2026-10-13T11:24:54.709290+00:00",
+  "utc": "2026-10-13T12:28:46.980879+00:00",
   "original_execution": false,
   "source": {
     "path": "rust/crates/genewars-core/src/plant_lifecycle.rs",
@@ -202,7 +202,7 @@
   "native_harness": {
     "path": "private/review/plant-lifecycle/review.exe",
     "size": 5098794,
-    "sha256": "a959cd737697635fb36515ed6f0b56ed18b2f65b1e8b5ee46d798815c5bbe59a"
+    "sha256": "41f32b0b2af928933f482916f4c8fec5403ac6afe6000b9a4f273a782b6a6d05"
   },
   "resolved_findings": [
     "Growmustpreserveoldnative30; fixedbyexplicitoldcountdowninput/regression",

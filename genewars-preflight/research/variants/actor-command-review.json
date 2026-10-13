@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-actor-command-review",
-  "utc": "2026-10-13T11:26:37.640715+00:00",
+  "utc": "2026-10-13T12:30:28.159301+00:00",
   "original_execution": false,
   "gui_execution": false,
   "source": {
@@ -82,7 +82,7 @@
   "harness": {
     "path": "private/review/actor-command/review.exe",
     "size": 5086245,
-    "sha256": "5e750524bc9902c2c51549d75e0d78e6d075a024abfa4fc211a0af9f8e5c045f"
+    "sha256": "2786456dbbd0ac645294d2b2a0b892190fe9b745307f42cd1397e8d6ee52a2ee"
   },
   "limits": [
     "Single supplied record must be externally bound to globalactorID; no pool/owner/type gate inferred",

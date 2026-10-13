@@ -1,6 +1,6 @@
 {
   "status": "passed-static-entity-shade-contract",
-  "checked_utc": "2026-10-13T11:23:48.055737+00:00",
+  "checked_utc": "2026-10-13T12:27:41.592764+00:00",
   "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
   "function_va": "0x7B240",
   "listing": "private/ghidra/camera-player-input/instructions-0007b240.txt",

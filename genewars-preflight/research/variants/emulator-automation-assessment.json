@@ -1,0 +1,181 @@
+{
+  "schema": "genewars-emulator-automation-assessment-v1",
+  "reviewed_utc": "2026-10-13T12:14:38.305911+00:00",
+  "status": "static-primary-source-assessment-no-emulator-run",
+  "repositories": [
+    {
+      "repository": "pmanyeh/DOSBox-X-MCP-Debugger",
+      "commit": "c12b3e5a040bfcbf71666e19a0e82907799ab17c",
+      "committed_utc": "2026-09-30T11:06:29Z",
+      "tree_truncated": false,
+      "root_license_files": [],
+      "actual_dosbox_src_gitlink": "2042f26b9507631173579642a72523938eb7a407"
+    },
+    {
+      "repository": "pmanyeh/dosbox-x",
+      "commit": "2042f26b9507631173579642a72523938eb7a407",
+      "committed_utc": "2026-09-30T11:06:15Z",
+      "tree_truncated": false,
+      "root_license_files": [
+        {
+          "path": "COPYING",
+          "blob": "d7186c2100d969e6dacd26cc730c7215f155fdc6"
+        }
+      ]
+    },
+    {
+      "repository": "joncampbell123/dosbox-x",
+      "commit": "b6abbd5980a885f5f310a4088c59a8688d1b116c",
+      "committed_utc": "2026-10-02T02:13:17Z",
+      "tree_truncated": false,
+      "root_license_files": [
+        {
+          "path": "COPYING",
+          "blob": "d7186c2100d969e6dacd26cc730c7215f155fdc6"
+        }
+      ]
+    },
+    {
+      "repository": "dividebysandwich/rust-dos",
+      "commit": "9edb15c8ee8ae8349e152de03875dcc823d6137c",
+      "committed_utc": "2026-10-13T11:25:11Z",
+      "tree_truncated": false,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "blob": "d159169d1050894d3ea3b98e1c965c4058208fe1"
+        }
+      ]
+    }
+  ],
+  "private_source_files": [
+    {
+      "path": "private/review/emulator-automation/dividebysandwich-rust-dos/Cargo.toml",
+      "bytes": 9613,
+      "sha256": "a3c9b872546be48037e07662b371da3b16eab9c69a4673be71fe19d31408fa3b"
+    },
+    {
+      "path": "private/review/emulator-automation/dividebysandwich-rust-dos/docs/llm-debugging.md",
+      "bytes": 62782,
+      "sha256": "ed945c9f271720072ff16f0beb2512ac265ff297cdd2374fa88ea35ebb80d317"
+    },
+    {
+      "path": "private/review/emulator-automation/dividebysandwich-rust-dos/LICENSE",
+      "bytes": 18092,
+      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+    },
+    {
+      "path": "private/review/emulator-automation/dividebysandwich-rust-dos/README.md",
+      "bytes": 26178,
+      "sha256": "ee57e523f49ade0561b166ee8f9b705d933b222fb708e82bf77b87b7c14edbb1"
+    },
+    {
+      "path": "private/review/emulator-automation/joncampbell123-dosbox-x/configure.ac",
+      "bytes": 53946,
+      "sha256": "6e9d217f0c56289ab5a36b50f87dbbcf6812fa1bc8eee1c0c97164eca6e0c315"
+    },
+    {
+      "path": "private/review/emulator-automation/joncampbell123-dosbox-x/docs/rpc-agent-usage.md",
+      "bytes": 20304,
+      "sha256": "f546124f76c1743a6402458e0861890b46c2ac307a38e7356f71c56a2af233ca"
+    },
+    {
+      "path": "private/review/emulator-automation/joncampbell123-dosbox-x/docs/rpc-development.md",
+      "bytes": 34986,
+      "sha256": "bec86e155daad7c031008d89ee62781f0b7db5ffeafd8cdbb9157f603fc660f3"
+    },
+    {
+      "path": "private/review/emulator-automation/joncampbell123-dosbox-x/docs/rpc.md",
+      "bytes": 5239,
+      "sha256": "96981ce54fe078402f59e41f445e8dd5c65fd25dbfaa49de37ad48c63cf0523b"
+    },
+    {
+      "path": "private/review/emulator-automation/joncampbell123-dosbox-x/README.debugger",
+      "bytes": 13229,
+      "sha256": "c6f5291881ee178d300cf56747e47b93c42a62929a5cde3da0b994b84d6be1b4"
+    },
+    {
+      "path": "private/review/emulator-automation/joncampbell123-dosbox-x/src/agent/server/agent_server.cpp",
+      "bytes": 160141,
+      "sha256": "dbeb7b764301c1c982ac1222b13f84373338986ef6c64620825cbee3f888e6dc"
+    },
+    {
+      "path": "private/review/emulator-automation/joncampbell123-dosbox-x/src/debug/debug_mcp.cpp",
+      "bytes": 16056,
+      "sha256": "c0aa10438cdaaae5baf1087ffd8188d8cade06dec5157296eaea6885fd120f3e"
+    },
+    {
+      "path": "private/review/emulator-automation/joncampbell123-dosbox-x/vs/config.h",
+      "bytes": 11107,
+      "sha256": "04c2ba2429662208eaa0d3c5f9b048dc03a6262297cb02bb59cbb4ba0e31635d"
+    },
+    {
+      "path": "private/review/emulator-automation/joncampbell123-dosbox-x/vs/dosbox-x.vcxproj",
+      "bytes": 147782,
+      "sha256": "aed27e74f9c55b039936899af41f5f50efb906e2280871af71fc8e71729081c7"
+    },
+    {
+      "path": "private/review/emulator-automation/pmanyeh-dosbox-x/README.development-in-Windows",
+      "bytes": 5485,
+      "sha256": "ad84bd4773bda088cb033a47cdc9917f20fa5aefa536c932337c57e951bc7a01"
+    },
+    {
+      "path": "private/review/emulator-automation/pmanyeh-dosbox-x/src/debug/debug_ai.cpp",
+      "bytes": 207527,
+      "sha256": "497b81be403717480f1cc60824465e998a8b11882254def22da5e959d6fd77eb"
+    },
+    {
+      "path": "private/review/emulator-automation/pmanyeh-dosbox-x/src/gui/sdlmain.cpp",
+      "bytes": 417018,
+      "sha256": "9e2d82834538b79b7135f772eeea7665e6463767a3cb4339c6f4f0f1815e2db6"
+    },
+    {
+      "path": "private/review/emulator-automation/pmanyeh-dosbox-x/src/ints/mouse.cpp",
+      "bytes": 106709,
+      "sha256": "cb76c3d04a652ad479412341b9d81423d2dfdfc94d26bf19216e8ef0138ce3db"
+    },
+    {
+      "path": "private/review/emulator-automation/pmanyeh-dosbox-x/vs/config.h",
+      "bytes": 11107,
+      "sha256": "04c2ba2429662208eaa0d3c5f9b048dc03a6262297cb02bb59cbb4ba0e31635d"
+    }
+  ],
+  "existing_verified_executable": {
+    "path": "private/tools/dosbox-x/2026.10.01/bin/x64/Release SDL2/dosbox-x.exe",
+    "bytes": 25836544,
+    "sha256": "a82adcfa7af2784566cfeff74c077cefed08505396db2948b7e6aa7d4cee0832",
+    "ascii_presence_checks": {
+      "mcp_server": true,
+      "agent.capabilities": false,
+      "C_DOSBOX_AGENT": false
+    },
+    "capability_execution_performed": false
+  },
+  "empty_probe_input": {
+    "path": "private/reference-run/mouse-probe-012/drive-c/MOUSE.COM",
+    "bytes": 1234,
+    "sha256": "7e0f4eca31e358b25a5aad959ce9eeec3ecd7c7e876ac78bf28999bdc1ce5b3b"
+  },
+  "copy_policy": {
+    "unlicensed_python_copied": false,
+    "gpl_source_private_only": true,
+    "production_code_integrated": false
+  },
+  "actions": {
+    "emulator_execution": false,
+    "original_execution": false,
+    "installation": false,
+    "global_configuration_changed": false,
+    "build": false
+  },
+  "findings": [
+    "native-relative-dispatch-not-guest-consumption",
+    "capture-set-does-not-sync-user_cursor_locked",
+    "paused-mouse-handler-can-return-without-update",
+    "absolute-gated-to-real-or-v86",
+    "first-absolute-sample-no-mickeys",
+    "absolute-history-reset-not-found",
+    "upstream-agent-build-separate-from-minimal-mcp",
+    "rust-dos-dos4gw-documentation-not-genewars-compatibility-proof"
+  ]
+}

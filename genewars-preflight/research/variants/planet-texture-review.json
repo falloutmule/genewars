@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T11:25:19.493934+00:00",
+  "checked_utc": "2026-10-13T12:29:11.390849+00:00",
   "original_or_gui_execution": false,
   "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
   "evidence": {
@@ -16,7 +16,7 @@
   "native_harness": {
     "path": "private/review/planet-textures/planet-texture-review.exe",
     "size": 5103011,
-    "sha256": "149d2f6ac2468de431cc51beab3fbff8b9083fc473ea10496d1998c1ef0c13bb"
+    "sha256": "e8aaf37fe01af7b714323ec2cf69a50149e11650552db3a9452b8ee2f9becfc0"
   },
   "reviewed_source": {
     "path": "rust/crates/genewars-assets/src/lib.rs",

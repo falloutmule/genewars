@@ -98,6 +98,10 @@ def main():
     run('plant_subsequent_step_contract', py + ['scripts/ghidra/validate_plant_step_bridge.py'])
     run('move_order_contract', py + ['scripts/ghidra/validate_move_order_bridge.py'])
     run('player_creation_contract', py + ['scripts/ghidra/validate_player_creation_bridge.py'])
+    run('actor_activation_contract', py + ['scripts/ghidra/validate_actor_activation_bridge.py'])
+    run('owned_player_state', py + ['scripts/validate_player_state.py'])
+    run('blueprint_generation_and_resources', py + ['scripts/ghidra/validate_blueprint_init_bridge.py'])
+    run('actor_initialization_and_creation', py + ['scripts/ghidra/validate_actor_initialization_bridge.py'])
     run('terrain_camera_target_contract', py + ['scripts/validate_camera_target.py'])
     run('terrain_factor_plan_contract', py + ['scripts/validate_terrain_factor_contract.py'])
     run('terrain_entity_shade_contract', py + ['scripts/validate_entity_shade.py'])
@@ -189,6 +193,7 @@ def main():
         run('recorded_runtime_ui', py + ['scripts/validate_runtime_ui.py'])
     run('first_world_command_eligibility', py + ['research/variants/first-world-command-review.py'])
     run('independent_actor_command', py + ['research/variants/actor-command-review.py'], timeout=180)
+    run('independent_actor_activation', py + ['research/variants/actor-activation-review.py'], timeout=180)
 
     baseline = json.loads((ROOT / 'research/verification.json').read_text(encoding='utf-8'))
     checks['dated_preflight_twelve_checks_passed'] = baseline['all_passed'] and len(baseline['checks']) == 12 and all(baseline['checks'].values())

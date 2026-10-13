@@ -1,6 +1,6 @@
 {
   "status": "archive-and-source-checks-passed",
-  "checked_utc": "2026-10-13T11:25:20.676957+00:00",
+  "checked_utc": "2026-10-13T12:29:12.542066+00:00",
   "target": "x86_64-pc-windows-gnu",
   "dependency_kinds": [
     "normal",

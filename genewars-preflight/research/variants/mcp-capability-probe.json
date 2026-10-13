@@ -1,0 +1,64 @@
+{
+  "status": "capability-test-incomplete",
+  "utc": "2026-10-13T12:17:46.981571+00:00",
+  "private_directory": "private/reference-run/mcp-capability-c4acef833f5949159d2a41f78305b355",
+  "original_execution": false,
+  "input_injection": false,
+  "host_timeout_seconds": 90,
+  "requests": [
+    {
+      "id": 1,
+      "command": "PING",
+      "response": "BEGIN 1 OK\nPONG\nEND 1\n"
+    }
+  ],
+  "command": [
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\tools\\dosbox-x\\2026.10.01\\bin\\x64\\Release SDL2\\dosbox-x.exe",
+    "-conf",
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\mcp-capability-c4acef833f5949159d2a41f78305b355\\dosbox-x.conf",
+    "-noconfig",
+    "-noautoexec",
+    "-defaultmapper",
+    "-nopromptfolder",
+    "-savedir",
+    "states",
+    "-time-limit",
+    "90",
+    "-showrt",
+    "-c",
+    "MOUNT C \"C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\mcp-capability-c4acef833f5949159d2a41f78305b355\\drive-c\" -nocachedir",
+    "-c",
+    "MOUNT",
+    "-c",
+    "CONFIG -SECUREMODE",
+    "-c",
+    "C:",
+    "-c",
+    "C:\\MOUSE.BAT"
+  ],
+  "config_sha256": "a947b76afa2e5d03087fc432c0f885f4075567f6b038e16faeddfeddcbe2e419",
+  "port": 51596,
+  "pid": 31292,
+  "error": "[WinError 10054] An existing connection was forcibly closed by the remote host",
+  "terminated_owned_child": true,
+  "exit_code": 3221226505,
+  "elapsed_host_seconds": 2.0981713000219315,
+  "immutable_inputs_unchanged": true,
+  "staged_logger_unchanged": true,
+  "guest_output_files": [
+    {
+      "name": "MOUSE.BAT",
+      "bytes": 31,
+      "sha256": "a5d0676c4e87de577b8a91c065795ea72ea8083660a11f62b46cf89000f59546"
+    },
+    {
+      "name": "MOUSE.COM",
+      "bytes": 1234,
+      "sha256": "7e0f4eca31e358b25a5aad959ce9eeec3ecd7c7e876ac78bf28999bdc1ce5b3b"
+    }
+  ],
+  "client_sha256": "ae8aa2a4edad433f4df9d9bde6cd9e42ff9ba9064eae4739f75ca456d223ea66",
+  "client_snapshot": "private/reference-run/mcp-capability-c4acef833f5949159d2a41f78305b355/client-executed.py",
+  "request_without_reply": "REQ 2 BREAK",
+  "interpretation": "PING transport observed; connection reset after BREAK; stopped CPU state, HELP and resume not established. Redirected-console or early-start break are possible causes, not verified."
+}

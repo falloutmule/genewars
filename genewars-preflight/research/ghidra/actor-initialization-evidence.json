@@ -1,0 +1,158 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-00057540.txt",
+      "sha256": "80b09ef936b94d6b530cdc6ad0158ca5c8db9a2b09d06ed088ab25a88a14fada"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-0006d490.txt",
+      "sha256": "5b9e8ac352751ec2e9dbda6bd5abfee4d61ab7602bd7cba97119663b17eb664e"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e400.txt",
+      "sha256": "baab823f665e719b3cdb9cc9b6d2a9db796afca7ebcfed65b169672b63fdf730"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e280.txt",
+      "sha256": "c7da6a86d5c1762a101700af490e38133edc114bd1b62af80f5149436e6dc481"
+    },
+    {
+      "private_path": "private/ghidra/actor-pool/instructions-000575c0.txt",
+      "sha256": "e307480cf03a593b9350472b613134ade60bf4aab1f294154a74c8a974ab4b58"
+    },
+    {
+      "private_path": "private/ghidra/campaign-level/instructions-00071b70.txt",
+      "sha256": "df0c9245caa952c20d3d319149413fc9d12382b8d65d036bba306ce8d7f19076"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0004fd30.txt",
+      "sha256": "0dfb420cafd52d6ebcf41de7e02299cf23938381f95ffc1ca1efaa0b91a29b60"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-00013eb0.txt",
+      "sha256": "f39a85cec1eeaf8c6471d4ca65ab9fd26f3f093cafec3efae15cbe694d2c656c"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0001f480.txt",
+      "sha256": "77d8ec6d64004960b0bb970a66612c76b1ffe3cfcfd4b949f8174e5662441744"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-00056e20.txt",
+      "sha256": "ea9f9732b2e32af849a86de57a4a416a565f2fe4c6809fed6587fc0dcc99baa0"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00080830.txt",
+      "sha256": "e9fda91b7c0fe5071443cf03bb73cd028996fdc32e7273e1a10f389d114c6973"
+    }
+  ],
+  "source_pool": {
+    "entry_id": "root/2/disc/152",
+    "source_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+    "family": 2,
+    "file_offset": 298830,
+    "packed_stride": 140,
+    "native_base": "0x16360e",
+    "native_stride": 200,
+    "count": 20,
+    "packed_sha256": "cd99e0d7b38a723658d7bf5eb2e9bb3238a13d62a467a1e7b4608db065cdf744",
+    "all_packed_bytes_zero": true,
+    "copies": [
+      {
+        "source": [
+          0,
+          31
+        ],
+        "destination": [
+          0,
+          31
+        ]
+      },
+      {
+        "source": [
+          31,
+          140
+        ],
+        "destination": [
+          39,
+          148
+        ]
+      }
+    ],
+    "preserved_prior_native_ranges": [
+      [
+        31,
+        39
+      ],
+      [
+        148,
+        200
+      ]
+    ],
+    "inactive": "byte6zero skips56E20 activeinitializer; no automatictailclear",
+    "staging_mutation": "6D490 modifies staging source+15/+17 AFTERcopy. Destinationheader retains originalbytes. Inputsourceartifactmustremainimmutable inport.",
+    "constructor": "1E400 zeroesninewordsofvelocity/acceleration/angles2D..3Fandwritesvtable23; readerpayload subsequently overwritesthoseserializedwords. Vtable/resourcehandlesremain typedruntimeinputs.",
+    "safety": "Inactiveconversionrequiresprior200bytesandpacked140byteswithbyte6zero. Do notzero-fillruntimegapsoracceptactivecopywithoutresourceinitializer."
+  },
+  "copy_vectors": [
+    {
+      "prior_hex": "00070e151c232a31383f464d545b626970777e858c939aa1a8afb6bdc4cbd2d9e0e7eef5fc030a11181f262d343b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980878e959ca3aab1b8bfc6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c838a91989fa6adb4bbc2c9d0d7dee5ecf3fa01080f161d242b323940474e555c636a71",
+      "packed_hex": "000d1a273441005b6875828f9ca9b6c3d0ddeaf704111e2b3845525f6c798693a0adbac7d4e1eefb0815222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b7885929facb9c6d3e0edfa0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b1825323f4c596673808d9aa7b4c1cedbe8f5020f",
+      "after_hex": "000d1a273441005b6875828f9ca9b6c3d0ddeaf704111e2b3845525f6c7986d9e0e7eef5fc030a93a0adbac7d4e1eefb0815222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b7885929facb9c6d3e0edfa0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b1825323f4c596673808d9aa7b4c1cedbe8f5020f0c131a21282f363d444b525960676e757c838a91989fa6adb4bbc2c9d0d7dee5ecf3fa01080f161d242b323940474e555c636a71"
+    },
+    {
+      "prior_hex": "01080f161d242b323940474e555c636a71787f868d949ba2a9b0b7bec5ccd3dae1e8eff6fd040b121920272e353c434a51585f666d747b828990979ea5acb3bac1c8cfd6dde4ebf2f900070e151c232a31383f464d545b626970777e858c939aa1a8afb6bdc4cbd2d9e0e7eef5fc030a11181f262d343b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b72",
+      "packed_hex": "010e1b283542005c697683909daab7c4d1deebf805121f2c394653606d7a8794a1aebbc8d5e2effc091623303d4a5764717e8b98a5b2bfccd9e6f3000d1a2734414e5b6875828f9ca9b6c3d0ddeaf704111e2b3845525f6c798693a0adbac7d4e1eefb0815222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce9f60310",
+      "after_hex": "010e1b283542005c697683909daab7c4d1deebf805121f2c394653606d7a87dae1e8eff6fd040b94a1aebbc8d5e2effc091623303d4a5764717e8b98a5b2bfccd9e6f3000d1a2734414e5b6875828f9ca9b6c3d0ddeaf704111e2b3845525f6c798693a0adbac7d4e1eefb0815222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce9f603100d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b72"
+    },
+    {
+      "prior_hex": "ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980878e959ca3aab1b8bfc6cdd4dbe2e9f0f7fe050c131a21282f363d444b525960676e757c838a91989fa6adb4bbc2c9d0d7dee5ecf3fa01080f161d242b323940474e555c636a71787f868d949ba2a9b0b7bec5ccd3dae1e8eff6fd040b121920272e353c434a51585f666d747b828990979ea5acb3bac1c8cfd6dde4ebf2f900070e151c232a31383f464d545b626970",
+      "packed_hex": "ff0c19263340005a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b7885929facb9c6d3e0edfa0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b1825323f4c596673808d9aa7b4c1cedbe8f5020f1c293643505d6a7784919eabb8c5d2dfecf90613202d3a4754616e7b8895a2afbcc9d6e3f0fd0a1724313e4b5865727f8c99a6b3c0cddae7f4010e",
+      "after_hex": "ff0c19263340005a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b7885d8dfe6edf4fb0209929facb9c6d3e0edfa0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b1825323f4c596673808d9aa7b4c1cedbe8f5020f1c293643505d6a7784919eabb8c5d2dfecf90613202d3a4754616e7b8895a2afbcc9d6e3f0fd0a1724313e4b5865727f8c99a6b3c0cddae7f4010e0b121920272e353c434a51585f666d747b828990979ea5acb3bac1c8cfd6dde4ebf2f900070e151c232a31383f464d545b626970"
+    }
+  ],
+  "copy_cases": 256,
+  "initialization": "4FD30+80830no-unit+56E20. Exactfieldcontractinblueprint-init-evidence.json; pointerdestinations1F/B0/C0/C4 representedbyfourtypedbindingswithzerobyteplaceholders, not forgednativeaddresses. Preservedvtable23..27 bytesremainopaque; thisportdoesnotcallthem.",
+  "native_comparison": {
+    "production_path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
+    "production_sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99",
+    "harness_private_path": "private/ghidra/actor-pool/native-actor-init-check.rs",
+    "harness_sha256": "2147e505484a916054ab443ac18ab87d0f00450449e5a58529eb8afb4325a7f7",
+    "cases": 10240,
+    "compared_bytes": 2048000,
+    "output_sha256": "95fd29c3ca4cb09e961b904009120e29b0ae971a8ea514393d7f450b1c80158e",
+    "fields": "All200afterimagebytes, priorpreservation, completekey/ID/temporary/finalpoint/height/shade/fourhandlebindings; all4playersx5slotsx32blueprintindicesx4stylesx4categories, variedprior/coordinates/heights/shade"
+  },
+  "owned_player_transaction_comparison": {
+    "sources": [
+      {
+        "path": "rust/crates/genewars-core/src/player_creation.rs",
+        "sha256": "7ae09e8231c2c1b5f2d9d846db9edfd4a274a8df95e98834d665a543c04a63ee"
+      },
+      {
+        "path": "rust/crates/genewars-runtime/src/blueprint.rs",
+        "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
+      },
+      {
+        "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
+        "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+      },
+      {
+        "path": "rust/crates/genewars-runtime/src/player_state.rs",
+        "sha256": "bd0d46605d9dc76960e35e6ec55ff298f5d45f2772f020a0514d6d9e6b7c5f8a"
+      }
+    ],
+    "harness_private_path": "private/ghidra/actor-pool/native-player-startup-check.rs",
+    "harness_sha256": "9939e5514fb6bf6e83dc1de7e2c223effbb910e7d90596c4d7ae868e6c9fc97c",
+    "cases": 528,
+    "compared_bytes": 1486848,
+    "output_sha256": "5edb21a106649d48e8fd5928cfa98fcc7fdbe2ec09a879881652a3529be68952",
+    "scope": "Actual generator -> ownedPlayerState -> selection -> actorinitialization. Full0x70Dplayer/5x200actors/attemptcounts/landingpending/RNGafterstates+alltypedbindings;528invalidsecondstylescheckatomicrollback."
+  },
+  "limits": [
+    "No initialruntimegapbytesguessed.",
+    "Temporaryoriginheight/shadeareexplicitinputs, notsampledfromfinaltarget.",
+    "No slotallocation/playerappend/blueprintflagmutation or landingactivationinsideinitializer.",
+    "No claimthatnewactorsareready; word70is0400."
+  ]
+}

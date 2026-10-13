@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T12:27:38.724450+00:00",
+  "cases": 1024,
+  "records_compared": 2048,
+  "bytes_compared": 3696640,
+  "sources": [
+    {
+      "path": "rust/crates/genewars-runtime/src/player_state.rs",
+      "sha256": "bd0d46605d9dc76960e35e6ec55ff298f5d45f2772f020a0514d6d9e6b7c5f8a"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/player_creation.rs",
+      "sha256": "7ae09e8231c2c1b5f2d9d846db9edfd4a274a8df95e98834d665a543c04a63ee"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/blueprint.rs",
+      "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
+      "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+    },
+    {
+      "path": "scripts/validate_player_state.py",
+      "sha256": "689435d66f8903cf465ddf38a3f380db939ffa32f247a9eb526d5ee00ce92400"
+    }
+  ],
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/campaign-start/instructions-00080460.txt",
+      "sha256": "15cf464ceb31fc599bc455e1cf53063eae7368d57cd66ffcd088d2a85ca70ce2"
+    },
+    {
+      "path": "private/ghidra/camera-player-input/instructions-00080590.txt",
+      "sha256": "c454d8a02dd88524f21c3bc7381dc977804aabe214a5f3cdf56b6744757d44d6"
+    }
+  ],
+  "output_sha256": "279ed3d67f8d3b8fb170f6d43f19e2646860dbf17859d1bf7a615668085ce7b0",
+  "original_execution": false,
+  "full_startup": false,
+  "limits": [
+    "Explicit caller target and hash-bound label; does not establish pre-load target-table contents",
+    "Fresh zeroed campaign path only; nonzero byte+2 initialization excluded",
+    "Two retained ranges only; blueprint generation/actor/resource/landing still separate"
+  ]
+}

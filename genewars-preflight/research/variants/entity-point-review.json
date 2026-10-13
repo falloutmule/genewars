@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-entity-point-review",
-  "checked_utc": "2026-10-13T11:24:43.524714+00:00",
+  "checked_utc": "2026-10-13T12:28:35.986856+00:00",
   "original_or_gui_execution": false,
   "native_points": 4276264,
   "real_coordinate_cases": 475136,
@@ -49,7 +49,7 @@
   "harness": {
     "path": "private/review/entity-point/review.exe",
     "size": 5110565,
-    "sha256": "c3b607b2b37a43abebcf992d3da757779912be5561f0c5c61e6dc62447840d03"
+    "sha256": "75bb60e9e169cab1f80d0fbc02e099484733d8ec14605ae91ea85496053dfaa9"
   },
   "review_sources": [
     {

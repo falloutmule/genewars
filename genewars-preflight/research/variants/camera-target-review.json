@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-explicit-camera-review",
-  "checked_utc": "2026-10-13T11:24:25.690899+00:00",
+  "checked_utc": "2026-10-13T12:28:18.137121+00:00",
   "original_or_gui_execution": false,
   "real_target_coordinates": 475136,
   "synthetic_target_coordinates": 917504,
@@ -10,7 +10,7 @@
   "evidence": {
     "path": "research/integration/camera-target-contract.json",
     "size": 2364,
-    "sha256": "951f49dffcbc6038bc208e7c30523b091d68b84ac447f18d2197a1c4321082b4"
+    "sha256": "bcb4238b128a8b50999dc3b675038e58cb5118c2a44220959a936d811d4c481a"
   },
   "private_listings": [
     {
@@ -32,7 +32,7 @@
   "harness": {
     "path": "private/review/camera-target/review.exe",
     "size": 5110078,
-    "sha256": "898811e8ef1725ac52ca79314803465cd46a76a6c997dc79aeab4598b207ad2e"
+    "sha256": "3876f3e36936ccb191ab4f11631c3be115f56bea159ec53e9c2c6b216631f5a2"
   },
   "review_sources": [
     {

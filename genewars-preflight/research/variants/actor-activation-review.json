@@ -1,0 +1,115 @@
+{
+  "status": "passed-independent-native-actor-activation-review",
+  "utc": "2026-10-13T12:30:38.728404+00:00",
+  "source_pins": [
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
+      "bytes": 25799,
+      "sha256": "fd28caad70c98333cd3bc2ff278e11c5562e237d84a2493251617601a4ba52bf"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/identity.rs",
+      "bytes": 3433,
+      "sha256": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
+    },
+    {
+      "path": "research/ghidra/actor-activation-evidence.json",
+      "bytes": 11668,
+      "sha256": "da09aef3351027aac5629cad62ba21d2d40a3b7053325e1a2db1c067d13a06ef"
+    }
+  ],
+  "instruction_pins": [
+    {
+      "private_path": "private/ghidra/command-resolver/instructions-00080ae0.txt",
+      "sha256": "f6abb34796b3a71a8443f62f35547b049f371968f15a7365dea2c367858739a6"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-00073e00.txt",
+      "sha256": "7869104854e5107e8d711b69704e8e1009dcba41892d0233c4daca72e8f0c5a0"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-00074cc0.txt",
+      "sha256": "701ba3601cd73db82d86a57d1502d53d6ad2a8d5910833c28f6e89784bcf542b"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-0008ac60.txt",
+      "sha256": "6fd0ff082558f7bc94da0a908710fab78b8d477369a106e15f37f4922ee557fa"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00080830.txt",
+      "sha256": "e9fda91b7c0fe5071443cf03bb73cd028996fdc32e7273e1a10f389d114c6973"
+    },
+    {
+      "private_path": "private/ghidra/plant-command/instructions-0004b630.txt",
+      "sha256": "1686608a6f95caf95f2f963ac824df9f02ecc2ed5d7a6d928fa85638b845ef76"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-0006df30.txt",
+      "sha256": "8afe40345a8ecb636ff3af67dd76b4fa4104596032270b0cc61ab26b2affe8b1"
+    },
+    {
+      "private_path": "private/ghidra/entity-shadow-panel/instructions-0007f3b0.txt",
+      "sha256": "6c128d79d263a395544aef8a99cac717c4b43bcebaf9271d742d4c1dfcff2034"
+    },
+    {
+      "private_path": "private/ghidra/campaign-level/instructions-00071b70.txt",
+      "sha256": "df0c9245caa952c20d3d319149413fc9d12382b8d65d036bba306ce8d7f19076"
+    }
+  ],
+  "candidate_cases": 262144,
+  "planner_cases": 144187,
+  "outcomes": [
+    35673,
+    98305,
+    4,
+    2,
+    7,
+    254,
+    3,
+    5,
+    1,
+    3,
+    2,
+    2,
+    224,
+    0,
+    2048,
+    6147,
+    1502,
+    1,
+    2,
+    2
+  ],
+  "whole_native_output_bytes_compared": 20860319,
+  "native_output_sha256": "25c604f6307fbec2a801e039e830e14004900ac6f830a18fb06211bb56366295",
+  "harness": {
+    "path": "private/review/actor-activation/review.exe",
+    "bytes": 5136262,
+    "sha256": "3c4739af95fe5004500dac8c1c2b44b92d70f7892545cc5cf3a2a072cd8be989"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/actor-activation-review.py",
+      "bytes": 8382,
+      "sha256": "1e3e608a4427f37651e46e57cc5946479a18f35545811f5dcdff93b4db028e54"
+    },
+    {
+      "path": "research/variants/actor-activation-review.rs",
+      "bytes": 6384,
+      "sha256": "89b3760f1cbfdc15e201cbe2f11d1d00c4d52a2fff10f6df0a12cb47d7bcc451"
+    }
+  ],
+  "original_execution": false,
+  "gui_execution": false,
+  "resolved_findings": [
+    "resource+1B write corrected; actor frame preserved",
+    "eligible actor restricted to type3",
+    "record ID and partition slot validated"
+  ],
+  "limits": [
+    "Non-null head tests assume externally validated family bounds and resolved ID/type identity; no record resolver or world commit executed",
+    "Explicit terrain/blocker sequence remains caller supplied; original retries and consumes live RNG without this safe cap",
+    "Blueprint selector must externally bind native C0; no pointer reconstruction",
+    "No associated type5 route, landing/RNG timeline, batch player49D update or whole startup claim"
+  ]
+}

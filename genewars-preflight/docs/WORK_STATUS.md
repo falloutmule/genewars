@@ -1,8 +1,22 @@
 # Working state — 2026-10-12 / 2026-10-13 UTC
 
-Active reconstruction; no complete playable game yet. Current priority is the Rust-first runtime tranche described below; older counts below are dated checkpoints. The CD executable is a provisional analysis candidate, not established canonical retail.
+Active reconstruction; no complete playable game yet. Current priority is the Rust-first actor startup tranche described below; older counts below are dated checkpoints. The CD executable is a provisional analysis candidate, not established canonical retail.
 
-## Current Rust-first checkpoint
+## Current actor startup checkpoint — 2026-10-13 12:30 UTC
+
+The full gate passes **122 checks and 233 Rust tests** at `2026-10-13T12:30:40.868903+00:00`. All **49,462 private files** are ignored, no private files are tracked, and the original archive SHA-256 remains unchanged. The existing native runtime still passes its 41 automated flow/resource/presentation cases; no user testing is required.
+
+The runtime library now owns fresh/restored player records, generates the original 20 blueprints with exactly 64 RNG draws, and prepares actor records using typed resource handles. An atomic fresh-player transaction composes blueprint selection, first-free allocation, player ID/count updates and actor placement. The first-mission mask selects blueprints 0/10 and actors 0/1. New actors retain ready word 0x0400; the code does not bypass landing. Unknown metadata, initializer bytes and pointer gaps remain explicit inputs or typed bindings.
+
+Validation compares 2,048 fresh/restored records (3,696,640 bytes), 528 complete blueprint generations with every RNG draw, 10,240 full actor initializer afterimages and handle bindings, and 528 owned player/five-slot transactions. Each transaction case also rejects an invalid second actor without modifying caller state. Per-slot activation passes 262,144 candidate samples and 144,187 planner cases, comparing 20,860,319 output bytes. Review corrected the shifted sine-table index, blueprint-versus-actor frame write, actor identity admission and resolved map-head binding before the gate.
+
+The optional emulator investigation verifies the upstream debugger protocols, pmanyeh native input/capture code and Rust-DOS documentation against pinned primary sources. The fork's relative-input receipt does not prove mouse-counter delivery; capture synchronization and protected-mode absolute-input restrictions are concrete source findings. The Python wrapper has no selected license. A separate private GPL-native build plus an independent client is the proposed route; no replacement, installation or global/MCP configuration change occurred.
+
+An independently authored empty probe exercised the installed upstream DOSBox-X: PING returned PONG, then BREAK caused a connection reset before a CPU reply; the process returned 0xC0000409 after 2.10 seconds. Inputs remained unchanged and no game/disc files were supplied. This proves transport only; debugger stop/resume and mouse delivery remain unverified. Console handling or the early BIOS-stage break are hypotheses, not established causes. See `research/variants/emulator-automation-assessment.md` and `mcp-capability-probe.json`.
+
+**Milestone C and the complete game remain unfinished.** The new helpers are not yet wired into the native mission scene. Next: preserve native actor-pool gaps while loading; bind the 16 source resources; reconstruct landing/effect/shared-RNG order; commit map links and the five-slot activation batch; then connect selection, target projection and the move-order producer. Explicit-seed tests do not establish the first original controllable frame. Continued implementation and automated testing remain authorized; do not stop for a user test or repeat generic emulator input trials.
+
+## Previous native-runtime checkpoint
 
 The full integration gate passes **117 checks and 214 Rust tests** at 2026-10-13T11:26:39.755478+00:00. All 48,172 private files are ignored, no private file is tracked, and the original archive SHA-256 remains unchanged. The separate new actor-activation proof also passes 9 listing pins, 4,096 trigonometric entries, 65,536 seeds, 131,072 flag cases and 19 vectors; it is a static follow-up beyond the aggregate gate's registered implementation checks.
 

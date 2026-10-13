@@ -1,6 +1,6 @@
 # GeneWars reconstruction workspace
 
-This is an active, evidence-backed Rust reconstruction using the user's local GeneWars archive. It provides native resource tools and an asset window, RNC1 and sprite decoding, a CPU renderer, and statically verified arithmetic, record/grid and UI transitions. It does not yet run a playable game.
+This is an active, evidence-backed Rust reconstruction using the user's local GeneWars archive. It provides a native menu and mutable plant-world development build, resource tools, RNC1/sprite decoding, a CPU renderer and source-backed player/actor startup transactions. It does not yet run a complete playable game. See [RUNTIME.md](docs/RUNTIME.md) for launch controls and current limits.
 
 The original [preflight](research/preflight.md) remains a dated baseline. Current work is tracked in [WORK_STATUS.md](docs/WORK_STATUS.md), [GAME_FEATURE_MATRIX.md](docs/GAME_FEATURE_MATRIX.md), and the [evidence ledger](research/EVIDENCE_LEDGER.md).
 
