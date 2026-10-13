@@ -44,3 +44,21 @@ private/build/rust-target/debug/genewars-terrain.exe private/integration/terrain
 This single-record selection deliberately leaves other entities out of the inspector. The separate queue helpers reproduce the proved admission rectangle,256-entry limit, special offscreen buckets, reverse equal-row order and flag packets for explicit inputs; they do not infer a complete initial world. Scheduled updates, other-family capacity competition and the dirty prepass still need integration.
 
 The plant integration compares21 frames /6,451,200 pixels with independent models and rejects five invalid requests without clobbering output. A bounded native window matches the CLI RGB checksum. A supervised Right/R/Left/R/Escape sequence produced five presentations and restored the original plant/terrain view; see `research/integration/plant-controls-observed.json`.
+
+## Explicit multi-plant snapshots
+
+`mission-plant-scene INPUT_DIR PLANT_DIR PLAYER raw|raise4096 SNAPSHOT OUTPUT_BMP` combines the proved family1 queue, draw packet and ordered shadow/foreground passes. Every snapshot supplies projected coordinates, shade, flags, resource/frame selectors and context gates explicitly. Capacity reserved by `initial_count` does not import other families or their chains. Admission callbacks and the dirty prepass are not executed. This is an inspection format authored for this project, not an original save format.
+
+The strict UTF-8 format is:
+
+```text
+GWPLANT1
+context ACTIVE INITIAL_COUNT MARGIN GATE MODE CONTEXT_FLAGS
+plant ID SLOT ANIM FRAME X Y SHADE FLAGS JITTER
+```
+
+Use numeric values: ACTIVE/GATE are0 or1; INITIAL_COUNT0..256; MARGIN128; SLOT0..11; byte fields0..255; X/Y signed32; unique ID unsigned32. At most4096 candidates are accepted. A queued frame is validated even if the draw packet skips it. Unsupported drawing flags fail before publishing output. Middle-row ties reverse input order; special offscreen buckets preserve residual order, and y480 reconstructs at479. Each drawn record's full shadow pass precedes its foreground, then the next record is drawn. The entire scene commits only if all requested draws succeed.
+
+`python -B scripts/plant_scene_example.py` creates a fresh private snapshot and BMP with all40 raw source plants, source record order/frames, sampled shade after the radius4096 plan, and explicit gate1/mode1/count0. Seven plants pass the player0 view's queue rectangle. The script reports the exact output path. These choices are diagnostic: runtime shade refresh, scheduled removals/growth and other-family competition are separate work.
+
+`validate_mission_plant_scene.py` compares eight complete scene frames, ordering/capacity/gating and rejected output preservation. The independent native scene review covers5443 scenes,15469927 destination bytes, five strict snapshot frames and13 parser rejections. See `research/integration/mission-plant-scene.json` and `research/variants/plant-scene-review.json`.

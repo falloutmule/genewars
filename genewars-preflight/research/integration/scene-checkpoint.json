@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "checkpoint_utc": "2026-10-13T09:45:47.191369+00:00",
+  "status": "reviewed-explicit-scene-and-measured-captured-input",
+  "full_gate": {
+    "completed_utc": "2026-10-13T09:41:22.870158+00:00",
+    "checks": 99,
+    "rust_tests": 178,
+    "private_files_ignored": 44031,
+    "all_passed": true
+  },
+  "receipts": [
+    {
+      "path": "research/integration/verification.json",
+      "bytes": 134322,
+      "sha256": "7cbde942cb10e244a465c1bf9eff6dabb7ab8962e233fd9f91e94cf17d9b5a5e"
+    },
+    {
+      "path": "research/integration/mission-plant-scene.json",
+      "bytes": 8055,
+      "sha256": "302c322f3755991efb2385a54eb1622a8ebd6c3fb114453f7e2c95bb4269bb3e"
+    },
+    {
+      "path": "research/variants/plant-scene-review.json",
+      "bytes": 3106,
+      "sha256": "903e070ad55ba71494b68ef275804b0171a8f879404626b9049247b75e243033"
+    },
+    {
+      "path": "research/variants/mouse-probe-observations.json",
+      "bytes": 12181,
+      "sha256": "9acc839b9427ffb6220feaebe0c769acebb72b1ee8a5eed649f9a573faa771c9"
+    },
+    {
+      "path": "research/variants/mouse-probe-review.json",
+      "bytes": 2919,
+      "sha256": "17d7d46f307d5bb04900de856b30b6088cca1ce80960f83fb8b82bf8f7dd7c90"
+    },
+    {
+      "path": "research/variants/mouse-timer-review.json",
+      "bytes": 1921,
+      "sha256": "211706085bc472903f1e450f7fdefdda8f78eae6ade23678a83fb8fdbbb392a9"
+    },
+    {
+      "path": "research/variants/mouse-probe-012-readiness.json",
+      "bytes": 5327,
+      "sha256": "4007abb95881e90b7bced544be8795e64ce4fed239ad339430dbee4d2909c4bf"
+    }
+  ],
+  "limits": [
+    "No full game/first-world-state claim; source lifecycle port still being reviewed separately.",
+    "Emptyinputsuccess is not an originalgame import/gameplay/control result.",
+    "No public upload/push."
+  ]
+}

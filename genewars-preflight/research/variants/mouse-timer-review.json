@@ -1,0 +1,52 @@
+{
+  "status": "passed-independent-timed-empty-probe-011-review",
+  "utc": "2026-10-13T09:32:14.289891+00:00",
+  "emulator_execution": false,
+  "original_execution": false,
+  "com": {
+    "path": "private/reference-run/mouse-probe-011/drive-c/MOUSE.COM",
+    "size": 1234,
+    "sha256": "7e0f4eca31e358b25a5aad959ce9eeec3ecd7c7e876ac78bf28999bdc1ce5b3b"
+  },
+  "config": {
+    "path": "private/reference-run/mouse-probe-011/dosbox-x.conf",
+    "size": 20819,
+    "sha256": "506802e42d08c46d77f176efcd0efab03cbf57e2b8fbe15f8242d0b9284a285b"
+  },
+  "emitter": {
+    "path": "scripts/reference/mouse_probe.py",
+    "size": 21079,
+    "sha256": "4ede09f0f6d04067a7f8e0c031287ce83c8ef803750be39aade420d6dd5cae33"
+  },
+  "launcher": {
+    "path": "scripts/reference/run_mouse_probe.py",
+    "size": 4652,
+    "sha256": "e2509df02c04bfff083e1eff3b74f0e8667fc8010f9a9d3fed6860a3d6acb622"
+  },
+  "timer_ticks": 1092,
+  "ordinary_modulo_tick_cases": 655360,
+  "callback_instructions_isomorphic": 62,
+  "callback_code_delta": 61,
+  "callback_counter_data_delta": 70,
+  "records_extent": [
+    589,
+    1485
+  ],
+  "timer_start_word": 1485,
+  "stop_reason_byte": 1487,
+  "max_log_bytes": 904,
+  "host_timeout_seconds": 180,
+  "safe_for_supervised_empty_run": true,
+  "checker_grants_execution_authorization": false,
+  "limits": [
+    "Tickinterval~59.98s only under normal18.2065Hz clock advancement",
+    "BIOSmidnightreset or clockjump can end early; frozen/slow guestclock remainsbounded byhost180s",
+    "MOUSE.LOG/STOP.BIN errors remain unavailable; no runtime/input result asserted",
+    "011callback matches008up to relocation; 008independent register/guard review supplies statecoverage"
+  ],
+  "review_source": {
+    "path": "research/variants/mouse-timer-review.py",
+    "size": 4798,
+    "sha256": "8976a7844cba605fb61fb8b435537824054de8b2cce7f4d0897eea62e6bb2a39"
+  }
+}

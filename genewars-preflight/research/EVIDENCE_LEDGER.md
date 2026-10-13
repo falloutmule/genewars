@@ -76,3 +76,12 @@ Actual commands and preservation/Git checks: [integration verification](integrat
 | QUEUE-01 | [Queue proof](ghidra/entity-queue-bridge.md), [review](variants/entity-queue-review.md) | Corroborated admission, bucket ordering and flag packets for explicit inputs; dirty prepass and full live sequence excluded |
 | PANEL-02 | [Conditional MAINPANL route](ghidra/initial-panel-bridge.md) | Static caller/selector witness under campaign, signedprogress<4 and nullactivechild gates; raw source does not prove live gates |
 | RUN-05 | [Absolute mouse diagnostic](variants/reference-run-005-outcome.md) | Observed menu/options; guest movement unresolved, no mission/save. Closed514s, operator exit15; immutable inputs passed |
+
+### Explicit scene and empty counter evidence (2026-10-13)
+
+- Observed / native: transactional `plant_scene` plus strict post-admission snapshot CLI. Eight complete-frame integrations pass; independent native review passes5443 scenes /15469927 destination bytes and13 malformed snapshot requests. These are caller-authored state snapshots, not an original first-frame observation.
+- Observed / empty emulator011: timer ended normally after61.5985seconds. Of64 retained callbacks, absolute CX/DX varied and button press/release occurred, but SI/DI were allzero.120 later callbacks overflowed. Same never/rawfalse configuration as original005, but text-mode independent callback context. Supports the counter-delivery hypothesis, does not prove whole-game causality.
+- Observed / empty emulator008/009:008 had no targetable window and was operator-stopped;009 had a window but stop keys did not end its wait and the host watchdog stopped it. Neither saved callback data.
+- Corroborated / static: MAINPANL constructor return-pointer witness is closed. Runtime activation gates remain conditional. The timed logger's mainline and callback isolation are independently checked; no original code runs in this probe.
+
+See `variants/mouse-probe-observations.json`, `variants/mouse-timer-review.json`, `variants/plant-scene-review.json` and `integration/mission-plant-scene.json`.

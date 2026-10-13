@@ -1,0 +1,81 @@
+{
+  "status": "passed-independent-native-plant-scene-review",
+  "utc": "2026-10-13T09:40:52.728942+00:00",
+  "original_execution": false,
+  "source_pins": [
+    {
+      "path": "rust/crates/genewars-render/src/plant.rs",
+      "size": 20418,
+      "sha256": "700ce459b589f87e0f1dc864589402b7231295cbf11a0ee1217eb2c9e27d9833"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/entity_shadow.rs",
+      "size": 6852,
+      "sha256": "e0f3a50f7ec896817d12bc31a61fa7718e189749431ec32ff0f1eb03d0e4c102"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/plant_draw.rs",
+      "size": 10737,
+      "sha256": "a7ccbf33266633814ca39cc379cef6fcc2db092260c6ef3d35f335ec8cb1c07f"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/plant_scene.rs",
+      "size": 12557,
+      "sha256": "db39ede4866105f4fae6e893f4cc1649e3eebec938f82ddd5c6feeb744a7e759"
+    },
+    {
+      "path": "rust/crates/genewars-tools/src/plant_scene.rs",
+      "size": 7264,
+      "sha256": "acf118da79d308026db9882dbe97ad61c4e77155271d4d47885646107ff4ab37"
+    },
+    {
+      "path": "rust/crates/genewars-tools/src/terrain_render.rs",
+      "size": 13457,
+      "sha256": "4214802388f7df11a6bc20e031d801b8ecdb0fba9cb792d81bf5be95bd37b8f6"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/entity_draw_queue.rs",
+      "size": 12711,
+      "sha256": "b80d62724db689da242800705edfb34319bed786ac9ed91be1d4ffac7f203215"
+    }
+  ],
+  "scene_cases": 5443,
+  "categories": {
+    "all_real_frames_ordered_overlap": 216,
+    "order_permutations": 6,
+    "late_rejection_atomic": 5,
+    "all_dispatch_byte_axes": 3072,
+    "empty_skip_and_geometry": 96,
+    "mixed_random_ordered_scenes": 2048
+  },
+  "successful_scenes": 2772,
+  "rejected_scenes": 2671,
+  "record_receipts": 6618,
+  "compared_destination_bytes": 15469927,
+  "strict_snapshot_frames": 5,
+  "strict_parser_rejections": 13,
+  "output_aggregate_sha256": "07255828ebff00ef4ac83260a3aecab4cddfe8bd7228234709a6efabc669ad9b",
+  "review_sources": [
+    {
+      "path": "research/variants/plant-scene-review.py",
+      "size": 11037,
+      "sha256": "b82b8b9682cd8a46e2b87f4ef6d02857f202a7e1786f087b9c004947ae656cba"
+    },
+    {
+      "path": "research/variants/plant-scene-review.rs",
+      "size": 4091,
+      "sha256": "2ae13061c24d51a73b0ba5a57b1fe2034def50c622f4b150179ff59392647a28"
+    }
+  ],
+  "native_harness": {
+    "path": "private/review/plant-scene/review.exe",
+    "size": 5323247,
+    "sha256": "fffad153b07a0b66ea4c0fe0acc905c5888cb640e11cf1d895974d17577a873a"
+  },
+  "limits": [
+    "Explicit post-admission flags/order/coordinates only; no original first-scene state inferred",
+    "Snapshot parser enforces uniqueIDs/margin128 even though purequeue supportsopaque repeatedIDs/margin0",
+    "Snapshot loads and validates all admitted frames even when drawpacket skips; stricter resource admission",
+    "Terrain_render integration reviewed foroffset128/pitch640 and explicitGENEPANL policy; fullterrainpixels covered by separate integration validators"
+  ]
+}

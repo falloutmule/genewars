@@ -1,0 +1,77 @@
+{
+  "status": "passed-independent-authored-callback-byte-review",
+  "utc": "2026-10-13T09:33:36.093852+00:00",
+  "emulator_execution": false,
+  "original_execution": false,
+  "com": {
+    "path": "private/reference-run/mouse-probe-008/drive-c/MOUSE.COM",
+    "size": 1160,
+    "sha256": "5c6fc1e7025508fbd6490d2bfe85acf8918fcef51883c4ec711212d4d53e3b4e"
+  },
+  "main_assembly": {
+    "path": "private/reference-run/mouse-probe-008/MOUSE.asm",
+    "size": 1319,
+    "sha256": "218d1de58cf4bd02c6acf75eeefb30f3151a3d3f37fc9fa2d4ea980b9cd7d2fa"
+  },
+  "callback_bounds": [
+    362,
+    501
+  ],
+  "callback_state_cases": 3840,
+  "executed_authored_callback_instructions": 144797,
+  "checked_callback_data_writes": 10887,
+  "counter_domain_checks": 65536,
+  "record_count_limit": 64,
+  "record_bytes": 14,
+  "max_log_bytes": 904,
+  "stack_input_register_offsets": {
+    "AX": 16,
+    "BX": 14,
+    "CX": 12,
+    "DX": 10,
+    "SI": 8,
+    "DI": 6
+  },
+  "driver_source": {
+    "path": "private/review/input-free-yield/src-ints-mouse.cpp",
+    "size": 105367,
+    "sha256": "66bbeb5e435487ebd0d838e1985df7cc43f1c632154e6c73f397b6afb1efb005"
+  },
+  "official_source": "https://github.com/joncampbell123/dosbox-x/blob/dosbox-x-v2026.10.01/src/ints/mouse.cpp",
+  "register_semantics": [
+    "AX eventmask with requested bits only;007F omits0100absoluteindicator",
+    "BL heldbuttons;BH wheel extension",
+    "CX/DX unsigned drivercoordinates",
+    "SI/DI raw signed16 cumulative motion counters; no0Bhreset in probe"
+  ],
+  "limitations": [
+    "Conventional valid COM stack required; callback state tests use distinct CS/SS and SP8000/FFF0",
+    "Probe uses186+ immediate shifts, compatible with pinned DOSBox CPU;8086 label is imprecise",
+    "File create/write/close errors exit0; absent/partial log must remain unavailable, not successful observation",
+    "No emulator/host-input responsiveness observation in this static review",
+    "Host180second supervision must be separately enforced by launcher"
+  ],
+  "review_source": {
+    "path": "research/variants/mouse-probe-review.py",
+    "size": 9882,
+    "sha256": "23850a64a338231d1c285e1a9c9a96ae4366b9848b7297075f799891541ba864"
+  },
+  "launcher": {
+    "path": "scripts/reference/run_mouse_probe.py",
+    "size": 4652,
+    "sha256": "e2509df02c04bfff083e1eff3b74f0e8667fc8010f9a9d3fed6860a3d6acb622"
+  },
+  "probe_preparer": {
+    "path": "scripts/reference/mouse_probe.py",
+    "size": 21079,
+    "sha256": "4ede09f0f6d04067a7f8e0c031287ce83c8ef803750be39aade420d6dd5cae33"
+  },
+  "probe_validator": {
+    "path": "scripts/reference/validate_mouse_probe.py",
+    "size": 10024,
+    "sha256": "8dbd9d92df0ef8c72e479e61f6caa351a2ee56c3e4a5eef88e688b3bba44011d"
+  },
+  "safe_for_supervised_empty_run": true,
+  "checker_grants_execution_authorization": false,
+  "host_timeout_seconds": 180
+}

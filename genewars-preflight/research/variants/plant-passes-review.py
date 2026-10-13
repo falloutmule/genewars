@@ -38,9 +38,9 @@ def synthetic():
  for record,x,y in [(0,0,0),(1,-3,-5),(1,1,1)]:b.extend(struct.pack('<IhhBB',record*6,x,y,0,0))
  for component,count in [(0,1),(10,2),(20,1)]:b.extend(struct.pack('<Ihh3xB2x',component,6,10,count))
  b.extend(struct.pack('<IIH',14,28,7));b.extend(struct.pack('<IIH',0,0,9));return bytes(b)
-def oracle(case,models,fade,gla):
+def oracle(case,models,fade,gla,initial=None):
  kind,model,ox,oy,dx,dy,color,w,h,pitch,prefix,delta,ctx,flags,native,shade,hasfade,seed,table=case
- minimum=(h-1)*pitch+w if w and h else 0;extent=max(0,minimum+delta);dest=bytearray((i*37+seed)%256 for i in range(prefix+extent+3));head=[0]*6
+ minimum=(h-1)*pitch+w if w and h else 0;extent=max(0,minimum+delta);dest=bytearray((i*37+seed)%256 for i in range(prefix+extent+3)) if initial is None else bytearray(initial);head=[0]*6
  invalid=pitch<w or extent<minimum
  if kind in [0,2]:
   invalid|=bool(ctx&2 or flags&16 or native&2 or not(flags&2 or shade>=30) and not hasfade)

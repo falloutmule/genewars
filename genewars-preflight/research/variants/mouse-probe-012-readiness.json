@@ -1,0 +1,150 @@
+{
+  "status": "prepared-never-to-always-empty-timed-probe",
+  "utc": "2026-10-13T09:38:59.059739+00:00",
+  "original_execution": false,
+  "emulator_execution": false,
+  "checker_grants_execution_authorization": false,
+  "baseline011": {
+    "pins": [
+      {
+        "path": "private/reference-run/mouse-probe-011/drive-c/MOUSE.COM",
+        "size": 1234,
+        "sha256": "7e0f4eca31e358b25a5aad959ce9eeec3ecd7c7e876ac78bf28999bdc1ce5b3b"
+      },
+      {
+        "path": "private/reference-run/mouse-probe-011/drive-c/MOUSE.LOG",
+        "size": 904,
+        "sha256": "a04a6c2f22552a433d899dd7592e88eeb38346cdac487f417a720368cdf85b8e"
+      },
+      {
+        "path": "private/reference-run/mouse-probe-011/drive-c/STOP.BIN",
+        "size": 1,
+        "sha256": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+      },
+      {
+        "path": "private/reference-run/mouse-probe-011/dosbox-x.conf",
+        "size": 20819,
+        "sha256": "506802e42d08c46d77f176efcd0efab03cbf57e2b8fbe15f8242d0b9284a285b"
+      },
+      {
+        "path": "private/reference-run/mouse-probe-011/logs/result.json",
+        "size": 14462,
+        "sha256": "c211fc4bbc5e487cf29880300d241ea3783d973fcf54c9cd1a8d505e94d1df2b"
+      },
+      {
+        "path": "private/reference-run/mouse-probe-011/logs/prepared.json",
+        "size": 3362,
+        "sha256": "d5977695a6bc4bd137aaffe08c7ab3eb1016c3ea4b28f4cf6929775be0333c22"
+      }
+    ],
+    "exit_code": 0,
+    "host_timeout": false,
+    "elapsed_host_seconds": 61.59852789994329,
+    "stop_reason": "timer",
+    "retained_records": 64,
+    "discarded_after_capacity": 120,
+    "retained_all_mickeys_zero": true,
+    "cx_range": [
+      128,
+      632
+    ],
+    "dx_range": [
+      104,
+      176
+    ],
+    "retained_button_events": [
+      {
+        "sequence": 36,
+        "ax_mask": 2,
+        "bx_raw": 1
+      },
+      {
+        "sequence": 38,
+        "ax_mask": 4,
+        "bx_raw": 0
+      }
+    ]
+  },
+  "probe012": {
+    "prepared": {
+      "path": "private/reference-run/mouse-probe-012/logs/prepared.json",
+      "size": 3621,
+      "sha256": "a7eccaa36e7b0627f4aeb6769082b3875210b0fdec4e4a43b555ef935998234d"
+    },
+    "config": {
+      "path": "private/reference-run/mouse-probe-012/dosbox-x.conf",
+      "size": 20820,
+      "sha256": "1e805ff8fbda2884f989fc62b43fd50c2a87052c204c42382b6ebb76b8e436e1"
+    },
+    "com": {
+      "path": "private/reference-run/mouse-probe-012/drive-c/MOUSE.COM",
+      "size": 1234,
+      "sha256": "7e0f4eca31e358b25a5aad959ce9eeec3ecd7c7e876ac78bf28999bdc1ce5b3b"
+    },
+    "static_validation": {
+      "path": "private/reference-run/mouse-probe-012/logs/static-validation.json",
+      "size": 4702,
+      "sha256": "b281c20bc342d5a2dae7ad4fe77c56eb6ac080b5f6f47532a6bb8d124dd4f22f"
+    },
+    "config_delta": [
+      {
+        "section": "sdl",
+        "key": "mouse_emulation",
+        "before": "never",
+        "after": "always"
+      }
+    ],
+    "command": [
+      "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\tools\\dosbox-x\\2026.10.01\\bin\\x64\\Release SDL2\\dosbox-x.exe",
+      "-conf",
+      "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\mouse-probe-012\\dosbox-x.conf",
+      "-noconfig",
+      "-noautoexec",
+      "-defaultmapper",
+      "-nopromptfolder",
+      "-savedir",
+      "states",
+      "-time-limit",
+      "180",
+      "-showrt",
+      "-c",
+      "MOUNT C \"C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\mouse-probe-012\\drive-c\" -nocachedir",
+      "-c",
+      "MOUNT",
+      "-c",
+      "CONFIG -SECUREMODE",
+      "-c",
+      "C:",
+      "-c",
+      "C:\\MOUSE.BAT"
+    ],
+    "launch_cli": "python -B scripts/reference/run_mouse_probe.py --probe-id mouse-probe-012 --timed --mouse-emulation always --run-empty"
+  },
+  "sources": [
+    {
+      "path": "private/review/input-free-yield/src-ints-mouse.cpp",
+      "size": 105367,
+      "sha256": "66bbeb5e435487ebd0d838e1985df7cc43f1c632154e6c73f397b6afb1efb005"
+    },
+    {
+      "path": "private/review/input-free-yield/src-gui-sdlmain.cpp",
+      "size": 423173,
+      "sha256": "0e2978912e692f9e016c67f15fc4e8e54de69ab481ba5c73a4c8edc086a8bf6c"
+    },
+    {
+      "path": "private/review/input-free-yield/src-gui-menu.cpp",
+      "size": 111248,
+      "sha256": "261e92f224cf828f2b69d9cce1d2e3927614507df497fb8c0053f7c25f99ea90"
+    }
+  ],
+  "official_guide": "https://dosbox-x.com/wiki/Guide%3AMouse-support-in-DOSBox%E2%80%90X",
+  "ui_operation": "Main -> Capture mouse; Ctrl+F10 alternate; record actual checkbox/title/visibility",
+  "limits": [
+    "011 establishes only first64rawcallbacks, with120latercallbacksdiscarded",
+    "Zero cumulative mickeys whileunlocked aligns withsourcegate; not fullgamecausalproof",
+    "always enum controlspositionemulation independently ofuser_cursor_locked gate",
+    "012samefirst64retention may fillbeforecapture; cannot inferlatermotionfromdiscardedcallbacks",
+    "No new driver/integration/security setting; onlyreviewedcaptureUI operation permittedby supervisor",
+    "No emulator execution by reviewer"
+  ]
+}

@@ -1,0 +1,363 @@
+{
+  "recorded_utc": "2026-10-13T09:45:47.166723+00:00",
+  "original_execution": false,
+  "probes": [
+    {
+      "probe": "mouse-probe-008",
+      "original_execution": false,
+      "elapsed_host_seconds": 50.083455199957825,
+      "exit_code": 4294967295,
+      "host_timeout": false,
+      "immutable_inputs_unchanged": true,
+      "mounts_observed": [
+        "C: fresh probe drive-c",
+        "Z: emulator internal"
+      ],
+      "callback_log": "unavailable",
+      "conclusion": "No callback-counter conclusion can be drawn without MPR1.",
+      "ui": "No targetable window in two inventories; exact process identity checked before operator abort.",
+      "inputs": [],
+      "evidence": [
+        {
+          "path": "private/reference-run/mouse-probe-008/logs/prepared.json",
+          "bytes": 3070,
+          "sha256": "c075c4b039865c75d655c966bae9a1101a5750103f1de32d1606d3d1c9c5d3e9"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-008/logs/static-validation.json",
+          "bytes": 4166,
+          "sha256": "97abca6996fe99c62cdd229335c28e74ec2efba00b915a2d3b54746cc0f00922"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-008/logs/launch-intent.json",
+          "bytes": 1048,
+          "sha256": "7115604d9145b1ff9a88362aaba97633ed231f1449f19ec1e82baf85b984922f"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-008/logs/launch-process.json",
+          "bytes": 262,
+          "sha256": "dc90691e6d37152ee1e0b08922969a834af6a8ae7eb208d6408c71b5563a5923"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-008/logs/result.json",
+          "bytes": 263,
+          "sha256": "e90715865f82ac29dacedec8d66b0df1790e50a62f67acaa6d40301cc217131f"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-008/logs/dosbox-x.log",
+          "bytes": 3212,
+          "sha256": "3d4418bec82af35df9dbd13ec424c18d0b773e0531b161cedf1d52c257ff3e70"
+        }
+      ]
+    },
+    {
+      "probe": "mouse-probe-009",
+      "original_execution": false,
+      "elapsed_host_seconds": 180.01205099991057,
+      "exit_code": 1,
+      "host_timeout": true,
+      "immutable_inputs_unchanged": true,
+      "mounts_observed": [
+        "C: fresh probe drive-c",
+        "Z: emulator internal"
+      ],
+      "callback_log": "unavailable",
+      "conclusion": "No callback-counter conclusion can be drawn without MPR1.",
+      "ui": "Visible MOUSE window observed. Click and drag showed host cursor movement; Escape and Return did not end the logger wait. Host watchdog stopped its exact child.",
+      "inputs": [
+        {
+          "kind": "click",
+          "point": [
+            100,
+            240
+          ]
+        },
+        {
+          "kind": "drag",
+          "from": [
+            100,
+            240
+          ],
+          "to": [
+            380,
+            290
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Escape"
+        },
+        {
+          "kind": "key",
+          "key": "Return"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "private/reference-run/mouse-probe-009/logs/prepared.json",
+          "bytes": 3070,
+          "sha256": "b09b4564d334611a4faaec8849d2131be17969cc26a3708130d7b51ca674f1c7"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-009/logs/static-validation.json",
+          "bytes": 4166,
+          "sha256": "9299dee23ca3163df7e19abbac634fdbe2022671b9a8f453dfe72069049f528d"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-009/logs/launch-intent.json",
+          "bytes": 1077,
+          "sha256": "1ae8225d745b8bdd8694ad150c1b53f51e3b0406aa52e47949ee017cf0a9f81f"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-009/logs/launch-process.json",
+          "bytes": 262,
+          "sha256": "33c1d20a4c8cf0ad5c7f228a0409d5e54925d9aaa4f63a9bc7261be46bd60c35"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-009/logs/result.json",
+          "bytes": 253,
+          "sha256": "d745ba6318806176b58e75d61b13199d5f0103f3dc23989429ae84b9f5d11949"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-009/logs/dosbox-x.log",
+          "bytes": 3212,
+          "sha256": "d86c36309a1e233f0cd9e10a710e3403d5cefad24a208829cb31d96e096b4755"
+        }
+      ]
+    },
+    {
+      "probe": "mouse-probe-011",
+      "original_execution": false,
+      "recorded_utc": "2026-10-13T09:35:28.228983+00:00",
+      "elapsed_host_seconds": 61.59852789994329,
+      "exit_code": 0,
+      "host_timeout": false,
+      "guest_stop_reason": "timer",
+      "immutable_inputs_unchanged": true,
+      "mounts_observed": [
+        "C: fresh probe drive-c",
+        "Z: emulator internal"
+      ],
+      "summary": {
+        "retained_records": 64,
+        "overflow": 120,
+        "event_masks": [
+          1,
+          2,
+          4
+        ],
+        "x_range": [
+          128,
+          632
+        ],
+        "y_range": [
+          104,
+          176
+        ],
+        "si_values": [
+          0
+        ],
+        "di_values": [
+          0
+        ],
+        "button_records": [
+          36,
+          38
+        ]
+      },
+      "inputs": [
+        {
+          "kind": "click",
+          "point": [
+            100,
+            240
+          ]
+        },
+        {
+          "kind": "drag",
+          "start": [
+            100,
+            240
+          ],
+          "end": [
+            380,
+            290
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Escape"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "private/reference-run/mouse-probe-011/logs/prepared.json",
+          "bytes": 3362,
+          "sha256": "d5977695a6bc4bd137aaffe08c7ab3eb1016c3ea4b28f4cf6929775be0333c22"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-011/logs/static-validation.json",
+          "bytes": 4208,
+          "sha256": "50eca7dffa3f97124217b41bd82fc7c2a114f858a1c12d1586c47034fd461e7d"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-011/logs/launch-intent.json",
+          "bytes": 1077,
+          "sha256": "87a1e514fbfdd7f09b9aa5cc1000c27e61945fcdbdcb4823328a841759ce7430"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-011/logs/result.json",
+          "bytes": 14462,
+          "sha256": "c211fc4bbc5e487cf29880300d241ea3783d973fcf54c9cd1a8d505e94d1df2b"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-011/logs/dosbox-x.log",
+          "bytes": 3228,
+          "sha256": "f0df50cc2d6a83584209c4cc139dd79cf7abc4f4f60a5337f1c7f156953b2a04"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-011/drive-c/MOUSE.LOG",
+          "bytes": 904,
+          "sha256": "a04a6c2f22552a433d899dd7592e88eeb38346cdac487f417a720368cdf85b8e"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-011/drive-c/STOP.BIN",
+          "bytes": 1,
+          "sha256": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-011/captures/after-drag.jpg",
+          "bytes": 37344,
+          "sha256": "0352a4e36e4fc7bfc856d7dd8e7581fffd33df7e58fae6f8c6b527dcf77dffe3"
+        }
+      ],
+      "conclusion": "Observed absolute coordinate movement and button transitions with zero cumulative SI/DI counters in the retained prefix. This supports the counter-delivery explanation for the original run005 frozen cursor; no original program ran in this probe.",
+      "limits": [
+        "Only the first64 callbacks were retained;120 later callbacks overflowed and are not represented.",
+        "Some callbacks occurred before deliberate test actions; no per-action guest timestamps exist.",
+        "The test used the same mouse_emulation=never/rawfalse config, but BIOS text mode and the independent callback, not the original game protected-mode context.",
+        "BX is raw16: BL contains held buttons and BH may contain wheel data. Mask007F omits the absolute-indicator bit.",
+        "Escape did not stop this logger; the timer did. Keyboard failure cause is not established."
+      ]
+    },
+    {
+      "probe": "mouse-probe-012",
+      "original_execution": false,
+      "recorded_utc": "2026-10-13T09:45:47.166723+00:00",
+      "elapsed_host_seconds": 80.6606053999858,
+      "exit_code": 0,
+      "host_timeout": false,
+      "guest_stop_reason": "timer",
+      "immutable_inputs_unchanged": true,
+      "mounts_observed": [
+        "C: fresh probe drive-c",
+        "Z: emulator internal"
+      ],
+      "summary": {
+        "retained_records": 7,
+        "overflow": 0,
+        "event_masks": [
+          1,
+          2,
+          4
+        ],
+        "signed_si_values": [
+          -151,
+          0,
+          177
+        ],
+        "signed_di_values": [
+          -40,
+          0,
+          160
+        ]
+      },
+      "inputs": [
+        {
+          "kind": "menu",
+          "item": "Main",
+          "point": [
+            23,
+            39
+          ]
+        },
+        {
+          "kind": "menu",
+          "item": "Capture mouse",
+          "point": [
+            101,
+            295
+          ]
+        },
+        {
+          "kind": "drag",
+          "start": [
+            180,
+            240
+          ],
+          "end": [
+            360,
+            290
+          ]
+        },
+        {
+          "kind": "click",
+          "point": [
+            23,
+            39
+          ],
+          "observation": "Main menu did not reopen"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "private/reference-run/mouse-probe-012/logs/prepared.json",
+          "bytes": 3621,
+          "sha256": "a7eccaa36e7b0627f4aeb6769082b3875210b0fdec4e4a43b555ef935998234d"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-012/logs/static-validation.json",
+          "bytes": 4702,
+          "sha256": "b281c20bc342d5a2dae7ad4fe77c56eb6ac080b5f6f47532a6bb8d124dd4f22f"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-012/logs/launch-intent.json",
+          "bytes": 1077,
+          "sha256": "31ef552e8886bc179d38f6c61788f2017bd9aec5d3901562cad973d8d628520c"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-012/logs/result.json",
+          "bytes": 2005,
+          "sha256": "be5fb01ec3f5e8b86d24c4f676f40f43a7977a591026c21c6e2c4c48abe175ff"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-012/logs/dosbox-x.log",
+          "bytes": 3228,
+          "sha256": "6379e8a5d627a9e899ff030db7b99673b83e132e74902ccfc3e144b68ac9e547"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-012/drive-c/MOUSE.LOG",
+          "bytes": 106,
+          "sha256": "87571ad7f7c79388f12d53f832095641ef03f917ff94791ad343fdc994aa6333"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-012/drive-c/STOP.BIN",
+          "bytes": 1,
+          "sha256": "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+        },
+        {
+          "path": "private/reference-run/mouse-probe-012/captures/after-capture-motion.jpg",
+          "bytes": 36963,
+          "sha256": "0602fa9fef5eb16341ff09378d0c2d64ef49dbac93030e2de8126237c50883c6"
+        }
+      ],
+      "conclusion": "With always/rawfalse and an observed Main/Capture mouse selection, signed cumulative SI/DI changed in the empty DOS callback. Both positive and negative motion and button transitions were retained. This supplies a tested input setup for a scoped original retry.",
+      "limits": [
+        "The capture checkmark was not captured; successful movement-counter delivery is the observed result.",
+        "BIOS guest-time timer and host elapsed time differ; native menu interaction can pause guest execution.",
+        "No original game was mounted, and game sensitivity/protected-mode input has not been validated."
+      ]
+    }
+  ],
+  "next_measurement": "Fresh originalrun006 using verified always/rawfalse input and explicit capture, under the existing20minute supervised scope."
+}

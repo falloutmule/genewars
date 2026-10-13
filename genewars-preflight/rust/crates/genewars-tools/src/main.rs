@@ -3,6 +3,7 @@ use std::{env, fs, io::{self, Read}, path::Path, process};
 use genewars_assets::{B32Atlas, CampaignHeader, ConqFastPrefix, ConqMapCells, Header, Palette256, PaletteChannelMode, SpriteTable, crc16_rnc, decode, decode_prefix};
 mod terrain_render;
 mod mission_source;
+mod plant_scene;
 
 const INPUT_LIMIT: u64 = 64 * 1024 * 1024;
 const DEFAULT_OUTPUT_LIMIT: usize = 64 * 1024 * 1024;
@@ -55,13 +56,14 @@ fn write_output(path: &str, bytes: &[u8]) -> Result<(), String> {
 
 fn run(args: &[String]) -> Result<(), String> {
     let usage = "usage: genewars-tools rnc-info INPUT | rnc-verify INPUT [MAX_BYTES] | rnc-decode INPUT OUTPUT [MAX_BYTES] | rnc-prefix INPUT OUTPUT [MAX_BYTES] | panel-render RNC_INPUT MAIN_PAL OUTPUT_BMP | sprite-verify ANB TAB | sprite4-verify ANB TAB BASE | sprite-decode ANB TAB RECORD INDEX_OUTPUT MASK_OUTPUT | sprite4-decode ANB TAB RECORD BASE INDEX_OUTPUT MASK_OUTPUT | distance SX SY TX TY | campaign-plan PROGRESS PRIOR_SYSTEM | campaign-inspect HEADER MISSION | terrain-info MISSION | terrain-height MISSION X Y | terrain-camera MISSION X Y | terrain-tile DECODED_B32A TILE OUTPUT | terrain-cell MISSION X Y CAMERA_X CAMERA_Y TOP ANCHOR_X ANCHOR_Y (INPUT '-' reads stdin)";
-    let usage = format!("{usage} | terrain-shade MISSION X Y | terrain-cell-render INPUT_DIR X Y FACTOR OUTPUT_BMP | terrain-view INPUT_DIR TARGET_X TARGET_Y raw|raise4096 OUTPUT_BMP | mission-source-view INPUT_DIR PLAYER raw|raise4096 OUTPUT_BMP | mission-source MISSION PLAYER | mission-plant-view INPUT_DIR PLANT_DIR PLAYER RECORD raw|raise4096 source|sampled OUTPUT_BMP");
+    let usage = format!("{usage} | terrain-shade MISSION X Y | terrain-cell-render INPUT_DIR X Y FACTOR OUTPUT_BMP | terrain-view INPUT_DIR TARGET_X TARGET_Y raw|raise4096 OUTPUT_BMP | mission-source-view INPUT_DIR PLAYER raw|raise4096 OUTPUT_BMP | mission-source MISSION PLAYER | mission-plant-view INPUT_DIR PLANT_DIR PLAYER RECORD raw|raise4096 source|sampled OUTPUT_BMP | mission-plant-scene INPUT_DIR PLANT_DIR PLAYER raw|raise4096 SNAPSHOT OUTPUT_BMP");
     let command = args.first().ok_or(usage.as_str())?;
     match command.as_str() {
         "terrain-cell-render" if args.len() == 6 => terrain_render::cell(&args[1..]),
         "terrain-view" if args.len() == 6 => terrain_render::view(&args[1..]),
         "mission-source-view" if args.len() == 5 => terrain_render::mission_view(&args[1..]),
         "mission-plant-view" if args.len() == 8 => terrain_render::mission_plant_view(&args[1..]),
+        "mission-plant-scene" if args.len() == 7 => terrain_render::mission_plant_scene(&args[1..]),
         "mission-source" if args.len() == 3 => mission_source::inspect(&args[1..]),
         "terrain-shade" if args.len() == 4 => {
             let bytes = read_input(&args[1])?;

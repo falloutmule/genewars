@@ -67,7 +67,7 @@ pub fn cell(args: &[String]) -> Result<(), String> {
 /// map snapshot policy. The full 640x480 viewport and columns 0..20 are a tool
 /// policy; the mission's initial context/player state remains unestablished.
 pub fn view(args: &[String]) -> Result<(), String> {
-    view_with_layout(args, None, None)
+    view_with_layout(args, None, None, None)
 }
 
 /// Select a raw target-table entry from the bounded source parser. The caller
@@ -75,7 +75,7 @@ pub fn view(args: &[String]) -> Result<(), String> {
 pub fn mission_view(args: &[String]) -> Result<(), String> {
     let player: usize = args[1].parse().map_err(|_| "source player must be0..3")?;
     let translated = [args[0].clone(), "0".to_owned(), "0".to_owned(), args[2].clone(), args[3].clone()];
-    view_with_layout(&translated, Some(player), None)
+    view_with_layout(&translated, Some(player), None, None)
 }
 
 /// Inspect one explicitly selected source record. Selection bypasses unresolved
@@ -87,11 +87,20 @@ pub fn mission_plant_view(args: &[String]) -> Result<(), String> {
         return Err("plant shade policy must be source or sampled".into());
     }
     let translated = [args[0].clone(), "0".to_owned(), "0".to_owned(), args[4].clone(), args[6].clone()];
-    view_with_layout(&translated, Some(player), Some((&args[1], record, args[5].as_str())))
+    view_with_layout(&translated, Some(player), Some((&args[1], record, args[5].as_str())), None)
+}
+
+/// Compose a caller-authored post-admission snapshot using the traced queue.
+pub fn mission_plant_scene(args: &[String]) -> Result<(), String> {
+    let player = args[2].parse().map_err(|_| "source player must be0..3")?;
+    let snapshot = super::plant_scene::Snapshot::parse(&super::read_input(&args[4])?)?;
+    let translated = [args[0].clone(), "0".to_owned(), "0".to_owned(), args[3].clone(), args[5].clone()];
+    view_with_layout(&translated, Some(player), None, Some((&args[1], &snapshot)))
 }
 
 fn view_with_layout(args: &[String], source_player: Option<usize>,
-                    plant: Option<(&str, usize, &str)>) -> Result<(), String> {
+                    plant: Option<(&str, usize, &str)>,
+                    scene: Option<(&str, &super::plant_scene::Snapshot)>) -> Result<(), String> {
     use genewars_core::cd_candidate::{camera_cells_for_target, plan_terrain_factor_raise_4096};
     if !matches!(args[3].as_str(), "raw" | "raise4096") {
         return Err("terrain-view policy must be raw or raise4096".into());
@@ -169,6 +178,12 @@ fn view_with_layout(args: &[String], source_player: Option<usize>,
             fields.animation_selector, fields.frame_selector, result.foreground_pixels_written,
             result.foreground_pixels_clipped, result.shadow_pixels_written, result.shadow_pixels_clipped);
     }
+    let mut scene_metadata = "null".to_owned();
+    if let Some((directory, snapshot)) = scene {
+        let gla_bytes = resource(&args[0], "MAIN.GLA")?;
+        let gla = genewars_render::terrain_modes::MainGlaTable::parse(&gla_bytes).map_err(|e| e.to_string())?;
+        scene_metadata = snapshot.draw(directory, &mut view.indices[128..], &fade, &gla)?;
+    }
     let dirty_count = view.dirty_requests.len();
     let (indices, requested, pairs, prepared_count, pixels) = (view.indices, view.requested_modes,
         view.pairs, view.prepared_triangles, view.pixels_written);
@@ -180,7 +195,7 @@ fn view_with_layout(args: &[String], source_player: Option<usize>,
         Some(player) => (16, "initial-viewport", "explicit-GENEPANL", player.to_string()),
         None => (20, "full-diagnostic", "none", "null".to_owned()),
     };
-    println!("{{\"target\":{:?},\"camera_words\":{:?},\"wrapped_camera\":{:?},\"map_policy\":\"{}\",\"factor_changes\":{changed},\"columns\":{columns},\"pairs\":{pairs},\"requested_modes\":{:?},\"prepared_triangles\":{prepared_count},\"pixel_writes\":{pixels},\"index_crc16\":{},\"rgb_crc16\":{},\"layout\":\"{layout}\",\"panel_policy\":\"{panel}\",\"source_player\":{player},\"dirty_requests\":{dirty_count},\"plant\":{plant_metadata},\"entity_callbacks_applied\":false,\"gameplay\":false,\"initial_mission_state_inferred\":false}}",
+    println!("{{\"target\":{:?},\"camera_words\":{:?},\"wrapped_camera\":{:?},\"map_policy\":\"{}\",\"factor_changes\":{changed},\"columns\":{columns},\"pairs\":{pairs},\"requested_modes\":{:?},\"prepared_triangles\":{prepared_count},\"pixel_writes\":{pixels},\"index_crc16\":{},\"rgb_crc16\":{},\"layout\":\"{layout}\",\"panel_policy\":\"{panel}\",\"source_player\":{player},\"dirty_requests\":{dirty_count},\"plant\":{plant_metadata},\"plant_scene\":{scene_metadata},\"entity_callbacks_applied\":false,\"gameplay\":false,\"initial_mission_state_inferred\":false}}",
         target, camera_words, camera, args[3], requested, genewars_assets::crc16_rnc(&indices), genewars_assets::crc16_rnc(image.rgb_bytes()));
     Ok(())
 }
