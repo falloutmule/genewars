@@ -1,0 +1,267 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/entity-plant/instructions-00096ac0.txt",
+      "sha256": "8146aa37b06d9236b517db22efb7b12f2993607380b9df262faa024a68bbc891"
+    },
+    {
+      "private_path": "private/ghidra/entity-shadow-panel/instructions-00092f80.txt",
+      "sha256": "10281988674a0779a1481f9813aad7054da5b25f11a04155341f9e78c813ecf4"
+    },
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-0008f660.txt",
+      "sha256": "30ec2f1ee90644788244bcf75fbfed5ed4aabb3c8faad04ccd75b0f35f2add9d"
+    },
+    {
+      "private_path": "private/ghidra/terrain-overlay-resource-refs/instructions-0001d770.txt",
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    }
+  ],
+  "resource": {
+    "entry_id": "root/2/disc/107",
+    "path": "GAME/DATA/MAIN.GLA",
+    "source_size": 34551,
+    "source_sha256": "c5e12a5b4325c8302cab0fb3ba3aaa654e2e044131763298815766d8a6f47a58",
+    "decoded_size": 65536,
+    "decoded_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+    "load_call": "0x1dc88",
+    "destination": "0x18cf48"
+  },
+  "admission": "Normal context flags0/component flags0/96AC0 extra argument0; explicit signed16 frame origin, positive bounded clip dimensions/pitch and enabled8F660 drawing (10AA15 nonzero). Destination and decoded frame validated before writes.",
+  "frame_component_placement": "Shadow x=origin_i16_x+component_signed_x; shadow y=origin_i16_y+truncate_toward_zero(component_signed_y/2). Full signed32 additions here; unlike foreground, no final signed16 narrowing in96AC0 normal path.",
+  "raster": "Descriptor height is floor(source_height/2). Output row k reads only opacity of original row2*k+1; even rows are consumed but not written. Odd final source row is discarded. Top clipping by k shadow rows consumes2*k source rows and retains the same odd-row phase. Horizontal clipping never changes source row selection.",
+  "sample": "For every positive-run pixel, destination=MAIN.GLA[(color_u8<<8)+existing_destination_u8]; source literal bytes are consumed but their values ignored. Negative runs preserve destination. Literal0 remains opaque. Color0 supplied by6C230; explicitcolor0..255 sample API also supported by92F80.",
+  "coverage": "Half-open rectangle intersection of shadow sprite with explicit clip. No pixel outside intersection; fully clipped or zero halfheight safely empty. Safe zero clip width/height accepted as empty without asserting equivalence to original zero-dimension behavior.",
+  "source_side_effects": "8F660 also marks dirty-block metadata before returning a draw pointer. This pure pixel contract excludes dirty bookkeeping and requires its drawing gate enabled.",
+  "component_half_vectors": [
+    {
+      "component_y": -32768,
+      "half_y_trunc0": -16384
+    },
+    {
+      "component_y": -32767,
+      "half_y_trunc0": -16383
+    },
+    {
+      "component_y": -3,
+      "half_y_trunc0": -1
+    },
+    {
+      "component_y": -2,
+      "half_y_trunc0": -1
+    },
+    {
+      "component_y": -1,
+      "half_y_trunc0": 0
+    },
+    {
+      "component_y": 0,
+      "half_y_trunc0": 0
+    },
+    {
+      "component_y": 1,
+      "half_y_trunc0": 0
+    },
+    {
+      "component_y": 2,
+      "half_y_trunc0": 1
+    },
+    {
+      "component_y": 3,
+      "half_y_trunc0": 1
+    },
+    {
+      "component_y": 32767,
+      "half_y_trunc0": 16383
+    }
+  ],
+  "cached_vs_stream_cases": 757,
+  "actual_fixtures": [
+    {
+      "slot": 0,
+      "width": 27,
+      "source_height": 26,
+      "shadow_height": 13,
+      "source_mask_sha256": "b378ba6caeb2fc2ede011681f012a22e15fc6ebf8e6dadc67f018b9479ab2ed7",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "2d2e297f9a87f8fc655aa582f093a9e0a4ae52a0f97974b092839708d91edf59",
+      "private_path": "private/ghidra/entity-plant/grass1-shadow0.bin"
+    },
+    {
+      "slot": 1,
+      "width": 28,
+      "source_height": 28,
+      "shadow_height": 14,
+      "source_mask_sha256": "77fe3eb02f7133cda7bbecaed73c42ce09f34a7bc1db65fcf31bf5e329d4b1e5",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "3aaad2407b8b216125097e43b9943440e836e999c7ff7722acc5498a6f2dc1c8",
+      "private_path": "private/ghidra/entity-plant/grass2-shadow0.bin"
+    },
+    {
+      "slot": 2,
+      "width": 27,
+      "source_height": 28,
+      "shadow_height": 14,
+      "source_mask_sha256": "49ce18900813cbee0b634a2700394ea82554d9015e605150609cc910fa1f00ca",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "9e839dc850ad4091886b2746a61f3562b1db67af7add7fda8161a625f665bae7",
+      "private_path": "private/ghidra/entity-plant/grass3-shadow0.bin"
+    },
+    {
+      "slot": 3,
+      "width": 31,
+      "source_height": 30,
+      "shadow_height": 15,
+      "source_mask_sha256": "d5a1598d1027812c620b19b43f2db0e75042d3ee52b8f9d7b0e182403a868f1f",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "01817071c7b04082f399409bd1d4d644e30ac3c24c201592217698ef714fcb44",
+      "private_path": "private/ghidra/entity-plant/desert1-shadow0.bin"
+    },
+    {
+      "slot": 4,
+      "width": 28,
+      "source_height": 27,
+      "shadow_height": 13,
+      "source_mask_sha256": "5ce335ae700a551fc0ac9f8082f328e6fd31d518b2a6d2ab64a2261b9a2c6c71",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "a38d7d392a8a6d7036e2f4d239c64c8c5c1e206ed6dd80b2654ab2b3ecadfeac",
+      "private_path": "private/ghidra/entity-plant/desert2-shadow0.bin"
+    },
+    {
+      "slot": 5,
+      "width": 17,
+      "source_height": 31,
+      "shadow_height": 15,
+      "source_mask_sha256": "e4c55a8fca67cea35074fc900422499aa443d8896090f142e631c6a48440f476",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "14871c646b2e80a801f332cadb1b3f80014b1790dc64c81da5af27ce8fd9cb26",
+      "private_path": "private/ghidra/entity-plant/desert3-shadow0.bin"
+    },
+    {
+      "slot": 6,
+      "width": 30,
+      "source_height": 23,
+      "shadow_height": 11,
+      "source_mask_sha256": "9bea95caa9d08c7e9be6aa2ceb0a3caffc5a87c9d5ef88bc0b641a3430b804bb",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "db84ccb46afb668d3902acb4ba250b0c6aff16d15515678836889efd40be3196",
+      "private_path": "private/ghidra/entity-plant/snow1-shadow0.bin"
+    },
+    {
+      "slot": 7,
+      "width": 19,
+      "source_height": 25,
+      "shadow_height": 12,
+      "source_mask_sha256": "a99bb536a7a67d46915441b686fdb7daea759e4f33feb120a48901b6e08c9c35",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "1050806a2e4c7664587af45f5c494c436c8ebf736c9818a371e0d056d72333a9",
+      "private_path": "private/ghidra/entity-plant/snow2-shadow0.bin"
+    },
+    {
+      "slot": 8,
+      "width": 24,
+      "source_height": 23,
+      "shadow_height": 11,
+      "source_mask_sha256": "52c24afa7d0089b0f9b8344e00effdbbbb21058f071d224baad2dcc49e39d49a",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "f505649b94611dca8b6ef1536bf1be84238ced3daacf5f319d6d2c7933d82f4f",
+      "private_path": "private/ghidra/entity-plant/snow3-shadow0.bin"
+    },
+    {
+      "slot": 9,
+      "width": 15,
+      "source_height": 30,
+      "shadow_height": 15,
+      "source_mask_sha256": "6a25077659b1ca11bd43687a2769f44aa34ec67758a2ea3a90ef6aae517008e1",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "e64a5439d337d3ec8ac251ad62774cb7554dc2ed928937fe8995f6f8c2d6d8f8",
+      "private_path": "private/ghidra/entity-plant/all1-shadow0.bin"
+    },
+    {
+      "slot": 10,
+      "width": 9,
+      "source_height": 22,
+      "shadow_height": 11,
+      "source_mask_sha256": "96b3d96ac0be05f82b70f6cc584193c785d16a3a55a091f47f8fd1b7b1e65aee",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "b55de0fecdbdb61720a27ed21258f4e873141c6ae8ec44f4f67c38a63411d5eb",
+      "private_path": "private/ghidra/entity-plant/all2-shadow0.bin"
+    },
+    {
+      "slot": 11,
+      "width": 14,
+      "source_height": 23,
+      "shadow_height": 11,
+      "source_mask_sha256": "e77df56937163c87ff19fad32c672f3e5ad930a68c23195fc51a95d8ed0526d5",
+      "destination": "64x48 pattern(i*37+11)mod256",
+      "placement": [
+        3,
+        4
+      ],
+      "color": 0,
+      "output_sha256": "674ed2dba1bc93f43b95c164e2606ffd8dab478e1670608948f3e36a08b01d60",
+      "private_path": "private/ghidra/entity-plant/all3-shadow0.bin"
+    }
+  ],
+  "limits": [
+    "No flip/scale/component flags, extra argument1 or flash/context transforms admitted.",
+    "No source literal colors or palette colors inferred from shadow result.",
+    "Separate from entity visibility, ordering and animation."
+  ]
+}

@@ -4,6 +4,9 @@ pub mod terrain;
 pub mod terrain_modes;
 pub mod terrain_strip;
 pub mod terrain_view;
+pub mod entity_shadow;
+pub mod plant;
+pub use plant::{PlantColorInputs, PlantColorRoute, PlantFrame, PlantFrameComponentRef, PlantFrameDrawReceipt, PlantRenderError, PlantShadowStatus};
 
 use genewars_assets::{AnbSections, FontResource, IndexedSprite, Palette256, PaletteChannelMode, SpriteTable, Error as AssetError};
 use std::fmt;

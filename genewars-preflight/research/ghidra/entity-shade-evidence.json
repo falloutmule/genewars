@@ -1,0 +1,837 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-0007b240.txt",
+      "sha256": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00072960.txt",
+      "sha256": "17166cfd793ae862a3b99a5b904c6940bf7ac2a18a8d94b5a2505a31d7777b1f"
+    }
+  ],
+  "input": "Exact229376-byte128x12814-byte-cell region, signed16 position words with8fractionbits. Neighbors wrap128; cell+0 signed16 light and cell+12 unsigned8 factor.",
+  "corner_order": [
+    "00",
+    "10",
+    "01",
+    "11"
+  ],
+  "corner_rule": "q_i=(signed_light_i*unsigned_factor_i)>>6, arithmetic floor independently BEFORE interpolation; q_i is signed32, not narrowed signed16.",
+  "interpolation": "fx=positionX&255,fy=positionY&255. If fx<fy: n=(q11-q01)*fx+(q01-q00)*fy. Else: n=(q10-q00)*fx+(q11-q10)*fy. p=2*q00+(n>>7).",
+  "output": "clamp(((p-7680)>>8)+16,0,64); unsigned byte result. All shifts arithmetic floor. Signed32 products/intermediates suffice for full i16 light/u8factor domain.",
+  "consumer": "72960 iterates active native family1 table446AE..4A8AE, stride31; passes native+7 position to7B240 and stores AL at native+17. Refresh timing and visibility callbacks separate.",
+  "vectors": [
+    {
+      "light_i16": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "factor_u8": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fraction_xy": [
+        0,
+        0
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "factor_u8": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fraction_xy": [
+        1,
+        0
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "factor_u8": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fraction_xy": [
+        0,
+        1
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "factor_u8": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fraction_xy": [
+        127,
+        128
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "factor_u8": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fraction_xy": [
+        128,
+        127
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "factor_u8": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fraction_xy": [
+        255,
+        255
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        4096,
+        4096,
+        4096,
+        4096
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        0,
+        0
+      ],
+      "shade_u8": 17
+    },
+    {
+      "light_i16": [
+        4096,
+        4096,
+        4096,
+        4096
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        1,
+        0
+      ],
+      "shade_u8": 17
+    },
+    {
+      "light_i16": [
+        4096,
+        4096,
+        4096,
+        4096
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        0,
+        1
+      ],
+      "shade_u8": 17
+    },
+    {
+      "light_i16": [
+        4096,
+        4096,
+        4096,
+        4096
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        127,
+        128
+      ],
+      "shade_u8": 17
+    },
+    {
+      "light_i16": [
+        4096,
+        4096,
+        4096,
+        4096
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        128,
+        127
+      ],
+      "shade_u8": 17
+    },
+    {
+      "light_i16": [
+        4096,
+        4096,
+        4096,
+        4096
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        255,
+        255
+      ],
+      "shade_u8": 17
+    },
+    {
+      "light_i16": [
+        8192,
+        8192,
+        8192,
+        8192
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        0,
+        0
+      ],
+      "shade_u8": 49
+    },
+    {
+      "light_i16": [
+        8192,
+        8192,
+        8192,
+        8192
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        1,
+        0
+      ],
+      "shade_u8": 49
+    },
+    {
+      "light_i16": [
+        8192,
+        8192,
+        8192,
+        8192
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        0,
+        1
+      ],
+      "shade_u8": 49
+    },
+    {
+      "light_i16": [
+        8192,
+        8192,
+        8192,
+        8192
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        127,
+        128
+      ],
+      "shade_u8": 49
+    },
+    {
+      "light_i16": [
+        8192,
+        8192,
+        8192,
+        8192
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        128,
+        127
+      ],
+      "shade_u8": 49
+    },
+    {
+      "light_i16": [
+        8192,
+        8192,
+        8192,
+        8192
+      ],
+      "factor_u8": [
+        63,
+        63,
+        63,
+        63
+      ],
+      "fraction_xy": [
+        255,
+        255
+      ],
+      "shade_u8": 49
+    },
+    {
+      "light_i16": [
+        -32768,
+        32767,
+        -1,
+        1
+      ],
+      "factor_u8": [
+        255,
+        255,
+        1,
+        63
+      ],
+      "fraction_xy": [
+        0,
+        0
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        -32768,
+        32767,
+        -1,
+        1
+      ],
+      "factor_u8": [
+        255,
+        255,
+        1,
+        63
+      ],
+      "fraction_xy": [
+        1,
+        0
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        -32768,
+        32767,
+        -1,
+        1
+      ],
+      "factor_u8": [
+        255,
+        255,
+        1,
+        63
+      ],
+      "fraction_xy": [
+        0,
+        1
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        -32768,
+        32767,
+        -1,
+        1
+      ],
+      "factor_u8": [
+        255,
+        255,
+        1,
+        63
+      ],
+      "fraction_xy": [
+        127,
+        128
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        -32768,
+        32767,
+        -1,
+        1
+      ],
+      "factor_u8": [
+        255,
+        255,
+        1,
+        63
+      ],
+      "fraction_xy": [
+        128,
+        127
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        -32768,
+        32767,
+        -1,
+        1
+      ],
+      "factor_u8": [
+        255,
+        255,
+        1,
+        63
+      ],
+      "fraction_xy": [
+        255,
+        255
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        4096,
+        4097,
+        8192,
+        -8192
+      ],
+      "factor_u8": [
+        63,
+        62,
+        0,
+        255
+      ],
+      "fraction_xy": [
+        0,
+        0
+      ],
+      "shade_u8": 17
+    },
+    {
+      "light_i16": [
+        4096,
+        4097,
+        8192,
+        -8192
+      ],
+      "factor_u8": [
+        63,
+        62,
+        0,
+        255
+      ],
+      "fraction_xy": [
+        1,
+        0
+      ],
+      "shade_u8": 17
+    },
+    {
+      "light_i16": [
+        4096,
+        4097,
+        8192,
+        -8192
+      ],
+      "factor_u8": [
+        63,
+        62,
+        0,
+        255
+      ],
+      "fraction_xy": [
+        0,
+        1
+      ],
+      "shade_u8": 17
+    },
+    {
+      "light_i16": [
+        4096,
+        4097,
+        8192,
+        -8192
+      ],
+      "factor_u8": [
+        63,
+        62,
+        0,
+        255
+      ],
+      "fraction_xy": [
+        127,
+        128
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        4096,
+        4097,
+        8192,
+        -8192
+      ],
+      "factor_u8": [
+        63,
+        62,
+        0,
+        255
+      ],
+      "fraction_xy": [
+        128,
+        127
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        4096,
+        4097,
+        8192,
+        -8192
+      ],
+      "factor_u8": [
+        63,
+        62,
+        0,
+        255
+      ],
+      "fraction_xy": [
+        255,
+        255
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        32767,
+        32767,
+        32767,
+        32767
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        0,
+        0
+      ],
+      "shade_u8": 64
+    },
+    {
+      "light_i16": [
+        32767,
+        32767,
+        32767,
+        32767
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        1,
+        0
+      ],
+      "shade_u8": 64
+    },
+    {
+      "light_i16": [
+        32767,
+        32767,
+        32767,
+        32767
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        0,
+        1
+      ],
+      "shade_u8": 64
+    },
+    {
+      "light_i16": [
+        32767,
+        32767,
+        32767,
+        32767
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        127,
+        128
+      ],
+      "shade_u8": 64
+    },
+    {
+      "light_i16": [
+        32767,
+        32767,
+        32767,
+        32767
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        128,
+        127
+      ],
+      "shade_u8": 64
+    },
+    {
+      "light_i16": [
+        32767,
+        32767,
+        32767,
+        32767
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        255,
+        255
+      ],
+      "shade_u8": 64
+    },
+    {
+      "light_i16": [
+        -32768,
+        -32768,
+        -32768,
+        -32768
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        0,
+        0
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        -32768,
+        -32768,
+        -32768,
+        -32768
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        1,
+        0
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        -32768,
+        -32768,
+        -32768,
+        -32768
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        0,
+        1
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        -32768,
+        -32768,
+        -32768,
+        -32768
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        127,
+        128
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        -32768,
+        -32768,
+        -32768,
+        -32768
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        128,
+        127
+      ],
+      "shade_u8": 0
+    },
+    {
+      "light_i16": [
+        -32768,
+        -32768,
+        -32768,
+        -32768
+      ],
+      "factor_u8": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "fraction_xy": [
+        255,
+        255
+      ],
+      "shade_u8": 0
+    }
+  ],
+  "weighted_equivalence_cases": 458752,
+  "actual_fixture": {
+    "source_entry": "root/2/disc/152",
+    "sha256": "84f81bc432d3451c93f0dc0034533f844fdffb208fc1edea87a9f85e744f00de",
+    "active_points": 40,
+    "explicit_second_input": "copy of raw map with everyfactor byte replaced63; diagnostic, no original state claim",
+    "private_path": "private/ghidra/entity-plant/shade-fixture.json"
+  },
+  "limits": [
+    "Does not establish initial factor state, visibility or animation timing.",
+    "Do not substitute terrain vertex shade formula or floor once after interpolation; corner floor order matters.",
+    "No FADE lookup here. Foreground dispatch separately bypassesFADE for shade>=30 or flags+15 mask02."
+  ]
+}

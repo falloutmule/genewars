@@ -1,0 +1,44 @@
+{
+  "checkpoint_commit": "9b9e56e",
+  "predecessor_commit": "30342a6",
+  "passed_integration_checks": 86,
+  "passed_rust_tests": 158,
+  "ignored_private_files": 41785,
+  "source_archive_sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906",
+  "git_staged_project_files": 70,
+  "git_byte_preservation_checks": 60,
+  "private_files_staged": 0,
+  "receipts": [
+    {
+      "path": "research/integration/verification.json",
+      "sha256": "f93454faca0a7b2a216dcea13163a3d3750bea9932a2bf77baf34783808e3871"
+    },
+    {
+      "path": "research/integration/mission-source-view.json",
+      "sha256": "e18dc5ef3ffe43580fc31b7b3eb22d9b46bb99cef12700f9b64968464421a33f"
+    },
+    {
+      "path": "research/variants/entity-point-review.json",
+      "sha256": "9ff6a573ec3b5bd497944f5f354d24b37f26d15645a5caf28c086de1e7a29141"
+    },
+    {
+      "path": "research/variants/mission-source-review.json",
+      "sha256": "24038f8ec51a04124c6589271b733af6450aef0c66e0221c4528de1cc2bcc664"
+    },
+    {
+      "path": "research/variants/terrain-view-review.json",
+      "sha256": "cec5793ac54d53abfa25783f5c04864bc07ddeaca74525d953b6bcaa3014b0de"
+    },
+    {
+      "path": "research/ghidra/terrain-viewport-evidence.json",
+      "sha256": "13224213d85b576caab382edf3ddf0ac5cb1b9ebd203cd14cd665a1044d75163"
+    }
+  ],
+  "scope": "Bounded source parser, explicit source-target terrain preview, proved initial right-side traversal, explicit GENEPANL choice, source metadata, entity projection and independent native checks. Original runs003/004 remain closed; no new original execution in this checkpoint.",
+  "limits": [
+    "No live mission or gameplay",
+    "Initial panel selector unresolved",
+    "Plant color and shadow drawing under active investigation",
+    "Guest motion unresolved in supervised original runs"
+  ]
+}

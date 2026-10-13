@@ -2,6 +2,8 @@
 
 Active reconstruction; no playable game yet. The CD executable is a provisional analysis candidate, not established canonical retail.
 
+Continuation is currently limited by worker usage quotas: all three active Sol/Luna agents returned usage-limit errors. No replacement model was substituted. The fully integrated checkpoint is9b9e56e (86 checks/158 Rust tests). The later plant color/shadow source is preserved separately as work in progress:48 renderer unit tests pass, and the new static plant/shadow/shade validators pass, but independent native plant review and scene integration are not run. No original-game or native preview process remains running.
+
 ## Implemented and verified
 
 - The project-local Rust 1.99.0 GNU toolchain builds the resource CLI, native asset inspector, event-driven control inspector and interactive menu inspector. The latest full integration gate passes86 checks and158 Rust tests: assets47, core45, controls11, desktop10, terrain-window4 and renderer41.
@@ -34,7 +36,7 @@ Root owns integration, core modules, Cargo workspace/lock, the current native me
 
 Run `python -B scripts/cargo.py test --workspace --offline --locked` for headless Rust checks and `python -B scripts/verify.py` for the complete current gate. The verifier preserves the dated12-check preflight and checks every private file is ignored (41,785 at the latest full run). It does not rerun broad extraction or execute the original game. A preceding run passed all pixel assertions but failed publishing the creature receipt with Windows OSError22. Its receipt is preserved as integration/verification-20261013-receipt-write-failure.json. Same-directory atomic publication and bounded transient-error retries fixed this; failure fixtures and the complete rerun pass.
 
-Branch codex/genewars-reconstruction preserves checkpoints30342a6,45e8a0e,d8f47ca and750b9cd. Checkpoint30342a6 contains the verified terrain rasterizer, native preview and its control observations. Never stage private or unrelated parent-workspace files. Local .gitattributes preserves byte-hashed receipt files without global Git changes. Continue from NEXT_ACTIONS.md; do not restart preflight.
+Branch codex/genewars-reconstruction preserves checkpoints9b9e56e,30342a6,45e8a0e,d8f47ca and750b9cd. Checkpoint9b9e56e contains the source parser, original viewport geometry and entity projection;30342a6 contains the terrain rasterizer, native preview and its control observations. Never stage private or unrelated parent-workspace files. Local .gitattributes preserves byte-hashed receipt files without global Git changes. Continue from NEXT_ACTIONS.md; do not restart preflight.
 
 ## Current terrain tranche
 
