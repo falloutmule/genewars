@@ -32,7 +32,7 @@ SESSION = 'run-001'
 HUMAN_APPROVAL = ROOT / 'research/variants/reference-approval.json'
 EXTRA_GAME_INPUTS = {}
 COPIED_GAME_INPUTS = {}
-SESSION_WRAPPERS = {'run-002':'run002.py','run-003':'run003.py','run-004':'run004.py','run-005':'run005.py'}
+SESSION_WRAPPERS = {'run-002':'run002.py','run-003':'run003.py','run-004':'run004.py','run-005':'run005.py','run-006':'run006.py'}
 # Independently reviewed five listings, mapped strings/tables, and all19aliases.
 TEXT_INSTALL_PROOF_PATH = 'research/ghidra/english-install-evidence.json'
 TEXT_INSTALL_PROOF_SHA256 = '541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970'
@@ -50,7 +50,7 @@ def select_session(name):
     RECORD = ROOT / 'research/variants' / ('reference-'+name+'-readiness.json')
     HUMAN_APPROVAL = ROOT / 'research/variants' / ('reference-'+name+'-approval.json')
     COPIED_GAME_INPUTS = {}
-    if name in ('run-003','run-004','run-005'):
+    if name in ('run-003','run-004','run-005','run-006'):
         proof_path = ROOT / TEXT_INSTALL_PROOF_PATH
         if TEXT_INSTALL_PROOF_SHA256 is None or not proof_path.exists() or digest(proof_path) != TEXT_INSTALL_PROOF_SHA256:
             raise ValueError('Run003 text-copy staging awaits independently reviewed installer evidence')
@@ -110,6 +110,9 @@ def effective_overrides():
         overrides['sdl']['raw_mouse_input'] = 'true'
     if SESSION == 'run-005':
         overrides['sdl']['mouse_emulation'] = 'never'
+        overrides['sdl']['raw_mouse_input'] = 'false'
+    if SESSION == 'run-006':
+        overrides['sdl']['mouse_emulation'] = 'always'
         overrides['sdl']['raw_mouse_input'] = 'false'
     return overrides
 
@@ -258,7 +261,7 @@ def make_config():
                 # release sdlmain.cpp6950 explicitly registers it, defaultfalse,
                 # OnlyAtStart; admit exactly this reviewed run004 diagnostic.
                 if not (section=='sdl' and key=='raw_mouse_input' and
-                        ((SESSION=='run-004' and value=='true') or (SESSION=='run-005' and value=='false'))):
+                        ((SESSION=='run-004' and value=='true') or (SESSION in ('run-005','run-006') and value=='false'))):
                     raise ValueError(f'Unsupported override {section}/{key}')
             sections[section][key] = value
     lines = ['# Private pinned reference setup. No startup/mount/game commands.']

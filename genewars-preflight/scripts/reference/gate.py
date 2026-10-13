@@ -72,6 +72,8 @@ def main():
     action = parser.add_mutually_exclusive_group()
     action.add_argument('--release-approved-original', action='store_true')
     action.add_argument('--abort', action='store_true')
+    parser.add_argument('--capture-observed', action='store_true',
+        help='Run006 supervisor attests visible Main/Capture mouse state before releasing the original')
     args = parser.parse_args()
     approval = json.loads((RUN / 'logs/human-approval.json').read_text(encoding='utf-8'))
     launch = json.loads((RUN / 'logs/launch-process.json').read_text(encoding='utf-8'))
@@ -100,7 +102,7 @@ def main():
     gate = checked(ROOT / approval['gate']['path'], RUN)
     if digest(gate) != approval['gate']['sha256']:
         raise SystemExit('Gate batch changed')
-    if SESSION in ('run-003','run-004','run-005'):
+    if SESSION in ('run-003','run-004','run-005','run-006'):
         from input_free_yield import CODE, verified_probe
         from launch import gate_batch
         helper_info = approval.get('yield_helper')
@@ -124,10 +126,10 @@ def main():
     token = approval['gate_token']
     blocked = marker.exists() or abort.exists() or (RUN / 'logs/host-release.json').exists()
     issues, mount_rows = runtime_issues(log, token, RUN, age, blocked,
-        mouse_emulation='never' if SESSION=='run-005' else 'always' if SESSION in ('run-003','run-004') else None)
+        mouse_emulation='never' if SESSION=='run-005' else 'always' if SESSION in ('run-003','run-004','run-006') else None)
     if SESSION == 'run-004' and 'DOS CON: Z:\\>CONFIG -GET sdl "raw_mouse_input"\nDOS CON: true' not in log:
         issues.append('Effective raw_mouse_input=true query absent')
-    if SESSION == 'run-005' and 'DOS CON: Z:\\>CONFIG -GET sdl "raw_mouse_input"\nDOS CON: false' not in log:
+    if SESSION in ('run-005','run-006') and 'DOS CON: Z:\\>CONFIG -GET sdl "raw_mouse_input"\nDOS CON: false' not in log:
         issues.append('Effective raw_mouse_input=false query absent')
     early_stderr = Path(launch['stderr']).read_text(encoding='utf-8', errors='replace')
     if any(text in early_stderr.lower() for text in ('not a valid value','unknown option','unknown property')):
@@ -139,7 +141,13 @@ def main():
               'issues':issues,'mount_table':mount_rows,'log_path':str(log_path),
               'log_sha256':digest(log_path) if log_path.exists() else None,
               'original_execution_requested_by_this_call':False}
+    if SESSION == 'run-006':
+        report['capture_state_supervisor_attested'] = args.capture_observed
+        report['capture_attestation_limit'] = 'Visible capture request/state, not a guarantee of SDL input delivery or game response'
     if args.release_approved_original:
+        if SESSION == 'run-006' and not args.capture_observed:
+            issues.append('Supervisor must observe Main/Capture mouse before run006 release and pass --capture-observed')
+            report['ready_for_supervisor_release'] = False
         if issues:
             raise SystemExit(json.dumps(report))
         runtime = prepare_run(False)  # still unchanged before the original starts

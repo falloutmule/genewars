@@ -9,9 +9,19 @@ mod campaign;
 mod menu_control;
 mod terrain;
 mod entity_draw_queue;
+mod plant_lifecycle;
+mod player_creation;
 
 /// Helpers whose evidence is restricted to the supplied CD analysis candidate.
 pub mod cd_candidate {
+    pub use crate::player_creation::{plan_player_actor_creation, actor_category_is_enabled,
+        family2_ordinary_update_is_suppressed, ActorBlueprintCandidate, ActorAllocationRequest,
+        ActorCreationAttempt, PlayerActorCreationPlan, PlayerCreationError,
+        PLAYER_BLUEPRINT_CAPACITY, PLAYER_ACTOR_SLOTS, FAMILY2_ACTOR_TYPE};
+    pub use crate::plant_lifecycle::{advance_plant_schedule_cursor, plan_family1_plant_schedule,
+        plan_first_counter_plant_update, PlantScheduleSlot, PlantCallbackState, PlantSchedulePlan,
+        FirstCounterPlantInput, FirstCounterPlantPlan, FirstCounterPhase, PendingPlantCleanup,
+        PlantLifecycleError, PLANT_SLOT_LIMIT, FAMILY1_PLANT_TYPE};
     pub use crate::entity_draw_queue::{queue_family1, family1_draw_packet, family1_admission_packet,
         ProjectedFamily1, QueuedFamily1, Family1Queue, QueueError, DrawPacket,
         AdmissionPacketInput, AdmissionPacket, FAMILY1_QUEUE_CAPACITY};

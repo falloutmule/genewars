@@ -1,13 +1,13 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T09:39:13.307644+00:00",
-  "binary_sha256": "173b62340923f6ab8231217b536f6fe2fc1d8429fed10e33d54e1b38e773498b",
+  "checked_utc": "2026-10-13T10:12:25.346069+00:00",
+  "binary_sha256": "6e9c4a215ff4bb776f55a33eef50cda4f1e5fa3c5d6533c63c67f3ec850eb8eb",
   "cells": 28,
   "cases": 84,
   "rendered_frames": 84,
   "rgb_pixels_compared": 25804800,
   "input_rejections": 3,
-  "outputs": "private/integration/terrain-cells/65e1e962490b49688ad367f73dc4d8a3",
+  "outputs": "private/integration/terrain-cells/08c258efc487440a8427908cea2e04b9",
   "records": [
     {
       "cell": [

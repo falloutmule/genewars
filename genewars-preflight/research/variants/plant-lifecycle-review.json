@@ -1,0 +1,218 @@
+{
+  "status": "passed-independent-native-plant-lifecycle-review",
+  "utc": "2026-10-13T10:14:05.128132+00:00",
+  "original_execution": false,
+  "source": {
+    "path": "rust/crates/genewars-core/src/plant_lifecycle.rs",
+    "size": 22946,
+    "sha256": "b9d38a54ec0dbaebbf86d3c27fed5933ba586cdb381904fbf302df9c5e8d2ac9"
+  },
+  "evidence": {
+    "path": "research/ghidra/plant-startup-evidence.json",
+    "size": 18436,
+    "sha256": "5b8930db2a6becd1f3ed468da0fbd411c7ae4f0778689151f0719d103f8df9bb"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/entity-order/instructions-0002bbe0.txt",
+      "size": 9461,
+      "sha256": "22f6962e80bfdcbb6dd4c8b03adb98963b3dd4f4d87d213f0961381d81835283"
+    },
+    {
+      "path": "private/ghidra/module-transition-refs/instructions-0001bbc0.txt",
+      "size": 3633,
+      "sha256": "0fb22c2e71579e6128d50664eb5f40c886a0ed3e327b19b9f0fdfed330db28fb"
+    },
+    {
+      "path": "private/ghidra/terrain-camera-refs/instructions-0007d090.txt",
+      "size": 14585,
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    },
+    {
+      "path": "private/ghidra/camera-player-input/instructions-00072ad0.txt",
+      "size": 2192,
+      "sha256": "b3b313e20205eb57066681414db877493563bd8990149334125f06210936386b"
+    },
+    {
+      "path": "private/ghidra/camera-player-input/instructions-00072960.txt",
+      "size": 3288,
+      "sha256": "17166cfd793ae862a3b99a5b904c6940bf7ac2a18a8d94b5a2505a31d7777b1f"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-0006c690.txt",
+      "size": 224,
+      "sha256": "2031cd548ca5fbda011cefd4ea96748d54fcc5f73a1c7f86db18e45ab791b624"
+    },
+    {
+      "path": "private/ghidra/entity-order-refs/instructions-0006d0b0.txt",
+      "size": 2676,
+      "sha256": "5d247a6771c89370366d39bca5bd24483a9222796b32e360b957d512ed7857ba"
+    },
+    {
+      "path": "private/ghidra/entity-order/instructions-0006ca90.txt",
+      "size": 11964,
+      "sha256": "056c0c9a3cfab3cc4cfbfb15851895551fa672bb546f1e5f459f7a258315769b"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-0008b300.txt",
+      "size": 535,
+      "sha256": "c78190a37b0270c2630299f25a91250520aa297fcf640cf649ffd7d023fcc087"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-0008b6f0.txt",
+      "size": 803,
+      "sha256": "7cc6dbbfebd6aaa55d68e45bc239249d42846f439f8dab72d05d375555a44adf"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-0001ebd0.txt",
+      "size": 98,
+      "sha256": "9f0e86fefaa3c2fc11a9cf4f29e8d3ce4a0724b82b959d21b404b3ea9fd64588"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-0008b520.txt",
+      "size": 3772,
+      "sha256": "37342106bfbee451f816f38ffbd92903d81b06fd534da2f6031e26c1be840e49"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0006d390.txt",
+      "size": 1863,
+      "sha256": "7f1c49974e62a52382eed53b9dcfa8dcc53b0727c9fdd2a626d57009a8376548"
+    },
+    {
+      "path": "private/ghidra/display-geometry/instructions-0006c780.txt",
+      "size": 3278,
+      "sha256": "462f1d606d4212d724b783dfe542df7cc6f8ea322cfd77e218ec26b72fc957d8"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008acc0.txt",
+      "size": 3120,
+      "sha256": "9e7e750030468985e9d1ed7ae836f8b8ee7606b4b0b51f1fc02345750f8ccb1e"
+    },
+    {
+      "path": "private/ghidra/panel-activation-refs/instructions-000724c0.txt",
+      "size": 9945,
+      "sha256": "588fd5fdf44fabe33a7e1f1df7c5cf5ab66edaf91f18cad6892015f252b47375"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-000409f0.txt",
+      "size": 360,
+      "sha256": "a1a7d26d1931c802d72a5256a29c491208cde9651cd40d6b785a07043dffad55"
+    },
+    {
+      "path": "private/ghidra/plant-startup/audio-shared-tail.txt",
+      "size": 69,
+      "sha256": "79e756dff496d72dd8a16c951128103d452fdbb5dfef43b96831d5817796111d"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-0002c200.txt",
+      "size": 835,
+      "sha256": "0f6ced29d379bd244077afc2da06c80886c6189d34dcb7317b7f170b5413354d"
+    }
+  ],
+  "update_cases": 820224,
+  "rejected_updates": 33910,
+  "phase_counts": {
+    "grow": 295688,
+    "delayed_retirement": 321300,
+    "retired": 169326
+  },
+  "schedule_cases": 73744,
+  "rejected_schedules": 65542,
+  "callback_requests": 5837,
+  "queued_index_receipts": 1563246,
+  "actual_loaded_plants": 40,
+  "actual_remaining_plants": 38,
+  "actual_metadata": [
+    {
+      "record": 8,
+      "neighbors": 7,
+      "terrain_class": 3,
+      "growth_delta": -1,
+      "plan": [
+        2,
+        0,
+        4,
+        4,
+        6,
+        0,
+        0,
+        128,
+        1,
+        3,
+        3,
+        39,
+        -1,
+        0,
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "record": 16,
+      "neighbors": 5,
+      "terrain_class": 3,
+      "growth_delta": 3,
+      "plan": [
+        2,
+        0,
+        4,
+        4,
+        6,
+        0,
+        0,
+        128,
+        1,
+        3,
+        3,
+        38,
+        -1,
+        0,
+        1,
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "source_mission": {
+    "path": "private/reference-run/run-004/drive-c/GAME/LEVELS/CONQ001.DAT",
+    "size": 343958,
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  },
+  "fixture": {
+    "path": "private/ghidra/plant-startup/first-scheduled-fixture.json",
+    "size": 1044,
+    "sha256": "405f649cc2645c18fec92ee0eae2cf26d314acf517cdcbe6e6257045bbd05618"
+  },
+  "native_output_sha256": "41a3c8b56ec3f47421f6971392ab8d97d1809e9b79a445b61d09b38d8d910bd6",
+  "review_sources": [
+    {
+      "path": "research/variants/plant-lifecycle-review.py",
+      "size": 11247,
+      "sha256": "4c15a22a2ac9a4f6dcd56d6633ce474a226368edeb4a162947527191560cc45d"
+    },
+    {
+      "path": "research/variants/plant-lifecycle-review.rs",
+      "size": 3175,
+      "sha256": "d5e01c280337fcb8987754747065c743d8a150f380cb1a22fd61d373e87233e5"
+    }
+  ],
+  "native_harness": {
+    "path": "private/review/plant-lifecycle/review.exe",
+    "size": 5098794,
+    "sha256": "d27f3455a03f6a29bea21ad007d31516071ac0fb373f90ef5620ed5abaf1fec4"
+  },
+  "resolved_findings": [
+    "Growmustpreserveoldnative30; fixedbyexplicitoldcountdowninput/regression",
+    "Solsourcefixtureduplicatehashkey fixedsource_sha256/fixture_sha256"
+  ],
+  "limits": [
+    "Explicit freshcounter/flags/neighbors/resourceparameters only; no wholemissiontick",
+    "Otherfamilies/actorcreation/shade-refresh finalmap state external",
+    "Cleanupmetadata are requests, not executedworld/UI/audio changes",
+    "Oldframecurrentview gate suppliedexplicitly; original narrowsprojectionwords beforebounds",
+    "Creationsecondpass pendingwhencreatedcountnonzero; nospawning/RNGimplementation"
+  ]
+}

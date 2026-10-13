@@ -1,0 +1,120 @@
+{
+  "status": "passed-existing-native-snapshot-wiring-review",
+  "utc": "2026-10-13T10:11:21.947009+00:00",
+  "checker_gui_execution": false,
+  "checker_original_execution": false,
+  "public_evidence": {
+    "path": "research/integration/plant-snapshot-window.json",
+    "size": 5430,
+    "sha256": "dd9a3b93c4df52ba99ec3caf26f6b81ad3311178a808f3526501f5ba72872749"
+  },
+  "private_evidence": {
+    "path": "private/integration/plant-snapshot-window/83896b651f09473fb96a0acf5f1c5af4/receipt.json",
+    "size": 11088,
+    "sha256": "b4a4a4a44db92fc7267f6ae301153a39eaf22180808c095e30f40dd83075ce49"
+  },
+  "source_pins": [
+    {
+      "path": "rust/crates/genewars-render/src/plant_snapshot.rs",
+      "size": 4926,
+      "sha256": "af655a9e5bf7e4e2a3c37ba5a69845c17d8be9ddcd35d34023684200de68cb16",
+      "matches_saved": true
+    },
+    {
+      "path": "rust/crates/genewars-render/src/plant_scene.rs",
+      "size": 12557,
+      "sha256": "db39ede4866105f4fae6e893f4cc1649e3eebec938f82ddd5c6feeb744a7e759",
+      "matches_saved": true
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-terrain.rs",
+      "size": 34940,
+      "sha256": "5a43a9e71fc73f9da40784c35044f30da44d7436030dbf5d9d5a53591c008baf",
+      "matches_saved": true
+    },
+    {
+      "path": "rust/crates/genewars-core/src/entity_draw_queue.rs",
+      "size": 12711,
+      "sha256": "b80d62724db689da242800705edfb34319bed786ac9ed91be1d4ffac7f203215",
+      "matches_saved": true
+    },
+    {
+      "path": "rust/crates/genewars-tools/src/plant_scene.rs",
+      "size": 4891,
+      "sha256": "b566a7442f5185991a7d8ade6c7d610edc6a580c0b1bef46ac8ce64ef1f924b2",
+      "matches_saved": true
+    }
+  ],
+  "private_receipt_records_code_pins": false,
+  "recorded_native_cases": 6,
+  "recorded_rejections": 3,
+  "comparisons": [
+    {
+      "case": "overlap-forward",
+      "native_report_sha256": "e83e8b134b6f35bec2bccbbf5aba7de09c4d2c83b231ba51b9f96b6982e76eb3",
+      "crc16": 28028,
+      "queue_order": [
+        101,
+        100
+      ]
+    },
+    {
+      "case": "overlap-reverse",
+      "native_report_sha256": "a74c7b41f538ae6ccf38cd318f8c880bf34db4e1d60ad03057067f82d4ad097e",
+      "crc16": 52649,
+      "queue_order": [
+        100,
+        101
+      ]
+    },
+    {
+      "case": "edges-capacity",
+      "native_report_sha256": "affe274847d5b9d395b902bafcd1853c4fbf8b0e39c1c5ddee2bc49fa5ace1bd",
+      "crc16": 37676,
+      "queue_order": [
+        200,
+        201
+      ]
+    },
+    {
+      "case": "gate-open-mode-zero",
+      "native_report_sha256": "4356dc294c53e687ce92bad04883c3ec833810686416700d0be4255e87e7e8f0",
+      "crc16": 37676,
+      "queue_order": [
+        302,
+        301,
+        300
+      ]
+    },
+    {
+      "case": "gate-closed",
+      "native_report_sha256": "be501df233de4344a635925e2001a96d7f4e9f67ef7beac1860c149082fa7c1b",
+      "crc16": 37676,
+      "queue_order": [
+        302,
+        301,
+        300
+      ]
+    },
+    {
+      "case": "unsupported-context-skipped",
+      "native_report_sha256": "d4098664b2accbd915ca043a98c129608de27a6308c1bb214988b63c8b486de8",
+      "crc16": 37676,
+      "queue_order": [
+        503
+      ]
+    }
+  ],
+  "independent_scene_pixel_review": {
+    "path": "research/variants/plant-scene-review.json",
+    "size": 3294,
+    "sha256": "e17e7041019ca814bb5fe60274cd12ed589edfe7b8863f4314215e2e295d85e8"
+  },
+  "limits": [
+    "Native evidence was inspected, not newly executed by this reviewer",
+    "Public source pins match current production; old private receipt lacks code pins, so public summary alone does not establish historical source capture",
+    "Native outputs are CRC16 and receipts; no native rawframebuffer or cryptographic pixel equality claimed",
+    "Independent fullpixel comparison covers shared headless scene and tools adapter; current native source uses same APIs",
+    "Scene snapshot queue is fixed at load and drawn on host camera/map diagnostic refresh; no live projection/callback or original cadence claim"
+  ]
+}

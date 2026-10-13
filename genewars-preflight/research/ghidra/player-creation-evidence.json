@@ -1,0 +1,603 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-0007d090.txt",
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0007f580.txt",
+      "sha256": "456bf6a90497272367895c99d36f9e8e8a1c37fac1690388a0e6343667e9d305"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0007fad0.txt",
+      "sha256": "03967b02b2b15b977b81d3603bc886579c1db4427381ed65548e384e15d4833a"
+    },
+    {
+      "private_path": "private/ghidra/font-text/instructions-0001d770.txt",
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    },
+    {
+      "private_path": "private/ghidra/mission-target-refs/instructions-000801c0.txt",
+      "sha256": "7ed3b8931a9da7fdd2be47a09f41b1b06dfb27c77c4fdf9ed604fe1885e0b4c0"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-00081310.txt",
+      "sha256": "334513c94d81fe315e276971e213dbbbb87f9cbfa88e0afc296b679528e65a3f"
+    },
+    {
+      "private_path": "private/ghidra/mission-array-refs/instructions-00081300.txt",
+      "sha256": "6a84a63418f260901cd6677b22e4532860becbf4340bac74053bd8963d9cc935"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0004fd30.txt",
+      "sha256": "0dfb420cafd52d6ebcf41de7e02299cf23938381f95ffc1ca1efaa0b91a29b60"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-00013eb0.txt",
+      "sha256": "f39a85cec1eeaf8c6471d4ca65ab9fd26f3f093cafec3efae15cbe694d2c656c"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0001f480.txt",
+      "sha256": "77d8ec6d64004960b0bb970a66612c76b1ffe3cfcfd4b949f8174e5662441744"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00080830.txt",
+      "sha256": "e9fda91b7c0fe5071443cf03bb73cd028996fdc32e7273e1a10f389d114c6973"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-00056e20.txt",
+      "sha256": "ea9f9732b2e32af849a86de57a4a416a565f2fe4c6809fed6587fc0dcc99baa0"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-00057a10.txt",
+      "sha256": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a"
+    },
+    {
+      "private_path": "private/ghidra/entity-shadow-panel/instructions-0007f3b0.txt",
+      "sha256": "6c128d79d263a395544aef8a99cac717c4b43bcebaf9271d742d4c1dfcff2034"
+    },
+    {
+      "private_path": "private/ghidra/mission-array-refs/instructions-00048790.txt",
+      "sha256": "840113f32e4845215dc107850ae4cf6218cd5558af2f2dbd1aae632654da533d"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0001f070.txt",
+      "sha256": "b890bd05c1566c3755c4a62dad58a937ee98d0119013e6f6fe11ef59b84f79c3"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-00049e90.txt",
+      "sha256": "55e976eb9c620d3cd6996d5dfd810532c8ca5c0a93fcb4a34239744049f9e001"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0001e810.txt",
+      "sha256": "7a30b56a1ffc4b24228dcebdc978fc38c5c5f73757cdcf7727e38ee778a42c2f"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-0005a850.txt",
+      "sha256": "e264758a9f7059194b9eecd159732595833af28f16764ef484be1a11f7216a50"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-0005a1c0.txt",
+      "sha256": "02f55f81e196715d686d5427c1475d280f0e4fbf13499355dd7974c629d989b9"
+    },
+    {
+      "private_path": "private/ghidra/mission-array-refs/instructions-0006a540.txt",
+      "sha256": "d947fde62e1f4a044d4c74953d8c95a1b25b0e4144fd43f64a1d148f4b5cca1b"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0001ec50.txt",
+      "sha256": "ed1420b97321186a1b7c3146ab315649a872bab54a0fc63686a6aad4e4f677ce"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0005ed20.txt",
+      "sha256": "ea29b165354042aaf33dc630322d89b577810f96c2ece1f8998799512e2feed0"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0006fb60.txt",
+      "sha256": "b373e98528fde4ef720bf0b529edbca889efb97bec713ac4d7fe184c868fb736"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0005eb30.txt",
+      "sha256": "2cf7510ee5298d221c299b11244f72adf6ce5831c7aedcb39d3e91e6cacb53ec"
+    },
+    {
+      "private_path": "private/ghidra/player-creation/instructions-0005e640.txt",
+      "sha256": "cbcd47d0c677749cbcf9adb928ef968ec6f8c0d4a399e2956dd39c13f2626239"
+    },
+    {
+      "private_path": "private/ghidra/mission-array-refs/instructions-00058780.txt",
+      "sha256": "e7f66d33d468912942e86f875cf4d9e1d0157ce8671a911104b8cb9ad6fcb623"
+    },
+    {
+      "private_path": "private/ghidra/mission-array-refs/instructions-00047f80.txt",
+      "sha256": "bae7d9800c80bce7b1419e5b7a2193b1f934b5080dd30285c7a2a15b50a2a4e4"
+    },
+    {
+      "private_path": "private/ghidra/entity-order-refs/instructions-0001c120.txt",
+      "sha256": "fd6d61b6f562770b3e34fe65b6fa6ecb9c700ae7aaaa3876f3826e3285670255"
+    }
+  ],
+  "mapped_tables": [
+    {
+      "va": "0x801a4",
+      "length": 16,
+      "sha256": "0bf6ab9747915ab4599fb438466c51cdbd6a5a3182bca05a606e4bfb24645025",
+      "targets": [
+        "0x801dc",
+        "0x80207",
+        "0x80273",
+        "0x80241"
+      ]
+    },
+    {
+      "va": "0x48738",
+      "length": 4,
+      "sha256": "4bc6ca30304e0ddff0c8bab5dbeeca527e4deec3a822a2d28e2e3ad01db02422",
+      "targets": [
+        "0x48c77"
+      ]
+    },
+    {
+      "va": "0x1121f8",
+      "length": 4,
+      "sha256": "f0f7fc78798206b05ba9e686172dbcd413864bdc2911b29229a5469ababbeb17",
+      "target": "0x57a10"
+    },
+    {
+      "va": "0x112050",
+      "length": 4,
+      "sha256": "2345b54047d3cabce7de3dc52ac0bf624e382641082e6cd9b5b1546517aa4c18",
+      "target": "0x5ed20"
+    },
+    {
+      "va": "0x112054",
+      "length": 4,
+      "sha256": "a28c9daa742f24757beeb8616761bdede1f6ed5a978da8d223aa2d7827a5bc54",
+      "target": "0x1ec50"
+    },
+    {
+      "va": "0x112080",
+      "length": 4,
+      "sha256": "9c36f5e64fad95600f155eb1a93a0e5c53459235c4188db4005fa1fea712419a",
+      "target": "0x6fb60"
+    },
+    {
+      "va": "0x1122cc",
+      "length": 4,
+      "sha256": "e162f9d9ef909a4ef666e98313da59ef92d9a0d5341f2110008c71a5cf06d06d",
+      "target": "0x1f070"
+    },
+    {
+      "va": "0x112298",
+      "length": 4,
+      "sha256": "f603b8504f1b3a9287e55c08f8031884abf64ae86fde2b2215878763b5ab75df",
+      "target": "0x1e810"
+    }
+  ],
+  "scope": "Pure blueprint category selection, first-free actor-slot requests and suppressed actor-update gate. No AI, audio, pointers, live first-frame or complete world initialization claim.",
+  "source": {
+    "entry_id": "root/2/disc/152",
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+    "mask_source_offset": "0x1EBD",
+    "mask_u8": 5,
+    "special_branch_dword_source_offset": "0x1EC2",
+    "special_branch_dword": 0,
+    "world_auxiliary_source_count_at34B8": 0,
+    "loaded_active_family_counts": [
+      1,
+      40,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "names_prerequisite": {
+    "entry_id": "root/2/disc/592",
+    "sha256": "23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786",
+    "first128_nonempty_unique": true,
+    "maximum_name_bytes": 8,
+    "scope": "Metadata generation needs initialized TEXT pointers; names remain private. RNG/style/skill/name choices are not emulated."
+  },
+  "selection_contract": {
+    "record_count": 32,
+    "record_stride": 36,
+    "player_relative_base": "0x16",
+    "active_u8_offset": 0,
+    "category_u8_offset": "0x16",
+    "record_flags_u32_offset": "0x20",
+    "categories": {
+      "0": {
+        "mask": 1
+      },
+      "1": {
+        "mask": 2,
+        "campaign_min_progress": 1
+      },
+      "2": {
+        "mask": 4
+      },
+      "3": {
+        "mask": 8,
+        "campaign_min_progress": 4
+      }
+    },
+    "progress": "signed i8 at player+0x6E7",
+    "quota": "at most one attempt/category; quota consumed before allocation even on failure",
+    "target_reset": "After selection, player+9 receives separate target table11A9DE[unsigned player+1]."
+  },
+  "allocation_contract": {
+    "player": "safe0..3",
+    "family": 2,
+    "base_va": "0x16360E",
+    "player_partition_bytes": 1000,
+    "slots_per_player": 5,
+    "native_stride": 200,
+    "global_slot_id": "player*5+local_slot",
+    "selection": "first active byte+6 equal0 in ascending local slot order; no slot returns AL0 without changes",
+    "success": "Blueprint byte+0x20 OR1; 4FD30 sets active3/owner/player-ID/resource metadata pointer. Append lowbyte global ID to player+4+signed oldcount and byte-increment player+3. Safe plan admits count0..5 and checks list capacity on each successful free-slot allocation. It does not require count to equal occupied slots; inconsistent counts are accepted when no append overflows."
+  },
+  "new_actor_fields": {
+    "active_type_u8": 3,
+    "owner_u8": "player",
+    "id_u16": "player*5+local_slot",
+    "blueprint_index_u8_at74": "selected index0..31",
+    "flags15_u16_after_4FD30": "0x0280",
+    "flags70_u16_after_4FD30": "0x0000",
+    "after_80830": {
+      "position_at7": "player+9 explicit target",
+      "flags16_or": 8,
+      "flags71_or": 4,
+      "animation19": 8,
+      "frame1b": 0,
+      "counter1d": 0,
+      "state1c": 1,
+      "flags15_u16": "0x0A80",
+      "flags70_u16": "0x0400"
+    },
+    "runtime_initializer": "56E20 binds resource using blueprint style+15/category+16, clears native94..C0 and populates runtime pointers; source bytes do not encode these pointers."
+  },
+  "actor_update_gate": {
+    "entry": "0x57A10",
+    "flag": "native byte+0x70 mask01",
+    "clear": "Direct jump5876F, return AL0, no mutation/callback/queue request",
+    "set": "Full update unresolved; do not approximate",
+    "ordinary_dispatch": "58780 uses signed player+3 count and signed byte IDs player+4 onward, calling virtual+64 in stored order. Safe IDs must belong to valid20-slot array."
+  },
+  "generated_metadata_contract": "7F580 clears32 active-name bytes and count, then four category loops with five records each.7FAD0 writes category+16 from outer index, style+15 from RNG modulo4, and selects an unused name among32 per style. With initialized hash-bound nonempty/unique names it creates20 records in category order0,1,2,3. This count/category statement does not specify random fields or copy unsafe strings.",
+  "initial_creation_gates": [
+    "Successful hash-bound CONQ001 load, single-player campaign, selectedplayer0, retained player+2=0 and signed progress0, player+3=0, initialized TEXT/name pointers, inactive five family2slots. Selected-player restoration preserves prior state, so these runtime gates are not inferred from raw player bytes alone.",
+    "Under those gates metadata category selection attempts0,10 and creates family2 IDs0,1.80830 with EDX=-1 and special dword11AC22=0 calls7F3B0, requesting factorycode31 at separate target81,53."
+  ],
+  "initial_creation_plan": {
+    "attempts": [
+      0,
+      10
+    ],
+    "created": [
+      {
+        "blueprint_index": 0,
+        "local_slot": 0,
+        "global_slot_id": 0,
+        "player_list_offset": 4,
+        "blueprint_flags20_or": 1
+      },
+      {
+        "blueprint_index": 10,
+        "local_slot": 1,
+        "global_slot_id": 1,
+        "player_list_offset": 5,
+        "blueprint_flags20_or": 1
+      }
+    ],
+    "player_count_after": 2,
+    "slot_types_after": [
+      3,
+      3,
+      0,
+      0,
+      0
+    ]
+  },
+  "family4_factory_request": {
+    "entry": "0x7F3B0",
+    "factory": "0x48790",
+    "object_code_u8": "0x31",
+    "numeric_family": 4,
+    "native_type_byte": 5,
+    "native_base_va": "0x1688AE",
+    "stride": 81,
+    "capacity": 200,
+    "position": "player+9 when11AC22=0",
+    "arguments": "height helper+0x6400, anglewords0/0x400/0x440, ownerplayer, remainingargszero",
+    "effects": "Factory increments family4 count; binds resource116818+10*0x31; successful reference saved toplayer+0x496/+0x498. Selectedowner requests reveal75B00(4096). Virtual44 is audio request1E810\u2192417E0, retained external effect. Full pool replacement behavior is excluded."
+  },
+  "family0_loaded_contract": {
+    "file_base": "0x3B55E",
+    "packed_stride": 116,
+    "native_base_va": "0x1542BE",
+    "native_stride": 124,
+    "capacity": 300,
+    "active_count": 1,
+    "active_index": 0,
+    "type_u8": 1,
+    "flags15_u8": 128,
+    "owner_u8": 4,
+    "state5e_u8": 8,
+    "resource_selector7a_i8": 4,
+    "initialization": "5A850 copies header31/payload85 around runtime pointers, then calls5A1C0.5A1C0 binds180E84[signed selector], with fallback table104A64, and does not create player actors or change the loaded count."
+  },
+  "preceding_update_boundary": "Ordinary1C120 requires118770mask04 set and118968mask02 clear; dispatches58780 family2,47F80 family3/playerbookkeeping,6A540 family0,6D0B0 plants, then other families includingfamily4.6A540 bounds its primary scan to300slots, skips inactive/flags15mask01, consumes one signedremainingcount per virtual64 call. Its creation pass can invoke marked newborn records without an array-end guard.5ED20 firstcalls6FB60 virtual94 before parity gating;6FB60 and5EB30/5E640 contain transitive AI/physics/target callbacks. Full preceding effects remain explicit unknown inputs; do not assume the loaded plant neighborhood survives them.",
+  "capacity_boundary": "Created family2 actors gate-suppress themselves whilebyte70mask01 clear. Family4 is updated after plants on ordinary route. The sole loaded family0 object can request queue admission beforeplants, but family3/playerbookkeeping and fullfamily0 callbacks remain unresolved creation/mutation boundaries. Hence no universal priorqueuecount1/3/4 or livepopulation44 claim. An explicit prioracceptedqueuecount<=216 stillguarantees40plant slots under existing256entry queue contract.",
+  "eligibility_cases": 524288,
+  "allocation_cases": 4096,
+  "actor_gate_cases": 256,
+  "vectors": [
+    {
+      "categories": [
+        0,
+        0,
+        1,
+        2,
+        3
+      ],
+      "mask_u8": 15,
+      "progress_i8": 0,
+      "campaign": true,
+      "player": 0,
+      "slots": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "old_count": 0,
+      "result": {
+        "attempts": [
+          0,
+          3
+        ],
+        "created": [
+          {
+            "blueprint_index": 0,
+            "local_slot": 0,
+            "global_slot_id": 0,
+            "player_list_offset": 4,
+            "blueprint_flags20_or": 1
+          },
+          {
+            "blueprint_index": 3,
+            "local_slot": 1,
+            "global_slot_id": 1,
+            "player_list_offset": 5,
+            "blueprint_flags20_or": 1
+          }
+        ],
+        "player_count_after": 2,
+        "slot_types_after": [
+          3,
+          3,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "categories": [
+        3,
+        2,
+        1,
+        0,
+        2
+      ],
+      "mask_u8": 15,
+      "progress_i8": 4,
+      "campaign": true,
+      "player": 0,
+      "slots": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "old_count": 0,
+      "result": {
+        "attempts": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "created": [
+          {
+            "blueprint_index": 0,
+            "local_slot": 0,
+            "global_slot_id": 0,
+            "player_list_offset": 4,
+            "blueprint_flags20_or": 1
+          },
+          {
+            "blueprint_index": 1,
+            "local_slot": 1,
+            "global_slot_id": 1,
+            "player_list_offset": 5,
+            "blueprint_flags20_or": 1
+          },
+          {
+            "blueprint_index": 2,
+            "local_slot": 2,
+            "global_slot_id": 2,
+            "player_list_offset": 6,
+            "blueprint_flags20_or": 1
+          },
+          {
+            "blueprint_index": 3,
+            "local_slot": 3,
+            "global_slot_id": 3,
+            "player_list_offset": 7,
+            "blueprint_flags20_or": 1
+          }
+        ],
+        "player_count_after": 4,
+        "slot_types_after": [
+          3,
+          3,
+          3,
+          3,
+          0
+        ]
+      }
+    },
+    {
+      "categories": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "mask_u8": 5,
+      "progress_i8": 0,
+      "campaign": true,
+      "player": 0,
+      "slots": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "old_count": 5,
+      "result": {
+        "attempts": [
+          0,
+          2
+        ],
+        "created": [],
+        "player_count_after": 5,
+        "slot_types_after": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      }
+    },
+    {
+      "categories": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "mask_u8": 15,
+      "progress_i8": -128,
+      "campaign": false,
+      "player": 0,
+      "slots": [
+        0,
+        3,
+        0,
+        3,
+        0
+      ],
+      "old_count": 2,
+      "result": {
+        "attempts": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "created": [
+          {
+            "blueprint_index": 0,
+            "local_slot": 0,
+            "global_slot_id": 0,
+            "player_list_offset": 6,
+            "blueprint_flags20_or": 1
+          },
+          {
+            "blueprint_index": 1,
+            "local_slot": 2,
+            "global_slot_id": 2,
+            "player_list_offset": 7,
+            "blueprint_flags20_or": 1
+          },
+          {
+            "blueprint_index": 2,
+            "local_slot": 4,
+            "global_slot_id": 4,
+            "player_list_offset": 8,
+            "blueprint_flags20_or": 1
+          }
+        ],
+        "player_count_after": 5,
+        "slot_types_after": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      }
+    },
+    {
+      "categories": [
+        255,
+        3,
+        1,
+        2,
+        0
+      ],
+      "mask_u8": 255,
+      "progress_i8": -1,
+      "campaign": true,
+      "player": 0,
+      "slots": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "old_count": 0,
+      "result": {
+        "attempts": [
+          3,
+          4
+        ],
+        "created": [
+          {
+            "blueprint_index": 3,
+            "local_slot": 0,
+            "global_slot_id": 0,
+            "player_list_offset": 4,
+            "blueprint_flags20_or": 1
+          },
+          {
+            "blueprint_index": 4,
+            "local_slot": 1,
+            "global_slot_id": 1,
+            "player_list_offset": 5,
+            "blueprint_flags20_or": 1
+          }
+        ],
+        "player_count_after": 2,
+        "slot_types_after": [
+          3,
+          3,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ]
+}

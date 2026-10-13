@@ -8,9 +8,11 @@ pub mod entity_shadow;
 pub mod plant;
 pub mod plant_draw;
 pub mod plant_scene;
+pub mod plant_snapshot;
 pub use plant::{PlantColorInputs, PlantColorRoute, PlantFrame, PlantFrameComponentRef, PlantFrameDrawReceipt, PlantRenderError, PlantShadowStatus};
 pub use plant_draw::{draw_normal_plant, PlantDrawError, PlantDrawReceipt};
 pub use plant_scene::{draw_explicit_family1_scene, PlantSceneError, PlantSceneReceipt, PlantSceneRecord, PlantSceneRecordReceipt, PlantSceneRecordStatus};
+pub use plant_snapshot::{PlantSceneSnapshot, PlantSnapshotRecord};
 
 use genewars_assets::{AnbSections, FontResource, IndexedSprite, Palette256, PaletteChannelMode, SpriteTable, Error as AssetError};
 use std::fmt;

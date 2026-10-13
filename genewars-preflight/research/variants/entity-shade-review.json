@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-entity-shade-review",
-  "checked_utc": "2026-10-13T09:40:30.524579+00:00",
+  "checked_utc": "2026-10-13T10:13:43.122996+00:00",
   "original_or_gui_execution": false,
   "actual_coordinates": 475136,
   "synthetic_fraction_cases": 1310720,
@@ -80,7 +80,7 @@
   "evidence": {
     "path": "research/integration/entity-shade-contract.json",
     "size": 988,
-    "sha256": "a51f2ac0133fa97b66ac11899175f1b052cb3b97506cddc4104f5ca0e3cce5e7"
+    "sha256": "cb41533f7b9be3d75b3e828b5dd8f40240faf6cdf498bcdab968d35ff63aec86"
   },
   "listing": {
     "path": "private/ghidra/camera-player-input/instructions-0007b240.txt",
@@ -94,8 +94,8 @@
   },
   "harness": {
     "path": "private/review/entity-shade/review.exe",
-    "size": 5101140,
-    "sha256": "07d6853f9295638488b3b047f6d2806b4aea46befede8490179f6a2fa056bf73"
+    "size": 5111758,
+    "sha256": "c6d31dc2346f0dcba4e9a8f94134d6037b19bd496f87742b814be4a7f69cc05d"
   },
   "review_sources": [
     {

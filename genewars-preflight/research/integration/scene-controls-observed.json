@@ -1,0 +1,75 @@
+{
+  "status": "passed-recorded-native-scene-controls",
+  "checked_utc": "2026-10-13T10:14:36.090419+00:00",
+  "original_execution": false,
+  "input_replayed_by_checker": false,
+  "observed_inputs": [
+    "Right",
+    "r",
+    "Left",
+    "r",
+    "Escape"
+  ],
+  "observed_behavior": "Terrain target moved; raw policy hid terrain; explicit plant positions stayed fixed; raised policy restored view; Escape closed window.",
+  "supervised_binary_sha256": "5571390d4789f5fc3cff158573a5f55de770b1b7e95d1ed08df25e4ef129db0c",
+  "presented_frames": 5,
+  "final_rgb_crc16": 41527,
+  "queue_order": [
+    29,
+    34,
+    35,
+    30,
+    33,
+    31,
+    32
+  ],
+  "rejected_metadata_mutations": 4,
+  "evidence": [
+    {
+      "path": "private/integration/plant-scene-example/b933f14ea57b40d7bd31d6046b62d4af/supervised-launch.json",
+      "bytes": 1204,
+      "sha256": "2fe60054beab55c2e7346cb45647ce317db0ec6ca6089e71fb8deee0964ada89"
+    },
+    {
+      "path": "private/integration/plant-scene-example/b933f14ea57b40d7bd31d6046b62d4af/supervised-process.json",
+      "bytes": 1342,
+      "sha256": "9a003051a7ed7e8a8f7e18be61e0ae680719f57cb6dbc5b423d363ea61acc2b5"
+    },
+    {
+      "path": "private/integration/plant-scene-example/b933f14ea57b40d7bd31d6046b62d4af/supervised.json",
+      "bytes": 2502,
+      "sha256": "567c12286c0f19c0833f2d45cc8df51b30864f0d5666aa201e5ccb294132c048"
+    },
+    {
+      "path": "private/integration/plant-scene-example/b933f14ea57b40d7bd31d6046b62d4af/report.json",
+      "bytes": 5212,
+      "sha256": "6068a9c7aadad89392c18bfd30b07659f59da9cd7e4e66d99768e501a70a592f"
+    },
+    {
+      "path": "private/integration/plant-scene-example/b933f14ea57b40d7bd31d6046b62d4af/explicit.snapshot",
+      "bytes": 1188,
+      "sha256": "7ef87e4e0100dadff69f13c3132072b8f222b90ae5e617af53d0e4a7ad6e8a2b"
+    },
+    {
+      "path": "private/integration/plant-scene-example/b933f14ea57b40d7bd31d6046b62d4af/scene.bmp",
+      "bytes": 921654,
+      "sha256": "1d1a22888247e4009b1621b93debce53957510679363803c618b949b9870f60c"
+    },
+    {
+      "path": "private/integration/plant-scene-example/b933f14ea57b40d7bd31d6046b62d4af/native-initial.jpg",
+      "bytes": 32833,
+      "sha256": "76a476413ad88e736ac2b198a56a2ceef9ac0bed9e50224c2946d5f053df1cd1"
+    },
+    {
+      "path": "private/integration/plant-scene-example/b933f14ea57b40d7bd31d6046b62d4af/native-restored.jpg",
+      "bytes": 32857,
+      "sha256": "9352620e7817bd1f8d00f9fc217149bfbaf9406767c2d349db6761728eaeafad"
+    }
+  ],
+  "limits": [
+    "Historical input observation, not a new UI replay",
+    "CRC16 and draw receipts are not cryptographic framebuffer equivalence",
+    "Explicit screen-space plant snapshot remains fixed while terrain target changes",
+    "Window captures include the native host; no original game state or timing claim"
+  ]
+}

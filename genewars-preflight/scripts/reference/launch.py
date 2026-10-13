@@ -143,22 +143,22 @@ def main():
             raise SystemExit('Unexpected preexisting gate/marker: refusing launch.')
         yield_helper = None
         yield_proof = None
-        if SESSION in ('run-003','run-004','run-005'):
+        if SESSION in ('run-003','run-004','run-005','run-006'):
             from input_free_yield import CODE, verified_probe
             yield_proof = verified_probe(ROOT)
             helper = checked(RUN / 'drive-c/YIELD.COM', RUN)
             with helper.open('xb') as stream:
                 stream.write(CODE)
             yield_helper = file_record(helper)
-        batch = gate_batch(token, original=True, yielding=SESSION in ('run-003','run-004','run-005'))
+        batch = gate_batch(token, original=True, yielding=SESSION in ('run-003','run-004','run-005','run-006'))
         with checked(gate, RUN).open('xb') as stream:
             stream.write(batch)
         # Original GW stays behind the host marker. Run003 adds one read-only
         # query to prove its sole changed mouse setting in the startup log.
         startup_commands = commands[:5]
-        if SESSION in ('run-003','run-004','run-005'):
+        if SESSION in ('run-003','run-004','run-005','run-006'):
             startup_commands += ['CONFIG -GET sdl "mouse_emulation"']
-        if SESSION in ('run-004','run-005'):
+        if SESSION in ('run-004','run-005','run-006'):
             startup_commands += ['CONFIG -GET sdl "raw_mouse_input"']
         startup_commands += commands[5:7] + ['C:\\STARTGW.BAT']
         for dos_command in startup_commands:
@@ -186,25 +186,24 @@ def main():
         with stdout_path.open('xb') as out, stderr_path.open('xb') as err:
             process = subprocess.Popen(command, cwd=RUN, stdin=subprocess.DEVNULL,
                                        stdout=out, stderr=err, startupinfo=interactive_startup)
-        launch_record = {'pid': process.pid, 'launched_utc': datetime.now(timezone.utc).isoformat(),
+        timed_out = False
+        try:
+            launch_record = {'pid': process.pid, 'launched_utc': datetime.now(timezone.utc).isoformat(),
                          'executable': str(SDL2 / 'dosbox-x.exe'), 'command': command,
                          'cwd': str(RUN), 'original_autorun': False,
                          'approval_record': str(approval_path),
                          'stdout': str(stdout_path), 'stderr': str(stderr_path)}
-        launch_record['windows_show_window'] = 1
-        with checked(RUN / 'logs/launch-process.json', RUN).open('x', encoding='utf-8') as stream:
-            json.dump(launch_record, stream, indent=2)
-        gate_command = wrapper_command('gate')
-        print(json.dumps({'pid': process.pid, 'original_autorun': False,
+            launch_record['windows_show_window'] = 1
+            with checked(RUN / 'logs/launch-process.json', RUN).open('x', encoding='utf-8') as stream:
+                json.dump(launch_record, stream, indent=2)
+            gate_command = wrapper_command('gate')
+            print(json.dumps({'pid': process.pid, 'original_autorun': False,
                           'host_release_required': True,
                           'review_log': str(RUN / 'logs/dosbox-x.log'),
                           'inspect_gate': gate_command,
                           'release_after_review': gate_command+' --release-approved-original',
                           'abort': gate_command+' --abort'}), flush=True)
-        # Keep this parent alive: the execution host may terminate its job's
-        # children when the parent exits. exec_command can yield a live session.
-        timed_out = False
-        try:
+            # Keep this parent alive; cleanup also covers receipt/print failures.
             while process.poll() is None:
                 remaining = 1200 - (time.monotonic() - host_start)
                 if remaining <= 0:

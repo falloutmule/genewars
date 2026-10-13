@@ -1,6 +1,6 @@
 # Native terrain preview
 
-The renderer reconstructs terrain from the exact CD candidate's CONQ001, B32A, FADE and MAIN resources. It preserves the original strip traversal, triangle preparation and mode-specific sampling arithmetic. It can also inspect one selected source plant with its original foreground and shadow. It is not a playable mission: simulation commands, objectives, audio, save/reload and original timing are absent.
+The renderer reconstructs terrain from the exact CD candidate's CONQ001, B32A, FADE and MAIN resources. It preserves the original strip traversal, triangle preparation and mode-specific sampling arithmetic. It can inspect one selected source plant or an explicit multi-plant snapshot with foreground and shadow passes. It is not a playable mission: simulation commands, objectives, audio, save/reload and original timing are absent.
 
 From the project directory:
 
@@ -62,3 +62,13 @@ Use numeric values: ACTIVE/GATE are0 or1; INITIAL_COUNT0..256; MARGIN128; SLOT0.
 `python -B scripts/plant_scene_example.py` creates a fresh private snapshot and BMP with all40 raw source plants, source record order/frames, sampled shade after the radius4096 plan, and explicit gate1/mode1/count0. Seven plants pass the player0 view's queue rectangle. The script reports the exact output path. These choices are diagnostic: runtime shade refresh, scheduled removals/growth and other-family competition are separate work.
 
 `validate_mission_plant_scene.py` compares eight complete scene frames, ordering/capacity/gating and rejected output preservation. The independent native scene review covers5443 scenes,15469927 destination bytes, five strict snapshot frames and13 parser rejections. See `research/integration/mission-plant-scene.json` and `research/variants/plant-scene-review.json`.
+
+The native window accepts the same strict parser through the shared render API:
+
+```text
+private/build/rust-target/debug/genewars-terrain.exe private/integration/terrain-inputs --source-player 0 --policy raise4096 --layout initial-genepanl --plant-snapshot PATH_TO_EXPLICIT_SNAPSHOT --plant-resources private/integration/plant-inputs
+```
+
+Use the snapshot path printed by `plant_scene_example.py`. Snapshot mode cannot be combined with `--plant-record`; it requires the explicit panel layout and plant resources. The title labels it as an explicit snapshot. Coordinates, shade, flags and queue order are frozen screen-space inputs: arrow keys change the terrain target underneath them, and R changes terrain factors only. Plants do not move or resample shade as a live world would. These controls remain inspection operations.
+
+Six bounded native windows each presented two frames and matched CLI RGB CRC16, queue order and per-record drawing receipts. CLI BMPs matched complete pinned SHA-256 values. Native CRC16 comparisons are not raw framebuffer equality. Malformed snapshots, duplicate IDs and truncated queued resources failed before creating reports. `scripts/validate_plant_snapshot_window.py --run-window-smokes` reproduces these checks; its default mode does not open a valid scene window. A separate supervised Right/R/Left/R/Escape sequence restored the initial target/policy and CRC16 in five presentations, closing with exit0. See `plant-snapshot-window.json` and `scene-controls-observed.json` under `research/integration/`.

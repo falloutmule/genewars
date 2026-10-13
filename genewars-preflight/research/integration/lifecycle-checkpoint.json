@@ -1,0 +1,74 @@
+{
+  "recorded_utc": "2026-10-13T10:17:02.287812+00:00",
+  "status": "validated-component-checkpoint",
+  "full_gate_checks": 105,
+  "rust_tests": 195,
+  "private_files_checked_at_full_gate": 45351,
+  "source_archive_sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906",
+  "previous_checkpoint": "b562984",
+  "source_pins": [
+    {
+      "path": "research/integration/verification.json",
+      "bytes": 141510,
+      "sha256": "7fb4a247b20dd7b9ee334750d8ee4247429aee7258ef521b345d3722da1d953d"
+    },
+    {
+      "path": "research/integration/plant-snapshot-window.json",
+      "bytes": 5323,
+      "sha256": "c0365523db592219cabc1813078b4f41138201072191cee056a3292092f3a984"
+    },
+    {
+      "path": "research/integration/scene-controls-observed.json",
+      "bytes": 2913,
+      "sha256": "8b82b59cab30976f9555efb813b67d017667c1954014f07d1ff605d17921ff61"
+    },
+    {
+      "path": "research/variants/plant-lifecycle-review.json",
+      "bytes": 7074,
+      "sha256": "9b66acc2ecf148fb3cb808fd582485cea9901df6eacfd4d0f72510ba24f13f15"
+    },
+    {
+      "path": "research/variants/player-creation-review.json",
+      "bytes": 8449,
+      "sha256": "ef2b5cec152364fe9c01b152f3f8536228a75f9e6772045e55a336ba6fdf7f21"
+    },
+    {
+      "path": "research/variants/plant-scene-review.json",
+      "bytes": 3294,
+      "sha256": "a3398899b6bf36399b96543ba40c78a5c32dd469f00d149a8f325a06a4481d1d"
+    },
+    {
+      "path": "research/variants/reference-run-006-result.json",
+      "bytes": 9057,
+      "sha256": "812dabc04c530cc411ece57e6d83e3f0deaf654c501764729db75d4eb99c688d"
+    },
+    {
+      "path": "research/variants/reference-run-006-review.json",
+      "bytes": 1638,
+      "sha256": "a21251c1b84414c9d289795020c4d6aea7de4a0620b4addbcf3b57c3c275d062"
+    },
+    {
+      "path": "scripts/validate_scene_controls.py",
+      "bytes": 5406,
+      "sha256": "b7d97fe1b2ce334c3b3a0a90ec196fd39afd75160768bfd0ba9bc664aa83abe3"
+    },
+    {
+      "path": "scripts/validate_plant_snapshot_window.py",
+      "bytes": 15842,
+      "sha256": "5a63f50b22b76ce99491706f1efbcf8477e8ababb5fb645ccf43627f1a4b3364"
+    }
+  ],
+  "followup": "After its full-gate step, historical scene controls validator was strengthened to compare shared launch/process metadata and exact expected command paths/options. Targeted rerun passed four negative metadata mutations. Production unchanged after fullgate.",
+  "original_reference": {
+    "run": "run-006",
+    "closed": true,
+    "mission_observed": false,
+    "immutable_inputs_passed": true
+  },
+  "gameplay_complete": false,
+  "limitations": [
+    "Pure plant/actor plans do not apply complete world callbacks",
+    "Native screen-space snapshots are diagnostics, not live initial state",
+    "Original first mission/input/save/framebuffer/timing unconfirmed"
+  ]
+}

@@ -1,0 +1,558 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/entity-order/instructions-0002bbe0.txt",
+      "sha256": "22f6962e80bfdcbb6dd4c8b03adb98963b3dd4f4d87d213f0961381d81835283"
+    },
+    {
+      "private_path": "private/ghidra/module-transition-refs/instructions-0001bbc0.txt",
+      "sha256": "0fb22c2e71579e6128d50664eb5f40c886a0ed3e327b19b9f0fdfed330db28fb"
+    },
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-0007d090.txt",
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00072ad0.txt",
+      "sha256": "b3b313e20205eb57066681414db877493563bd8990149334125f06210936386b"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00072960.txt",
+      "sha256": "17166cfd793ae862a3b99a5b904c6940bf7ac2a18a8d94b5a2505a31d7777b1f"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-0006c690.txt",
+      "sha256": "2031cd548ca5fbda011cefd4ea96748d54fcc5f73a1c7f86db18e45ab791b624"
+    },
+    {
+      "private_path": "private/ghidra/entity-order-refs/instructions-0006d0b0.txt",
+      "sha256": "5d247a6771c89370366d39bca5bd24483a9222796b32e360b957d512ed7857ba"
+    },
+    {
+      "private_path": "private/ghidra/entity-order/instructions-0006ca90.txt",
+      "sha256": "056c0c9a3cfab3cc4cfbfb15851895551fa672bb546f1e5f459f7a258315769b"
+    },
+    {
+      "private_path": "private/ghidra/plant-startup/instructions-0008b300.txt",
+      "sha256": "c78190a37b0270c2630299f25a91250520aa297fcf640cf649ffd7d023fcc087"
+    },
+    {
+      "private_path": "private/ghidra/plant-startup/instructions-0008b6f0.txt",
+      "sha256": "7cc6dbbfebd6aaa55d68e45bc239249d42846f439f8dab72d05d375555a44adf"
+    },
+    {
+      "private_path": "private/ghidra/plant-startup/instructions-0001ebd0.txt",
+      "sha256": "9f0e86fefaa3c2fc11a9cf4f29e8d3ce4a0724b82b959d21b404b3ea9fd64588"
+    },
+    {
+      "private_path": "private/ghidra/plant-startup/instructions-0008b520.txt",
+      "sha256": "37342106bfbee451f816f38ffbd92903d81b06fd534da2f6031e26c1be840e49"
+    },
+    {
+      "private_path": "private/ghidra/mission-array-refs/instructions-0006d390.txt",
+      "sha256": "7f1c49974e62a52382eed53b9dcfa8dcc53b0727c9fdd2a626d57009a8376548"
+    },
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-0006c780.txt",
+      "sha256": "462f1d606d4212d724b783dfe542df7cc6f8ea322cfd77e218ec26b72fc957d8"
+    },
+    {
+      "private_path": "private/ghidra/terrain-map-refs/instructions-0008acc0.txt",
+      "sha256": "9e7e750030468985e9d1ed7ae836f8b8ee7606b4b0b51f1fc02345750f8ccb1e"
+    },
+    {
+      "private_path": "private/ghidra/panel-activation-refs/instructions-000724c0.txt",
+      "sha256": "588fd5fdf44fabe33a7e1f1df7c5cf5ab66edaf91f18cad6892015f252b47375"
+    },
+    {
+      "private_path": "private/ghidra/plant-startup/instructions-000409f0.txt",
+      "sha256": "a1a7d26d1931c802d72a5256a29c491208cde9651cd40d6b785a07043dffad55"
+    },
+    {
+      "private_path": "private/ghidra/plant-startup/audio-shared-tail.txt",
+      "sha256": "79e756dff496d72dd8a16c951128103d452fdbb5dfef43b96831d5817796111d"
+    },
+    {
+      "private_path": "private/ghidra/plant-startup/instructions-0002c200.txt",
+      "sha256": "0f6ced29d379bd244077afc2da06c80886c6189d34dcb7317b7f170b5413354d"
+    }
+  ],
+  "field_layout": {
+    "source_family1_base": "0x43d4e",
+    "source_stride": 41,
+    "native_stride": 49,
+    "fields": {
+      "active_type_u8": [
+        6,
+        6
+      ],
+      "flags15_u8": [
+        21,
+        21
+      ],
+      "shade_u8": [
+        23,
+        23
+      ],
+      "owner_u8": [
+        24,
+        24
+      ],
+      "animation_u8": [
+        25,
+        25
+      ],
+      "frame_u8": [
+        27,
+        27
+      ],
+      "resource_i8": [
+        35,
+        43
+      ],
+      "growth_i16": [
+        36,
+        44
+      ],
+      "flags2e_u8": [
+        38,
+        46
+      ],
+      "update_counter_u8": [
+        39,
+        47
+      ],
+      "retirement_counter_u8": [
+        40,
+        48
+      ]
+    },
+    "field_pairs": "sourceoffset,nativeoffset; cachedframeptrnative27hex isruntimeonly"
+  },
+  "pure_plan_admission": {
+    "growth_i16": "1..32767",
+    "animation_u8": "0..255",
+    "flags15": "u8,mask01clear",
+    "flags2e": "u8,mask9Aclear",
+    "counter2f": "exactly0",
+    "cell13": "u8,1..255",
+    "neighbor_byte_sum": "0..255; originalnine-cellcountaccumulateswithbytewrap",
+    "crowding_limit": "u8,0..255",
+    "check_threshold1b": "u8,1..255",
+    "spread_period18": "u8,2..255",
+    "delta": "i8,-128..127",
+    "retirement_delay1d": "u8,0..255",
+    "owner": "u8,0..4; largerownerssaferejected",
+    "frame": "preserved; notadvancedbythisslice"
+  },
+  "timeline": "7D090 calls72AD0 (75B00 then72960shade refresh) beforemodule transition.2BBE0 invokes82BD0/829A0/84310 thenlocked86C20 beforethe next1C120 entityupdate.1BBC0latercalls70B00,1C120,8DFE0. Withfresh emptyqueue the moduleinitializationdraw hasno newlyqueuedplants; do notlabelitfirstliveentityframe.",
+  "loaded_plant_contract": "40activeCONQ001family1records0..39, native type2, animation0/frame0, flags15=04, flags2E=0,counter2F=0.6C690 setsresource pointer andcachedframe27=NULL, preservingserializedanimation/frame.72960replacesnative shade17frommap light/factor beforemoduleinit.",
+  "schedule": "Ordinary6D0B0 startscursor16bitword11C2BA with+8; ifsignedresult>512 then(cursor+1)&7, elsekeepsresult. Atmost2eligible matchingindex slots invokevirtual64, advancingcursoragainperinvoke; stillqueuesallremainingeligibleactive records. Safeinputcursor0..512. Sourcecount40andcursor0yieldrequests8,16; cursorafter=24.",
+  "growth_slice": "Closed first-counter update: flags15mask01clear; flags2Emask9Aclear; growthsigned16>0; oldcounter0; celloverlay13>0; parameterthreshold1B>0; periodparameter18>1. Incrementcounterto1. Ifpositive-growth neighborcount>crowdingparameter1A: growth0, enterretirement below. Else addsignedparameter[10+terrainclass] withsigned16wrap/capupper32; nonpositiveoutputalsoretires. Counter1modperiod!=0 bypassesspawn/RNG; positivegrowthanimation=max(oldanimation,min(growth>>3,2)). ORflag04ifanimationchanged, frameunchanged, returncreatedcount0.",
+  "retirement_slice": "Withadmittedfreshflags2E mask88clear:6C780 adds6tou8animation, setsgrowth0, flags2E|80 andcounter30=resourcecounter1D. Ifcounter>=4: subtract4andreturnactive. Ifcounter<4: immediatelyunlink; cell13 increasesby2 onlyifold<64 (63becomes65); owner0..3requestsDECwordatplayer+5FA, owner4skips; request724C0bookkeeping, cleartype6anddecrementplantcount. Immediatebranchdoesnotrenderanimation6 becauseactivebytecleared. Requestoldframe-dirtycheckinexplicitcurrentview; originalcallsvirtual70onlywhenprojectedpointinside[0,640-margin)x[0,480), andcachedframe27NULL suppressesitsbody.",
+  "bookkeeping": "724C0 clears matching3-byte target-reference typebytes in activeotherfamilies (notplantgrowthfields), mayreactivatepanel ifremovedentityselected, andcalls409F0audio/objectnotification plus2C200UIselectioncleanup.409F0scans9attachmentrecordsstride16hex andclearsmatchingpointer+4;2C200onlyclearsmatchingpanelpointersR+19F/R+1CC. These areexplicitpendingrequests, notsilentlyexecutedbythepurestateplan. Actualworld/selection/audioinputsremaincallerresponsibility.",
+  "terrain_class": "8B520 samples cell+5low3 atpositionroundedupindependentlywhenfraction>=128. Ifthatclass0, return1ifany of3x3neighbors aroundunroundedfloorcellhasnonzerolow3, else0.128wrap. This is separatefromtextureUVorientation.",
+  "neighbor_contract": "8B300(mask0) establishesatleastone type2linkedentitypercell;8B6F0(mode0) countstype2whosevirtual68 returnsfalse.1EBD0 returnsgrowth<=0, socountpositivegrowth.6D390resolves3-byte signed16index/u8familyreferences. All40sourceplantmaplinksvalidatedexactlyonce andpositioncellconsistent.",
+  "source_fixture": {
+    "entry_id": "root/2/disc/152",
+    "source_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+    "active_family_counts": [
+      1,
+      40,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "plant_links_before": 40,
+    "plant_links_after": 38,
+    "scheduled_indices": [
+      8,
+      16
+    ],
+    "cursor_after": 24,
+    "private_path": "private/ghidra/plant-startup/first-scheduled-fixture.json",
+    "fixture_sha256": "405f649cc2645c18fec92ee0eae2cf26d314acf517cdcbe6e6257045bbd05618",
+    "results_metadata": [
+      {
+        "record": 8,
+        "resource_slot": 3,
+        "growth_before": 22,
+        "terrain_class": 3,
+        "growth_delta": -1,
+        "neighbor_positive_growth_count": 7,
+        "crowding_threshold": 2,
+        "period": 3,
+        "result": {
+          "growth_i16": 0,
+          "counter_u8": 1,
+          "animation_u8": 6,
+          "flags15_u8": 4,
+          "flags2e_u8": 128,
+          "created_count_u8": 0,
+          "phase": "retire",
+          "retirement_counter_u8": 3,
+          "active_type_u8": 0,
+          "cell13_after": 3,
+          "plant_count_delta": -1,
+          "owner_count_decrement": null,
+          "pending_bookkeeping": [
+            "unlink-cell-list",
+            "check-old-frame-dirty-in-current-view",
+            "724C0-reference/UI/audio-notifications"
+          ]
+        }
+      },
+      {
+        "record": 16,
+        "resource_slot": 0,
+        "growth_before": 11,
+        "terrain_class": 3,
+        "growth_delta": 3,
+        "neighbor_positive_growth_count": 5,
+        "crowding_threshold": 3,
+        "period": 4,
+        "result": {
+          "growth_i16": 0,
+          "counter_u8": 1,
+          "animation_u8": 6,
+          "flags15_u8": 4,
+          "flags2e_u8": 128,
+          "created_count_u8": 0,
+          "phase": "retire",
+          "retirement_counter_u8": 3,
+          "active_type_u8": 0,
+          "cell13_after": 3,
+          "plant_count_delta": -1,
+          "owner_count_decrement": null,
+          "pending_bookkeeping": [
+            "unlink-cell-list",
+            "check-old-frame-dirty-in-current-view",
+            "724C0-reference/UI/audio-notifications"
+          ]
+        }
+      }
+    ]
+  },
+  "cursor_vectors": [
+    {
+      "cursor": 0,
+      "next": 8
+    },
+    {
+      "cursor": 1,
+      "next": 9
+    },
+    {
+      "cursor": 7,
+      "next": 15
+    },
+    {
+      "cursor": 8,
+      "next": 16
+    },
+    {
+      "cursor": 496,
+      "next": 504
+    },
+    {
+      "cursor": 504,
+      "next": 512
+    },
+    {
+      "cursor": 505,
+      "next": 2
+    },
+    {
+      "cursor": 511,
+      "next": 0
+    },
+    {
+      "cursor": 512,
+      "next": 1
+    }
+  ],
+  "growth_vectors": [
+    {
+      "growth_before": 1,
+      "animation_before": 0,
+      "signed_delta": 0,
+      "result": {
+        "phase": "grow",
+        "growth_i16": 1,
+        "counter_u8": 1,
+        "animation_u8": 0,
+        "flags15_u8": 4,
+        "active_type_u8": 2,
+        "created_count_u8": 0
+      }
+    },
+    {
+      "growth_before": 7,
+      "animation_before": 0,
+      "signed_delta": 0,
+      "result": {
+        "phase": "grow",
+        "growth_i16": 7,
+        "counter_u8": 1,
+        "animation_u8": 0,
+        "flags15_u8": 4,
+        "active_type_u8": 2,
+        "created_count_u8": 0
+      }
+    },
+    {
+      "growth_before": 8,
+      "animation_before": 0,
+      "signed_delta": 0,
+      "result": {
+        "phase": "grow",
+        "growth_i16": 8,
+        "counter_u8": 1,
+        "animation_u8": 1,
+        "flags15_u8": 4,
+        "active_type_u8": 2,
+        "created_count_u8": 0
+      }
+    },
+    {
+      "growth_before": 15,
+      "animation_before": 0,
+      "signed_delta": 0,
+      "result": {
+        "phase": "grow",
+        "growth_i16": 15,
+        "counter_u8": 1,
+        "animation_u8": 1,
+        "flags15_u8": 4,
+        "active_type_u8": 2,
+        "created_count_u8": 0
+      }
+    },
+    {
+      "growth_before": 16,
+      "animation_before": 0,
+      "signed_delta": 0,
+      "result": {
+        "phase": "grow",
+        "growth_i16": 16,
+        "counter_u8": 1,
+        "animation_u8": 2,
+        "flags15_u8": 4,
+        "active_type_u8": 2,
+        "created_count_u8": 0
+      }
+    },
+    {
+      "growth_before": 32,
+      "animation_before": 1,
+      "signed_delta": 3,
+      "result": {
+        "phase": "grow",
+        "growth_i16": 32,
+        "counter_u8": 1,
+        "animation_u8": 2,
+        "flags15_u8": 4,
+        "active_type_u8": 2,
+        "created_count_u8": 0
+      }
+    },
+    {
+      "growth_before": 22,
+      "animation_before": 0,
+      "signed_delta": 2,
+      "result": {
+        "phase": "grow",
+        "growth_i16": 24,
+        "counter_u8": 1,
+        "animation_u8": 2,
+        "flags15_u8": 4,
+        "active_type_u8": 2,
+        "created_count_u8": 0
+      }
+    },
+    {
+      "growth_before": 11,
+      "animation_before": 0,
+      "signed_delta": 3,
+      "result": {
+        "phase": "grow",
+        "growth_i16": 14,
+        "counter_u8": 1,
+        "animation_u8": 1,
+        "flags15_u8": 4,
+        "active_type_u8": 2,
+        "created_count_u8": 0
+      }
+    },
+    {
+      "growth_before": 5,
+      "animation_before": 2,
+      "signed_delta": -4,
+      "result": {
+        "phase": "grow",
+        "growth_i16": 1,
+        "counter_u8": 1,
+        "animation_u8": 2,
+        "flags15_u8": 4,
+        "active_type_u8": 2,
+        "created_count_u8": 0
+      }
+    }
+  ],
+  "retirement_vectors": [
+    {
+      "neighbors_u8": 3,
+      "crowding_u8": 3,
+      "growth_i16": 1,
+      "delta_i8": 0,
+      "delay_u8": 3,
+      "owner_u8": 4,
+      "cell13_u8": 1,
+      "result": {
+        "phase": "grow",
+        "growth_i16": 1,
+        "counter_u8": 1,
+        "animation_u8": 0,
+        "flags15_u8": 4,
+        "active_type_u8": 2,
+        "created_count_u8": 0
+      }
+    },
+    {
+      "neighbors_u8": 4,
+      "crowding_u8": 3,
+      "growth_i16": 1,
+      "delta_i8": 0,
+      "delay_u8": 3,
+      "owner_u8": 4,
+      "cell13_u8": 1,
+      "result": {
+        "growth_i16": 0,
+        "counter_u8": 1,
+        "animation_u8": 6,
+        "flags15_u8": 4,
+        "flags2e_u8": 128,
+        "created_count_u8": 0,
+        "phase": "retire",
+        "retirement_counter_u8": 3,
+        "active_type_u8": 0,
+        "cell13_after": 3,
+        "plant_count_delta": -1,
+        "owner_count_decrement": null,
+        "pending_bookkeeping": [
+          "unlink-cell-list",
+          "check-old-frame-dirty-in-current-view",
+          "724C0-reference/UI/audio-notifications"
+        ]
+      }
+    },
+    {
+      "neighbors_u8": 4,
+      "crowding_u8": 3,
+      "growth_i16": 22,
+      "delta_i8": 3,
+      "delay_u8": 4,
+      "owner_u8": 4,
+      "cell13_u8": 63,
+      "result": {
+        "growth_i16": 0,
+        "counter_u8": 1,
+        "animation_u8": 6,
+        "flags15_u8": 4,
+        "flags2e_u8": 128,
+        "created_count_u8": 0,
+        "phase": "delayed-retirement",
+        "retirement_counter_u8": 0,
+        "active_type_u8": 2
+      }
+    },
+    {
+      "neighbors_u8": 4,
+      "crowding_u8": 3,
+      "growth_i16": 22,
+      "delta_i8": 3,
+      "delay_u8": 255,
+      "owner_u8": 4,
+      "cell13_u8": 64,
+      "result": {
+        "growth_i16": 0,
+        "counter_u8": 1,
+        "animation_u8": 6,
+        "flags15_u8": 4,
+        "flags2e_u8": 128,
+        "created_count_u8": 0,
+        "phase": "delayed-retirement",
+        "retirement_counter_u8": 251,
+        "active_type_u8": 2
+      }
+    },
+    {
+      "neighbors_u8": 0,
+      "crowding_u8": 3,
+      "growth_i16": 1,
+      "delta_i8": -1,
+      "delay_u8": 0,
+      "owner_u8": 0,
+      "cell13_u8": 63,
+      "result": {
+        "growth_i16": 0,
+        "counter_u8": 1,
+        "animation_u8": 6,
+        "flags15_u8": 4,
+        "flags2e_u8": 128,
+        "created_count_u8": 0,
+        "phase": "retire",
+        "retirement_counter_u8": 0,
+        "active_type_u8": 0,
+        "cell13_after": 65,
+        "plant_count_delta": -1,
+        "owner_count_decrement": 0,
+        "pending_bookkeeping": [
+          "unlink-cell-list",
+          "check-old-frame-dirty-in-current-view",
+          "724C0-reference/UI/audio-notifications"
+        ]
+      }
+    },
+    {
+      "neighbors_u8": 0,
+      "crowding_u8": 3,
+      "growth_i16": 32767,
+      "delta_i8": 1,
+      "delay_u8": 3,
+      "owner_u8": 3,
+      "cell13_u8": 255,
+      "result": {
+        "growth_i16": 0,
+        "counter_u8": 1,
+        "animation_u8": 6,
+        "flags15_u8": 4,
+        "flags2e_u8": 128,
+        "created_count_u8": 0,
+        "phase": "retire",
+        "retirement_counter_u8": 3,
+        "active_type_u8": 0,
+        "cell13_after": 255,
+        "plant_count_delta": -1,
+        "owner_count_decrement": 3,
+        "pending_bookkeeping": [
+          "unlink-cell-list",
+          "check-old-frame-dirty-in-current-view",
+          "724C0-reference/UI/audio-notifications"
+        ]
+      }
+    }
+  ],
+  "register_growth_cases": 262136,
+  "capacity": "Loadedsource has1activefamily0 and40activefamily1, others0. Thisboundsisolatedloadedstate41entries, notliveafterplayerentitycreation/otherupdates. Explicitprioracceptedcount<=216 guaranteesroomforall40plants; largerpriorstate mustuseexistingcapacity256queuecontract.",
+  "limits": [
+    "This validates firstscheduledplant updates againstanexplicitloadedstate, notwhole1C120tick. Earlierfamily0/player updates maymutatestate; keepthat externalstate explicit.",
+    "75B00callbacks/actorcreation notexecuted; shade prooftakesfinalmap snapshot asinput.",
+    "No timing/frame-rate oruniversalinitialqueue emptinessinferred.",
+    "Fullgrowthspawning/longretirement paths excluded; immediateowner4retirementproducesexplicitpendingbookkeeping."
+  ]
+}

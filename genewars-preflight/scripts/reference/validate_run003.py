@@ -17,7 +17,7 @@ def config(path):
     return values
 
 def main(session='run-003'):
-    assert session in ('run-003','run-004','run-005')
+    assert session in ('run-003','run-004','run-005','run-006')
     prepare.select_session(session)
     import launch,gate
     root,run=prepare.ROOT,prepare.RUN
@@ -34,6 +34,8 @@ def main(session='run-003'):
     if session=='run-004':expected['sdl','raw_mouse_input']=(None,'true')
     if session=='run-005':
         expected={('sdl','mouse_emulation'):('locked','never'),('sdl','raw_mouse_input'):(None,'false')}
+    if session=='run-006':
+        expected={('sdl','mouse_emulation'):('locked','always'),('sdl','raw_mouse_input'):(None,'false')}
     assert delta==expected
     assert new['cpu','integration device']=='false' and new['cpu','integration device pnp']=='false'
     fixture=root/'private/review'/(session+'-guards');fixture.mkdir(parents=True,exist_ok=True)

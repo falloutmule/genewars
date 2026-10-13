@@ -1,0 +1,39 @@
+{
+  "status": "passed-synthetic-missing-capture-refusal",
+  "utc": "2026-10-13T09:52:28.652892+00:00",
+  "original_execution": false,
+  "emulator_execution": false,
+  "process_identity_mocked": true,
+  "host_release_written": false,
+  "marker_written": false,
+  "gate_sha256": "19d24789f4231ec07fd3f15e455f174434ff9bfa2bced643d75afe2df72cc128",
+  "report": {
+    "pid": 12345,
+    "image": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\tools\\dosbox-x\\2026.10.01\\bin\\x64\\Release SDL2\\dosbox-x.exe",
+    "started_utc": "2026-10-13T09:52:28.603291+00:00",
+    "age_seconds": 0.018813,
+    "ready_for_supervisor_release": false,
+    "issues": [
+      "Supervisor must observe Main/Capture mouse before run006 release and pass --capture-observed"
+    ],
+    "mount_table": [
+      [
+        "C",
+        "Local C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\run006-capture-guard\\drive-c"
+      ],
+      [
+        "D",
+        "ISO C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\run006-capture-guard\\media\\GENEWARS.cue"
+      ],
+      [
+        "Z",
+        "Internal Virtual Drive"
+      ]
+    ],
+    "log_path": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\run006-capture-guard\\logs\\dosbox-x.log",
+    "log_sha256": "9b64cd4e1c89140a25341f40f855393705e0db6ef6022115d3167253b75f4ed6",
+    "original_execution_requested_by_this_call": false,
+    "capture_state_supervisor_attested": false,
+    "capture_attestation_limit": "Visible capture request/state, not a guarantee of SDL input delivery or game response"
+  }
+}

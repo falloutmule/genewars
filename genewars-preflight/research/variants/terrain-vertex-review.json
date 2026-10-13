@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-terrain-vertex-review",
-  "checked_utc": "2026-10-13T09:40:16.352343+00:00",
+  "checked_utc": "2026-10-13T10:13:28.880043+00:00",
   "original_or_gui_execution": false,
   "height_values": 65536,
   "cell_flag_values": 256,
@@ -32,7 +32,7 @@
   "harness": {
     "path": "private/review/terrain-vertex/review.exe",
     "size": 5083237,
-    "sha256": "c7ea296956f9e5b9b6d8dce820d08afca0c36a33435213c7a2ac73fbb6e62ed8"
+    "sha256": "297b18b59e787d0dd4524423cdf972052d62357354a058a0d15765183b042a16"
   },
   "review_sources": [
     {

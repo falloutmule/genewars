@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-plant-scene-review",
-  "utc": "2026-10-13T09:40:52.728942+00:00",
+  "utc": "2026-10-13T10:14:09.672663+00:00",
   "original_execution": false,
   "source_pins": [
     {
@@ -24,9 +24,14 @@
       "sha256": "db39ede4866105f4fae6e893f4cc1649e3eebec938f82ddd5c6feeb744a7e759"
     },
     {
+      "path": "rust/crates/genewars-render/src/plant_snapshot.rs",
+      "size": 4926,
+      "sha256": "af655a9e5bf7e4e2a3c37ba5a69845c17d8be9ddcd35d34023684200de68cb16"
+    },
+    {
       "path": "rust/crates/genewars-tools/src/plant_scene.rs",
-      "size": 7264,
-      "sha256": "acf118da79d308026db9882dbe97ad61c4e77155271d4d47885646107ff4ab37"
+      "size": 4891,
+      "sha256": "b566a7442f5185991a7d8ade6c7d610edc6a580c0b1bef46ac8ce64ef1f924b2"
     },
     {
       "path": "rust/crates/genewars-tools/src/terrain_render.rs",
@@ -58,8 +63,8 @@
   "review_sources": [
     {
       "path": "research/variants/plant-scene-review.py",
-      "size": 11037,
-      "sha256": "b82b8b9682cd8a46e2b87f4ef6d02857f202a7e1786f087b9c004947ae656cba"
+      "size": 11057,
+      "sha256": "188fc90181131ab72809da138f08eb3acd66057ae8c1de77c2291085782abcde"
     },
     {
       "path": "research/variants/plant-scene-review.rs",
@@ -69,8 +74,8 @@
   ],
   "native_harness": {
     "path": "private/review/plant-scene/review.exe",
-    "size": 5323247,
-    "sha256": "fffad153b07a0b66ea4c0fe0acc905c5888cb640e11cf1d895974d17577a873a"
+    "size": 5336332,
+    "sha256": "40d33f8a39d17257c60936d6fb2df6d2ed0516aa3c5caf61368ed847778ffc97"
   },
   "limits": [
     "Explicit post-admission flags/order/coordinates only; no original first-scene state inferred",

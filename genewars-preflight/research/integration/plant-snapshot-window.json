@@ -1,0 +1,137 @@
+{
+  "status": "passed",
+  "checked_utc": "2026-10-13T10:13:25.995619+00:00",
+  "private_receipt": {
+    "path": "private/integration/plant-snapshot-window/fc77b559f8b8409e9d226ba2df7e9e8f/receipt.json",
+    "sha256": "cb6083cfb8c73e141b29e17d450af74f3151d31009b06e8a8ffb4045f1859cf2"
+  },
+  "native_windows_launched": true,
+  "case_count": 6,
+  "rejected_count": 3,
+  "cases": [
+    {
+      "case": "overlap-forward",
+      "snapshot_sha256": "f4122b3e793941464401d926f72a1785441ec6245461ebf86b5f9020d601b28e",
+      "cli_bmp_sha256": "32dc2796effd3e8c3c63cb6062b2ee3c5cd8f17419a29ab111f470b9bc815351",
+      "expected_rgb_crc16": 28028,
+      "expected_queue_order": [
+        101,
+        100
+      ],
+      "presented_frames": 2,
+      "native_rgb_crc16": 28028,
+      "native_report_sha256": "e83e8b134b6f35bec2bccbbf5aba7de09c4d2c83b231ba51b9f96b6982e76eb3"
+    },
+    {
+      "case": "overlap-reverse",
+      "snapshot_sha256": "8ed0c9bb92a90c86cb7210a88df2955a2f55eadd82a5d2ff87d02f86a3bc5961",
+      "cli_bmp_sha256": "22e072c224fddb68a8ec59e60ef13c99f0e180264b5e10ca119058ea45ba7c69",
+      "expected_rgb_crc16": 52649,
+      "expected_queue_order": [
+        100,
+        101
+      ],
+      "presented_frames": 2,
+      "native_rgb_crc16": 52649,
+      "native_report_sha256": "a74c7b41f538ae6ccf38cd318f8c880bf34db4e1d60ad03057067f82d4ad097e"
+    },
+    {
+      "case": "edges-capacity",
+      "snapshot_sha256": "f9033e19967ed3edd4af2566883f8c6ae1e6dfd2029fe2e0a9525d46f50cd967",
+      "cli_bmp_sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef",
+      "expected_rgb_crc16": 37676,
+      "expected_queue_order": [
+        200,
+        201
+      ],
+      "presented_frames": 2,
+      "native_rgb_crc16": 37676,
+      "native_report_sha256": "affe274847d5b9d395b902bafcd1853c4fbf8b0e39c1c5ddee2bc49fa5ace1bd"
+    },
+    {
+      "case": "gate-open-mode-zero",
+      "snapshot_sha256": "91c4c8a0f93e384bbfc3fc91eb0b25b5625b86596e19c330f3c61c59b84d5aa7",
+      "cli_bmp_sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef",
+      "expected_rgb_crc16": 37676,
+      "expected_queue_order": [
+        302,
+        301,
+        300
+      ],
+      "presented_frames": 2,
+      "native_rgb_crc16": 37676,
+      "native_report_sha256": "4356dc294c53e687ce92bad04883c3ec833810686416700d0be4255e87e7e8f0"
+    },
+    {
+      "case": "gate-closed",
+      "snapshot_sha256": "fd315353de575379a521a34a8eb4a419a5aa9aba022f53394f4aaa02eca72d8c",
+      "cli_bmp_sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef",
+      "expected_rgb_crc16": 37676,
+      "expected_queue_order": [
+        302,
+        301,
+        300
+      ],
+      "presented_frames": 2,
+      "native_rgb_crc16": 37676,
+      "native_report_sha256": "be501df233de4344a635925e2001a96d7f4e9f67ef7beac1860c149082fa7c1b"
+    },
+    {
+      "case": "unsupported-context-skipped",
+      "snapshot_sha256": "86f08b11964645740c4a1dc0c80ba6c2f2156f659ceb1846ac8c868316354f28",
+      "cli_bmp_sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef",
+      "expected_rgb_crc16": 37676,
+      "expected_queue_order": [
+        503
+      ],
+      "presented_frames": 2,
+      "native_rgb_crc16": 37676,
+      "native_report_sha256": "d4098664b2accbd915ca043a98c129608de27a6308c1bb214988b63c8b486de8"
+    }
+  ],
+  "binaries": {
+    "genewars-tools": {
+      "path": "private/build/rust-target/debug/genewars-tools.exe",
+      "bytes": 10768558,
+      "sha256": "6e9c4a215ff4bb776f55a33eef50cda4f1e5fa3c5d6533c63c67f3ec850eb8eb"
+    },
+    "genewars-terrain": {
+      "path": "private/build/rust-target/debug/genewars-terrain.exe",
+      "bytes": 19589806,
+      "sha256": "5571390d4789f5fc3cff158573a5f55de770b1b7e95d1ed08df25e4ef129db0c"
+    }
+  },
+  "code_sources": [
+    {
+      "path": "rust/crates/genewars-render/src/plant_snapshot.rs",
+      "bytes": 4926,
+      "sha256": "af655a9e5bf7e4e2a3c37ba5a69845c17d8be9ddcd35d34023684200de68cb16"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/plant_scene.rs",
+      "bytes": 12557,
+      "sha256": "db39ede4866105f4fae6e893f4cc1649e3eebec938f82ddd5c6feeb744a7e759"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-terrain.rs",
+      "bytes": 34940,
+      "sha256": "5a43a9e71fc73f9da40784c35044f30da44d7436030dbf5d9d5a53591c008baf"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/entity_draw_queue.rs",
+      "bytes": 12711,
+      "sha256": "b80d62724db689da242800705edfb34319bed786ac9ed91be1d4ffac7f203215"
+    },
+    {
+      "path": "rust/crates/genewars-tools/src/plant_scene.rs",
+      "bytes": 4891,
+      "sha256": "b566a7442f5185991a7d8ade6c7d610edc6a580c0b1bef46ac8ce64ef1f924b2"
+    }
+  ],
+  "staged_source_unchanged": true,
+  "existing_fixtures_unchanged": true,
+  "rejected_snapshots_unchanged": true,
+  "code_source_pin_binding": "production source hashes captured with this private run receipt",
+  "comparison_scope": "Native comparison checks CRC16 plus queue order and per-record/pixel receipts. The native window does not expose raw framebuffer bytes, so this is not cryptographic or raw-framebuffer equality. Each CLI BMP matched its pinned prior full SHA-256.",
+  "scope": "Explicit GWPLANT1 post-admission diagnostics only; no original state or callback claim."
+}

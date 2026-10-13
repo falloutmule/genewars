@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T09:40:13.574966+00:00",
+  "checked_utc": "2026-10-13T10:13:23.811757+00:00",
   "original_execution": false,
   "gameplay": false,
   "cases": [
@@ -146,8 +146,8 @@
   },
   "executable": {
     "path": "private/build/rust-target/debug/genewars-tools.exe",
-    "bytes": 10523148,
-    "sha256": "173b62340923f6ab8231217b536f6fe2fc1d8429fed10e33d54e1b38e773498b"
+    "bytes": 10768558,
+    "sha256": "6e9c4a215ff4bb776f55a33eef50cda4f1e5fa3c5d6533c63c67f3ec850eb8eb"
   },
   "terrain_inputs": [
     {

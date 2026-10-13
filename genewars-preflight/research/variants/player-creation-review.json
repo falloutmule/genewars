@@ -1,0 +1,211 @@
+{
+  "status": "passed-independent-native-player-creation-review",
+  "utc": "2026-10-13T10:14:06.472963+00:00",
+  "original_execution": false,
+  "source": {
+    "path": "rust/crates/genewars-core/src/player_creation.rs",
+    "size": 11771,
+    "sha256": "7ae09e8231c2c1b5f2d9d846db9edfd4a274a8df95e98834d665a543c04a63ee"
+  },
+  "evidence": {
+    "path": "research/ghidra/player-creation-evidence.json",
+    "size": 19818,
+    "sha256": "d9a623a7aa12b10fe19a55e57dad0acf7e814fc22cdb3a76c639c7067aa9ca11"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/terrain-camera-refs/instructions-0007d090.txt",
+      "size": 14585,
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0007f580.txt",
+      "size": 3074,
+      "sha256": "456bf6a90497272367895c99d36f9e8e8a1c37fac1690388a0e6343667e9d305"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0007fad0.txt",
+      "size": 10225,
+      "sha256": "03967b02b2b15b977b81d3603bc886579c1db4427381ed65548e384e15d4833a"
+    },
+    {
+      "path": "private/ghidra/font-text/instructions-0001d770.txt",
+      "size": 17969,
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    },
+    {
+      "path": "private/ghidra/mission-target-refs/instructions-000801c0.txt",
+      "size": 2116,
+      "sha256": "7ed3b8931a9da7fdd2be47a09f41b1b06dfb27c77c4fdf9ed604fe1885e0b4c0"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-00081310.txt",
+      "size": 535,
+      "sha256": "334513c94d81fe315e276971e213dbbbb87f9cbfa88e0afc296b679528e65a3f"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00081300.txt",
+      "size": 1020,
+      "sha256": "6a84a63418f260901cd6677b22e4532860becbf4340bac74053bd8963d9cc935"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0004fd30.txt",
+      "size": 4447,
+      "sha256": "0dfb420cafd52d6ebcf41de7e02299cf23938381f95ffc1ca1efaa0b91a29b60"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-00013eb0.txt",
+      "size": 53,
+      "sha256": "f39a85cec1eeaf8c6471d4ca65ab9fd26f3f093cafec3efae15cbe694d2c656c"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0001f480.txt",
+      "size": 160,
+      "sha256": "77d8ec6d64004960b0bb970a66612c76b1ffe3cfcfd4b949f8174e5662441744"
+    },
+    {
+      "path": "private/ghidra/camera-player-input/instructions-00080830.txt",
+      "size": 4795,
+      "sha256": "e9fda91b7c0fe5071443cf03bb73cd028996fdc32e7273e1a10f389d114c6973"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-00056e20.txt",
+      "size": 1178,
+      "sha256": "ea9f9732b2e32af849a86de57a4a416a565f2fe4c6809fed6587fc0dcc99baa0"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-00057a10.txt",
+      "size": 31095,
+      "sha256": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a"
+    },
+    {
+      "path": "private/ghidra/entity-shadow-panel/instructions-0007f3b0.txt",
+      "size": 1840,
+      "sha256": "6c128d79d263a395544aef8a99cac717c4b43bcebaf9271d742d4c1dfcff2034"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00048790.txt",
+      "size": 49286,
+      "sha256": "840113f32e4845215dc107850ae4cf6218cd5558af2f2dbd1aae632654da533d"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0001f070.txt",
+      "size": 2970,
+      "sha256": "b890bd05c1566c3755c4a62dad58a937ee98d0119013e6f6fe11ef59b84f79c3"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-00049e90.txt",
+      "size": 2334,
+      "sha256": "55e976eb9c620d3cd6996d5dfd810532c8ca5c0a93fcb4a34239744049f9e001"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0001e810.txt",
+      "size": 356,
+      "sha256": "7a30b56a1ffc4b24228dcebdc978fc38c5c5f73757cdcf7727e38ee778a42c2f"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-0005a850.txt",
+      "size": 780,
+      "sha256": "e264758a9f7059194b9eecd159732595833af28f16764ef484be1a11f7216a50"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-0005a1c0.txt",
+      "size": 747,
+      "sha256": "02f55f81e196715d686d5427c1475d280f0e4fbf13499355dd7974c629d989b9"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0006a540.txt",
+      "size": 3064,
+      "sha256": "d947fde62e1f4a044d4c74953d8c95a1b25b0e4144fd43f64a1d148f4b5cca1b"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0001ec50.txt",
+      "size": 74,
+      "sha256": "ed1420b97321186a1b7c3146ab315649a872bab54a0fc63686a6aad4e4f677ce"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0005ed20.txt",
+      "size": 365821,
+      "sha256": "ea29b165354042aaf33dc630322d89b577810f96c2ece1f8998799512e2feed0"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0006fb60.txt",
+      "size": 28347,
+      "sha256": "b373e98528fde4ef720bf0b529edbca889efb97bec713ac4d7fe184c868fb736"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0005eb30.txt",
+      "size": 3487,
+      "sha256": "2cf7510ee5298d221c299b11244f72adf6ce5831c7aedcb39d3e91e6cacb53ec"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0005e640.txt",
+      "size": 12333,
+      "sha256": "cbcd47d0c677749cbcf9adb928ef968ec6f8c0d4a399e2956dd39c13f2626239"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00058780.txt",
+      "size": 1036,
+      "sha256": "e7f66d33d468912942e86f875cf4d9e1d0157ce8671a911104b8cb9ad6fcb623"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00047f80.txt",
+      "size": 9361,
+      "sha256": "bae7d9800c80bce7b1419e5b7a2193b1f934b5080dd30285c7a2a15b50a2a4e4"
+    },
+    {
+      "path": "private/ghidra/entity-order-refs/instructions-0001c120.txt",
+      "size": 16082,
+      "sha256": "fd6d61b6f562770b3e34fe65b6fa6ecb9c700ae7aaaa3876f3826e3285670255"
+    }
+  ],
+  "jump_table_sha256": "0bf6ab9747915ab4599fb438466c51cdbd6a5a3182bca05a606e4bfb24645025",
+  "source_mission": {
+    "path": "private/ghidra/campaign-resources/152.dat",
+    "size": 343958,
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  },
+  "category_gate_cases": 653312,
+  "ordinary_update_gate_cases": 256,
+  "plan_cases": 112197,
+  "categories": {
+    "all_active_and_category_bytes": 65536,
+    "all_slot_occupancy_player_blueprint_positions": 4096,
+    "all_slot_patterns_and_signed_count_bytes": 8192,
+    "all_player_bytes_error_precedence": 1536,
+    "every_mask_progress_boundary_campaign": 4096,
+    "category_order_duplicate_quota_and_holes": 18432,
+    "one_free_slot_failure_consumes_later_quotas": 30,
+    "all_occupied_bytes_preserved": 255,
+    "empty_scan_target_reset": 24,
+    "random_raw_blueprint_scan": 10000
+  },
+  "successful_plans": 94699,
+  "rejected_plans": 17498,
+  "attempt_receipts": 62947,
+  "allocation_receipts": 40506,
+  "native_plan_output_sha256": "91d3a0f81e486c5e7598b1d2341b8617b66106f3fca0fde0fe3f6d7f7aa5b73a",
+  "review_sources": [
+    {
+      "path": "research/variants/player-creation-review.py",
+      "size": 9785,
+      "sha256": "0fc6edfcc5a2f4118efc9b3b5bbb7fc3230578ad3188c43b8afd7ff1d557ce66"
+    },
+    {
+      "path": "research/variants/player-creation-review.rs",
+      "size": 1763,
+      "sha256": "5d8d04cbcd693f65abc9a4f90a2a884f6f0137ecfbb871854fccedffa4e8d88b"
+    }
+  ],
+  "native_harness": {
+    "path": "private/review/player-creation/review.exe",
+    "size": 5092311,
+    "sha256": "5d82ef6f6160d471b6ec5e1b3df8ccf29d99dbe1842c10d8ffd3655478232221"
+  },
+  "limits": [
+    "Explicit metadata, slot, count, player and campaign inputs; no generated random blueprint or retained live-player inference",
+    "Count0..5 and per-success append capacity enforced; count is not required to equal occupied slots",
+    "Requests describe selected writes only; initializer resource pointers, placement, reveal, audio and target-table copy remain caller operations",
+    "Clear flags70bit0 suppression only; family0 AI/playerbookkeeping/fullmissiontick unknown"
+  ]
+}

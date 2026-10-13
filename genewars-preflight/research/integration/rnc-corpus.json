@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "source_archive_sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906",
-  "decoder_executable_sha256": "173b62340923f6ab8231217b536f6fe2fc1d8429fed10e33d54e1b38e773498b",
+  "decoder_executable_sha256": "6e9c4a215ff4bb776f55a33eef50cda4f1e5fa3c5d6533c63c67f3ec850eb8eb",
   "command_template": "genewars-tools rnc-decode - private/integration/rnc-decoded/<source-sha256>.bin 67108864",
   "validation": "Each source record hash checked; Rust verifies packed length/CRC, bounded decode, decoded length/CRC. Equal input hashes share one decode. Exact-hash compound layouts use an explicit prefix API and independently account for every tail byte.",
   "summary": {

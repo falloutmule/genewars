@@ -1,0 +1,40 @@
+{
+  "status": "passed-independent-closed-run006-audit",
+  "utc": "2026-10-13T10:10:31.250066+00:00",
+  "checker_original_execution": false,
+  "checker_gui_execution": false,
+  "result": {
+    "path": "research/variants/reference-run-006-result.json",
+    "size": 9057,
+    "sha256": "812dabc04c530cc411ece57e6d83e3f0deaf654c501764729db75d4eb99c688d"
+  },
+  "final_process": {
+    "path": "private/reference-run/run-006/logs/final-process.json",
+    "size": 202,
+    "sha256": "27d480841b8d409670944a6e32ace5a5867b92a5b9f2dc853faf4412281c6bfd"
+  },
+  "observations": {
+    "path": "private/reference-run/run-006/logs/supervisor-observations.json",
+    "size": 3519,
+    "sha256": "0b2724ef4ea0ef6754985f8b4d4eb5131b5301d8eec5a0055ec061228f36dc15"
+  },
+  "baseline_files": 510,
+  "unchanged_original_files": 489,
+  "changed_original_files": 1,
+  "added_host_helper_files": 3,
+  "removed_files": 0,
+  "process_exit_code": 4294967295,
+  "operator_stop_recorded": true,
+  "host_timeout": false,
+  "menu": "observed",
+  "mission": "not_observed",
+  "raw_framebuffer": "not_observed",
+  "media_and_emulator_pins_rehashed": true,
+  "limits": [
+    "Observed menu/click chronology is supervisor evidence, not independent GUI observation by this lane",
+    "Original exit status is operator termination, not game failure/success",
+    "No guest mouse register trace or wholegame delivery guarantee from emptyprobe012",
+    "Archive/tool311-member checks preserved from finish receipt; not independently rescanned by this audit",
+    "No original/emulator/GUI launched, no raw checker receipt modified"
+  ]
+}

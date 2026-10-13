@@ -1,15 +1,15 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T09:39:50.668803+00:00",
+  "checked_utc": "2026-10-13T10:13:00.963485+00:00",
   "current_binary": {
     "path": "private/build/rust-target/debug/genewars-terrain.exe",
-    "bytes": 18337155,
-    "sha256": "cae19479a681ddb30e46eb95f5e15eaf1726ff946d7eed57edc0ac17735e6058"
+    "bytes": 19589806,
+    "sha256": "5571390d4789f5fc3cff158573a5f55de770b1b7e95d1ed08df25e4ef129db0c"
   },
   "current_bounded_run": {
-    "path": "private/integration/terrain-window-4323e7c7c196454491f87885da3d4b6a.json",
-    "bytes": 455,
-    "sha256": "aaeae4bf0357b35603a0b777a9eed6d92be6b4593d8f9c7e2a59f11ae8d6138d"
+    "path": "private/integration/terrain-window-8300a86aee764914877f358055ebbedc.json",
+    "bytes": 474,
+    "sha256": "37ed922fc5daea698c864315a570c2a5c9585c66cfd0f6f3a48de0dd2822bc41"
   },
   "bounded_result": {
     "width": 640,
@@ -44,6 +44,7 @@
     "layout": "full",
     "initial_source_player": null,
     "plant": null,
+    "plant_scene": null,
     "rgb_crc16": 7693,
     "original_initial_panel_inferred": false,
     "live_callbacks_applied": false

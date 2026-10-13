@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T09:41:13.076153+00:00",
+  "checked_utc": "2026-10-13T10:14:30.134090+00:00",
   "original_or_gui_execution": false,
   "checks": {
     "packet_byte_cases": 1024,
@@ -18,7 +18,7 @@
   "native_harness": {
     "path": "private/review/core-controls/core-control-review.exe",
     "size": 5102628,
-    "sha256": "eea9038bd2756ea98318c542d2c6ccd043e9081bc3421bf871c5bd2201e5a35d"
+    "sha256": "b59662911b680698a18e10d309399eb14c8534362f59df25b0983479060799ee"
   },
   "reviewed_sources": [
     {
