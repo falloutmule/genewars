@@ -31,7 +31,7 @@ def main():
         command+=['--extern',f'genewars_{crate}={lib}']
     subprocess.run(command,cwd=P,env=environment(),capture_output=True,check=True);subprocess.run([str(exe),str(P),str(work)],cwd=P,check=True)
     actual=(work/'actual.bin').read_bytes();assert actual==expected,dict(actual=len(actual),expected=len(expected),first_difference=next((i for i,(a,e)in enumerate(zip(actual,expected))if a!=e),None))
-    pins=['rust/crates/genewars-runtime/src/plant_spread.rs','rust/crates/genewars-runtime/src/actor_world/plant_updates.rs','scripts/plant_factory_probe.rs','scripts/validate_plant_factory.py']
+    pins=['rust/crates/genewars-runtime/src/plant_spread.rs','rust/crates/genewars-runtime/src/world/plant_creation.rs','rust/crates/genewars-runtime/src/actor_world/plant_updates.rs','scripts/plant_factory_probe.rs','scripts/validate_plant_factory.py']
     receipt=dict(status='passed',utc=datetime.now(timezone.utc).isoformat(),cases=24,compared_bytes=len(actual),literal_instructions=steps,listing_pins={f.relative_to(P).as_posix():sha(f)for f in files},implementation_pins={f:sha(P/f)for f in pins},original_execution=False,
         scope='Complete neutral owner4 creation on exact mission: first inactive slot, quantized position, literal terrain height/shade calls, all512 packed plants, entire map/backing, source count and native Mule common links. Twelve selectors, signed boundaries, empty/plant/Mule occupied cells. Pointer gaps normalized. Reproduction caller/newborn scheduler and owner0..3 accounting remain separate.')
     (P/'research/integration/plant-factory-validation.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt))

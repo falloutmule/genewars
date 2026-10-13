@@ -252,7 +252,7 @@ impl ActorWorld {
                 let bytes=match kind {
                     1 if self.creatures.is_some()=>self.creatures.as_ref().unwrap().records()[slot].to_vec(),
                     3=>self.actors.records()[slot].to_vec(),
-                    5=>self.effects.as_ref().unwrap().records()[slot].to_vec(),
+                    5 if self.effects.is_some()=>self.effects.as_ref().unwrap().records()[slot].to_vec(),
                     _=>{
                         let start=layout.file_offset+slot*layout.packed_stride;
                         let packed=&self.backing[start..start+layout.packed_stride];
@@ -277,7 +277,7 @@ impl ActorWorld {
                 if before[offset]!=patch.before { return Err(ActorWorldError::CleanupBeforeImage{kind:patch.kind,slot:patch.slot,offset:patch.offset}); }
                 after[offset]=patch.after;self.actors.replace_record_checked(slot,&before,&after)?;
             },
-            5=>{
+            5 if self.effects.is_some()=>{
                 let pool=self.effects.as_mut().unwrap();let before=*pool.record(slot)?;let mut after=before;
                 if before[offset]!=patch.before { return Err(ActorWorldError::CleanupBeforeImage{kind:patch.kind,slot:patch.slot,offset:patch.offset}); }
                 after[offset]=patch.after;pool.replace_record_checked(slot,&before,&after)?;

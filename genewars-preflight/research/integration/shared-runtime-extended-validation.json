@@ -1,0 +1,1920 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-13T19:07:59.731921+00:00",
+  "binary_sha256": "97ef530d1809104a15986b3900de5444ed8a5dfc2eb6115248fbe0b80204b567",
+  "build_profile": "release",
+  "cases": [
+    {
+      "name": "initial",
+      "mission": {
+        "steps": 0,
+        "plants": 40,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 0,
+        "world_sha256": "262bd63bdd84337f241a06fc0d05c5dc0be73ecb7c46f02872bd2553619b59db",
+        "rgb_sha256": "3a8851460584531e99e510d0efd72d658fcc993ce68573e01c64e5dc92a9b081",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31,
+          32
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 5428,
+        "rng_draws": 64,
+        "selected_actor": null,
+        "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 787,
+        "active_effects": 1,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "pending_destination": [
+              0,
+              0
+            ],
+            "state": 1,
+            "ready": false,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "pending_destination": [
+              0,
+              0
+            ],
+            "state": 1,
+            "ready": false,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              16384,
+              15872
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "state": 8,
+            "animation": 6,
+            "frame": 0,
+            "reserve": 78,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/initial"
+    },
+    {
+      "name": "one",
+      "mission": {
+        "steps": 1,
+        "plants": 38,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 1,
+        "world_sha256": "9afc2902485275e4a7314bc3850189c7f59db009b5dcab254a22bab7f7b4008d",
+        "rgb_sha256": "7ee8a3e13f53bd332588708861277e85072568918001af61a2cefd5d633bb6aa",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31,
+          32
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 5428,
+        "rng_draws": 71,
+        "selected_actor": null,
+        "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 802,
+        "active_effects": 2,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "pending_destination": [
+              0,
+              0
+            ],
+            "state": 1,
+            "ready": false,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "pending_destination": [
+              0,
+              0
+            ],
+            "state": 1,
+            "ready": false,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              16384,
+              15872
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "state": 8,
+            "animation": 6,
+            "frame": 0,
+            "reserve": 78,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/one"
+    },
+    {
+      "name": "early-selection",
+      "mission": {
+        "steps": 0,
+        "plants": 40,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 0,
+        "world_sha256": "262bd63bdd84337f241a06fc0d05c5dc0be73ecb7c46f02872bd2553619b59db",
+        "rgb_sha256": "3a8851460584531e99e510d0efd72d658fcc993ce68573e01c64e5dc92a9b081",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31,
+          32
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 5428,
+        "rng_draws": 64,
+        "selected_actor": null,
+        "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 787,
+        "active_effects": 1,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "pending_destination": [
+              0,
+              0
+            ],
+            "state": 1,
+            "ready": false,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "pending_destination": [
+              0,
+              0
+            ],
+            "state": 1,
+            "ready": false,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              16384,
+              15872
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "state": 8,
+            "animation": 6,
+            "frame": 0,
+            "reserve": 78,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": "actor is not active for this player",
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/early-selection"
+    },
+    {
+      "name": "contact",
+      "mission": {
+        "steps": 189,
+        "plants": 31,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 189,
+        "world_sha256": "be5c0137915e23af5b4277d0a227c946dea037a1b408ddd604b9e9d8ad0720d9",
+        "rgb_sha256": "75b5c2cae0023cd8e0996e80c404bc8b9c1f9a2400479aba255fd5ee188efc97",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 5428,
+        "rng_draws": 834,
+        "selected_actor": 0,
+        "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 2696,
+        "active_effects": 37,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              21147,
+              13263
+            ],
+            "pending_destination": [
+              21147,
+              13263
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": true,
+            "animation": 8,
+            "frame": 0
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              20884,
+              13078
+            ],
+            "pending_destination": [
+              20884,
+              13078
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": true,
+            "animation": 8,
+            "frame": 0
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              16131,
+              16941
+            ],
+            "destination": [
+              16480,
+              16851
+            ],
+            "state": 8,
+            "animation": 3,
+            "frame": 1,
+            "reserve": 63,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/contact"
+    },
+    {
+      "name": "command",
+      "mission": {
+        "steps": 189,
+        "plants": 31,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 189,
+        "world_sha256": "6bee9b257e99a3f522ab6a687f647d366c9036ac4c3e68a06ca56bf5474ae254",
+        "rgb_sha256": "75b5c2cae0023cd8e0996e80c404bc8b9c1f9a2400479aba255fd5ee188efc97",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 5428,
+        "rng_draws": 834,
+        "selected_actor": 0,
+        "issued_move_commands": 1,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 2696,
+        "active_effects": 37,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              20840,
+              13673
+            ],
+            "pending_destination": [
+              20840,
+              13673
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": true,
+            "animation": 8,
+            "frame": 0
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              20884,
+              13078
+            ],
+            "pending_destination": [
+              20884,
+              13078
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": true,
+            "animation": 8,
+            "frame": 0
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              16131,
+              16941
+            ],
+            "destination": [
+              16480,
+              16851
+            ],
+            "state": 8,
+            "animation": 3,
+            "frame": 1,
+            "reserve": 63,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/command"
+    },
+    {
+      "name": "command-arrival",
+      "mission": {
+        "steps": 289,
+        "plants": 30,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 267,
+        "world_sha256": "a75cb1d1f39a06dda1023040b68ddb9583ec765c145b456f3e7837ce41aea883",
+        "rgb_sha256": "72b6722d880876422f675831464026b7e077bbb715b08f3b3caa75dd49823154",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 5428,
+        "rng_draws": 872,
+        "selected_actor": 0,
+        "issued_move_commands": 1,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 3500,
+        "active_effects": 1,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              20840,
+              13673
+            ],
+            "destination": [
+              20840,
+              13673
+            ],
+            "pending_destination": [
+              20840,
+              13673
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 2
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20884,
+              13078
+            ],
+            "destination": [
+              20884,
+              13078
+            ],
+            "pending_destination": [
+              20884,
+              13078
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 2
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              16430,
+              16355
+            ],
+            "destination": [
+              16377,
+              15876
+            ],
+            "state": 8,
+            "animation": 1,
+            "frame": 2,
+            "reserve": 51,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/command-arrival"
+    },
+    {
+      "name": "full",
+      "mission": {
+        "steps": 450,
+        "plants": 27,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 399,
+        "world_sha256": "51879d1d160ed1ddf647cb06ed426b96aae3addb132c9cd90ff6b46a90cae09a",
+        "rgb_sha256": "036b0491c966d139f319de25c23230be519906e751f93811b60df251b906bd91",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 5428,
+        "rng_draws": 1279,
+        "selected_actor": null,
+        "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 4955,
+        "active_effects": 0,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              21147,
+              13263
+            ],
+            "destination": [
+              21147,
+              13263
+            ],
+            "pending_destination": [
+              21147,
+              13263
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 4
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20884,
+              13078
+            ],
+            "destination": [
+              20884,
+              13078
+            ],
+            "pending_destination": [
+              20884,
+              13078
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              16243,
+              15741
+            ],
+            "destination": [
+              16243,
+              15741
+            ],
+            "state": 7,
+            "animation": 19,
+            "frame": 2,
+            "reserve": 65,
+            "target_kind": 2
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/full"
+    },
+    {
+      "name": "repeat",
+      "mission": {
+        "steps": 450,
+        "plants": 27,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 399,
+        "world_sha256": "51879d1d160ed1ddf647cb06ed426b96aae3addb132c9cd90ff6b46a90cae09a",
+        "rgb_sha256": "036b0491c966d139f319de25c23230be519906e751f93811b60df251b906bd91",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 5428,
+        "rng_draws": 1279,
+        "selected_actor": null,
+        "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 4955,
+        "active_effects": 0,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              21147,
+              13263
+            ],
+            "destination": [
+              21147,
+              13263
+            ],
+            "pending_destination": [
+              21147,
+              13263
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 4
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20884,
+              13078
+            ],
+            "destination": [
+              20884,
+              13078
+            ],
+            "pending_destination": [
+              20884,
+              13078
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              16243,
+              15741
+            ],
+            "destination": [
+              16243,
+              15741
+            ],
+            "state": 7,
+            "animation": 19,
+            "frame": 2,
+            "reserve": 65,
+            "target_kind": 2
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/repeat"
+    },
+    {
+      "name": "pan-return",
+      "mission": {
+        "steps": 0,
+        "plants": 40,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 0,
+        "world_sha256": "262bd63bdd84337f241a06fc0d05c5dc0be73ecb7c46f02872bd2553619b59db",
+        "rgb_sha256": "3a8851460584531e99e510d0efd72d658fcc993ce68573e01c64e5dc92a9b081",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31,
+          32
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 5428,
+        "rng_draws": 64,
+        "selected_actor": null,
+        "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 787,
+        "active_effects": 1,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "pending_destination": [
+              0,
+              0
+            ],
+            "state": 1,
+            "ready": false,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20736,
+              13568
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "pending_destination": [
+              0,
+              0
+            ],
+            "state": 1,
+            "ready": false,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              16384,
+              15872
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "state": 8,
+            "animation": 6,
+            "frame": 0,
+            "reserve": 78,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/pan-return"
+    },
+    {
+      "name": "seed-0",
+      "mission": {
+        "steps": 450,
+        "plants": 26,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 302,
+        "world_sha256": "e5eed4a6599abc94214f178cde29488a8341e7ca0e4350e492a7e6db5152f63f",
+        "rgb_sha256": "2f710cf2d630f6928f76cde14e7c94538f3cbebb5a09842b3555330a324ecce5",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 0,
+        "rng_draws": 1331,
+        "selected_actor": null,
+        "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 4957,
+        "active_effects": 0,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              20736,
+              13056
+            ],
+            "destination": [
+              20736,
+              13056
+            ],
+            "pending_destination": [
+              20736,
+              13056
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 3
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20736,
+              13056
+            ],
+            "destination": [
+              20736,
+              13056
+            ],
+            "pending_destination": [
+              20736,
+              13056
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              16243,
+              15741
+            ],
+            "destination": [
+              16243,
+              15741
+            ],
+            "state": 8,
+            "animation": 4,
+            "frame": 0,
+            "reserve": 81,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/seed-0"
+    },
+    {
+      "name": "seed-65535",
+      "mission": {
+        "steps": 450,
+        "plants": 27,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 402,
+        "world_sha256": "55ee95cb4b7272ee2532635921123c926fb27e691b24f781de76087bf4455cc1",
+        "rgb_sha256": "92213bfa8d3af7d6901a702dbfc71ae0a64e8abd47e649c18c12f0e2e0abbb6c",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 65535,
+        "rng_draws": 1264,
+        "selected_actor": null,
+        "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 4954,
+        "active_effects": 0,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              21139,
+              13882
+            ],
+            "destination": [
+              21139,
+              13882
+            ],
+            "pending_destination": [
+              21139,
+              13882
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              21050,
+              13971
+            ],
+            "destination": [
+              21050,
+              13971
+            ],
+            "pending_destination": [
+              21050,
+              13971
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 0
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              15746,
+              15767
+            ],
+            "destination": [
+              15746,
+              15767
+            ],
+            "state": 7,
+            "animation": 19,
+            "frame": 0,
+            "reserve": 51,
+            "target_kind": 2
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/seed-65535"
+    },
+    {
+      "name": "extended-5428",
+      "mission": {
+        "steps": 2400,
+        "plants": 24,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 454,
+        "world_sha256": "f944bf4f2526aaa034bc5a636e91fcf5df615ac2bf72a2d8663edc9eca5c1757",
+        "rgb_sha256": "66ecd66a05cc26c9397a94a10303f8eac3f36b98076e2019878bfe13453eeb3f",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          31,
+          2
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 5428,
+        "rng_draws": 1749,
+        "selected_actor": 0,
+        "issued_move_commands": 0,
+        "plant_births": 9,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 20584,
+        "active_effects": 0,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              21147,
+              13263
+            ],
+            "destination": [
+              21147,
+              13263
+            ],
+            "pending_destination": [
+              21147,
+              13263
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 2
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20884,
+              13078
+            ],
+            "destination": [
+              20884,
+              13078
+            ],
+            "pending_destination": [
+              20884,
+              13078
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 4
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              15039,
+              16252
+            ],
+            "destination": [
+              15217,
+              16768
+            ],
+            "state": 8,
+            "animation": 5,
+            "frame": 0,
+            "reserve": 121,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/extended-5428"
+    },
+    {
+      "name": "extended-0",
+      "mission": {
+        "steps": 2400,
+        "plants": 25,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 362,
+        "world_sha256": "19a6799eefb1435b260508cee37f5b1d125264cf0fdb2cc25077486f3eb3f486",
+        "rgb_sha256": "57016a216208e386628f40f3b5446f1471d93eeb13379636e3395d2634372da4",
+        "queue": [
+          3,
+          29,
+          35,
+          1,
+          33,
+          31
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 0,
+        "rng_draws": 2242,
+        "selected_actor": 0,
+        "issued_move_commands": 0,
+        "plant_births": 8,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 20580,
+        "active_effects": 0,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              20736,
+              13056
+            ],
+            "destination": [
+              20736,
+              13056
+            ],
+            "pending_destination": [
+              20736,
+              13056
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 2
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20736,
+              13056
+            ],
+            "destination": [
+              20736,
+              13056
+            ],
+            "pending_destination": [
+              20736,
+              13056
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 4
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              15969,
+              16266
+            ],
+            "destination": [
+              15969,
+              16266
+            ],
+            "state": 8,
+            "animation": 1,
+            "frame": 0,
+            "reserve": 123,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/extended-0"
+    },
+    {
+      "name": "extended-65535",
+      "mission": {
+        "steps": 2400,
+        "plants": 25,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 467,
+        "world_sha256": "3bd5067b786022d9325f885389c3b4f48443087361c82d87b01881eeceb31c65",
+        "rgb_sha256": "f39aeaea6fdba5cd66578be74ed669bbcd150f36155a23ded0eaf4bd2799805e",
+        "queue": [
+          29,
+          5,
+          35,
+          33,
+          31
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 65535,
+        "rng_draws": 1745,
+        "selected_actor": 0,
+        "issued_move_commands": 0,
+        "plant_births": 8,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 20580,
+        "active_effects": 0,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              21139,
+              13882
+            ],
+            "destination": [
+              21139,
+              13882
+            ],
+            "pending_destination": [
+              21139,
+              13882
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 1
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              21050,
+              13971
+            ],
+            "destination": [
+              21050,
+              13971
+            ],
+            "pending_destination": [
+              21050,
+              13971
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 2
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              16450,
+              16583
+            ],
+            "destination": [
+              15609,
+              16631
+            ],
+            "state": 8,
+            "animation": 7,
+            "frame": 7,
+            "reserve": 119,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/extended-65535"
+    },
+    {
+      "name": "extended-repeat",
+      "mission": {
+        "steps": 2400,
+        "plants": 24,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 454,
+        "world_sha256": "f944bf4f2526aaa034bc5a636e91fcf5df615ac2bf72a2d8663edc9eca5c1757",
+        "rgb_sha256": "66ecd66a05cc26c9397a94a10303f8eac3f36b98076e2019878bfe13453eeb3f",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          31,
+          2
+        ],
+        "blocked": null,
+        "world_mode": "landing-study",
+        "seed": 5428,
+        "rng_draws": 1749,
+        "selected_actor": 0,
+        "issued_move_commands": 0,
+        "plant_births": 9,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 20584,
+        "active_effects": 0,
+        "actor_states": [
+          {
+            "slot": 0,
+            "owner": 0,
+            "position": [
+              21147,
+              13263
+            ],
+            "destination": [
+              21147,
+              13263
+            ],
+            "pending_destination": [
+              21147,
+              13263
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 2
+          },
+          {
+            "slot": 1,
+            "owner": 0,
+            "position": [
+              20884,
+              13078
+            ],
+            "destination": [
+              20884,
+              13078
+            ],
+            "pending_destination": [
+              20884,
+              13078
+            ],
+            "state": 1,
+            "ready": true,
+            "pending_move": false,
+            "animation": 8,
+            "frame": 4
+          }
+        ],
+        "creature_states": [
+          {
+            "slot": 0,
+            "owner": 4,
+            "position": [
+              15039,
+              16252
+            ],
+            "destination": [
+              15217,
+              16768
+            ],
+            "state": 8,
+            "animation": 5,
+            "frame": 0,
+            "reserve": 121,
+            "target_kind": 0
+          }
+        ],
+        "actor_movement": true,
+        "plant_updates": true,
+        "creature_ai": true,
+        "other_families_frozen": true
+      },
+      "error": null,
+      "private_output": "private/integration/shared-runtime-validation/ff419c7a9c864cb6b4d73374cf74af8e/extended-repeat"
+    }
+  ],
+  "case_count": 16,
+  "extended_steps": 2400,
+  "full_state_export_rejected": true,
+  "mission_window_presented_three_frames": true,
+  "implementation_pins": [
+    {
+      "path": "rust/crates/genewars-assets/examples/campaign_header_probe.rs",
+      "sha256": "8db6cf075916117bc0b6ddc2c3368566de59b0e3559f7bd29080b20027ea567f"
+    },
+    {
+      "path": "rust/crates/genewars-assets/examples/rnc_decode.rs",
+      "sha256": "3618f11f55a1c4c0cf273ef360e6b8a4eea089161dbc3e6c6155dc40475a02e1"
+    },
+    {
+      "path": "rust/crates/genewars-assets/examples/rnc_prefix.rs",
+      "sha256": "dec736c5175267cd6db0564574d5127f22f69297b29531e95c72836665da29e2"
+    },
+    {
+      "path": "rust/crates/genewars-assets/examples/sprite_probe.rs",
+      "sha256": "83c0aff7ffe1e2c436fcac43632ed42da5f80fff0c2eb22e78e9f4731e50dc4f"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/lib.rs",
+      "sha256": "7a9571d30a1d3c229281a45223d277d908b61976ff21d27fe763966da7af133d"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/map_atlas.rs",
+      "sha256": "275facee7a4ad590ec68558bcd12016f2178eff73c058eb92d85864bc8aa30a7"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/mission_source.rs",
+      "sha256": "4c7d23930fb35483e7288af90845a28d64e3df228e7adaf2e5c7196c06ed313a"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/campaign.rs",
+      "sha256": "a610b74be9c65dd66ef9c84771b1c07422e1efea41d6e9895290a551d061bf78"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/construction.rs",
+      "sha256": "4866ff1f9bdd1bffbfb964bf03c495e5a1118d6bc24b0e3f8beea64ff780e5c0"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/custom_list.rs",
+      "sha256": "98955b9435e074518a2ee195e54e25779f96e7de7120f9620fdab1c89ea495c8"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/entity_draw_queue.rs",
+      "sha256": "b80d62724db689da242800705edfb34319bed786ac9ed91be1d4ffac7f203215"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/lib.rs",
+      "sha256": "1793d9674e9278dc0ea81ccabcf34c412bd0a925c126d9e47607a45764364f4c"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/menu_control.rs",
+      "sha256": "9def9eafcff361edeac28ff199ab1a241ada086c1bc4e826ba65fa6dbe28a472"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/mouse_packet.rs",
+      "sha256": "5763c082b5774e7e9042c3bff2cabf638b22ede7744f60e1c9904493527714fa"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/opaque_records.rs",
+      "sha256": "3019eb2459c8fab24c7f3aafdaf75a0d857229692f537881292a6614a293eba9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/plant_lifecycle.rs",
+      "sha256": "b9d38a54ec0dbaebbf86d3c27fed5933ba586cdb381904fbf302df9c5e8d2ac9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/player_creation.rs",
+      "sha256": "7ae09e8231c2c1b5f2d9d846db9edfd4a274a8df95e98834d665a543c04a63ee"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/terrain.rs",
+      "sha256": "5b906fdc3ed1809fefd078a1c60cca20cbca5a254df2fe386fe4608cf2450e6a"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-controls.rs",
+      "sha256": "90541643caeddb012511802bd989c935f2b4db2dd08251c8f513cf2e116d80d6"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-game.rs",
+      "sha256": "273e3866abe1c917b88e8cb7f6dcc8af6c1d9b9f01d49c53b05042166d7893c6"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-menu.rs",
+      "sha256": "b5998fd0ba96ee80c8b0b4a0ce1d8816aefd8bee1210da3dcc625d97e7cba094"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-terrain.rs",
+      "sha256": "5a43a9e71fc73f9da40784c35044f30da44d7436030dbf5d9d5a53591c008baf"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/actor_panel_text.rs",
+      "sha256": "2420680a90c00832f00c90e80ec28577d3fb79da91f2d09dce77c61d13a26951"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs",
+      "sha256": "fe2a7263ce0859ee06a954c075942c6cb67700b60b985a2b870e410fc02928fb"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/creature_scene.rs",
+      "sha256": "dacefce04049ac3151653bf14a9112fc9a2311dc8451ca4cee684980503d348c"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/effect_scene.rs",
+      "sha256": "5dfbe546ad2a5605fc4463914e67603bb0e07c47682fedf73a64a74340c5a9d1"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/game_window.rs",
+      "sha256": "57d772723476b101464c9a068c0094fdfc8d55926bb654ba4e276a6e4314cd56"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/menu_art.rs",
+      "sha256": "ed4c36e97472e90abd25c9d916297cc45b827545c2d606de7dcbe5005475ac81"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/menu_window.rs",
+      "sha256": "81a97003331f8a4773fd404ca6fdfc1eb93ab31b5d81f6e6e1dc03c1264797b9"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs",
+      "sha256": "06cea402d97ba53cfa40b35887a9ac637e5c98bf9de6fb2e5d6da7fd8741dcb2"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs",
+      "sha256": "1b08d625c101586b2d92be8b4fce66527b7819105d867aea688b2e7d355de263"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/shared_scene.rs",
+      "sha256": "6ef44a43bbdce5ddf97cef9b28e4bd8768a30161d8bc80c7e8d7eb381ecf9b4f"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/status_text.rs",
+      "sha256": "5035e4633529a97e3c4f3d7ec729be3ce2d4a4539bb97ef1835987f8ec7724d0"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/main.rs",
+      "sha256": "d6e975720b2ac940b2ff80363b30c3f46a43383c9e2bcc89a817a91c7493c1dc"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/entity_shadow.rs",
+      "sha256": "e0f3a50f7ec896817d12bc31a61fa7718e189749431ec32ff0f1eb03d0e4c102"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/lib.rs",
+      "sha256": "2e215508459fe7196bb32cab5fecbc70280b392e6b0cd187ff53137b5630326d"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/plant.rs",
+      "sha256": "700ce459b589f87e0f1dc864589402b7231295cbf11a0ee1217eb2c9e27d9833"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/plant_draw.rs",
+      "sha256": "a7ccbf33266633814ca39cc379cef6fcc2db092260c6ef3d35f335ec8cb1c07f"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/plant_scene.rs",
+      "sha256": "db39ede4866105f4fae6e893f4cc1649e3eebec938f82ddd5c6feeb744a7e759"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/plant_snapshot.rs",
+      "sha256": "af655a9e5bf7e4e2a3c37ba5a69845c17d8be9ddcd35d34023684200de68cb16"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/terrain.rs",
+      "sha256": "36baa11ca1f1d46d6c5bd8a71460b8d9eac3fdf1812fc19a0be45a7a94d611e9"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/terrain_modes.rs",
+      "sha256": "f0caed325fdf7eec0c7fb62eff5d8ab0bc4976f1483520d52ea56dc54c80a128"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/terrain_strip.rs",
+      "sha256": "7c24734112832f7b92d75ccdab2ea920134569bf6afb13d390a465ec7a9e50e6"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/terrain_view.rs",
+      "sha256": "90512297a4d22b4a806f4b41f14f6b08f48849b94ab4439198e0813ed139104d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
+      "sha256": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_command.rs",
+      "sha256": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction.rs",
+      "sha256": "0988dac1c88cbea6db58b6036cc26e8618ad49ded7de3787009ce2f82f88d182"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
+      "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_motion.rs",
+      "sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
+      "sha256": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_render.rs",
+      "sha256": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_resources.rs",
+      "sha256": "8c94e8afb54d1dbcb0e33de471a9b7d4d4008d3a8782f970ff5b0e95194145a3"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
+      "sha256": "01927dbf45e172e8e507acd925249bc89f2f78815dbfaac8202ea4d83f8b4e77"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/bookkeeping_updates.rs",
+      "sha256": "ab7bcd5a197af390b9d54d0d1e5eb94a1484ff2118cd8963767aab7dae8673d1"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
+      "sha256": "2d010e151a59448bcdfc38a6359abaa5bb2dd304217fabcdd6c83031c44a3521"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
+      "sha256": "f3f3077d1904f243e1d495f9712541c181d3fc4d7cb565240115b0a05fd40f85"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
+      "sha256": "3cfcc1a1e7dbcff0d5bebb5f020c41aa54a359093a5f49660041860f49841cc4"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs",
+      "sha256": "e85b2309b63ba285f35d45dffc44103af5508405af05a2303bec0c78d362c4a9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
+      "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "c97c4f7e70e1cddf3cb1cdff1ab5112270e12ca585eb8d6021858efe9f771e52"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/blueprint.rs",
+      "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/bookkeeping.rs",
+      "sha256": "b1d2a1172c2368a98c3008eb9d14817a5837753e698cd7f71a76c6d4272c3b2a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building.rs",
+      "sha256": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_site.rs",
+      "sha256": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terrain.rs",
+      "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/creature_world.rs",
+      "sha256": "afabdefae2713abe6f4ac97cc3450ac7700bc7741558bca22252bd53a14725c5"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
+      "sha256": "944251d5617a636b7b847a51ef00270d06872b5b27a23f5b79286b43c2bc23bd"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/identity.rs",
+      "sha256": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing.rs",
+      "sha256": "38ca22019dc6fe33fccfa8e7f67ed3e627f50224c1626c663c351538a1c691c8"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
+      "sha256": "1ba0b302d1908501fbf05ad46f75b6627fa8172eceb4b49b6d94bed05c90769f"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/lib.rs",
+      "sha256": "580b1b4f862d40db3b4322c35dcb6acb6275e08beaa3a14ec474551dd9ceca62"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
+      "sha256": "cc063773f1a08c161bb34aa03751e75dd3c74ea50e78d4d63c0d6a6ad844e685"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/plant_spread.rs",
+      "sha256": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/player_state.rs",
+      "sha256": "d7faa11882d551bc009e43e7e6ea89dca3d14dd726341cfeb959981d6da496b0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_projection.rs",
+      "sha256": "455938c39b889e6e035e2821e74b7d5f4aae980786745c7861dc1aa5dbb38dc6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_resolver.rs",
+      "sha256": "1412ab3a6a55e95df5b1e5cd1f4bf4169da55523966b1bfec56b3a917628d1c5"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/terrain_target.rs",
+      "sha256": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world/plant_creation.rs",
+      "sha256": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world.rs",
+      "sha256": "3fd7e6a7df779c935836566ba8d9755cf843db7d964a888e7d53a53d405bffe7"
+    },
+    {
+      "path": "rust/crates/genewars-tools/src/main.rs",
+      "sha256": "d071ae2af9683494231922a1038c068f296f19f384fb2a04625787d462b969db"
+    },
+    {
+      "path": "rust/crates/genewars-tools/src/mission_source.rs",
+      "sha256": "b5bac5fc47fc4cd46d1374afa5172d2970b8a099835a1dc86644a2dc4dc3c8be"
+    },
+    {
+      "path": "rust/crates/genewars-tools/src/plant_scene.rs",
+      "sha256": "b566a7442f5185991a7d8ade6c7d610edc6a580c0b1bef46ac8ce64ef1f924b2"
+    },
+    {
+      "path": "rust/crates/genewars-tools/src/terrain_render.rs",
+      "sha256": "4214802388f7df11a6bc20e031d801b8ecdb0fba9cb792d81bf5be95bd37b8f6"
+    },
+    {
+      "path": "rust/Cargo.toml",
+      "sha256": "9e2a935f4f0c091e1c1d0ecd329739a4f586c27b343575e1103a5d42b9f6e523"
+    },
+    {
+      "path": "rust/crates/genewars-assets/Cargo.toml",
+      "sha256": "c2241224efb8cbeffbf7ee13ba858d6347927046acd08f3f24799d8438127548"
+    },
+    {
+      "path": "rust/crates/genewars-core/Cargo.toml",
+      "sha256": "7a659e87a4d0f91ca799b4e2eee3e7e60d4e756a98d0cd94e0486c3a33e8ceaf"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/Cargo.toml",
+      "sha256": "16bb9c09e4a05129deac3a1b649ac7e4dc740cf73a77858bcca5ff9d15358eb2"
+    },
+    {
+      "path": "rust/crates/genewars-render/Cargo.toml",
+      "sha256": "3ea0fda789e7ac7c63600f39f110af29356de628a5931b299f15e7241065565e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/Cargo.toml",
+      "sha256": "c0349e07cfefb5904320732c1115df3014ff7ecf1650586b260c7bcba32477e5"
+    },
+    {
+      "path": "rust/crates/genewars-tools/Cargo.toml",
+      "sha256": "3637a5f73884255b30d746d360b4e700bf9a00b6da1b6a24efa6d71708f1a227"
+    },
+    {
+      "path": "rust/Cargo.lock",
+      "sha256": "37750a04776d56fe248c353a378446b510d5699fc0890975ee519c1cfea1b663"
+    },
+    {
+      "path": "research/integration/runtime-resource-catalog.tsv",
+      "sha256": "b4ced7d0c25222e19941f8c00a2c1f93b78ee48bdd2fdbb987e7b01ac9e4fdd4"
+    },
+    {
+      "path": "scripts/validate_shared_runtime.py",
+      "sha256": "1a9e709e96cc69afab0a6ce854a6fc2745a0526fa95c7ff522d9e7c70d49f912"
+    }
+  ],
+  "scope": "Explicit seeded world study: numeric reveal, source factory/contact activates actors; player-list actor callbacks consume ground orders, move, arrive and idle; plants, empty-building bookkeeping, mission countdown and full family4 lifecycle run in admitted source order. The neutral Mule shares RNG in source family order, searches for food, approaches, feeds and retires consumed plants; its admitted states are rendered through the verified wrapper. Compilation snapshot pinned before/after build and binary copied privately before tests. Other creature kinds, other families and presentation requests remain pending. No full-game/startup parity or original execution."
+}

@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-mode5-triangle-review",
-  "checked_utc": "2026-10-13T17:28:26.890326+00:00",
+  "checked_utc": "2026-10-13T19:12:08.441234+00:00",
   "original_or_gui_execution": false,
   "native_cases": 5880,
   "case_groups": {
@@ -92,7 +92,7 @@
   "harness": {
     "path": "private/review/mode5-triangle/review.exe",
     "size": 5102102,
-    "sha256": "4d4e464bd0e47437ec903f6c66cba03e80529dd303271efa1272d6e4ee609af4"
+    "sha256": "d933750199bc3a7ce4e37ebae41f1220005b0f172e623e2e1f92482536d66622"
   },
   "review_sources": [
     {

@@ -22,6 +22,23 @@ use super::runtime_resources::creature_scene::{draw_supported_mule_record, Creat
 use super::effect_scene::{draw_effect_slots, EffectSceneReceipt};
 use super::runtime_resources::{Frame, Resources};
 
+#[path = "actor_panel_text.rs"]
+pub mod panel_text;
+
+/// Draw the selected actor's source-bound generated name and category using
+/// the catalog-admitted FONT0, English TEXT table, and MAIN.PAL owned by
+/// `Resources`. Selection policy and panel visibility remain caller-owned.
+pub fn draw_selected_actor_text(
+    resources: &Resources,
+    world: &ActorWorld,
+    actor_slot: usize,
+    image: &mut genewars_render::RgbImage,
+) -> Result<panel_text::SelectedActorTextReceipt, String> {
+    let font = resources.panel_font0()?;
+    let text = resources.panel_text()?;
+    panel_text::draw_selected_actor_details(image, &font, &text, resources.panel_palette(), world, actor_slot)
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ActorSceneActorReceipt {
     pub actor_slot: usize,

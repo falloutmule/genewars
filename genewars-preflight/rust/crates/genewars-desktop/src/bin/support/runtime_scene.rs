@@ -31,8 +31,8 @@ impl MissionState {
     fn extra_report(&self)->String {
         match self {
             Self::Plants(_)=>"\"world_mode\":\"plants\"".into(),
-            Self::Landing(w)=>format!("\"world_mode\":\"landing-study\",\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
-                w.seed,w.world.rng().draw_count,w.selected.map(|s|s.to_string()).unwrap_or("null".into()),w.command_count,w.pending_requests,
+            Self::Landing(w)=>format!("\"world_mode\":\"landing-study\",\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"plant_births\":{},\"reproduction_enabled\":true,\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
+                w.seed,w.world.rng().draw_count,w.selected.map(|s|s.to_string()).unwrap_or("null".into()),w.command_count,w.plant_births,w.pending_requests,
                 w.world.effects().unwrap().records().iter().filter(|r|r[6]!=0).count(),w.actor_state_json(),w.creature_state_json()),
         }
     }
@@ -187,7 +187,7 @@ impl Game {
             Scene::Error=>(&flat,vec!["MISSION LOAD FAILED - NO WORLD COMMITTED".into(),self.error.clone().unwrap_or_default(),"ESC: RETURN TO MENU".into()]),
             Scene::Quit=>(&self.images[0],vec!["CLOSING".into()]),
         };
-        status_text::overlay(base,&lines)
+        if self.scene==Scene::Mission {status_text::mission_overlay(base,&lines)}else{status_text::overlay(base,&lines)}
     }
 
     pub fn report(&self)->String {

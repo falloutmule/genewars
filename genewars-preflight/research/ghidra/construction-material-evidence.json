@@ -1,0 +1,9 @@
+{
+  "cases": 512,
+  "compared_bytes": 8192,
+  "literal_instruction_steps": 129015,
+  "output_sha256": "3e8c2af03b0921230a4e82d28e4a21d45b5b7f5c3b9bf239a0b0ea0cd04251e9",
+  "source_sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31",
+  "listing_sha256": "b1b285e56911bee26f33d6aa3c2a5ccd42481e25be7fc4f986f5e55bbb173ad3",
+  "scope": "8B890 entire raw-material repair writes including torus edges, encoded classes, source pointer carry and asymmetric propagation; no original execution"
+}

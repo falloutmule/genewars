@@ -45,3 +45,6 @@ effects/EFF.ANB	f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253
 physics/angle.bin	1c26f16f88a3e0cedc9c879837b3849567ff70514c033eb6249bd95a264debce	514	private/integration/physics-tables/angle.bin	validated mapped object1 offset 0x9E134; physics-inputs.json
 physics/bounce.bin	c62a747206c89218e01102645341f151f5308fe1259b177f9d0418a67575e5e5	16	private/integration/physics-tables/bounce.bin	validated mapped object3 offset 0x4530; physics-inputs.json
 creatures/MULE.ANB	f6c62221b52a62088f91ae8d00becfef513282cbf98a5990c1a0859cd8b2d346	57038	private/integration/creature-resources/MULE.ANB	root/2/disc/335; selector4 packed4 proof creature-evidence.json
+panel/font0.dat	af89c4e4c02e394810b22ecf3d57211cdb56a0006071a88f43d0ae6fb370447d	8039	private/integration/rnc-decoded/ee30f263c450c2611d8bfc0b7d3511d532477d320b7fa245076db28b766209af.bin	root/2/disc/71; decoded RNC output
+panel/font0.tab	321c49b302552e2bcf287bd20ef0954fb977dd66aef6e82101e3c0c64b5b0a17	1170	private/integration/rnc-decoded/f08fe66f5be70bde22e2a59d160d1a097cc36d0dbcb011f254a8220275cef161.bin	root/2/disc/72; decoded RNC output
+physics/plant-spread.bin	8aa88c050cdb4229467f43347efcd9a8d88e5651cf2684e92666dcfe886515b6	36	private/integration/physics-tables/plant-spread.bin	validated mapped object3 offset 0x4564; physics-inputs.json

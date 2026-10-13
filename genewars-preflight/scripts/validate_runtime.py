@@ -24,12 +24,14 @@ def main():
     scratch.mkdir(parents=True)
     cases = []
 
-    def run(name, script, root=bundle, export=False, failure=False):
+    def run(name, script, root=bundle, export=False, failure=False, landing_seed=None):
         directory = scratch / name
         directory.mkdir()
         replay = directory / 'input.txt'
         replay.write_text(script, encoding='utf-8')
         command = [str(binary), str(root), '--headless', str(replay), '--report', str(directory / 'report.json')]
+        if landing_seed is not None:
+            command += ['--landing-seed', str(landing_seed)]
         if export:
             command += ['--world-output', str(directory / 'world.bin'), '--bmp', str(directory / 'image.bmp')]
         proc = subprocess.run(command, capture_output=True, text=True, timeout=180)
@@ -77,9 +79,11 @@ def main():
         original = path.read_bytes()
         path.write_bytes(bytes([original[0] ^ 1]) + original[1:])
         is_menu = resource['path'].startswith('menu/')
-        result = run('corrupt-%02d' % i, 'click 312 140\nload\n', damaged, failure=is_menu)
+        # The explicit reproduction table is consumed only by the landing route.
+        seed = 5428 if resource['path'] == 'physics/plant-spread.bin' else None
+        result = run('corrupt-%02d' % i, 'click 312 140\nload\n', damaged, failure=is_menu, landing_seed=seed)
         if not is_menu:
-            assert result['scene'] == 'Error' and result['mission'] is None and 'mismatch' in result['error']
+            assert result['scene'] == 'Error' and result['mission'] is None and 'mismatch' in result['error'], (resource['path'], result)
         path.write_bytes(original)
     missing = damaged / 'terrain/CONQ001.DAT'
     moved = damaged / 'terrain/missing.dat'

@@ -3,9 +3,10 @@
 //! `MissionWorld` owns an exact copy of the admitted packed mission source.
 //! It validates and follows the source map's three-byte entity references,
 //! preserves all packed bytes outside the proved plant/map mutations, and runs
-//! family-1 callbacks only on the statically admitted no-RNG paths.
-//! Other-family AI, reproduction, creation passes, view callbacks, queue
-//! effects, and reference/UI/audio cleanup remain explicitly suspended.
+//! family-1 callbacks through either the legacy bounded API or the explicit
+//! RNG-enabled neutral reproduction API. Other-family AI, view callbacks,
+//! draw-queue consumers and reference/UI/audio cleanup remain suspended here;
+//! the owned ActorWorld adapter applies numeric cross-family target cleanup.
 
 use core::fmt;
 use genewars_assets::{ConqMissionSource, MissionSourceError};
@@ -16,6 +17,9 @@ use genewars_core::cd_candidate::{
 use std::collections::HashSet;
 use std::vec::Vec;
 use std::ops::{Deref, DerefMut};
+
+mod plant_creation;
+pub(crate) use plant_creation::PlantReproductionContext;
 
 const MISSION_SHA256: &str = "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2";
 const PARAMETER_SHA256: &str = "297a1da0e9c30d6d4cb7c88addb8234be260e0e93b7d4b2b1c4c3ad8b7df2b7c";
@@ -42,8 +46,7 @@ const PLAYER_COUNT: usize = 4;
 pub struct PlantParameters {
     pub growth_deltas_i8: [i8; 8],
     pub spread_period_u8: u8,
-    /// Retained because the source field is proved even though this update
-    /// slice does not use the random-walk path.
+    /// Number of RNG direction samples for an eligible reproduction attempt.
     pub random_walk_steps_u8: u8,
     pub crowding_limit_u8: u8,
     pub check_threshold_u8: u8,
@@ -163,6 +166,7 @@ pub struct PlantRenderRecord {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TickEvent {
     Grew { record_index: usize, growth_before: i16, growth_after: i16 },
+    Created { parent_index: usize, record_index: usize },
     SuppressedNoop { record_index: usize, flags_at_15: u8, flags_at_2e: u8 },
     DelayedRetirement { record_index: usize, remaining_delay: u8 },
     Retired { record_index: usize, old_cell_counter: u8, new_cell_counter: u8 },
@@ -267,6 +271,15 @@ impl MissionWorld {
         Ok(report)
     }
 
+    /// Explicit RNG-enabled route; legacy plant-only stepping remains bounded.
+    pub fn tick_plants_with_reproduction(&mut self,rng:&mut crate::blueprint::BlueprintRng,
+        directions:&crate::plant_spread::SpreadDirections,height_threshold:i16)->Result<PlantTickReport,RuntimeError> {
+        let mut candidate=self.clone_for_transaction()?;let mut staged_rng=*rng;
+        let mut context=PlantReproductionContext{rng:&mut staged_rng,directions,height_threshold};
+        let report=candidate.tick_plants_inner_with_reproduction(&mut context)?;
+        *self=candidate;*rng=staged_rng;Ok(report)
+    }
+
     fn clone_for_transaction(&self) -> Result<Self, RuntimeError> {
         let mut bytes = Vec::new();
         bytes.try_reserve_exact(self.bytes.len()).map_err(|_| RuntimeError::AllocationFailed)?;
@@ -301,6 +314,12 @@ impl<S: PlantStorage> MissionWorld<S> {
     /// or unavailable owner-count mutation rejects the entire pass without
     /// changing bytes, cursor, or tick number.
     pub(crate) fn tick_plants_inner(&mut self) -> Result<PlantTickReport, RuntimeError> {
+        self.tick_plants_inner_impl(None)
+    }
+    pub(crate) fn tick_plants_inner_with_reproduction(&mut self,context:&mut PlantReproductionContext<'_>)->Result<PlantTickReport,RuntimeError> {
+        self.tick_plants_inner_impl(Some(context))
+    }
+    fn tick_plants_inner_impl(&mut self,mut reproduction:Option<&mut PlantReproductionContext<'_>>)->Result<PlantTickReport,RuntimeError> {
         let before_count = self.plant_count();
         let cursor_before = self.schedule_cursor();
         let slots = self.schedule_slots()?;
@@ -313,24 +332,30 @@ impl<S: PlantStorage> MissionWorld<S> {
         // Calls are sequential. Later callbacks see earlier map/list/growth
         // mutations when their nine-cell positive-growth count is computed.
         for &index in &callback_indices {
-            self.process_plant_callback(index, &mut events)?;
+            let created_count=self.process_plant_callback(index, &mut events,reproduction.as_deref_mut())?;
             let layout = self.layouts()[PLANT_GROUP];
             let record_start = layout.offset + index * layout.stride;
             callback_states.push((index, PlantCallbackState {
                 active_type_at_6: self.bytes[record_start + 6],
                 flags_at_2e: self.bytes[record_start + 38],
-                created_count: 0,
+                created_count,
             }));
         }
 
-        let schedule = plan_family1_plant_schedule(
+        let mut schedule = plan_family1_plant_schedule(
             cursor_before, before_count, &slots, &callback_states,
         )?;
         if schedule.second_pass_pending {
-            return Err(RuntimeError::UnsupportedScheduledPlantState {
-                index: callback_indices.first().copied().unwrap_or(0),
-                reason: "first-counter slice cannot create plants; subsequent pass is unsupported",
-            });
+            if reproduction.is_none(){return Err(RuntimeError::StorageInvariant("newborn plants without admitted reproduction"));}
+            let layout=self.layouts()[PLANT_GROUP];let mut remaining=schedule.created_count;
+            for slot in 0..layout.count {
+                if remaining==0{break;}
+                let at=layout.offset+slot*layout.stride;
+                if self.bytes[at+6]!=0&&self.bytes[at+21]&1!=0 {
+                    self.bytes[at+21]&=0xfe;schedule.queued_indices.push(slot);remaining-=1;
+                }
+            }
+            if remaining!=0{return Err(RuntimeError::StorageInvariant("missing marked newborn plant"));}
         }
         write_u16(&mut self.bytes, SCHEDULE_CURSOR_OFFSET, schedule.cursor_after);
         self.tick_number = self.tick_number.checked_add(1).ok_or(RuntimeError::AllocationFailed)?;
@@ -343,7 +368,7 @@ impl<S: PlantStorage> MissionWorld<S> {
             callbacks: schedule.callback_indices,
             queued_indices: schedule.queued_indices,
             events,
-            suspended: SUSPENDED,
+            suspended: SuspendedSubsystems{family1_creation_pass:reproduction.is_none(),..SUSPENDED},
             full_game_tick: false,
         })
     }
@@ -466,7 +491,7 @@ impl<S: PlantStorage> MissionWorld<S> {
         Ok(calls)
     }
 
-    fn process_plant_callback(&mut self, index: usize, events: &mut Vec<TickEvent>) -> Result<(), RuntimeError> {
+    fn process_plant_callback(&mut self, index: usize, events: &mut Vec<TickEvent>,reproduction:Option<&mut PlantReproductionContext<'_>>) -> Result<u8, RuntimeError> {
         let layouts = self.layouts();
         let layout = layouts[PLANT_GROUP];
         if index >= layout.count { return Err(RuntimeError::UnsupportedScheduledPlantState { index, reason: "slot outside family-1 table" }); }
@@ -476,7 +501,7 @@ impl<S: PlantStorage> MissionWorld<S> {
         let flags2e = self.bytes[start + 38];
         if flags15 & 1 != 0 || flags2e & 0x10 != 0 {
             events.push(TickEvent::SuppressedNoop { record_index: index, flags_at_15: flags15, flags_at_2e: flags2e });
-            return Ok(());
+            return Ok(0);
         }
         let selector = self.bytes[start + 35] as i8;
         if !(0..12).contains(&i32::from(selector)) {
@@ -498,6 +523,7 @@ impl<S: PlantStorage> MissionWorld<S> {
         if owner > 4 {
             return Err(RuntimeError::UnsupportedOwnerCounter { index, owner });
         }
+        let mut created_count=0u8;
         let old_growth = growth;
         let old_animation = animation;
         if growth > 0 {
@@ -519,7 +545,12 @@ impl<S: PlantStorage> MissionWorld<S> {
                     if counter % params.spread_period_u8 == 0 {
                         let cap = if owner == 4 { 412 } else { 512 };
                         if self.plant_count() < cap {
-                            return Err(RuntimeError::UnsupportedScheduledPlantState { index, reason: "scheduled reproduction/RNG path is not implemented" });
+                            let context=reproduction.ok_or(RuntimeError::UnsupportedScheduledPlantState { index, reason: "scheduled reproduction/RNG path is not implemented" })?;
+                            // Source stores growth/counter before querying its target cell.
+                            self.bytes[start+36..start+38].copy_from_slice(&growth.to_le_bytes());self.bytes[start+39]=counter;
+                            if let Some(slot)=self.reproduce_neutral_plant(index,params,context)? {
+                                created_count=1;events.push(TickEvent::Created{parent_index:index,record_index:usize::from(slot)});
+                            }
                         }
                     }
                 }
@@ -570,7 +601,7 @@ impl<S: PlantStorage> MissionWorld<S> {
         self.bytes[start + 38] = flags2e_after;
         self.bytes[start + 39] = counter;
         self.bytes[start + 40] = retirement;
-        Ok(())
+        Ok(created_count)
     }
 
     fn positive_growth_neighbor_count(&self, gx: u8, gy: u8) -> Result<u8, RuntimeError> {

@@ -80,6 +80,6 @@
   "production_source_sha256": {
     "rust/crates/genewars-runtime/src/actor_motion.rs": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f",
     "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs": "01927dbf45e172e8e507acd925249bc89f2f78815dbfaac8202ea4d83f8b4e77",
-    "rust/crates/genewars-runtime/src/creature_world.rs": "fb829cee975ca26518f25d0db36f4685ad7576fc270ae4b292c645293f006d56"
+    "rust/crates/genewars-runtime/src/creature_world.rs": "afabdefae2713abe6f4ac97cc3450ac7700bc7741558bca22252bd53a14725c5"
   }
 }

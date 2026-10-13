@@ -20,6 +20,7 @@ pub struct CreaturePassReceipt {
     pub pending_ui_animations: [CreatureUiAnimationRequest; 8],
     pub pending_audio: Vec<u8>,
     pub pending_plant_retirements: Vec<u16>,
+    pub pending_portrait_refreshes: Vec<u16>,
 }
 
 fn ui_animation_requests() -> [CreatureUiAnimationRequest; 8] {
@@ -42,17 +43,17 @@ impl ActorWorld {
             if slot != 0 { return Err(ActorWorldError::UnsupportedCreatureSchedule); }
             if context.frame_counter == 1 {
                 world.step_initial_mule_choice(context.frame_counter, trig)?;
-                Ok((Vec::new(),Vec::new()))
+                Ok((Vec::new(),Vec::new(),false))
             } else {
                 let receipt=world.step_mule_followup_with_water(context, physics, trig, animations)?;
-                Ok((receipt.pending_audio,receipt.pending_plant_retirements))
+                Ok((receipt.pending_audio,receipt.pending_plant_retirements,receipt.pending_portrait_refresh))
             }
         })
     }
 
     fn neutral_creature_pass_with<F>(&mut self, player_count: u8, mut callback: F)
         -> Result<CreaturePassReceipt, ActorWorldError>
-    where F: FnMut(&mut Self, u16) -> Result<(Vec<u8>,Vec<u16>), ActorWorldError> {
+    where F: FnMut(&mut Self, u16) -> Result<(Vec<u8>,Vec<u16>,bool), ActorWorldError> {
         if player_count > 4 { return Err(ActorWorldError::InvalidPlayer(player_count)); }
         let pool = self.creatures.as_ref().ok_or(ActorWorldError::UnsupportedCreatureSchedule)?;
         let declared = word(&self.backing, 0x3550);
@@ -78,16 +79,18 @@ impl ActorWorld {
         let mut slots = Vec::new();
         let mut pending_audio=Vec::new();
         let mut pending_plant_retirements=Vec::new();
+        let mut pending_portrait_refreshes=Vec::new();
         if active == 1 {
             // Virtual68 at 1EC50 is the pure state>=24 predicate. Owner4
             // skips the player-counter increment for either result.
-            let (audio,retirements)=callback(&mut staged, 0)?;
+            let (audio,retirements,portrait)=callback(&mut staged, 0)?;
             pending_audio.extend(audio);pending_plant_retirements.extend(retirements);
+            if portrait {pending_portrait_refreshes.push(0);}
             slots.push(0);
         }
         staged.validate_links()?;
         *self = staged;
-        Ok(CreaturePassReceipt { primary_slots: slots, pending_ui_animations: ui_animation_requests(), pending_audio, pending_plant_retirements })
+        Ok(CreaturePassReceipt { primary_slots: slots, pending_ui_animations: ui_animation_requests(), pending_audio, pending_plant_retirements, pending_portrait_refreshes })
     }
 
     /// Source14EC0 scans all 32 kind7 records. Source4F580 with count zero
@@ -141,7 +144,7 @@ mod tests {
     #[test]
     fn inconsistent_counts_and_hidden_empty_family_members_reject_without_changes() {
         let mut world=fixture();world.backing[0x3550..0x3552].copy_from_slice(&1i16.to_le_bytes());let before=world.clone();
-        assert!(matches!(world.neutral_creature_pass_with(4,|_,_|Ok((Vec::new(),Vec::new()))),Err(ActorWorldError::CreatureCountMismatch{..})));
+        assert!(matches!(world.neutral_creature_pass_with(4,|_,_|Ok((Vec::new(),Vec::new(),false))),Err(ActorWorldError::CreatureCountMismatch{..})));
         assert_eq!(world,before);
         for kind in [6u8,7] {
             let mut world=fixture();assert!(world.step_empty_families_7_and_6().is_ok());

@@ -1,0 +1,11 @@
+{
+  "cases": 256,
+  "compared_bytes": 3104,
+  "literal_instruction_steps": 27106,
+  "output_sha256": "da6ed171c5fea578c8f8581d863bccb29508ef4737d6f2e848c3cced70ce14e2",
+  "source_sha256": "0b78ab600e361fedbff300f20b10e16beb1a01bda89ba881aa86c53f507231d0",
+  "pins": {
+    "private/ghidra/construction-command/instructions-0008cde0.txt": "eb4efe6a450c354651410f3240dc5709035f28c44866dcd99251433c94cd4850"
+  },
+  "scope": "8CDE0 ordered completion RNG/height setter protocol; setter test port clamps only and does not claim8C550 transitive completion"
+}

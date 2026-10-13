@@ -1,0 +1,9 @@
+{
+  "cases": 256,
+  "compared_bytes": 512,
+  "literal_instruction_steps": 20883,
+  "output_sha256": "f92df86ceb5267d25769e7f310d031f015da8e6c943dbdfbdb7b490c6b87e503",
+  "source_sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31",
+  "listing_sha256": "dcd3cda09865c093a5e1df220935f2a51a6b2c33bd35a62d5528e4eac08a952b",
+  "scope": "8C290 complete shade arithmetic with explicit ordered733A0 normal inputs; no original execution"
+}

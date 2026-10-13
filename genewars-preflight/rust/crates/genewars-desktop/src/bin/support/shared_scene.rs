@@ -7,7 +7,7 @@ use genewars_core::cd_candidate::{interpolate_height,interpolate_entity_shade,ca
 use genewars_runtime::{actor_world::{ActorWorld,LandingEffectCallback,GroundMoveInput,GroundMoveOutcome},
     actor_pool::ActorHandleBindings,blueprint::{BlueprintNames,BlueprintRng},
     player_state::{PlayerState,ActorOriginSample},actor_activation::TrigTables,
-    creature_world::MuleStepContext,
+    creature_world::MuleStepContext,plant_spread::SpreadDirections,
     landing_effect_lifecycle::RetirementUiState,terrain_target::project_terrain_target};
 use super::{runtime_resources::{Resources,Frame,read_bound},actor_scene};
 
@@ -15,11 +15,13 @@ use super::{runtime_resources::{Resources,Frame,read_bound},actor_scene};
 pub struct SharedMission {
     pub world:ActorWorld,
     trig:TrigTables,
+    plant_spread:SpreadDirections,
     ui:RetirementUiState,
     pub frame_counter:u64,
     pub selected:Option<usize>,
     pub command_count:u64,
     pub pending_requests:u64,
+    pub plant_births:u64,
     pub seed:u16,
 }
 impl SharedMission {
@@ -48,8 +50,9 @@ impl SharedMission {
                 pending_requests+=reveal.pending_presentation_vertices.len()as u64;
             } else {pending_requests+=1;}
         }
-        Ok(Self{world,trig:TrigTables::generate_pinned().map_err(|e|e.to_string())?,ui:RetirementUiState::native_empty(),
-            frame_counter:0,selected:None,command_count:0,pending_requests,seed})
+        let plant_spread=SpreadDirections::from_mapped_bytes(&read_bound(&root.join("physics/plant-spread.bin"))?).map_err(|e|e.to_string())?;
+        Ok(Self{world,trig:TrigTables::generate_pinned().map_err(|e|e.to_string())?,plant_spread,ui:RetirementUiState::native_empty(),
+            frame_counter:0,selected:None,command_count:0,pending_requests,plant_births:0,seed})
     }
     pub fn render(&self,resources:&Resources,target:[i16;2])->Result<Frame,String> {
         // Until original admission/order is integrated, only linked active
@@ -58,8 +61,13 @@ impl SharedMission {
             (r[6]==3&&r[0x70]&1!=0).then_some(slot)).collect::<Vec<_>>();
         let effects=self.world.effects().ok_or("effects not admitted")?.records().iter().enumerate()
             .filter_map(|(slot,r)|(r[6]!=0).then_some(slot)).collect::<Vec<_>>();
-        actor_scene::render_actor_world_with_selected_portrait(resources,&self.world,target,0,self.frame_counter as u8,&actors,&[0],
-            actor_scene::MuleSceneGlobals{global_shadow_mode:0,inherited_wrapper_flags:0,clip_flag_bit0:false},&effects,self.selected).map(|r|r.frame)
+        let mut frame=actor_scene::render_actor_world_with_selected_portrait(resources,&self.world,target,0,self.frame_counter as u8,&actors,&[0],
+            actor_scene::MuleSceneGlobals{global_shadow_mode:0,inherited_wrapper_flags:0,clip_flag_bit0:false},&effects,self.selected)?.frame;
+        if let Some(slot)=self.selected {
+            actor_scene::draw_selected_actor_text(resources,&self.world,slot,&mut frame.image)?;
+            frame.rgb_sha256=genewars_runtime::identity::sha256_hex(frame.image.rgb_bytes());
+        }
+        Ok(frame)
     }
     pub fn step(&mut self,resources:&Resources)->Result<String,String> {
         let mut staged=self.clone();let event=staged.step_inner(resources)?;*self=staged;Ok(event)
@@ -79,8 +87,11 @@ impl SharedMission {
         let creatures=self.world.step_neutral_creature_callbacks(4,
             MuleStepContext{frame_counter:frame,gravity:context.gravity,water_height:context.water_height,climate},
             &resources.physics,&self.trig,&resources.mule_animations).map_err(|e|e.to_string())?;
-        self.pending_requests+=(creatures.pending_ui_animations.len()+creatures.pending_audio.len()+creatures.pending_plant_retirements.len())as u64;
-        self.world.tick_plants().map_err(|e|e.to_string())?;
+        self.pending_requests+=(creatures.pending_ui_animations.len()+creatures.pending_audio.len()+creatures.pending_plant_retirements.len()+creatures.pending_portrait_refreshes.len())as u64;
+        let plants=self.world.tick_plants_with_reproduction(&self.plant_spread).map_err(|e|e.to_string())?;
+        self.plant_births+=plants.events.iter().filter(|event|matches!(event,genewars_runtime::TickEvent::Created{..})).count()as u64;
+        self.pending_requests+=plants.events.iter().filter(|event|matches!(event,
+            genewars_runtime::TickEvent::OldFrameDirtyCheckPending{..}|genewars_runtime::TickEvent::ReferenceUiAudioCleanupPending{..})).count()as u64;
         let countdown=self.world.step_empty_family8_countdown(0,0).map_err(|e|e.to_string())?;
         self.pending_requests+=u64::from(countdown.started);
         self.world.step_empty_families_7_and_6().map_err(|e|e.to_string())?;

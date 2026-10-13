@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-actor-render-review",
-  "utc": "2026-10-13T17:26:07.669842+00:00",
+  "utc": "2026-10-13T19:09:46.187943+00:00",
   "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
   "contract": {
     "path": "research/ghidra/actor-draw-contract.json",
@@ -97,7 +97,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "7806c14e6650c9b05ea7e592f92bd73d4ca33ac31d8d3a2c74f2dfe0fe868049"
+      "sha256": "c97c4f7e70e1cddf3cb1cdff1ab5112270e12ca585eb8d6021858efe9f771e52"
     },
     {
       "path": "rust/crates/genewars-runtime/src/blueprint.rs",
@@ -112,8 +112,20 @@
       "sha256": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/construction_site.rs",
+      "sha256": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terrain.rs",
+      "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/countdown_expiry.rs",
+      "sha256": "1b3e076d2f1d198d23d3990015f9865775225ca2b0b4df0de69ee1f461983efb"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/creature_world.rs",
-      "sha256": "fb829cee975ca26518f25d0db36f4685ad7576fc270ae4b292c645293f006d56"
+      "sha256": "afabdefae2713abe6f4ac97cc3450ac7700bc7741558bca22252bd53a14725c5"
     },
     {
       "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
@@ -161,7 +173,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/world.rs",
-      "sha256": "8a304a471b815b8e3323b6dddc13c8cbbd0c3dfae5ea5327643a03e9662f9bda"
+      "sha256": "3fd7e6a7df779c935836566ba8d9755cf843db7d964a888e7d53a53d405bffe7"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
@@ -173,19 +185,27 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
-      "sha256": "c79f3f74f2c7c6a89134f7b33d4c0dd2a946673bd7395c3b14e631af40e33b68"
+      "sha256": "2d010e151a59448bcdfc38a6359abaa5bb2dd304217fabcdd6c83031c44a3521"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
-      "sha256": "9e23ef09c3b179e708ce1b464d4c1d8056f4dbf313f7e844085ff035d4c668cf"
+      "sha256": "f3f3077d1904f243e1d495f9712541c181d3fc4d7cb565240115b0a05fd40f85"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
-      "sha256": "00489979f547eed51c3b9f9cc8c69d6bac6f3603fcb08bf67d6b230a309c822d"
+      "sha256": "3cfcc1a1e7dbcff0d5bebb5f020c41aa54a359093a5f49660041860f49841cc4"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs",
+      "sha256": "e85b2309b63ba285f35d45dffc44103af5508405af05a2303bec0c78d362c4a9"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
       "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world/plant_creation.rs",
+      "sha256": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82"
     }
   ],
   "review_sources": [

@@ -1,0 +1,10 @@
+{
+  "cases": 64,
+  "compared_bytes": 14688582,
+  "literal_instruction_steps": 1183125,
+  "output_sha256": "9ecab781b287c670a09b556b618848756d34a687ead67d5cab79b6347204d351",
+  "source_sha256": "bc7c8aebad792673ffc8b9b7fc89f240ff6caea5ccf089f1ec54c04f2cba0feb",
+  "listing_sha256": "3fe7d254e0599e09fbc475574260ae4baef25a8cb8ec757c01fc24c0c2057159",
+  "table_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+  "scope": "42B90 complete18B task, material/reservation map afterimage and ordered viewport requests"
+}

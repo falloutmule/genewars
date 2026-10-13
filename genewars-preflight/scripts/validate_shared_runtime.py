@@ -8,7 +8,7 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--window-smoke',action='store_true');parser.add_argument('--release',action='store_true');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--window-smoke',action='store_true');parser.add_argument('--release',action='store_true');parser.add_argument('--extended-steps',type=int,default=0);args=parser.parse_args()
     bundle, _ = stage()
     work = ROOT/'private/integration/shared-runtime-validation'/uuid.uuid4().hex
     work.mkdir(parents=True)
@@ -83,12 +83,23 @@ def main():
             assert mule['state']==8 and mule['target_kind']==0 and result['mission']['plants']==26
         else:
             assert mule['state']==7 and mule['target_kind']==2
+    if args.extended_steps:
+        assert 1101<=args.extended_steps<=10000
+        extended=[]
+        for seed in [5428,0,65535]:
+            result=run('extended-'+str(seed),start+f'tick {args.extended_steps}\nselect 0\n',seed,bmp=True)
+            assert result['mission']['steps']==args.extended_steps
+            assert result['mission']['plant_births']>0 and result['mission']['reproduction_enabled']
+            assert result['mission']['selected_actor']==0 and result['error'] is None
+            extended.append(result)
+        repeated=run('extended-repeat',start+f'tick {args.extended_steps}\nselect 0\n')
+        assert repeated['mission']==extended[0]['mission']
     reject=subprocess.run([str(binary),str(bundle),'--landing-seed','1','--world-output',str(work/'incomplete-save.bin')],capture_output=True,text=True,timeout=10)
     assert reject.returncode!=0 and 'full-state export' in reject.stderr and not (work/'incomplete-save.bin').exists()
     receipt=dict(status='passed',verified_at=datetime.now(timezone.utc).isoformat(),binary_sha256=sha(binary),build_profile=profile,
-        cases=cases,case_count=len(cases)+1,full_state_export_rejected=True,mission_window_presented_three_frames=args.window_smoke,
+        cases=cases,case_count=len(cases)+1,extended_steps=args.extended_steps,full_state_export_rejected=True,mission_window_presented_three_frames=args.window_smoke,
         implementation_pins=pins,
         scope='Explicit seeded world study: numeric reveal, source factory/contact activates actors; player-list actor callbacks consume ground orders, move, arrive and idle; plants, empty-building bookkeeping, mission countdown and full family4 lifecycle run in admitted source order. The neutral Mule shares RNG in source family order, searches for food, approaches, feeds and retires consumed plants; its admitted states are rendered through the verified wrapper. Compilation snapshot pinned before/after build and binary copied privately before tests. Other creature kinds, other families and presentation requests remain pending. No full-game/startup parity or original execution.')
-    (ROOT/'research/integration/shared-runtime-validation.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
+    (ROOT/'research/integration'/('shared-runtime-extended-validation.json' if args.extended_steps else 'shared-runtime-validation.json')).write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(dict(status='passed',cases=receipt['case_count'],private_output=str(work))))
 if __name__=='__main__':main()

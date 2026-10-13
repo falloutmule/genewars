@@ -5,6 +5,9 @@ P=Path(__file__).resolve().parents[2]
 s=importlib.util.spec_from_file_location('creature_source',Path(__file__).with_name('initial-creature-source.py'));m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
 class CapturedSource(m.Source):
  def store(self,a,n,v):
+  if a<=0x1542be+0x5e<a+n and hasattr(self,'pc'):
+   self.state_writes=getattr(self,'state_writes',[])+[(hex(self.pc),(v>>(8*(0x1542be+0x5e-a)))&255)]
+  if a==0x1542be+0x4b and n==2:self.angle_writes=getattr(self,'angle_writes',[])+[(hex(self.pc),v&65535)]
   if getattr(self,'pc',None)==0x5ed20 and 0x2f0000<=a<0x300000 and not hasattr(self,'prefix_before'):
    self.prefix_before=bytes(self.load(0x118d60+i,1)for i in range(0x355e))
   if getattr(self,'pc',None)==0x5b580 and not hasattr(self,'acquisition_before'):
@@ -21,7 +24,10 @@ class CapturedSource(m.Source):
   return super().load(a,n)
 def main():
  frame=int(sys.argv[1])if len(sys.argv)>1 else 365
- prefix='combined-seed0-before-mule'if '--seed0'in sys.argv else'combined-before-mule';w=P/f'private/integration/{prefix}{frame}'
+ tag=next((a.split('=',1)[1]for a in sys.argv if a.startswith('--seed=')),None);prefix=f'combined-seed{tag}-before-mule'if tag else('combined-seed0-before-mule'if '--seed0'in sys.argv else'combined-before-mule');w=P/f'private/integration/{prefix}{frame}'
+ snapshot=next((a.split('=',1)[1]for a in sys.argv if a.startswith('--snapshot=')),None)
+ if snapshot:
+  w=(P/snapshot).resolve();assert w.is_relative_to((P/'private').resolve())
  b=(w/'backing.bin').read_bytes();c=(w/'creatures.bin').read_bytes();seed,ring,count=struct.unpack('<HBI',(w/'rng.bin').read_bytes())
  state={0x118d60+i:x for i,x in enumerate(b[:0x355e])};state.update({0x11c2be+i:x for i,x in enumerate(b[0x355e:0x3b55e])})
  for i in range(300):
@@ -35,11 +41,15 @@ def main():
  state[0x118770]=b[0x52466];state[0x11872c]=ring
  for i,x in enumerate(count.to_bytes(4,'little')):state[0x118782+i]=x
  model=CapturedSource();extra=[P/'private/ghidra/terrain-map-refs/instructions-0005b580.txt',P/'private/ghidra/activation-rng-refs/instructions-0005c920.txt',P/'private/ghidra/initial-creature/instructions-0005d360.txt',P/'private/ghidra/terrain-map-refs/instructions-00074a50.txt',P/'private/ghidra/initial-creature/instructions-0006c900.txt',P/'private/ghidra/initial-creature/instructions-0005c730.txt',P/'private/ghidra/player-creation/instructions-0001e810.txt',P/'private/ghidra/landing-contact/instructions-000417e0.txt',P/'private/ghidra/terrain-map-refs/instructions-0006c780.txt',P/'private/ghidra/panel-activation-refs/instructions-000724c0.txt',P/'private/ghidra/entity-plant/instructions-0007af00.txt',P/'private/ghidra/display-geometry/instructions-000979e8.txt',P/'private/ghidra/plant-startup/instructions-000409f0.txt',P/'private/ghidra/plant-startup/audio-shared-tail.txt',P/'private/ghidra/plant-startup/instructions-0002c200.txt']
+ extra += [P/'private/ghidra/initial-creature/instructions-0006d230.txt',P/'private/ghidra/terrain-map-refs/instructions-000305f0.txt',P/'private/ghidra/initial-creature/instructions-0005df20.txt']
  full=next(p for p in extra if p.name=='instructions-0006c900.txt');trim=P/'private/review/creature-motion/listing-6c900-closed.txt';trim.write_text('\n'.join(line for line in full.read_text().splitlines()if int(line[:8],16)<=0x6c927)+'\n');extra=[trim if p==full else p for p in extra]
  ext=m.m.Model(extra,b'');model.code.update(ext.code);model.next=dict(zip(sorted(model.code),sorted(model.code)[1:]));model.files+=extra+[full];model.code[0x2c200]=('RET',[])
+ # The portrait/module flag refresh reads a live UI vtable. Its request is
+ # explicit; numeric creature/map state is complete before this branch.
+ model.code[0x5e068]=('JMP',['0x0005e0a3'])
  report,after,trace=model.run(frame,seed,state_before=state)
  for fill in [0x55,0xff]:
-  other=CapturedSource();other.code.update(ext.code);other.next=dict(zip(sorted(other.code),sorted(other.code)[1:]));other.code[0x2c200]=('RET',[])
+  other=CapturedSource();other.code.update(ext.code);other.next=dict(zip(sorted(other.code),sorted(other.code)[1:]));other.code[0x2c200]=('RET',[]);other.code[0x5e068]=('JMP',['0x0005e0a3'])
   _,poisoned,_=other.run(frame,seed,state_before=state,stack_fill=fill)
   assert after==poisoned,('stack-poison',frame,fill)
   assert bytes(model.saved_state[0x11c2be+i]for i in range(229376))==bytes(other.saved_state[0x11c2be+i]for i in range(229376))
@@ -60,7 +70,7 @@ def main():
   (w/'acquisition-fixture.bin').write_bytes(fixture)
  if hasattr(model,'feed_after'):
   (w/'feed-fixture.bin').write_bytes(model.feed_before+model.feed_after+struct.pack('<BHBI',model.nutrition,seed,ring,count))
- result=dict(report=report,deferred_ui_calls=trace.count(0x2c200),ui_context_policy="Module2C200 UI cleanup is an explicit pending request; its preserved registers are retained. No native UI root prior is invented.",snapshot_inputs=[dict(path=x.relative_to(P).as_posix(),sha256=hashlib.sha256(x.read_bytes()).hexdigest())for x in w.glob('*.bin')if not x.name.startswith('source-')],listing_pins=[dict(path=x.relative_to(P).as_posix(),sha256=hashlib.sha256(x.read_bytes()).hexdigest())for x in model.files],trace=[hex(x)for x in trace])
+ result=dict(report=report,state_writes=getattr(model,'state_writes',[]),angle_writes=getattr(model,'angle_writes',[]),waypoints=model.waypoints,deferred_ui_calls=trace.count(0x2c200),deferred_portrait_checks=trace.count(0x5e068),ui_context_policy="Module2C200 UI cleanup and5E068 portrait/module refresh are explicit pending requests. Numeric entity/map writes are retained; no native UI root prior is invented.",snapshot_inputs=[dict(path=x.relative_to(P).as_posix(),sha256=hashlib.sha256(x.read_bytes()).hexdigest())for x in w.glob('*.bin')if not x.name.startswith('source-')],listing_pins=[dict(path=x.relative_to(P).as_posix(),sha256=hashlib.sha256(x.read_bytes()).hexdigest())for x in model.files],trace=[hex(x)for x in trace])
  (w/f'source-trace{frame}.json').write_text(json.dumps(result,indent=2)+'\n')
  print(json.dumps(report,indent=2))
 if __name__=='__main__':main()

@@ -1,36 +1,87 @@
 {
-  "status": "passed-focused-repair-and-checkpoint",
-  "utc": "2026-10-13T17:46:19.365044+00:00",
+  "status": "passed-focused-repairs-and-extended-checks",
+  "utc": "2026-10-13T19:32:01.040386+00:00",
   "aggregate": {
     "path": "research/integration/verification.json",
-    "sha256": "87342084da97415ee5f593d21489f3037649087d9c1b23db644de34c6c6c120b",
-    "passed": 159,
-    "total": 160,
+    "sha256": "e5c8e5f9f1fd164a2f883970cda021489b8d3c35d7bc6c7c1dca6f0d33106bba",
+    "passed": 174,
+    "total": 176,
     "failed": [
-      "owned_creature_motion"
+      "rust_workspace_tests",
+      "native_runtime_flow_and_failures"
     ]
   },
-  "repair": {
-    "check": "owned_creature_motion",
-    "cause": "Source-pin guard detected concurrent source edits; numeric comparisons had matched.",
-    "rerun_exit_code": 0,
-    "receipt": "research/variants/creature-motion-review.json",
-    "receipt_sha256": "bb879a1f6ca5a0fba31c2268862f9031deec6f4be251a71e9bea124ea5a06cf2",
-    "current_source_pins_verified": true
+  "repairs": [
+    {
+      "check": "rust_workspace_tests",
+      "cause": "Catalog guard still expected46 entries after three source-bound resources were added.",
+      "rerun_passed": 348,
+      "failed": 0,
+      "test_binaries": 14,
+      "private_log": "private/integration/workspace-current-002.log",
+      "log_sha256": "c19b04dae01538e21bfeb77e37978414adc26f6b9375e96704b74257224a7798"
+    },
+    {
+      "check": "native_runtime_flow_and_failures",
+      "cause": "The reproduction table is consumed only by the landing route; corruption test now dispatches that resource through its consumer.",
+      "rerun_passed": 64,
+      "receipt": "research/integration/runtime-validation.json"
+    }
+  ],
+  "receipts": {
+    "runtime-validation.json": {
+      "path": "research/integration/runtime-validation.json",
+      "sha256": "fb14fbab819aa350115df3f76bc1f84118a253373590cd2521509abad5303c3e"
+    },
+    "shared-runtime-extended-validation.json": {
+      "path": "research/integration/shared-runtime-extended-validation.json",
+      "sha256": "b7b4724841c01e5807b6a6098b89c2c143d8947bcea56c6876b8c1c3918eadb0"
+    },
+    "countdown-expiry-validation.json": {
+      "path": "research/integration/countdown-expiry-validation.json",
+      "sha256": "cf57643849ee8c61ecf696cbc65938a55e0d7ea7813ed7404626ab5f55287062"
+    },
+    "family8-creation-validation.json": {
+      "path": "research/integration/family8-creation-validation.json",
+      "sha256": "cf2d0902b3407aecf4d60b476ef88fe67d984a56772be8584ab19503b0edc5d5"
+    },
+    "plant-reproduction-validation.json": {
+      "path": "research/integration/plant-reproduction-validation.json",
+      "sha256": "cd49e4b6d3465e6d9ff89e2e5a205520afac286bc45dc5954ff63b280de933ea"
+    },
+    "family8-pool-validation.json": {
+      "path": "research/integration/family8-pool-validation.json",
+      "sha256": "7ac7dd1d0fa7491a1e11f48055b9f8be978ed1857b355b779f4973c0bc869ddf"
+    },
+    "construction-tranche-evidence.json": {
+      "path": "research/ghidra/construction-tranche-evidence.json",
+      "sha256": "1be0adcf16a01a147502b884c438e9f5ca1819ccbc0f3fe56be3ee9b81d69930"
+    }
   },
-  "native": {
-    "cases": 12,
-    "exit_code": 0,
-    "receipt": "research/integration/shared-runtime-validation.json",
-    "sha256": "7c94313be6a7777b93e48fd9f9ed369200331f07b1c0b6e0c6138ed21be6e125",
-    "current_source_pins_verified": true
+  "creature_review": {
+    "path": "research/variants/creature-hungry-review.json",
+    "sha256": "a2b8a1019cc1d507c923c6c6497a8a30c0dc8aceb4dadc968fb03ad8d0bca756",
+    "callbacks": 27,
+    "compared_bytes": 9290214
   },
-  "workspace": {
-    "passed": 341,
-    "failed": 0,
-    "test_binaries": 14,
-    "private_log": "private/integration/checkpoint-workspace-tests.log",
-    "log_sha256": "567b953da49c09ad1cee80aa48df65fa4c1519ea34dc983bff6c9de3d91aaddd"
-  },
-  "scope": "Focused successful rerun after the dated159/160 aggregate. The aggregate receipt is preserved, not rewritten as a new complete run. Additional plant creation components have separate receipts and remain outside active reproduction scheduling."
+  "combined_runs": [
+    {
+      "private_log": "private/integration/combined-world-extended-007.log",
+      "seeds": [
+        0,
+        65535
+      ],
+      "completed_steps": 6000,
+      "next_rejection": "CountdownExpiry at6001"
+    },
+    {
+      "private_log": "private/integration/combined-world-extended-008.log",
+      "seeds": [
+        5428
+      ],
+      "completed_steps": 6000,
+      "next_rejection": "CountdownExpiry at6001"
+    }
+  ],
+  "scope": "The dated174/176 aggregate is preserved. Both failed checks have successful focused reruns. Extended native16-case receipt retains its actual compilation snapshot before the later retry-only repair. New countdown/family8 planners are tested separately and unexported; whole expiry/construction integration remains pending. This record is not a new all-green aggregate or a full-game completion claim."
 }

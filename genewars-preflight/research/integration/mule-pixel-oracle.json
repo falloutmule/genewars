@@ -21,16 +21,16 @@
       "sha256": "4a2cadd448445e2241161863aa5297b47470a9d6ec17e0a09cdd1222b7e18adf"
     },
     "rust/crates/genewars-desktop/src/bin/support/creature_scene.rs": {
-      "bytes": 44073,
-      "sha256": "bf9d9fade3e9c0a67fb46b503165e8c663bec54dfa61ca821a1d32bb7cd0a5a6"
+      "bytes": 45236,
+      "sha256": "dacefce04049ac3151653bf14a9112fc9a2311dc8451ca4cee684980503d348c"
     },
     "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs": {
-      "bytes": 44506,
-      "sha256": "426fdf619f75d5f7773411f7601eaa93205a6628214c14f49764315d6a4c23e7"
+      "bytes": 45191,
+      "sha256": "fe2a7263ce0859ee06a954c075942c6cb67700b60b985a2b870e410fc02928fb"
     },
     "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs": {
-      "bytes": 19119,
-      "sha256": "00595c566393142a10d8cb93024efbba32fc9d5b9bfff976e65590c16bb44255"
+      "bytes": 20514,
+      "sha256": "06cea402d97ba53cfa40b35887a9ac637e5c98bf9de6fb2e5d6da7fd8741dcb2"
     },
     "research/ghidra/creature-evidence.json": {
       "bytes": 21352,
@@ -89,8 +89,8 @@
       "sha256": "d27a9d7772a8a565db1cca9bc08e054516f91fe342077377f3919e8c3eb87097"
     },
     "research/formats/mule-render-contract.md": {
-      "bytes": 6650,
-      "sha256": "337d24b748a37e940491c8200a6dc714f570b999782de9ba62e6ee4676bb07b0"
+      "bytes": 7545,
+      "sha256": "febaa47a4164be15a83dfedd86e21077fbf310ff46ba50eb2923e1e8f0f3e91b"
     }
   },
   "comparison": "all Rust framebuffer bytes equal the independently parsed ANB/RLE/scale/flip/fade/GLA model",

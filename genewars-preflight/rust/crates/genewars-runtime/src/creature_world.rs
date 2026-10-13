@@ -288,13 +288,14 @@ pub fn plan_mule_after_admitted_prefix_with_water_policy<F,O,C>(before:&Creature
     physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
     contact:F,obstacle:O,animations:&MuleAnimations,mut choice:C,admit_water:bool)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
-    let neutral=before[0x5e]==8&&matches!(before[0x61],0|0x40)&&matches!(before[0x60],8|0x88);
+    let neutral=before[0x5e]==8&&matches!(before[0x61],0|0x40|0x80)&&matches!(before[0x60],8|0x88);
+    let relocation=before[0x5e]==0&&before[0x61]==0x80&&before[0x60]==8&&before[0x57]==0;
     let food_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&before[0x57]==2;
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
-    if context.frame_counter<2||before[6]!=1||before[0x18]!=4||!(neutral||food_approach||feeding_wait)||before[0x7a]!=4||before[0x76]!=30
-       ||before[0x7b]!=255||before[0x15]!=0x80||before[0x16]!=2
-       ||before[0x4f]!=0||before[0x52]!=0||motion_word(before,0x49)as u16&!0x327f!=0||before[0x49]&3==3
-       ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=8481{return Err(CreatureError::UnsupportedMotionState);}
+    if context.frame_counter<2||before[6]!=1||before[0x18]!=4||!(neutral||relocation||food_approach||feeding_wait)||before[0x7a]!=4||before[0x76]!=30
+       ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
+       ||before[0x4f]!=0||before[0x52]!=0||motion_word(before,0x49)as u16&!0x337f!=0||before[0x49]&3==3
+       ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=2{return Err(CreatureError::UnsupportedMotionState);}
     let mut a=*prefix;
     let(plan,water_effect)=if admit_water {plan_common_nonflight_physics_with_water_tail(&a,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,obstacle,true)?}else{(plan_common_nonflight_physics(&a,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,obstacle)?,None)};
     a=plan.after;
@@ -318,13 +319,17 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
             motion_put(&mut a,0x6a,health.wrapping_add((maximum-health).min(2)));
             motion_put(&mut a,0x68,if reserve<3{0}else{reserve-3});
         }else if reserve<=0&&context.frame_counter&31<=1{return Err(CreatureError::UnsupportedMotionState);}
-        if a[0x60]&0x80!=0 {
+        // Type1 virtualB0=1EC10 tests49mask0100.5E0B0 resets the
+        // failed action and chooses a one-draw wait before ordinary AI.
+        if motion_word(&a,0x49)as u16&0x100!=0 {a=choice(&a)?;}
+        else if a[0x60]&0x80!=0 {
             let class=crate::world::map_terrain_class(map,motion_point(&a)).map_err(|_|CreatureError::MotionEnvironment)?;
             let mask=if matches!(class,2|5){63}else{127};
             if motion_word(&a,0x6c)&mask==0{let reserve=motion_word(&a,0x68);motion_put(&mut a,0x68,if reserve<1{0}else{reserve-1});}
         }
         if context.frame_counter&15<=1&&context.climate.wrapping_add(motion_word(map,motion_cell(motion_point(&a))*14+9))<=25{return Err(CreatureError::MotionEnvironment);}
-        if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;motion_put(&mut a,0x6c,0);}
+        if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;if a[0x61]&0x80!=0&&a[0x6e..0x72]==a[11..15]{a[0x61]&=0x7f;}motion_put(&mut a,0x6c,0);}
+        if a[0x5e]==0&&motion_word(&a,0x6c)==0 {a=choice(&a)?;}
         if before[0x5e]==7 {
             if common_distance_squared(map,motion_point(&a),working_target)?>4096 {return Err(CreatureError::UnsupportedMotionState);}
             if motion_word(&a,0x6c)&15==0 {a=choice(&a)?;}
@@ -336,19 +341,26 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
         if a[0x5e]==1&&motion_word(&a,0x49)as u16&0x200!=0&&a[0x60]&0x80==0 {a=choice(&a)?;}
         a[0x4a]&=0xfc;let energy=motion_word(&a,0x66).wrapping_sub(1);motion_put(&mut a,0x66,energy);
         // Selector4 parameter life19000, skill30:51%; reserve divisor1211.
-        let hunger=((9690-i32::from(energy))*255/1211).max(16)as u8;a[0x77]=hunger;
-        motion_put(&mut a,0x62,((92*(i32::from(hunger)+1)>>8)+32)as i16);
-        motion_put(&mut a,0x64,((40*(i32::from(hunger)+1)>>8)+16)as i16);
+        if energy<=8479 {
+            //6A416..6A48F preserves max fields62/64 at full hunger, then
+            //updates raw lifecycle byte79 from selector4's divisor3.
+            a[0x77]=255;let stage=(i32::from(energy)-1211)/2826+1;
+            if stage!=i32::from(a[0x79]as i8).abs(){a[0x79]=stage as u8;}
+        }else{
+            let hunger=((9690-i32::from(energy))*255/1211).max(16)as u8;a[0x77]=hunger;
+            motion_put(&mut a,0x62,((92*(i32::from(hunger)+1)>>8)+32)as i16);
+            motion_put(&mut a,0x64,((40*(i32::from(hunger)+1)>>8)+16)as i16);
+        }
         let timer=motion_word(&a,0x6c);if timer>0 {motion_put(&mut a,0x6c,timer-1);}
     }
-    else if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;motion_put(&mut a,0x6c,0);}
+    else if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;if a[0x61]&0x80!=0&&a[0x6e..0x72]==a[11..15]{a[0x61]&=0x7f;}motion_put(&mut a,0x6c,0);}
     let yaw=motion_word(&a,0x39);if !(0..=2048).contains(&yaw){return Err(CreatureError::UnsupportedMotionState);}
     if a[0x5e]==7 {
         if a[0x19]!=19 {a[0x19]=19;a[0x1a]=0;a[0x1b]=0;a[0x1c]=1;a[0x1d]=2;a[0x1e]=0;}
     }else{
         a[0x19]=(((((i32::from(yaw)>>7)+1)>>1)+1)&7)as u8;
         let speed=motion_word(&a,0x41);
-        if speed==0 {a[0x1b]=0;a[0x1c]=0;a[0x1d]=0;}else{a[0x1c]=1;a[0x1d]=((1024-i32::from(speed))/256)as u8;}
+        if speed==0&&a[0x5e]!=0 {a[0x1b]=0;a[0x1c]=0;a[0x1d]=0;}else{a[0x1c]=1;a[0x1d]=((1024-i32::from(speed))/256)as u8;}
     }
     let animation_holds=&animations.holds[usize::from(a[0x19])];let animation_flags=animations.flags[usize::from(a[0x19])];
     if animation_holds.is_empty()||animation_holds.len()>255||animation_flags&!1!=0{return Err(CreatureError::UnsupportedMotionState);}
@@ -371,6 +383,38 @@ pub fn common_distance_squared(map:&[u8],from:[i16;2],to:[i16;2])->Result<i32,Cr
 }
 
 const WALK_STEPS:[[i16;2];8]=[[0,-128],[128,-128],[128,0],[128,128],[0,128],[-128,128],[-128,0],[-128,-128]];
+/// Source305F0 with radius2048, eight cell rings and callback6D230.
+/// Queries retain source order. A success skips later ring/minor groups,
+/// while the current group continues and its last accepted point wins.
+/// This variant has no75080 rounding or RNG; coordinates wrap as words.
+pub fn find_common_idle_relocation<F>(current:[i16;2],mut accepts:F)->Result<Option<[i16;2]>,CreatureError>
+where F:FnMut([i16;2])->Result<bool,CreatureError> {
+    for ring in 0..=8i16 {
+        for minor in 0..=ring {
+            let (i,j)=(minor*256,ring*256);
+            let mut offsets=Vec::with_capacity(8);
+            if ring==0 {offsets.push([0,0]);}
+            else {
+                if minor!=0 {offsets.extend([[i,j],[j,-i],[-i,-j],[-j,i]]);}
+                if minor!=ring {offsets.extend([[j,i],[i,-j],[-j,-i],[-i,j]]);}
+            }
+            let mut found=None;
+            for delta in offsets {
+                let point=std::array::from_fn(|k|current[k].wrapping_add(delta[k]));
+                if genewars_core::cd_candidate::distance_squared_wrapping_15(current,point)<=0x400000&&accepts(point)? {found=Some(point);}
+            }
+            if found.is_some(){return Ok(found);}
+        }
+    }
+    Ok(None)
+}
+/// Bounded type1 virtualA8 (5DF20 ->5DF50) from an idle state8 with no
+/// live action references. The optional portrait refresh is caller-owned.
+pub fn plan_mule_idle_relocation(before:&CreatureRecord,point:[i16;2])->Result<CreatureRecord,CreatureError> {
+    if before[6]!=1||before[0x18]!=4||before[0x5e]!=8||before[0x60]&2!=0||before[0x57]!=0||before[0x5d]!=0 {return Err(CreatureError::UnsupportedMotionState);}
+    let mut a=*before;a[0x15]&=0xdf;a[0x33..0x37].fill(0);let flags=motion_word(&a,0x60)as u16&0xd71a;motion_put(&mut a,0x60,flags as i16);a[0x5d]=0;a[0x57]=0;motion_put(&mut a,0x6c,0);
+    a[0x5e]=0;a[0x60]|=8;motion_put(&mut a,0x72,point[0]);motion_put(&mut a,0x74,point[1]);motion_put(&mut a,0x6e,point[0]);motion_put(&mut a,0x70,point[1]);a[0x61]|=0x80;a[0x5f]=0;Ok(a)
+}
 fn walk_point(at:[i16;2],direction:u8)->[i16;2]{std::array::from_fn(|i|at[i].wrapping_add(WALK_STEPS[usize::from(direction)][i]))}
 fn boundary_direction<F>(at:[i16;2],mut direction:u8,clockwise:bool,accept:&mut F)->Result<u8,CreatureError>
 where F:FnMut([i16;2])->Result<bool,CreatureError> {
@@ -414,7 +458,7 @@ where F:FnMut([i16;2])->Result<bool,CreatureError>,R:FnMut([i16;2],[i16;2])->Res
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum CreatureRngPurpose { NeighborhoodX, NeighborhoodY, IdleDelay, WanderAngle, WanderRadius }
+pub enum CreatureRngPurpose { NeighborhoodX, NeighborhoodY, IdleDelay, WanderAngle, WanderRadius, RetryDelay }
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct CreatureRngDraw { pub purpose: CreatureRngPurpose, pub seed_before:u16, pub seed_after:u16, pub value:u8 }
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -433,6 +477,17 @@ fn draw(rng:&mut crate::blueprint::BlueprintRng,purpose:CreatureRngPurpose,trace
     let before=rng.seed;rng.seed=rng.seed.wrapping_mul(0xe62d);rng.ring=rng.ring.wrapping_add(1)&31;rng.draw_count=rng.draw_count.wrapping_add(1);
     let value=(rng.seed>>8)as u8;trace.push(CreatureRngDraw{purpose,seed_before:before,seed_after:rng.seed,value});value
 }
+///5E0B0 retry-exhaustion reset with a separately proved false5B100 cell
+/// predicate. The admitted idle Mule has no selected/live action to release.
+/// Call after the source energy/regeneration prefix, before ordinary AI.
+pub fn plan_mule_retry_wait(before:&CreatureRecord,rng_before:crate::blueprint::BlueprintRng)->Result<InitialMuleChoice,CreatureError> {
+    if rng_before.ring>=32||before[6]!=1||before[0x18]!=4||before[0x5e]!=8||before[0x7a]!=4
+       ||motion_word(before,0x49)as u16&0x100==0||before[0x60]&2!=0||before[0x57]!=0||before[0x5d]!=0 {return Err(CreatureError::UnsupportedMotionState);}
+    let mut after=*before;let mut rng=rng_before;let mut draws=Vec::new();
+    after[0x15]&=0xdf;after[0x33..0x37].fill(0);let flags=motion_word(&after,0x60)as u16&0xd71a;motion_put(&mut after,0x60,flags as i16);after[0x5d]=0;after[0x57]=0;
+    let delay=i16::from(draw(&mut rng,CreatureRngPurpose::RetryDelay,&mut draws)%20)+10;after[0x5e]=8;motion_put(&mut after,0x6c,delay);
+    Ok(InitialMuleChoice{before:*before,after,rng_before,rng_after:rng,draws,sampled_points:Vec::new(),chosen_target:None,queue_requested:true})
+}
 /// Owner4 healthy/neutral-neighborhood rechoice at timer0, after the common
 /// movement and5E0B0 prefix. Caller establishes the neighborhood scorer's
 /// no-action gates and false current-cell predicate before invoking this.
@@ -443,14 +498,19 @@ where F:FnMut([i16;2])->Result<bool,CreatureError> {
     let mut after=*before;let mut rng=rng_before;let mut draws=Vec::new();let mut sampled_points=Vec::new();
     draw(&mut rng,CreatureRngPurpose::NeighborhoodX,&mut draws);draw(&mut rng,CreatureRngPurpose::NeighborhoodY,&mut draws);
     if after[0x60]&8==0 {after[0x72..0x76].copy_from_slice(&before[7..11]);after[0x60]|=8;}
-    let delay=draw(&mut rng,CreatureRngPurpose::IdleDelay,&mut draws)%10<4;let mut chosen_target=None;
+    let mut chosen_target=None;
+    let explicit_relocation=after[0x61]&0x80!=0;
+    let delay=if explicit_relocation {false}else{draw(&mut rng,CreatureRngPurpose::IdleDelay,&mut draws)%10<4};
     if delay {motion_put(&mut after,0x6c,20);}else {
+        if explicit_relocation {let point=[motion_word(&after,0x6e),motion_word(&after,0x70)];let accepted=accept(point)?;sampled_points.push((point,accepted));if !accepted{return Err(CreatureError::TargetSearchRequired);}chosen_target=Some(point);}
+        else {
         for _ in 0..16 {
             let angle=usize::from(draw(&mut rng,CreatureRngPurpose::WanderAngle,&mut draws))*8;
             let radius=(2048*i32::from(draw(&mut rng,CreatureRngPurpose::WanderRadius,&mut draws)))>>8;let index=angle.wrapping_sub(512)&2047;
             let deltas=[(tables.cosine()[index]*(radius*2))>>16,(tables.sine()[index]*(radius*2))>>16];
             let anchor=[motion_word(&after,0x72),motion_word(&after,0x74)];let point=std::array::from_fn(|i|((anchor[i].wrapping_mul(2).wrapping_add(deltas[i]as i16)>>1)as u16&0x7fff)as i16);
             let accepted=accept(point)?;sampled_points.push((point,accepted));if accepted{chosen_target=Some(point);break;}after[0x49]|=0x40;
+        }
         }
         let point=chosen_target.ok_or(CreatureError::TargetSearchRequired)?;
         motion_put(&mut after,11,point[0]);motion_put(&mut after,13,point[1]);after[0x16]&=0x3f;after[0x49]|=0x14;after[0x54]=20;
@@ -491,12 +551,13 @@ pub fn plan_mule_plant_feed_after_retirement(before:&CreatureRecord,nutrition:u8
 }
 fn plan_mule_plant_feed_inner(before:&CreatureRecord,nutrition:u8,rng_before:crate::blueprint::BlueprintRng,retired:bool)->Result<InitialMuleChoice,CreatureError> {
     if rng_before.ring>=32||before[6]!=1||before[0x18]!=4||before[0x5e]!=7||before[0x7a]!=4||before[0x76]!=30||before[0x61]!=0x40||before[0x60]!=8
-       ||before[0x57]!=2||motion_word(before,0x6c)&15!=0||before[0x77]==255{return Err(CreatureError::UnsupportedMotionState);}
-    let gain=i16::from(nutrition)*2;let reserve=motion_word(before,0x68).wrapping_add(gain);let energy=motion_word(before,0x66).wrapping_sub(gain*2);
-    if reserve>motion_word(before,0x62)||energy<=8482{return Err(CreatureError::UnsupportedMotionState);}
-    let mut after=*before;motion_put(&mut after,0x68,reserve);motion_put(&mut after,0x66,energy);
+       ||before[0x57]!=2||motion_word(before,0x6c)&15!=0{return Err(CreatureError::UnsupportedMotionState);}
+    let gain=i16::from(nutrition)*2;let reserve=motion_word(before,0x68).wrapping_add(gain);let energy=if before[0x77]==255 {motion_word(before,0x66)}else{motion_word(before,0x66).wrapping_sub(gain*2)};
+    if energy<=2{return Err(CreatureError::UnsupportedMotionState);}
+    let full=reserve>motion_word(before,0x62);
+    let mut after=*before;motion_put(&mut after,0x68,if full{motion_word(before,0x62)}else{reserve});motion_put(&mut after,0x66,energy);if full{after[0x61]&=0xbf;}
     let mut rng=rng_before;let mut draws=Vec::new();draw(&mut rng,CreatureRngPurpose::NeighborhoodX,&mut draws);draw(&mut rng,CreatureRngPurpose::NeighborhoodY,&mut draws);
-    if retired {
+    if retired||full {
         //724C0 clears the selected target kind.5CC60 then resets the
         //state7 action and69500 consumes one idle-delay draw.
         after[0x57]=0;after[0x15]&=0xdf;after[0x33..0x37].fill(0);let flags=motion_word(&after,0x60)as u16&0xd71a;motion_put(&mut after,0x60,flags as i16);after[0x5d]=0;
@@ -621,6 +682,30 @@ impl CreaturePool {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn retry_wait_consumes_one_draw_preserves_motion_and_null_indices() {
+        let mut before=[0x55;124];before[6]=1;before[24]=4;before[0x5e]=8;before[0x7a]=4;before[0x60]=8;before[0x57]=0;before[0x5d]=0;motion_put(&mut before,0x49,0x2150);
+        let rng=crate::blueprint::BlueprintRng{seed:49876,ring:31,draw_count:u32::MAX};let plan=plan_mule_retry_wait(&before,rng).unwrap();
+        assert_eq!(plan.rng_after,crate::blueprint::BlueprintRng{seed:46916,ring:0,draw_count:0});assert_eq!(plan.draws.len(),1);assert_eq!(motion_word(&plan.after,0x6c),13);
+        assert_eq!(&plan.after[0x2d..0x33],&before[0x2d..0x33]);assert_eq!(&plan.after[0x3d..0x43],&before[0x3d..0x43]);assert_eq!(&plan.after[0x55..0x57],&before[0x55..0x57]);
+        before[0x57]=2;assert!(plan_mule_retry_wait(&before,rng).is_err());before[0x57]=0;motion_put(&mut before,0x49,0x2050);assert!(plan_mule_retry_wait(&before,rng).is_err());
+    }
+    #[test]
+    fn relocation_finishes_current_group_and_keeps_last_accepted_point() {
+        let mut queries=Vec::new();
+        let result=find_common_idle_relocation([32767,-32768],|point|{queries.push(point);Ok(queries.len()>1)}).unwrap();
+        assert_eq!(queries,vec![[32767,-32768],[-32513,-32768],[32767,32512],[32511,-32768],[32767,-32512]]);
+        assert_eq!(result,Some([32767,-32512]));
+        let mut calls=0;assert!(find_common_idle_relocation([0,0],|_|{calls+=1;Err(CreatureError::MotionEnvironment)}).is_err());assert_eq!(calls,1);
+    }
+    #[test]
+    fn relocation_preserves_opaque_null_indices_and_resets_only_admitted_action() {
+        let mut before=[0x55;124];before[6]=1;before[24]=4;before[0x5e]=8;before[0x60]=8;before[0x57]=0;before[0x5d]=0;
+        let after=plan_mule_idle_relocation(&before,[123,-456]).unwrap();
+        assert_eq!(&after[0x55..0x57],&before[0x55..0x57]);assert_eq!(&after[0x5b..0x5d],&before[0x5b..0x5d]);
+        assert_eq!(after[0x5e],0);assert_eq!(&after[0x6e..0x72],&after[0x72..0x76]);assert_eq!(motion_word(&after,0x6c),0);assert_eq!(after[0x5f],0);
+        before[0x57]=2;assert!(plan_mule_idle_relocation(&before,[0,0]).is_err());
+    }
     #[test]
     fn split_copy_preserves_runtime_gap_and_binds_active_record() {
         let prior=core::array::from_fn(|slot|core::array::from_fn(|i|(slot*37+i*19)as u8));

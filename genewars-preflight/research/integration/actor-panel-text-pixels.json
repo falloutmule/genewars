@@ -1,0 +1,136 @@
+{
+  "schema": "genewars-actor-panel-text-pixels-v1",
+  "inputs": {
+    "private\\review\\font-menu\\font0.dat": {
+      "sha256": "af89c4e4c02e394810b22ecf3d57211cdb56a0006071a88f43d0ae6fb370447d",
+      "bytes": 8039
+    },
+    "private\\review\\font-menu\\font0.tab": {
+      "sha256": "321c49b302552e2bcf287bd20ef0954fb977dd66aef6e82101e3c0c64b5b0a17",
+      "bytes": 1170
+    },
+    "private\\reference-run\\run-006\\drive-c\\GAME\\DATA\\TEXT.DAT": {
+      "sha256": "23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786",
+      "bytes": 36610
+    },
+    "private\\integration\\terrain-inputs\\MAIN.PAL": {
+      "sha256": "8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05",
+      "bytes": 768
+    }
+  },
+  "font_records": 194,
+  "space_height": 8,
+  "viewport": {
+    "origin": [
+      84,
+      382
+    ],
+    "size": [
+      78,
+      21
+    ],
+    "line_advance": 8
+  },
+  "source_evidence": {
+    "path": "research/ghidra/actor-panel-text-evidence.json",
+    "sha256": "ee6598ae05f4d62cba8d3f5644412ca8e11cb9b1b0d6aa4b7644a77bb4437eff"
+  },
+  "font_color_control": {
+    "white_rgb6": [
+      63,
+      63,
+      63
+    ],
+    "black_rgb6": [
+      0,
+      0,
+      0
+    ],
+    "white_palette_index": 145,
+    "black_palette_index": 0,
+    "black_marker_literals": [
+      2,
+      4,
+      12,
+      16,
+      20,
+      24,
+      32,
+      36,
+      40,
+      48,
+      52,
+      56,
+      60
+    ],
+    "evidence": "0x1D770 initializes FONT0 context color slots from 0x186F55/54; 0x715E0 resolves white/black against active palette; 0x1FF30 maps selected-panel glyph marker bytes"
+  },
+  "comparison": "independent Python FONT0 RLE/TEXT/palette/font-marker/bar model matched every byte of each Rust 640x480 RGB frame over a patterned background",
+  "bars": {
+    "raw_fields": [
+      23,
+      25,
+      26
+    ],
+    "origins": [
+      [
+        116,
+        415
+      ],
+      [
+        116,
+        435
+      ],
+      [
+        116,
+        435
+      ]
+    ],
+    "height": 6,
+    "palette_indices": [
+      232,
+      196,
+      200
+    ],
+    "meaning_labels": null
+  },
+  "categories": [
+    {
+      "category": 0,
+      "category_text_index": 128,
+      "name_width": 30,
+      "category_width": 47,
+      "changed_channel_values_in_clip": 1430,
+      "rgb_sha256": "1422e0ea01844762c95d79de097dac51b906b02ed709b0be282a617c55ec25e1"
+    },
+    {
+      "category": 1,
+      "category_text_index": 129,
+      "name_width": 24,
+      "category_width": 45,
+      "changed_channel_values_in_clip": 1247,
+      "rgb_sha256": "ba958f370540e8582cdaeb97c209cd57a010651de9e9bd8faaed278ce29fe690"
+    },
+    {
+      "category": 2,
+      "category_text_index": 130,
+      "name_width": 18,
+      "category_width": 56,
+      "changed_channel_values_in_clip": 1328,
+      "rgb_sha256": "4642c6616f61357032f6e80f5c2714e2b2ddae8bf2e13b9a76331e1e4caba86f"
+    },
+    {
+      "category": 3,
+      "category_text_index": 131,
+      "name_width": 30,
+      "category_width": 36,
+      "changed_channel_values_in_clip": 1203,
+      "rgb_sha256": "59d8250f343048bf3ce3c88316c62a60466328ff80ef93ce4ff9308eea6e0677"
+    }
+  ],
+  "private_run_id": "5e84057f-9769-441e-8a04-84ad8027395c",
+  "probe_source": {
+    "path": "scripts/actor_panel_text_probe.rs",
+    "sha256": "f04b9bfd97b57950f66801ee497845a09cc8f9e799ddc6a8ebeeccc3d6e5c3f4"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "cases": 64,
+  "compared_bytes": 33496,
+  "literal_instruction_steps": 100894,
+  "output_sha256": "711f9a386969f77133b5793a04be853ca6f46e4eb247d725c4bddd890d69b66d",
+  "source_sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31",
+  "listing_sha256": "0b70076ba33011160a5f0cb917d7c89dd0675f9ff33edd129469ef75a27405c8",
+  "table_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+  "scope": "8D1B0 full map afterimage with caller supplied112D24 table;84E10 viewport invalidation explicit"
+}

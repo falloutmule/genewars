@@ -1,15 +1,16 @@
 {
   "status": "passed-source-food-acquisition-and-feeding",
-  "utc": "2026-10-13T17:47:06.488577+00:00",
+  "utc": "2026-10-13T19:20:55.747290+00:00",
   "current_native_pure_plan_bytes": 248,
   "current_native_rejection_cases": 4,
   "historical_callback_comparisons": [
     {
       "frame": 365,
-      "seed0": false,
+      "startup_seed": 5428,
       "compared_bytes": 344082,
       "source_instructions": 11890,
       "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
       "inputs": [
         {
           "path": "private/integration/combined-before-mule365/backing.bin",
@@ -54,15 +55,16 @@
       ],
       "reference_trace": {
         "path": "private/integration/combined-before-mule365/source-trace365.json",
-        "sha256": "f4e5c74dc2f9f28581dd47696e280dfaee701ec89c6f171918935095b8444d56"
+        "sha256": "14f4233cf705490e71d330692f18dad9b06a4fad6ee3d3200be4bd2347bcac54"
       }
     },
     {
       "frame": 366,
-      "seed0": false,
+      "startup_seed": 5428,
       "compared_bytes": 344082,
       "source_instructions": 3318,
       "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
       "inputs": [
         {
           "path": "private/integration/combined-before-mule366/backing.bin",
@@ -107,15 +109,16 @@
       ],
       "reference_trace": {
         "path": "private/integration/combined-before-mule366/source-trace366.json",
-        "sha256": "2a4dc3183673402a7dcc329aa9a00ed1060997187389ebb78753ee72f0287ea0"
+        "sha256": "fff51963f4223482a4d5301eabb681c8e227f66b0dbfcd0efd57c80ee0ce3d13"
       }
     },
     {
       "frame": 375,
-      "seed0": false,
+      "startup_seed": 5428,
       "compared_bytes": 344082,
       "source_instructions": 2677,
       "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
       "inputs": [
         {
           "path": "private/integration/combined-before-mule375/backing.bin",
@@ -160,15 +163,16 @@
       ],
       "reference_trace": {
         "path": "private/integration/combined-before-mule375/source-trace375.json",
-        "sha256": "1067f16c0c8d1b0284f89b7b3f031c44194399f916caadfa234e913dbe3685a1"
+        "sha256": "044ae9fb82a9f18ff00deaf9bad7d66e68e0a9ac697d9f5e1a45007c35a4ed78"
       }
     },
     {
       "frame": 385,
-      "seed0": false,
+      "startup_seed": 5428,
       "compared_bytes": 344082,
       "source_instructions": 2962,
       "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
       "inputs": [
         {
           "path": "private/integration/combined-before-mule385/backing.bin",
@@ -213,15 +217,16 @@
       ],
       "reference_trace": {
         "path": "private/integration/combined-before-mule385/source-trace385.json",
-        "sha256": "d091015868c288e8376e08ddcc76559381f03dbabd27f952d84c7729897d819b"
+        "sha256": "7e173e58c3a8f79e4eaeceefaeb930e7e24f06c53f0239cbfcec4b07b111986a"
       }
     },
     {
       "frame": 415,
-      "seed0": false,
+      "startup_seed": 5428,
       "compared_bytes": 344082,
       "source_instructions": 11682,
       "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
       "inputs": [
         {
           "path": "private/integration/combined-before-mule415/backing.bin",
@@ -266,15 +271,16 @@
       ],
       "reference_trace": {
         "path": "private/integration/combined-before-mule415/source-trace415.json",
-        "sha256": "a338e090f8fffee04739d2009fe0f01d3dbd7eb3951185b83dbb4fb4af65a361"
+        "sha256": "b2de6a4a25398d4eaf9995aac894f05767445ba199d44a09e65b90500a47cba8"
       }
     },
     {
       "frame": 447,
-      "seed0": false,
+      "startup_seed": 5428,
       "compared_bytes": 344082,
       "source_instructions": 11482,
       "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
       "inputs": [
         {
           "path": "private/integration/combined-before-mule447/backing.bin",
@@ -319,15 +325,502 @@
       ],
       "reference_trace": {
         "path": "private/integration/combined-before-mule447/source-trace447.json",
-        "sha256": "7c78916a3852cb7c9634f68856c920de08e9f5a13d05808717980942bb2af83f"
+        "sha256": "9f0db789a1cadbc8e49db50549686f125038754eab8138ff3a21a67032769ddc"
+      }
+    },
+    {
+      "frame": 508,
+      "startup_seed": 5428,
+      "compared_bytes": 344082,
+      "source_instructions": 1792,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule508/backing.bin",
+          "sha256": "4b7041d84c4085bbd4bde6cef46aa42ae244abebce4d73ef9496cf8357f6a596"
+        },
+        {
+          "path": "private/integration/combined-before-mule508/creatures.bin",
+          "sha256": "7d55a385d7453931d8046944c6460819b6677b93bbf327b9bdf3ddee402a59f8"
+        },
+        {
+          "path": "private/integration/combined-before-mule508/actors.bin",
+          "sha256": "256dabf7b8886ff809babb36374514af20e0dea724cf3eb48e5849950d6a4747"
+        },
+        {
+          "path": "private/integration/combined-before-mule508/effects.bin",
+          "sha256": "9d624ac45eedf00f401d565bac95ea4df2b4e1bc7a97e70dfcff5e1885744a31"
+        },
+        {
+          "path": "private/integration/combined-before-mule508/players.bin",
+          "sha256": "a883a7ee425e6ad52f763f9354a6dbac57fa5641e216487acedb2e560412d408"
+        },
+        {
+          "path": "private/integration/combined-before-mule508/rng.bin",
+          "sha256": "57612aa2aceb9072acc384c27449a3ea1044fd482bc00c44f530520a6bb95e5a"
+        },
+        {
+          "path": "private/integration/combined-before-mule508/native-after508.bin",
+          "sha256": "afa66aab1395eb479da6809532d4fd18224f5e66dc9fec0793d59455071bac82"
+        },
+        {
+          "path": "private/integration/combined-before-mule508/map-after508.bin",
+          "sha256": "fd7c9128b24f0ca1a728873c6a63644d1a8f0378f67b7d9c3e409e327fa9966c"
+        },
+        {
+          "path": "private/integration/combined-before-mule508/rng-after508.bin",
+          "sha256": "57612aa2aceb9072acc384c27449a3ea1044fd482bc00c44f530520a6bb95e5a"
+        },
+        {
+          "path": "private/integration/combined-before-mule508/backing-after508.bin",
+          "sha256": "4b7041d84c4085bbd4bde6cef46aa42ae244abebce4d73ef9496cf8357f6a596"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule508/source-trace508.json",
+        "sha256": "18d8c44febd66218659b95507a1f77e70afdc7b3b2938a6247e9a8bbd8bfd462"
+      }
+    },
+    {
+      "frame": 509,
+      "startup_seed": 5428,
+      "compared_bytes": 344082,
+      "source_instructions": 2164,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule509/backing.bin",
+          "sha256": "c140dea49750e0b6e98ccdfde1cdd38f31c7b5d80c5eb2a60fb1a3e8abee52a9"
+        },
+        {
+          "path": "private/integration/combined-before-mule509/creatures.bin",
+          "sha256": "7d55a385d7453931d8046944c6460819b6677b93bbf327b9bdf3ddee402a59f8"
+        },
+        {
+          "path": "private/integration/combined-before-mule509/actors.bin",
+          "sha256": "59949cdd6112a2c3d173ab198ef85c8c0262564603664465247d92de69c9be6e"
+        },
+        {
+          "path": "private/integration/combined-before-mule509/effects.bin",
+          "sha256": "9d624ac45eedf00f401d565bac95ea4df2b4e1bc7a97e70dfcff5e1885744a31"
+        },
+        {
+          "path": "private/integration/combined-before-mule509/players.bin",
+          "sha256": "f7eaf3007ee1fd0e6ef29b0873af5fe570f7233236004a0a7aebdbfa85db0503"
+        },
+        {
+          "path": "private/integration/combined-before-mule509/rng.bin",
+          "sha256": "57612aa2aceb9072acc384c27449a3ea1044fd482bc00c44f530520a6bb95e5a"
+        },
+        {
+          "path": "private/integration/combined-before-mule509/native-after509.bin",
+          "sha256": "7d61f07c91c56caa6cfb7aa83f208d1dc5d254732c4d6625de582668939516b0"
+        },
+        {
+          "path": "private/integration/combined-before-mule509/map-after509.bin",
+          "sha256": "fd7c9128b24f0ca1a728873c6a63644d1a8f0378f67b7d9c3e409e327fa9966c"
+        },
+        {
+          "path": "private/integration/combined-before-mule509/rng-after509.bin",
+          "sha256": "57612aa2aceb9072acc384c27449a3ea1044fd482bc00c44f530520a6bb95e5a"
+        },
+        {
+          "path": "private/integration/combined-before-mule509/backing-after509.bin",
+          "sha256": "c140dea49750e0b6e98ccdfde1cdd38f31c7b5d80c5eb2a60fb1a3e8abee52a9"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule509/source-trace509.json",
+        "sha256": "ec778c4c6e7333e0d8504f7d7dbf1593669b2d3acfeb2a9e45457fbbe17a7e06"
+      }
+    },
+    {
+      "frame": 689,
+      "startup_seed": 5428,
+      "compared_bytes": 344082,
+      "source_instructions": 11396,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule689/backing.bin",
+          "sha256": "540a8a2d7d852e5d08ddd0280a358e7a34db0f097044c86fdbb2f427e6f0c318"
+        },
+        {
+          "path": "private/integration/combined-before-mule689/creatures.bin",
+          "sha256": "97502e54bd53f1feee0e203ab1f3c5342406f251057aea7fc9219db925c3c837"
+        },
+        {
+          "path": "private/integration/combined-before-mule689/actors.bin",
+          "sha256": "8569f31537c31b11869b4249e92c77175fbe6e838b7605158281712d92be367b"
+        },
+        {
+          "path": "private/integration/combined-before-mule689/effects.bin",
+          "sha256": "9d624ac45eedf00f401d565bac95ea4df2b4e1bc7a97e70dfcff5e1885744a31"
+        },
+        {
+          "path": "private/integration/combined-before-mule689/players.bin",
+          "sha256": "566cab9a4c385379b7ad344c7e107cf57c9c1cc8c050547fd796f6b45a7089f4"
+        },
+        {
+          "path": "private/integration/combined-before-mule689/rng.bin",
+          "sha256": "18f81a4e17fd3d263ee317d578d80e0f7ee69ae5c576dc4922d47e7b1ab82499"
+        },
+        {
+          "path": "private/integration/combined-before-mule689/native-after689.bin",
+          "sha256": "cffa1015bc3764d45d59f002109927d7287ee0a704d56f1da9d8c2182339f0a4"
+        },
+        {
+          "path": "private/integration/combined-before-mule689/map-after689.bin",
+          "sha256": "0edee99a42ba9497f3d6f65b15392b05bf1142b54207cdc5100923de72645784"
+        },
+        {
+          "path": "private/integration/combined-before-mule689/rng-after689.bin",
+          "sha256": "b584c45158459124306163e949e0448eab313e9a6d71dcfeeb14e4006593ac43"
+        },
+        {
+          "path": "private/integration/combined-before-mule689/backing-after689.bin",
+          "sha256": "46e9d9062f6997f1dfa2e6dfa3b71b9ef06bf8336352e5047a3b165993482569"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule689/source-trace689.json",
+        "sha256": "33e58e445266f5f0f88f11f05c7bf03f7305d4db80617c2a50a508dcb2ae0e0d"
+      }
+    },
+    {
+      "frame": 704,
+      "startup_seed": 5428,
+      "compared_bytes": 344082,
+      "source_instructions": 5118,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 1,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule704/backing.bin",
+          "sha256": "f0042e4c42ea6a92b704d138f9887ef887691517b2cb3cfe69310e3b62e7b3a4"
+        },
+        {
+          "path": "private/integration/combined-before-mule704/creatures.bin",
+          "sha256": "d680c7350e717e113358bc2cc3e73355181bd432b7499b3636b6ee936c6509e4"
+        },
+        {
+          "path": "private/integration/combined-before-mule704/actors.bin",
+          "sha256": "278e537ba1eb80b458afff2f7ec68d33848d0e20958b10e5057e42a66a16ff1b"
+        },
+        {
+          "path": "private/integration/combined-before-mule704/effects.bin",
+          "sha256": "9d624ac45eedf00f401d565bac95ea4df2b4e1bc7a97e70dfcff5e1885744a31"
+        },
+        {
+          "path": "private/integration/combined-before-mule704/players.bin",
+          "sha256": "99d679593708ea822d7f0378366d8216ae8c9dffeb7d7ad1a406eaf3ae81981b"
+        },
+        {
+          "path": "private/integration/combined-before-mule704/rng.bin",
+          "sha256": "c97ec8b51e398a6e46a3d5b84cd23f8a2ffcf0e71c99303ee5e4b934a1b29774"
+        },
+        {
+          "path": "private/integration/combined-before-mule704/native-after704.bin",
+          "sha256": "655b5e431515d78f8521dd1d2c8d1f1c794e3100fe4bab39bdef1318ebcfda23"
+        },
+        {
+          "path": "private/integration/combined-before-mule704/map-after704.bin",
+          "sha256": "0edee99a42ba9497f3d6f65b15392b05bf1142b54207cdc5100923de72645784"
+        },
+        {
+          "path": "private/integration/combined-before-mule704/rng-after704.bin",
+          "sha256": "c97ec8b51e398a6e46a3d5b84cd23f8a2ffcf0e71c99303ee5e4b934a1b29774"
+        },
+        {
+          "path": "private/integration/combined-before-mule704/backing-after704.bin",
+          "sha256": "f0042e4c42ea6a92b704d138f9887ef887691517b2cb3cfe69310e3b62e7b3a4"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule704/source-trace704.json",
+        "sha256": "b3586fc8d183a276f682555ddc7215df562b6c89b163de71bc72cf77015f5801"
+      }
+    },
+    {
+      "frame": 705,
+      "startup_seed": 5428,
+      "compared_bytes": 344082,
+      "source_instructions": 11112,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule705/backing.bin",
+          "sha256": "267d24e06ef16d156ee6fc38d02071143973eaa0ef877bed5b251f3db8928ad4"
+        },
+        {
+          "path": "private/integration/combined-before-mule705/creatures.bin",
+          "sha256": "cb1dced336252af87774fc0ac028b8f497728b1a04956f5b3c1d3887da7ed91a"
+        },
+        {
+          "path": "private/integration/combined-before-mule705/actors.bin",
+          "sha256": "1d23487daa2cc6fecad819f79e839d64910ebf44a860d444cf553ea1054bc95c"
+        },
+        {
+          "path": "private/integration/combined-before-mule705/effects.bin",
+          "sha256": "9d624ac45eedf00f401d565bac95ea4df2b4e1bc7a97e70dfcff5e1885744a31"
+        },
+        {
+          "path": "private/integration/combined-before-mule705/players.bin",
+          "sha256": "9f74d4b1b5a9103be70fc4531889627235c99c06d930b1df8d2eefebc361880b"
+        },
+        {
+          "path": "private/integration/combined-before-mule705/rng.bin",
+          "sha256": "c97ec8b51e398a6e46a3d5b84cd23f8a2ffcf0e71c99303ee5e4b934a1b29774"
+        },
+        {
+          "path": "private/integration/combined-before-mule705/native-after705.bin",
+          "sha256": "466de9540195302a026d878f0945f522288b2019b9307183467a09858379ae40"
+        },
+        {
+          "path": "private/integration/combined-before-mule705/map-after705.bin",
+          "sha256": "0edee99a42ba9497f3d6f65b15392b05bf1142b54207cdc5100923de72645784"
+        },
+        {
+          "path": "private/integration/combined-before-mule705/rng-after705.bin",
+          "sha256": "69e2aa4aa95549d3aa5e8bc2b0e957c12bb714108e2088603ef4f2f141264a15"
+        },
+        {
+          "path": "private/integration/combined-before-mule705/backing-after705.bin",
+          "sha256": "267d24e06ef16d156ee6fc38d02071143973eaa0ef877bed5b251f3db8928ad4"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule705/source-trace705.json",
+        "sha256": "c4ca77ce6684e7d44b10976c64b2474da73d6d0d51502d9bc43bf6be36310d8c"
+      }
+    },
+    {
+      "frame": 1311,
+      "startup_seed": 5428,
+      "compared_bytes": 344082,
+      "source_instructions": 32388,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule1311/backing.bin",
+          "sha256": "470b74e6b6149de4b7ead4adf515944e3aa1ed9e963277b15324e5270a3fcbe7"
+        },
+        {
+          "path": "private/integration/combined-before-mule1311/creatures.bin",
+          "sha256": "f36d8611e60a27aed307487dcac1702a5699d07bc00831df190c9ff374014615"
+        },
+        {
+          "path": "private/integration/combined-before-mule1311/actors.bin",
+          "sha256": "8e01ee4c69c969e362e9027c967236682a7e4157217c84702c3af90cf6f461ed"
+        },
+        {
+          "path": "private/integration/combined-before-mule1311/effects.bin",
+          "sha256": "9d624ac45eedf00f401d565bac95ea4df2b4e1bc7a97e70dfcff5e1885744a31"
+        },
+        {
+          "path": "private/integration/combined-before-mule1311/players.bin",
+          "sha256": "eed4b1c57f4b1d124244ff4ca51809c2feee318bb648cecfef9d7b95774addec"
+        },
+        {
+          "path": "private/integration/combined-before-mule1311/rng.bin",
+          "sha256": "edbc24d966f0a45c3cd44f9f0d3bd6b1b18ef51ecdc8585352df41fb0b42e65c"
+        },
+        {
+          "path": "private/integration/combined-before-mule1311/native-after1311.bin",
+          "sha256": "ace084a1ac8a4061acf194751d4ec81af8abf13cbb0a649a5f4c35e9414ea23d"
+        },
+        {
+          "path": "private/integration/combined-before-mule1311/map-after1311.bin",
+          "sha256": "936a2a637691b40d1f1fe329d18efc4ce7e5c77233d7b762fedc7cfcde960412"
+        },
+        {
+          "path": "private/integration/combined-before-mule1311/rng-after1311.bin",
+          "sha256": "edbc24d966f0a45c3cd44f9f0d3bd6b1b18ef51ecdc8585352df41fb0b42e65c"
+        },
+        {
+          "path": "private/integration/combined-before-mule1311/backing-after1311.bin",
+          "sha256": "470b74e6b6149de4b7ead4adf515944e3aa1ed9e963277b15324e5270a3fcbe7"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule1311/source-trace1311.json",
+        "sha256": "0ee533a0130174e169df8c39d295cafef95fa74b4e02d42cacbcc37e4326a223"
+      }
+    },
+    {
+      "frame": 1312,
+      "startup_seed": 5428,
+      "compared_bytes": 344082,
+      "source_instructions": 1884,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule1312/backing.bin",
+          "sha256": "489ff3ff9c7ea5a80d782204a003fcea42d1f438b5cb5b99ef1b84d3af234191"
+        },
+        {
+          "path": "private/integration/combined-before-mule1312/creatures.bin",
+          "sha256": "cc30ba1fc64f451d4ad9063b7ed5c7ff3f85f10430af983fbd1b9f6d57a3bb2d"
+        },
+        {
+          "path": "private/integration/combined-before-mule1312/actors.bin",
+          "sha256": "4ba25045ad479edd71248bf48dbd74eb5e956d3f4817f0c5652df7570a2ef967"
+        },
+        {
+          "path": "private/integration/combined-before-mule1312/effects.bin",
+          "sha256": "9d624ac45eedf00f401d565bac95ea4df2b4e1bc7a97e70dfcff5e1885744a31"
+        },
+        {
+          "path": "private/integration/combined-before-mule1312/players.bin",
+          "sha256": "cd38f39aebefdf6aeb1fb816ae05d8fcda5d98f4ac203067a06189a66469b512"
+        },
+        {
+          "path": "private/integration/combined-before-mule1312/rng.bin",
+          "sha256": "7a35a2956262b77845e224a84dcd926c6c638de89c405fd82cabbd1baa9af0e7"
+        },
+        {
+          "path": "private/integration/combined-before-mule1312/native-after1312.bin",
+          "sha256": "ced26a75d1480261f345ad2ec49d5e0a23c49e84265a7c62afd674124a53d0c1"
+        },
+        {
+          "path": "private/integration/combined-before-mule1312/map-after1312.bin",
+          "sha256": "936a2a637691b40d1f1fe329d18efc4ce7e5c77233d7b762fedc7cfcde960412"
+        },
+        {
+          "path": "private/integration/combined-before-mule1312/rng-after1312.bin",
+          "sha256": "7a35a2956262b77845e224a84dcd926c6c638de89c405fd82cabbd1baa9af0e7"
+        },
+        {
+          "path": "private/integration/combined-before-mule1312/backing-after1312.bin",
+          "sha256": "489ff3ff9c7ea5a80d782204a003fcea42d1f438b5cb5b99ef1b84d3af234191"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule1312/source-trace1312.json",
+        "sha256": "695c5636c5cb9919aad0600a03641e8f22bc7365ce87cddd8ee5ad5a7b2f3f7f"
+      }
+    },
+    {
+      "frame": 5677,
+      "startup_seed": 5428,
+      "compared_bytes": 344082,
+      "source_instructions": 2230,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule5677/backing.bin",
+          "sha256": "6a906f8d0e108affa53589028ff78f8ae6c8855d4ec7f5065f51a6ad5732b7e2"
+        },
+        {
+          "path": "private/integration/combined-before-mule5677/creatures.bin",
+          "sha256": "b8af1ca4ada19949d6d805ce468e3ffe4c57d4e244ab3c2650f9103da1941c29"
+        },
+        {
+          "path": "private/integration/combined-before-mule5677/actors.bin",
+          "sha256": "ea3517c538e6e4b7530998030450a98c81f732ccbfbcb30fb20d080160afbe50"
+        },
+        {
+          "path": "private/integration/combined-before-mule5677/effects.bin",
+          "sha256": "5561b959c86b55a4aa631fcada26a56f59c1d57a47dc5c3c11340316ef55a386"
+        },
+        {
+          "path": "private/integration/combined-before-mule5677/players.bin",
+          "sha256": "46082e15d4ab22c8071899a005c176e7d52167c874fff9a1fc92583227277c2f"
+        },
+        {
+          "path": "private/integration/combined-before-mule5677/rng.bin",
+          "sha256": "7193bca8108e054634ac2f2a5173764a4d270a01cc9be5c97633d73b50d0194b"
+        },
+        {
+          "path": "private/integration/combined-before-mule5677/native-after5677.bin",
+          "sha256": "7c27fc9abb0ece5dab46754737abc6b7a608f280e3ac4b1127ce41a464053cb6"
+        },
+        {
+          "path": "private/integration/combined-before-mule5677/map-after5677.bin",
+          "sha256": "f95428bf118d7ee034e6ae142881289783b7cd96ffc755273a5143d078ef08a6"
+        },
+        {
+          "path": "private/integration/combined-before-mule5677/rng-after5677.bin",
+          "sha256": "4af2a8926195454950003e98de21d35026aab62bde71222737904ff28329bec0"
+        },
+        {
+          "path": "private/integration/combined-before-mule5677/backing-after5677.bin",
+          "sha256": "6a906f8d0e108affa53589028ff78f8ae6c8855d4ec7f5065f51a6ad5732b7e2"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule5677/source-trace5677.json",
+        "sha256": "1b665710a658a070dcd4332b0c2049ed480cbe894c7c84346e4e2f4f2b8c9628"
+      }
+    },
+    {
+      "frame": 5678,
+      "startup_seed": 5428,
+      "compared_bytes": 344082,
+      "source_instructions": 1545,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule5678/backing.bin",
+          "sha256": "09b8168b794df0c61b5d23d4ddf5be8e3b41b01c2acb304908f5be9031bc41ab"
+        },
+        {
+          "path": "private/integration/combined-before-mule5678/creatures.bin",
+          "sha256": "ba70850725f265681bf19c8d746f166b7f77a676fca547a6978e0aa560b558a7"
+        },
+        {
+          "path": "private/integration/combined-before-mule5678/actors.bin",
+          "sha256": "b488f0491bd626667e90336b3f1360ec9c14fc24b4b980c89d66fbfd4d7382b9"
+        },
+        {
+          "path": "private/integration/combined-before-mule5678/effects.bin",
+          "sha256": "5561b959c86b55a4aa631fcada26a56f59c1d57a47dc5c3c11340316ef55a386"
+        },
+        {
+          "path": "private/integration/combined-before-mule5678/players.bin",
+          "sha256": "fcc29da793bca1b6796d74ff39eca7c7a6745201c1ac10c90dd651f924eb7589"
+        },
+        {
+          "path": "private/integration/combined-before-mule5678/rng.bin",
+          "sha256": "4af2a8926195454950003e98de21d35026aab62bde71222737904ff28329bec0"
+        },
+        {
+          "path": "private/integration/combined-before-mule5678/native-after5678.bin",
+          "sha256": "f84153b086e5dee686923efc7b753ad607779b4307efdfdb00c78f666ff01002"
+        },
+        {
+          "path": "private/integration/combined-before-mule5678/map-after5678.bin",
+          "sha256": "f95428bf118d7ee034e6ae142881289783b7cd96ffc755273a5143d078ef08a6"
+        },
+        {
+          "path": "private/integration/combined-before-mule5678/rng-after5678.bin",
+          "sha256": "4af2a8926195454950003e98de21d35026aab62bde71222737904ff28329bec0"
+        },
+        {
+          "path": "private/integration/combined-before-mule5678/backing-after5678.bin",
+          "sha256": "09b8168b794df0c61b5d23d4ddf5be8e3b41b01c2acb304908f5be9031bc41ab"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule5678/source-trace5678.json",
+        "sha256": "28d16d695234979bfd931702b51eb44755e82058529555670506cd7d27614129"
       }
     },
     {
       "frame": 441,
-      "seed0": true,
+      "startup_seed": 0,
       "compared_bytes": 344082,
       "source_instructions": 19726,
       "ui_cleanup_deferred": 1,
+      "portrait_check_deferred": 0,
       "inputs": [
         {
           "path": "private/integration/combined-seed0-before-mule441/backing.bin",
@@ -372,11 +865,605 @@
       ],
       "reference_trace": {
         "path": "private/integration/combined-seed0-before-mule441/source-trace441.json",
-        "sha256": "8c953e8a7b3bf133bd4c8507c8c9645053c3825997d497fa85602edb43996dd0"
+        "sha256": "9915a6add776764025e7b7e50bc01ad40df7eb81d7f2ab481bbb15a424fafe0b"
+      }
+    },
+    {
+      "frame": 508,
+      "startup_seed": 0,
+      "compared_bytes": 344082,
+      "source_instructions": 1865,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed0-before-mule508/backing.bin",
+          "sha256": "abc7c0d6ab655ae21aedbf1639472f6efb8bf011ca9cc0de3a230b19de58699d"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule508/creatures.bin",
+          "sha256": "0f7455dbf6798ea06ad5bca06dc5bbe507127b991fc011035f761466be246d45"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule508/actors.bin",
+          "sha256": "cc167538a2e57014eb76c1cd3c9e6542544b7dfa580ae423f8120848bd5f3ca1"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule508/effects.bin",
+          "sha256": "5f8eae0842e9b69b3ace5aebbf4679c52813055b57c569da50622f6f83f5b75e"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule508/players.bin",
+          "sha256": "cdab6427d3e3597d7cd4467510113c9e1e387bcba6a495ab1c8a2f0f9913966c"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule508/rng.bin",
+          "sha256": "bab36239e7b0bf88842495d749b38ceceb6e7ecc096b832a2046cc88958cb57b"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule508/native-after508.bin",
+          "sha256": "328b87163a18d49fa6a2e9901b14d727451af8c1d5346761802cd1be7fd5ceec"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule508/map-after508.bin",
+          "sha256": "ff3a83ce4add84ef82ce0724a28d799b967382d93e91d04a3f45e35162347147"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule508/rng-after508.bin",
+          "sha256": "bab36239e7b0bf88842495d749b38ceceb6e7ecc096b832a2046cc88958cb57b"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule508/backing-after508.bin",
+          "sha256": "abc7c0d6ab655ae21aedbf1639472f6efb8bf011ca9cc0de3a230b19de58699d"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed0-before-mule508/source-trace508.json",
+        "sha256": "d2b1f0baaa5779e1e8a8cfd1da8857d659ac9f3d9c1030b07d4bae1002292d11"
+      }
+    },
+    {
+      "frame": 509,
+      "startup_seed": 0,
+      "compared_bytes": 344082,
+      "source_instructions": 2436,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed0-before-mule509/backing.bin",
+          "sha256": "9357593d7884ea92531f50088340229b634d6b25b6f846fc95f6a81fa99d667b"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule509/creatures.bin",
+          "sha256": "e44627793473405f271f1bc6be6624e73901fde4c07ad4a3477416920eff8cdf"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule509/actors.bin",
+          "sha256": "8ecb3a4059c10833eaafe02450cf9dd21702a255aa88083e44a45f44071b2b7c"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule509/effects.bin",
+          "sha256": "5f8eae0842e9b69b3ace5aebbf4679c52813055b57c569da50622f6f83f5b75e"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule509/players.bin",
+          "sha256": "149ee58589b071df32fe9a3a3b97c78219931ad12fd79cafa37023f19c0090bf"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule509/rng.bin",
+          "sha256": "bab36239e7b0bf88842495d749b38ceceb6e7ecc096b832a2046cc88958cb57b"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule509/native-after509.bin",
+          "sha256": "07bfd454bb964ca3a84ee5b2b1f79230f02cffb7b705001682780db886f584b6"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule509/map-after509.bin",
+          "sha256": "ff3a83ce4add84ef82ce0724a28d799b967382d93e91d04a3f45e35162347147"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule509/rng-after509.bin",
+          "sha256": "bab36239e7b0bf88842495d749b38ceceb6e7ecc096b832a2046cc88958cb57b"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule509/backing-after509.bin",
+          "sha256": "9357593d7884ea92531f50088340229b634d6b25b6f846fc95f6a81fa99d667b"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed0-before-mule509/source-trace509.json",
+        "sha256": "b64696291d3a68705db3b4e5548cbfab3d1916360c29faa2f0ee072e9106a26a"
+      }
+    },
+    {
+      "frame": 631,
+      "startup_seed": 0,
+      "compared_bytes": 344082,
+      "source_instructions": 11362,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed0-before-mule631/backing.bin",
+          "sha256": "612fece881bb7715e8ca7e562a83df5a65525ac1604fead46cdf9fb2eaa646fb"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule631/creatures.bin",
+          "sha256": "5c52f38f9b43f905d548bf71fd9b4cd467dc82e8120a3b3ae75421a98c4ff2d5"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule631/actors.bin",
+          "sha256": "4979ba05cd5f9dfd99e040344ff2fccb81033d97969f9f64458b3fdd7295d28a"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule631/effects.bin",
+          "sha256": "5f8eae0842e9b69b3ace5aebbf4679c52813055b57c569da50622f6f83f5b75e"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule631/players.bin",
+          "sha256": "76cb6cd7e4d19b1983987d0dc6eaf75894d575f5b9dcbbb35a033af0daeed0df"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule631/rng.bin",
+          "sha256": "afd56c41110abbb14c49fb8b12106f171935ed5472f446dfe9e5a25f84a02486"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule631/native-after631.bin",
+          "sha256": "bfd386b64796f6263ca0c71ac2ac2f7a8b6b0801c38d325a094b97e5066d0555"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule631/map-after631.bin",
+          "sha256": "ff3a83ce4add84ef82ce0724a28d799b967382d93e91d04a3f45e35162347147"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule631/rng-after631.bin",
+          "sha256": "5a23d9a0955a21c3b98e5fc9dbdbad3b88b8029d3716ac67c522786a3780def4"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule631/backing-after631.bin",
+          "sha256": "11b870dfdc8b5ff1dd66f0d396cff5ff8dfa5603cb56f40028a456c45db9fa85"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed0-before-mule631/source-trace631.json",
+        "sha256": "53a95c0ca1095ca8bcd2accf5756c8a8b3097df3cc153a1f6be5d3c7a557da99"
+      }
+    },
+    {
+      "frame": 640,
+      "startup_seed": 0,
+      "compared_bytes": 344082,
+      "source_instructions": 5118,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 1,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed0-before-mule640/backing.bin",
+          "sha256": "2b5dd53a3684a0b3884f58afde2811737c753c0ab9f8460b6c377e919fb6f3b4"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule640/creatures.bin",
+          "sha256": "a3e3d3ab3c4d4b5a0631458eda05d0c4f25eb1842da65d89f06b123243e57bcc"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule640/actors.bin",
+          "sha256": "e7b1d1346cf46a67d853aca2c66523e0995d92830fc87dc2213a8f8a3f7e2b1e"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule640/effects.bin",
+          "sha256": "5f8eae0842e9b69b3ace5aebbf4679c52813055b57c569da50622f6f83f5b75e"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule640/players.bin",
+          "sha256": "29f834cce7581e9c10763bcec7b509d0e96633e549dc0b9f2c1dbe8b5fa65e8f"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule640/rng.bin",
+          "sha256": "c785186ee553ffd8ed11c1b64e3ff18f973be2938bf0ed79ded2f87d4de87cd3"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule640/native-after640.bin",
+          "sha256": "bfe9b22c7c0c22c696015f22d4f3b3ce693fe021602af0c71a695bad3236293f"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule640/map-after640.bin",
+          "sha256": "ff3a83ce4add84ef82ce0724a28d799b967382d93e91d04a3f45e35162347147"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule640/rng-after640.bin",
+          "sha256": "c785186ee553ffd8ed11c1b64e3ff18f973be2938bf0ed79ded2f87d4de87cd3"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule640/backing-after640.bin",
+          "sha256": "2b5dd53a3684a0b3884f58afde2811737c753c0ab9f8460b6c377e919fb6f3b4"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed0-before-mule640/source-trace640.json",
+        "sha256": "ad0ab7ffe0fa5ed6fe849c2dbca3f3c1a2d515c9472c5d64d56e59044ab465ef"
+      }
+    },
+    {
+      "frame": 641,
+      "startup_seed": 0,
+      "compared_bytes": 344082,
+      "source_instructions": 11108,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed0-before-mule641/backing.bin",
+          "sha256": "bd49811b96ab3c4db5f924fe9194b1956afd32cfa54ff068958f369ec4748dbd"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule641/creatures.bin",
+          "sha256": "25b51b3598ea14cbcd4993a634878b2806f99cb62feabd263cb19b9908bf4bb7"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule641/actors.bin",
+          "sha256": "ba762b87c9bb688aaa4794709bf79baf58194abe21732560699a14e3f339647e"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule641/effects.bin",
+          "sha256": "5f8eae0842e9b69b3ace5aebbf4679c52813055b57c569da50622f6f83f5b75e"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule641/players.bin",
+          "sha256": "51e10eadcbf08ea06e600bd48ac46a9070c3bdcb2b6e2ba270e5a9518318d1fe"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule641/rng.bin",
+          "sha256": "c785186ee553ffd8ed11c1b64e3ff18f973be2938bf0ed79ded2f87d4de87cd3"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule641/native-after641.bin",
+          "sha256": "0b4f66cf7520a10bfa93081787e41c5ca012983df75492ffc3657071d8c80906"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule641/map-after641.bin",
+          "sha256": "ff3a83ce4add84ef82ce0724a28d799b967382d93e91d04a3f45e35162347147"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule641/rng-after641.bin",
+          "sha256": "831cc3adc6eff096a26a3809bfc966e600f61e90131667f2f901b1638672a1c4"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule641/backing-after641.bin",
+          "sha256": "bd49811b96ab3c4db5f924fe9194b1956afd32cfa54ff068958f369ec4748dbd"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed0-before-mule641/source-trace641.json",
+        "sha256": "b5ca09ac2a96922a622667eb25044b943da1c7fc97f6727d00ee36880a04f4e8"
+      }
+    },
+    {
+      "frame": 511,
+      "startup_seed": 65535,
+      "compared_bytes": 344082,
+      "source_instructions": 11336,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed65535-before-mule511/backing.bin",
+          "sha256": "55e0bfdd8a118f8759b9ef8b2de18fd77e5f3da8414489725e84d3b261f944d5"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule511/creatures.bin",
+          "sha256": "36af494fbd1cd8bdede586e1fb63da87d427253e127ac3a9f3779430bed1adf0"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule511/actors.bin",
+          "sha256": "0548ef4b5741895fefe74e4e92bee85f2bd38b1aec0d0295f65bdb4669aae628"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule511/effects.bin",
+          "sha256": "bc29d7ea170ab43354965ac03d978fbff99a8dec6fbd1a2712ca0556289184e0"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule511/players.bin",
+          "sha256": "fef17107a35b6a2ec01e75e22c28e72842aefdce216a174de8f5fb82f07c0da9"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule511/rng.bin",
+          "sha256": "64cf01b0c609200ff95cb5a5369048b75ea8f307bdc8a54655d1514a3ca67377"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule511/native-after511.bin",
+          "sha256": "da1e714746fe9268b4c8f92d1b7f2a6e98caec78d06001b6c386255d0ac9506e"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule511/map-after511.bin",
+          "sha256": "6fa71a2fe97b331a77202c3382913cde8d53e4d8f81bfa7a83b17d26fe2ca4d8"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule511/rng-after511.bin",
+          "sha256": "1558a22ca87e42ed13f45591ebb6ef4c4816c1e8a859ce2ebf3d6aa2d5f1183a"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule511/backing-after511.bin",
+          "sha256": "643cde26ddf9f6021a987986f4bdddf67da16cae69fd6c78dd5a2fdf1b3472b8"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed65535-before-mule511/source-trace511.json",
+        "sha256": "6a91e2125c67edd4d95f1b343bc2a12f9d0dcd0a99325aa231363851063d713e"
+      }
+    },
+    {
+      "frame": 607,
+      "startup_seed": 65535,
+      "compared_bytes": 344082,
+      "source_instructions": 11711,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed65535-before-mule607/backing.bin",
+          "sha256": "1ed8c725e050b31c38c71c30a559a14426f8e4de22f3b140904cdcc7b005b6e8"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule607/creatures.bin",
+          "sha256": "22d394680199dd044cfd6fbab59a98d2de904f9e419cc14f4a2a19dc82195ebb"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule607/actors.bin",
+          "sha256": "a74ae6b0e98813fb48293361cd42d345607c40b982baee55c2f01392ded5a634"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule607/effects.bin",
+          "sha256": "bc29d7ea170ab43354965ac03d978fbff99a8dec6fbd1a2712ca0556289184e0"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule607/players.bin",
+          "sha256": "87357133ef17a1764d14c5a75b1d50c47caa8c75b79a87cc4f007965f2b3d4e3"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule607/rng.bin",
+          "sha256": "4e6790c5daf4b86dcbb337850093d8dab57bd56cd40e5f83a41f59169902357a"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule607/native-after607.bin",
+          "sha256": "ecb58688ee4231164df75583e8a62d978afd5725c85828a315a6bb54ea0e4d78"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule607/map-after607.bin",
+          "sha256": "6fa71a2fe97b331a77202c3382913cde8d53e4d8f81bfa7a83b17d26fe2ca4d8"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule607/rng-after607.bin",
+          "sha256": "395028a6dd1f1ca8708648725b47715737af3dd615db82cb814e52765c940f10"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule607/backing-after607.bin",
+          "sha256": "9a097ad01df8034ee2a39393be6c7a450e3f491bd1097a8421113b2c94ea969f"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed65535-before-mule607/source-trace607.json",
+        "sha256": "e1ff2688339ab7284e66f35c0bf99c0b3c629f6824ad59886be6d0ccb10fbf91"
+      }
+    },
+    {
+      "frame": 608,
+      "startup_seed": 65535,
+      "compared_bytes": 344082,
+      "source_instructions": 5137,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 1,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed65535-before-mule608/backing.bin",
+          "sha256": "05e1d04ad1f1ac0b5ee6280babc3e26b99d6925bda49de33bd16489c2eb6e04c"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule608/creatures.bin",
+          "sha256": "0b9fc65294f3f28d7d96a25a6a4cbb24ef6c5ba0c9a2371e5345b2193be34e57"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule608/actors.bin",
+          "sha256": "b61e28b3866d25a715308d9f4cf1112f950466e8e21861debdf1639830e5ad5e"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule608/effects.bin",
+          "sha256": "bc29d7ea170ab43354965ac03d978fbff99a8dec6fbd1a2712ca0556289184e0"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule608/players.bin",
+          "sha256": "1405d3a344d67da04931ef36e04660fcf323e7ab6f7a9308beb4698f1cdb5e70"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule608/rng.bin",
+          "sha256": "648cc7d90a932658f5fd77feee2777a9705e20306d24cf96ec56202ea58c55d7"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule608/native-after608.bin",
+          "sha256": "456cb8ee78ca6eb2ebf9d2f7060dddce720bb29402751842f72bc0191d301691"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule608/map-after608.bin",
+          "sha256": "6fa71a2fe97b331a77202c3382913cde8d53e4d8f81bfa7a83b17d26fe2ca4d8"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule608/rng-after608.bin",
+          "sha256": "648cc7d90a932658f5fd77feee2777a9705e20306d24cf96ec56202ea58c55d7"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule608/backing-after608.bin",
+          "sha256": "05e1d04ad1f1ac0b5ee6280babc3e26b99d6925bda49de33bd16489c2eb6e04c"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed65535-before-mule608/source-trace608.json",
+        "sha256": "de36c940952b66963ea2bc333848f2c8b65217397c545f720e954bb8dad33ac8"
+      }
+    },
+    {
+      "frame": 609,
+      "startup_seed": 65535,
+      "compared_bytes": 344082,
+      "source_instructions": 11456,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed65535-before-mule609/backing.bin",
+          "sha256": "96325d93f4460f84a16b17dd080e4726270b76296cf6fa60c5995181c1f00f89"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule609/creatures.bin",
+          "sha256": "5496ef158a10d91edad0725163d4faf2f530c64b2149b03d6c4dd91d5dc0d305"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule609/actors.bin",
+          "sha256": "ec0fe2f697d5fc2e7f2295d53daacddb5d18fd9301fbdd3bd5d9941d2e80b77a"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule609/effects.bin",
+          "sha256": "bc29d7ea170ab43354965ac03d978fbff99a8dec6fbd1a2712ca0556289184e0"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule609/players.bin",
+          "sha256": "7b7ec180ffede377a85774bc4d7d4fe065a1e1004d1a5f2f3f2a2bc446d5488f"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule609/rng.bin",
+          "sha256": "648cc7d90a932658f5fd77feee2777a9705e20306d24cf96ec56202ea58c55d7"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule609/native-after609.bin",
+          "sha256": "253ba3ebca7c8552db34fbd53cea061d4d05ecd89a7de32387de20dbe63a92c1"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule609/map-after609.bin",
+          "sha256": "6fa71a2fe97b331a77202c3382913cde8d53e4d8f81bfa7a83b17d26fe2ca4d8"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule609/rng-after609.bin",
+          "sha256": "8d5e275dfcfe71324a15d4ec6e54e6f5175b07aa34a569e31a2f7d7225de8115"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule609/backing-after609.bin",
+          "sha256": "96325d93f4460f84a16b17dd080e4726270b76296cf6fa60c5995181c1f00f89"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed65535-before-mule609/source-trace609.json",
+        "sha256": "8db0b3a2b7b13423a9b47c5104677536629bee8189cde2114447223fc9a5a62e"
+      }
+    },
+    {
+      "frame": 974,
+      "startup_seed": 65535,
+      "compared_bytes": 344082,
+      "source_instructions": 162448,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed65535-before-mule974/backing.bin",
+          "sha256": "f1576671c76875442e328cc8e1460c5ea777fc217d10600506b26e569084ec75"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule974/creatures.bin",
+          "sha256": "9d906b36ac8993235ed746f4a917ad6fdf5839c4751c8b89fdcf38c16b96b17e"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule974/actors.bin",
+          "sha256": "ee81277f9c8c163358bc857a23b783ec1e260fcb93ec14286729251bc84f36ac"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule974/effects.bin",
+          "sha256": "bc29d7ea170ab43354965ac03d978fbff99a8dec6fbd1a2712ca0556289184e0"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule974/players.bin",
+          "sha256": "c907684b88e0fc43d7cbebd6a3748d72bca43118f2d3b77398dee0e1b7358814"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule974/rng.bin",
+          "sha256": "f4d3057a15d441aa8c3fd5c5a36269b17088378de9271b916f2050f84a793eec"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule974/native-after974.bin",
+          "sha256": "c539c628e2406c6df3bbd3663f60defd23cda2da4292b2923942782b76970447"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule974/map-after974.bin",
+          "sha256": "daec756a003b8329c8bd2a71a77c479a2415d4dd70268f32fc554369f14c8c7d"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule974/rng-after974.bin",
+          "sha256": "d36772f8d1c7022121a011a2092cac49928e63664268d07db69bb6bf39bfdcea"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule974/backing-after974.bin",
+          "sha256": "f1576671c76875442e328cc8e1460c5ea777fc217d10600506b26e569084ec75"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed65535-before-mule974/source-trace974.json",
+        "sha256": "4b17c47542f4d31701a6565ffe416589a8868b4d903e81024d4196f53cc76d5f"
+      }
+    },
+    {
+      "frame": 975,
+      "startup_seed": 65535,
+      "compared_bytes": 344082,
+      "source_instructions": 2191,
+      "ui_cleanup_deferred": 0,
+      "portrait_check_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed65535-before-mule975/backing.bin",
+          "sha256": "d840ee18f1c711b891ee8ddb3152531ebde92f7f5151b1e23c6c4ef19bd28734"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule975/creatures.bin",
+          "sha256": "2b25a6d024cd4e26d2d7e5dba68ed157227b0b98fa28db90d72b0b745f1e6532"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule975/actors.bin",
+          "sha256": "aa7a228fb8b4105ed71d504185eb65beb037960c021864175f56ab692c0b01b7"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule975/effects.bin",
+          "sha256": "bc29d7ea170ab43354965ac03d978fbff99a8dec6fbd1a2712ca0556289184e0"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule975/players.bin",
+          "sha256": "b0018853c4f7274bc28af532623aa7c0f2491a757d2ef6a09a60586de8c075b6"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule975/rng.bin",
+          "sha256": "b99c79dfeac9bfa35898133d155923287e3e22ea3c706e05b6fda722b22bd945"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule975/native-after975.bin",
+          "sha256": "9fcebdaeda591d5d5129ece1292add7bc7e0bcf823978ee3ba62444a5acf0954"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule975/map-after975.bin",
+          "sha256": "daec756a003b8329c8bd2a71a77c479a2415d4dd70268f32fc554369f14c8c7d"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule975/rng-after975.bin",
+          "sha256": "b99c79dfeac9bfa35898133d155923287e3e22ea3c706e05b6fda722b22bd945"
+        },
+        {
+          "path": "private/integration/combined-seed65535-before-mule975/backing-after975.bin",
+          "sha256": "d840ee18f1c711b891ee8ddb3152531ebde92f7f5151b1e23c6c4ef19bd28734"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed65535-before-mule975/source-trace975.json",
+        "sha256": "125fcaf70e7a20a01bb6ea8148b15136c47259aca8e347aec96a48f1e10c5452"
       }
     }
   ],
-  "historical_compared_bytes": 2408574,
+  "historical_compared_bytes": 9290214,
   "stack_fill_cases": [
     0,
     85,
@@ -473,7 +1560,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "5cfdfd1b09ae7d3f33ace71c5f540216482326fabc27647be6beeb4b674d0d5e"
+      "sha256": "c97c4f7e70e1cddf3cb1cdff1ab5112270e12ca585eb8d6021858efe9f771e52"
     },
     {
       "path": "rust/crates/genewars-runtime/src/blueprint.rs",
@@ -488,12 +1575,40 @@
       "sha256": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/building_effect.rs",
+      "sha256": "b01c1c881d27d66d6a17bea61dad970b0cd066fe1a062a496cd397eb71b318fc"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_completion.rs",
+      "sha256": "0b78ab600e361fedbff300f20b10e16beb1a01bda89ba881aa86c53f507231d0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_setup.rs",
+      "sha256": "cc51bdfb257227a4c873f6b14bca776125de289af42b376744d4b46c6de5c4ae"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_site.rs",
+      "sha256": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terrain.rs",
+      "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/countdown_expiry.rs",
+      "sha256": "1b3e076d2f1d198d23d3990015f9865775225ca2b0b4df0de69ee1f461983efb"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/creature_world.rs",
-      "sha256": "fb829cee975ca26518f25d0db36f4685ad7576fc270ae4b292c645293f006d56"
+      "sha256": "3658a74dc0c1ecc545492489378e80847196457b7775b9a30180be3518d77bf5"
     },
     {
       "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
       "sha256": "944251d5617a636b7b847a51ef00270d06872b5b27a23f5b79286b43c2bc23bd"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/family8_creation.rs",
+      "sha256": "0f312593fb963669ec9a98e33abed62e09aa2a2f9cfef9f0799946aa4743a712"
     },
     {
       "path": "rust/crates/genewars-runtime/src/identity.rs",
@@ -537,7 +1652,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/world.rs",
-      "sha256": "8a304a471b815b8e3323b6dddc13c8cbbd0c3dfae5ea5327643a03e9662f9bda"
+      "sha256": "3fd7e6a7df779c935836566ba8d9755cf843db7d964a888e7d53a53d405bffe7"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
@@ -549,37 +1664,41 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
-      "sha256": "c79f3f74f2c7c6a89134f7b33d4c0dd2a946673bd7395c3b14e631af40e33b68"
+      "sha256": "736f0df2c43cf385e2ffe4601d69112b709a118d1ab92f070a273b5ec85a7ad3"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
-      "sha256": "9e23ef09c3b179e708ce1b464d4c1d8056f4dbf313f7e844085ff035d4c668cf"
+      "sha256": "f3f3077d1904f243e1d495f9712541c181d3fc4d7cb565240115b0a05fd40f85"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
-      "sha256": "8de21959a0f10016a708dbecad0b9e8721ec223013a9750993fb86b8576323dd"
+      "sha256": "3cfcc1a1e7dbcff0d5bebb5f020c41aa54a359093a5f49660041860f49841cc4"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs",
-      "sha256": "3b7a7853f6f7925dbf386274ddb570856eab9beb692086215ac39e1fa632e46d"
+      "sha256": "e85b2309b63ba285f35d45dffc44103af5508405af05a2303bec0c78d362c4a9"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
       "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world/plant_creation.rs",
+      "sha256": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82"
     }
   ],
   "review_sources": [
     {
       "path": "research/variants/creature-hungry-review.py",
-      "sha256": "749d16fd109437c1087ac265301cc6a42e120cf9ef9cd9b258de0c642e9799ee"
+      "sha256": "28de27d782613ed12d7f332644d0af4930a845ee760b0d56c2f90768a37514d0"
     },
     {
       "path": "research/variants/creature-hungry-review.rs",
-      "sha256": "33f1b4a94b3255300d6b1af4682ed998ef5bdc64f1c3eabfb2a9c9e292222b09"
+      "sha256": "0fafe65dc85955442d9284d4514881009d8f833184bf178078a0e0e4e62f45f7"
     },
     {
       "path": "research/variants/creature-hungry-source.py",
-      "sha256": "9a4f0d5ad4290f73f76f38d164e9c43407e14fa94858d5e6c09032e4e3481216"
+      "sha256": "31484ef67161f1329cdf78c37d17fb7179834b4b4195122fe9bcd2c55d4560ae"
     },
     {
       "path": "research/variants/initial-creature-source.py",
@@ -588,8 +1707,8 @@
   ],
   "limits": [
     "Current compiled acquisition/feeding plans are compared against independently interpreted source before/after images. Full owned callback comparisons use parent-generated private historical captures; this script does not freshly replay the whole inter-family scheduler.",
-    "Render queue83140 and module UI cleanup2C200 remain explicit pending requests; source417E0 is gated off by the explicitly bound mission-tail flags38. No original or GUI execution.",
+    "Render queue83140, module UI cleanup2C200 and optional portrait check5E068 remain explicit pending requests; source417E0 is gated off by the explicitly bound mission-tail flags38. No original or GUI execution.",
     "Source/native pointer gap31..39 is normalized for comparison; full backing comparisons do not assert it is a complete save file.",
-    "Immediate neutral plant death is admitted only for retirement delay<4; larger delays, foreign neighborhoods, energy/full-reserve completion and source water-damage branches remain explicit boundaries."
+    "Immediate neutral plant death is admitted only for retirement delay<4; larger delays, foreign neighborhoods, energy death and source water-damage branches remain explicit boundaries. Full-reserve completion, hunger saturation and target release are compared across all three seeded contexts."
   ]
 }

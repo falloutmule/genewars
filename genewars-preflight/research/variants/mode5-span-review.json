@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-mode5-span-review",
-  "checked_utc": "2026-10-13T17:28:24.743975+00:00",
+  "checked_utc": "2026-10-13T19:12:06.123333+00:00",
   "original_or_gui_execution": false,
   "cases": 7979,
   "written_pixels_compared": 583275,
@@ -70,7 +70,7 @@
   "harness": {
     "path": "private/review/mode5-span/review.exe",
     "size": 5090377,
-    "sha256": "bc1038688f5d6d3753bc8f884ed9c3e952fb6f6b1e4c28bc78a9820b95931e6d"
+    "sha256": "e7fbc998365c1176b3b99bb27944af041eaccb2f9ba9bcb6a87c168783d5d7f3"
   },
   "review_sources": [
     {

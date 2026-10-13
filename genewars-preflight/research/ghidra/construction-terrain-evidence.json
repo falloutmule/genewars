@@ -1,0 +1,9 @@
+{
+  "allocation_cases": 64,
+  "numeric_step_cases": 64,
+  "compared_bytes": 31271,
+  "literal_instruction_steps": 109900,
+  "output_sha256": "aad099ed1e194178b858ce542b39002fec9d941bdc83dcae24c182ab7cc33f43",
+  "source_sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31",
+  "scope": "791C0/77B80/77960 complete job allocation;78E30 numeric work/ordered request journals only.8C550/8C1C0/8B890/8D1B0/8D660 explicit typed ports must execute before a world commit."
+}

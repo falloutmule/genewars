@@ -275,8 +275,26 @@
       "sha256": "f6c62221b52a62088f91ae8d00becfef513282cbf98a5990c1a0859cd8b2d346",
       "size": 57038,
       "provenance": "root/2/disc/335; selector4 packed4 proof creature-evidence.json"
+    },
+    {
+      "path": "panel/font0.dat",
+      "sha256": "af89c4e4c02e394810b22ecf3d57211cdb56a0006071a88f43d0ae6fb370447d",
+      "size": 8039,
+      "provenance": "root/2/disc/71; decoded RNC output"
+    },
+    {
+      "path": "panel/font0.tab",
+      "sha256": "321c49b302552e2bcf287bd20ef0954fb977dd66aef6e82101e3c0c64b5b0a17",
+      "size": 1170,
+      "provenance": "root/2/disc/72; decoded RNC output"
+    },
+    {
+      "path": "physics/plant-spread.bin",
+      "sha256": "8aa88c050cdb4229467f43347efcd9a8d88e5651cf2684e92666dcfe886515b6",
+      "size": 36,
+      "provenance": "validated mapped object3 offset 0x4564; physics-inputs.json"
     }
   ],
   "original_execution": false,
-  "catalog_sha256": "c6c53b7f3ad36abbf2eb07664bccf6639cc0324d56f08878c8a0c1c037dffd33"
+  "catalog_sha256": "b4ced7d0c25222e19941f8c00a2c1f93b78ee48bdd2fdbb987e7b01ac9e4fdd4"
 }

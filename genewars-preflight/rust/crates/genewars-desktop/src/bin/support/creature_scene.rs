@@ -1,7 +1,7 @@
 //! Bounded MULE composition for the proved 59470 wrapper path.
 //!
-//! This admits selector 4 and owner 4 in source-pinned states 1 (animations
-//! 0..7), 7 (animation 19), and 8 (animations 0..7), with frame bounds checked
+//! This admits selector 4 and owner 4 in source-pinned states 0, 1, and 8
+//! (animations 0..7), plus state 7 (animation 19), with frame bounds checked
 //! against the ANB and ordinary shade rows 0..31. The parity-selected special
 //! shade branch remains rejected. The caller supplies projected origin and
 //! wrapper/global flags. Resource, health-depth, and frame selection come from
@@ -68,7 +68,8 @@ pub enum CreatureDrawError {
 }
 
 /// Reproduce 59470's transient 19CFAC word setup. Its early animation/state
-/// branch skips the yaw override for the admitted MULE state-8 frames.
+/// branch skips the yaw override for admitted low-animation states, including
+/// the blocked-ground relocation state 0.
 fn mule_wrapper_flags(record: &[u8; 124], inherited: u8) -> u8 {
     if record[0x19] < 0x10 && record[0x5e] < 0x1a { return inherited; }
     let yaw = i16::from_le_bytes([record[0x39], record[0x3a]]);
@@ -159,10 +160,12 @@ pub fn draw_initial_mule_record(
 
 /// Draw a source-selected MULE record for the currently admitted startup
 /// states. The extra pairs are pinned to the combined-world snapshots and
-/// direction selector: state 1 uses animations 0..7 with frame bounds from
+/// direction selector: states 0 and 1 use animations 0..7 with frame bounds from
 /// the ANB, and state 7 uses animation 19/frames 0..3. State 8 retains the
-/// earlier bounded 0..7 animation path. This does not infer the state machine
-/// or animation clock; callers provide the current record.
+/// earlier bounded 0..7 animation path. State 0 is admitted only for the
+/// source-pinned low-animation case selected by `0x5E640`; this does not infer
+/// the state machine or animation clock, and callers provide the current
+/// record.
 pub fn draw_supported_mule_record(
     database: &CreatureAnimationDatabase,
     record: &genewars_runtime::creature_world::CreatureRecord,
@@ -182,6 +185,9 @@ pub fn draw_supported_mule_record(
     let animation = record[0x19];
     let frame_index = record[0x1b];
     let admitted_pair = match record[0x5e] {
+        // The blocked-ground relocation path enters state 0, and `0x5E640`
+        // dispatches case 0 through this bounded directional animation set.
+        0 => animation <= 7,
         // State 1's source-proved directional selector chooses animation 0..7;
         // the ANB then bounds the current frame for each chosen direction.
         1 => animation <= 7,
@@ -563,6 +569,12 @@ mod tests {
         let (resources, _, _) = Resources::load(&repository.join("private/integration/game-runtime"))
             .expect("hash-bound game resources");
         for (relative, expected_hash, expected_state, expected_animation, expected_frame) in [
+            ("combined-before-mule704/source-after704.bin",
+                "992a276fab0cf19e9c8290a17c6a3d2b23b7f7cc845469fd40a6c55b609318aa", 0, 6, 1),
+            ("combined-seed0-before-mule640/source-after640.bin",
+                "febfd1a200dfcec4ebf91b5b7d2cc20e11a72eef92c2cf0645abccb0454d0ddc", 0, 6, 1),
+            ("combined-seed65535-before-mule608/source-after608.bin",
+                "33f91be4c6b427f132f498b3d62d19a631437c446c5d3c625bc6f1df824b309b", 0, 2, 1),
             ("combined-before-mule366/source-after366.bin",
                 "68c3ab88608abbbd82ff0f9bfd4a740ead1ca5a1e8daf797b2ec6f3b352ab041", 1, 0, 0),
             ("combined-before-mule385/source-after385.bin",
@@ -603,6 +615,13 @@ mod tests {
         assert_eq!(pixels, before);
         record[0x19] = 19;
         record[0x1b] = 4;
+        assert_eq!(draw_supported_mule_record(&resources.mule, &record, [24,18], 0, 0,
+            0, false, 0, 0, &resources.fade, &resources.gla, [64,48], 64, &mut pixels),
+            Err(CreatureDrawError::UnsupportedRecordState));
+        assert_eq!(pixels, before);
+        record[0x5e] = 0;
+        record[0x19] = 8;
+        record[0x1b] = 0;
         assert_eq!(draw_supported_mule_record(&resources.mule, &record, [24,18], 0, 0,
             0, false, 0, 0, &resources.fade, &resources.gla, [64,48], 64, &mut pixels),
             Err(CreatureDrawError::UnsupportedRecordState));

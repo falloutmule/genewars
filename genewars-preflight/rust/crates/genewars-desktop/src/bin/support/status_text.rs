@@ -56,3 +56,26 @@ pub fn overlay(image: &RgbImage, lines: &[String]) -> Result<RgbImage,String> {
     }
     RgbImage::from_rgb24(640,480,rgb).map_err(|e|e.to_string())
 }
+
+/// Compact development controls stay to the right of the source-backed
+/// selected-actor text and bars. They must not erase the panel they explain.
+pub fn mission_overlay(image:&RgbImage,lines:&[String])->Result<RgbImage,String> {
+    let mut wrapped=Vec::new();
+    for line in lines {
+        let mut current=String::new();
+        for word in line.split_whitespace(){
+            if !current.is_empty()&&current.len()+word.len()+1>74 {wrapped.push(current);current=String::new();}
+            if !current.is_empty(){current.push(' ');}current.push_str(word);
+        }
+        wrapped.push(current);
+    }
+    let mut rgb=image.rgb_bytes().to_vec();let height=(wrapped.len()*10+12).min(480);let top=480-height;
+    for y in top..480 {for x in 176..640 {rgb[(y*640+x)*3..(y*640+x)*3+3].copy_from_slice(&[12,18,25]);}}
+    for (line,text)in wrapped.iter().enumerate(){for (col,c)in text.bytes().take(74).enumerate(){
+        for (dx,bits)in glyph(c).iter().enumerate(){for dy in 0..7 {
+            let x=182+col*6+dx;let y=top+6+line*10+dy;
+            if y<480&&bits&(1<<dy)!=0 {rgb[(y*640+x)*3..(y*640+x)*3+3].copy_from_slice(&[229,239,218]);}
+        }}
+    }}
+    RgbImage::from_rgb24(640,480,rgb).map_err(|e|e.to_string())
+}

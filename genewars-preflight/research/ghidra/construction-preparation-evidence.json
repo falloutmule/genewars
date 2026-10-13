@@ -1,0 +1,10 @@
+{
+  "cases": 64,
+  "compared_bytes": 14681782,
+  "literal_instruction_steps": 244068,
+  "output_sha256": "ee604878d1f51950e3c106966e1724d936544736113347baeae169f568ab7a6f",
+  "source_sha256": "bc7c8aebad792673ffc8b9b7fc89f240ff6caea5ccf089f1ec54c04f2cba0feb",
+  "listing_sha256": "8346e2e8cc123527be927e2b30cf62f629864ad94c5637a07d8b7e0297ea9c0e",
+  "table_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+  "scope": "8CBA0 material preparation, full map and ordered84E10 requests"
+}

@@ -1,7 +1,7 @@
 //! Fixed CD resource admission and projection of owned world state.
 pub(super) mod creature_scene;
 use std::{fs, io::Read, path::Path};
-use genewars_assets::{AnbAnimationRecord, AnbFrameRecord, AnbSections, B32Atlas, CampaignHeader, ConqFastPrefix, ConqMapCells, ConqMissionSource, Palette256, PaletteChannelMode, SpriteTable};
+use genewars_assets::{AnbAnimationRecord, AnbFrameRecord, AnbSections, B32Atlas, CampaignHeader, ConqFastPrefix, ConqMapCells, ConqMissionSource, FontResource, Palette256, PaletteChannelMode, SpriteTable, TextStringTable};
 use genewars_core::cd_candidate::{CampaignResourcePlan, camera_cells_for_target, entity_view_position,
     interpolate_entity_shade, plan_terrain_factor_raise_4096, queue_family1, family1_draw_packet, ProjectedFamily1};
 use genewars_render::{RgbImage, PlantFrame, PlantColorInputs, PlantSceneRecord, draw_explicit_family1_scene,
@@ -31,6 +31,7 @@ pub struct Resources {
     _header: Vec<u8>,
     pub title: Vec<u8>,
     atlas: Vec<u8>, fade: Vec<u8>, gla: Vec<u8>, panel: Vec<u8>,
+    font0_dat: Vec<u8>, font0_tab: Vec<u8>, text: Vec<u8>,
     palette: Palette256, plants: Vec<Vec<u8>>,
     pub actors: ActorResources,
     pub effects: EffectAnimationDatabase,
@@ -252,6 +253,15 @@ impl Resources {
         let gla = read_bound(&root.join("terrain/MAIN.GLA"))?;
         MainGlaTable::parse(&gla).map_err(|e| e.to_string())?;
         let panel = read_bound(&root.join("terrain/GENEPANL.DAT"))?;
+        let font0_dat = read_bound(&root.join("panel/font0.dat"))?;
+        let font0_tab = read_bound(&root.join("panel/font0.tab"))?;
+        let text = read_bound(&root.join("menu/text.dat"))?;
+        // Parse these at load time so malformed or mismatched panel resources
+        // fail admission before any selected-actor drawing is attempted.
+        let font0 = FontResource::parse(&font0_dat, &font0_tab).map_err(|e| e.to_string())?;
+        if font0.record_count() < 96 { return Err("FONT0 has fewer than 96 byte-addressable glyph records".into()); }
+        let text_table = TextStringTable::parse(&text).map_err(|e| e.to_string())?;
+        if text_table.strings().len() != 604 { return Err("English TEXT resource did not produce the pinned 604-entry index".into()); }
         let palette = Palette256::parse(&read_bound(&root.join("terrain/MAIN.PAL"))?, PaletteChannelMode::Rgb).map_err(|e| e.to_string())?;
         if palette.entries().iter().flatten().any(|&v| v>63) { return Err("MAIN.PAL is not RGB6".into()); }
         let plants = (0..12).map(|slot| read_bound(&root.join(format!("plants/slot-{slot:02}.anb")))).collect::<Result<Vec<_>,_>>()?;
@@ -262,7 +272,7 @@ impl Resources {
         let physics = PhysicsTables::from_mapped_bytes(&angle, &bounce).map_err(|e| e.to_string())?;
         let mule = CreatureAnimationDatabase::load(root)?;
         let mule_animations = MuleAnimations::from_anb(mule.bytes()).map_err(|e| format!("CD MULE animation metadata: {e}"))?;
-        Ok((Self { _header: header, title, atlas, fade, gla, panel, palette, plants, actors, effects, physics, mule, mule_animations }, world, target))
+        Ok((Self { _header: header, title, atlas, fade, gla, panel, font0_dat, font0_tab, text, palette, plants, actors, effects, physics, mule, mule_animations }, world, target))
     }
 
     pub fn render(&self, world: &MissionWorld, target: [i16;2]) -> Result<Frame,String> {
@@ -328,4 +338,13 @@ impl Resources {
     pub(super) fn fade_bytes(&self) -> &[u8] { &self.fade }
     pub(super) fn main_gla_bytes(&self) -> &[u8] { &self.gla }
     pub(super) fn palette_entries(&self) -> &[[u8; 3]; 256] { self.palette.entries() }
+
+    /// Parsed views over the exact catalog-bound FONT0 and English TEXT inputs.
+    pub(super) fn panel_font0(&self) -> Result<FontResource<'_>, String> {
+        FontResource::parse(&self.font0_dat, &self.font0_tab).map_err(|e| e.to_string())
+    }
+    pub(super) fn panel_text(&self) -> Result<TextStringTable<'_>, String> {
+        TextStringTable::parse(&self.text).map_err(|e| e.to_string())
+    }
+    pub(super) fn panel_palette(&self) -> &Palette256 { &self.palette }
 }

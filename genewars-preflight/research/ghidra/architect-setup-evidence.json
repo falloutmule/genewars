@@ -1,0 +1,10 @@
+{
+  "cases": 28,
+  "compared_bytes": 6432336,
+  "literal_instruction_steps": 604312,
+  "output_sha256": "d068520d971b3b9cbe7540106402755e902d2fee9c56dd07fb63f6414b543c28",
+  "source_sha256": "bc7c8aebad792673ffc8b9b7fc89f240ff6caea5ccf089f1ec54c04f2cba0feb",
+  "listing_sha256": "301fe1652f9d5cb11c92b8d692330cdb3d1363d6e087dc911de360131f99b15e",
+  "table_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+  "scope": "507D0 new category0 architect setup200B actor plus entiremap and viewport requests; presentation explicit"
+}

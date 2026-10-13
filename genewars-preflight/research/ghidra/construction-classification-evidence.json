@@ -1,0 +1,15 @@
+{
+  "cases": 512,
+  "compared_bytes": 7168,
+  "literal_instruction_steps": 72902,
+  "output_sha256": "17a9de6755c29a419814fad1917f7ab8f9ed8561afea983b12d9131095def44c",
+  "source_sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31",
+  "listing_sha256": {
+    "instructions-0008cb00.txt": "2c35541f4b44258aec8419dda54367ad5ad45366e3030108b87eb8a4fb45a921",
+    "instructions-0008c990.txt": "1a60f5357184688c8da3b86e88d20f7b53cdf7aafafe46cfcb10ca527a978837",
+    "instructions-0008c1c0.txt": "c7be373421095700644a1fcb13f7e3de744c886bebc54ab304fbe708b3a1b586",
+    "instructions-00097910.txt": "8581fffdf51047b5d57eaa70409790ab8757ddaed1c977624a8f75958be3600a",
+    "instructions-00073690.txt": "a61c7b67cebcd05dbb96053d1fbe7745c703b75be5af996bb0227e4c9691cace"
+  },
+  "scope": "Full8CB00/73690/97910 climate derivation and8C990/8C1C0 material classification including preserve gate; no original execution"
+}

@@ -946,6 +946,30 @@ mod tests {
     }
 
     #[test]
+    fn reproduction_route_clears_retired_plant_targets_and_rolls_back_late_failure() {
+        let directions_bytes:Vec<u8>=[[0i16,-256],[256,-256],[256,0],[256,256],[0,256],[-256,256],[-256,0],[-256,-256],[0,0]]
+            .into_iter().flatten().flat_map(i16::to_le_bytes).collect();
+        let directions=crate::plant_spread::SpreadDirections::from_mapped_bytes(&directions_bytes).unwrap();
+        for late_failure in [false,true] {
+            let mut world=shared_plant_fixture(&[[1,0,3],[8,0,2],[16,0,2],[0,0,1],[0,0,3]]);
+            world.admit_creatures(&[[0;124];300]).unwrap();
+            let prior=*world.actors.record(0).unwrap();let mut actor=prior;actor[0x4d..0x50].copy_from_slice(&[8,0,2]);
+            world.actors.replace_record_checked(0,&prior,&actor).unwrap();
+            let pool=world.creatures.as_mut().unwrap();let prior=*pool.record(0).unwrap();let mut creature=prior;
+            creature[0x55..0x58].copy_from_slice(&[8,0,2]);pool.replace_record_checked(0,&prior,&creature).unwrap();
+            if late_failure {let second=world.layouts[1].file_offset+16*41;world.backing[second+24]=0;}
+            let before=world.clone();let result=world.tick_plants_with_reproduction(&directions);
+            if late_failure {assert!(result.is_err());assert_eq!(world,before);}
+            else {
+                assert_eq!(result.unwrap().active_plant_count_after,0);
+                assert_eq!(&world.actors.record(0).unwrap()[0x4d..0x50],&[8,0,0]);
+                assert_eq!(&world.creatures().unwrap().record(0).unwrap()[0x55..0x58],&[8,0,0]);
+                assert_eq!(world.rng,before.rng);world.validate_links().unwrap();
+            }
+        }
+    }
+
+    #[test]
     fn shared_plant_growth_traverses_native_actors_without_changing_their_records() {
         let mut world = shared_plant_fixture(&[[1,0,3],[8,0,2],[0,0,3]]);
         let plant = world.layouts[1].file_offset + 8 * 41;

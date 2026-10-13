@@ -1,0 +1,14 @@
+{
+  "cases": 56,
+  "compared_bytes": 4536,
+  "literal_instruction_steps": 30174,
+  "output_sha256": "5ef7ab2b661c9b5c22a778da306f6a508ad4c40bfe5e2b295d0bf71b8ac7df44",
+  "source_sha256": "7f906971f7269390e547877d1a7ecfa6c99a744cf2368fe4f7ac412c17894576",
+  "pins": {
+    "private/ghidra/terrain-map-refs/instructions-0007b240.txt": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb",
+    "private/ghidra/mission-tail-init/instructions-00049e90.txt": "55e976eb9c620d3cd6996d5dfd810532c8ca5c0a93fcb4a34239744049f9e001",
+    "private/ghidra/player-creation/instructions-0001f070.txt": "b890bd05c1566c3755c4a62dad58a937ee98d0119013e6f6fe11ef59b84f79c3",
+    "private/ghidra/mission-array-refs/instructions-00048790.txt": "840113f32e4845215dc107850ae4cf6218cd5558af2f2dbd1aae632654da533d"
+  },
+  "scope": "48790 code2C whole81B free-slot afterimage,42FA0 independent building port, audio3F args asserted, noRNG"
+}

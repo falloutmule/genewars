@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-mission-source-parser-review",
-  "checked_utc": "2026-10-13T17:29:12.117178+00:00",
+  "checked_utc": "2026-10-13T19:12:55.488049+00:00",
   "original_or_gui_execution": false,
   "real_sources": 5,
   "opaque_synthetic_sources": 3,
@@ -393,7 +393,7 @@
   "harness": {
     "path": "private/review/mission-source/review.exe",
     "size": 5111862,
-    "sha256": "583e2db880a70703df845d2e8f22e6dfa47bbc8bf428c9fcc6e42620d85ed14e"
+    "sha256": "2b2b4d8328e6bf6e3477be7a5241e3aae8c81ca525b9f5cfa78c48316a90b1e7"
   },
   "review_sources": [
     {

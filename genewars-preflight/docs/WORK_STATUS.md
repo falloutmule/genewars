@@ -2,6 +2,32 @@
 
 Active reconstruction; no complete playable game yet. The owned landing world is now connected to the native scene; current priority is persistent creature and actor movement. Older sections/counts below are dated checkpoints. The CD executable is a provisional analysis candidate, not established canonical retail.
 
+## Continuing checkpoint — 2026-10-13 19:21 UTC
+
+The complete aggregate finished **174/176**. Both failures were test-maintenance errors: the resource-count assertion still expected 46 instead of 49, and corruption of the landing-only plant reproduction table was tested through the plant-only route. Both are corrected. Fresh focused runs pass **348 workspace tests across 14 test binaries** and **64 native flow/failure cases**, including corruption admission through the appropriate consumer. `checkpoint-validation.json` records these repairs without rewriting the aggregate as a new all-green run.
+
+The source-backed retry-reset repair now passes the default seed's step 5,677 and next callback. The independent creature review has **27 complete captures / 9,290,214 bytes**, including exact RNG and three stack-fill variants. All three longer combined trajectories now complete **6,000 steps** and reach the explicitly unsupported countdown expiry at 6,001. The native rendered 2,400-step / 16-case receipt remains a separate pinned snapshot. New countdown caller and family8 creation planners pass their focused gates but are not integrated; construction setup/completion continues in parallel.
+
+## Native extended integration — 2026-10-13 19:08 UTC
+
+The optimized native application passes 16 automatic cases, including three 2,400-step seeded runs, exact repeated world/frame output, terrain-command arrival and a bounded three-frame window. The separate `shared-runtime-extended-validation.json` preserves this pinned binary/source snapshot (private run ff419c7a9c864cb6b4d73374cf74af8e); ordinary aggregate runs retain their shorter receipt. Seeds 5428/0/65535 produce 9/8/8 plant births and finish with 24/25/25 active plants. Other families and full startup/objective/presentation scheduling remain explicitly incomplete.
+
+Selected FONT0 text is visibly readable after correcting the source glyph-marker mapping: white is nearest MAIN.PAL index 145, black index 0. The independent four-category oracle compares 3,686,400 channel bytes; source text clipping, category lookup and raw bars are preserved. The development status overlay now stays right of the unit panel. Native contact pixels were inspected automatically; no user test is needed.
+
+The creature review now compares 25 full callbacks, 8,602,050 bytes and 365,759 interpreted instructions with three stack fills. Relocation search has 330 independent cases / 12,590 queries. Failed lane continuation and the one-draw equal-cost fallback now match the source. Longer combined probes reach 5,676 steps on seed 5428 before a retry-exhaustion branch, and 6,000 steps on seeds 0/65535 before the explicitly unsupported countdown expiry. These are new implementation targets, not successful unlimited simulation.
+
+Construction assignment, all 14 building factories, terrain allocation/steps, material/classification/slope/shade/border helpers and site admission have separate source-backed gates. These components are not yet an integrated building lifecycle. Root additionally proved 80 timer-expiry caller cases against 93,768 literal instructions and 880 request bytes; A separate 48-case numeric creation plan also passes (5,232 bytes / 26,220 instructions); family8 pool ownership, callback and rendering integration remain pending, so expiry still rejects transactionally. The aggregate suite is running against the stable production tranche. Work continues.
+
+## Active integration — 2026-10-13 18:44 UTC
+
+The historical service interruption is no longer the current blocker: all three lanes resumed. The native optimized application passes12 automatic cases after adding explicit neutral plant reproduction and selected actor text/status bars. Receipt `research/integration/shared-runtime-validation.json` pins the tested compilation; private run7cc69a8c20f64ecfaeecadaf2c76a16c covers450 steps across seeds0/5428/65535, exact repeat replay and move-command arrival. It is a headless run, not a new original-game or window test.
+
+`plant-reproduction-validation.json` compares42 complete literal6D0B0/6CA90 scheduler checkpoints from three seeded trajectories, including17 births and five retirement cleanup calls:14,448,690 bytes and154,935 interpreted instructions. Exact backing/map/plant/Mule bytes, RNG and queue order match. Both shared and packed implementations produce the same reports/RNG per step and normalized backing at checkpoints. Source2C200 UI consumption and render-queue bodies remain explicit boundaries. The shared native route also applies numeric724C0 target cleanup when plants retire; a focused test verifies native actor/Mule targets clear and a late second-callback failure rolls everything back. It caught and fixed missing-effect-pool cleanup handling. The legacy no-RNG plant route remains bounded by design.
+
+Selected actor names/categories now use the typed blueprint, TEXT128..131 and pinned FONT0 at84,382 with a78×21 clip; adjacent raw-field bars follow the source draw order. Four full patterned-frame comparisons match3,686,400 RGB channel bytes. No unproved semantic labels are assigned to raw bar fields. Runtime staging now admits49 exact resources.
+
+The extended Mule review passes15 complete callback comparisons through hunger saturation and feeding completion689/631/607,5,161,230 compared bytes. Combined runs currently reach the next blocked-cell relocation state at704/640/608; Sol02 is tracing and implementing that state. Construction assignment/factory proofs remain112/28 cases; the new terrain-job slice adds64 allocations plus64 work steps,31,271 bytes/109,900 instructions. Terrain helper bodies and source site/stage lifecycle remain integration prerequisites. Work continues; this is not game completion or a request for user testing.
+
 ## Preserved checkpoint - 2026-10-13 17:36 UTC
 
 All three child agents stopped with a service usage-limit error, reporting availability again on October20. This is an execution blocker, not a request for manual game tests or renewed authorization. The latest primary task stopped at a safe checkpoint; complete game reconstruction remains unfinished.

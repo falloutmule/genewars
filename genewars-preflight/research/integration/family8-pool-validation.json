@@ -1,0 +1,19 @@
+{
+  "status": "passed-storage-invariants",
+  "utc": "2026-10-13T19:27:50.557390+00:00",
+  "slots": 16,
+  "loader_compared_bytes": 1632,
+  "source_loader_pin": {
+    "private/ghidra/mission-tail-readers/instructions-00010090.txt": "7102a94a9c5d4aac7464a52da36cf7fa882fb73f1455df0b71c2e0320af28a5a"
+  },
+  "implementation_pins": {
+    "scripts/validate_family8_pool.py": "babc038099224075b852f02328d55c18f44e41a64aa1e7d0b6fcb08a0a64637e",
+    "scripts/family8_pool_probe.rs": "d6ff435c91a47fbfab69e674d30922b89c3418235cffe498b6444a45d3bf58a6",
+    "rust/crates/genewars-runtime/src/family8_pool.rs": "f8a66c113f1e13343d5635888359ef8350f86efdc5c24030cfb4081b0e4fd086",
+    "rust/crates/genewars-runtime/src/family8_creation.rs": "0f312593fb963669ec9a98e33abed62e09aa2a2f9cfef9f0799946aa4743a712"
+  },
+  "private_run": "private/review/family8-pool/cdc12fc124044750ae46125ded7ee062",
+  "result": "PASS family8 pool:16 gap-preserving loads and creations, stale/identity/pointer rejection, exact bindings",
+  "scope": "Synthetic complete16-slot inactive loader/gap comparison and checked typed creation, stale before-image, pointer and identity mutation rejection. Loader mapping is source10090/6D490 structural evidence; this harness does not interpret those instructions. The separate family8-creation validator replays the complete numeric source factory. No owned-world adapter or scheduler integration.",
+  "original_execution": false
+}

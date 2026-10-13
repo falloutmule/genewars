@@ -64,7 +64,7 @@
       "initialized_table_bytes": "zero before the startup pointer-table loop; runtime population is established",
       "reference_graph": "private/ghidra/portrait-detail-refs/reference-graph.json",
       "reference_graph_sha256": "a71d0368e9cc18bd43abbe788e0b496240724566edbe62786a91f3879c4081ba",
-      "table_initializer": "0x1D770 stores 604 string pointers at 0x115E90+4*i, loop 0x1DA60–0x1DA7B; 0x116090 is entry128. Signed selectors 0..3 resolve text indices128..131. Source string contents are not embedded.",
+      "table_initializer": "0x1D770 fills 604 pointers at 0x115E90 + 4*i from the parsed TEXT table; 0x116090 = entry 128; selector 0..3 selects 128..131.",
       "object3_sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
       "initializer_evidence_file": "private/ghidra/animal-consumers/instructions-0001d770.txt",
       "initializer_evidence_sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784",
@@ -84,7 +84,9 @@
           6
         ],
         "startup_pipe_rewrite_indices": "221..254 only; entries128..131 unchanged"
-      }
+      },
+      "first_argument": "Typed actor C0 BlueprintRecordHandle resolves to PlayerState.blueprint(index), a 36-byte record; generated name is NUL-terminated in bytes [0,20).",
+      "category_argument": "TEXT index 128 + signed blueprint category byte at record+0x16; the current safe renderer admits 0..3."
     },
     "bars": {
       "helper": "0x2FF50",
@@ -124,21 +126,32 @@
     },
     "limitations": [
       "Selectors outside 0..3 are not admitted for this four-entry category slice.",
-      "First actor-object string extent and initializer remain unresolved; no complete two-line panel renderer is claimed."
+      "Runtime population of descriptor array 0x118C74 is not reconstructed from its zero-initialized static image; the two-line helper accepts the caller-admitted FONT0 resource pair explicitly."
     ],
     "text_context": {
       "context": "0x187054",
       "draw_origin_xy": [
-        0,
-        0
+        84,
+        382
       ],
       "format": "0x10D687 (%s newline %s)",
-      "first_line": "pointer at actor-object +0xC0; bounded string extent and initializer unresolved",
+      "first_line": "Typed C0 blueprint metadata handle; bounded name is bytes [0,20) through first NUL.",
       "newline_byte": "0x0A",
       "newline_handler": "0x1FE70 dispatches to 0x1FEEC",
       "newline_handler_evidence_file": "private/ghidra/actor-name-trace/instructions-0001fe70.txt",
       "newline_handler_sha256": "449f333522c68d6ef52e1d4ac2097329fbe951d66c1fd2a945f80321d19def28",
-      "line_advance": "adds the height byte at [font-context first-glyph-record + 5] to the line accumulator, then restores the saved baseline"
-    }
+      "line_advance": "FONT0 space glyph record height is 8; handler 0x1FEEC adds [context.table+5] and restores saved baseline.",
+      "viewport": {
+        "width": 78,
+        "height": 21,
+        "right_exclusive": 162,
+        "bottom_exclusive": 403
+      },
+      "category_line_xy": [
+        84,
+        390
+      ]
+    },
+    "panel_text_evidence": "research/ghidra/actor-panel-text-evidence.json"
   }
 }

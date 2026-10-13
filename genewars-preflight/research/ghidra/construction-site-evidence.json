@@ -1,0 +1,20 @@
+{
+  "cases": 224,
+  "classes": {
+    "2": 46,
+    "0": 151,
+    "1": 17,
+    "4": 1,
+    "3": 9
+  },
+  "compared_bytes": 2342,
+  "literal_instruction_steps": 121178,
+  "output_sha256": "5712394235846ebf851672387708534221a47dcbad1f4d19178c17ed1ef12631",
+  "source_sha256": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2",
+  "listing_sha256": "3b841e53446aedf505ac35be4ac8f78a8d677e2845963a40960354bf14cd0a09",
+  "selector5_offset": [
+    -128,
+    640
+  ],
+  "scope": "Full74E80 source return class and ordered8B340 query port, including selector5 recursive second footprint; no original execution"
+}

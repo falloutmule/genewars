@@ -1,0 +1,242 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T19:07:42.453341+00:00",
+  "cases": 330,
+  "queries": 12590,
+  "interpreted_instructions": 1477755,
+  "fixture": {
+    "path": "private/review/creature-relocation/search.bin",
+    "sha256": "be367b3ff1fe2969b519ce97b90b911ce99430a7b6c75f015dfa8a3f3d4a2734"
+  },
+  "source_pins": [
+    {
+      "path": "rust/crates/genewars-assets/src/lib.rs",
+      "sha256": "7a9571d30a1d3c229281a45223d277d908b61976ff21d27fe763966da7af133d"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/map_atlas.rs",
+      "sha256": "275facee7a4ad590ec68558bcd12016f2178eff73c058eb92d85864bc8aa30a7"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/mission_source.rs",
+      "sha256": "4c7d23930fb35483e7288af90845a28d64e3df228e7adaf2e5c7196c06ed313a"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/campaign.rs",
+      "sha256": "a610b74be9c65dd66ef9c84771b1c07422e1efea41d6e9895290a551d061bf78"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/construction.rs",
+      "sha256": "4866ff1f9bdd1bffbfb964bf03c495e5a1118d6bc24b0e3f8beea64ff780e5c0"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/custom_list.rs",
+      "sha256": "98955b9435e074518a2ee195e54e25779f96e7de7120f9620fdab1c89ea495c8"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/entity_draw_queue.rs",
+      "sha256": "b80d62724db689da242800705edfb34319bed786ac9ed91be1d4ffac7f203215"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/lib.rs",
+      "sha256": "1793d9674e9278dc0ea81ccabcf34c412bd0a925c126d9e47607a45764364f4c"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/menu_control.rs",
+      "sha256": "9def9eafcff361edeac28ff199ab1a241ada086c1bc4e826ba65fa6dbe28a472"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/mouse_packet.rs",
+      "sha256": "5763c082b5774e7e9042c3bff2cabf638b22ede7744f60e1c9904493527714fa"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/opaque_records.rs",
+      "sha256": "3019eb2459c8fab24c7f3aafdaf75a0d857229692f537881292a6614a293eba9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/plant_lifecycle.rs",
+      "sha256": "b9d38a54ec0dbaebbf86d3c27fed5933ba586cdb381904fbf302df9c5e8d2ac9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/player_creation.rs",
+      "sha256": "7ae09e8231c2c1b5f2d9d846db9edfd4a274a8df95e98834d665a543c04a63ee"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/terrain.rs",
+      "sha256": "5b906fdc3ed1809fefd078a1c60cca20cbca5a254df2fe386fe4608cf2450e6a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
+      "sha256": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_command.rs",
+      "sha256": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction.rs",
+      "sha256": "0988dac1c88cbea6db58b6036cc26e8618ad49ded7de3787009ce2f82f88d182"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
+      "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_motion.rs",
+      "sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
+      "sha256": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_render.rs",
+      "sha256": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_resources.rs",
+      "sha256": "8c94e8afb54d1dbcb0e33de471a9b7d4d4008d3a8782f970ff5b0e95194145a3"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "c97c4f7e70e1cddf3cb1cdff1ab5112270e12ca585eb8d6021858efe9f771e52"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/blueprint.rs",
+      "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/bookkeeping.rs",
+      "sha256": "b1d2a1172c2368a98c3008eb9d14817a5837753e698cd7f71a76c6d4272c3b2a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building.rs",
+      "sha256": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_site.rs",
+      "sha256": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terrain.rs",
+      "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/countdown_expiry.rs",
+      "sha256": "1b3e076d2f1d198d23d3990015f9865775225ca2b0b4df0de69ee1f461983efb"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/creature_world.rs",
+      "sha256": "afabdefae2713abe6f4ac97cc3450ac7700bc7741558bca22252bd53a14725c5"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
+      "sha256": "944251d5617a636b7b847a51ef00270d06872b5b27a23f5b79286b43c2bc23bd"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/identity.rs",
+      "sha256": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing.rs",
+      "sha256": "38ca22019dc6fe33fccfa8e7f67ed3e627f50224c1626c663c351538a1c691c8"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
+      "sha256": "1ba0b302d1908501fbf05ad46f75b6627fa8172eceb4b49b6d94bed05c90769f"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/lib.rs",
+      "sha256": "580b1b4f862d40db3b4322c35dcb6acb6275e08beaa3a14ec474551dd9ceca62"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
+      "sha256": "cc063773f1a08c161bb34aa03751e75dd3c74ea50e78d4d63c0d6a6ad844e685"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/plant_spread.rs",
+      "sha256": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/player_state.rs",
+      "sha256": "d7faa11882d551bc009e43e7e6ea89dca3d14dd726341cfeb959981d6da496b0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_projection.rs",
+      "sha256": "455938c39b889e6e035e2821e74b7d5f4aae980786745c7861dc1aa5dbb38dc6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_resolver.rs",
+      "sha256": "1412ab3a6a55e95df5b1e5cd1f4bf4169da55523966b1bfec56b3a917628d1c5"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/terrain_target.rs",
+      "sha256": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world.rs",
+      "sha256": "3fd7e6a7df779c935836566ba8d9755cf843db7d964a888e7d53a53d405bffe7"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
+      "sha256": "01927dbf45e172e8e507acd925249bc89f2f78815dbfaac8202ea4d83f8b4e77"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/bookkeeping_updates.rs",
+      "sha256": "ab7bcd5a197af390b9d54d0d1e5eb94a1484ff2118cd8963767aab7dae8673d1"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
+      "sha256": "2d010e151a59448bcdfc38a6359abaa5bb2dd304217fabcdd6c83031c44a3521"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
+      "sha256": "f3f3077d1904f243e1d495f9712541c181d3fc4d7cb565240115b0a05fd40f85"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
+      "sha256": "3cfcc1a1e7dbcff0d5bebb5f020c41aa54a359093a5f49660041860f49841cc4"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs",
+      "sha256": "e85b2309b63ba285f35d45dffc44103af5508405af05a2303bec0c78d362c4a9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
+      "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world/plant_creation.rs",
+      "sha256": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82"
+    }
+  ],
+  "listing_pins": [
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-000305f0.txt",
+      "sha256": "9e85edb137efe6c9abfb07e5173b42b3542ebd7c1e339d35613b245d7650db98"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006d230.txt",
+      "sha256": "3d824f3569182e3b8bc1037c4b74d9adbfcb9bd7f92444e8f562acc9c7ddbf3d"
+    }
+  ],
+  "review_pins": [
+    {
+      "path": "research/variants/creature-relocation-review.py",
+      "sha256": "16b78082d9bf14e258a6a837dab2f9a674dfaaa411a7a3e52a8fefbcf076e9b5"
+    },
+    {
+      "path": "research/variants/creature-relocation-review.rs",
+      "sha256": "73b3f67ba5d177019e0b88e7c8bb4a809e89ed4c1c0b6f40108976d4d9a051af"
+    },
+    {
+      "path": "research/variants/initial-creature-source.py",
+      "sha256": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2"
+    }
+  ],
+  "limits": [
+    "Explicit threshold predicates substitute only74D90 environment output; radial iteration/callback/choice execute through the pinned listing interpreter. No game or GUI execution.",
+    "The source completes the current group after success; last accepted in that group wins.",
+    "This checks the no75080-rounding, radius2048/eight-ring variant only."
+  ]
+}

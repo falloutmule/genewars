@@ -1,0 +1,9 @@
+{
+  "cases": 64,
+  "compared_bytes": 16512,
+  "literal_instruction_steps": 13502,
+  "output_sha256": "61d3a3f7b4677341ab2915bb94bc37ab47a5c2d2a98974a7352e75e00281764a",
+  "source_sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31",
+  "listing_sha256": "7153008e93b676377a22bb27f8e9ff7e16471c6e7a0ae37af2eb9d406e5f7d94",
+  "scope": "8BEE0 full numeric diagonal repair and live RNG;8C290 shade and84B40 refresh explicit ordered ports, not world commit"
+}

@@ -1,0 +1,10 @@
+{
+  "cases": 64,
+  "compared_bytes": 14687472,
+  "literal_instruction_steps": 1181769,
+  "output_sha256": "db6e2681c49261734c45d0edfe30dd3877bbf94abdd970dae002550ad1cd480b",
+  "source_sha256": "bc7c8aebad792673ffc8b9b7fc89f240ff6caea5ccf089f1ec54c04f2cba0feb",
+  "listing_sha256": "ea2554be981b0acae18e192ba9827ebdf4e4dea2d8e6fbee83f889ec15f390c5",
+  "table_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+  "scope": "753F0 full reservation including8CBA0/material/border composition and8D580 flags"
+}

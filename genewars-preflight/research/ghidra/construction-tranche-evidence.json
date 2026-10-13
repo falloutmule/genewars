@@ -1,0 +1,131 @@
+{
+  "status": "Corroborated independent static/native slices; no complete construction world lifecycle",
+  "production": [
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction.rs",
+      "sha256": "0988dac1c88cbea6db58b6036cc26e8618ad49ded7de3787009ce2f82f88d182"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building.rs",
+      "sha256": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terrain.rs",
+      "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_site.rs",
+      "sha256": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_setup.rs",
+      "sha256": "bc7c8aebad792673ffc8b9b7fc89f240ff6caea5ccf089f1ec54c04f2cba0feb"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_completion.rs",
+      "sha256": "0b78ab600e361fedbff300f20b10e16beb1a01bda89ba881aa86c53f507231d0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_effect.rs",
+      "sha256": "7f906971f7269390e547877d1a7ecfa6c99a744cf2368fe4f7ac412c17894576"
+    }
+  ],
+  "gates": [
+    {
+      "path": "scripts/ghidra/validate_architect_assignment.py",
+      "receipt": "research/ghidra/architect-assignment-evidence.json",
+      "receipt_sha256": "fc2519dd345fef10758aad6777b5d62f5a2c606b1cfbbca8019540fa8a21f482",
+      "validator_sha256": "63dbe6358a7f86b530d67684d4de1509bb2ce3a36f0d5198e04d612c393a89cb"
+    },
+    {
+      "path": "scripts/ghidra/validate_building_factory.py",
+      "receipt": "research/ghidra/building-factory-evidence.json",
+      "receipt_sha256": "711826a5279b9477f9a414a746e87cd74f73880765ad35833a19bd9247c21549",
+      "validator_sha256": "32d2ea21ccf2c6e451d92c5f0f520d506b3911a6543886c16c0e0a25c0cc3c00"
+    },
+    {
+      "path": "scripts/ghidra/validate_construction_terrain.py",
+      "receipt": "research/ghidra/construction-terrain-evidence.json",
+      "receipt_sha256": "31f061369b025911708a6f2deb67a22644eee86a3c5eaafff3e1b2c9ef0cea36",
+      "validator_sha256": "cd046706b0d993d8fe0417e077ddc0a5037b8e1f7fa2f0604d40328ca4c35b73"
+    },
+    {
+      "path": "scripts/ghidra/validate_construction_material.py",
+      "receipt": "research/ghidra/construction-material-evidence.json",
+      "receipt_sha256": "5286c58ea88acc4999e9a08f3c643ce27b2cf152b32c2ae16369f1d43be9c409",
+      "validator_sha256": "2d96387d9e2051f841210018dd94e76560c2cfb0de63eafc9108d813e08d95eb"
+    },
+    {
+      "path": "scripts/ghidra/validate_construction_classification.py",
+      "receipt": "research/ghidra/construction-classification-evidence.json",
+      "receipt_sha256": "244cb625bbc62700a5372831a2403fe0eacdccd8adf259d08b4097bb8eb7534f",
+      "validator_sha256": "2e2baaf83eb5de775aea71815c7facda3dbaea940996c8b2354ee95d32e7b279"
+    },
+    {
+      "path": "scripts/ghidra/validate_construction_slope.py",
+      "receipt": "research/ghidra/construction-slope-evidence.json",
+      "receipt_sha256": "1b9fd6455af95b96f88a4e11082a868639ec738f09f1893fb3fb8daf925bbd56",
+      "validator_sha256": "dbc3fe194ce619c0f52e88591d3a573998977d29fc1b0bdceaa0dded4a11d614"
+    },
+    {
+      "path": "scripts/ghidra/validate_construction_shade.py",
+      "receipt": "research/ghidra/construction-shade-evidence.json",
+      "receipt_sha256": "00f80ab4caadee7c8e2d7cb8c32343d644bfe63eba9d8a0915dd61efa68e727c",
+      "validator_sha256": "19932a700b2ae04e17b08b10ed9f4901dcda1a77ff9a23bc4113deae6bfa3d03"
+    },
+    {
+      "path": "scripts/ghidra/validate_construction_border.py",
+      "receipt": "research/ghidra/construction-border-evidence.json",
+      "receipt_sha256": "354891efcb4f7d1b98cc0217a0feaf1e47e1ea73f3d216a62fb57d25e8733f81",
+      "validator_sha256": "ce10cd0fa0a7db1281f0fb39194d165ab15f738762eaa3e2d17eae998a21e555"
+    },
+    {
+      "path": "scripts/ghidra/validate_construction_site.py",
+      "receipt": "research/ghidra/construction-site-evidence.json",
+      "receipt_sha256": "aa9205958319c4c7d4770186fef0a943edded91c8265bf43c002420ac4751cd4",
+      "validator_sha256": "902e92ec663200f7b63a3331f813cedb4cdc59bdd7c857d45a48b9915a69ac4a"
+    },
+    {
+      "path": "scripts/ghidra/validate_construction_preparation.py",
+      "receipt": "research/ghidra/construction-preparation-evidence.json",
+      "receipt_sha256": "ce832688918b87348fc49e20c156aa2e26820bbcb8aee6112482a97f1b1d46a9",
+      "validator_sha256": "fed24035603a8010598af678aae8a2cfc2169ca4d85bc82578c90ab54b0205fd"
+    },
+    {
+      "path": "scripts/ghidra/validate_construction_reservation.py",
+      "receipt": "research/ghidra/construction-reservation-evidence.json",
+      "receipt_sha256": "bb2a979387728ee69e95d54c18d1682d3ea50c2b52446e46a4aca487074b6179",
+      "validator_sha256": "ec3e85f0250a4238f6ada549f8d589c84db77ddc764fc3a1d1377c1de10a4e3b"
+    },
+    {
+      "path": "scripts/ghidra/validate_construction_task.py",
+      "receipt": "research/ghidra/construction-task-evidence.json",
+      "receipt_sha256": "c606559806033fb1bf0e9a5cb25745a7efcd91efd7b0ba981f425347c802b4c9",
+      "validator_sha256": "16ef0a97f59a8ed7d6a8a80a565d82958b2bd46c4f6991b0027744528e67b010"
+    },
+    {
+      "path": "scripts/ghidra/validate_architect_setup.py",
+      "receipt": "research/ghidra/architect-setup-evidence.json",
+      "receipt_sha256": "1f16818b0866dc616d6666c7d818ee07c26b00a1ae26b14d029f3dc07c260cf8",
+      "validator_sha256": "37167f2eb36c158b35b3251cd825246c6109a47288efb82216e57001f20bd835"
+    },
+    {
+      "path": "scripts/ghidra/validate_construction_completion.py",
+      "receipt": "research/ghidra/construction-completion-evidence.json",
+      "receipt_sha256": "b39cae0c7bb810c5d7fbbd0ea8a1f49d3259fcbeb67f570ca411f5e2235f8f37",
+      "validator_sha256": "6a1844640b0eedffd9eac50624f5d5bdb2f22d376582d348e56a6489c4945c51"
+    },
+    {
+      "path": "scripts/ghidra/validate_building_effect.py",
+      "receipt": "research/ghidra/building-effect-evidence.json",
+      "receipt_sha256": "34e9343f825eca7920ad07d46e7e2cad68328534872363e217cfbf8e533506e8",
+      "validator_sha256": "16470fa2bbb1dec1ba3ea82a8199fdc00cc6c87ab64da862ab1b3f128767dc21"
+    }
+  ],
+  "remaining": [
+    "8C550 transitive setter/world entity refresh and8D660 adapter",
+    "534D0 terraform start/wait/debit/work lifecycle",
+    "effect2C actual physics/lifetime and generic retirement",
+    "owned building pool/map/player transactions"
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T17:29:30.669738+00:00",
+  "checked_utc": "2026-10-13T19:14:22.066263+00:00",
   "original_or_gui_execution": false,
   "evidence": {
     "path": "research/ghidra/font-menu-evidence.json",
@@ -108,7 +108,7 @@
   "native_harness": {
     "path": "private/review/font-menu/font-menu-review.exe",
     "size": 5256682,
-    "sha256": "0215aab23077b489589995a9254613f37accd45e5c2ce09902327e4a5a6f798b"
+    "sha256": "47e73b1f044b27eb78c088cacc10fb8ede30535675987c1c15c671bb4232ebb0"
   },
   "font_count": 7,
   "glyph_count": 1190,

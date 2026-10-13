@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T17:28:10.521760+00:00",
+  "checked_utc": "2026-10-13T19:11:51.091283+00:00",
   "original_execution": false,
   "gameplay": false,
   "cases": 21,
@@ -77,7 +77,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-29-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-29-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -156,7 +156,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-30-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-30-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -235,7 +235,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-31-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-31-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -314,7 +314,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-32-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-32-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -393,7 +393,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-33-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-33-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -472,7 +472,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-34-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-34-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -551,7 +551,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-35-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-35-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -630,7 +630,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-33-raw-sampled.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-33-raw-sampled.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -709,7 +709,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-34-raise4096-sampled.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-34-raise4096-sampled.bmp",
         "bytes": 921654,
         "sha256": "c5c0ff18a3b10df968279d08b536a1316ccae81e34bb7a13b0d30a0990ad2a42"
       },
@@ -788,7 +788,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-0-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-0-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -867,7 +867,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-14-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-14-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -946,7 +946,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-0-record-36-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-0-record-36-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -1025,7 +1025,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-1-record-29-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-1-record-29-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -1104,7 +1104,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-1-record-33-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-1-record-33-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -1183,7 +1183,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-1-record-35-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-1-record-35-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -1262,7 +1262,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-2-record-29-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-2-record-29-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -1341,7 +1341,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-2-record-33-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-2-record-33-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -1420,7 +1420,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-2-record-35-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-2-record-35-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -1499,7 +1499,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-3-record-29-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-3-record-29-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -1578,7 +1578,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-3-record-33-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-3-record-33-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -1657,7 +1657,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/player-3-record-35-raw-source.bmp",
+        "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/player-3-record-35-raw-source.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -1702,10 +1702,10 @@
     "executable": {
       "path": "private/build/rust-target/debug/genewars-terrain.exe",
       "bytes": 19586780,
-      "sha256": "b55be14b692abaab1e113ed5706428349f3de442a5ca9c40b964935f7ebe7dd6"
+      "sha256": "b4ec24740f7bac7377a7e77565aac1d84e878bc7d4f2955d1379f5af38933792"
     },
     "report": {
-      "path": "private/integration/mission-plant-views/660402573bc441f4881cd153e792415b/native-3-frame-report.json",
+      "path": "private/integration/mission-plant-views/3db904c28229479cbd970a983ede60a4/native-3-frame-report.json",
       "bytes": 627,
       "sha256": "748424d940b6a2f8da48e00e9380fd90c4eec2709ed1b8915e9b9251b6fce343"
     },

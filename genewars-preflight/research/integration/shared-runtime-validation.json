@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T17:44:41.615185+00:00",
-  "binary_sha256": "f838386ca3cee53b27f4e076a08ff615d6d31be20c4f27318a4af16715fd389e",
+  "verified_at": "2026-10-13T19:16:05.527985+00:00",
+  "binary_sha256": "97ef530d1809104a15986b3900de5444ed8a5dfc2eb6115248fbe0b80204b567",
   "build_profile": "release",
   "cases": [
     {
@@ -32,6 +32,8 @@
         "rng_draws": 64,
         "selected_actor": null,
         "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
         "pending_presentation_requests": 787,
         "active_effects": 1,
         "actor_states": [
@@ -103,7 +105,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/776fe78ea069427c82a20c33816ef426/initial"
+      "private_output": "private/integration/shared-runtime-validation/a1f1c3e5f3dd4465955685c240c45455/initial"
     },
     {
       "name": "one",
@@ -133,7 +135,9 @@
         "rng_draws": 71,
         "selected_actor": null,
         "issued_move_commands": 0,
-        "pending_presentation_requests": 798,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 802,
         "active_effects": 2,
         "actor_states": [
           {
@@ -204,7 +208,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/776fe78ea069427c82a20c33816ef426/one"
+      "private_output": "private/integration/shared-runtime-validation/a1f1c3e5f3dd4465955685c240c45455/one"
     },
     {
       "name": "early-selection",
@@ -234,6 +238,8 @@
         "rng_draws": 64,
         "selected_actor": null,
         "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
         "pending_presentation_requests": 787,
         "active_effects": 1,
         "actor_states": [
@@ -305,7 +311,7 @@
         "other_families_frozen": true
       },
       "error": "actor is not active for this player",
-      "private_output": "private/integration/shared-runtime-validation/776fe78ea069427c82a20c33816ef426/early-selection"
+      "private_output": "private/integration/shared-runtime-validation/a1f1c3e5f3dd4465955685c240c45455/early-selection"
     },
     {
       "name": "contact",
@@ -319,7 +325,7 @@
         ],
         "changed_world_frames": 189,
         "world_sha256": "be5c0137915e23af5b4277d0a227c946dea037a1b408ddd604b9e9d8ad0720d9",
-        "rgb_sha256": "ecca71dfe63052017eb2b9c53f8504c4f6e2335a2f5750e20fdd8274634d8ba7",
+        "rgb_sha256": "75b5c2cae0023cd8e0996e80c404bc8b9c1f9a2400479aba255fd5ee188efc97",
         "queue": [
           29,
           34,
@@ -334,7 +340,9 @@
         "rng_draws": 834,
         "selected_actor": 0,
         "issued_move_commands": 0,
-        "pending_presentation_requests": 2678,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 2696,
         "active_effects": 37,
         "actor_states": [
           {
@@ -405,7 +413,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/776fe78ea069427c82a20c33816ef426/contact"
+      "private_output": "private/integration/shared-runtime-validation/a1f1c3e5f3dd4465955685c240c45455/contact"
     },
     {
       "name": "command",
@@ -419,7 +427,7 @@
         ],
         "changed_world_frames": 189,
         "world_sha256": "6bee9b257e99a3f522ab6a687f647d366c9036ac4c3e68a06ca56bf5474ae254",
-        "rgb_sha256": "ecca71dfe63052017eb2b9c53f8504c4f6e2335a2f5750e20fdd8274634d8ba7",
+        "rgb_sha256": "75b5c2cae0023cd8e0996e80c404bc8b9c1f9a2400479aba255fd5ee188efc97",
         "queue": [
           29,
           34,
@@ -434,7 +442,9 @@
         "rng_draws": 834,
         "selected_actor": 0,
         "issued_move_commands": 1,
-        "pending_presentation_requests": 2678,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 2696,
         "active_effects": 37,
         "actor_states": [
           {
@@ -505,7 +515,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/776fe78ea069427c82a20c33816ef426/command"
+      "private_output": "private/integration/shared-runtime-validation/a1f1c3e5f3dd4465955685c240c45455/command"
     },
     {
       "name": "command-arrival",
@@ -519,7 +529,7 @@
         ],
         "changed_world_frames": 267,
         "world_sha256": "a75cb1d1f39a06dda1023040b68ddb9583ec765c145b456f3e7837ce41aea883",
-        "rgb_sha256": "a79df63385e501cd45e0adaee7dacae58b24915e13f30db3cce2a4f0e907d3e4",
+        "rgb_sha256": "72b6722d880876422f675831464026b7e077bbb715b08f3b3caa75dd49823154",
         "queue": [
           29,
           34,
@@ -534,7 +544,9 @@
         "rng_draws": 872,
         "selected_actor": 0,
         "issued_move_commands": 1,
-        "pending_presentation_requests": 3480,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 3500,
         "active_effects": 1,
         "actor_states": [
           {
@@ -605,7 +617,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/776fe78ea069427c82a20c33816ef426/command-arrival"
+      "private_output": "private/integration/shared-runtime-validation/a1f1c3e5f3dd4465955685c240c45455/command-arrival"
     },
     {
       "name": "full",
@@ -634,7 +646,9 @@
         "rng_draws": 1279,
         "selected_actor": null,
         "issued_move_commands": 0,
-        "pending_presentation_requests": 4929,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 4955,
         "active_effects": 0,
         "actor_states": [
           {
@@ -705,7 +719,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/776fe78ea069427c82a20c33816ef426/full"
+      "private_output": "private/integration/shared-runtime-validation/a1f1c3e5f3dd4465955685c240c45455/full"
     },
     {
       "name": "repeat",
@@ -734,7 +748,9 @@
         "rng_draws": 1279,
         "selected_actor": null,
         "issued_move_commands": 0,
-        "pending_presentation_requests": 4929,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 4955,
         "active_effects": 0,
         "actor_states": [
           {
@@ -805,7 +821,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/776fe78ea069427c82a20c33816ef426/repeat"
+      "private_output": "private/integration/shared-runtime-validation/a1f1c3e5f3dd4465955685c240c45455/repeat"
     },
     {
       "name": "pan-return",
@@ -835,6 +851,8 @@
         "rng_draws": 64,
         "selected_actor": null,
         "issued_move_commands": 0,
+        "plant_births": 0,
+        "reproduction_enabled": true,
         "pending_presentation_requests": 787,
         "active_effects": 1,
         "actor_states": [
@@ -906,7 +924,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/776fe78ea069427c82a20c33816ef426/pan-return"
+      "private_output": "private/integration/shared-runtime-validation/a1f1c3e5f3dd4465955685c240c45455/pan-return"
     },
     {
       "name": "seed-0",
@@ -935,7 +953,9 @@
         "rng_draws": 1331,
         "selected_actor": null,
         "issued_move_commands": 0,
-        "pending_presentation_requests": 4931,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 4957,
         "active_effects": 0,
         "actor_states": [
           {
@@ -1006,7 +1026,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/776fe78ea069427c82a20c33816ef426/seed-0"
+      "private_output": "private/integration/shared-runtime-validation/a1f1c3e5f3dd4465955685c240c45455/seed-0"
     },
     {
       "name": "seed-65535",
@@ -1035,7 +1055,9 @@
         "rng_draws": 1264,
         "selected_actor": null,
         "issued_move_commands": 0,
-        "pending_presentation_requests": 4928,
+        "plant_births": 0,
+        "reproduction_enabled": true,
+        "pending_presentation_requests": 4954,
         "active_effects": 0,
         "actor_states": [
           {
@@ -1106,10 +1128,11 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/776fe78ea069427c82a20c33816ef426/seed-65535"
+      "private_output": "private/integration/shared-runtime-validation/a1f1c3e5f3dd4465955685c240c45455/seed-65535"
     }
   ],
   "case_count": 12,
+  "extended_steps": 0,
   "full_state_export_rejected": true,
   "mission_window_presented_three_frames": true,
   "implementation_pins": [
@@ -1202,12 +1225,16 @@
       "sha256": "5a43a9e71fc73f9da40784c35044f30da44d7436030dbf5d9d5a53591c008baf"
     },
     {
+      "path": "rust/crates/genewars-desktop/src/bin/support/actor_panel_text.rs",
+      "sha256": "2420680a90c00832f00c90e80ec28577d3fb79da91f2d09dce77c61d13a26951"
+    },
+    {
       "path": "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs",
-      "sha256": "426fdf619f75d5f7773411f7601eaa93205a6628214c14f49764315d6a4c23e7"
+      "sha256": "fe2a7263ce0859ee06a954c075942c6cb67700b60b985a2b870e410fc02928fb"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/creature_scene.rs",
-      "sha256": "bf9d9fade3e9c0a67fb46b503165e8c663bec54dfa61ca821a1d32bb7cd0a5a6"
+      "sha256": "dacefce04049ac3151653bf14a9112fc9a2311dc8451ca4cee684980503d348c"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/effect_scene.rs",
@@ -1227,19 +1254,19 @@
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs",
-      "sha256": "00595c566393142a10d8cb93024efbba32fc9d5b9bfff976e65590c16bb44255"
+      "sha256": "06cea402d97ba53cfa40b35887a9ac637e5c98bf9de6fb2e5d6da7fd8741dcb2"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs",
-      "sha256": "42721ad4c23d0a7e7b8b4c4c792994712f2bc2082e9194f81c2c786d9ee9e62b"
+      "sha256": "1b08d625c101586b2d92be8b4fce66527b7819105d867aea688b2e7d355de263"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/shared_scene.rs",
-      "sha256": "09fe765acb5009eee206e399badf9362798e9efeb1368b1b02cfba131344ad34"
+      "sha256": "6ef44a43bbdce5ddf97cef9b28e4bd8768a30161d8bc80c7e8d7eb381ecf9b4f"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/status_text.rs",
-      "sha256": "dcd958b362233af08c48caab97dbcf543f248ca6f01d6fe273f40ce6b1603fec"
+      "sha256": "5035e4633529a97e3c4f3d7ec729be3ce2d4a4539bb97ef1835987f8ec7724d0"
     },
     {
       "path": "rust/crates/genewars-desktop/src/main.rs",
@@ -1327,19 +1354,19 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
-      "sha256": "c79f3f74f2c7c6a89134f7b33d4c0dd2a946673bd7395c3b14e631af40e33b68"
+      "sha256": "2d010e151a59448bcdfc38a6359abaa5bb2dd304217fabcdd6c83031c44a3521"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
-      "sha256": "9e23ef09c3b179e708ce1b464d4c1d8056f4dbf313f7e844085ff035d4c668cf"
+      "sha256": "f3f3077d1904f243e1d495f9712541c181d3fc4d7cb565240115b0a05fd40f85"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
-      "sha256": "8de21959a0f10016a708dbecad0b9e8721ec223013a9750993fb86b8576323dd"
+      "sha256": "3cfcc1a1e7dbcff0d5bebb5f020c41aa54a359093a5f49660041860f49841cc4"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs",
-      "sha256": "3b7a7853f6f7925dbf386274ddb570856eab9beb692086215ac39e1fa632e46d"
+      "sha256": "e85b2309b63ba285f35d45dffc44103af5508405af05a2303bec0c78d362c4a9"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
@@ -1347,7 +1374,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "5cfdfd1b09ae7d3f33ace71c5f540216482326fabc27647be6beeb4b674d0d5e"
+      "sha256": "c97c4f7e70e1cddf3cb1cdff1ab5112270e12ca585eb8d6021858efe9f771e52"
     },
     {
       "path": "rust/crates/genewars-runtime/src/blueprint.rs",
@@ -1362,12 +1389,28 @@
       "sha256": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/construction_site.rs",
+      "sha256": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terrain.rs",
+      "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/countdown_expiry.rs",
+      "sha256": "1b3e076d2f1d198d23d3990015f9865775225ca2b0b4df0de69ee1f461983efb"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/creature_world.rs",
-      "sha256": "fb829cee975ca26518f25d0db36f4685ad7576fc270ae4b292c645293f006d56"
+      "sha256": "afabdefae2713abe6f4ac97cc3450ac7700bc7741558bca22252bd53a14725c5"
     },
     {
       "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
       "sha256": "944251d5617a636b7b847a51ef00270d06872b5b27a23f5b79286b43c2bc23bd"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/family8_creation.rs",
+      "sha256": "0f312593fb963669ec9a98e33abed62e09aa2a2f9cfef9f0799946aa4743a712"
     },
     {
       "path": "rust/crates/genewars-runtime/src/identity.rs",
@@ -1410,8 +1453,12 @@
       "sha256": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/world/plant_creation.rs",
+      "sha256": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/world.rs",
-      "sha256": "8a304a471b815b8e3323b6dddc13c8cbbd0c3dfae5ea5327643a03e9662f9bda"
+      "sha256": "3fd7e6a7df779c935836566ba8d9755cf843db7d964a888e7d53a53d405bffe7"
     },
     {
       "path": "rust/crates/genewars-tools/src/main.rs",
@@ -1463,11 +1510,11 @@
     },
     {
       "path": "research/integration/runtime-resource-catalog.tsv",
-      "sha256": "c6c53b7f3ad36abbf2eb07664bccf6639cc0324d56f08878c8a0c1c037dffd33"
+      "sha256": "b4ced7d0c25222e19941f8c00a2c1f93b78ee48bdd2fdbb987e7b01ac9e4fdd4"
     },
     {
       "path": "scripts/validate_shared_runtime.py",
-      "sha256": "536a9d9170ed0c4204f789cb6e23401145c0a43b8310fa937a524dcb0b397dfe"
+      "sha256": "686aa14dbfbd2f7450b33116b77d8a9f24c30fd6f34b15fd04745ec04bb464d6"
     }
   ],
   "scope": "Explicit seeded world study: numeric reveal, source factory/contact activates actors; player-list actor callbacks consume ground orders, move, arrive and idle; plants, empty-building bookkeeping, mission countdown and full family4 lifecycle run in admitted source order. The neutral Mule shares RNG in source family order, searches for food, approaches, feeds and retires consumed plants; its admitted states are rendered through the verified wrapper. Compilation snapshot pinned before/after build and binary copied privately before tests. Other creature kinds, other families and presentation requests remain pending. No full-game/startup parity or original execution."
