@@ -1,0 +1,14 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-000743c0.txt",
+      "sha256": "085e0737b57e9f7d27248169f23cf35199a03594e4c8547f514ed053e890695c"
+    }
+  ],
+  "cases": 2048,
+  "compared_bytes": 276364,
+  "output_sha256": "aee19e0c23f2de08144768b4eec338b402c56f447f3fa13508b67977a09219f5",
+  "source_sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f",
+  "scope": "Literalnumeric743C0 walk; actualpointpredicatecaller-owned. Initialrejectiontrue,duplicatefirstprobe,recompute64,modularnearesttarget,snap4096,failurepreviousfixedstep. Explicit1024bound."
+}

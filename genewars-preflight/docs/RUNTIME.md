@@ -1,6 +1,6 @@
 # Rust mission runtime
 
-`genewars-game` is a native development build with a real, mutable plant world. It uses the user's exact privately staged CD resources. It does not run GW.EXE or DOSBox.
+`genewars-game` is a native development build with an owned plant route and a seeded landing route. It uses the user's exact privately staged CD resources. It does not run GW.EXE or DOSBox. Bounded actor movement works; the complete game remains unfinished.
 
 From the `genewars-preflight` directory:
 
@@ -8,7 +8,7 @@ From the `genewars-preflight` directory:
 python -B scripts/run_game.py
 ```
 
-This builds with the existing project-local Rust toolchain in offline/locked mode, verifies/stages 26 pinned resources, and opens the application. It installs nothing. Missing or altered resources cause an explicit error. The compiled resource catalog checks both size and SHA-256 at runtime; a different local manifest cannot silently change the admitted build.
+This builds an optimized executable with overflow checks using the existing project-local Rust toolchain in offline/locked mode, verifies/stages46 pinned resources, and opens the application. It installs nothing. Missing or altered resources cause an explicit error. The compiled resource catalog checks both size and SHA-256 at runtime; a different local manifest cannot silently change the admitted build.
 
 - **Single Player:** shows Loading, then reads CONQ001 and its parameter table into owned state, validates map/entity links, and renders the world.
 - **Space:** advances one plant subsystem step.
@@ -18,7 +18,21 @@ This builds with the existing project-local Rust toolchain in offline/locked mod
 - **Options:** toggles automatic stepping for the next mission load. These are clearly labeled development options.
 - **Quit:** closes the application.
 
-## What is implemented
+## Owned landing route
+
+```powershell
+python -B scripts/run_game.py --landing-seed 5428
+```
+
+The seed is an explicit development input, not a recovered original live seed. This route loads the same exact mission into one shared map with native creature/actor/effect pools and fresh player records. Native prior bytes and blueprint scratch are explicitly zeroed by host policy. It generates the64-draw blueprints, prepares actors0/1, creates the normal associated landing object, and applies the numeric radius4096 reveal update.
+
+Space/Enter advance actor callbacks, empty-building bookkeeping, neutral Mule callbacks, plants, the empty-family8 countdown and landing/effects in the admitted source order. Contact activates actors; the fixture reaches it on pass189. Subsequent phases complete departure and remove the landing object on pass389. Actors walk to their sampled destinations, arrive and idle; smoke and departure particles animate, move and retire. The neutral Mule walks, finds a plant, approaches it, feeds and returns to idle after plant retirement. Other creature kinds and remaining systems are not yet integrated. Audio, message and original UI/minimap requests are counted as pending.
+
+Tab selects the next activated player actor. Right-click on terrain dispatches the source move-order transaction using actual terrain projection. Later steps consume the order and move the actor. The automatic seed5428 test reaches target[20840,13673] and returns to idle after the click at[320,240]. These selection controls and actor/Mule/effect drawing order are explicit development policies. The native host renders tentative updates before committing them, so an unsupported callback or render error preserves the prior world. The current12-case suite includes450-step seeds0,5428 and65535.
+
+Replay commands `select 0` and `order 320 240` exercise the same selection/command methods. `--window-replay REPLAY --frames 3 --seconds 20` runs a script then presents the resulting scene in a bounded native window, allowing automatic presentation testing. This route rejects `--world-output`: packed backing alone omits owned native/player/RNG state and is not a complete save.
+
+## Plant route
 
 The native scene host uses the existing menu capture/release state machine and the original resource-backed artwork. Menu, loading, mission, error, options and exit use one event loop. The old `genewars-menu` and `genewars-terrain` inspectors remain available for earlier tests.
 
@@ -36,11 +50,11 @@ The renderer projects current world records every frame, orders them through the
 
 **Partial milestones:** A (native menu→loaded world) and B (admitted deterministic updates→state/pixel changes) are implemented within this plant subsystem. Other-family AI, original dirty rectangles, target-reference/UI/audio cleanup, generation/reproduction and whole-game scheduling remain suspended or pending. The raw mission contains no player-owned actors. The direct load bypasses the original campaign movie/confirmation sequence.
 
-**Gameplay milestone C remains open.** A bounded move-order setter and target return-value helper exist as explicit-input primitives. The player/actor startup helpers below still need to join the native world, command eligibility and map queries. Landing and intervening RNG consumption must be integrated before a user command can act on a valid player actor. Camera movement, plant stepping and UI selection are not player gameplay commands.
+**A bounded gameplay command cycle now works.** The seeded route dispatches terrain commands to landing-activated actors and executes their movement, arrival and idle callbacks. Admitted source-order actor, Mule, plant and effect callbacks share one RNG; broader pathfinding, creature interaction and original whole-frame ordering remain under integration; this does not establish complete gameplay or behavioral parity.
 
-The runtime library now implements the next startup prerequisites: owned fresh/restored player state, the 20-record/64-draw blueprint generator, actor initialization with typed resource bindings, and a transaction that prepares the player record plus its five actor slots. Under the fresh first-mission inputs it prepares actors 0/1 from blueprints 0/10. Their ready word remains 0x0400. The per-slot activation planner is also implemented and independently checked, with explicit RNG/environment and resolved map-head inputs. These helpers are not yet dispatched by the native Single Player route. The landing/effect schedule, native pool gaps, opaque generator scratch bytes, resource loading and complete map commit remain explicit integration work.
+Owned fresh/restored player state, the20-record/64-draw blueprint generator and actor initialization now feed the seeded route. First-mission mask5 prepares actors0/1 from blueprints0/10 with ready word0x0400; landing contact performs associated-object activation and queues sampled destinations. Source-derived placement queries and shared link commits are implemented. Explicit fixtures do not establish the original native priors, initial live seed or complete campaign entry.
 
-No original-game mission comparison, save/reload, combat, economy, objectives, AI, genetics, audio or behavioral parity is claimed. DOSBox is optional for a specific unresolved observation, not a prerequisite for further Rust implementation.
+No original-game mission comparison, save/reload, combat, economy, objectives, general AI, genetics, audio or behavioral parity is claimed. DOSBox is optional for a specific unresolved observation, not a prerequisite for further Rust implementation.
 
 ## Repeatable headless flow
 
@@ -58,4 +72,4 @@ Run the executable with the private bundle and `--headless REPLAY --report NEW_J
 
 `ActorPool` preserves the inactive loader's native gaps and validates startup transactions with typed handles. `ActorWorld` owns the pool, player records, map/common link headers and an explicit live RNG. It commits both bounded activation routes and ground-controller pending commands atomically. The associated-object route places an actor at the object and issues its sampled destination order; it does not move the actor immediately.
 
-This library is not yet wired into the native screen. Its fixture tests are automatic and do not require a user gameplay test. Factory/landing scheduling, prior RNG consumers, actual environment predicates, resource resolution, screen target projection and movement remain unfinished. The packed backing excludes native actor/player overlays and cannot be used alone as a save file. See `research/integration/actor-world-contract.md`, `actor-world-validation.json` and `associated-activation-validation.json`.
+The library is wired into the seeded native screen. Its fixture, headless and bounded window tests are automatic. General movement/pathfinding, prior-family RNG consumers and full scheduling remain unfinished. The packed backing excludes native/player overlays and cannot be used alone as a save file. See `research/integration/actor-world-contract.md`, `landing-world-contract.md`, `shared-runtime-validation.json` and `reveal-validation.json`; receipts identify their dated compilation snapshots.

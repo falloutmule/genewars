@@ -47,6 +47,8 @@ pub struct PlantParameters {
     pub random_walk_steps_u8: u8,
     pub crowding_limit_u8: u8,
     pub check_threshold_u8: u8,
+    /// Source6C900 feeding value at parameter-row byte28.
+    pub nutrition_u8: u8,
     pub retirement_delay_u8: u8,
 }
 
@@ -62,7 +64,7 @@ impl PlantParameterTable {
     pub(crate) fn fixture_for_shared_test() -> Self {
         Self { records: [PlantParameters {
             growth_deltas_i8: [1; 8], spread_period_u8: 4, random_walk_steps_u8: 0,
-            crowding_limit_u8: 10, check_threshold_u8: 1, retirement_delay_u8: 3,
+            crowding_limit_u8: 10, check_threshold_u8: 1, nutrition_u8: 8, retirement_delay_u8: 3,
         }; PARAMETER_COUNT] }
     }
 
@@ -82,6 +84,7 @@ impl PlantParameterTable {
                 random_walk_steps_u8: row[25],
                 crowding_limit_u8: row[26],
                 check_threshold_u8: row[27],
+                nutrition_u8: row[28],
                 retirement_delay_u8: row[29],
             }
         });
@@ -739,7 +742,7 @@ mod tests {
     fn test_parameters(crowding_limit: u8) -> PlantParameterTable {
         let rows = [PlantParameters {
             growth_deltas_i8: [1; 8], spread_period_u8: 4, random_walk_steps_u8: 0,
-            crowding_limit_u8: crowding_limit, check_threshold_u8: 1,
+            crowding_limit_u8: crowding_limit, check_threshold_u8: 1, nutrition_u8: 8,
             retirement_delay_u8: 3,
         }; PARAMETER_COUNT];
         PlantParameterTable { records: rows }

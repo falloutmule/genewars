@@ -1,0 +1,98 @@
+{
+  "scope": "Independent Python source-derived framebuffer comparison; not original-execution parity",
+  "cases": 153,
+  "framebuffer_bytes_compared": 500004,
+  "mule_input": {
+    "bytes": 57038,
+    "sha256": "f6c62221b52a62088f91ae8d00becfef513282cbf98a5990c1a0859cd8b2d346"
+  },
+  "fade_input": {
+    "bytes": 16384,
+    "sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392"
+  },
+  "main_gla_input": {
+    "bytes": 65536,
+    "sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3"
+  },
+  "ordinary_shade_cases": 3,
+  "code_pins": {
+    "scripts/validate_mule_scene.py": {
+      "bytes": 13427,
+      "sha256": "4a2cadd448445e2241161863aa5297b47470a9d6ec17e0a09cdd1222b7e18adf"
+    },
+    "rust/crates/genewars-desktop/src/bin/support/creature_scene.rs": {
+      "bytes": 44073,
+      "sha256": "bf9d9fade3e9c0a67fb46b503165e8c663bec54dfa61ca821a1d32bb7cd0a5a6"
+    },
+    "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs": {
+      "bytes": 44506,
+      "sha256": "426fdf619f75d5f7773411f7601eaa93205a6628214c14f49764315d6a4c23e7"
+    },
+    "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs": {
+      "bytes": 19119,
+      "sha256": "00595c566393142a10d8cb93024efbba32fc9d5b9bfff976e65590c16bb44255"
+    },
+    "research/ghidra/creature-evidence.json": {
+      "bytes": 21352,
+      "sha256": "9f06ff9bafc7dc3ba4389e0ae214971b671ec29908e83b9c2fbcac3cfbd5b365"
+    },
+    "research/ghidra/creature-codec-bridge.md": {
+      "bytes": 3942,
+      "sha256": "59544d44a909fc2a234b88c3b5fb6a9d29afdc5b982de1a1f555358aaee9aa55"
+    },
+    "private/ghidra/terrain-viewport/instructions-00059470.txt": {
+      "bytes": 28361,
+      "sha256": "3eb7e965f3edfc676b298a79bc47958e5e558538e244c8a8ca78ddefeb75fd50"
+    },
+    "private/integration/combined-before-mule366/source-after366.bin": {
+      "bytes": 124,
+      "sha256": "68c3ab88608abbbd82ff0f9bfd4a740ead1ca5a1e8daf797b2ec6f3b352ab041"
+    },
+    "private/integration/combined-before-mule375/source-after375.bin": {
+      "bytes": 124,
+      "sha256": "dbd2674496026b73ea92d4932be0508b846281f47565b2de0591c6fa81fd7475"
+    },
+    "private/integration/combined-before-mule385/source-after385.bin": {
+      "bytes": 124,
+      "sha256": "fac6842c180146b2cee77dcd9da407bed9cbafd57d414b554d00076056d539bd"
+    },
+    "private/integration/combined-before-mule415/source-after415.bin": {
+      "bytes": 124,
+      "sha256": "99180a26ab1b842d90b4188421d30fa644357efaba1fd033b924bef730f8a935"
+    },
+    "private/ghidra/actor-activation/instructions-0001f260.txt": {
+      "bytes": 155,
+      "sha256": "0f0c7ee7a26b87418a794e92c763f2dffb749d896335288aa052cfa40aba9ff2"
+    },
+    "private/ghidra/entity-draw-refs/instructions-00094f30.txt": {
+      "bytes": 4229,
+      "sha256": "f00cc3c296626d8487b01ac6b3536387aadb4cca21b344504d861a9c0cff0d38"
+    },
+    "private/ghidra/entity-draw-refs/instructions-00094a60.txt": {
+      "bytes": 11121,
+      "sha256": "af6b624ccb8a70001f39c6151631b63efbc8849664a50deeb297e33df8d765dd"
+    },
+    "private/ghidra/entity-draw-refs/instructions-00095100.txt": {
+      "bytes": 6024,
+      "sha256": "4353aa2e5f3e508ebe9a3cfe62a3ba37396eace84ef1ce6e179e3a42a70402de"
+    },
+    "private/ghidra/entity-draw-refs/instructions-000937a0.txt": {
+      "bytes": 7215,
+      "sha256": "768ee45a47755bee8ba3c5e8256d2b6bc96d82a941faf66fd071dedb06fe63a0"
+    },
+    "private/ghidra/entity-draw-refs/instructions-00093f80.txt": {
+      "bytes": 19408,
+      "sha256": "ada3e0049482a07eb14db2a04532039edc38bb7d0294165212279df399075dd7"
+    },
+    "private/ghidra/display-geometry/instructions-0008f8f0.txt": {
+      "bytes": 7386,
+      "sha256": "d27a9d7772a8a565db1cca9bc08e054516f91fe342077377f3919e8c3eb87097"
+    },
+    "research/formats/mule-render-contract.md": {
+      "bytes": 6650,
+      "sha256": "337d24b748a37e940491c8200a6dc714f570b999782de9ba62e6ee4676bb07b0"
+    }
+  },
+  "comparison": "all Rust framebuffer bytes equal the independently parsed ANB/RLE/scale/flip/fade/GLA model",
+  "shade_contract": "raw zero selects row 0; nonzero adds arithmetic virtual_height >> 7 and caps at 31; negative rows and unresolved parity-special dispatch reject atomically"
+}

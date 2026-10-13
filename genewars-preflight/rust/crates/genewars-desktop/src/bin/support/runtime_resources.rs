@@ -1,11 +1,12 @@
 //! Fixed CD resource admission and projection of owned world state.
+pub(super) mod creature_scene;
 use std::{fs, io::Read, path::Path};
-use genewars_assets::{AnbAnimationRecord, AnbFrameRecord, AnbSections, B32Atlas, CampaignHeader, ConqFastPrefix, ConqMapCells, ConqMissionSource, Palette256, PaletteChannelMode};
+use genewars_assets::{AnbAnimationRecord, AnbFrameRecord, AnbSections, B32Atlas, CampaignHeader, ConqFastPrefix, ConqMapCells, ConqMissionSource, Palette256, PaletteChannelMode, SpriteTable};
 use genewars_core::cd_candidate::{CampaignResourcePlan, camera_cells_for_target, entity_view_position,
     interpolate_entity_shade, plan_terrain_factor_raise_4096, queue_family1, family1_draw_packet, ProjectedFamily1};
 use genewars_render::{RgbImage, PlantFrame, PlantColorInputs, PlantSceneRecord, draw_explicit_family1_scene,
     terrain::TerrainFadeTable, terrain_modes::MainGlaTable, terrain_view::{render_initial_terrain_view,compose_left_panel}};
-use genewars_runtime::{actor_initialization::ActorResourceTableKey, actor_resources::{ActorAnimationDatabase, ActorResourceCatalog}, effect_pool::EffectAnimationBinding, identity::sha256_hex, world::MissionWorld};
+use genewars_runtime::{actor_initialization::ActorResourceTableKey, actor_resources::{ActorAnimationDatabase, ActorResourceCatalog}, creature_world::MuleAnimations, effect_pool::EffectAnimationBinding, identity::sha256_hex, physics_tables::PhysicsTables, world::MissionWorld};
 
 pub const CATALOG: &str = include_str!("../../../../../../research/integration/runtime-resource-catalog.tsv");
 
@@ -33,6 +34,100 @@ pub struct Resources {
     palette: Palette256, plants: Vec<Vec<u8>>,
     pub actors: ActorResources,
     pub effects: EffectAnimationDatabase,
+    /// Hash-validated CD angle and terrain bounce tables used by landing updates.
+    pub physics: PhysicsTables,
+    /// Exact CD selector-4 MULE animation database; its sprite codec remains
+    /// explicitly selected by the creature draw path.
+    pub mule: CreatureAnimationDatabase,
+    /// Once-parsed animation hold/flag metadata from the exact same
+    /// hash-admitted MULE.ANB bytes as `mule`; used by the owned world tick.
+    pub mule_animations: MuleAnimations,
+}
+
+pub struct CreatureAnimationDatabase { bytes: Vec<u8>, sprite_records: usize, animations: usize }
+
+/// Decoded pixels and source component metadata for one explicitly selected
+/// packed-four-bit creature frame. This exposes asset contents only; a
+/// caller still has to supply the palette base and the proved draw wrapper.
+pub struct CreatureFrameComponent {
+    pub local_position: (i16, i16),
+    pub flags: u8,
+    pub sprite_record: usize,
+    pub sprite: genewars_assets::IndexedSprite,
+}
+
+pub struct CreatureFramePixels {
+    pub animation: usize,
+    pub frame_index: usize,
+    pub frame: AnbFrameRecord,
+    pub components: Vec<CreatureFrameComponent>,
+}
+
+impl CreatureAnimationDatabase {
+    fn load(root: &Path) -> Result<Self, String> {
+        let bytes = read_bound(&root.join("creatures/MULE.ANB"))?;
+        let sections = AnbSections::parse(&bytes).map_err(|e| e.to_string())?;
+        // These values are pinned for the exact CD MULE input. Parsing also
+        // checks all section ranges before the runtime keeps the resource.
+        if sections.header_word() != 24 || sections.offsets() != [51836, 52526, 54306, 56798] {
+            return Err("CD MULE ANB section layout differs from its pinned resource proof".into());
+        }
+        let metadata = sections.ui_metadata().map_err(|e| e.to_string())?;
+        let table = SpriteTable::from_anb(&bytes).map_err(|e| e.to_string())?;
+        if metadata.animation_count() != 24 || table.records().len() != 115 {
+            return Err("CD MULE ANB animation or sprite-table count differs from its pinned proof".into());
+        }
+        let sprite_records = table.records().len();
+        let animations = metadata.animation_count();
+        drop((sections, metadata, table));
+        Ok(Self { bytes, sprite_records, animations })
+    }
+
+    pub fn bytes(&self) -> &[u8] { &self.bytes }
+    pub fn sprite_record_count(&self) -> usize { self.sprite_records }
+    pub fn animation_count(&self) -> usize { self.animations }
+
+    /// Decode one caller-selected frame using the explicitly proved packed4
+    /// codec for this MULE database. `palette_base` is deliberately supplied
+    /// by the caller: this method does not choose a creature owner/fade path.
+    pub fn decode_frame_packed4(
+        &self,
+        animation_index: usize,
+        frame_index: usize,
+        palette_base: u8,
+    ) -> Result<CreatureFramePixels, String> {
+        let sections = AnbSections::parse(&self.bytes).map_err(|e| e.to_string())?;
+        let metadata = sections.ui_metadata().map_err(|e| e.to_string())?;
+        let animation = metadata.animation(animation_index).map_err(|e| e.to_string())?;
+        if animation.last_frame_offset < animation.first_frame_offset
+            || (animation.last_frame_offset - animation.first_frame_offset) % 14 != 0 {
+            return Err(format!("MULE animation {animation_index} has an invalid frame range"));
+        }
+        let frame_count = ((animation.last_frame_offset - animation.first_frame_offset) / 14 + 1) as usize;
+        if frame_index >= frame_count {
+            return Err(format!("MULE animation {animation_index} frame {frame_index} is out of range"));
+        }
+        let offset = usize::try_from(animation.first_frame_offset).map_err(|e| e.to_string())?
+            .checked_add(frame_index.checked_mul(14).ok_or("MULE frame offset overflow")?)
+            .ok_or("MULE frame offset overflow")?;
+        let frame = metadata.frame_at(u32::try_from(offset).map_err(|e| e.to_string())?)
+            .map_err(|e| e.to_string())?;
+        let table = SpriteTable::from_anb(&self.bytes).map_err(|e| e.to_string())?;
+        let mut components = Vec::with_capacity(usize::from(frame.component_count));
+        for index in 0..usize::from(frame.component_count) {
+            let component = metadata.frame_component(frame, index).map_err(|e| e.to_string())?;
+            let sprite_record = usize::try_from(component.sprite_offset).map_err(|e| e.to_string())? / 6;
+            let sprite = table.decode_packed4(sprite_record, &self.bytes, palette_base)
+                .map_err(|e| format!("MULE sprite record {sprite_record}: {e}"))?;
+            components.push(CreatureFrameComponent {
+                local_position: component.local_position(),
+                flags: component.flags,
+                sprite_record,
+                sprite,
+            });
+        }
+        Ok(CreatureFramePixels { animation: animation_index, frame_index, frame, components })
+    }
 }
 
 /// The sixteen source-bound databases loaded through 56E20's style/category
@@ -58,18 +153,26 @@ impl ActorResources {
         self.catalog.spec(key).map_err(|e| e.to_string())?;
         self.databases.get(usize::from(key.flat_index)).ok_or_else(|| format!("missing actor resource key {}", key.flat_index))
     }
+
+    /// Read-only view of the sixteen already hash-validated source databases.
+    pub fn databases(&self) -> &[ActorAnimationDatabase] { &self.databases }
 }
 
-/// EFF.ANB contains the two effect animation IDs used by the bounded landing
-/// plans. This resolves metadata only; it does not claim effect timing or draw
-/// dispatch beyond the separately traced EFF frame ranges.
+/// EFF.ANB contains the animation IDs used by the bounded landing plans. The
+/// typed bindings validate the resource ranges; draw behavior is implemented
+/// separately from its traced wrapper contract.
 pub struct EffectAnimationDatabase { bytes: Vec<u8> }
 
 impl EffectAnimationDatabase {
     fn load(root: &Path) -> Result<Self, String> {
         let bytes = read_bound(&root.join("effects/EFF.ANB"))?;
         let value = Self { bytes };
-        for (binding, expected_frames) in [(EffectAnimationBinding::EffAnimation49, 1), (EffectAnimationBinding::EffAnimation6, 13)] {
+        for (binding, expected_frames) in [
+            (EffectAnimationBinding::EffAnimation49, 1),
+            (EffectAnimationBinding::EffAnimation6, 13),
+            (EffectAnimationBinding::EffAnimation48, 12),
+            (EffectAnimationBinding::EffAnimation47, 6),
+        ] {
             if value.frame_count(binding)? != expected_frames {
                 return Err(format!("EFF animation {:?} has an unexpected frame count", binding));
             }
@@ -80,7 +183,12 @@ impl EffectAnimationDatabase {
     pub fn bytes(&self) -> &[u8] { &self.bytes }
 
     pub fn animation_index(binding: EffectAnimationBinding) -> usize {
-        match binding { EffectAnimationBinding::EffAnimation49 => 49, EffectAnimationBinding::EffAnimation6 => 6 }
+        match binding {
+            EffectAnimationBinding::EffAnimation49 => 49,
+            EffectAnimationBinding::EffAnimation6 => 6,
+            EffectAnimationBinding::EffAnimation48 => 48,
+            EffectAnimationBinding::EffAnimation47 => 47,
+        }
     }
 
     pub fn animation(&self, binding: EffectAnimationBinding) -> Result<AnbAnimationRecord, String> {
@@ -149,7 +257,12 @@ impl Resources {
         let plants = (0..12).map(|slot| read_bound(&root.join(format!("plants/slot-{slot:02}.anb")))).collect::<Result<Vec<_>,_>>()?;
         let actors = ActorResources::load(root)?;
         let effects = EffectAnimationDatabase::load(root)?;
-        Ok((Self { _header: header, title, atlas, fade, gla, panel, palette, plants, actors, effects }, world, target))
+        let angle = read_bound(&root.join("physics/angle.bin"))?;
+        let bounce = read_bound(&root.join("physics/bounce.bin"))?;
+        let physics = PhysicsTables::from_mapped_bytes(&angle, &bounce).map_err(|e| e.to_string())?;
+        let mule = CreatureAnimationDatabase::load(root)?;
+        let mule_animations = MuleAnimations::from_anb(mule.bytes()).map_err(|e| format!("CD MULE animation metadata: {e}"))?;
+        Ok((Self { _header: header, title, atlas, fade, gla, panel, palette, plants, actors, effects, physics, mule, mule_animations }, world, target))
     }
 
     pub fn render(&self, world: &MissionWorld, target: [i16;2]) -> Result<Frame,String> {

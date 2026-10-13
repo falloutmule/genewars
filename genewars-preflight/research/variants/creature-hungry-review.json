@@ -1,0 +1,595 @@
+{
+  "status": "passed-source-food-acquisition-and-feeding",
+  "utc": "2026-10-13T17:47:06.488577+00:00",
+  "current_native_pure_plan_bytes": 248,
+  "current_native_rejection_cases": 4,
+  "historical_callback_comparisons": [
+    {
+      "frame": 365,
+      "seed0": false,
+      "compared_bytes": 344082,
+      "source_instructions": 11890,
+      "ui_cleanup_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule365/backing.bin",
+          "sha256": "f8f70d929890fa68db07d4cb0853b73561e328fd70c3d89d39e7249c420079c9"
+        },
+        {
+          "path": "private/integration/combined-before-mule365/creatures.bin",
+          "sha256": "dfab27de34a0e3a0ae56292db213e84b5d46733ac70d00c862a1159b82a3ceb1"
+        },
+        {
+          "path": "private/integration/combined-before-mule365/actors.bin",
+          "sha256": "d027a8946ad6101a430982b355e39220c06b849427880b8aa533c90937633bd0"
+        },
+        {
+          "path": "private/integration/combined-before-mule365/effects.bin",
+          "sha256": "dcefe2ece182f482eeea18bae0ce148b057cf80871c64731502c26e6699444e6"
+        },
+        {
+          "path": "private/integration/combined-before-mule365/players.bin",
+          "sha256": "c4a3bf07ae33a5f5443d16a32bc91077d056f37d8a237cbc4647ea3f0af90fce"
+        },
+        {
+          "path": "private/integration/combined-before-mule365/rng.bin",
+          "sha256": "b059f9d5aa3cb559bed117ce5908b713af2bd32688ce00e15de43474d04d4f1b"
+        },
+        {
+          "path": "private/integration/combined-before-mule365/native-after365.bin",
+          "sha256": "f83ec8882c1af235990a7fc3db3f9d3b45a79018b0ec4a3cdc921c4520c4a4f7"
+        },
+        {
+          "path": "private/integration/combined-before-mule365/map-after365.bin",
+          "sha256": "3e6644899e2099529eb8c3f1d7532f676ac241754732dff663ebd8b61ab655ed"
+        },
+        {
+          "path": "private/integration/combined-before-mule365/rng-after365.bin",
+          "sha256": "f31db19763cdf165f481ed7babafc300d7eff079a25723d44f9015b81fcde43d"
+        },
+        {
+          "path": "private/integration/combined-before-mule365/backing-after365.bin",
+          "sha256": "f8f70d929890fa68db07d4cb0853b73561e328fd70c3d89d39e7249c420079c9"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule365/source-trace365.json",
+        "sha256": "f4e5c74dc2f9f28581dd47696e280dfaee701ec89c6f171918935095b8444d56"
+      }
+    },
+    {
+      "frame": 366,
+      "seed0": false,
+      "compared_bytes": 344082,
+      "source_instructions": 3318,
+      "ui_cleanup_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule366/backing.bin",
+          "sha256": "2185c56856ebe8c4027ba4e180f471144a50aac0f809a394cda3e640987ddb22"
+        },
+        {
+          "path": "private/integration/combined-before-mule366/creatures.bin",
+          "sha256": "02ae7820ab8feff6431eb4b7bbef0c7f45e836d8e18d6c33497346e8a3c1a712"
+        },
+        {
+          "path": "private/integration/combined-before-mule366/actors.bin",
+          "sha256": "d91a8d709c210a6c5e26488d65321efa9c42f075feb25c9511e90cba3b50d92e"
+        },
+        {
+          "path": "private/integration/combined-before-mule366/effects.bin",
+          "sha256": "e29fe959f91932a244ddb15cd75dd2ab244e3ff18149598678c92529e233fa30"
+        },
+        {
+          "path": "private/integration/combined-before-mule366/players.bin",
+          "sha256": "a19b7d601ba4a79bcca102644e6222b6b497cd4848346865a710d64949551843"
+        },
+        {
+          "path": "private/integration/combined-before-mule366/rng.bin",
+          "sha256": "480ed34615f79990801aa0d92b95423754256bc585b24fa0e191912a9b96d0a3"
+        },
+        {
+          "path": "private/integration/combined-before-mule366/native-after366.bin",
+          "sha256": "27f0459a4d0e34fc528037ee4e06dda1ccdc3c70f24022964151db47a01b84d3"
+        },
+        {
+          "path": "private/integration/combined-before-mule366/map-after366.bin",
+          "sha256": "3ef2fd0078e6190474a99d2cf47ab8b4720e1d7b61e4accb8b217be1794e09af"
+        },
+        {
+          "path": "private/integration/combined-before-mule366/rng-after366.bin",
+          "sha256": "480ed34615f79990801aa0d92b95423754256bc585b24fa0e191912a9b96d0a3"
+        },
+        {
+          "path": "private/integration/combined-before-mule366/backing-after366.bin",
+          "sha256": "2185c56856ebe8c4027ba4e180f471144a50aac0f809a394cda3e640987ddb22"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule366/source-trace366.json",
+        "sha256": "2a4dc3183673402a7dcc329aa9a00ed1060997187389ebb78753ee72f0287ea0"
+      }
+    },
+    {
+      "frame": 375,
+      "seed0": false,
+      "compared_bytes": 344082,
+      "source_instructions": 2677,
+      "ui_cleanup_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule375/backing.bin",
+          "sha256": "615aff8ae1c97de6073d6539dc57fec556520dd6c7a013bd8e0cb41dfae0c1b4"
+        },
+        {
+          "path": "private/integration/combined-before-mule375/creatures.bin",
+          "sha256": "5e007effcae75ef3155a72fd0f5415d68575a88a840be6e40dca3363e9e664a7"
+        },
+        {
+          "path": "private/integration/combined-before-mule375/actors.bin",
+          "sha256": "9648fcdafae3e21095d79d02374fadd888c143c9586b86b7893e171c18141b4b"
+        },
+        {
+          "path": "private/integration/combined-before-mule375/effects.bin",
+          "sha256": "9bfd825fed7abec7043e36b51efc56394542e0006df682ff852614ebeeca47e1"
+        },
+        {
+          "path": "private/integration/combined-before-mule375/players.bin",
+          "sha256": "46300bebab3ec487c5a4511e3799e555771c6f98179ede234af70b7d42470566"
+        },
+        {
+          "path": "private/integration/combined-before-mule375/rng.bin",
+          "sha256": "4ab45c751ec619f497539d5aa0080054b4937e0e5730f77f303efab70992e306"
+        },
+        {
+          "path": "private/integration/combined-before-mule375/native-after375.bin",
+          "sha256": "f1793e476260a88b1e35b3fe815850f81b5656647303fe360535febad0af5161"
+        },
+        {
+          "path": "private/integration/combined-before-mule375/map-after375.bin",
+          "sha256": "c74aef5fc85ecd67b27687950b9bec07094b16fe1a1af32468eb62f95526bff2"
+        },
+        {
+          "path": "private/integration/combined-before-mule375/rng-after375.bin",
+          "sha256": "4ab45c751ec619f497539d5aa0080054b4937e0e5730f77f303efab70992e306"
+        },
+        {
+          "path": "private/integration/combined-before-mule375/backing-after375.bin",
+          "sha256": "615aff8ae1c97de6073d6539dc57fec556520dd6c7a013bd8e0cb41dfae0c1b4"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule375/source-trace375.json",
+        "sha256": "1067f16c0c8d1b0284f89b7b3f031c44194399f916caadfa234e913dbe3685a1"
+      }
+    },
+    {
+      "frame": 385,
+      "seed0": false,
+      "compared_bytes": 344082,
+      "source_instructions": 2962,
+      "ui_cleanup_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule385/backing.bin",
+          "sha256": "e35473703268abdd5fda3445ae18fb9fbd13d648eb5d0b6756b04dbb2d20a589"
+        },
+        {
+          "path": "private/integration/combined-before-mule385/creatures.bin",
+          "sha256": "9cbbf55b93bc9495bea05f12f143bd4bde5472c3603c03b2c7927c948f1789c8"
+        },
+        {
+          "path": "private/integration/combined-before-mule385/actors.bin",
+          "sha256": "78056c868174441043b567f96b34eb363e2d0b72882c5d1082deab9cd62f645c"
+        },
+        {
+          "path": "private/integration/combined-before-mule385/effects.bin",
+          "sha256": "eaec427b05169b98a310367a5dceac0b3ad0b2e59efa15bf68457ec72e02208f"
+        },
+        {
+          "path": "private/integration/combined-before-mule385/players.bin",
+          "sha256": "5da4c7cf4e8b669c0769f9f3e622dc3182069a0c3bf7db892e6a63981004931b"
+        },
+        {
+          "path": "private/integration/combined-before-mule385/rng.bin",
+          "sha256": "a4730772ba757a80833ea48e068fa97812fb7d4a46f6cbb83a783ee5acd41e25"
+        },
+        {
+          "path": "private/integration/combined-before-mule385/native-after385.bin",
+          "sha256": "08e0b3dfba244e77de7b276cd7e71f8759ee4e555fe4920eaf844b008b7d5995"
+        },
+        {
+          "path": "private/integration/combined-before-mule385/map-after385.bin",
+          "sha256": "0f3a3eda82f9cdd4e3ee9f7fde4a90ec96c645fdf1d215aa7d4be628558cad49"
+        },
+        {
+          "path": "private/integration/combined-before-mule385/rng-after385.bin",
+          "sha256": "a4730772ba757a80833ea48e068fa97812fb7d4a46f6cbb83a783ee5acd41e25"
+        },
+        {
+          "path": "private/integration/combined-before-mule385/backing-after385.bin",
+          "sha256": "7a4376ddbf28a5b7bd57c5010de6c6212c5c8502d63b5be6e4b774a49c0c6709"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule385/source-trace385.json",
+        "sha256": "d091015868c288e8376e08ddcc76559381f03dbabd27f952d84c7729897d819b"
+      }
+    },
+    {
+      "frame": 415,
+      "seed0": false,
+      "compared_bytes": 344082,
+      "source_instructions": 11682,
+      "ui_cleanup_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule415/backing.bin",
+          "sha256": "3f13b3d15ccd2aa17370057c395cc6e9c43123bbb56111757f9f3ba7f5730034"
+        },
+        {
+          "path": "private/integration/combined-before-mule415/creatures.bin",
+          "sha256": "cccded89e25c0e4350dab9c3639adbcef750e4613ab07d167266973fd41267aa"
+        },
+        {
+          "path": "private/integration/combined-before-mule415/actors.bin",
+          "sha256": "48105796718ef83627c55be22a2364955594fd81510d87fcdf15b5b4e72ebd78"
+        },
+        {
+          "path": "private/integration/combined-before-mule415/effects.bin",
+          "sha256": "9d624ac45eedf00f401d565bac95ea4df2b4e1bc7a97e70dfcff5e1885744a31"
+        },
+        {
+          "path": "private/integration/combined-before-mule415/players.bin",
+          "sha256": "f3de0837b45fa9701bae9688391446685a9dd130d222e40879c73885964f4149"
+        },
+        {
+          "path": "private/integration/combined-before-mule415/rng.bin",
+          "sha256": "5a632428a8bc6c39ef6af334fb30e47e02dc44b6ce466dfaac1f56c14735fe36"
+        },
+        {
+          "path": "private/integration/combined-before-mule415/native-after415.bin",
+          "sha256": "4b176cb0c9a3f9b1f78062045f2b744dbabb9525601da465e18d13e3aa52f8fb"
+        },
+        {
+          "path": "private/integration/combined-before-mule415/map-after415.bin",
+          "sha256": "86745bb5ced13ecbede629fb11f9a53989fc7fdf5ca92d3549a9f128bcc42ab6"
+        },
+        {
+          "path": "private/integration/combined-before-mule415/rng-after415.bin",
+          "sha256": "2f4f46fff5dcdfbb24855eaa8fe3149a1706be235902173445e4efdafd639462"
+        },
+        {
+          "path": "private/integration/combined-before-mule415/backing-after415.bin",
+          "sha256": "c3d342655b57b41a12e370d66edd0fdbcf125d6a3153b3e551fc3d38c3a67980"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule415/source-trace415.json",
+        "sha256": "a338e090f8fffee04739d2009fe0f01d3dbd7eb3951185b83dbb4fb4af65a361"
+      }
+    },
+    {
+      "frame": 447,
+      "seed0": false,
+      "compared_bytes": 344082,
+      "source_instructions": 11482,
+      "ui_cleanup_deferred": 0,
+      "inputs": [
+        {
+          "path": "private/integration/combined-before-mule447/backing.bin",
+          "sha256": "8aae29a832c745c9c1715a51f500825b454ac9f0e4f447aae704b16e98fa8195"
+        },
+        {
+          "path": "private/integration/combined-before-mule447/creatures.bin",
+          "sha256": "fe419b8f69fe9806934815d2fe3a59825b92179960e5dfc28a5155e8b4056474"
+        },
+        {
+          "path": "private/integration/combined-before-mule447/actors.bin",
+          "sha256": "965810bd0fd297b1b7a49ce551cf02545cfdee439e7941e2c5304d47f33d13a4"
+        },
+        {
+          "path": "private/integration/combined-before-mule447/effects.bin",
+          "sha256": "9d624ac45eedf00f401d565bac95ea4df2b4e1bc7a97e70dfcff5e1885744a31"
+        },
+        {
+          "path": "private/integration/combined-before-mule447/players.bin",
+          "sha256": "ba21d0a7faee4e0c0bd05e529b754e44db8217c648d36800f22e6423f7864116"
+        },
+        {
+          "path": "private/integration/combined-before-mule447/rng.bin",
+          "sha256": "68a567655efb853d8cea3021a3ea81fd5d9f0ad51c2ad05184a159c9b2e1eb3d"
+        },
+        {
+          "path": "private/integration/combined-before-mule447/native-after447.bin",
+          "sha256": "f755653212fe132db9bc90eedf81338726ebee1c26bf9c07c869436b17d6cfca"
+        },
+        {
+          "path": "private/integration/combined-before-mule447/map-after447.bin",
+          "sha256": "680da8b912a3c1302c53526f40e24024e1ba028f856d731b0e7715acef23130f"
+        },
+        {
+          "path": "private/integration/combined-before-mule447/rng-after447.bin",
+          "sha256": "54328acecfc9f0e7731363d4d951f7b7699b7cca63a9008d516474d517e9c53e"
+        },
+        {
+          "path": "private/integration/combined-before-mule447/backing-after447.bin",
+          "sha256": "62cf923488d99e40fbb4abc53c90ce9ef7f0e169980249a72f09b524f3238d77"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-before-mule447/source-trace447.json",
+        "sha256": "7c78916a3852cb7c9634f68856c920de08e9f5a13d05808717980942bb2af83f"
+      }
+    },
+    {
+      "frame": 441,
+      "seed0": true,
+      "compared_bytes": 344082,
+      "source_instructions": 19726,
+      "ui_cleanup_deferred": 1,
+      "inputs": [
+        {
+          "path": "private/integration/combined-seed0-before-mule441/backing.bin",
+          "sha256": "b4371b2e271439407bb22123e551c715c26e5a0ff9d957f20a18ba37eeb71685"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule441/creatures.bin",
+          "sha256": "40e48af8e08dfb9baf5fadf552f2f2329be91a744059d4653346686bccbf85f1"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule441/actors.bin",
+          "sha256": "7f4e6a28504ed3e462f598473bb1c97a34c97706b3444dcb3209937e512a1176"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule441/effects.bin",
+          "sha256": "5f8eae0842e9b69b3ace5aebbf4679c52813055b57c569da50622f6f83f5b75e"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule441/players.bin",
+          "sha256": "855a6dee348156b3648a7fd9fbc97dd8500194a2fa051176692b1618a1d19299"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule441/rng.bin",
+          "sha256": "f8ef0c4f6c16353bb295c72e666ee18d91527578d3928714936e80ed4550749a"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule441/native-after441.bin",
+          "sha256": "3884f20cd7a294367f7351ea3e200f23cba375677a106cf9cbf92db3e1f7b157"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule441/map-after441.bin",
+          "sha256": "b1d64def885c36771523e932106c01e0d53c5648a2dbf37587a3776c197631c4"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule441/rng-after441.bin",
+          "sha256": "a8c7b913306566e1b9103df873611376c9aa25df7e8e0411f65c152f9ee54fde"
+        },
+        {
+          "path": "private/integration/combined-seed0-before-mule441/backing-after441.bin",
+          "sha256": "b99c5669e9d95527a7a150ad27094d8686a4aa8f1b3f9400a847fe008addf214"
+        }
+      ],
+      "reference_trace": {
+        "path": "private/integration/combined-seed0-before-mule441/source-trace441.json",
+        "sha256": "8c953e8a7b3bf133bd4c8507c8c9645053c3825997d497fa85602edb43996dd0"
+      }
+    }
+  ],
+  "historical_compared_bytes": 2408574,
+  "stack_fill_cases": [
+    0,
+    85,
+    255
+  ],
+  "source_pins": [
+    {
+      "path": "rust/crates/genewars-assets/src/lib.rs",
+      "sha256": "7a9571d30a1d3c229281a45223d277d908b61976ff21d27fe763966da7af133d"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/map_atlas.rs",
+      "sha256": "275facee7a4ad590ec68558bcd12016f2178eff73c058eb92d85864bc8aa30a7"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/mission_source.rs",
+      "sha256": "4c7d23930fb35483e7288af90845a28d64e3df228e7adaf2e5c7196c06ed313a"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/campaign.rs",
+      "sha256": "a610b74be9c65dd66ef9c84771b1c07422e1efea41d6e9895290a551d061bf78"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/construction.rs",
+      "sha256": "4866ff1f9bdd1bffbfb964bf03c495e5a1118d6bc24b0e3f8beea64ff780e5c0"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/custom_list.rs",
+      "sha256": "98955b9435e074518a2ee195e54e25779f96e7de7120f9620fdab1c89ea495c8"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/entity_draw_queue.rs",
+      "sha256": "b80d62724db689da242800705edfb34319bed786ac9ed91be1d4ffac7f203215"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/lib.rs",
+      "sha256": "1793d9674e9278dc0ea81ccabcf34c412bd0a925c126d9e47607a45764364f4c"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/menu_control.rs",
+      "sha256": "9def9eafcff361edeac28ff199ab1a241ada086c1bc4e826ba65fa6dbe28a472"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/mouse_packet.rs",
+      "sha256": "5763c082b5774e7e9042c3bff2cabf638b22ede7744f60e1c9904493527714fa"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/opaque_records.rs",
+      "sha256": "3019eb2459c8fab24c7f3aafdaf75a0d857229692f537881292a6614a293eba9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/plant_lifecycle.rs",
+      "sha256": "b9d38a54ec0dbaebbf86d3c27fed5933ba586cdb381904fbf302df9c5e8d2ac9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/player_creation.rs",
+      "sha256": "7ae09e8231c2c1b5f2d9d846db9edfd4a274a8df95e98834d665a543c04a63ee"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/terrain.rs",
+      "sha256": "5b906fdc3ed1809fefd078a1c60cca20cbca5a254df2fe386fe4608cf2450e6a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
+      "sha256": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_command.rs",
+      "sha256": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction.rs",
+      "sha256": "0988dac1c88cbea6db58b6036cc26e8618ad49ded7de3787009ce2f82f88d182"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
+      "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_motion.rs",
+      "sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
+      "sha256": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_render.rs",
+      "sha256": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_resources.rs",
+      "sha256": "8c94e8afb54d1dbcb0e33de471a9b7d4d4008d3a8782f970ff5b0e95194145a3"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "5cfdfd1b09ae7d3f33ace71c5f540216482326fabc27647be6beeb4b674d0d5e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/blueprint.rs",
+      "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/bookkeeping.rs",
+      "sha256": "b1d2a1172c2368a98c3008eb9d14817a5837753e698cd7f71a76c6d4272c3b2a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building.rs",
+      "sha256": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/creature_world.rs",
+      "sha256": "fb829cee975ca26518f25d0db36f4685ad7576fc270ae4b292c645293f006d56"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
+      "sha256": "944251d5617a636b7b847a51ef00270d06872b5b27a23f5b79286b43c2bc23bd"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/identity.rs",
+      "sha256": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing.rs",
+      "sha256": "38ca22019dc6fe33fccfa8e7f67ed3e627f50224c1626c663c351538a1c691c8"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
+      "sha256": "1ba0b302d1908501fbf05ad46f75b6627fa8172eceb4b49b6d94bed05c90769f"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/lib.rs",
+      "sha256": "580b1b4f862d40db3b4322c35dcb6acb6275e08beaa3a14ec474551dd9ceca62"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
+      "sha256": "cc063773f1a08c161bb34aa03751e75dd3c74ea50e78d4d63c0d6a6ad844e685"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/plant_spread.rs",
+      "sha256": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/player_state.rs",
+      "sha256": "d7faa11882d551bc009e43e7e6ea89dca3d14dd726341cfeb959981d6da496b0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_projection.rs",
+      "sha256": "455938c39b889e6e035e2821e74b7d5f4aae980786745c7861dc1aa5dbb38dc6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_resolver.rs",
+      "sha256": "1412ab3a6a55e95df5b1e5cd1f4bf4169da55523966b1bfec56b3a917628d1c5"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/terrain_target.rs",
+      "sha256": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world.rs",
+      "sha256": "8a304a471b815b8e3323b6dddc13c8cbbd0c3dfae5ea5327643a03e9662f9bda"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
+      "sha256": "01927dbf45e172e8e507acd925249bc89f2f78815dbfaac8202ea4d83f8b4e77"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/bookkeeping_updates.rs",
+      "sha256": "ab7bcd5a197af390b9d54d0d1e5eb94a1484ff2118cd8963767aab7dae8673d1"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
+      "sha256": "c79f3f74f2c7c6a89134f7b33d4c0dd2a946673bd7395c3b14e631af40e33b68"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
+      "sha256": "9e23ef09c3b179e708ce1b464d4c1d8056f4dbf313f7e844085ff035d4c668cf"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
+      "sha256": "8de21959a0f10016a708dbecad0b9e8721ec223013a9750993fb86b8576323dd"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs",
+      "sha256": "3b7a7853f6f7925dbf386274ddb570856eab9beb692086215ac39e1fa632e46d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
+      "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    }
+  ],
+  "review_sources": [
+    {
+      "path": "research/variants/creature-hungry-review.py",
+      "sha256": "749d16fd109437c1087ac265301cc6a42e120cf9ef9cd9b258de0c642e9799ee"
+    },
+    {
+      "path": "research/variants/creature-hungry-review.rs",
+      "sha256": "33f1b4a94b3255300d6b1af4682ed998ef5bdc64f1c3eabfb2a9c9e292222b09"
+    },
+    {
+      "path": "research/variants/creature-hungry-source.py",
+      "sha256": "9a4f0d5ad4290f73f76f38d164e9c43407e14fa94858d5e6c09032e4e3481216"
+    },
+    {
+      "path": "research/variants/initial-creature-source.py",
+      "sha256": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2"
+    }
+  ],
+  "limits": [
+    "Current compiled acquisition/feeding plans are compared against independently interpreted source before/after images. Full owned callback comparisons use parent-generated private historical captures; this script does not freshly replay the whole inter-family scheduler.",
+    "Render queue83140 and module UI cleanup2C200 remain explicit pending requests; source417E0 is gated off by the explicitly bound mission-tail flags38. No original or GUI execution.",
+    "Source/native pointer gap31..39 is normalized for comparison; full backing comparisons do not assert it is a complete save file.",
+    "Immediate neutral plant death is admitted only for retirement delay<4; larger delays, foreign neighborhoods, energy/full-reserve completion and source water-damage branches remain explicit boundaries."
+  ]
+}

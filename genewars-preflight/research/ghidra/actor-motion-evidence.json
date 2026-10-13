@@ -1,0 +1,32 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "source_sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f",
+  "instruction_contracts": [
+    {
+      "path": "private/ghidra/actor-motion/instructions-00057a10.txt",
+      "sha256": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a"
+    },
+    {
+      "path": "private/ghidra/actor-motion/instructions-00051930.txt",
+      "sha256": "f9f2552e82a11b93d3ee858ce9073185ef0e5c74a9bba48775a019b5383730c3"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00052340.txt",
+      "sha256": "a8c4d8761c19c40b94af254de31f43f01d8070ebf40770e67b30f57e43c1befc"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00073970.txt",
+      "sha256": "ab614b5e9d2dd1ee9c1c49247f21ac39540946feade19a4e9c7cde767ae2c461"
+    }
+  ],
+  "cases": 2048,
+  "compared_bytes": 411648,
+  "output_sha256": "9b994227d5f8db2c8c83537930296958aacf80c9d7ffbd7a39578588c3a85222",
+  "speed_words": [
+    960,
+    576,
+    1088,
+    832
+  ],
+  "scope": "Post6FB60/postblueprint input at57E0F only. Inhibited/no-pending branches and opcode3 consume; acknowledgements typed. Earlier movement, state dispatch and animation not claimed."
+}

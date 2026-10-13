@@ -1,66 +1,76 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T14:50:24.305137+00:00",
+  "verified_at": "2026-10-13T17:27:48.524319+00:00",
   "sessions": [
     {
       "seed": "0",
-      "passes": "289",
-      "created": "188",
-      "retired": "188",
+      "passes": "450",
+      "created": "285",
+      "smoke_retired": "266",
+      "departure_retired": "19",
       "max_active": "24",
       "contact_pass": "189",
-      "rng_draws": "752",
-      "quiet_timer": "50",
-      "rollback": "true"
+      "landing_retired_pass": "389",
+      "rng_draws": "1122",
+      "messages": "1",
+      "active_after": "0"
     },
     {
       "seed": "1",
-      "passes": "289",
-      "created": "188",
-      "retired": "188",
+      "passes": "450",
+      "created": "285",
+      "smoke_retired": "266",
+      "departure_retired": "19",
       "max_active": "41",
       "contact_pass": "189",
-      "rng_draws": "752",
-      "quiet_timer": "50",
-      "rollback": "true"
+      "landing_retired_pass": "389",
+      "rng_draws": "1122",
+      "messages": "1",
+      "active_after": "0"
     },
     {
       "seed": "5428",
-      "passes": "289",
-      "created": "188",
-      "retired": "188",
+      "passes": "450",
+      "created": "285",
+      "smoke_retired": "266",
+      "departure_retired": "19",
       "max_active": "41",
       "contact_pass": "189",
-      "rng_draws": "752",
-      "quiet_timer": "50",
-      "rollback": "true"
+      "landing_retired_pass": "389",
+      "rng_draws": "1122",
+      "messages": "1",
+      "active_after": "0"
     },
     {
       "seed": "32768",
-      "passes": "289",
-      "created": "188",
-      "retired": "188",
+      "passes": "450",
+      "created": "285",
+      "smoke_retired": "266",
+      "departure_retired": "19",
       "max_active": "48",
       "contact_pass": "189",
-      "rng_draws": "752",
-      "quiet_timer": "50",
-      "rollback": "true"
+      "landing_retired_pass": "389",
+      "rng_draws": "1122",
+      "messages": "1",
+      "active_after": "0"
     },
     {
       "seed": "65535",
-      "passes": "289",
-      "created": "188",
-      "retired": "188",
+      "passes": "450",
+      "created": "285",
+      "smoke_retired": "266",
+      "departure_retired": "19",
       "max_active": "40",
       "contact_pass": "189",
-      "rng_draws": "752",
-      "quiet_timer": "50",
-      "rollback": "true"
+      "landing_retired_pass": "389",
+      "rng_draws": "1122",
+      "messages": "1",
+      "active_after": "0"
     }
   ],
-  "total_passes": 1445,
-  "created_and_retired": 940,
-  "callback_draws": 3760,
+  "total_passes": 2250,
+  "created_and_retired": 1425,
+  "callback_draws": 5610,
   "source_pins": [
     {
       "path": "private/integration/game-runtime/terrain/CONQ001.DAT",
@@ -70,23 +80,31 @@
   "implementation_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "61523e25803399b5cd420be63f29f608cfe9c9f6c76031e5df30ec3417f6647d"
+      "sha256": "5cfdfd1b09ae7d3f33ace71c5f540216482326fabc27647be6beeb4b674d0d5e"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
-      "sha256": "d22112307fb1ca75dd209b6f752353eea2ef14153accbef3637a6c9acfed734d"
+      "sha256": "9e23ef09c3b179e708ce1b464d4c1d8056f4dbf313f7e844085ff035d4c668cf"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/creature_world.rs",
+      "sha256": "fb829cee975ca26518f25d0db36f4685ad7576fc270ae4b292c645293f006d56"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/player_state.rs",
+      "sha256": "d7faa11882d551bc009e43e7e6ea89dca3d14dd726341cfeb959981d6da496b0"
     },
     {
       "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
-      "sha256": "055e8b1d5f5a3256ea4eb9bdea4ee3749960c03bafa0a4955263a7acb955c334"
+      "sha256": "944251d5617a636b7b847a51ef00270d06872b5b27a23f5b79286b43c2bc23bd"
     },
     {
       "path": "rust/crates/genewars-runtime/src/landing.rs",
-      "sha256": "f8a43c4ac0a69d6579a20a034cbdb401b427ebff2a992bdc5029eac760678f12"
+      "sha256": "38ca22019dc6fe33fccfa8e7f67ed3e627f50224c1626c663c351538a1c691c8"
     },
     {
       "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
-      "sha256": "f6032674e731dedd6bb40a79c0aeb3ea24bf130ad2691a200aad79db891e0161"
+      "sha256": "1ba0b302d1908501fbf05ad46f75b6627fa8172eceb4b49b6d94bed05c90769f"
     },
     {
       "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
@@ -94,13 +112,13 @@
     },
     {
       "path": "scripts/landing_scheduler_probe.rs",
-      "sha256": "fc53a0f0f26ee16eb7171ff6a09761def0144cdfdffc0d72819255d177b195f9"
+      "sha256": "782e3c7bc4e661a6ed6d7cb8a140014aeb6a535d823f9a5be2fb6951e7f671d7"
     },
     {
       "path": "scripts/validate_landing_scheduler.py",
-      "sha256": "c8ef65df69f3c18221df168eacdecd5a7701992e655c7d1b5cc74dcac7f1994c"
+      "sha256": "5cbcfc20e80535b5e65d0e09540fa4e59ba8c492ed284babfc06623201b3d63f"
     }
   ],
-  "output_sha256": "c669fe4887ca401f0708f58f135213cf581a479db1382495a80432d4299c394c",
-  "scope": "Actual CONQ map, explicit synthetic player/native-prior/RNG inputs, native-empty UI. Complete bounded family4 numeric primary/newborn passes through quiet timer50, preserving shared links and cleanup. Players have no actors; contact proves the zero-slot activation counter branch. Kind1/plant callbacks, render admission, palette/audio execution and full startup are outside this regression. Timer49 failure is atomic; no original executable ran."
+  "output_sha256": "94fa5f5a86a65b55198c5a6dcac50d585f328db66fa9a7c9d066dba6741baa3b",
+  "scope": "Actual CONQ map, explicit synthetic player/native-prior/RNG inputs, native-empty UI, native creature storage admitted. Complete bounded family4 numeric primary/newborn landing lifecycle through parent and particle retirement, preserving shared links, cleanup and player timer700. Players have no actors; contact proves the zero-slot activation counter branch. Kind1/plant callbacks, render admission, palette/audio/message execution and full startup are outside this composition regression. Component independent oracles and atomic rollback tests are separate; no original executable ran."
 }

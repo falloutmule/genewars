@@ -257,8 +257,26 @@
       "sha256": "f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253",
       "size": 186726,
       "provenance": "root/2/disc/59; decoded RNC output"
+    },
+    {
+      "path": "physics/angle.bin",
+      "sha256": "1c26f16f88a3e0cedc9c879837b3849567ff70514c033eb6249bd95a264debce",
+      "size": 514,
+      "provenance": "validated mapped object1 offset 0x9E134; physics-inputs.json"
+    },
+    {
+      "path": "physics/bounce.bin",
+      "sha256": "c62a747206c89218e01102645341f151f5308fe1259b177f9d0418a67575e5e5",
+      "size": 16,
+      "provenance": "validated mapped object3 offset 0x4530; physics-inputs.json"
+    },
+    {
+      "path": "creatures/MULE.ANB",
+      "sha256": "f6c62221b52a62088f91ae8d00becfef513282cbf98a5990c1a0859cd8b2d346",
+      "size": 57038,
+      "provenance": "root/2/disc/335; selector4 packed4 proof creature-evidence.json"
     }
   ],
   "original_execution": false,
-  "catalog_sha256": "dd84be2e7a01889f68fd5d8a9db8e7f7769b64e51609d8960b1dbeb27e91125e"
+  "catalog_sha256": "c6c53b7f3ad36abbf2eb07664bccf6639cc0324d56f08878c8a0c1c037dffd33"
 }

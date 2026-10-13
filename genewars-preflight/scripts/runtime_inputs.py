@@ -8,6 +8,11 @@ CATALOG = ROOT / 'research/integration/runtime-resource-catalog.tsv'
 
 
 def stage():
+    # Reproduce the two small mapped physics inputs before catalog admission.
+    from physics_inputs import stage as stage_physics
+    stage_physics()
+    from creature_inputs import stage as stage_creature
+    stage_creature()
     private = (ROOT / 'private').resolve()
     destination = private / 'integration/game-runtime'
     pending = []

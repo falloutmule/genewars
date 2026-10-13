@@ -1,4 +1,10 @@
 {
+  "instruction_contracts": [
+    {
+      "path": "private/ghidra/plant-command/instructions-0004b630.txt",
+      "sha256": "1686608a6f95caf95f2f963ac824df9f02ecc2ed5d7a6d928fa85638b845ef76"
+    }
+  ],
   "cases": 327680,
   "timers": [
     150,
@@ -10,5 +16,5 @@
   "seed_cases": 65536,
   "compared_bytes": 33095680,
   "output_sha256": "3649d2fd36066fe9859a8073f39e52241dcf553cd426b85697e3c363b44e5b9e",
-  "source_sha256": "4f2ba6dcfa9f27bfb25618c8f86389b0074d8f50dc10e0ab13bc7f1a32dba939"
+  "source_sha256": "38ca22019dc6fe33fccfa8e7f67ed3e627f50224c1626c663c351538a1c691c8"
 }

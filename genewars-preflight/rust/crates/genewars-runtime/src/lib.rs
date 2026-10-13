@@ -10,6 +10,7 @@
 pub mod world;
 pub mod identity;
 pub mod actor_command;
+pub mod actor_motion;
 pub mod player_state;
 pub mod blueprint;
 pub mod actor_activation;
@@ -25,6 +26,9 @@ pub mod terrain_target;
 pub mod physics_tables;
 pub mod landing_effect_lifecycle;
 pub mod creature_world;
+pub mod bookkeeping;
+pub mod target_resolver;
+pub mod plant_spread;
 
 pub use world::{
     MissionWorld, PlantParameterTable, PlantParameters, PlantRenderRecord,

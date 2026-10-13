@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-full-and-initial-terrain-view-review",
-  "checked_utc": "2026-10-13T14:51:52.490315+00:00",
+  "checked_utc": "2026-10-13T17:29:19.166466+00:00",
   "original_or_gui_execution": false,
   "native_cases": 39,
   "complete_frames": 33,
@@ -1333,7 +1333,7 @@
   "harness": {
     "path": "private/review/terrain-view/review.exe",
     "size": 5179506,
-    "sha256": "6ce342c8da01aab92891a6b1ee394c1c12caa6c5dba772ff4da508f237ec8b11"
+    "sha256": "e693021723967d7ed121a34544307599c3ba473193f868b21fbf8b7dd896bbac"
   },
   "review_sources": [
     {

@@ -1,0 +1,31 @@
+{
+  "instruction_contracts": [
+    {
+      "path": "private/ghidra/plant-command/instructions-0004b630.txt",
+      "sha256": "1686608a6f95caf95f2f963ac824df9f02ecc2ed5d7a6d928fa85638b845ef76"
+    }
+  ],
+  "cases": 262144,
+  "phase_timer_pairs": [
+    [
+      2,
+      30
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      20
+    ],
+    [
+      3,
+      1
+    ]
+  ],
+  "seed_cases": 65536,
+  "compared_bytes": 26345472,
+  "output_sha256": "f1639931aced8162c19a2869e39bd0c39b7de7ddc91f21ebdf357296c2c27b6c",
+  "source_sha256": "38ca22019dc6fe33fccfa8e7f67ed3e627f50224c1626c663c351538a1c691c8"
+}

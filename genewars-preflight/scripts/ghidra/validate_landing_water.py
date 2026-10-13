@@ -1,0 +1,20 @@
+"""Independent stationary0x30 factory and signed7AC00 lifetime fixtures."""
+from pathlib import Path
+import ast,struct,random,subprocess,hashlib,json,uuid
+p=Path(__file__).resolve().parents[2];w=p/'private/ghidra/landing-water'/uuid.uuid4().hex;w.mkdir(parents=True);sha=lambda b:hashlib.sha256(b).hexdigest()
+mem=(p/'private/ghidra/validated/memory-.object3.bin').read_bytes();assert mem[0x4eb4+48*6:0x4eb4+49*6]==bytes([0,0,20,255,0,0])
+tree=ast.parse((p/'scripts/ghidra/validate_landing_bridge.py').read_text());scope={'struct':struct};exec(compile(ast.Module(body=[x for x in tree.body if isinstance(x,ast.FunctionDef)and x.name=='factory'],type_ignores=[]),'factory','exec'),scope)
+corpus=json.loads((p/'research/integration/sprite-corpus.json').read_text())['results'];row=next(x for x in corpus if x['entry_id']=='root/2/disc/59');db=(p/row['private_database']).read_bytes();assert sha(db)==row['decoded_sha256'];_,_,_,frames,animations=struct.unpack_from('<H4I',db);first,last,n,flags=struct.unpack_from('<IIBB',db,animations+48*10);assert (first,last,n,flags)==(3318,3472,12,0)and all(db[frames+first+i*14+10]==0 for i in range(12))
+rng=random.Random(0x30);data=bytearray();expected=bytearray()
+for i in range(1024):
+ a=bytearray(rng.randbytes(81));a[6]=0;data+=a;b=bytearray(scope['factory'](a,0,0,[20736,13568],6272,40));struct.pack_into('<i',b,39,7000);b[45:63]=bytes(18);struct.pack_into('<H',b,21,0x820);b[29]=2;b[69]=48;b[73]=a[73];b[76]=0;expected+=b
+for frame in range(12):
+ for counter in range(256):
+  a=bytearray(81);a[6]=5;a[69]=48;a[21]=32;a[22]=8;a[27]=frame;a[28]=1;a[29]=2;a[30]=counter;struct.pack_into('<h',a,74,-1);data+=a;b=bytearray(a);b[22]&=~2;c=counter-256 if counter>=128 else counter;c=min(c,2);b[30]=(c-1)&255
+  if c<=0:b[30]=2;b[27]=(frame+1)%12
+  expected+=bytes([b[27]==11 and b[30]==0])+b
+h=w/'water-oracle.rs';module=(p/'rust/crates/genewars-runtime/src/landing.rs').as_posix();h.write_text(f'#[path="{module}"]mod landing;\n'+r'''use landing::*;use std::io::{Read,Write};fn main(){let mut b=Vec::new();std::io::stdin().read_to_end(&mut b).unwrap();let mut out=Vec::new();for(i,c)in b.chunks_exact(81).enumerate(){let a=c.try_into().unwrap();if i<1024{let mut pool=[[0;81];200];pool[0]=a;let p=plan_water_splash_factory(&pool,0,[20736,13568],6272,40,7000,None).unwrap();assert_eq!(p.animation_index,48);out.extend(p.after_nonpointer);}else{let r=plan_water_splash_update(&a).unwrap();out.push(r.retirement_required as u8);out.extend(r.after);}}std::io::stdout().write_all(&out).unwrap();}''');exe=w/'water-oracle.exe';subprocess.run([str(p/'private/tools/rust/rustup/toolchains/1.99.0-x86_64-pc-windows-gnu/bin/rustc.exe'),'--edition=2021','-Awarnings',str(h),'-o',str(exe)],check=True);out=subprocess.run([str(exe)],input=data,capture_output=True,check=True).stdout;assert out==expected
+pins=[]
+for path in ['activation-rng-refs/instructions-00048790.txt','landing-contact/instructions-0001e600.txt','landing-contact/instructions-0007ac00.txt','effect-draw/instructions-0004a060.txt']:
+ f=p/'private/ghidra'/path;assert sha(f.read_bytes())=={'activation-rng-refs/instructions-00048790.txt': '840113f32e4845215dc107850ae4cf6218cd5558af2f2dbd1aae632654da533d', 'landing-contact/instructions-0001e600.txt': '0415a671680b7fb71d925182b25097591272170159fb470a71028deec4bc68ae', 'landing-contact/instructions-0007ac00.txt': 'cc002c636ec832486e06fe90af6cfc68a0489d6acae6efcf83d5a5ce735706e1', 'effect-draw/instructions-0004a060.txt': 'c1562d884b99ef3145fb69593cd221aec76a0d711b8c780c110dcf911b58bfb9'}[path];pins.append({'path':'private/ghidra/'+path,'sha256':sha(f.read_bytes())})
+r={'factory_cases':1024,'animation_cases':3072,'compared_bytes':len(out),'output_sha256':sha(out),'source_sha256':sha((p/'rust/crates/genewars-runtime/src/landing.rs').read_bytes()),'pins':pins,'scope':'0x30 stationary EFF48 delay2; every signed counter; prior byte preservation; no RNG; full pool replacement explicitly unsupported'};(p/'research/ghidra/landing-water-evidence.json').write_text(json.dumps(r,indent=2)+'\n');print(r)

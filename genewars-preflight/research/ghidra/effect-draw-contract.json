@@ -1,0 +1,99 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "status": "Observed bounded code6/code31 binary draw contract; no original execution",
+  "pins": [
+    {
+      "path": "private/ghidra/effect-draw/instructions-0004a060.txt",
+      "sha256": "c1562d884b99ef3145fb69593cd221aec76a0d711b8c780c110dcf911b58bfb9"
+    },
+    {
+      "path": "private/ghidra/entity-order-refs/instructions-0004e950.txt",
+      "sha256": "a661608b0b5e833aa178b7ab5548bf57c12a98318686adda79954d584403a2f2"
+    },
+    {
+      "path": "private/ghidra/display-geometry/instructions-00083140.txt",
+      "sha256": "9d18112e4f02934ede585142dda83c1ea16af0b4f4bbd51acd09226c08f28c52"
+    },
+    {
+      "path": "private/ghidra/entity-plant/instructions-00097a90.txt",
+      "sha256": "f4838e42b23429982ada97583a03a88fb9dbf7160101709acd6f6124112d17fb"
+    },
+    {
+      "path": "private/ghidra/entity-plant/instructions-00097ca0.txt",
+      "sha256": "a08451b7623fdefcec8650da29e4edd0387c1b73ba2a74e6fead993f031c518b"
+    },
+    {
+      "path": "private/ghidra/entity-plant/instructions-0009a660.txt",
+      "sha256": "f6e10c86aa6ce6cf6b7906b26279ffc9baf4142fd81b0f99779f58b40b3001ee"
+    },
+    {
+      "path": "private/ghidra/entity-plant/instructions-0009b0d0.txt",
+      "sha256": "b8516427e8601213d500caa4fdf5fcfd0dbba6885f73a0f1890a6dbb6d2f26a0"
+    },
+    {
+      "path": "private/ghidra/entity-plant/instructions-00096ac0.txt",
+      "sha256": "8146aa37b06d9236b517db22efb7b12f2993607380b9df262faa024a68bbc891"
+    },
+    {
+      "path": "private/ghidra/entity-shadow-panel/instructions-00092f80.txt",
+      "sha256": "10281988674a0779a1481f9813aad7054da5b25f11a04155341f9e78c813ecf4"
+    }
+  ],
+  "resource": {
+    "entry_id": "root/2/disc/59",
+    "decoded_sha256": "f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253",
+    "special": {
+      "animation": 66,
+      "first_frame": 4634,
+      "last_frame": 4634,
+      "count": 1,
+      "flags": 0,
+      "frame_width_raw": 154,
+      "frame_height_raw": 30,
+      "component_count": 1,
+      "component": {
+        "x": -76,
+        "y": -14,
+        "flags": 4
+      }
+    }
+  },
+  "wrapper": "Type5vtable112254+24=4A060. Codes6/31\u21924ACA5selectedframe *(anim1F+anim19*10)+frame1B*14. Code6\u21924ACF4shadow96AC0(origin,frame,ECX0,stack0)unconditional. Code31\u21924ADA7globalflags|0C,EFFanimation66FIRSTframe via*(116818+294),97A90atsamegroundorigin,thenflags&F3; maindrawfollows.",
+  "main": "4ADDFheightvirtual4=physical27-ground11. dy=height>>6; effectiveShade=(rawshade==0?0:rawshade+(dy>>1)); flags15&2clearandeffectiveShade<30select97CA0(FADE188F48+effectiveShade*256),otherwise97A90. OriginXincomingDXsign16;mainYsigned16wrap(originY-dy). flags15&10odd(framecounter+IDlow)temporarilyORglobal4thenAND~4. Noownerpalettebias inthese97A90/97CA0wrappers; lowlevel9A660/9B0D0plantblitter, not95390/95E40.",
+  "order": "4E950postupdateascendingactivefamily4slotsuntilcount11C2B4,excludescode46,calls83140; bucketorderingexistingentityqueuecontract. Interfamilyorderrequiresactualscheduler.",
+  "component_high80": "Observed04and84areequivalent:97A90/97CA0onlytransformlowbits1/2;9A660/9B0D0firstdispatchwholeflagszero/exact2but04and84bothsamegeneralpath,thenonlybits1,2,4,8. No80test/color/control/clipdifference. Mode12source-highblend;mode4destination-highblend. Fadebeforeblend. Shadow96AC0lowbittransforms;92F80onlyglobalbit1,so04/84equivalent.",
+  "blend": "9A6609A9B3TESTbit4gatesblend;9AA03TESTbit8selects18CF48[(source<<8)+destination],else[(destination<<8)+source]. 9B0D09B452TESTbit4,9B49ETESTbit8;fade[rawsource]firstat9B4AF,thenblend. Noownerrecolor. TransparentRLEskipspreserveframebuffer;literalzeroopaque.",
+  "shadow6": "96AC0stackmode0/CL0 from4ACF4..4AD01. Forglobalflagslow3clear:positionoriginX+signedcomponentX,originY+trunc0(signedcomponentY/2); flagsglobalORcomponentflags;92F80flattenedopacityshadow,flags80ignored. Globalflipvariantsremainexisting96AC0contract,notassumedordinaryspriteflip.",
+  "queue_admission": "83140requiresactive116974=1863A2andcount<256;7AF00groundprojectionX[-40,width-margin+40);admitifheight-adjustedYorGROUNDYin[-10,height+40). BucketorderingusesGROUNDY,notadjustedY. Sharedbucketresidual/equalorderproofinentity-queue-evidence; type5dirty/selectiongatesremainexplicit.",
+  "effect2f": {
+    "animation": 47,
+    "decoded_sha256": "f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253",
+    "frames": 6,
+    "first_frame": 3234,
+    "last_frame": 3304,
+    "animation_flags": 0,
+    "all_frame_holds": 0,
+    "component_flags": [
+      0
+    ],
+    "draw": "4ABEC..4AC94 uses selectedframe *(anim1F+anim19*10)+frame1B*14;no96AC0shadow;virtualheightphysical27-ground11;effectiveShade=rawshade17+(height>>7);effectiveShade<30uses96990else96870. Ownerrecoloru8(owner18*16-64)thenfadeifselected. MainY=i32(sign16originY)-(height>>6),nointermediate16wrap. Flags15mask2/10donotaffectthisspecialbranch. Primitive95390/95E40ownerrecolorpass,not9A660/9B0D0."
+  },
+  "water_splash_0x30": {
+    "selector_decimal": 48,
+    "animation_index": 48,
+    "frame_first": 3318,
+    "frame_last": 3472,
+    "frames": 12,
+    "flags": 0,
+    "holds": 0,
+    "source_path": "4AF01..4AF21 ->4ACA5; not31 ->4ADD7; not11 ->4ACF4 shadow96AC0; then4ADDF main",
+    "placement": "shadow ground origin; main signed16(originY-((physical27-ground11)>>6))",
+    "shade": "raw0 yields0; otherwise raw+((physical27-ground11)>>7); flags15 bit2 or effective>=30 selects97A90 else97CA0 fade",
+    "factory_flags": "0820; immobile bit16&8; no bit15&2 or bit15&10",
+    "special_layer": "No code31 EFF66 layer",
+    "pin": {
+      "path": "private/ghidra/effect-draw/instructions-0004a060.txt",
+      "sha256": "c1562d884b99ef3145fb69593cd221aec76a0d711b8c780c110dcf911b58bfb9"
+    }
+  }
+}

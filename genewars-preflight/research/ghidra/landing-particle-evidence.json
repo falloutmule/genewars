@@ -1,0 +1,17 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "factory_cases": 1024,
+  "airborne_cases": 1024,
+  "animation_cases": 72,
+  "compared_bytes": 175888,
+  "output_sha256": "54f9eeefe45fedd7aefea96ec35fe571b67781f4debeef8eef203a36da9b963d",
+  "source_sha256": "38ca22019dc6fe33fccfa8e7f67ed3e627f50224c1626c663c351538a1c691c8",
+  "EFF47": {
+    "entry_id": "root/2/disc/59",
+    "decoded_sha256": "f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253",
+    "frames": 6,
+    "flags": 0,
+    "all_holds": 0
+  },
+  "selector_tail": "4B524+(2F-6)*4 points4B7D5return, no damping; generic7AC00lastframe5counter0retires,childselectorFFnoRNG"
+}

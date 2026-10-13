@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-player-creation-review",
-  "utc": "2026-10-13T14:51:33.139389+00:00",
+  "utc": "2026-10-13T17:28:59.095760+00:00",
   "original_execution": false,
   "source": {
     "path": "rust/crates/genewars-core/src/player_creation.rs",
@@ -200,7 +200,7 @@
   "native_harness": {
     "path": "private/review/player-creation/review.exe",
     "size": 5092311,
-    "sha256": "bcf5f07f11dc4869ae04b81551cc61ebf2b919c836cd860a3bf43bd8aeaaf806"
+    "sha256": "042432b728884599f895cd95b5b4da3bdcd15a32439e3033e8a7dd335004acff"
   },
   "limits": [
     "Explicit metadata, slot, count, player and campaign inputs; no generated random blueprint or retained live-player inference",

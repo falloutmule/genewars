@@ -1,0 +1,5 @@
+The optional owned Mule water callback passes the source frame139 request comparison: code0x30 at[17106,17622], height1781, zero angles, no RNG draw. Its110 numeric record bytes (6..30 and39..123) match2,554 interpreted instructions. The current native adapter creates one hash-bound splash and emits the audio3B request; a missing effect pool rejects without committing state.
+
+`step_mule_followup_with_water` enables this transaction. Existing APIs preserve their rejecting policy, so the corrected138-callback independent fixture retains its exact scope. The listing model treats48790 as an explicit factory request and does not insert a modeled effect; links, map and opaque pointer bytes are therefore excluded from this comparison. The code30 factory/lifecycle has its own landing-lane evidence. Code15, water damage and a cross-cell arrival during a request remain explicit rejections. No original or GUI execution occurs.
+
+Reproduce with `python -B research/variants/creature-water-review.py`; the JSON pins all relevant sources and outputs.

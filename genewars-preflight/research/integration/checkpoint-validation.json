@@ -1,0 +1,36 @@
+{
+  "status": "passed-focused-repair-and-checkpoint",
+  "utc": "2026-10-13T17:46:19.365044+00:00",
+  "aggregate": {
+    "path": "research/integration/verification.json",
+    "sha256": "87342084da97415ee5f593d21489f3037649087d9c1b23db644de34c6c6c120b",
+    "passed": 159,
+    "total": 160,
+    "failed": [
+      "owned_creature_motion"
+    ]
+  },
+  "repair": {
+    "check": "owned_creature_motion",
+    "cause": "Source-pin guard detected concurrent source edits; numeric comparisons had matched.",
+    "rerun_exit_code": 0,
+    "receipt": "research/variants/creature-motion-review.json",
+    "receipt_sha256": "bb879a1f6ca5a0fba31c2268862f9031deec6f4be251a71e9bea124ea5a06cf2",
+    "current_source_pins_verified": true
+  },
+  "native": {
+    "cases": 12,
+    "exit_code": 0,
+    "receipt": "research/integration/shared-runtime-validation.json",
+    "sha256": "7c94313be6a7777b93e48fd9f9ed369200331f07b1c0b6e0c6138ed21be6e125",
+    "current_source_pins_verified": true
+  },
+  "workspace": {
+    "passed": 341,
+    "failed": 0,
+    "test_binaries": 14,
+    "private_log": "private/integration/checkpoint-workspace-tests.log",
+    "log_sha256": "567b953da49c09ad1cee80aa48df65fa4c1519ea34dc983bff6c9de3d91aaddd"
+  },
+  "scope": "Focused successful rerun after the dated159/160 aggregate. The aggregate receipt is preserved, not rewritten as a new complete run. Additional plant creation components have separate receipts and remain outside active reproduction scheduling."
+}

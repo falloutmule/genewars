@@ -27,6 +27,8 @@ pub enum PlayerStateError {
     FreshCreationStateRequired,
     ActorPartitionOccupied(usize),
     StaleBlueprint(usize),
+    StaleLandingReference,
+    StaleBookkeeping,
 }
 
 impl core::fmt::Display for PlayerStateError {
@@ -127,6 +129,16 @@ impl PlayerState {
     }
 
     pub fn bytes(&self) -> &[u8; PLAYER_RECORD_BYTES] { &self.bytes }
+    pub(crate) fn replace_bookkeeping_checked(&mut self,before:&[u8;PLAYER_RECORD_BYTES],after:&[u8;PLAYER_RECORD_BYTES])->Result<(),PlayerStateError> {
+        if &self.bytes!=before {return Err(PlayerStateError::StaleBookkeeping);}
+        if after[1]!=before[1] {return Err(PlayerStateError::PlayerMismatch{expected:before[1],actual:after[1]});}
+        self.bytes=*after;Ok(())
+    }
+    /// Code31 phase3 completion preserves the raw null index and origin.
+    pub(crate) fn retire_landing_reference(&mut self,slot:u16)->Result<(),PlayerStateError> {
+        if self.bytes[0x496..0x499]!=[slot as u8,(slot>>8) as u8,5] { return Err(PlayerStateError::StaleLandingReference); }
+        self.bytes[0x498]=0;self.bytes[0x499..0x49D].copy_from_slice(&700u32.to_le_bytes());Ok(())
+    }
     pub fn origin(&self) -> PlayerStateOrigin { self.origin }
     pub fn player_id(&self) -> u8 { self.bytes[1] }
     pub fn creation_mode(&self) -> u8 { self.bytes[2] }

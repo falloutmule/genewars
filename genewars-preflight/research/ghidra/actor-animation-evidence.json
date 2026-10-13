@@ -1,0 +1,21 @@
+{
+  "cases": 4096,
+  "compared_bytes": 819200,
+  "output_sha256": "df3c2b2964ca0b1f9117b4005143d8528ddb9a4115c5aacfa4aedb0292fb9bc1",
+  "source_sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f",
+  "instruction_contracts": [
+    {
+      "path": "private/ghidra/actor-motion/instructions-00057a10.txt",
+      "sha256": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f060.txt",
+      "sha256": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7"
+    },
+    {
+      "path": "private/ghidra/landing-contact/instructions-0007ac00.txt",
+      "sha256": "cc002c636ec832486e06fe90af6cfc68a0489d6acae6efcf83d5a5ce735706e1"
+    }
+  ],
+  "scope": "State8 directional animation58435 plus7AC00: signed delay/counter, unsigned holds, bothdirections, flags0/1,2..24frames; metadata of selected animation explicit."
+}

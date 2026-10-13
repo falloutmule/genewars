@@ -1,0 +1,47 @@
+{
+  "status": "passed-bounded-empty-bookkeeping",
+  "utc": "2026-10-13T17:25:32.435449+00:00",
+  "player_cases": 192,
+  "countdown_cases": 1728,
+  "compared_bytes": 353472,
+  "literal_instruction_steps": 422456,
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00047f80.txt",
+      "sha256": "bae7d9800c80bce7b1419e5b7a2193b1f934b5080dd30285c7a2a15b50a2a4e4"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-000437a0.txt",
+      "sha256": "7aa65558885556472096f9f32bc7e469dcc4f227385c258451ba4c105343156d"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00013780.txt",
+      "sha256": "634efec82d190cdf793a444a423709cd2e962031a6b2e20ec05c8606bc3a36b4"
+    }
+  ],
+  "source_pins": [
+    {
+      "path": "scripts/validate_bookkeeping.py",
+      "sha256": "0aa52f16f7abfcbea059d0c01b62dac81c3959309e5791a798a0a988cb096e80"
+    },
+    {
+      "path": "scripts/bookkeeping_probe.rs",
+      "sha256": "684bf82c01ed96b92f7ca6be012cc43e6a5d240a700b5bbf196752f0e170173a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/bookkeeping.rs",
+      "sha256": "b1d2a1172c2368a98c3008eb9d14817a5837753e698cd7f71a76c6d4272c3b2a"
+    },
+    {
+      "path": "research/variants/initial-creature-source.py",
+      "sha256": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2"
+    }
+  ],
+  "boundaries": [
+    "No buildings or family8 entities",
+    "Audio/format and shared UI animation bodies excluded at explicit calling-convention boundaries",
+    "Countdown expiry requires factories and rejects",
+    "No complete original scheduler or startup claim"
+  ],
+  "original_execution": false
+}

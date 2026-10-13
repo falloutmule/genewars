@@ -17,7 +17,7 @@ impl Host<'_> {
         let (Some(width),Some(height))=(NonZeroU32::new(size.width),NonZeroU32::new(size.height)) else {return Ok(false);};
         let image=self.game.image()?;
         if let Some(mission)=&self.game.mission {
-            window.set_title(&format!("GeneWars Rust - {} - partial plant world",String::from_utf8_lossy(&mission.resources.title)));
+            window.set_title(&format!("GeneWars Rust - {} - {}",String::from_utf8_lossy(&mission.resources.title),if self.game.landing_seed.is_some(){"landing study"}else{"partial plant world"}));
         } else {window.set_title("GeneWars Rust - development build");}
         let surface=self.surface.as_mut().ok_or("surface unavailable")?;
         surface.resize(width,height).map_err(|e|e.to_string())?;
@@ -68,6 +68,7 @@ impl ApplicationHandler for Host<'_> {
                     Key::Named(NamedKey::Escape)=>self.game.escape(),
                     Key::Named(NamedKey::Enter)=>self.game.toggle_run(),
                     Key::Named(NamedKey::Space)=>if self.game.scene==Scene::Options{self.game.toggle_run()}else{self.game.tick()},
+                    Key::Named(NamedKey::Tab)=>self.game.select_actor(None),
                     Key::Named(NamedKey::ArrowLeft)=>self.game.pan(-256,0),Key::Named(NamedKey::ArrowRight)=>self.game.pan(256,0),
                     Key::Named(NamedKey::ArrowUp)=>self.game.pan(0,-256),Key::Named(NamedKey::ArrowDown)=>self.game.pan(0,256),_=>{}
                 }self.redraw();

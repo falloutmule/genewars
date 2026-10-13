@@ -1,0 +1,18 @@
+{
+  "cases": 112,
+  "compared_bytes": 22512,
+  "literal_instruction_steps": 8980,
+  "output_sha256": "80f586bf8da0d69bffb7879cd5786b09f4a3fdf8432b2aa359fd59b993406958",
+  "source_sha256": "0988dac1c88cbea6db58b6036cc26e8618ad49ded7de3787009ce2f82f88d182",
+  "pins": [
+    {
+      "path": "private\\ghidra\\construction-command\\instructions-00081080.txt",
+      "sha256": "775300aa5477fd51b09c1e5ef33fac9a1a36ab7dea716f6b9df63ad500c429b6"
+    },
+    {
+      "path": "private\\ghidra\\mission-array-refs\\instructions-00051960.txt",
+      "sha256": "320c9cd20991011bea99937b34cc95da75660f92c35181cbec346a240218b43e"
+    }
+  ],
+  "scope": "Opcode5 new idle category0/mode0 assignment only, source UI273B0 explicitly pending at519AE; native blueprint pointer normalized. Initialization, building factory and lifecycle remain separate."
+}

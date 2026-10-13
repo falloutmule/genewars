@@ -1,0 +1,144 @@
+{
+  "executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "scope": "selected type-3 actor direct portrait call and its explicit draw placement",
+  "selection": {
+    "function": "0x2A450",
+    "evidence_file": "private/ghidra/portrait-chain-refs/instructions-0002a450.txt",
+    "sha256": "cb5047c287e513c530dde22cadbca29be158b9401219cfed6d706b952dbb638b",
+    "behavior": "Maps the selected player-list slot to a global actor record and passes it to the panel object at 0x185F8F through 0x258E0."
+  },
+  "panel_draw_calls": [
+    {
+      "function": "0x265F0",
+      "callsite": "0x266EC",
+      "evidence_file": "private/ghidra/portrait-call18-functions/instructions-000265f0.txt",
+      "sha256": "df874ca820fe964791bd124419d200f57587c8c669907d1dadc76466d015b22f",
+      "registers_before_virtual_call": "EAX=selected actor; ECX=actor vtable; EBX=0x2A; EDX=0x19"
+    },
+    {
+      "function": "0x27F20",
+      "callsite": "0x2800D",
+      "evidence_file": "private/ghidra/portrait-call18-functions/instructions-00027f20.txt",
+      "sha256": "812fa3270bb313d83299aee124092970f7e2778dec03baf2db170021d3c91260",
+      "registers_before_virtual_call": "EAX=selected actor; ECX=actor vtable; EBX=0x2A; EDX=0x19"
+    }
+  ],
+  "dispatch": {
+    "vtable_slot_offset": "0x18",
+    "vtable_target": "0x57050",
+    "slot_evidence_file": "private/ghidra/actor-draw/direct-57050-refs.txt",
+    "wrapper_evidence_file": "private/ghidra/actor-draw/instructions-00057050.txt",
+    "wrapper_sha256": "2f3f7eeb5135976db5d892d7ee5faa050963b557f6390d3bc48d5a07b496643",
+    "draw_evidence_file": "private/ghidra/actor-draw/instructions-00057070.txt",
+    "draw_sha256": "1526c85bd083ac2632c1781f1a36fe5c2510df87cd34aed12b8a86334ac0a72b",
+    "coordinate_order": "57050 sign-extends DX and BX; 57070 forwards DX as component X and BX as component Y",
+    "portrait_origin_xy": [
+      25,
+      42
+    ],
+    "wrapper_mode": "57050 sets 0x115B58 while invoking the actor virtual +0x24. 57070 skips its normal shadow pass and does not subtract virtual-height/64 from the supplied Y in this mode. The ordinary wrapper shade, visibility, and color rules still apply."
+  },
+  "pixel_validation": {
+    "test": "selected_actor_portrait_uses_fullframe_panel_origin_and_direct_wrapper",
+    "command": "python -B scripts/cargo.py test -p genewars-desktop --bin genewars-game selected_actor_portrait_uses_fullframe_panel_origin_and_direct_wrapper",
+    "result": "passed",
+    "checks": [
+      "Actual admitted actor frame is composited on a full 640x480 indexed frame at (25,42).",
+      "Independent component pixel walk matches the complete resulting indexed framebuffer.",
+      "The portrait changes left-panel pixels and leaves the 512-pixel world viewport unchanged.",
+      "A synthetic negative-origin clipped draw matches the same independent pixel walk."
+    ]
+  },
+  "limitations": [
+    "This closes the portrait draw call and coordinates only; it does not claim a complete selected panel, text layout, or whole-screen renderer.",
+    "The caller supplies the selected actor slot, selected player, frame counter, and world/layer order.",
+    "The callsite evidence uses private Ghidra instruction listings; no original executable was run for this validation."
+  ],
+  "adjacent_details": {
+    "panel_function": "0x265F0",
+    "format": {
+      "address": "0x10D687",
+      "observed_bytes": "%s\\n%s",
+      "arguments": "format %s arguments: pointer at actor-object +0xC0, then pointer loaded from 0x116090 + sign_extend(actor[0x16])*4",
+      "name_table_address": "0x116090 (entry 128 within pointer table based at 0x115E90)",
+      "initialized_table_bytes": "zero before the startup pointer-table loop; runtime population is established",
+      "reference_graph": "private/ghidra/portrait-detail-refs/reference-graph.json",
+      "reference_graph_sha256": "a71d0368e9cc18bd43abbe788e0b496240724566edbe62786a91f3879c4081ba",
+      "table_initializer": "0x1D770 stores 604 string pointers at 0x115E90+4*i, loop 0x1DA60–0x1DA7B; 0x116090 is entry128. Signed selectors 0..3 resolve text indices128..131. Source string contents are not embedded.",
+      "object3_sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
+      "initializer_evidence_file": "private/ghidra/animal-consumers/instructions-0001d770.txt",
+      "initializer_evidence_sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784",
+      "string_indices": {
+        "selector_domain": "signed byte values 0..3 admitted for this label slice",
+        "base_index": 128,
+        "entry_indices": [
+          128,
+          129,
+          130,
+          131
+        ],
+        "byte_lengths": [
+          8,
+          8,
+          10,
+          6
+        ],
+        "startup_pipe_rewrite_indices": "221..254 only; entries128..131 unchanged"
+      }
+    },
+    "bars": {
+      "helper": "0x2FF50",
+      "helper_sha256": "79a22c4e566a0d828a3d622b193c80053ad1856b8e10bcdeaafc92e2903eaa2a7",
+      "draw_primitive": "0x980C0",
+      "primitive_sha256": "22d2dbf2c0f2c5dd1cf76d0f86eb9a1421db4a5c80afaaf871eb80f247ca585e2",
+      "nonpositive_value": "no draw",
+      "positive_width": "max(1, 45*value/100), with no upper clamp in the helper",
+      "height": 6,
+      "rows": [
+        {
+          "field_offset": "0x17",
+          "origin_xy": [
+            116,
+            415
+          ],
+          "color_index": 232
+        },
+        {
+          "field_offset": "0x19",
+          "origin_xy": [
+            116,
+            435
+          ],
+          "color_index": 196
+        },
+        {
+          "field_offset": "0x1A",
+          "origin_xy": [
+            116,
+            435
+          ],
+          "color_index": 200
+        }
+      ],
+      "semantics": "raw field offsets and draw parameters only; no field labels inferred"
+    },
+    "limitations": [
+      "Selectors outside 0..3 are not admitted for this four-entry category slice.",
+      "First actor-object string extent and initializer remain unresolved; no complete two-line panel renderer is claimed."
+    ],
+    "text_context": {
+      "context": "0x187054",
+      "draw_origin_xy": [
+        0,
+        0
+      ],
+      "format": "0x10D687 (%s newline %s)",
+      "first_line": "pointer at actor-object +0xC0; bounded string extent and initializer unresolved",
+      "newline_byte": "0x0A",
+      "newline_handler": "0x1FE70 dispatches to 0x1FEEC",
+      "newline_handler_evidence_file": "private/ghidra/actor-name-trace/instructions-0001fe70.txt",
+      "newline_handler_sha256": "449f333522c68d6ef52e1d4ac2097329fbe951d66c1fd2a945f80321d19def28",
+      "line_advance": "adds the height byte at [font-context first-glyph-record + 5] to the line accumulator, then restores the saved baseline"
+    }
+  }
+}

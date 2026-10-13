@@ -1,0 +1,974 @@
+{
+  "status": "passed-independent-native-initial-mule-choice",
+  "utc": "2026-10-13T17:24:14.794761+00:00",
+  "scope": "Exact initial owner4/type1/selector4/state8/zero-timer numeric callback with neutral-neighborhood and ground-context gates; no latermovement/scheduler claim",
+  "source_pins": [
+    {
+      "path": "rust/crates/genewars-assets/src/lib.rs",
+      "sha256": "7a9571d30a1d3c229281a45223d277d908b61976ff21d27fe763966da7af133d"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/map_atlas.rs",
+      "sha256": "275facee7a4ad590ec68558bcd12016f2178eff73c058eb92d85864bc8aa30a7"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/mission_source.rs",
+      "sha256": "4c7d23930fb35483e7288af90845a28d64e3df228e7adaf2e5c7196c06ed313a"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/campaign.rs",
+      "sha256": "a610b74be9c65dd66ef9c84771b1c07422e1efea41d6e9895290a551d061bf78"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/construction.rs",
+      "sha256": "4866ff1f9bdd1bffbfb964bf03c495e5a1118d6bc24b0e3f8beea64ff780e5c0"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/custom_list.rs",
+      "sha256": "98955b9435e074518a2ee195e54e25779f96e7de7120f9620fdab1c89ea495c8"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/entity_draw_queue.rs",
+      "sha256": "b80d62724db689da242800705edfb34319bed786ac9ed91be1d4ffac7f203215"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/lib.rs",
+      "sha256": "1793d9674e9278dc0ea81ccabcf34c412bd0a925c126d9e47607a45764364f4c"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/menu_control.rs",
+      "sha256": "9def9eafcff361edeac28ff199ab1a241ada086c1bc4e826ba65fa6dbe28a472"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/mouse_packet.rs",
+      "sha256": "5763c082b5774e7e9042c3bff2cabf638b22ede7744f60e1c9904493527714fa"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/opaque_records.rs",
+      "sha256": "3019eb2459c8fab24c7f3aafdaf75a0d857229692f537881292a6614a293eba9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/plant_lifecycle.rs",
+      "sha256": "b9d38a54ec0dbaebbf86d3c27fed5933ba586cdb381904fbf302df9c5e8d2ac9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/player_creation.rs",
+      "sha256": "7ae09e8231c2c1b5f2d9d846db9edfd4a274a8df95e98834d665a543c04a63ee"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/terrain.rs",
+      "sha256": "5b906fdc3ed1809fefd078a1c60cca20cbca5a254df2fe386fe4608cf2450e6a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
+      "sha256": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_command.rs",
+      "sha256": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction.rs",
+      "sha256": "0988dac1c88cbea6db58b6036cc26e8618ad49ded7de3787009ce2f82f88d182"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
+      "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_motion.rs",
+      "sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
+      "sha256": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_render.rs",
+      "sha256": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_resources.rs",
+      "sha256": "8c94e8afb54d1dbcb0e33de471a9b7d4d4008d3a8782f970ff5b0e95194145a3"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "7806c14e6650c9b05ea7e592f92bd73d4ca33ac31d8d3a2c74f2dfe0fe868049"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/blueprint.rs",
+      "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/bookkeeping.rs",
+      "sha256": "b1d2a1172c2368a98c3008eb9d14817a5837753e698cd7f71a76c6d4272c3b2a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building.rs",
+      "sha256": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/creature_world.rs",
+      "sha256": "fb829cee975ca26518f25d0db36f4685ad7576fc270ae4b292c645293f006d56"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
+      "sha256": "944251d5617a636b7b847a51ef00270d06872b5b27a23f5b79286b43c2bc23bd"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/identity.rs",
+      "sha256": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing.rs",
+      "sha256": "38ca22019dc6fe33fccfa8e7f67ed3e627f50224c1626c663c351538a1c691c8"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
+      "sha256": "1ba0b302d1908501fbf05ad46f75b6627fa8172eceb4b49b6d94bed05c90769f"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/lib.rs",
+      "sha256": "580b1b4f862d40db3b4322c35dcb6acb6275e08beaa3a14ec474551dd9ceca62"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
+      "sha256": "cc063773f1a08c161bb34aa03751e75dd3c74ea50e78d4d63c0d6a6ad844e685"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/plant_spread.rs",
+      "sha256": "30ea62c6623b05ddc20971b7c5b5c75f154c1a5e1a2c3e913947d7f374209888"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/player_state.rs",
+      "sha256": "d7faa11882d551bc009e43e7e6ea89dca3d14dd726341cfeb959981d6da496b0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_projection.rs",
+      "sha256": "455938c39b889e6e035e2821e74b7d5f4aae980786745c7861dc1aa5dbb38dc6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_resolver.rs",
+      "sha256": "1412ab3a6a55e95df5b1e5cd1f4bf4169da55523966b1bfec56b3a917628d1c5"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/terrain_target.rs",
+      "sha256": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world.rs",
+      "sha256": "8a304a471b815b8e3323b6dddc13c8cbbd0c3dfae5ea5327643a03e9662f9bda"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
+      "sha256": "01927dbf45e172e8e507acd925249bc89f2f78815dbfaac8202ea4d83f8b4e77"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/bookkeeping_updates.rs",
+      "sha256": "ab7bcd5a197af390b9d54d0d1e5eb94a1484ff2118cd8963767aab7dae8673d1"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
+      "sha256": "77cdddb78e6fb230720499d5372e952d68abda8193ac124dc8c86a647eb97eb9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
+      "sha256": "9e23ef09c3b179e708ce1b464d4c1d8056f4dbf313f7e844085ff035d4c668cf"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
+      "sha256": "00489979f547eed51c3b9f9cc8c69d6bac6f3603fcb08bf67d6b230a309c822d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
+      "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    }
+  ],
+  "mission": {
+    "path": "private/integration/game-runtime/terrain/CONQ001.DAT",
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/player-creation/instructions-0005ed20.txt",
+      "sha256": "ea29b165354042aaf33dc630322d89b577810f96c2ece1f8998799512e2feed0"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0006fb60.txt",
+      "sha256": "b373e98528fde4ef720bf0b529edbca889efb97bec713ac4d7fe184c868fb736"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0005eb30.txt",
+      "sha256": "2cf7510ee5298d221c299b11244f72adf6ce5831c7aedcb39d3e91e6cacb53ec"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0005e640.txt",
+      "sha256": "cbcd47d0c677749cbcf9adb928ef968ec6f8c0d4a399e2956dd39c13f2626239"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0001ec50.txt",
+      "sha256": "ed1420b97321186a1b7c3146ab315649a872bab54a0fc63686a6aad4e4f677ce"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f980.txt",
+      "sha256": "29a29a39c3cfee69d78fc3bb6ff818953299d0ba57f25500d2015c720e593f3d"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006b150.txt",
+      "sha256": "9395a017642140a42c59b83e6e47c4c77b71e3ee368b811dd02b54f1866156c1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00023800.txt",
+      "sha256": "4227dd9dbd21613fa4e396d702bc66347bfcc4b5085f1d2cdb7b77267bf7bcc5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00023820.txt",
+      "sha256": "dc2ca6ff81274248aafa161ec20efc0d7947fd06fcddc5fee70ce77b433c7ea1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001ec10.txt",
+      "sha256": "4987af3cf6109166c9577008df7d94e772076ce575f10a8601f8a1383b942dbb"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001ec20.txt",
+      "sha256": "60779ead189d0df91af75d7de30ee0726857f9658f0a51c0fbe238dd1cf323ec"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f060.txt",
+      "sha256": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005b400.txt",
+      "sha256": "80c66399500e97ca59bbe76c29dc12f531c9780fdad313ef1a462e40586a741a"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f8f0.txt",
+      "sha256": "79e1953c322d12fdfe9161c53d960cd98af86ad0fefe5d74adf2f3f68259ac7c"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b340.txt",
+      "sha256": "9c96acdce1336ae5bf34b745b501da187f77dcfb618a1194fee5537a3ad77c0b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005ad70.txt",
+      "sha256": "2ca44bf24af651de458c9ee2303cdc272a4ed9d29f4797c6eaa7d6fc74d54c8b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006db00.txt",
+      "sha256": "42e576bafeec8c50c4ab8151c5573f071ac350a4941b263e9ed7d94f25ee12a2"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005a110.txt",
+      "sha256": "5121591cbf165c63dc16fb3de9fb95a8b7772b96162f72a44191d8a8b97d8910"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0006df30.txt",
+      "sha256": "8afe40345a8ecb636ff3af67dd76b4fa4104596032270b0cc61ab26b2affe8b1"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0007b380.txt",
+      "sha256": "a636e0647b1a66cf9eb422bfc86e03f8b2e450a42290ed9ad70c08c3f4792f7d"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f260.txt",
+      "sha256": "0f0c7ee7a26b87418a794e92c763f2dffb749d896335288aa052cfa40aba9ff2"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001ee20.txt",
+      "sha256": "0aa43dc30a3d2399e5d659215c01ed920605684839f5762cfba24f4c3c4b9d1f"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f220.txt",
+      "sha256": "0eda1dc90e070c6c7fc3cfbae1e8e50bb0ebe50c658ae0a199af4f43b3bbbcac"
+    },
+    {
+      "path": "private/ghidra/landing-contact/instructions-000733a0.txt",
+      "sha256": "fca831c451b1c09a39d93188d8cf9428b04ae5b25d8f87f09ecceb87c5f3f736"
+    },
+    {
+      "path": "private/ghidra/landing-contact/instructions-0007ac00.txt",
+      "sha256": "cc002c636ec832486e06fe90af6cfc68a0489d6acae6efcf83d5a5ce735706e1"
+    },
+    {
+      "path": "private/ghidra/primitives/instructions-0007a6c0.txt",
+      "sha256": "038389547efce23a858a88bdc1e89ed6b5e1ec1799704c22fd3fc1b30175d509"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-0005e0b0.txt",
+      "sha256": "89174afadbb823011cf4781900d1894bbb0fceda13d58a7041ea8af8981606ba"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008b520.txt",
+      "sha256": "37342106bfbee451f816f38ffbd92903d81b06fd534da2f6031e26c1be840e49"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0006d390.txt",
+      "sha256": "7f1c49974e62a52382eed53b9dcfa8dcc53b0727c9fdd2a626d57009a8376548"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-000736f0.txt",
+      "sha256": "bc949e97b253e9a9b6c59ca1e14386d72af6a47f73d770d9f4f48b0e98b0d57e"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0007b140.txt",
+      "sha256": "aef70bf9859bc9c21d01f697528a266d30ef1961e47d9697f762f7c74be7a2f4"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001ee10.txt",
+      "sha256": "67284531f9de18e252b503ec89522e7be59fad0a1128732c24c53705f64e1e72"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-00074270.txt",
+      "sha256": "0e6512bf106d649968285420fc325a0cf12afabecaa582ed4b6cc9a486b59a30"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-0008b130.txt",
+      "sha256": "f2505f556f5a3a4f012cd375b6a43cc8029c3f03b5f1c37efe65b8a6cec2d52f"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-00074d90.txt",
+      "sha256": "69e9654b5a4844452ca3995de8814c049a820e745251b4c8e88c402fe46280af"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-00074160.txt",
+      "sha256": "abcc56f1c17963a69d68c85bc4c251b28929235b518cf4b696c18abfcb458c3b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-000401a0.txt",
+      "sha256": "ccc926f2fb858bd725f562c10631e074824b98f5cc5a8771713a5a47918ee612"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008d930.txt",
+      "sha256": "0b85f4c6b25abca474b29c71972d4201a823ad2bdd80367efd02bd7741f4139e"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006b700.txt",
+      "sha256": "763d2e72feee4f9ee6129a3918d74e0671c2ad6e9e2c157e5b2e54eb8c5780fe"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00073970.txt",
+      "sha256": "ab614b5e9d2dd1ee9c1c49247f21ac39540946feade19a4e9c7cde767ae2c461"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b7d0.txt",
+      "sha256": "423a0606ea12770fa2b85abbd7a5803944cb825a05a2aedf5957017dfc3e0750"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005b100.txt",
+      "sha256": "32f6824af152305c75e3639c1917ee35e5e80a2a801a90e768415e73ea51e02d"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b780.txt",
+      "sha256": "96da34b2865718f4a50247df2f77d0c78d441888edfd3af7b20d76dafc6d7028"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-0008d7b0.txt",
+      "sha256": "dfbad38e9039f97aa243cddc0149971c5f01860e7163ee667d99a71757852b30"
+    },
+    {
+      "path": "private/ghidra/primitives/instructions-00073690.txt",
+      "sha256": "a61c7b67cebcd05dbb96053d1fbe7745c703b75be5af996bb0227e4c9691cace"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-000ae028.txt",
+      "sha256": "526b3f9cdc9b43ed6b330383417fad4b6c8acb41a917acf5571e4f01f0a6585b"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-0001ebd0.txt",
+      "sha256": "9f0e86fefaa3c2fc11a9cf4f29e8d3ce4a0724b82b959d21b404b3ea9fd64588"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0005d700.txt",
+      "sha256": "46db7123380194986cc4598e5cb9cc8f44f2b8f48cb4b9f79a4ac41327a4cf33"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-00073c20.txt",
+      "sha256": "b1192da02ccb17b0c4e9117aa0432c6bd47d8a4ee542bea4936bdd60498ad65e"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-00074cc0.txt",
+      "sha256": "701ba3601cd73db82d86a57d1502d53d6ad2a8d5910833c28f6e89784bcf542b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00013e50.txt",
+      "sha256": "2c85f008ec84237004f0eb0e03048a44da01dbdd0c70666a67704bfb44cbeda5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00013e70.txt",
+      "sha256": "48f6ca2435f3ae64caee93657f3fb4952a319d8978ad448b8a7011e497f6f2fc"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005a990.txt",
+      "sha256": "d063df1c8f85cd877b6e1ea913fa88dbc2a9301bc318d79af7d1a6e935867a97"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0003fbe0.txt",
+      "sha256": "a537c544a5cd516bdf2359670ea4b102d06880440f55037a947d2ceff90c4821"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-00013eb0.txt",
+      "sha256": "f39a85cec1eeaf8c6471d4ca65ab9fd26f3f093cafec3efae15cbe694d2c656c"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f410.txt",
+      "sha256": "35c557c5e1042c57cbf5a4f2b90afadb232326d2477a2a6b03d41b367433294a"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-000743c0.txt",
+      "sha256": "085e0737b57e9f7d27248169f23cf35199a03594e4c8547f514ed053e890695c"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008acc0.txt",
+      "sha256": "9e7e750030468985e9d1ed7ae836f8b8ee7606b4b0b51f1fc02345750f8ccb1e"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008ac60.txt",
+      "sha256": "6fd0ff082558f7bc94da0a908710fab78b8d477369a106e15f37f4922ee557fa"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f0c0.txt",
+      "sha256": "37cd520262802d6b6a3e21c88b131522f31a9e129b6d4aa1afa152ce11e7e9e1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006ede0.txt",
+      "sha256": "acc710c7461bee41e527cdded6de067d1577811222b2abdfa3b00f71f2e654d5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f010.txt",
+      "sha256": "9529f80432601ec84b37f26f2263c0bbc9d333b66e5e49efc430dca4ba822aac"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00073770.txt",
+      "sha256": "0fb14f7905a336e918e7651cba16d789204f380f1e194609c350f8bb0c93e47c"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f270.txt",
+      "sha256": "bd463c1d8715675e7418abb8df161d8cbc6fa47e705022eaf22d6772aea80bc1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f450.txt",
+      "sha256": "cb7c70b22b60097ee15f37a91809e072f340b4d1eaf2e3819fea4c3fb8109a0f"
+    },
+    {
+      "path": "private/ghidra/actor-motion/instructions-0006e9e0.txt",
+      "sha256": "9e0d0cd2b98c380f36514b9ff8c7b28a538dedb3516aa1192e5fa38828c9f12e"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0005cc60.txt",
+      "sha256": "732f53cf3c69987464aaa7903bfa1fc99e0e826dad615b979269bf6c55e4d2cb"
+    }
+  ],
+  "review_sources": [
+    {
+      "path": "research/variants/initial-creature-review.py",
+      "sha256": "69d81231ff39edf77a09ff689ac1de92b64b11a76fa35683ee629f0227916086"
+    },
+    {
+      "path": "research/variants/initial-creature-review.rs",
+      "sha256": "c44d01b6b9bc50a41e7cbb5de1e3fc1eb1d34cd27369bbf65c2b6caec73c43d8"
+    },
+    {
+      "path": "research/variants/initial-creature-source.py",
+      "sha256": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2"
+    }
+  ],
+  "seed_cases": 65536,
+  "waiting_cases": 26624,
+  "backward_search_rejections": 0,
+  "draws_checked": 284420,
+  "owned_world_cases": 66,
+  "literal_whole_callback_cases": 66,
+  "dead_high_stack_lane_poison_cases": 132,
+  "literal_instructions": 747569,
+  "native_output_bytes": 9076020,
+  "outputs": [
+    {
+      "path": "private/review/initial-creature-native/all-seeds.bin",
+      "sha256": "0e61028b6f6d2035bbef2827e18a319a616464fbc51dc1f35a2e39b95c8ad297"
+    },
+    {
+      "path": "private/review/initial-creature-native/owned-seeds.bin",
+      "sha256": "ae83a5a63dc76e8c0b1fa33d4ed5daa5a50b7a644c41923d151048bf2b59ddb8"
+    }
+  ],
+  "source_callbacks": [
+    {
+      "seed": 0,
+      "instructions": 11059,
+      "draws": 3,
+      "rng_seed_after": 0,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 1,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 26101,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 2,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 52202,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 3,
+      "instructions": 11467,
+      "draws": 5,
+      "rng_seed_after": 8439,
+      "canonical_after_sha256": "acfec395bc436f8743b245fcbb018860e9226f9fcbe87a9964095a8eaf735f5d"
+    },
+    {
+      "seed": 4,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 38868,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 5,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 64969,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 6,
+      "instructions": 11459,
+      "draws": 5,
+      "rng_seed_after": 16878,
+      "canonical_after_sha256": "2c0e3c8d53b0ed791dce5c720d972b37a73b1dee4c5d199d345310c7de1454ae"
+    },
+    {
+      "seed": 7,
+      "instructions": 11049,
+      "draws": 3,
+      "rng_seed_after": 51635,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 8,
+      "instructions": 11464,
+      "draws": 5,
+      "rng_seed_after": 22504,
+      "canonical_after_sha256": "7cf0594433fca0f5769d0374c76e95ebcbd3aa046bc6a84bad749d2b56ca24ae"
+    },
+    {
+      "seed": 9,
+      "instructions": 11461,
+      "draws": 5,
+      "rng_seed_after": 25317,
+      "canonical_after_sha256": "6a455367aa203f416780835d2f78d83dc98f070ce1a286d4b85e06456e644900"
+    },
+    {
+      "seed": 10,
+      "instructions": 11049,
+      "draws": 3,
+      "rng_seed_after": 64402,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 11,
+      "instructions": 11464,
+      "draws": 5,
+      "rng_seed_after": 30943,
+      "canonical_after_sha256": "0069a0555f136d6eaa1a4e272c5052b2d14597002573862004d4d92b6ccb8863"
+    },
+    {
+      "seed": 12,
+      "instructions": 11474,
+      "draws": 5,
+      "rng_seed_after": 33756,
+      "canonical_after_sha256": "f8b8f34739c03b5301987314736d2081db7cf82b37384cb3544ff3c7ee0e30ea"
+    },
+    {
+      "seed": 13,
+      "instructions": 11474,
+      "draws": 5,
+      "rng_seed_after": 36569,
+      "canonical_after_sha256": "306b582ee355e98c2f4da6403c75a2e51490f1668f93ff0e7de3f9bfbbe30171"
+    },
+    {
+      "seed": 14,
+      "instructions": 11474,
+      "draws": 5,
+      "rng_seed_after": 39382,
+      "canonical_after_sha256": "4fc67dc98b478fd6fadc8552384d7c73435d147de35c1a05a221c3de544b67fb"
+    },
+    {
+      "seed": 15,
+      "instructions": 11458,
+      "draws": 5,
+      "rng_seed_after": 42195,
+      "canonical_after_sha256": "32229f968138fe5303103a5529c54c5634c77efeae9651397d9ebadb056a5e31"
+    },
+    {
+      "seed": 16,
+      "instructions": 11471,
+      "draws": 5,
+      "rng_seed_after": 45008,
+      "canonical_after_sha256": "f755570fc70c92cbce68d9b31499eb5fbfb040f2f134cdf9530b830641124fbf"
+    },
+    {
+      "seed": 17,
+      "instructions": 11474,
+      "draws": 5,
+      "rng_seed_after": 47821,
+      "canonical_after_sha256": "98b40192122ca35221920bca0aafde1fc9697bf8137997cce715249a0f23298b"
+    },
+    {
+      "seed": 18,
+      "instructions": 11048,
+      "draws": 3,
+      "rng_seed_after": 11066,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 19,
+      "instructions": 11463,
+      "draws": 5,
+      "rng_seed_after": 53447,
+      "canonical_after_sha256": "b8425febbd70a00cfaccd3c25cc7fbe27b05a2de0d4544bc8ceb274c8035c0d6"
+    },
+    {
+      "seed": 20,
+      "instructions": 11460,
+      "draws": 5,
+      "rng_seed_after": 56260,
+      "canonical_after_sha256": "7baef8307c63e3060d3f063cb58c45bef9ae256a2c9ec2189ec1314b354e2d19"
+    },
+    {
+      "seed": 21,
+      "instructions": 11048,
+      "draws": 3,
+      "rng_seed_after": 23833,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 22,
+      "instructions": 11500,
+      "draws": 5,
+      "rng_seed_after": 61886,
+      "canonical_after_sha256": "dcdfd707ab59587d4eb63a292720fe81072d4a5ad3189f800775d19a31e985bc"
+    },
+    {
+      "seed": 23,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 10499,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 24,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 36600,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 25,
+      "instructions": 11851,
+      "draws": 7,
+      "rng_seed_after": 34237,
+      "canonical_after_sha256": "79e6dd344f71b71e167c333882fb9d5e0045a92117d4132d00a9cd191d50eb8c"
+    },
+    {
+      "seed": 26,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 23266,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 27,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 49367,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 28,
+      "instructions": 11467,
+      "draws": 5,
+      "rng_seed_after": 13228,
+      "canonical_after_sha256": "f19363dc14366586f62ebc55b495d4de97a1601e3c291e93c537b88b316721a3"
+    },
+    {
+      "seed": 29,
+      "instructions": 11049,
+      "draws": 3,
+      "rng_seed_after": 36033,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 30,
+      "instructions": 11049,
+      "draws": 3,
+      "rng_seed_after": 62134,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 31,
+      "instructions": 11462,
+      "draws": 5,
+      "rng_seed_after": 21667,
+      "canonical_after_sha256": "af293ab372b97e71e5d6e40f99b45fddbccc31cd7b3a243a780674e3c2e53b30"
+    },
+    {
+      "seed": 32,
+      "instructions": 11049,
+      "draws": 3,
+      "rng_seed_after": 48800,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 33,
+      "instructions": 11461,
+      "draws": 5,
+      "rng_seed_after": 27293,
+      "canonical_after_sha256": "b1a5da04e8ecd3a8bebf5611db29b3ce4f4fe9734d3331bebf0534e556fff79e"
+    },
+    {
+      "seed": 34,
+      "instructions": 11460,
+      "draws": 5,
+      "rng_seed_after": 30106,
+      "canonical_after_sha256": "9c6b147c8d3f7b6e7f450f5ce1bbb41efa41a17d634a54e3654b58c26b9a797d"
+    },
+    {
+      "seed": 35,
+      "instructions": 11059,
+      "draws": 3,
+      "rng_seed_after": 61567,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 36,
+      "instructions": 11471,
+      "draws": 5,
+      "rng_seed_after": 35732,
+      "canonical_after_sha256": "5cca63aae40e65af9686a45f775b2af3cfc6fc732bc17ea85aafc24a83770369"
+    },
+    {
+      "seed": 37,
+      "instructions": 11458,
+      "draws": 5,
+      "rng_seed_after": 38545,
+      "canonical_after_sha256": "e4acb789b4a90f11226b4d08785b286c5b06f598202777d5baee779feb0e8c2e"
+    },
+    {
+      "seed": 38,
+      "instructions": 11458,
+      "draws": 5,
+      "rng_seed_after": 41358,
+      "canonical_after_sha256": "d8757abaf666f5a1fcd73ce693de50745b13d900fa9d4ec317eb1550566ff745"
+    },
+    {
+      "seed": 39,
+      "instructions": 11474,
+      "draws": 5,
+      "rng_seed_after": 44171,
+      "canonical_after_sha256": "cb67ae2133054afd8c1b9e4abc7b755eae8780b1523dc49c31cea13135c62aa9"
+    },
+    {
+      "seed": 40,
+      "instructions": 11463,
+      "draws": 5,
+      "rng_seed_after": 46984,
+      "canonical_after_sha256": "7a86b8961e87519986912417422cf2d5f8fe8779632da3fe925e33b330c71d9d"
+    },
+    {
+      "seed": 41,
+      "instructions": 11460,
+      "draws": 5,
+      "rng_seed_after": 49797,
+      "canonical_after_sha256": "5c37e079e2d3c92324718e5f78c6dcd49c9234ffe8331a0d906817ae93a7f396"
+    },
+    {
+      "seed": 42,
+      "instructions": 11463,
+      "draws": 5,
+      "rng_seed_after": 52610,
+      "canonical_after_sha256": "9d3b1d4eb2537c1a0a34ebe19f3da0cdab05f216e458327d7f20967eb786505a"
+    },
+    {
+      "seed": 43,
+      "instructions": 11048,
+      "draws": 3,
+      "rng_seed_after": 8231,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 44,
+      "instructions": 11463,
+      "draws": 5,
+      "rng_seed_after": 58236,
+      "canonical_after_sha256": "0c9c15afb1ca767ac79047eaf60a2157d15027900010e41c899d000cf3fccc39"
+    },
+    {
+      "seed": 45,
+      "instructions": 11464,
+      "draws": 5,
+      "rng_seed_after": 61049,
+      "canonical_after_sha256": "e7f72862dfe0d6aeac4dd4a9173de4f79f732b9928a882ac31d83cf8fd8f8686"
+    },
+    {
+      "seed": 46,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 20998,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 47,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 47099,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 48,
+      "instructions": 11835,
+      "draws": 7,
+      "rng_seed_after": 23792,
+      "canonical_after_sha256": "71a1e8f20d84621a72249841f45a216e73fe3a14f3b074c3dbf0050fa70ea5e8"
+    },
+    {
+      "seed": 49,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 33765,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 50,
+      "instructions": 11054,
+      "draws": 3,
+      "rng_seed_after": 59866,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 51,
+      "instructions": 11464,
+      "draws": 5,
+      "rng_seed_after": 12391,
+      "canonical_after_sha256": "75ce56a65513775852367afad43862be5a5ad64d71476cbad677e863e6b6f5b0"
+    },
+    {
+      "seed": 52,
+      "instructions": 11049,
+      "draws": 3,
+      "rng_seed_after": 46532,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 53,
+      "instructions": 11446,
+      "draws": 5,
+      "rng_seed_after": 18017,
+      "canonical_after_sha256": "ce92f5ee70de978cecacdbef833ca643b631076ba31ae089cd74b67b5ef6f7fe"
+    },
+    {
+      "seed": 54,
+      "instructions": 11462,
+      "draws": 5,
+      "rng_seed_after": 20830,
+      "canonical_after_sha256": "3bde873fe3fbddecb5d9b85abb82fe8e092e54a9a2dedb0af73f66a4ac11b724"
+    },
+    {
+      "seed": 55,
+      "instructions": 11049,
+      "draws": 3,
+      "rng_seed_after": 59299,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 56,
+      "instructions": 11458,
+      "draws": 5,
+      "rng_seed_after": 26456,
+      "canonical_after_sha256": "fd315e62bce3fd5c598f36d02b09f4a0d8d0686073eeed20bf7af0093e36a949"
+    },
+    {
+      "seed": 57,
+      "instructions": 11472,
+      "draws": 5,
+      "rng_seed_after": 29269,
+      "canonical_after_sha256": "123e32560557b6504e8ae79401c0541eae01b3e881ba812b8ef6f873bc566364"
+    },
+    {
+      "seed": 58,
+      "instructions": 11474,
+      "draws": 5,
+      "rng_seed_after": 32082,
+      "canonical_after_sha256": "65c7e4d524c8370169c581ff28ab92edae7815e20a4c8632cfbf5b2a36ab3bd2"
+    },
+    {
+      "seed": 59,
+      "instructions": 11474,
+      "draws": 5,
+      "rng_seed_after": 34895,
+      "canonical_after_sha256": "0558f5f651f87da4e9172376fa1aabb153914c1df4624aebadd7ebac1bc8e9f6"
+    },
+    {
+      "seed": 60,
+      "instructions": 11474,
+      "draws": 5,
+      "rng_seed_after": 37708,
+      "canonical_after_sha256": "818aad4e54e3692b6ee5c7fb1ade2c8808671e8f980dbbc0278f13734a41a938"
+    },
+    {
+      "seed": 61,
+      "instructions": 11474,
+      "draws": 5,
+      "rng_seed_after": 40521,
+      "canonical_after_sha256": "f576cbac656f9b32dc97e98a77e20eec3fdb312ec9e66b5209e73e4654333ec8"
+    },
+    {
+      "seed": 62,
+      "instructions": 11471,
+      "draws": 5,
+      "rng_seed_after": 43334,
+      "canonical_after_sha256": "cdada08d26ca42a51a5f9b6ea15ddbc14e115921172f455964e5b7b2358c281d"
+    },
+    {
+      "seed": 63,
+      "instructions": 11048,
+      "draws": 3,
+      "rng_seed_after": 5963,
+      "canonical_after_sha256": "43c3cd5fd303bc3a88a397f7a1f9480fee5ebe74f04d182ebd8a6f616f131ed9"
+    },
+    {
+      "seed": 5428,
+      "instructions": 11481,
+      "draws": 5,
+      "rng_seed_after": 64612,
+      "canonical_after_sha256": "dfd404df389101e44e2f6bc231c32443bae2f1454ac4ddd2ae6986ac62fbb319"
+    },
+    {
+      "seed": 65535,
+      "instructions": 11845,
+      "draws": 7,
+      "rng_seed_after": 43195,
+      "canonical_after_sha256": "e848d873f5cde329d11e6cdbaecc03aee4bbe1e30318cca7053c97cbd6d0b6cf"
+    }
+  ],
+  "negative_cases": [
+    "wrongframe0preserveswholeworld",
+    "repeatedfirstcallbackpreserveswholeworld",
+    "16rejectedpointsrequirebackwardsearch",
+    "alteredinitialrecordrejectsbeforequery"
+  ],
+  "original_execution": false,
+  "gui_execution": false,
+  "limits": [
+    "Live RNG is caller-owned and shared; seed5428 is one explicit fixture, not inferred landingseed",
+    "83140 captured as pending queue request; admission and rendering notexecuted by sourceoracle",
+    "Complete ground/climate/currentcell/neutralneighborhood gates are checked against owned state",
+    "Latercallbackmovement, damage/reproduction/enemyAI and backwardsearch remain unsupported",
+    "Private pointer bytes normalized only forafterimage comparison; typedresource/vtable handles stay separate",
+    "Three original point helpers read dead high stack lanes; low16 narrowing before observable use checked with two poison patterns"
+  ]
+}

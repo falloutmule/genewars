@@ -157,7 +157,7 @@
     "rng_seed_cases": 65536,
     "compared_bytes": 1196032,
     "output_sha256": "a7d9e0504b3a21012d17872b7eaa81a971cf1a7b9cfb4eaf0cf694b1464f1f14",
-    "scope": "Freshly authored Rust scalar/byte oracle compared to Python source-basedmodel; nooriginalmachinecodeexecution. Shippinglanding.rs APIs comparedagainstsameindependentfixtures,including32factoryvectors;6shippingmoduletestsrun."
+    "scope": "Freshly authored Rust scalar/byte oracle compared to Python source-basedmodel; nooriginalmachinecodeexecution. Shippinglanding.rs APIs comparedagainstsameindependentfixtures,including32factoryvectors;8shippingmoduletestsrun."
   },
   "effect6_flight_comparison": {
     "flight_cases": 2048,
@@ -177,7 +177,7 @@
     "tables_sha256": "f03124f960c98b1448478427fe48bbfe77d9cda74a7bd6025be53a0e2430a29e"
   },
   "production_comparison": {
-    "source_sha256": "f8a43c4ac0a69d6579a20a034cbdb401b427ebff2a992bdc5029eac760678f12",
+    "source_sha256": "38ca22019dc6fe33fccfa8e7f67ed3e627f50224c1626c663c351538a1c691c8",
     "harness_sha256": "fde94d1d5afdfa4b60bcf3dd67724689d5420961055b60434cfe9d8c8ec27999",
     "compared_bytes": 1198624,
     "output_sha256": "2b60db016a33abc55b3c17dd10c7fee167cfca81072a3843c70c455023ac7984",
@@ -186,7 +186,7 @@
     "rng_seed_cases": 65536
   },
   "lifecycle": {
-    "production_source_sha256": "f6032674e731dedd6bb40a79c0aeb3ea24bf130ad2691a200aad79db891e0161",
+    "production_source_sha256": "1ba0b302d1908501fbf05ad46f75b6627fa8172eceb4b49b6d94bed05c90769f",
     "tests": 3,
     "retirement": "Code6rowchildFF:49D30mapunlink,724C0clearsmatchingreferenceKINDBYTESonlyin nativekind1refs4D/50/55/58/5B(kind1flags60&~2if5Bmatch),kind3refs4D/50/7F/7B,kind5ref47,kind7refs4D/50/57/5A,kind8ref59. UI25150requestifselected;409F0nine22Bpointerrecordsclearsdeadpointer;2C200activepanel193+19For1C4+1CCpointerclear. Thenkind6=0,count11C2B4--. NoRNG. NativeemptyUIisexplicitpolicy.",
     "scheduler": "4E950primaryascending200activeflag1clear,sumu8callbackcreationreturns. Newbornascendingactiveflag1set,clearbitbeforecallback,remaining--,ignorecallbackreturn,stopremaining0. Unaccountedcreationcountrejectsinboundedport. Queueascendingactiveexceptselector46."

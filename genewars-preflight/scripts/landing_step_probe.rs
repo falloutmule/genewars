@@ -11,7 +11,7 @@ fn snapshot(out:&mut impl Write,world:&ActorWorld) {
     let r=world.rng();out.write_all(&r.seed.to_le_bytes()).unwrap();out.write_all(&[r.ring]).unwrap();out.write_all(&r.draw_count.to_le_bytes()).unwrap();
     for r in world.effects().unwrap().records(){out.write_all(r).unwrap();}
     for slot in 0..200 {
-        out.write_all(&[match world.effects().unwrap().binding(slot).unwrap(){None=>0,Some(EffectAnimationBinding::EffAnimation49)=>49,Some(EffectAnimationBinding::EffAnimation6)=>6}]).unwrap();
+        out.write_all(&[match world.effects().unwrap().binding(slot).unwrap(){None=>0,Some(EffectAnimationBinding::EffAnimation49)=>49,Some(EffectAnimationBinding::EffAnimation6)=>6,Some(EffectAnimationBinding::EffAnimation47)=>47,Some(EffectAnimationBinding::EffAnimation48)=>48}]).unwrap();
     }
 }
 fn main(){

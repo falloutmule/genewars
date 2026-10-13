@@ -1,0 +1,75 @@
+{
+  "scope": "Source-backed selected actor portrait pixel receipt from shared landing-study state; not full-panel parity",
+  "replay": {
+    "steps": 189,
+    "world_sha256": "8ac279729f4a02287e7f79fbeda466ab153061edb0d2cfc07c05f310bd9c9a6a",
+    "selected_actor": 0,
+    "frame_rgb_sha256": "e0ea4ac0746cb0f72223d7480b2a2bca1c75829ad97da735961a7bd6ec17616f",
+    "target": [
+      20736,
+      13568
+    ],
+    "private_path": "private/integration/shared-runtime-validation/ff55f5e4dd66476b99b4a1b800b73ced/contact/replay.txt",
+    "seed": 5428
+  },
+  "draw": {
+    "visible_by_wrapper": true,
+    "changed_bounds_xy": [
+      [
+        17,
+        26
+      ],
+      [
+        31,
+        43
+      ]
+    ],
+    "opaque_pixels": 270,
+    "panel_rgb_pixels_changed_vs_same_world_without_portrait": 139,
+    "pixels_clipped": 0,
+    "origin_xy": [
+      25,
+      42
+    ],
+    "pixels_written": 270
+  },
+  "interpretation": "Portrait renderer wrote pixels at its proved origin. It renders near the panel upper-left, outside the large circular black backing visible in the contact screenshot; the screenshot alone made it look absent.",
+  "test": {
+    "command": "python -B scripts/cargo.py test --offline --locked -p genewars-desktop --bin genewars-game selected_portrait_receipt_on_shared_landing_contact_frame -- --nocapture",
+    "name": "selected_portrait_receipt_on_shared_landing_contact_frame",
+    "comparison": "full shared world reproduced from seed 5428 at 189 steps, compared portrait frame to same-world terrain/plant baseline in RGB on the left panel",
+    "result": "passed"
+  },
+  "visual_reference": {
+    "path": "private/integration/shared-runtime-validation/ff55f5e4dd66476b99b4a1b800b73ced/contact/frame.bmp",
+    "sha256": "6bb74957acec37f3392524736459e8fea0dc622caf352768db47c6e9ce6d9d4d",
+    "note": "Native contact screenshot, includes UI overlay; used for visual location only, not byte-equality comparison."
+  },
+  "source_evidence": "research/ghidra/actor-portrait-evidence.json",
+  "pins": {
+    "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs": {
+      "sha256": "426fdf619f75d5f7773411f7601eaa93205a6628214c14f49764315d6a4c23e7",
+      "bytes": 44506
+    },
+    "rust/crates/genewars-desktop/src/bin/support/shared_scene.rs": {
+      "sha256": "b13fc908b52a8e0d0dd49791ef073b030b066f0f81fa0f7ec7026c7fbb043b89",
+      "bytes": 9202
+    },
+    "research/ghidra/actor-portrait-evidence.json": {
+      "sha256": "3551700bc83998a48346bd5791e7498890297e9579da57e9537eec42e8a7b727",
+      "bytes": 3274
+    },
+    "private/integration/shared-runtime-validation/ff55f5e4dd66476b99b4a1b800b73ced/contact/report.json": {
+      "sha256": "c54f5c5839b89be18d4cd7d416affb164230d68d968b5c6c56729a1b346762bb",
+      "bytes": 57777
+    },
+    "private/integration/shared-runtime-validation/ff55f5e4dd66476b99b4a1b800b73ced/contact/frame.bmp": {
+      "sha256": "6bb74957acec37f3392524736459e8fea0dc622caf352768db47c6e9ce6d9d4d",
+      "bytes": 921654
+    },
+    "private/integration/shared-runtime-validation/ff55f5e4dd66476b99b4a1b800b73ced/contact/replay.txt": {
+      "sha256": "76714c0ba93dce3573fba4e8e38999c594f943a0e38efe299aab3025c9a3c1d1",
+      "bytes": 41
+    }
+  }
+}

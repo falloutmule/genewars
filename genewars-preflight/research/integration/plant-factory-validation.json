@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T17:27:59.255280+00:00",
+  "cases": 24,
+  "compared_bytes": 8258016,
+  "literal_instructions": 14470,
+  "listing_pins": {
+    "private/ghidra/mission-array-refs/instructions-0006c4b0.txt": "cfac862c9c9273b3d7cd578ba3b0b4148883a971fc6336ccca7b9226d233bfd5",
+    "private/ghidra/plant-factory-1f340.txt": "370a1bbed261323d79b6b1614691f26bc82a037367d55a53065235ba53e75098",
+    "private/ghidra/mission-tail-init/instructions-0006c690.txt": "2031cd548ca5fbda011cefd4ea96748d54fcc5f73a1c7f86db18e45ab791b624",
+    "private/ghidra/terrain-map-refs/instructions-0007b240.txt": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb"
+  },
+  "implementation_pins": {
+    "rust/crates/genewars-runtime/src/plant_spread.rs": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066",
+    "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs": "3b7a7853f6f7925dbf386274ddb570856eab9beb692086215ac39e1fa632e46d",
+    "scripts/plant_factory_probe.rs": "3b32b9822660a3cebd9163d7bd63ee88abdc6ec62178e14a070e94522b261020",
+    "scripts/validate_plant_factory.py": "9866f78b908556f4cb598be3127c522f632bd014188cbb5f28a7a79890c1964f"
+  },
+  "original_execution": false,
+  "scope": "Complete neutral owner4 creation on exact mission: first inactive slot, quantized position, literal terrain height/shade calls, all512 packed plants, entire map/backing, source count and native Mule common links. Twelve selectors, signed boundaries, empty/plant/Mule occupied cells. Pointer gaps normalized. Reproduction caller/newborn scheduler and owner0..3 accounting remain separate."
+}

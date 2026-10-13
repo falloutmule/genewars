@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T14:49:50.338376+00:00",
+  "verified_at": "2026-10-13T17:26:59.811917+00:00",
   "sessions": 32,
   "factories": 128,
   "complete_afterimages": 128,
@@ -15,13 +15,13 @@
     },
     {
       "path": "scripts/ghidra/validate_landing_bridge.py",
-      "sha256": "90be59cb854388b8c8b2ac46c24051b51689900ad1a43246d2da2ed0563d5550"
+      "sha256": "10dc9ff5f7077d4bc401fd7394f687b6710f9760ad11304135600bbc4709633f"
     }
   ],
   "implementation_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "61523e25803399b5cd420be63f29f608cfe9c9f6c76031e5df30ec3417f6647d"
+      "sha256": "5cfdfd1b09ae7d3f33ace71c5f540216482326fabc27647be6beeb4b674d0d5e"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
@@ -29,19 +29,19 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
-      "sha256": "055e8b1d5f5a3256ea4eb9bdea4ee3749960c03bafa0a4955263a7acb955c334"
+      "sha256": "944251d5617a636b7b847a51ef00270d06872b5b27a23f5b79286b43c2bc23bd"
     },
     {
       "path": "rust/crates/genewars-runtime/src/landing.rs",
-      "sha256": "f8a43c4ac0a69d6579a20a034cbdb401b427ebff2a992bdc5029eac760678f12"
+      "sha256": "38ca22019dc6fe33fccfa8e7f67ed3e627f50224c1626c663c351538a1c691c8"
     },
     {
       "path": "rust/crates/genewars-runtime/src/player_state.rs",
-      "sha256": "fe0196a5fda76b838102f563b9669a04cf4cb07199beaf9b7358e2553b2ee547"
+      "sha256": "d7faa11882d551bc009e43e7e6ea89dca3d14dd726341cfeb959981d6da496b0"
     },
     {
       "path": "rust/crates/genewars-runtime/src/world.rs",
-      "sha256": "f45b4357337724ac724711cbb9ddbe92a7764fe701d99f531be76bd072874c19"
+      "sha256": "8a304a471b815b8e3323b6dddc13c8cbbd0c3dfae5ea5327643a03e9662f9bda"
     },
     {
       "path": "scripts/landing_world_probe.rs",

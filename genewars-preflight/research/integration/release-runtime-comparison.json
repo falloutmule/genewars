@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-13T15:49:32.064287+00:00",
+  "debug_receipt_sha256": "16efa63cebe735fb2708d5f9451a7e075aa3c8aaf3e3f9fb94414bf9963b8094",
+  "release_receipt_sha256": "65274d1cce620527675a83877f7fa1e5ddbdb6e024989e2c9e1a91be4cc5df26",
+  "debug_binary_sha256": "3ea2ec7c49cdf178b34c460fb6429220a7e522ff4c976ea3d2a7c9b25260ffdb",
+  "release_binary_sha256": "e8f55eb17f71c3cdbe2996520ea89942e27d329c238539d72735dd6e163d76e1",
+  "cases": 10,
+  "scope": "All ten shared landing case mission reports and errors match the earlier debug observations. This release build also passed its own eleven-case suite and native window presentation. Sources evolved between these dated compilation snapshots; this is a regression comparison, not proof of arbitrary build-profile equivalence."
+}

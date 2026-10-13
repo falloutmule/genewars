@@ -43,13 +43,15 @@ pub fn plan_reference_cleanup(kind:u8,slot:u16,bytes:&[u8],dead:LandingReference
  if bytes[6]!=kind||i16::from_le_bytes([bytes[15],bytes[16]])!=slot as i16{return Err(LifecycleError::RecordIdentity);}
  let mut patches=Vec::new();for &o in cleanup_reference_offsets(kind){if reference(bytes,o)==dead{patches.push(CleanupBytePatch{kind,slot,offset:(o+2) as u16,before:bytes[o+2],after:0});if kind==1&&o==0x5b&&bytes[0x60]&2!=0{patches.push(CleanupBytePatch{kind,slot,offset:0x60,before:bytes[0x60],after:bytes[0x60]&!2});}}}Ok(patches)
 }
-/// Retire code6 only. Its child selectorFF proves no factory/RNG at retirement.
+/// Retire boundedcode6/code2F/fresh4C0code31. Child selectorsFF prove no
+/// factory/RNG at retirement. Code31playerreference/counter effects must
+/// already be committed from RetireLanding before this common cleanup.
 /// Index words and unmentioned bytes remain unchanged, including stale links.
 pub fn plan_effect6_retirement(
  dead:&LandingRecord,pool_count:i16,records:&[CleanupRecord<'_>],ui:&RetirementUiState,
 )->Result<EffectRetirementPlan,LifecycleError>{
  if dead[6]!=5{return Err(LifecycleError::InvalidDeadRecord);}
- if dead[69]!=6{return Err(LifecycleError::UnsupportedRetirementCode(dead[69]));}
+ if !matches!(dead[69],6|0x2f|0x30|0x31)||dead[69]==0x31&&dead[76]!=0{return Err(LifecycleError::UnsupportedRetirementCode(dead[69]));}
  let identity=LandingReference{index:i16::from_le_bytes([dead[15],dead[16]]),kind:5};
  if identity.index<0||identity.index>=200{return Err(LifecycleError::RecordIdentity);}
  if !(1..=200).contains(&pool_count){return Err(LifecycleError::InvalidPoolCount);}

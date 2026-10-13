@@ -42,3 +42,6 @@ actors/key-13.anb	662b6358b87eff43624009881701ff9eec243d05800a79ed7478fc6736b724
 actors/key-14.anb	9f4ef097c5db8ad10c41b8992345bb2b26b6b4045a30c96e03c867f2ef968f0d	34865	private/integration/actor-resources/key-14.anb	actor key 14; root/2/disc/371
 actors/key-15.anb	6e6a81c03e5b8ec50706ca85c77161190183a9d44202dd155a9fc249043df559	32699	private/integration/actor-resources/key-15.anb	actor key 15; root/2/disc/372
 effects/EFF.ANB	f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253	186726	private/integration/rnc-decoded/74c282b4aff35204da78399a3f2674cabda56b0a76dc9a9974635ae5ad878b8d.bin	root/2/disc/59; decoded RNC output
+physics/angle.bin	1c26f16f88a3e0cedc9c879837b3849567ff70514c033eb6249bd95a264debce	514	private/integration/physics-tables/angle.bin	validated mapped object1 offset 0x9E134; physics-inputs.json
+physics/bounce.bin	c62a747206c89218e01102645341f151f5308fe1259b177f9d0418a67575e5e5	16	private/integration/physics-tables/bounce.bin	validated mapped object3 offset 0x4530; physics-inputs.json
+creatures/MULE.ANB	f6c62221b52a62088f91ae8d00becfef513282cbf98a5990c1a0859cd8b2d346	57038	private/integration/creature-resources/MULE.ANB	root/2/disc/335; selector4 packed4 proof creature-evidence.json

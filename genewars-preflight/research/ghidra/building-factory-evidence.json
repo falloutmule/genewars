@@ -1,0 +1,30 @@
+{
+  "cases": 28,
+  "compared_bytes": 52472,
+  "literal_instruction_steps": 30008,
+  "output_sha256": "1ec6d4ccb1fa8c49bb933cd894d63860934105333d53ab81e721bade192653cd",
+  "source_sha256": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf",
+  "pins": [
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00042fa0.txt",
+      "sha256": "3776bddece184d5b651b8697ecb917730ce9a4d22217130d6845e1533d4f86bc"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00043e30.txt",
+      "sha256": "1ff35294ce1f59509b1f14aac03e82d9072cf6220db711b08cca0c7121fd89f7"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00043560.txt",
+      "sha256": "fccec47dbee8b59319e9364e771c94f58936bf4d8d8d39990884aa9dc3555289"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-00044ff0.txt",
+      "sha256": "3b8b284ba28ec64221cc52a0b7454b40c76bdd3ba7a3306afce3663a64544905"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0007b240.txt",
+      "sha256": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb"
+    }
+  ],
+  "scope": "All14 selectors, fourowner partitions, firstfree allocation and entire playercenter afterimage; empty resolved maphead; resource animation/vtable pointers typed-normalized; no building callback or original execution"
+}

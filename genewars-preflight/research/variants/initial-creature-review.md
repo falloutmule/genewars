@@ -1,0 +1,11 @@
+# Initial Mule numeric choice
+
+Corroborated: the exact loaded kind1/owner4/selector4/state8 record has timer+6C zero. Its first odd callback therefore takes the state-table entry at624B8 and performs neighborhood AI. The owner4 shortcut at6539F applies after the timer is positive; it does not justify skipping the initial choice.
+
+`CreaturePool` owns the300 native124-byte records with explicit constructed priors and logical animation bindings. `ActorWorld::step_initial_mule_choice` admits only the exact initial record, frame1, its verified ground/warmth context, a self-only current cell and a conservative neighborhood containing only itself and neutral plants. It queries current map/native pools, then commits native after-image and shared RNG together. Ordinary scheduler gates and the final queue admission remain external; this is not a complete family0 update or startup.
+
+The first neighborhood initializer consumes two RNG draws to choose scan directions. The delay test consumes another; each wander sample consumes two more. Explicit seed5428 therefore consumes five draws and ends at64612, with target[17155,17734], speed577 and timer32766. This seed is a test input, not an inferred live landing seed. Waiting seeds consume three draws. Sixteen rejected samples require backward search and reject transactionally in this port.
+
+The native sweep checked all65,536 seeds and284,420 draws. Sixty-six complete instruction-derived callbacks also matched all124 canonical non-pointer bytes and RNG after-values;66 owned-world transactions matched these results while preserving backing bytes, actors and players. A rejected point followed by a successful point retains flag49 bit40; the independent literal comparison exposed and corrected its loss in the draft. Wrong frame, repeated initial update, altered record and exhausted candidate search reject. Exact pins, counts, byte hashes and limitations are in `initial-creature-review.json`. Replay `python -B research/variants/initial-creature-review.py`.
+
+Later movement, contact changes, map relinking, enemy/hunger/reproduction behavior and the live scheduler remain separate work. The literal oracle captures83140 as a pending request and does not execute queue/render side effects. No original executable or GUI ran in this review.

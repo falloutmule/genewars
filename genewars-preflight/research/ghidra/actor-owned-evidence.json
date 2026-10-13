@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "kind": "Production composition evidence; independent source component oracles are separate",
+  "mission_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+  "inputs": {
+    "native_priors": "explicit zero actor/creature/effect records",
+    "players": "four fresh campaign records",
+    "ring": 0,
+    "scratch36": "explicit zero",
+    "blueprint_draws": 64,
+    "mask": 5,
+    "reveal_radius": 4096,
+    "family4_prepasses": 189,
+    "runtime_mode": 0,
+    "override_180d80": 0,
+    "runtime_count_11c2bc": 0,
+    "other_families": "frozen; no full startup parity claim"
+  },
+  "scenarios": [
+    {
+      "seed": 5428,
+      "actor_callbacks": 522,
+      "footstep_factories": 37,
+      "arrivals": [
+        {
+          "frame": 239,
+          "actor_id": 0
+        },
+        {
+          "frame": 239,
+          "actor_id": 1
+        },
+        {
+          "frame": 360,
+          "actor_id": 0
+        }
+      ],
+      "ordered_frames": [
+        190,
+        450
+      ],
+      "late_second_actor_rollback": true,
+      "private_log_sha256": "eaaee4baca77536bb9d46e738427543d801c3b1c05c87f228acef4a19f87fa57"
+    },
+    {
+      "seed": 65535,
+      "actor_callbacks": 522,
+      "footstep_factories": 41,
+      "arrivals": [
+        {
+          "frame": 243,
+          "actor_id": 1
+        },
+        {
+          "frame": 255,
+          "actor_id": 0
+        },
+        {
+          "frame": 359,
+          "actor_id": 0
+        }
+      ],
+      "ordered_frames": [
+        190,
+        450
+      ],
+      "late_second_actor_rollback": true,
+      "private_log_sha256": "30f33fecc5177674b70bc1c801f3e318872517a4e1b482636ead02c302e85438"
+    }
+  ],
+  "reorder": {
+    "frame": 310,
+    "actor_id": 0,
+    "requested": [
+      20736,
+      13568
+    ]
+  },
+  "harness_sha256": "1f82bb25a8df687cc9195aa9bfc5d19076a2c4e3a9aee353e0a8d48ea321a341",
+  "production_source_sha256": {
+    "rust/crates/genewars-runtime/src/actor_motion.rs": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f",
+    "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs": "01927dbf45e172e8e507acd925249bc89f2f78815dbfaac8202ea4d83f8b4e77",
+    "rust/crates/genewars-runtime/src/creature_world.rs": "fb829cee975ca26518f25d0db36f4685ad7576fc270ae4b292c645293f006d56"
+  }
+}

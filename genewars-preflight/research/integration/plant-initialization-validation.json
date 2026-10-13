@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T17:25:36.573185+00:00",
+  "cases": 144,
+  "compared_bytes": 8208,
+  "literal_instructions": 139968,
+  "listing_pins": {
+    "private/ghidra/mission-array-refs/instructions-0006c4b0.txt": "cfac862c9c9273b3d7cd578ba3b0b4148883a971fc6336ccca7b9226d233bfd5",
+    "private/ghidra/plant-factory-1f340.txt": "370a1bbed261323d79b6b1614691f26bc82a037367d55a53065235ba53e75098",
+    "private/ghidra/mission-tail-init/instructions-0006c690.txt": "2031cd548ca5fbda011cefd4ea96748d54fcc5f73a1c7f86db18e45ab791b624"
+  },
+  "implementation_pins": {
+    "rust/crates/genewars-runtime/src/plant_spread.rs": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066",
+    "scripts/plant_initialization_probe.rs": "1d2844440154a2c079239b0735fb1e659ebd053e69c9beb93968e94b123cda27",
+    "scripts/validate_plant_initialization.py": "4870ca4a87edd5b24492b2233cfd726936066b129978619ae8efe8c4caccd118"
+  },
+  "original_execution": false,
+  "scope": "Neutral owner4 record initialization, all selectors, first-free slots0/1/8/40/255/511, exact factory position and both terrain sample coordinates, retained unknown bytes. Height/shade bodies and link insertion replaced by explicit stubs; pointers31..39 normalized and resource selector retained as typed metadata. Does not prove complete creation/world scheduling."
+}

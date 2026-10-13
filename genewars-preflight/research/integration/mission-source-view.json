@@ -1,28 +1,28 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T14:50:30.393343+00:00",
+  "checked_utc": "2026-10-13T17:27:55.697828+00:00",
   "frames": 8,
   "pixels_compared": 2457600,
   "invalid_requests_rejected": 3,
   "input_bytes_unchanged": true,
   "source_metadata_records": [
     {
-      "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-0-source.json",
+      "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-0-source.json",
       "bytes": 11914,
       "sha256": "f77164315a82af6d75110d88bfb360425726d10c875e01758eb40a15cb598504"
     },
     {
-      "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-1-source.json",
+      "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-1-source.json",
       "bytes": 11986,
       "sha256": "43514ec40706d4a39461e1752e5720ea04eeb1c350a186420a6553903f707bca"
     },
     {
-      "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-2-source.json",
+      "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-2-source.json",
       "bytes": 11986,
       "sha256": "11898838ac990c3995d9b5b1a6bacfcd5cc95a832a9ddb6a353df251721a5bdf"
     },
     {
-      "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-3-source.json",
+      "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-3-source.json",
       "bytes": 11986,
       "sha256": "d8e16f79d12186ed7906f516857e0a4d52d6aad95f28a6ad12acc521b505fc93"
     }
@@ -36,10 +36,10 @@
   "native_window": {
     "path": "private/build/rust-target/debug/genewars-terrain.exe",
     "bytes": 19586780,
-    "sha256": "75812a440f5abc61932b913f5933f3a719bcad53d4c512b8dcb8b81079e53e1f"
+    "sha256": "b55be14b692abaab1e113ed5706428349f3de442a5ca9c40b964935f7ebe7dd6"
   },
   "bounded_window": {
-    "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/window.json",
+    "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/window.json",
     "bytes": 484,
     "sha256": "0947335c37769a1cf96e3b8f6755b5bc0d0e9f1ab64a174b25a4beaf6cee56a2"
   },
@@ -163,7 +163,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-0-raw.bmp",
+        "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-0-raw.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -219,7 +219,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-0-raise4096.bmp",
+        "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-0-raise4096.bmp",
         "bytes": 921654,
         "sha256": "c4229b52f43fce9799263567f649c7781fd18097044f9053e798ebb6de6f2b90"
       },
@@ -275,7 +275,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-1-raw.bmp",
+        "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-1-raw.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -331,7 +331,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-1-raise4096.bmp",
+        "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-1-raise4096.bmp",
         "bytes": 921654,
         "sha256": "b1f8eefcb04ef0663956575e87f7d51261eb997746443d07f0581482a6bf9fd5"
       },
@@ -387,7 +387,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-2-raw.bmp",
+        "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-2-raw.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -443,7 +443,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-2-raise4096.bmp",
+        "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-2-raise4096.bmp",
         "bytes": 921654,
         "sha256": "b1f8eefcb04ef0663956575e87f7d51261eb997746443d07f0581482a6bf9fd5"
       },
@@ -499,7 +499,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-3-raw.bmp",
+        "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-3-raw.bmp",
         "bytes": 921654,
         "sha256": "0234faf897e2ae762f807b906e8c804ed0842591c5ebb978df6170870b7f27ef"
       },
@@ -555,7 +555,7 @@
       "gameplay": false,
       "initial_mission_state_inferred": false,
       "bmp": {
-        "path": "private/integration/mission-source-views/0e300e04a5f34cff96a0421ce29ebdca/player-3-raise4096.bmp",
+        "path": "private/integration/mission-source-views/9b50e26122534e058f5dcc5bb2b62913/player-3-raise4096.bmp",
         "bytes": 921654,
         "sha256": "b1f8eefcb04ef0663956575e87f7d51261eb997746443d07f0581482a6bf9fd5"
       },

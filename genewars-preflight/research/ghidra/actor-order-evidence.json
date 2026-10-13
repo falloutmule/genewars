@@ -1,0 +1,13 @@
+{
+  "cases": 8192,
+  "compared_bytes": 13198,
+  "output_sha256": "910a5037712548d9b5ac07da7fe507a5b0b72adc2908a67748c53ff51f6a27f9",
+  "source_sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f",
+  "instruction_contracts": [
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00058780.txt",
+      "sha256": "e7f66d33d468912942e86f875cf4d9e1d0157ce8671a911104b8cb9ad6fcb623"
+    }
+  ],
+  "scope": "Signedbyte IDs4+index, live signedcount3 percallback; negativecountterminates; owned count>5unsupported. Includes [0,1] byteIDs regression and changing count/list snapshots."
+}

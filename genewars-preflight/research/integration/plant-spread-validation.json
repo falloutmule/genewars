@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T17:25:37.630759+00:00",
+  "cases": 126,
+  "compared_bytes": 4068,
+  "listing_sha256": "056c0c9a3cfab3cc4cfbfb15851895551fa672bb546f1e5f459f7a258315769b",
+  "source_pins": {
+    "rust/crates/genewars-runtime/src/plant_spread.rs": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066",
+    "scripts/plant_spread_probe.rs": "e1b9989fd933f0a012dfd43b216230a971cc72c12432a35f93521021ccdf9331",
+    "scripts/validate_plant_spread.py": "c62428046f1c526cd151cb1ac0ea9e4a12090cbd45563ba31e11f54785d88ab1"
+  },
+  "output_sha256": "3f2a45932a4c9727460ceaad4b83f502536dd85830c42c8fb534cbd8efa13d97",
+  "original_execution": false,
+  "scope": "Literal6CCF6..6CFC5 arithmetic, exact ordered environment queries, all RNG seed/ring/count afterimages and every rejection path. Caller reproduction gates, environment bodies and plant factory are separate contracts; no reproduction-enabled world claimed."
+}

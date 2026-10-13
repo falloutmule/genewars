@@ -1,0 +1,33 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "path": "private/ghidra/actor-motion/instructions-0006e9e0.txt",
+      "sha256": "9e0d0cd2b98c380f36514b9ff8c7b28a538dedb3516aa1192e5fa38828c9f12e"
+    },
+    {
+      "path": "private/ghidra/actor-motion/instructions-00057a10.txt",
+      "sha256": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-00052780.txt",
+      "sha256": "048be1420c3c58c6e56a11954c565c2f3ea254710600c635d77605020d103a20"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-0008d7b0.txt",
+      "sha256": "dfbad38e9039f97aa243cddc0149971c5f01860e7163ee667d99a71757852b30"
+    },
+    {
+      "path": "private/ghidra/actor-motion/instructions-00058a70.txt",
+      "sha256": "181b9e2070dd4ce19adc1229812a0b0a529587eb96c0068393a0694aaf7169c0"
+    }
+  ],
+  "arrival_cases": 262144,
+  "idle_cases": 2048,
+  "empty_scorer_cases": 1024,
+  "seed_cases": 65536,
+  "compared_bytes": 65654098,
+  "output_sha256": "660f9a692e31ce4894f104987cefbb3624a1e03cccf0275a05bc45d84e60ff99",
+  "source_sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f",
+  "scope": "Arrival snap BL1 preservesphysicalheight; arrivalidle21B and52780 globals: count0/6000,override0/1,mode0/1; normalidle0/1/2timer,periodic666chance0/126,empty-source-scorer6BD/6BE; unpoweredclass3clears73; eligible targets explicitlyexcluded."
+}

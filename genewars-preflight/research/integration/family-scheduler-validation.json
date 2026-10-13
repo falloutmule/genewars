@@ -1,0 +1,78 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T17:25:34.307936+00:00",
+  "cases": [
+    {
+      "seed": 0,
+      "player_count": 0,
+      "draws": 3
+    },
+    {
+      "seed": 0,
+      "player_count": 1,
+      "draws": 3
+    },
+    {
+      "seed": 0,
+      "player_count": 4,
+      "draws": 3
+    },
+    {
+      "seed": 5428,
+      "player_count": 0,
+      "draws": 5
+    },
+    {
+      "seed": 5428,
+      "player_count": 1,
+      "draws": 5
+    },
+    {
+      "seed": 5428,
+      "player_count": 4,
+      "draws": 5
+    },
+    {
+      "seed": 10548,
+      "player_count": 0,
+      "draws": 3
+    },
+    {
+      "seed": 10548,
+      "player_count": 1,
+      "draws": 3
+    },
+    {
+      "seed": 10548,
+      "player_count": 4,
+      "draws": 3
+    },
+    {
+      "seed": 65535,
+      "player_count": 0,
+      "draws": 7
+    },
+    {
+      "seed": 65535,
+      "player_count": 1,
+      "draws": 7
+    },
+    {
+      "seed": 65535,
+      "player_count": 4,
+      "draws": 7
+    }
+  ],
+  "compared_bytes": 2841684,
+  "literal_instruction_steps": 137528,
+  "listing_sha256": "d947fde62e1f4a044d4c74953d8c95a1b25b0e4144fd43f64a1d148f4b5cca1b",
+  "source_pins": {
+    "scripts/validate_family_scheduler.py": "e3d8b188daff45388a1813d9906181bfd603c06d8499a8d2b933a1eaa4e9a6b3",
+    "scripts/family_scheduler_probe.rs": "35156e4ffa713756dec13a43dd01da93a4be9bc578be77d63cbe3ff106b90066",
+    "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs": "00489979f547eed51c3b9f9cc8c69d6bac6f3603fcb08bf67d6b230a309c822d",
+    "research/variants/initial-creature-source.py": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2"
+  },
+  "output_sha256": "53951e4e2f45add6f407d177d27b35e32da1a7ec1357e6925b7de4eeee0acfa9",
+  "scope": "Source6A540 first neutral-Mule pass, player-count reset range, entire player/native/map afterimages, RNG and eight ordered UI request descriptors. Native resource/vtable pointers normalized to owned typed bindings. UI animation bodies deferred only at eight scheduler callsites; not a complete original startup.",
+  "original_execution": false
+}

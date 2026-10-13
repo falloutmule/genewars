@@ -19,3 +19,36 @@ The code6 request has a transitive factory draw: successful free-pool allocation
 EFF animation6 has thirteen frames, flags0, and hold0 on every frame. `plan_effect6_animation_after_physics` implements its delay1..3 progression and retirement predicate; surviving updates apply signed `(15 * velocity) >> 4`. The code6 row's child selector is FF, so retirement's `4B3B0` returns zero without another factory or RNG draw. Retirement still requires `49D30` map unlink, `724C0` reference cleanup, clearing type and decrementing the family4 counter. The counter VA `11C2B4` corresponds to backing offset3554 from mission globals base118D60.
 
 The validator now compares shipping APIs with 32 factory, 8,192 phase0, all65,536 three-draw seed, 1,024 first-contact, 1,024 code6 factory, 2,048 fractional code6 flight and156 animation cases. It runs the five landing module tests. The finite actual-map scheduler, preceding families and live seed selection remain separate integration work.
+# Finite departure and uphill contact evidence
+
+The source-backed production planners now cover phases0..3, code6 and code2F
+factory/physics/animation, native retirement and family4 primary/newborn passes.
+Standalone phase1, lifecycle, departure and particle validators compare shipping
+APIs against independently written source models. Root's separate actual-map
+composition receipt records five explicit seeds across450 passes each; it is
+conditional evidence with other actor families frozen, not full startup parity.
+
+The actual-map regression found an uphill impact with post-acceleration VZ9.
+6E3C5..6E3E3 requests the unsupported damage callback only when
+((signedVZ>>6)/16)>0. Small positive impacts remain admitted and bounce. A public
+numeric fixture reproduces slot32's position, fractions, velocities, heights and
+corner words without copying asset bytes. All five450-pass schedules pass after
+this correction; all particles retire. Horizontal squared speeds use widened
+math and reject negative wrapped native speeds before indexing trig tables.
+
+Full pool exhaustion is conditional: source priorities are code6=27,31=1,2F=35.
+The common factory can replace an unmarked lower-priority incumbent. A full pool
+containing only6/31 has no eligible replacement for6 and returnsNULL before its
+factory RNG draw; direct phase draws and audio still execute. A full pool with
+unmarked2F cannot be treated as unconditionalNULL.
+
+Observed code0x30 water splash now binds EFF animation48 (12 hold0 frames),
+uses signed animation delay2 and immobile flag16&8, and consumes no RNG.
+Source491CA requests audio3B; generic retirement clears reference kinds and
+unlinks the map record. The independent water validator compares1024 prior
+record factory cases and all3072 frame/signed-counter combinations.
+
+Observed type5 virtual90 is1E600, returning row104EB9. Rows6/2F/30 return0;
+the source skips splash factories and type1/3-only zero-height damage for
+these particles. Their former water-height rejection was overrestrictive
+and is removed; code31 retains its separate true-virtual90 water boundary.

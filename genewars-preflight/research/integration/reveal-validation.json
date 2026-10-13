@@ -1,0 +1,350 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-13T17:30:18.528503+00:00",
+  "source_pin": {
+    "path": "private/integration/game-runtime/terrain/CONQ001.DAT",
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/camera-player-input/instructions-00075b00.txt",
+      "sha256": "338546946ce863304620159905fd171845a8d655c4b09f0f6657b6a58fedc966"
+    },
+    {
+      "path": "private/ghidra/camera-player-input/instructions-00084b40.txt",
+      "sha256": "9424f5091c9fdb3baa1f4e27c53310c85cdbf87a51ce4fa0aa11b54dadb363a5"
+    },
+    {
+      "path": "private/ghidra/camera-player-input/instructions-0008b800.txt",
+      "sha256": "6ae63cd69b0f93d01d7a7850c7a2c9c7c56d11b5ff22db129edd1cc7e2819832"
+    },
+    {
+      "path": "private/ghidra/camera-player-input/instructions-0007b240.txt",
+      "sha256": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb"
+    },
+    {
+      "path": "private/ghidra/entity-plant/instructions-0001f240.txt",
+      "sha256": "b91628625841cfa04088d9babedbb03644231d8e019edd92ac86e8a806241e69"
+    },
+    {
+      "path": "private/ghidra/entity-plant/instructions-0001f280.txt",
+      "sha256": "dba12fb47f1658bff3d7fa8bfcee4cc648c065194e697f4a85f5958592291223"
+    }
+  ],
+  "implementation_pins": [
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "5cfdfd1b09ae7d3f33ace71c5f540216482326fabc27647be6beeb4b674d0d5e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
+      "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/terrain.rs",
+      "sha256": "5b906fdc3ed1809fefd078a1c60cca20cbca5a254df2fe386fe4608cf2450e6a"
+    },
+    {
+      "path": "scripts/reveal_probe.rs",
+      "sha256": "3cb09b116355a9d3fa94c51665d1440927e7bbd20823b55159cad64c06e68d47"
+    },
+    {
+      "path": "scripts/validate_reveal.py",
+      "sha256": "5ff8bd49241479a54a007d5e9a3c1da5db6dee0af7d21c42e502c3eff92e0de7"
+    }
+  ],
+  "cases": 32,
+  "afterimage_bytes": 11007040,
+  "afterimage_sha256": "71638b33d8374f49908209fab6d8fed2952685bba1f46d8ec3a7a11bb3b74a9f",
+  "cases_detail": [
+    {
+      "target": [
+        20736,
+        13568
+      ],
+      "changed_vertices": 786,
+      "cell_visits": 3144,
+      "plant_shade_writes": 44
+    },
+    {
+      "target": [
+        16384,
+        15872
+      ],
+      "changed_vertices": 784,
+      "cell_visits": 3136,
+      "plant_shade_writes": 76
+    },
+    {
+      "target": [
+        0,
+        0
+      ],
+      "changed_vertices": 793,
+      "cell_visits": 3172,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        32767,
+        32767
+      ],
+      "changed_vertices": 793,
+      "cell_visits": 3172,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        -32768,
+        -32768
+      ],
+      "changed_vertices": 793,
+      "cell_visits": 3172,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        -1,
+        -1
+      ],
+      "changed_vertices": 793,
+      "cell_visits": 3172,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        24436,
+        17004
+      ],
+      "changed_vertices": 761,
+      "cell_visits": 3044,
+      "plant_shade_writes": 79
+    },
+    {
+      "target": [
+        24417,
+        17287
+      ],
+      "changed_vertices": 764,
+      "cell_visits": 3056,
+      "plant_shade_writes": 69
+    },
+    {
+      "target": [
+        24703,
+        17016
+      ],
+      "changed_vertices": 754,
+      "cell_visits": 3016,
+      "plant_shade_writes": 69
+    },
+    {
+      "target": [
+        24687,
+        16799
+      ],
+      "changed_vertices": 755,
+      "cell_visits": 3020,
+      "plant_shade_writes": 75
+    },
+    {
+      "target": [
+        24940,
+        16993
+      ],
+      "changed_vertices": 765,
+      "cell_visits": 3060,
+      "plant_shade_writes": 60
+    },
+    {
+      "target": [
+        24726,
+        17252
+      ],
+      "changed_vertices": 765,
+      "cell_visits": 3060,
+      "plant_shade_writes": 60
+    },
+    {
+      "target": [
+        24445,
+        17528
+      ],
+      "changed_vertices": 776,
+      "cell_visits": 3104,
+      "plant_shade_writes": 59
+    },
+    {
+      "target": [
+        24176,
+        17773
+      ],
+      "changed_vertices": 787,
+      "cell_visits": 3148,
+      "plant_shade_writes": 59
+    },
+    {
+      "target": [
+        23937,
+        17811
+      ],
+      "changed_vertices": 789,
+      "cell_visits": 3156,
+      "plant_shade_writes": 63
+    },
+    {
+      "target": [
+        23679,
+        17786
+      ],
+      "changed_vertices": 796,
+      "cell_visits": 3184,
+      "plant_shade_writes": 73
+    },
+    {
+      "target": [
+        -24735,
+        143
+      ],
+      "changed_vertices": 805,
+      "cell_visits": 3220,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        -19419,
+        -20770
+      ],
+      "changed_vertices": 799,
+      "cell_visits": 3196,
+      "plant_shade_writes": 32
+    },
+    {
+      "target": [
+        -26666,
+        -13275
+      ],
+      "changed_vertices": 802,
+      "cell_visits": 3208,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        -17395,
+        -11687
+      ],
+      "changed_vertices": 799,
+      "cell_visits": 3196,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        -432,
+        -3855
+      ],
+      "changed_vertices": 802,
+      "cell_visits": 3208,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        -10057,
+        -16399
+      ],
+      "changed_vertices": 795,
+      "cell_visits": 3180,
+      "plant_shade_writes": 95
+    },
+    {
+      "target": [
+        -30211,
+        -1257
+      ],
+      "changed_vertices": 796,
+      "cell_visits": 3184,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        -22019,
+        17253
+      ],
+      "changed_vertices": 797,
+      "cell_visits": 3188,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        -4491,
+        30558
+      ],
+      "changed_vertices": 804,
+      "cell_visits": 3216,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        3766,
+        27715
+      ],
+      "changed_vertices": 802,
+      "cell_visits": 3208,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        -24874,
+        -7544
+      ],
+      "changed_vertices": 800,
+      "cell_visits": 3200,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        14328,
+        -4389
+      ],
+      "changed_vertices": 799,
+      "cell_visits": 3196,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        -26842,
+        23515
+      ],
+      "changed_vertices": 801,
+      "cell_visits": 3204,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        26635,
+        -5314
+      ],
+      "changed_vertices": 800,
+      "cell_visits": 3200,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        3047,
+        10323
+      ],
+      "changed_vertices": 803,
+      "cell_visits": 3212,
+      "plant_shade_writes": 0
+    },
+    {
+      "target": [
+        22488,
+        443
+      ],
+      "changed_vertices": 805,
+      "cell_visits": 3220,
+      "plant_shade_writes": 0
+    }
+  ],
+  "scope": "Independent ordered radius4096 factor, four-cell dirty flag and eligible plant-shade callback model. Exact mission bytes, explicit native priors; actors/creatures/players/RNG unchanged; repeated reveal idempotent. Presentation invalidation/minimap callbacks remain pending; no original program execution."
+}

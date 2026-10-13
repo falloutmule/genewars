@@ -54,6 +54,7 @@ pub enum LandingEvent {
     SavePlayerLandingReference { owner: u8, reference: LandingReference },
     Reveal { position: [i16;2], radius: u16 },
     PlayAudio(LandingAudioRequest),
+    RetireLanding { owner:u8, reference:LandingReference, player_counter_after:u32 },
     StopAudio { channel: u8 },
     /// Timer49 source UI text/resource request; journal802 choice already drawn.
     LandingMessage { owner:u8, message_index:u16 },
@@ -294,7 +295,7 @@ pub fn plan_landing_effect6_factory(
     sine:&[i32;2048],cosine:&[i32;2048],
 )->Result<LandingEffect6FactoryPlan,LandingError>{
     if rng.ring>=32{return Err(LandingError::InvalidRing(rng.ring));}
-    if angles[0]>=2048||angles[1]>=2048||angles[2]>32767{return Err(LandingError::UnsupportedPhysicsState);}
+    if angles[0]>2048||angles[1]>2048||angles[2]>32767{return Err(LandingError::UnsupportedPhysicsState);}
     let mut factory=plan_landing_factory(pool,pool_count,0,0,at,ground,shade,old_head)?;
     let prior=factory.before;let a=&mut factory.after_nonpointer;
     put_dword(a,39,physical_height);a[69]=6;a[73]=prior[73];a[76]=prior[76];
@@ -344,7 +345,7 @@ pub fn plan_effect6_flight(
     let mut velocity=[word(before,45),word(before,47),word(before,49).wrapping_add(word(before,55))];
     let candidate_height=dword(before,39).wrapping_add(i32::from(velocity[2])>>3);
     let height=ground.max(candidate_height.max(0));
-    if !obstacle_lookup_is_null||!(0..=65534).contains(&water_height)||height<=water_height+320{return Err(LandingError::EnvironmentalCallbackRequired);}
+    if !obstacle_lookup_is_null||!(0..=65534).contains(&water_height){return Err(LandingError::EnvironmentalCallbackRequired);}
     for(i,o)in[7,9].into_iter().enumerate(){
         let fixed=(i32::from(word(before,o))<<16).wrapping_add(i32::from(before[67+i])<<8).wrapping_add(i32::from(velocity[i])<<10);
         put_word(&mut after,o,at[i]);after[67+i]=(fixed>>8) as u8;
@@ -353,8 +354,9 @@ pub fn plan_effect6_flight(
     if candidate_height<=ground{
         if dword(before,39)<=dword(before,17){return Err(LandingError::UnsupportedPhysicsState);}
         // Source first-impact branch's damage request only occurs for a
-        // positive downward-expression; admitted descending impacts exclude it.
-        if velocity[2]>0{return Err(LandingError::UnsupportedPhysicsState);}
+        // positive downward-expression. Smallpositiveuphillsurfaceimpacts
+        // stillhaveexpression0andmustbounce, ratherthanrejectallpositiveVZ.
+        if (i32::from(velocity[2])>>6)/16>0{return Err(LandingError::UnsupportedPhysicsState);}
         let normal=landing_terrain_normal(at,terrain_height_words);
         velocity[2]=((i32::from(velocity[2]).abs()*i32::from(bounce_coefficient))>>8) as i16;
         velocity[0]=velocity[0].wrapping_add((i32::from(velocity[2])*normal[0]/256) as i16);
@@ -407,7 +409,7 @@ pub fn plan_effect6_grounded_after_second_sample(
 )->Result<LandingAirbornePlan,LandingError>{
     ground_ok(ground)?;
     if candidate[6]!=5||candidate[69]!=6||word(candidate,15)!=word(before,15){return Err(LandingError::InvalidRecord);}
-    if !obstacle_lookup_is_null||!(0..=65534).contains(&water_height)||ground<=water_height+320{return Err(LandingError::EnvironmentalCallbackRequired);}
+    if !obstacle_lookup_is_null||!(0..=65534).contains(&water_height){return Err(LandingError::EnvironmentalCallbackRequired);}
     let mut after=*candidate;put_dword(&mut after,17,ground);after[23]=shade;put_dword(&mut after,39,ground);
     for o in [7,9]{let v=word(&after,o)&0x7fff;put_word(&mut after,o,v);}
     Ok(LandingAirbornePlan{before:*before,after})
@@ -484,6 +486,60 @@ pub fn plan_landing_phase1_after_physics(before:&LandingRecord,rng:LandingRng)->
  Ok(LandingPhase0Plan{before:*before,after,contact:false,rng_before:rng,rng_after:next,draws,events,created_count})
 }
 
+/// Phase2/3 rising vertical code31 physics, actualno-obstacle/no-watergates.
+pub fn plan_landing_rising_physics(before:&LandingRecord,ground:i32,shade:u8,water:i32,collision_null:bool,angles:&[u16;257])->Result<LandingAirbornePlan,LandingError>{
+ if before[6]!=5||before[69]!=0x31||!matches!(before[70],2|3)||before[73]!=0||before[76]!=0||before[45..49]!=[0;4]||before[51..55]!=[0;4]||before[67..69]!=[0;2]||word(before,49)<=0||word(before,55)<0{return Err(LandingError::UnsupportedPhysicsState);}
+ validate_landing_animation_identity(before)?;let mut temporary=*before;temporary[69]=6;
+ let mut plan=plan_effect6_flight(&temporary,ground,shade,water,collision_null,[0;4],0,angles)?;
+ if dword(&plan.after,39)<=water+320{return Err(LandingError::EnvironmentalCallbackRequired);}plan.before=*before;plan.after[69]=0x31;Ok(plan)
+}
+pub fn plan_landing_phase2_after_physics(before:&LandingRecord,rng:LandingRng)->Result<LandingPhase0Plan,LandingError>{
+ if rng.ring>=32{return Err(LandingError::InvalidRing(rng.ring));}
+ if before[6]!=5||before[69]!=0x31||before[70]!=2||before[24]>=4||before[73]!=0||before[76]!=0||!(1..=30).contains(&word(before,74)){return Err(LandingError::UnsupportedPhysicsState);}
+ validate_landing_animation_identity(before)?;
+ if word(before,74)==1{let mut after=*before;put_word(&mut after,74,20);after[51..55].fill(0);put_word(&mut after,55,640);after[70]=3;return Ok(LandingPhase0Plan{before:*before,after,contact:false,rng_before:rng,rng_after:rng,draws:Vec::new(),events:vec![LandingEvent::StopAudio{channel:0x50},LandingEvent::PlayAudio(LandingAudioRequest{channel:0x52,mode:2,parameter:0,stack_byte:127,stack_dword:100})],created_count:Some(0)});}
+ let mut temporary=*before;temporary[70]=1;let mut plan=plan_landing_phase1_after_physics(&temporary,rng)?;
+ plan.before=*before;plan.after[70]=2;for event in &mut plan.events{if let LandingEvent::CreateEffect{angles,..}=event{angles[2]+=1280;}}Ok(plan)
+}
+pub fn plan_landing_phase3_after_physics(before:&LandingRecord,rng:LandingRng)->Result<LandingPhase0Plan,LandingError>{
+ if before[6]!=5||before[69]!=0x31||before[70]!=3||before[24]>=4||before[73]!=0||before[76]!=0||!(1..=20).contains(&word(before,74)){return Err(LandingError::UnsupportedPhysicsState);}
+ if rng.ring>=32{return Err(LandingError::InvalidRing(rng.ring));}validate_landing_animation_identity(before)?;
+ let mut after=*before;let timer=word(before,74)-1;put_word(&mut after,74,timer);let mut next=rng;let mut draws=Vec::new();let mut events=Vec::new();
+ if timer==0{events.push(LandingEvent::RetireLanding{owner:before[24],reference:LandingReference{index:word(before,15),kind:5},player_counter_after:700});return Ok(LandingPhase0Plan{before:*before,after,contact:false,rng_before:rng,rng_after:next,draws,events,created_count:Some(0)});}
+ let mut angles=[word(before,57)as u16,word(before,59)as u16,(word(before,61)>>2)as u16];
+ next.draw_count=next.draw_count.wrapping_add(2);
+ for (i,journal_code)in[0x822,0x823].into_iter().enumerate(){let old=next.seed;let slot=next.ring;next.seed=next.seed.wrapping_mul(0xe62d);next.ring=(next.ring+1)&31;angles[i]=angles[i].wrapping_add(1920+(next.seed>>8))&2047;draws.push(LandingDraw{ring_slot:slot,seed_before:old,seed_after:next.seed,journal_code});}
+ events.push(LandingEvent::CreateEffect{object_code:0x2f,position:position(before),physical_height:dword(before,39),angles,owner:before[24],mark_newborn_on_success:true});
+ Ok(LandingPhase0Plan{before:*before,after,contact:false,rng_before:rng,rng_after:next,draws,events,created_count:None})
+}
+/// Code2Fnull-parent factory sharescode6commoninitialization, acceleration,
+/// delay1..3 butjournal229 andownerparent. ItbindsEFFanimation47.
+pub fn plan_landing_effect2f_factory(pool:&[LandingRecord;200],count:i16,owner:u8,at:[i16;2],ground:i32,shade:u8,height:i32,angles:[u16;3],head:Option<ResolvedCellHead>,gravity:i16,rng:LandingRng,sine:&[i32;2048],cosine:&[i32;2048])->Result<LandingEffect6FactoryPlan,LandingError>{
+ if owner>=4{return Err(LandingError::InvalidOwner(owner));}let mut plan=plan_landing_effect6_factory(pool,count,at,ground,shade,height,angles,head,gravity,rng,sine,cosine)?;plan.factory.after_nonpointer[24]=owner;plan.factory.after_nonpointer[69]=0x2f;plan.factory.animation_index=47;plan.draw.journal_code=0x229;Ok(plan)
+}
+/// EFF47sixhold0framesflags0; sourcecode2F hasnoownselectortaildamping.
+pub fn plan_effect2f_animation_after_physics(before:&LandingRecord)->Result<Effect6UpdatePlan,LandingError>{
+ if before[6]!=5||before[69]!=0x2f{return Err(LandingError::InvalidRecord);}
+ if before[26]!=0||before[27]>5||before[28]!=1||!(1..=3).contains(&before[29])||before[30]>3{return Err(LandingError::UnsupportedAnimationState);}
+ let mut after=*before;let timer=word(&after,74);if timer>=0{put_word(&mut after,74,timer.wrapping_sub(1));}let delay=after[29];let c=after[30].min(delay);after[30]=c.wrapping_sub(1);if c==0{after[30]=delay;after[27]=(after[27]+1)%6;}
+ let retired=word(&after,74)<0&&after[27]==5&&after[30]==0;Ok(Effect6UpdatePlan{after,retirement_required:retired})
+}
+/// Code2Fcommonphysics matchescode6exceptvirtual70alwaysfalse: the
+/// obstacle query is skipped by the source, not assumedNULL. No damping.
+pub fn plan_effect2f_flight(before:&LandingRecord,ground:i32,shade:u8,water:i32,corners:[i16;4],bounce:i16,angles:&[u16;257])->Result<LandingAirbornePlan,LandingError>{
+ if before[6]!=5||before[69]!=0x2f{return Err(LandingError::InvalidRecord);}let mut temporary=*before;temporary[69]=6;let mut plan=plan_effect6_flight(&temporary,ground,shade,water,true,corners,bounce,angles)?;plan.before=*before;plan.after[69]=0x2f;Ok(plan)
+}
+
+pub fn effect2f_physics_candidate(before:&LandingRecord)->Result<[i16;2],LandingError>{
+ if before[6]!=5||before[69]!=0x2f{return Err(LandingError::InvalidRecord);}let mut temporary=*before;temporary[69]=6;effect6_physics_candidate(&temporary)
+}
+pub fn effect2f_grounded_candidate(before:&LandingRecord,ground:i32,angles:&[u16;257],sine:&[i32;2048],cosine:&[i32;2048])->Result<LandingRecord,LandingError>{
+ if before[6]!=5||before[69]!=0x2f{return Err(LandingError::InvalidRecord);}let mut temporary=*before;temporary[69]=6;let mut after=effect6_grounded_candidate(&temporary,ground,angles,sine,cosine)?;after[69]=0x2f;Ok(after)
+}
+pub fn plan_effect2f_grounded_after_second_sample(before:&LandingRecord,candidate:&LandingRecord,ground:i32,shade:u8,water:i32)->Result<LandingAirbornePlan,LandingError>{
+ if before[6]!=5||before[69]!=0x2f||candidate[6]!=5||candidate[69]!=0x2f{return Err(LandingError::InvalidRecord);}let mut b=*before;let mut c=*candidate;b[69]=6;c[69]=6;let mut plan=plan_effect6_grounded_after_second_sample(&b,&c,ground,shade,water,true)?;plan.before=*before;plan.after[69]=0x2f;Ok(plan)
+}
+
 /// Explicit branch inputs to7D090's post-load seed selection. This is not a
 /// claim about which mode/profile/clock values a real session used.
 pub fn select_landing_startup_seed(
@@ -517,7 +573,19 @@ pub fn select_landing_startup_seed(
   let a=factory().after_nonpointer;let p=plan_landing_vertical_airborne(&a,6272,44,1632,true).unwrap();assert_eq!(dword(&p.after,39),dword(&a,39)-136);assert_eq!(p.after[23],44);
   let mut a=a;put_dword(&mut a,39,6273);assert_eq!(plan_landing_vertical_airborne(&a,6272,44,1632,true),Err(LandingError::ContactPhysicsRequired));
  }
+ #[test]fn small_positive_vertical_velocity_can_contact_rising_terrain_without_damage(){
+  let mut a=factory().after_nonpointer;a[69]=6;put_dword(&mut a,39,6286);put_dword(&mut a,17,6285);put_word(&mut a,49,25);put_word(&mut a,55,-16);
+  let p=plan_effect6_flight(&a,6290,40,1632,true,[3145;4],128,&[0;257]).unwrap();assert_eq!(dword(&p.after,39),6290);assert_eq!(word(&p.after,49),4);
+  // Numeric projection of the seed1/pass332 slot32 regression; no source bytes.
+  let mut a=factory().after_nonpointer;a[69]=6;put_word(&mut a,7,20726);put_word(&mut a,9,13546);a[67]=200;a[68]=172;put_dword(&mut a,17,6285);put_dword(&mut a,39,6286);put_word(&mut a,45,-132);put_word(&mut a,47,-297);put_word(&mut a,49,25);put_word(&mut a,55,-16);
+  let p=plan_effect6_flight(&a,6288,0,1632,true,[3456,3008,3136,3136],50,&[0;257]).unwrap();assert_eq!(position(&p.after),[20724,13542]);assert_eq!(&p.after[67..69],&[184,8]);assert_eq!(dword(&p.after,39),6288);assert_eq!(word(&p.after,49),1);
+  put_word(&mut a,49,1040);assert_eq!(plan_effect6_flight(&a,6500,40,1632,true,[3250;4],128,&[0;257]),Err(LandingError::UnsupportedPhysicsState));
+ }
  #[test]fn full_i16_horizontal_velocity_rejects_without_debug_overflow(){
+  let rng=LandingRng{seed:1,ring:0,draw_count:0};let pool=[[0;81];200];
+  let edge=plan_landing_effect6_factory(&pool,0,[0,0],0,0,1,[2048,2048,1],None,1024,rng,&[0;2048],&[0;2048]).unwrap();
+  assert_eq!(word(&edge.factory.after_nonpointer,57),2048);
+  assert!(plan_landing_effect6_factory(&pool,0,[0,0],0,0,1,[2049,0,1],None,1024,rng,&[0;2048],&[0;2048]).is_err());
   let mut a=factory().after_nonpointer;a[69]=6;put_word(&mut a,45,i16::MIN);put_word(&mut a,47,i16::MIN);put_word(&mut a,49,-1);
   assert_eq!(plan_effect6_flight(&a,6272,40,1632,true,[3136;4],128,&[0;257]),Err(LandingError::UnsupportedPhysicsState));
   put_dword(&mut a,39,6272);assert_eq!(effect6_grounded_candidate(&a,6272,&[0;257],&[0;2048],&[0;2048]),Err(LandingError::UnsupportedPhysicsState));
@@ -531,5 +599,43 @@ pub fn select_landing_startup_seed(
  #[test]fn seed_modes_do_not_guess_clock_or_network(){
   assert_eq!(select_landing_startup_seed(0,5428,10,false,0,0,0,None),Ok(5428));assert_eq!(select_landing_startup_seed(0x81,5428,0,false,0,0,0,None),Ok(65535));
   assert_eq!(select_landing_startup_seed(1,0,0,true,4,5,6,None),Ok(70));assert_eq!(select_landing_startup_seed(1,0,0,false,0,0,0,None),Err(LandingError::MissingSynchronizedSeed));
+ }
+}
+
+///48790/491CA stationary water splash: EFF48, delay2, no RNG.
+pub fn plan_water_splash_factory(pool:&[LandingRecord;200],count:i16,at:[i16;2],ground:i32,shade:u8,height:i32,head:Option<ResolvedCellHead>)->Result<LandingFactoryPlan,LandingError>{
+ let mut p=plan_landing_factory(pool,count,0,0,at,ground,shade,head)?;
+ let a=&mut p.after_nonpointer;put_dword(a,39,height);a[45..63].fill(0);put_word(a,21,0x0820);a[29]=2;a[69]=0x30;a[73]=p.before[73];a[76]=0;p.animation_index=48;
+ p.events.retain(|e|matches!(e,LandingEvent::SetCellHead{..}|LandingEvent::SetOldHeadPrevious{..}));
+ p.events.push(LandingEvent::PlayAudio(LandingAudioRequest{channel:0x3b,mode:2,parameter:0,stack_byte:127,stack_dword:100}));Ok(p)
+}
+///6DF30 immobile flag skips integration; virtual70 and90 are false for30.
+pub fn plan_water_splash_update(before:&LandingRecord)->Result<Effect6UpdatePlan,LandingError>{
+ if before[6]!=5||before[69]!=0x30||before[22]!=8||before[21]&!1!=0x20||before[76]!=0{return Err(LandingError::InvalidRecord);}
+ if before[26]!=0||before[27]>=12||before[28]!=1||before[29]!=2{return Err(LandingError::UnsupportedAnimationState);}
+ let mut a=*before;put_word(&mut a,7,word(before,7)&0x7fff);put_word(&mut a,9,word(before,9)&0x7fff);
+ let timer=word(&a,74);if timer>=0{put_word(&mut a,74,timer.wrapping_sub(1));}
+ let c=if (a[30]as i8)>2{2}else{a[30]};a[30]=c.wrapping_sub(1);if (c as i8)<=0{a[30]=2;a[27]=(a[27]+1)%12;}
+ Ok(Effect6UpdatePlan{retirement_required:word(&a,74)<0&&a[27]==11&&a[30]==0,after:a})
+}
+
+///48846 scans ascending, retaining the first strictly greatest priority above20.
+/// Replacement cleanup needs an explicit UI state and remains a world boundary.
+pub fn water_splash_replacement(pool:&[LandingRecord;200])->Result<Option<u16>,LandingError>{
+ let mut priority=20;let mut selected=None;
+ for(i,r)in pool.iter().enumerate(){let p=match r[69]{6=>27,0x2f=>35,0x30=>20,0x31=>1,_=>return Err(LandingError::UnsupportedPhysicsState)};
+  if p>priority&&r[21]&1==0{priority=p;selected=Some(i as u16);}
+ }Ok(selected)
+}
+#[cfg(test)]
+mod water_particle_tests {
+ use super::*;
+ #[test]
+ fn type5_false_virtual90_skips_water_callbacks_without_changing_physics(){
+  let mut a=[0;81];a[6]=5;a[69]=6;a[21]=0x20;put_word(&mut a,63,-1);put_dword(&mut a,39,1900);
+  let dry=plan_effect6_flight(&a,0,40,0,true,[0;4],128,&[0;257]).unwrap();
+  let wet=plan_effect6_flight(&a,0,40,1632,true,[0;4],128,&[0;257]).unwrap();assert_eq!(dry,wet);
+  a[69]=0x2f;let dry=plan_effect2f_flight(&a,0,40,0,[0;4],128,&[0;257]).unwrap();let wet=plan_effect2f_flight(&a,0,40,1632,[0;4],128,&[0;257]).unwrap();assert_eq!(dry,wet);
+  a[69]=6;let dry=plan_effect6_grounded_after_second_sample(&a,&a,1600,40,0,true).unwrap();let wet=plan_effect6_grounded_after_second_sample(&a,&a,1600,40,1632,true).unwrap();assert_eq!(dry,wet);
  }
 }

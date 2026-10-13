@@ -5,7 +5,7 @@
 use crate::landing::{LandingFactoryPlan, LandingRecord, FAMILY4_CAPACITY};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum EffectAnimationBinding { EffAnimation49, EffAnimation6 }
+pub enum EffectAnimationBinding { EffAnimation49, EffAnimation6, EffAnimation47, EffAnimation48 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum EffectPoolError {
@@ -56,6 +56,8 @@ impl EffectPool {
         let binding = match (after[69],plan.animation_index) {
             (0x31,49) => EffectAnimationBinding::EffAnimation49,
             (6,6) => EffectAnimationBinding::EffAnimation6,
+            (0x30,48) => EffectAnimationBinding::EffAnimation48,
+            (0x2F,47) => EffectAnimationBinding::EffAnimation47,
             _ => return Err(EffectPoolError::InvalidFactoryPlan),
         };
         if self.records.iter().position(|r| r[6] == 0) != Some(slot)
@@ -80,9 +82,10 @@ impl EffectPool {
         self.records[slot] = *after;
         Ok(())
     }
-    pub(crate) fn retire_code6_checked(&mut self,slot:usize,before:&LandingRecord,after:&LandingRecord)->Result<(),EffectPoolError> {
+    pub(crate) fn retire_checked(&mut self,slot:usize,before:&LandingRecord,after:&LandingRecord)->Result<(),EffectPoolError> {
         if self.record(slot)?!=before { return Err(EffectPoolError::StaleRecord(slot)); }
-        if before[6]!=5||before[69]!=6||self.binding(slot)?!=Some(EffectAnimationBinding::EffAnimation6) { return Err(EffectPoolError::InvalidRetirement); }
+        let expected_binding=match before[69] { 6=>EffectAnimationBinding::EffAnimation6,0x2F=>EffectAnimationBinding::EffAnimation47,0x30=>EffectAnimationBinding::EffAnimation48,0x31=>EffectAnimationBinding::EffAnimation49,_=>return Err(EffectPoolError::InvalidRetirement) };
+        if before[6]!=5||self.binding(slot)?!=Some(expected_binding) { return Err(EffectPoolError::InvalidRetirement); }
         let mut expected=*before;expected[6]=0;
         if expected[73]==5&&word(&expected,71)==slot as i16 { expected[73]=0; }
         if *after!=expected { return Err(EffectPoolError::InvalidRetirement); }

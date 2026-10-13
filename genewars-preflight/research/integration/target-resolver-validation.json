@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T17:25:45.739484+00:00",
+  "cases": 160,
+  "compared_bytes": 59744,
+  "max_queries": 4096,
+  "port_limit_cases": [
+    50,
+    158
+  ],
+  "terminated_case_literal_instruction_steps": 742399,
+  "listing_sha256": "c44b051dc39fd5998975fecccd10798615d09cba01a10c6e909646373358861a",
+  "source_pins": {
+    "scripts/validate_target_resolver.py": "2875e262ff9baac258effccb852b7dd273265262f92d4af361f848416e01a437",
+    "scripts/target_resolver_probe.rs": "0bc6938f7052362c899ae6383177888edb8966ed345db30d58e3d6db0a73db5b",
+    "rust/crates/genewars-runtime/src/target_resolver.rs": "1412ab3a6a55e95df5b1e5cd1f4bf4169da55523966b1bfec56b3a917628d1c5",
+    "research/variants/initial-creature-source.py": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2"
+  },
+  "output_sha256": "9f0950379f4d35b1e2dbcfb24a590ac933472e088dc16902cae13cd9e5f258dd",
+  "original_execution": false,
+  "scope": "Literal74A50 numeric search and every queried point, terminal snap, signed wrap and angular boundaries. Obstacle/terrain/blocker calls replaced by explicit deterministic environment fixtures; their bodies and gameplay query admission are separate evidence. 4096-iteration guard is a port bound, never a fabricated success."
+}
