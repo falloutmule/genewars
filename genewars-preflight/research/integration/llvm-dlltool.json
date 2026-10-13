@@ -1,0 +1,49 @@
+{
+  "completed_utc": "2026-10-13T01:24:03.815853+00:00",
+  "source_url": "https://static.rust-lang.org/dist/2026-10-01/llvm-tools-1.99.0-x86_64-pc-windows-gnu.tar.xz",
+  "archive_sha256": "977aad42852c34b4d0489a8a3fbd997b5f3e71d907fd4d256daea8f5ecba70e7",
+  "archive_bytes": 95343080,
+  "extracted": [
+    {
+      "archive_member": "llvm-tools-1.99.0-x86_64-pc-windows-gnu/LICENSE.TXT",
+      "path": "private/tools/llvm-dlltool/1.99.0/LICENSE.TXT",
+      "size": 15141,
+      "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+    },
+    {
+      "archive_member": "llvm-tools-1.99.0-x86_64-pc-windows-gnu/llvm-tools-preview/lib/rustlib/x86_64-pc-windows-gnu/bin/llvm-ar.exe",
+      "path": "private/tools/llvm-dlltool/1.99.0/llvm-ar.exe",
+      "size": 67042562,
+      "sha256": "025e548fd90fb802338c915d7d26acd758cf0f6ece91e92344295bc6aa497f66"
+    }
+  ],
+  "alias": {
+    "path": "private/tools/llvm-dlltool/1.99.0/dlltool.exe",
+    "sha256": "025e548fd90fb802338c915d7d26acd758cf0f6ece91e92344295bc6aa497f66",
+    "byte_identical_to": "private/tools/llvm-dlltool/1.99.0/llvm-ar.exe"
+  },
+  "version": "LLVM (http://llvm.org/):\n  LLVM version 23.1.1-rust-1.99.0-stable\n  Optimized build.\n",
+  "dlltool_help": "OVERVIEW: llvm-dlltool\n\nUSAGE: llvm-dlltool [options] file...\n\nOPTIONS:\n  -D <value>              Specify the input DLL Name\n  -d <value>              Input .def File\n  -f <value>              Assembler Flags\n  --identify-strict       Error out if the --identify option detects more than one DLL\n  -I <value>              Identify DLL name from import library\n  -k                      Kill @n Symbol from export\n  -l <value>              Generate an import lib\n  -m <value>              Set target machine\n  --no-leading-underscore Don't add leading underscores on symbols\n  -N <value>              Input native .def File on ARM64EC\n  -S <value>              Assembler\n  -t <value>              Prefix for temporary files (ignored)\n\nTARGETS: i386, i386:x86-64, arm, arm64, arm64ec, r4000\n",
+  "dlltool_help_exit_code": 1,
+  "runtime_dependencies": [
+    {
+      "source": "private/tools/rust/rustup/toolchains/1.99.0-x86_64-pc-windows-gnu/bin/libgcc_s_seh-1.dll",
+      "sha256": "64b5522968f77151259696f57ff75318c5a8620f36a7b462070b82ed1f684755"
+    },
+    {
+      "source": "private/tools/rust/rustup/toolchains/1.99.0-x86_64-pc-windows-gnu/bin/libwinpthread-1.dll",
+      "sha256": "a0281a5b43a305825159cc48aa4c400b475c752e7b6113c31771cc4e70d8b1b7"
+    }
+  ],
+  "import_library_probe": {
+    "exit_code": 0,
+    "sha256": "fc5807c737735a999309887b3aebee1061acb989c64b353393d3b57c1cf49b13"
+  },
+  "scope": "Private verified tool payload and basename alias only; no global configuration or Rust installation changes.",
+  "rationale": "Bundled GNU dlltool2.44 found but import generation fails CreateProcess; its accompanying GNU assembler is absent.",
+  "documentation": [
+    "https://github.com/rust-lang/rust/issues/140704",
+    "https://github.com/rust-lang/rust/issues/85658",
+    "https://raw.githubusercontent.com/llvm/llvm-project/main/llvm/tools/llvm-ar/llvm-ar.cpp"
+  ]
+}

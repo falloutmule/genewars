@@ -1,0 +1,91 @@
+{
+  "completed_utc": "2026-10-13T01:30:15.612249+00:00",
+  "scope": "Supervised locally built Rust host only; no original program executed by this check.",
+  "observed": {
+    "native_host_exit_code": 0,
+    "exit_reason": "escape",
+    "presented_frames": 5246,
+    "packet_updates": 5246,
+    "host_nominal_update_hz": 60,
+    "activated_control_ids": [
+      27,
+      28
+    ],
+    "left_mouse_transitions": 8,
+    "eventful_packets": 8,
+    "trace_omissions": 0
+  },
+  "scenarios": [
+    {
+      "action": "upper-arrow click",
+      "result": "capture -2 then event27",
+      "physical_client_xy": [
+        463,
+        245
+      ]
+    },
+    {
+      "action": "lower-arrow click",
+      "result": "capture -2 then event28",
+      "physical_client_xy": [
+        463,
+        278
+      ]
+    },
+    {
+      "action": "black margin click",
+      "result": "no capture or activation",
+      "physical_client_xy": [
+        448,
+        233
+      ]
+    },
+    {
+      "action": "rapid upper-arrow drag ending outside control before packet",
+      "result": "producer uses current [373,245], no capture or activation; press event began at [463,245]"
+    },
+    {
+      "action": "Escape key",
+      "result": "clean process exit0 with exit_reason escape"
+    }
+  ],
+  "limitations": [
+    "No original-game timing or UI parity established.",
+    "Captured held-then-release-outside was not physically observed; synthetic tests cover the state transition.",
+    "Selected-frame pixels are checked by renderer tests; no screenshot of a sustained pressed state captured.",
+    "No focus-loss or window-close-button interaction test."
+  ],
+  "evidence": [
+    {
+      "path": "private/integration/panel/controls-interaction-20261013-01.json",
+      "size": 1530,
+      "sha256": "596aa7cc9a6b598b8c215cb3be9e724184e126000108d999fc76baa5414ba8d3"
+    },
+    {
+      "path": "private/integration/panel/controls-ui-actions-20261013-01.jsonl",
+      "size": 536,
+      "sha256": "03b72adf35760441203ea60631bda67128a2031977b772c1b1ce74d88e9879b9"
+    },
+    {
+      "path": "private/integration/panel/controls-tested-20261013.exe",
+      "size": 16504165,
+      "sha256": "14d3cbb878c02eec5efeaf45140176c4c1f6dfaae5b093efe7f7e6f400e465af",
+      "tested_build_path": "private/build/rust-target/debug/genewars-controls.exe"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-controls.rs",
+      "size": 27367,
+      "sha256": "90541643caeddb012511802bd989c935f2b4db2dd08251c8f513cf2e116d80d6"
+    },
+    {
+      "path": "private/integration/panel/ifcustom-controls-smoke-20261012.anb",
+      "size": 36660,
+      "sha256": "daf41bf104dd5d6436f7af23158a5d23d624c12780e3e66177b3b5aec2fbe006"
+    },
+    {
+      "path": "private/integration/panel/MAIN.PAL",
+      "size": 768,
+      "sha256": "8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05"
+    }
+  ]
+}

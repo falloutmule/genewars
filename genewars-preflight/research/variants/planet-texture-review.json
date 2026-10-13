@@ -1,0 +1,667 @@
+{
+  "status": "passed",
+  "checked_utc": "2026-10-13T01:55:32.424880+00:00",
+  "original_or_gui_execution": false,
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "evidence": {
+    "path": "research/ghidra/planet-texture-evidence.json",
+    "size": 27577,
+    "sha256": "493539d5a3ffaec1c7d733382bf62f9ba21e381dfff5fbb3e8f894eebe5b779a"
+  },
+  "harness": {
+    "path": "research/variants/planet-texture-review.rs",
+    "size": 2073,
+    "sha256": "55e15db022b58a9c4e27b12d00ad641f1559fdc9c6b669b0680c5dacb46f5f08"
+  },
+  "native_harness": {
+    "path": "private/review/planet-textures/planet-texture-review.exe",
+    "size": 5100963,
+    "sha256": "3243b1377081710bc714379d5f136c7d61eb2cd5a21a161b89e92a4a5b1b72b1"
+  },
+  "reviewed_source": {
+    "path": "rust/crates/genewars-assets/src/lib.rs",
+    "size": 62263,
+    "sha256": "f622934d99ba2dd139090b697246b55a02de67e9b8bcda6f7dda233ec2b6a189"
+  },
+  "listing_hash_checks": [
+    {
+      "path": "private/ghidra/planets-refs/instructions-00015b90.txt",
+      "size": 10757,
+      "sha256": "d2e639da791ba69c9967189b128a3d39d03818f43b870d252e880e87dc354484"
+    },
+    {
+      "path": "private/ghidra/planets-file/instructions-0009a09c.txt",
+      "size": 2049,
+      "sha256": "b6750ccf4cf2f7e8ade257f259173d217d4aa974a3586cb6e5dddabaeba5ce5e"
+    },
+    {
+      "path": "private/ghidra/config-path/instructions-000150f0.txt",
+      "size": 6230,
+      "sha256": "03c42ed329ddd00ed2a50e8dc218ad8e77e17580ccc5b23fa85e64501786aec6"
+    },
+    {
+      "path": "private/ghidra/config-parser/instructions-000150b0.txt",
+      "size": 434,
+      "sha256": "bd2af73977bf52ecc650efb9d3bba7f2851872b8c541a125b379b6e261c05c7f"
+    },
+    {
+      "path": "private/ghidra/planets-consumers/instructions-000192d0.txt",
+      "size": 11764,
+      "sha256": "6abe8a227aca485465bee0d4b70417c075dfead22f8a921dc7998bf1f0f058ee"
+    },
+    {
+      "path": "private/ghidra/planets-texture/mode3-tail.txt",
+      "size": 1404,
+      "sha256": "e60f2b5dad7b3c22707dc2b754efc13ab56984c1e35addcc375a3d92de5daf74"
+    },
+    {
+      "path": "private/ghidra/planets-texture/mode3-sampler.txt",
+      "size": 6750,
+      "sha256": "499bb1aa2a2e0602f2526fe68a4585e70e4edfe3d86abb437ea2de328d6f14d7"
+    }
+  ],
+  "asset_count": 4,
+  "tile_count": 56,
+  "indices_compared": 622592,
+  "opacity_bytes_compared": 622592,
+  "opaque_pixels": 378446,
+  "assets": [
+    {
+      "entry_id": "root/2/disc/117",
+      "source": {
+        "path": "private/reference-run/run-001/drive-c/GAME/DATA/PL1.DAT",
+        "size": 35346,
+        "sha256": "4283af614d54519e2a9f6c59a881ba58ad356b8844c9e489a51501c51e2aeeac"
+      },
+      "decoded": {
+        "path": "private/review/planet-textures/PL1.DAT/decoded.bin",
+        "size": 163840,
+        "sha256": "476090285016a3f458c175e2aae84c30d1f33a23817ee5556d99dd96ef1aceee"
+      },
+      "tiles": [
+        {
+          "type": 0,
+          "indices": 16384,
+          "opaque": 11175,
+          "first_address": 0,
+          "last_address": 32639,
+          "indices_sha256": "1970a14237e2ab062c3515e8c6bccfd298ee6eeee0df145ded46bd76d567103b",
+          "mask_sha256": "fc5d1d51a131c7e2c93d7b478ec0d0c3c3eebf5b976d9fd3812b4f517b2c8d77"
+        },
+        {
+          "type": 1,
+          "indices": 16384,
+          "opaque": 11138,
+          "first_address": 128,
+          "last_address": 32767,
+          "indices_sha256": "267c0ea5327b5dc41c1fb1457282b14b1045fc387e2a5f711d7abc7395db6543",
+          "mask_sha256": "01d7fbd173f4098bf6375f587f4dd044f9ffc401aa60a1081dc4d55c1072a55a"
+        },
+        {
+          "type": 2,
+          "indices": 16384,
+          "opaque": 11146,
+          "first_address": 32768,
+          "last_address": 65407,
+          "indices_sha256": "b83b0dc94c558504c1eb3da013cf9da27946106573743b983a39b3e14a055543",
+          "mask_sha256": "e5c55a1600ad60a2d64cc61290aeed4207badab07705af45612d3362e57564f2"
+        },
+        {
+          "type": 3,
+          "indices": 16384,
+          "opaque": 11138,
+          "first_address": 32896,
+          "last_address": 65535,
+          "indices_sha256": "7b9688a37914279e5db33ab572763d6d99d4f25d397dca6da8a24c788eae7a20",
+          "mask_sha256": "f988859e9d54e491410bf79f6c8707c50b8aa9fc0e7d95f28e9fa5fe01a4cf00"
+        },
+        {
+          "type": 4,
+          "indices": 16384,
+          "opaque": 11170,
+          "first_address": 65536,
+          "last_address": 98175,
+          "indices_sha256": "6e7b916d04d920ec99b756529d09ae2b0a3895e54719bc218a373771e49e1be0",
+          "mask_sha256": "76121aa59e452dbef9f8570f482fd2661f24cf9052661260fa3f221ad52950d1"
+        },
+        {
+          "type": 5,
+          "indices": 16384,
+          "opaque": 11146,
+          "first_address": 65664,
+          "last_address": 98303,
+          "indices_sha256": "5cfb927d70481274b0b839321da6318c9fa401f071f1e56ae370fa06120b693f",
+          "mask_sha256": "9eff649f569f4650f9565897c44d067ebe0fef549bfb6208ad5882e1bc92517c"
+        },
+        {
+          "type": 6,
+          "indices": 16384,
+          "opaque": 11368,
+          "first_address": 98304,
+          "last_address": 130943,
+          "indices_sha256": "66f43782bd7789f652c6f9098d7814b9283ec57fdd92513648f7c260acf44b7f",
+          "mask_sha256": "f53609ec8d659d634f269f856ba0e1e5271150346601813b30afb2825027df27"
+        },
+        {
+          "type": 7,
+          "indices": 16384,
+          "opaque": 11326,
+          "first_address": 98432,
+          "last_address": 131071,
+          "indices_sha256": "cc45b3c904c592178e65750e45d6acfe6140ef7961e3269db32229e7efd25223",
+          "mask_sha256": "695a7077261d01268ad3c2cac2d2e5b356c9a5bfb50883d7114592c096b246da"
+        },
+        {
+          "type": 8,
+          "indices": 4096,
+          "opaque": 974,
+          "first_address": 131072,
+          "last_address": 147263,
+          "indices_sha256": "e23708617220d0420981e826c1f36fdfd19bf9b9cf544f887af0ff1cd7b8d3ee",
+          "mask_sha256": "281ca05a55f37b3d8105c20f65d05f0c5d235e3e817c5359f21db491b09b0a1b"
+        },
+        {
+          "type": 9,
+          "indices": 4096,
+          "opaque": 962,
+          "first_address": 131136,
+          "last_address": 147327,
+          "indices_sha256": "f5f4f42093d0c02fd2b6422fbd2a41aa744b3f0a62cec68fee8bb4ae0a4e13cc",
+          "mask_sha256": "5088254313152cf2e238729de9056ea81fa95b17361c3c3a972eb0f3faae0f2b"
+        },
+        {
+          "type": 10,
+          "indices": 4096,
+          "opaque": 765,
+          "first_address": 131200,
+          "last_address": 147391,
+          "indices_sha256": "27f1365db14bf18731b147dcabb13e78e31de8aa5025b7ac05b4d19aaf8d089d",
+          "mask_sha256": "3135bcc096a89ed398833ffcf107388b27eb09cad6b0a50477803e1b91c34709"
+        },
+        {
+          "type": 11,
+          "indices": 4096,
+          "opaque": 736,
+          "first_address": 131264,
+          "last_address": 147455,
+          "indices_sha256": "9e08c6919a29eeedf687a73049c959af858860274aaddfe2145a16388ec8e1fc",
+          "mask_sha256": "db231c093ee41f56594555ea4e1da9136053024122e17f93d22ea9cbed8f0695"
+        },
+        {
+          "type": 12,
+          "indices": 4096,
+          "opaque": 653,
+          "first_address": 147456,
+          "last_address": 163647,
+          "indices_sha256": "49e7c403e78df198ada17445ba75ac37d15b3e18eec5faa297751ba416ae9b0c",
+          "mask_sha256": "0c266cf5abadff89d7b6ab69493ccc4a131ab2aaaf7c1d38387b1e96df41e3f5"
+        },
+        {
+          "type": 13,
+          "indices": 4096,
+          "opaque": 763,
+          "first_address": 147520,
+          "last_address": 163711,
+          "indices_sha256": "99b02339acf7b489e96ce0e7455d6322af4b1cb0d269b0ddbe1a407afd770524",
+          "mask_sha256": "0404fb908cd5e3ba4f13119fa2ebfddc3f22847591ac8df4af58045534aa0780"
+        }
+      ],
+      "native_checks": {
+        "tiles": 14,
+        "indices": 155648,
+        "rejected_types": 242,
+        "malformed_lengths": 5
+      },
+      "uninterpreted_atlas_bytes": 8192
+    },
+    {
+      "entry_id": "root/2/disc/118",
+      "source": {
+        "path": "private/reference-run/run-001/drive-c/GAME/DATA/PL2.DAT",
+        "size": 35170,
+        "sha256": "5d16ceef343f85fe8a250b1b554e2d1ae7c2748580c772e2ed08b9ad0ca2ad32"
+      },
+      "decoded": {
+        "path": "private/review/planet-textures/PL2.DAT/decoded.bin",
+        "size": 163840,
+        "sha256": "444dc16a096187065727c347f3755e898bd89edbb8daf12d677f6253b0b61849"
+      },
+      "tiles": [
+        {
+          "type": 0,
+          "indices": 16384,
+          "opaque": 11200,
+          "first_address": 0,
+          "last_address": 32639,
+          "indices_sha256": "6c217a51963ecf4c396f6fdf2da6fd1fe22b1b0943d4d813433c1f45983930bf",
+          "mask_sha256": "8d7e5d363ffba6458f01faa4a35f2246805cbb06815ed4f9fb3a97554e9a6d41"
+        },
+        {
+          "type": 1,
+          "indices": 16384,
+          "opaque": 11193,
+          "first_address": 128,
+          "last_address": 32767,
+          "indices_sha256": "19c24da3c094532e591e6e970d2b2256c6af4933d4e431bc607026553b16103b",
+          "mask_sha256": "afdec925ac0176507e2d7704c18549701092eaeac4b9078af0d70cd22431ded3"
+        },
+        {
+          "type": 2,
+          "indices": 16384,
+          "opaque": 11198,
+          "first_address": 32768,
+          "last_address": 65407,
+          "indices_sha256": "61fc7f0886554ab6933406001167fcf28264e60e55fed1e3f4e3e79d892c2256",
+          "mask_sha256": "e2debbdd4321dcdf3cc75a6f8578f8a12cd702c26e890dd577023a56161d6dd2"
+        },
+        {
+          "type": 3,
+          "indices": 16384,
+          "opaque": 11165,
+          "first_address": 32896,
+          "last_address": 65535,
+          "indices_sha256": "6ede1b9395d15d90bf61e3125009f950667dfad581336cd6a1b8aef51fbcf8d8",
+          "mask_sha256": "b83ef843b7a1d544e3665b450aade94e91ea691cb1398f65a9a79a219a0aa205"
+        },
+        {
+          "type": 4,
+          "indices": 16384,
+          "opaque": 11177,
+          "first_address": 65536,
+          "last_address": 98175,
+          "indices_sha256": "5efb596c8441cbebd2e6219442e8c32d9943e465977543086d94118a81460c96",
+          "mask_sha256": "ae70204a2a34e3e922c0670d9a8fb09524694615e6f81db342cdcc9839ceaa41"
+        },
+        {
+          "type": 5,
+          "indices": 16384,
+          "opaque": 11209,
+          "first_address": 65664,
+          "last_address": 98303,
+          "indices_sha256": "0993249866f9b0fef381f36ff3cfabf72be8b5b6e31a487a2b95369810ab039c",
+          "mask_sha256": "e7ae8c806b789e8e2505a4971892872e9a0218b2bd60ffe4c5254b2e6c49be4d"
+        },
+        {
+          "type": 6,
+          "indices": 16384,
+          "opaque": 11368,
+          "first_address": 98304,
+          "last_address": 130943,
+          "indices_sha256": "66f43782bd7789f652c6f9098d7814b9283ec57fdd92513648f7c260acf44b7f",
+          "mask_sha256": "f53609ec8d659d634f269f856ba0e1e5271150346601813b30afb2825027df27"
+        },
+        {
+          "type": 7,
+          "indices": 16384,
+          "opaque": 11326,
+          "first_address": 98432,
+          "last_address": 131071,
+          "indices_sha256": "cc45b3c904c592178e65750e45d6acfe6140ef7961e3269db32229e7efd25223",
+          "mask_sha256": "695a7077261d01268ad3c2cac2d2e5b356c9a5bfb50883d7114592c096b246da"
+        },
+        {
+          "type": 8,
+          "indices": 4096,
+          "opaque": 974,
+          "first_address": 131072,
+          "last_address": 147263,
+          "indices_sha256": "e23708617220d0420981e826c1f36fdfd19bf9b9cf544f887af0ff1cd7b8d3ee",
+          "mask_sha256": "281ca05a55f37b3d8105c20f65d05f0c5d235e3e817c5359f21db491b09b0a1b"
+        },
+        {
+          "type": 9,
+          "indices": 4096,
+          "opaque": 962,
+          "first_address": 131136,
+          "last_address": 147327,
+          "indices_sha256": "f5f4f42093d0c02fd2b6422fbd2a41aa744b3f0a62cec68fee8bb4ae0a4e13cc",
+          "mask_sha256": "5088254313152cf2e238729de9056ea81fa95b17361c3c3a972eb0f3faae0f2b"
+        },
+        {
+          "type": 10,
+          "indices": 4096,
+          "opaque": 765,
+          "first_address": 131200,
+          "last_address": 147391,
+          "indices_sha256": "27f1365db14bf18731b147dcabb13e78e31de8aa5025b7ac05b4d19aaf8d089d",
+          "mask_sha256": "3135bcc096a89ed398833ffcf107388b27eb09cad6b0a50477803e1b91c34709"
+        },
+        {
+          "type": 11,
+          "indices": 4096,
+          "opaque": 736,
+          "first_address": 131264,
+          "last_address": 147455,
+          "indices_sha256": "9e08c6919a29eeedf687a73049c959af858860274aaddfe2145a16388ec8e1fc",
+          "mask_sha256": "db231c093ee41f56594555ea4e1da9136053024122e17f93d22ea9cbed8f0695"
+        },
+        {
+          "type": 12,
+          "indices": 4096,
+          "opaque": 653,
+          "first_address": 147456,
+          "last_address": 163647,
+          "indices_sha256": "49e7c403e78df198ada17445ba75ac37d15b3e18eec5faa297751ba416ae9b0c",
+          "mask_sha256": "0c266cf5abadff89d7b6ab69493ccc4a131ab2aaaf7c1d38387b1e96df41e3f5"
+        },
+        {
+          "type": 13,
+          "indices": 4096,
+          "opaque": 763,
+          "first_address": 147520,
+          "last_address": 163711,
+          "indices_sha256": "99b02339acf7b489e96ce0e7455d6322af4b1cb0d269b0ddbe1a407afd770524",
+          "mask_sha256": "0404fb908cd5e3ba4f13119fa2ebfddc3f22847591ac8df4af58045534aa0780"
+        }
+      ],
+      "native_checks": {
+        "tiles": 14,
+        "indices": 155648,
+        "rejected_types": 242,
+        "malformed_lengths": 5
+      },
+      "uninterpreted_atlas_bytes": 8192
+    },
+    {
+      "entry_id": "root/2/disc/119",
+      "source": {
+        "path": "private/reference-run/run-001/drive-c/GAME/DATA/PL3.DAT",
+        "size": 40842,
+        "sha256": "32d3f630178e1b123465d47d1af5dbb39e670d9f8fe6a1d27dda2fad565fa2b0"
+      },
+      "decoded": {
+        "path": "private/review/planet-textures/PL3.DAT/decoded.bin",
+        "size": 163840,
+        "sha256": "e06b921118fdf46008abac35caf958332926cdddff861b65f58dc0213a1438d1"
+      },
+      "tiles": [
+        {
+          "type": 0,
+          "indices": 16384,
+          "opaque": 11269,
+          "first_address": 0,
+          "last_address": 32639,
+          "indices_sha256": "050e81e17e3d54fc3d2e6d6e063566a757975e38d96913e0508ab4a03a0cc3a1",
+          "mask_sha256": "2e783cb7534cc165f63bf76abfddacd066262915797a64b97d424e736ecea8e4"
+        },
+        {
+          "type": 1,
+          "indices": 16384,
+          "opaque": 11159,
+          "first_address": 128,
+          "last_address": 32767,
+          "indices_sha256": "b2c97fd66fa8843e3b36f4c4abab6e84baa1c012fe78aa865992b14360431b17",
+          "mask_sha256": "04256287e360433a22d3eb49068166d01c52246fd2a9a756498ff16fe77effde"
+        },
+        {
+          "type": 2,
+          "indices": 16384,
+          "opaque": 11168,
+          "first_address": 32768,
+          "last_address": 65407,
+          "indices_sha256": "b035503c996992084d286e3c79dace65d94b8f83b86c744239e08af1122d090c",
+          "mask_sha256": "2e96c28ef26d6c87c90bbaed1af75bcd589c2d9155fe7734256d1b214a1ffb0d"
+        },
+        {
+          "type": 3,
+          "indices": 16384,
+          "opaque": 11151,
+          "first_address": 32896,
+          "last_address": 65535,
+          "indices_sha256": "22ccfe7f7b962b8c536e1d135fa424b7d75ad4af9099a958b29ad4b42e40a425",
+          "mask_sha256": "52fe5939d72674dab8868787708a37214071a0d3e1e0ded50cfe015af3b835ae"
+        },
+        {
+          "type": 4,
+          "indices": 16384,
+          "opaque": 11149,
+          "first_address": 65536,
+          "last_address": 98175,
+          "indices_sha256": "f52a1a484a103e160be0fbe510ed8c47afcecd9aafc57652fb3f18f04c26516d",
+          "mask_sha256": "2c23c6629937f1b4d84d4139252136c12de54de8903c5b184dcaed4d14655dd4"
+        },
+        {
+          "type": 5,
+          "indices": 16384,
+          "opaque": 11149,
+          "first_address": 65664,
+          "last_address": 98303,
+          "indices_sha256": "b3ea65ca4e2cd3e67ac8dd10ca7066c6eb7d3530056f5e2be1dff5a7cb66deb5",
+          "mask_sha256": "6887ab3759dbe9809952475f3355a70e788e1d8fc0fb74d30244511edcdadcd5"
+        },
+        {
+          "type": 6,
+          "indices": 16384,
+          "opaque": 11368,
+          "first_address": 98304,
+          "last_address": 130943,
+          "indices_sha256": "66f43782bd7789f652c6f9098d7814b9283ec57fdd92513648f7c260acf44b7f",
+          "mask_sha256": "f53609ec8d659d634f269f856ba0e1e5271150346601813b30afb2825027df27"
+        },
+        {
+          "type": 7,
+          "indices": 16384,
+          "opaque": 11326,
+          "first_address": 98432,
+          "last_address": 131071,
+          "indices_sha256": "cc45b3c904c592178e65750e45d6acfe6140ef7961e3269db32229e7efd25223",
+          "mask_sha256": "695a7077261d01268ad3c2cac2d2e5b356c9a5bfb50883d7114592c096b246da"
+        },
+        {
+          "type": 8,
+          "indices": 4096,
+          "opaque": 974,
+          "first_address": 131072,
+          "last_address": 147263,
+          "indices_sha256": "e23708617220d0420981e826c1f36fdfd19bf9b9cf544f887af0ff1cd7b8d3ee",
+          "mask_sha256": "281ca05a55f37b3d8105c20f65d05f0c5d235e3e817c5359f21db491b09b0a1b"
+        },
+        {
+          "type": 9,
+          "indices": 4096,
+          "opaque": 962,
+          "first_address": 131136,
+          "last_address": 147327,
+          "indices_sha256": "f5f4f42093d0c02fd2b6422fbd2a41aa744b3f0a62cec68fee8bb4ae0a4e13cc",
+          "mask_sha256": "5088254313152cf2e238729de9056ea81fa95b17361c3c3a972eb0f3faae0f2b"
+        },
+        {
+          "type": 10,
+          "indices": 4096,
+          "opaque": 765,
+          "first_address": 131200,
+          "last_address": 147391,
+          "indices_sha256": "27f1365db14bf18731b147dcabb13e78e31de8aa5025b7ac05b4d19aaf8d089d",
+          "mask_sha256": "3135bcc096a89ed398833ffcf107388b27eb09cad6b0a50477803e1b91c34709"
+        },
+        {
+          "type": 11,
+          "indices": 4096,
+          "opaque": 736,
+          "first_address": 131264,
+          "last_address": 147455,
+          "indices_sha256": "9e08c6919a29eeedf687a73049c959af858860274aaddfe2145a16388ec8e1fc",
+          "mask_sha256": "db231c093ee41f56594555ea4e1da9136053024122e17f93d22ea9cbed8f0695"
+        },
+        {
+          "type": 12,
+          "indices": 4096,
+          "opaque": 653,
+          "first_address": 147456,
+          "last_address": 163647,
+          "indices_sha256": "49e7c403e78df198ada17445ba75ac37d15b3e18eec5faa297751ba416ae9b0c",
+          "mask_sha256": "0c266cf5abadff89d7b6ab69493ccc4a131ab2aaaf7c1d38387b1e96df41e3f5"
+        },
+        {
+          "type": 13,
+          "indices": 4096,
+          "opaque": 763,
+          "first_address": 147520,
+          "last_address": 163711,
+          "indices_sha256": "99b02339acf7b489e96ce0e7455d6322af4b1cb0d269b0ddbe1a407afd770524",
+          "mask_sha256": "0404fb908cd5e3ba4f13119fa2ebfddc3f22847591ac8df4af58045534aa0780"
+        }
+      ],
+      "native_checks": {
+        "tiles": 14,
+        "indices": 155648,
+        "rejected_types": 242,
+        "malformed_lengths": 5
+      },
+      "uninterpreted_atlas_bytes": 8192
+    },
+    {
+      "entry_id": "root/2/disc/120",
+      "source": {
+        "path": "private/reference-run/run-001/drive-c/GAME/DATA/PL4.DAT",
+        "size": 39244,
+        "sha256": "8c07e6acd8741e413a8ab63441f85f41fd95d001271d7e541f8c8ab47789d8f2"
+      },
+      "decoded": {
+        "path": "private/review/planet-textures/PL4.DAT/decoded.bin",
+        "size": 163840,
+        "sha256": "1795203e16cc147c35fb4fcd5eb0b3bd85ca6b8662fe25bd2f314f3bb556bbf9"
+      },
+      "tiles": [
+        {
+          "type": 0,
+          "indices": 16384,
+          "opaque": 11212,
+          "first_address": 0,
+          "last_address": 32639,
+          "indices_sha256": "4e0c9a7f4f88745e73bc28a0ec5d8b7a4bcd8d9c3f61d4d5fec4b0de18418db2",
+          "mask_sha256": "ff49cd0bd663a7dfe49ca3888e9d462567f29925002d772dcc6ab0b4bb341028"
+        },
+        {
+          "type": 1,
+          "indices": 16384,
+          "opaque": 11210,
+          "first_address": 128,
+          "last_address": 32767,
+          "indices_sha256": "8aa7185302aa30a718b3896046e2eb47b11a8d20e43c00ebacdc9c9d7967a33c",
+          "mask_sha256": "08ffcf0de67da6f81d676a67f1cca7f6db6cc788b2e0b1f05d0b2c104a0389b6"
+        },
+        {
+          "type": 2,
+          "indices": 16384,
+          "opaque": 11209,
+          "first_address": 32768,
+          "last_address": 65407,
+          "indices_sha256": "930add25f07b8e4b3efc7347e3ac5246f16a15cb86dce2e8014ea861ccef50db",
+          "mask_sha256": "b965078764af0b24f3fb3ebadf49726fc0d27dd416684539a26f8565ea5af3ff"
+        },
+        {
+          "type": 3,
+          "indices": 16384,
+          "opaque": 11161,
+          "first_address": 32896,
+          "last_address": 65535,
+          "indices_sha256": "afc599f8d3f462dd55afa12b962e78145b0c6d0f81a1c8d1a24b12d654d43b81",
+          "mask_sha256": "4acc373cc06248b9507c0597e7987d0e1cd514a9391ae0d03421a746da4dd4ab"
+        },
+        {
+          "type": 4,
+          "indices": 16384,
+          "opaque": 11192,
+          "first_address": 65536,
+          "last_address": 98175,
+          "indices_sha256": "59faebf17e29d6b5cb1f3566f3e9546658d11095ff7094174743aecc2a4a4a34",
+          "mask_sha256": "4faf7836af605ac5599dbe97abbe276d6a4963e7dd2e46a3e6f5ecef7ab15697"
+        },
+        {
+          "type": 5,
+          "indices": 16384,
+          "opaque": 11174,
+          "first_address": 65664,
+          "last_address": 98303,
+          "indices_sha256": "528e1f0d79839a0218f4d25c2310cbf609c12b42ecc5be4b070cfce16cf5b757",
+          "mask_sha256": "03fbcb2655797dea18e2a6553be80c4694a1b7d32124d6f19f277db5b10a8d0b"
+        },
+        {
+          "type": 6,
+          "indices": 16384,
+          "opaque": 11368,
+          "first_address": 98304,
+          "last_address": 130943,
+          "indices_sha256": "66f43782bd7789f652c6f9098d7814b9283ec57fdd92513648f7c260acf44b7f",
+          "mask_sha256": "f53609ec8d659d634f269f856ba0e1e5271150346601813b30afb2825027df27"
+        },
+        {
+          "type": 7,
+          "indices": 16384,
+          "opaque": 11326,
+          "first_address": 98432,
+          "last_address": 131071,
+          "indices_sha256": "cc45b3c904c592178e65750e45d6acfe6140ef7961e3269db32229e7efd25223",
+          "mask_sha256": "695a7077261d01268ad3c2cac2d2e5b356c9a5bfb50883d7114592c096b246da"
+        },
+        {
+          "type": 8,
+          "indices": 4096,
+          "opaque": 974,
+          "first_address": 131072,
+          "last_address": 147263,
+          "indices_sha256": "e23708617220d0420981e826c1f36fdfd19bf9b9cf544f887af0ff1cd7b8d3ee",
+          "mask_sha256": "281ca05a55f37b3d8105c20f65d05f0c5d235e3e817c5359f21db491b09b0a1b"
+        },
+        {
+          "type": 9,
+          "indices": 4096,
+          "opaque": 962,
+          "first_address": 131136,
+          "last_address": 147327,
+          "indices_sha256": "f5f4f42093d0c02fd2b6422fbd2a41aa744b3f0a62cec68fee8bb4ae0a4e13cc",
+          "mask_sha256": "5088254313152cf2e238729de9056ea81fa95b17361c3c3a972eb0f3faae0f2b"
+        },
+        {
+          "type": 10,
+          "indices": 4096,
+          "opaque": 765,
+          "first_address": 131200,
+          "last_address": 147391,
+          "indices_sha256": "27f1365db14bf18731b147dcabb13e78e31de8aa5025b7ac05b4d19aaf8d089d",
+          "mask_sha256": "3135bcc096a89ed398833ffcf107388b27eb09cad6b0a50477803e1b91c34709"
+        },
+        {
+          "type": 11,
+          "indices": 4096,
+          "opaque": 736,
+          "first_address": 131264,
+          "last_address": 147455,
+          "indices_sha256": "9e08c6919a29eeedf687a73049c959af858860274aaddfe2145a16388ec8e1fc",
+          "mask_sha256": "db231c093ee41f56594555ea4e1da9136053024122e17f93d22ea9cbed8f0695"
+        },
+        {
+          "type": 12,
+          "indices": 4096,
+          "opaque": 653,
+          "first_address": 147456,
+          "last_address": 163647,
+          "indices_sha256": "49e7c403e78df198ada17445ba75ac37d15b3e18eec5faa297751ba416ae9b0c",
+          "mask_sha256": "0c266cf5abadff89d7b6ab69493ccc4a131ab2aaaf7c1d38387b1e96df41e3f5"
+        },
+        {
+          "type": 13,
+          "indices": 4096,
+          "opaque": 763,
+          "first_address": 147520,
+          "last_address": 163711,
+          "indices_sha256": "99b02339acf7b489e96ce0e7455d6322af4b1cb0d269b0ddbe1a407afd770524",
+          "mask_sha256": "0404fb908cd5e3ba4f13119fa2ebfddc3f22847591ac8df4af58045534aa0780"
+        }
+      ],
+      "native_checks": {
+        "tiles": 14,
+        "indices": 155648,
+        "rejected_types": 242,
+        "malformed_lengths": 5
+      },
+      "uninterpreted_atlas_bytes": 8192
+    }
+  ],
+  "limits": [
+    "Exact PL1..4 inputs and types0..13 only; unused8192bytes peratlas uninterpreted",
+    "No palette association, interpolation, projection, clipping, draw order or live rendering established",
+    "PLANETS.DAT consumer remains unproven; numbered textures are a separate resource path"
+  ]
+}

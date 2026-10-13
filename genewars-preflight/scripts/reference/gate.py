@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 import re
 
-from prepare import ROOT, RUN, SDL2, checked, digest, prepare_run
+from prepare import ROOT, RUN, SDL2, SESSION, HUMAN_APPROVAL, EXTRA_GAME_INPUTS, checked, digest, prepare_run
 
 
 def process_identity(pid):
@@ -71,9 +71,13 @@ def main():
     args = parser.parse_args()
     approval = json.loads((RUN / 'logs/human-approval.json').read_text(encoding='utf-8'))
     launch = json.loads((RUN / 'logs/launch-process.json').read_text(encoding='utf-8'))
-    human = json.loads((ROOT / 'research/variants/reference-approval.json').read_text(encoding='utf-8'))
+    human = json.loads(HUMAN_APPROVAL.read_text(encoding='utf-8'))
     if not human['approved'] or not approval.get('host_release_required'):
         raise SystemExit('No scoped approved host-gate session')
+    if SESSION == 'run-002':
+        expected_config = __import__('hashlib').sha256(EXTRA_GAME_INPUTS['GAME/config.ini']).hexdigest()
+        if human.get('run_id') != SESSION or human.get('generated_config_sha256') != expected_config or human.get('candidate_sha256') != '4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba':
+            raise SystemExit('Approval does not bind this exact prepared run/config')
     pid = int(launch['pid'])
     actual_image, started = process_identity(pid)
     if actual_image != (SDL2 / 'dosbox-x.exe').resolve():

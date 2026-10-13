@@ -1,0 +1,11 @@
+# Reference run002 outcome
+
+**Observed:** the separately approved DOSBox-X session started the exact provisional CD candidate, displayed an animated introduction, main-menu artwork, and Options artwork with embossed OPTIONS/OK text. Dynamic labels were not visible in the observed panels; their cause remains unresolved. Guest pointer movement and physical control mapping also remain unresolved. No mission, gameplay, save/reload, or original timing sample was obtained.
+
+The captures are **private host-window screenshots, not raw emulator framebuffer dumps**. The raw integrity receipt's supplied `framebuffer_capture: observed` status uses a broad capture label; the supervisor's accompanying notes explicitly identify window screenshots. This adjacent clarification preserves both original receipts unchanged and does not claim palette-index framebuffer access.
+
+The operator stopped PID 18116 after native close attempts failed to end the session. The final process receipt records exit 15 at `2026-10-13T01:50:15.851776Z`; this is the supervised OS termination result, not a game-reported failure code or an observed natural application exit. No installation/configuration error was visible during this run. The 782.22-second process lifetime and 728.11-second release-to-exit interval describe host supervision, not game performance or cadence.
+
+**Corroborated by post-run hashes:** 489 of 490 original GAME files were unchanged. Only `GW.ERR` changed, from 45 bytes to an empty file; no original file was removed. Generated `config.ini`, `GW.EXE`, `DOS4GW.EXE`, original archive, original/copied media, emulator package/executable and emulator configuration remained unchanged. The added C-drive files were the reviewed `STARTGW.BAT` gate and `ADDRESS.TXT`; no save-game result is inferred from these additions.
+
+The checker, supervisor and exact operator-stop receipt hashes, plus private screenshot records, are pinned in `reference-run-002-outcome.json`. Claims apply only to this candidate and prepared emulator setup. They establish startup observations and retained input integrity, not a playable reconstruction, canonical retail behavior, font diagnosis, input parity, mission success, or timing equivalence. This reviewer launched no original program or GUI.

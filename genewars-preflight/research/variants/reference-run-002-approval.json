@@ -1,0 +1,11 @@
+{
+  "run_id": "run-002",
+  "approved": true,
+  "human_statement": "approve and continue to the end i will be unavailable",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "generated_config_sha256": "ff0c1921640bb81cd0b73fc4a995316ea9ff1b8d60ed288e5d52a1be4e7c0d5f",
+  "scope": "One separately approved supervised session of exact CD GW.EXE/DOS4GW with generated static-evidence config.ini. No installer/launcher/patch/other variant.",
+  "note": "Explicit asynchronous human reply to the scoped run002 question; not blanket original-executable authorization.",
+  "recorded_utc": "2026-10-13T01:31:05.479368+00:00",
+  "approved_question": "One new supervised DOSBox-X session up to20minutes of exact CD GW.EXE/DOS4GW.EXE with reviewed generated config.ini in fresh private run002; startup/menu/firstmission/UI and optionalsave/reload; stop on another installation/configurationfailure; noinstaller/patch."
+}

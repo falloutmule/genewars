@@ -1,0 +1,349 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "status": "verified_bounded_numeric_transaction",
+  "source": "Exact CD candidate, static instructions; no original program execution",
+  "transaction_va": "0x53a33",
+  "function_va": "0x534d0",
+  "command_chain": [
+    "pending entity+0x57 bit0 -> 0x57f8d -> 0x507d0",
+    "profile byte+0x16=0 -> initializer 0x5122f sets dispatch byte entity+0x55=9",
+    "dispatch 0x57fa9 table index8 -> 0x58271 -> 0x534d0",
+    "mode byte entity+0x7e=0 and stage u16 entity+0x88=3 -> 0x53a33"
+  ],
+  "costs_va": "0x104e1c",
+  "costs": [
+    600,
+    750,
+    400,
+    400,
+    300,
+    600,
+    250,
+    1000,
+    300,
+    500,
+    900,
+    650,
+    600,
+    300
+  ],
+  "cost_table_sha256": "cfa842063144e873d53542ae67d8fd138ccd3baf55d01ab5ab3551d0c38af165",
+  "layout": {
+    "owner": "unsigned byte entity+0x18",
+    "selector": "signed byte entity+0x83; safe admitted range 0..13",
+    "skill": "signed byte [entity+0xc0]+0x17",
+    "stage": "unsigned16 entity+0x88",
+    "resource_base": "0x119215 + owner*0x70d",
+    "primary": "signed32 resource+2",
+    "secondary": "signed32 resource+6",
+    "refill_flag": "byte at 0x118d76 + unsigned(resource[0])*0x70d; any nonzero"
+  },
+  "prerequisite": "vtable at entity+0x23, callback slot+0xac returns AL nonzero; caller must supply readiness",
+  "formula": "cost = wrapping_i32(base_cost - 2*signed8_skill); compare signed wrapping_i32(primary+secondary) >= cost",
+  "insufficient": "Pools untouched by debit branch; entity+0x7a=8, calls 0x51e80(entity,1), then returns. Pure model does not emulate cancellation side effects.",
+  "not_ready": "Calls 0x526c0(entity,0) through 0x53982; model only leaves pools and stage unchanged, excluding helper side effects.",
+  "paid": "Spend primary first using signed wrapping cost-primary comparison; otherwise subtract remainder from secondary and clear primary. If refill flag nonzero and new signed wrapping total<=1000, set secondary=1000. Set stage=4.",
+  "tests": {
+    "listing_contracts": 4,
+    "cost_skill_combinations": 3584,
+    "cost_skill_vectors_sha256": "aa787f96c29a9dba22131f67366edc606ad97ed71048a87fc3803804edce9f17",
+    "transaction_vectors": 18
+  },
+  "vectors": [
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 600,
+      "secondary": 0,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 600,
+        "primary": 0,
+        "secondary": 0,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 601,
+      "secondary": 0,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 600,
+        "primary": 1,
+        "secondary": 0,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 599,
+      "secondary": 0,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "insufficient",
+        "cost": 600,
+        "primary": 599,
+        "secondary": 0,
+        "stage": 3
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 100,
+      "secondary": 500,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 600,
+        "primary": 0,
+        "secondary": 0,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 100,
+      "secondary": 501,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 600,
+        "primary": 0,
+        "secondary": 1,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 700,
+      "secondary": 0,
+      "refill": true,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 600,
+        "primary": 100,
+        "secondary": 1000,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 1600,
+      "secondary": 0,
+      "refill": true,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 600,
+        "primary": 1000,
+        "secondary": 1000,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 1601,
+      "secondary": 0,
+      "refill": true,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 600,
+        "primary": 1001,
+        "secondary": 0,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 0,
+      "secondary": 600,
+      "refill": true,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 600,
+        "primary": 0,
+        "secondary": 1000,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 6,
+      "skill": 127,
+      "primary": 0,
+      "secondary": 0,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": -4,
+        "primary": 4,
+        "secondary": 0,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 6,
+      "skill": -128,
+      "primary": 506,
+      "secondary": 0,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 506,
+        "primary": 0,
+        "secondary": 0,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 6,
+      "skill": -128,
+      "primary": 505,
+      "secondary": 0,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "insufficient",
+        "cost": 506,
+        "primary": 505,
+        "secondary": 0,
+        "stage": 3
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 2147483647,
+      "secondary": 1,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "insufficient",
+        "cost": 600,
+        "primary": 2147483647,
+        "secondary": 1,
+        "stage": 3
+      }
+    },
+    {
+      "selector": 6,
+      "skill": 127,
+      "primary": -2147483648,
+      "secondary": -2147483648,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": -4,
+        "primary": 0,
+        "secondary": 4,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 600,
+      "secondary": 0,
+      "refill": false,
+      "ready": false,
+      "expected": {
+        "status": "not_ready",
+        "primary": 600,
+        "secondary": 0,
+        "stage": 3
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": 2147483647,
+      "secondary": 0,
+      "refill": true,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 600,
+        "primary": 2147483047,
+        "secondary": 0,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 0,
+      "skill": 0,
+      "primary": -1,
+      "secondary": 602,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 600,
+        "primary": 0,
+        "secondary": 1,
+        "stage": 4
+      }
+    },
+    {
+      "selector": 13,
+      "skill": 127,
+      "primary": 46,
+      "secondary": 0,
+      "refill": false,
+      "ready": true,
+      "expected": {
+        "status": "paid",
+        "cost": 46,
+        "primary": 0,
+        "secondary": 0,
+        "stage": 4
+      }
+    }
+  ],
+  "private_listings": [
+    {
+      "private_path": "private/ghidra/construction-command/activation-range.txt",
+      "sha256": "593262712e35cbc78615bbda524173ef480e015e805c5121922636a98eeb29c2"
+    },
+    {
+      "private_path": "private/ghidra/construction-setup/instructions-000507d0.txt",
+      "sha256": "301fe1652f9d5cb11c92b8d692330cdb3d1363d6e087dc911de360131f99b15e"
+    },
+    {
+      "private_path": "private/ghidra/construction-command/dispatch-range.txt",
+      "sha256": "fdb04361a7bf1b3d0a296fa96b724f733b0d38d133c8340595518edcc45f1fc3"
+    },
+    {
+      "private_path": "private/ghidra/building-cost-refs/instructions-000534d0.txt",
+      "sha256": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141"
+    }
+  ],
+  "limits": [
+    "Safe API rejects selectors outside0..13; original signed array access has no local guard",
+    "Not an entire build command or world simulation; callback, movement, reservations, cancellation and later building creation excluded",
+    "No proven physical input binding, scheduling cadence, skill gameplay range, refill-flag meaning or balance invariant",
+    "Negative adjusted costs and signed overflow preserved, not clamped",
+    "Two original temporary pool writes before NEG collapse to one final pure transaction result",
+    "Synthetic model vectors and instruction/hash assertions are not execution of the original binary"
+  ]
+}

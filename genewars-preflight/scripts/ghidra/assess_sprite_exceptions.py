@@ -27,11 +27,12 @@ out=dict(scope='static exception triage; no guessed repair or original execution
  bones=dict(input_sha256=H,bytes=len(b),sprite_record=5,width=width,height=height,
    sprite_start=offset+18,next_sprite_start=next_offset,complete_rows_before_next_sprite=completed,
    cursor_crossing_next_sprite=pos,referencing_component=8,referencing_frame=8,referencing_animation=4,
-   sentinel_exemption=False,status='blocked',
-   conclusion='Nonempty sprite is referenced by animation metadata; not proven unused. Stream crosses neighboring sprite before declared height. Exact cause remains unresolved.'),
+   sentinel_exemption=False,status='resolved_packed4',
+   admission_receipt='research/ghidra/bones-evidence.json',
+   conclusion='The indexed8 model crosses neighboring sprite data. Actual entity/frame consumers90460/94400 establish packed4; separate hash-bound receipt validates all10 active streams. This diagnostic retains the rejected-model observation.'),
  gpf=dict(cd_candidate_literal_reference=b'gpf' in candidate.lower(),status='blocked',
    conclusion='Reported DEADBEEF/prefix-RNC wrapper and CRC failure have no established support in ANB loader98A60. Do not bypass CRC or invent a variant.'),
- instruction_basis=['0x98A60 fixes sprite data relative to file+18','0xA7730 signed-control basic path','0xA7730 skips only zero-width/height descriptors'],
+   instruction_basis=['0x98A60 fixes sprite data relative to file+18','0xA7730 is the rejected indexed8 model for BONES','0x5A1C0 selects BONES animation base','0x94910/0x94D70 call packed4 consumers90460/94400'],
  tests_passed=True)
 (P/'research/ghidra/sprite-exception-assessment.json').write_text(json.dumps(out,indent=2)+'\n')
-print('PASS BONES nonempty/referenced record and bounded stream-crossing assessment; unresolved inputs remain blocked')
+print('PASS BONES rejected-indexed8 diagnostic retained; packed4 admission is separate; GPF remains blocked')

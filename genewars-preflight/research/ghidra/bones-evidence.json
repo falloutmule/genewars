@@ -1,0 +1,218 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "source_sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f",
+  "packed4_source_sha256": [
+    "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f"
+  ],
+  "source_aliases": [
+    {
+      "entry_id": "root/1/221",
+      "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/BONES.ANB",
+      "sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f"
+    },
+    {
+      "entry_id": "root/2/disc/319",
+      "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/BONES.ANB;1",
+      "sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f"
+    }
+  ],
+  "status": "verified_packed4",
+  "scope": "Raw unscaled packed4 indices and opacity; caller color/lighting not ported",
+  "loader_descriptor_va": "0x10401c",
+  "loader_pointer_va": "0x116800",
+  "animation_base_va": "0x116804",
+  "selector_va": "0x5a1c0",
+  "selector_rule": "unsigned byte entity+0x5e >=26 selects BONES, stores animation base at entity+0x1f",
+  "draw_regions": [
+    "0x59a45 -> 0x59a6c -> 0x94910 -> 0x90460",
+    "0x59b32 -> 0x59b59 -> 0x94d70 -> 0x94400"
+  ],
+  "rows": 378,
+  "short_rows": 378,
+  "opaque_pixels": 3061,
+  "data_end": 3721,
+  "records": [
+    {
+      "record": 0,
+      "width": 0,
+      "height": 0,
+      "active": false
+    },
+    {
+      "record": 1,
+      "width": 73,
+      "height": 30,
+      "active": true,
+      "start": 19,
+      "end": 445,
+      "consumed": 426,
+      "opaque": 373,
+      "indices_sha256": "adb2762e279b460f548c5d1ec166cd19cfa3b7365823498f72a3bbc12fbf08dc",
+      "mask_sha256": "0c742d6101e72146710977acc8ad63d0f86f59fbe763a477176187276e7c7ed3",
+      "short_rows": 30,
+      "maximum_row_width": 68
+    },
+    {
+      "record": 2,
+      "width": 73,
+      "height": 30,
+      "active": true,
+      "start": 445,
+      "end": 754,
+      "consumed": 309,
+      "opaque": 199,
+      "indices_sha256": "d61ade207c337276a99f106f469db1aff9b29a445f03a5aa54c3fad7b84a8ffc",
+      "mask_sha256": "14ccd3e3d8114831d765a4a820951a318e1b75f819d55cff74e974084f6b6de5",
+      "short_rows": 30,
+      "maximum_row_width": 68
+    },
+    {
+      "record": 3,
+      "width": 55,
+      "height": 34,
+      "active": true,
+      "start": 754,
+      "end": 1047,
+      "consumed": 293,
+      "opaque": 198,
+      "indices_sha256": "946d9724e8c678728c90debe0ef3a7c309aa3cd4ebc94d2bb57867ae7b349443",
+      "mask_sha256": "916fea846ee727a585371100317a8957882980d33772ea72064138a13e7f37f2",
+      "short_rows": 34,
+      "maximum_row_width": 48
+    },
+    {
+      "record": 4,
+      "width": 55,
+      "height": 34,
+      "active": true,
+      "start": 1047,
+      "end": 1267,
+      "consumed": 220,
+      "opaque": 112,
+      "indices_sha256": "b17dd6abf4174a66c9171506080784abc5c01283c92e32ee3981a76d9585a706",
+      "mask_sha256": "97893f58a152b94fad600e5c389f65f4deffe211bc8efaaf0fb2d3a43fa70d9a",
+      "short_rows": 34,
+      "maximum_row_width": 47
+    },
+    {
+      "record": 5,
+      "width": 65,
+      "height": 36,
+      "active": true,
+      "start": 1267,
+      "end": 1710,
+      "consumed": 443,
+      "opaque": 387,
+      "indices_sha256": "53efdcfcd2593ed696d684ab6eb53ed4e6af9d738e6b897c228fe666be3b6996",
+      "mask_sha256": "b164948123a83c86524e172994fc50720abe9ef1f4a3ef9c8635580dd7c21f46",
+      "short_rows": 36,
+      "maximum_row_width": 60
+    },
+    {
+      "record": 6,
+      "width": 65,
+      "height": 36,
+      "active": true,
+      "start": 1710,
+      "end": 1998,
+      "consumed": 288,
+      "opaque": 177,
+      "indices_sha256": "b21d332324bb0090e69af2feedaefbb955be45a3eef01cfde0e4263c059b2424",
+      "mask_sha256": "206f50d3e105574ada6802aee17aac24cea681ab152fe41854d3915c4ec948d9",
+      "short_rows": 36,
+      "maximum_row_width": 60
+    },
+    {
+      "record": 7,
+      "width": 56,
+      "height": 45,
+      "active": true,
+      "start": 1998,
+      "end": 2458,
+      "consumed": 460,
+      "opaque": 338,
+      "indices_sha256": "388a8c3182e91b129a5a4d74024014005dc07f90ad0bc0ad4e62ee46ec62f797",
+      "mask_sha256": "cc46c0fe15dc42d0fc2a415cb9f352c970f0eb997b59bf30f8380c63145ef969",
+      "short_rows": 45,
+      "maximum_row_width": 54
+    },
+    {
+      "record": 8,
+      "width": 56,
+      "height": 45,
+      "active": true,
+      "start": 2458,
+      "end": 2798,
+      "consumed": 340,
+      "opaque": 208,
+      "indices_sha256": "54076d35917730b2d2ec826a7e12ac0cbd26129dea9dbf93f61d2f8ed31163c5",
+      "mask_sha256": "6aa5be339dfcc14ad7b35fe666a49cf29f3af271b2481add63541df4d7f10391",
+      "short_rows": 45,
+      "maximum_row_width": 53
+    },
+    {
+      "record": 9,
+      "width": 72,
+      "height": 44,
+      "active": true,
+      "start": 2798,
+      "end": 3363,
+      "consumed": 565,
+      "opaque": 701,
+      "indices_sha256": "c2d43f2268adbc20c151589f77291ba28cf6a6a6364c66a6b1d0c41fd2ab587d",
+      "mask_sha256": "b4f6fa41e6c7cb9abde87824481cd89693ec6da79eb94db9b877971a4a10df22",
+      "short_rows": 44,
+      "maximum_row_width": 67
+    },
+    {
+      "record": 10,
+      "width": 72,
+      "height": 44,
+      "active": true,
+      "start": 3363,
+      "end": 3721,
+      "consumed": 358,
+      "opaque": 368,
+      "indices_sha256": "3de4568ab234a2f375408d229feb75feddf43e85d235009c4cfa4b92d5466fcc",
+      "mask_sha256": "e9461a79c2bd19741922a37e60f2500307d77287fbd2b34656204f7f34edeea8",
+      "short_rows": 44,
+      "maximum_row_width": 66
+    }
+  ],
+  "private_listings": [
+    {
+      "private_path": "private/ghidra/creature-paths/instructions-0001d770.txt",
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    },
+    {
+      "private_path": "private/ghidra/bones-frame/instructions-0005a1c0.txt",
+      "sha256": "02f55f81e196715d686d5427c1475d280f0e4fbf13499355dd7974c629d989b9"
+    },
+    {
+      "private_path": "private/ghidra/bones-consumer/entity-render.txt",
+      "sha256": "c4ae380d23207ea48e58cbb1fd6310a8aa554b70909870b36b5aef03b1b69d73"
+    },
+    {
+      "private_path": "private/ghidra/bones-frame/instructions-00094910.txt",
+      "sha256": "1c5a26e8f70df7a0e2b9162d1ec2ab1445b83794bdf521804d51dedbe2adaf90"
+    },
+    {
+      "private_path": "private/ghidra/bones-frame/instructions-00094d70.txt",
+      "sha256": "ae2894ef062735e2404f99291a40b5a69ba31751c132cfa4ea32416245620b50"
+    },
+    {
+      "private_path": "private/ghidra/bones-blit/instructions-00090460.txt",
+      "sha256": "e621112e0956d1c5b77ca27ea47096818d1a7cb3eb00886473c147fbaf4790c9"
+    },
+    {
+      "private_path": "private/ghidra/bones-blit/instructions-00094400.txt",
+      "sha256": "dce68160736b3d8a9aa7b035103da7c09b2f8900949af99289c4fff4ff7dc8f2"
+    }
+  ],
+  "limits": [
+    "No admission for other hashes or files named BONES",
+    "Short rows leave an implicit transparent remainder; no width-equality requirement",
+    "Lighting, palette translation, flip and scale behavior excluded",
+    "No original executable run by this analysis"
+  ]
+}

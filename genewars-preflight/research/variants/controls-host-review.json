@@ -1,0 +1,70 @@
+{
+  "status": "static-and-unit-review-passed",
+  "checked_utc": "2026-10-13T01:30:44.671717+00:00",
+  "gui_or_original_execution": false,
+  "source": [
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-controls.rs",
+      "size": 27367,
+      "sha256": "90541643caeddb012511802bd989c935f2b4db2dd08251c8f513cf2e116d80d6"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/lib.rs",
+      "size": 24825,
+      "sha256": "ca4f840e3c74d62d5256a80069962d2cfb4b2736437d38c2deb1a178c7da553b"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/mouse_packet.rs",
+      "size": 2717,
+      "sha256": "5763c082b5774e7e9042c3bff2cabf638b22ede7744f60e1c9904493527714fa"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/custom_list.rs",
+      "size": 9111,
+      "sha256": "98955b9435e074518a2ee195e54e25779f96e7de7120f9620fdab1c89ea495c8"
+    }
+  ],
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\scripts\\cargo.py",
+    "test",
+    "--offline",
+    "--locked",
+    "-p",
+    "genewars-desktop",
+    "--bin",
+    "genewars-controls"
+  ],
+  "exit_code": 0,
+  "unit_tests_passed": 11,
+  "private_outputs": [
+    {
+      "path": "private/review/controls-host/unit-stdout.txt",
+      "size": 946,
+      "sha256": "83e7f9e7231b2cac752eb6ec979da32ecc3526472dd426be936c26cd2223de00"
+    },
+    {
+      "path": "private/review/controls-host/unit-stderr.txt",
+      "size": 1987,
+      "sha256": "62f473475bbdd37aa10c7faeab0528e061a8130f85089e50d4526ed769763d22"
+    }
+  ],
+  "reviewed_contracts": [
+    "Ordered press notification sets an empty latch even while already physically held",
+    "First press position retained separately; hit test uses current position at packet production",
+    "Quick press/release produces press packet then release packet",
+    "Captured release activates outside control; original list order resolves overlapping hits",
+    "Physical-to-virtual floor mapping agrees with nearest-neighbor display sampling",
+    "Selected component y offset and all32 sprite rows used; opaque palette zero remains hit-capable",
+    "Public hit coordinate subtraction widened to i64 after independent overflow finding",
+    "Input/packet/activation traces capped with explicit omitted counts",
+    "60Hz is a host diagnostic schedule, not original timing"
+  ],
+  "limits": [
+    "Focus changes are deliberately ignored; focus-loss recovery not claimed",
+    "No native pointer/quick-click observation by this review receipt",
+    "No gameplay, right-button, audio or original scheduler parity"
+  ],
+  "earlier_build_failure": "Bundled GNU DLLTool could not start assembler; root supplied private LLVM tooling, after which these unit tests passed."
+}

@@ -35,8 +35,9 @@
     "referencing_frame": 8,
     "referencing_animation": 4,
     "sentinel_exemption": false,
-    "status": "blocked",
-    "conclusion": "Nonempty sprite is referenced by animation metadata; not proven unused. Stream crosses neighboring sprite before declared height. Exact cause remains unresolved."
+    "status": "resolved_packed4",
+    "admission_receipt": "research/ghidra/bones-evidence.json",
+    "conclusion": "The indexed8 model crosses neighboring sprite data. Actual entity/frame consumers90460/94400 establish packed4; separate hash-bound receipt validates all10 active streams. This diagnostic retains the rejected-model observation."
   },
   "gpf": {
     "cd_candidate_literal_reference": false,
@@ -45,8 +46,9 @@
   },
   "instruction_basis": [
     "0x98A60 fixes sprite data relative to file+18",
-    "0xA7730 signed-control basic path",
-    "0xA7730 skips only zero-width/height descriptors"
+    "0xA7730 is the rejected indexed8 model for BONES",
+    "0x5A1C0 selects BONES animation base",
+    "0x94910/0x94D70 call packed4 consumers90460/94400"
   ],
   "tests_passed": true
 }

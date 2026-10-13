@@ -1,0 +1,81 @@
+{
+  "status": "operator_stopped_after_startup_observations",
+  "checked_utc": "2026-10-13T01:56:57.914450+00:00",
+  "session": "run-002",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "raw_integrity_receipt": {
+    "path": "research/variants/reference-run-002-result.json",
+    "size": 8737,
+    "sha256": "0a633a97067acc76741299f446930c97fa1455fd45338b1fbbdb70593cbe6037"
+  },
+  "supervisor_observations": {
+    "path": "private/reference-run/run-002/logs/supervisor-observations.json",
+    "size": 1472,
+    "sha256": "8ba5904d5dd349ac7b46898fbfc04acf4a37e3d2083750e6c395ea3f2e8fb5e1"
+  },
+  "operator_stop": {
+    "path": "private/reference-run/run-002/logs/operator-stop.json",
+    "size": 682,
+    "sha256": "7cec2a5efddf2317d6ae45b99cd5ef97fcedb4eca74666c6d419022068391d99"
+  },
+  "observed": {
+    "original_runtime_started": true,
+    "introduction": true,
+    "main_menu_artwork": true,
+    "options_artwork": true,
+    "host_window_screenshots": true,
+    "raw_emulator_framebuffer_dump": false,
+    "dynamic_labels": "Not visible in observed menu/options panels; cause unresolved",
+    "guest_motion": "Unresolved",
+    "mission": false,
+    "gameplay": false,
+    "save_reload": false,
+    "original_timing_measured": false
+  },
+  "termination": {
+    "kind": "Operator OS termination after unsuccessful native close attempts",
+    "pid": 18116,
+    "process_exit_code": 15,
+    "process_end_utc": "2026-10-13T01:50:15.851776+00:00",
+    "game_failure_code": false,
+    "natural_application_exit_observed": false
+  },
+  "integrity": {
+    "unchanged_original_files": 489,
+    "original_files": 490,
+    "changed_original_file": "GAME/GW.ERR,45bytes->0bytes",
+    "removed_original_files": 0,
+    "generated_config_unchanged": true,
+    "original_executables_unchanged": true,
+    "archive_media_tools_emulator_config_unchanged": true
+  },
+  "private_screenshot_records": [
+    {
+      "path": "private/reference-run/run-002/captures/intro.png",
+      "size": 18445,
+      "sha256": "ff18f23f5f8d3e9af3e5e575b17fc5f6f972b1764efd1327a39fc33b87fadec6"
+    },
+    {
+      "path": "private/reference-run/run-002/captures/main-menu.png",
+      "size": 38921,
+      "sha256": "e35a8239501dd626c790f25fa58b5c6460eb460fbe88ea0634e8b522ee132cc2"
+    },
+    {
+      "path": "private/reference-run/run-002/captures/options-final.png",
+      "size": 43163,
+      "sha256": "07024720df268b01ef1f68c64bd522c8f2844d920b808a5c364e15d5885caa9f"
+    },
+    {
+      "path": "private/reference-run/run-002/captures/options.png",
+      "size": 43095,
+      "sha256": "112a841324714483862bca4792c1816820f26c5758341010dcb39e16af0d1d1b"
+    }
+  ],
+  "clarifications": [
+    "Raw checker observations.framebuffer_capture=observed reflects the supplied broad capture status; supervisor explicitly says these are host window screenshots, not raw emulator framebuffer dumps",
+    "Exit15 records supervised OS termination and does not establish a game crash/error",
+    "Launch/release-to-exit intervals are supervisory bounds, not original gameplay timing",
+    "This adjacent note preserves raw checker and supervisor receipts unchanged",
+    "No original or GUI launched by this reviewer"
+  ]
+}

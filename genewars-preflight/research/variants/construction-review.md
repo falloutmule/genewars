@@ -1,0 +1,17 @@
+# Independent construction debit review
+
+**Corroborated:** the root-owned `construction_stage3_debit` preserves the final numeric values of the exact CD candidate branch at VA `0x53A33..0x53B09`. Independent review found no mismatch. This conclusion covers the pure debit after mode byte 0 and stage 3 are established; it does not establish a complete construction command or live gameplay behavior.
+
+Direct instructions test **AL**, not the whole callback return register. `ready: bool` therefore represents `AL != 0`; future callers must normalize the low byte. Callback false jumps to the general update at `0x53982`, so `NotReady` preserves only the pure helper's pools/stage and excludes that update's other effects.
+
+The owner is unsigned entity byte `+0x18`; the selector and profile skill are sign-extended bytes at entity `+0x83` and profile `+0x17`. The resource record is `0x118D74 + owner*0x70D + 0x4A1 = 0x119215 + owner*0x70D`; balances are unaligned signed dwords at offsets 2 and 6. The refill lookup uses **resource byte 0**, independently of the entity owner. The Boolean port parameter keeps that lookup outside this pure API and assumes no equality between those indices.
+
+`ADD`, `SUB`, and `NEG` operate modulo 2^32. `JGE` at `0x53A93`, `JG` at `0x53ABC`, and `JG` at `0x53AFD` interpret the resulting register bits as signed. The port correctly preserves these rules even where conventional positive-balance accounting differs: a wrapped negative total rejects payment, negative adjusted costs can credit a pool, and a positive cost minus a negative primary can wrap into the nonpositive branch. `secondary.wrapping_sub(remainder)` equals the original `NEG(remainder-secondary)` at every bit pattern. No extra clamp is warranted by this branch.
+
+The flagged refill assigns **secondary = 1000** when the new signed wrapped combined total is at most 1000; it does not top up the combined total to 1000. The primary remains unchanged. The final stage write is a 16-bit 4 at entity `+0x88`. The Rust result intentionally collapses intermediate memory writes and excludes subsequent entity flags, calls, callback execution, insufficient-resource helper effects, and world mutations.
+
+`ConstructionSelector` safely admits only signed-byte values 0 through 13; the original sign-extended table access has no local guard. This deliberate safe restriction is documented, and callers cannot construct an unchecked selector through the public API.
+
+Run `python -B research/variants/construction-review.py`. The independent Rust harness imports the actual port and compares it with a register-style unsigned arithmetic model that uses signed interpretations only at the original conditional branches. It passed all 18 evidence vectors, 3,584 cost/skill combinations, 256 selector values, and 3,870,016 transactions: a Cartesian matrix of 16 signed boundary balances, both flags and every admitted selector/skill, plus 200,000 deterministic full-range samples. Four private listing hashes and the mapped 56-byte cost table were checked. Results and exact source/harness hashes are in `construction-review.json`; no original binary or GUI was executed.
+
+Remaining unknowns are callback meaning and scheduling, building names, normal skill/balance ranges, refill flag meaning, and the complete effects of the surrounding command. Synthetic arithmetic coverage does not establish reachability of extreme values during play.

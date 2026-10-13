@@ -13,7 +13,7 @@ import subprocess
 import secrets
 import time
 
-from prepare import ROOT, RUN, SDL2, RECORD, checked, file_record, prepare_tool, prepare_run
+from prepare import ROOT, RUN, SDL2, RECORD, SESSION, HUMAN_APPROVAL, checked, file_record, prepare_tool, prepare_run
 
 
 def arguments(config, limit):
@@ -117,6 +117,14 @@ def main():
         print(json.dumps(receipt))
         return
     if args.open_approved_session:
+        human = json.loads(HUMAN_APPROVAL.read_bytes())
+        if not human.get('approved'):
+            raise SystemExit('This session has no separate recorded human execution approval')
+        if SESSION == 'run-002' and (human.get('run_id') != SESSION or
+                human.get('candidate_sha256') != '4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba' or
+                not isinstance(human.get('human_statement'),str) or not human['human_statement'].strip() or
+                human.get('generated_config_sha256') != runtime['generated_game_inputs'][0]['sha256']):
+            raise SystemExit('Approval does not bind this exact prepared run/config')
         if not args.approval_note or len(args.approval_note.strip()) < 30:
             raise SystemExit('Requires a descriptive record of prior explicit human approval. No original is autorun.')
         if (RUN / 'logs/human-approval.json').exists():
@@ -163,12 +171,13 @@ def main():
         launch_record['windows_show_window'] = 1
         with checked(RUN / 'logs/launch-process.json', RUN).open('x', encoding='utf-8') as stream:
             json.dump(launch_record, stream, indent=2)
+        gate_command = 'python -B scripts/reference/run002.py gate' if SESSION == 'run-002' else 'python -B scripts/reference/gate.py'
         print(json.dumps({'pid': process.pid, 'original_autorun': False,
                           'host_release_required': True,
                           'review_log': str(RUN / 'logs/dosbox-x.log'),
-                          'inspect_gate': 'python -B scripts/reference/gate.py',
-                          'release_after_review': 'python -B scripts/reference/gate.py --release-approved-original',
-                          'abort': 'python -B scripts/reference/gate.py --abort'}), flush=True)
+                          'inspect_gate': gate_command,
+                          'release_after_review': gate_command+' --release-approved-original',
+                          'abort': gate_command+' --abort'}), flush=True)
         # Keep this parent alive: the execution host may terminate its job's
         # children when the parent exits. exec_command can yield a live session.
         timed_out = False

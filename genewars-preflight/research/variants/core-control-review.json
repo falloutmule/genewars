@@ -1,0 +1,101 @@
+{
+  "status": "passed",
+  "checked_utc": "2026-10-13T01:55:32.781665+00:00",
+  "original_or_gui_execution": false,
+  "checks": {
+    "packet_byte_cases": 1024,
+    "count_selection_cases": 65536,
+    "truncated_lengths": 2250,
+    "name_nul_positions": 340,
+    "following_field_nuls_rejected": 10,
+    "status": "passed"
+  },
+  "harness": {
+    "path": "research/variants/core-control-review.rs",
+    "size": 2409,
+    "sha256": "b5fe153f14918744ee724affbd143589b516003995558905dc9a945dd452298e"
+  },
+  "native_harness": {
+    "path": "private/review/core-controls/core-control-review.exe",
+    "size": 5102628,
+    "sha256": "4d22db9ea666ab53d7260ff7aa0c5dee9ede0048fcb41c849947eb9029194e56"
+  },
+  "reviewed_sources": [
+    {
+      "path": "rust/crates/genewars-core/src/mouse_packet.rs",
+      "size": 2717,
+      "sha256": "5763c082b5774e7e9042c3bff2cabf638b22ede7744f60e1c9904493527714fa"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/custom_list.rs",
+      "size": 9111,
+      "sha256": "98955b9435e074518a2ee195e54e25779f96e7de7120f9620fdab1c89ea495c8"
+    }
+  ],
+  "static_evidence": [
+    {
+      "path": "research/ghidra/input-evidence.json",
+      "size": 4095,
+      "sha256": "5245c7393f6614306b9cdaf0a923b161633890d444380b8ee74d7335f29732f0"
+    },
+    {
+      "path": "research/ghidra/list-layout-evidence.json",
+      "size": 1915,
+      "sha256": "f8702b4b26b85664203d32f3a74e3e7b6a0a8709347dbfedd09e2e308db405b4"
+    }
+  ],
+  "listing_hash_checks": [
+    {
+      "path": "private/ghidra/mouse-callback-refs/instructions-000a3164.txt",
+      "size": 3524,
+      "sha256": "e729db9adf2b94e567e1936e02affd0bb1affd69cd0392ea22c8fd210f466eff"
+    },
+    {
+      "path": "private/ghidra/mouse-callback/instructions-000a3524.txt",
+      "size": 6300,
+      "sha256": "f34144576fdb8a7fbed0be241831487c9e2ccc0212f46fbbcea4fc672c2933e2"
+    },
+    {
+      "path": "private/ghidra/packet-fields/instructions-00070e40.txt",
+      "size": 10926,
+      "sha256": "d9e28b4cd2565e951d112522fde407f6186667f3e7f3840837f0619304ddc83d"
+    },
+    {
+      "path": "private/ghidra/input-scheduling/instructions-00070b00.txt",
+      "size": 6046,
+      "sha256": "3e0ae3e530d45f9dfe5a66fdd3669d532cc428f04ba769bae00d9b24bbdc84eb"
+    },
+    {
+      "path": "private/ghidra/packet-fields/instructions-000715a0.txt",
+      "size": 370,
+      "sha256": "c312d02f09220aeac475e07f0ddcdab99d0a04bd5ebc1d4f4a7551040d4a2d8b"
+    },
+    {
+      "path": "private/ghidra/ui-input/instructions-000a87d0.txt",
+      "size": 16702,
+      "sha256": "1fe8f247f251c7b1a5a333b71d830d93ddca2feb1f6d557448894131510afd58"
+    },
+    {
+      "path": "private/ghidra/ui-custom/instructions-0007e0b0.txt",
+      "size": 4486,
+      "sha256": "c6ad1005ac8d0bd49a5c15a91fef629ce4f36d102ca1ab2bee496e74db398ea8"
+    },
+    {
+      "path": "private/ghidra/ui-controls/instructions-0007e9c0.txt",
+      "size": 10193,
+      "sha256": "798669898e5888b6158727edf6a704afc985b9e280da2d6ce9945d64ae64d97e"
+    },
+    {
+      "path": "private/ghidra/list-layout/instructions-0007ef30.txt",
+      "size": 5871,
+      "sha256": "4aacd61a423bea2c15fc6764e5cbc237f90ced73ecb8a610c5fad1297b5ca0b1"
+    },
+    {
+      "path": "private/ghidra/ui-controls/instructions-0007e400.txt",
+      "size": 11198,
+      "sha256": "e09f38677a943351455b1b0c2448a47217127cd1bbb34a9861d91a5e9924b7ee"
+    }
+  ],
+  "bounds_scope": "Ten 225-byte records; 34-byte NUL window is a conservative safe-port rule, not a guarantee of original string termination.",
+  "packet_scope": "Mode2 one-button transition only; cadence, callback races, mickey scaling and other packet fields excluded."
+}

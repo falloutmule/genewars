@@ -3,11 +3,13 @@
   "summary": {
     "records": 263,
     "unique_inputs": 166,
-    "passed": 260,
-    "blocked": 3,
-    "packed4_source_records": 50,
-    "packed4_unique_inputs": 25,
-    "unique_sprite_records": 10990
+    "passed": 262,
+    "blocked": 1,
+    "packed4_source_records": 52,
+    "packed4_unique_inputs": 26,
+    "packed4_creature_unique_inputs": 25,
+    "packed4_bones_source_records": 2,
+    "unique_sprite_records": 11001
   },
   "results": [
     {
@@ -25203,8 +25205,8 @@
       "input_sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f",
       "decoded_size": 4077,
       "decoded_sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f",
-      "encoding": "indexed8",
-      "codec_admission": "existing indexed8 structural probe",
+      "encoding": "packed4-high-first",
+      "codec_admission": "hash-and-caller-bound BONES evidence",
       "header_word": 5,
       "section_offsets": [
         3721,
@@ -25217,9 +25219,94 @@
       "private_database": "private\\integration\\sprites\\2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f.anb",
       "private_bounded_database": "private\\integration\\sprites\\2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f-sprite-prefix.bin",
       "private_table": "private\\integration\\sprites\\2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f.tab",
-      "exit_code": 2,
-      "status": "blocked",
-      "reason": "SpriteStreamTruncated { record: 5, offset: 3660 }"
+      "exit_code": 0,
+      "status": "passed",
+      "native_result": {
+        "records": [
+          {
+            "record": 0,
+            "width": 0,
+            "height": 0,
+            "consumed_bytes": 0,
+            "opaque_pixels": 0
+          },
+          {
+            "record": 1,
+            "width": 73,
+            "height": 30,
+            "consumed_bytes": 426,
+            "opaque_pixels": 373
+          },
+          {
+            "record": 2,
+            "width": 73,
+            "height": 30,
+            "consumed_bytes": 309,
+            "opaque_pixels": 199
+          },
+          {
+            "record": 3,
+            "width": 55,
+            "height": 34,
+            "consumed_bytes": 293,
+            "opaque_pixels": 198
+          },
+          {
+            "record": 4,
+            "width": 55,
+            "height": 34,
+            "consumed_bytes": 220,
+            "opaque_pixels": 112
+          },
+          {
+            "record": 5,
+            "width": 65,
+            "height": 36,
+            "consumed_bytes": 443,
+            "opaque_pixels": 387
+          },
+          {
+            "record": 6,
+            "width": 65,
+            "height": 36,
+            "consumed_bytes": 288,
+            "opaque_pixels": 177
+          },
+          {
+            "record": 7,
+            "width": 56,
+            "height": 45,
+            "consumed_bytes": 460,
+            "opaque_pixels": 338
+          },
+          {
+            "record": 8,
+            "width": 56,
+            "height": 45,
+            "consumed_bytes": 340,
+            "opaque_pixels": 208
+          },
+          {
+            "record": 9,
+            "width": 72,
+            "height": 44,
+            "consumed_bytes": 565,
+            "opaque_pixels": 701
+          },
+          {
+            "record": 10,
+            "width": 72,
+            "height": 44,
+            "consumed_bytes": 358,
+            "opaque_pixels": 368
+          }
+        ],
+        "pixel_slots": 24176,
+        "status": "verified",
+        "association": "caller_supplied",
+        "encoding": "packed4-high-first",
+        "palette_base": 0
+      }
     },
     {
       "entry_id": "root/1/222",
@@ -100327,8 +100414,8 @@
       "input_sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f",
       "decoded_size": 4077,
       "decoded_sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f",
-      "encoding": "indexed8",
-      "codec_admission": "existing indexed8 structural probe",
+      "encoding": "packed4-high-first",
+      "codec_admission": "hash-and-caller-bound BONES evidence",
       "header_word": 5,
       "section_offsets": [
         3721,
@@ -100341,9 +100428,94 @@
       "private_database": "private\\integration\\sprites\\2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f.anb",
       "private_bounded_database": "private\\integration\\sprites\\2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f-sprite-prefix.bin",
       "private_table": "private\\integration\\sprites\\2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f.tab",
-      "exit_code": 2,
-      "status": "blocked",
-      "reason": "SpriteStreamTruncated { record: 5, offset: 3660 }"
+      "exit_code": 0,
+      "status": "passed",
+      "native_result": {
+        "records": [
+          {
+            "record": 0,
+            "width": 0,
+            "height": 0,
+            "consumed_bytes": 0,
+            "opaque_pixels": 0
+          },
+          {
+            "record": 1,
+            "width": 73,
+            "height": 30,
+            "consumed_bytes": 426,
+            "opaque_pixels": 373
+          },
+          {
+            "record": 2,
+            "width": 73,
+            "height": 30,
+            "consumed_bytes": 309,
+            "opaque_pixels": 199
+          },
+          {
+            "record": 3,
+            "width": 55,
+            "height": 34,
+            "consumed_bytes": 293,
+            "opaque_pixels": 198
+          },
+          {
+            "record": 4,
+            "width": 55,
+            "height": 34,
+            "consumed_bytes": 220,
+            "opaque_pixels": 112
+          },
+          {
+            "record": 5,
+            "width": 65,
+            "height": 36,
+            "consumed_bytes": 443,
+            "opaque_pixels": 387
+          },
+          {
+            "record": 6,
+            "width": 65,
+            "height": 36,
+            "consumed_bytes": 288,
+            "opaque_pixels": 177
+          },
+          {
+            "record": 7,
+            "width": 56,
+            "height": 45,
+            "consumed_bytes": 460,
+            "opaque_pixels": 338
+          },
+          {
+            "record": 8,
+            "width": 56,
+            "height": 45,
+            "consumed_bytes": 340,
+            "opaque_pixels": 208
+          },
+          {
+            "record": 9,
+            "width": 72,
+            "height": 44,
+            "consumed_bytes": 565,
+            "opaque_pixels": 701
+          },
+          {
+            "record": 10,
+            "width": 72,
+            "height": 44,
+            "consumed_bytes": 358,
+            "opaque_pixels": 368
+          }
+        ],
+        "pixel_slots": 24176,
+        "status": "verified",
+        "association": "caller_supplied",
+        "encoding": "packed4-high-first",
+        "palette_base": 0
+      }
     },
     {
       "entry_id": "root/2/disc/320",
@@ -128090,11 +128262,15 @@
       }
     }
   ],
-  "decoder_executable_sha256": "1d0f15bd6d529d006c7a255eb7559fa8e1da695a6e35e7ce5a4df696b23ddfd1",
+  "decoder_executable_sha256": "091b749a8ef71c55d9d35bc969c05a274820ae154789746801051ebc7198085c",
   "codec_evidence": {
     "path": "research\\ghidra\\creature-evidence.json",
     "sha256": "9f06ff9bafc7dc3ba4389e0ae214971b671ec29908e83b9c2fbcac3cfbd5b365"
   },
-  "scope": "ANB header and embedded sprite records checked with RLE strictly bounded before metadata. Packed4 is selected only for the 25 hash-and-provenance-bound creature inputs admitted by CD caller evidence; base0 is a structural diagnostic, not runtime palette selection. Other inputs retain the indexed8 structural probe. This supersedes the unsafe full-file-bound result. Parsing is not cross-build semantic equivalence, complete animation reconstruction, or runtime verification.",
+  "bones_codec_evidence": {
+    "path": "research\\ghidra\\bones-evidence.json",
+    "sha256": "4b1db1b6460690083065c5a806daf5e476594fc704f3fd8291c4008a06462d76"
+  },
+  "scope": "ANB header and embedded sprite records checked with RLE strictly bounded before metadata. Packed4 is selected only for 25 hash-and-provenance-bound creature inputs plus one separately proved BONES input admitted by CD caller evidence; base0 is a structural diagnostic, not runtime palette or lighting. Other inputs retain the indexed8 structural probe. This supersedes the unsafe full-file-bound result. Parsing is not cross-build semantic equivalence, complete animation reconstruction, or runtime verification.",
   "source_archive_sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906"
 }

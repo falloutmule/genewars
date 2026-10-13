@@ -1,0 +1,77 @@
+{
+  "status": "passed_with_scope_limit",
+  "checked_utc": "2026-10-13T01:53:15.528996+00:00",
+  "original_or_gui_execution": false,
+  "reviewed_files": [
+    {
+      "path": "scripts/verify.py",
+      "size": 10198,
+      "sha256": "d5f4a41d9bbbeab24492d3205301e5dc283f6f6763c78df9b0ea3336f26a9e62"
+    },
+    {
+      "path": "scripts/validate_sprites.py",
+      "size": 7996,
+      "sha256": "765515cfb07603a23999417ff74d460d2cc512bab2418b36d74bcc1a0924020a"
+    },
+    {
+      "path": "scripts/cargo.py",
+      "size": 1317,
+      "sha256": "88cdb6964156fbfd85ea34d230509e11c160ed693c1d19ea3dd0f26d59f3ea2b"
+    },
+    {
+      "path": "scripts/prepare_llvm_dlltool.py",
+      "size": 5191,
+      "sha256": "1f3563eb906cb0a22839b50bec8be1417ffa0969b771a04a82420e5559756741"
+    },
+    {
+      "path": "rust/Cargo.lock",
+      "size": 42624,
+      "sha256": "1864506f79e1014a735910fb07aa63b93d06b266da7a4ca26254f1921b79abe7"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/construction.rs",
+      "size": 5508,
+      "sha256": "4866ff1f9bdd1bffbfb964bf03c495e5a1118d6bc24b0e3f8beea64ff780e5c0"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-controls.rs",
+      "size": 27367,
+      "sha256": "90541643caeddb012511802bd989c935f2b4db2dd08251c8f513cf2e116d80d6"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/lib.rs",
+      "size": 62263,
+      "sha256": "f622934d99ba2dd139090b697246b55a02de67e9b8bcda6f7dda233ec2b6a189"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/lib.rs",
+      "size": 24825,
+      "sha256": "ca4f840e3c74d62d5256a80069962d2cfb4b2736437d38c2deb1a178c7da553b"
+    }
+  ],
+  "headless_workspace_test": {
+    "command": "python -B scripts/cargo.py test --workspace --offline --locked",
+    "exit_code": 0,
+    "passed": 84,
+    "crates": {
+      "assets": 29,
+      "core": 23,
+      "controls_host": 11,
+      "desktop": 10,
+      "render": 11
+    }
+  },
+  "checks": {
+    "all_python_sources_parse": true,
+    "llvm_archive_and_member_hashes": true,
+    "llvm_alias_byte_identical": true,
+    "llvm_runtime_dependencies": true,
+    "native_interaction_evidence_hashes": true
+  },
+  "limitations": [
+    "Full scripts/verify.py launches two native-window smokes and was intentionally not run under this no-GUI review scope",
+    "Existing aggregate verification receipt at01:02UTC predates current changes; root must refresh full verification beforecheckpoint",
+    "Tool/download scripts inspected statically and cached payloads hashed; no download or tool-installation execution bythisreview",
+    "Native interaction receipt corroborates supervisedroot observations; this reviewer performed no physicalUI actions"
+  ]
+}

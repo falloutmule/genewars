@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "checked_utc": "2026-10-13T01:55:31.676006+00:00",
+  "original_or_gui_execution": false,
+  "checks": {
+    "selector_cases": 256,
+    "cost_skill_cases": 3584,
+    "transaction_cases": 3870016,
+    "receipt_vectors": 18
+  },
+  "harness": {
+    "path": "research/variants/construction-review.rs",
+    "size": 3701,
+    "sha256": "a3315af0e27ef60bd7df2e043facce3d313859eaf3ee663a08d9b363853b3cdd"
+  },
+  "native_harness": {
+    "path": "private/review/construction/construction-review.exe",
+    "size": 5088094,
+    "sha256": "523702327421c0e3d0cde5fa58b8dbd56b8d21a708f6466be91da9ed4b1cb11f"
+  },
+  "reviewed_source": {
+    "path": "rust/crates/genewars-core/src/construction.rs",
+    "size": 5508,
+    "sha256": "4866ff1f9bdd1bffbfb964bf03c495e5a1118d6bc24b0e3f8beea64ff780e5c0"
+  },
+  "evidence_receipt": {
+    "path": "research/ghidra/construction-evidence.json",
+    "size": 8795,
+    "sha256": "307f49b7527186282420ef0b82eb4e930407afd617790e5e9a62a53e7cacaf62"
+  },
+  "private_listing_hash_checks": [
+    {
+      "path": "private/ghidra/construction-command/activation-range.txt",
+      "size": 2599,
+      "sha256": "593262712e35cbc78615bbda524173ef480e015e805c5121922636a98eeb29c2"
+    },
+    {
+      "path": "private/ghidra/construction-setup/instructions-000507d0.txt",
+      "size": 39144,
+      "sha256": "301fe1652f9d5cb11c92b8d692330cdb3d1363d6e087dc911de360131f99b15e"
+    },
+    {
+      "path": "private/ghidra/construction-command/dispatch-range.txt",
+      "size": 2044,
+      "sha256": "fdb04361a7bf1b3d0a296fa96b724f733b0d38d133c8340595518edcc45f1fc3"
+    },
+    {
+      "path": "private/ghidra/building-cost-refs/instructions-000534d0.txt",
+      "size": 49692,
+      "sha256": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141"
+    }
+  ],
+  "cost_table_sha256": "cfa842063144e873d53542ae67d8fd138ccd3baf55d01ab5ab3551d0c38af165",
+  "scope": "Pure debit final values after mode0/stage3 and callback prerequisite; signed selector safely restricted0..13; world/helper effects excluded.",
+  "finding": "No mismatch in signed branches, low-byte readiness contract, wrapping final values, negative costs, refill assignment/threshold or stage result."
+}

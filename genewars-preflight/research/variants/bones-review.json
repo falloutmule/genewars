@@ -1,0 +1,334 @@
+{
+  "status": "passed",
+  "checked_utc": "2026-10-13T01:55:30.152547+00:00",
+  "original_or_gui_execution": false,
+  "source_sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f",
+  "source_aliases": [
+    {
+      "entry_id": "root/1/221",
+      "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/BONES.ANB",
+      "sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f"
+    },
+    {
+      "entry_id": "root/2/disc/319",
+      "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/BONES.ANB;1",
+      "sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f"
+    }
+  ],
+  "independent_model": {
+    "path": "research/variants/creature-review.py",
+    "size": 8878,
+    "sha256": "24801fcf7619815c841ec1105adf57973a6dd003402caeb647150b73f0ad98d7"
+  },
+  "proof": {
+    "path": "research/ghidra/bones-evidence.json",
+    "size": 7120,
+    "sha256": "4b1db1b6460690083065c5a806daf5e476594fc704f3fd8291c4008a06462d76"
+  },
+  "corpus": {
+    "path": "research/integration/sprite-corpus.json",
+    "size": 3400879,
+    "sha256": "1893da0a36ad3c25e9ff9d569556237a0c37f59023da663829734a660c873832"
+  },
+  "native_tool": {
+    "path": "private/build/rust-target/debug/genewars-tools.exe",
+    "size": 6821874,
+    "sha256": "091b749a8ef71c55d9d35bc969c05a274820ae154789746801051ebc7198085c"
+  },
+  "listing_hash_checks": [
+    {
+      "path": "private/ghidra/creature-paths/instructions-0001d770.txt",
+      "size": 17969,
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    },
+    {
+      "path": "private/ghidra/bones-frame/instructions-0005a1c0.txt",
+      "size": 747,
+      "sha256": "02f55f81e196715d686d5427c1475d280f0e4fbf13499355dd7974c629d989b9"
+    },
+    {
+      "path": "private/ghidra/bones-consumer/entity-render.txt",
+      "size": 12564,
+      "sha256": "c4ae380d23207ea48e58cbb1fd6310a8aa554b70909870b36b5aef03b1b69d73"
+    },
+    {
+      "path": "private/ghidra/bones-frame/instructions-00094910.txt",
+      "size": 3054,
+      "sha256": "1c5a26e8f70df7a0e2b9162d1ec2ab1445b83794bdf521804d51dedbe2adaf90"
+    },
+    {
+      "path": "private/ghidra/bones-frame/instructions-00094d70.txt",
+      "size": 4056,
+      "sha256": "ae2894ef062735e2404f99291a40b5a69ba31751c132cfa4ea32416245620b50"
+    },
+    {
+      "path": "private/ghidra/bones-blit/instructions-00090460.txt",
+      "size": 30492,
+      "sha256": "e621112e0956d1c5b77ca27ea47096818d1a7cb3eb00886473c147fbaf4790c9"
+    },
+    {
+      "path": "private/ghidra/bones-blit/instructions-00094400.txt",
+      "size": 7838,
+      "sha256": "dce68160736b3d8a9aa7b035103da7c09b2f8900949af99289c4fff4ff7dc8f2"
+    }
+  ],
+  "summary": {
+    "active_records": 10,
+    "empty_records": 1,
+    "rows": 378,
+    "short_rows": 378,
+    "overshoot_rows": 0,
+    "opaque_pixels": 3061,
+    "odd_runs": 399,
+    "zero_nibbles": 0,
+    "full_native_pixel_mask_comparisons": 10
+  },
+  "results": [
+    {
+      "record": 1,
+      "width": 73,
+      "height": 30,
+      "start": 19,
+      "consumed_bytes": 426,
+      "opaque_pixels": 373,
+      "rows": 30,
+      "odd_runs": 43,
+      "zero_nibbles": 0,
+      "overshoot_rows": 0,
+      "short_rows": 30,
+      "max_row_sum": 68,
+      "end": 445,
+      "metadata_limit": 3721,
+      "index_sha256": "adb2762e279b460f548c5d1ec166cd19cfa3b7365823498f72a3bbc12fbf08dc",
+      "mask_sha256": "0c742d6101e72146710977acc8ad63d0f86f59fbe763a477176187276e7c7ed3",
+      "native_exit_code": 0,
+      "base254": {
+        "index_sha256": "22edbaecc0e5ce3444067813e4bf01bd2ca7ebf53e273dbf4ce6319255691021",
+        "mask_sha256": "0c742d6101e72146710977acc8ad63d0f86f59fbe763a477176187276e7c7ed3",
+        "native_exit_code": 0
+      }
+    },
+    {
+      "record": 2,
+      "width": 73,
+      "height": 30,
+      "start": 445,
+      "consumed_bytes": 309,
+      "opaque_pixels": 199,
+      "rows": 30,
+      "odd_runs": 51,
+      "zero_nibbles": 0,
+      "overshoot_rows": 0,
+      "short_rows": 30,
+      "max_row_sum": 68,
+      "end": 754,
+      "metadata_limit": 3721,
+      "index_sha256": "d61ade207c337276a99f106f469db1aff9b29a445f03a5aa54c3fad7b84a8ffc",
+      "mask_sha256": "14ccd3e3d8114831d765a4a820951a318e1b75f819d55cff74e974084f6b6de5",
+      "native_exit_code": 0,
+      "base254": {
+        "index_sha256": "e3e5a331e518363d88a776604d1ad9488980ba8faf150a98d57e120525b783db",
+        "mask_sha256": "14ccd3e3d8114831d765a4a820951a318e1b75f819d55cff74e974084f6b6de5",
+        "native_exit_code": 0
+      }
+    },
+    {
+      "record": 3,
+      "width": 55,
+      "height": 34,
+      "start": 754,
+      "consumed_bytes": 293,
+      "opaque_pixels": 198,
+      "rows": 34,
+      "odd_runs": 40,
+      "zero_nibbles": 0,
+      "overshoot_rows": 0,
+      "short_rows": 34,
+      "max_row_sum": 48,
+      "end": 1047,
+      "metadata_limit": 3721,
+      "index_sha256": "946d9724e8c678728c90debe0ef3a7c309aa3cd4ebc94d2bb57867ae7b349443",
+      "mask_sha256": "916fea846ee727a585371100317a8957882980d33772ea72064138a13e7f37f2",
+      "native_exit_code": 0,
+      "base254": {
+        "index_sha256": "32bc7904d4e3d9490ad057453a034dcacbd9dfbd90e3631ce7024082014d3a28",
+        "mask_sha256": "916fea846ee727a585371100317a8957882980d33772ea72064138a13e7f37f2",
+        "native_exit_code": 0
+      }
+    },
+    {
+      "record": 4,
+      "width": 55,
+      "height": 34,
+      "start": 1047,
+      "consumed_bytes": 220,
+      "opaque_pixels": 112,
+      "rows": 34,
+      "odd_runs": 32,
+      "zero_nibbles": 0,
+      "overshoot_rows": 0,
+      "short_rows": 34,
+      "max_row_sum": 47,
+      "end": 1267,
+      "metadata_limit": 3721,
+      "index_sha256": "b17dd6abf4174a66c9171506080784abc5c01283c92e32ee3981a76d9585a706",
+      "mask_sha256": "97893f58a152b94fad600e5c389f65f4deffe211bc8efaaf0fb2d3a43fa70d9a",
+      "native_exit_code": 0,
+      "base254": {
+        "index_sha256": "8489b1b8a870ffefe4ef39dc392d8963bcc617cbb2e9062be16ffb624dd4e52e",
+        "mask_sha256": "97893f58a152b94fad600e5c389f65f4deffe211bc8efaaf0fb2d3a43fa70d9a",
+        "native_exit_code": 0
+      }
+    },
+    {
+      "record": 5,
+      "width": 65,
+      "height": 36,
+      "start": 1267,
+      "consumed_bytes": 443,
+      "opaque_pixels": 387,
+      "rows": 36,
+      "odd_runs": 47,
+      "zero_nibbles": 0,
+      "overshoot_rows": 0,
+      "short_rows": 36,
+      "max_row_sum": 60,
+      "end": 1710,
+      "metadata_limit": 3721,
+      "index_sha256": "53efdcfcd2593ed696d684ab6eb53ed4e6af9d738e6b897c228fe666be3b6996",
+      "mask_sha256": "b164948123a83c86524e172994fc50720abe9ef1f4a3ef9c8635580dd7c21f46",
+      "native_exit_code": 0,
+      "base254": {
+        "index_sha256": "6ea6a5f2575d681c8e99d4f44439a4803b9d1ea4cbcd182b89a75b8331c9daf9",
+        "mask_sha256": "b164948123a83c86524e172994fc50720abe9ef1f4a3ef9c8635580dd7c21f46",
+        "native_exit_code": 0
+      }
+    },
+    {
+      "record": 6,
+      "width": 65,
+      "height": 36,
+      "start": 1710,
+      "consumed_bytes": 288,
+      "opaque_pixels": 177,
+      "rows": 36,
+      "odd_runs": 39,
+      "zero_nibbles": 0,
+      "overshoot_rows": 0,
+      "short_rows": 36,
+      "max_row_sum": 60,
+      "end": 1998,
+      "metadata_limit": 3721,
+      "index_sha256": "b21d332324bb0090e69af2feedaefbb955be45a3eef01cfde0e4263c059b2424",
+      "mask_sha256": "206f50d3e105574ada6802aee17aac24cea681ab152fe41854d3915c4ec948d9",
+      "native_exit_code": 0,
+      "base254": {
+        "index_sha256": "e796f012e0b79d9afb272521de582210822e1c2ac31d732034b477fde277bb88",
+        "mask_sha256": "206f50d3e105574ada6802aee17aac24cea681ab152fe41854d3915c4ec948d9",
+        "native_exit_code": 0
+      }
+    },
+    {
+      "record": 7,
+      "width": 56,
+      "height": 45,
+      "start": 1998,
+      "consumed_bytes": 460,
+      "opaque_pixels": 338,
+      "rows": 45,
+      "odd_runs": 48,
+      "zero_nibbles": 0,
+      "overshoot_rows": 0,
+      "short_rows": 45,
+      "max_row_sum": 54,
+      "end": 2458,
+      "metadata_limit": 3721,
+      "index_sha256": "388a8c3182e91b129a5a4d74024014005dc07f90ad0bc0ad4e62ee46ec62f797",
+      "mask_sha256": "cc46c0fe15dc42d0fc2a415cb9f352c970f0eb997b59bf30f8380c63145ef969",
+      "native_exit_code": 0,
+      "base254": {
+        "index_sha256": "dbd41695b90b6da7fb7cba000b54d4df5eec774ea92bef398e68cc4d53fcb923",
+        "mask_sha256": "cc46c0fe15dc42d0fc2a415cb9f352c970f0eb997b59bf30f8380c63145ef969",
+        "native_exit_code": 0
+      }
+    },
+    {
+      "record": 8,
+      "width": 56,
+      "height": 45,
+      "start": 2458,
+      "consumed_bytes": 340,
+      "opaque_pixels": 208,
+      "rows": 45,
+      "odd_runs": 38,
+      "zero_nibbles": 0,
+      "overshoot_rows": 0,
+      "short_rows": 45,
+      "max_row_sum": 53,
+      "end": 2798,
+      "metadata_limit": 3721,
+      "index_sha256": "54076d35917730b2d2ec826a7e12ac0cbd26129dea9dbf93f61d2f8ed31163c5",
+      "mask_sha256": "6aa5be339dfcc14ad7b35fe666a49cf29f3af271b2481add63541df4d7f10391",
+      "native_exit_code": 0,
+      "base254": {
+        "index_sha256": "6e8b8b5754d499c1dd4c534789edfcd934b09dc8051bbc021132120955551fa5",
+        "mask_sha256": "6aa5be339dfcc14ad7b35fe666a49cf29f3af271b2481add63541df4d7f10391",
+        "native_exit_code": 0
+      }
+    },
+    {
+      "record": 9,
+      "width": 72,
+      "height": 44,
+      "start": 2798,
+      "consumed_bytes": 565,
+      "opaque_pixels": 701,
+      "rows": 44,
+      "odd_runs": 37,
+      "zero_nibbles": 0,
+      "overshoot_rows": 0,
+      "short_rows": 44,
+      "max_row_sum": 67,
+      "end": 3363,
+      "metadata_limit": 3721,
+      "index_sha256": "c2d43f2268adbc20c151589f77291ba28cf6a6a6364c66a6b1d0c41fd2ab587d",
+      "mask_sha256": "b4f6fa41e6c7cb9abde87824481cd89693ec6da79eb94db9b877971a4a10df22",
+      "native_exit_code": 0,
+      "base254": {
+        "index_sha256": "c61a3a34b53fb2d1b764ebdaa4832b643cb8ddb28b42d66923fd477e8b253fbd",
+        "mask_sha256": "b4f6fa41e6c7cb9abde87824481cd89693ec6da79eb94db9b877971a4a10df22",
+        "native_exit_code": 0
+      }
+    },
+    {
+      "record": 10,
+      "width": 72,
+      "height": 44,
+      "start": 3363,
+      "consumed_bytes": 358,
+      "opaque_pixels": 368,
+      "rows": 44,
+      "odd_runs": 24,
+      "zero_nibbles": 0,
+      "overshoot_rows": 0,
+      "short_rows": 44,
+      "max_row_sum": 66,
+      "end": 3721,
+      "metadata_limit": 3721,
+      "index_sha256": "3de4568ab234a2f375408d229feb75feddf43e85d235009c4cfa4b92d5466fcc",
+      "mask_sha256": "e9461a79c2bd19741922a37e60f2500307d77287fbd2b34656204f7f34edeea8",
+      "native_exit_code": 0,
+      "base254": {
+        "index_sha256": "68c5a97c8708e5d71d0a6a7d64f1dab021d812a03ca485d1f469dc6c3f21e6ec",
+        "mask_sha256": "e9461a79c2bd19741922a37e60f2500307d77287fbd2b34656204f7f34edeea8",
+        "native_exit_code": 0
+      }
+    }
+  ],
+  "contract": "Separate exact-hash admission. Unscaled raw high-first packed4 indices and explicit opacity. Sprite extent remains [18,section0); no byte or row-width bounds relaxed.",
+  "limits": [
+    "No palette-bank/lighting/translation/flip/scale admission",
+    "Next sprite offsets are observations, not parser bounds",
+    "No original render parity or runtime state labels inferred"
+  ]
+}

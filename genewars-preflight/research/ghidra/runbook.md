@@ -13,6 +13,10 @@ python -B scripts/ghidra/validate_ui_bridge.py
 python -B scripts/ghidra/validate_creature_bridge.py
 python -B scripts/ghidra/validate_input_bridge.py
 python -B scripts/ghidra/validate_list_layout.py
+python -B scripts/ghidra/validate_config_bridge.py
+python -B scripts/ghidra/validate_bones_bridge.py
+python -B scripts/ghidra/validate_construction_bridge.py
+python -B scripts/ghidra/validate_planet_texture_bridge.py
 ```
 
 The import command replaces the local analysis database; preserve existing discoveries before deliberately reimporting. Normal continued work uses `-process ... -noanalysis`, not reimport. `RepairObjectPermissions.java` corrects the loader's all-read-only default from independently verified LE flags; it changes no bytes. `RecoverPanelFunctions.java` repairs the rejected speculative boundary and creates two function-pointer targets. Reapply it after a fresh import before exporting panel evidence.
@@ -25,6 +29,10 @@ Setup failures are preserved privately: the first import without the extension f
 
 Accepted loader evidence is `loader-validation.json`: all 244 pages, 26,883 internal fixup records, 24,497 cross-object instances and all four reconstructed object images compare byte-for-byte. Entry object 1 + 0x96E40 maps to VA 0xA6E40. Function tranche and renderer bridge are bounded static behavior specifications; synthetic models/tests are not original execution traces.
 
-Later bounded receipts are `ui-evidence.json`, `creature-evidence.json`, and `input-evidence.json`. Their matching bridge documents distinguish actual UI assets, caller-selected packed4 creature pixels, and the mode-two mouse-packet/capture path. Earlier general ANB indexed8 assumptions are superseded by the creature codec proof; never choose a codec by parse success. The creature receipt admits 25 exact input hashes/50 CD+root1 aliases, excluding BONES pending a separate consumer trace.
+Later bounded receipts are `ui-evidence.json`, `creature-evidence.json`, `input-evidence.json`, `list-layout-evidence.json`, `config-evidence.json`, and `bones-evidence.json`. Their matching bridge documents distinguish actual UI assets, caller-selected packed4 pixels, mode-two mouse packets/capture, bounded list-name storage, and exact CD configuration. Earlier general ANB indexed8 assumptions are superseded by the creature codec proof; never choose a codec by parse success. The creature receipt admits 25 exact input hashes/50 CD+root1 aliases. BONES is admitted separately by its actual entity/frame consumer trace and exact source hash; GPF remains blocked.
 
-Next work: recover BONES's actual consumer, identify animation timing/flags, and bound custom-screen list records before any text copy. Runtime comparison requires separate authorization and a preserved variant hash; root now supervises a separately approved scoped reference session. This Ghidra lane continues static analysis and does not launch the original executable.
+Configuration analysis preserved the existing game program and added a separate static installer program in the same local Ghidra project. The exact CD installer original remains untouched. The loader's partial-page read failure is documented in `config-bridge.md`; an analysis-only zero-padded copy was independently checked against every original LE page/fixup. No installer execution is involved.
+
+Later simulation evidence is `construction-evidence.json` and `construction-cost-bridge.md`: a stage-three debit with signed skill adjustment, two wrapping signed32 pools, explicit readiness prerequisite and separately gated refill. `planet-texture-evidence.json` and `planet-texture-bridge.md` establish numbered PL1..4 texture tiles and index-zero transparency. PLANETS.DAT itself remains consumer-unproven; its byte count is not a planet-record schema.
+
+Next work: identify animation timing/flags and behavior beyond the bounded custom controls and transactions. Root supervises the separately authorized reference workflow and preserves runtime receipts and variant hashes. This Ghidra lane continues static analysis and does not launch the original executable; static evidence receipts do not themselves grant runtime authorization.

@@ -8,6 +8,10 @@ use std::fmt;
 const RNC_HEADER_LEN: usize = 18;
 const PALETTE256_BYTES: usize = 256 * 3;
 const SPRITE_TAB_RECORD_BYTES: usize = 6;
+const PLANET_ATLAS_WIDTH: usize = 256;
+const PLANET_ATLAS_HEIGHT: usize = 640;
+const PLANET_ATLAS_BYTES: usize = PLANET_ATLAS_WIDTH * PLANET_ATLAS_HEIGHT;
+const PLANET_TEXTURE_ROW_STRIDE: usize = PLANET_ATLAS_WIDTH;
 
 /// File offset where the observed 18-byte ANB header ends and sprite data begins.
 pub const ANB_SPRITE_DATA_BASE: usize = 0x12;
@@ -45,6 +49,10 @@ pub enum Error {
     AnbComponentRangeInvalid { frame: usize, offset: u32, count: usize, component_bytes: usize },
     AnbComponentOutOfBounds { component: usize, count: usize },
     AnbSpriteReferenceInvalid { component: usize, offset: u32, sprite_records: usize },
+    PlanetAtlasLength { expected: usize, actual: usize },
+    PlanetTileOutOfRange { tile_type: u8 },
+    PlanetTileOutOfBounds { tile_type: u8, offset: usize, width: usize, height: usize },
+    PlanetTileAllocationFailed,
 }
 
 impl fmt::Display for Error {
@@ -327,6 +335,83 @@ impl Palette256 {
 
     pub fn entries(&self) -> &[[u8; 3]; 256] {
         &self.entries
+    }
+}
+
+/// A bounded view of the fixed-stride planet texture atlas used by the CD
+/// planet-selection sampler. This is only the source texture data; it does
+/// not assign a palette or a projected screen position.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PlanetTextureAtlas<'a> {
+    bytes: &'a [u8],
+}
+
+impl<'a> PlanetTextureAtlas<'a> {
+    /// Parse an exact 256×640 byte atlas. The 256-byte row stride and
+    /// 163,840-byte extent are established by the texture sampler and the
+    /// decoded PL1–PL4 resources.
+    pub fn parse(bytes: &'a [u8]) -> Result<Self, Error> {
+        if bytes.len() != PLANET_ATLAS_BYTES {
+            return Err(Error::PlanetAtlasLength { expected: PLANET_ATLAS_BYTES, actual: bytes.len() });
+        }
+        Ok(Self { bytes })
+    }
+
+    /// Extract one explicitly selected atlas tile. Types 0–7 are 128×128;
+    /// types 8–13 are 64×64. No tile type is inferred from the source data.
+    pub fn tile(&self, tile_type: u8) -> Result<PlanetTextureTile, Error> {
+        let (offset, width, height) = match tile_type {
+            0..=7 => {
+                let index = usize::from(tile_type);
+                let offset = (index & 1) * 128 + (index >> 1) * 32_768;
+                (offset, 128, 128)
+            }
+            8..=13 => {
+                let index = usize::from(tile_type - 8);
+                let offset = 131_072 + (index / 4) * 16_384 + (index % 4) * 64;
+                (offset, 64, 64)
+            }
+            _ => return Err(Error::PlanetTileOutOfRange { tile_type }),
+        };
+
+        let pixel_count = width * height;
+        let mut indices = Vec::new();
+        indices.try_reserve_exact(pixel_count).map_err(|_| Error::PlanetTileAllocationFailed)?;
+        for row in 0..height {
+            let row_start = offset
+                .checked_add(row * PLANET_TEXTURE_ROW_STRIDE)
+                .ok_or(Error::LengthOverflow)?;
+            let row_end = row_start.checked_add(width).ok_or(Error::LengthOverflow)?;
+            let source = self.bytes.get(row_start..row_end).ok_or(Error::PlanetTileOutOfBounds {
+                tile_type,
+                offset: row_start,
+                width,
+                height,
+            })?;
+            indices.extend_from_slice(source);
+        }
+        Ok(PlanetTextureTile { tile_type, width, height, indices })
+    }
+}
+
+/// Contiguous raw palette indices for one explicitly selected planet tile.
+/// Index zero is transparent in the evidenced sampler; all other values are
+/// copied unchanged. Palette selection and color conversion are separate.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PlanetTextureTile {
+    pub tile_type: u8,
+    pub width: usize,
+    pub height: usize,
+    pub indices: Vec<u8>,
+}
+
+impl PlanetTextureTile {
+    pub fn is_opaque(&self, x: usize, y: usize) -> Option<bool> {
+        if x >= self.width || y >= self.height {
+            return None;
+        }
+        let index = y.checked_mul(self.width)?.checked_add(x)?;
+        self.indices.get(index).map(|value| *value != 0)
     }
 }
 
@@ -1018,6 +1103,59 @@ mod tests {
             Palette256::parse(&[0; PALETTE256_BYTES + 1], PaletteChannelMode::Rgb),
             Err(Error::PaletteLength { expected: PALETTE256_BYTES, actual: PALETTE256_BYTES + 1 })
         );
+    }
+
+    #[test]
+    fn extracts_explicit_planet_tiles_with_the_proven_256_byte_stride() {
+        let mut bytes = vec![0u8; PLANET_ATLAS_BYTES];
+        for (index, byte) in bytes.iter_mut().enumerate() {
+            *byte = ((index.wrapping_mul(17).wrapping_add(3)) & 0xff) as u8;
+        }
+        // Type zero's top-left texel is the transparent index. Neighboring
+        // rows are separated by the source atlas stride, not tile width.
+        bytes[0] = 0;
+        let atlas = PlanetTextureAtlas::parse(&bytes).unwrap();
+        for tile_type in 0..=13u8 {
+            let tile = atlas.tile(tile_type).unwrap();
+            let (offset, side) = if tile_type < 8 {
+                (usize::from(tile_type & 1) * 128 + usize::from(tile_type >> 1) * 32_768, 128)
+            } else {
+                let index = usize::from(tile_type - 8);
+                (131_072 + (index / 4) * 16_384 + (index % 4) * 64, 64)
+            };
+            assert_eq!((tile.tile_type, tile.width, tile.height), (tile_type, side, side));
+            assert_eq!(tile.indices.len(), side * side);
+            assert_eq!(tile.indices[0], bytes[offset]);
+            assert_eq!(tile.indices[side + 1], bytes[offset + PLANET_TEXTURE_ROW_STRIDE + 1]);
+            assert_eq!(tile.indices[side * side - 1], bytes[offset + (side - 1) * PLANET_TEXTURE_ROW_STRIDE + side - 1]);
+            assert_eq!(tile.is_opaque(0, 0), Some(tile.indices[0] != 0));
+            assert_eq!(tile.is_opaque(side, 0), None);
+            assert_eq!(tile.is_opaque(0, side), None);
+        }
+        assert_eq!(atlas.tile(14), Err(Error::PlanetTileOutOfRange { tile_type: 14 }));
+        assert_eq!(atlas.tile(255), Err(Error::PlanetTileOutOfRange { tile_type: 255 }));
+    }
+
+    #[test]
+    fn validates_planet_atlas_extent_before_tile_reads() {
+        assert_eq!(
+            PlanetTextureAtlas::parse(&[0; PLANET_ATLAS_BYTES - 1]),
+            Err(Error::PlanetAtlasLength { expected: PLANET_ATLAS_BYTES, actual: PLANET_ATLAS_BYTES - 1 })
+        );
+        assert_eq!(
+            PlanetTextureAtlas::parse(&[0; PLANET_ATLAS_BYTES + 1]),
+            Err(Error::PlanetAtlasLength { expected: PLANET_ATLAS_BYTES, actual: PLANET_ATLAS_BYTES + 1 })
+        );
+    }
+
+    #[test]
+    fn planet_tile_transparency_is_explicit_and_only_index_zero_is_clear() {
+        let mut bytes = vec![1u8; PLANET_ATLAS_BYTES];
+        bytes[0] = 0;
+        bytes[1] = 1;
+        let tile = PlanetTextureAtlas::parse(&bytes).unwrap().tile(0).unwrap();
+        assert_eq!(tile.is_opaque(0, 0), Some(false));
+        assert_eq!(tile.is_opaque(1, 0), Some(true));
     }
 
     #[test]

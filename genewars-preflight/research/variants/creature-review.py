@@ -91,7 +91,8 @@ def main():
     corpus = json.loads(corpus_path.read_bytes())
     evidence = json.loads(evidence_path.read_bytes())
     admitted = set(evidence['packed4_source_sha256'])
-    rows = {v['input_sha256']:v for v in corpus['results'] if v.get('encoding') == 'packed4-high-first'}
+    rows = {v['input_sha256']:v for v in corpus['results'] if v.get('encoding') == 'packed4-high-first'
+            and v['input_sha256'] in admitted}
     assert set(rows) == admitted and len(rows) == 25
     tool_before = record(EXE)
     listing_checks = []

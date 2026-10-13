@@ -1,6 +1,6 @@
 # GeneWars reconstruction
 
-The user requested execution of GENEWARS_CONTINUOUS_MULTIAGENT_CODEX_HANDOFF.md on 2026-10-12. Scope is faithful evidence-backed Rust reconstruction with isolated standalone Ghidra/LX-loader tooling. Original DOS programs/installers must not be executed without separately scoped authorization. No public uploads, global tool/MCP changes, or proprietary bytes in tracked files.
+The user requested execution of GENEWARS_CONTINUOUS_MULTIAGENT_CODEX_HANDOFF.md on 2026-10-12. Scope is faithful evidence-backed Rust reconstruction with isolated standalone Ghidra/LX-loader tooling. The latest direct user instruction enables full access, explicitly authorizes necessary reference-session reruns, and asks us to continue implementation/testing without repeated permission requests. Preserve fresh private staging, verified input hashes and bounded supervised execution for reference runs. This does not require running an installer or patcher; neither has run. No public uploads, global tool/MCP changes, or proprietary bytes in tracked files.
 
 Preserve existing preflight report, manifest, diagnostics and verification as the dated baseline. Do not rerun broad extraction. Use targeted, hashed reads of the supplied archive or existing private disc. The CD is a provisional analysis candidate, not established canonical retail behavior.
 
@@ -12,7 +12,7 @@ All source binaries, manual text/images, raw decompilation, downloaded tools, ca
 - SOL-01 (`gpt-6.1-sol`) owns `research/ghidra/`, `scripts/ghidra/`, and private Ghidra/JDK installations/projects.
 - LUNA-01 (`gpt-6-luna`) owns the assets/render/desktop crates, `scripts/desktop/`, `research/formats/`, and private asset samples.
 - LUNA-02 (`gpt-6-luna`) owns `research/manual/`, `docs/game-system-matrix.md`, `scripts/manual/`, and private manual files.
-- SOL-02 (`gpt-6.1-sol`) owns `research/variants/`, `scripts/reference/`, private review files and the prepared DOSBox/reference-run directories. One separately approved original session reached DOS/4GW and stopped at missing config.ini; see reference-run-result.json. Do not treat that completed one-session approval as blanket original/installer authorization.
+- SOL-02 (`gpt-6.1-sol`) owns `research/variants/`, `scripts/reference/`, private review files and the prepared DOSBox/reference-run directories. Run 001 stopped at missing config.ini. Run 002, with a statically derived configuration, displayed intro/menu/options artwork but had missing labels and unresolved guest mouse motion. See the separate result receipts. Later necessary reference reruns are authorized by the latest user instruction; do not repeat the obsolete approval gate.
 - Three concurrent children are the available maximum alongside root. Schedule independent Sol review after a lane frees. Do not change model family without user authorization.
 
 Do not edit another lane's files or revert others' changes. Share exact artifact paths, hashes, actual command/test results and unresolved evidence gaps. Mark claims Observed, Corroborated, Provisional, Unknown or Contradicted, with manual/binary/execution source status. A function name alone is not behavioral proof.

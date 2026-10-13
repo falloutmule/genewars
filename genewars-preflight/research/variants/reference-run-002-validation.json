@@ -1,0 +1,161 @@
+{
+  "status": "prepared-verified-no-execution",
+  "checked_utc": "2026-10-13T01:26:59.202294+00:00",
+  "original_execution": false,
+  "emulator_execution": false,
+  "approved": false,
+  "source_game_files": 490,
+  "source_game_bytes": 186368166,
+  "generated_config": {
+    "path": "private/reference-run/run-002/drive-c/GAME/config.ini",
+    "size": 126,
+    "sha256": "ff0c1921640bb81cd0b73fc4a995316ea9ff1b8d60ed288e5d52a1be4e7c0d5f",
+    "provenance": "Independently generated from exact static setup writer/parser contract"
+  },
+  "media": [
+    {
+      "entry_id": "root/2/disc/3",
+      "path": "private/reference-run/run-002/media/GENEWARS.cue",
+      "size": 238,
+      "sha256": "ba85aeb6a808145b43998a34faf6904956866539625bd45ead6dba0c2fd10ee5"
+    },
+    {
+      "entry_id": "root/2/disc/4",
+      "path": "private/reference-run/run-002/media/GENEWARS.img",
+      "size": 630947520,
+      "sha256": "3ae5f2154a84898a7d1652e550d741a0a431fe67fd0b3eb20121e3b11fd4e5de"
+    }
+  ],
+  "emulator_config": {
+    "path": "private/reference-run/run-002/dosbox-x.conf",
+    "size": 20796,
+    "sha256": "9dba4b2ff89fa91a891cff667616f23b1562ba909ec3ed6f98a143870eb58f78"
+  },
+  "emulator_tool": {
+    "path": "private/tools/dosbox-x/2026.10.01/bin/x64/Release SDL2/dosbox-x.exe",
+    "size": 25836544,
+    "sha256": "a82adcfa7af2784566cfeff74c077cefed08505396db2948b7e6aa7d4cee0832"
+  },
+  "static_config_evidence": {
+    "path": "research/ghidra/config-evidence.json",
+    "size": 4050,
+    "sha256": "75414dd497336a7a9d51addf7b253bea918152ead4bf9d8c53ac81932b25e546"
+  },
+  "preparation_receipt": {
+    "path": "research/variants/reference-run-002-readiness.json",
+    "size": 138149,
+    "sha256": "e6bc016dafb694e4249cf2459baab9f95f35782231b018bd55a7e795d8a1c010"
+  },
+  "before_files": {
+    "path": "private/reference-run/run-002/logs/before-files.json",
+    "size": 108327,
+    "sha256": "9e9acd03bf38d2eff0d19d20a3f69f5d1264c545f76b60c320854c411a1c1174"
+  },
+  "approval_refusal_cases": [
+    {
+      "case": "pending",
+      "rejected": true,
+      "process_creation_called": false,
+      "reason": "This session has no separate recorded human execution approval"
+    },
+    {
+      "case": "wrong-run",
+      "rejected": true,
+      "process_creation_called": false,
+      "reason": "Approval does not bind this exact prepared run/config"
+    },
+    {
+      "case": "wrong-config",
+      "rejected": true,
+      "process_creation_called": false,
+      "reason": "Approval does not bind this exact prepared run/config"
+    },
+    {
+      "case": "wrong-candidate",
+      "rejected": true,
+      "process_creation_called": false,
+      "reason": "Approval does not bind this exact prepared run/config"
+    },
+    {
+      "case": "missing-human-statement",
+      "rejected": true,
+      "process_creation_called": false,
+      "reason": "Approval does not bind this exact prepared run/config"
+    }
+  ],
+  "dry_run": {
+    "mode": "dry-run-only-no-process-started",
+    "command": [
+      "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\tools\\dosbox-x\\2026.10.01\\bin\\x64\\Release SDL2\\dosbox-x.exe",
+      "-conf",
+      "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\run-002\\dosbox-x.conf",
+      "-noconfig",
+      "-noautoexec",
+      "-defaultmapper",
+      "-nopromptfolder",
+      "-savedir",
+      "states",
+      "-time-limit",
+      "1200",
+      "-showrt"
+    ],
+    "cwd": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\run-002",
+    "manual_commands_after_separate_human_approval": [
+      "MOUNT C \"C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\run-002\\drive-c\" -nocachedir",
+      "IMGMOUNT D \"C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\run-002\\media\\GENEWARS.cue\" -t iso",
+      "MOUNT",
+      "CONFIG -SECUREMODE",
+      "MOUNT E \".\"",
+      "C:",
+      "CD \\GAME",
+      "REM Stop if E: mount is not refused. Only after approval/checks: GW.EXE"
+    ],
+    "verification": {
+      "files": 490,
+      "tool": {
+        "path": "private/tools/dosbox-x/2026.10.01/bin/x64/Release SDL2/dosbox-x.exe",
+        "size": 25836544,
+        "sha256": "a82adcfa7af2784566cfeff74c077cefed08505396db2948b7e6aa7d4cee0832"
+      },
+      "config": {
+        "path": "private/reference-run/run-002/dosbox-x.conf",
+        "size": 20796,
+        "sha256": "9dba4b2ff89fa91a891cff667616f23b1562ba909ec3ed6f98a143870eb58f78"
+      }
+    },
+    "security": "No game filename/-c content/startup commands. This script cannot grant human authorization."
+  },
+  "scripts": [
+    {
+      "path": "scripts/reference/prepare.py",
+      "size": 18512,
+      "sha256": "6c268e2b029a450e444e487c7afd43cb96751e11a53523232bf867f2090fca70"
+    },
+    {
+      "path": "scripts/reference/launch.py",
+      "size": 13832,
+      "sha256": "cc40c755c3455ed87b121c68f721e4660aa65edec45a1bd2b383a49f550d47e6"
+    },
+    {
+      "path": "scripts/reference/gate.py",
+      "size": 7207,
+      "sha256": "1d53cbb6efbeef09c4bdb07d9ee0833153b643a769a78d5092e9729520c7aa70"
+    },
+    {
+      "path": "scripts/reference/run002.py",
+      "size": 756,
+      "sha256": "176dafce7872967c5e603506a8f44684ffe803485c27a7c61a9e76b95f289f71"
+    },
+    {
+      "path": "scripts/reference/validate_run002.py",
+      "size": 4804,
+      "sha256": "80ab3a2cdcf7561645f5681547e8f9a5ca56beb7cb4517cc8816a49ccc1952e3"
+    },
+    {
+      "path": "scripts/reference/archive_failed_launch.py",
+      "size": 4126,
+      "sha256": "9990b5c5c36a81e7463641882972591eb72ee0c19c05c1df026bd19f54f634d4"
+    }
+  ],
+  "approval_required": "New explicit human approval of run-002 exact candidate/config and bounded scope; run-001 approval is consumed."
+}

@@ -4,9 +4,12 @@
 mod opaque_records;
 mod custom_list;
 mod mouse_packet;
+mod construction;
 
 /// Helpers whose evidence is restricted to the supplied CD analysis candidate.
 pub mod cd_candidate {
+    pub use crate::construction::{construction_stage3_debit, ConstructionSelector,
+        InvalidConstructionSelector, ConstructionPools, ConstructionDebit, ConstructionDebitStatus};
     pub use crate::custom_list::{custom_list_offset_step, custom_list_selection, custom_list_name,
         CustomArrow, CustomArrowCapture, CustomListNameError, CUSTOM_LIST_STORAGE_BYTES};
     pub use crate::mouse_packet::{mode2_button_packet, ButtonPacket};

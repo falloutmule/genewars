@@ -28,6 +28,36 @@ EXTRACT = TOOLS / VERSION
 SDL2 = EXTRACT / 'bin/x64/Release SDL2'
 RUN = ROOT / 'private/reference-run/run-001'
 RECORD = ROOT / 'research/variants/reference-readiness.json'
+SESSION = 'run-001'
+HUMAN_APPROVAL = ROOT / 'research/variants/reference-approval.json'
+EXTRA_GAME_INPUTS = {}
+
+
+def select_session(name):
+    """Select a fixed reviewed context inside this Python process only."""
+    global SESSION, RUN, RECORD, HUMAN_APPROVAL, EXTRA_GAME_INPUTS
+    if name != 'run-002':
+        raise ValueError('Only the explicitly prepared run-002 context can be selected')
+    SESSION = name
+    RUN = ROOT / 'private/reference-run/run-002'
+    RECORD = ROOT / 'research/variants/reference-run-002-readiness.json'
+    HUMAN_APPROVAL = ROOT / 'research/variants/reference-run-002-approval.json'
+    # Independent generated text following the exact setup writer's eight
+    # quoted fields. These are preparation paths, not inferred game defaults.
+    pairs = [('CD','D:\\GAME\\'),('InstallDrive','C:\\GAME\\'),('Language','ENGLISH'),
+             ('Intro','All'),('Anims','All'),('Sounds','All'),('Levels','All'),('Data','All')]
+    evidence = json.loads((ROOT/'research/ghidra/config-evidence.json').read_bytes())
+    if [key for key,value in pairs] != evidence['keys'] or ['All']*5 not in evidence['category_choices']:
+        raise ValueError('Static configuration contract changed; review before preparation')
+    for item in evidence['private_listings']:
+        if digest(ROOT/item['private_path']) != item['sha256']:
+            raise ValueError('Configuration instruction evidence changed')
+    text = ''.join(f'{key}="{value}"\r\n' for key,value in pairs).encode('ascii')
+    if any(len(line) >= 79 for line in text.splitlines()) or len(text.splitlines()) != 8:
+        raise ValueError('Generated configuration violates parser line limit')
+    EXTRA_GAME_INPUTS = {'GAME/config.ini': text}
+
+
 OVERRIDES = {
     'sdl': {'fullscreen': 'false', 'output': 'surface', 'autolock': 'false',
             'clip_mouse_button': 'none', 'mapperfile': 'logs/mapper.map',
@@ -209,6 +239,17 @@ def prepare_run(stage):
                    'revalidated_by': 'SourceReader constructor'}
     # Only the exact expected files may be visible in C: before approval.
     expected = {row['path'] for row in rows}
+    generated = []
+    for rel,data in EXTRA_GAME_INPUTS.items():
+        target = checked(RUN/'drive-c'/rel,RUN)
+        if stage:
+            ensure_bytes(target,data,RUN)
+        if target.read_bytes() != data:
+            raise ValueError('Generated game configuration changed')
+        info = file_record(target)
+        info['provenance'] = 'Independently generated from exact static setup writer/parser contract'
+        generated.append(info)
+        expected.add(info['path'])
     approval_path = RUN / 'logs/human-approval.json'
     if approval_path.exists():
         approval = json.loads(approval_path.read_text(encoding='utf-8'))
@@ -235,10 +276,11 @@ def prepare_run(stage):
             config_path.write_bytes(config)
         else:
             ensure_bytes(config_path, config, RUN)
-        ensure_bytes(RUN / 'logs/before-files.json', (json.dumps(rows, indent=2)+'\n').encode(), RUN)
+        ensure_bytes(RUN / 'logs/before-files.json', (json.dumps(rows+generated, indent=2)+'\n').encode(), RUN)
     if (RUN / 'dosbox-x.conf').read_bytes() != config:
         raise ValueError('Pinned config mismatch')
     return {'files': rows, 'file_count': len(rows), 'game_bytes': sum(r['size'] for r in rows),
+            'generated_game_inputs': generated,
             'media': media, 'source_archive': archive, 'config': file_record(RUN / 'dosbox-x.conf'),
             'config_parameter_count': count, 'config_overrides': OVERRIDES,
             'executable_sections_empty': ['autoexec', 'config', '4dos', 'devices']}
@@ -263,6 +305,7 @@ def main():
                         for b in receipt['batches'])):
             validation = receipt
     record = {'schema_version': 1, 'status': 'staged-and-hash-verified-original-execution-not-authorized',
+              'session': SESSION,
               'original_execution': False, 'emulator_execution': validation is not None,
               'emulator_runtime_restrictions_tested': validation is not None,
               'empty_emulator_validation': validation, 'tool': tool, 'runtime': runtime,
@@ -270,6 +313,19 @@ def main():
               'security_limit': 'DOSBox controls are not an OS sandbox. Process retains host user permissions.',
               'reproduce': 'python -B scripts/reference/prepare.py --stage',
               'verify_only': 'python -B scripts/reference/prepare.py'}
+    if SESSION == 'run-002':
+        record.update(reproduce='python -B scripts/reference/run002.py prepare --stage',
+                      verify_only='python -B scripts/reference/run002.py prepare',
+                      config_evidence=file_record(ROOT/'research/ghidra/config-evidence.json'),
+                      human_approval_record=HUMAN_APPROVAL.relative_to(ROOT).as_posix())
+        pending = {'run_id':SESSION,'approved':False,'human_statement':None,
+                   'candidate_sha256':'4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba',
+                   'generated_config_sha256':runtime['generated_game_inputs'][0]['sha256'],
+                   'scope':'One separately approved supervised session of exact CD GW.EXE/DOS4GW with generated static-evidence config.ini. No installer/launcher/patch/other variant.',
+                   'note':'Preparation is not original-execution authorization. Run-001 approval was consumed.'}
+        if stage and not HUMAN_APPROVAL.exists():
+            with HUMAN_APPROVAL.open('x',encoding='utf-8') as stream:
+                json.dump(pending,stream,indent=2)
     if stage:
         RECORD.write_text(json.dumps(record, indent=2)+'\n', encoding='utf-8')
     print(json.dumps({'status': record['status'], 'tool': tool, 'file_count': runtime['file_count'],

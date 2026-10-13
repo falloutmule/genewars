@@ -1,0 +1,140 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "installer_sha256": "570059e6b64f289e740491814fa775d4c87d53b4e2a61d53cea5e7cd7106feb7",
+  "scope": "Exact CD static parser/setup writer; no generated config or execution",
+  "parser_va": "0x150f0",
+  "setup_writer_va": "0x1ae48",
+  "config_open": {
+    "path": "config.ini",
+    "mode": "r",
+    "relative_to": "current working directory",
+    "failure_before_parsing": true
+  },
+  "keys": [
+    "CD",
+    "InstallDrive",
+    "Language",
+    "Intro",
+    "Anims",
+    "Sounds",
+    "Levels",
+    "Data"
+  ],
+  "setup_format_strings": {
+    "0x508b1": "CD=\"%s\"\n",
+    "0x508ba": "InstallDrive=\"%s\\\"\n",
+    "0x508ce": "Language=\"%s\"\n",
+    "0x508dd": "Intro=\"%s\"\n",
+    "0x508e9": "Anims=\"%s\"\n",
+    "0x508f5": "Sounds=\"%s\"\n",
+    "0x50902": "Levels=\"%s\"\n",
+    "0x5090f": "Data=\"%s\"\n"
+  },
+  "installer_mapping": {
+    "original_size": 1062561,
+    "analysis_padding_zero_bytes": 863,
+    "pages": 232,
+    "fixup_instances": 7845,
+    "all_three_mapped_objects_equal": true
+  },
+  "category_choices": [
+    [
+      "All",
+      "All",
+      "All",
+      "All",
+      "All"
+    ],
+    [
+      "All",
+      "All",
+      "Min",
+      "Min",
+      "Min"
+    ],
+    [
+      "Min",
+      "Min",
+      "Min",
+      "Min",
+      "Min"
+    ]
+  ],
+  "sound_fallback_hex": "7f000000320000000101",
+  "sound_read_path": "InstallDrive prefix + sound.ini",
+  "sound_ini_absent_cd": true,
+  "config_ini_absent_cd": true,
+  "parser_vectors": [
+    {
+      "line": "Data=\"All\"\n",
+      "recognized": true,
+      "installed_prefix": true
+    },
+    {
+      "line": "data=\"All\"\n",
+      "recognized": true,
+      "installed_prefix": true
+    },
+    {
+      "line": "Data =\"All\"\n",
+      "recognized": false,
+      "installed_prefix": null
+    },
+    {
+      "line": "Data=\"all\"\n",
+      "recognized": true,
+      "installed_prefix": false
+    },
+    {
+      "line": "Data=\"Min\"\n",
+      "recognized": true,
+      "installed_prefix": false
+    }
+  ],
+  "private_listings": [
+    {
+      "private_path": "private/ghidra/config-path/instructions-000150f0.txt",
+      "sha256": "03c42ed329ddd00ed2a50e8dc218ad8e77e17580ccc5b23fa85e64501786aec6"
+    },
+    {
+      "private_path": "private/ghidra/config-parser/instructions-000150b0.txt",
+      "sha256": "bd2af73977bf52ecc650efb9d3bba7f2851872b8c541a125b379b6e261c05c7f"
+    },
+    {
+      "private_path": "private/ghidra/config-parser/instructions-000154f0.txt",
+      "sha256": "ce0f99d2ba988b846a1a7de2270c5ba15dc00825eaf3102cd287cb86e1c6759a"
+    },
+    {
+      "private_path": "private/ghidra/config-read/instructions-0009954c.txt",
+      "sha256": "e9194b8449adabcca0a6a45056fa880dd15ae74846268a0d4b75779219694076"
+    },
+    {
+      "private_path": "private/ghidra/config-sound/instructions-00015050.txt",
+      "sha256": "f61e2ddba000cefa96fc2045a767e966ae8077be52a72c823f644870cdfba0fb"
+    },
+    {
+      "private_path": "private/ghidra/config-installer-refs/instructions-0001ae48.txt",
+      "sha256": "00fb3f8f4cb8e189262d6928760c257bcbda22c6ffd3e67fda54b52766e99aac"
+    },
+    {
+      "private_path": "private/ghidra/config-installer-values/choice-range.txt",
+      "sha256": "6116105211f8d2e07bc1d6d36350e580b714b5d3362ac1af91d1108adaa1be58"
+    },
+    {
+      "private_path": "private/ghidra/config-installer-values/choice2-range.txt",
+      "sha256": "f61656d7067c39939ae0c50e510a5c91a6c4a4d4ec09962c8c3abb4811e2c2f8"
+    },
+    {
+      "private_path": "private/ghidra/config-installer-values/choice3-range.txt",
+      "sha256": "16d01ee0f612eba7a08271a9969811d736834e252f65aa80ae85caaff40a9c71"
+    }
+  ],
+  "limits": [
+    "No proof of successful original startup",
+    "Mount letters and chosen install location are preparation choices",
+    "No sound.ini input length guard proved",
+    "No UI install-selection default inferred",
+    "Missing keys are not validated but later consumers need valid paths",
+    "No new original session authorized by this receipt"
+  ]
+}

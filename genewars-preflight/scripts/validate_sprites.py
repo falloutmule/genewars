@@ -20,6 +20,16 @@ def main():
                   for row in codec_evidence['admitted_sources'] for source in row['sources']}
     if len(packed4) != 25 or {value[0] for value in admissions.values()} != packed4:
         raise ValueError('Unexpected creature admission contract; review before extending coverage')
+    bones_path = ROOT / 'research/ghidra/bones-evidence.json'
+    bones = json.loads(bones_path.read_text(encoding='utf-8'))
+    bones_hash = '2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f'
+    if bones['status'] != 'verified_packed4' or bones['packed4_source_sha256'] != [bones_hash]:
+        raise ValueError('Unexpected separate BONES admission contract')
+    bones_admissions = {row['entry_id']: (row['sha256'], row['path']) for row in bones['source_aliases']}
+    if set(bones_admissions) != {'root/1/221', 'root/2/disc/319'} or any(v[0] != bones_hash for v in bones_admissions.values()):
+        raise ValueError('Unexpected BONES source provenance')
+    admissions.update(bones_admissions)
+    packed4.add(bones_hash)
     scratch = ROOT / 'private/integration/sprites'
     scratch.mkdir(parents=True, exist_ok=True)
     exe = ROOT / 'private/build/rust-target/debug/genewars-tools.exe'
@@ -45,7 +55,9 @@ def main():
                     data_path.write_bytes(data)
                 encoding = 'packed4-high-first' if key in packed4 else 'indexed8'
                 info = {'decoded_size': len(data), 'decoded_sha256': sha(data), 'encoding': encoding,
-                        'codec_admission': 'hash-and-caller-bound creature evidence' if key in packed4 else 'existing indexed8 structural probe'}
+                        'codec_admission': ('hash-and-caller-bound BONES evidence' if key == bones_hash else
+                                            'hash-and-caller-bound creature evidence' if key in packed4 else
+                                            'existing indexed8 structural probe')}
                 try:
                     if len(data) < 18:
                         raise ValueError('Short ANB header')
@@ -85,11 +97,14 @@ def main():
                'blocked': sum(r['status'] != 'passed' for r in results),
                'packed4_source_records': sum(r['encoding'] == 'packed4-high-first' for r in results),
                'packed4_unique_inputs': len(packed4),
+               'packed4_creature_unique_inputs': len(packed4) - 1,
+               'packed4_bones_source_records': sum(r['input_sha256'] == bones_hash for r in results),
                'unique_sprite_records': sum(len(r['native_result']['records']) for r in cache.values() if r['status'] == 'passed')}
     report = {'schema_version': 1, 'summary': summary, 'results': results,
               'decoder_executable_sha256': sha(exe.read_bytes()),
               'codec_evidence': {'path': str(codec_path.relative_to(ROOT)), 'sha256': sha(codec_path.read_bytes())},
-              'scope': 'ANB header and embedded sprite records checked with RLE strictly bounded before metadata. Packed4 is selected only for the 25 hash-and-provenance-bound creature inputs admitted by CD caller evidence; base0 is a structural diagnostic, not runtime palette selection. Other inputs retain the indexed8 structural probe. This supersedes the unsafe full-file-bound result. Parsing is not cross-build semantic equivalence, complete animation reconstruction, or runtime verification.',
+              'bones_codec_evidence': {'path': str(bones_path.relative_to(ROOT)), 'sha256': sha(bones_path.read_bytes())},
+              'scope': 'ANB header and embedded sprite records checked with RLE strictly bounded before metadata. Packed4 is selected only for 25 hash-and-provenance-bound creature inputs plus one separately proved BONES input admitted by CD caller evidence; base0 is a structural diagnostic, not runtime palette or lighting. Other inputs retain the indexed8 structural probe. This supersedes the unsafe full-file-bound result. Parsing is not cross-build semantic equivalence, complete animation reconstruction, or runtime verification.',
               'source_archive_sha256': reader.manifest['source']['planning_sha256']}
     (ROOT / 'research/integration/sprite-corpus.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     print(json.dumps({'summary': summary, 'blocked': [{k: r[k] for k in ('entry_id', 'reason')} for r in results if r['status'] != 'passed']}))

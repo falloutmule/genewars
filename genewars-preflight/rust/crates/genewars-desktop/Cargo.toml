@@ -1,12 +1,15 @@
 [package]
 name = "genewars-desktop"
+default-run = "genewars-desktop"
 version = "0.1.0"
 edition = "2021"
 publish = false
-license = "MIT OR Apache-2.0"
 description = "Native window host for inspecting bounded GeneWars assets"
 
 [dependencies]
+genewars-core = { path = "../genewars-core" }
+winit = { version = "=0.30.13", default-features = false, features = ["rwh_06"] }
+softbuffer = { version = "=0.4.8", default-features = false }
 genewars-assets = { path = "../genewars-assets" }
 genewars-render = { path = "../genewars-render" }
 minifb = { version = "=0.29.0", default-features = false, features = ["x11"] }

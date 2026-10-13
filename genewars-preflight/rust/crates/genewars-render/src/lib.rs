@@ -9,6 +9,12 @@ pub const GENE_PANEL_INDEX_BYTES: usize = GENE_PANEL_WIDTH as usize * GENE_PANEL
 pub const CD_SCREEN_WIDTH: u32 = 640;
 pub const CD_SCREEN_HEIGHT: u32 = 480;
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum CdArrow {
+    Up,
+    Down,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Error {
     WrongPanelIndexLength { expected: usize, actual: usize },
@@ -67,6 +73,87 @@ pub fn render_cd_ifcustom_arrows(
         )?;
     }
     Ok(image)
+}
+
+/// Compose the two evidence-bound controls with at most one captured/selected.
+pub fn render_cd_ifcustom_controls(
+    anb: &[u8],
+    palette: &Palette256,
+    selected: Option<CdArrow>,
+) -> Result<RgbImage, Error> {
+    let sections = AnbSections::parse(anb).map_err(Error::Asset)?;
+    let metadata = sections.ui_metadata().map_err(Error::Asset)?;
+    let sprites = SpriteTable::from_anb(anb).map_err(Error::Asset)?;
+    let mut image = RgbImage::from_rgb24(CD_SCREEN_WIDTH, CD_SCREEN_HEIGHT,
+        vec![0; (CD_SCREEN_WIDTH * CD_SCREEN_HEIGHT * 3) as usize])?;
+    for (arrow, animation_index, control_x, control_y) in [
+        (CdArrow::Up, 6usize, 455i32, 229i32),
+        (CdArrow::Down, 7usize, 455i32, 261i32),
+    ] {
+        let (sprite, x, y) = verified_arrow_sprite(anb, &metadata, &sprites, animation_index, selected == Some(arrow))?;
+        image.blit_indexed_sprite(&sprite, palette, control_x + x, control_y + y)?;
+    }
+    Ok(image)
+}
+
+/// Return the first control, in original list order, whose currently displayed
+/// frame has an opaque sprite pixel at the supplied 640x480 screen coordinate.
+pub fn hit_test_cd_ifcustom_arrows(
+    anb: &[u8],
+    selected: Option<CdArrow>,
+    x: i32,
+    y: i32,
+) -> Result<Option<CdArrow>, Error> {
+    let sections = AnbSections::parse(anb).map_err(Error::Asset)?;
+    let metadata = sections.ui_metadata().map_err(Error::Asset)?;
+    let sprites = SpriteTable::from_anb(anb).map_err(Error::Asset)?;
+    for (arrow, animation_index, control_x, control_y) in [
+        (CdArrow::Up, 6usize, 455i32, 229i32),
+        (CdArrow::Down, 7usize, 455i32, 261i32),
+    ] {
+        let (sprite, local_x, local_y) = verified_arrow_sprite(anb, &metadata, &sprites, animation_index, selected == Some(arrow))?;
+        let source_x = i64::from(x) - i64::from(control_x) - i64::from(local_x);
+        let source_y = i64::from(y) - i64::from(control_y) - i64::from(local_y);
+        if source_x >= 0 && source_y >= 0
+            && source_x < i64::from(sprite.width) && source_y < i64::from(sprite.height)
+            && sprite.opaque[source_y as usize * usize::from(sprite.width) + source_x as usize]
+        {
+            return Ok(Some(arrow));
+        }
+    }
+    Ok(None)
+}
+
+fn verified_arrow_sprite(
+    anb: &[u8],
+    metadata: &genewars_assets::AnbUiMetadata<'_>,
+    sprites: &SpriteTable,
+    animation_index: usize,
+    selected: bool,
+) -> Result<(IndexedSprite, i32, i32), Error> {
+    let animation = metadata.animation(animation_index).map_err(Error::Asset)?;
+    if animation.trailing_word != 2
+        || animation.last_frame_offset.checked_sub(animation.first_frame_offset) != Some(14)
+    {
+        return Err(Error::UnsupportedIfCustomArrowBinding);
+    }
+    let frame_offset = if selected { animation.last_frame_offset } else { animation.first_frame_offset };
+    let frame = metadata.frame_at(frame_offset).map_err(Error::Asset)?;
+    if frame.component_count != 1 || frame.display_dimensions() != (19, 31) {
+        return Err(Error::UnsupportedIfCustomArrowBinding);
+    }
+    let component = metadata.frame_component(frame, 0).map_err(Error::Asset)?;
+    if component.flags != 0 {
+        return Err(Error::UnsupportedIfCustomArrowBinding);
+    }
+    let (local_x, local_y) = component.local_position();
+    let sprite_index = component.sprite_offset as usize / 6;
+    let descriptor = sprites.records().get(sprite_index).ok_or(Error::UnsupportedIfCustomArrowBinding)?;
+    if (descriptor.width, descriptor.height) != (19, 32) {
+        return Err(Error::UnsupportedIfCustomArrowBinding);
+    }
+    let sprite = sprites.decode(sprite_index, anb).map_err(Error::Asset)?;
+    Ok((sprite, i32::from(local_x), i32::from(local_y)))
 }
 
 impl fmt::Display for Error {
@@ -333,6 +420,30 @@ mod tests {
         assert_eq!(pixel(&selected, 455, 262), [255, 0, 0]);
         assert_eq!(pixel(&selected, 455, 229), [0, 0, 0]);
         assert_eq!(pixel(&selected, 455, 261), [255, 0, 0]);
+    }
+
+    #[test]
+    fn custom_arrow_hit_test_uses_selected_frame_offsets_and_opaque_pixels() {
+        let anb = synthetic_ifcustom_arrows();
+        assert_eq!(hit_test_cd_ifcustom_arrows(&anb, None, 455, 229).unwrap(), Some(CdArrow::Up));
+        assert_eq!(hit_test_cd_ifcustom_arrows(&anb, None, 455, 261).unwrap(), Some(CdArrow::Down));
+        assert_eq!(hit_test_cd_ifcustom_arrows(&anb, None, 474, 229).unwrap(), None);
+        assert_eq!(hit_test_cd_ifcustom_arrows(&anb, None, i32::MIN, i32::MIN).unwrap(), None);
+        assert_eq!(hit_test_cd_ifcustom_arrows(&anb, None, i32::MAX, i32::MAX).unwrap(), None);
+        assert_eq!(hit_test_cd_ifcustom_arrows(&anb, Some(CdArrow::Up), 455, 229).unwrap(), None);
+        assert_eq!(hit_test_cd_ifcustom_arrows(&anb, Some(CdArrow::Up), 455, 230).unwrap(), Some(CdArrow::Up));
+        // The up control's selected raster reaches y=261; original list order
+        // checks it before the down control at the shared boundary.
+        assert_eq!(hit_test_cd_ifcustom_arrows(&anb, Some(CdArrow::Up), 455, 261).unwrap(), Some(CdArrow::Up));
+    }
+
+    #[test]
+    fn composes_only_the_captured_arrow_in_selected_frame() {
+        let anb = synthetic_ifcustom_arrows();
+        let image = render_cd_ifcustom_controls(&anb, &red_index_palette(), Some(CdArrow::Up)).unwrap();
+        assert_eq!(pixel(&image, 455, 230), [255, 0, 0]);
+        assert_eq!(pixel(&image, 455, 229), [0, 0, 0]);
+        assert_eq!(pixel(&image, 455, 261), [255, 0, 0]);
     }
 
     #[test]
