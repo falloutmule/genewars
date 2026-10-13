@@ -4,3 +4,9 @@
 research/tooling-sources.json whitespace=cr-at-eol,-blank-at-eof
 # Console diagnostics are preserved verbatim, including table padding.
 *.txt -text -whitespace
+# Native/source validation receipts also hash exact implementation bytes.
+*.rs -text whitespace=cr-at-eol
+*.py -text whitespace=cr-at-eol
+*.java -text whitespace=cr-at-eol
+*.toml -text whitespace=cr-at-eol
+*.lock -text whitespace=cr-at-eol

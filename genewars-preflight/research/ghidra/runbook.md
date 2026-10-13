@@ -17,6 +17,8 @@ python -B scripts/ghidra/validate_config_bridge.py
 python -B scripts/ghidra/validate_bones_bridge.py
 python -B scripts/ghidra/validate_construction_bridge.py
 python -B scripts/ghidra/validate_planet_texture_bridge.py
+python -B scripts/ghidra/validate_english_install_bridge.py
+python -B scripts/ghidra/validate_font_menu_bridge.py
 ```
 
 The import command replaces the local analysis database; preserve existing discoveries before deliberately reimporting. Normal continued work uses `-process ... -noanalysis`, not reimport. `RepairObjectPermissions.java` corrects the loader's all-read-only default from independently verified LE flags; it changes no bytes. `RecoverPanelFunctions.java` repairs the rejected speculative boundary and creates two function-pointer targets. Reapply it after a fresh import before exporting panel evidence.
@@ -36,3 +38,13 @@ Configuration analysis preserved the existing game program and added a separate 
 Later simulation evidence is `construction-evidence.json` and `construction-cost-bridge.md`: a stage-three debit with signed skill adjustment, two wrapping signed32 pools, explicit readiness prerequisite and separately gated refill. `planet-texture-evidence.json` and `planet-texture-bridge.md` establish numbered PL1..4 texture tiles and index-zero transparency. PLANETS.DAT itself remains consumer-unproven; its byte count is not a planet-record schema.
 
 Next work: identify animation timing/flags and behavior beyond the bounded custom controls and transactions. Root supervises the separately authorized reference workflow and preserves runtime receipts and variant hashes. This Ghidra lane continues static analysis and does not launch the original executable; static evidence receipts do not themselves grant runtime authorization.
+
+English installation-path evidence is `english-install-evidence.json` / `english-install-bridge.md`: the selected English CD text and speech flattening is proved by the original installer copy worker, without running it. `font-menu-evidence.json` / `font-menu-bridge.md` establish FONT2 mapping, the 604-string table, the title palette binding and bounded normal three-button composition. Native rendering requires full640x480 clip and zero incoming draw flags; runtime state and original screenshots are maintained in the reference lane.
+
+Campaign entry evidence is `campaign-entry-evidence.json` / `campaign-entry-bridge.md`; reproduce with `python -B scripts/ghidra/validate_campaign_entry_bridge.py`. It follows the enabled main-menu branch through campaign confirmation into the actual CONQ001 loader, preserves prior system state in96 bounded resource-plan vectors, and establishes exact first header/direct-prefix bounds. The map tail and cell meanings remain opaque; resource selection is not mission simulation.
+
+Main-menu input is `menu-input-evidence.json` / `menu-input-bridge.md`; reproduce with `python -B scripts/ghidra/validate_menu_input_bridge.py`. Its flags0x1048/callback0 behavior differs from the custom arrows: press returns ID with mask0, and release requires an opaque normal-frame hit. The receipt covers mask-write lifetime, selected frames, 25,950 hit pixels and 8,192 bounded packet cases.
+
+Terrain evidence is `terrain-evidence.json` / `terrain-bridge.md`; reproduce with `python -B scripts/ghidra/validate_terrain_bridge.py`. Actual indexing proves a128×128 wrapping grid, record+2 signed height, record+4 texture selection, the piecewise doubled-height sampler, and160 complete B32A textures. MAIN palette association and constructor geometry are established; original camera, live visibility/shading and complete triangle rasterization remain outside this bounded port.
+
+The explicit strip transform, alternating-column derivation, actual two-triangle/UV order, raw vertex shade operands and64-row FADE lookup are in `terrain-projection-evidence.json` / `terrain-projection-bridge.md`. Reproduce with `validate_terrain_projection_bridge.py`; these primitives require caller-supplied camera and lighting state and do not establish generic triangle rasterization equivalence.

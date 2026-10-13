@@ -1,0 +1,273 @@
+{
+  "status": "passed-bounded-independent-native-review",
+  "checked_utc": "2026-10-13T03:26:18.525396+00:00",
+  "original_or_gui_execution": false,
+  "campaign_plans": 96,
+  "admission_pairs": 65536,
+  "packet_cases": 128000,
+  "normal_hit_pixels": 25950,
+  "normal_opaque": 18827,
+  "normal_mask_sha256": "a9a7ad36a9255a84d90c9d9e4d70b9a17f3f9b6f7273ac7f1d018d3c6295814e",
+  "full_rgb_title_frames": 2,
+  "full_rgb_channels_per_frame": 921600,
+  "header_bytes": 699,
+  "map_prefix_bytes": 243038,
+  "map_tail_bytes": 100920,
+  "source_receipts": [
+    {
+      "path": "research/ghidra/campaign-entry-evidence.json",
+      "size": 64045,
+      "sha256": "49f6920e492706f96833c35ddef8a5482e54ad276e21e9ada32f6e3de8f09005"
+    },
+    {
+      "path": "research/ghidra/menu-input-evidence.json",
+      "size": 11416,
+      "sha256": "7c2145f1bfeca463d0b610076cd9409ff75272023c2fdd86542749b7785aafb7"
+    },
+    {
+      "path": "research/ghidra/font-menu-evidence.json",
+      "size": 8684,
+      "sha256": "4ceac854cc17e135d4187fe109626f29bd19b4b5bfb8aa46b7d5e01b0eebd7d5"
+    }
+  ],
+  "private_listings": [
+    {
+      "path": "private/ghidra/font-menu/instructions-0007c870.txt",
+      "size": 3523,
+      "sha256": "f46fc13eef1df0bc64238de65ae7355f73a889194b4c870f0a6b50ac91e52f07"
+    },
+    {
+      "path": "private/ghidra/campaign-constructor-head.txt",
+      "size": 900,
+      "sha256": "4eded971a84068514e2ea1c978e3c664de523f7285387d0b8ca833dab1b36d5d"
+    },
+    {
+      "path": "private/ghidra/campaign-screen/instructions-00015b10.txt",
+      "size": 511,
+      "sha256": "5d38695bf234584b10f8b28c6e8c39ec2f6b688f893e1e094a9dec0cfd2eff59"
+    },
+    {
+      "path": "private/ghidra/campaign-screen/instructions-00015b90.txt",
+      "size": 10757,
+      "sha256": "d2e639da791ba69c9967189b128a3d39d03818f43b870d252e880e87dc354484"
+    },
+    {
+      "path": "private/ghidra/campaign-header/instructions-00015720.txt",
+      "size": 1028,
+      "sha256": "393fa5bb123f54ed6d457ac5e591a6a2e9706e61a1e8c7a511759c92e0749f60"
+    },
+    {
+      "path": "private/ghidra/campaign-actions/instructions-00017e80.txt",
+      "size": 7085,
+      "sha256": "78660fe10705b977dff3fcc294e75c40452e9672022369959bb0556e1f9efb0a"
+    },
+    {
+      "path": "private/ghidra/campaign-actions/instructions-00016170.txt",
+      "size": 1324,
+      "sha256": "5f8950f98883bea43b558d6e976e29aa6494b833ccb4e0c7bf2e6df091b00456"
+    },
+    {
+      "path": "private/ghidra/campaign-mission-constructor.txt",
+      "size": 381,
+      "sha256": "dd6a74b803dab90cc26f04ded4ed9e609c89835a9aacaed0b45d83df2d761515"
+    },
+    {
+      "path": "private/ghidra/campaign-view-thunks/instructions-0008de70.txt",
+      "size": 47,
+      "sha256": "72cd41e9e25bc6b9865a6b0e59b674fd31cfc5237715a6283bef7100b0fc35d4"
+    },
+    {
+      "path": "private/ghidra/campaign-level-entry/instructions-0007ce60.txt",
+      "size": 3111,
+      "sha256": "520168ee49d1b8b7afc77265a0a97ee874e61b9ddc311aefa6bf2056451ebec8"
+    },
+    {
+      "path": "private/ghidra/campaign-level/instructions-0007d090.txt",
+      "size": 14585,
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    },
+    {
+      "path": "private/ghidra/campaign-level/instructions-00071b70.txt",
+      "size": 15482,
+      "sha256": "df0c9245caa952c20d3d319149413fc9d12382b8d65d036bba306ce8d7f19076"
+    },
+    {
+      "path": "private/ghidra/campaign-briefing/instructions-00017850.txt",
+      "size": 4467,
+      "sha256": "e622861a871cdcdf0bb3768fcb7d49dc5011d84ecadf4b2a2ffae7524b212368"
+    },
+    {
+      "path": "private/ghidra/campaign-header-consumer/instructions-0008ab70.txt",
+      "size": 2113,
+      "sha256": "73e30902668744ea25f5c83660ffbfa745fdcab76db6e30d6ef4afcf15808032"
+    },
+    {
+      "path": "private/ghidra/ui-input/instructions-000a87d0.txt",
+      "size": 16702,
+      "sha256": "1fe8f247f251c7b1a5a333b71d830d93ddca2feb1f6d557448894131510afd58"
+    },
+    {
+      "path": "private/ghidra/ui-controls/instructions-000a86d0.txt",
+      "size": 2336,
+      "sha256": "a4336dd52bebdb8311a05dc25bc64063e99d93928aaa23e335012aaf19bea470"
+    },
+    {
+      "path": "private/ghidra/ui-frame/instructions-00098c40.txt",
+      "size": 1775,
+      "sha256": "b0b7188387e745e3fee9ea2c49a65b1bf1a2994300468fb6ca85da5771c2249b"
+    },
+    {
+      "path": "private/ghidra/sprite-scaled/instructions-00098b60.txt",
+      "size": 1364,
+      "sha256": "2775e1d25062d7c9140240a007024e944448df5387bba3379ba185ce2bcaed43"
+    },
+    {
+      "path": "private/ghidra/ui-controls/instructions-000a84d0.txt",
+      "size": 2665,
+      "sha256": "df232042329475b234c8d61f7844ffac88e5bd10cf98c10c2b4e601ba9e44b5e"
+    },
+    {
+      "path": "private/ghidra/font-menu/instructions-0007c870.txt",
+      "size": 3523,
+      "sha256": "f46fc13eef1df0bc64238de65ae7355f73a889194b4c870f0a6b50ac91e52f07"
+    },
+    {
+      "path": "private/ghidra/font-draw/instructions-000a7618.txt",
+      "size": 306,
+      "sha256": "df3f0482d660eb56acb03faa0b9144c9a8b9caa14ef28d8ddb4fa1f8351ef124"
+    },
+    {
+      "path": "private/ghidra/font-menu-constructor-tail.txt",
+      "size": 1435,
+      "sha256": "40c1a567b912f2924a40e800b47069fd3540254719dd65b065824e6d49d48c14"
+    },
+    {
+      "path": "private/ghidra/font-text/instructions-0007c6a0.txt",
+      "size": 2709,
+      "sha256": "f59af2770a13393f74bc1e4f5daa4fd0078a9158d899771cba99769891b56209"
+    },
+    {
+      "path": "private/ghidra/font-init/instructions-0001f550.txt",
+      "size": 822,
+      "sha256": "775ba6cd4cc5d3a8074eac27408c2c8a311877840c303fc28800341bd24140bf"
+    },
+    {
+      "path": "private/ghidra/font-init/instructions-0001f5a0.txt",
+      "size": 2182,
+      "sha256": "c9ecc8eaf86c6d18bbd8a6d0ed74cdb3ba520da09e034da21f527e3ddedead52"
+    },
+    {
+      "path": "private/ghidra/font-wrapper/instructions-0001f730.txt",
+      "size": 294,
+      "sha256": "f3320d21ab701c5c32d4cd5c7be560e2fa76123bbc54662b714a970735e44c08"
+    },
+    {
+      "path": "private/ghidra/font-init/instructions-0001f750.txt",
+      "size": 9584,
+      "sha256": "9c8573643f2b605206d821774c50e3c6776e81bd3d2840c4fd3f5baa176d567f"
+    },
+    {
+      "path": "private/ghidra/font-menu/instructions-0007ca70.txt",
+      "size": 1305,
+      "sha256": "871ac5bcdd4ea2cf5add8feeea364367b0945ad28eba02e034535321d60f5382"
+    },
+    {
+      "path": "private/ghidra/font-menu-bind/instructions-000a8320.txt",
+      "size": 2747,
+      "sha256": "782abc48942eed3858ada0401b148f8f55c96d0c7805815e71bfdf16dea42721"
+    },
+    {
+      "path": "private/ghidra/ui-controls/instructions-000a84d0.txt",
+      "size": 2665,
+      "sha256": "df232042329475b234c8d61f7844ffac88e5bd10cf98c10c2b4e601ba9e44b5e"
+    },
+    {
+      "path": "private/ghidra/font-menu-bind/instructions-000a85d0.txt",
+      "size": 2290,
+      "sha256": "5a245dd01ae9fcd5476c8eb0ac34e76b5e565fd32c74d5fafc2a9854d68b941a"
+    },
+    {
+      "path": "private/ghidra/font-menu-construct/instructions-000aea78.txt",
+      "size": 688,
+      "sha256": "3699b9c5eb659d383c732c7288314f9924ec88eed36b17f45b971717123eb641"
+    },
+    {
+      "path": "private/ghidra/display-geometry/instructions-000a7730.txt",
+      "size": 21862,
+      "sha256": "aa63d9caf20fbcd13f8d139958df0e542a2ca45437a42b7249c87adbe9a60f00"
+    },
+    {
+      "path": "private/ghidra/font-menu-state/instructions-0001cdf0.txt",
+      "size": 9116,
+      "sha256": "476c28e193b3bc5e7fdff41c0ae127f34b140f6ec56a69f94faa8523de475be2"
+    }
+  ],
+  "crate_sources": [
+    {
+      "path": "rust/crates/genewars-core/src/campaign.rs",
+      "size": 5179,
+      "sha256": "a610b74be9c65dd66ef9c84771b1c07422e1efea41d6e9895290a551d061bf78"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/menu_control.rs",
+      "size": 11212,
+      "sha256": "9def9eafcff361edeac28ff199ab1a241ada086c1bc4e826ba65fa6dbe28a472"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/lib.rs",
+      "size": 80195,
+      "sha256": "3c8ba11658ed1839c6991ecf0402e963682892b2f1daac8ff0c28354060ea9d3"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/lib.rs",
+      "size": 38923,
+      "sha256": "fd318c35a9ff66e1d1a2d8c1ef018994c2d408cb916646d496638b93417df47e"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "private/integration/rnc-decoded/c7d2dfc5d774c69337436249ec74e4d0fa6ae1d06bd5ae785f9f73ee2ac0f707.bin",
+      "size": 58185,
+      "sha256": "f5537949f249fc4f84e265768a4a8af981d5db02604a67371bb70dab3f40e7bc"
+    },
+    {
+      "path": "private/integration/menu/titlescr.pal",
+      "size": 768,
+      "sha256": "36ef1916917c118a8115c8550a0d2d684d9041743a9d7521414479504606e491"
+    },
+    {
+      "path": "private/reference-run/run-003/drive-c/GAME/LEVELS/HDRCO1.DAT",
+      "size": 699,
+      "sha256": "5e1f382ea68f57f1cec03a3f7de2c4903ca127519481da98232a7f1c3a46aa11"
+    },
+    {
+      "path": "private/reference-run/run-003/drive-c/GAME/LEVELS/CONQ001.DAT",
+      "size": 343958,
+      "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+    }
+  ],
+  "harness": {
+    "path": "private/review/campaign-menu/review.exe",
+    "size": 5190663,
+    "sha256": "02d1ed82b3b50e9baf234b7571a68d7f6fbd42b3f917355b9985b99338d3af1b"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/campaign-menu-review.py",
+      "size": 8552,
+      "sha256": "e7016c61be63a1c892a8653671ca54c9f1add84bac5ee4f0f9a545c7b568e78b"
+    },
+    {
+      "path": "research/variants/campaign-menu-review.rs",
+      "size": 4197,
+      "sha256": "96c05270934483d82962cf8e40a851fdaddc8f62d903069af1f2bf209709ff14"
+    }
+  ],
+  "limits": [
+    "Progress0..23/system0..3 are safe-port admissions, not original checks or completion policy",
+    "Title hit union supports zero component flags; transforms not admitted",
+    "Safe complete-row RLE validation stronger than original final-row early-return",
+    "Copied mission prefix exposes initial bytes, not post-normalizer live state",
+    "No menu input cadence, mission simulation or GUI parity inferred"
+  ]
+}

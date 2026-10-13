@@ -1,0 +1,7 @@
+# Run004 outcome
+
+The raw SDL2 backend did not resolve automated guest mouse movement in this tested setup. Root verified effective raw_mouse_input=true and mouse_emulation=always, then observed click-skipped intro segments, visible menu labels and Options artwork. Requested capture was confirmed by the title suffix; an in-client drag and settled click still did not move the guest brown cursor as expected. This does not show that physical mouse input is unsupported, nor establish the underlying cause.
+
+PID29652 was released at2026-10-13T03:00:59.989732Z and operator-terminated after exact identity verification at03:02:58.126383Z. Exit15 is operator SIGTERM, not an original game failure. Process lifetime was146.104 seconds, with no host timeout. Private JPEGs are host-window captures; no raw framebuffer, mission, gameplay/save/reload or timing sample was observed.
+
+Integrity passed:489 of490 original files unchanged, only GW.ERR changed, all19 aliases/generated config/original executables/media/archive/tools unchanged, three additions and no removals. The raw finish receipt retains exact paths/hashes. All earlier runs remain preserved. No further original attempt is prepared in this tranche; root requires a new concrete diagnostic before another session. See `reference-run-004-result.json`, private supervisor observations and the adjacent outcome JSON. The raw checker receipt is unchanged.

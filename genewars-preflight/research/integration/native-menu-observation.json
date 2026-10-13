@@ -1,0 +1,55 @@
+{
+  "completed_utc": "2026-10-13T02:26:08.262820+00:00",
+  "scope": "Supervised locally built Rust menu window; no original program.",
+  "observed": {
+    "menu_art_and_labels_visible": true,
+    "original_menu_parity_claimed": false,
+    "event_driven_escape_exit": true,
+    "exit_code": 0,
+    "presented_frames_before_escape": 1
+  },
+  "superseded_polling_attempt": {
+    "quick_escape_press": "not observed to exit",
+    "uia_close": "exited successfully",
+    "report": {
+      "path": "private/integration/menu/menu-ui-check.json",
+      "size": 200,
+      "sha256": "e1a4db47436976990175e8acc44c4ba73f621684320060cd60741fdee9170652"
+    },
+    "binary": {
+      "path": "private/integration/menu/menu-minifb-tested.exe",
+      "size": 7297535,
+      "sha256": "e281cbfb3c9338e9ff00435bf94c10e9af9f66916aa5d84dae40673e0ea1b209"
+    },
+    "capture": {
+      "path": "private/integration/menu/menu-ui-window.png",
+      "size": 100270,
+      "sha256": "ec9a85339c1082b64a7520f8926c1d6c87aa6ce05bd455213fb3529498d27f75"
+    }
+  },
+  "current_event_driven_attempt": {
+    "action": "One quick Escape key press to the freshly activated and visually observed window",
+    "remaining_windows": 0,
+    "report": {
+      "path": "private/integration/menu/menu-winit-ui.json",
+      "size": 190,
+      "sha256": "9ca4c9feb62940d513f02afdc4a341e5858f0b73b05bd35bdbd58bb5aa0e870b"
+    },
+    "binary": {
+      "path": "private/integration/menu/menu-winit-tested.exe",
+      "size": 16351684,
+      "sha256": "7b365675fc81f3312fc1a2b3c3e28bdfe12536600f9a0f3375474f3ae1c77f2b"
+    },
+    "capture": {
+      "path": "private/integration/menu/menu-winit-window.png",
+      "size": 33443,
+      "sha256": "e4ebf90c9798a0cad9c2067afde38bf1bb9de8e01a8f220e6195c6b5ecb27120"
+    }
+  },
+  "limits": [
+    "Static composition only; menu clicks and command dispatch are not implemented",
+    "No original runtime framebuffer comparison",
+    "Native window activation and capture worked; this narrows the reference-run activation problem but does not identify its cause",
+    "UI observation times are not a timing benchmark"
+  ]
+}

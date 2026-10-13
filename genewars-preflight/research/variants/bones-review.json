@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T01:55:30.152547+00:00",
+  "checked_utc": "2026-10-13T03:26:10.019239+00:00",
   "original_or_gui_execution": false,
   "source_sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f",
   "source_aliases": [
@@ -17,8 +17,8 @@
   ],
   "independent_model": {
     "path": "research/variants/creature-review.py",
-    "size": 8878,
-    "sha256": "24801fcf7619815c841ec1105adf57973a6dd003402caeb647150b73f0ad98d7"
+    "size": 10538,
+    "sha256": "00b38192ad5e285ce361afa25eae2cf8b8762f657c9d27cd23c95413adfb2075"
   },
   "proof": {
     "path": "research/ghidra/bones-evidence.json",
@@ -28,12 +28,12 @@
   "corpus": {
     "path": "research/integration/sprite-corpus.json",
     "size": 3400879,
-    "sha256": "1893da0a36ad3c25e9ff9d569556237a0c37f59023da663829734a660c873832"
+    "sha256": "b05d4620ecc893b14856668a5e54d41b2d85df2fd803bb31d4d66f4da610fff6"
   },
   "native_tool": {
     "path": "private/build/rust-target/debug/genewars-tools.exe",
-    "size": 6821874,
-    "sha256": "091b749a8ef71c55d9d35bc969c05a274820ae154789746801051ebc7198085c"
+    "size": 7461565,
+    "sha256": "34a04276e20fdc2cde69d5895fecb95afae300aea9bda8233fcb4eab5dacadda"
   },
   "listing_hash_checks": [
     {

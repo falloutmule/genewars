@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 import re
 
-from prepare import ROOT, RUN, SDL2, SESSION, HUMAN_APPROVAL, EXTRA_GAME_INPUTS, checked, digest, prepare_run
+from prepare import ROOT, RUN, SDL2, SESSION, SESSION_WRAPPERS, HUMAN_APPROVAL, EXTRA_GAME_INPUTS, COPIED_GAME_INPUTS, runtime_alias_binding, checked, digest, prepare_run
 
 
 def process_identity(pid):
@@ -41,7 +41,7 @@ def process_identity(pid):
         kernel.CloseHandle(handle)
 
 
-def runtime_issues(log, token, run, age, blocked=False):
+def runtime_issues(log, token, run, age, blocked=False, mouse_emulation=None):
     issues = []
     if age >= 1200:
         issues.append('Session time limit expired')
@@ -60,6 +60,10 @@ def runtime_issues(log, token, run, age, blocked=False):
         issues.append('Runtime configuration rejected')
     if 'REFERENCE_GATE_RELEASED' in log:
         issues.append('Original gate already released')
+    if mouse_emulation is not None:
+        query = 'DOS CON: Z:\\>CONFIG -GET sdl "mouse_emulation"\nDOS CON: '+mouse_emulation
+        if query not in log:
+            issues.append('Effective mouse_emulation query absent or mismatched')
     return issues, mount_rows
 
 
@@ -74,10 +78,15 @@ def main():
     human = json.loads(HUMAN_APPROVAL.read_text(encoding='utf-8'))
     if not human['approved'] or not approval.get('host_release_required'):
         raise SystemExit('No scoped approved host-gate session')
-    if SESSION == 'run-002':
+    if SESSION in SESSION_WRAPPERS:
         expected_config = __import__('hashlib').sha256(EXTRA_GAME_INPUTS['GAME/config.ini']).hexdigest()
         if human.get('run_id') != SESSION or human.get('generated_config_sha256') != expected_config or human.get('candidate_sha256') != '4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba':
             raise SystemExit('Approval does not bind this exact prepared run/config')
+        if COPIED_GAME_INPUTS and human.get('flattened_text_sha256') != next(iter(COPIED_GAME_INPUTS.values()))['sha256']:
+            raise SystemExit('Approval does not bind the exact reviewed flattened text copy')
+        aliases = [dict(runtime_relative_path=destination,**row) for destination,row in COPIED_GAME_INPUTS.items()]
+        if aliases and human.get('runtime_aliases_sha256') != runtime_alias_binding(aliases):
+            raise SystemExit('Approval does not bind the complete reviewed runtime alias set')
     pid = int(launch['pid'])
     actual_image, started = process_identity(pid)
     if actual_image != (SDL2 / 'dosbox-x.exe').resolve():
@@ -91,6 +100,19 @@ def main():
     gate = checked(ROOT / approval['gate']['path'], RUN)
     if digest(gate) != approval['gate']['sha256']:
         raise SystemExit('Gate batch changed')
+    if SESSION in ('run-003','run-004'):
+        from input_free_yield import CODE, verified_probe
+        from launch import gate_batch
+        helper_info = approval.get('yield_helper')
+        if not helper_info or checked(ROOT/helper_info['path'],RUN) != RUN/'drive-c/YIELD.COM':
+            raise SystemExit('Reviewed input-free helper absent')
+        helper_path = ROOT/helper_info['path']
+        if helper_path.read_bytes()!=CODE or digest(helper_path)!=helper_info['sha256']:
+            raise SystemExit('Input-free helper changed')
+        if approval.get('verified_empty_yield_probe')!=verified_probe(ROOT):
+            raise SystemExit('Empty yield proof changed')
+        if gate.read_bytes()!=gate_batch(approval['gate_token'],original=True,yielding=True):
+            raise SystemExit('Reviewed yielding gate differs')
     if args.abort:
         with abort.open('xb') as stream:
             stream.write(b'Abort waiting gate; no original requested.\r\n')
@@ -101,10 +123,15 @@ def main():
     log = log_path.read_text(encoding='utf-8', errors='replace') if log_path.exists() else ''
     token = approval['gate_token']
     blocked = marker.exists() or abort.exists() or (RUN / 'logs/host-release.json').exists()
-    issues, mount_rows = runtime_issues(log, token, RUN, age, blocked)
+    issues, mount_rows = runtime_issues(log, token, RUN, age, blocked,
+        mouse_emulation='always' if SESSION in ('run-003','run-004') else None)
+    if SESSION == 'run-004' and 'DOS CON: Z:\\>CONFIG -GET sdl "raw_mouse_input"\nDOS CON: true' not in log:
+        issues.append('Effective raw_mouse_input=true query absent')
     early_stderr = Path(launch['stderr']).read_text(encoding='utf-8', errors='replace')
     if any(text in early_stderr.lower() for text in ('not a valid value','unknown option','unknown property')):
         issues.append('Early runtime configuration rejected')
+    if any(text in (log+'\n'+early_stderr).lower() for text in ('illegal command','file not found')):
+        issues.append('Runtime gate command rejected')
     report = {'pid':pid, 'image':str(actual_image), 'started_utc':started.isoformat(),
               'age_seconds':age,'ready_for_supervisor_release':not issues,
               'issues':issues,'mount_table':mount_rows,'log_path':str(log_path),
@@ -113,7 +140,9 @@ def main():
     if args.release_approved_original:
         if issues:
             raise SystemExit(json.dumps(report))
-        prepare_run(False)  # still unchanged before the original starts
+        runtime = prepare_run(False)  # still unchanged before the original starts
+        if runtime.get('copied_game_inputs') and human.get('runtime_aliases_sha256') != runtime_alias_binding(runtime['copied_game_inputs']):
+            raise SystemExit('Approval does not bind the complete reviewed runtime alias set')
         report['original_execution_requested_by_this_call'] = True
         report['released_utc'] = datetime.now(timezone.utc).isoformat()
         # Save evidence before signaling. Atomic exclusive marker creation

@@ -6,14 +6,54 @@ counts/hashes only. No source extraction, emulator or original code execution.
 from datetime import datetime, timezone
 import hashlib
 import json
+import errno
+import os
 from pathlib import Path
 import struct
 import subprocess
+import tempfile
+import time
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT/'research/variants/creature-review.json'
 SCRATCH = ROOT/'private/review/creature-corpus'
 EXE = ROOT/'private/build/rust-target/debug/genewars-tools.exe'
+
+
+def write_receipt(payload):
+    """Publish only a complete receipt; preserve the old one if writing fails.
+
+    The fixed destination is already a valid project-local Windows path.
+    Windows sharing/lock/access and the observed invalid-parameter error get
+    three bounded attempts. Disk/full/other errors are never retried. Text
+    mode preserves the prior write_text newline convention on this platform.
+    """
+    parent = OUT.parent.resolve()
+    assert parent.is_dir() and OUT.name == 'creature-review.json'
+    assert not OUT.is_symlink() and OUT.resolve().parent == parent
+    for attempt in range(3):
+        temporary = None
+        try:
+            descriptor, name = tempfile.mkstemp(prefix='.creature-review-',suffix='.tmp',dir=parent)
+            temporary = Path(name)
+            with os.fdopen(descriptor,'w',encoding='utf-8') as stream:
+                stream.write(payload)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(temporary,OUT)
+            temporary = None
+            return
+        except OSError as error:
+            transient = os.name == 'nt' and (
+                getattr(error,'winerror',None) in (5,32,33,87)
+                or (getattr(error,'winerror',None) is None and error.errno in (errno.EACCES,errno.EINVAL)))
+            if not transient or attempt == 2:
+                raise
+            time.sleep((0.05,0.15)[attempt])
+        finally:
+            if temporary is not None:
+                assert temporary.parent == parent and temporary.name.startswith('.creature-review-')
+                temporary.unlink(missing_ok=True)
 
 
 def sha(data):
@@ -171,7 +211,7 @@ def main():
         truncated_row_terminator_rejected=dict(exit_code=rejected.returncode),results=results,
         scope='Explicit 25-hash caller admission; complete-height unscaled high-first packed4, no translation table. Native masks and full pixels independently compared for every active stream.',
         exclusions=['BONES/GPF','runtime palette-bank binding','translation-table branch','scale/flip/lighting/timing','next sprite offset as hard boundary'])
-    OUT.write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
+    write_receipt(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps(dict(status='passed',summary=totals,output=OUT.relative_to(ROOT).as_posix())))
 
 

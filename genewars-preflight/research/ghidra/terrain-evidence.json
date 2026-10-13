@@ -1,0 +1,2209 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/terrain-map-refs/instructions-00074cc0.txt",
+      "sha256": "701ba3601cd73db82d86a57d1502d53d6ad2a8d5910833c28f6e89784bcf542b"
+    },
+    {
+      "private_path": "private/ghidra/terrain-map-refs/instructions-0007b140.txt",
+      "sha256": "aef70bf9859bc9c21d01f697528a266d30ef1961e47d9697f762f7c74be7a2f4"
+    },
+    {
+      "private_path": "private/ghidra/terrain-map-refs/instructions-0008c860.txt",
+      "sha256": "a72f170c244c1f31c50704c1b4894ed87609e3b2c687d3ea3a9fae44d42143b6"
+    },
+    {
+      "private_path": "private/ghidra/terrain-map-refs/instructions-0007b7f0.txt",
+      "sha256": "26769c153064fd73cf9b69c2affe127a2e9ad5f0ff76596d7610e7742b932d25"
+    },
+    {
+      "private_path": "private/ghidra/terrain-render-refs/instructions-0001d770.txt",
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    },
+    {
+      "private_path": "private/ghidra/terrain-constructor/instructions-0008db90.txt",
+      "sha256": "b68c2cedc7bf7904a58293c448423f5408f65061548769d78245f5961f0a7c8c"
+    },
+    {
+      "private_path": "private/ghidra/terrain-camera-init/instructions-000402e0.txt",
+      "sha256": "aa96ec091284a4c5da028ab02399c93efb38df0c26cdf0d984bfedcba5e9bbdd"
+    },
+    {
+      "private_path": "private/ghidra/terrain-runtime/instructions-000a76d0.txt",
+      "sha256": "d2b755d867098ab1bae9f373d3a41f7114f5da42f8cc4063c5591f91dd6d9f78"
+    },
+    {
+      "private_path": "private/ghidra/terrain-runtime/instructions-000159f0.txt",
+      "sha256": "6f18856cd4541e99df78fdc00748dcdace75d950d8f6c3fde2547b0f93cd1d96"
+    },
+    {
+      "private_path": "private/ghidra/terrain-runtime/instructions-0002f870.txt",
+      "sha256": "cd31755ee12ed5f8636719fd5dd5d98dfdd795d9e78fb7b180d7df9187ab8047"
+    },
+    {
+      "private_path": "private/ghidra/terrain-mode5.txt",
+      "sha256": "bc73059ae3b302a185735a2b82c76f40346cf7feaae33da71749a77450fbaaf9"
+    },
+    {
+      "private_path": "private/ghidra/campaign-refs/instructions-0008dfe0.txt",
+      "sha256": "5c01a78d7d0f68a98819f5cd34748b879ccde2b8c8477e5f1d595753e1968496"
+    }
+  ],
+  "map": {
+    "source_entry": "root/2/disc/152",
+    "file_offset": 13662,
+    "width": 128,
+    "height": 128,
+    "record_stride": 14,
+    "row_stride": 1792,
+    "region_size": 229376,
+    "region_sha256": "57300db747f5576c3939b95d4b0089d2347c1d525293171b866537935fdb39a6",
+    "height_i16_offset": 2,
+    "texture_u8_offset": 4,
+    "orientation_flag_u8_offset": 5,
+    "orientation_mask": 112,
+    "initial_height_min": 0,
+    "initial_height_max": 4800,
+    "initial_texture_min": 0,
+    "initial_texture_max": 118,
+    "coordinate_vectors": [
+      {
+        "x_word": 0,
+        "y_word": 0,
+        "cell_x": 0,
+        "cell_y": 0,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "record_index": 0,
+        "file_record_offset": 13662,
+        "next_x": 1,
+        "next_y": 1
+      },
+      {
+        "x_word": 256,
+        "y_word": 0,
+        "cell_x": 1,
+        "cell_y": 0,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "record_index": 1,
+        "file_record_offset": 13676,
+        "next_x": 2,
+        "next_y": 1
+      },
+      {
+        "x_word": 32767,
+        "y_word": 32767,
+        "cell_x": 127,
+        "cell_y": 127,
+        "fraction_x": 255,
+        "fraction_y": 255,
+        "record_index": 16383,
+        "file_record_offset": 243024,
+        "next_x": 0,
+        "next_y": 0
+      },
+      {
+        "x_word": 32768,
+        "y_word": 32768,
+        "cell_x": 0,
+        "cell_y": 0,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "record_index": 0,
+        "file_record_offset": 13662,
+        "next_x": 1,
+        "next_y": 1
+      },
+      {
+        "x_word": 65535,
+        "y_word": 65535,
+        "cell_x": 127,
+        "cell_y": 127,
+        "fraction_x": 255,
+        "fraction_y": 255,
+        "record_index": 16383,
+        "file_record_offset": 243024,
+        "next_x": 0,
+        "next_y": 0
+      },
+      {
+        "x_word": 65280,
+        "y_word": 0,
+        "cell_x": 127,
+        "cell_y": 0,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "record_index": 127,
+        "file_record_offset": 15440,
+        "next_x": 0,
+        "next_y": 1
+      },
+      {
+        "x_word": 0,
+        "y_word": 65280,
+        "cell_x": 0,
+        "cell_y": 127,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "record_index": 16256,
+        "file_record_offset": 241246,
+        "next_x": 1,
+        "next_y": 0
+      }
+    ]
+  },
+  "height_interpolation": {
+    "function_va": "0x7b140",
+    "input_coordinates": "two signed16 words; low bytes are unsigned fractions; high coordinates wrap with mask127",
+    "output": "signed32 doubled height; arithmetic shift7, diagonal fx<fy",
+    "vectors": [
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "doubled_height": 0
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fraction_x": 0,
+        "fraction_y": 255,
+        "doubled_height": 0
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fraction_x": 255,
+        "fraction_y": 0,
+        "doubled_height": 0
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fraction_x": 255,
+        "fraction_y": 255,
+        "doubled_height": 0
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fraction_x": 127,
+        "fraction_y": 128,
+        "doubled_height": 0
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fraction_x": 128,
+        "fraction_y": 127,
+        "doubled_height": 0
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fraction_x": 128,
+        "fraction_y": 128,
+        "doubled_height": 0
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "doubled_height": 14
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "fraction_x": 0,
+        "fraction_y": 255,
+        "doubled_height": 14
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "fraction_x": 255,
+        "fraction_y": 0,
+        "doubled_height": 14
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "fraction_x": 255,
+        "fraction_y": 255,
+        "doubled_height": 14
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "fraction_x": 127,
+        "fraction_y": 128,
+        "doubled_height": 14
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "fraction_x": 128,
+        "fraction_y": 127,
+        "doubled_height": 14
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          7,
+          7,
+          7,
+          7
+        ],
+        "fraction_x": 128,
+        "fraction_y": 128,
+        "doubled_height": 14
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          256,
+          512,
+          768
+        ],
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "doubled_height": 0
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          256,
+          512,
+          768
+        ],
+        "fraction_x": 0,
+        "fraction_y": 255,
+        "doubled_height": 1020
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          256,
+          512,
+          768
+        ],
+        "fraction_x": 255,
+        "fraction_y": 0,
+        "doubled_height": 510
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          256,
+          512,
+          768
+        ],
+        "fraction_x": 255,
+        "fraction_y": 255,
+        "doubled_height": 1530
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          256,
+          512,
+          768
+        ],
+        "fraction_x": 127,
+        "fraction_y": 128,
+        "doubled_height": 766
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          256,
+          512,
+          768
+        ],
+        "fraction_x": 128,
+        "fraction_y": 127,
+        "doubled_height": 764
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          0,
+          256,
+          512,
+          768
+        ],
+        "fraction_x": 128,
+        "fraction_y": 128,
+        "doubled_height": 768
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -32768,
+          32767,
+          -32768,
+          32767
+        ],
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "doubled_height": -65536
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -32768,
+          32767,
+          -32768,
+          32767
+        ],
+        "fraction_x": 0,
+        "fraction_y": 255,
+        "doubled_height": -65536
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -32768,
+          32767,
+          -32768,
+          32767
+        ],
+        "fraction_x": 255,
+        "fraction_y": 0,
+        "doubled_height": 65022
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -32768,
+          32767,
+          -32768,
+          32767
+        ],
+        "fraction_x": 255,
+        "fraction_y": 255,
+        "doubled_height": 65022
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -32768,
+          32767,
+          -32768,
+          32767
+        ],
+        "fraction_x": 127,
+        "fraction_y": 128,
+        "doubled_height": -513
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -32768,
+          32767,
+          -32768,
+          32767
+        ],
+        "fraction_x": 128,
+        "fraction_y": 127,
+        "doubled_height": -1
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -32768,
+          32767,
+          -32768,
+          32767
+        ],
+        "fraction_x": 128,
+        "fraction_y": 128,
+        "doubled_height": -1
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          32767,
+          -32768,
+          32767,
+          -32768
+        ],
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "doubled_height": 65534
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          32767,
+          -32768,
+          32767,
+          -32768
+        ],
+        "fraction_x": 0,
+        "fraction_y": 255,
+        "doubled_height": 65534
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          32767,
+          -32768,
+          32767,
+          -32768
+        ],
+        "fraction_x": 255,
+        "fraction_y": 0,
+        "doubled_height": -65025
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          32767,
+          -32768,
+          32767,
+          -32768
+        ],
+        "fraction_x": 255,
+        "fraction_y": 255,
+        "doubled_height": -65025
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          32767,
+          -32768,
+          32767,
+          -32768
+        ],
+        "fraction_x": 127,
+        "fraction_y": 128,
+        "doubled_height": 510
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          32767,
+          -32768,
+          32767,
+          -32768
+        ],
+        "fraction_x": 128,
+        "fraction_y": 127,
+        "doubled_height": -1
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          32767,
+          -32768,
+          32767,
+          -32768
+        ],
+        "fraction_x": 128,
+        "fraction_y": 128,
+        "doubled_height": -1
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -5,
+          8,
+          -13,
+          21
+        ],
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "doubled_height": -10
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -5,
+          8,
+          -13,
+          21
+        ],
+        "fraction_x": 0,
+        "fraction_y": 255,
+        "doubled_height": -26
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -5,
+          8,
+          -13,
+          21
+        ],
+        "fraction_x": 255,
+        "fraction_y": 0,
+        "doubled_height": 15
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -5,
+          8,
+          -13,
+          21
+        ],
+        "fraction_x": 255,
+        "fraction_y": 255,
+        "doubled_height": 41
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -5,
+          8,
+          -13,
+          21
+        ],
+        "fraction_x": 127,
+        "fraction_y": 128,
+        "doubled_height": 15
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -5,
+          8,
+          -13,
+          21
+        ],
+        "fraction_x": 128,
+        "fraction_y": 127,
+        "doubled_height": 15
+      },
+      {
+        "heights_h00_h10_h01_h11": [
+          -5,
+          8,
+          -13,
+          21
+        ],
+        "fraction_x": 128,
+        "fraction_y": 128,
+        "doubled_height": 16
+      }
+    ],
+    "barycentric_comparisons": 393216
+  },
+  "atlas": {
+    "entry_id": "root/2/disc/40",
+    "decoded_sha256": "8206e4be65dd7f1fa12df131cf2d1aab5f5b47f7181c8ace86facbb1787bcdb8",
+    "decoded_size": 163840,
+    "tile_count": 160,
+    "zero_index_transparent": false,
+    "tile_vectors": [
+      {
+        "tile": 0,
+        "source_base": 0,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 7967,
+        "index_sha256": "3c27f2e3b05dc34526716c53a87accd7f1e9ee0d068743eef4847747d13c999f"
+      },
+      {
+        "tile": 1,
+        "source_base": 32,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 7999,
+        "index_sha256": "f8cebb8d6750f9b6597ac2022b2cddf001e7df25ad8d4993d0c8daa589134dd6"
+      },
+      {
+        "tile": 2,
+        "source_base": 64,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 8031,
+        "index_sha256": "0c05e6ae820285bf8b7b6e866cfed4c3475b0923a183870b295c9655b0c31f18"
+      },
+      {
+        "tile": 3,
+        "source_base": 96,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 8063,
+        "index_sha256": "e0b7058a9ed00141a9978f481390e4f71e49401080b15a492a3e79e619ed4f17"
+      },
+      {
+        "tile": 4,
+        "source_base": 128,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 8095,
+        "index_sha256": "87cabb90d6055627374ff0334e31421857bf0b39520a6603b64bc88d46400cf4"
+      },
+      {
+        "tile": 5,
+        "source_base": 160,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 8127,
+        "index_sha256": "4075b228772439dc940d40b7df99fb21650724bdf4794bc4c74f2451d855c89e"
+      },
+      {
+        "tile": 6,
+        "source_base": 192,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 8159,
+        "index_sha256": "e1dd89bd141042bab5ac7dd10d894d6da529e8cdf999dd8a8274f7e3a773bc12"
+      },
+      {
+        "tile": 7,
+        "source_base": 224,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 8191,
+        "index_sha256": "a0543810ccef6892d6a4bc73572d32c2ed9c2495528009dd0699ef8ca767d5ca"
+      },
+      {
+        "tile": 8,
+        "source_base": 8192,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 16159,
+        "index_sha256": "1f14e09443710f506206b3ea3e8b890dc904a9aa78e17dae0beca497fe399f41"
+      },
+      {
+        "tile": 9,
+        "source_base": 8224,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 16191,
+        "index_sha256": "487aca2ebe96f5e29baaaff3a90f63fbc5e55def753708953bfc0ebcb238143c"
+      },
+      {
+        "tile": 10,
+        "source_base": 8256,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 16223,
+        "index_sha256": "4cb44dd880eecac3d1c105da110aacc6612bb4affa09da7bbdf48ef44933f15b"
+      },
+      {
+        "tile": 11,
+        "source_base": 8288,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 16255,
+        "index_sha256": "c8dda06639fed643aec46b5c6f972bb4801a97e7bb2d746adb45401de7c4cb6b"
+      },
+      {
+        "tile": 12,
+        "source_base": 8320,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 16287,
+        "index_sha256": "3d808d9dbc5ce387c86e551e4fc4dbe625d37211f109d615e3fa3fb90b453f31"
+      },
+      {
+        "tile": 13,
+        "source_base": 8352,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 16319,
+        "index_sha256": "27c6528b1eaa35b3af2711ae6e47cd52c927d400b6df3c347e658e9d1a595892"
+      },
+      {
+        "tile": 14,
+        "source_base": 8384,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 16351,
+        "index_sha256": "d2dd390d49c1b6a6304f5aa6f78df062bb4ad9c5b30c92cb4842f5542711e9dd"
+      },
+      {
+        "tile": 15,
+        "source_base": 8416,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 16383,
+        "index_sha256": "2e2b5845864d72afad697d4e5dcfcb603622799165fa63c8c011f0051a06ad40"
+      },
+      {
+        "tile": 16,
+        "source_base": 16384,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 24351,
+        "index_sha256": "e77c00c80743eafa6279283ecfb8e7f9b52df12bcfc092d4f95b26e5ed54267c"
+      },
+      {
+        "tile": 17,
+        "source_base": 16416,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 24383,
+        "index_sha256": "2f8f1d7d5b96aa58f78e72519b3eb3ef61cb5cc7302ad72753b6ac6c298d4b1b"
+      },
+      {
+        "tile": 18,
+        "source_base": 16448,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 24415,
+        "index_sha256": "ecacd6f61d92a09fa9c0f5ec81f5167fb488dde71e8fddebd2f13f2eb1f53036"
+      },
+      {
+        "tile": 19,
+        "source_base": 16480,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 24447,
+        "index_sha256": "da91670ba40900d40766f8bcca62b9286fe284959acb8881046f006f57be4f4f"
+      },
+      {
+        "tile": 20,
+        "source_base": 16512,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 24479,
+        "index_sha256": "d6d3862a73e934f9ee3fcd27cd9aea5dcf79b3f9bfdb15d472e01c68174c8187"
+      },
+      {
+        "tile": 21,
+        "source_base": 16544,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 24511,
+        "index_sha256": "e8c63d84b6233536b7780ae026f4e2f1369bfab344684c8eebad5cddf15bdab1"
+      },
+      {
+        "tile": 22,
+        "source_base": 16576,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 24543,
+        "index_sha256": "c290b01f69d53b06be68eaffa797eb683297708322134c8a76b5e4a718a3d6b4"
+      },
+      {
+        "tile": 23,
+        "source_base": 16608,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 24575,
+        "index_sha256": "887e3ca214f7e181ecba65aa0b19ad941ca1ea9a9104769a2edad4173ea54291"
+      },
+      {
+        "tile": 24,
+        "source_base": 24576,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 32543,
+        "index_sha256": "15e1e300e78379cc1ece73cb28bb5b529b98940fcdbac269bf917c40e2275e3d"
+      },
+      {
+        "tile": 25,
+        "source_base": 24608,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 32575,
+        "index_sha256": "d7af0375a6021d6df779be204ffa05f1aff3809353156fb80a7aa9fe438a0a8a"
+      },
+      {
+        "tile": 26,
+        "source_base": 24640,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 32607,
+        "index_sha256": "2140060753a026c0ef3df44b0061c3ebec5ad5a44760c69786316f14515b773b"
+      },
+      {
+        "tile": 27,
+        "source_base": 24672,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 32639,
+        "index_sha256": "727c1712cf576b4f37d3e71107d52d4e60baed3d97389f42f87a13715c30a1ba"
+      },
+      {
+        "tile": 28,
+        "source_base": 24704,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 32671,
+        "index_sha256": "703a71b496e85f126c71b9c9a31878653b0a4260511cf77254a62b2b0b053fad"
+      },
+      {
+        "tile": 29,
+        "source_base": 24736,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 32703,
+        "index_sha256": "3fe24e40e16c7f0ae526e903406e403aa75ed8a52c59bf5fdf673b6e16680adc"
+      },
+      {
+        "tile": 30,
+        "source_base": 24768,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 32735,
+        "index_sha256": "29b86e7f5aafd8714a4c99b93297ebbfd88a661e93a7dac7c2401fb59fc2ac16"
+      },
+      {
+        "tile": 31,
+        "source_base": 24800,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 32767,
+        "index_sha256": "3d0392a83495b2593faf06345c9b929b3b1aa43430207d8337acfbf63633da46"
+      },
+      {
+        "tile": 32,
+        "source_base": 32768,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 40735,
+        "index_sha256": "19e73fe12227d09fb262e42004d1626986454ac5d03c923395b97c12d318906f"
+      },
+      {
+        "tile": 33,
+        "source_base": 32800,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 40767,
+        "index_sha256": "dd5c18afd6a4c7b146ea4e9dc891e0ebb3868e32b159fd68e4184b6e928be53c"
+      },
+      {
+        "tile": 34,
+        "source_base": 32832,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 40799,
+        "index_sha256": "8cba6a0aa74056eba2370a658e877db2eb9d9314a9da55b18c61eb5e97939356"
+      },
+      {
+        "tile": 35,
+        "source_base": 32864,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 40831,
+        "index_sha256": "68270b1e0d49c0e51c784710b72d7e1b555b2432a7a23991e6571ed83af696f7"
+      },
+      {
+        "tile": 36,
+        "source_base": 32896,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 40863,
+        "index_sha256": "8a1fa2638468dd549842f9b155db247ac0be13477565ab06de8a448e76a74b6c"
+      },
+      {
+        "tile": 37,
+        "source_base": 32928,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 40895,
+        "index_sha256": "be735f3973a9755e3b115bdbfb8b6f5c6771ae00cdbcaa2e3201b99d003d423a"
+      },
+      {
+        "tile": 38,
+        "source_base": 32960,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 40927,
+        "index_sha256": "ffe896e7eb61958606575ba835fccfa3ed8f27fb8ee437c791ca3dec0e39db1b"
+      },
+      {
+        "tile": 39,
+        "source_base": 32992,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 40959,
+        "index_sha256": "1788015ede624ac6f3b8e400451a4086eace8f7dcc9748214cdfe6b1850b7015"
+      },
+      {
+        "tile": 40,
+        "source_base": 40960,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 48927,
+        "index_sha256": "7d97b5ff1f79638c21dad591351bf7e2d27d3f90bbaf1ae4d5ff28b45ee42f3e"
+      },
+      {
+        "tile": 41,
+        "source_base": 40992,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 48959,
+        "index_sha256": "cfc4fc66fe371d8ae90de912adff0779e7ccfbe23b9c45fc9949320ee20672cd"
+      },
+      {
+        "tile": 42,
+        "source_base": 41024,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 48991,
+        "index_sha256": "5a6089c7a2a67303ce42521bb70262fa24cf2f335cfb5c0f4f282c458097abbd"
+      },
+      {
+        "tile": 43,
+        "source_base": 41056,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 49023,
+        "index_sha256": "ccbd9eecb878ed29ca58822c4a5dfc2fb2b5d8c1d8e98bdd7ca2dd8cf2b34344"
+      },
+      {
+        "tile": 44,
+        "source_base": 41088,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 49055,
+        "index_sha256": "01198249b2909526a0de31e83192a83e01bb4720b969f50a5f393eea79f58d4e"
+      },
+      {
+        "tile": 45,
+        "source_base": 41120,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 49087,
+        "index_sha256": "df63e032093bc2c86441020fe1bac82f2637cd54606e17b1d2770c2c81ac8d07"
+      },
+      {
+        "tile": 46,
+        "source_base": 41152,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 49119,
+        "index_sha256": "fca61e443865cecaf04c6a5d3b0d90009317928dedbc951df81257917110dc51"
+      },
+      {
+        "tile": 47,
+        "source_base": 41184,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 49151,
+        "index_sha256": "006c6d3e810bb1f418910a4831d2278099aa9e1e61c2a0b37142357c9957fe6d"
+      },
+      {
+        "tile": 48,
+        "source_base": 49152,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 57119,
+        "index_sha256": "156e8d7448fc41d856b6f99ad4672abb1ec8dc32873457e27681a029eaee2e21"
+      },
+      {
+        "tile": 49,
+        "source_base": 49184,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 57151,
+        "index_sha256": "1af08d8eed27c0e54edfbed471d8fb5242649e2c9698e7c79e42d370847dd534"
+      },
+      {
+        "tile": 50,
+        "source_base": 49216,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 57183,
+        "index_sha256": "7c9c29d07635781a9ed7d7273b0399a154b700f9a2b501100d5694184fdc529f"
+      },
+      {
+        "tile": 51,
+        "source_base": 49248,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 57215,
+        "index_sha256": "e31c35f072853c0b6c7a95bb1427203617053ebe1904f62f93091800a176ec15"
+      },
+      {
+        "tile": 52,
+        "source_base": 49280,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 57247,
+        "index_sha256": "6475dca2a285fd1d1e30d48cec035a8116c8266d3d64c8f5d2288b026dd3c342"
+      },
+      {
+        "tile": 53,
+        "source_base": 49312,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 57279,
+        "index_sha256": "50ee35eea0a0e78b6fc5af8d5a20ba784c6ed2166734fd2b1d46fec79e051fec"
+      },
+      {
+        "tile": 54,
+        "source_base": 49344,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 57311,
+        "index_sha256": "c8141043ebd33caabbc2ed065fb70f3235dd39beff80c879033475b9067e1d0a"
+      },
+      {
+        "tile": 55,
+        "source_base": 49376,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 57343,
+        "index_sha256": "701209b6f9fa125d8fea43b36e26947df39637a203c59c2b946df0450c02e7c4"
+      },
+      {
+        "tile": 56,
+        "source_base": 57344,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 65311,
+        "index_sha256": "e36fb1ba43a7805d346d0770716bdc11d11e7a0dfe8e10d97ff6e86cdfecce97"
+      },
+      {
+        "tile": 57,
+        "source_base": 57376,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 65343,
+        "index_sha256": "50f8d3c23b279dd8c62bf3b093082686a369d2eca7b337783117a6383fc556dd"
+      },
+      {
+        "tile": 58,
+        "source_base": 57408,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 65375,
+        "index_sha256": "5c082fc92b9e90a4e272a05443101689244d8df93614c2d729c092ffae968f66"
+      },
+      {
+        "tile": 59,
+        "source_base": 57440,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 65407,
+        "index_sha256": "571df6671da615d185519ea74fc39116612f5509071e466e3087274934f2bc52"
+      },
+      {
+        "tile": 60,
+        "source_base": 57472,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 65439,
+        "index_sha256": "b844d43609ca5c3a1c0a88dd28ba45ae260ed1159c885718363097813c672cd5"
+      },
+      {
+        "tile": 61,
+        "source_base": 57504,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 65471,
+        "index_sha256": "de877530216b354ac8fd79fbb62b969a201a89d5b5a076c98772fac0c6e44975"
+      },
+      {
+        "tile": 62,
+        "source_base": 57536,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 65503,
+        "index_sha256": "77cab28c0a1e4d5e7472e3ac99bf863093870997a6b40747b91125a6814e9d5a"
+      },
+      {
+        "tile": 63,
+        "source_base": 57568,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 65535,
+        "index_sha256": "ddd6f481137cea6e05af2e49376bdb44fa3400141d659b6e17caf8255d02f18a"
+      },
+      {
+        "tile": 64,
+        "source_base": 65536,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 73503,
+        "index_sha256": "8e681ea4d933768d50285da9cc8363951769a7851ebda50bbd8c6cffdbf155ec"
+      },
+      {
+        "tile": 65,
+        "source_base": 65568,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 73535,
+        "index_sha256": "a4cd0cce7d5e0c7596218be86dcd62f4fe889682915bf53c2e4e8417ec03b7d0"
+      },
+      {
+        "tile": 66,
+        "source_base": 65600,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 73567,
+        "index_sha256": "93e83c9ff7e68800203a221f730387ea36d62e89a21381b5e6ca32336df3b4ec"
+      },
+      {
+        "tile": 67,
+        "source_base": 65632,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 73599,
+        "index_sha256": "973481c1e5a17998bad4eb3f060997f256cbe89ee5671fd8303d325b98af50a8"
+      },
+      {
+        "tile": 68,
+        "source_base": 65664,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 73631,
+        "index_sha256": "c276bfc2a0e5e3914fe2bc1ba77450edd011e25e485791adc4e83d5afbc679ff"
+      },
+      {
+        "tile": 69,
+        "source_base": 65696,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 73663,
+        "index_sha256": "4e84b15ee9fb7fc94dacb28002815d6fdb5d4198d2acb94c2bd9679b55148423"
+      },
+      {
+        "tile": 70,
+        "source_base": 65728,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 73695,
+        "index_sha256": "7bb5f53168afa4a7ce50239aaf7c5ef9d20c183c46dae0d2f86da954ae00dfc6"
+      },
+      {
+        "tile": 71,
+        "source_base": 65760,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 73727,
+        "index_sha256": "8740cdc48cea715700d0d6508604cc53f3e2e90ece0eb650f305db44f23e33b3"
+      },
+      {
+        "tile": 72,
+        "source_base": 73728,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 81695,
+        "index_sha256": "89eaeeaa9dc9d130f84c7035d49896343952332281dd190dc879247bd0a9b520"
+      },
+      {
+        "tile": 73,
+        "source_base": 73760,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 81727,
+        "index_sha256": "aebf5671675047fce836c2dfdb18e3bc6f0d6174bbfc94127d603ecfe654c204"
+      },
+      {
+        "tile": 74,
+        "source_base": 73792,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 81759,
+        "index_sha256": "357aa8aabbdd7c44252665bac8b6ac465b7c3c862b09409ead56239464e39298"
+      },
+      {
+        "tile": 75,
+        "source_base": 73824,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 81791,
+        "index_sha256": "f9711d5f126f27e805c66996990cfb6ddf7bdb57e7cbd8d8231c2d390acdfb0b"
+      },
+      {
+        "tile": 76,
+        "source_base": 73856,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 81823,
+        "index_sha256": "c55ada890f84e42a23780a14aae0f937b42e37bd380d58399515c110814421ac"
+      },
+      {
+        "tile": 77,
+        "source_base": 73888,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 81855,
+        "index_sha256": "0b27b73be47cb2286801725e0b42072a6b5561f41b81ebc5b26baa42d954d260"
+      },
+      {
+        "tile": 78,
+        "source_base": 73920,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 81887,
+        "index_sha256": "f5647d2f1dadd36c48041067e6f690636cfc43e7ea26d3dee0739f9c67211ee9"
+      },
+      {
+        "tile": 79,
+        "source_base": 73952,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 81919,
+        "index_sha256": "1ee037caff8377d8720840aafebc077b5dcfc54ebc0e6f7f1723512cabdaf072"
+      },
+      {
+        "tile": 80,
+        "source_base": 81920,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 89887,
+        "index_sha256": "f0a31f571b2b42e45c274fcd45a9ef5b1702af0a2ae3efdb9f8fb7ac350445c4"
+      },
+      {
+        "tile": 81,
+        "source_base": 81952,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 89919,
+        "index_sha256": "4f7c266f2f16cd74225754fd9d1f93b9ae9d7bd73be20d0a38fbb490939bd839"
+      },
+      {
+        "tile": 82,
+        "source_base": 81984,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 89951,
+        "index_sha256": "d9d9fb51dc477b1307e2961e2295c5881990e24c86669fba5adb8478a69d7ef8"
+      },
+      {
+        "tile": 83,
+        "source_base": 82016,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 89983,
+        "index_sha256": "e163a96d6108941909508ebac008d14a562e5ed2b2c39deef97c3dcc341712db"
+      },
+      {
+        "tile": 84,
+        "source_base": 82048,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 90015,
+        "index_sha256": "5f07fe8fb598cb12b8742dc2d036742b9f9e58d58c80192c26924f88fbd5ab9e"
+      },
+      {
+        "tile": 85,
+        "source_base": 82080,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 90047,
+        "index_sha256": "7579e133c7e6c6f349bcdb17aa9fd9abc41bb1bd3e27e15b9eea6ebf9b97353e"
+      },
+      {
+        "tile": 86,
+        "source_base": 82112,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 90079,
+        "index_sha256": "57fdabb441be79fcab7ff89a08071d2be2be3912ec28905f7321ffa477601e43"
+      },
+      {
+        "tile": 87,
+        "source_base": 82144,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 90111,
+        "index_sha256": "ffd492ca79a2b6dab6ea6d283a9dcb6eb7a7386b5d9b2ae8ef6bfd0370bebe91"
+      },
+      {
+        "tile": 88,
+        "source_base": 90112,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 98079,
+        "index_sha256": "ac9501ae88635cb91d0b451fbe80468f81697a4a4a9c04d4c1149fe822bace85"
+      },
+      {
+        "tile": 89,
+        "source_base": 90144,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 98111,
+        "index_sha256": "e88a327438348221cb8e7705c057aafe8aa2ee4c5ecb050307cf6716d013a837"
+      },
+      {
+        "tile": 90,
+        "source_base": 90176,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 98143,
+        "index_sha256": "1a086703bf2238604fdb23d7cc0134c74929f741f88b368c0ceeb5ec7939c7fd"
+      },
+      {
+        "tile": 91,
+        "source_base": 90208,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 98175,
+        "index_sha256": "300b3cc313893f525965e6f84bcbac9df98aa24e8e6db5ba588a413224829c7f"
+      },
+      {
+        "tile": 92,
+        "source_base": 90240,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 98207,
+        "index_sha256": "2a3de3178133d94a4788ed221629a7b14d8e2ef03ec3773ab6618a55fa46b4b5"
+      },
+      {
+        "tile": 93,
+        "source_base": 90272,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 98239,
+        "index_sha256": "ded09bf7caac144391998ed57358825619702594a78de34828bc3e7ffb9ad997"
+      },
+      {
+        "tile": 94,
+        "source_base": 90304,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 98271,
+        "index_sha256": "15c81f1b12df2060b55a8f971dd3c6d2f217b2567a99ca4e6a2d281beb3eef84"
+      },
+      {
+        "tile": 95,
+        "source_base": 90336,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 98303,
+        "index_sha256": "631ca26075f732eb25e1aa290a45c6c8400aa68013e0bbb4912528da0d167f0f"
+      },
+      {
+        "tile": 96,
+        "source_base": 98304,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 106271,
+        "index_sha256": "3e5501016422678f5f5e2c33ebe984d2010a045a73bb6884e95c37b6c5676180"
+      },
+      {
+        "tile": 97,
+        "source_base": 98336,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 106303,
+        "index_sha256": "6a0c78dbe6d73690310d4c04f4e8649c453a850af364d56645d7d6e8cd197ac8"
+      },
+      {
+        "tile": 98,
+        "source_base": 98368,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 106335,
+        "index_sha256": "ab351c1bbec78f9c032dc6af619865fae387764e419265cc8450de202677d20e"
+      },
+      {
+        "tile": 99,
+        "source_base": 98400,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 106367,
+        "index_sha256": "e2d3e63fc287f33c5c85daf4bd0640463882ef5099df09d8979cefb7a413fecc"
+      },
+      {
+        "tile": 100,
+        "source_base": 98432,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 106399,
+        "index_sha256": "4e125d19bef7cd1d6f11e8e6559ef48c183a79c022a9edf0a132b1dd949bb134"
+      },
+      {
+        "tile": 101,
+        "source_base": 98464,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 106431,
+        "index_sha256": "43f3fc43cfbda76c0d7d13d2e65a8dc1b228a2336a05996239d0de73f642277c"
+      },
+      {
+        "tile": 102,
+        "source_base": 98496,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 106463,
+        "index_sha256": "1a275c2272ba5a887f96c4ce017461f9f6fea90f6f6aaaaf783b60e3cc45f181"
+      },
+      {
+        "tile": 103,
+        "source_base": 98528,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 106495,
+        "index_sha256": "7fc91dfe2bab7d7961222777e0703d7dea6c598476d5782a60746e9d375aa9ac"
+      },
+      {
+        "tile": 104,
+        "source_base": 106496,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 114463,
+        "index_sha256": "14e7990b8621f988f64fed9f2161c38578b0689dce463765964c1ba5b63dca4a"
+      },
+      {
+        "tile": 105,
+        "source_base": 106528,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 114495,
+        "index_sha256": "c0a12c1d1139754e31e4bb96533aec69451d46d45071e732f43498aedebab5ed"
+      },
+      {
+        "tile": 106,
+        "source_base": 106560,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 114527,
+        "index_sha256": "a80ccf4765cdb8eaf75976137eb8c54f16f287e9fdcd91e5f8c95a37e90ffe8f"
+      },
+      {
+        "tile": 107,
+        "source_base": 106592,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 114559,
+        "index_sha256": "44a3a94bfe88868233813f33928d3d9008b3ea36dbb0e1e1d212c3ef35461619"
+      },
+      {
+        "tile": 108,
+        "source_base": 106624,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 114591,
+        "index_sha256": "105b8440227e3948efb0a8bdbe0f1ef2294504a7020d77ac28cd904085616fb7"
+      },
+      {
+        "tile": 109,
+        "source_base": 106656,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 114623,
+        "index_sha256": "421d1d5c41d0bc4aaad42e56b710f0c6371c89c277e22e706e3e994d38359171"
+      },
+      {
+        "tile": 110,
+        "source_base": 106688,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 114655,
+        "index_sha256": "889138648207f7b6c77ee2f177ee4d8c4eb8f1003e2a849b12852038892ba92e"
+      },
+      {
+        "tile": 111,
+        "source_base": 106720,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 114687,
+        "index_sha256": "77b99a6e23d8a204859f66d1b1cec5abcb76eac1baaeade20977a57119baddc7"
+      },
+      {
+        "tile": 112,
+        "source_base": 114688,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 122655,
+        "index_sha256": "47018df8b8f70fe75740bda667370e222f11fc6398965d676601ed4ad0f521ec"
+      },
+      {
+        "tile": 113,
+        "source_base": 114720,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 122687,
+        "index_sha256": "4ba1612ba5cfcee3ef17b06e6aa72dac75ac14527991d4e2e3cf9e6d1ee3e8dc"
+      },
+      {
+        "tile": 114,
+        "source_base": 114752,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 122719,
+        "index_sha256": "ce1d6b7d18fb2f87ddf9edea570a8094babe4b27c38e33222f290af973952e75"
+      },
+      {
+        "tile": 115,
+        "source_base": 114784,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 122751,
+        "index_sha256": "8d87e1b3ac0acb92a475e07c3e4e3879ff9eaa6b8cd1d036cc24a2764f398e28"
+      },
+      {
+        "tile": 116,
+        "source_base": 114816,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 122783,
+        "index_sha256": "393e5e08a2d9d7ec2e90cc5a04d5f280a2e7522be8e3b689d99c084ad211eba2"
+      },
+      {
+        "tile": 117,
+        "source_base": 114848,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 122815,
+        "index_sha256": "7f981dc5c2c296a470ba59e5e1eb75379e46dfb69ed7aa8217d980cfe4243242"
+      },
+      {
+        "tile": 118,
+        "source_base": 114880,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 122847,
+        "index_sha256": "663ab3d59a8f3953e578b250f8a19624278c08e9a037670ec380bfb07f7f42e3"
+      },
+      {
+        "tile": 119,
+        "source_base": 114912,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 122879,
+        "index_sha256": "16f30ca58aa81aeef76f329bbc1ea434f3b52872910e4ce057ea1449f7821945"
+      },
+      {
+        "tile": 120,
+        "source_base": 122880,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 130847,
+        "index_sha256": "47c6058b5e3246ba07a971b0245bceb016e48161d55a1c47de8b29862fbe21a6"
+      },
+      {
+        "tile": 121,
+        "source_base": 122912,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 130879,
+        "index_sha256": "2878f8f754fb319e3bb81bf6a43c807b3ba3629fbc27cf374b684e672bb61b07"
+      },
+      {
+        "tile": 122,
+        "source_base": 122944,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 130911,
+        "index_sha256": "88f73add1a95af039a5fd436a55ef9c152666ee763adb4f2018d9db28aca7e12"
+      },
+      {
+        "tile": 123,
+        "source_base": 122976,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 130943,
+        "index_sha256": "3d5be74e11e9a8e64dc9e496b2a7ef5a624753e853b5ee1b05e80545b7b13e74"
+      },
+      {
+        "tile": 124,
+        "source_base": 123008,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 130975,
+        "index_sha256": "ff60a663304136c811c8bb0f585d8e7a98dd1e16cb5c4c4e7f6e6bc23336c74f"
+      },
+      {
+        "tile": 125,
+        "source_base": 123040,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 131007,
+        "index_sha256": "64a9bd8599e70858c3bf91987a6fba07ecd75993abda24cd834b2129542ffd69"
+      },
+      {
+        "tile": 126,
+        "source_base": 123072,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 131039,
+        "index_sha256": "18c759257a6e904bdc813883b19c61be6698698e73f8f4c7cb90578f00f440b6"
+      },
+      {
+        "tile": 127,
+        "source_base": 123104,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 131071,
+        "index_sha256": "6c569ea386d225db50e550d59b08cb2568ad7b08a5806e431fcd6042adcdebc3"
+      },
+      {
+        "tile": 128,
+        "source_base": 131072,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 139039,
+        "index_sha256": "6bd65e5889c7ae5e3f75deeb9b57225e68973411d9d6ebe734bb348c6a180c14"
+      },
+      {
+        "tile": 129,
+        "source_base": 131104,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 139071,
+        "index_sha256": "54bda5e3e29b3945e50ed33c75f22bfcae4ba99d39646ba5df9744217ec2bd31"
+      },
+      {
+        "tile": 130,
+        "source_base": 131136,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 139103,
+        "index_sha256": "cfe9dcc6971c95b10f69b25d61cfa301bfd9ae785cf4b9b7b42c4ec0612d393f"
+      },
+      {
+        "tile": 131,
+        "source_base": 131168,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 139135,
+        "index_sha256": "a80677aa964a8e8a86d2c717cd19f1ed5d922a07708e71f55f297a6140bb18c2"
+      },
+      {
+        "tile": 132,
+        "source_base": 131200,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 139167,
+        "index_sha256": "6ed31b7882d3bebccecb0453036a2f451c121c3d5c6f6abf8f5bcf126b55de0b"
+      },
+      {
+        "tile": 133,
+        "source_base": 131232,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 139199,
+        "index_sha256": "d8ba42cdbe21a7e3c6c432295a4de5d006ef5ac2befabd640f988f8efc5f4707"
+      },
+      {
+        "tile": 134,
+        "source_base": 131264,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 139231,
+        "index_sha256": "d91b2598336b63bb2c892e578f55daf1db378b30dd90ba23b7f900c56cab252f"
+      },
+      {
+        "tile": 135,
+        "source_base": 131296,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 139263,
+        "index_sha256": "762dbf14a2604af2edbad7394436608a06c542ca158e21689c032e4153c1e46c"
+      },
+      {
+        "tile": 136,
+        "source_base": 139264,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 147231,
+        "index_sha256": "89f468332bed29a4d4ed3485744d13032bf0a6bf0cc50c3468b2e2124e6817b7"
+      },
+      {
+        "tile": 137,
+        "source_base": 139296,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 147263,
+        "index_sha256": "ae84c250f20d056c835b3b9ee6e9c1cbe2cbb0eb12557c8cc6896c42d410b48f"
+      },
+      {
+        "tile": 138,
+        "source_base": 139328,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 147295,
+        "index_sha256": "6f448a0b37f5a6372bef4309d1cb95dcbab5db2f25dd2a417de555da55c840f6"
+      },
+      {
+        "tile": 139,
+        "source_base": 139360,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 147327,
+        "index_sha256": "1850c0b67883ef5c447f99ffcbce8f2d5920c7bf299f2c1432ba78bb84c9a0f8"
+      },
+      {
+        "tile": 140,
+        "source_base": 139392,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 147359,
+        "index_sha256": "2bf3331244383afd2df00e14a5eb71031e32f83c65ff476d6855c29c1890910b"
+      },
+      {
+        "tile": 141,
+        "source_base": 139424,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 147391,
+        "index_sha256": "bb7007aae06fe0acff9262eda1315cc6200820c4775f69f45c35c552e06afc89"
+      },
+      {
+        "tile": 142,
+        "source_base": 139456,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 147423,
+        "index_sha256": "c0319923e1a9369be6bfb6f6cd9e1afdd330a3280517535eba08b628a1370ef0"
+      },
+      {
+        "tile": 143,
+        "source_base": 139488,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 147455,
+        "index_sha256": "0d1af05bd7e34c01024532acb404f28a3ffe083156776084ac0322bbef252bfe"
+      },
+      {
+        "tile": 144,
+        "source_base": 147456,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 155423,
+        "index_sha256": "812e9db18e04439046a71139fe3a017cd4d06b0668985f76c8cbbe7c0556dd89"
+      },
+      {
+        "tile": 145,
+        "source_base": 147488,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 155455,
+        "index_sha256": "2ffa2812ed9ba0e66c24b853df272d509424ed5e267c5ebc66db9c49a6d146b8"
+      },
+      {
+        "tile": 146,
+        "source_base": 147520,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 155487,
+        "index_sha256": "b443606344e4fd5d485539c2ea02ad714bb4274e1bea4453306dd7ec47c7f598"
+      },
+      {
+        "tile": 147,
+        "source_base": 147552,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 155519,
+        "index_sha256": "236a8483f11edbe53395371683f3854c41482ee7a6f32b467af364f69d4ec711"
+      },
+      {
+        "tile": 148,
+        "source_base": 147584,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 155551,
+        "index_sha256": "1b173135fa57122f4ad249839127fa1d628b7c2a80268d47a7255d5823360560"
+      },
+      {
+        "tile": 149,
+        "source_base": 147616,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 155583,
+        "index_sha256": "17632e6b745eb7a3a2afa56984d03d872a66fa000d49dc544adef691aae954f8"
+      },
+      {
+        "tile": 150,
+        "source_base": 147648,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 155615,
+        "index_sha256": "589b3dd05ae84a4723e95ff6a58787ef61fbad19758d676a2759508af310ea52"
+      },
+      {
+        "tile": 151,
+        "source_base": 147680,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 155647,
+        "index_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "tile": 152,
+        "source_base": 155648,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 163615,
+        "index_sha256": "438b92f2c75882fe475666adf9482962bf0589dfb1261e7bff60d78c50318291"
+      },
+      {
+        "tile": 153,
+        "source_base": 155680,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 163647,
+        "index_sha256": "9b9152b8e12d94581e21750657572e315af36ce9d34b74e132890d418a986e14"
+      },
+      {
+        "tile": 154,
+        "source_base": 155712,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 163679,
+        "index_sha256": "6ed1a8dbe98661bb949130ff9d025389486090abf1920162a130a1c4620b810d"
+      },
+      {
+        "tile": 155,
+        "source_base": 155744,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 163711,
+        "index_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "tile": 156,
+        "source_base": 155776,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 163743,
+        "index_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "tile": 157,
+        "source_base": 155808,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 163775,
+        "index_sha256": "1c3599b8cc268af68dc9f30bcd8ae5abb29a31dbb2f1151aaaac67756977a8e0"
+      },
+      {
+        "tile": 158,
+        "source_base": 155840,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 163807,
+        "index_sha256": "e2c435ae1465e6c0c03aaa1bac8e4c7c4a5a82183681677262fa392c3eab2e2a"
+      },
+      {
+        "tile": 159,
+        "source_base": 155872,
+        "width": 32,
+        "height": 32,
+        "source_stride": 256,
+        "last_source_offset": 163839,
+        "index_sha256": "44d80de0cd063eef9edc6527862b56f204c9440a7869945781c2dfd54af384be"
+      }
+    ]
+  },
+  "terrain_vertex": {
+    "horizontal_step": 32,
+    "diagonal_vertical_step": 16,
+    "height_factor": 2,
+    "height_displacement": "2 * (signed_height >> 6)",
+    "note": "Do not replace with (2*height)>>6; original terrain-vertex rounding differs from arbitrary-point projection."
+  },
+  "uv_orientation_table": {
+    "va": "0x1060ec",
+    "index": "(record_byte5 & 0x70)>>4",
+    "corners_u16_16": [
+      [
+        0,
+        0,
+        2097151,
+        0,
+        2097151,
+        2097151,
+        0,
+        2097151
+      ],
+      [
+        2097151,
+        0,
+        0,
+        0,
+        0,
+        2097151,
+        2097151,
+        2097151
+      ],
+      [
+        0,
+        2097151,
+        2097151,
+        2097151,
+        2097151,
+        0,
+        0,
+        0
+      ],
+      [
+        2097151,
+        2097151,
+        0,
+        2097151,
+        0,
+        0,
+        2097151,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        2097151,
+        2097151,
+        2097151,
+        2097151,
+        0
+      ],
+      [
+        0,
+        2097151,
+        0,
+        0,
+        2097151,
+        0,
+        2097151,
+        2097151
+      ],
+      [
+        2097151,
+        0,
+        2097151,
+        2097151,
+        0,
+        2097151,
+        0,
+        0
+      ],
+      [
+        2097151,
+        2097151,
+        2097151,
+        0,
+        0,
+        0,
+        0,
+        2097151
+      ]
+    ]
+  },
+  "palette": {
+    "descriptor_va": "0x1043e4",
+    "filename": "data/main.pal",
+    "buffer_global": "0x115e80",
+    "active_view": "0x1863a2",
+    "active_view_palette_field": "0x1863a4"
+  },
+  "resources": [
+    {
+      "entry_id": "root/2/disc/152",
+      "source": "GAME/LEVELS/CONQ001.DAT",
+      "input_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+      "input_size": 343958
+    },
+    {
+      "entry_id": "root/2/disc/40",
+      "source": "GAME/DATA/B32A.DAT",
+      "input_sha256": "481677e31b05d9e4ba428932a4eaf9003fae4fe320f90daf22a947cbd3e4ef9c",
+      "input_size": 56355
+    },
+    {
+      "entry_id": "root/2/disc/108",
+      "source": "GAME/DATA/MAIN.PAL",
+      "input_sha256": "8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05",
+      "input_size": 768
+    },
+    {
+      "entry_id": "root/2/disc/61",
+      "source": "GAME/DATA/FADE.DAT",
+      "input_sha256": "ddef38a3e63fbb3680aac15569f12e02f141036ffa270ddd48cdc82bce361503",
+      "input_size": 7766
+    }
+  ],
+  "limits": [
+    "Map record bytes beyond height/texture/orientation remain opaque; signed16 at0 and byte12 feed lighting but are not assigned gameplay names.",
+    "Mode5 samples stride256 and maps every source index through FADE.DAT; zero is not skipped.",
+    "Initial camera origin, live shade/visibility fields, full triangle rasterization/clipping and overlay composition are not implemented by this receipt.",
+    "Atlas pointer160 is one past source allocation; safe API rejects160+ rather than accepting the startup sentinel.",
+    "Height scale and steps are constructor facts, not proof of a selected camera position or a whole original terrain frame."
+  ]
+}

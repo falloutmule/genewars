@@ -1,0 +1,54 @@
+{
+  "status": "empty-probe-ended",
+  "original_execution": false,
+  "emulator_execution": true,
+  "prepared": {
+    "path": "private/reference-run/yield-gate-probe-001/logs/prepared.json",
+    "size": 1852,
+    "sha256": "7e1f2760952858ba6665faee8a3a54fb8c92ee1e80c6d9c90d810945cb0f1f27"
+  },
+  "final_process": {
+    "pid": 38776,
+    "exit_code": 1,
+    "ended_utc": "2026-10-13T02:31:11.706102+00:00",
+    "elapsed_host_seconds": 120.02012999996077,
+    "host_timeout": true,
+    "original_execution": false
+  },
+  "sentinel_observed": false,
+  "gate_released": false,
+  "aborted": false,
+  "observations": null,
+  "files": [
+    {
+      "path": "private/reference-run/yield-gate-probe-001/logs/dosbox-x.log",
+      "size": 4561,
+      "sha256": "93a371a9d229db371cfe3964c4e940464979e907bf350603f3c423120718c7c5"
+    },
+    {
+      "path": "private/reference-run/yield-gate-probe-001/logs/emulator-stderr.txt",
+      "size": 5480,
+      "sha256": "4444b7b476bcbf8ee3c258eba74b124534cf2e44aabe1376104e7bb265475d4a"
+    },
+    {
+      "path": "private/reference-run/yield-gate-probe-001/logs/emulator-stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "private/reference-run/yield-gate-probe-001/logs/final-process.json",
+      "size": 197,
+      "sha256": "4c61ceb42b6495ba4b755279e09790e1e55b1018e976eb2458e959373da05b8e"
+    },
+    {
+      "path": "private/reference-run/yield-gate-probe-001/logs/launch-process.json",
+      "size": 1158,
+      "sha256": "897de6f7225e49eaa83c62590f63c17903da9e4ef077d413ea43c16dd2dd8fe2"
+    },
+    {
+      "path": "private/reference-run/yield-gate-probe-001/logs/prepared.json",
+      "size": 1852,
+      "sha256": "7e1f2760952858ba6665faee8a3a54fb8c92ee1e80c6d9c90d810945cb0f1f27"
+    }
+  ]
+}

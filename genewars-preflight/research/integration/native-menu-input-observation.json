@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "observed_utc": "2026-10-13T02:59:42.961047+00:00",
+  "binary": {
+    "path": "private/integration/menu/menu-interaction-001-tested.exe",
+    "size": 16879645,
+    "sha256": "317b9b24253917e752036b2d76043f0b53f6a3fd9804121e8a71021a3d889afd"
+  },
+  "native_report": {
+    "path": "private/integration/menu/menu-interaction-001.json",
+    "size": 262,
+    "sha256": "49817a5afb708d510e8d999af12d25642eb3e801a71b62b5f2f34a71a93ab156"
+  },
+  "capture": {
+    "path": "private/integration/menu/menu-interaction-001.jpg",
+    "size": 33532,
+    "sha256": "f769e1ed5ba0c5b48d6057c9b2a2b7d1395572740076b4fc3b1eba2ed15ebb13"
+  },
+  "source": [
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-menu.rs",
+      "size": 5378,
+      "sha256": "abf5a0fcccaa87c4ad4072d521b85854ab7d761dc66fb44edd1de2be98add0dd"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/menu_window.rs",
+      "size": 9363,
+      "sha256": "81a97003331f8a4773fd404ca6fdfc1eb93ab31b5d81f6e6e1dc03c1264797b9"
+    }
+  ],
+  "actions": [
+    {
+      "point": [
+        94,
+        102
+      ],
+      "purpose": "transparent first-button corner",
+      "activation": null
+    },
+    {
+      "point": [
+        209,
+        128
+      ],
+      "purpose": "Single Player",
+      "activation": 0
+    },
+    {
+      "point": [
+        209,
+        176
+      ],
+      "purpose": "Options",
+      "activation": 3
+    },
+    {
+      "point": [
+        209,
+        222
+      ],
+      "purpose": "Quit request",
+      "activation": 2
+    },
+    {
+      "key": "Escape",
+      "result": "exit0"
+    }
+  ],
+  "result": {
+    "width": 640,
+    "height": 480,
+    "layout": "three_button_normal",
+    "text_entries": 604,
+    "text_consumed_bytes": 36609,
+    "text_trailing_bytes": 1,
+    "presented_frames": 7,
+    "exit_reason": "escape",
+    "activation_requests": [
+      0,
+      3,
+      2
+    ],
+    "input_updates": 12,
+    "scene_dispatch": false,
+    "gameplay": false
+  },
+  "limits": [
+    "Host event adapter; original packet cadence not reproduced.",
+    "Scene requests are recorded, not dispatched; no campaign or Options simulation.",
+    "Quick clicks and corner rejection observed. Held selected appearance/release outside/focus loss remain synthetic/static checks, not observed UI tests.",
+    "Window JPEG is not raw framebuffer."
+  ]
+}

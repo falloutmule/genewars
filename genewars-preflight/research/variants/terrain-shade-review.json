@@ -1,0 +1,88 @@
+{
+  "status": "passed-independent-native-shade-fade-review",
+  "checked_utc": "2026-10-13T03:26:16.834336+00:00",
+  "original_or_gui_execution": false,
+  "all_signed16_light_unsigned8_factor_pairs": 16777216,
+  "shade_min": -33390592,
+  "shade_max": 33455108,
+  "fade_rows": 64,
+  "fade_indices": 16384,
+  "invalid_shade_endpoint_pairs": 384,
+  "invalid_lengths": [
+    0,
+    1,
+    16383,
+    16385
+  ],
+  "zero_is_not_transparent": {
+    "shade": 63,
+    "source_index": 0,
+    "output_index": 148
+  },
+  "evidence": {
+    "path": "research/ghidra/terrain-projection-evidence.json",
+    "size": 26086,
+    "sha256": "ab41b22be3f0477242854a8b10b97ea84ddd391e34d400c5da60ed4b0121af15"
+  },
+  "private_listings": [
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0007b7f0.txt",
+      "size": 14310,
+      "sha256": "26769c153064fd73cf9b69c2affe127a2e9ad5f0ff76596d7610e7742b932d25"
+    },
+    {
+      "path": "private/ghidra/terrain-camera-refs/instructions-000829a0.txt",
+      "size": 1851,
+      "sha256": "1cfd80f94461e5489c639ba060e1f5d036985f69e315de03d0641e8b61967b69"
+    },
+    {
+      "path": "private/ghidra/terrain-camera-refs/instructions-00082e20.txt",
+      "size": 2974,
+      "sha256": "66286b34e27300bf69ee0b62c036059c9e981596ae85703fd021a940983c7eb3"
+    },
+    {
+      "path": "private/ghidra/terrain-mode5.txt",
+      "size": 6934,
+      "sha256": "bc73059ae3b302a185735a2b82c76f40346cf7feaae33da71749a77450fbaaf9"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "private/reference-run/run-004/drive-c/GAME/DATA/FADE.DAT",
+      "size": 7766,
+      "sha256": "ddef38a3e63fbb3680aac15569f12e02f141036ffa270ddd48cdc82bce361503"
+    },
+    {
+      "path": "private/integration/rnc-decoded/ddef38a3e63fbb3680aac15569f12e02f141036ffa270ddd48cdc82bce361503.bin",
+      "size": 16384,
+      "sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392"
+    }
+  ],
+  "harness": {
+    "path": "private/review/terrain-shade/review.exe",
+    "size": 5085198,
+    "sha256": "6573d6a57916f3a65b429b3db89c6e08eb03bd92f9289396833dd04cf2279d46"
+  },
+  "source": {
+    "path": "rust/crates/genewars-render/src/terrain.rs",
+    "size": 11819,
+    "sha256": "f96ee7ade46d28bfc125ea91135f26f8a6596d4e5e29b77fe507552d9eba2387"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/terrain-shade-review.py",
+      "size": 4326,
+      "sha256": "839bca5eab21bbe61f0cfeceb29823af69c452252cf7f525dfdb7529142a5920"
+    },
+    {
+      "path": "research/variants/terrain-shade-review.rs",
+      "size": 1038,
+      "sha256": "fb86485c6803823ac6468c514ac9327bf2b1c413eda40b6a94a5f2c28b8d7bf8"
+    }
+  ],
+  "limits": [
+    "No shade-factor producer, visibility meaning or selection inferred",
+    "Shade row is explicit0..63; no clamp/automatic conversion of16.16shade",
+    "No gradients, rasterization, clipping or completeframe equivalence claimed"
+  ]
+}

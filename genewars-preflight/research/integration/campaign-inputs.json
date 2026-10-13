@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "purpose": "hash-bound first-mission input staging; no game execution or resource interpretation",
+  "manifest_sha256": "6139f4083031cee88bc04849f1959ae1e43aff41eef7c87cb4a62bc8b86e9e6a",
+  "campaign_entry_evidence_sha256": "49f6920e492706f96833c35ddef8a5482e54ad276e21e9ada32f6e3de8f09005",
+  "campaign_entry_candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "selected_rnc_records": [
+    {
+      "entry_id": "root/2/disc/117",
+      "status": "passed",
+      "input_sha256": "4283af614d54519e2a9f6c59a881ba58ad356b8844c9e489a51501c51e2aeeac",
+      "input_size": 35346,
+      "output_size": 163840,
+      "output_sha256": "476090285016a3f458c175e2aae84c30d1f33a23817ee5556d99dd96ef1aceee"
+    },
+    {
+      "entry_id": "root/2/disc/93",
+      "status": "passed",
+      "input_sha256": "fa70fb20318dceab350402fe962744248f9127bb91b64cb0b11526f9bb7f88d6",
+      "input_size": 105717,
+      "output_size": 307200,
+      "output_sha256": "761701f542363a867b8330b9a63f54f8659e6195b96f26824bf301b967a2f8c3"
+    },
+    {
+      "entry_id": "root/2/disc/94",
+      "status": "passed",
+      "input_sha256": "678f226e78ab61eb7ec30afa6c54f2686dca550850e0267a4824e79e7ec1e44d",
+      "input_size": 706,
+      "output_size": 768,
+      "output_sha256": "9d08b13c6d0864a48a3a6c37dc9c5766b7443e65549328763d17e264e69cfbf2"
+    },
+    {
+      "entry_id": "root/2/disc/137",
+      "status": "passed",
+      "input_sha256": "678b8ea509bc5e0c8a609b74c77293604c89e293351ab5f62ff4b6a3a078ffd0",
+      "input_size": 128679,
+      "output_size": 307200,
+      "output_sha256": "93e2b1b6d222235998498270bffa45ddc334cdc9a6f2933dbef8b0d5db0bb0f2"
+    },
+    {
+      "entry_id": "root/2/disc/138",
+      "status": "passed",
+      "input_sha256": "fb584c8f2c241f3dabd94a9a5e30f21ede0f37bed08c18ecbde8ebf972ee5ff4",
+      "input_size": 662,
+      "output_size": 768,
+      "output_sha256": "f438c26190b9f58433c815f89f63726b22d2b8ba1737c30ca60affdb8bb18e88"
+    }
+  ],
+  "selected_rnc_records_sha256": "c7ac9448c0c6d9cc94ac12f66c54f45059305b9a4c082836cafab1fdd181a990",
+  "staged_resources": [
+    {
+      "filename": "HDRCO1.DAT",
+      "selected_entry_id": "root/2/disc/190",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/LEVELS/HDRCO1.DAT;1",
+      "source_aliases_same_sha256": [
+        {
+          "entry_id": "root/1/75",
+          "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/LEVELS/HDRCO1.DAT"
+        },
+        {
+          "entry_id": "root/2/disc/190",
+          "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/LEVELS/HDRCO1.DAT;1"
+        }
+      ],
+      "source_size": 699,
+      "source_sha256": "5e1f382ea68f57f1cec03a3f7de2c4903ca127519481da98232a7f1c3a46aa11",
+      "storage": "raw_source",
+      "staged_size": 699,
+      "staged_sha256": "5e1f382ea68f57f1cec03a3f7de2c4903ca127519481da98232a7f1c3a46aa11",
+      "private_path": "private/integration/campaign-first/HDRCO1.DAT"
+    },
+    {
+      "filename": "CONQ001.DAT",
+      "selected_entry_id": "root/2/disc/152",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/LEVELS/CONQ001.DAT;1",
+      "source_aliases_same_sha256": [
+        {
+          "entry_id": "root/1/123",
+          "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/LEVELS/CONQ001.DAT"
+        },
+        {
+          "entry_id": "root/2/disc/152",
+          "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/LEVELS/CONQ001.DAT;1"
+        }
+      ],
+      "source_size": 343958,
+      "source_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+      "storage": "raw_source",
+      "staged_size": 343958,
+      "staged_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+      "private_path": "private/integration/campaign-first/CONQ001.DAT"
+    },
+    {
+      "filename": "PL1.DAT",
+      "selected_entry_id": "root/2/disc/117",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/PL1.DAT;1",
+      "source_aliases_same_sha256": [
+        {
+          "entry_id": "root/1/200",
+          "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/PL1.DAT"
+        },
+        {
+          "entry_id": "root/2/disc/117",
+          "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/PL1.DAT;1"
+        }
+      ],
+      "source_size": 35346,
+      "source_sha256": "4283af614d54519e2a9f6c59a881ba58ad356b8844c9e489a51501c51e2aeeac",
+      "storage": "validated_rnc_decode",
+      "staged_size": 163840,
+      "staged_sha256": "476090285016a3f458c175e2aae84c30d1f33a23817ee5556d99dd96ef1aceee",
+      "private_path": "private/integration/campaign-first/PL1.DAT",
+      "rnc_corpus_output": "private\\integration\\rnc-decoded\\4283af614d54519e2a9f6c59a881ba58ad356b8844c9e489a51501c51e2aeeac.bin",
+      "rnc_output_size": 163840,
+      "rnc_output_sha256": "476090285016a3f458c175e2aae84c30d1f33a23817ee5556d99dd96ef1aceee"
+    },
+    {
+      "filename": "LEVSCR01.DAT",
+      "selected_entry_id": "root/2/disc/93",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR01.DAT;1",
+      "source_aliases_same_sha256": [
+        {
+          "entry_id": "root/1/269",
+          "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/LEVSCR01.DAT"
+        },
+        {
+          "entry_id": "root/2/disc/93",
+          "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR01.DAT;1"
+        }
+      ],
+      "source_size": 105717,
+      "source_sha256": "fa70fb20318dceab350402fe962744248f9127bb91b64cb0b11526f9bb7f88d6",
+      "storage": "validated_rnc_decode",
+      "staged_size": 307200,
+      "staged_sha256": "761701f542363a867b8330b9a63f54f8659e6195b96f26824bf301b967a2f8c3",
+      "private_path": "private/integration/campaign-first/LEVSCR01.DAT",
+      "rnc_corpus_output": "private\\integration\\rnc-decoded\\fa70fb20318dceab350402fe962744248f9127bb91b64cb0b11526f9bb7f88d6.bin",
+      "rnc_output_size": 307200,
+      "rnc_output_sha256": "761701f542363a867b8330b9a63f54f8659e6195b96f26824bf301b967a2f8c3"
+    },
+    {
+      "filename": "LEVSCR01.PAL",
+      "selected_entry_id": "root/2/disc/94",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR01.PAL;1",
+      "source_aliases_same_sha256": [
+        {
+          "entry_id": "root/1/211",
+          "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/LEVSCR02.PAL"
+        },
+        {
+          "entry_id": "root/1/212",
+          "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/LEVSCR03.PAL"
+        },
+        {
+          "entry_id": "root/1/252",
+          "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/LEVSCR01.PAL"
+        },
+        {
+          "entry_id": "root/1/264",
+          "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/LEVSCR04.PAL"
+        },
+        {
+          "entry_id": "root/2/disc/100",
+          "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR04.PAL;1"
+        },
+        {
+          "entry_id": "root/2/disc/94",
+          "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR01.PAL;1"
+        },
+        {
+          "entry_id": "root/2/disc/96",
+          "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR02.PAL;1"
+        },
+        {
+          "entry_id": "root/2/disc/98",
+          "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR03.PAL;1"
+        }
+      ],
+      "source_size": 706,
+      "source_sha256": "678f226e78ab61eb7ec30afa6c54f2686dca550850e0267a4824e79e7ec1e44d",
+      "storage": "validated_rnc_decode",
+      "staged_size": 768,
+      "staged_sha256": "9d08b13c6d0864a48a3a6c37dc9c5766b7443e65549328763d17e264e69cfbf2",
+      "private_path": "private/integration/campaign-first/LEVSCR01.PAL",
+      "rnc_corpus_output": "private\\integration\\rnc-decoded\\678f226e78ab61eb7ec30afa6c54f2686dca550850e0267a4824e79e7ec1e44d.bin",
+      "rnc_output_size": 768,
+      "rnc_output_sha256": "9d08b13c6d0864a48a3a6c37dc9c5766b7443e65549328763d17e264e69cfbf2"
+    },
+    {
+      "filename": "TOPLNT0.DAT",
+      "selected_entry_id": "root/2/disc/137",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/TOPLNT0.DAT;1",
+      "source_aliases_same_sha256": [
+        {
+          "entry_id": "root/1/295",
+          "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/TOPLNT0.DAT"
+        },
+        {
+          "entry_id": "root/2/disc/137",
+          "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/TOPLNT0.DAT;1"
+        }
+      ],
+      "source_size": 128679,
+      "source_sha256": "678b8ea509bc5e0c8a609b74c77293604c89e293351ab5f62ff4b6a3a078ffd0",
+      "storage": "validated_rnc_decode",
+      "staged_size": 307200,
+      "staged_sha256": "93e2b1b6d222235998498270bffa45ddc334cdc9a6f2933dbef8b0d5db0bb0f2",
+      "private_path": "private/integration/campaign-first/TOPLNT0.DAT",
+      "rnc_corpus_output": "private\\integration\\rnc-decoded\\678b8ea509bc5e0c8a609b74c77293604c89e293351ab5f62ff4b6a3a078ffd0.bin",
+      "rnc_output_size": 307200,
+      "rnc_output_sha256": "93e2b1b6d222235998498270bffa45ddc334cdc9a6f2933dbef8b0d5db0bb0f2"
+    },
+    {
+      "filename": "TOPLNT0.PAL",
+      "selected_entry_id": "root/2/disc/138",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/TOPLNT0.PAL;1",
+      "source_aliases_same_sha256": [
+        {
+          "entry_id": "root/1/286",
+          "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/TOPLNT0.PAL"
+        },
+        {
+          "entry_id": "root/2/disc/138",
+          "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/TOPLNT0.PAL;1"
+        }
+      ],
+      "source_size": 662,
+      "source_sha256": "fb584c8f2c241f3dabd94a9a5e30f21ede0f37bed08c18ecbde8ebf972ee5ff4",
+      "storage": "validated_rnc_decode",
+      "staged_size": 768,
+      "staged_sha256": "f438c26190b9f58433c815f89f63726b22d2b8ba1737c30ca60affdb8bb18e88",
+      "private_path": "private/integration/campaign-first/TOPLNT0.PAL",
+      "rnc_corpus_output": "private\\integration\\rnc-decoded\\fb584c8f2c241f3dabd94a9a5e30f21ede0f37bed08c18ecbde8ebf972ee5ff4.bin",
+      "rnc_output_size": 768,
+      "rnc_output_sha256": "f438c26190b9f58433c815f89f63726b22d2b8ba1737c30ca60affdb8bb18e88"
+    }
+  ],
+  "scope": "Metadata only. Staged resource bytes remain beneath private/. Selected source IDs are explicit; aliases require exact source SHA-256 equality."
+}

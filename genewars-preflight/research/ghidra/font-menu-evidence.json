@@ -1,0 +1,286 @@
+{
+  "status": "verified_bounded_static_menu_and_font_contract",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "screen_va": "0x184fe8",
+  "control_table_va": "0x10708c",
+  "palette_pointer_va": "0x18500a",
+  "palette_source": "TITLESCR.PAL",
+  "framebuffer_contract": "640x480 indexed row-major, full clip, zero draw flags and UI origin(0,0) required",
+  "controls": [
+    {
+      "record_va": "0x10708c",
+      "id": 0,
+      "flags": "0x1048",
+      "x": 140,
+      "four_button_y": 85,
+      "animation_index": 0
+    },
+    {
+      "record_va": "0x1070b4",
+      "id": 1,
+      "flags": "0x1048",
+      "x": 140,
+      "four_button_y": 156,
+      "animation_index": 0
+    },
+    {
+      "record_va": "0x1070dc",
+      "id": 3,
+      "flags": "0x1048",
+      "x": 140,
+      "four_button_y": 227,
+      "animation_index": 0
+    },
+    {
+      "record_va": "0x107104",
+      "id": 2,
+      "flags": "0x1048",
+      "x": 140,
+      "four_button_y": 298,
+      "animation_index": 0
+    }
+  ],
+  "three_button_positions": [
+    [
+      140,
+      115
+    ],
+    [
+      140,
+      186
+    ],
+    [
+      140,
+      257
+    ]
+  ],
+  "animation_index": 0,
+  "states": [
+    {
+      "state": "normal",
+      "frame_index": 0,
+      "width": 346,
+      "height": 75,
+      "components": [
+        {
+          "sprite_index": 1,
+          "x": 0,
+          "y": 0,
+          "width": 116,
+          "height": 75,
+          "flags": 0
+        },
+        {
+          "sprite_index": 2,
+          "x": 116,
+          "y": 11,
+          "width": 120,
+          "height": 50,
+          "flags": 0
+        },
+        {
+          "sprite_index": 3,
+          "x": 236,
+          "y": 3,
+          "width": 110,
+          "height": 71,
+          "flags": 0
+        }
+      ]
+    },
+    {
+      "state": "selected",
+      "frame_index": 2,
+      "width": 346,
+      "height": 75,
+      "components": [
+        {
+          "sprite_index": 7,
+          "x": 0,
+          "y": 0,
+          "width": 116,
+          "height": 75,
+          "flags": 0
+        },
+        {
+          "sprite_index": 8,
+          "x": 116,
+          "y": 11,
+          "width": 120,
+          "height": 50,
+          "flags": 0
+        },
+        {
+          "sprite_index": 9,
+          "x": 236,
+          "y": 3,
+          "width": 110,
+          "height": 71,
+          "flags": 0
+        }
+      ]
+    }
+  ],
+  "labels": [
+    {
+      "text_index": 255,
+      "byte_count": 12,
+      "text_sha256": "87a108839d7b0a9506200016578fa75ef437d2a9eb424389a5a1576a6c7ebf4e",
+      "width": 246,
+      "x_center": 312,
+      "left": 189,
+      "three_button_y": 140
+    },
+    {
+      "text_index": 258,
+      "byte_count": 7,
+      "text_sha256": "d0b1a869600d21076a3fa8b5f52546e55920588ce73dfb7e56ca9dc08bdcaf3e",
+      "width": 151,
+      "x_center": 312,
+      "left": 237,
+      "three_button_y": 211
+    },
+    {
+      "text_index": 259,
+      "byte_count": 4,
+      "text_sha256": "a872f67384948f79440eb93bc12a47d2f25f6e0067bc252559f9af76c9e8257e",
+      "width": 85,
+      "x_center": 312,
+      "left": 270,
+      "three_button_y": 282
+    },
+    {
+      "text_index": 257,
+      "byte_count": 7,
+      "text_sha256": "b5a9716fcd63f4a279e2f6df8f6de89dce75ff38fad8c7e04ebb2d8e2227e2eb",
+      "width": 178,
+      "x_center": 312,
+      "left": 223,
+      "three_button_y": null
+    }
+  ],
+  "assets": [
+    {
+      "entry_id": "root/2/disc/92",
+      "source": "GAME/DATA/IFTITLE.ANB",
+      "input_sha256": "c7d2dfc5d774c69337436249ec74e4d0fa6ae1d06bd5ae785f9f73ee2ac0f707",
+      "decoded_size": 58185,
+      "decoded_sha256": "f5537949f249fc4f84e265768a4a8af981d5db02604a67371bb70dab3f40e7bc"
+    },
+    {
+      "entry_id": "root/2/disc/135",
+      "source": "GAME/DATA/TITLESCR.DAT",
+      "input_sha256": "2548b024fede333b49fc4011541939fc8ce294cb95b48cdb41ed7d0cec54a0b9",
+      "decoded_size": 307200,
+      "decoded_sha256": "5ecc729145963a110a5c1748a1c2e2894c01245ba1d98befab5a3743b25ae0e2"
+    },
+    {
+      "entry_id": "root/2/disc/136",
+      "source": "GAME/DATA/TITLESCR.PAL",
+      "input_sha256": "d5ec91e731c2ff7e8d74dbbde6a3fe0410ec602ff0da52eb1e6f6bb1a44307c7",
+      "decoded_size": 768,
+      "decoded_sha256": "36ef1916917c118a8115c8550a0d2d684d9041743a9d7521414479504606e491"
+    },
+    {
+      "entry_id": "root/2/disc/75",
+      "source": "GAME/DATA/FONT2.DAT",
+      "input_sha256": "2f3d275f88f2ff6671562a819cbc7a791b16ad4510a4020f3b6078c917f60dba",
+      "decoded_size": 44647,
+      "decoded_sha256": "2e1abcf8fb13cc306449f25bb2b0da64aa9627646ad4335910bdd0114a36b4fa"
+    },
+    {
+      "entry_id": "root/2/disc/76",
+      "source": "GAME/DATA/FONT2.TAB",
+      "input_sha256": "f54057e1b19cc1711a1596b6459cfdfb359a170f5ed739df71fd852befba4bab",
+      "decoded_size": 1170,
+      "decoded_sha256": "e7a5299f511e76de4999cfde40b8852ed1d8da83406d5f0284886996e8fd87b1"
+    }
+  ],
+  "font_contract": {
+    "table_record_size": 6,
+    "table_prefix_bytes": 6,
+    "dat_base_bias": 0,
+    "absolute_tab_offset": "(byte_code-31)*6",
+    "space_tab_offset": 6,
+    "A_tab_offset": 204,
+    "A_record": [
+      3917,
+      30,
+      27
+    ],
+    "advance": "width-1",
+    "scope": "one unkerned line, bytes>=32 and bounded by admitted table; space advances without painting",
+    "rle": "signed control: positive literal bytes including opaque zero; negative transparent skip; zero row end; clip writes, consume full literal runs",
+    "safe_deviation": "Require final row zero for complete bounded stream; runtime may return immediately after final visible row"
+  },
+  "text_contract": {
+    "count": 604,
+    "consumed": 36609,
+    "trailing_bytes": 1,
+    "encoding": "opaque bytes"
+  },
+  "unknowns": [
+    "wallclock callback timing",
+    "complete network initialization semantics",
+    "live runtime draw flags; native normal composition requires zero",
+    "mouse-motion runtime cause"
+  ],
+  "private_listings": [
+    {
+      "private_path": "private/ghidra/font-draw/instructions-000a7618.txt",
+      "sha256": "df3f0482d660eb56acb03faa0b9144c9a8b9caa14ef28d8ddb4fa1f8351ef124"
+    },
+    {
+      "private_path": "private/ghidra/font-menu-constructor-tail.txt",
+      "sha256": "40c1a567b912f2924a40e800b47069fd3540254719dd65b065824e6d49d48c14"
+    },
+    {
+      "private_path": "private/ghidra/font-text/instructions-0007c6a0.txt",
+      "sha256": "f59af2770a13393f74bc1e4f5daa4fd0078a9158d899771cba99769891b56209"
+    },
+    {
+      "private_path": "private/ghidra/font-init/instructions-0001f550.txt",
+      "sha256": "775ba6cd4cc5d3a8074eac27408c2c8a311877840c303fc28800341bd24140bf"
+    },
+    {
+      "private_path": "private/ghidra/font-init/instructions-0001f5a0.txt",
+      "sha256": "c9ecc8eaf86c6d18bbd8a6d0ed74cdb3ba520da09e034da21f527e3ddedead52"
+    },
+    {
+      "private_path": "private/ghidra/font-wrapper/instructions-0001f730.txt",
+      "sha256": "f3320d21ab701c5c32d4cd5c7be560e2fa76123bbc54662b714a970735e44c08"
+    },
+    {
+      "private_path": "private/ghidra/font-init/instructions-0001f750.txt",
+      "sha256": "9c8573643f2b605206d821774c50e3c6776e81bd3d2840c4fd3f5baa176d567f"
+    },
+    {
+      "private_path": "private/ghidra/font-menu/instructions-0007ca70.txt",
+      "sha256": "871ac5bcdd4ea2cf5add8feeea364367b0945ad28eba02e034535321d60f5382"
+    },
+    {
+      "private_path": "private/ghidra/font-menu-bind/instructions-000a8320.txt",
+      "sha256": "782abc48942eed3858ada0401b148f8f55c96d0c7805815e71bfdf16dea42721"
+    },
+    {
+      "private_path": "private/ghidra/ui-controls/instructions-000a84d0.txt",
+      "sha256": "df232042329475b234c8d61f7844ffac88e5bd10cf98c10c2b4e601ba9e44b5e"
+    },
+    {
+      "private_path": "private/ghidra/font-menu-bind/instructions-000a85d0.txt",
+      "sha256": "5a245dd01ae9fcd5476c8eb0ac34e76b5e565fd32c74d5fafc2a9854d68b941a"
+    },
+    {
+      "private_path": "private/ghidra/font-menu-construct/instructions-000aea78.txt",
+      "sha256": "3699b9c5eb659d383c732c7288314f9924ec88eed36b17f45b971717123eb641"
+    },
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-000a7730.txt",
+      "sha256": "aa63d9caf20fbcd13f8d139958df0e542a2ca45437a42b7249c87adbe9a60f00"
+    },
+    {
+      "private_path": "private/ghidra/font-menu-state/instructions-0001cdf0.txt",
+      "sha256": "476c28e193b3bc5e7fdff41c0ae127f34b140f6ec56a69f94faa8523de475be2"
+    }
+  ]
+}

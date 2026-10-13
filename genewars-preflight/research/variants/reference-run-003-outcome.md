@@ -1,0 +1,9 @@
+# Run003 outcome
+
+The supervised original displayed the animated intro, labelled three-button main menu and labelled Options screen. Labels were visible after the installer-proven English aliases were added. The host pointer moved, but guest motion remained unresolved: a click aimed at Single Player entered Options. Capture was requested and its title suffix observed; an in-client drag did not produce the expected guest movement. This does not prove SDL relative-mode success or identify the cause.
+
+Root released PID25284 at 2026-10-13T02:46:27.868179Z and stopped the verified exact process with SIGTERM at 02:54:54.596486Z. Exit15 records operator termination, not an original game failure. Process lifetime was 536.061 seconds without host timeout; it is not a gameplay timing measurement. Private captures are host-window JPEGs, not raw framebuffer dumps. No mission, gameplay input, save/reload or timing sample was observed.
+
+The completed integrity receipt reports 489 of 490 original files unchanged; GW.ERR alone changed from 45 bytes to 0. All 19 aliases, generated config, original executables, media, archive and emulator inputs remained unchanged. No files were removed. Three additions were ADDRESS.TXT, the generated nonce batch and the independently authored YIELD.COM; the raw receipt retains their exact hashes. Attempt001 remains preserved as unreleased. The input-free empty probe and attempt002 gate records remain separate evidence.
+
+See `reference-run-003-result.json`, its timestamped private post-run receipt and `private/reference-run/run-003/logs/supervisor-observations.json`. This adjacent note clarifies observations without changing the raw checker receipt. The provisional CD candidate remains unproven canonical retail behavior; no playable reconstruction or mission parity is established by this run.

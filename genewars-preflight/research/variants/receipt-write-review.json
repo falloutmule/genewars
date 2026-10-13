@@ -1,0 +1,19 @@
+{
+  "status": "passed-synthetic-windows-receipt-publication-tests",
+  "checked_utc": "2026-10-13T03:27:03.551313+00:00",
+  "source_sha256": "00b38192ad5e285ce361afa25eae2cf8b8762f657c9d27cd23c95413adfb2075",
+  "actual_creature_receipt_changed": false,
+  "original_or_gui_execution": false,
+  "checks": [
+    "Observed EINVAL retry then successful atomic publication",
+    "Windows newline convention preserved",
+    "Sharing/access error caps at3 attempts; old receipt preserved",
+    "ENOSPC propagates after1 attempt; old receipt preserved",
+    "No temporary leftovers"
+  ],
+  "limits": [
+    "Original transient IO cause not established",
+    "Tests inject replacement failures; they do not reproduce OS-level fault",
+    "Actual creature rerun separately passed all unchanged pixel assertions"
+  ]
+}

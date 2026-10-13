@@ -1,0 +1,606 @@
+{
+  "schema_version": 1,
+  "completed_utc": "2026-10-13T03:21:24.245952+00:00",
+  "all_passed": false,
+  "checks": {
+    "inventory_boundary_tests": true,
+    "rust_workspace_tests": true,
+    "native_cli_build": true,
+    "first_campaign_resource_staging": true,
+    "native_campaign_resource_plan": true,
+    "native_terrain_cli": true,
+    "all_rnc_records": true,
+    "real_panel_render": true,
+    "anb_corpus_accounting": true,
+    "anb_only_documented_failures": true,
+    "anb_explicit_codec_accounting": true,
+    "independent_creature_pixels": false,
+    "independent_bones_pixels": true,
+    "native_distance_smoke": true,
+    "native_distance_result": true,
+    "reject_out_of_range_input": true,
+    "independent_primitive_review": true,
+    "le_mapping_replay": true,
+    "record_and_grid_contracts": true,
+    "renderer_bridge": true,
+    "custom_ui_bridge": true,
+    "creature_codec_bridge": true,
+    "input_packet_bridge": true,
+    "custom_list_storage": true,
+    "config_parser_and_writer": true,
+    "english_install_copy_contract": true,
+    "font_and_menu_contract": true,
+    "campaign_entry_contract": true,
+    "menu_input_contract": true,
+    "terrain_contract": true,
+    "terrain_projection_contract": true,
+    "independent_terrain_cells_and_heights": true,
+    "independent_terrain_vertices": true,
+    "independent_campaign_and_menu_controls": true,
+    "bones_codec_bridge": true,
+    "construction_debit_bridge": true,
+    "independent_construction_debit": true,
+    "planet_texture_bridge": true,
+    "independent_planet_texture_pixels": true,
+    "independent_core_controls": true,
+    "windows_dependency_receipt": true,
+    "sprite_exception_assessment": true,
+    "native_window_smoke": true,
+    "native_window_presented_three_frames": true,
+    "native_controls_build": true,
+    "native_controls_smoke": true,
+    "native_controls_updated_three_packets": true,
+    "native_menu_build": true,
+    "native_menu_render_and_window": true,
+    "independent_font_and_menu_pixels": true,
+    "current_native_menu_pixels_match_oracle": true,
+    "dated_preflight_twelve_checks_passed": true,
+    "dated_manifest_and_comparison_unchanged": true,
+    "original_archive_unchanged": true,
+    "manifest_assertions_hold": true,
+    "no_private_files_tracked": true,
+    "all_private_files_ignored": true
+  },
+  "commands": [
+    {
+      "label": "inventory_boundary_tests",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_inventory.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_sfx_members_duplicate_names_and_blocked_image_are_preserved (test_inventory.Archives.test_sfx_members_duplicate_names_and_blocked_image_are_preserved) ... ok\ntest_stale_disc_inventory_is_rejected (test_inventory.Archives.test_stale_disc_inventory_is_rejected) ... ok\ntest_entry_outside_object_is_flagged (test_inventory.Headers.test_entry_outside_object_is_flagged) ... ok\ntest_invalid_pointer_does_not_scan_for_incidental_le (test_inventory.Headers.test_invalid_pointer_does_not_scan_for_incidental_le) ... ok\ntest_le_header_is_followed_at_actual_offset (test_inventory.Headers.test_le_header_is_followed_at_actual_offset) ... ok\ntest_object_table_cannot_overlap_header (test_inventory.Headers.test_object_table_cannot_overlap_header) ... ok\ntest_truncated_le_and_oversized_object_table_are_flagged (test_inventory.Headers.test_truncated_le_and_oversized_object_table_are_flagged) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.022s\n\nOK\n"
+    },
+    {
+      "label": "rust_workspace_tests",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/cargo.py",
+        "test",
+        "--workspace",
+        "--offline",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "stdout": "\nrunning 43 tests\ntest campaign_header_tests::campaign_header_exposes_only_the_bounded_string_and_keeps_all_bytes_opaque ... ok\ntest campaign_header_tests::campaign_header_allows_empty_and_maximum_bounded_strings ... ok\ntest campaign_header_tests::campaign_header_rejects_wrong_extents_and_missing_terminator ... ok\ntest conq_fast_prefix_tests::conq_fast_prefix_exposes_four_bounded_initial_player_byte_ranges ... ok\ntest tests::copies_overlapping_backreference_matches ... ok\ntest conq_fast_prefix_tests::conq_fast_prefix_rejects_short_inputs_and_other_loader_tags ... ok\ntest font_text_tests::font_records_start_after_opaque_header_and_codepoint_maps_once ... ok\ntest font_text_tests::font_rle_literal_zero_is_opaque_and_negative_run_is_transparent ... ok\ntest tests::decodes_explicit_packed4_high_first_odd_rows_and_transparent_skips ... ok\ntest font_text_tests::text_table_consumes_only_the_proven_604_entries ... ok\ntest map_atlas::tests::map_fields_are_little_endian_and_other_bytes_remain_raw ... ok\ntest tests::clips_runs_to_declared_width_but_consumes_full_literals ... ok\ntest map_atlas::tests::map_region_requires_exact_traced_extent ... ok\ntest font_text_tests::font_parser_rejects_partial_tables_bad_offsets_and_truncated_streams ... ok\ntest font_text_tests::font_rle_clips_writes_but_consumes_full_overwide_literal_run ... ok\ntest conq_fast_prefix_tests::conq_fast_prefix_exposes_only_the_proven_copy_and_opaque_tail ... ok\ntest tests::decodes_synthetic_method1_literal_stream ... ok\ntest tests::embedded_sprite_decode_cannot_cross_into_later_anb_sections ... ok\ntest tests::lookahead_crosses_word_boundary_without_committing_cursor ... ok\ntest tests::packed4_consumes_full_clipped_run_and_rejects_truncated_payload ... ok\ntest tests::parses_big_endian_header_fields ... ok\ntest tests::parses_borrowed_anb_sections_with_absolute_offsets_and_opaque_word ... ok\ntest tests::parses_raw_palette_triplets_without_reordering_or_scaling ... ok\ntest tests::parses_six_byte_sprite_record_and_preserves_rle_opacity ... ok\ntest tests::planet_tile_transparency_is_explicit_and_only_index_zero_is_clear ... ok\ntest tests::prefix_decode_reports_consumed_length_and_preserves_tail ... ok\ntest tests::reads_bounded_anb_animation_frame_and_component_records ... ok\ntest tests::rejects_bad_anb_metadata_section_lengths_and_references ... ok\ntest tests::rejects_declared_output_over_limit_before_allocating ... ok\ntest tests::rejects_malformed_sprite_tables_offsets_and_streams ... ok\ntest tests::rejects_output_completed_before_declared_chunks_finish ... ok\ntest tests::rejects_oversubscribed_huffman_table ... ok\ntest tests::rejects_palette_lengths_other_than_256_triplets ... ok\ntest tests::deterministic_mutations_never_panic_or_exceed_output_limit ... ok\ntest tests::rejects_short_or_malformed_headers ... ok\ntest tests::rejects_truncated_anb_header ... ok\ntest tests::extracts_explicit_planet_tiles_with_the_proven_256_byte_stride ... ok\ntest tests::rejects_unordered_and_out_of_bounds_anb_offsets ... ok\ntest tests::rnc_crc_matches_published_header_sample ... ok\ntest tests::validates_exact_packed_length ... ok\ntest tests::validates_planet_atlas_extent_before_tile_reads ... ok\ntest tests::zero_count_table_reuses_previous_table ... ok\ntest map_atlas::tests::b32_tiles_use_eight_columns_and_skip_source_row_padding ... ok\n\ntest result: ok. 43 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 39 tests\ntest campaign::tests::initial_campaign_selects_traced_first_mission_resources ... ok\ntest campaign::tests::nonboundary_progress_retains_system_and_separates_background_selection ... ok\ntest construction::tests::preserves_signed_overflow_and_negative_cost ... ok\ntest construction::tests::selector_admission_rejects_negative_and_past_table ... ok\ntest construction::tests::callback_prerequisite_preserves_pools_without_evaluating_cost ... ok\ntest custom_list::tests::bounded_names_reject_wrapped_indices_and_terminators_in_following_fields ... ok\ntest custom_list::tests::capture_pending_and_outside_release_preserve_exact_sentinels ... ok\ntest menu_control::tests::captured_hover_transitions_write_exact_masks_and_preserve_capture ... ok\ntest custom_list::tests::all_offsets_match_byte_width_and_zero_guard ... ok\ntest campaign::tests::unsupported_state_is_rejected_without_wrapping_into_resource_names ... ok\ntest construction::tests::exact_affordability_boundary_and_primary_first ... ok\ntest menu_control::tests::captured_press_is_ignored_unless_a_release_event_is_also_present ... ok\ntest campaign::tests::sequential_campaign_updates_system_at_each_six_planet_boundary ... ok\ntest custom_list::tests::selection_has_half_open_edges_and_requires_the_observed_packet_conditions ... ok\ntest construction::tests::refill_assigns_secondary_not_combined_total ... ok\ntest custom_list::tests::all_packet_bits_obey_capture_state_and_mask_eight ... ok\ntest menu_control::tests::release_after_leave_accepts_zero_countdown_and_preserves_it_after_clear ... ok\ntest menu_control::tests::simultaneous_press_and_release_captures_without_activation ... ok\ntest menu_control::tests::captured_release_activates_only_inside_normal_opaque_footprint ... ok\ntest menu_control::tests::hover_and_uncaptured_no_hit_do_not_change_state_or_input_mask ... ok\ntest menu_control::tests::menu_control_order_is_the_observed_manager_traversal ... ok\ntest custom_list::tests::each_of_six_rows_uses_twelve_scanlines_and_wraps_after_255 ... ok\ntest menu_control::tests::uncaptured_press_returns_id_but_writes_zero_mask_and_selects_control ... ok\ntest mouse_packet::tests::instruction_truth_table_covers_every_input_combination ... ok\ntest mouse_packet::tests::quick_click_survives_two_polls_and_repress_emits_both_events ... ok\ntest opaque_records::tests::radius_preserves_wrap_unsigned_comparison_and_inclusive_boundary ... ok\ntest opaque_records::tests::radius_requires_complete_group_and_exact_qualification_flags ... ok\ntest terrain::tests::extrema_fit_and_wrong_map_extent_is_rejected ... ok\ntest terrain::tests::negative_fraction_uses_arithmetic_floor_shift ... ok\ntest terrain::tests::samples_each_piecewise_triangle_and_vertices ... ok\ntest terrain::tests::signed_coordinates_wrap_both_cell_axes_and_neighbor_edges ... ok\ntest tests::combined_distance_applies_floor_after_wrapping ... ok\ntest tests::coordinates_congruent_modulo_32768_have_identical_distance ... ok\ntest tests::static_instruction_vectors ... ok\ntest opaque_records::tests::repeated_grid_rows_are_idempotent ... ok\ntest tests::symmetry_and_bound_hold_at_signed_and_wrap_boundaries ... ok\ntest opaque_records::tests::grid_bounds_failure_has_no_partial_writes_and_zero_counts_need_no_memory ... ok\ntest tests::square_root_edges_and_perfect_square_neighbors ... ok\ntest opaque_records::tests::grid_preserves_linear_columns_wrapped_rows_and_unrelated_bytes ... ok\n\ntest result: ok. 39 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 11 tests\ntest tests::duplicate_down_does_not_overwrite_first_position ... ok\ntest tests::idle_packet_does_not_consume_action_trace_capacity ... ok\ntest tests::first_press_latch_survives_release_and_repress_until_consumed ... ok\ntest tests::quick_press_release_before_tick_preserves_press_and_position ... ok\ntest tests::missing_cursor_still_latches_press_without_fabricating_coordinates ... ok\ntest tests::parses_only_bounded_control_inspector_options ... ok\ntest tests::press_notification_after_prior_latch_consumption_is_not_deduplicated_by_held_state ... ok\ntest tests::maps_physical_cursor_to_virtual_640_by_480_client_coordinates ... ok\ntest tests::report_has_explicit_host_cadence_and_no_game_claim ... ok\ntest tests::host_packet_updates_preserve_press_then_release_for_quick_click ... ok\ntest tests::report_writes_exclusively ... ok\n\ntest result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 10 tests\ntest tests::parses_explicit_sprite_database_palette_and_record ... ok\ntest tests::parses_explicit_packed4_base_and_diagnostic_view ... ok\ntest tests::parses_named_ifcustom_static_render_state_and_output ... ok\ntest tests::writes_machine_readable_report_with_escaped_error ... ok\ntest tests::positional_input_named_report_is_not_an_output_path ... ok\ntest tests::rejects_duplicate_options ... ok\ntest tests::rejects_zero_or_missing_frame_counts ... ok\ntest tests::parses_required_paths_and_bounded_frame_option ... ok\ntest tests::refuses_to_overwrite_bmp_targets ... ok\ntest tests::refuses_to_overwrite_report_targets ... ok\n\ntest result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 23 tests\ntest cd_title_button_tests::title_button_rejects_unproven_animation_frames_or_component_flags ... ok\ntest cd_title_button_tests::title_button_hit_uses_union_of_normal_positive_literal_masks ... ok\ntest terrain::tests::vertex_height_shifts_signed_value_before_doubling ... ok\ntest font_line_tests::text_line_measures_width_minus_one_and_paints_opaque_zero_indices ... ok\ntest cd_title_button_tests::title_button_draws_cached_normal_or_selected_components_at_signed_origin ... ok\ntest terrain::tests::shade_calculation_matches_signed_16_16_vectors_and_extrema ... ok\ntest tests::bmp_has_expected_windows_header_and_rgb_to_bgr_conversion ... ok\ntest terrain::tests::uv_table_matches_all_eight_corner_permutations ... ok\ntest font_line_tests::text_line_rejects_controls_and_zero_width_glyphs_without_partial_draw ... ok\ntest terrain::tests::vertex_position_rejects_i32_overflow ... ok\ntest terrain::tests::vertex_position_uses_unwrapped_deltas_and_explicit_placement ... ok\ntest terrain::tests::mode5_sample_uses_vu_address_then_fade_even_for_zero_source ... ok\ntest terrain::tests::fade_lookup_uses_explicit_bounded_row_and_palette_index ... ok\ntest tests::rejects_bad_index_length_palette_mode_and_components ... ok\ntest tests::composites_explicit_opacity_with_destination_clipping_and_midtones ... ok\ntest tests::custom_arrow_hit_test_uses_selected_frame_offsets_and_opaque_pixels ... ok\ntest tests::rejects_invalid_rgb_image_buffer_dimensions ... ok\ntest tests::composes_only_the_captured_arrow_in_selected_frame ... ok\ntest tests::rejects_sprite_planes_that_do_not_match_declared_dimensions ... ok\ntest tests::rejects_unproven_ifcustom_animation_shapes ... ok\ntest tests::composes_verified_custom_arrows_at_component_adjusted_positions ... ok\ntest tests::scales_midrange_dac_components_with_floor ... ok\ntest tests::renders_fixed_panel_rgb_order_scale_and_orientation ... ok\n\ntest result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+      "stderr": "warning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_assets-0ahcomsp8crgl\\s-hn5toug3xl-1ih3xzc-working`\n\nwarning: `genewars-assets` (lib) generated 1 warning\n   Compiling genewars-render v0.1.0 (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\\crates\\genewars-render)\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_render-2qn4j0t6uigl0\\s-hn5tuagftk-12vhupj-working`\n\n   Compiling genewars-assets v0.1.0 (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\\crates\\genewars-assets)\nwarning: `genewars-render` (lib test) generated 1 warning\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_core-2y6veoqe3c7z6\\s-hn5tepfj5q-1k7mr33-working`\n\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_assets-3fxgco6amz2um\\s-hn5tosdxov-0e2nbq1-working`\n\nwarning: `genewars-core` (lib test) generated 1 warning\nwarning: `genewars-assets` (lib test) generated 1 warning\n   Compiling genewars-desktop v0.1.0 (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\\crates\\genewars-desktop)\n   Compiling genewars-tools v0.1.0 (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\\crates\\genewars-tools)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.14s\n     Running unittests src\\lib.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_assets-c90ee9e2976408ba.exe)\n     Running unittests src\\lib.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_core-91b8cb3c61ea614f.exe)\n     Running unittests src\\bin\\genewars-controls.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_controls-9110045498162ecf.exe)\n     Running unittests src\\main.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_desktop-3fb6daaf84f94d0e.exe)\n     Running unittests src\\bin\\genewars-menu.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_menu-d19031f544edaa06.exe)\n     Running unittests src\\lib.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_render-cdc6d7e84d7e30e4.exe)\n     Running unittests src\\main.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_tools-cda44993ddebee5e.exe)\n   Doc-tests genewars_assets\n   Doc-tests genewars_core\n   Doc-tests genewars_render\n"
+    },
+    {
+      "label": "native_cli_build",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/cargo.py",
+        "build",
+        "-p",
+        "genewars-tools",
+        "--offline",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_assets-0ahcomsp8crgl\\s-hn5toug3xl-1ih3xzc-working`\n\nwarning: `genewars-assets` (lib) generated 1 warning\n   Compiling genewars-tools v0.1.0 (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\\crates\\genewars-tools)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.59s\n"
+    },
+    {
+      "label": "first_campaign_resource_staging",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/campaign_inputs.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"purpose\": \"hash-bound first-mission input staging; no game execution or resource interpretation\",\n  \"manifest_sha256\": \"6139f4083031cee88bc04849f1959ae1e43aff41eef7c87cb4a62bc8b86e9e6a\",\n  \"campaign_entry_evidence_sha256\": \"49f6920e492706f96833c35ddef8a5482e54ad276e21e9ada32f6e3de8f09005\",\n  \"campaign_entry_candidate_sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\",\n  \"selected_rnc_records\": [\n    {\n      \"entry_id\": \"root/2/disc/117\",\n      \"status\": \"passed\",\n      \"input_sha256\": \"4283af614d54519e2a9f6c59a881ba58ad356b8844c9e489a51501c51e2aeeac\",\n      \"input_size\": 35346,\n      \"output_size\": 163840,\n      \"output_sha256\": \"476090285016a3f458c175e2aae84c30d1f33a23817ee5556d99dd96ef1aceee\"\n    },\n    {\n      \"entry_id\": \"root/2/disc/93\",\n      \"status\": \"passed\",\n      \"input_sha256\": \"fa70fb20318dceab350402fe962744248f9127bb91b64cb0b11526f9bb7f88d6\",\n      \"input_size\": 105717,\n      \"output_size\": 307200,\n      \"output_sha256\": \"761701f542363a867b8330b9a63f54f8659e6195b96f26824bf301b967a2f8c3\"\n    },\n    {\n      \"entry_id\": \"root/2/disc/94\",\n      \"status\": \"passed\",\n      \"input_sha256\": \"678f226e78ab61eb7ec30afa6c54f2686dca550850e0267a4824e79e7ec1e44d\",\n      \"input_size\": 706,\n      \"output_size\": 768,\n      \"output_sha256\": \"9d08b13c6d0864a48a3a6c37dc9c5766b7443e65549328763d17e264e69cfbf2\"\n    },\n    {\n      \"entry_id\": \"root/2/disc/137\",\n      \"status\": \"passed\",\n      \"input_sha256\": \"678b8ea509bc5e0c8a609b74c77293604c89e293351ab5f62ff4b6a3a078ffd0\",\n      \"input_size\": 128679,\n      \"output_size\": 307200,\n      \"output_sha256\": \"93e2b1b6d222235998498270bffa45ddc334cdc9a6f2933dbef8b0d5db0bb0f2\"\n    },\n    {\n      \"entry_id\": \"root/2/disc/138\",\n      \"status\": \"passed\",\n      \"input_sha256\": \"fb584c8f2c241f3dabd94a9a5e30f21ede0f37bed08c18ecbde8ebf972ee5ff4\",\n      \"input_size\": 662,\n      \"output_size\": 768,\n      \"output_sha256\": \"f438c26190b9f58433c815f89f63726b22d2b8ba1737c30ca60affdb8bb18e88\"\n    }\n  ],\n  \"selected_rnc_records_sha256\": \"c7ac9448c0c6d9cc94ac12f66c54f45059305b9a4c082836cafab1fdd181a990\",\n  \"staged_resources\": [\n    {\n      \"filename\": \"HDRCO1.DAT\",\n      \"selected_entry_id\": \"root/2/disc/190\",\n      \"source_path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/LEVELS/HDRCO1.DAT;1\",\n      \"source_aliases_same_sha256\": [\n        {\n          \"entry_id\": \"root/1/75\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/LEVELS/HDRCO1.DAT\"\n        },\n        {\n          \"entry_id\": \"root/2/disc/190\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/LEVELS/HDRCO1.DAT;1\"\n        }\n      ],\n      \"source_size\": 699,\n      \"source_sha256\": \"5e1f382ea68f57f1cec03a3f7de2c4903ca127519481da98232a7f1c3a46aa11\",\n      \"storage\": \"raw_source\",\n      \"staged_size\": 699,\n      \"staged_sha256\": \"5e1f382ea68f57f1cec03a3f7de2c4903ca127519481da98232a7f1c3a46aa11\",\n      \"private_path\": \"private/integration/campaign-first/HDRCO1.DAT\"\n    },\n    {\n      \"filename\": \"CONQ001.DAT\",\n      \"selected_entry_id\": \"root/2/disc/152\",\n      \"source_path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/LEVELS/CONQ001.DAT;1\",\n      \"source_aliases_same_sha256\": [\n        {\n          \"entry_id\": \"root/1/123\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/LEVELS/CONQ001.DAT\"\n        },\n        {\n          \"entry_id\": \"root/2/disc/152\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/LEVELS/CONQ001.DAT;1\"\n        }\n      ],\n      \"source_size\": 343958,\n      \"source_sha256\": \"72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2\",\n      \"storage\": \"raw_source\",\n      \"staged_size\": 343958,\n      \"staged_sha256\": \"72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2\",\n      \"private_path\": \"private/integration/campaign-first/CONQ001.DAT\"\n    },\n    {\n      \"filename\": \"PL1.DAT\",\n      \"selected_entry_id\": \"root/2/disc/117\",\n      \"source_path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/PL1.DAT;1\",\n      \"source_aliases_same_sha256\": [\n        {\n          \"entry_id\": \"root/1/200\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/PL1.DAT\"\n        },\n        {\n          \"entry_id\": \"root/2/disc/117\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/PL1.DAT;1\"\n        }\n      ],\n      \"source_size\": 35346,\n      \"source_sha256\": \"4283af614d54519e2a9f6c59a881ba58ad356b8844c9e489a51501c51e2aeeac\",\n      \"storage\": \"validated_rnc_decode\",\n      \"staged_size\": 163840,\n      \"staged_sha256\": \"476090285016a3f458c175e2aae84c30d1f33a23817ee5556d99dd96ef1aceee\",\n      \"private_path\": \"private/integration/campaign-first/PL1.DAT\",\n      \"rnc_corpus_output\": \"private\\\\integration\\\\rnc-decoded\\\\4283af614d54519e2a9f6c59a881ba58ad356b8844c9e489a51501c51e2aeeac.bin\",\n      \"rnc_output_size\": 163840,\n      \"rnc_output_sha256\": \"476090285016a3f458c175e2aae84c30d1f33a23817ee5556d99dd96ef1aceee\"\n    },\n    {\n      \"filename\": \"LEVSCR01.DAT\",\n      \"selected_entry_id\": \"root/2/disc/93\",\n      \"source_path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR01.DAT;1\",\n      \"source_aliases_same_sha256\": [\n        {\n          \"entry_id\": \"root/1/269\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/LEVSCR01.DAT\"\n        },\n        {\n          \"entry_id\": \"root/2/disc/93\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR01.DAT;1\"\n        }\n      ],\n      \"source_size\": 105717,\n      \"source_sha256\": \"fa70fb20318dceab350402fe962744248f9127bb91b64cb0b11526f9bb7f88d6\",\n      \"storage\": \"validated_rnc_decode\",\n      \"staged_size\": 307200,\n      \"staged_sha256\": \"761701f542363a867b8330b9a63f54f8659e6195b96f26824bf301b967a2f8c3\",\n      \"private_path\": \"private/integration/campaign-first/LEVSCR01.DAT\",\n      \"rnc_corpus_output\": \"private\\\\integration\\\\rnc-decoded\\\\fa70fb20318dceab350402fe962744248f9127bb91b64cb0b11526f9bb7f88d6.bin\",\n      \"rnc_output_size\": 307200,\n      \"rnc_output_sha256\": \"761701f542363a867b8330b9a63f54f8659e6195b96f26824bf301b967a2f8c3\"\n    },\n    {\n      \"filename\": \"LEVSCR01.PAL\",\n      \"selected_entry_id\": \"root/2/disc/94\",\n      \"source_path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR01.PAL;1\",\n      \"source_aliases_same_sha256\": [\n        {\n          \"entry_id\": \"root/1/211\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/LEVSCR02.PAL\"\n        },\n        {\n          \"entry_id\": \"root/1/212\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/LEVSCR03.PAL\"\n        },\n        {\n          \"entry_id\": \"root/1/252\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/LEVSCR01.PAL\"\n        },\n        {\n          \"entry_id\": \"root/1/264\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/LEVSCR04.PAL\"\n        },\n        {\n          \"entry_id\": \"root/2/disc/100\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR04.PAL;1\"\n        },\n        {\n          \"entry_id\": \"root/2/disc/94\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR01.PAL;1\"\n        },\n        {\n          \"entry_id\": \"root/2/disc/96\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR02.PAL;1\"\n        },\n        {\n          \"entry_id\": \"root/2/disc/98\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/LEVSCR03.PAL;1\"\n        }\n      ],\n      \"source_size\": 706,\n      \"source_sha256\": \"678f226e78ab61eb7ec30afa6c54f2686dca550850e0267a4824e79e7ec1e44d\",\n      \"storage\": \"validated_rnc_decode\",\n      \"staged_size\": 768,\n      \"staged_sha256\": \"9d08b13c6d0864a48a3a6c37dc9c5766b7443e65549328763d17e264e69cfbf2\",\n      \"private_path\": \"private/integration/campaign-first/LEVSCR01.PAL\",\n      \"rnc_corpus_output\": \"private\\\\integration\\\\rnc-decoded\\\\678f226e78ab61eb7ec30afa6c54f2686dca550850e0267a4824e79e7ec1e44d.bin\",\n      \"rnc_output_size\": 768,\n      \"rnc_output_sha256\": \"9d08b13c6d0864a48a3a6c37dc9c5766b7443e65549328763d17e264e69cfbf2\"\n    },\n    {\n      \"filename\": \"TOPLNT0.DAT\",\n      \"selected_entry_id\": \"root/2/disc/137\",\n      \"source_path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/TOPLNT0.DAT;1\",\n      \"source_aliases_same_sha256\": [\n        {\n          \"entry_id\": \"root/1/295\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/TOPLNT0.DAT\"\n        },\n        {\n          \"entry_id\": \"root/2/disc/137\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/TOPLNT0.DAT;1\"\n        }\n      ],\n      \"source_size\": 128679,\n      \"source_sha256\": \"678b8ea509bc5e0c8a609b74c77293604c89e293351ab5f62ff4b6a3a078ffd0\",\n      \"storage\": \"validated_rnc_decode\",\n      \"staged_size\": 307200,\n      \"staged_sha256\": \"93e2b1b6d222235998498270bffa45ddc334cdc9a6f2933dbef8b0d5db0bb0f2\",\n      \"private_path\": \"private/integration/campaign-first/TOPLNT0.DAT\",\n      \"rnc_corpus_output\": \"private\\\\integration\\\\rnc-decoded\\\\678b8ea509bc5e0c8a609b74c77293604c89e293351ab5f62ff4b6a3a078ffd0.bin\",\n      \"rnc_output_size\": 307200,\n      \"rnc_output_sha256\": \"93e2b1b6d222235998498270bffa45ddc334cdc9a6f2933dbef8b0d5db0bb0f2\"\n    },\n    {\n      \"filename\": \"TOPLNT0.PAL\",\n      \"selected_entry_id\": \"root/2/disc/138\",\n      \"source_path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/TOPLNT0.PAL;1\",\n      \"source_aliases_same_sha256\": [\n        {\n          \"entry_id\": \"root/1/286\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/TOPLNT0.PAL\"\n        },\n        {\n          \"entry_id\": \"root/2/disc/138\",\n          \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/TOPLNT0.PAL;1\"\n        }\n      ],\n      \"source_size\": 662,\n      \"source_sha256\": \"fb584c8f2c241f3dabd94a9a5e30f21ede0f37bed08c18ecbde8ebf972ee5ff4\",\n      \"storage\": \"validated_rnc_decode\",\n      \"staged_size\": 768,\n      \"staged_sha256\": \"f438c26190b9f58433c815f89f63726b22d2b8ba1737c30ca60affdb8bb18e88\",\n      \"private_path\": \"private/integration/campaign-first/TOPLNT0.PAL\",\n      \"rnc_corpus_output\": \"private\\\\integration\\\\rnc-decoded\\\\fb584c8f2c241f3dabd94a9a5e30f21ede0f37bed08c18ecbde8ebf972ee5ff4.bin\",\n      \"rnc_output_size\": 768,\n      \"rnc_output_sha256\": \"f438c26190b9f58433c815f89f63726b22d2b8ba1737c30ca60affdb8bb18e88\"\n    }\n  ],\n  \"scope\": \"Metadata only. Staged resource bytes remain beneath private/. Selected source IDs are explicit; aliases require exact source SHA-256 equality.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "native_campaign_resource_plan",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_campaign_plan.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"checked_utc\": \"2026-10-13T03:20:39.720857+00:00\", \"native_binary_sha256\": \"fb75dae2e5a562b001c9d22aa84083812d97b84039c3968e779c90bd7baae4bd\", \"evidence_sha256\": \"49f6920e492706f96833c35ddef8a5482e54ad276e21e9ada32f6e3de8f09005\", \"native_source_sha256\": \"a610b74be9c65dd66ef9c84771b1c07422e1efea41d6e9895290a551d061bf78\", \"states_compared\": 96, \"source_identities_selected\": 72, \"invalid_inputs_rejected\": 8, \"original_execution\": false, \"staged_resources_verified\": 7, \"first_header_and_prefix_compared\": {\"header_bytes\": 699, \"title_bytes\": 8, \"title_crc16\": 38424, \"mission_bytes\": 343958, \"tag\": 348982, \"prefix_bytes\": 243038, \"prefix_crc16\": 26371, \"tail_bytes\": 100920, \"tail_crc16\": 17117, \"opaque_region_bytes\": 229376, \"opaque_region_crc16\": 27235, \"initial_player_crc16\": [3506, 35416, 16997, 50575], \"gameplay\": false}, \"limits\": \"Bounded resource plan only; retained system is explicit. No mission execution, completion rule or general signed-byte behavior claim.\"}\n",
+      "stderr": ""
+    },
+    {
+      "label": "native_terrain_cli",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_terrain_cli.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"checked_utc\": \"2026-10-13T03:20:41.177031+00:00\", \"binary_sha256\": \"fb75dae2e5a562b001c9d22aa84083812d97b84039c3968e779c90bd7baae4bd\", \"proof_sha256\": \"baf2d7e399f1ab40937cca5771a7fc611b7e15f2d54a4194f3ced1d13e0a21ba\", \"map_info\": {\"width_cells\": 128, \"height_cells\": 128, \"record_bytes\": 14, \"min_height\": 0, \"max_height\": 4800, \"min_texture\": 0, \"max_texture\": 118, \"gameplay\": false}, \"projection_proof_sha256\": \"ab41b22be3f0477242854a8b10b97ea84ddd391e34d400c5da60ed4b0121af15\", \"explicit_cell_placements\": 36, \"cell_vertices_compared\": 144, \"height_points\": 37, \"tiles_compared\": 160, \"tile_bytes_compared\": 163840, \"invalid_inputs_rejected\": 5, \"private_tile_outputs\": \"private/integration/terrain/363bf2dc5e7a48c0a47c38b886dc0314\", \"original_execution\": false, \"limits\": \"Native resources and explicitly placed cell vertices only; no terrain frame, inferred camera, draw order, visibility or shading claim.\"}\n",
+      "stderr": ""
+    },
+    {
+      "label": "all_rnc_records",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_rnc_corpus.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"summary\": {\"records\": 331, \"unique_inputs\": 179, \"passed\": 331, \"failed\": 0, \"compound_records\": 2}, \"failures\": []}\n",
+      "stderr": ""
+    },
+    {
+      "label": "real_panel_render",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/render_panel.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"schema_version\": 1, \"sources\": [{\"entry_id\": \"root/2/disc/86\", \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/GENEPANL.DAT;1\", \"size\": 16204, \"sha256\": \"8116b2b883320b8573c50496a570f0f3fa978e4c20b9c85a284339ff1f920e24\"}, {\"entry_id\": \"root/2/disc/108\", \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/MAIN.PAL;1\", \"size\": 768, \"sha256\": \"8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05\"}], \"candidate_binary_sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\", \"width\": 128, \"height\": 480, \"index_sha256\": \"af9741b4545fb6f28a1dd0e50da0570e39992e75c872bc2249891f3330f59951\", \"bmp_sha256\": \"af218cc65e0abb410242cd73440b53d4c18f4d8cd3f03f1f7542c4bb1c70809b\", \"rgb_sha256\": \"bb135e29eb2e6dacf17ab8273e57df185fe24b82320ab5b296fbf74a6c11444d\", \"png_sha256\": \"2c17b7126fe1ce16efe61f46f8517df660bc51524bc6401499c3412089018b12\", \"all_pixels_verified\": true, \"native_command\": [\"C:\\\\Users\\\\fallo\\\\Documents\\\\ChatGPT\\\\Freecad\\\\genewars-preflight\\\\private\\\\build\\\\rust-target\\\\debug\\\\genewars-tools.exe\", \"panel-render\", \"C:\\\\Users\\\\fallo\\\\Documents\\\\ChatGPT\\\\Freecad\\\\genewars-preflight\\\\private\\\\integration\\\\panel\\\\GENEPANL.RNC\", \"C:\\\\Users\\\\fallo\\\\Documents\\\\ChatGPT\\\\Freecad\\\\genewars-preflight\\\\private\\\\integration\\\\panel\\\\MAIN.PAL\", \"C:\\\\Users\\\\fallo\\\\Documents\\\\ChatGPT\\\\Freecad\\\\genewars-preflight\\\\private\\\\integration\\\\panel\\\\panel.bmp\"], \"native_stdout\": {\"width\": 128, \"height\": 480, \"bmp_bytes\": 184374, \"palette\": \"RGB6\", \"transfer\": \"floor(v*255/63)\", \"status\": \"written\"}, \"private_preview\": \"private\\\\integration\\\\panel\\\\panel.png\", \"evidence\": \"Panel draw VA0x24AD0 width128; display init0x1CAA0 binds480rows; MAIN.PAL init chain0x979A0->0xA13F0->0xA6D2C.\", \"display_conversion\": \"Explicit RGB6-to-RGB8 floor(component*255/63). Source channel order is binary-verified; this presentation transfer is not a measured original DAC/monitor response.\", \"scope\": \"Static original UI panel rendering only; no original execution, interactive game, overlay widgets or gameplay parity.\"}\n",
+      "stderr": ""
+    },
+    {
+      "label": "anb_corpus_accounting",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_sprites.py"
+      ],
+      "exit_code": 1,
+      "stdout": "{\"summary\": {\"records\": 263, \"unique_inputs\": 166, \"passed\": 262, \"blocked\": 1, \"packed4_source_records\": 52, \"packed4_unique_inputs\": 26, \"packed4_creature_unique_inputs\": 25, \"packed4_bones_source_records\": 2, \"unique_sprite_records\": 11001}, \"blocked\": [{\"entry_id\": \"root/4/105\", \"reason\": \"ANB sections are not ordered within file bounds\"}]}\n",
+      "stderr": ""
+    },
+    {
+      "label": "independent_creature_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/creature-review.py"
+      ],
+      "exit_code": 1,
+      "stdout": "Checked 1/25 inputs, 114 active streams\nChecked 2/25 inputs, 248 active streams\nChecked 3/25 inputs, 374 active streams\nChecked 4/25 inputs, 497 active streams\nChecked 5/25 inputs, 602 active streams\nChecked 6/25 inputs, 698 active streams\nChecked 7/25 inputs, 793 active streams\nChecked 8/25 inputs, 916 active streams\nChecked 9/25 inputs, 1016 active streams\nChecked 10/25 inputs, 1136 active streams\nChecked 11/25 inputs, 1234 active streams\nChecked 12/25 inputs, 1345 active streams\nChecked 13/25 inputs, 1452 active streams\nChecked 14/25 inputs, 1559 active streams\nChecked 15/25 inputs, 1655 active streams\nChecked 16/25 inputs, 1744 active streams\nChecked 17/25 inputs, 1837 active streams\nChecked 18/25 inputs, 1938 active streams\nChecked 19/25 inputs, 2067 active streams\nChecked 20/25 inputs, 2172 active streams\nChecked 21/25 inputs, 2285 active streams\nChecked 22/25 inputs, 2367 active streams\nChecked 23/25 inputs, 2463 active streams\nChecked 24/25 inputs, 2565 active streams\nChecked 25/25 inputs, 2673 active streams\n",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\research\\variants\\creature-review.py\", line 179, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\research\\variants\\creature-review.py\", line 174, in main\n    OUT.write_text(json.dumps(receipt,indent=2)+'\\n',encoding='utf-8')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\pathlib\\__init__.py\", line 809, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\pathlib\\__init__.py\", line 771, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 22] Invalid argument: 'C:\\\\Users\\\\fallo\\\\Documents\\\\ChatGPT\\\\Freecad\\\\genewars-preflight\\\\research\\\\variants\\\\creature-review.json'\n"
+    },
+    {
+      "label": "independent_bones_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/bones-review.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"summary\": {\"active_records\": 10, \"empty_records\": 1, \"rows\": 378, \"short_rows\": 378, \"overshoot_rows\": 0, \"opaque_pixels\": 3061, \"odd_runs\": 399, \"zero_nibbles\": 0, \"full_native_pixel_mask_comparisons\": 10}}\n",
+      "stderr": ""
+    },
+    {
+      "label": "native_distance_smoke",
+      "command": [
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\genewars-tools.exe",
+        "distance",
+        "0",
+        "0",
+        "3",
+        "4"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"squared_distance\":25,\"variant\":\"cd-candidate\",\"function_va\":\"0x73690\"}\n",
+      "stderr": ""
+    },
+    {
+      "label": "reject_out_of_range_input",
+      "exit_code": 2,
+      "stderr": "coordinates must fit signed 16-bit\n"
+    },
+    {
+      "label": "independent_primitive_review",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/review_checks.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"primitive\": {\n    \"differences_tested\": 65536,\n    \"mismatches\": [],\n    \"max_squared_sum\": 536870912\n  },\n  \"sqrt\": {\n    \"static_model_cases\": 206606,\n    \"mismatches\": 0,\n    \"bsr_bins\": 32,\n    \"seed_bound_failure_bins\": [],\n    \"table_values_exported\": false\n  },\n  \"synthetic_speculative_refill\": [\n    {\n      \"probe_order\": \"symbol_index\",\n      \"matched_symbol\": 1,\n      \"physical_cursor_advance\": 2\n    },\n    {\n      \"probe_order\": \"depth\",\n      \"matched_symbol\": 1,\n      \"physical_cursor_advance\": 0\n    }\n  ],\n  \"candidate\": {\n    \"size\": 1265994,\n    \"sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\",\n    \"git_blob_sha1\": \"cb7ddad872b1c169c8b9657bb83b0e6aa6703c75\",\n    \"upstream_metadata_matches\": [\n      {\n        \"path\": \"bin/gw-genewars-1_0-sep_1996.exe\",\n        \"git_blob_sha1\": \"cb7ddad872b1c169c8b9657bb83b0e6aa6703c75\",\n        \"size\": 1265994\n      }\n    ]\n  },\n  \"variant_metadata_from_preflight\": [\n    {\n      \"variant\": \"repack\",\n      \"sha256\": \"6a8c75b7de5f4e7f27c5378b712e04c24fd106778429f5765c49a641fac90e64\",\n      \"size\": 1265994,\n      \"entry_object\": 1,\n      \"entry_offset\": 618048,\n      \"objects\": [\n        {\n          \"base\": 65536,\n          \"virtual_size\": 911408\n        },\n        {\n          \"base\": 983040,\n          \"virtual_size\": 131\n        },\n        {\n          \"base\": 1048576,\n          \"virtual_size\": 695488\n        },\n        {\n          \"base\": 1769472,\n          \"virtual_size\": 4944\n        }\n      ]\n    },\n    {\n      \"variant\": \"larger_rip\",\n      \"sha256\": \"824bcf84a6bff6f3b98ec8eb94e376b37ee55eb0a2fa1dbbb3d4a3b6f3249d1e\",\n      \"size\": 5184949,\n      \"entry_object\": 1,\n      \"entry_offset\": 730168,\n      \"objects\": [\n        {\n          \"base\": 65536,\n          \"virtual_size\": 965680\n        },\n        {\n          \"base\": 1048576,\n          \"virtual_size\": 300\n        },\n        {\n          \"base\": 1114112,\n          \"virtual_size\": 734704\n        },\n        {\n          \"base\": 1900544,\n          \"virtual_size\": 4944\n        }\n      ]\n    },\n    {\n      \"variant\": \"patch_payload\",\n      \"sha256\": \"2a0a51a5a8170cb7555cc0a745c08ed371c1500503d5cec08d77190d39822a3f\",\n      \"size\": 1251658,\n      \"entry_object\": 1,\n      \"entry_offset\": 653676,\n      \"objects\": [\n        {\n          \"base\": 65536,\n          \"virtual_size\": 911664\n        },\n        {\n          \"base\": 983040,\n          \"virtual_size\": 150\n        },\n        {\n          \"base\": 1048576,\n          \"virtual_size\": 691280\n        },\n        {\n          \"base\": 1769472,\n          \"virtual_size\": 4944\n        }\n      ]\n    },\n    {\n      \"variant\": \"disc_game_tree\",\n      \"sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\",\n      \"size\": 1265994,\n      \"entry_object\": 1,\n      \"entry_offset\": 618048,\n      \"objects\": [\n        {\n          \"base\": 65536,\n          \"virtual_size\": 911408\n        },\n        {\n          \"base\": 983040,\n          \"virtual_size\": 131\n        },\n        {\n          \"base\": 1048576,\n          \"virtual_size\": 695488\n        },\n        {\n          \"base\": 1769472,\n          \"virtual_size\": 4944\n        }\n      ]\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "le_mapping_replay",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/review_loader.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"candidate_sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\",\n  \"format\": \"Linear Executable (LE-Style DOS)\",\n  \"entry_point\": \"0xA6E40\",\n  \"pages_verified\": 244,\n  \"fixup_instances\": 26883,\n  \"unique_fixup_addresses\": 26860,\n  \"cross_object_fixup_instances\": 24497,\n  \"block_checks\": [\n    {\n      \"object\": 1,\n      \"size\": 911408,\n      \"all_bytes_equal\": true,\n      \"mapped_sha256\": \"92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe\"\n    },\n    {\n      \"object\": 2,\n      \"size\": 131,\n      \"all_bytes_equal\": true,\n      \"mapped_sha256\": \"4395b75e2d47f32c5748408417e57a743af95b2e783b828037f5f5d8dbf8c3dd\"\n    },\n    {\n      \"object\": 3,\n      \"size\": 695488,\n      \"all_bytes_equal\": true,\n      \"mapped_sha256\": \"aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87\"\n    },\n    {\n      \"object\": 4,\n      \"size\": 4944,\n      \"all_bytes_equal\": true,\n      \"mapped_sha256\": \"613604a99884153a8f1ee0b74c87f2df5908dbd6a7a22888bebe7b2669880059\"\n    }\n  ],\n  \"all_checks_passed\": true,\n  \"limitations\": [\n    \"Static validation only; original executable never run.\",\n    \"Object2 lacks 32-bit flag; its 16-bit thunk code is not covered by this 32-bit function tranche.\",\n    \"Compiler selection borlandcpp is loader default, not compiler identification; register calling conventions require direct instruction inspection.\",\n    \"Ghidra .image overlay contains original file bytes; exclude it from code-address coordinates.\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "record_and_grid_contracts",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/primitive_contract_checks.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"binary_sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\",\n  \"function_digests\": [\n    {\n      \"address\": \"0x432c0\",\n      \"size\": 124,\n      \"sha256\": \"fd38865ce7d0c49e05cfa4567a7b5285764ef65e5e4905fd8067c8df07a3bf4a\"\n    },\n    {\n      \"address\": \"0x8d580\",\n      \"size\": 106,\n      \"sha256\": \"6cfb48801ee8e6813eb5f614a3e67d412e25f914a07c310225e7a891a2ac0a64\"\n    },\n    {\n      \"address\": \"0x8d5f0\",\n      \"size\": 105,\n      \"sha256\": \"24460497190e3fe63c1a955c3da285a3ffe8010a5414eae7230fb7b9e175ff8a\"\n    }\n  ],\n  \"record_cases\": [\n    {\n      \"name\": \"coincident_default\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": true\n    },\n    {\n      \"name\": \"inclusive_radius_boundary\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        1536,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 2359296,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": true\n    },\n    {\n      \"name\": \"one_beyond_radius_boundary\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        1537,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 2362369,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": false\n    },\n    {\n      \"name\": \"negative_boundary\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        -1536,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 2359296,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": true\n    },\n    {\n      \"name\": \"wrapped_coordinate\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        -32768,\n        -32768\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": true\n    },\n    {\n      \"name\": \"inactive_marker\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 0,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": false\n    },\n    {\n      \"name\": \"high_word_flag_does_not_qualify\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 0,\n      \"kind\": 3,\n      \"ignored_high_flags\": 1,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": false\n    },\n    {\n      \"name\": \"other_flag_bits_ignored\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 254,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": false\n    },\n    {\n      \"name\": \"kind_mismatch\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 2,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": false\n    },\n    {\n      \"name\": \"high_unsigned_threshold\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        16384,\n        16384\n      ],\n      \"radius_byte\": 83,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 536870912,\n      \"wrapped_squared_radius\": 4261478400,\n      \"expected\": true\n    },\n    {\n      \"name\": \"first_square_wrap_false\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        16384,\n        16384\n      ],\n      \"radius_byte\": 84,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 536870912,\n      \"wrapped_squared_radius\": 67371008,\n      \"expected\": false\n    },\n    {\n      \"name\": \"exact_zero_square_wrap_true\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 254,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 0,\n      \"expected\": true\n    },\n    {\n      \"name\": \"exact_zero_square_wrap_false\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        1,\n        0\n      ],\n      \"radius_byte\": 254,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 1,\n      \"wrapped_squared_radius\": 0,\n      \"expected\": false\n    },\n    {\n      \"name\": \"zero_square_wrap_modulo_equivalent\",\n      \"query\": [\n        -1,\n        0\n      ],\n      \"coordinate\": [\n        32767,\n        0\n      ],\n      \"radius_byte\": 254,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 0,\n      \"expected\": true\n    }\n  ],\n  \"grid_cases\": [\n    {\n      \"name\": \"origin\",\n      \"x\": 0,\n      \"y\": 0,\n      \"columns\": 1,\n      \"rows\": 1,\n      \"touched_byte_offsets\": [\n        11\n      ],\n      \"writes\": 1,\n      \"first_offset\": 11,\n      \"last_offset\": 11,\n      \"minimum_slice_len\": 12,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"empty_columns\",\n      \"x\": 0,\n      \"y\": 0,\n      \"columns\": 0,\n      \"rows\": 255,\n      \"touched_byte_offsets\": [],\n      \"writes\": 0,\n      \"first_offset\": null,\n      \"last_offset\": null,\n      \"minimum_slice_len\": 0,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"empty_rows\",\n      \"x\": 0,\n      \"y\": 0,\n      \"columns\": 255,\n      \"rows\": 0,\n      \"touched_byte_offsets\": [],\n      \"writes\": 0,\n      \"first_offset\": null,\n      \"last_offset\": null,\n      \"minimum_slice_len\": 0,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"negative_coords\",\n      \"x\": -1,\n      \"y\": -1,\n      \"columns\": 1,\n      \"rows\": 1,\n      \"touched_byte_offsets\": [\n        229373\n      ],\n      \"writes\": 1,\n      \"first_offset\": 229373,\n      \"last_offset\": 229373,\n      \"minimum_slice_len\": 229374,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"column_spills_into_next_linear_row\",\n      \"x\": 32512,\n      \"y\": 0,\n      \"columns\": 2,\n      \"rows\": 1,\n      \"touched_byte_offsets\": [\n        1789,\n        1803\n      ],\n      \"writes\": 2,\n      \"first_offset\": 1789,\n      \"last_offset\": 1803,\n      \"minimum_slice_len\": 1804,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"y_wraps_to_zero\",\n      \"x\": 0,\n      \"y\": 32512,\n      \"columns\": 1,\n      \"rows\": 2,\n      \"touched_byte_offsets\": [\n        227595,\n        11\n      ],\n      \"writes\": 2,\n      \"first_offset\": 227595,\n      \"last_offset\": 11,\n      \"minimum_slice_len\": 227596,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"last_cell_column_out_of_standard_grid\",\n      \"x\": -1,\n      \"y\": -1,\n      \"columns\": 2,\n      \"rows\": 1,\n      \"touched_byte_offsets\": [\n        229373,\n        229387\n      ],\n      \"writes\": 2,\n      \"first_offset\": 229373,\n      \"last_offset\": 229387,\n      \"minimum_slice_len\": 229388,\n      \"fits_128_square_grid\": false\n    },\n    {\n      \"name\": \"last_cell_three_row_spill\",\n      \"x\": -1,\n      \"y\": -1,\n      \"columns\": 255,\n      \"rows\": 1,\n      \"touched_byte_offsets\": null,\n      \"writes\": 255,\n      \"first_offset\": 229373,\n      \"last_offset\": 232929,\n      \"minimum_slice_len\": 232930,\n      \"fits_128_square_grid\": false\n    }\n  ],\n  \"projection_cases\": 65536,\n  \"projection_mismatches\": 0,\n  \"group_bytes\": 4288,\n  \"original_last_read_exclusive\": 4272,\n  \"object3_fully_addressable_groups\": 66\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "renderer_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_renderer_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS renderer/palette/sprite static receipts, asset hashes, and 4 synthetic pitch cases\n",
+      "stderr": ""
+    },
+    {
+      "label": "custom_ui_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_ui_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS exact CD custom UI binding, 4 sprite/frame states, 256 offset values, 9 selection boundary cases\n",
+      "stderr": ""
+    },
+    {
+      "label": "creature_codec_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_creature_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"private_listing_contracts\": 7, \"admitted_unique_inputs\": 25, \"source_aliases\": 50, \"synthetic_vectors\": 3}\n",
+      "stderr": ""
+    },
+    {
+      "label": "input_packet_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_input_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"listing_contracts\": 6, \"button_vectors\": 8, \"capture_cases\": 2304}\n",
+      "stderr": ""
+    },
+    {
+      "label": "custom_list_storage",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_list_layout.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"listing_contracts\": 4, \"selection_vectors\": 2816, \"capacity\": 10}\n",
+      "stderr": ""
+    },
+    {
+      "label": "config_parser_and_writer",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_config_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"installer_pages\": 232, \"fixups\": 7845, \"listing_contracts\": 9, \"parser_vectors\": 5}\n",
+      "stderr": ""
+    },
+    {
+      "label": "english_install_copy_contract",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_english_install_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS English copy contract: 5 instruction contracts, 3 installer lists, 19 exact CD source/destination records; runtime 604 strings.\n",
+      "stderr": ""
+    },
+    {
+      "label": "font_and_menu_contract",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_font_menu_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS font/menu: 14 listing contracts, 5 exact CD assets, 4 control records, 6 frame components, 604 text entries, 4 centered label widths.\n",
+      "stderr": ""
+    },
+    {
+      "label": "campaign_entry_contract",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_campaign_entry_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS 14 instruction contracts; 96 state-aware plans; 72 exact CD resource identities; first header and level prefix bounds\n",
+      "stderr": ""
+    },
+    {
+      "label": "menu_input_contract",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_menu_input_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS 6 instruction contracts; 25950 direct normal-frame pixel hits; 8192 bounded packet cases; 17 explicit vectors\n",
+      "stderr": ""
+    },
+    {
+      "label": "terrain_contract",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_terrain_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS 12 instruction contracts; 393216 height comparisons; 7 coordinate boundaries; 160 tiles/163840 source bytes; exact first-map field extents\n",
+      "stderr": ""
+    },
+    {
+      "label": "terrain_projection_contract",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_terrain_projection_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS 4 instruction contracts; 307200 alternating-strip vertex comparisons; 8 UV bindings; 262144 shade arithmetic checks; 64 fade rows\n",
+      "stderr": ""
+    },
+    {
+      "label": "independent_terrain_cells_and_heights",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/terrain-review.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed-independent-native-terrain-review\", \"checked_utc\": \"2026-10-13T03:21:10.932847+00:00\", \"original_or_gui_execution\": false, \"real_cells\": 16384, \"raw_cell_bytes\": 229376, \"atlas_tiles\": 160, \"atlas_indices\": 163840, \"atlas_source_coverage\": \"each byte exactly once\", \"real_height_samples\": 475136, \"synthetic_height_samples\": 524288, \"extrema_height_sets\": 8, \"invalid_cases\": [\"Maplength short/long\", \"Cellcoordinate128/usizeMAX\", \"Atlaslength short/long\", \"Tile160/usizeMAX\", \"Interpolationregion short/long\"], \"integer_bound\": {\"max_abs_difference\": 65535, \"max_fraction\": 255, \"max_abs_two_product_sum\": 33422850, \"result_min\": -65536, \"result_max\": 65534}, \"evidence\": {\"path\": \"research/ghidra/terrain-evidence.json\", \"size\": 62278, \"sha256\": \"baf2d7e399f1ab40937cca5771a7fc611b7e15f2d54a4194f3ced1d13e0a21ba\"}, \"limits\": [\"No complete triangle rasterization/shading/camera/frame parity inferred\", \"Map exposes initial serialized fields before runtime normalization\", \"Atlas raw indices assign no transparency; mode5 zero-write remains explicit static evidence\", \"Doubled interpolation result differs from separately rounded vertex projection\"]}\n",
+      "stderr": ""
+    },
+    {
+      "label": "independent_terrain_vertices",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/terrain-vertex-review.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed-independent-native-terrain-vertex-review\", \"checked_utc\": \"2026-10-13T03:21:11.438442+00:00\", \"original_or_gui_execution\": false, \"height_values\": 65536, \"cell_flag_values\": 256, \"orientation_admission_values\": 256, \"strip_vertex_positions\": 154368, \"overflow_boundary_cases\": 6, \"projection_receipt_vectors\": 8, \"formula_scope\": \"Equivalent to7B7F0strip A/B/C/D for explicit unwrappedcells/camera/placement; not7AF00pointprojection\", \"projection_proof\": {\"path\": \"research/ghidra/terrain-projection-evidence.json\", \"size\": 26086, \"sha256\": \"ab41b22be3f0477242854a8b10b97ea84ddd391e34d400c5da60ed4b0121af15\"}, \"limits\": [\"Checked intermediateoverflow rejects deliberate safeport inputs instead of original32bitwrap\", \"No initialcamera or fullraster/clip/shade/opacity behavior inferred\", \"Triangles are firstA,C,B forcellA andsecondB,C,D foradjacentcellB; not two successivecalls ononefixedcell\"]}\n",
+      "stderr": ""
+    },
+    {
+      "label": "independent_campaign_and_menu_controls",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/campaign-menu-review.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed-bounded-independent-native-review\", \"checked_utc\": \"2026-10-13T03:21:13.203599+00:00\", \"original_or_gui_execution\": false, \"campaign_plans\": 96, \"admission_pairs\": 65536, \"packet_cases\": 128000, \"normal_hit_pixels\": 25950, \"normal_opaque\": 18827, \"normal_mask_sha256\": \"a9a7ad36a9255a84d90c9d9e4d70b9a17f3f9b6f7273ac7f1d018d3c6295814e\", \"full_rgb_title_frames\": 2, \"full_rgb_channels_per_frame\": 921600, \"header_bytes\": 699, \"map_prefix_bytes\": 243038, \"map_tail_bytes\": 100920, \"limits\": [\"Progress0..23/system0..3 are safe-port admissions, not original checks or completion policy\", \"Title hit union supports zero component flags; transforms not admitted\", \"Safe complete-row RLE validation stronger than original final-row early-return\", \"Copied mission prefix exposes initial bytes, not post-normalizer live state\", \"No menu input cadence, mission simulation or GUI parity inferred\"]}\n",
+      "stderr": ""
+    },
+    {
+      "label": "bones_codec_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_bones_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"active_records\": 10, \"rows\": 378, \"short_rows\": 378, \"opaque_pixels\": 3061, \"final_stream_end\": 3721, \"listing_contracts\": 7}\n",
+      "stderr": ""
+    },
+    {
+      "label": "construction_debit_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_construction_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"listing_contracts\": 4, \"cost_skill_combinations\": 3584, \"transaction_vectors\": 18}\n",
+      "stderr": ""
+    },
+    {
+      "label": "independent_construction_debit",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/construction-review.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"selector_cases\": 256, \"cost_skill_cases\": 3584, \"transaction_cases\": 3870016, \"receipt_vectors\": 18}\n",
+      "stderr": ""
+    },
+    {
+      "label": "planet_texture_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_planet_texture_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"listing_contracts\": 7, \"tiles\": 56, \"indices_checked\": 622592}\n",
+      "stderr": ""
+    },
+    {
+      "label": "independent_planet_texture_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/planet-texture-review.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"assets\": 4, \"tiles\": 56, \"indices\": 622592, \"opacity_bytes\": 622592, \"opaque\": 378446}\n",
+      "stderr": ""
+    },
+    {
+      "label": "independent_core_controls",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/core-control-review.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"packet_byte_cases\": 1024, \"count_selection_cases\": 65536, \"truncated_lengths\": 2250, \"name_nul_positions\": 340, \"following_field_nuls_rejected\": 10, \"status\": \"passed\"}\n",
+      "stderr": ""
+    },
+    {
+      "label": "windows_dependency_receipt",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/windows-dependency-review.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"archive-and-source-checks-passed\", \"registry_packages\": 24, \"new_backend_closure_packages\": 17, \"license_payload_gaps\": [\"winapi-x86_64-pc-windows-gnu 0.4.0\"]}\n",
+      "stderr": ""
+    },
+    {
+      "label": "sprite_exception_assessment",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/assess_sprite_exceptions.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS BONES rejected-indexed8 diagnostic retained; packed4 admission is separate; GPF remains blocked\n",
+      "stderr": ""
+    },
+    {
+      "label": "native_window_smoke",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/desktop/smoke.py",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\GENEPANL.RNC",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\MAIN.PAL",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\native-smoke-1acb3bdf8bd04e82a2192738d331b9d1.json",
+        "--frames",
+        "3"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"presented_frames\":3,\"exit_reason\":\"frame_limit\"}\n",
+      "stderr": "warning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_assets-0ahcomsp8crgl\\s-hn5toug3xl-1ih3xzc-working`\n\nwarning: `genewars-assets` (lib) generated 1 warning\n   Compiling genewars-desktop v0.1.0 (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\\crates\\genewars-desktop)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.55s\n     Running `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\genewars-desktop.exe panel C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\GENEPANL.RNC C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\MAIN.PAL --frames 3 --report C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\native-smoke-1acb3bdf8bd04e82a2192738d331b9d1.json`\n"
+    },
+    {
+      "label": "native_controls_build",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/cargo.py",
+        "build",
+        "-p",
+        "genewars-desktop",
+        "--bin",
+        "genewars-controls",
+        "--offline",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_assets-0ahcomsp8crgl\\s-hn5toug3xl-1ih3xzc-working`\n\nwarning: `genewars-assets` (lib) generated 1 warning\n   Compiling genewars-desktop v0.1.0 (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\\crates\\genewars-desktop)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.98s\n"
+    },
+    {
+      "label": "native_controls_smoke",
+      "command": [
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\genewars-controls.exe",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\rnc-decoded\\1f69d8bca8bed9d9e15ee1cc79e0ce0856bb4cb6d7e3791e704b31d02b0006b4.bin",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\MAIN.PAL",
+        "--frames",
+        "3",
+        "--report",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\controls-smoke-81cd51f8604c4165a33a76513508c157.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"presented_frames\":3,\"packet_updates\":3,\"host_update_hz\":60,\"exit_reason\":\"frame_limit\",\"activated_control_ids\":[],\"mouse_transitions\":[],\"packet_trace\":[],\"omitted_mouse_transitions\":0,\"omitted_packet_records\":0,\"omitted_activation_ids\":0}\n",
+      "stderr": ""
+    },
+    {
+      "label": "native_menu_build",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/cargo.py",
+        "build",
+        "-p",
+        "genewars-desktop",
+        "--bin",
+        "genewars-menu",
+        "--offline",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_assets-0ahcomsp8crgl\\s-hn5toug3xl-1ih3xzc-working`\n\nwarning: `genewars-assets` (lib) generated 1 warning\n   Compiling genewars-desktop v0.1.0 (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\\crates\\genewars-desktop)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.06s\n"
+    },
+    {
+      "label": "native_menu_render_and_window",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/render_menu.py",
+        "--frames",
+        "3"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"native_report\": {\"width\": 640, \"height\": 480, \"layout\": \"three_button_normal\", \"text_entries\": 604, \"text_consumed_bytes\": 36609, \"text_trailing_bytes\": 1, \"presented_frames\": 3, \"exit_reason\": \"frame_limit\", \"activation_requests\": [], \"input_updates\": 0, \"scene_dispatch\": false, \"gameplay\": false}, \"private_preview\": \"private/integration/menu/menu-117c322e691647318b8931f0ccf261a1.png\", \"rgb_sha256\": \"49d107894bd481bdd9bee30fa89bf68a307b85eccad3e67419d20cbd79a1959f\"}\n",
+      "stderr": ""
+    },
+    {
+      "label": "independent_font_and_menu_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/font-menu-review.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"fonts\": 7, \"glyphs\": 1190, \"indices\": 142315, \"opaque\": 65162, \"menu_pixels\": 307200, \"menu_channels\": 921600}\n",
+      "stderr": ""
+    }
+  ],
+  "private_files_checked": 39284,
+  "baseline_sha256": {
+    "game-files-manifest.json": "6139f4083031cee88bc04849f1959ae1e43aff41eef7c87cb4a62bc8b86e9e6a",
+    "variant-comparison.json": "fa63d42693a0157fa3937255237290b84d3cf6a5f4df93cd5010c66847f9588d"
+  },
+  "source_archive_sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906",
+  "scope": "Rust/parser/static checks, real panel rendering, native asset/control-window presentation and dated-preflight preservation. Strict metadata bounds and separate hash-bound packed4 creature/BONES admissions supersede the unsafe full-file sprite result. One GPF ANB record remains unresolved. The earlier 12 checks are historical evidence; no broad re-extraction was performed. This verifier does not execute original programs; separately approved reference observations and supervised native-input tests have their own receipts. No gameplay parity or playable game is claimed here."
+}

@@ -1,0 +1,781 @@
+{
+  "status": "passed-independent-native-terrain-review",
+  "checked_utc": "2026-10-13T03:26:13.589470+00:00",
+  "original_or_gui_execution": false,
+  "real_cells": 16384,
+  "raw_cell_bytes": 229376,
+  "atlas_tiles": 160,
+  "atlas_indices": 163840,
+  "atlas_source_coverage": "each byte exactly once",
+  "real_height_samples": 475136,
+  "synthetic_height_samples": 524288,
+  "extrema_height_sets": 8,
+  "tile_hashes": [
+    {
+      "tile": 0,
+      "sha256": "3c27f2e3b05dc34526716c53a87accd7f1e9ee0d068743eef4847747d13c999f"
+    },
+    {
+      "tile": 1,
+      "sha256": "f8cebb8d6750f9b6597ac2022b2cddf001e7df25ad8d4993d0c8daa589134dd6"
+    },
+    {
+      "tile": 2,
+      "sha256": "0c05e6ae820285bf8b7b6e866cfed4c3475b0923a183870b295c9655b0c31f18"
+    },
+    {
+      "tile": 3,
+      "sha256": "e0b7058a9ed00141a9978f481390e4f71e49401080b15a492a3e79e619ed4f17"
+    },
+    {
+      "tile": 4,
+      "sha256": "87cabb90d6055627374ff0334e31421857bf0b39520a6603b64bc88d46400cf4"
+    },
+    {
+      "tile": 5,
+      "sha256": "4075b228772439dc940d40b7df99fb21650724bdf4794bc4c74f2451d855c89e"
+    },
+    {
+      "tile": 6,
+      "sha256": "e1dd89bd141042bab5ac7dd10d894d6da529e8cdf999dd8a8274f7e3a773bc12"
+    },
+    {
+      "tile": 7,
+      "sha256": "a0543810ccef6892d6a4bc73572d32c2ed9c2495528009dd0699ef8ca767d5ca"
+    },
+    {
+      "tile": 8,
+      "sha256": "1f14e09443710f506206b3ea3e8b890dc904a9aa78e17dae0beca497fe399f41"
+    },
+    {
+      "tile": 9,
+      "sha256": "487aca2ebe96f5e29baaaff3a90f63fbc5e55def753708953bfc0ebcb238143c"
+    },
+    {
+      "tile": 10,
+      "sha256": "4cb44dd880eecac3d1c105da110aacc6612bb4affa09da7bbdf48ef44933f15b"
+    },
+    {
+      "tile": 11,
+      "sha256": "c8dda06639fed643aec46b5c6f972bb4801a97e7bb2d746adb45401de7c4cb6b"
+    },
+    {
+      "tile": 12,
+      "sha256": "3d808d9dbc5ce387c86e551e4fc4dbe625d37211f109d615e3fa3fb90b453f31"
+    },
+    {
+      "tile": 13,
+      "sha256": "27c6528b1eaa35b3af2711ae6e47cd52c927d400b6df3c347e658e9d1a595892"
+    },
+    {
+      "tile": 14,
+      "sha256": "d2dd390d49c1b6a6304f5aa6f78df062bb4ad9c5b30c92cb4842f5542711e9dd"
+    },
+    {
+      "tile": 15,
+      "sha256": "2e2b5845864d72afad697d4e5dcfcb603622799165fa63c8c011f0051a06ad40"
+    },
+    {
+      "tile": 16,
+      "sha256": "e77c00c80743eafa6279283ecfb8e7f9b52df12bcfc092d4f95b26e5ed54267c"
+    },
+    {
+      "tile": 17,
+      "sha256": "2f8f1d7d5b96aa58f78e72519b3eb3ef61cb5cc7302ad72753b6ac6c298d4b1b"
+    },
+    {
+      "tile": 18,
+      "sha256": "ecacd6f61d92a09fa9c0f5ec81f5167fb488dde71e8fddebd2f13f2eb1f53036"
+    },
+    {
+      "tile": 19,
+      "sha256": "da91670ba40900d40766f8bcca62b9286fe284959acb8881046f006f57be4f4f"
+    },
+    {
+      "tile": 20,
+      "sha256": "d6d3862a73e934f9ee3fcd27cd9aea5dcf79b3f9bfdb15d472e01c68174c8187"
+    },
+    {
+      "tile": 21,
+      "sha256": "e8c63d84b6233536b7780ae026f4e2f1369bfab344684c8eebad5cddf15bdab1"
+    },
+    {
+      "tile": 22,
+      "sha256": "c290b01f69d53b06be68eaffa797eb683297708322134c8a76b5e4a718a3d6b4"
+    },
+    {
+      "tile": 23,
+      "sha256": "887e3ca214f7e181ecba65aa0b19ad941ca1ea9a9104769a2edad4173ea54291"
+    },
+    {
+      "tile": 24,
+      "sha256": "15e1e300e78379cc1ece73cb28bb5b529b98940fcdbac269bf917c40e2275e3d"
+    },
+    {
+      "tile": 25,
+      "sha256": "d7af0375a6021d6df779be204ffa05f1aff3809353156fb80a7aa9fe438a0a8a"
+    },
+    {
+      "tile": 26,
+      "sha256": "2140060753a026c0ef3df44b0061c3ebec5ad5a44760c69786316f14515b773b"
+    },
+    {
+      "tile": 27,
+      "sha256": "727c1712cf576b4f37d3e71107d52d4e60baed3d97389f42f87a13715c30a1ba"
+    },
+    {
+      "tile": 28,
+      "sha256": "703a71b496e85f126c71b9c9a31878653b0a4260511cf77254a62b2b0b053fad"
+    },
+    {
+      "tile": 29,
+      "sha256": "3fe24e40e16c7f0ae526e903406e403aa75ed8a52c59bf5fdf673b6e16680adc"
+    },
+    {
+      "tile": 30,
+      "sha256": "29b86e7f5aafd8714a4c99b93297ebbfd88a661e93a7dac7c2401fb59fc2ac16"
+    },
+    {
+      "tile": 31,
+      "sha256": "3d0392a83495b2593faf06345c9b929b3b1aa43430207d8337acfbf63633da46"
+    },
+    {
+      "tile": 32,
+      "sha256": "19e73fe12227d09fb262e42004d1626986454ac5d03c923395b97c12d318906f"
+    },
+    {
+      "tile": 33,
+      "sha256": "dd5c18afd6a4c7b146ea4e9dc891e0ebb3868e32b159fd68e4184b6e928be53c"
+    },
+    {
+      "tile": 34,
+      "sha256": "8cba6a0aa74056eba2370a658e877db2eb9d9314a9da55b18c61eb5e97939356"
+    },
+    {
+      "tile": 35,
+      "sha256": "68270b1e0d49c0e51c784710b72d7e1b555b2432a7a23991e6571ed83af696f7"
+    },
+    {
+      "tile": 36,
+      "sha256": "8a1fa2638468dd549842f9b155db247ac0be13477565ab06de8a448e76a74b6c"
+    },
+    {
+      "tile": 37,
+      "sha256": "be735f3973a9755e3b115bdbfb8b6f5c6771ae00cdbcaa2e3201b99d003d423a"
+    },
+    {
+      "tile": 38,
+      "sha256": "ffe896e7eb61958606575ba835fccfa3ed8f27fb8ee437c791ca3dec0e39db1b"
+    },
+    {
+      "tile": 39,
+      "sha256": "1788015ede624ac6f3b8e400451a4086eace8f7dcc9748214cdfe6b1850b7015"
+    },
+    {
+      "tile": 40,
+      "sha256": "7d97b5ff1f79638c21dad591351bf7e2d27d3f90bbaf1ae4d5ff28b45ee42f3e"
+    },
+    {
+      "tile": 41,
+      "sha256": "cfc4fc66fe371d8ae90de912adff0779e7ccfbe23b9c45fc9949320ee20672cd"
+    },
+    {
+      "tile": 42,
+      "sha256": "5a6089c7a2a67303ce42521bb70262fa24cf2f335cfb5c0f4f282c458097abbd"
+    },
+    {
+      "tile": 43,
+      "sha256": "ccbd9eecb878ed29ca58822c4a5dfc2fb2b5d8c1d8e98bdd7ca2dd8cf2b34344"
+    },
+    {
+      "tile": 44,
+      "sha256": "01198249b2909526a0de31e83192a83e01bb4720b969f50a5f393eea79f58d4e"
+    },
+    {
+      "tile": 45,
+      "sha256": "df63e032093bc2c86441020fe1bac82f2637cd54606e17b1d2770c2c81ac8d07"
+    },
+    {
+      "tile": 46,
+      "sha256": "fca61e443865cecaf04c6a5d3b0d90009317928dedbc951df81257917110dc51"
+    },
+    {
+      "tile": 47,
+      "sha256": "006c6d3e810bb1f418910a4831d2278099aa9e1e61c2a0b37142357c9957fe6d"
+    },
+    {
+      "tile": 48,
+      "sha256": "156e8d7448fc41d856b6f99ad4672abb1ec8dc32873457e27681a029eaee2e21"
+    },
+    {
+      "tile": 49,
+      "sha256": "1af08d8eed27c0e54edfbed471d8fb5242649e2c9698e7c79e42d370847dd534"
+    },
+    {
+      "tile": 50,
+      "sha256": "7c9c29d07635781a9ed7d7273b0399a154b700f9a2b501100d5694184fdc529f"
+    },
+    {
+      "tile": 51,
+      "sha256": "e31c35f072853c0b6c7a95bb1427203617053ebe1904f62f93091800a176ec15"
+    },
+    {
+      "tile": 52,
+      "sha256": "6475dca2a285fd1d1e30d48cec035a8116c8266d3d64c8f5d2288b026dd3c342"
+    },
+    {
+      "tile": 53,
+      "sha256": "50ee35eea0a0e78b6fc5af8d5a20ba784c6ed2166734fd2b1d46fec79e051fec"
+    },
+    {
+      "tile": 54,
+      "sha256": "c8141043ebd33caabbc2ed065fb70f3235dd39beff80c879033475b9067e1d0a"
+    },
+    {
+      "tile": 55,
+      "sha256": "701209b6f9fa125d8fea43b36e26947df39637a203c59c2b946df0450c02e7c4"
+    },
+    {
+      "tile": 56,
+      "sha256": "e36fb1ba43a7805d346d0770716bdc11d11e7a0dfe8e10d97ff6e86cdfecce97"
+    },
+    {
+      "tile": 57,
+      "sha256": "50f8d3c23b279dd8c62bf3b093082686a369d2eca7b337783117a6383fc556dd"
+    },
+    {
+      "tile": 58,
+      "sha256": "5c082fc92b9e90a4e272a05443101689244d8df93614c2d729c092ffae968f66"
+    },
+    {
+      "tile": 59,
+      "sha256": "571df6671da615d185519ea74fc39116612f5509071e466e3087274934f2bc52"
+    },
+    {
+      "tile": 60,
+      "sha256": "b844d43609ca5c3a1c0a88dd28ba45ae260ed1159c885718363097813c672cd5"
+    },
+    {
+      "tile": 61,
+      "sha256": "de877530216b354ac8fd79fbb62b969a201a89d5b5a076c98772fac0c6e44975"
+    },
+    {
+      "tile": 62,
+      "sha256": "77cab28c0a1e4d5e7472e3ac99bf863093870997a6b40747b91125a6814e9d5a"
+    },
+    {
+      "tile": 63,
+      "sha256": "ddd6f481137cea6e05af2e49376bdb44fa3400141d659b6e17caf8255d02f18a"
+    },
+    {
+      "tile": 64,
+      "sha256": "8e681ea4d933768d50285da9cc8363951769a7851ebda50bbd8c6cffdbf155ec"
+    },
+    {
+      "tile": 65,
+      "sha256": "a4cd0cce7d5e0c7596218be86dcd62f4fe889682915bf53c2e4e8417ec03b7d0"
+    },
+    {
+      "tile": 66,
+      "sha256": "93e83c9ff7e68800203a221f730387ea36d62e89a21381b5e6ca32336df3b4ec"
+    },
+    {
+      "tile": 67,
+      "sha256": "973481c1e5a17998bad4eb3f060997f256cbe89ee5671fd8303d325b98af50a8"
+    },
+    {
+      "tile": 68,
+      "sha256": "c276bfc2a0e5e3914fe2bc1ba77450edd011e25e485791adc4e83d5afbc679ff"
+    },
+    {
+      "tile": 69,
+      "sha256": "4e84b15ee9fb7fc94dacb28002815d6fdb5d4198d2acb94c2bd9679b55148423"
+    },
+    {
+      "tile": 70,
+      "sha256": "7bb5f53168afa4a7ce50239aaf7c5ef9d20c183c46dae0d2f86da954ae00dfc6"
+    },
+    {
+      "tile": 71,
+      "sha256": "8740cdc48cea715700d0d6508604cc53f3e2e90ece0eb650f305db44f23e33b3"
+    },
+    {
+      "tile": 72,
+      "sha256": "89eaeeaa9dc9d130f84c7035d49896343952332281dd190dc879247bd0a9b520"
+    },
+    {
+      "tile": 73,
+      "sha256": "aebf5671675047fce836c2dfdb18e3bc6f0d6174bbfc94127d603ecfe654c204"
+    },
+    {
+      "tile": 74,
+      "sha256": "357aa8aabbdd7c44252665bac8b6ac465b7c3c862b09409ead56239464e39298"
+    },
+    {
+      "tile": 75,
+      "sha256": "f9711d5f126f27e805c66996990cfb6ddf7bdb57e7cbd8d8231c2d390acdfb0b"
+    },
+    {
+      "tile": 76,
+      "sha256": "c55ada890f84e42a23780a14aae0f937b42e37bd380d58399515c110814421ac"
+    },
+    {
+      "tile": 77,
+      "sha256": "0b27b73be47cb2286801725e0b42072a6b5561f41b81ebc5b26baa42d954d260"
+    },
+    {
+      "tile": 78,
+      "sha256": "f5647d2f1dadd36c48041067e6f690636cfc43e7ea26d3dee0739f9c67211ee9"
+    },
+    {
+      "tile": 79,
+      "sha256": "1ee037caff8377d8720840aafebc077b5dcfc54ebc0e6f7f1723512cabdaf072"
+    },
+    {
+      "tile": 80,
+      "sha256": "f0a31f571b2b42e45c274fcd45a9ef5b1702af0a2ae3efdb9f8fb7ac350445c4"
+    },
+    {
+      "tile": 81,
+      "sha256": "4f7c266f2f16cd74225754fd9d1f93b9ae9d7bd73be20d0a38fbb490939bd839"
+    },
+    {
+      "tile": 82,
+      "sha256": "d9d9fb51dc477b1307e2961e2295c5881990e24c86669fba5adb8478a69d7ef8"
+    },
+    {
+      "tile": 83,
+      "sha256": "e163a96d6108941909508ebac008d14a562e5ed2b2c39deef97c3dcc341712db"
+    },
+    {
+      "tile": 84,
+      "sha256": "5f07fe8fb598cb12b8742dc2d036742b9f9e58d58c80192c26924f88fbd5ab9e"
+    },
+    {
+      "tile": 85,
+      "sha256": "7579e133c7e6c6f349bcdb17aa9fd9abc41bb1bd3e27e15b9eea6ebf9b97353e"
+    },
+    {
+      "tile": 86,
+      "sha256": "57fdabb441be79fcab7ff89a08071d2be2be3912ec28905f7321ffa477601e43"
+    },
+    {
+      "tile": 87,
+      "sha256": "ffd492ca79a2b6dab6ea6d283a9dcb6eb7a7386b5d9b2ae8ef6bfd0370bebe91"
+    },
+    {
+      "tile": 88,
+      "sha256": "ac9501ae88635cb91d0b451fbe80468f81697a4a4a9c04d4c1149fe822bace85"
+    },
+    {
+      "tile": 89,
+      "sha256": "e88a327438348221cb8e7705c057aafe8aa2ee4c5ecb050307cf6716d013a837"
+    },
+    {
+      "tile": 90,
+      "sha256": "1a086703bf2238604fdb23d7cc0134c74929f741f88b368c0ceeb5ec7939c7fd"
+    },
+    {
+      "tile": 91,
+      "sha256": "300b3cc313893f525965e6f84bcbac9df98aa24e8e6db5ba588a413224829c7f"
+    },
+    {
+      "tile": 92,
+      "sha256": "2a3de3178133d94a4788ed221629a7b14d8e2ef03ec3773ab6618a55fa46b4b5"
+    },
+    {
+      "tile": 93,
+      "sha256": "ded09bf7caac144391998ed57358825619702594a78de34828bc3e7ffb9ad997"
+    },
+    {
+      "tile": 94,
+      "sha256": "15c81f1b12df2060b55a8f971dd3c6d2f217b2567a99ca4e6a2d281beb3eef84"
+    },
+    {
+      "tile": 95,
+      "sha256": "631ca26075f732eb25e1aa290a45c6c8400aa68013e0bbb4912528da0d167f0f"
+    },
+    {
+      "tile": 96,
+      "sha256": "3e5501016422678f5f5e2c33ebe984d2010a045a73bb6884e95c37b6c5676180"
+    },
+    {
+      "tile": 97,
+      "sha256": "6a0c78dbe6d73690310d4c04f4e8649c453a850af364d56645d7d6e8cd197ac8"
+    },
+    {
+      "tile": 98,
+      "sha256": "ab351c1bbec78f9c032dc6af619865fae387764e419265cc8450de202677d20e"
+    },
+    {
+      "tile": 99,
+      "sha256": "e2d3e63fc287f33c5c85daf4bd0640463882ef5099df09d8979cefb7a413fecc"
+    },
+    {
+      "tile": 100,
+      "sha256": "4e125d19bef7cd1d6f11e8e6559ef48c183a79c022a9edf0a132b1dd949bb134"
+    },
+    {
+      "tile": 101,
+      "sha256": "43f3fc43cfbda76c0d7d13d2e65a8dc1b228a2336a05996239d0de73f642277c"
+    },
+    {
+      "tile": 102,
+      "sha256": "1a275c2272ba5a887f96c4ce017461f9f6fea90f6f6aaaaf783b60e3cc45f181"
+    },
+    {
+      "tile": 103,
+      "sha256": "7fc91dfe2bab7d7961222777e0703d7dea6c598476d5782a60746e9d375aa9ac"
+    },
+    {
+      "tile": 104,
+      "sha256": "14e7990b8621f988f64fed9f2161c38578b0689dce463765964c1ba5b63dca4a"
+    },
+    {
+      "tile": 105,
+      "sha256": "c0a12c1d1139754e31e4bb96533aec69451d46d45071e732f43498aedebab5ed"
+    },
+    {
+      "tile": 106,
+      "sha256": "a80ccf4765cdb8eaf75976137eb8c54f16f287e9fdcd91e5f8c95a37e90ffe8f"
+    },
+    {
+      "tile": 107,
+      "sha256": "44a3a94bfe88868233813f33928d3d9008b3ea36dbb0e1e1d212c3ef35461619"
+    },
+    {
+      "tile": 108,
+      "sha256": "105b8440227e3948efb0a8bdbe0f1ef2294504a7020d77ac28cd904085616fb7"
+    },
+    {
+      "tile": 109,
+      "sha256": "421d1d5c41d0bc4aaad42e56b710f0c6371c89c277e22e706e3e994d38359171"
+    },
+    {
+      "tile": 110,
+      "sha256": "889138648207f7b6c77ee2f177ee4d8c4eb8f1003e2a849b12852038892ba92e"
+    },
+    {
+      "tile": 111,
+      "sha256": "77b99a6e23d8a204859f66d1b1cec5abcb76eac1baaeade20977a57119baddc7"
+    },
+    {
+      "tile": 112,
+      "sha256": "47018df8b8f70fe75740bda667370e222f11fc6398965d676601ed4ad0f521ec"
+    },
+    {
+      "tile": 113,
+      "sha256": "4ba1612ba5cfcee3ef17b06e6aa72dac75ac14527991d4e2e3cf9e6d1ee3e8dc"
+    },
+    {
+      "tile": 114,
+      "sha256": "ce1d6b7d18fb2f87ddf9edea570a8094babe4b27c38e33222f290af973952e75"
+    },
+    {
+      "tile": 115,
+      "sha256": "8d87e1b3ac0acb92a475e07c3e4e3879ff9eaa6b8cd1d036cc24a2764f398e28"
+    },
+    {
+      "tile": 116,
+      "sha256": "393e5e08a2d9d7ec2e90cc5a04d5f280a2e7522be8e3b689d99c084ad211eba2"
+    },
+    {
+      "tile": 117,
+      "sha256": "7f981dc5c2c296a470ba59e5e1eb75379e46dfb69ed7aa8217d980cfe4243242"
+    },
+    {
+      "tile": 118,
+      "sha256": "663ab3d59a8f3953e578b250f8a19624278c08e9a037670ec380bfb07f7f42e3"
+    },
+    {
+      "tile": 119,
+      "sha256": "16f30ca58aa81aeef76f329bbc1ea434f3b52872910e4ce057ea1449f7821945"
+    },
+    {
+      "tile": 120,
+      "sha256": "47c6058b5e3246ba07a971b0245bceb016e48161d55a1c47de8b29862fbe21a6"
+    },
+    {
+      "tile": 121,
+      "sha256": "2878f8f754fb319e3bb81bf6a43c807b3ba3629fbc27cf374b684e672bb61b07"
+    },
+    {
+      "tile": 122,
+      "sha256": "88f73add1a95af039a5fd436a55ef9c152666ee763adb4f2018d9db28aca7e12"
+    },
+    {
+      "tile": 123,
+      "sha256": "3d5be74e11e9a8e64dc9e496b2a7ef5a624753e853b5ee1b05e80545b7b13e74"
+    },
+    {
+      "tile": 124,
+      "sha256": "ff60a663304136c811c8bb0f585d8e7a98dd1e16cb5c4c4e7f6e6bc23336c74f"
+    },
+    {
+      "tile": 125,
+      "sha256": "64a9bd8599e70858c3bf91987a6fba07ecd75993abda24cd834b2129542ffd69"
+    },
+    {
+      "tile": 126,
+      "sha256": "18c759257a6e904bdc813883b19c61be6698698e73f8f4c7cb90578f00f440b6"
+    },
+    {
+      "tile": 127,
+      "sha256": "6c569ea386d225db50e550d59b08cb2568ad7b08a5806e431fcd6042adcdebc3"
+    },
+    {
+      "tile": 128,
+      "sha256": "6bd65e5889c7ae5e3f75deeb9b57225e68973411d9d6ebe734bb348c6a180c14"
+    },
+    {
+      "tile": 129,
+      "sha256": "54bda5e3e29b3945e50ed33c75f22bfcae4ba99d39646ba5df9744217ec2bd31"
+    },
+    {
+      "tile": 130,
+      "sha256": "cfe9dcc6971c95b10f69b25d61cfa301bfd9ae785cf4b9b7b42c4ec0612d393f"
+    },
+    {
+      "tile": 131,
+      "sha256": "a80677aa964a8e8a86d2c717cd19f1ed5d922a07708e71f55f297a6140bb18c2"
+    },
+    {
+      "tile": 132,
+      "sha256": "6ed31b7882d3bebccecb0453036a2f451c121c3d5c6f6abf8f5bcf126b55de0b"
+    },
+    {
+      "tile": 133,
+      "sha256": "d8ba42cdbe21a7e3c6c432295a4de5d006ef5ac2befabd640f988f8efc5f4707"
+    },
+    {
+      "tile": 134,
+      "sha256": "d91b2598336b63bb2c892e578f55daf1db378b30dd90ba23b7f900c56cab252f"
+    },
+    {
+      "tile": 135,
+      "sha256": "762dbf14a2604af2edbad7394436608a06c542ca158e21689c032e4153c1e46c"
+    },
+    {
+      "tile": 136,
+      "sha256": "89f468332bed29a4d4ed3485744d13032bf0a6bf0cc50c3468b2e2124e6817b7"
+    },
+    {
+      "tile": 137,
+      "sha256": "ae84c250f20d056c835b3b9ee6e9c1cbe2cbb0eb12557c8cc6896c42d410b48f"
+    },
+    {
+      "tile": 138,
+      "sha256": "6f448a0b37f5a6372bef4309d1cb95dcbab5db2f25dd2a417de555da55c840f6"
+    },
+    {
+      "tile": 139,
+      "sha256": "1850c0b67883ef5c447f99ffcbce8f2d5920c7bf299f2c1432ba78bb84c9a0f8"
+    },
+    {
+      "tile": 140,
+      "sha256": "2bf3331244383afd2df00e14a5eb71031e32f83c65ff476d6855c29c1890910b"
+    },
+    {
+      "tile": 141,
+      "sha256": "bb7007aae06fe0acff9262eda1315cc6200820c4775f69f45c35c552e06afc89"
+    },
+    {
+      "tile": 142,
+      "sha256": "c0319923e1a9369be6bfb6f6cd9e1afdd330a3280517535eba08b628a1370ef0"
+    },
+    {
+      "tile": 143,
+      "sha256": "0d1af05bd7e34c01024532acb404f28a3ffe083156776084ac0322bbef252bfe"
+    },
+    {
+      "tile": 144,
+      "sha256": "812e9db18e04439046a71139fe3a017cd4d06b0668985f76c8cbbe7c0556dd89"
+    },
+    {
+      "tile": 145,
+      "sha256": "2ffa2812ed9ba0e66c24b853df272d509424ed5e267c5ebc66db9c49a6d146b8"
+    },
+    {
+      "tile": 146,
+      "sha256": "b443606344e4fd5d485539c2ea02ad714bb4274e1bea4453306dd7ec47c7f598"
+    },
+    {
+      "tile": 147,
+      "sha256": "236a8483f11edbe53395371683f3854c41482ee7a6f32b467af364f69d4ec711"
+    },
+    {
+      "tile": 148,
+      "sha256": "1b173135fa57122f4ad249839127fa1d628b7c2a80268d47a7255d5823360560"
+    },
+    {
+      "tile": 149,
+      "sha256": "17632e6b745eb7a3a2afa56984d03d872a66fa000d49dc544adef691aae954f8"
+    },
+    {
+      "tile": 150,
+      "sha256": "589b3dd05ae84a4723e95ff6a58787ef61fbad19758d676a2759508af310ea52"
+    },
+    {
+      "tile": 151,
+      "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+    },
+    {
+      "tile": 152,
+      "sha256": "438b92f2c75882fe475666adf9482962bf0589dfb1261e7bff60d78c50318291"
+    },
+    {
+      "tile": 153,
+      "sha256": "9b9152b8e12d94581e21750657572e315af36ce9d34b74e132890d418a986e14"
+    },
+    {
+      "tile": 154,
+      "sha256": "6ed1a8dbe98661bb949130ff9d025389486090abf1920162a130a1c4620b810d"
+    },
+    {
+      "tile": 155,
+      "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+    },
+    {
+      "tile": 156,
+      "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+    },
+    {
+      "tile": 157,
+      "sha256": "1c3599b8cc268af68dc9f30bcd8ae5abb29a31dbb2f1151aaaac67756977a8e0"
+    },
+    {
+      "tile": 158,
+      "sha256": "e2c435ae1465e6c0c03aaa1bac8e4c7c4a5a82183681677262fa392c3eab2e2a"
+    },
+    {
+      "tile": 159,
+      "sha256": "44d80de0cd063eef9edc6527862b56f204c9440a7869945781c2dfd54af384be"
+    }
+  ],
+  "invalid_cases": [
+    "Maplength short/long",
+    "Cellcoordinate128/usizeMAX",
+    "Atlaslength short/long",
+    "Tile160/usizeMAX",
+    "Interpolationregion short/long"
+  ],
+  "integer_bound": {
+    "max_abs_difference": 65535,
+    "max_fraction": 255,
+    "max_abs_two_product_sum": 33422850,
+    "result_min": -65536,
+    "result_max": 65534
+  },
+  "evidence": {
+    "path": "research/ghidra/terrain-evidence.json",
+    "size": 62278,
+    "sha256": "baf2d7e399f1ab40937cca5771a7fc611b7e15f2d54a4194f3ced1d13e0a21ba"
+  },
+  "private_listings": [
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-00074cc0.txt",
+      "size": 1714,
+      "sha256": "701ba3601cd73db82d86a57d1502d53d6ad2a8d5910833c28f6e89784bcf542b"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0007b140.txt",
+      "size": 2292,
+      "sha256": "aef70bf9859bc9c21d01f697528a266d30ef1961e47d9697f762f7c74be7a2f4"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008c860.txt",
+      "size": 1392,
+      "sha256": "a72f170c244c1f31c50704c1b4894ed87609e3b2c687d3ea3a9fae44d42143b6"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0007b7f0.txt",
+      "size": 14310,
+      "sha256": "26769c153064fd73cf9b69c2affe127a2e9ad5f0ff76596d7610e7742b932d25"
+    },
+    {
+      "path": "private/ghidra/terrain-render-refs/instructions-0001d770.txt",
+      "size": 17969,
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    },
+    {
+      "path": "private/ghidra/terrain-constructor/instructions-0008db90.txt",
+      "size": 4282,
+      "sha256": "b68c2cedc7bf7904a58293c448423f5408f65061548769d78245f5961f0a7c8c"
+    },
+    {
+      "path": "private/ghidra/terrain-camera-init/instructions-000402e0.txt",
+      "size": 380,
+      "sha256": "aa96ec091284a4c5da028ab02399c93efb38df0c26cdf0d984bfedcba5e9bbdd"
+    },
+    {
+      "path": "private/ghidra/terrain-runtime/instructions-000a76d0.txt",
+      "size": 778,
+      "sha256": "d2b755d867098ab1bae9f373d3a41f7114f5da42f8cc4063c5591f91dd6d9f78"
+    },
+    {
+      "path": "private/ghidra/terrain-runtime/instructions-000159f0.txt",
+      "size": 53,
+      "sha256": "6f18856cd4541e99df78fdc00748dcdace75d950d8f6c3fde2547b0f93cd1d96"
+    },
+    {
+      "path": "private/ghidra/terrain-runtime/instructions-0002f870.txt",
+      "size": 98,
+      "sha256": "cd31755ee12ed5f8636719fd5dd5d98dfdd795d9e78fb7b180d7df9187ab8047"
+    },
+    {
+      "path": "private/ghidra/terrain-mode5.txt",
+      "size": 6934,
+      "sha256": "bc73059ae3b302a185735a2b82c76f40346cf7feaae33da71749a77450fbaaf9"
+    },
+    {
+      "path": "private/ghidra/campaign-refs/instructions-0008dfe0.txt",
+      "size": 12712,
+      "sha256": "5c01a78d7d0f68a98819f5cd34748b879ccde2b8c8477e5f1d595753e1968496"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "private/reference-run/run-004/drive-c/GAME/LEVELS/CONQ001.DAT",
+      "size": 343958,
+      "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+    },
+    {
+      "path": "private/integration/rnc-decoded/481677e31b05d9e4ba428932a4eaf9003fae4fe320f90daf22a947cbd3e4ef9c.bin",
+      "size": 163840,
+      "sha256": "8206e4be65dd7f1fa12df131cf2d1aab5f5b47f7181c8ace86facbb1787bcdb8"
+    }
+  ],
+  "harness": {
+    "path": "private/review/terrain/terrain-review.exe",
+    "size": 5119462,
+    "sha256": "91600bb9be9ce609d9936d4aff15b6a73c9f2a4802962aa126624fede8748277"
+  },
+  "sources": [
+    {
+      "path": "rust/crates/genewars-assets/src/map_atlas.rs",
+      "size": 5976,
+      "sha256": "6abaa5e15d1bf99c98caef1edc7b849e43d4941b058ca44a772ac106e487a938"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/terrain.rs",
+      "size": 4225,
+      "sha256": "4b544671060013930ec38d36471deae7f442a9dcbf7bdd95473b6ce61865a611"
+    },
+    {
+      "path": "research/variants/terrain-review.py",
+      "size": 6827,
+      "sha256": "d4164397209552b1d62ad34bd1314316791ea5112c19d6687ffbdfd1609c99ce"
+    },
+    {
+      "path": "research/variants/terrain-review.rs",
+      "size": 2335,
+      "sha256": "bf4684e8a0279b30e8e60276db469c53498ca99e975a16965aab8bb5189940f6"
+    }
+  ],
+  "limits": [
+    "No complete triangle rasterization/shading/camera/frame parity inferred",
+    "Map exposes initial serialized fields before runtime normalization",
+    "Atlas raw indices assign no transparency; mode5 zero-write remains explicit static evidence",
+    "Doubled interpolation result differs from separately rounded vertex projection"
+  ]
+}

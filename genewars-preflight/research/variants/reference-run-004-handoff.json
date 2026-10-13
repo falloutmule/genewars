@@ -1,0 +1,96 @@
+{
+  "status": "ready-for-root-supervised-run004",
+  "checked_utc": "2026-10-13T02:59:43.502247+00:00",
+  "original_execution": false,
+  "reviewer_emulator_execution": false,
+  "human_authorization_recorded": true,
+  "baseline_files": 510,
+  "original_files": 490,
+  "generated_config_files": 1,
+  "copied_aliases": 19,
+  "config": {
+    "path": "private/reference-run/run-004/dosbox-x.conf",
+    "size": 20819,
+    "sha256": "101d258bd061ca9f629637f7c1746426416b6b0155b7e16b968667ca76450baa"
+  },
+  "config_parameter_count": 895,
+  "only_delta_vs_run003": "sdl/raw_mouse_input: omitted effectivefalse -> explicittrue; startup-only SDL2 raw relative backend",
+  "startup_commands": 10,
+  "host_watchdog_seconds": 1200,
+  "original_autorun": false,
+  "fresh_visible_supervision_required": true,
+  "artifacts": [
+    {
+      "path": "research/variants/reference-run-004-approval.json",
+      "size": 1455,
+      "sha256": "4286c126f536483eb5cd34662b3e7f40323c8f0950c5d505bd1bc465793f5aaa"
+    },
+    {
+      "path": "research/variants/reference-run-004-readiness.json",
+      "size": 142170,
+      "sha256": "99ffc3bc8567bdf98dc62eca6cba0663fb5bde82af057615b5ced23bbb797bda"
+    },
+    {
+      "path": "research/variants/reference-run-004-validation.json",
+      "size": 5596,
+      "sha256": "4ca337c5d07e80d5b83127231738b43f21eff4db671c2985d6638d9f93328a3e"
+    },
+    {
+      "path": "research/variants/reference-run-004-proposal.md",
+      "size": 3482,
+      "sha256": "e15d3346019fea66c70c97fbcfb498d0b9f9b23cded4c044fc787189b4ba0278"
+    },
+    {
+      "path": "research/variants/reference-input-free-probe-result.json",
+      "size": 3350,
+      "sha256": "2d8d05bc104a529b0213c6338225bd1de18706abbbc7af4d04b6fa1cf4ec93f6"
+    }
+  ],
+  "scripts": [
+    {
+      "path": "scripts/reference/prepare.py",
+      "size": 24615,
+      "sha256": "f394edbf586d082ce106d6854d69d90abc5a6d1fe4fae2712e389580eba47efb"
+    },
+    {
+      "path": "scripts/reference/launch.py",
+      "size": 15241,
+      "sha256": "8d1743514ce9f647741685fe93e6294466f31607ec816578d85579095dd7d9a0"
+    },
+    {
+      "path": "scripts/reference/gate.py",
+      "size": 9557,
+      "sha256": "4cee4aa18d8a2e0391f8ae1276fd37a2371602788e97c988c72a4c086b418ed5"
+    },
+    {
+      "path": "scripts/reference/run004.py",
+      "size": 147,
+      "sha256": "aa848d2ecba8b088242210491aeacdc71325347f0e9c5f9c71a56bd7770fa835"
+    },
+    {
+      "path": "scripts/reference/session.py",
+      "size": 615,
+      "sha256": "2ed1ce9a4586c32a605a8588236452f6c40e671b4fbd351e9bce47e96cdbe59b"
+    },
+    {
+      "path": "scripts/reference/finish002.py",
+      "size": 11812,
+      "sha256": "747b20fe880fbbd46809a26da14ec3bc67cffb8de5acf61668a35458bd1186c1"
+    },
+    {
+      "path": "scripts/reference/validate_run004.py",
+      "size": 674,
+      "sha256": "7967c51183425db50cb0b94c41034112c9539b71ffebb9468bfa83e8470ddd7a"
+    },
+    {
+      "path": "scripts/reference/validate_run003.py",
+      "size": 5773,
+      "sha256": "bdf5f0f60f0b841c8d5507b772a365ea14d280850e4118b4c2a98e05ee0a5600"
+    },
+    {
+      "path": "scripts/reference/input_free_yield.py",
+      "size": 4308,
+      "sha256": "737efc3c6018cd5aac7dcefb065aaf6245625456796315d604fda7036013f006"
+    }
+  ]
+}

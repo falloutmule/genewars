@@ -1,0 +1,65 @@
+{
+  "status": "passed-static-host-review-with-pinned-operator-observation",
+  "reviewer_original_or_gui_execution": false,
+  "checked_utc": "2026-10-13T03:09:47.795802+00:00",
+  "production_sources": [
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-menu.rs",
+      "size": 5378,
+      "sha256": "abf5a0fcccaa87c4ad4072d521b85854ab7d761dc66fb44edd1de2be98add0dd"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/menu_window.rs",
+      "size": 9363,
+      "sha256": "81a97003331f8a4773fd404ca6fdfc1eb93ab31b5d81f6e6e1dc03c1264797b9"
+    }
+  ],
+  "observation": {
+    "path": "research/integration/native-menu-input-observation.json",
+    "size": 2460,
+    "sha256": "1c476ae8ef882e5421d688b65deadcd85325ca45bc277c1df3abff5d3bfeb46b"
+  },
+  "native_report": {
+    "path": "private/integration/menu/menu-interaction-001.json",
+    "size": 262,
+    "sha256": "49817a5afb708d510e8d999af12d25642eb3e801a71b62b5f2f34a71a93ab156"
+  },
+  "tested_binary": {
+    "path": "private/integration/menu/menu-interaction-001-tested.exe",
+    "size": 16879645,
+    "sha256": "317b9b24253917e752036b2d76043f0b53f6a3fd9804121e8a71021a3d889afd"
+  },
+  "normal_bmp": {
+    "path": "private/integration/menu/menu-interaction-001.bmp",
+    "size": 921654,
+    "sha256": "0686d19dd9e58b3441abab757095876bce4e3f34b9a03de7469a9b62425bede0"
+  },
+  "normal_rgb_sha256": "49d107894bd481bdd9bee30fa89bf68a307b85eccad3e67419d20cbd79a1959f",
+  "pixels_compared_to_independent_oracle": 307200,
+  "controller_review": {
+    "path": "research/variants/campaign-menu-review.json",
+    "size": 10280,
+    "sha256": "35d4e303f338dc76af3ac9789cb1f704152ba9393d9096ec2d1e738919f8ae27"
+  },
+  "conclusions": [
+    "Ordered immediate host transition packets; mode2 producer and original sampling cadence are not implemented here",
+    "Current physical client maps to640x480 usingfloor; mapped cursor bounds make signed hit subtraction safe",
+    "MenuId1disabled, remainingfirsthit order0/3/2; captured hit usesnormal artwork",
+    "Escape/Close event-driven; zero-size no presentation; positive CLI framebound counts successfulpresents",
+    "Focusloss sends outside release and resets physicalstates as explicit diagnostic cancellation policy",
+    "4images dimensionschecked; selectedframe index maps IDs0/3/2 toimages1/2/3; redraw whenselectionchanges"
+  ],
+  "observed_only": [
+    "Transparentcorner miss",
+    "Activationrequests0/3/2",
+    "QuickEscape exit0"
+  ],
+  "limits": [
+    "No scene dispatch or gameplay",
+    "No original cadence, repeatedasync press latches, right-event packet production or original focus semantics reproduced",
+    "Operator observed quickclicks, not held visual/outside release/focus-loss interactions",
+    "Framebound is not wallclock timeout; minimized/staticwindow maywait",
+    "Win64 host arithmetic reviewed; no32bit target claim",
+    "WindowJPEG not rawframebuffer"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "status": "empty-probe-ended",
+  "original_execution": false,
+  "emulator_execution": true,
+  "prepared": {
+    "path": "private/reference-run/input-free-gate-probe-002/logs/prepared.json",
+    "size": 2097,
+    "sha256": "0b1fa7390ed4174055add198b20a61d7de70b82f214b1e28ced33d4b3ae3c7af"
+  },
+  "final_process": {
+    "pid": 4456,
+    "exit_code": 0,
+    "ended_utc": "2026-10-13T02:43:02.006256+00:00",
+    "elapsed_host_seconds": 38.34321010007989,
+    "host_timeout": false,
+    "original_execution": false
+  },
+  "helper": {
+    "path": "private/reference-run/input-free-gate-probe-002/drive-c/YIELD.COM",
+    "size": 27,
+    "sha256": "2e5c8a0491dc099d1296389394e1a659f92eff2b91cf8c310b3c56f35a56aa09"
+  },
+  "sentinel_observed": true,
+  "gate_released": true,
+  "aborted": false,
+  "observations": {
+    "file": {
+      "path": "private/reference-run/input-free-gate-probe-002/logs/supervisor-observations.json",
+      "size": 510,
+      "sha256": "b18a1706031b7be50f34cee2aaf47e28a8eff7103e083f310e1ef43fba17163f"
+    },
+    "data": {
+      "observed_utc": "2026-10-13T02:43:00.939Z",
+      "window": {
+        "app": "process:C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\tools\\dosbox-x\\2026.10.01\\bin\\x64\\Release SDL2\\dosbox-x.exe",
+        "id": 1906388,
+        "title": "DOSBox-X 2026.10.01: YIELD - 30000 cycles/ms, 100%/RT"
+      },
+      "activation": "succeeded",
+      "waiting_nonce_visible": "33C27220",
+      "capture": "captures/waiting.png",
+      "original_execution": false,
+      "limit": "Host window capture; not raw framebuffer"
+    }
+  },
+  "files": [
+    {
+      "path": "private/reference-run/input-free-gate-probe-002/logs/dosbox-x.log",
+      "size": 3530,
+      "sha256": "845a3ab88f29246b74ee3da9e81ab811d96b17b165314a334e8c305446bc75aa"
+    },
+    {
+      "path": "private/reference-run/input-free-gate-probe-002/logs/emulator-stderr.txt",
+      "size": 4263,
+      "sha256": "baca375ef350203782bf70ce4b6b44ef90351d18f6d97d222b950c63610de4f1"
+    },
+    {
+      "path": "private/reference-run/input-free-gate-probe-002/logs/emulator-stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "private/reference-run/input-free-gate-probe-002/logs/final-process.json",
+      "size": 196,
+      "sha256": "194d8cb0d133c494a6dbd73804fc6ffd482b0ead28c5d38af80c0a3179e32f04"
+    },
+    {
+      "path": "private/reference-run/input-free-gate-probe-002/logs/host-release.json",
+      "size": 714,
+      "sha256": "91d0473ab0a62a0418d5d5a9bad5a9d1d330dc936df79184fb445fa9ad88d6f5"
+    },
+    {
+      "path": "private/reference-run/input-free-gate-probe-002/logs/launch-process.json",
+      "size": 1167,
+      "sha256": "54025b663ade048a922a401c998932943502f11c47b8919e0d90d06af9c15539"
+    },
+    {
+      "path": "private/reference-run/input-free-gate-probe-002/logs/prepared.json",
+      "size": 2097,
+      "sha256": "0b1fa7390ed4174055add198b20a61d7de70b82f214b1e28ced33d4b3ae3c7af"
+    },
+    {
+      "path": "private/reference-run/input-free-gate-probe-002/logs/supervisor-observations.json",
+      "size": 510,
+      "sha256": "b18a1706031b7be50f34cee2aaf47e28a8eff7103e083f310e1ef43fba17163f"
+    }
+  ]
+}

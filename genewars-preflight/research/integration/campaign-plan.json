@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "checked_utc": "2026-10-13T03:25:42.620053+00:00",
+  "native_binary_sha256": "34a04276e20fdc2cde69d5895fecb95afae300aea9bda8233fcb4eab5dacadda",
+  "evidence_sha256": "49f6920e492706f96833c35ddef8a5482e54ad276e21e9ada32f6e3de8f09005",
+  "native_source_sha256": "a610b74be9c65dd66ef9c84771b1c07422e1efea41d6e9895290a551d061bf78",
+  "states_compared": 96,
+  "source_identities_selected": 72,
+  "invalid_inputs_rejected": 8,
+  "original_execution": false,
+  "staged_resources_verified": 7,
+  "first_header_and_prefix_compared": {
+    "header_bytes": 699,
+    "title_bytes": 8,
+    "title_crc16": 38424,
+    "mission_bytes": 343958,
+    "tag": 348982,
+    "prefix_bytes": 243038,
+    "prefix_crc16": 26371,
+    "tail_bytes": 100920,
+    "tail_crc16": 17117,
+    "opaque_region_bytes": 229376,
+    "opaque_region_crc16": 27235,
+    "initial_player_crc16": [
+      3506,
+      35416,
+      16997,
+      50575
+    ],
+    "gameplay": false
+  },
+  "limits": "Bounded resource plan only; retained system is explicit. No mission execution, completion rule or general signed-byte behavior claim."
+}

@@ -1,0 +1,103 @@
+{
+  "status": "ready-for-root-supervision",
+  "checked_utc": "2026-10-13T02:15:01.594878+00:00",
+  "human_authorization_recorded": true,
+  "reviewer_original_execution": false,
+  "reviewer_emulator_execution": false,
+  "baseline_files": 510,
+  "original_files": 490,
+  "generated_files": 1,
+  "copied_aliases": 19,
+  "configuration_delta": [
+    {
+      "section": "sdl",
+      "key": "mouse_emulation",
+      "before": "locked",
+      "after": "always"
+    }
+  ],
+  "restrictions_tested_in_run003_emulator": false,
+  "runtime_gate_required": true,
+  "artifacts": [
+    {
+      "path": "research/variants/reference-run-003-approval.json",
+      "size": 1620,
+      "sha256": "ff5a3bcfaae7f09447085175e29e5f51200edfb9926b39feb87681d633bf829d"
+    },
+    {
+      "path": "research/variants/reference-run-003-readiness.json",
+      "size": 141358,
+      "sha256": "d7c520d61423a783c904b1bdabd6b1c479252b39c44dd1801f4de504988260b4"
+    },
+    {
+      "path": "research/variants/reference-run-003-validation.json",
+      "size": 5477,
+      "sha256": "cab2d1c405433fa625e8dad13f07e9e8d16c3144633c29b7bb83ce4a4bcec70b"
+    },
+    {
+      "path": "research/variants/reference-finish002-validation.json",
+      "size": 1131,
+      "sha256": "27be8e1003d6ab3126cd57cce7a5521c83bd4de78edd21b578513e0ad28e6247"
+    },
+    {
+      "path": "research/variants/reference-run-003-proposal.md",
+      "size": 6425,
+      "sha256": "ee56578c49e26068c6b3c3388db7b4f447a8e690f20ec40ebdc51c55cdd3348d"
+    },
+    {
+      "path": "private/reference-run/run-003/logs/before-files.json",
+      "size": 119024,
+      "sha256": "461de3001da4dd04b46a71de7c73272b33e9eca97bc7a9ca1c34c6e5b915613c"
+    },
+    {
+      "path": "private/reference-run/run-003/logs/dry-run.json",
+      "size": 1723,
+      "sha256": "2c6b3b838462cd022b80339d3060afd8e5b171a4a612aa6e8785869075224526"
+    },
+    {
+      "path": "scripts/reference/prepare.py",
+      "size": 23704,
+      "sha256": "f43eb7a40baad2813f666a81ce1f017918787c9c499026bebe7aca9529fa06ab"
+    },
+    {
+      "path": "scripts/reference/session.py",
+      "size": 615,
+      "sha256": "2ed1ce9a4586c32a605a8588236452f6c40e671b4fbd351e9bce47e96cdbe59b"
+    },
+    {
+      "path": "scripts/reference/run002.py",
+      "size": 393,
+      "sha256": "7d096ae918b85cd1bf08ef67945bb7fcf00dffee4bf4ad92aea3000a7c61b536"
+    },
+    {
+      "path": "scripts/reference/run003.py",
+      "size": 145,
+      "sha256": "253a2eabf32ae6c9a051fff7d2e9e6037aae586fccdb1f3c0a0d2546ec9906c9"
+    },
+    {
+      "path": "scripts/reference/launch.py",
+      "size": 14444,
+      "sha256": "0a57ba827ad181345213f6effeb1a98498243b56db678a2e5d8224c58233eee6"
+    },
+    {
+      "path": "scripts/reference/gate.py",
+      "size": 8374,
+      "sha256": "3eafd5bc63d412bd2bc56715b6f182e94a1d57a9f6aca351e05a570ce815fa1f"
+    },
+    {
+      "path": "scripts/reference/finish002.py",
+      "size": 11333,
+      "sha256": "feba137b8bd45a7cab683ea179a3305b145b6998903c4c8c936a25abfb90625b"
+    },
+    {
+      "path": "scripts/reference/validate_run003.py",
+      "size": 5604,
+      "sha256": "57d22699b630efd5a2fe358a333b8ea18cdec13023789e2c97dc103427d4fe46"
+    },
+    {
+      "path": "scripts/reference/validate_finish002.py",
+      "size": 7625,
+      "sha256": "e25fb4cd5cfd98449258dab532517e3be87d69edb54e1b3966db38bb2cbda354"
+    }
+  ]
+}

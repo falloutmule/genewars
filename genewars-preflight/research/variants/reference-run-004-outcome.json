@@ -1,0 +1,34 @@
+{
+  "status": "observed-labelled-menu-raw-input-diagnostic-unresolved",
+  "raw_receipt": {
+    "path": "research/variants/reference-run-004-result.json",
+    "size": 9224,
+    "sha256": "1b322ac032dff5785c79be5068cb6c07f05aac18451685166a3a65912c8d47cc"
+  },
+  "private_supervisor_observations": {
+    "path": "private/reference-run/run-004/logs/supervisor-observations.json",
+    "size": 1408,
+    "sha256": "ad0d5221dc49c60a8997a8f1fc6dcd6976dbd7bb7a4bee473cca7bd8fdcf4365"
+  },
+  "original_execution": true,
+  "reviewer_original_or_gui_execution": false,
+  "pid": 29652,
+  "process_exit_code": 15,
+  "process_end_utc": "2026-10-13T03:02:58.126383+00:00",
+  "process_lifetime_seconds": 146.10384930006694,
+  "host_timeout": false,
+  "exit_interpretation": "Operator SIGTERM after exactprocessidentity verification; not originalgamefailure",
+  "raw_mouse_input_effective": true,
+  "mouse_emulation_effective": "always",
+  "requested_capture_observed": true,
+  "guest_motion_resolved": false,
+  "window_capture_observed": true,
+  "raw_framebuffer_capture_observed": false,
+  "mission_observed": false,
+  "unchanged_original_files": 489,
+  "unchanged_aliases": 19,
+  "generated_config_unchanged": true,
+  "immutable_input_checks_passed": true,
+  "additional_attempt_prepared": false,
+  "next_reference_condition": "A new concrete input diagnostic is required by root before another attempt"
+}

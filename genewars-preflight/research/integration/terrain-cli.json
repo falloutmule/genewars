@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "checked_utc": "2026-10-13T03:25:44.116401+00:00",
+  "binary_sha256": "34a04276e20fdc2cde69d5895fecb95afae300aea9bda8233fcb4eab5dacadda",
+  "proof_sha256": "baf2d7e399f1ab40937cca5771a7fc611b7e15f2d54a4194f3ced1d13e0a21ba",
+  "map_info": {
+    "width_cells": 128,
+    "height_cells": 128,
+    "record_bytes": 14,
+    "min_height": 0,
+    "max_height": 4800,
+    "min_texture": 0,
+    "max_texture": 118,
+    "gameplay": false
+  },
+  "projection_proof_sha256": "ab41b22be3f0477242854a8b10b97ea84ddd391e34d400c5da60ed4b0121af15",
+  "explicit_cell_placements": 36,
+  "cell_vertices_compared": 144,
+  "height_points": 37,
+  "tiles_compared": 160,
+  "tile_bytes_compared": 163840,
+  "invalid_inputs_rejected": 5,
+  "private_tile_outputs": "private/integration/terrain/d3b61a092bd3411e824a2b834efccc88",
+  "original_execution": false,
+  "limits": "Native resources and explicitly placed cell vertices only; no terrain frame, inferred camera, draw order, visibility or shading claim."
+}

@@ -1,0 +1,32 @@
+{
+  "status": "bounded-search-no-supported-relative-motion-generator-found",
+  "checked_utc": "2026-10-13T03:27:30.526256+00:00",
+  "source_tag": "dosbox-x-v2026.10.01",
+  "sources": [
+    {
+      "path": "private/review/input-free-yield/src-gui-sdl_mapper.cpp",
+      "size": 209779,
+      "sha256": "3c23e810381ed5dec432075a3bc25b99f4ef7e6d494e6dcfd4f7e24a238f2ea5"
+    },
+    {
+      "path": "private/review/input-free-yield/src-gui-menu.cpp",
+      "size": 111248,
+      "sha256": "261e92f224cf828f2b69d9cce1d2e3927614507df497fb8c0053f7c25f99ea90"
+    }
+  ],
+  "mapper_mouse_events": [
+    "mouse_left",
+    "mouse_middle",
+    "mouse_right"
+  ],
+  "relative_mouse_motion_output_call_present": false,
+  "original_or_gui_execution": false,
+  "config_or_mapper_modified": false,
+  "additional_reference_attempt_prepared": false,
+  "limits": [
+    "Only pinned mapper/menu plus previously reviewed SDL host inspected",
+    "Negative source search is not universal absence proof",
+    "Mouse-button mapping does not produce movement",
+    "No external helper or emulator patch proposed"
+  ]
+}

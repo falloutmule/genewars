@@ -1,0 +1,57 @@
+{
+  "status": "static-review-no-blocker",
+  "checked_utc": "2026-10-13T02:30:47.976123+00:00",
+  "reviewer_gui_or_original_execution": false,
+  "reviewed_target": "Windows x64 GNU",
+  "source_and_evidence": [
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/menu_window.rs",
+      "size": 4811,
+      "sha256": "699294ce62d9f637e8781551ccffc9deeb1f1fa61c37fd9e4f90fe488f4b215e"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-menu.rs",
+      "size": 6196,
+      "sha256": "9578b14c4cdc75872c6af182da17a613103efa732db819757017f13910741758"
+    },
+    {
+      "path": "scripts/menu_inputs.py",
+      "size": 3191,
+      "sha256": "ddd5a07a52f7a0e211f670fcea247f2ec4f1e95659ec438262e5296d00ea2b80"
+    },
+    {
+      "path": "scripts/render_menu.py",
+      "size": 4390,
+      "sha256": "dda57fb8d6890a5e409d2f15e77020e60f791561e829ced3fbcc1f866678e0ee"
+    },
+    {
+      "path": "research/variants/font-menu-review.json",
+      "size": 707075,
+      "sha256": "ef452509008d6c651f112bebb5cdbbb6c6f7f2a39341132aad49e3c4998c6bd4"
+    },
+    {
+      "path": "research/ghidra/font-menu-evidence.json",
+      "size": 8684,
+      "sha256": "4ceac854cc17e135d4187fe109626f29bd19b4b5bfb8aa46b7d5e01b0eebd7d5"
+    },
+    {
+      "path": "research/integration/native-menu-observation.json",
+      "size": 2172,
+      "sha256": "9c8aff9bed23e3452ef3ae5f222eb25e436ac5317cc74a534f31590dfb57e194"
+    }
+  ],
+  "checks": [
+    "Event-driven Pressed Escape and CloseRequested exit",
+    "Presented-frame count excludes minimized zero-size",
+    "PositiveCLIlimit stops after requestedsuccessfulpresents",
+    "Nearest floor sampling coverscompleteclientarea",
+    "No host gamecadence inferred",
+    "ExactCD privateinput hashes/bounds/refusal reviewed",
+    "Integration subprocess timeout30seconds"
+  ],
+  "limits": [
+    "Nativeactivation/escapewas supervisedbyroot, not reviewer",
+    "32bit arithmetic portability unreviewed",
+    "Framelimit ispresentcalls notphysicalrefreshcounter"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "status": "original-intro-labelled-menu-observed-guest-motion-unresolved",
+  "raw_receipt": {
+    "path": "research/variants/reference-run-003-result.json",
+    "size": 9832,
+    "sha256": "58d79d45d0d1668b50ad29b4cebd90f81e98a16ae165e72bf913786752786cfb"
+  },
+  "operator_observations": {
+    "path": "private/reference-run/run-003/logs/supervisor-observations.json",
+    "size": 1464,
+    "sha256": "2a456492297a70a8a19ca6f01d2ce9dd2c4e91ff265698244627a70b5857f3fc"
+  },
+  "original_execution": true,
+  "reviewer_original_or_gui_execution": false,
+  "pid": 25284,
+  "exit_code": 15,
+  "exit_interpretation": "Operator SIGTERM of verified exact process; not original game failure",
+  "host_timeout": false,
+  "window_capture_observed": true,
+  "raw_framebuffer_capture_observed": false,
+  "mission_observed": false,
+  "unchanged_original_files": 489,
+  "changed_file": "GW.ERR",
+  "before_baseline": 510,
+  "unchanged_aliases": 19,
+  "immutable_input_checks_passed": true,
+  "note": {
+    "path": "research/variants/reference-run-003-outcome.md",
+    "size": 1849,
+    "sha256": "a4c3184933726f1176a621e278186de8625445c3f14e85f5e5e052224ded62d3"
+  }
+}

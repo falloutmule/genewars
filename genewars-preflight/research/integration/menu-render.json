@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "completed_utc": "2026-10-13T03:26:22.890530+00:00",
+  "sources": [
+    {
+      "entry_id": "root/2/disc/75",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/FONT2.DAT;1",
+      "source_sha256": "2f3d275f88f2ff6671562a819cbc7a791b16ad4510a4020f3b6078c917f60dba",
+      "source_size": 9586,
+      "decoded_size": 44647,
+      "decoded_sha256": "2e1abcf8fb13cc306449f25bb2b0da64aa9627646ad4335910bdd0114a36b4fa",
+      "private_path": "private/integration/menu/font2.dat"
+    },
+    {
+      "entry_id": "root/2/disc/76",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/FONT2.TAB;1",
+      "source_sha256": "f54057e1b19cc1711a1596b6459cfdfb359a170f5ed739df71fd852befba4bab",
+      "source_size": 641,
+      "decoded_size": 1170,
+      "decoded_sha256": "e7a5299f511e76de4999cfde40b8852ed1d8da83406d5f0284886996e8fd87b1",
+      "private_path": "private/integration/menu/font2.tab"
+    },
+    {
+      "entry_id": "root/2/disc/92",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/IFTITLE.ANB;1",
+      "source_sha256": "c7d2dfc5d774c69337436249ec74e4d0fa6ae1d06bd5ae785f9f73ee2ac0f707",
+      "source_size": 30050,
+      "decoded_size": 58185,
+      "decoded_sha256": "f5537949f249fc4f84e265768a4a8af981d5db02604a67371bb70dab3f40e7bc",
+      "private_path": "private/integration/menu/iftitle.anb"
+    },
+    {
+      "entry_id": "root/2/disc/135",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/TITLESCR.DAT;1",
+      "source_sha256": "2548b024fede333b49fc4011541939fc8ce294cb95b48cdb41ed7d0cec54a0b9",
+      "source_size": 139405,
+      "decoded_size": 307200,
+      "decoded_sha256": "5ecc729145963a110a5c1748a1c2e2894c01245ba1d98befab5a3743b25ae0e2",
+      "private_path": "private/integration/menu/titlescr.dat"
+    },
+    {
+      "entry_id": "root/2/disc/136",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/TITLESCR.PAL;1",
+      "source_sha256": "d5ec91e731c2ff7e8d74dbbde6a3fe0410ec602ff0da52eb1e6f6bb1a44307c7",
+      "source_size": 667,
+      "decoded_size": 768,
+      "decoded_sha256": "36ef1916917c118a8115c8550a0d2d684d9041743a9d7521414479504606e491",
+      "private_path": "private/integration/menu/titlescr.pal"
+    },
+    {
+      "entry_id": "root/2/disc/592",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/TEXT/ENG/TEXT.DAT;1",
+      "source_sha256": "23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786",
+      "source_size": 36610,
+      "decoded_size": 36610,
+      "decoded_sha256": "23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786",
+      "private_path": "private/integration/menu/text.dat"
+    }
+  ],
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "bridge": "research/ghidra/font-menu-evidence.json",
+  "bridge_sha256": "4ceac854cc17e135d4187fe109626f29bd19b4b5bfb8aa46b7d5e01b0eebd7d5",
+  "native_report": {
+    "width": 640,
+    "height": 480,
+    "layout": "three_button_normal",
+    "text_entries": 604,
+    "text_consumed_bytes": 36609,
+    "text_trailing_bytes": 1,
+    "presented_frames": 3,
+    "exit_reason": "frame_limit",
+    "activation_requests": [],
+    "input_updates": 0,
+    "scene_dispatch": false,
+    "gameplay": false
+  },
+  "native_command": [
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\genewars-menu.exe",
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\menu",
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\menu\\titlescr.pal",
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\menu\\menu-e928a85adda742888eb38504745b6a0f.bmp",
+    "--report",
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\menu\\menu-e928a85adda742888eb38504745b6a0f.json",
+    "--frames",
+    "3"
+  ],
+  "native_executable_sha256": "6cc33ccfebce086cff5b657428e956153edea1c1f9de3799547117abcd64218d",
+  "bmp_sha256": "0686d19dd9e58b3441abab757095876bce4e3f34b9a03de7469a9b62425bede0",
+  "rgb_sha256": "49d107894bd481bdd9bee30fa89bf68a307b85eccad3e67419d20cbd79a1959f",
+  "png_sha256": "61543ffe6f438c52f16b1b760e9b33236484a000e0103036f8d99a902e466b49",
+  "private_bmp": "private/integration/menu/menu-e928a85adda742888eb38504745b6a0f.bmp",
+  "private_preview": "private/integration/menu/menu-e928a85adda742888eb38504745b6a0f.png",
+  "private_report": "private/integration/menu/menu-e928a85adda742888eb38504745b6a0f.json",
+  "display_conversion": "Explicit floor(RGB6*255/63); original monitor transfer not measured.",
+  "scope": "Static initial non-network three-button normal-frame composition. No interaction, command dispatch, mission loading, timing or original-game parity claim. Independent pixel comparison has a separate receipt."
+}

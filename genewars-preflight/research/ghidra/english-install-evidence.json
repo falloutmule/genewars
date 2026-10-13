@@ -1,0 +1,534 @@
+{
+  "status": "verified_static_installer_copy_contract",
+  "installer_sha256": "570059e6b64f289e740491814fa775d4c87d53b4e2a61d53cea5e7cd7106feb7",
+  "game_candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "language": "ENG",
+  "copy_semantics": "Byte copy, unchanged basename, install-prefix + destination_directory + basename",
+  "language_selection_va": "0x15ef3..0x15f0c",
+  "text_source_format_va": "0x135d6..0x135ee",
+  "copy_worker_va": "0x170c8",
+  "destination_format_va": "0x171a9..0x171ca",
+  "runtime_text_descriptor_va": "0x10443c",
+  "runtime_loader_va": "0x1d799..0x1d7ab",
+  "runtime_string_count": 604,
+  "scope": "Selected language rows only; does not install or execute originals; other table rows preserve relative source-directory layout.",
+  "copies": [
+    {
+      "entry_id": "root/2/disc/420",
+      "source": "GAME/SPEECH/ENG/BBOT.SPE",
+      "destination": "SPEECH/BBOT.SPE",
+      "size": 801970,
+      "sha256": "30d6429190a898c31e677dfeef780b27b0d904da697dade6eb979511b9966243"
+    },
+    {
+      "entry_id": "root/2/disc/421",
+      "source": "GAME/SPEECH/ENG/BENG.SPE",
+      "destination": "SPEECH/BENG.SPE",
+      "size": 680498,
+      "sha256": "2f3d823b308130194f4ad8b767cdaafdfc377ba625c025b9ddf454df3aeecbac"
+    },
+    {
+      "entry_id": "root/2/disc/422",
+      "source": "GAME/SPEECH/ENG/BGEN.SPE",
+      "destination": "SPEECH/BGEN.SPE",
+      "size": 1478164,
+      "sha256": "9f59b9bba1cd0c2192a2614c325c03d1bd20a9b5d6f51a1b4d9239c908b8fbbd"
+    },
+    {
+      "entry_id": "root/2/disc/423",
+      "source": "GAME/SPEECH/ENG/BRAN.SPE",
+      "destination": "SPEECH/BRAN.SPE",
+      "size": 494540,
+      "sha256": "4ec90e0cc0c3cb4923def1db10bacd619ffdbda0894123cb56abf2e0febdd1e9"
+    },
+    {
+      "entry_id": "root/2/disc/424",
+      "source": "GAME/SPEECH/ENG/HBOT.SPE",
+      "destination": "SPEECH/HBOT.SPE",
+      "size": 616772,
+      "sha256": "c36dd994963ce4d77941d32b95c89abc9e97d1cd85bd45dd1e3d6f3f6cb838e8"
+    },
+    {
+      "entry_id": "root/2/disc/425",
+      "source": "GAME/SPEECH/ENG/HENG.SPE",
+      "destination": "SPEECH/HENG.SPE",
+      "size": 515722,
+      "sha256": "f9bcf168a695b5e9de420d5ee5d3557ef57ec66a185f7c8ed95a4992bbf2799b"
+    },
+    {
+      "entry_id": "root/2/disc/426",
+      "source": "GAME/SPEECH/ENG/HGEN.SPE",
+      "destination": "SPEECH/HGEN.SPE",
+      "size": 1414266,
+      "sha256": "b57565e7e45147ef514a99df01800dc118ea87666fb99adf34e94094a7e064a5"
+    },
+    {
+      "entry_id": "root/2/disc/427",
+      "source": "GAME/SPEECH/ENG/HRAN.SPE",
+      "destination": "SPEECH/HRAN.SPE",
+      "size": 511818,
+      "sha256": "36e6af0bc72441642c805c95d2525c9c391e82a16842d54ab1e8798c0b659a19"
+    },
+    {
+      "entry_id": "root/2/disc/428",
+      "source": "GAME/SPEECH/ENG/MISC.SPE",
+      "destination": "SPEECH/MISC.SPE",
+      "size": 940718,
+      "sha256": "1bac429ca69ec03112b355ec8a10150578c078c8b0e50082fa93848aeae2ad7e"
+    },
+    {
+      "entry_id": "root/2/disc/429",
+      "source": "GAME/SPEECH/ENG/NARR.SPE",
+      "destination": "SPEECH/NARR.SPE",
+      "size": 4354332,
+      "sha256": "472add108a6c810806060549161b0ca6dc975a0cc02afba7e6cc0ec8cc9ed7e0"
+    },
+    {
+      "entry_id": "root/2/disc/430",
+      "source": "GAME/SPEECH/ENG/SBOT.SPE",
+      "destination": "SPEECH/SBOT.SPE",
+      "size": 761556,
+      "sha256": "4d166de3e60fd1a12e3a27a44e5ae5bd6c62689f25dbd6a591bc5200c9b2289d"
+    },
+    {
+      "entry_id": "root/2/disc/431",
+      "source": "GAME/SPEECH/ENG/SENG.SPE",
+      "destination": "SPEECH/SENG.SPE",
+      "size": 543598,
+      "sha256": "4695f2196e02e6f0a38df246585ef9888c0f6fbdc0b6baba641a710e23dfc863"
+    },
+    {
+      "entry_id": "root/2/disc/432",
+      "source": "GAME/SPEECH/ENG/SGEN.SPE",
+      "destination": "SPEECH/SGEN.SPE",
+      "size": 1948000,
+      "sha256": "f1ea2165cfcf6b0bbff95d61bb4dda9eeb8707a08d89a930786bb08f1df9d910"
+    },
+    {
+      "entry_id": "root/2/disc/433",
+      "source": "GAME/SPEECH/ENG/SRAN.SPE",
+      "destination": "SPEECH/SRAN.SPE",
+      "size": 595602,
+      "sha256": "26d8f41b745129dfaf2654a0852dbb09367aaebab8953bec043de77c26972305"
+    },
+    {
+      "entry_id": "root/2/disc/434",
+      "source": "GAME/SPEECH/ENG/ZBOT.SPE",
+      "destination": "SPEECH/ZBOT.SPE",
+      "size": 678118,
+      "sha256": "308a79dac53f4f4faf774bb6bed87d497c6b369c1c73f8b25d894f1a86afe255"
+    },
+    {
+      "entry_id": "root/2/disc/435",
+      "source": "GAME/SPEECH/ENG/ZENG.SPE",
+      "destination": "SPEECH/ZENG.SPE",
+      "size": 583856,
+      "sha256": "7426318d8723b1ae2012194ff483135a06cff8ac3517fffea37f551e5e6c9da9"
+    },
+    {
+      "entry_id": "root/2/disc/436",
+      "source": "GAME/SPEECH/ENG/ZGEN.SPE",
+      "destination": "SPEECH/ZGEN.SPE",
+      "size": 1834598,
+      "sha256": "52f23331fbec20f94eea3cf65efc7341e20a622734a6acf9558bd521b9ee50d7"
+    },
+    {
+      "entry_id": "root/2/disc/437",
+      "source": "GAME/SPEECH/ENG/ZRAN.SPE",
+      "destination": "SPEECH/ZRAN.SPE",
+      "size": 411978,
+      "sha256": "a51dd4c1235066443312178bb210bb93063389dde4898c2abbe4c3d6a65f5771"
+    },
+    {
+      "entry_id": "root/2/disc/592",
+      "source": "GAME/DATA/TEXT/ENG/TEXT.DAT",
+      "destination": "DATA/TEXT.DAT",
+      "size": 36610,
+      "sha256": "23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786"
+    }
+  ],
+  "installer_lists": [
+    {
+      "va": "0x6f71c",
+      "records": [
+        {
+          "index": 0,
+          "source_pattern": "",
+          "destination_directory": "SPEECH\\"
+        },
+        {
+          "index": 1,
+          "source_pattern": "",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 2,
+          "source_pattern": "..\\..\\GAME\\DATA\\*.*",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 3,
+          "source_pattern": "..\\..\\GAME\\DATA\\BUILDING\\*.*",
+          "destination_directory": "DATA\\BUILDING\\"
+        },
+        {
+          "index": 4,
+          "source_pattern": "..\\..\\GAME\\DATA\\CREATURE\\*.*",
+          "destination_directory": "DATA\\CREATURE\\"
+        },
+        {
+          "index": 5,
+          "source_pattern": "..\\..\\GAME\\DATA\\PLANT\\*.*",
+          "destination_directory": "DATA\\PLANT\\"
+        },
+        {
+          "index": 6,
+          "source_pattern": "..\\..\\GAME\\DATA\\REQ\\*.*",
+          "destination_directory": "DATA\\REQ\\"
+        },
+        {
+          "index": 7,
+          "source_pattern": "..\\..\\GAME\\DATA\\SPEC\\*.*",
+          "destination_directory": "DATA\\SPEC\\"
+        },
+        {
+          "index": 8,
+          "source_pattern": "..\\..\\GAME\\INTRO\\*.*",
+          "destination_directory": "INTRO\\"
+        },
+        {
+          "index": 9,
+          "source_pattern": "..\\..\\GAME\\ANIMS\\*.*",
+          "destination_directory": "ANIMS\\"
+        },
+        {
+          "index": 10,
+          "source_pattern": "..\\..\\GAME\\LEVELS\\*.*",
+          "destination_directory": "LEVELS\\"
+        },
+        {
+          "index": 11,
+          "source_pattern": "..\\..\\GAME\\SOUND\\*.*",
+          "destination_directory": "SOUND\\"
+        },
+        {
+          "index": 12,
+          "source_pattern": "..\\..\\GAME\\S\\*.*",
+          "destination_directory": "S\\"
+        },
+        {
+          "index": 13,
+          "source_pattern": "..\\..\\GAME\\S\\DATA\\*.*",
+          "destination_directory": "S\\DATA\\"
+        },
+        {
+          "index": 14,
+          "source_pattern": "..\\..\\GAME\\GW.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 15,
+          "source_pattern": "..\\..\\GAME\\DOS4GW.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 16,
+          "source_pattern": "..\\..\\GAME\\GENEWARS.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 17,
+          "source_pattern": "INST.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 18,
+          "source_pattern": "INSTALL.BAT",
+          "destination_directory": ""
+        },
+        {
+          "index": 19,
+          "source_pattern": "LDATA\\*.*",
+          "destination_directory": "LDATA\\"
+        }
+      ]
+    },
+    {
+      "va": "0x70ebc",
+      "records": [
+        {
+          "index": 0,
+          "source_pattern": "",
+          "destination_directory": "SPEECH\\"
+        },
+        {
+          "index": 1,
+          "source_pattern": "",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 2,
+          "source_pattern": "..\\..\\GAME\\SOUND\\*.LST",
+          "destination_directory": "SOUND\\"
+        },
+        {
+          "index": 3,
+          "source_pattern": "..\\..\\GAME\\SOUND\\*.DIG",
+          "destination_directory": "SOUND\\"
+        },
+        {
+          "index": 4,
+          "source_pattern": "..\\..\\GAME\\INTRO\\*.*",
+          "destination_directory": "INTRO\\"
+        },
+        {
+          "index": 5,
+          "source_pattern": "..\\..\\GAME\\ANIMS\\*.*",
+          "destination_directory": "ANIMS\\"
+        },
+        {
+          "index": 6,
+          "source_pattern": "..\\..\\GAME\\DATA\\REQ\\*.*",
+          "destination_directory": "DATA\\REQ\\"
+        },
+        {
+          "index": 7,
+          "source_pattern": "..\\..\\GAME\\DATA\\MAINPANL.*",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 8,
+          "source_pattern": "..\\..\\GAME\\DATA\\GENEPANL.*",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 9,
+          "source_pattern": "..\\..\\GAME\\DATA\\LPANEL.*",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 10,
+          "source_pattern": "..\\..\\GAME\\DATA\\FILESCR.*",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 11,
+          "source_pattern": "..\\..\\GAME\\DATA\\PICONS.ANB",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 12,
+          "source_pattern": "..\\..\\GAME\\DATA\\MAIN.GLA",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 13,
+          "source_pattern": "..\\..\\GAME\\DATA\\REQ\\*.ANB",
+          "destination_directory": "DATA\\REQ\\"
+        },
+        {
+          "index": 14,
+          "source_pattern": "..\\..\\GAME\\DATA\\CREATURE\\*.*",
+          "destination_directory": "DATA\\CREATURE\\"
+        },
+        {
+          "index": 15,
+          "source_pattern": "..\\..\\GAME\\S\\*.*",
+          "destination_directory": "S\\"
+        },
+        {
+          "index": 16,
+          "source_pattern": "..\\..\\GAME\\S\\DATA\\*.*",
+          "destination_directory": "S\\DATA\\"
+        },
+        {
+          "index": 17,
+          "source_pattern": "..\\..\\GAME\\GW.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 18,
+          "source_pattern": "..\\..\\GAME\\DOS4GW.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 19,
+          "source_pattern": "..\\..\\GAME\\GENEWARS.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 20,
+          "source_pattern": "INST.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 21,
+          "source_pattern": "INSTALL.BAT",
+          "destination_directory": ""
+        },
+        {
+          "index": 22,
+          "source_pattern": "LDATA\\*.*",
+          "destination_directory": "LDATA\\"
+        },
+        {
+          "index": 23,
+          "source_pattern": "..\\..\\GAME\\SOUND\\SAMPLE.AD",
+          "destination_directory": "SOUND\\"
+        },
+        {
+          "index": 24,
+          "source_pattern": "..\\..\\GAME\\SOUND\\SAMPLE.OPL",
+          "destination_directory": "SOUND\\"
+        }
+      ]
+    },
+    {
+      "va": "0x72bfc",
+      "records": [
+        {
+          "index": 0,
+          "source_pattern": "",
+          "destination_directory": "SPEECH\\"
+        },
+        {
+          "index": 1,
+          "source_pattern": "",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 2,
+          "source_pattern": "..\\..\\GAME\\SOUND\\*.LST",
+          "destination_directory": "SOUND\\"
+        },
+        {
+          "index": 3,
+          "source_pattern": "..\\..\\GAME\\SOUND\\*.DIG",
+          "destination_directory": "SOUND\\"
+        },
+        {
+          "index": 4,
+          "source_pattern": "..\\..\\GAME\\ANIMS\\biolose.smk",
+          "destination_directory": "ANIMS\\"
+        },
+        {
+          "index": 5,
+          "source_pattern": "..\\..\\GAME\\ANIMS\\biowin.smk",
+          "destination_directory": "ANIMS\\"
+        },
+        {
+          "index": 6,
+          "source_pattern": "..\\..\\GAME\\DATA\\REQ\\*.*",
+          "destination_directory": "DATA\\REQ\\"
+        },
+        {
+          "index": 7,
+          "source_pattern": "..\\..\\GAME\\DATA\\CREATURE\\*.*",
+          "destination_directory": "DATA\\CREATURE\\"
+        },
+        {
+          "index": 8,
+          "source_pattern": "..\\..\\GAME\\DATA\\MAINPANL.*",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 9,
+          "source_pattern": "..\\..\\GAME\\DATA\\GENEPANL.*",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 10,
+          "source_pattern": "..\\..\\GAME\\DATA\\LPANEL.*",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 11,
+          "source_pattern": "..\\..\\GAME\\DATA\\FILESCR.*",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 12,
+          "source_pattern": "..\\..\\GAME\\DATA\\PICONS.ANB",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 13,
+          "source_pattern": "..\\..\\GAME\\DATA\\MAIN.GLA",
+          "destination_directory": "DATA\\"
+        },
+        {
+          "index": 14,
+          "source_pattern": "..\\..\\GAME\\S\\*.*",
+          "destination_directory": "S\\"
+        },
+        {
+          "index": 15,
+          "source_pattern": "..\\..\\GAME\\S\\DATA\\*.*",
+          "destination_directory": "S\\DATA\\"
+        },
+        {
+          "index": 16,
+          "source_pattern": "..\\..\\GAME\\GW.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 17,
+          "source_pattern": "..\\..\\GAME\\DOS4GW.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 18,
+          "source_pattern": "..\\..\\GAME\\GENEWARS.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 19,
+          "source_pattern": "INST.EXE",
+          "destination_directory": ""
+        },
+        {
+          "index": 20,
+          "source_pattern": "INSTALL.BAT",
+          "destination_directory": ""
+        },
+        {
+          "index": 21,
+          "source_pattern": "LDATA\\*.*",
+          "destination_directory": "LDATA\\"
+        },
+        {
+          "index": 22,
+          "source_pattern": "..\\..\\GAME\\SOUND\\SAMPLE.AD",
+          "destination_directory": "SOUND\\"
+        },
+        {
+          "index": 23,
+          "source_pattern": "..\\..\\GAME\\SOUND\\SAMPLE.OPL",
+          "destination_directory": "SOUND\\"
+        }
+      ]
+    }
+  ],
+  "private_listings": [
+    {
+      "private_path": "private/ghidra/font-installer-copy.txt",
+      "sha256": "c19c1f70695a96f4bafaa1983f88d76fd892010b72f442ffcc0e191eedac7dff"
+    },
+    {
+      "private_path": "private/ghidra/font-installer-copy-loop.txt",
+      "sha256": "fe9096a801bbe05853b07fbc8772f32d54a940138c064cbaee67ea4d7a7f57ee"
+    },
+    {
+      "private_path": "private/ghidra/font-installer-refs/instructions-00015c38.txt",
+      "sha256": "c5b498a9450fa93be7f36a78a30beb91b4495c87214303c977736bbe6ede8d1a"
+    },
+    {
+      "private_path": "private/ghidra/font-installer-copy-worker/instructions-000170c8.txt",
+      "sha256": "69e86b5429242ff6f4263fcb1d34523b7da0febcb157c65364ed9f0d5e82ff3f"
+    },
+    {
+      "private_path": "private/ghidra/font-text/instructions-0001d770.txt",
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    }
+  ]
+}

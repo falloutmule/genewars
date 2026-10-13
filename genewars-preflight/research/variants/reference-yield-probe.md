@@ -1,0 +1,20 @@
+# Empty yielding-gate probe
+
+Prepared, guard-checked and not launched by the reviewer. Root owns visible launch/activation and release. Only a private directory containing the generated YIELDGAT.BAT and nonce markers is mounted as C; Z is internal. No game, disc or original resource is present. Exact run003 emulator config and pinned SDL2 executable are reused. The host parent and emulator command both impose 120 seconds; stdout/stderr and actual final PID/exit/end are private. Default prepare or launch creates no process.
+
+```text
+python -B scripts/reference/yield_probe.py launch --open-probe
+python -B scripts/reference/yield_probe.py inspect
+python -B scripts/reference/yield_probe.py release
+python -B scripts/reference/yield_probe.py finish
+```
+
+Keep the first command's live parent session. Inspect uses PID image/creation identity and requires exactly C/Z, secure-mode entry, refused E mount, mouse_emulation always and a fresh waiting nonce. Release is only after the operator successfully activates and captures the actual target window. It creates an exclusive marker for an ECHO sentinel, never GW. `abort` stops only a waiting probe. A stalled console read may prevent batch abort; the exact-child host watchdog still terminates it. Finish requires an ended receipt, reports actual sentinel/abort/exit evidence and accepts optional `--observations` pointing inside this private probe. Preserve this used probe rather than relaunching it.
+
+The inference is specific to this gate. The pinned [shell.cpp](https://raw.githubusercontent.com/joncampbell123/dosbox-x/dosbox-x-v2026.10.01/src/shell/shell.cpp) RunInternal and batch Run branches iterate host commands without unconditional idle/event pumping; an explicit idle is present in the separate input-EOF path. The [machine loop](https://raw.githubusercontent.com/joncampbell123/dosbox-x/dosbox-x-v2026.10.01/src/dosbox.cpp) pumps GFX_Events, and [CALLBACK_Idle](https://raw.githubusercontent.com/joncampbell123/dosbox-x/dosbox-x-v2026.10.01/src/cpu/callback.cpp) re-enters that machine loop. Thus a tight host IF/GOTO loop could starve window handling while still reading marker files. Run002's successful identical tight gate is contrary evidence to a universal failure; initial event timing may differ. This is a testable hypothesis, not the established activation cause or a general Windows failure.
+
+The probe inserts `Z:\DOS\CHOICE.COM /C:Y /N /T:Y,1 > NUL` after abort/release checks. The pinned [program registration](https://raw.githubusercontent.com/joncampbell123/dosbox-x/dosbox-x-v2026.10.01/src/dos/dos_programs.cpp) makes CHOICE an internal Z:\DOS program. Its [command implementation](https://raw.githubusercontent.com/joncampbell123/dosbox-x/dosbox-x-v2026.10.01/src/shell/shell_cmds.cpp) implements timeout by scheduling mapper input and reading the console; it is not a passive sleep.
+
+Do not transplant this exact wait into an original gate merely because activation succeeds. The [mapper Typer](https://raw.githubusercontent.com/joncampbell123/dosbox-x/dosbox-x-v2026.10.01/src/gui/sdl_mapper.cpp) activates Y, waits 50ms and deactivates it on a worker thread. CHOICE can return on keydown before keyup. A marker detected immediately afterward can therefore leave held/pending Y across the next operation. A later Typer Start joins the old worker, but the current marker branch occurs first. Upstream also identifies thread-safety concerns, and dotype timing can cancel synthetic input. The empty sentinel cannot reveal original input side effects. A future original wait requires an independently checked input-free yield or an explicitly tested draining protocol; none is claimed here.
+
+The source URLs are pinned to release tag dosbox-x-v2026.10.01; the actual tool log identifies commit b6abbd5. This is source review of the official release, not a reproducible-build comparison. GPL source was inspected, not copied into reconstruction code. Readiness records the exact local script/config/batch/preparation hashes and mocked default-no-Popen and rejection checks.

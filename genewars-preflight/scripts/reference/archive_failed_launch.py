@@ -58,9 +58,11 @@ def main():
     records = []
     paths = ['drive-c/STARTGW.BAT','logs/human-approval.json','logs/launch-process.json',
              'logs/emulator-stdout.txt','logs/emulator-stderr.txt','logs/dosbox-x.log',
-             'logs/final-process.json']
+             'logs/final-process.json','logs/ui-recovery.json','logs/ui-actions.jsonl']
     if abort.exists():
         paths.append(str(abort.relative_to(RUN)))
+    if approval.get('yield_helper'):
+        paths.append(str(checked(ROOT/approval['yield_helper']['path'],RUN).relative_to(RUN)))
     for rel in paths:
         source = checked(RUN/rel,RUN)
         if not source.exists():

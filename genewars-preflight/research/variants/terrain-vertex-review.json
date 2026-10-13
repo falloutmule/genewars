@@ -1,0 +1,54 @@
+{
+  "status": "passed-independent-native-terrain-vertex-review",
+  "checked_utc": "2026-10-13T03:26:14.088160+00:00",
+  "original_or_gui_execution": false,
+  "height_values": 65536,
+  "cell_flag_values": 256,
+  "orientation_admission_values": 256,
+  "strip_vertex_positions": 154368,
+  "overflow_boundary_cases": 6,
+  "projection_receipt_vectors": 8,
+  "formula_scope": "Equivalent to7B7F0strip A/B/C/D for explicit unwrappedcells/camera/placement; not7AF00pointprojection",
+  "proof": {
+    "path": "research/ghidra/terrain-evidence.json",
+    "size": 62278,
+    "sha256": "baf2d7e399f1ab40937cca5771a7fc611b7e15f2d54a4194f3ced1d13e0a21ba"
+  },
+  "projection_proof": {
+    "path": "research/ghidra/terrain-projection-evidence.json",
+    "size": 26086,
+    "sha256": "ab41b22be3f0477242854a8b10b97ea84ddd391e34d400c5da60ed4b0121af15"
+  },
+  "strip_listing": {
+    "path": "private/ghidra/terrain-map-refs/instructions-0007b7f0.txt",
+    "size": 14310,
+    "sha256": "26769c153064fd73cf9b69c2affe127a2e9ad5f0ff76596d7610e7742b932d25"
+  },
+  "source": {
+    "path": "rust/crates/genewars-render/src/terrain.rs",
+    "size": 11819,
+    "sha256": "f96ee7ade46d28bfc125ea91135f26f8a6596d4e5e29b77fe507552d9eba2387"
+  },
+  "harness": {
+    "path": "private/review/terrain-vertex/review.exe",
+    "size": 5083237,
+    "sha256": "a1b8485eba44dda4b73be59a18202230eaf07cfbccc14bf093c84e5350a29387"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/terrain-vertex-review.py",
+      "size": 5411,
+      "sha256": "45c2d87fa9f9da4b3b3c2288225eba185a91d73eb79c05098ad7046a2b417dc4"
+    },
+    {
+      "path": "research/variants/terrain-vertex-review.rs",
+      "size": 1254,
+      "sha256": "eeb76f89e5a470e2cf926869173e6ad03b6a4f80c92c162117bfdeeb0faa6daa"
+    }
+  ],
+  "limits": [
+    "Checked intermediateoverflow rejects deliberate safeport inputs instead of original32bitwrap",
+    "No initialcamera or fullraster/clip/shade/opacity behavior inferred",
+    "Triangles are firstA,C,B forcellA andsecondB,C,D foradjacentcellB; not two successivecalls ononefixedcell"
+  ]
+}

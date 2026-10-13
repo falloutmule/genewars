@@ -1,0 +1,39 @@
+{
+  "status": "prepared-and-guards-verified-no-process",
+  "checked_utc": "2026-10-13T02:28:27.551471+00:00",
+  "original_execution": false,
+  "reviewer_emulator_execution": false,
+  "host_watchdog_seconds": 120,
+  "mounts": [
+    "private empty C directory",
+    "internal Z only"
+  ],
+  "config": {
+    "path": "private/reference-run/yield-gate-probe-001/dosbox-x.conf",
+    "size": 20796,
+    "sha256": "a3275d1cf47a7305764698352de4ed6f03fef2ecea192d7f4c45fdd7cb17107b"
+  },
+  "gate": {
+    "path": "private/reference-run/yield-gate-probe-001/drive-c/YIELDGAT.BAT",
+    "size": 342,
+    "sha256": "97efad5d08ee2c3da265fbbbc4fa2446cb7adfeb47b713605937c066447ff3c2"
+  },
+  "prepared": {
+    "path": "private/reference-run/yield-gate-probe-001/logs/prepared.json",
+    "size": 1852,
+    "sha256": "7e1f2760952858ba6665faee8a3a54fb8c92ee1e80c6d9c90d810945cb0f1f27"
+  },
+  "script": {
+    "path": "scripts/reference/yield_probe.py",
+    "size": 8681,
+    "sha256": "758c9162b8aa5d8b78f031a688aa5b346f7777938715c9825a9e6ae0e54beaec"
+  },
+  "checks": [
+    "No game/disc/IMGMOUNT in batch",
+    "Abort checked before release before yieldingwait",
+    "Exact regenerated command equality",
+    "Default launch no Popen",
+    "Good C/Z lock/always accepted",
+    "Five invalid mount/lock/mouse/command/age cases rejected"
+  ]
+}

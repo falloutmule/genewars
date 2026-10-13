@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "status": "completed-runtime-observed",
+  "checked_utc": "2026-10-13T03:03:13.247436+00:00",
+  "session": "run-004",
+  "original_execution": true,
+  "original_execution_requested": true,
+  "dos4gw_runtime_observed": true,
+  "original_returned_marker_observed": false,
+  "known_error_messages": [],
+  "pid": 29652,
+  "process_exit_code": 15,
+  "host_timeout": false,
+  "process_start_utc": "2026-10-13T03:00:32.029872+00:00",
+  "process_end_utc": "2026-10-13T03:02:58.126383+00:00",
+  "process_lifetime_seconds": 146.10384930006694,
+  "release_to_process_end_upper_bound_seconds": 118.136651,
+  "observations": {
+    "menu": "observed",
+    "mission": "not_observed",
+    "gameplay_input": "not_observed",
+    "save_reload": "not_observed",
+    "framebuffer_capture": "not_observed",
+    "timing_sample": "not_observed"
+  },
+  "private_supervisor_observations": {
+    "path": "private/reference-run/run-004/logs/supervisor-observations.json",
+    "size": 1408,
+    "sha256": "ad0d5221dc49c60a8997a8f1fc6dcd6976dbd7bb7a4bee473cca7bd8fdcf4365"
+  },
+  "before_files": {
+    "path": "private/reference-run/run-004/logs/before-files.json",
+    "size": 119024,
+    "sha256": "c9eee3a5d256c0c06121c08b872eb62d3458cb230d4703ff999ff7470c981f62"
+  },
+  "before_game_tree_files": 510,
+  "original_source_files": 490,
+  "unchanged_original_source_files": 489,
+  "copied_runtime_inputs": 19,
+  "unchanged_copied_runtime_inputs": 19,
+  "generated_config_unchanged": true,
+  "original_executables_unchanged": true,
+  "changed": [
+    {
+      "before": {
+        "entry_id": "root/2/disc/17",
+        "path": "private/reference-run/run-004/drive-c/GAME/GW.ERR",
+        "size": 45,
+        "sha256": "e758e8e330d7c6ab2bb8a39cde9d4199a3f25a05172bab482a81ec51c92f03c3"
+      },
+      "after": {
+        "path": "private/reference-run/run-004/drive-c/GAME/GW.ERR",
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "removed": [],
+  "added": [
+    {
+      "path": "private/reference-run/run-004/drive-c/ADDRESS.TXT",
+      "size": 24,
+      "sha256": "9307f34d576f87fe30acdfb325dddafae42ae75cb031748e2210e0925b550e2c"
+    },
+    {
+      "path": "private/reference-run/run-004/drive-c/STARTGW.BAT",
+      "size": 369,
+      "sha256": "e1006cdc16d617598b5a214f8e5ab8a5cdd3309f1527060bb6b2f27c0dd699e6"
+    },
+    {
+      "path": "private/reference-run/run-004/drive-c/YIELD.COM",
+      "size": 27,
+      "sha256": "2e5c8a0491dc099d1296389394e1a659f92eff2b91cf8c310b3c56f35a56aa09"
+    }
+  ],
+  "media_checks": [
+    {
+      "expected_sha256": "ba85aeb6a808145b43998a34faf6904956866539625bd45ead6dba0c2fd10ee5",
+      "expected_size": 238,
+      "actual": {
+        "path": "private/reference-run/run-004/media/GENEWARS.cue",
+        "size": 238,
+        "sha256": "ba85aeb6a808145b43998a34faf6904956866539625bd45ead6dba0c2fd10ee5"
+      },
+      "passed": true
+    },
+    {
+      "expected_sha256": "ba85aeb6a808145b43998a34faf6904956866539625bd45ead6dba0c2fd10ee5",
+      "expected_size": 238,
+      "actual": {
+        "path": "private/disc/member-003.cue",
+        "size": 238,
+        "sha256": "ba85aeb6a808145b43998a34faf6904956866539625bd45ead6dba0c2fd10ee5"
+      },
+      "passed": true
+    },
+    {
+      "expected_sha256": "3ae5f2154a84898a7d1652e550d741a0a431fe67fd0b3eb20121e3b11fd4e5de",
+      "expected_size": 630947520,
+      "actual": {
+        "path": "private/reference-run/run-004/media/GENEWARS.img",
+        "size": 630947520,
+        "sha256": "3ae5f2154a84898a7d1652e550d741a0a431fe67fd0b3eb20121e3b11fd4e5de"
+      },
+      "passed": true
+    },
+    {
+      "expected_sha256": "3ae5f2154a84898a7d1652e550d741a0a431fe67fd0b3eb20121e3b11fd4e5de",
+      "expected_size": 630947520,
+      "actual": {
+        "path": "private/disc/member-004.img",
+        "size": 630947520,
+        "sha256": "3ae5f2154a84898a7d1652e550d741a0a431fe67fd0b3eb20121e3b11fd4e5de"
+      },
+      "passed": true
+    }
+  ],
+  "archive_check": {
+    "expected_sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906",
+    "actual_sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906",
+    "passed": true
+  },
+  "tool_package_check": {
+    "passed": true,
+    "verified_members": 311
+  },
+  "emulator_executable_check": {
+    "expected_sha256": "a82adcfa7af2784566cfeff74c077cefed08505396db2948b7e6aa7d4cee0832",
+    "expected_size": 25836544,
+    "actual": {
+      "path": "private/tools/dosbox-x/2026.10.01/bin/x64/Release SDL2/dosbox-x.exe",
+      "size": 25836544,
+      "sha256": "a82adcfa7af2784566cfeff74c077cefed08505396db2948b7e6aa7d4cee0832"
+    },
+    "passed": true
+  },
+  "emulator_config_check": {
+    "expected_sha256": "101d258bd061ca9f629637f7c1746426416b6b0155b7e16b968667ca76450baa",
+    "expected_size": 20819,
+    "actual": {
+      "path": "private/reference-run/run-004/dosbox-x.conf",
+      "size": 20819,
+      "sha256": "101d258bd061ca9f629637f7c1746426416b6b0155b7e16b968667ca76450baa"
+    },
+    "passed": true
+  },
+  "independently_generated_yield_helper_check": {
+    "expected_sha256": "2e5c8a0491dc099d1296389394e1a659f92eff2b91cf8c310b3c56f35a56aa09",
+    "expected_size": 27,
+    "actual": {
+      "path": "private/reference-run/run-004/drive-c/YIELD.COM",
+      "size": 27,
+      "sha256": "2e5c8a0491dc099d1296389394e1a659f92eff2b91cf8c310b3c56f35a56aa09"
+    },
+    "passed": true
+  },
+  "immutable_input_checks_passed": true,
+  "private_evidence": [
+    {
+      "path": "private/reference-run/run-004/captures/gate.jpg",
+      "size": 43282,
+      "sha256": "12fe86c649ea475276c3d0b98fa580eaaaea24cc341c0ce0a1a27d7df35c87b3"
+    },
+    {
+      "path": "private/reference-run/run-004/captures/menu-before-lock.jpg",
+      "size": 34548,
+      "sha256": "bf3b124e3350d5006c7fff7483a1169d2235e0de77ffee061f27ecef8115448e"
+    },
+    {
+      "path": "private/reference-run/run-004/captures/raw-locked-click-result.jpg",
+      "size": 43593,
+      "sha256": "c2a15bf388ebddef53d5eee0bfd62cc7e5d2936406703a1ef016e330be6e9bbf"
+    },
+    {
+      "path": "private/reference-run/run-004/logs/before-files.json",
+      "size": 119024,
+      "sha256": "c9eee3a5d256c0c06121c08b872eb62d3458cb230d4703ff999ff7470c981f62"
+    },
+    {
+      "path": "private/reference-run/run-004/logs/dosbox-x.log",
+      "size": 5167,
+      "sha256": "7be0d94c11400536d3d7596cc80d1fc2799c1c47dbf9f3028c677db81e53c6f5"
+    },
+    {
+      "path": "private/reference-run/run-004/logs/emulator-stderr.txt",
+      "size": 6030,
+      "sha256": "e193962cb4ab471ddff8500396892aa884e501148cb3b18255eed26f4b66c3d1"
+    },
+    {
+      "path": "private/reference-run/run-004/logs/emulator-stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "private/reference-run/run-004/logs/final-process.json",
+      "size": 195,
+      "sha256": "2d1e3db60cfd43412e20f4c8dcc654a952221f081eb3080a6470a970ed936ef0"
+    },
+    {
+      "path": "private/reference-run/run-004/logs/host-release.json",
+      "size": 1135,
+      "sha256": "e1dbfc4b4e5bbe107f10d0487a5c9a5d38d1067e41e3bd81fc9d19daec0f701d"
+    },
+    {
+      "path": "private/reference-run/run-004/logs/human-approval.json",
+      "size": 2828,
+      "sha256": "1838c6a23f3fd15b5dc8e1593a2c365dddc8e76795f348156bc78935d1985def"
+    },
+    {
+      "path": "private/reference-run/run-004/logs/launch-process.json",
+      "size": 1920,
+      "sha256": "e87d4ccd89c2aaae09cb298209a8213325b3be23e8b9c6ad7aee03a189ad42a4"
+    },
+    {
+      "path": "private/reference-run/run-004/logs/operator-stop.json",
+      "size": 490,
+      "sha256": "d1d4a862509b888ef5abd0739b6113799a98e259c9fb288c247d00e195dba0ff"
+    },
+    {
+      "path": "private/reference-run/run-004/logs/supervisor-observations.json",
+      "size": 1408,
+      "sha256": "ad0d5221dc49c60a8997a8f1fc6dcd6976dbd7bb7a4bee473cca7bd8fdcf4365"
+    },
+    {
+      "path": "private/reference-run/run-004/logs/ui-actions.jsonl",
+      "size": 1132,
+      "sha256": "f77f29fa1ee13cec35bec9645930b6e9ed3724d0f13fb75dfb4d049ea70e902b"
+    },
+    {
+      "path": "research/variants/reference-run-004-approval.json",
+      "size": 1455,
+      "sha256": "4286c126f536483eb5cd34662b3e7f40323c8f0950c5d505bd1bc465793f5aaa"
+    },
+    {
+      "path": "scripts/reference/finish002.py",
+      "size": 11812,
+      "sha256": "747b20fe880fbbd46809a26da14ec3bc67cffb8de5acf61668a35458bd1186c1"
+    }
+  ],
+  "checker_grants_execution_authorization": false,
+  "limits": [
+    "Emulator exit status does not establish game success",
+    "Release-to-process-exit includes shutdown and is not original gameplay timing",
+    "Missing optional observations remain unknown; no inference of menu/mission/capture from exit code",
+    "No original, emulator or GUI launched by this checker"
+  ],
+  "cleanup": "No deletion or restaging; retain this session, earlier sessions and all private outputs."
+}

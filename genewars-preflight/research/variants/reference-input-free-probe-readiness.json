@@ -1,0 +1,177 @@
+{
+  "status": "prepared-not-executed",
+  "original_execution": false,
+  "reviewer_emulator_execution": false,
+  "helper": {
+    "path": "private/reference-run/input-free-gate-probe-002/drive-c/YIELD.COM",
+    "size": 27,
+    "sha256": "2e5c8a0491dc099d1296389394e1a659f92eff2b91cf8c310b3c56f35a56aa09"
+  },
+  "assembly": {
+    "path": "private/reference-run/input-free-gate-probe-002/YIELD.asm",
+    "size": 295,
+    "sha256": "ffd4db541e6a3420fad900d9aa73c71a397a8e17a53978be6a90ab03b2f6dfb6"
+  },
+  "validation": {
+    "size": 27,
+    "unchanged_tick": {
+      "polls": 65535,
+      "steps": 196613,
+      "exit_code": 0,
+      "ds_restored": true
+    },
+    "low16_wrap": {
+      "polls": 1,
+      "steps": 10,
+      "exit_code": 0,
+      "ds_restored": true
+    },
+    "last_poll_change": {
+      "polls": 65535,
+      "steps": 196612,
+      "exit_code": 0,
+      "ds_restored": true
+    },
+    "exhaustive_successor_ticks": 65536,
+    "model_limitations": "Only listed guest instructions modeled; no IRQ, DOS or SDL execution"
+  },
+  "disassembly": [
+    {
+      "address": 256,
+      "bytes": "1e",
+      "mnemonic": "push",
+      "operands": "ds"
+    },
+    {
+      "address": 257,
+      "bytes": "b84000",
+      "mnemonic": "mov",
+      "operands": "ax, 0x40"
+    },
+    {
+      "address": 260,
+      "bytes": "8ed8",
+      "mnemonic": "mov",
+      "operands": "ds, ax"
+    },
+    {
+      "address": 262,
+      "bytes": "8b1e6c00",
+      "mnemonic": "mov",
+      "operands": "bx, word ptr [0x6c]"
+    },
+    {
+      "address": 266,
+      "bytes": "b9ffff",
+      "mnemonic": "mov",
+      "operands": "cx, 0xffff"
+    },
+    {
+      "address": 269,
+      "bytes": "3b1e6c00",
+      "mnemonic": "cmp",
+      "operands": "bx, word ptr [0x6c]"
+    },
+    {
+      "address": 273,
+      "bytes": "7502",
+      "mnemonic": "jne",
+      "operands": "0x115"
+    },
+    {
+      "address": 275,
+      "bytes": "e2f8",
+      "mnemonic": "loop",
+      "operands": "0x10d"
+    },
+    {
+      "address": 277,
+      "bytes": "1f",
+      "mnemonic": "pop",
+      "operands": "ds"
+    },
+    {
+      "address": 278,
+      "bytes": "b8004c",
+      "mnemonic": "mov",
+      "operands": "ax, 0x4c00"
+    },
+    {
+      "address": 281,
+      "bytes": "cd21",
+      "mnemonic": "int",
+      "operands": "0x21"
+    }
+  ],
+  "independent_review": "SOL-01 checked branch targets, stack balance, input absence and 65535 poll bound",
+  "guards": [
+    "default launch never Popen",
+    "changed helper rejected",
+    "missing secure mode rejected",
+    "extra mount rejected",
+    "wrong nonce rejected",
+    "expired watchdog rejected"
+  ],
+  "capstone": {
+    "version": "5.0.1",
+    "wheel_sha256": "1bfa5c81e6880caf41a31946cd6d2d069c048bcc22edf121254b501a048de675",
+    "license": "BSD3; verified private wheel LICENSE.TXT before extraction",
+    "private_locator_shim": true
+  },
+  "sources": [
+    {
+      "path": "private/review/input-free-yield/src-dos-dos_execute.cpp",
+      "size": 38079,
+      "sha256": "d5581e190cbabd7ea6e1a3c8cfb1c74dfa97c43321e29114653ff1fad41d0307"
+    },
+    {
+      "path": "private/review/input-free-yield/src-dosbox.cpp",
+      "size": 342476,
+      "sha256": "39a41a56aa9a9937b65e090c9f18957f42a827a4369b950cf6229ed2bf0f7b59"
+    },
+    {
+      "path": "private/review/input-free-yield/src-ints-bios.cpp",
+      "size": 553932,
+      "sha256": "bd8f618ce165240f0f5a79b212f83b8bc50ef2d880cd0cefae95715561a12f6e"
+    },
+    {
+      "path": "private/review/input-free-yield/include-bios.h",
+      "size": 29939,
+      "sha256": "6ebc40937b5ca0fd8b02e94052ecbac03464768a0ebc359a77ee2420a5159e0e"
+    }
+  ],
+  "prepared": {
+    "path": "private/reference-run/input-free-gate-probe-002/logs/prepared.json",
+    "size": 2097,
+    "sha256": "0b1fa7390ed4174055add198b20a61d7de70b82f214b1e28ced33d4b3ae3c7af"
+  },
+  "scripts": [
+    {
+      "path": "scripts/reference/input_free_yield.py",
+      "size": 3216,
+      "sha256": "b67460858df50b158808df25b1121515f5d9b2fc1b39c0f98e2d6d184f47785a"
+    },
+    {
+      "path": "scripts/reference/input_free_probe.py",
+      "size": 9290,
+      "sha256": "90d164f5a1439f93341269fa7d03f4061795b2e15023dc8f2184bec942f89d21"
+    },
+    {
+      "path": "scripts/reference/validate_input_free_probe.py",
+      "size": 3906,
+      "sha256": "dde032a2a23acd1322f581edd4fab050e31232974b54221ce93e715aedc03677"
+    }
+  ],
+  "gate": {
+    "path": "private/reference-run/input-free-gate-probe-002/drive-c/YIELDGAT.BAT",
+    "size": 316,
+    "sha256": "2a15c7c3bcbcd243d772c91ae50fad74bb47603e9569da08cf5cbc9a5d106a98"
+  },
+  "config": {
+    "path": "private/reference-run/input-free-gate-probe-002/dosbox-x.conf",
+    "size": 20796,
+    "sha256": "a3275d1cf47a7305764698352de4ed6f03fef2ecea192d7f4c45fdd7cb17107b"
+  },
+  "no_game_or_disc_mounted": true,
+  "root_only_gui_launch": true
+}

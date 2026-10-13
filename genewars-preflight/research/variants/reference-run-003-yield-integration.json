@@ -1,0 +1,48 @@
+{
+  "status": "input-free-yield-integration-checked-no-reviewer-execution",
+  "verified_empty_probe": {
+    "path": "research/variants/reference-input-free-probe-result.json",
+    "size": 3350,
+    "sha256": "2d8d05bc104a529b0213c6338225bd1de18706abbbc7af4d04b6fa1cf4ec93f6"
+  },
+  "helper_sha256": "2e5c8a0491dc099d1296389394e1a659f92eff2b91cf8c310b3c56f35a56aa09",
+  "gate_template_sha256": "95b99a9d1acf2368be69820b31f450e8e09ae3a43c3812c89353e10caa6e0895",
+  "no_synthetic_input": true,
+  "abort_checked_before_release": true,
+  "helper_missing_aborts": true,
+  "prior_failed_attempt_preserved": true,
+  "host_watchdog_seconds": 1200,
+  "original_autorun": false,
+  "sources": [
+    {
+      "path": "scripts/reference/launch.py",
+      "size": 15102,
+      "sha256": "aa734f6cfd626ce5bda43a89e8e8d45cc637d1cb8bff93fef1c5012923d3abc4"
+    },
+    {
+      "path": "scripts/reference/gate.py",
+      "size": 9355,
+      "sha256": "0943d4d373971ca25344f23be939540ebe08b4f20f65acb846a9a0424ee6f000"
+    },
+    {
+      "path": "scripts/reference/prepare.py",
+      "size": 24136,
+      "sha256": "4245380bf2af3dff066be116f9b6a1b572a4fe92a73cad3f94332dd8df752417"
+    },
+    {
+      "path": "scripts/reference/archive_failed_launch.py",
+      "size": 4306,
+      "sha256": "b5cbcdb4c71e801c85ff006632999701b4659b7d964955c89239cb061eaaa16f"
+    },
+    {
+      "path": "scripts/reference/finish002.py",
+      "size": 11812,
+      "sha256": "747b20fe880fbbd46809a26da14ec3bc67cffb8de5acf61668a35458bd1186c1"
+    },
+    {
+      "path": "scripts/reference/input_free_yield.py",
+      "size": 4308,
+      "sha256": "737efc3c6018cd5aac7dcefb065aaf6245625456796315d604fda7036013f006"
+    }
+  ]
+}

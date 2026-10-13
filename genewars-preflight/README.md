@@ -33,6 +33,12 @@ genewars-tools.exe sprite-decode SPRITE_DATABASE_PREFIX DECODED_TAB RECORD INDEX
 genewars-tools.exe sprite4-verify SPRITE_DATABASE_PREFIX DECODED_TAB BASE
 genewars-tools.exe sprite4-decode SPRITE_DATABASE_PREFIX DECODED_TAB RECORD BASE INDEX_OUTPUT MASK_OUTPUT
 genewars-tools.exe distance 0 0 3 4
+genewars-tools.exe campaign-plan 0 0
+genewars-tools.exe campaign-inspect HEADER_PATH MISSION_PATH
+genewars-tools.exe terrain-info MISSION_PATH
+genewars-tools.exe terrain-height MISSION_PATH X Y
+genewars-tools.exe terrain-tile DECODED_B32A TILE OUTPUT
+genewars-tools.exe terrain-cell MISSION X Y CAMERA_X CAMERA_Y TOP ANCHOR_X ANCHOR_Y
 ```
 
 `INPUT` may be `-` for binary stdin. Inputs are bounded to 64 MiB. The output limit defaults to 64 MiB and can be tightened. `rnc-decode` requires a complete single RNC stream. `rnc-prefix` explicitly reports consumed and remaining bytes; callers must account for the tail. Existing differing output files are never overwritten. The distance command returns squared distance using the CD candidate's wrapped arithmetic, with no assumed gameplay units.
@@ -59,10 +65,24 @@ python -B scripts/cargo.py run -p genewars-desktop --bin genewars-controls --off
 
 A supervised Windows test observed events27/28, a nonactivating margin click and Escape exit. See `research/integration/native-controls-observation.json`. It preserves ordered button transitions and uses current cursor coordinates at each diagnostic60Hz packet update. This is not original game cadence or a full interface. The portable core also exposes a bounded construction-stage resource debit; callback, cancellation and later world mutations remain outside that helper.
 
+## Native menu composition
+
+`python -B scripts/menu_inputs.py` stages six exact CD resources privately, reusing the validated RNC outputs. `python -B scripts/render_menu.py --frames 3` exports a fresh private BMP/PNG and presents the native window for three frames. The executable also accepts `--window` for an interactive menu inspection until Escape or window close:
+
+```text
+private/build/rust-target/debug/genewars-menu.exe private/integration/menu private/integration/menu/titlescr.pal private/integration/menu/new-menu.bmp --window
+```
+
+Choose a new output filename; the executable refuses to overwrite one. The three-button composition uses the original FONT2 glyphs and TEXT.DAT strings, TITLESCR palette/background, and IFTITLE components. All 307,200 pixels match an independent instruction-derived composition. The proven scope assumes a zero UI origin, zero incoming draw flags and full 640×480 clip. The event host now runs the proved capture/release state, selected artwork and opacity hit tests. It records activation requests without dispatching game scenes. Optional `--report NEW_JSON` records requests, updates and presented frames. A supervised test observed Single Player/Options/Quit requests 0/3/2, transparent-corner rejection and Escape exit. Immediate host events and focus cancellation are explicit port policies; original polling cadence remains separate.
+
+`python -B scripts/campaign_inputs.py` stages seven exact resources for the initial campaign/mission. The `campaign-plan` command accepts progress 0–23 and prior system 0–3; these are explicit port bounds. It preserves the original conditional system update. `campaign-inspect` validates the 699-byte header and tagged mission prefix and reports metadata only. It does not deserialize the opaque tail or run a mission. The native plan and first-file slices pass independent comparisons in `scripts/validate_campaign_plan.py`.
+
+Terrain commands expose the proved 128×128 map layout and piecewise triangular height interpolation. Coordinates for `terrain-height` are signed 16-bit words, with cell indices in their high bytes and fractions in their low bytes. Its result is doubled height, not screen height or a gameplay-unit claim. `terrain-tile` exports 1,024 raw palette indices from one of 160 32×32 B32A tiles; zero is an opaque index for the traced mode-five terrain consumer. Every raw cell byte, tile byte and nearly one million real/synthetic height samples passed independent comparison. `terrain-cell` combines actual cell heights, texture/orientation and four UV/vertex positions with explicit unwrapped cell/camera coordinates and placement. Map reads wrap separately at 128. Its two triangle index triples describe cell topology, not the original scene draw order; overflow is rejected. The renderer does not yet render a terrain scene.
+
 ## Evidence and distribution boundaries
 
 The CD candidate is SHA-256 `4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba`. Its static analysis does not establish canonical retail behavior. Standalone Ghidra 12.0.1 uses the matched LX/LE extension; REA has not analyzed this executable. No incompatible symbol maps have been applied.
 
-The first DOSBox-X reference attempt stopped at missing `config.ini`. A second session, using a statically derived configuration, displayed the introduction and menu/options artwork. Missing dynamic labels and unresolved guest mouse motion prevented a mission test. It ended by operator termination after UI close failed; its exit status is not a game result. Window screenshots and logs remain private. The original archive, media and executable hashes are unchanged; see [run 002 results](research/variants/reference-run-002-result.json). The latest user instruction authorizes necessary reference reruns. No installer or patcher ran.
+The first DOSBox-X reference attempt stopped at missing `config.ini`. Run 002 reached intro/menu/options artwork. Runs 003 and 004 used the statically proved English runtime copies and displayed readable labels. Guest mouse movement remained unresolved through both warp and raw input diagnostics, preventing a mission test. The sessions ended by verified-PID operator termination after UI close failed; exit 15 is not a game result. No reference process remains running. Window screenshots and logs remain private. The archive, media and executable hashes are unchanged; see [run 003 outcome](research/variants/reference-run-003-outcome.md) and [run 004 outcome](research/variants/reference-run-004-outcome.md). The latest user instruction authorizes necessary reference reruns. No installer or patcher ran.
 
 All original resources, downloaded tools, raw decompiler exports and build caches stay under ignored `private/`. No commercial assets are embedded in Rust or synthetic tests. Third-party research license findings are in [independent-review.md](research/variants/independent-review.md). No product distribution license has been selected, and no remote publication is part of this work.

@@ -31,17 +31,54 @@ RECORD = ROOT / 'research/variants/reference-readiness.json'
 SESSION = 'run-001'
 HUMAN_APPROVAL = ROOT / 'research/variants/reference-approval.json'
 EXTRA_GAME_INPUTS = {}
+COPIED_GAME_INPUTS = {}
+SESSION_WRAPPERS = {'run-002':'run002.py','run-003':'run003.py','run-004':'run004.py'}
+# Independently reviewed five listings, mapped strings/tables, and all19aliases.
+TEXT_INSTALL_PROOF_PATH = 'research/ghidra/english-install-evidence.json'
+TEXT_INSTALL_PROOF_SHA256 = '541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970'
+ENGLISH_TEXT_ENTRY = 'root/2/disc/592'
+ENGLISH_TEXT_SHA256 = '23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786'
 
 
 def select_session(name):
     """Select a fixed reviewed context inside this Python process only."""
-    global SESSION, RUN, RECORD, HUMAN_APPROVAL, EXTRA_GAME_INPUTS
-    if name != 'run-002':
-        raise ValueError('Only the explicitly prepared run-002 context can be selected')
+    global SESSION, RUN, RECORD, HUMAN_APPROVAL, EXTRA_GAME_INPUTS, COPIED_GAME_INPUTS
+    if name not in SESSION_WRAPPERS:
+        raise ValueError('Only explicitly reviewed session contexts can be selected')
     SESSION = name
-    RUN = ROOT / 'private/reference-run/run-002'
-    RECORD = ROOT / 'research/variants/reference-run-002-readiness.json'
-    HUMAN_APPROVAL = ROOT / 'research/variants/reference-run-002-approval.json'
+    RUN = ROOT / 'private/reference-run' / name
+    RECORD = ROOT / 'research/variants' / ('reference-'+name+'-readiness.json')
+    HUMAN_APPROVAL = ROOT / 'research/variants' / ('reference-'+name+'-approval.json')
+    COPIED_GAME_INPUTS = {}
+    if name in ('run-003','run-004'):
+        proof_path = ROOT / TEXT_INSTALL_PROOF_PATH
+        if TEXT_INSTALL_PROOF_SHA256 is None or not proof_path.exists() or digest(proof_path) != TEXT_INSTALL_PROOF_SHA256:
+            raise ValueError('Run003 text-copy staging awaits independently reviewed installer evidence')
+        proof = json.loads(proof_path.read_bytes())
+        for item in proof['private_listings']:
+            if digest(ROOT/item['private_path']) != item['sha256']:
+                raise ValueError('Text-install instruction evidence changed')
+        COPIED_GAME_INPUTS = {'GAME/DATA/TEXT.DAT':dict(source_entry_id=ENGLISH_TEXT_ENTRY,
+            sha256=ENGLISH_TEXT_SHA256,size=36610,evidence=file_record(proof_path))}
+        manifest = json.loads((ROOT/'research/game-files-manifest.json').read_bytes())
+        speech = [entry for entry in manifest['entries'] if entry['kind']=='file'
+            and entry['entry_id'].startswith('root/2/disc/')
+            and entry.get('normalized_iso_path','').startswith('GAME/SPEECH/ENG/')]
+        if len(speech)!=18 or sum(entry['size'] for entry in speech)!=19166106:
+            raise ValueError('Unexpected exact English speech source set')
+        for entry in speech:
+            source = PurePosixPath(entry['normalized_iso_path'])
+            if len(source.parts)!=4:
+                raise ValueError('Installer wildcard admits direct English speech files only')
+            destination = 'GAME/SPEECH/'+source.name
+            if destination.casefold() in {name.casefold() for name in COPIED_GAME_INPUTS}:
+                raise ValueError('Flattened runtime alias collision')
+            COPIED_GAME_INPUTS[destination] = dict(source_entry_id=entry['entry_id'],
+                sha256=entry['sha256'],size=entry['size'],evidence=file_record(proof_path))
+        admitted = {(row['entry_id'],'GAME/'+row['destination'],row['size'],row['sha256']) for row in proof['copies']}
+        prepared = {(row['source_entry_id'],destination,row['size'],row['sha256']) for destination,row in COPIED_GAME_INPUTS.items()}
+        if admitted != prepared:
+            raise ValueError('Runtime aliases differ from the reviewed installer receipt')
     # Independent generated text following the exact setup writer's eight
     # quoted fields. These are preparation paths, not inferred game defaults.
     pairs = [('CD','D:\\GAME\\'),('InstallDrive','C:\\GAME\\'),('Language','ENGLISH'),
@@ -56,6 +93,34 @@ def select_session(name):
     if any(len(line) >= 79 for line in text.splitlines()) or len(text.splitlines()) != 8:
         raise ValueError('Generated configuration violates parser line limit')
     EXTRA_GAME_INPUTS = {'GAME/config.ini': text}
+
+
+def wrapper_command(action):
+    wrapper = SESSION_WRAPPERS.get(SESSION)
+    if wrapper is None:
+        return 'python -B scripts/reference/'+action+'.py'
+    return 'python -B scripts/reference/'+wrapper+' '+action
+
+
+def effective_overrides():
+    overrides = {section:dict(values) for section,values in OVERRIDES.items()}
+    if SESSION in ('run-003','run-004'):
+        overrides['sdl']['mouse_emulation'] = 'always'
+    if SESSION == 'run-004':
+        overrides['sdl']['raw_mouse_input'] = 'true'
+    return overrides
+
+
+def runtime_alias_binding(rows):
+    """Bind the complete source/destination set, independent of session folder."""
+    normalized = []
+    for row in rows:
+        relative = row.get('runtime_relative_path')
+        if relative is None:
+            relative = row['path'].split('/drive-c/',1)[1]
+        normalized.append(dict(source_entry_id=row['source_entry_id'],sha256=row['sha256'],size=row['size'],runtime_relative_path=relative))
+    normalized.sort(key=lambda row:row['runtime_relative_path'].casefold())
+    return __import__('hashlib').sha256(json.dumps(normalized,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
 
 OVERRIDES = {
@@ -183,10 +248,14 @@ def make_config():
             if not sep or current is None or key.strip().lower() in sections[current]:
                 raise ValueError('Unexpected reference configuration syntax')
             sections[current][key.strip().lower()] = value.strip()
-    for section, settings in OVERRIDES.items():
+    for section, settings in effective_overrides().items():
         for key, value in settings.items():
             if key not in sections[section]:
-                raise ValueError(f'Unsupported override {section}/{key}')
+                # Packaged full reference omits this SDL2-only key. The pinned
+                # release sdlmain.cpp6950 explicitly registers it, defaultfalse,
+                # OnlyAtStart; admit exactly this reviewed run004 diagnostic.
+                if not (SESSION=='run-004' and section=='sdl' and key=='raw_mouse_input' and value=='true'):
+                    raise ValueError(f'Unsupported override {section}/{key}')
             sections[section][key] = value
     lines = ['# Private pinned reference setup. No startup/mount/game commands.']
     for section, settings in sections.items():
@@ -200,6 +269,7 @@ def prepare_run(stage):
     if stage and (RUN / 'logs/human-approval.json').exists():
         raise ValueError('Run has approval/session record; preserve it and stage a separately reviewed new run')
     rows = []
+    copied = []
     with SourceReader() as reader:
         entries = [e for e in reader.entries.values() if e['kind'] == 'file'
                    and e.get('normalized_iso_path', '').startswith('GAME/')
@@ -220,6 +290,20 @@ def prepare_run(stage):
             if target.stat().st_size != entry['size'] or digest(target) != entry['sha256']:
                 raise ValueError(f'Staged file mismatch: {entry["entry_id"]}')
             rows.append({'entry_id': entry['entry_id'], **file_record(target)})
+        for rel,contract in COPIED_GAME_INPUTS.items():
+            if rel.casefold() in names:
+                raise ValueError('Flattened alias collides with an original CD path')
+            names.add(rel.casefold())
+            entry = reader.entries[contract['source_entry_id']]
+            if (entry['size'],entry['sha256']) != (contract['size'],contract['sha256']):
+                raise ValueError('Reviewed runtime-copy source changed')
+            target = checked(RUN/'drive-c'/rel,RUN)
+            if stage:
+                ensure_bytes(target,reader.read(entry['entry_id']),RUN)
+            if target.stat().st_size != entry['size'] or digest(target) != entry['sha256']:
+                raise ValueError('Reviewed flattened text copy changed')
+            copied.append(dict(source_entry_id=entry['entry_id'],runtime_relative_path=rel,**file_record(target),
+                provenance='Byte-identical source copy to statically proved installed runtime path',evidence=contract['evidence']))
         media = []
         for entry_id, source, name in (
             ('root/2/disc/3', ROOT / 'private/disc/member-003.cue', 'GENEWARS.cue'),
@@ -238,7 +322,7 @@ def prepare_run(stage):
         archive = {'sha256': reader.manifest['source']['sha256_before'],
                    'revalidated_by': 'SourceReader constructor'}
     # Only the exact expected files may be visible in C: before approval.
-    expected = {row['path'] for row in rows}
+    expected = {row['path'] for row in rows+copied}
     generated = []
     for rel,data in EXTRA_GAME_INPUTS.items():
         target = checked(RUN/'drive-c'/rel,RUN)
@@ -259,6 +343,13 @@ def prepare_run(stage):
             if digest(gate_path) != gate_info['sha256']:
                 raise ValueError('Session gate changed')
             expected.add(gate_info['path'])
+        helper_info = approval.get('yield_helper')
+        if helper_info:
+            from input_free_yield import CODE
+            helper_path = checked(ROOT / helper_info['path'], RUN)
+            if helper_path != RUN/'drive-c/YIELD.COM' or helper_path.read_bytes()!=CODE or file_record(helper_path)!=helper_info:
+                raise ValueError('Input-free yield helper changed')
+            expected.add(helper_info['path'])
     actual = {checked(p, RUN).relative_to(ROOT).as_posix()
               for p in (RUN / 'drive-c').rglob('*') if p.is_file()}
     if actual != expected:
@@ -276,13 +367,14 @@ def prepare_run(stage):
             config_path.write_bytes(config)
         else:
             ensure_bytes(config_path, config, RUN)
-        ensure_bytes(RUN / 'logs/before-files.json', (json.dumps(rows+generated, indent=2)+'\n').encode(), RUN)
+        ensure_bytes(RUN / 'logs/before-files.json', (json.dumps(rows+generated+copied, indent=2)+'\n').encode(), RUN)
     if (RUN / 'dosbox-x.conf').read_bytes() != config:
         raise ValueError('Pinned config mismatch')
     return {'files': rows, 'file_count': len(rows), 'game_bytes': sum(r['size'] for r in rows),
             'generated_game_inputs': generated,
+            'copied_game_inputs': copied,
             'media': media, 'source_archive': archive, 'config': file_record(RUN / 'dosbox-x.conf'),
-            'config_parameter_count': count, 'config_overrides': OVERRIDES,
+            'config_parameter_count': count, 'config_overrides': effective_overrides(),
             'executable_sections_empty': ['autoexec', 'config', '4dos', 'devices']}
 
 
@@ -304,7 +396,7 @@ def main():
                 and all(digest(ROOT / b['startup_log']['path']) == b['startup_log']['sha256']
                         for b in receipt['batches'])):
             validation = receipt
-    record = {'schema_version': 1, 'status': 'staged-and-hash-verified-original-execution-not-authorized',
+    record = {'schema_version': 1, 'status': 'staged-and-hash-verified-no-original-executed',
               'session': SESSION,
               'original_execution': False, 'emulator_execution': validation is not None,
               'emulator_runtime_restrictions_tested': validation is not None,
@@ -313,16 +405,20 @@ def main():
               'security_limit': 'DOSBox controls are not an OS sandbox. Process retains host user permissions.',
               'reproduce': 'python -B scripts/reference/prepare.py --stage',
               'verify_only': 'python -B scripts/reference/prepare.py'}
-    if SESSION == 'run-002':
-        record.update(reproduce='python -B scripts/reference/run002.py prepare --stage',
-                      verify_only='python -B scripts/reference/run002.py prepare',
+    if SESSION in SESSION_WRAPPERS:
+        record.update(reproduce=wrapper_command('prepare')+' --stage',
+                      verify_only=wrapper_command('prepare'),
                       config_evidence=file_record(ROOT/'research/ghidra/config-evidence.json'),
                       human_approval_record=HUMAN_APPROVAL.relative_to(ROOT).as_posix())
         pending = {'run_id':SESSION,'approved':False,'human_statement':None,
                    'candidate_sha256':'4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba',
                    'generated_config_sha256':runtime['generated_game_inputs'][0]['sha256'],
                    'scope':'One separately approved supervised session of exact CD GW.EXE/DOS4GW with generated static-evidence config.ini. No installer/launcher/patch/other variant.',
-                   'note':'Preparation is not original-execution authorization. Run-001 approval was consumed.'}
+                   'note':'Preparation does not grant permission. Supervisor must record the applicable human-approved scope.'}
+        if runtime['copied_game_inputs']:
+            pending['flattened_text_sha256'] = runtime['copied_game_inputs'][0]['sha256']
+            pending['runtime_aliases_sha256'] = runtime_alias_binding(runtime['copied_game_inputs'])
+            record['text_install_evidence'] = runtime['copied_game_inputs'][0]['evidence']
         if stage and not HUMAN_APPROVAL.exists():
             with HUMAN_APPROVAL.open('x',encoding='utf-8') as stream:
                 json.dump(pending,stream,indent=2)

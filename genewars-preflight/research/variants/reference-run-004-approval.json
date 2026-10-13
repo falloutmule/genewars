@@ -1,0 +1,13 @@
+{
+  "run_id": "run-004",
+  "approved": true,
+  "human_statement": "Continue where you left off. Full access is enabled now\u2014retry the approved reference session, then keep implementing and testing GeneWars. I\u2019ll be unavailable. re run what ever you need too. stop asking permission",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "generated_config_sha256": "ff0c1921640bb81cd0b73fc4a995316ea9ff1b8d60ed288e5d52a1be4e7c0d5f",
+  "scope": "One root-supervised <=1200host-second exact CD GW.EXE/DOS4GW session using unchanged126-byteconfig.ini and19Englishaliases, verifiedinput-freegate; onlynewemulator delta raw_mouse_input=true versusrun003. Observe actualcapture andguestcursor, reachfirstmissionifpossible, optionalbriefsave/reload/timing. Noinstaller/patch/alternatevariant/network/upload/globalconfig.",
+  "note": "Latest direct human authorization covers necessary scoped reruns. Root alone launches and supervises. This records permission; no checker grants it.",
+  "flattened_text_sha256": "23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786",
+  "runtime_aliases_sha256": "55c352cd19e90344f4c07c97b3dc65b70c437ae763a6555c78b42d869ca3f0f6",
+  "recorded_utc": "2026-10-13T02:57:21.047454+00:00",
+  "authorization_source": "Direct human statement relayed by root in this team conversation; latest instruction explicitly authorizes necessary scoped reference reruns."
+}

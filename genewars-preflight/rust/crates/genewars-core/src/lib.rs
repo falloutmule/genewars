@@ -5,9 +5,15 @@ mod opaque_records;
 mod custom_list;
 mod mouse_packet;
 mod construction;
+mod campaign;
+mod menu_control;
+mod terrain;
 
 /// Helpers whose evidence is restricted to the supplied CD analysis candidate.
 pub mod cd_candidate {
+    pub use crate::campaign::{CampaignPlanError, CampaignResourcePlan};
+    pub use crate::menu_control::{MenuCallback0State, MenuCallbackResult, MenuControl, MenuPacket};
+    pub use crate::terrain::{interpolate_height, TerrainError};
     pub use crate::construction::{construction_stage3_debit, ConstructionSelector,
         InvalidConstructionSelector, ConstructionPools, ConstructionDebit, ConstructionDebitStatus};
     pub use crate::custom_list::{custom_list_offset_step, custom_list_selection, custom_list_name,

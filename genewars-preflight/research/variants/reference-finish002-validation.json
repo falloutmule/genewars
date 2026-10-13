@@ -1,26 +1,41 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T01:54:08.229150+00:00",
+  "checked_utc": "2026-10-13T02:48:00.474007+00:00",
   "synthetic_cases": [
     {
+      "session": "run-002",
       "case": "unreleased",
       "exit_code": 0,
       "passed": true
     },
     {
+      "session": "run-002",
       "case": "observed",
       "exit_code": 9,
       "passed": true
     },
     {
+      "session": "run-002",
       "case": "unconfirmed",
       "exit_code": -9,
+      "passed": true
+    },
+    {
+      "session": "run-003",
+      "case": "copied-runtime",
+      "exit_code": 15,
+      "passed": true
+    },
+    {
+      "session": "run-003",
+      "case": "changed-helper",
+      "exit_code": 15,
       "passed": true
     }
   ],
   "assertions": [
     "No process creation",
-    "491 baseline files",
+    "491/510 baseline files with19 separately bound aliases",
     "Actual added/changed/removed counts",
     "Nonzero/negative exit retained",
     "Released but unobserved runtime stays unknown",
@@ -28,7 +43,8 @@
     "Absent observations stay unknown",
     "Missing final receipt rejected",
     "Checker grants no permission and does not negate human authorization",
-    "Human approval unchanged"
+    "Human approval unchanged",
+    "Independent helper addition separately inventoried; changed helper fails immutable checks"
   ],
   "actual_reference_run_read_or_changed": false
 }

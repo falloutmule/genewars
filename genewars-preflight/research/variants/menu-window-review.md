@@ -1,0 +1,11 @@
+# Event-driven static menu host review
+
+No blocking issue found in the current Windows x64 host. Escape reacts to the delivered Pressed event and CloseRequested exits, so a short press no longer depends on polling a held state. Event-loop errors propagate before a success report. The image, context and surface use owned Arc window references; orderly return drops them. Window IDs are checked before handling events.
+
+Successful buffer presentation alone increments the counter. A positive CLI limit exits after its requested count; zero dimensions return without increment or continuous redraw, and resize requests another redraw. Without a limit the static host waits for events and redraw requests. This is presentation behavior, not original game cadence or timing. The frame limit counts successful presentation calls, not independently measured physical monitor refreshes. A minimized window can wait indefinitely without reaching a frame limit; the integration subprocess has a separate 30-second timeout.
+
+The physical-client buffer samples floor(x×source_width/client_width) and the corresponding y expression. This stays inside the 640×480 source and nearest-neighbor scales the complete image. Current Windows x64 arithmetic remains within usize bounds for u32 client dimensions; portability to a 32-bit target is not reviewed. A changed DPI/client size is handled by querying current dimensions at each redraw. No game pointer or hit mapping is implemented in this static host.
+
+The input staging helper pins six exact CD source IDs and hashes, validates cached decode lengths/hashes and confines decoded paths to private storage. It refuses to overwrite changed staged inputs. The render wrapper validates the native report, exact optional frame-limit outcome, bounded subprocess, BMP dimensions/encoding and RGB/PNG hashes. Its output is private; no game text or art is copied into public metadata.
+
+The existing independent entire-menu pixel oracle remains applicable to composition; this host replacement does not alter that rendering path. Root's separately supervised native observation is evidence for Escape/window control, not reviewer GUI execution. The updated static source contract requires zero UI origin, zero draw flags and a full 640×480 clip; the Rust canvas explicitly provides those conditions.

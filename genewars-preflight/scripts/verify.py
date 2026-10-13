@@ -37,6 +37,9 @@ def main():
     run('rust_workspace_tests', py + ['scripts/cargo.py', 'test', '--workspace', '--offline', '--locked'])
     build = run('native_cli_build', py + ['scripts/cargo.py', 'build', '-p', 'genewars-tools', '--offline', '--locked'])
     if build.returncode == 0:
+        run('first_campaign_resource_staging', py + ['scripts/campaign_inputs.py'])
+        run('native_campaign_resource_plan', py + ['scripts/validate_campaign_plan.py'])
+        run('native_terrain_cli', py + ['scripts/validate_terrain_cli.py'])
         run('all_rnc_records', py + ['scripts/validate_rnc_corpus.py'])
         run('real_panel_render', py + ['scripts/render_panel.py'])
         # Exact creature hashes select the independently traced packed4 path.
@@ -70,6 +73,16 @@ def main():
     run('input_packet_bridge', py + ['scripts/ghidra/validate_input_bridge.py'])
     run('custom_list_storage', py + ['scripts/ghidra/validate_list_layout.py'])
     run('config_parser_and_writer', py + ['scripts/ghidra/validate_config_bridge.py'])
+    run('english_install_copy_contract', py + ['scripts/ghidra/validate_english_install_bridge.py'])
+    run('font_and_menu_contract', py + ['scripts/ghidra/validate_font_menu_bridge.py'])
+    run('campaign_entry_contract', py + ['scripts/ghidra/validate_campaign_entry_bridge.py'])
+    run('menu_input_contract', py + ['scripts/ghidra/validate_menu_input_bridge.py'])
+    run('terrain_contract', py + ['scripts/ghidra/validate_terrain_bridge.py'])
+    run('terrain_projection_contract', py + ['scripts/ghidra/validate_terrain_projection_bridge.py'])
+    run('independent_terrain_cells_and_heights', py + ['research/variants/terrain-review.py'])
+    run('independent_terrain_vertices', py + ['research/variants/terrain-vertex-review.py'])
+    run('independent_terrain_shade_and_fade', py + ['research/variants/terrain-shade-review.py'])
+    run('independent_campaign_and_menu_controls', py + ['research/variants/campaign-menu-review.py'])
     run('bones_codec_bridge', py + ['scripts/ghidra/validate_bones_bridge.py'])
     run('construction_debit_bridge', py + ['scripts/ghidra/validate_construction_bridge.py'])
     run('independent_construction_debit', py + ['research/variants/construction-review.py'])
@@ -103,6 +116,16 @@ def main():
             observed = json.loads(controls_report.read_text(encoding='utf-8'))
             checks['native_controls_updated_three_packets'] = (observed['packet_updates'] == 3 and observed['presented_frames'] >= 3
                                                                and observed['exit_reason'] == 'frame_limit' and 'error' not in observed)
+
+    menu_build = run('native_menu_build', py + ['scripts/cargo.py', 'build', '-p', 'genewars-desktop', '--bin', 'genewars-menu', '--offline', '--locked'])
+    if menu_build.returncode == 0:
+        menu_render = run('native_menu_render_and_window', py + ['scripts/render_menu.py', '--frames', '3'], timeout=45)
+        menu_review = run('independent_font_and_menu_pixels', py + ['research/variants/font-menu-review.py'])
+        if menu_render.returncode == 0 and menu_review.returncode == 0:
+            rendered = json.loads((ROOT / 'research/integration/menu-render.json').read_bytes())
+            reviewed = json.loads((ROOT / 'research/variants/font-menu-review.json').read_bytes())
+            checks['current_native_menu_pixels_match_oracle'] = (reviewed['status'] == 'passed'
+                and rendered['rgb_sha256'] == reviewed['menu']['rgb_sha256'])
 
     baseline = json.loads((ROOT / 'research/verification.json').read_text(encoding='utf-8'))
     checks['dated_preflight_twelve_checks_passed'] = baseline['all_passed'] and len(baseline['checks']) == 12 and all(baseline['checks'].values())

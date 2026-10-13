@@ -1,0 +1,469 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/ui-input/instructions-000a87d0.txt",
+      "sha256": "1fe8f247f251c7b1a5a333b71d830d93ddca2feb1f6d557448894131510afd58"
+    },
+    {
+      "private_path": "private/ghidra/ui-controls/instructions-000a86d0.txt",
+      "sha256": "a4336dd52bebdb8311a05dc25bc64063e99d93928aaa23e335012aaf19bea470"
+    },
+    {
+      "private_path": "private/ghidra/ui-frame/instructions-00098c40.txt",
+      "sha256": "b0b7188387e745e3fee9ea2c49a65b1bf1a2994300468fb6ca85da5771c2249b"
+    },
+    {
+      "private_path": "private/ghidra/sprite-scaled/instructions-00098b60.txt",
+      "sha256": "2775e1d25062d7c9140240a007024e944448df5387bba3379ba185ce2bcaed43"
+    },
+    {
+      "private_path": "private/ghidra/ui-controls/instructions-000a84d0.txt",
+      "sha256": "df232042329475b234c8d61f7844ffac88e5bd10cf98c10c2b4e601ba9e44b5e"
+    },
+    {
+      "private_path": "private/ghidra/font-menu/instructions-0007c870.txt",
+      "sha256": "f46fc13eef1df0bc64238de65ae7355f73a889194b4c870f0a6b50ac91e52f07"
+    }
+  ],
+  "controls": [
+    {
+      "id": 0,
+      "record_va": "0x10708c",
+      "x": 140,
+      "three_button_y": 115,
+      "enabled_in_three_button": true,
+      "flags": "0x1048",
+      "callback": 0
+    },
+    {
+      "id": 1,
+      "record_va": "0x1070b4",
+      "x": 140,
+      "three_button_y": null,
+      "enabled_in_three_button": false,
+      "flags": "0x1048",
+      "callback": 0
+    },
+    {
+      "id": 3,
+      "record_va": "0x1070dc",
+      "x": 140,
+      "three_button_y": 186,
+      "enabled_in_three_button": true,
+      "flags": "0x1048",
+      "callback": 0
+    },
+    {
+      "id": 2,
+      "record_va": "0x107104",
+      "x": 140,
+      "three_button_y": 257,
+      "enabled_in_three_button": true,
+      "flags": "0x1048",
+      "callback": 0
+    }
+  ],
+  "scope": "Flags0x1048, callback0, capture countdown0or1; three-button menu with normal-frame hit test and zero origin",
+  "normal_hit": {
+    "width": 346,
+    "height": 75,
+    "mask_sha256": "a9a7ad36a9255a84d90c9d9e4d70b9a17f3f9b6f7273ac7f1d018d3c6295814e",
+    "opaque_count": 18827,
+    "private_mask": "private/ghidra/menu-input/normal-hit-mask.bin",
+    "decoded_anb_sha256": "f5537949f249fc4f84e265768a4a8af981d5db02604a67371bb70dab3f40e7bc",
+    "components": [
+      {
+        "sprite": 1,
+        "x": 0,
+        "y": 0,
+        "width": 116,
+        "height": 75
+      },
+      {
+        "sprite": 2,
+        "x": 116,
+        "y": 11,
+        "width": 120,
+        "height": 50
+      },
+      {
+        "sprite": 3,
+        "x": 236,
+        "y": 3,
+        "width": 110,
+        "height": 71
+      }
+    ],
+    "pixel_comparisons": 25950,
+    "vectors": [
+      {
+        "local_x": 0,
+        "local_y": 0,
+        "hit": false
+      },
+      {
+        "local_x": 345,
+        "local_y": 0,
+        "hit": false
+      },
+      {
+        "local_x": 0,
+        "local_y": 74,
+        "hit": false
+      },
+      {
+        "local_x": 345,
+        "local_y": 74,
+        "hit": false
+      },
+      {
+        "local_x": 173,
+        "local_y": 37,
+        "hit": true
+      },
+      {
+        "local_x": 116,
+        "local_y": 11,
+        "hit": true
+      },
+      {
+        "local_x": 236,
+        "local_y": 3,
+        "hit": false
+      },
+      {
+        "local_x": -1,
+        "local_y": 0,
+        "hit": false
+      },
+      {
+        "local_x": 346,
+        "local_y": 0,
+        "hit": false
+      },
+      {
+        "local_x": 0,
+        "local_y": 75,
+        "hit": false
+      }
+    ]
+  },
+  "state_vectors": [
+    {
+      "input": {
+        "captured": null,
+        "prior_inside": false,
+        "prior_countdown": 0,
+        "packet_byte8": 0,
+        "packet_byte9": 0,
+        "first_opaque_hit": 0,
+        "captured_opaque_hit": false
+      },
+      "output": {
+        "event": -1,
+        "mask_write": null,
+        "capture": null,
+        "selected": false,
+        "countdown": 0
+      }
+    },
+    {
+      "input": {
+        "captured": null,
+        "prior_inside": false,
+        "prior_countdown": 0,
+        "packet_byte8": 1,
+        "packet_byte9": 0,
+        "first_opaque_hit": 0,
+        "captured_opaque_hit": false
+      },
+      "output": {
+        "event": 0,
+        "mask_write": 0,
+        "capture": 0,
+        "selected": true,
+        "countdown": 1
+      }
+    },
+    {
+      "input": {
+        "captured": null,
+        "prior_inside": false,
+        "prior_countdown": 0,
+        "packet_byte8": 3,
+        "packet_byte9": 0,
+        "first_opaque_hit": 0,
+        "captured_opaque_hit": false
+      },
+      "output": {
+        "event": 0,
+        "mask_write": 0,
+        "capture": 0,
+        "selected": true,
+        "countdown": 1
+      }
+    },
+    {
+      "input": {
+        "captured": null,
+        "prior_inside": false,
+        "prior_countdown": 0,
+        "packet_byte8": 64,
+        "packet_byte9": 0,
+        "first_opaque_hit": 0,
+        "captured_opaque_hit": false
+      },
+      "output": {
+        "event": -1,
+        "mask_write": null,
+        "capture": null,
+        "selected": false,
+        "countdown": 0
+      }
+    },
+    {
+      "input": {
+        "captured": null,
+        "prior_inside": false,
+        "prior_countdown": 0,
+        "packet_byte8": 1,
+        "packet_byte9": 0,
+        "first_opaque_hit": null,
+        "captured_opaque_hit": false
+      },
+      "output": {
+        "event": -1,
+        "mask_write": null,
+        "capture": null,
+        "selected": false,
+        "countdown": 0
+      }
+    },
+    {
+      "input": {
+        "captured": 0,
+        "prior_inside": true,
+        "prior_countdown": 1,
+        "packet_byte8": 4,
+        "packet_byte9": 0,
+        "first_opaque_hit": null,
+        "captured_opaque_hit": true
+      },
+      "output": {
+        "event": -1,
+        "mask_write": 2,
+        "capture": 0,
+        "selected": true,
+        "countdown": 1
+      }
+    },
+    {
+      "input": {
+        "captured": 0,
+        "prior_inside": true,
+        "prior_countdown": 1,
+        "packet_byte8": 4,
+        "packet_byte9": 0,
+        "first_opaque_hit": null,
+        "captured_opaque_hit": false
+      },
+      "output": {
+        "event": 0,
+        "mask_write": 1,
+        "capture": 0,
+        "selected": false,
+        "countdown": 0
+      }
+    },
+    {
+      "input": {
+        "captured": 0,
+        "prior_inside": false,
+        "prior_countdown": 0,
+        "packet_byte8": 4,
+        "packet_byte9": 0,
+        "first_opaque_hit": null,
+        "captured_opaque_hit": true
+      },
+      "output": {
+        "event": 0,
+        "mask_write": 2,
+        "capture": 0,
+        "selected": true,
+        "countdown": 1
+      }
+    },
+    {
+      "input": {
+        "captured": 0,
+        "prior_inside": false,
+        "prior_countdown": 0,
+        "packet_byte8": 4,
+        "packet_byte9": 1,
+        "first_opaque_hit": null,
+        "captured_opaque_hit": false
+      },
+      "output": {
+        "event": -1,
+        "mask_write": 6,
+        "capture": 0,
+        "selected": false,
+        "countdown": 0
+      }
+    },
+    {
+      "input": {
+        "captured": 0,
+        "prior_inside": true,
+        "prior_countdown": 1,
+        "packet_byte8": 2,
+        "packet_byte9": 0,
+        "first_opaque_hit": null,
+        "captured_opaque_hit": true
+      },
+      "output": {
+        "event": 0,
+        "mask_write": 8,
+        "capture": null,
+        "selected": false,
+        "countdown": 1
+      }
+    },
+    {
+      "input": {
+        "captured": 0,
+        "prior_inside": true,
+        "prior_countdown": 1,
+        "packet_byte8": 2,
+        "packet_byte9": 0,
+        "first_opaque_hit": null,
+        "captured_opaque_hit": false
+      },
+      "output": {
+        "event": -1,
+        "mask_write": 8,
+        "capture": null,
+        "selected": false,
+        "countdown": 1
+      }
+    },
+    {
+      "input": {
+        "captured": 0,
+        "prior_inside": false,
+        "prior_countdown": 0,
+        "packet_byte8": 3,
+        "packet_byte9": 0,
+        "first_opaque_hit": 3,
+        "captured_opaque_hit": true
+      },
+      "output": {
+        "event": 0,
+        "mask_write": 8,
+        "capture": null,
+        "selected": false,
+        "countdown": 0
+      }
+    },
+    {
+      "input": {
+        "captured": 0,
+        "prior_inside": false,
+        "prior_countdown": 0,
+        "packet_byte8": 128,
+        "packet_byte9": 1,
+        "first_opaque_hit": null,
+        "captured_opaque_hit": true
+      },
+      "output": {
+        "event": 0,
+        "mask_write": 4,
+        "capture": 0,
+        "selected": true,
+        "countdown": 1
+      }
+    },
+    {
+      "input": {
+        "captured": 0,
+        "prior_inside": true,
+        "prior_countdown": 1,
+        "packet_byte8": 1,
+        "packet_byte9": 0,
+        "first_opaque_hit": 3,
+        "captured_opaque_hit": true
+      },
+      "output": {
+        "event": -1,
+        "mask_write": 0,
+        "capture": 0,
+        "selected": true,
+        "countdown": 1
+      }
+    },
+    {
+      "input": {
+        "captured": 3,
+        "prior_inside": true,
+        "prior_countdown": 1,
+        "packet_byte8": 2,
+        "packet_byte9": 0,
+        "first_opaque_hit": 0,
+        "captured_opaque_hit": false
+      },
+      "output": {
+        "event": -1,
+        "mask_write": 8,
+        "capture": null,
+        "selected": false,
+        "countdown": 1
+      }
+    },
+    {
+      "input": {
+        "captured": 2,
+        "prior_inside": true,
+        "prior_countdown": 1,
+        "packet_byte8": 2,
+        "packet_byte9": 0,
+        "first_opaque_hit": 0,
+        "captured_opaque_hit": true
+      },
+      "output": {
+        "event": 2,
+        "mask_write": 8,
+        "capture": null,
+        "selected": false,
+        "countdown": 1
+      }
+    },
+    {
+      "input": {
+        "captured": null,
+        "prior_inside": false,
+        "prior_countdown": 1,
+        "packet_byte8": 0,
+        "packet_byte9": 0,
+        "first_opaque_hit": null,
+        "captured_opaque_hit": false
+      },
+      "output": {
+        "event": -1,
+        "mask_write": null,
+        "capture": null,
+        "selected": false,
+        "countdown": 1
+      }
+    }
+  ],
+  "exhaustive_packet_cases": 8192,
+  "notes": [
+    "Initial press returns ID with mask0, not -2; caller ignores it.",
+    "Release only activates on captured normal-frame opaque pixels; another control cannot substitute.",
+    "Null mask_write preserves the original stale global mask on uncaptured no-event calls.",
+    "Release leaves global countdown unchanged; its value is irrelevant after capture clear.",
+    "Positive literal zero is opaque; the hit routine does not inspect literal color bytes.",
+    "Selected artwork uses last frame while hit testing always uses first frame."
+  ]
+}

@@ -1,4 +1,4 @@
-"""Read-only run002 integrity audit after confirmed parent-recorded process exit.
+"""Read-only reviewed-session integrity audit after parent-recorded process exit.
 
 Does not assume a successful game, zero exit, configuration failure or menu.
 No process is started, signaled or queried. Run001's checker stays unchanged.
@@ -25,7 +25,8 @@ def main():
     parser.add_argument('--supervisor-observations',type=Path,
         help='Optional private JSON of observed/not_observed/unknown statuses; missing observations remain unknown')
     args = parser.parse_args()
-    prepare.select_session('run-002')
+    if prepare.SESSION == 'run-001':
+        prepare.select_session('run-002')
     root,run = prepare.ROOT,prepare.RUN
     logs = run/'logs'
     final_path = logs/'final-process.json'
@@ -41,9 +42,11 @@ def main():
     human = json.loads(prepare.HUMAN_APPROVAL.read_bytes())
     before_path = logs/'before-files.json'
     before = json.loads(before_path.read_bytes())
-    assert len(before) == 491 and len({v['path'] for v in before}) == 491
+    expected_count = 490+len(staged['runtime']['generated_game_inputs'])+len(staged['runtime'].get('copied_game_inputs',[]))
+    assert len(before) == expected_count and len({v['path'] for v in before}) == expected_count
     original = [v for v in before if 'entry_id' in v]
-    generated = [v for v in before if 'entry_id' not in v]
+    copied = [v for v in before if 'source_entry_id' in v]
+    generated = [v for v in before if 'entry_id' not in v and 'source_entry_id' not in v]
     assert len(original) == 490 and len(generated) == 1
     assert generated[0]['sha256'] == human['generated_config_sha256']
     manifest = json.loads((root/'research/game-files-manifest.json').read_bytes())
@@ -51,6 +54,13 @@ def main():
     for item in original:
         expected = entries[item['entry_id']]
         assert (item['size'],item['sha256']) == (expected['size'],expected['sha256'])
+    for item in copied:
+        expected = entries[item['source_entry_id']]
+        assert (item['size'],item['sha256']) == (expected['size'],expected['sha256'])
+    if copied:
+        assert prepare.runtime_alias_binding(copied) == human['runtime_aliases_sha256']
+        text = next(item for item in copied if item['path'].endswith('/GAME/DATA/TEXT.DAT'))
+        assert text['sha256'] == human['flattened_text_sha256']
     after = [prepare.file_record(prepare.checked(path,run)) for path in sorted((run/'drive-c').rglob('*')) if path.is_file()]
     old,new = {v['path']:v for v in before},{v['path']:v for v in after}
     same = lambda key: key in new and (old[key]['size'],old[key]['sha256']) == (new[key]['size'],new[key]['sha256'])
@@ -79,6 +89,10 @@ def main():
     tool_check = immutable(root/tool_expected['path'],tool_expected['sha256'],tool_expected['size'])
     config_expected = staged['runtime']['config']
     config_check = immutable(run/'dosbox-x.conf',config_expected['sha256'],config_expected['size'])
+    launch_approval_path=logs/'human-approval.json'
+    launch_approval=json.loads(launch_approval_path.read_bytes()) if launch_approval_path.exists() else {}
+    helper=launch_approval.get('yield_helper')
+    helper_check=immutable(prepare.checked(root/helper['path'],run),helper['sha256'],helper['size']) if helper else None
     release_path = logs/'host-release.json'
     release = json.loads(release_path.read_bytes()) if release_path.exists() else None
     interval = None
@@ -117,7 +131,8 @@ def main():
     sources = [prepare.file_record(prepare.checked(path,run)) for path in sorted(set(source_paths))]
     sources += [prepare.file_record(prepare.HUMAN_APPROVAL),prepare.file_record(Path(__file__))]
     checks_passed = archive_check['passed'] and package_check['passed'] and tool_check['passed'] and config_check['passed'] and all(v['passed'] for v in media)
-    result = dict(schema_version=1,status=status,checked_utc=now.isoformat(),session='run-002',
+    checks_passed = checks_passed and (helper_check is None or helper_check['passed'])
+    result = dict(schema_version=1,status=status,checked_utc=now.isoformat(),session=prepare.SESSION,
         original_execution=observed,original_execution_requested=requested,dos4gw_runtime_observed=runtime_seen,
         original_returned_marker_observed=returned,known_error_messages=errors,
         pid=final['pid'],process_exit_code=final['exit_code'],host_timeout=final.get('host_timeout'),
@@ -125,26 +140,28 @@ def main():
         process_lifetime_seconds=final.get('elapsed_host_seconds'),
         release_to_process_end_upper_bound_seconds=interval,
         observations=observations,private_supervisor_observations=observation_source,
-        before_files=prepare.file_record(before_path),before_game_tree_files=491,
+        before_files=prepare.file_record(before_path),before_game_tree_files=len(before),
         original_source_files=490,unchanged_original_source_files=sum(same(v['path']) for v in original),
+        copied_runtime_inputs=len(copied),unchanged_copied_runtime_inputs=sum(same(v['path']) for v in copied),
         generated_config_unchanged=same(generated[0]['path']),
         original_executables_unchanged=all(same((run/'drive-c/GAME'/name).relative_to(root).as_posix()) for name in ('GW.EXE','DOS4GW.EXE')),
         changed=changed,removed=removed,added=added,media_checks=media,archive_check=archive_check,
         tool_package_check=package_check,emulator_executable_check=tool_check,emulator_config_check=config_check,
+        independently_generated_yield_helper_check=helper_check,
         immutable_input_checks_passed=checks_passed,private_evidence=sources,
         checker_grants_execution_authorization=False,
         limits=['Emulator exit status does not establish game success',
                 'Release-to-process-exit includes shutdown and is not original gameplay timing',
                 'Missing optional observations remain unknown; no inference of menu/mission/capture from exit code',
                 'No original, emulator or GUI launched by this checker'],
-        cleanup='No deletion or restaging; retain complete run001/run002 and all private outputs.')
+        cleanup='No deletion or restaging; retain this session, earlier sessions and all private outputs.')
     prepare.ensure_bytes(logs/'after-files.json',(json.dumps(after,indent=2)+'\n').encode('utf-8'),run)
     history = prepare.checked(logs/'post-run-receipts',run)
     history.mkdir(exist_ok=True)
     receipt_path = history/(now.strftime('%Y%m%dT%H%M%S%fZ')+'-pid'+str(final['pid'])+'.json')
     with receipt_path.open('x',encoding='utf-8') as stream:
         json.dump(result,stream,indent=2)
-    target = root/'research/variants/reference-run-002-result.json'
+    target = root/'research/variants'/('reference-'+prepare.SESSION+'-result.json')
     target.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
     # Permission comes from the human's recorded scope, not an integrity audit.
     # Do not negate later human approval when refreshing this aggregate state.

@@ -1,0 +1,1195 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/terrain-map-refs/instructions-0007b7f0.txt",
+      "sha256": "26769c153064fd73cf9b69c2affe127a2e9ad5f0ff76596d7610e7742b932d25"
+    },
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-000829a0.txt",
+      "sha256": "1cfd80f94461e5489c639ba060e1f5d036985f69e315de03d0641e8b61967b69"
+    },
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-00082e20.txt",
+      "sha256": "66286b34e27300bf69ee0b62c036059c9e981596ae85703fd021a940983c7eb3"
+    },
+    {
+      "private_path": "private/ghidra/terrain-mode5.txt",
+      "sha256": "bc73059ae3b302a185735a2b82c76f40346cf7feaae33da71749a77450fbaaf9"
+    }
+  ],
+  "vertex_projection": {
+    "function_va": "0x7b7f0",
+    "coordinate_domain": "unwrapped integer cells; map lookup wraps separately",
+    "camera_globals": [
+      "0x184fdc",
+      "0x184fe0"
+    ],
+    "formula": "x=(dx-dy)*32; y=(dx+dy)*16 - 2*(height>>6) - explicit_vertical_top",
+    "caller_anchor": "Optional additive placement is caller policy; source strip coordinates use anchor0.",
+    "arithmetic": "Source uses signed32 wrapping arithmetic. Safe checked port may reject overflowing intermediate coordinates explicitly.",
+    "vectors": [
+      {
+        "world_cell": [
+          0,
+          0
+        ],
+        "camera_cell": [
+          0,
+          0
+        ],
+        "height_i16": 0,
+        "vertical_top": 0,
+        "caller_anchor": [
+          0,
+          0
+        ],
+        "position": [
+          0,
+          0
+        ]
+      },
+      {
+        "world_cell": [
+          1,
+          0
+        ],
+        "camera_cell": [
+          0,
+          0
+        ],
+        "height_i16": 0,
+        "vertical_top": 0,
+        "caller_anchor": [
+          0,
+          0
+        ],
+        "position": [
+          32,
+          16
+        ]
+      },
+      {
+        "world_cell": [
+          1,
+          1
+        ],
+        "camera_cell": [
+          0,
+          0
+        ],
+        "height_i16": 0,
+        "vertical_top": 0,
+        "caller_anchor": [
+          0,
+          0
+        ],
+        "position": [
+          0,
+          32
+        ]
+      },
+      {
+        "world_cell": [
+          0,
+          1
+        ],
+        "camera_cell": [
+          0,
+          0
+        ],
+        "height_i16": 0,
+        "vertical_top": 0,
+        "caller_anchor": [
+          0,
+          0
+        ],
+        "position": [
+          -32,
+          16
+        ]
+      },
+      {
+        "world_cell": [
+          128,
+          127
+        ],
+        "camera_cell": [
+          127,
+          127
+        ],
+        "height_i16": 64,
+        "vertical_top": 7,
+        "caller_anchor": [
+          0,
+          0
+        ],
+        "position": [
+          32,
+          7
+        ]
+      },
+      {
+        "world_cell": [
+          4,
+          3
+        ],
+        "camera_cell": [
+          1,
+          1
+        ],
+        "height_i16": 65,
+        "vertical_top": 7,
+        "caller_anchor": [
+          100,
+          200
+        ],
+        "position": [
+          132,
+          271
+        ]
+      },
+      {
+        "world_cell": [
+          -1,
+          0
+        ],
+        "camera_cell": [
+          0,
+          0
+        ],
+        "height_i16": -1,
+        "vertical_top": 0,
+        "caller_anchor": [
+          0,
+          0
+        ],
+        "position": [
+          -32,
+          -14
+        ]
+      },
+      {
+        "world_cell": [
+          0,
+          0
+        ],
+        "camera_cell": [
+          0,
+          0
+        ],
+        "height_i16": -65,
+        "vertical_top": 0,
+        "caller_anchor": [
+          0,
+          0
+        ],
+        "position": [
+          0,
+          4
+        ]
+      }
+    ],
+    "parity_vectors": [
+      {
+        "camera": [
+          127,
+          127
+        ],
+        "column": 0,
+        "iteration": 0,
+        "world_vertices_A_B_C_D": [
+          [
+            127,
+            126
+          ],
+          [
+            127,
+            127
+          ],
+          [
+            128,
+            127
+          ],
+          [
+            128,
+            128
+          ]
+        ],
+        "buffer_vertices_A_B_C_D": [
+          [
+            32,
+            -16
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            32,
+            16
+          ],
+          [
+            0,
+            32
+          ]
+        ],
+        "first_triangle_world": [
+          [
+            127,
+            126
+          ],
+          [
+            128,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "second_triangle_world": [
+          [
+            127,
+            127
+          ],
+          [
+            128,
+            127
+          ],
+          [
+            128,
+            128
+          ]
+        ]
+      },
+      {
+        "camera": [
+          127,
+          127
+        ],
+        "column": 1,
+        "iteration": 0,
+        "world_vertices_A_B_C_D": [
+          [
+            127,
+            125
+          ],
+          [
+            127,
+            126
+          ],
+          [
+            128,
+            126
+          ],
+          [
+            128,
+            127
+          ]
+        ],
+        "buffer_vertices_A_B_C_D": [
+          [
+            64,
+            -32
+          ],
+          [
+            32,
+            -16
+          ],
+          [
+            64,
+            0
+          ],
+          [
+            32,
+            16
+          ]
+        ],
+        "first_triangle_world": [
+          [
+            127,
+            125
+          ],
+          [
+            128,
+            126
+          ],
+          [
+            127,
+            126
+          ]
+        ],
+        "second_triangle_world": [
+          [
+            127,
+            126
+          ],
+          [
+            128,
+            126
+          ],
+          [
+            128,
+            127
+          ]
+        ]
+      }
+    ],
+    "strip_equivalence_vertex_comparisons": 307200
+  },
+  "triangle_binding": {
+    "corner_order": [
+      "00",
+      "10",
+      "11",
+      "01"
+    ],
+    "indices": [
+      [
+        0,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2
+      ]
+    ],
+    "first_call": "0x7bb8e",
+    "second_call": "0x7bd9d",
+    "first_uv_offsets": [
+      0,
+      16,
+      24
+    ],
+    "second_uv_offsets": [
+      0,
+      8,
+      16
+    ],
+    "orientation_vectors": [
+      {
+        "orientation": 0,
+        "corners_00_10_11_01": [
+          [
+            0,
+            0
+          ],
+          [
+            2097151,
+            0
+          ],
+          [
+            2097151,
+            2097151
+          ],
+          [
+            0,
+            2097151
+          ]
+        ],
+        "triangles": [
+          [
+            [
+              0,
+              0
+            ],
+            [
+              2097151,
+              2097151
+            ],
+            [
+              0,
+              2097151
+            ]
+          ],
+          [
+            [
+              0,
+              0
+            ],
+            [
+              2097151,
+              0
+            ],
+            [
+              2097151,
+              2097151
+            ]
+          ]
+        ]
+      },
+      {
+        "orientation": 1,
+        "corners_00_10_11_01": [
+          [
+            2097151,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            2097151
+          ],
+          [
+            2097151,
+            2097151
+          ]
+        ],
+        "triangles": [
+          [
+            [
+              2097151,
+              0
+            ],
+            [
+              0,
+              2097151
+            ],
+            [
+              2097151,
+              2097151
+            ]
+          ],
+          [
+            [
+              2097151,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2097151
+            ]
+          ]
+        ]
+      },
+      {
+        "orientation": 2,
+        "corners_00_10_11_01": [
+          [
+            0,
+            2097151
+          ],
+          [
+            2097151,
+            2097151
+          ],
+          [
+            2097151,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "triangles": [
+          [
+            [
+              0,
+              2097151
+            ],
+            [
+              2097151,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              2097151
+            ],
+            [
+              2097151,
+              2097151
+            ],
+            [
+              2097151,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "orientation": 3,
+        "corners_00_10_11_01": [
+          [
+            2097151,
+            2097151
+          ],
+          [
+            0,
+            2097151
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            2097151,
+            0
+          ]
+        ],
+        "triangles": [
+          [
+            [
+              2097151,
+              2097151
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              2097151,
+              0
+            ]
+          ],
+          [
+            [
+              2097151,
+              2097151
+            ],
+            [
+              0,
+              2097151
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "orientation": 4,
+        "corners_00_10_11_01": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            2097151
+          ],
+          [
+            2097151,
+            2097151
+          ],
+          [
+            2097151,
+            0
+          ]
+        ],
+        "triangles": [
+          [
+            [
+              0,
+              0
+            ],
+            [
+              2097151,
+              2097151
+            ],
+            [
+              2097151,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2097151
+            ],
+            [
+              2097151,
+              2097151
+            ]
+          ]
+        ]
+      },
+      {
+        "orientation": 5,
+        "corners_00_10_11_01": [
+          [
+            0,
+            2097151
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            2097151,
+            0
+          ],
+          [
+            2097151,
+            2097151
+          ]
+        ],
+        "triangles": [
+          [
+            [
+              0,
+              2097151
+            ],
+            [
+              2097151,
+              0
+            ],
+            [
+              2097151,
+              2097151
+            ]
+          ],
+          [
+            [
+              0,
+              2097151
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              2097151,
+              0
+            ]
+          ]
+        ]
+      },
+      {
+        "orientation": 6,
+        "corners_00_10_11_01": [
+          [
+            2097151,
+            0
+          ],
+          [
+            2097151,
+            2097151
+          ],
+          [
+            0,
+            2097151
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "triangles": [
+          [
+            [
+              2097151,
+              0
+            ],
+            [
+              0,
+              2097151
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              2097151,
+              0
+            ],
+            [
+              2097151,
+              2097151
+            ],
+            [
+              0,
+              2097151
+            ]
+          ]
+        ]
+      },
+      {
+        "orientation": 7,
+        "corners_00_10_11_01": [
+          [
+            2097151,
+            2097151
+          ],
+          [
+            2097151,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            2097151
+          ]
+        ],
+        "triangles": [
+          [
+            [
+              2097151,
+              2097151
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2097151
+            ]
+          ],
+          [
+            [
+              2097151,
+              2097151
+            ],
+            [
+              2097151,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        ]
+      }
+    ]
+  },
+  "vertex_shade": {
+    "source_fields": {
+      "light_signed16": 0,
+      "factor_unsigned8": 12
+    },
+    "formula": "4*light*factor + 0x8000",
+    "output": "signed32 16.16 shade",
+    "vectors": [
+      {
+        "light_i16": 0,
+        "factor_u8": 0,
+        "shade_16_16": 32768
+      },
+      {
+        "light_i16": 8192,
+        "factor_u8": 0,
+        "shade_16_16": 32768
+      },
+      {
+        "light_i16": 8192,
+        "factor_u8": 64,
+        "shade_16_16": 2129920
+      },
+      {
+        "light_i16": 3840,
+        "factor_u8": 64,
+        "shade_16_16": 1015808
+      },
+      {
+        "light_i16": 8192,
+        "factor_u8": 255,
+        "shade_16_16": 8388608
+      },
+      {
+        "light_i16": -1,
+        "factor_u8": 64,
+        "shade_16_16": 32512
+      },
+      {
+        "light_i16": -32768,
+        "factor_u8": 255,
+        "shade_16_16": -33390592
+      },
+      {
+        "light_i16": 32767,
+        "factor_u8": 255,
+        "shade_16_16": 33455108
+      }
+    ],
+    "numeric_checks": 262144,
+    "meaning": "Factor is an explicit raw lighting operand; its visibility producer/gameplay semantics remain unresolved."
+  },
+  "fade_lookup": {
+    "entry_id": "root/2/disc/61",
+    "input_sha256": "ddef38a3e63fbb3680aac15569f12e02f141036ffa270ddd48cdc82bce361503",
+    "decoded_size": 16384,
+    "decoded_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+    "rows": 64,
+    "columns": 256,
+    "formula": "fade[shade_index*256 + source_palette_index]",
+    "safe_shade_indices": [
+      0,
+      63
+    ],
+    "row_receipts": [
+      {
+        "shade": 0,
+        "row_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1"
+      },
+      {
+        "shade": 1,
+        "row_sha256": "effa4c2f2555fc99ba035c67b91a5d1e7916bd933918b1a6c0c28a4fadae6920"
+      },
+      {
+        "shade": 2,
+        "row_sha256": "65bc1c79c4c966e2e471542ee3e3b72a2dc4fede499faa4773794a61a1abfbe6"
+      },
+      {
+        "shade": 3,
+        "row_sha256": "0563a43c5062995295e827d88d13a0ca7fa11fe696f44c49b005d5f32527a4d4"
+      },
+      {
+        "shade": 4,
+        "row_sha256": "97c2a40bef19220246962189619c04637cceac24d2ae8634a1fbf94c69500581"
+      },
+      {
+        "shade": 5,
+        "row_sha256": "ac8de5a074afbf647ed0d31af532c4b3732846dc99820a93c7b06cac00f0d801"
+      },
+      {
+        "shade": 6,
+        "row_sha256": "4442db0446471f794faaa210f4f109766a63d08ee18a653f7dd91fd0f85006be"
+      },
+      {
+        "shade": 7,
+        "row_sha256": "60ecf4abd856cb31cfc7a100a2e16adc6f96103bbf0855b089627ed18c342237"
+      },
+      {
+        "shade": 8,
+        "row_sha256": "fac89e7e9521572f316c9e47d1af484c1fab6b2bda0c5bbf2817472ccd16946c"
+      },
+      {
+        "shade": 9,
+        "row_sha256": "745eea97b62de957852992c5ad3265201729f2eb94cd4ea872ad434a65e248ac"
+      },
+      {
+        "shade": 10,
+        "row_sha256": "cc7b5f7a4f8b167280bf08c1a9772a1cd39e424998462f1d920a87fb89c34a44"
+      },
+      {
+        "shade": 11,
+        "row_sha256": "07b262591034a6c11793cb58a0d7beba9ef6c34780af9df6285ad65dcdceafae"
+      },
+      {
+        "shade": 12,
+        "row_sha256": "ab24b111cb0240fed19494643bf33718d08994c008da5d0313b1b91a1051d626"
+      },
+      {
+        "shade": 13,
+        "row_sha256": "dacca4422e675a02381240b28af0965b3433f64b7c75b611fe01f6fd25f09b5f"
+      },
+      {
+        "shade": 14,
+        "row_sha256": "858ab026230e34d215b176df1e6f7fd4e5ade3500dbc8efc51d7bbd85c0cbe52"
+      },
+      {
+        "shade": 15,
+        "row_sha256": "e4aa6f864df4223c6cc9c9dc3792b55087db2c8f015214b39ad841369cc6b2f1"
+      },
+      {
+        "shade": 16,
+        "row_sha256": "9f62a2b9f40d5b3d6eb6dcd6429097654f3b1634625e3cb64f9444420f8f1c8e"
+      },
+      {
+        "shade": 17,
+        "row_sha256": "7e19944a7e22ea804391ea05b1cf4a6d2675879d19015f8205891640252938b4"
+      },
+      {
+        "shade": 18,
+        "row_sha256": "336b042a52785cdd20ff0d56349667952b0ba196a99c11997f5a5d29bebb617b"
+      },
+      {
+        "shade": 19,
+        "row_sha256": "7813432fb4aa6566a9d1f8929fc058319054f40e562a68971d5a34e8df669449"
+      },
+      {
+        "shade": 20,
+        "row_sha256": "2faa81a2f8831212a6017dfc0728844bfb939f78b4b2ee5782b5e9c71c97d9fb"
+      },
+      {
+        "shade": 21,
+        "row_sha256": "9358fe4d205586a4f95dab0364dc85d1b5fb73e0edccbf8079949d8d9fc54586"
+      },
+      {
+        "shade": 22,
+        "row_sha256": "c87179edde2dc2c898abfe7fbebb34a8dc8dbbe92eecf138939ea7e7a8215267"
+      },
+      {
+        "shade": 23,
+        "row_sha256": "81a33a2ff19148dc4a52a33f9e8c84212e8d73ddd999f434a2211f22f8c7b13f"
+      },
+      {
+        "shade": 24,
+        "row_sha256": "3c3e8403608fa59e5034053acbe32442c8e456df24a395b69b78cf721a64a1c2"
+      },
+      {
+        "shade": 25,
+        "row_sha256": "e6817d9f42f2483c600d88f50c7a75c9a8ebc0a91e6f55ce8149f3dab5e01bea"
+      },
+      {
+        "shade": 26,
+        "row_sha256": "99b56944ecf751b38926550af36d3177207ee52ef5f3d0adaee7d10fcf376103"
+      },
+      {
+        "shade": 27,
+        "row_sha256": "5ee815334c0f684333bf0f2df699f5434f497e495988a60910e352b67860daf4"
+      },
+      {
+        "shade": 28,
+        "row_sha256": "c7853b45da979e16c0bc3e78a24a1f94d680df0752fd71f12fcf0e79c66751e3"
+      },
+      {
+        "shade": 29,
+        "row_sha256": "2ec42420bf824fb2255d2fc4c262b88b5978514d49d844bccafb6bd6d8254eef"
+      },
+      {
+        "shade": 30,
+        "row_sha256": "ba7ae8bb11244d9728ed86b55c859f861ed7459878b6153c67fdb9a767a1d98a"
+      },
+      {
+        "shade": 31,
+        "row_sha256": "f80f6f709646a6ced287b0530441bd979863beaf1f3bb946b92db6e3c3e0f8d7"
+      },
+      {
+        "shade": 32,
+        "row_sha256": "27e5bbcaf1bb81bd254928a592d869ac46c9e09bb96775e56729907e8221bf32"
+      },
+      {
+        "shade": 33,
+        "row_sha256": "27e5bbcaf1bb81bd254928a592d869ac46c9e09bb96775e56729907e8221bf32"
+      },
+      {
+        "shade": 34,
+        "row_sha256": "7333c81c2eebf5c798b87fb37df1a57223185fb9a3d2dfffed31cef4163241fc"
+      },
+      {
+        "shade": 35,
+        "row_sha256": "6e3cb676af724fb5ae9e2663049541c944dd3d034239f5e3d1cf99b58708b9ef"
+      },
+      {
+        "shade": 36,
+        "row_sha256": "2286380c332a7fd1d1ce7f0903390367a5bf55bc7e1819ac7578172285a4e111"
+      },
+      {
+        "shade": 37,
+        "row_sha256": "c93910ba1bcdddcf66343d2c825bc4ebb4e344837c134615c8ad215d295fd3f5"
+      },
+      {
+        "shade": 38,
+        "row_sha256": "231158ddbb734a3d2f57104c1c5a1f89f4b36ab0eb76ec50404ee93d89f33f98"
+      },
+      {
+        "shade": 39,
+        "row_sha256": "1dff2059c13c0b81f0b607de0406f0c746e1a75d72321ea43d7b944a1a681ad1"
+      },
+      {
+        "shade": 40,
+        "row_sha256": "35fa0a7b7bc79df8ab01617e7e979af06a427fe582c0a9c3f1c6139987eda0fc"
+      },
+      {
+        "shade": 41,
+        "row_sha256": "3249e52948822443b31673451027236d9a056999b6775fd4a23b5ada91b904bf"
+      },
+      {
+        "shade": 42,
+        "row_sha256": "5a77001e31419bc7840f204868e5b7bade3ad7038085dc0de01429e989a16687"
+      },
+      {
+        "shade": 43,
+        "row_sha256": "741fb273862fab13632fae679b7cd700083c59d7b16b9f44352b5bfaaf2390d0"
+      },
+      {
+        "shade": 44,
+        "row_sha256": "c87d7e480c20202cb0954349f2ff2625a98efbbe3bfe11e012c35dbaa3f2d7a1"
+      },
+      {
+        "shade": 45,
+        "row_sha256": "bab518741d90d15a217fa40ed78bf01a0e3e9b9e90553fcc70a98e84143a75e0"
+      },
+      {
+        "shade": 46,
+        "row_sha256": "26658ffa966edc17c9ee66b5e8421c299424272f567d34a6a438248d8ab1350e"
+      },
+      {
+        "shade": 47,
+        "row_sha256": "2eb103b89dbfd228da7ab3dac91f905f99f08fc9fc4c1a0f4e055a1ec82c3b06"
+      },
+      {
+        "shade": 48,
+        "row_sha256": "f5f1aa838d732ad4e0d21cb2c5d58d795a5fac355652014015cc6fecc07898c0"
+      },
+      {
+        "shade": 49,
+        "row_sha256": "427aa3f2b590cc726eecd4e8ca92a37c752fd0da0df1df2a1b027f852aa0d9a3"
+      },
+      {
+        "shade": 50,
+        "row_sha256": "04379f973d7f8eba618158518e9e4eb79ca2db791f6171d3648107eddef022d0"
+      },
+      {
+        "shade": 51,
+        "row_sha256": "d3aa826f76d77f5066b3ca73d9490ed02dd3a2d1928e997f342d01a34744c054"
+      },
+      {
+        "shade": 52,
+        "row_sha256": "d270a5fcced97e53fd286fd97d51cd466092681e06e435c80b2ae84938b0d99e"
+      },
+      {
+        "shade": 53,
+        "row_sha256": "99dfedc32296e12108ec57a6bcbd04a4393cfbac0da6d452631d9ead5114112b"
+      },
+      {
+        "shade": 54,
+        "row_sha256": "394097ffa28ea285a5df605c27345d8ee1a3a88afaf16ad3e0c80c4107dccd38"
+      },
+      {
+        "shade": 55,
+        "row_sha256": "8f7f1667189b4a70dd9fec36750a12bc85ee4bd29a6af51e3b8500a8eb2443de"
+      },
+      {
+        "shade": 56,
+        "row_sha256": "44a59f7138bacdf67fc98c676322286b5914a755d36d6d448699bea7e1996af9"
+      },
+      {
+        "shade": 57,
+        "row_sha256": "854491f5fef48d34ec9a2790bed886c094b363be5002b66a695410ff40e37b1d"
+      },
+      {
+        "shade": 58,
+        "row_sha256": "e1d35191cce7c9ad1a827da99d7e618f5d1b0322c37ceceef3fc5ed022f39357"
+      },
+      {
+        "shade": 59,
+        "row_sha256": "6a255dbbadb78da52a778e9993a77023d72d85bdadf692185ac62098535350db"
+      },
+      {
+        "shade": 60,
+        "row_sha256": "d2937348c33e7a599208980fa70623e34b7c4f73aae36c214b931eb288eed3b4"
+      },
+      {
+        "shade": 61,
+        "row_sha256": "bf1f9a08b02df6051283f3fad719b768e7809dea1045468048a28e85b2234057"
+      },
+      {
+        "shade": 62,
+        "row_sha256": "b843b3dc1f3d3cff4d6f6f6345db006b37f163e45c5b5ea92cc4a7c2d031d4e9"
+      },
+      {
+        "shade": 63,
+        "row_sha256": "4e00d133c6aaf7c62433279ef88a064209e91d6e4dd791bb707f009bf4cec157"
+      }
+    ],
+    "vectors": [
+      {
+        "shade": 0,
+        "source_index": 0,
+        "output_index": 0
+      },
+      {
+        "shade": 0,
+        "source_index": 1,
+        "output_index": 0
+      },
+      {
+        "shade": 0,
+        "source_index": 127,
+        "output_index": 0
+      },
+      {
+        "shade": 0,
+        "source_index": 255,
+        "output_index": 0
+      },
+      {
+        "shade": 1,
+        "source_index": 0,
+        "output_index": 0
+      },
+      {
+        "shade": 1,
+        "source_index": 1,
+        "output_index": 0
+      },
+      {
+        "shade": 1,
+        "source_index": 127,
+        "output_index": 50
+      },
+      {
+        "shade": 1,
+        "source_index": 255,
+        "output_index": 50
+      },
+      {
+        "shade": 32,
+        "source_index": 0,
+        "output_index": 0
+      },
+      {
+        "shade": 32,
+        "source_index": 1,
+        "output_index": 1
+      },
+      {
+        "shade": 32,
+        "source_index": 127,
+        "output_index": 127
+      },
+      {
+        "shade": 32,
+        "source_index": 255,
+        "output_index": 255
+      },
+      {
+        "shade": 63,
+        "source_index": 0,
+        "output_index": 148
+      },
+      {
+        "shade": 63,
+        "source_index": 1,
+        "output_index": 148
+      },
+      {
+        "shade": 63,
+        "source_index": 127,
+        "output_index": 236
+      },
+      {
+        "shade": 63,
+        "source_index": 255,
+        "output_index": 255
+      }
+    ],
+    "zero_index_transparent": false
+  },
+  "limits": [
+    "This is the strip vertex path, not arbitrary-point projection7AF00.",
+    "No startup camera, player visibility or shade factor is invented.",
+    "Triangle coverage, clipping, gradient rounding and edge ownership are not yet established; do not substitute a generic rasterizer and claim original pixels.",
+    "The camera object setter829A0 sign-extends two stored cell words;82E20 has a separate target-anchoring routine, not an inferred startup position."
+  ]
+}

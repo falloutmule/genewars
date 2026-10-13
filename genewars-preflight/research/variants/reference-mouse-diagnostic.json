@@ -1,0 +1,38 @@
+{
+  "status": "source-supported-diagnostic-no-fix-claimed",
+  "original_execution_by_reviewer": false,
+  "gui_execution_by_reviewer": false,
+  "source_tag": "dosbox-x-v2026.10.01",
+  "sources": [
+    {
+      "path": "private/review/input-free-yield/src-gui-sdlmain.cpp",
+      "size": 423173,
+      "sha256": "0e2978912e692f9e016c67f15fc4e8e54de69ab481ba5c73a4c8edc086a8bf6c"
+    },
+    {
+      "path": "private/review/input-free-yield/src-ints-mouse.cpp",
+      "size": 105367,
+      "sha256": "66bbeb5e435487ebd0d838e1985df7cc43f1c632154e6c73f397b6afb1efb005"
+    }
+  ],
+  "key_locations": {
+    "mickey_accumulation_locked_only": "mouse.cpp881..915",
+    "relative_mode_capture": "sdlmain.cpp2679..2715",
+    "focus_lost_releases": "sdlmain.cpp6071..6077",
+    "focus_gain_recapture_fullscreen_only": "sdlmain.cpp6061..6064",
+    "raw_input_startup_default_false": "sdlmain.cpp6950",
+    "warp_hint": "sdlmain.cpp3957"
+  },
+  "actual_config": {
+    "path": "private/reference-run/run-003/dosbox-x.conf",
+    "size": 20796,
+    "sha256": "a3275d1cf47a7305764698352de4ed6f03fef2ecea192d7f4c45fdd7cb17107b"
+  },
+  "recommended_diagnostic": "Confirm capture title/checkmark; test in-client drag without intervening focus loss",
+  "live_raw_toggle_found": false,
+  "limits": [
+    "Requested capture indicator does not prove SDL relative-mode success; return value unchecked",
+    "Absolute injected movement under relative-mode capture not measured by reviewer",
+    "No live config or integration-device change proposed"
+  ]
+}

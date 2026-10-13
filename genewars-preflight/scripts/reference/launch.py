@@ -13,7 +13,7 @@ import subprocess
 import secrets
 import time
 
-from prepare import ROOT, RUN, SDL2, RECORD, SESSION, HUMAN_APPROVAL, checked, file_record, prepare_tool, prepare_run
+from prepare import ROOT, RUN, SDL2, RECORD, SESSION, HUMAN_APPROVAL, SESSION_WRAPPERS, wrapper_command, runtime_alias_binding, checked, file_record, prepare_tool, prepare_run
 
 
 def arguments(config, limit):
@@ -22,11 +22,12 @@ def arguments(config, limit):
             'states', '-time-limit', str(limit), '-showrt']
 
 
-def gate_batch(token, *, original=False):
+def gate_batch(token, *, original=False, yielding=False):
     operation = 'GW.EXE' if original else 'ECHO REFERENCE_EMPTY_SENTINEL'
+    wait = ('IF NOT EXIST C:\\YIELD.COM GOTO ABORT\r\nC:\\YIELD.COM\r\n' if yielding else '')
     return ('@ECHO OFF\r\nECHO REFERENCE_GATE_WAITING ' + token + '\r\n'
             ':WAIT\r\nIF EXIST C:\\' + token + '.NO GOTO ABORT\r\n'
-            'IF EXIST C:\\' + token + '.OK GOTO RUN\r\nGOTO WAIT\r\n'
+            'IF EXIST C:\\' + token + '.OK GOTO RUN\r\n' + wait + 'GOTO WAIT\r\n'
             ':RUN\r\nDEL C:\\' + token + '.OK\r\n'
             'ECHO REFERENCE_GATE_RELEASED ' + token + '\r\n'
             'C:\r\nCD \\GAME\r\n' + operation + '\r\n'
@@ -120,11 +121,16 @@ def main():
         human = json.loads(HUMAN_APPROVAL.read_bytes())
         if not human.get('approved'):
             raise SystemExit('This session has no separate recorded human execution approval')
-        if SESSION == 'run-002' and (human.get('run_id') != SESSION or
+        if SESSION in SESSION_WRAPPERS and (human.get('run_id') != SESSION or
                 human.get('candidate_sha256') != '4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba' or
                 not isinstance(human.get('human_statement'),str) or not human['human_statement'].strip() or
                 human.get('generated_config_sha256') != runtime['generated_game_inputs'][0]['sha256']):
             raise SystemExit('Approval does not bind this exact prepared run/config')
+        copied = runtime.get('copied_game_inputs',[])
+        if copied and human.get('flattened_text_sha256') != copied[0]['sha256']:
+            raise SystemExit('Approval does not bind the exact reviewed flattened text copy')
+        if copied and human.get('runtime_aliases_sha256') != runtime_alias_binding(copied):
+            raise SystemExit('Approval does not bind the complete reviewed runtime alias set')
         if not args.approval_note or len(args.approval_note.strip()) < 30:
             raise SystemExit('Requires a descriptive record of prior explicit human approval. No original is autorun.')
         if (RUN / 'logs/human-approval.json').exists():
@@ -135,11 +141,26 @@ def main():
         gate = RUN / 'drive-c/STARTGW.BAT'
         if any(path.exists() for path in (marker, abort, gate)):
             raise SystemExit('Unexpected preexisting gate/marker: refusing launch.')
-        batch = gate_batch(token, original=True)
+        yield_helper = None
+        yield_proof = None
+        if SESSION in ('run-003','run-004'):
+            from input_free_yield import CODE, verified_probe
+            yield_proof = verified_probe(ROOT)
+            helper = checked(RUN / 'drive-c/YIELD.COM', RUN)
+            with helper.open('xb') as stream:
+                stream.write(CODE)
+            yield_helper = file_record(helper)
+        batch = gate_batch(token, original=True, yielding=SESSION in ('run-003','run-004'))
         with checked(gate, RUN).open('xb') as stream:
             stream.write(batch)
-        # Eight reviewed built-ins only; original GW is behind the host marker.
-        startup_commands = commands[:7] + ['C:\\STARTGW.BAT']
+        # Original GW stays behind the host marker. Run003 adds one read-only
+        # query to prove its sole changed mouse setting in the startup log.
+        startup_commands = commands[:5]
+        if SESSION in ('run-003','run-004'):
+            startup_commands += ['CONFIG -GET sdl "mouse_emulation"']
+        if SESSION == 'run-004':
+            startup_commands += ['CONFIG -GET sdl "raw_mouse_input"']
+        startup_commands += commands[5:7] + ['C:\\STARTGW.BAT']
         for dos_command in startup_commands:
             command.extend(['-c', dos_command])
         approval = {'recorded_utc': datetime.now(timezone.utc).isoformat(),
@@ -149,6 +170,8 @@ def main():
                     'original_autorun': False, 'host_release_required': True,
                     'gate': file_record(gate), 'gate_token': token,
                     'release_marker': str(marker), 'abort_marker': str(abort)}
+        if yield_helper:
+            approval.update(yield_helper=yield_helper,verified_empty_yield_probe=yield_proof)
         approval_path = RUN / 'logs/human-approval.json'
         with approval_path.open('x', encoding='utf-8') as stream:
             json.dump(approval, stream, indent=2)
@@ -171,7 +194,7 @@ def main():
         launch_record['windows_show_window'] = 1
         with checked(RUN / 'logs/launch-process.json', RUN).open('x', encoding='utf-8') as stream:
             json.dump(launch_record, stream, indent=2)
-        gate_command = 'python -B scripts/reference/run002.py gate' if SESSION == 'run-002' else 'python -B scripts/reference/gate.py'
+        gate_command = wrapper_command('gate')
         print(json.dumps({'pid': process.pid, 'original_autorun': False,
                           'host_release_required': True,
                           'review_log': str(RUN / 'logs/dosbox-x.log'),

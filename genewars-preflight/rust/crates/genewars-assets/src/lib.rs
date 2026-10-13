@@ -4,6 +4,8 @@
 //! the published format descriptions listed in `research/formats/rnc.md`.
 
 use std::fmt;
+pub mod map_atlas;
+pub use map_atlas::{B32Atlas, ConqMapCells, ConqMapCell, Error as MapAtlasError};
 
 const RNC_HEADER_LEN: usize = 18;
 const PALETTE256_BYTES: usize = 256 * 3;
@@ -12,6 +14,18 @@ const PLANET_ATLAS_WIDTH: usize = 256;
 const PLANET_ATLAS_HEIGHT: usize = 640;
 const PLANET_ATLAS_BYTES: usize = PLANET_ATLAS_WIDTH * PLANET_ATLAS_HEIGHT;
 const PLANET_TEXTURE_ROW_STRIDE: usize = PLANET_ATLAS_WIDTH;
+const FONT_TAB_HEADER_BYTES: usize = 6;
+const FONT_TAB_RECORD_BYTES: usize = 6;
+const CAMPAIGN_HEADER_BYTES: usize = 699;
+const CAMPAIGN_HEADER_TITLE_OFFSET: usize = 32;
+const CONQ_FAST_TAG: u32 = 0x55336;
+const CONQ_FAST_PREFIX_BYTES: usize = 0x3B55E;
+const CONQ_INITIAL_PLAYER_OFFSET: usize = 0x14;
+const CONQ_INITIAL_PLAYER_RECORD_BYTES: usize = 0x70D;
+const CONQ_INITIAL_PLAYER_COUNT: usize = 4;
+const CONQ_OPAQUE_REGION_OFFSET: usize = 0x355E;
+/// Number of NUL-terminated entries built by the traced English text indexer.
+pub const TEXT_STRING_COUNT: usize = 604;
 
 /// File offset where the observed 18-byte ANB header ends and sprite data begins.
 pub const ANB_SPRITE_DATA_BASE: usize = 0x12;
@@ -53,6 +67,19 @@ pub enum Error {
     PlanetTileOutOfRange { tile_type: u8 },
     PlanetTileOutOfBounds { tile_type: u8, offset: usize, width: usize, height: usize },
     PlanetTileAllocationFailed,
+    FontTableLength { actual: usize },
+    FontDataOffsetOutOfBounds { record: usize, offset: usize, data_len: usize },
+    FontGlyphOutOfBounds { record: usize, records: usize },
+    FontUnsupportedTextByte { byte: u8 },
+    FontGlyphStreamTruncated { record: usize, offset: usize },
+    FontGlyphAllocationFailed,
+    TextTableAllocationFailed,
+    TextTableTruncated { expected: usize, parsed: usize, offset: usize },
+    CampaignHeaderLength { expected: usize, actual: usize },
+    CampaignHeaderTitleUnterminated { offset: usize, limit: usize },
+    ConqFastPrefixTruncated { required: usize, actual: usize },
+    ConqUnsupportedFastTag { actual: u32 },
+    ConqInitialPlayerOutOfBounds { index: usize, count: usize },
 }
 
 impl fmt::Display for Error {
@@ -62,6 +89,233 @@ impl fmt::Display for Error {
 }
 
 impl std::error::Error for Error {}
+
+/// Bounded view of a six-byte opaque header followed by six-byte font records.
+/// Record offsets address the supplied DAT byte slice directly; they do not
+/// include the ANB sprite-data bias used by other resource types.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct FontResource<'a> {
+    data: &'a [u8],
+    records: &'a [u8],
+}
+
+impl<'a> FontResource<'a> {
+    pub fn parse(data: &'a [u8], table: &'a [u8]) -> Result<Self, Error> {
+        if table.len() < FONT_TAB_HEADER_BYTES
+            || (table.len() - FONT_TAB_HEADER_BYTES) % FONT_TAB_RECORD_BYTES != 0
+        {
+            return Err(Error::FontTableLength { actual: table.len() });
+        }
+        Ok(Self { data, records: &table[FONT_TAB_HEADER_BYTES..] })
+    }
+
+    pub fn record_count(&self) -> usize {
+        self.records.len() / FONT_TAB_RECORD_BYTES
+    }
+
+    /// The character table begins after the opaque six-byte TAB prefix.
+    /// Byte 32 (space) is record 0; each subsequent byte selects the next row.
+    pub fn record_for_byte(&self, byte: u8) -> Result<FontGlyphRecord, Error> {
+        if byte < 32 {
+            return Err(Error::FontUnsupportedTextByte { byte });
+        }
+        self.record(usize::from(byte - 32))
+    }
+
+    pub fn record(&self, record: usize) -> Result<FontGlyphRecord, Error> {
+        if record >= self.record_count() {
+            return Err(Error::FontGlyphOutOfBounds { record, records: self.record_count() });
+        }
+        let start = record.checked_mul(FONT_TAB_RECORD_BYTES)
+            .ok_or(Error::FontGlyphOutOfBounds { record, records: self.record_count() })?;
+        let end = start.checked_add(FONT_TAB_RECORD_BYTES)
+            .ok_or(Error::FontGlyphOutOfBounds { record, records: self.record_count() })?;
+        let bytes = self.records.get(start..end)
+            .ok_or(Error::FontGlyphOutOfBounds { record, records: self.record_count() })?;
+        let data_offset = u32::from_le_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]) as usize;
+        let width = bytes[4];
+        let height = bytes[5];
+        if width != 0 && height != 0 && data_offset >= self.data.len() {
+            return Err(Error::FontDataOffsetOutOfBounds { record, offset: data_offset, data_len: self.data.len() });
+        }
+        Ok(FontGlyphRecord { record, data_offset, width, height })
+    }
+
+    /// Decode the row-control stream for one record. Positive signed controls
+    /// copy literal index bytes (including zero as opaque), negative controls
+    /// skip transparent pixels, and zero ends a row.
+    pub fn decode_glyph(&self, record: usize) -> Result<IndexedSprite, Error> {
+        let glyph = self.record(record)?;
+        let width = usize::from(glyph.width);
+        let height = usize::from(glyph.height);
+        let pixel_count = width.checked_mul(height).ok_or(Error::FontGlyphAllocationFailed)?;
+        let mut indices = Vec::new();
+        let mut opaque = Vec::new();
+        indices.try_reserve_exact(pixel_count).map_err(|_| Error::FontGlyphAllocationFailed)?;
+        opaque.try_reserve_exact(pixel_count).map_err(|_| Error::FontGlyphAllocationFailed)?;
+        indices.resize(pixel_count, 0);
+        opaque.resize(pixel_count, false);
+        if width == 0 || height == 0 {
+            return Ok(IndexedSprite { width: glyph.width, height: glyph.height, indices, opaque, consumed_bytes: 0 });
+        }
+
+        let mut cursor = glyph.data_offset;
+        for row in 0..height {
+            let mut x = 0usize;
+            loop {
+                let control_byte = *self.data.get(cursor)
+                    .ok_or(Error::FontGlyphStreamTruncated { record, offset: cursor })?;
+                cursor += 1;
+                let control = control_byte as i8;
+                if control == 0 { break; }
+                let run = usize::from(control.unsigned_abs());
+                if control > 0 {
+                    let end = cursor.checked_add(run).ok_or(Error::FontGlyphStreamTruncated { record, offset: cursor })?;
+                    let literal = self.data.get(cursor..end)
+                        .ok_or(Error::FontGlyphStreamTruncated { record, offset: cursor })?;
+                    let visible = run.min(width.saturating_sub(x));
+                    let output_start = row * width + x.min(width);
+                    let output_end = output_start + visible;
+                    indices[output_start..output_end].copy_from_slice(&literal[..visible]);
+                    opaque[output_start..output_end].fill(true);
+                    cursor = end;
+                    x = x.saturating_add(run).min(width);
+                } else {
+                    x = x.saturating_add(run).min(width);
+                }
+            }
+        }
+        Ok(IndexedSprite { width: glyph.width, height: glyph.height, indices, opaque, consumed_bytes: cursor - glyph.data_offset })
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct FontGlyphRecord {
+    pub record: usize,
+    pub data_offset: usize,
+    pub width: u8,
+    pub height: u8,
+}
+
+/// The 604 strings indexed by the traced startup loop, plus the byte extent
+/// that loop did not index. Bytes are preserved without charset interpretation.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct TextStringTable<'a> {
+    strings: Vec<&'a [u8]>,
+    consumed_len: usize,
+    trailing: &'a [u8],
+}
+
+impl<'a> TextStringTable<'a> {
+    pub fn parse(bytes: &'a [u8]) -> Result<Self, Error> {
+        let mut strings = Vec::new();
+        strings.try_reserve_exact(TEXT_STRING_COUNT).map_err(|_| Error::TextTableAllocationFailed)?;
+        let mut start = 0usize;
+        for index in 0..TEXT_STRING_COUNT {
+            let relative_end = bytes.get(start..).and_then(|rest| rest.iter().position(|byte| *byte == 0))
+                .ok_or(Error::TextTableTruncated { expected: TEXT_STRING_COUNT, parsed: index, offset: start })?;
+            let end = start + relative_end;
+            strings.push(&bytes[start..end]);
+            start = end + 1;
+        }
+        Ok(Self { strings, consumed_len: start, trailing: &bytes[start..] })
+    }
+
+    pub fn strings(&self) -> &[&'a [u8]] { &self.strings }
+    pub fn consumed_len(&self) -> usize { self.consumed_len }
+    pub fn trailing(&self) -> &'a [u8] { self.trailing }
+}
+
+/// Borrowed view of the exact 699-byte first-campaign header contract.
+/// Only the NUL-terminated byte slice at offset 32 is interpreted; all other
+/// bytes remain opaque. The title location is evidenced for HDRCO1 and should
+/// not be assumed for other filename families without their consumer trace.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CampaignHeader<'a> {
+    bytes: &'a [u8],
+    title: &'a [u8],
+}
+
+impl<'a> CampaignHeader<'a> {
+    pub fn parse(bytes: &'a [u8]) -> Result<Self, Error> {
+        if bytes.len() != CAMPAIGN_HEADER_BYTES {
+            return Err(Error::CampaignHeaderLength { expected: CAMPAIGN_HEADER_BYTES, actual: bytes.len() });
+        }
+        let tail = &bytes[CAMPAIGN_HEADER_TITLE_OFFSET..];
+        let terminator = tail.iter().position(|byte| *byte == 0)
+            .ok_or(Error::CampaignHeaderTitleUnterminated {
+                offset: CAMPAIGN_HEADER_TITLE_OFFSET,
+                limit: CAMPAIGN_HEADER_BYTES,
+            })?;
+        Ok(Self { bytes, title: &tail[..terminator] })
+    }
+
+    /// The original 699-byte allocation, including all uninterpreted fields.
+    pub fn bytes(&self) -> &'a [u8] { self.bytes }
+
+    /// The bounded NUL string passed by the traced campaign briefing consumer.
+    pub fn title_bytes(&self) -> &'a [u8] { self.title }
+}
+
+/// Borrowed decomposition of the loader's proven CONQ fast-path byte copy.
+/// It does not interpret the copied bytes as a complete live mission state.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ConqFastPrefix<'a> {
+    file: &'a [u8],
+}
+
+impl<'a> ConqFastPrefix<'a> {
+    /// Accept the `0x55336` fast-path tag and require the exact prefix copied by
+    /// the loader. Any bytes after that prefix remain available as opaque tail.
+    pub fn parse(file: &'a [u8]) -> Result<Self, Error> {
+        if file.len() < CONQ_FAST_PREFIX_BYTES {
+            return Err(Error::ConqFastPrefixTruncated {
+                required: CONQ_FAST_PREFIX_BYTES,
+                actual: file.len(),
+            });
+        }
+        let tag = u32::from_le_bytes([file[0], file[1], file[2], file[3]]);
+        if tag != CONQ_FAST_TAG {
+            return Err(Error::ConqUnsupportedFastTag { actual: tag });
+        }
+        Ok(Self { file })
+    }
+
+    pub fn tag(&self) -> u32 {
+        CONQ_FAST_TAG
+    }
+
+    /// Bytes copied by the fast path, at matching source and destination
+    /// offsets. The first dword is the observed branch tag.
+    pub fn copied_prefix(&self) -> &'a [u8] {
+        &self.file[..CONQ_FAST_PREFIX_BYTES]
+    }
+
+    /// Opaque bytes after the bounded prefix; no tail format is asserted.
+    pub fn trailing_bytes(&self) -> &'a [u8] {
+        &self.file[CONQ_FAST_PREFIX_BYTES..]
+    }
+
+    /// One of the four initial player-record byte ranges passed through the
+    /// traced normalizers. This exposes bytes only, not a live-state schema.
+    pub fn initial_player_record(&self, index: usize) -> Result<&'a [u8], Error> {
+        if index >= CONQ_INITIAL_PLAYER_COUNT {
+            return Err(Error::ConqInitialPlayerOutOfBounds {
+                index,
+                count: CONQ_INITIAL_PLAYER_COUNT,
+            });
+        }
+        let start = CONQ_INITIAL_PLAYER_OFFSET + index * CONQ_INITIAL_PLAYER_RECORD_BYTES;
+        Ok(&self.copied_prefix()[start..start + CONQ_INITIAL_PLAYER_RECORD_BYTES])
+    }
+
+    /// The opaque copied byte range beginning at file offset `0x355E`.
+    /// The loader's legacy path also traverses this region in 14-byte steps;
+    /// its fields and semantics are not interpreted here.
+    pub fn opaque_14_byte_region(&self) -> &'a [u8] {
+        &self.copied_prefix()[CONQ_OPAQUE_REGION_OFFSET..]
+    }
+}
 
 /// Borrowed, bounds-checked view of the ANB header and its four absolute section offsets.
 /// The first 16-bit word is opaque here; [`AnbUiMetadata`] applies its proven animation-count
@@ -1478,5 +1732,148 @@ mod tests {
             bit += width;
         }
         words
+    }
+}
+
+#[cfg(test)]
+mod font_text_tests {
+    use super::*;
+
+    fn tab(records: &[(u32, u8, u8)]) -> Vec<u8> {
+        let mut bytes = vec![0xA5; FONT_TAB_HEADER_BYTES];
+        for &(offset, width, height) in records {
+            bytes.extend_from_slice(&offset.to_le_bytes());
+            bytes.extend_from_slice(&[width, height]);
+        }
+        bytes
+    }
+
+    #[test]
+    fn font_records_start_after_opaque_header_and_codepoint_maps_once() {
+        let data = [1, 9, 8, 0];
+        let table = tab(&[(0, 2, 1), (3, 4, 1)]);
+        let font = FontResource::parse(&data, &table).unwrap();
+        assert_eq!(font.record_for_byte(32).unwrap(), FontGlyphRecord { record: 0, data_offset: 0, width: 2, height: 1 });
+        assert_eq!(font.record_for_byte(33).unwrap(), FontGlyphRecord { record: 1, data_offset: 3, width: 4, height: 1 });
+        assert_eq!(font.record_count(), 2);
+        assert_eq!(font.record_for_byte(31), Err(Error::FontUnsupportedTextByte { byte: 31 }));
+        assert!(matches!(font.record_for_byte(34), Err(Error::FontGlyphOutOfBounds { .. })));
+        assert_eq!(font.record(usize::MAX), Err(Error::FontGlyphOutOfBounds { record: usize::MAX, records: 2 }));
+    }
+
+    #[test]
+    fn font_rle_literal_zero_is_opaque_and_negative_run_is_transparent() {
+        let data = [2, 0, 5, 0, 0xFD, 0];
+        let table = tab(&[(0, 3, 2)]);
+        let glyph = FontResource::parse(&data, &table).unwrap().decode_glyph(0).unwrap();
+        assert_eq!(glyph.indices, [0, 5, 0, 0, 0, 0]);
+        assert_eq!(glyph.opaque, [true, true, false, false, false, false]);
+        assert_eq!(glyph.consumed_bytes, data.len());
+    }
+
+    #[test]
+    fn font_rle_clips_writes_but_consumes_full_overwide_literal_run() {
+        let data = [3, 7, 8, 9, 0];
+        let table = tab(&[(0, 2, 1)]);
+        let glyph = FontResource::parse(&data, &table).unwrap().decode_glyph(0).unwrap();
+        assert_eq!(glyph.indices, [7, 8]);
+        assert_eq!(glyph.opaque, [true, true]);
+        assert_eq!(glyph.consumed_bytes, data.len());
+    }
+
+    #[test]
+    fn font_parser_rejects_partial_tables_bad_offsets_and_truncated_streams() {
+        assert_eq!(FontResource::parse(&[], &[0; 11]).unwrap_err(), Error::FontTableLength { actual: 11 });
+        let bad_offset = tab(&[(7, 1, 1)]);
+        assert_eq!(FontResource::parse(&[0], &bad_offset).unwrap().record(0), Err(Error::FontDataOffsetOutOfBounds { record: 0, offset: 7, data_len: 1 }));
+        let truncated_table = tab(&[(0, 2, 1)]);
+        let truncated = FontResource::parse(&[2, 9], &truncated_table).unwrap();
+        assert_eq!(truncated.decode_glyph(0), Err(Error::FontGlyphStreamTruncated { record: 0, offset: 1 }));
+    }
+
+    #[test]
+    fn text_table_consumes_only_the_proven_604_entries() {
+        let bytes = [vec![0; TEXT_STRING_COUNT], vec![b'X', 0]].concat();
+        let table = TextStringTable::parse(&bytes).unwrap();
+        assert_eq!(table.strings().len(), 604);
+        assert_eq!(table.consumed_len(), TEXT_STRING_COUNT);
+        assert_eq!(table.trailing(), &[b'X', 0]);
+        assert_eq!(TextStringTable::parse(&bytes[..TEXT_STRING_COUNT - 1]), Err(Error::TextTableTruncated { expected: 604, parsed: 603, offset: 603 }));
+    }
+}
+
+#[cfg(test)]
+mod campaign_header_tests {
+    use super::*;
+
+    #[test]
+    fn campaign_header_exposes_only_the_bounded_string_and_keeps_all_bytes_opaque() {
+        let mut bytes = vec![0xA5; CAMPAIGN_HEADER_BYTES];
+        bytes[CAMPAIGN_HEADER_TITLE_OFFSET..CAMPAIGN_HEADER_TITLE_OFFSET + 3].copy_from_slice(b"ABC");
+        bytes[CAMPAIGN_HEADER_TITLE_OFFSET + 3] = 0;
+        let header = CampaignHeader::parse(&bytes).unwrap();
+        assert_eq!(header.bytes(), bytes);
+        assert_eq!(header.title_bytes(), b"ABC");
+    }
+
+    #[test]
+    fn campaign_header_allows_empty_and_maximum_bounded_strings() {
+        let mut empty = vec![0xFF; CAMPAIGN_HEADER_BYTES];
+        empty[CAMPAIGN_HEADER_TITLE_OFFSET] = 0;
+        assert_eq!(CampaignHeader::parse(&empty).unwrap().title_bytes(), b"");
+
+        let mut maximum = vec![0x41; CAMPAIGN_HEADER_BYTES];
+        maximum[CAMPAIGN_HEADER_TITLE_OFFSET + 666] = 0;
+        assert_eq!(CampaignHeader::parse(&maximum).unwrap().title_bytes().len(), 666);
+    }
+
+    #[test]
+    fn campaign_header_rejects_wrong_extents_and_missing_terminator() {
+        assert_eq!(CampaignHeader::parse(&[0; CAMPAIGN_HEADER_BYTES - 1]), Err(Error::CampaignHeaderLength { expected: 699, actual: 698 }));
+        assert_eq!(CampaignHeader::parse(&[0; CAMPAIGN_HEADER_BYTES + 1]), Err(Error::CampaignHeaderLength { expected: 699, actual: 700 }));
+        assert_eq!(CampaignHeader::parse(&[0x41; CAMPAIGN_HEADER_BYTES]), Err(Error::CampaignHeaderTitleUnterminated { offset: 32, limit: 699 }));
+    }
+}
+
+#[cfg(test)]
+mod conq_fast_prefix_tests {
+    use super::*;
+
+    fn stream() -> Vec<u8> {
+        let mut bytes = vec![0xA5; CONQ_FAST_PREFIX_BYTES + 7];
+        bytes[..4].copy_from_slice(&CONQ_FAST_TAG.to_le_bytes());
+        bytes
+    }
+
+    #[test]
+    fn conq_fast_prefix_exposes_only_the_proven_copy_and_opaque_tail() {
+        let bytes = stream();
+        let prefix = ConqFastPrefix::parse(&bytes).unwrap();
+        assert_eq!(prefix.tag(), CONQ_FAST_TAG);
+        assert_eq!(prefix.copied_prefix(), &bytes[..CONQ_FAST_PREFIX_BYTES]);
+        assert_eq!(prefix.trailing_bytes(), &[0xA5; 7]);
+        assert_eq!(prefix.opaque_14_byte_region().len(), 0x38000);
+    }
+
+    #[test]
+    fn conq_fast_prefix_exposes_four_bounded_initial_player_byte_ranges() {
+        let bytes = stream();
+        let prefix = ConqFastPrefix::parse(&bytes).unwrap();
+        for index in 0..CONQ_INITIAL_PLAYER_COUNT {
+            assert_eq!(prefix.initial_player_record(index).unwrap().len(), CONQ_INITIAL_PLAYER_RECORD_BYTES);
+        }
+        assert_eq!(prefix.initial_player_record(4), Err(Error::ConqInitialPlayerOutOfBounds { index: 4, count: 4 }));
+        assert_eq!(prefix.initial_player_record(usize::MAX), Err(Error::ConqInitialPlayerOutOfBounds { index: usize::MAX, count: 4 }));
+    }
+
+    #[test]
+    fn conq_fast_prefix_rejects_short_inputs_and_other_loader_tags() {
+        let mut short = stream();
+        short.truncate(CONQ_FAST_PREFIX_BYTES - 1);
+        assert_eq!(ConqFastPrefix::parse(&short), Err(Error::ConqFastPrefixTruncated { required: CONQ_FAST_PREFIX_BYTES, actual: CONQ_FAST_PREFIX_BYTES - 1 }));
+
+        let mut unsupported = stream();
+        unsupported[..4].copy_from_slice(&0x12345678u32.to_le_bytes());
+        assert_eq!(ConqFastPrefix::parse(&unsupported), Err(Error::ConqUnsupportedFastTag { actual: 0x12345678 }));
     }
 }

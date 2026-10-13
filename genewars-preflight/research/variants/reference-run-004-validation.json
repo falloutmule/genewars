@@ -1,0 +1,163 @@
+{
+  "status": "prepared-verified-no-execution",
+  "checked_utc": "2026-10-13T02:57:30.342981+00:00",
+  "original_execution": false,
+  "emulator_execution": false,
+  "original_files": 490,
+  "generated_files": 1,
+  "copied_runtime_aliases": 19,
+  "total_before_files": 510,
+  "runtime_aliases_sha256": "55c352cd19e90344f4c07c97b3dc65b70c437ae763a6555c78b42d869ca3f0f6",
+  "config_delta": [
+    {
+      "section": "sdl",
+      "key": "raw_mouse_input",
+      "before": null,
+      "after": "true"
+    },
+    {
+      "section": "sdl",
+      "key": "mouse_emulation",
+      "before": "locked",
+      "after": "always"
+    }
+  ],
+  "approval_refusal_cases": [
+    {
+      "case": "pending",
+      "rejected": true,
+      "reason": "This session has no separate recorded human execution approval"
+    },
+    {
+      "case": "wrong-run",
+      "rejected": true,
+      "reason": "Approval does not bind this exact prepared run/config"
+    },
+    {
+      "case": "wrong-config",
+      "rejected": true,
+      "reason": "Approval does not bind this exact prepared run/config"
+    },
+    {
+      "case": "wrong-candidate",
+      "rejected": true,
+      "reason": "Approval does not bind this exact prepared run/config"
+    },
+    {
+      "case": "missing-human",
+      "rejected": true,
+      "reason": "Approval does not bind this exact prepared run/config"
+    },
+    {
+      "case": "wrong-text",
+      "rejected": true,
+      "reason": "Approval does not bind the exact reviewed flattened text copy"
+    },
+    {
+      "case": "wrong-aliases",
+      "rejected": true,
+      "reason": "Approval does not bind the complete reviewed runtime alias set"
+    }
+  ],
+  "mouse_query_gate_fixture": "accepted-always/rejected-locked",
+  "dry_run": {
+    "mode": "dry-run-only-no-process-started",
+    "command": [
+      "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\tools\\dosbox-x\\2026.10.01\\bin\\x64\\Release SDL2\\dosbox-x.exe",
+      "-conf",
+      "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\run-004\\dosbox-x.conf",
+      "-noconfig",
+      "-noautoexec",
+      "-defaultmapper",
+      "-nopromptfolder",
+      "-savedir",
+      "states",
+      "-time-limit",
+      "1200",
+      "-showrt"
+    ],
+    "cwd": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\run-004",
+    "manual_commands_after_separate_human_approval": [
+      "MOUNT C \"C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\run-004\\drive-c\" -nocachedir",
+      "IMGMOUNT D \"C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\run-004\\media\\GENEWARS.cue\" -t iso",
+      "MOUNT",
+      "CONFIG -SECUREMODE",
+      "MOUNT E \".\"",
+      "C:",
+      "CD \\GAME",
+      "REM Stop if E: mount is not refused. Only after approval/checks: GW.EXE"
+    ],
+    "verification": {
+      "files": 490,
+      "tool": {
+        "path": "private/tools/dosbox-x/2026.10.01/bin/x64/Release SDL2/dosbox-x.exe",
+        "size": 25836544,
+        "sha256": "a82adcfa7af2784566cfeff74c077cefed08505396db2948b7e6aa7d4cee0832"
+      },
+      "config": {
+        "path": "private/reference-run/run-004/dosbox-x.conf",
+        "size": 20819,
+        "sha256": "101d258bd061ca9f629637f7c1746426416b6b0155b7e16b968667ca76450baa"
+      }
+    },
+    "security": "No game filename/-c content/startup commands. This script cannot grant human authorization."
+  },
+  "scripts": [
+    {
+      "path": "scripts/reference/prepare.py",
+      "size": 24615,
+      "sha256": "f394edbf586d082ce106d6854d69d90abc5a6d1fe4fae2712e389580eba47efb"
+    },
+    {
+      "path": "scripts/reference/session.py",
+      "size": 615,
+      "sha256": "2ed1ce9a4586c32a605a8588236452f6c40e671b4fbd351e9bce47e96cdbe59b"
+    },
+    {
+      "path": "scripts/reference/run002.py",
+      "size": 393,
+      "sha256": "7d096ae918b85cd1bf08ef67945bb7fcf00dffee4bf4ad92aea3000a7c61b536"
+    },
+    {
+      "path": "scripts/reference/run003.py",
+      "size": 145,
+      "sha256": "253a2eabf32ae6c9a051fff7d2e9e6037aae586fccdb1f3c0a0d2546ec9906c9"
+    },
+    {
+      "path": "scripts/reference/launch.py",
+      "size": 15241,
+      "sha256": "8d1743514ce9f647741685fe93e6294466f31607ec816578d85579095dd7d9a0"
+    },
+    {
+      "path": "scripts/reference/gate.py",
+      "size": 9557,
+      "sha256": "4cee4aa18d8a2e0391f8ae1276fd37a2371602788e97c988c72a4c086b418ed5"
+    },
+    {
+      "path": "scripts/reference/finish002.py",
+      "size": 11812,
+      "sha256": "747b20fe880fbbd46809a26da14ec3bc67cffb8de5acf61668a35458bd1186c1"
+    },
+    {
+      "path": "scripts/reference/validate_run003.py",
+      "size": 5773,
+      "sha256": "bdf5f0f60f0b841c8d5507b772a365ea14d280850e4118b4c2a98e05ee0a5600"
+    }
+  ],
+  "before_files": {
+    "path": "private/reference-run/run-004/logs/before-files.json",
+    "size": 119024,
+    "sha256": "c9eee3a5d256c0c06121c08b872eb62d3458cb230d4703ff999ff7470c981f62"
+  },
+  "text_install_evidence": {
+    "path": "research/ghidra/english-install-evidence.json",
+    "size": 16813,
+    "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+  },
+  "preparation_receipt": {
+    "path": "research/variants/reference-run-004-readiness.json",
+    "size": 141394,
+    "sha256": "ab89e38251d4218f1b309a4bff8bafddbe0499adc5f8e95423be52128136db98"
+  },
+  "approval_unchanged": true
+}

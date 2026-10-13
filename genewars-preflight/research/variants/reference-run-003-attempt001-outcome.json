@@ -1,0 +1,59 @@
+{
+  "status": "blocked-visible-supervision-attempt-preserved",
+  "checked_utc": "2026-10-13T02:18:13.770457+00:00",
+  "run_id": "run-003",
+  "attempt": "attempt001-unreleased-ui",
+  "emulator_execution": true,
+  "original_execution": false,
+  "host_release": false,
+  "pid": 32264,
+  "exit_code": 0,
+  "ended_utc": "2026-10-13T02:17:08.628177+00:00",
+  "elapsed_host_seconds": 174.46229900000617,
+  "restrictions_observed": [
+    "exact C/D/Z mount log",
+    "secure mode and E refusal",
+    "CONFIG mouse_emulation always"
+  ],
+  "ui_outcome": "Operator reported repeated activation timeouts and underlying Codex crop; no reliable visible target supervision. Aborted waiting gate before original release.",
+  "launch_flag_comparison": {
+    "reference_pid": 18116,
+    "same_executable": true,
+    "same_SW_SHOWNORMAL": 1,
+    "same_command_after_session_path_normalization_and_extra_readonly_mouse_query": true,
+    "conclusion": "No differing launch/window flag demonstrated. Desktop/session/foreground context is not pinned by these receipts; no concrete cause established."
+  },
+  "baseline_files_recreated": false,
+  "artifacts": [
+    {
+      "path": "private/reference-run/run-003/attempts/attempt001-unreleased-ui/archive-receipt.json",
+      "size": 3247,
+      "sha256": "57acf2d20b69a65916266dc71fc8ce55b7fcbe8fec54825205fcf23320086a1f"
+    },
+    {
+      "path": "private/reference-run/run-003/attempts/attempt001-unreleased-ui/logs/ui-recovery.json",
+      "size": 456,
+      "sha256": "bc9877a969a755c70ef99b7ea319ea69d5eacd59d26501d867d3fd400ae60e28"
+    },
+    {
+      "path": "private/reference-run/run-003/attempts/attempt001-unreleased-ui/logs/final-process.json",
+      "size": 194,
+      "sha256": "cabc2a825addbf78e8fa61a7105264011a092360f97c691e90ed3102de748de5"
+    },
+    {
+      "path": "private/reference-run/run-003/attempts/attempt001-unreleased-ui/logs/dosbox-x.log",
+      "size": 3917,
+      "sha256": "1f89012bc34f8be23abe3856414f19745710ef6911f3c5611986c42a5a667c32"
+    },
+    {
+      "path": "private/reference-run/run-003/attempts/attempt001-unreleased-ui/logs/launch-process.json",
+      "size": 1865,
+      "sha256": "9a5326badf7f7a7a42412b636f4c185c25194889a9a64f2e11bfd943a6324edc"
+    },
+    {
+      "path": "private/reference-run/run-002/logs/launch-process.json",
+      "size": 1810,
+      "sha256": "8e97398d0fe47d3c23f02b1d8851516e038100ae708419edc817ad14be4a41e2"
+    }
+  ]
+}

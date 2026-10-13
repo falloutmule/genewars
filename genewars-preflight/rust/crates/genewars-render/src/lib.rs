@@ -1,6 +1,8 @@
 //! Small, evidence-bounded CPU rendering helpers for GeneWars indexed assets.
 
-use genewars_assets::{AnbSections, IndexedSprite, Palette256, PaletteChannelMode, SpriteTable, Error as AssetError};
+pub mod terrain;
+
+use genewars_assets::{AnbSections, FontResource, IndexedSprite, Palette256, PaletteChannelMode, SpriteTable, Error as AssetError};
 use std::fmt;
 
 pub const GENE_PANEL_WIDTH: u32 = 128;
@@ -28,6 +30,10 @@ pub enum Error {
     SpritePlaneLength { expected: usize, indices: usize, opacity: usize },
     Asset(AssetError),
     UnsupportedIfCustomArrowBinding,
+    UnsupportedCdTitleButtonBinding,
+    TitleButtonPositionOverflow,
+    TextCursorOverflow,
+    ZeroWidthTextGlyph { byte: u8 },
 }
 
 /// Render the two statically verified CD IFCUSTOM arrow controls on a black
@@ -154,6 +160,108 @@ fn verified_arrow_sprite(
     }
     let sprite = sprites.decode(sprite_index, anb).map_err(Error::Asset)?;
     Ok((sprite, i32::from(local_x), i32::from(local_y)))
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct TitleButtonComponent {
+    sprite: IndexedSprite,
+    x: i16,
+    y: i16,
+}
+
+/// Cached normal/selected artwork for the one traced CD title-button ANB.
+///
+/// Parsing admits only its single animation (frame byte offsets 0 and 28,
+/// trailing word 3), 346×75 frames, three components per frame, and zero
+/// component flags. It intentionally does not implement component transforms.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CdTitleButton {
+    normal: Vec<TitleButtonComponent>,
+    selected: Vec<TitleButtonComponent>,
+}
+
+impl CdTitleButton {
+    pub fn parse(anb: &[u8]) -> Result<Self, Error> {
+        let sections = AnbSections::parse(anb).map_err(Error::Asset)?;
+        let metadata = sections.ui_metadata().map_err(Error::Asset)?;
+        if metadata.animation_count() != 1 {
+            return Err(Error::UnsupportedCdTitleButtonBinding);
+        }
+        let animation = metadata.animation(0).map_err(Error::Asset)?;
+        if animation.first_frame_offset != 0
+            || animation.last_frame_offset != 28
+            || animation.trailing_word != 3
+        {
+            return Err(Error::UnsupportedCdTitleButtonBinding);
+        }
+        let sprites = SpriteTable::from_anb(anb).map_err(Error::Asset)?;
+        let normal = parse_title_button_frame(anb, &metadata, &sprites, 0)?;
+        let selected = parse_title_button_frame(anb, &metadata, &sprites, 28)?;
+        Ok(Self { normal, selected })
+    }
+
+    /// Test local signed coordinates against the union of normal-frame opaque
+    /// literal pixels. Selected artwork never changes the hit footprint.
+    pub fn hit_test(&self, x: i32, y: i32) -> bool {
+        self.normal.iter().any(|component| {
+            let source_x = i64::from(x) - i64::from(component.x);
+            let source_y = i64::from(y) - i64::from(component.y);
+            source_x >= 0
+                && source_y >= 0
+                && source_x < i64::from(component.sprite.width)
+                && source_y < i64::from(component.sprite.height)
+                && component.sprite.opaque[
+                    source_y as usize * usize::from(component.sprite.width) + source_x as usize
+                ]
+        })
+    }
+
+    /// Draw the cached normal frame or selected last frame at signed screen
+    /// coordinates. Sprite opacity is the explicit positive-literal mask;
+    /// palette index zero is drawn when that mask marks it opaque.
+    pub fn draw(
+        &self,
+        image: &mut RgbImage,
+        palette: &Palette256,
+        x: i32,
+        y: i32,
+        selected: bool,
+    ) -> Result<(), Error> {
+        let components = if selected { &self.selected } else { &self.normal };
+        for component in components {
+            let component_x = x.checked_add(i32::from(component.x))
+                .ok_or(Error::TitleButtonPositionOverflow)?;
+            let component_y = y.checked_add(i32::from(component.y))
+                .ok_or(Error::TitleButtonPositionOverflow)?;
+            image.blit_indexed_sprite(&component.sprite, palette, component_x, component_y)?;
+        }
+        Ok(())
+    }
+}
+
+fn parse_title_button_frame(
+    anb: &[u8],
+    metadata: &genewars_assets::AnbUiMetadata<'_>,
+    sprites: &SpriteTable,
+    frame_offset: u32,
+) -> Result<Vec<TitleButtonComponent>, Error> {
+    let frame = metadata.frame_at(frame_offset).map_err(Error::Asset)?;
+    if frame.component_count != 3 || frame.display_dimensions() != (346, 75) {
+        return Err(Error::UnsupportedCdTitleButtonBinding);
+    }
+    let mut components = Vec::new();
+    components.try_reserve_exact(3).map_err(|_| Error::AllocationFailed)?;
+    for local_index in 0..3 {
+        let component = metadata.frame_component(frame, local_index).map_err(Error::Asset)?;
+        if component.flags != 0 {
+            return Err(Error::UnsupportedCdTitleButtonBinding);
+        }
+        let sprite_index = component.sprite_offset as usize / 6;
+        let sprite = sprites.decode(sprite_index, anb).map_err(Error::Asset)?;
+        let (x, y) = component.local_position();
+        components.push(TitleButtonComponent { sprite, x, y });
+    }
+    Ok(components)
 }
 
 impl fmt::Display for Error {
@@ -307,6 +415,46 @@ pub fn render_gene_panel(indices: &[u8], palette: &Palette256) -> Result<RgbImag
     RgbImage::from_rgb24(GENE_PANEL_WIDTH, GENE_PANEL_HEIGHT, rgb)
 }
 
+/// Measure the traced unkerned single-line branch. It accepts bytes >= 32,
+/// advances by glyph width minus one, and rejects controls rather than
+/// guessing newline, wrapping, or formatting behavior.
+pub fn measure_text_line(font: &FontResource<'_>, text: &[u8]) -> Result<i32, Error> {
+    let mut width = 0i32;
+    for &byte in text {
+        let glyph = font.record_for_byte(byte).map_err(Error::Asset)?;
+        if glyph.width == 0 {
+            return Err(Error::ZeroWidthTextGlyph { byte });
+        }
+        width = width.checked_add(i32::from(glyph.width) - 1).ok_or(Error::TextCursorOverflow)?;
+    }
+    Ok(width)
+}
+
+/// Draw one unkerned line using the caller-selected font and palette. Space
+/// advances but is not painted. Literal glyph bytes, including palette index
+/// zero, follow the font RLE opacity mask. Returns the final x cursor.
+pub fn blit_text_line(
+    image: &mut RgbImage,
+    font: &FontResource<'_>,
+    text: &[u8],
+    palette: &Palette256,
+    x: i32,
+    y: i32,
+) -> Result<i32, Error> {
+    let _ = measure_text_line(font, text)?;
+    validate_rgb6_palette(palette)?;
+    let mut cursor = x;
+    for &byte in text {
+        let glyph_record = font.record_for_byte(byte).map_err(Error::Asset)?;
+        if byte != b' ' {
+            let glyph = font.decode_glyph(glyph_record.record).map_err(Error::Asset)?;
+            image.blit_indexed_sprite(&glyph, palette, cursor, y)?;
+        }
+        cursor = cursor.checked_add(i32::from(glyph_record.width) - 1).ok_or(Error::TextCursorOverflow)?;
+    }
+    Ok(cursor)
+}
+
 fn validate_rgb6_palette(palette: &Palette256) -> Result<(), Error> {
     if palette.channel_mode() != PaletteChannelMode::Rgb {
         return Err(Error::PaletteChannelMode(palette.channel_mode()));
@@ -336,6 +484,53 @@ fn rgb_len(width: u32, height: u32) -> Result<usize, Error> {
         .checked_mul(usize::try_from(height).map_err(|_| Error::DimensionsTooLarge)?)
         .and_then(|pixels| pixels.checked_mul(3))
         .ok_or(Error::FileTooLarge)
+}
+
+#[cfg(test)]
+mod font_line_tests {
+    use super::*;
+
+    fn table(widths: &[(u8, u8)]) -> Vec<u8> {
+        let mut table = vec![0; 6];
+        for &(width, height) in widths {
+            table.extend_from_slice(&0u32.to_le_bytes());
+            table.extend_from_slice(&[width, height]);
+        }
+        table
+    }
+
+    fn palette() -> Palette256 {
+        let mut bytes = vec![0; 768];
+        bytes[0..3].copy_from_slice(&[63, 0, 0]);
+        bytes[3..6].copy_from_slice(&[0, 63, 0]);
+        Palette256::parse(&bytes, PaletteChannelMode::Rgb).unwrap()
+    }
+
+    #[test]
+    fn text_line_measures_width_minus_one_and_paints_opaque_zero_indices() {
+        let data = [2, 0, 1, 0];
+        let table = table(&[(3, 1), (2, 1)]);
+        let font = FontResource::parse(&data, &table).unwrap();
+        assert_eq!(measure_text_line(&font, b"! !").unwrap(), 4);
+        let mut image = RgbImage::from_rgb24(4, 1, vec![0; 12]).unwrap();
+        assert_eq!(blit_text_line(&mut image, &font, b"! !", &palette(), 0, 0).unwrap(), 4);
+        assert_eq!(&image.rgb_bytes()[0..3], &[255, 0, 0]);
+        assert_eq!(&image.rgb_bytes()[3..6], &[0, 255, 0]);
+        assert_eq!(&image.rgb_bytes()[9..12], &[255, 0, 0]);
+    }
+
+    #[test]
+    fn text_line_rejects_controls_and_zero_width_glyphs_without_partial_draw() {
+        let data = [1, 1, 0];
+        let table = table(&[(1, 1), (0, 1)]);
+        let font = FontResource::parse(&data, &table).unwrap();
+        assert_eq!(measure_text_line(&font, b"\n"), Err(Error::Asset(AssetError::FontUnsupportedTextByte { byte: 10 })));
+        assert_eq!(measure_text_line(&font, b" "), Ok(0));
+        assert_eq!(measure_text_line(&font, b"!"), Err(Error::ZeroWidthTextGlyph { byte: b'!' }));
+        let mut image = RgbImage::from_rgb24(2, 1, vec![0; 6]).unwrap();
+        assert!(blit_text_line(&mut image, &font, b" \n", &palette(), 0, 0).is_err());
+        assert_eq!(image.rgb_bytes(), &[0; 6]);
+    }
 }
 
 #[cfg(test)]
@@ -562,6 +757,163 @@ mod tests {
         assert_eq!(
             RgbImage::from_rgb24(0, 1, vec![]),
             Err(Error::InvalidDimensions { width: 0, height: 1 })
+        );
+    }
+}
+
+#[cfg(test)]
+mod cd_title_button_tests {
+    use super::*;
+
+    const COMPONENT_BYTES: usize = 10;
+
+    fn synthetic_title_anb() -> (Vec<u8>, usize, usize, usize) {
+        let mut anb = vec![0u8; 18];
+        let sprite_rle = [1, 0, 0xFE, 0, 0xFF, 1, 1, 0xFF, 0];
+        for _ in 0..3 {
+            anb.extend_from_slice(&sprite_rle);
+        }
+        let sprite_table = anb.len();
+        for sprite in 0..3u32 {
+            anb.extend_from_slice(&(sprite * sprite_rle.len() as u32).to_le_bytes());
+            anb.extend_from_slice(&[3, 2]);
+        }
+        let component_table = anb.len();
+        let positions = [
+            [(0i16, 0i16), (4, 0), (0, 3)],
+            [(0i16, 0i16), (4, 0), (0, 3)],
+            [(0i16, 5i16), (4, 5), (0, 8)],
+        ];
+        for frame_components in positions {
+            for (index, (x, y)) in frame_components.into_iter().enumerate() {
+                let sprite_index = index as u32;
+                anb.extend_from_slice(&(sprite_index * 6).to_le_bytes());
+                anb.extend_from_slice(&(x * 2).to_le_bytes());
+                anb.extend_from_slice(&(y * 2).to_le_bytes());
+                anb.extend_from_slice(&[0, 0]);
+            }
+        }
+        let frame_table = anb.len();
+        for (component_offset, width, height, count) in [
+            (0u32, 692i16, 150i16, 3u8),
+            (0u32, 692i16, 150i16, 3u8),
+            (6 * COMPONENT_BYTES as u32, 692i16, 150i16, 3u8),
+        ] {
+            anb.extend_from_slice(&component_offset.to_le_bytes());
+            anb.extend_from_slice(&width.to_le_bytes());
+            anb.extend_from_slice(&height.to_le_bytes());
+            anb.extend_from_slice(&[0, 0, 0, count, 0, 0]);
+        }
+        let animation_table = anb.len();
+        anb.extend_from_slice(&0u32.to_le_bytes());
+        anb.extend_from_slice(&28u32.to_le_bytes());
+        anb.extend_from_slice(&3u16.to_le_bytes());
+
+        anb[..2].copy_from_slice(&1u16.to_le_bytes());
+        for (index, offset) in [
+            sprite_table as u32,
+            component_table as u32,
+            frame_table as u32,
+            animation_table as u32,
+        ]
+        .into_iter()
+        .enumerate()
+        {
+            let start = 2 + index * 4;
+            anb[start..start + 4].copy_from_slice(&offset.to_le_bytes());
+        }
+        (anb, component_table, frame_table, animation_table)
+    }
+
+    fn palette() -> Palette256 {
+        let mut bytes = vec![0u8; 256 * 3];
+        for (index, color) in [
+            [63, 0, 0],
+            [0, 63, 0],
+            [0, 0, 63],
+        ]
+        .into_iter()
+        .enumerate()
+        {
+            bytes[index * 3..index * 3 + 3].copy_from_slice(&color);
+        }
+        Palette256::parse(&bytes, PaletteChannelMode::Rgb).unwrap()
+    }
+
+    fn pixel(image: &RgbImage, x: usize, y: usize) -> [u8; 3] {
+        let start = (y * image.width() as usize + x) * 3;
+        image.rgb_bytes()[start..start + 3].try_into().unwrap()
+    }
+
+    #[test]
+    fn title_button_hit_uses_union_of_normal_positive_literal_masks() {
+        let (anb, _, _, _) = synthetic_title_anb();
+        let button = CdTitleButton::parse(&anb).unwrap();
+        assert_eq!(button.selected[0].y, 5);
+        assert_eq!(button.selected[1].y, 5);
+        assert_eq!(button.selected[2].y, 8);
+        assert!(button.hit_test(0, 0)); // literal palette index zero is opaque
+        assert!(!button.hit_test(1, 0)); // transparent hole in each sprite box
+        assert!(button.hit_test(1, 1));
+        assert!(button.hit_test(4, 0)); // second component
+        assert!(button.hit_test(0, 3)); // third component
+        assert!(!button.hit_test(-1, 0));
+        assert!(!button.hit_test(i32::MIN, i32::MAX));
+        assert!(!button.hit_test(i32::MAX, i32::MIN));
+        // These coordinates hit the selected composition, but not the normal
+        // footprint used for callback hit testing.
+        assert!(!button.hit_test(0, 5));
+    }
+
+    #[test]
+    fn title_button_draws_cached_normal_or_selected_components_at_signed_origin() {
+        let (anb, _, _, _) = synthetic_title_anb();
+        let button = CdTitleButton::parse(&anb).unwrap();
+        assert_eq!(button.selected[0].y, 5);
+        assert_eq!(button.selected[1].y, 5);
+        assert_eq!(button.selected[2].y, 8);
+        let mut normal = RgbImage::from_rgb24(12, 12, vec![0; 12 * 12 * 3]).unwrap();
+        button.draw(&mut normal, &palette(), 1, 1, false).unwrap();
+        assert_eq!(pixel(&normal, 1, 1), [255, 0, 0]); // opaque source index 0
+        assert_eq!(pixel(&normal, 2, 1), [0, 0, 0]); // transparent source hole
+        assert_eq!(pixel(&normal, 2, 2), [0, 255, 0]);
+        assert_eq!(pixel(&normal, 5, 1), [255, 0, 0]);
+
+        let mut selected = RgbImage::from_rgb24(12, 12, vec![0; 12 * 12 * 3]).unwrap();
+        button.draw(&mut selected, &palette(), 1, 1, true).unwrap();
+        assert_eq!(pixel(&selected, 1, 1), [0, 0, 0]);
+        assert_eq!(pixel(&selected, 1, 6), [255, 0, 0]);
+        assert_eq!(pixel(&selected, 2, 7), [0, 255, 0]);
+
+        assert_eq!(
+            button.draw(&mut selected, &palette(), i32::MAX, 0, true),
+            Err(Error::TitleButtonPositionOverflow)
+        );
+    }
+
+    #[test]
+    fn title_button_rejects_unproven_animation_frames_or_component_flags() {
+        let (mut wrong_animation, _, _, animation_table) = synthetic_title_anb();
+        wrong_animation[animation_table + 8..animation_table + 10]
+            .copy_from_slice(&4u16.to_le_bytes());
+        assert_eq!(
+            CdTitleButton::parse(&wrong_animation),
+            Err(Error::UnsupportedCdTitleButtonBinding)
+        );
+
+        let (mut wrong_frame, _, frame_table, _) = synthetic_title_anb();
+        wrong_frame[frame_table + 4..frame_table + 6]
+            .copy_from_slice(&690i16.to_le_bytes());
+        assert_eq!(
+            CdTitleButton::parse(&wrong_frame),
+            Err(Error::UnsupportedCdTitleButtonBinding)
+        );
+
+        let (mut transformed_component, component_table, _, _) = synthetic_title_anb();
+        transformed_component[component_table + 8] = 1;
+        assert_eq!(
+            CdTitleButton::parse(&transformed_component),
+            Err(Error::UnsupportedCdTitleButtonBinding)
         );
     }
 }
