@@ -1,0 +1,52 @@
+{
+  "scope": "static exception triage; no guessed repair or original execution",
+  "bones": {
+    "input_sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f",
+    "bytes": 4077,
+    "sprite_record": 5,
+    "width": 65,
+    "height": 36,
+    "sprite_start": 1267,
+    "next_sprite_start": 1710,
+    "complete_rows_before_next_sprite": [
+      {
+        "row": 0,
+        "expanded_width": 0,
+        "end": 1268
+      },
+      {
+        "row": 1,
+        "expanded_width": 0,
+        "end": 1269
+      },
+      {
+        "row": 2,
+        "expanded_width": 0,
+        "end": 1270
+      },
+      {
+        "row": 3,
+        "expanded_width": 0,
+        "end": 1271
+      }
+    ],
+    "cursor_crossing_next_sprite": 1802,
+    "referencing_component": 8,
+    "referencing_frame": 8,
+    "referencing_animation": 4,
+    "sentinel_exemption": false,
+    "status": "blocked",
+    "conclusion": "Nonempty sprite is referenced by animation metadata; not proven unused. Stream crosses neighboring sprite before declared height. Exact cause remains unresolved."
+  },
+  "gpf": {
+    "cd_candidate_literal_reference": false,
+    "status": "blocked",
+    "conclusion": "Reported DEADBEEF/prefix-RNC wrapper and CRC failure have no established support in ANB loader98A60. Do not bypass CRC or invent a variant."
+  },
+  "instruction_basis": [
+    "0x98A60 fixes sprite data relative to file+18",
+    "0xA7730 signed-control basic path",
+    "0xA7730 skips only zero-width/height descriptors"
+  ],
+  "tests_passed": true
+}

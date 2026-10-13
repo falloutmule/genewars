@@ -1,0 +1,6 @@
+# Evidence receipts have byte-level hashes; preserve their recorded line endings.
+*.json -text whitespace=cr-at-eol
+# The dated source receipt includes a terminal blank line; keep its exact bytes.
+research/tooling-sources.json whitespace=cr-at-eol,-blank-at-eof
+# Console diagnostics are preserved verbatim, including table padding.
+*.txt -text -whitespace

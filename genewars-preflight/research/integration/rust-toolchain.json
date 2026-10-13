@@ -1,0 +1,32 @@
+{
+  "installer_url": "https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-gnu/rustup-init.exe",
+  "installer_sha256": "6d5b5709addc0122c916d8c810da8d8a7b086a5d64fa805ef404d506392aadc8",
+  "checksum_url": "https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-gnu/rustup-init.exe.sha256",
+  "channel_url": "https://static.rust-lang.org/dist/channel-rust-stable.toml",
+  "channel_sha256": "ce6dddc886364f8d786514771212cebe9b731ba82d6b859951c6b0ccc516b6a2",
+  "channel_date": "2026-10-01",
+  "toolchain": "1.99.0-x86_64-pc-windows-gnu",
+  "command": [
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\tools\\rust\\rustup-init.exe",
+    "-y",
+    "--no-modify-path",
+    "--profile",
+    "minimal",
+    "--default-host",
+    "x86_64-pc-windows-gnu",
+    "--default-toolchain",
+    "1.99.0-x86_64-pc-windows-gnu"
+  ],
+  "environment_overrides": {
+    "RUSTUP_HOME": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\tools\\rust\\rustup",
+    "CARGO_HOME": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\tools\\rust\\cargo"
+  },
+  "exit_code": 0,
+  "stdout": "\n  1.99.0-x86_64-pc-windows-gnu installed - rustc 1.99.0 (b940084d7 2026-09-28)\n\n\nRust is installed now. Great!\n\nTo get started you need Cargo's bin directory (C:\\Users\\fallo\\Documents\\ChatGPT\n\\Freecad\\genewars-preflight\\private\\tools\\rust\\cargo\\bin) in your PATH\nenvironment variable. This has not been done automatically.\n",
+  "stderr": "info: profile set to minimal\ninfo: setting default host tuple to x86_64-pc-windows-gnu\ninfo: syncing channel updates for 1.99.0-x86_64-pc-windows-gnu\ninfo: latest update on 2026-10-01 for version 1.99.0 (b940084d7 2026-09-28)\ninfo: downloading 4 components\ninfo: default toolchain set to 1.99.0-x86_64-pc-windows-gnu\n",
+  "configuration_scope": "project-private Rust homes; --no-modify-path; no global configuration requested",
+  "documentation": [
+    "https://rust-lang.github.io/rustup/installation/windows.html",
+    "https://rust-lang.github.io/rustup/installation/index.html"
+  ]
+}

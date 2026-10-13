@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "completed_utc": "2026-10-13T01:02:59.926664+00:00",
+  "all_passed": true,
+  "checks": {
+    "inventory_boundary_tests": true,
+    "rust_workspace_tests": true,
+    "native_cli_build": true,
+    "all_rnc_records": true,
+    "real_panel_render": true,
+    "anb_corpus_accounting": true,
+    "anb_only_documented_failures": true,
+    "anb_explicit_codec_accounting": true,
+    "independent_creature_pixels": true,
+    "native_distance_smoke": true,
+    "native_distance_result": true,
+    "reject_out_of_range_input": true,
+    "independent_primitive_review": true,
+    "le_mapping_replay": true,
+    "record_and_grid_contracts": true,
+    "renderer_bridge": true,
+    "custom_ui_bridge": true,
+    "creature_codec_bridge": true,
+    "input_packet_bridge": true,
+    "custom_list_storage": true,
+    "sprite_exception_assessment": true,
+    "native_window_smoke": true,
+    "native_window_presented_three_frames": true,
+    "dated_preflight_twelve_checks_passed": true,
+    "dated_manifest_and_comparison_unchanged": true,
+    "original_archive_unchanged": true,
+    "manifest_assertions_hold": true,
+    "no_private_files_tracked": true,
+    "all_private_files_ignored": true
+  },
+  "commands": [
+    {
+      "label": "inventory_boundary_tests",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_inventory.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\ntest_sfx_members_duplicate_names_and_blocked_image_are_preserved (test_inventory.Archives.test_sfx_members_duplicate_names_and_blocked_image_are_preserved) ... ok\ntest_stale_disc_inventory_is_rejected (test_inventory.Archives.test_stale_disc_inventory_is_rejected) ... ok\ntest_entry_outside_object_is_flagged (test_inventory.Headers.test_entry_outside_object_is_flagged) ... ok\ntest_invalid_pointer_does_not_scan_for_incidental_le (test_inventory.Headers.test_invalid_pointer_does_not_scan_for_incidental_le) ... ok\ntest_le_header_is_followed_at_actual_offset (test_inventory.Headers.test_le_header_is_followed_at_actual_offset) ... ok\ntest_object_table_cannot_overlap_header (test_inventory.Headers.test_object_table_cannot_overlap_header) ... ok\ntest_truncated_le_and_oversized_object_table_are_flagged (test_inventory.Headers.test_truncated_le_and_oversized_object_table_are_flagged) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.030s\n\nOK\n"
+    },
+    {
+      "label": "rust_workspace_tests",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/cargo.py",
+        "test",
+        "--workspace",
+        "--offline",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "stdout": "\nrunning 26 tests\ntest tests::clips_runs_to_declared_width_but_consumes_full_literals ... ok\ntest tests::copies_overlapping_backreference_matches ... ok\ntest tests::embedded_sprite_decode_cannot_cross_into_later_anb_sections ... ok\ntest tests::lookahead_crosses_word_boundary_without_committing_cursor ... ok\ntest tests::parses_borrowed_anb_sections_with_absolute_offsets_and_opaque_word ... ok\ntest tests::decodes_explicit_packed4_high_first_odd_rows_and_transparent_skips ... ok\ntest tests::parses_big_endian_header_fields ... ok\ntest tests::decodes_synthetic_method1_literal_stream ... ok\ntest tests::parses_raw_palette_triplets_without_reordering_or_scaling ... ok\ntest tests::rejects_malformed_sprite_tables_offsets_and_streams ... ok\ntest tests::reads_bounded_anb_animation_frame_and_component_records ... ok\ntest tests::prefix_decode_reports_consumed_length_and_preserves_tail ... ok\ntest tests::rejects_bad_anb_metadata_section_lengths_and_references ... ok\ntest tests::rejects_declared_output_over_limit_before_allocating ... ok\ntest tests::packed4_consumes_full_clipped_run_and_rejects_truncated_payload ... ok\ntest tests::rejects_output_completed_before_declared_chunks_finish ... ok\ntest tests::rejects_oversubscribed_huffman_table ... ok\ntest tests::rejects_short_or_malformed_headers ... ok\ntest tests::parses_six_byte_sprite_record_and_preserves_rle_opacity ... ok\ntest tests::rejects_palette_lengths_other_than_256_triplets ... ok\ntest tests::rejects_truncated_anb_header ... ok\ntest tests::deterministic_mutations_never_panic_or_exceed_output_limit ... ok\ntest tests::rejects_unordered_and_out_of_bounds_anb_offsets ... ok\ntest tests::rnc_crc_matches_published_header_sample ... ok\ntest tests::validates_exact_packed_length ... ok\ntest tests::zero_count_table_reuses_previous_table ... ok\n\ntest result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 18 tests\ntest custom_list::tests::all_offsets_match_byte_width_and_zero_guard ... ok\ntest custom_list::tests::bounded_names_reject_wrapped_indices_and_terminators_in_following_fields ... ok\ntest mouse_packet::tests::instruction_truth_table_covers_every_input_combination ... ok\ntest custom_list::tests::each_of_six_rows_uses_twelve_scanlines_and_wraps_after_255 ... ok\ntest opaque_records::tests::radius_requires_complete_group_and_exact_qualification_flags ... ok\ntest custom_list::tests::selection_has_half_open_edges_and_requires_the_observed_packet_conditions ... ok\ntest custom_list::tests::all_packet_bits_obey_capture_state_and_mask_eight ... ok\ntest mouse_packet::tests::quick_click_survives_two_polls_and_repress_emits_both_events ... ok\ntest opaque_records::tests::radius_preserves_wrap_unsigned_comparison_and_inclusive_boundary ... ok\ntest custom_list::tests::capture_pending_and_outside_release_preserve_exact_sentinels ... ok\ntest tests::combined_distance_applies_floor_after_wrapping ... ok\ntest tests::coordinates_congruent_modulo_32768_have_identical_distance ... ok\ntest tests::static_instruction_vectors ... ok\ntest tests::symmetry_and_bound_hold_at_signed_and_wrap_boundaries ... ok\ntest opaque_records::tests::repeated_grid_rows_are_idempotent ... ok\ntest opaque_records::tests::grid_bounds_failure_has_no_partial_writes_and_zero_counts_need_no_memory ... ok\ntest tests::square_root_edges_and_perfect_square_neighbors ... ok\ntest opaque_records::tests::grid_preserves_linear_columns_wrapped_rows_and_unrelated_bytes ... ok\n\ntest result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 10 tests\ntest tests::parses_explicit_sprite_database_palette_and_record ... ok\ntest tests::parses_explicit_packed4_base_and_diagnostic_view ... ok\ntest tests::parses_named_ifcustom_static_render_state_and_output ... ok\ntest tests::parses_required_paths_and_bounded_frame_option ... ok\ntest tests::positional_input_named_report_is_not_an_output_path ... ok\ntest tests::rejects_duplicate_options ... ok\ntest tests::rejects_zero_or_missing_frame_counts ... ok\ntest tests::writes_machine_readable_report_with_escaped_error ... ok\ntest tests::refuses_to_overwrite_report_targets ... ok\ntest tests::refuses_to_overwrite_bmp_targets ... ok\n\ntest result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 9 tests\ntest tests::bmp_has_expected_windows_header_and_rgb_to_bgr_conversion ... ok\ntest tests::rejects_invalid_rgb_image_buffer_dimensions ... ok\ntest tests::rejects_sprite_planes_that_do_not_match_declared_dimensions ... ok\ntest tests::rejects_bad_index_length_palette_mode_and_components ... ok\ntest tests::composites_explicit_opacity_with_destination_clipping_and_midtones ... ok\ntest tests::rejects_unproven_ifcustom_animation_shapes ... ok\ntest tests::composes_verified_custom_arrows_at_component_adjusted_positions ... ok\ntest tests::renders_fixed_panel_rgb_order_scale_and_orientation ... ok\ntest tests::scales_midrange_dac_components_with_floor ... ok\n\ntest result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\nwarn: could not canonicalize path C:\\Users\\fallo\nwarn: could not canonicalize path C:\\Users\nwarn: could not canonicalize path C:\\\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_assets-0ahcomsp8crgl\\s-hn5pqhlwsn-02rexwc-working`\n\nwarning: `genewars-assets` (lib) generated 1 warning\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_render-1u6h31bt7jg6a\\s-hn5pqhobrn-0ij0bap-working`\n\n   Compiling genewars-core v0.1.0 (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\\crates\\genewars-core)\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\rnc_decode-2l2jeq1m6ewab\\s-hn5pqhuyrj-0flnqr3-working`\n\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\sprite_probe-292txt45wjtc0\\s-hn5pqhv2aw-0xif12c-working`\n\nwarning: `genewars-render` (lib) generated 1 warning\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_core-0tkua02bvmcti\\s-hn5q29ji5u-1wdveo4-working`\n\nwarning: `genewars-assets` (example \"rnc_decode\") generated 1 warning\nwarning: `genewars-assets` (example \"sprite_probe\") generated 1 warning\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_render-2qn4j0t6uigl0\\s-hn5pqhurbq-0aiqcqa-working`\n\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\rnc_prefix-1ze0lef3c97kj\\s-hn5pqhuuvo-0crha5b-working`\n\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_assets-3fxgco6amz2um\\s-hn5pqhob5e-18p934q-working`\n\nwarning: `genewars-render` (lib test) generated 1 warning\nwarning: `genewars-assets` (example \"rnc_prefix\") generated 1 warning\nwarning: `genewars-assets` (lib test) generated 1 warning\nwarning: `genewars-core` (lib) generated 1 warning\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_core-2y6veoqe3c7z6\\s-hn5q29n84e-1v17592-working`\n\n   Compiling genewars-tools v0.1.0 (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\\crates\\genewars-tools)\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_desktop-0a6yiog1xjos7\\s-hn5ps97uly-1c9iijk-working`\n\nwarning: `genewars-desktop` (bin \"genewars-desktop\" test) generated 1 warning\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_tools-2qq7x4ufvtdp9\\s-hn5q29ozva-0luf3co-working`\n\nwarning: `genewars-tools` (bin \"genewars-tools\" test) generated 1 warning\nwarning: `genewars-core` (lib test) generated 1 warning\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.93s\n     Running unittests src\\lib.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_assets-c90ee9e2976408ba.exe)\n     Running unittests src\\lib.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_core-91b8cb3c61ea614f.exe)\n     Running unittests src\\main.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_desktop-e50dccdec8f26b53.exe)\n     Running unittests src\\lib.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_render-cdc6d7e84d7e30e4.exe)\n     Running unittests src\\main.rs (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\genewars_tools-cda44993ddebee5e.exe)\n   Doc-tests genewars_assets\n   Doc-tests genewars_core\n   Doc-tests genewars_render\n"
+    },
+    {
+      "label": "native_cli_build",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/cargo.py",
+        "build",
+        "-p",
+        "genewars-tools",
+        "--offline",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\nwarn: could not canonicalize path C:\\Users\\fallo\nwarn: could not canonicalize path C:\\Users\nwarn: could not canonicalize path C:\\\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_assets-0ahcomsp8crgl\\s-hn5pqhlwsn-02rexwc-working`\n\nwarning: `genewars-assets` (lib) generated 1 warning\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_render-1u6h31bt7jg6a\\s-hn5pqhobrn-0ij0bap-working`\n\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_core-0tkua02bvmcti\\s-hn5q29ji5u-1wdveo4-working`\n\nwarning: `genewars-render` (lib) generated 1 warning\nwarning: `genewars-core` (lib) generated 1 warning\n   Compiling genewars-tools v0.1.0 (C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\\crates\\genewars-tools)\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_tools-33h8ykqrul0fs\\s-hn5q2a9ivi-1ufe5b3-working`\n\nwarning: `genewars-tools` (bin \"genewars-tools\") generated 1 warning\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.82s\n"
+    },
+    {
+      "label": "all_rnc_records",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_rnc_corpus.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"summary\": {\"records\": 331, \"unique_inputs\": 179, \"passed\": 331, \"failed\": 0, \"compound_records\": 2}, \"failures\": []}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "real_panel_render",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/render_panel.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"schema_version\": 1, \"sources\": [{\"entry_id\": \"root/2/disc/86\", \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/GENEPANL.DAT;1\", \"size\": 16204, \"sha256\": \"8116b2b883320b8573c50496a570f0f3fa978e4c20b9c85a284339ff1f920e24\"}, {\"entry_id\": \"root/2/disc/108\", \"path\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/MAIN.PAL;1\", \"size\": 768, \"sha256\": \"8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05\"}], \"candidate_binary_sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\", \"width\": 128, \"height\": 480, \"index_sha256\": \"af9741b4545fb6f28a1dd0e50da0570e39992e75c872bc2249891f3330f59951\", \"bmp_sha256\": \"af218cc65e0abb410242cd73440b53d4c18f4d8cd3f03f1f7542c4bb1c70809b\", \"rgb_sha256\": \"bb135e29eb2e6dacf17ab8273e57df185fe24b82320ab5b296fbf74a6c11444d\", \"png_sha256\": \"2c17b7126fe1ce16efe61f46f8517df660bc51524bc6401499c3412089018b12\", \"all_pixels_verified\": true, \"native_command\": [\"C:\\\\Users\\\\fallo\\\\Documents\\\\ChatGPT\\\\Freecad\\\\genewars-preflight\\\\private\\\\build\\\\rust-target\\\\debug\\\\genewars-tools.exe\", \"panel-render\", \"C:\\\\Users\\\\fallo\\\\Documents\\\\ChatGPT\\\\Freecad\\\\genewars-preflight\\\\private\\\\integration\\\\panel\\\\GENEPANL.RNC\", \"C:\\\\Users\\\\fallo\\\\Documents\\\\ChatGPT\\\\Freecad\\\\genewars-preflight\\\\private\\\\integration\\\\panel\\\\MAIN.PAL\", \"C:\\\\Users\\\\fallo\\\\Documents\\\\ChatGPT\\\\Freecad\\\\genewars-preflight\\\\private\\\\integration\\\\panel\\\\panel.bmp\"], \"native_stdout\": {\"width\": 128, \"height\": 480, \"bmp_bytes\": 184374, \"palette\": \"RGB6\", \"transfer\": \"floor(v*255/63)\", \"status\": \"written\"}, \"private_preview\": \"private\\\\integration\\\\panel\\\\panel.png\", \"evidence\": \"Panel draw VA0x24AD0 width128; display init0x1CAA0 binds480rows; MAIN.PAL init chain0x979A0->0xA13F0->0xA6D2C.\", \"display_conversion\": \"Explicit RGB6-to-RGB8 floor(component*255/63). Source channel order is binary-verified; this presentation transfer is not a measured original DAC/monitor response.\", \"scope\": \"Static original UI panel rendering only; no original execution, interactive game, overlay widgets or gameplay parity.\"}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "anb_corpus_accounting",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_sprites.py"
+      ],
+      "exit_code": 1,
+      "stdout": "{\"summary\": {\"records\": 263, \"unique_inputs\": 166, \"passed\": 260, \"blocked\": 3, \"packed4_source_records\": 50, \"packed4_unique_inputs\": 25, \"unique_sprite_records\": 10990}, \"blocked\": [{\"entry_id\": \"root/1/221\", \"reason\": \"SpriteStreamTruncated { record: 5, offset: 3660 }\"}, {\"entry_id\": \"root/4/105\", \"reason\": \"ANB sections are not ordered within file bounds\"}, {\"entry_id\": \"root/2/disc/319\", \"reason\": \"SpriteStreamTruncated { record: 5, offset: 3660 }\"}]}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "independent_creature_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/creature-review.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Checked 1/25 inputs, 114 active streams\nChecked 2/25 inputs, 248 active streams\nChecked 3/25 inputs, 374 active streams\nChecked 4/25 inputs, 497 active streams\nChecked 5/25 inputs, 602 active streams\nChecked 6/25 inputs, 698 active streams\nChecked 7/25 inputs, 793 active streams\nChecked 8/25 inputs, 916 active streams\nChecked 9/25 inputs, 1016 active streams\nChecked 10/25 inputs, 1136 active streams\nChecked 11/25 inputs, 1234 active streams\nChecked 12/25 inputs, 1345 active streams\nChecked 13/25 inputs, 1452 active streams\nChecked 14/25 inputs, 1559 active streams\nChecked 15/25 inputs, 1655 active streams\nChecked 16/25 inputs, 1744 active streams\nChecked 17/25 inputs, 1837 active streams\nChecked 18/25 inputs, 1938 active streams\nChecked 19/25 inputs, 2067 active streams\nChecked 20/25 inputs, 2172 active streams\nChecked 21/25 inputs, 2285 active streams\nChecked 22/25 inputs, 2367 active streams\nChecked 23/25 inputs, 2463 active streams\nChecked 24/25 inputs, 2565 active streams\nChecked 25/25 inputs, 2673 active streams\n{\"status\": \"passed\", \"summary\": {\"inputs\": 25, \"active_streams\": 2673, \"empty_records\": 25, \"rows\": 134009, \"odd_runs\": 107328, \"zero_nibbles\": 7105, \"overshoot_rows\": 0, \"short_rows\": 125714, \"opaque_pixels\": 1661696, \"native_full_pixel_mask_comparisons\": 2673, \"base250_comparisons\": 25}, \"output\": \"research/variants/creature-review.json\"}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "native_distance_smoke",
+      "command": [
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\genewars-tools.exe",
+        "distance",
+        "0",
+        "0",
+        "3",
+        "4"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"squared_distance\":25,\"variant\":\"cd-candidate\",\"function_va\":\"0x73690\"}\n",
+      "stderr": ""
+    },
+    {
+      "label": "reject_out_of_range_input",
+      "exit_code": 2,
+      "stderr": "coordinates must fit signed 16-bit\n"
+    },
+    {
+      "label": "independent_primitive_review",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/review_checks.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"primitive\": {\n    \"differences_tested\": 65536,\n    \"mismatches\": [],\n    \"max_squared_sum\": 536870912\n  },\n  \"sqrt\": {\n    \"static_model_cases\": 206606,\n    \"mismatches\": 0,\n    \"bsr_bins\": 32,\n    \"seed_bound_failure_bins\": [],\n    \"table_values_exported\": false\n  },\n  \"synthetic_speculative_refill\": [\n    {\n      \"probe_order\": \"symbol_index\",\n      \"matched_symbol\": 1,\n      \"physical_cursor_advance\": 2\n    },\n    {\n      \"probe_order\": \"depth\",\n      \"matched_symbol\": 1,\n      \"physical_cursor_advance\": 0\n    }\n  ],\n  \"candidate\": {\n    \"size\": 1265994,\n    \"sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\",\n    \"git_blob_sha1\": \"cb7ddad872b1c169c8b9657bb83b0e6aa6703c75\",\n    \"upstream_metadata_matches\": [\n      {\n        \"path\": \"bin/gw-genewars-1_0-sep_1996.exe\",\n        \"git_blob_sha1\": \"cb7ddad872b1c169c8b9657bb83b0e6aa6703c75\",\n        \"size\": 1265994\n      }\n    ]\n  },\n  \"variant_metadata_from_preflight\": [\n    {\n      \"variant\": \"repack\",\n      \"sha256\": \"6a8c75b7de5f4e7f27c5378b712e04c24fd106778429f5765c49a641fac90e64\",\n      \"size\": 1265994,\n      \"entry_object\": 1,\n      \"entry_offset\": 618048,\n      \"objects\": [\n        {\n          \"base\": 65536,\n          \"virtual_size\": 911408\n        },\n        {\n          \"base\": 983040,\n          \"virtual_size\": 131\n        },\n        {\n          \"base\": 1048576,\n          \"virtual_size\": 695488\n        },\n        {\n          \"base\": 1769472,\n          \"virtual_size\": 4944\n        }\n      ]\n    },\n    {\n      \"variant\": \"larger_rip\",\n      \"sha256\": \"824bcf84a6bff6f3b98ec8eb94e376b37ee55eb0a2fa1dbbb3d4a3b6f3249d1e\",\n      \"size\": 5184949,\n      \"entry_object\": 1,\n      \"entry_offset\": 730168,\n      \"objects\": [\n        {\n          \"base\": 65536,\n          \"virtual_size\": 965680\n        },\n        {\n          \"base\": 1048576,\n          \"virtual_size\": 300\n        },\n        {\n          \"base\": 1114112,\n          \"virtual_size\": 734704\n        },\n        {\n          \"base\": 1900544,\n          \"virtual_size\": 4944\n        }\n      ]\n    },\n    {\n      \"variant\": \"patch_payload\",\n      \"sha256\": \"2a0a51a5a8170cb7555cc0a745c08ed371c1500503d5cec08d77190d39822a3f\",\n      \"size\": 1251658,\n      \"entry_object\": 1,\n      \"entry_offset\": 653676,\n      \"objects\": [\n        {\n          \"base\": 65536,\n          \"virtual_size\": 911664\n        },\n        {\n          \"base\": 983040,\n          \"virtual_size\": 150\n        },\n        {\n          \"base\": 1048576,\n          \"virtual_size\": 691280\n        },\n        {\n          \"base\": 1769472,\n          \"virtual_size\": 4944\n        }\n      ]\n    },\n    {\n      \"variant\": \"disc_game_tree\",\n      \"sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\",\n      \"size\": 1265994,\n      \"entry_object\": 1,\n      \"entry_offset\": 618048,\n      \"objects\": [\n        {\n          \"base\": 65536,\n          \"virtual_size\": 911408\n        },\n        {\n          \"base\": 983040,\n          \"virtual_size\": 131\n        },\n        {\n          \"base\": 1048576,\n          \"virtual_size\": 695488\n        },\n        {\n          \"base\": 1769472,\n          \"virtual_size\": 4944\n        }\n      ]\n    }\n  ]\n}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "le_mapping_replay",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/review_loader.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"candidate_sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\",\n  \"format\": \"Linear Executable (LE-Style DOS)\",\n  \"entry_point\": \"0xA6E40\",\n  \"pages_verified\": 244,\n  \"fixup_instances\": 26883,\n  \"unique_fixup_addresses\": 26860,\n  \"cross_object_fixup_instances\": 24497,\n  \"block_checks\": [\n    {\n      \"object\": 1,\n      \"size\": 911408,\n      \"all_bytes_equal\": true,\n      \"mapped_sha256\": \"92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe\"\n    },\n    {\n      \"object\": 2,\n      \"size\": 131,\n      \"all_bytes_equal\": true,\n      \"mapped_sha256\": \"4395b75e2d47f32c5748408417e57a743af95b2e783b828037f5f5d8dbf8c3dd\"\n    },\n    {\n      \"object\": 3,\n      \"size\": 695488,\n      \"all_bytes_equal\": true,\n      \"mapped_sha256\": \"aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87\"\n    },\n    {\n      \"object\": 4,\n      \"size\": 4944,\n      \"all_bytes_equal\": true,\n      \"mapped_sha256\": \"613604a99884153a8f1ee0b74c87f2df5908dbd6a7a22888bebe7b2669880059\"\n    }\n  ],\n  \"all_checks_passed\": true,\n  \"limitations\": [\n    \"Static validation only; original executable never run.\",\n    \"Object2 lacks 32-bit flag; its 16-bit thunk code is not covered by this 32-bit function tranche.\",\n    \"Compiler selection borlandcpp is loader default, not compiler identification; register calling conventions require direct instruction inspection.\",\n    \"Ghidra .image overlay contains original file bytes; exclude it from code-address coordinates.\"\n  ]\n}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "record_and_grid_contracts",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/primitive_contract_checks.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"binary_sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\",\n  \"function_digests\": [\n    {\n      \"address\": \"0x432c0\",\n      \"size\": 124,\n      \"sha256\": \"fd38865ce7d0c49e05cfa4567a7b5285764ef65e5e4905fd8067c8df07a3bf4a\"\n    },\n    {\n      \"address\": \"0x8d580\",\n      \"size\": 106,\n      \"sha256\": \"6cfb48801ee8e6813eb5f614a3e67d412e25f914a07c310225e7a891a2ac0a64\"\n    },\n    {\n      \"address\": \"0x8d5f0\",\n      \"size\": 105,\n      \"sha256\": \"24460497190e3fe63c1a955c3da285a3ffe8010a5414eae7230fb7b9e175ff8a\"\n    }\n  ],\n  \"record_cases\": [\n    {\n      \"name\": \"coincident_default\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": true\n    },\n    {\n      \"name\": \"inclusive_radius_boundary\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        1536,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 2359296,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": true\n    },\n    {\n      \"name\": \"one_beyond_radius_boundary\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        1537,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 2362369,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": false\n    },\n    {\n      \"name\": \"negative_boundary\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        -1536,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 2359296,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": true\n    },\n    {\n      \"name\": \"wrapped_coordinate\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        -32768,\n        -32768\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": true\n    },\n    {\n      \"name\": \"inactive_marker\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 0,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": false\n    },\n    {\n      \"name\": \"high_word_flag_does_not_qualify\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 0,\n      \"kind\": 3,\n      \"ignored_high_flags\": 1,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": false\n    },\n    {\n      \"name\": \"other_flag_bits_ignored\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 254,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": false\n    },\n    {\n      \"name\": \"kind_mismatch\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 0,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 2,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 2359296,\n      \"expected\": false\n    },\n    {\n      \"name\": \"high_unsigned_threshold\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        16384,\n        16384\n      ],\n      \"radius_byte\": 83,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 536870912,\n      \"wrapped_squared_radius\": 4261478400,\n      \"expected\": true\n    },\n    {\n      \"name\": \"first_square_wrap_false\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        16384,\n        16384\n      ],\n      \"radius_byte\": 84,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 536870912,\n      \"wrapped_squared_radius\": 67371008,\n      \"expected\": false\n    },\n    {\n      \"name\": \"exact_zero_square_wrap_true\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        0,\n        0\n      ],\n      \"radius_byte\": 254,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 0,\n      \"expected\": true\n    },\n    {\n      \"name\": \"exact_zero_square_wrap_false\",\n      \"query\": [\n        0,\n        0\n      ],\n      \"coordinate\": [\n        1,\n        0\n      ],\n      \"radius_byte\": 254,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 1,\n      \"wrapped_squared_radius\": 0,\n      \"expected\": false\n    },\n    {\n      \"name\": \"zero_square_wrap_modulo_equivalent\",\n      \"query\": [\n        -1,\n        0\n      ],\n      \"coordinate\": [\n        32767,\n        0\n      ],\n      \"radius_byte\": 254,\n      \"marker\": 1,\n      \"flags\": 1,\n      \"kind\": 3,\n      \"ignored_high_flags\": 0,\n      \"squared_distance\": 0,\n      \"wrapped_squared_radius\": 0,\n      \"expected\": true\n    }\n  ],\n  \"grid_cases\": [\n    {\n      \"name\": \"origin\",\n      \"x\": 0,\n      \"y\": 0,\n      \"columns\": 1,\n      \"rows\": 1,\n      \"touched_byte_offsets\": [\n        11\n      ],\n      \"writes\": 1,\n      \"first_offset\": 11,\n      \"last_offset\": 11,\n      \"minimum_slice_len\": 12,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"empty_columns\",\n      \"x\": 0,\n      \"y\": 0,\n      \"columns\": 0,\n      \"rows\": 255,\n      \"touched_byte_offsets\": [],\n      \"writes\": 0,\n      \"first_offset\": null,\n      \"last_offset\": null,\n      \"minimum_slice_len\": 0,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"empty_rows\",\n      \"x\": 0,\n      \"y\": 0,\n      \"columns\": 255,\n      \"rows\": 0,\n      \"touched_byte_offsets\": [],\n      \"writes\": 0,\n      \"first_offset\": null,\n      \"last_offset\": null,\n      \"minimum_slice_len\": 0,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"negative_coords\",\n      \"x\": -1,\n      \"y\": -1,\n      \"columns\": 1,\n      \"rows\": 1,\n      \"touched_byte_offsets\": [\n        229373\n      ],\n      \"writes\": 1,\n      \"first_offset\": 229373,\n      \"last_offset\": 229373,\n      \"minimum_slice_len\": 229374,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"column_spills_into_next_linear_row\",\n      \"x\": 32512,\n      \"y\": 0,\n      \"columns\": 2,\n      \"rows\": 1,\n      \"touched_byte_offsets\": [\n        1789,\n        1803\n      ],\n      \"writes\": 2,\n      \"first_offset\": 1789,\n      \"last_offset\": 1803,\n      \"minimum_slice_len\": 1804,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"y_wraps_to_zero\",\n      \"x\": 0,\n      \"y\": 32512,\n      \"columns\": 1,\n      \"rows\": 2,\n      \"touched_byte_offsets\": [\n        227595,\n        11\n      ],\n      \"writes\": 2,\n      \"first_offset\": 227595,\n      \"last_offset\": 11,\n      \"minimum_slice_len\": 227596,\n      \"fits_128_square_grid\": true\n    },\n    {\n      \"name\": \"last_cell_column_out_of_standard_grid\",\n      \"x\": -1,\n      \"y\": -1,\n      \"columns\": 2,\n      \"rows\": 1,\n      \"touched_byte_offsets\": [\n        229373,\n        229387\n      ],\n      \"writes\": 2,\n      \"first_offset\": 229373,\n      \"last_offset\": 229387,\n      \"minimum_slice_len\": 229388,\n      \"fits_128_square_grid\": false\n    },\n    {\n      \"name\": \"last_cell_three_row_spill\",\n      \"x\": -1,\n      \"y\": -1,\n      \"columns\": 255,\n      \"rows\": 1,\n      \"touched_byte_offsets\": null,\n      \"writes\": 255,\n      \"first_offset\": 229373,\n      \"last_offset\": 232929,\n      \"minimum_slice_len\": 232930,\n      \"fits_128_square_grid\": false\n    }\n  ],\n  \"projection_cases\": 65536,\n  \"projection_mismatches\": 0,\n  \"group_bytes\": 4288,\n  \"original_last_read_exclusive\": 4272,\n  \"object3_fully_addressable_groups\": 66\n}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "renderer_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_renderer_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS renderer/palette/sprite static receipts, asset hashes, and 4 synthetic pitch cases\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "custom_ui_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_ui_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS exact CD custom UI binding, 4 sprite/frame states, 256 offset values, 9 selection boundary cases\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "creature_codec_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_creature_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"private_listing_contracts\": 7, \"admitted_unique_inputs\": 25, \"source_aliases\": 50, \"synthetic_vectors\": 3}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "input_packet_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_input_bridge.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"listing_contracts\": 6, \"button_vectors\": 8, \"capture_cases\": 2304}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "custom_list_storage",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_list_layout.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"listing_contracts\": 4, \"selection_vectors\": 2816, \"capacity\": 10}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "sprite_exception_assessment",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/assess_sprite_exceptions.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS BONES nonempty/referenced record and bounded stream-crossing assessment; unresolved inputs remain blocked\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "label": "native_window_smoke",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/desktop/smoke.py",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\GENEPANL.RNC",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\MAIN.PAL",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\native-smoke-f5ca75e10376438ab60a628e2e8985d6.json",
+        "--frames",
+        "3"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"presented_frames\":3,\"exit_reason\":\"frame_limit\"}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\nFailed to find real location of C:\\Python314\\python.exe\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\rust\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\\ChatGPT\nwarn: could not canonicalize path C:\\Users\\fallo\\Documents\nwarn: could not canonicalize path C:\\Users\\fallo\nwarn: could not canonicalize path C:\\Users\nwarn: could not canonicalize path C:\\\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_assets-0ahcomsp8crgl\\s-hn5pqhlwsn-02rexwc-working`\n\nwarning: `genewars-assets` (lib) generated 1 warning\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_render-1u6h31bt7jg6a\\s-hn5pqhobrn-0ij0bap-working`\n\nwarning: `genewars-render` (lib) generated 1 warning\nwarning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\incremental\\genewars_desktop-3d716yg15gpe7\\s-hn5psjc3nh-0oidbk9-working`\n\nwarning: `genewars-desktop` (bin \"genewars-desktop\") generated 1 warning\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s\n     Running `C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\genewars-desktop.exe panel C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\GENEPANL.RNC C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\MAIN.PAL --frames 3 --report C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\native-smoke-f5ca75e10376438ab60a628e2e8985d6.json`\n"
+    }
+  ],
+  "private_files_checked": 18981,
+  "baseline_sha256": {
+    "game-files-manifest.json": "6139f4083031cee88bc04849f1959ae1e43aff41eef7c87cb4a62bc8b86e9e6a",
+    "variant-comparison.json": "fa63d42693a0157fa3937255237290b84d3cf6a5f4df93cd5010c66847f9588d"
+  },
+  "source_archive_sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906",
+  "scope": "Rust/parser/static checks, real panel rendering, native asset-window presentation and dated-preflight preservation. Strict metadata bounds and explicit hash-bound packed4 creature admission supersede the unsafe full-file sprite result. Three ANB records (two hashes) have explicit unresolved failures. The earlier 12 checks are historical evidence; no broad re-extraction was performed. This verifier does not execute original programs; separately approved reference observations have their own receipts. No physical keyboard/close test, gameplay parity, or playable game is claimed here."
+}

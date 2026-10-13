@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "status": "approved-original-started-stopped-at-config-check",
+  "checked_utc": "2026-10-13T01:02:42.949957+00:00",
+  "original_execution": true,
+  "human_approval_statement": "Approve this scoped reference run",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "pid": 31916,
+  "host_release_utc": "2026-10-13T00:58:39.250972+00:00",
+  "process_end_utc": "2026-10-13T00:58:41.747427+00:00",
+  "process_exit_code": 0,
+  "host_timeout": false,
+  "process_lifetime_seconds": 74.47291160002351,
+  "release_to_process_end_upper_bound_seconds": 2.496455,
+  "outcome": {
+    "runtime": "DOS/4GW 1.97",
+    "error": "Can't read config.ini!",
+    "following_message": "Please install GENEWARS properly to play!",
+    "returned_to_gate": true
+  },
+  "scope_limits": [
+    "No menu or mission reached",
+    "No gameplay inputs, save or reload",
+    "No framebuffer capture",
+    "Release-to-exit interval includes emulator shutdown and is not gameplay timing",
+    "BIOS INT15 unknown-call warnings also present; causal role unknown",
+    "Exit code is emulator code, not proof of original success"
+  ],
+  "original_archive_sha256_revalidated": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906",
+  "game_files_before": 490,
+  "unchanged_original_game_files": 489,
+  "changed": [
+    {
+      "before": {
+        "entry_id": "root/2/disc/17",
+        "path": "private/reference-run/run-001/drive-c/GAME/GW.ERR",
+        "size": 45,
+        "sha256": "e758e8e330d7c6ab2bb8a39cde9d4199a3f25a05172bab482a81ec51c92f03c3"
+      },
+      "after": {
+        "path": "private/reference-run/run-001/drive-c/GAME/GW.ERR",
+        "size": 47,
+        "sha256": "62681b2bc13d5510367ce46165db72d6683a656606f237c7d0e17dfb6e7bf1a5"
+      }
+    }
+  ],
+  "removed": [],
+  "added": [
+    {
+      "path": "private/reference-run/run-001/drive-c/STARTGW.BAT",
+      "size": 317,
+      "sha256": "561ef535f9b8ab381438dbaf0607eede6faae82442957bdd78b32cff33026913"
+    },
+    {
+      "path": "private/reference-run/run-001/drive-c/ADDRESS.TXT",
+      "size": 24,
+      "sha256": "9307f34d576f87fe30acdfb325dddafae42ae75cb031748e2210e0925b550e2c"
+    }
+  ],
+  "media": [
+    {
+      "path": "private/reference-run/run-001/media/GENEWARS.cue",
+      "size": 238,
+      "sha256": "ba85aeb6a808145b43998a34faf6904956866539625bd45ead6dba0c2fd10ee5"
+    },
+    {
+      "path": "private/disc/member-003.cue",
+      "size": 238,
+      "sha256": "ba85aeb6a808145b43998a34faf6904956866539625bd45ead6dba0c2fd10ee5"
+    },
+    {
+      "path": "private/reference-run/run-001/media/GENEWARS.img",
+      "size": 630947520,
+      "sha256": "3ae5f2154a84898a7d1652e550d741a0a431fe67fd0b3eb20121e3b11fd4e5de"
+    },
+    {
+      "path": "private/disc/member-004.img",
+      "size": 630947520,
+      "sha256": "3ae5f2154a84898a7d1652e550d741a0a431fe67fd0b3eb20121e3b11fd4e5de"
+    }
+  ],
+  "emulator_executable": {
+    "path": "private/tools/dosbox-x/2026.10.01/bin/x64/Release SDL2/dosbox-x.exe",
+    "size": 25836544,
+    "sha256": "a82adcfa7af2784566cfeff74c077cefed08505396db2948b7e6aa7d4cee0832"
+  },
+  "config": {
+    "path": "private/reference-run/run-001/dosbox-x.conf",
+    "size": 20796,
+    "sha256": "9dba4b2ff89fa91a891cff667616f23b1562ba909ec3ed6f98a143870eb58f78"
+  },
+  "private_evidence": [
+    {
+      "path": "private/reference-run/run-001/logs/human-approval.json",
+      "size": 2405,
+      "sha256": "c4d143a7765bab8ea73c0c7f9f92c382c30fd27f744e67dba534b2495c7c30e4"
+    },
+    {
+      "path": "private/reference-run/run-001/logs/host-release.json",
+      "size": 1135,
+      "sha256": "2e80e1d777e6e69159f7c2f9c0e19f532b5b3f4ea07dceb8bfdcc3e750b8563a"
+    },
+    {
+      "path": "private/reference-run/run-001/logs/launch-process.json",
+      "size": 1810,
+      "sha256": "ef04b48c45344a6d984461ebefafdbfe7ac9df9cf731d1cdd1e388d6fcef5826"
+    },
+    {
+      "path": "private/reference-run/run-001/logs/final-process.json",
+      "size": 193,
+      "sha256": "fb2521e9b401bd2a9de2a25dcd6ceae1e52b23f6f17418ba34161108b47a393c"
+    },
+    {
+      "path": "private/reference-run/run-001/logs/dosbox-x.log",
+      "size": 4372,
+      "sha256": "91ed2677670fdf4f55bcdd2db4f6382505abb8bb25326925bb308efe632ff43f"
+    },
+    {
+      "path": "private/reference-run/run-001/logs/emulator-stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "private/reference-run/run-001/logs/emulator-stderr.txt",
+      "size": 5129,
+      "sha256": "e894bc4b2f5badff25a7fb7f653a7e52496b758ffba8dbccb80ceea5ab9875a0"
+    },
+    {
+      "path": "private/reference-run/run-001/logs/ui-actions.jsonl",
+      "size": 1198,
+      "sha256": "dac713348bc615a34f7d334ae0b30c3dbeff3e2aff22dc40548a5a9c8f3ad8fb"
+    }
+  ],
+  "first_two_unreleased_attempts_preserved": true,
+  "archived_attempts": [
+    {
+      "path": "private/reference-run/run-001/attempts/launch-001-before-parent-wait/archive-receipt.json",
+      "size": 2273,
+      "sha256": "1366bf8e5e01848c07247e79c6994181c4db50a37f3495ad2a80f54524dc65e6"
+    },
+    {
+      "path": "private/reference-run/run-001/attempts/launch-002-ui-unavailable/archive-receipt.json",
+      "size": 2849,
+      "sha256": "4b24553b3ced9c4def1d29933b186f361d2d7fe80c6ce1aba894ac1f4badabdb"
+    }
+  ],
+  "additional_original_execution_authorized": false,
+  "cleanup": "No deletion; complete private run tree, outputs, media and attempt logs retained. No global changes."
+}

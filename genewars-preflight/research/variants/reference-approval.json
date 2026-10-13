@@ -1,0 +1,9 @@
+{
+  "approved": true,
+  "human_statement": "Approve this scoped reference run",
+  "scope": "One supervised local session <=20 minutes, exact CD GW.EXE and DOS4GW.EXE, private disposable GAME tree, read-only copied CUE/IMG, networking/host integrations disabled; startup/menu/first available mission/panel/timing and optional one save/reload; no installer/launcher/patch/variant.",
+  "authorization_source": "Human reply relayed by root supervisor to SOL-02",
+  "recorded_utc": "2026-10-13T00:44:11.594271+00:00",
+  "supervisor": "root",
+  "original_execution_observed_by_review_lane": false
+}

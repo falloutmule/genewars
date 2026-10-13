@@ -1,0 +1,310 @@
+{
+  "scope": "provisional CD candidate; static semantics only; no original execution",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "ifeditor_literal_present": false,
+  "asset": {
+    "entry_id": "root/2/disc/89",
+    "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/IFCUSTOM.ANB;1",
+    "input_sha256": "1f69d8bca8bed9d9e15ee1cc79e0ce0856bb4cb6d7e3791e704b31d02b0006b4",
+    "decoded_sha256": "daf41bf104dd5d6436f7af23158a5d23d624c12780e3e66177b3b5aec2fbe006",
+    "decoded_bytes": 36660
+  },
+  "screen_state_va": "0x185014",
+  "controls_pointer_va": "0x185018",
+  "control_table_va": "0x107154",
+  "asset_pointer_va": "0x18501c",
+  "initializer_va": "0x7e0b0",
+  "input_dispatch_va": "0x7e400",
+  "draw_dispatch_va": "0x7e9c0",
+  "control_stride": 40,
+  "controls": [
+    {
+      "record_va": "0x1072bc",
+      "id": 27,
+      "flags": "0x48",
+      "position": [
+        455,
+        229
+      ],
+      "animation_index": 6,
+      "states": [
+        {
+          "state": "normal",
+          "frame_index": 12,
+          "component_index": 12,
+          "sprite_index": 13,
+          "width": 19,
+          "height": 32,
+          "frame_bounds": [
+            19,
+            31
+          ],
+          "component_position": [
+            0,
+            0
+          ],
+          "sprite_data_offset": 10912
+        },
+        {
+          "state": "selected",
+          "frame_index": 13,
+          "component_index": 13,
+          "sprite_index": 14,
+          "width": 19,
+          "height": 32,
+          "frame_bounds": [
+            19,
+            31
+          ],
+          "component_position": [
+            0,
+            1
+          ],
+          "sprite_data_offset": 11387
+        }
+      ]
+    },
+    {
+      "record_va": "0x1072e4",
+      "id": 28,
+      "flags": "0x48",
+      "position": [
+        455,
+        261
+      ],
+      "animation_index": 7,
+      "states": [
+        {
+          "state": "normal",
+          "frame_index": 14,
+          "component_index": 14,
+          "sprite_index": 15,
+          "width": 19,
+          "height": 32,
+          "frame_bounds": [
+            19,
+            31
+          ],
+          "component_position": [
+            0,
+            0
+          ],
+          "sprite_data_offset": 11845
+        },
+        {
+          "state": "selected",
+          "frame_index": 15,
+          "component_index": 15,
+          "sprite_index": 16,
+          "width": 19,
+          "height": 32,
+          "frame_bounds": [
+            19,
+            31
+          ],
+          "component_position": [
+            0,
+            1
+          ],
+          "sprite_data_offset": 12324
+        }
+      ]
+    }
+  ],
+  "offset_field": "state+0x16 u8",
+  "selected_field": "state+0x19 u8",
+  "offset_vectors": [
+    {
+      "before": 0,
+      "event_id": 27,
+      "after": 0
+    },
+    {
+      "before": 0,
+      "event_id": 28,
+      "after": 1
+    },
+    {
+      "before": 0,
+      "event_id": -1,
+      "after": 0
+    },
+    {
+      "before": 0,
+      "event_id": -2,
+      "after": 0
+    },
+    {
+      "before": 1,
+      "event_id": 27,
+      "after": 0
+    },
+    {
+      "before": 1,
+      "event_id": 28,
+      "after": 2
+    },
+    {
+      "before": 1,
+      "event_id": -1,
+      "after": 1
+    },
+    {
+      "before": 1,
+      "event_id": -2,
+      "after": 1
+    },
+    {
+      "before": 254,
+      "event_id": 27,
+      "after": 253
+    },
+    {
+      "before": 254,
+      "event_id": 28,
+      "after": 255
+    },
+    {
+      "before": 254,
+      "event_id": -1,
+      "after": 254
+    },
+    {
+      "before": 254,
+      "event_id": -2,
+      "after": 254
+    },
+    {
+      "before": 255,
+      "event_id": 27,
+      "after": 254
+    },
+    {
+      "before": 255,
+      "event_id": 28,
+      "after": 0
+    },
+    {
+      "before": 255,
+      "event_id": -1,
+      "after": 255
+    },
+    {
+      "before": 255,
+      "event_id": -2,
+      "after": 255
+    }
+  ],
+  "selection_vectors": [
+    {
+      "offset": 0,
+      "event_id": -1,
+      "x": 180,
+      "y": 224,
+      "packetflag": 1,
+      "selected": 0
+    },
+    {
+      "offset": 0,
+      "event_id": -1,
+      "x": 453,
+      "y": 295,
+      "packetflag": 1,
+      "selected": 5
+    },
+    {
+      "offset": 255,
+      "event_id": -1,
+      "x": 200,
+      "y": 295,
+      "packetflag": 1,
+      "selected": 4
+    },
+    {
+      "offset": 0,
+      "event_id": -1,
+      "x": 179,
+      "y": 224,
+      "packetflag": 1,
+      "selected": null
+    },
+    {
+      "offset": 0,
+      "event_id": -1,
+      "x": 454,
+      "y": 224,
+      "packetflag": 1,
+      "selected": null
+    },
+    {
+      "offset": 0,
+      "event_id": -1,
+      "x": 180,
+      "y": 223,
+      "packetflag": 1,
+      "selected": null
+    },
+    {
+      "offset": 0,
+      "event_id": -1,
+      "x": 180,
+      "y": 296,
+      "packetflag": 1,
+      "selected": null
+    },
+    {
+      "offset": 0,
+      "event_id": 27,
+      "x": 200,
+      "y": 240,
+      "packetflag": 1,
+      "selected": null
+    },
+    {
+      "offset": 0,
+      "event_id": -1,
+      "x": 200,
+      "y": 240,
+      "packetflag": 0,
+      "selected": null
+    }
+  ],
+  "receipts": [
+    {
+      "private_path": "private/ghidra/ui-objects/constructor-range.txt",
+      "sha256": "c343d27b3ab0d5609b46dff3bf899e8830c241aa82b5f3e4c8025401d71e7249"
+    },
+    {
+      "private_path": "private/ghidra/ui-custom/instructions-0007e0b0.txt",
+      "sha256": "c6ad1005ac8d0bd49a5c15a91fef629ce4f36d102ca1ab2bee496e74db398ea8"
+    },
+    {
+      "private_path": "private/ghidra/ui-controls/instructions-0007e400.txt",
+      "sha256": "e09f38677a943351455b1b0c2448a47217127cd1bbb34a9861d91a5e9924b7ee"
+    },
+    {
+      "private_path": "private/ghidra/ui-input/instructions-000a87d0.txt",
+      "sha256": "1fe8f247f251c7b1a5a333b71d830d93ddca2feb1f6d557448894131510afd58"
+    },
+    {
+      "private_path": "private/ghidra/ui-controls/instructions-000a86d0.txt",
+      "sha256": "a4336dd52bebdb8311a05dc25bc64063e99d93928aaa23e335012aaf19bea470"
+    },
+    {
+      "private_path": "private/ghidra/ui-frame/instructions-00098c40.txt",
+      "sha256": "b0b7188387e745e3fee9ea2c49a65b1bf1a2994300468fb6ca85da5771c2249b"
+    }
+  ],
+  "tests": {
+    "offset_domain_values": 256,
+    "offset_events": 4,
+    "selection_boundary_cases": 9,
+    "all_passed": true
+  },
+  "limitations": [
+    "Event-to-offset helper only, not the entire custom screen.",
+    "No logical item-count clamp is present in these two event cases; increment wraps.",
+    "Sprite hit test uses opaque pixels of components, bypassing the 19x31 frame rectangle; sprite raster is19x32.",
+    "Later input-evidence.json establishes physical button mapping; unrelated control flags and wallclock cadence remain outside scope."
+  ]
+}

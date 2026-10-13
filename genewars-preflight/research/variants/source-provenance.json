@@ -1,0 +1,41 @@
+{
+  "observed_at_utc": "2026-10-13T00:04:56.1904309Z",
+  "sources": [
+    {
+      "repository": "mefistotelis/genewars-re-helpers",
+      "commit": "a85d5c517b524aa4906a720330ed1435bf8b65cf",
+      "commit_time": "2026-09-21T19:17:00Z",
+      "github_api_license": null,
+      "tree_entries": 21,
+      "tree_truncated": false,
+      "license_named_paths": [],
+      "checked_headers": [],
+      "tree_url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/trees/a85d5c517b524aa4906a720330ed1435bf8b65cf?recursive=1"
+    },
+    {
+      "repository": "mefistotelis/genewars",
+      "commit": "72ec4c4908d26304dd373132cb3187c855d4bf58",
+      "commit_time": "2022-04-26T21:07:04Z",
+      "github_api_license": null,
+      "tree_entries": 396,
+      "tree_truncated": false,
+      "license_named_paths": [],
+      "checked_headers": [
+        {
+          "path": "bio/src/cvector.cpp",
+          "git_blob_sha1": "b51e8bf6db38def198fb5c338888bad2c9176a4b",
+          "header_license": "GPL-2.0-or-later",
+          "source_url": "https://github.com/mefistotelis/genewars/blob/72ec4c4908d26304dd373132cb3187c855d4bf58/bio/src/cvector.cpp"
+        },
+        {
+          "path": "bio/include/bio_ver.h",
+          "git_blob_sha1": "11997ac669bbb75241d7dd42adf147f81b3f9a84",
+          "header_license": "GPL-2.0-or-later",
+          "source_url": "https://github.com/mefistotelis/genewars/blob/72ec4c4908d26304dd373132cb3187c855d4bf58/bio/include/bio_ver.h"
+        }
+      ],
+      "tree_url": "https://api.github.com/repos/mefistotelis/genewars/git/trees/72ec4c4908d26304dd373132cb3187c855d4bf58?recursive=1"
+    }
+  ],
+  "scope": "Metadata and two license headers only; no commercial binary/symbol-map download, no source reuse."
+}

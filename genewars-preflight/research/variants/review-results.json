@@ -1,0 +1,140 @@
+{
+  "primitive": {
+    "differences_tested": 65536,
+    "mismatches": [],
+    "max_squared_sum": 536870912
+  },
+  "sqrt": {
+    "static_model_cases": 206606,
+    "mismatches": 0,
+    "bsr_bins": 32,
+    "seed_bound_failure_bins": [],
+    "table_values_exported": false
+  },
+  "synthetic_speculative_refill": [
+    {
+      "probe_order": "symbol_index",
+      "matched_symbol": 1,
+      "physical_cursor_advance": 2
+    },
+    {
+      "probe_order": "depth",
+      "matched_symbol": 1,
+      "physical_cursor_advance": 0
+    }
+  ],
+  "candidate": {
+    "size": 1265994,
+    "sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+    "git_blob_sha1": "cb7ddad872b1c169c8b9657bb83b0e6aa6703c75",
+    "upstream_metadata_matches": [
+      {
+        "path": "bin/gw-genewars-1_0-sep_1996.exe",
+        "git_blob_sha1": "cb7ddad872b1c169c8b9657bb83b0e6aa6703c75",
+        "size": 1265994
+      }
+    ]
+  },
+  "variant_metadata_from_preflight": [
+    {
+      "variant": "repack",
+      "sha256": "6a8c75b7de5f4e7f27c5378b712e04c24fd106778429f5765c49a641fac90e64",
+      "size": 1265994,
+      "entry_object": 1,
+      "entry_offset": 618048,
+      "objects": [
+        {
+          "base": 65536,
+          "virtual_size": 911408
+        },
+        {
+          "base": 983040,
+          "virtual_size": 131
+        },
+        {
+          "base": 1048576,
+          "virtual_size": 695488
+        },
+        {
+          "base": 1769472,
+          "virtual_size": 4944
+        }
+      ]
+    },
+    {
+      "variant": "larger_rip",
+      "sha256": "824bcf84a6bff6f3b98ec8eb94e376b37ee55eb0a2fa1dbbb3d4a3b6f3249d1e",
+      "size": 5184949,
+      "entry_object": 1,
+      "entry_offset": 730168,
+      "objects": [
+        {
+          "base": 65536,
+          "virtual_size": 965680
+        },
+        {
+          "base": 1048576,
+          "virtual_size": 300
+        },
+        {
+          "base": 1114112,
+          "virtual_size": 734704
+        },
+        {
+          "base": 1900544,
+          "virtual_size": 4944
+        }
+      ]
+    },
+    {
+      "variant": "patch_payload",
+      "sha256": "2a0a51a5a8170cb7555cc0a745c08ed371c1500503d5cec08d77190d39822a3f",
+      "size": 1251658,
+      "entry_object": 1,
+      "entry_offset": 653676,
+      "objects": [
+        {
+          "base": 65536,
+          "virtual_size": 911664
+        },
+        {
+          "base": 983040,
+          "virtual_size": 150
+        },
+        {
+          "base": 1048576,
+          "virtual_size": 691280
+        },
+        {
+          "base": 1769472,
+          "virtual_size": 4944
+        }
+      ]
+    },
+    {
+      "variant": "disc_game_tree",
+      "sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+      "size": 1265994,
+      "entry_object": 1,
+      "entry_offset": 618048,
+      "objects": [
+        {
+          "base": 65536,
+          "virtual_size": 911408
+        },
+        {
+          "base": 983040,
+          "virtual_size": 131
+        },
+        {
+          "base": 1048576,
+          "virtual_size": 695488
+        },
+        {
+          "base": 1769472,
+          "virtual_size": 4944
+        }
+      ]
+    }
+  ]
+}

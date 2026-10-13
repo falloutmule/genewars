@@ -1,0 +1,154 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "scope": "Static mode-two mouse packet and two controls with initial delayone",
+  "callback_va": "0xa3524",
+  "registration_va": "0xa32d0",
+  "producer_va": "0x70e40",
+  "producer_caller_va": "0x70b00",
+  "packet_pointer_va": "0x118970",
+  "packet_storage_va": "0x118771",
+  "coordinate_type": "signed16 lowwords of signed32 currentglobals19CF9C/19CFA0",
+  "packet_bits": {
+    "byte8": {
+      "0": "left press event",
+      "1": "left release event",
+      "2": "left packet-held state",
+      "6": "right press event",
+      "7": "right release event"
+    },
+    "byte9": {
+      "0": "right packet-held state"
+    }
+  },
+  "button_vectors": [
+    {
+      "old_packet_held": 0,
+      "latched_press": 0,
+      "physical_held": 0,
+      "down": 0,
+      "up": 0,
+      "new_packet_held": 0
+    },
+    {
+      "old_packet_held": 0,
+      "latched_press": 0,
+      "physical_held": 1,
+      "down": 0,
+      "up": 0,
+      "new_packet_held": 1
+    },
+    {
+      "old_packet_held": 0,
+      "latched_press": 1,
+      "physical_held": 0,
+      "down": 1,
+      "up": 0,
+      "new_packet_held": 1
+    },
+    {
+      "old_packet_held": 0,
+      "latched_press": 1,
+      "physical_held": 1,
+      "down": 1,
+      "up": 0,
+      "new_packet_held": 1
+    },
+    {
+      "old_packet_held": 1,
+      "latched_press": 0,
+      "physical_held": 0,
+      "down": 0,
+      "up": 1,
+      "new_packet_held": 0
+    },
+    {
+      "old_packet_held": 1,
+      "latched_press": 0,
+      "physical_held": 1,
+      "down": 0,
+      "up": 0,
+      "new_packet_held": 1
+    },
+    {
+      "old_packet_held": 1,
+      "latched_press": 1,
+      "physical_held": 0,
+      "down": 1,
+      "up": 1,
+      "new_packet_held": 1
+    },
+    {
+      "old_packet_held": 1,
+      "latched_press": 1,
+      "physical_held": 1,
+      "down": 1,
+      "up": 1,
+      "new_packet_held": 1
+    }
+  ],
+  "capture_case_count": 2304,
+  "capture_vectors": [
+    {
+      "old_capture": null,
+      "byte8": 3,
+      "hit": 27,
+      "new_capture": 27,
+      "event": -2
+    },
+    {
+      "old_capture": 27,
+      "byte8": 0,
+      "hit": null,
+      "new_capture": 27,
+      "event": -1
+    },
+    {
+      "old_capture": 27,
+      "byte8": 2,
+      "hit": null,
+      "new_capture": null,
+      "event": 27
+    }
+  ],
+  "countdown": {
+    "source_va": "0x10aafd",
+    "source_width": "u8",
+    "state_va": "0x1a011c",
+    "state_width": "u16",
+    "custom_initial_value": 1,
+    "greater_than_one": "decrement per managercall; arrivalatone emits capturedID and clearscapture without releasecheck; excluded fromdelayoneport"
+  },
+  "private_listings": [
+    {
+      "private_path": "private/ghidra/mouse-callback-refs/instructions-000a3164.txt",
+      "sha256": "e729db9adf2b94e567e1936e02affd0bb1affd69cd0392ea22c8fd210f466eff"
+    },
+    {
+      "private_path": "private/ghidra/mouse-callback/instructions-000a3524.txt",
+      "sha256": "f34144576fdb8a7fbed0be241831487c9e2ccc0212f46fbbcea4fc672c2933e2"
+    },
+    {
+      "private_path": "private/ghidra/packet-fields/instructions-00070e40.txt",
+      "sha256": "d9e28b4cd2565e951d112522fde407f6186667f3e7f3840837f0619304ddc83d"
+    },
+    {
+      "private_path": "private/ghidra/input-scheduling/instructions-00070b00.txt",
+      "sha256": "3e0ae3e530d45f9dfe5a66fdd3669d532cc428f04ba769bae00d9b24bbdc84eb"
+    },
+    {
+      "private_path": "private/ghidra/packet-fields/instructions-000715a0.txt",
+      "sha256": "c312d02f09220aeac475e07f0ddcdab99d0a04bd5ebc1d4f4a7551040d4a2d8b"
+    },
+    {
+      "private_path": "private/ghidra/ui-input/instructions-000a87d0.txt",
+      "sha256": "1fe8f247f251c7b1a5a333b71d830d93ddca2feb1f6d557448894131510afd58"
+    }
+  ],
+  "limits": [
+    "Modeone keyboard producer not ported",
+    "Mouse mickey scaling/clamping not ported",
+    "Wallclock tickrate and outer loop scheduling not established",
+    "Original async callback/producer race behavior not claimed",
+    "Screen list allocation/count and unchecked textcopy still unresolved"
+  ]
+}

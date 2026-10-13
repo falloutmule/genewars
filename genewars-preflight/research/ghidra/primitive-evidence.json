@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "source_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "canonical": false,
+  "original_execution_performed": false,
+  "method": "Static instruction review plus independent integer semantics model; vectors are model-derived, not original execution traces.",
+  "functions": [
+    {
+      "address": "0x73690",
+      "object": 1,
+      "object_offset": "0x63690",
+      "size": 95,
+      "mapped_bytes_sha256": "524ab0a464489de4ac487b9a79a276d0f353904b8468332665d7c0a4413b4bce",
+      "independent_name": "wrapped_squared_distance",
+      "confidence": "Observed",
+      "variant_scope": "CD provisional analysis candidate only",
+      "callers": [
+        "000305f0",
+        "00030f10",
+        "00031330",
+        "000355b0",
+        "00035820",
+        "00036c10",
+        "0003c700",
+        "000432c0",
+        "0005d700",
+        "0006f0c0",
+        "0008cb00",
+        "0008d930",
+        "0008d9e0"
+      ]
+    },
+    {
+      "address": "0x737f0",
+      "object": 1,
+      "object_offset": "0x637f0",
+      "size": 102,
+      "mapped_bytes_sha256": "aef5590c2e117ec3f26e30c34add218e1a24c4d7c6de5bb4e3b329e152ecabff",
+      "independent_name": "wrapped_floor_distance",
+      "confidence": "Observed",
+      "variant_scope": "CD provisional analysis candidate only",
+      "callers": [
+        "00026130",
+        "000330b0",
+        "00033f60",
+        "0003d500",
+        "00040c60",
+        "000417e0",
+        "00048790"
+      ]
+    },
+    {
+      "address": "0x97910",
+      "object": 1,
+      "object_offset": "0x87910",
+      "size": 66,
+      "mapped_bytes_sha256": "86b504485f59416bec598a40f0ae7397691b67f11d5bed4c9684b07fb5c4ccc5",
+      "independent_name": "floor_sqrt_u32",
+      "confidence": "Observed",
+      "variant_scope": "CD provisional analysis candidate only",
+      "callers": [
+        "000104d0",
+        "000108e0",
+        "00019e20",
+        "0001a330",
+        "0001a780",
+        "0001b2e0",
+        "00042240",
+        "00048790",
+        "0006dd50",
+        "0006df30",
+        "000733a0",
+        "000737f0",
+        "000738f0",
+        "00073a50",
+        "00075890",
+        "00075b00",
+        "00075d30",
+        "00079d50",
+        "0008cb00"
+      ]
+    },
+    {
+      "address": "0x432c0",
+      "object": 1,
+      "object_offset": "0x332c0",
+      "size": 124,
+      "mapped_bytes_sha256": "fd38865ce7d0c49e05cfa4567a7b5285764ef65e5e4905fd8067c8df07a3bf4a",
+      "independent_name": "record_radius_predicate",
+      "confidence": "Observed",
+      "variant_scope": "CD provisional analysis candidate only",
+      "callers": [
+        "00026130"
+      ]
+    },
+    {
+      "address": "0x8d580",
+      "object": 1,
+      "object_offset": "0x7d580",
+      "size": 106,
+      "mapped_bytes_sha256": "6cfb48801ee8e6813eb5f614a3e67d412e25f914a07c310225e7a891a2ac0a64",
+      "independent_name": "set_grid_flag_0x10",
+      "confidence": "Observed",
+      "variant_scope": "CD provisional analysis candidate only",
+      "callers": [
+        "000753f0",
+        "00077c60"
+      ]
+    },
+    {
+      "address": "0x8d5f0",
+      "object": 1,
+      "object_offset": "0x7d5f0",
+      "size": 105,
+      "mapped_bytes_sha256": "24460497190e3fe63c1a955c3da285a3ffe8010a5414eae7230fb7b9e175ff8a",
+      "independent_name": "clear_grid_flag_0x10",
+      "confidence": "Observed",
+      "variant_scope": "CD provisional analysis candidate only",
+      "callers": [
+        "000753f0"
+      ]
+    }
+  ],
+  "distance_vectors": [
+    {
+      "source": [
+        0,
+        0
+      ],
+      "target": [
+        0,
+        0
+      ],
+      "squared": 0,
+      "distance": 0
+    },
+    {
+      "source": [
+        0,
+        0
+      ],
+      "target": [
+        3,
+        4
+      ],
+      "squared": 25,
+      "distance": 5
+    },
+    {
+      "source": [
+        0,
+        0
+      ],
+      "target": [
+        32767,
+        0
+      ],
+      "squared": 1,
+      "distance": 1
+    },
+    {
+      "source": [
+        0,
+        0
+      ],
+      "target": [
+        16383,
+        0
+      ],
+      "squared": 268402689,
+      "distance": 16383
+    },
+    {
+      "source": [
+        0,
+        0
+      ],
+      "target": [
+        16384,
+        0
+      ],
+      "squared": 268435456,
+      "distance": 16384
+    },
+    {
+      "source": [
+        0,
+        0
+      ],
+      "target": [
+        16385,
+        0
+      ],
+      "squared": 268402689,
+      "distance": 16383
+    },
+    {
+      "source": [
+        0,
+        0
+      ],
+      "target": [
+        32767,
+        32767
+      ],
+      "squared": 2,
+      "distance": 1
+    },
+    {
+      "source": [
+        0,
+        0
+      ],
+      "target": [
+        16384,
+        16384
+      ],
+      "squared": 536870912,
+      "distance": 23170
+    },
+    {
+      "source": [
+        -32768,
+        -32768
+      ],
+      "target": [
+        0,
+        0
+      ],
+      "squared": 0,
+      "distance": 0
+    },
+    {
+      "source": [
+        -32768,
+        32767
+      ],
+      "target": [
+        32767,
+        -32768
+      ],
+      "squared": 2,
+      "distance": 1
+    },
+    {
+      "source": [
+        100,
+        200
+      ],
+      "target": [
+        110,
+        220
+      ],
+      "squared": 500,
+      "distance": 22
+    },
+    {
+      "source": [
+        32760,
+        10
+      ],
+      "target": [
+        7,
+        10
+      ],
+      "squared": 225,
+      "distance": 15
+    }
+  ],
+  "sqrt_vectors": [
+    {
+      "input": 0,
+      "expected": 0
+    },
+    {
+      "input": 1,
+      "expected": 1
+    },
+    {
+      "input": 2,
+      "expected": 1
+    },
+    {
+      "input": 3,
+      "expected": 1
+    },
+    {
+      "input": 4,
+      "expected": 2
+    },
+    {
+      "input": 8,
+      "expected": 2
+    },
+    {
+      "input": 9,
+      "expected": 3
+    },
+    {
+      "input": 15,
+      "expected": 3
+    },
+    {
+      "input": 16,
+      "expected": 4
+    },
+    {
+      "input": 17,
+      "expected": 4
+    },
+    {
+      "input": 65535,
+      "expected": 255
+    },
+    {
+      "input": 65536,
+      "expected": 256
+    },
+    {
+      "input": 536870912,
+      "expected": 23170
+    },
+    {
+      "input": 2147483647,
+      "expected": 46340
+    },
+    {
+      "input": 2147483648,
+      "expected": 46340
+    },
+    {
+      "input": 4294967295,
+      "expected": 65535
+    }
+  ],
+  "checks": {
+    "all_passed": true,
+    "delta_semantics_checks": 131071,
+    "sqrt_model_vs_mathematical_checks": 200139,
+    "sqrt_table_matches_derived_upper_bounds": true
+  },
+  "limits": [
+    "Feature identities and world units unknown; these functions establish arithmetic and record layouts only.",
+    "Compiler default produces unreliable inferred C signatures; EAX/EDX register flow and instruction width take precedence."
+  ]
+}

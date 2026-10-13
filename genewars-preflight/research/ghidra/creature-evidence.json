@@ -1,0 +1,523 @@
+{
+  "scope": "Static provisional CD candidate; explicit caller-selected packed4 codec, no original execution",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "loader_name_table_va": "0x104494",
+  "loader_va": "0x6ac50",
+  "loader_destination_va": "0x180e20",
+  "frame_drawers": [
+    "0x947e0",
+    "0x94bc0"
+  ],
+  "sprite_drawers": [
+    "0x8fbd0",
+    "0x93400"
+  ],
+  "packed4_source_sha256": [
+    "0c9d9dbbcb29e39ab29aac17eca97da9a404791febdb79123b6c0eb44af78767",
+    "14a75aa9a0787ad041b80c384ea9a268edf7f5ef30c4ac4d6661bfe363bcd81e",
+    "841e7772da00934befd3e8055c6ee9c8487735c73d1d10e383a5c7b715cb4ce3",
+    "5ba1cc74cc4f2dfec20e0cad9b5656a59bc9e93c8c626a8caf562ea7800b79ec",
+    "f6c62221b52a62088f91ae8d00becfef513282cbf98a5990c1a0859cd8b2d346",
+    "fe1fb252f9c2fddb1bb32625acd4624087ac3a17828c51c96256167e352bbe00",
+    "10b7fdb9fedfdd18fa2189fc8e142a6f3d942dd81db38433b373559edec6c854",
+    "d2c46b9948c05491f730f9c8e3a51b5bb509fe92416ce711e371711e9879eb80",
+    "382182e0e1c7778ffc66b5dcdd5bdf6288d6ac72135946edc854cc5f55a06ef2",
+    "1483536ff084d24a4898166756d058ccc5be4b38a0a3b90f3b3a7d55c6c7fb04",
+    "9a588b42098597778560ba95a890529efa2b25969e2b162849441cfb72e478cc",
+    "380caaeefa791bc2735cad0f460639794ff2e42adffe2c97e27902829780ac2e",
+    "241287861ce99cb867879e5a34877407d9389393b5b0337755418cc09bfaff00",
+    "92cf65b5c0b9989fa35868c8ef69dc0bb18993750dc96d79bf715b863b16fad1",
+    "82ee6a6f05fad2de224049f6d9b80ba1ba5a746e439d2361f3a993a622a029ee",
+    "bdbba070209f032194286a928bc50b461be38fd981ca394325e330c5c96625ca",
+    "dc71401469ecb4e5a47634f932a9a517686fc188881579c600fea22b1d90baa8",
+    "175383dc29ebfdf56c08f44d3a53719a7f9a3fdce0530d24ce5b237db7d1ca42",
+    "39fefa9ac416bccfae2c069150a0e066d8ca7eb580b502d9253af9c86bc82475",
+    "2f5e7e8fb8268017bc313fa888f8232a88e515fd77d9133a719d37d7ec53b6b6",
+    "c793e0f2ba034cee39e0bac7c9cffcdf3d24461605f09945d95485c41a57ed8d",
+    "c141a7f5be79141aa570ff0f0086d916d09f15223fd72f0d85309146a17fe287",
+    "32c43a3e485b07d5cbccc36ede1465d170b09e7a9fa8445a1badb041217fd55e",
+    "273bc86685a7512629592abdad2c9059b75c81ef4959e92f22ef345ee47dcfa2",
+    "93fce7be86fe31c4dbb94d90513255b8c3c58891d6284a458709ef587afe9edb"
+  ],
+  "admitted_sources": [
+    {
+      "loader_index": 0,
+      "filename": "dino.anb",
+      "source_sha256": "0c9d9dbbcb29e39ab29aac17eca97da9a404791febdb79123b6c0eb44af78767",
+      "decoded_sha256": "0c9d9dbbcb29e39ab29aac17eca97da9a404791febdb79123b6c0eb44af78767",
+      "sources": [
+        {
+          "entry_id": "root/1/231",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/DINO.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/325",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/DINO.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 1,
+      "filename": "crab.anb",
+      "source_sha256": "14a75aa9a0787ad041b80c384ea9a268edf7f5ef30c4ac4d6661bfe363bcd81e",
+      "decoded_sha256": "14a75aa9a0787ad041b80c384ea9a268edf7f5ef30c4ac4d6661bfe363bcd81e",
+      "sources": [
+        {
+          "entry_id": "root/1/222",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/CRAB.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/320",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/CRAB.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 2,
+      "filename": "frog.anb",
+      "source_sha256": "841e7772da00934befd3e8055c6ee9c8487735c73d1d10e383a5c7b715cb4ce3",
+      "decoded_sha256": "841e7772da00934befd3e8055c6ee9c8487735c73d1d10e383a5c7b715cb4ce3",
+      "sources": [
+        {
+          "entry_id": "root/1/225",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/FROG.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/330",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/FROG.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 3,
+      "filename": "bird.anb",
+      "source_sha256": "5ba1cc74cc4f2dfec20e0cad9b5656a59bc9e93c8c626a8caf562ea7800b79ec",
+      "decoded_sha256": "5ba1cc74cc4f2dfec20e0cad9b5656a59bc9e93c8c626a8caf562ea7800b79ec",
+      "sources": [
+        {
+          "entry_id": "root/1/233",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/BIRD.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/314",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/BIRD.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 4,
+      "filename": "mule.anb",
+      "source_sha256": "f6c62221b52a62088f91ae8d00becfef513282cbf98a5990c1a0859cd8b2d346",
+      "decoded_sha256": "f6c62221b52a62088f91ae8d00becfef513282cbf98a5990c1a0859cd8b2d346",
+      "sources": [
+        {
+          "entry_id": "root/1/214",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/MULE.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/335",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/MULE.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 5,
+      "filename": "dinocrab.anb",
+      "source_sha256": "fe1fb252f9c2fddb1bb32625acd4624087ac3a17828c51c96256167e352bbe00",
+      "decoded_sha256": "fe1fb252f9c2fddb1bb32625acd4624087ac3a17828c51c96256167e352bbe00",
+      "sources": [
+        {
+          "entry_id": "root/1/220",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/DINOCRAB.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/327",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/DINOCRAB.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 6,
+      "filename": "dinofrog.anb",
+      "source_sha256": "10b7fdb9fedfdd18fa2189fc8e142a6f3d942dd81db38433b373559edec6c854",
+      "decoded_sha256": "10b7fdb9fedfdd18fa2189fc8e142a6f3d942dd81db38433b373559edec6c854",
+      "sources": [
+        {
+          "entry_id": "root/1/219",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/DINOFROG.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/328",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/DINOFROG.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 7,
+      "filename": "dinobird.anb",
+      "source_sha256": "d2c46b9948c05491f730f9c8e3a51b5bb509fe92416ce711e371711e9879eb80",
+      "decoded_sha256": "d2c46b9948c05491f730f9c8e3a51b5bb509fe92416ce711e371711e9879eb80",
+      "sources": [
+        {
+          "entry_id": "root/1/237",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/DINOBIRD.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/326",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/DINOBIRD.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 8,
+      "filename": "dinomule.anb",
+      "source_sha256": "382182e0e1c7778ffc66b5dcdd5bdf6288d6ac72135946edc854cc5f55a06ef2",
+      "decoded_sha256": "382182e0e1c7778ffc66b5dcdd5bdf6288d6ac72135946edc854cc5f55a06ef2",
+      "sources": [
+        {
+          "entry_id": "root/1/229",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/DINOMULE.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/329",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/DINOMULE.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 9,
+      "filename": "crabfrog.anb",
+      "source_sha256": "1483536ff084d24a4898166756d058ccc5be4b38a0a3b90f3b3a7d55c6c7fb04",
+      "decoded_sha256": "1483536ff084d24a4898166756d058ccc5be4b38a0a3b90f3b3a7d55c6c7fb04",
+      "sources": [
+        {
+          "entry_id": "root/1/232",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/CRABFROG.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/323",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/CRABFROG.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 10,
+      "filename": "crabbird.anb",
+      "source_sha256": "9a588b42098597778560ba95a890529efa2b25969e2b162849441cfb72e478cc",
+      "decoded_sha256": "9a588b42098597778560ba95a890529efa2b25969e2b162849441cfb72e478cc",
+      "sources": [
+        {
+          "entry_id": "root/1/227",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/CRABBIRD.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/321",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/CRABBIRD.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 11,
+      "filename": "crabmule.anb",
+      "source_sha256": "380caaeefa791bc2735cad0f460639794ff2e42adffe2c97e27902829780ac2e",
+      "decoded_sha256": "380caaeefa791bc2735cad0f460639794ff2e42adffe2c97e27902829780ac2e",
+      "sources": [
+        {
+          "entry_id": "root/1/234",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/CRABMULE.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/324",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/CRABMULE.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 12,
+      "filename": "frogbird.anb",
+      "source_sha256": "241287861ce99cb867879e5a34877407d9389393b5b0337755418cc09bfaff00",
+      "decoded_sha256": "241287861ce99cb867879e5a34877407d9389393b5b0337755418cc09bfaff00",
+      "sources": [
+        {
+          "entry_id": "root/1/228",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/FROGBIRD.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/331",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/FROGBIRD.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 13,
+      "filename": "frogmule.anb",
+      "source_sha256": "92cf65b5c0b9989fa35868c8ef69dc0bb18993750dc96d79bf715b863b16fad1",
+      "decoded_sha256": "92cf65b5c0b9989fa35868c8ef69dc0bb18993750dc96d79bf715b863b16fad1",
+      "sources": [
+        {
+          "entry_id": "root/1/236",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/FROGMULE.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/334",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/FROGMULE.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 14,
+      "filename": "birdmule.anb",
+      "source_sha256": "82ee6a6f05fad2de224049f6d9b80ba1ba5a746e439d2361f3a993a622a029ee",
+      "decoded_sha256": "82ee6a6f05fad2de224049f6d9b80ba1ba5a746e439d2361f3a993a622a029ee",
+      "sources": [
+        {
+          "entry_id": "root/1/224",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/BIRDMULE.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/318",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/BIRDMULE.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 15,
+      "filename": "crabdino.anb",
+      "source_sha256": "bdbba070209f032194286a928bc50b461be38fd981ca394325e330c5c96625ca",
+      "decoded_sha256": "bdbba070209f032194286a928bc50b461be38fd981ca394325e330c5c96625ca",
+      "sources": [
+        {
+          "entry_id": "root/1/226",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/CRABDINO.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/322",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/CRABDINO.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 16,
+      "filename": "frogdino.anb",
+      "source_sha256": "dc71401469ecb4e5a47634f932a9a517686fc188881579c600fea22b1d90baa8",
+      "decoded_sha256": "dc71401469ecb4e5a47634f932a9a517686fc188881579c600fea22b1d90baa8",
+      "sources": [
+        {
+          "entry_id": "root/1/223",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/FROGDINO.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/333",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/FROGDINO.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 17,
+      "filename": "frogcrab.anb",
+      "source_sha256": "175383dc29ebfdf56c08f44d3a53719a7f9a3fdce0530d24ce5b237db7d1ca42",
+      "decoded_sha256": "175383dc29ebfdf56c08f44d3a53719a7f9a3fdce0530d24ce5b237db7d1ca42",
+      "sources": [
+        {
+          "entry_id": "root/1/230",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/FROGCRAB.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/332",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/FROGCRAB.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 18,
+      "filename": "birddino.anb",
+      "source_sha256": "39fefa9ac416bccfae2c069150a0e066d8ca7eb580b502d9253af9c86bc82475",
+      "decoded_sha256": "39fefa9ac416bccfae2c069150a0e066d8ca7eb580b502d9253af9c86bc82475",
+      "sources": [
+        {
+          "entry_id": "root/1/235",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/BIRDDINO.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/316",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/BIRDDINO.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 19,
+      "filename": "birdcrab.anb",
+      "source_sha256": "2f5e7e8fb8268017bc313fa888f8232a88e515fd77d9133a719d37d7ec53b6b6",
+      "decoded_sha256": "2f5e7e8fb8268017bc313fa888f8232a88e515fd77d9133a719d37d7ec53b6b6",
+      "sources": [
+        {
+          "entry_id": "root/1/216",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/BIRDCRAB.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/315",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/BIRDCRAB.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 20,
+      "filename": "birdfrog.anb",
+      "source_sha256": "c793e0f2ba034cee39e0bac7c9cffcdf3d24461605f09945d95485c41a57ed8d",
+      "decoded_sha256": "c793e0f2ba034cee39e0bac7c9cffcdf3d24461605f09945d95485c41a57ed8d",
+      "sources": [
+        {
+          "entry_id": "root/1/215",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/BIRDFROG.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/317",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/BIRDFROG.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 21,
+      "filename": "muledino.anb",
+      "source_sha256": "c141a7f5be79141aa570ff0f0086d916d09f15223fd72f0d85309146a17fe287",
+      "decoded_sha256": "c141a7f5be79141aa570ff0f0086d916d09f15223fd72f0d85309146a17fe287",
+      "sources": [
+        {
+          "entry_id": "root/1/218",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/MULEDINO.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/338",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/MULEDINO.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 22,
+      "filename": "mulecrab.anb",
+      "source_sha256": "32c43a3e485b07d5cbccc36ede1465d170b09e7a9fa8445a1badb041217fd55e",
+      "decoded_sha256": "32c43a3e485b07d5cbccc36ede1465d170b09e7a9fa8445a1badb041217fd55e",
+      "sources": [
+        {
+          "entry_id": "root/1/239",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/MULECRAB.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/337",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/MULECRAB.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 23,
+      "filename": "mulefrog.anb",
+      "source_sha256": "273bc86685a7512629592abdad2c9059b75c81ef4959e92f22ef345ee47dcfa2",
+      "decoded_sha256": "273bc86685a7512629592abdad2c9059b75c81ef4959e92f22ef345ee47dcfa2",
+      "sources": [
+        {
+          "entry_id": "root/1/238",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/MULEFROG.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/339",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/MULEFROG.ANB;1"
+        }
+      ]
+    },
+    {
+      "loader_index": 24,
+      "filename": "mulebird.anb",
+      "source_sha256": "93fce7be86fe31c4dbb94d90513255b8c3c58891d6284a458709ef587afe9edb",
+      "decoded_sha256": "93fce7be86fe31c4dbb94d90513255b8c3c58891d6284a458709ef587afe9edb",
+      "sources": [
+        {
+          "entry_id": "root/1/217",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/CREATURE/MULEBIRD.ANB"
+        },
+        {
+          "entry_id": "root/2/disc/336",
+          "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/CREATURE/MULEBIRD.ANB;1"
+        }
+      ]
+    }
+  ],
+  "private_listings": [
+    {
+      "private_path": "private/ghidra/animal-loader/instructions-0006ac50.txt",
+      "sha256": "f0792a3ffe1b0ae8ba99379fb8748d001215cf46cc8af98868272e36052f29ce"
+    },
+    {
+      "private_path": "private/ghidra/creature-paths/instructions-0001d770.txt",
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    },
+    {
+      "private_path": "private/ghidra/creature-paths/instructions-00022fd0.txt",
+      "sha256": "1a2511b5cc20c1b99378e23a850cc5dad5aa1b117f9be38d9268595d1cd12404"
+    },
+    {
+      "private_path": "private/ghidra/creature-consumer/instructions-000947e0.txt",
+      "sha256": "bbb7a2e97c6588810fc9941dfbbaa933a5d309df06d14ced528ef693b302d35e"
+    },
+    {
+      "private_path": "private/ghidra/creature-consumer/instructions-00094bc0.txt",
+      "sha256": "5e46611ea53ca0b013f204cd4d283fa8216fdb9ecdb04abcfdabf80e485dde4a"
+    },
+    {
+      "private_path": "private/ghidra/creature-consumer/instructions-00093400.txt",
+      "sha256": "5eb6536f528b26092a29a9a18fc8b33529604e60c92f3169b39e35f9465e9769"
+    },
+    {
+      "private_path": "private/ghidra/creature-consumer/instructions-0008fbd0.txt",
+      "sha256": "b2ccafc8a7a5b022e8c3d6f4dceb648d007aa3f6fdc6375052ae95128745035a"
+    }
+  ],
+  "synthetic_vectors": [
+    {
+      "count": 3,
+      "packed_hex": "abc0",
+      "base": 0,
+      "expected": [
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "count": 4,
+      "packed_hex": "0123",
+      "base": 254,
+      "expected": [
+        254,
+        255,
+        0,
+        1
+      ]
+    },
+    {
+      "count": 1,
+      "packed_hex": "0f",
+      "base": 0,
+      "expected": [
+        0
+      ]
+    }
+  ],
+  "contract": {
+    "sprite_data_base": 18,
+    "record_stride": 6,
+    "width_offset": 4,
+    "height_offset": 5,
+    "positive_control": "N opaque pixels from ceil(N/2) packed bytes; high nibble then low; odd low padding ignored",
+    "negative_control": "signed -1 through -128 skips transparent pixels",
+    "zero_control": "row end",
+    "base_color": "u8 base + nibble, wrapping modulo256 when no translation table",
+    "translation": "optional table indexes usize(base)+nibble without prewrap; maximum270",
+    "clipping": "consume full packed run even if displayed writes clip to width",
+    "scope_limit": "Safe complete-row parsing requires height zero terminators; original last visible row may return at width exhaustion before reading final zero"
+  },
+  "excluded": [
+    "BONES.ANB not in verified25-name loader; separate caller unresolved",
+    "GPF wrapper/CRC unresolved",
+    "Scale, flip, lighting, palette bank association, animation timing not ported here"
+  ]
+}

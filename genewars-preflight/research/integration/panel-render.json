@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "entry_id": "root/2/disc/86",
+      "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/GENEPANL.DAT;1",
+      "size": 16204,
+      "sha256": "8116b2b883320b8573c50496a570f0f3fa978e4c20b9c85a284339ff1f920e24"
+    },
+    {
+      "entry_id": "root/2/disc/108",
+      "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/MAIN.PAL;1",
+      "size": 768,
+      "sha256": "8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05"
+    }
+  ],
+  "candidate_binary_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "width": 128,
+  "height": 480,
+  "index_sha256": "af9741b4545fb6f28a1dd0e50da0570e39992e75c872bc2249891f3330f59951",
+  "bmp_sha256": "af218cc65e0abb410242cd73440b53d4c18f4d8cd3f03f1f7542c4bb1c70809b",
+  "rgb_sha256": "bb135e29eb2e6dacf17ab8273e57df185fe24b82320ab5b296fbf74a6c11444d",
+  "png_sha256": "2c17b7126fe1ce16efe61f46f8517df660bc51524bc6401499c3412089018b12",
+  "all_pixels_verified": true,
+  "native_command": [
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\genewars-tools.exe",
+    "panel-render",
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\GENEPANL.RNC",
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\MAIN.PAL",
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\panel\\panel.bmp"
+  ],
+  "native_stdout": {
+    "width": 128,
+    "height": 480,
+    "bmp_bytes": 184374,
+    "palette": "RGB6",
+    "transfer": "floor(v*255/63)",
+    "status": "written"
+  },
+  "private_preview": "private\\integration\\panel\\panel.png",
+  "evidence": "Panel draw VA0x24AD0 width128; display init0x1CAA0 binds480rows; MAIN.PAL init chain0x979A0->0xA13F0->0xA6D2C.",
+  "display_conversion": "Explicit RGB6-to-RGB8 floor(component*255/63). Source channel order is binary-verified; this presentation transfer is not a measured original DAC/monitor response.",
+  "scope": "Static original UI panel rendering only; no original execution, interactive game, overlay widgets or gameplay parity."
+}

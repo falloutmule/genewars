@@ -1,0 +1,241 @@
+GeneWars toolchain diagnostics
+Assessment date: 2026-10-12 (America/Denver)
+Metadata observation checkpoint: 2026-10-12T22:01:03Z
+Workspace: C:\Users\fallo\Documents\ChatGPT\Freecad
+
+Scope and result
+- Only version/read-only discovery commands were run. No software installation, environment/configuration changes, game execution, Ghidra import or game-binary downloads occurred.
+- PATH Node 24.14.0 and bundled Node 24.19.0 satisfy REA's documented Node range. npm reports 11.9.0.
+- PATH java and javac are 1.8.0_211; Java reports 64-bit. JAVA_HOME points to that Java 8 JDK. This is below the JDK 21 minimum for the documented Ghidra candidates.
+- REA, Ghidra launchers and Gradle were not found on PATH. No Ghidra or compatible newer JDK appeared in the bounded locations below. This is not an exhaustive machine-wide absence claim.
+- The observed npm global prefix is C:\Users\fallo\AppData\Roaming\npm; its rea-agents package manifest was absent.
+- The process and OS report 64-bit. OSVersion reports Windows NT 10.0.26200.0. A CIM filesystem query was denied: volume/file-system admission is unverified, despite that probe's shell exit code 0.
+- LOCALAPPDATA and TEMP are redirected in the command sandbox. A literal C:\Users\fallo\AppData\Local\Programs check was therefore also performed; no matching immediate tool directory was found. No broad personal-directory search was made.
+- Parent reports no exposed REA/Ghidra MCP tools in this session.
+
+Missing diagnostic commands
+rea doctor --json
+status: not run
+stdout: not produced
+stderr: not produced
+exit_code: null
+reason: rea was not found; no package-runner download attempted.
+
+rea providers --json
+status: not run
+stdout: not produced
+stderr: not produced
+exit_code: null
+reason: rea was not found; no package-runner download attempted.
+
+Source-backed assessment (documented, not locally tested)
+- REA main is pinned at 8fc2043eb8bcedbf34dce064f977e455438635d6; manifest version 6.4.0. Node range: ^22.19.0 || ^24.11.0 || >=26.0.0. Ghidra admission: 12.1.x, verified with 12.1.4 and full 64-bit JDK 21; current Java maximum is unspecified.
+- REA admits validated real-mode DOS MZ and explicit COM on their supported hosts. Declared NE/LE/LX headers are rejected. DOS verification covers Linux x64 and macOS arm64; it does not establish Windows support.
+- Windows REA Ghidra P0 is experimental and read-only, for native unmanaged PE applications/DLLs on fixed local NTFS volumes. Main admits x86/x64; the guide limits published versions through 5.0.0 to x64. It does not admit DOS MZ, COM, LE/LX or raw-binary. Matching native controls, path admission and cleanup remain untested locally.
+- Standalone Ghidra 12.0.1 + LX loader v12.0.1 is the metadata-matched fallback candidate. Its official Ghidra and loader asset names, sizes, published hashes and source commits are recorded in tooling-sources.json. Ghidra 12.0.1 requires JDK >=21; this version is outside REA's 12.1.x range.
+- The release metadata proves the named asset/version pairing, not successful loading of this archive. No matching 12.1.4 loader asset was established, and no cross-version compatibility is claimed.
+- Loader source supports builds against an explicit GHIDRA_INSTALL_DIR; compilation and import against another Ghidra version remain untested. The versioned Ghidra properties state Gradle >=8.5 for builds.
+- GeneWars helper documentation describes LE import and XML symbols. Matching the user's executable build and address/object layout is required before adopting those symbols; no such runtime/import test was performed by this assessment.
+
+Primary sources
+https://github.com/morluto/rea/blob/8fc2043eb8bcedbf34dce064f977e455438635d6/docs/installation.md
+https://github.com/morluto/rea/blob/8fc2043eb8bcedbf34dce064f977e455438635d6/docs/ghidra-dos.md
+https://github.com/morluto/rea/blob/8fc2043eb8bcedbf34dce064f977e455438635d6/docs/windows-ghidra-p0.md
+https://github.com/yetmorecode/ghidra-lx-loader/releases/tag/v12.0.1
+https://github.com/NationalSecurityAgency/ghidra/releases/tag/Ghidra_12.0.1_build
+https://github.com/mefistotelis/genewars-re-helpers/blob/a85d5c517b524aa4906a720330ed1435bf8b65cf/README.md
+
+Canonical local probe transcript
+Each record below contains the exact executable and argument vector, separately captured stdout/stderr, and the process exit code. PowerShell -Command contents are included as literal arguments. Empty output is represented by an empty string. A zero exit code does not override a nonempty diagnostic stderr.
+
+PROBE 1: PATH Node version
+{
+  "label": "PATH Node version",
+  "executable": "C:\\Program Files\\nodejs\\node.exe",
+  "arguments": [
+    "--version"
+  ],
+  "stdout": "v24.14.0\r\n",
+  "stderr": "",
+  "exit_code": 0
+}
+
+PROBE 2: Bundled Node version
+{
+  "label": "Bundled Node version",
+  "executable": "C:\\Users\\fallo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+  "arguments": [
+    "--version"
+  ],
+  "stdout": "v24.19.0\r\n",
+  "stderr": "",
+  "exit_code": 0
+}
+
+PROBE 3: npm version via Node entry point
+{
+  "label": "npm version via Node entry point",
+  "executable": "C:\\Program Files\\nodejs\\node.exe",
+  "arguments": [
+    "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+    "--version"
+  ],
+  "stdout": "11.9.0\n",
+  "stderr": "",
+  "exit_code": 0
+}
+
+PROBE 4: npm global prefix via Node entry point
+{
+  "label": "npm global prefix via Node entry point",
+  "executable": "C:\\Program Files\\nodejs\\node.exe",
+  "arguments": [
+    "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+    "prefix",
+    "--global"
+  ],
+  "stdout": "C:\\Users\\fallo\\AppData\\Roaming\\npm\n",
+  "stderr": "",
+  "exit_code": 0
+}
+
+PROBE 5: PATH Java version
+{
+  "label": "PATH Java version",
+  "executable": "C:\\Program Files\\Java\\jdk1.8.0_211\\bin\\java.exe",
+  "arguments": [
+    "-version"
+  ],
+  "stdout": "",
+  "stderr": "java version \"1.8.0_211\"\r\nJava(TM) SE Runtime Environment (build 1.8.0_211-b12)\r\nJava HotSpot(TM) 64-Bit Server VM (build 25.211-b12, mixed mode)\r\n",
+  "exit_code": 0
+}
+
+PROBE 6: PATH javac version
+{
+  "label": "PATH javac version",
+  "executable": "C:\\Program Files\\Java\\jdk1.8.0_211\\bin\\javac.exe",
+  "arguments": [
+    "-version"
+  ],
+  "stdout": "",
+  "stderr": "javac 1.8.0_211\r\n",
+  "exit_code": 0
+}
+
+PROBE 7: environment
+{
+  "label": "environment",
+  "executable": "C:\\Users\\fallo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": [
+    "-NoProfile",
+    "-NonInteractive",
+    "-Command",
+    "\n    $names = @('JAVA_HOME','GHIDRA_INSTALL_DIR','REA_ANALYSIS_PROVIDER')\n    $values = foreach ($name in $names) { [pscustomobject]@{name=$name; value=[Environment]::GetEnvironmentVariable($name,'Process')} }\n    [pscustomobject]@{process_64_bit=[Environment]::Is64BitProcess; os_64_bit=[Environment]::Is64BitOperatingSystem; variables=$values} | ConvertTo-Json -Depth 5\n  "
+  ],
+  "stdout": "{\r\n  \"process_64_bit\": true,\r\n  \"os_64_bit\": true,\r\n  \"variables\": [\r\n    {\r\n      \"name\": \"JAVA_HOME\",\r\n      \"value\": \"C:\\\\Program Files\\\\Java\\\\jdk1.8.0_211\"\r\n    },\r\n    {\r\n      \"name\": \"GHIDRA_INSTALL_DIR\",\r\n      \"value\": null\r\n    },\r\n    {\r\n      \"name\": \"REA_ANALYSIS_PROVIDER\",\r\n      \"value\": null\r\n    }\r\n  ]\r\n}\r\n",
+  "stderr": "",
+  "exit_code": 0
+}
+
+PROBE 8: standard_installation_directories
+{
+  "label": "standard_installation_directories",
+  "executable": "C:\\Users\\fallo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": [
+    "-NoProfile",
+    "-NonInteractive",
+    "-Command",
+    "\n    $paths = @('C:\\tools','C:\\ghidra','C:\\Program Files\\Ghidra','C:\\Program Files\\Java','C:\\Program Files\\Eclipse Adoptium','C:\\Program Files\\Amazon Corretto','C:\\Program Files\\Zulu','C:\\Program Files\\Microsoft')\n    $results = foreach ($path in $paths) { $exists = Test-Path -LiteralPath $path -PathType Container; $children = @(); if ($exists) { $children = @(Get-ChildItem -LiteralPath $path -Directory -ErrorAction Stop | Where-Object { $path -notin @('C:\\tools','C:\\Program Files\\Microsoft') -or $_.Name -match '(?i)ghidra|jdk|java|gradle|rea|adoptium|corretto|zulu' } | Select-Object -ExpandProperty FullName) }; [pscustomobject]@{path=$path; exists=$exists; matching_immediate_subdirectories=$children} }; $results | ConvertTo-Json -Depth 5\n  "
+  ],
+  "stdout": "[\r\n  {\r\n    \"path\": \"C:\\\\tools\",\r\n    \"exists\": false,\r\n    \"matching_immediate_subdirectories\": []\r\n  },\r\n  {\r\n    \"path\": \"C:\\\\ghidra\",\r\n    \"exists\": false,\r\n    \"matching_immediate_subdirectories\": []\r\n  },\r\n  {\r\n    \"path\": \"C:\\\\Program Files\\\\Ghidra\",\r\n    \"exists\": false,\r\n    \"matching_immediate_subdirectories\": []\r\n  },\r\n  {\r\n    \"path\": \"C:\\\\Program Files\\\\Java\",\r\n    \"exists\": true,\r\n    \"matching_immediate_subdirectories\": [\r\n      \"C:\\\\Program Files\\\\Java\\\\jdk1.8.0_211\"\r\n    ]\r\n  },\r\n  {\r\n    \"path\": \"C:\\\\Program Files\\\\Eclipse Adoptium\",\r\n    \"exists\": false,\r\n    \"matching_immediate_subdirectories\": []\r\n  },\r\n  {\r\n    \"path\": \"C:\\\\Program Files\\\\Amazon Corretto\",\r\n    \"exists\": false,\r\n    \"matching_immediate_subdirectories\": []\r\n  },\r\n  {\r\n    \"path\": \"C:\\\\Program Files\\\\Zulu\",\r\n    \"exists\": false,\r\n    \"matching_immediate_subdirectories\": []\r\n  },\r\n  {\r\n    \"path\": \"C:\\\\Program Files\\\\Microsoft\",\r\n    \"exists\": false,\r\n    \"matching_immediate_subdirectories\": []\r\n  }\r\n]\r\n",
+  "stderr": "",
+  "exit_code": 0
+}
+
+PROBE 9: local_program_installation_directories
+{
+  "label": "local_program_installation_directories",
+  "executable": "C:\\Users\\fallo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": [
+    "-NoProfile",
+    "-NonInteractive",
+    "-Command",
+    "\n    $basePath = Join-Path $env:LOCALAPPDATA 'Programs'\n    $exists = Test-Path -LiteralPath $basePath -PathType Container\n    $children = @()\n    if ($exists) { $children = @(Get-ChildItem -LiteralPath $basePath -Directory -ErrorAction Stop | Where-Object { $_.Name -match '(?i)ghidra|jdk|java|gradle|rea|adoptium|corretto|zulu' } | Select-Object -ExpandProperty FullName) }\n    [pscustomobject]@{path=$basePath; exists=$exists; matching_immediate_subdirectories=$children} | ConvertTo-Json -Depth 5\n  "
+  ],
+  "stdout": "{\r\n  \"path\": \"C:\\\\Users\\\\fallo\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{0973eb21-bb9a-48b9-aebc-7a965944ef83}\\\\AC\\\\Programs\",\r\n  \"exists\": false,\r\n  \"matching_immediate_subdirectories\": []\r\n}\r\n",
+  "stderr": "",
+  "exit_code": 0
+}
+
+PROBE 10: global_rea_package_manifest
+{
+  "label": "global_rea_package_manifest",
+  "executable": "C:\\Users\\fallo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": [
+    "-NoProfile",
+    "-NonInteractive",
+    "-Command",
+    "\n    $manifest = 'C:\\Users\\fallo\\AppData\\Roaming\\npm\\node_modules\\rea-agents\\package.json'\n    $exists = Test-Path -LiteralPath $manifest -PathType Leaf\n    $metadata = $null\n    if ($exists) { $pkg = Get-Content -LiteralPath $manifest -Raw | ConvertFrom-Json; $metadata = [pscustomobject]@{name=$pkg.name; version=$pkg.version; engines=$pkg.engines} }\n    [pscustomobject]@{path=$manifest; exists=$exists; package=$metadata} | ConvertTo-Json -Depth 5\n  "
+  ],
+  "stdout": "{\r\n  \"path\": \"C:\\\\Users\\\\fallo\\\\AppData\\\\Roaming\\\\npm\\\\node_modules\\\\rea-agents\\\\package.json\",\r\n  \"exists\": false,\r\n  \"package\": null\r\n}\r\n",
+  "stderr": "",
+  "exit_code": 0
+}
+
+PROBE 11: PATH command resolution
+{
+  "label": "PATH command resolution",
+  "executable": "C:\\Users\\fallo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": [
+    "-NoProfile",
+    "-NonInteractive",
+    "-Command",
+    "$names = @('node','npm','java','javac','rea','ghidraRun','analyzeHeadless','gradle'); $records = foreach ($name in $names) { $found = @(Get-Command -Name $name -All -ErrorAction SilentlyContinue); [pscustomobject]@{ Name = $name; Found = ($found.Count -gt 0); Commands = @($found | Select-Object Name,CommandType,Source,Path) } }; $records | ConvertTo-Json -Depth 5"
+  ],
+  "stdout": "[\r\n  {\r\n    \"Name\": \"node\",\r\n    \"Found\": true,\r\n    \"Commands\": [\r\n      {\r\n        \"Name\": \"node.exe\",\r\n        \"CommandType\": 32,\r\n        \"Source\": \"C:\\\\Program Files\\\\nodejs\\\\node.exe\",\r\n        \"Path\": \"C:\\\\Program Files\\\\nodejs\\\\node.exe\"\r\n      },\r\n      {\r\n        \"Name\": \"node.exe\",\r\n        \"CommandType\": 32,\r\n        \"Source\": \"C:\\\\Users\\\\fallo\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\node\\\\bin\\\\node.exe\",\r\n        \"Path\": \"C:\\\\Users\\\\fallo\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\node\\\\bin\\\\node.exe\"\r\n      }\r\n    ]\r\n  },\r\n  {\r\n    \"Name\": \"npm\",\r\n    \"Found\": true,\r\n    \"Commands\": [\r\n      {\r\n        \"Name\": \"npm.ps1\",\r\n        \"CommandType\": 16,\r\n        \"Source\": \"C:\\\\Program Files\\\\nodejs\\\\npm.ps1\",\r\n        \"Path\": \"C:\\\\Program Files\\\\nodejs\\\\npm.ps1\"\r\n      },\r\n      {\r\n        \"Name\": \"npm.cmd\",\r\n        \"CommandType\": 32,\r\n        \"Source\": \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\",\r\n        \"Path\": \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\"\r\n      },\r\n      {\r\n        \"Name\": \"npm\",\r\n        \"CommandType\": 32,\r\n        \"Source\": \"C:\\\\Program Files\\\\nodejs\\\\npm\",\r\n        \"Path\": \"C:\\\\Program Files\\\\nodejs\\\\npm\"\r\n      }\r\n    ]\r\n  },\r\n  {\r\n    \"Name\": \"java\",\r\n    \"Found\": true,\r\n    \"Commands\": [\r\n      {\r\n        \"Name\": \"java.exe\",\r\n        \"CommandType\": 32,\r\n        \"Source\": \"C:\\\\Program Files\\\\Java\\\\jdk1.8.0_211\\\\bin\\\\java.exe\",\r\n        \"Path\": \"C:\\\\Program Files\\\\Java\\\\jdk1.8.0_211\\\\bin\\\\java.exe\"\r\n      }\r\n    ]\r\n  },\r\n  {\r\n    \"Name\": \"javac\",\r\n    \"Found\": true,\r\n    \"Commands\": [\r\n      {\r\n        \"Name\": \"javac.exe\",\r\n        \"CommandType\": 32,\r\n        \"Source\": \"C:\\\\Program Files\\\\Java\\\\jdk1.8.0_211\\\\bin\\\\javac.exe\",\r\n        \"Path\": \"C:\\\\Program Files\\\\Java\\\\jdk1.8.0_211\\\\bin\\\\javac.exe\"\r\n      }\r\n    ]\r\n  },\r\n  {\r\n    \"Name\": \"rea\",\r\n    \"Found\": false,\r\n    \"Commands\": []\r\n  },\r\n  {\r\n    \"Name\": \"ghidraRun\",\r\n    \"Found\": false,\r\n    \"Commands\": []\r\n  },\r\n  {\r\n    \"Name\": \"analyzeHeadless\",\r\n    \"Found\": false,\r\n    \"Commands\": []\r\n  },\r\n  {\r\n    \"Name\": \"gradle\",\r\n    \"Found\": false,\r\n    \"Commands\": []\r\n  }\r\n]\r\n",
+  "stderr": "",
+  "exit_code": 0
+}
+
+PROBE 12: Additional bounded standard locations
+{
+  "label": "Additional bounded standard locations",
+  "executable": "C:\\Users\\fallo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": [
+    "-NoProfile",
+    "-NonInteractive",
+    "-Command",
+    "$paths = @('C:\\Program Files','C:\\Program Files (x86)','C:\\Users\\fallo\\AppData\\Local\\Programs','C:\\Users\\fallo\\.jdks'); $results = foreach ($path in $paths) { $exists = Test-Path -LiteralPath $path -PathType Container; $children=@(); if ($exists) { $children=@(Get-ChildItem -LiteralPath $path -Directory -ErrorAction Stop | Where-Object { $_.Name -match '(?i)ghidra|jdk|java|gradle|adoptium|corretto|zulu|temurin' } | Select-Object -ExpandProperty FullName) }; [pscustomobject]@{path=$path; exists=$exists; matching_immediate_subdirectories=$children} }; $results | ConvertTo-Json -Depth 5"
+  ],
+  "stdout": "[\r\n  {\r\n    \"path\": \"C:\\\\Program Files\",\r\n    \"exists\": true,\r\n    \"matching_immediate_subdirectories\": [\r\n      \"C:\\\\Program Files\\\\Java\"\r\n    ]\r\n  },\r\n  {\r\n    \"path\": \"C:\\\\Program Files (x86)\",\r\n    \"exists\": true,\r\n    \"matching_immediate_subdirectories\": []\r\n  },\r\n  {\r\n    \"path\": \"C:\\\\Users\\\\fallo\\\\AppData\\\\Local\\\\Programs\",\r\n    \"exists\": true,\r\n    \"matching_immediate_subdirectories\": []\r\n  },\r\n  {\r\n    \"path\": \"C:\\\\Users\\\\fallo\\\\.jdks\",\r\n    \"exists\": false,\r\n    \"matching_immediate_subdirectories\": []\r\n  }\r\n]\r\n",
+  "stderr": "",
+  "exit_code": 0
+}
+
+PROBE 13: Local volume and temporary-directory observations
+{
+  "label": "Local volume and temporary-directory observations",
+  "executable": "C:\\Users\\fallo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": [
+    "-NoProfile",
+    "-NonInteractive",
+    "-Command",
+    "$item = Get-Item -LiteralPath 'C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad' -Force; $volume = Get-CimInstance Win32_LogicalDisk -Filter \"DeviceID='C:'\" | Select-Object DeviceID,DriveType,FileSystem; [pscustomobject]@{os_version=[Environment]::OSVersion.VersionString; workspace_attributes=$item.Attributes.ToString(); workspace_link_type=$item.LinkType; current_temp=[IO.Path]::GetTempPath(); volume=$volume} | ConvertTo-Json -Depth 5"
+  ],
+  "stdout": "{\r\n  \"os_version\": \"Microsoft Windows NT 10.0.26200.0\",\r\n  \"workspace_attributes\": \"Directory\",\r\n  \"workspace_link_type\": null,\r\n  \"current_temp\": \"C:\\\\Users\\\\fallo\\\\AppData\\\\Local\\\\Packages\\\\sandbox.{ccaae0fb-d1d1-4f3e-a4b9-008373004a9c}\\\\AC\\\\Temp\\\\\",\r\n  \"volume\": null\r\n}\r\n",
+  "stderr": "Get-CimInstance: Access to a CIM resource was not available to the client.\r\n",
+  "exit_code": 0
+}
+
+Remote metadata retrieval notes
+- Browser reads rechecked the primary REA DOS, Windows and loader release pages.
+- Initial read-only GitHub API request in the network sandbox failed with: No such host is known. Shell exit code 1. The tool exposed one combined stream, so stdout/stderr separation is unavailable for that exploratory attempt.
+- A permitted retry read the public GitHub release/commit/content APIs successfully. No release asset bytes were downloaded. Published release hashes have not been verified against local archives.
+- Source text was read into memory to resolve documentation commit/blob identities and compute source-content SHA-256 values. tooling-sources.json retains metadata and paraphrased claims, not full source documents.
+- No provider readiness result is fabricated from PATH discovery. REA doctor/providers, native path/DACL checks, Ghidra startup, extension loading, import, decompilation and cleanup are all untested.
+
+Initial exploratory wrapper correction
+- A preliminary PowerShell foreach pipeline had a parser error: An empty pipe element is not allowed (exit code 1). It produced no tool-presence evidence. The corrected PATH command was rerun and is recorded above.
+- Two JavaScript orchestration construction attempts failed before launching a shell (invalid template token and unavailable btoa helper). They performed no filesystem or toolchain operation.
+

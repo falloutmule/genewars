@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "path": "tools/ghidra/ghidra.zip",
+      "sha256": "85bd2990945f3a78df4d1e09f1bb1f40ab77be3bac62c6e7678900788c7f0f41",
+      "size": 512517017,
+      "published_digest_match": true
+    },
+    {
+      "path": "tools/ghidra/lx-loader.zip",
+      "sha256": "8b7e7461bd48621faa5e32c27a2c7ff8b17b82c7b765c8c6afe2cee8db693cec",
+      "size": 313312,
+      "published_digest_match": true
+    },
+    {
+      "path": "tools/jdk/jdk.zip",
+      "sha256": "f9d6e191ab098c0d416e7d588a24420a8621cd2f4720dab2459b8b7b2d2d8b4e",
+      "size": 205073461,
+      "published_digest_match": true
+    },
+    {
+      "path": "ghidra/GW-CD-candidate.exe",
+      "sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+      "size": 1265994,
+      "provenance": "GAME/GW.EXE;1 raw disc LBA501, MODE1/2352 payload +16"
+    }
+  ],
+  "jdk": "jdk-21.0.12.1+1",
+  "ghidra": "12.0.1",
+  "loader": "v12.0.1",
+  "candidate_is_canonical": false,
+  "network_failure": "Initial non-escalated curl: Could not resolve host api.adoptium.net; approved network retry succeeded."
+}

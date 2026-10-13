@@ -1,0 +1,153 @@
+{
+  "modes": [
+    {
+      "mode_index": 1,
+      "table_width": 320,
+      "table_height": 200
+    },
+    {
+      "mode_index": 13,
+      "table_width": 640,
+      "table_height": 480
+    }
+  ],
+  "unique_palette_inputs": 26,
+  "palette_lengths": [
+    768
+  ],
+  "channel_min": 0,
+  "channel_max": 63,
+  "distinct_channel_values": 64,
+  "exact_cd_inputs": [
+    {
+      "entry_id": "root/2/disc/86",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/GENEPANL.DAT;1",
+      "input_sha256": "8116b2b883320b8573c50496a570f0f3fa978e4c20b9c85a284339ff1f920e24",
+      "output_size": 61440,
+      "output_sha256": "af9741b4545fb6f28a1dd0e50da0570e39992e75c872bc2249891f3330f59951"
+    },
+    {
+      "entry_id": "root/2/disc/108",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/MAIN.PAL;1",
+      "input_sha256": "8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05",
+      "raw_size": 768,
+      "local_bytes_reviewed": true
+    }
+  ],
+  "independent_pixel_review": {
+    "pixels_verified": 61440,
+    "channels_verified": 184320,
+    "bmp_sha256": "af218cc65e0abb410242cd73440b53d4c18f4d8cd3f03f1f7542c4bb1c70809b",
+    "rgb_sha256": "bb135e29eb2e6dacf17ab8273e57df185fe24b82320ab5b296fbf74a6c11444d",
+    "orientation": "bottom-up BMP BGR independently checked against top-down source RGB",
+    "main_palette_min": 0,
+    "main_palette_max": 63
+  },
+  "logical_frame": {
+    "width": 640,
+    "height": 480,
+    "bytes": 307200
+  },
+  "panel": {
+    "width": 128,
+    "height": 480,
+    "source_pitch": 128,
+    "bytes": 61440,
+    "destination_pitch": 640,
+    "last_write_exclusive": 306688
+  },
+  "scaling_vectors": [
+    {
+      "vga6": 0,
+      "normalized_floor": 0,
+      "bit_replication": 0
+    },
+    {
+      "vga6": 1,
+      "normalized_floor": 4,
+      "bit_replication": 4
+    },
+    {
+      "vga6": 15,
+      "normalized_floor": 60,
+      "bit_replication": 60
+    },
+    {
+      "vga6": 16,
+      "normalized_floor": 64,
+      "bit_replication": 65
+    },
+    {
+      "vga6": 21,
+      "normalized_floor": 85,
+      "bit_replication": 85
+    },
+    {
+      "vga6": 31,
+      "normalized_floor": 125,
+      "bit_replication": 125
+    },
+    {
+      "vga6": 32,
+      "normalized_floor": 129,
+      "bit_replication": 130
+    },
+    {
+      "vga6": 42,
+      "normalized_floor": 170,
+      "bit_replication": 170
+    },
+    {
+      "vga6": 47,
+      "normalized_floor": 190,
+      "bit_replication": 190
+    },
+    {
+      "vga6": 48,
+      "normalized_floor": 194,
+      "bit_replication": 195
+    },
+    {
+      "vga6": 62,
+      "normalized_floor": 250,
+      "bit_replication": 251
+    },
+    {
+      "vga6": 63,
+      "normalized_floor": 255,
+      "bit_replication": 255
+    }
+  ],
+  "scaling_convention_difference_inputs": [
+    16,
+    17,
+    18,
+    19,
+    20,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62
+  ]
+}

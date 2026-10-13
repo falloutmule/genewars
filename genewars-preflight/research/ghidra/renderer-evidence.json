@@ -1,0 +1,131 @@
+{
+  "scope": "provisional CD candidate; static evidence, no original execution",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "descriptors": [
+    {
+      "va": "0x1043e4",
+      "filename": "data/main.pal",
+      "allocation_pointer": "0x115e80",
+      "end_pointer": "0x0"
+    },
+    {
+      "va": "0x103db4",
+      "filename": "data/pointers.dat",
+      "allocation_pointer": "0x11698c",
+      "end_pointer": "0x0"
+    },
+    {
+      "va": "0x103de0",
+      "filename": "data/pointers.tab",
+      "allocation_pointer": "0x115e74",
+      "end_pointer": "0x115e78"
+    }
+  ],
+  "panel_filename_table_va": "0x105604",
+  "panel_filenames": [
+    "data/mainpanl.dat",
+    "data/genepanl.dat",
+    "data/lpanel.dat"
+  ],
+  "panel": {
+    "width": 128,
+    "height": 480,
+    "source_stride": 128,
+    "display_width": 640,
+    "destination_step": "pitch & ~3",
+    "decoded_sha256": "af9741b4545fb6f28a1dd0e50da0570e39992e75c872bc2249891f3330f59951",
+    "decoded_bytes": 61440
+  },
+  "palette": {
+    "member": "GAME/DATA/MAIN.PAL;1",
+    "disc_inventory_entry": "root/2/disc/108",
+    "lba": 7491,
+    "bytes": 768,
+    "sha256": "8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05",
+    "channel_order": "RGB",
+    "channel_bits": 6,
+    "min": 0,
+    "max": 63,
+    "uploader_scales_channels": false,
+    "hardware_reference": "https://www.scs.stanford.edu/10wi-cs140/pintos/specs/freevga/vga/colorreg.htm"
+  },
+  "functions": [
+    {
+      "va": "0x24ad0",
+      "object": 1,
+      "object_offset": "0x14ad0",
+      "body_address_count": 72,
+      "mapped_contiguous_sha256": "f00807331956c17fa56e7a5c2be7d5835f736d9663f93574e55e9ec175448283",
+      "private_listing": "private/ghidra/panel-verified/instructions-00024ad0.txt",
+      "listing_sha256": "fa373332d2ada300d5b3a7492ff0de48d2b1ab7f7c52037ca9edcb77f5e4fc70"
+    },
+    {
+      "va": "0x1caa0",
+      "object": 1,
+      "object_offset": "0xcaa0",
+      "body_address_count": 488,
+      "mapped_contiguous_sha256": "fee8a663ebf90ed078765c160288b9897f29957a460ab89cf385bef5df857e16",
+      "private_listing": "private/ghidra/mode-functions/instructions-0001caa0.txt",
+      "listing_sha256": "ab5870b0727cdc062a6ebce680c31c25595e78f40a6ed24162228f716bcf63fb"
+    },
+    {
+      "va": "0x979a0",
+      "object": 1,
+      "object_offset": "0x879a0",
+      "body_address_count": 16,
+      "mapped_contiguous_sha256": "b75a43d1a997c33a19e8f81f37f8213cc8e944182fce1c573899163a09577cbe",
+      "private_listing": "private/ghidra/mode-functions/instructions-000979a0.txt",
+      "listing_sha256": "d672e55dcb9e0e191be23f909a69d8df052f0127801d7b6326443aacc88f8b0f"
+    },
+    {
+      "va": "0xa13f0",
+      "object": 1,
+      "object_offset": "0x913f0",
+      "body_address_count": 368,
+      "mapped_contiguous_sha256": "7ce9f6d3a645cc9d4417910950d5c3b8ad9e04fc8ea9e700ede614369574e10c",
+      "private_listing": "private/ghidra/mode-functions/instructions-000a13f0.txt",
+      "listing_sha256": "d3197593d72dc4d5166b5dbf2f089b60712316f7a8d62f7c19ba9750a4701501"
+    },
+    {
+      "va": "0xa6d2c",
+      "object": 1,
+      "object_offset": "0x96d2c",
+      "body_address_count": 74,
+      "mapped_contiguous_sha256": "e6d61530db7def20c44eee409f8317845bb21eba6a13fe05fcf1c48b77c2d003",
+      "private_listing": "private/ghidra/vga/instructions-000a6d2c.txt",
+      "listing_sha256": "59c9d1a3f9d2a91f26e0cb95aad49633187900106a933db43faf13062e18890e"
+    },
+    {
+      "va": "0xa7618",
+      "object": 1,
+      "object_offset": "0x97618",
+      "body_address_count": 24,
+      "mapped_contiguous_sha256": "226dc6448700e672da62cc6e41d2f5227bbbdea10d064fd1e861dc02f38d9369",
+      "private_listing": "private/ghidra/sprite-functions/instructions-000a7618.txt",
+      "listing_sha256": "df3f0482d660eb56acb03faa0b9144c9a8b9caa14ef28d8ddb4fa1f8351ef124"
+    },
+    {
+      "va": "0xa7730",
+      "object": 1,
+      "object_offset": "0x97730",
+      "body_address_count": 2244,
+      "mapped_contiguous_sha256": "ebd11040dd31cef1cc448c771669d946375f29f786d4c8b2dfa6f0129a947cb5",
+      "private_listing": "private/ghidra/sprite-functions/instructions-000a7730.txt",
+      "listing_sha256": "aa63d9caf20fbcd13f8d139958df0e542a2ca45437a42b7249c87adbe9a60f00"
+    },
+    {
+      "va": "0x98a60",
+      "object": 1,
+      "object_offset": "0x88a60",
+      "body_address_count": 255,
+      "mapped_contiguous_sha256": "a0acb2172d8cb1ca7aa505704aed96ab96449c19c4d18416368134c021e59bca",
+      "private_listing": "private/ghidra/sprite-functions/instructions-00098a60.txt",
+      "listing_sha256": "75b266f751d4c7d29dc4d5bf83493b821cdb38f7e10838403daa29ac1fdc4a8a"
+    }
+  ],
+  "tests": {
+    "static_listing_invariants": 8,
+    "synthetic_pitch_cases": 4,
+    "all_pass": true
+  }
+}

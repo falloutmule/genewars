@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "source": {
+    "archive": "C:\\Users\\fallo\\Downloads\\genewars.zip",
+    "archive_member": "Genewars_Manual_DOS_EN.pdf",
+    "private_copy": "private/manual/Genewars_Manual_DOS_EN.pdf",
+    "bytes": 3825521,
+    "sha256": "0de3be7b3ba15d68af16744f4b742d549b840cf33162581aeb7de509bdf29309",
+    "manifest_sha256_match": true,
+    "pdf_pages": 18,
+    "format_observation": "Scanned two-page spreads; no embedded text layer. PDF page 1 is outer cover art; printed page 1 appears on PDF page 2 right half. Printed pages then advance left/right on each spread. PDF page 18 has printed page 32 left and an apparently blank right half."
+  },
+  "extraction": {
+    "rendering": "Poppler pdftoppm, 300 dpi PNG, per PDF page",
+    "ocr": "Tesseract installed at C:\\Program Files\\Tesseract-OCR, English, --psm 6; each spread split into left and right halves",
+    "raw_ocr_private": "private/manual/extracted-text.txt",
+    "rendered_pages_private": "private/manual/rendered-300/page-NN.png",
+    "visual_reviewed_pdf_pages": [7, 9, 10, 11, 12, 13],
+    "limitations": [
+      "OCR contains recognition errors and is a navigation aid, not authoritative wording.",
+      "Claims below were summarized from the scan; visual review checked the controls and system pages listed above.",
+      "The manual itself warns that the product may change without notice."
+    ]
+  },
+  "status_legend": {
+    "manual-documented": "Explicitly described or shown in the supplied manual.",
+    "binary-verified": "Confirmed from a hash-identified executable by static analysis; none in this lane.",
+    "execution-verified": "Observed by running an identified original build; none in this lane.",
+    "disputed": "Conflicting evidence exists; not used as an implementation rule.",
+    "unknown": "The manual does not establish the rule or implementation detail."
+  },
+  "findings": [
+    {
+      "topic": "Controls and commands",
+      "status": "manual-documented",
+      "claims": [
+        "Left-click selects a specialist on the status bar or field and issues movement; right-click deselects. Control+left-click-drag groups specialists; Alt+left-click-drag selects only creatures when mixed with specialists.",
+        "Contextual action prompts initiate creature tasks. Engineer builds by selecting a building option; Control+left-click invokes its destroy command. Botanist uses Control+left-click to cut plants. Ranger Control+left-click kills enemy creatures or culls owned creatures.",
+        "Geneticist researches unknown creatures, heals injured lifeforms, and stuns researched creatures. Ranger can feed, boost fighting, enable mating in season, and stun.",
+        "Network chat uses F1-F4 for opponents and Return to send; manual describes IPX networking."
+      ],
+      "pages": [{"pdf": 7, "printed": [10, 11]}, {"pdf": 8, "printed": [12, 13]}, {"pdf": 9, "printed": [14]}, {"pdf": 15, "printed": [26]}]
+    },
+    {
+      "topic": "UI and feedback",
+      "status": "manual-documented",
+      "claims": [
+        "The screen includes base-power display, GOOP storage, score-o-rama, Bad-o-meter, five specialist monitors, action screen, help toggle, overview map, and field of play. Strength, health and creature genetic evolution are shown; Botanist monitor uses that bar for seed count.",
+        "Monitor click selects and right-click zooms; red static indicates a specialist taking damage. Score-o-rama tracks mission completion and can show opposing teams after a Tech Facility is built."
+      ],
+      "pages": [{"pdf": 7, "printed": [10, 11]}]
+    },
+    {
+      "topic": "Specialists and team selection",
+      "status": "manual-documented",
+      "claims": [
+        "Five specialist roles are described: Engineer (build/repair/upgrade), Geneticist (research/heal/stun), Botanist (plant/harvest seeds/cut plants), Ranger (creature behavior/population), and pilot (interplanetary travel). Initial crew is selected by Ethereals; later missions allow team choice and expertise is displayed by cursor hover.",
+        "The Landing Pad supports crew transfers from orbit and later crew selection."
+      ],
+      "pages": [{"pdf": 6, "printed": [8, 9]}, {"pdf": 7, "printed": [11]}, {"pdf": 8, "printed": [12, 13]}, {"pdf": 9, "printed": [14]}, {"pdf": 10, "printed": [17]}]
+    },
+    {
+      "topic": "Buildings and dependencies",
+      "status": "manual-documented",
+      "claims": [
+        "Extractor mines minerals into GOOP and is required before other buildings. First Stage Power Distributor channels power to nearby structures and can run itself plus one Extractor; Photon Processor converts stellar energy to electrical power and requires a Distributor.",
+        "Gene Pod breeds basic drones from GOOP. The manual lists cost, strength, defense, speed and awareness attributes; it says to build a Gene Pod before the buildings listed after it. Recycling Plant converts dead flora/fauna to GOOP; GOOP Vat stores surplus and requires a Recycling Plant.",
+        "Landing Pad moves crew between orbit and planet. Pulper makes upgrade mouldings from wood and requires Crabs to upgrade buildings. Other building types are revealed after early missions; Gene Machine/Gene Lab are named for advanced hybrid research."
+      ],
+      "pages": [{"pdf": 9, "printed": [15]}, {"pdf": 10, "printed": [16, 17]}, {"pdf": 11, "printed": [18, 19]}, {"pdf": 12, "printed": [20]}]
+    },
+    {
+      "topic": "Economy and construction",
+      "status": "manual-documented",
+      "claims": [
+        "GOOP is the currency/material for buildings and creatures. Plants and dead biomass feed GOOP production through creature labor and Recycling Plant; plant wood can supply a Pulper for upgrade mouldings.",
+        "Building upgrades require an Engineer, powered Pulper, at least one Mule and one Crab. Mule carries harvested plant material to Pulper; Crab carries mouldings to Engineer and assists construction. Higher Engineer skill shortens upgrade time."
+      ],
+      "pages": [{"pdf": 5, "printed": [6, 7]}, {"pdf": 10, "printed": [17]}, {"pdf": 11, "printed": [18]}]
+    },
+    {
+      "topic": "Species, genetics, and breeding",
+      "status": "manual-documented",
+      "claims": [
+        "Natural creature families named are Mule, Crab, Frog, Bird, and Dino. The Gene Pod supports basic drones; research above the 50% Gene Pod ceiling needs Gene Machine or Gene Lab. The manual says a 50% research reading is enough to build, and extra research affects size, strength, stamina, and intelligence.",
+        "Different creatures may mate to produce hybrids; a Mule and Crab can produce Crabomule. Hybrids combine parent abilities, count as their own species, and do not inherit species special powers automatically. The manual calls for a Monolith interaction to grant a hybrid power.",
+        "A Monolith can raise specialist abilities and grant a species special power. Listed powers: Mule kick, Crab armor, Frog damaging spit, Bird dive attack, Dino fire breath."
+      ],
+      "pages": [{"pdf": 6, "printed": [8, 9]}, {"pdf": 8, "printed": [13]}, {"pdf": 10, "printed": [16]}, {"pdf": 11, "printed": [18, 19]}, {"pdf": 12, "printed": [20]}]
+    },
+    {
+      "topic": "Species traits and races",
+      "status": "manual-documented",
+      "claims": [
+        "The four playable races are Earthlings, Saurians, Bohemians and Schnozzoids; Ethereals are non-playable observers. Race descriptions give qualitative ability, strength, speed, research, creature-attention, healing, and cloaking traits. Monolith-upgraded specialist ability/strength maxima are race-specific.",
+        "Creature descriptions characterize Mule as labor/biomass transport, Crab as builder and land/water-capable, Frog as scout, Bird as flying scout, and Dino as powerful but temperamental."
+      ],
+      "pages": [{"pdf": 5, "printed": [6, 7]}, {"pdf": 6, "printed": [8, 9]}, {"pdf": 11, "printed": [18, 19]}, {"pdf": 12, "printed": [20]}]
+    },
+    {
+      "topic": "Plants and terrain",
+      "status": "manual-documented",
+      "claims": [
+        "Plants have climatic/terrain preferences and vary in GOOP, food, wood and defensive value. Botanist harvest reveals a species icon and surface preference; symbol sizes indicate food and wood value and a dot indicates seed cost.",
+        "Early examples include Terrinium Bulb (grass), Phylax Root (grass, fast-growing and nutritious), and Waxx Leaf (grass, reproduces quickly). Manual hints mention later plant types but do not provide a complete species catalog."
+      ],
+      "pages": [{"pdf": 12, "printed": [20, 21]}, {"pdf": 13, "printed": [22]}]
+    },
+    {
+      "topic": "Campaign and missions",
+      "status": "manual-documented",
+      "claims": [
+        "Single-player campaign is described as 24 planets/missions to repopulate. The first five hint levels are Exceland, Krell, Madami, Roach and Brown. Goals and available systems differ by mission; Ethereals give orders and the player is judged on them.",
+        "Some missions use Ethereal Zones and competing colonization teams; the manual says computer players may compete. Zone mission hints describe moving creatures to marked Zones and depleting them."
+      ],
+      "pages": [{"pdf": 6, "printed": [9]}, {"pdf": 5, "printed": [6, 7]}, {"pdf": 13, "printed": [22, 23]}]
+    },
+    {
+      "topic": "Win/loss, Ethereals, and scoring",
+      "status": "manual-documented",
+      "claims": [
+        "Bad-o-meter reflects Ethereal approval. Good actions may lead to rewards such as Monolith; bad behavior may be punished, including Adami Process. The manual uses qualitative terms and provides no numeric thresholds or event formula.",
+        "Network winner depends on level: score most in Ethereal Zones where present, or defeat opponents on levels without Zones. Single-player mission end conditions are not specified as a complete formal rule set."
+      ],
+      "pages": [{"pdf": 5, "printed": [6, 7]}, {"pdf": 7, "printed": [10]}, {"pdf": 15, "printed": [26]}]
+    },
+    {
+      "topic": "Options, saves, and navigation",
+      "status": "manual-documented",
+      "claims": [
+        "Options screen diagram labels music toggle and level, sound-effects toggle and level, save new file by typing a name and pressing Return, load saved game, finish game and return to the main screen, exit to system, and exit screen.",
+        "Pilot handles travel between planets after a left-click. Landing Pad supports specialist crew transfer."
+      ],
+      "pages": [{"pdf": 6, "printed": [9]}, {"pdf": 13, "printed": [22]}, {"pdf": 10, "printed": [17]}]
+    },
+    {
+      "topic": "Network mode",
+      "status": "manual-documented",
+      "claims": [
+        "Network option appears when suitable IPX network is detected. Manual describes creating/joining sessions, host-selected level, eight levels, opponent chat using F1-F4, and creature advantage. The manual does not establish a player cap.",
+        "Creature advantage picks one pure breed from Dino, Crab, Frog, Bird at 50% research with its special ability active."
+      ],
+      "pages": [{"pdf": 14, "printed": [24, 25]}, {"pdf": 15, "printed": [26]}]
+    },
+    {
+      "topic": "AI and autonomous behavior",
+      "status": "unknown",
+      "claims": [
+        "The manual mentions computer colonization players and creatures following instincts when deactivated from player control; it does not define opponent strategy, pathfinding, threat evaluation, orders, or autonomous behavior rules."
+      ],
+      "pages": [{"pdf": 7, "printed": [10]}, {"pdf": 13, "printed": [23]}]
+    },
+    {
+      "topic": "Save format and campaign persistence",
+      "status": "unknown",
+      "claims": [
+        "The UI labels save-new-file and load-saved-game actions, but the manual does not specify file format, serialized state, checkpoints, campaign selection semantics, or save timing."
+      ],
+      "pages": [{"pdf": 13, "printed": [22]}]
+    },
+    {
+      "topic": "Unresolved implementation details",
+      "status": "unknown",
+      "claims": [
+        "Numeric costs, production rates, resource capacities, power radii, plant growth rates, creature stat formulas, breeding probability/timing, genetics inheritance calculations, damage, tick timing, map dimensions, mission scripts, AI rules, and save schema are not specified by this manual.",
+        "No contradictions were identified within the summarized manual sections. Product notice states the product may change without notice, so manual claims need comparison with a hash-identified executable build."
+      ],
+      "pages": [{"pdf": 16, "printed": [28, 29]}]
+    }
+  ],
+  "binary_execution_verification": {
+    "binary_verified": [],
+    "execution_verified": [],
+    "note": "This manual lane performed no game-binary execution or binary analysis. All rule claims are manual-documented only."
+  },
+  "prioritized_questions_for_sol": [
+    "Map the manual command affordances to actual executable command identifiers, mouse/key event state, targeting modes and group-selection rules; in particular resolve Engineer selection/upgrading ambiguity and context-action prompts.",
+    "Recover mission objective predicates, Ethereal arrival/timer logic, Bad-o-meter updates/rewards/punishments, and campaign transition order; check whether the first five hint names and 24-planet count match the CD candidate build.",
+    "Determine the actual economy and power model: Extractor inputs/output, GOOP/storage capacities, resource transactions, power range/consumption, Photon Processor generation and upgrade effects.",
+    "Determine creature creation/research stat formulas, Gene Pod cap and Gene Machine/Lab unlocks; identify breeding compatibility, mating season, offspring inheritance and hybrid species registration.",
+    "Identify plant growth/harvest/replant, terrain suitability, food/wood values, biomass collection and recycling behavior; test whether Bad-o-meter rewards sustainable farming as described.",
+    "Trace specialist and creature autonomy, Ranger task areas, combat/damage/stun behavior, pathfinding and computer opponent decision logic.",
+    "Find save/load routines and file schemas, plus campaign state persistence; distinguish save UI claims from the actual implementation.",
+    "After matching executable hashes/layouts, cross-check manual-only findings against each relevant build and report variant-specific differences."
+  ]
+}

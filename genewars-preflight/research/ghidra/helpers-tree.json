@@ -1,0 +1,173 @@
+{
+  "sha": "a85d5c517b524aa4906a720330ed1435bf8b65cf",
+  "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/trees/a85d5c517b524aa4906a720330ed1435bf8b65cf",
+  "tree": [
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dfd4ae72214bb002e71fbf7a723a098f2d6ec961",
+      "size": 2987,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/dfd4ae72214bb002e71fbf7a723a098f2d6ec961"
+    },
+    {
+      "path": "bin",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "37ddb2df457e6923e7c2dd2bffa94e2196277646",
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/trees/37ddb2df457e6923e7c2dd2bffa94e2196277646"
+    },
+    {
+      "path": "bin/gw-genewars-1_0-sep_1996.exe",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cb7ddad872b1c169c8b9657bb83b0e6aa6703c75",
+      "size": 1265994,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/cb7ddad872b1c169c8b9657bb83b0e6aa6703c75"
+    },
+    {
+      "path": "bin/gw-genewars-1_1-nov_1996.exe",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d12d2894ba58072a1ed3fcc37630a3a5279ec8de",
+      "size": 1251658,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/d12d2894ba58072a1ed3fcc37630a3a5279ec8de"
+    },
+    {
+      "path": "bin/gw-genewars-beta2-jul_1996.exe",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cfd6656daf6db4ad15db73ad5ffde99d3a205f40",
+      "size": 5184949,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/cfd6656daf6db4ad15db73ad5ffde99d3a205f40"
+    },
+    {
+      "path": "bin/gw-genewars-demo1-aug_1996.exe",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cb089637e0b885b4162ca069ecdc0ca115c2b301",
+      "size": 1298250,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/cb089637e0b885b4162ca069ecdc0ca115c2b301"
+    },
+    {
+      "path": "bin/gw-genewars-demo2-sep_1996.exe",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a0d22b5c572a44a14f901e6f615dd6599d726032",
+      "size": 1265482,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/a0d22b5c572a44a14f901e6f615dd6599d726032"
+    },
+    {
+      "path": "bin/s-genewars-1_0-sep_1996.exe",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d91d0361af1e0debc8e36cf4892e480509878e93",
+      "size": 398995,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/d91d0361af1e0debc8e36cf4892e480509878e93"
+    },
+    {
+      "path": "bin/s-genewars-1_1-nov_1996.exe",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d91d0361af1e0debc8e36cf4892e480509878e93",
+      "size": 398995,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/d91d0361af1e0debc8e36cf4892e480509878e93"
+    },
+    {
+      "path": "bin/s-genewars-beta2-jul_1996.exe",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0f980728283a41b02e07c7896126524e38eca69b",
+      "size": 761055,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/0f980728283a41b02e07c7896126524e38eca69b"
+    },
+    {
+      "path": "bin/wdump.exe",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9e8117919f8fc60986051b2d016bb5502f531d09",
+      "size": 158720,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/9e8117919f8fc60986051b2d016bb5502f531d09"
+    },
+    {
+      "path": "symbols",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d5b79d46ff79a2854023dd239f0aae80fa4ea9ac",
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/trees/d5b79d46ff79a2854023dd239f0aae80fa4ea9ac"
+    },
+    {
+      "path": "symbols/gw-genewars-1_1-nov_1996.bytes",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c07d72c81159833f64de49ecf7142e3e8e168ef2",
+      "size": 999424,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/c07d72c81159833f64de49ecf7142e3e8e168ef2"
+    },
+    {
+      "path": "symbols/gw-genewars-1_1-nov_1996.map",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ea52cdc77d7b7d2b757f022eb90eace496790bff",
+      "size": 82949,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/ea52cdc77d7b7d2b757f022eb90eace496790bff"
+    },
+    {
+      "path": "symbols/gw-genewars-1_1-nov_1996.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "02c617cddcaee09e2299dbc54afb1828e05abf95",
+      "size": 3516685,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/02c617cddcaee09e2299dbc54afb1828e05abf95"
+    },
+    {
+      "path": "symbols/gw-genewars-beta2-jul_1996-autogen_ida.c",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "60528c626392c036d8d58c1eafc1dd91f8315518",
+      "size": 4962767,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/60528c626392c036d8d58c1eafc1dd91f8315518"
+    },
+    {
+      "path": "symbols/gw-genewars-beta2-jul_1996-original_bld.map",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "db76955972d933624f2cfae2a3cc933ac6487e62",
+      "size": 215546,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/db76955972d933624f2cfae2a3cc933ac6487e62"
+    },
+    {
+      "path": "symbols/gw-genewars-beta2-jul_1996.bytes",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d0640a1dc19c419c7e62aba7ef889bd77fc09388",
+      "size": 1072476,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/d0640a1dc19c419c7e62aba7ef889bd77fc09388"
+    },
+    {
+      "path": "symbols/gw-genewars-beta2-jul_1996.h",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "74e8b91c64a5ed92f174c2cf9d77f1973e3f7408",
+      "size": 102139,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/74e8b91c64a5ed92f174c2cf9d77f1973e3f7408"
+    },
+    {
+      "path": "symbols/gw-genewars-beta2-jul_1996.map",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ab79470de312080736b6ecc6d650e2b0f8fab10",
+      "size": 285657,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/5ab79470de312080736b6ecc6d650e2b0f8fab10"
+    },
+    {
+      "path": "symbols/gw-genewars-beta2-jul_1996.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d04206691dce959e350f6cae9642f00e7d4ed8ea",
+      "size": 5693776,
+      "url": "https://api.github.com/repos/mefistotelis/genewars-re-helpers/git/blobs/d04206691dce959e350f6cae9642f00e7d4ed8ea"
+    }
+  ],
+  "truncated": false
+}

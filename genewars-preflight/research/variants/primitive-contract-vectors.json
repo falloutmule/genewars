@@ -1,0 +1,412 @@
+{
+  "binary_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "function_digests": [
+    {
+      "address": "0x432c0",
+      "size": 124,
+      "sha256": "fd38865ce7d0c49e05cfa4567a7b5285764ef65e5e4905fd8067c8df07a3bf4a"
+    },
+    {
+      "address": "0x8d580",
+      "size": 106,
+      "sha256": "6cfb48801ee8e6813eb5f614a3e67d412e25f914a07c310225e7a891a2ac0a64"
+    },
+    {
+      "address": "0x8d5f0",
+      "size": 105,
+      "sha256": "24460497190e3fe63c1a955c3da285a3ffe8010a5414eae7230fb7b9e175ff8a"
+    }
+  ],
+  "record_cases": [
+    {
+      "name": "coincident_default",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        0,
+        0
+      ],
+      "radius_byte": 0,
+      "marker": 1,
+      "flags": 1,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 0,
+      "wrapped_squared_radius": 2359296,
+      "expected": true
+    },
+    {
+      "name": "inclusive_radius_boundary",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        1536,
+        0
+      ],
+      "radius_byte": 0,
+      "marker": 1,
+      "flags": 1,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 2359296,
+      "wrapped_squared_radius": 2359296,
+      "expected": true
+    },
+    {
+      "name": "one_beyond_radius_boundary",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        1537,
+        0
+      ],
+      "radius_byte": 0,
+      "marker": 1,
+      "flags": 1,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 2362369,
+      "wrapped_squared_radius": 2359296,
+      "expected": false
+    },
+    {
+      "name": "negative_boundary",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        -1536,
+        0
+      ],
+      "radius_byte": 0,
+      "marker": 1,
+      "flags": 1,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 2359296,
+      "wrapped_squared_radius": 2359296,
+      "expected": true
+    },
+    {
+      "name": "wrapped_coordinate",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        -32768,
+        -32768
+      ],
+      "radius_byte": 0,
+      "marker": 1,
+      "flags": 1,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 0,
+      "wrapped_squared_radius": 2359296,
+      "expected": true
+    },
+    {
+      "name": "inactive_marker",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        0,
+        0
+      ],
+      "radius_byte": 0,
+      "marker": 0,
+      "flags": 1,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 0,
+      "wrapped_squared_radius": 2359296,
+      "expected": false
+    },
+    {
+      "name": "high_word_flag_does_not_qualify",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        0,
+        0
+      ],
+      "radius_byte": 0,
+      "marker": 1,
+      "flags": 0,
+      "kind": 3,
+      "ignored_high_flags": 1,
+      "squared_distance": 0,
+      "wrapped_squared_radius": 2359296,
+      "expected": false
+    },
+    {
+      "name": "other_flag_bits_ignored",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        0,
+        0
+      ],
+      "radius_byte": 0,
+      "marker": 1,
+      "flags": 254,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 0,
+      "wrapped_squared_radius": 2359296,
+      "expected": false
+    },
+    {
+      "name": "kind_mismatch",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        0,
+        0
+      ],
+      "radius_byte": 0,
+      "marker": 1,
+      "flags": 1,
+      "kind": 2,
+      "ignored_high_flags": 0,
+      "squared_distance": 0,
+      "wrapped_squared_radius": 2359296,
+      "expected": false
+    },
+    {
+      "name": "high_unsigned_threshold",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        16384,
+        16384
+      ],
+      "radius_byte": 83,
+      "marker": 1,
+      "flags": 1,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 536870912,
+      "wrapped_squared_radius": 4261478400,
+      "expected": true
+    },
+    {
+      "name": "first_square_wrap_false",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        16384,
+        16384
+      ],
+      "radius_byte": 84,
+      "marker": 1,
+      "flags": 1,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 536870912,
+      "wrapped_squared_radius": 67371008,
+      "expected": false
+    },
+    {
+      "name": "exact_zero_square_wrap_true",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        0,
+        0
+      ],
+      "radius_byte": 254,
+      "marker": 1,
+      "flags": 1,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 0,
+      "wrapped_squared_radius": 0,
+      "expected": true
+    },
+    {
+      "name": "exact_zero_square_wrap_false",
+      "query": [
+        0,
+        0
+      ],
+      "coordinate": [
+        1,
+        0
+      ],
+      "radius_byte": 254,
+      "marker": 1,
+      "flags": 1,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 1,
+      "wrapped_squared_radius": 0,
+      "expected": false
+    },
+    {
+      "name": "zero_square_wrap_modulo_equivalent",
+      "query": [
+        -1,
+        0
+      ],
+      "coordinate": [
+        32767,
+        0
+      ],
+      "radius_byte": 254,
+      "marker": 1,
+      "flags": 1,
+      "kind": 3,
+      "ignored_high_flags": 0,
+      "squared_distance": 0,
+      "wrapped_squared_radius": 0,
+      "expected": true
+    }
+  ],
+  "grid_cases": [
+    {
+      "name": "origin",
+      "x": 0,
+      "y": 0,
+      "columns": 1,
+      "rows": 1,
+      "touched_byte_offsets": [
+        11
+      ],
+      "writes": 1,
+      "first_offset": 11,
+      "last_offset": 11,
+      "minimum_slice_len": 12,
+      "fits_128_square_grid": true
+    },
+    {
+      "name": "empty_columns",
+      "x": 0,
+      "y": 0,
+      "columns": 0,
+      "rows": 255,
+      "touched_byte_offsets": [],
+      "writes": 0,
+      "first_offset": null,
+      "last_offset": null,
+      "minimum_slice_len": 0,
+      "fits_128_square_grid": true
+    },
+    {
+      "name": "empty_rows",
+      "x": 0,
+      "y": 0,
+      "columns": 255,
+      "rows": 0,
+      "touched_byte_offsets": [],
+      "writes": 0,
+      "first_offset": null,
+      "last_offset": null,
+      "minimum_slice_len": 0,
+      "fits_128_square_grid": true
+    },
+    {
+      "name": "negative_coords",
+      "x": -1,
+      "y": -1,
+      "columns": 1,
+      "rows": 1,
+      "touched_byte_offsets": [
+        229373
+      ],
+      "writes": 1,
+      "first_offset": 229373,
+      "last_offset": 229373,
+      "minimum_slice_len": 229374,
+      "fits_128_square_grid": true
+    },
+    {
+      "name": "column_spills_into_next_linear_row",
+      "x": 32512,
+      "y": 0,
+      "columns": 2,
+      "rows": 1,
+      "touched_byte_offsets": [
+        1789,
+        1803
+      ],
+      "writes": 2,
+      "first_offset": 1789,
+      "last_offset": 1803,
+      "minimum_slice_len": 1804,
+      "fits_128_square_grid": true
+    },
+    {
+      "name": "y_wraps_to_zero",
+      "x": 0,
+      "y": 32512,
+      "columns": 1,
+      "rows": 2,
+      "touched_byte_offsets": [
+        227595,
+        11
+      ],
+      "writes": 2,
+      "first_offset": 227595,
+      "last_offset": 11,
+      "minimum_slice_len": 227596,
+      "fits_128_square_grid": true
+    },
+    {
+      "name": "last_cell_column_out_of_standard_grid",
+      "x": -1,
+      "y": -1,
+      "columns": 2,
+      "rows": 1,
+      "touched_byte_offsets": [
+        229373,
+        229387
+      ],
+      "writes": 2,
+      "first_offset": 229373,
+      "last_offset": 229387,
+      "minimum_slice_len": 229388,
+      "fits_128_square_grid": false
+    },
+    {
+      "name": "last_cell_three_row_spill",
+      "x": -1,
+      "y": -1,
+      "columns": 255,
+      "rows": 1,
+      "touched_byte_offsets": null,
+      "writes": 255,
+      "first_offset": 229373,
+      "last_offset": 232929,
+      "minimum_slice_len": 232930,
+      "fits_128_square_grid": false
+    }
+  ],
+  "projection_cases": 65536,
+  "projection_mismatches": 0,
+  "group_bytes": 4288,
+  "original_last_read_exclusive": 4272,
+  "object3_fully_addressable_groups": 66
+}

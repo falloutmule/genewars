@@ -1,0 +1,45 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "scope": "Static custom-screen record capacity; safe bounds recommendation, no unchecked original textcopy",
+  "initializer_va": "0x7e0b0",
+  "maintainer_va": "0x7ef30",
+  "record_storage_offset": "0x507",
+  "record_stride": 225,
+  "capacity": 10,
+  "zeroed_storage_bytes": 2250,
+  "count_offset": "0xdd1",
+  "count_type": "u8",
+  "record_name_offset": "0xe",
+  "record_header_offset": 8,
+  "record_header_bytes": 40,
+  "following_metadata_offset": "0x30",
+  "following_metadata_bytes": 88,
+  "safe_name_window_bytes": 34,
+  "safe_selection_rule": "count<=10 AND selected<count; require NUL in record[0xE:0x30], then validate destination limit and encoding",
+  "selection_vectors_checked": 2816,
+  "accepted_combinations": 55,
+  "private_listings": [
+    {
+      "private_path": "private/ghidra/ui-custom/instructions-0007e0b0.txt",
+      "sha256": "c6ad1005ac8d0bd49a5c15a91fef629ce4f36d102ca1ab2bee496e74db398ea8"
+    },
+    {
+      "private_path": "private/ghidra/ui-controls/instructions-0007e9c0.txt",
+      "sha256": "798669898e5888b6158727edf6a704afc985b9e280da2d6ce9945d64ae64d97e"
+    },
+    {
+      "private_path": "private/ghidra/list-layout/instructions-0007ef30.txt",
+      "sha256": "4aacd61a423bea2c15fc6764e5cbc237f90ced73ecb8a610c5fad1297b5ca0b1"
+    },
+    {
+      "private_path": "private/ghidra/ui-controls/instructions-0007e400.txt",
+      "sha256": "e09f38677a943351455b1b0c2448a47217127cd1bbb34a9861d91a5e9924b7ee"
+    }
+  ],
+  "unresolved": [
+    "Incoming record semantics/encoding and guaranteed string terminator are not proven",
+    "Original drawloop limits rowcount by count rather than count-offset; do not port unchecked accesses",
+    "Absolute allocation size/other object fields and full maintainer lifecycle not reconstructed",
+    "Original unchecked copy tostate+3D5 excluded"
+  ]
+}

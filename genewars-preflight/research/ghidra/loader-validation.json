@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "canonical": false,
+  "format": "Linear Executable (LE-Style DOS)",
+  "entry_point": "0xA6E40",
+  "objects": [
+    {
+      "number": 1,
+      "size": 911408,
+      "base": 65536,
+      "flags": 8261,
+      "page_index": 1,
+      "page_count": 223
+    },
+    {
+      "number": 2,
+      "size": 131,
+      "base": 983040,
+      "flags": 69,
+      "page_index": 224,
+      "page_count": 1
+    },
+    {
+      "number": 3,
+      "size": 695488,
+      "base": 1048576,
+      "flags": 8259,
+      "page_index": 225,
+      "page_count": 19
+    },
+    {
+      "number": 4,
+      "size": 4944,
+      "base": 1769472,
+      "flags": 8259,
+      "page_index": 244,
+      "page_count": 1
+    }
+  ],
+  "pages_verified": 244,
+  "page_size": 4096,
+  "fixup_record_types": {
+    "7": 26883
+  },
+  "target_flags": {
+    "16": 21224,
+    "0": 5659
+  },
+  "fixup_instances": 26883,
+  "unique_fixup_addresses": 26860,
+  "cross_object_fixup_instances": 24497,
+  "cross_object_samples": [
+    {
+      "source_object": 1,
+      "address": 67917,
+      "target_object": 3,
+      "target": 1148798,
+      "type": 7,
+      "value": 1148798,
+      "width": 4,
+      "record_offset": 38945
+    },
+    {
+      "source_object": 1,
+      "address": 67939,
+      "target_object": 3,
+      "target": 1691564,
+      "type": 7,
+      "value": 1691564,
+      "width": 4,
+      "record_offset": 38954
+    },
+    {
+      "source_object": 1,
+      "address": 67958,
+      "target_object": 3,
+      "target": 1592589,
+      "type": 7,
+      "value": 1592589,
+      "width": 4,
+      "record_offset": 38963
+    },
+    {
+      "source_object": 1,
+      "address": 67997,
+      "target_object": 3,
+      "target": 1140748,
+      "type": 7,
+      "value": 1140748,
+      "width": 4,
+      "record_offset": 38972
+    },
+    {
+      "source_object": 1,
+      "address": 68090,
+      "target_object": 3,
+      "target": 1592581,
+      "type": 7,
+      "value": 1592581,
+      "width": 4,
+      "record_offset": 38981
+    },
+    {
+      "source_object": 1,
+      "address": 68099,
+      "target_object": 3,
+      "target": 1140748,
+      "type": 7,
+      "value": 1140748,
+      "width": 4,
+      "record_offset": 38990
+    },
+    {
+      "source_object": 1,
+      "address": 68140,
+      "target_object": 3,
+      "target": 1691564,
+      "type": 7,
+      "value": 1691564,
+      "width": 4,
+      "record_offset": 38999
+    },
+    {
+      "source_object": 1,
+      "address": 68652,
+      "target_object": 3,
+      "target": 1601365,
+      "type": 7,
+      "value": 1601365,
+      "width": 4,
+      "record_offset": 39008
+    },
+    {
+      "source_object": 1,
+      "address": 68670,
+      "target_object": 3,
+      "target": 1616712,
+      "type": 7,
+      "value": 1616712,
+      "width": 4,
+      "record_offset": 39017
+    },
+    {
+      "source_object": 1,
+      "address": 68705,
+      "target_object": 3,
+      "target": 1691564,
+      "type": 7,
+      "value": 1691564,
+      "width": 4,
+      "record_offset": 39026
+    },
+    {
+      "source_object": 1,
+      "address": 68723,
+      "target_object": 3,
+      "target": 1691564,
+      "type": 7,
+      "value": 1691564,
+      "width": 4,
+      "record_offset": 39035
+    },
+    {
+      "source_object": 1,
+      "address": 68780,
+      "target_object": 3,
+      "target": 1691564,
+      "type": 7,
+      "value": 1691564,
+      "width": 4,
+      "record_offset": 39044
+    }
+  ],
+  "one_past_end_targets": 1,
+  "block_checks": [
+    {
+      "object": 1,
+      "size": 911408,
+      "all_bytes_equal": true,
+      "mapped_sha256": "92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe"
+    },
+    {
+      "object": 2,
+      "size": 131,
+      "all_bytes_equal": true,
+      "mapped_sha256": "4395b75e2d47f32c5748408417e57a743af95b2e783b828037f5f5d8dbf8c3dd"
+    },
+    {
+      "object": 3,
+      "size": 695488,
+      "all_bytes_equal": true,
+      "mapped_sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+    },
+    {
+      "object": 4,
+      "size": 4944,
+      "all_bytes_equal": true,
+      "mapped_sha256": "613604a99884153a8f1ee0b74c87f2df5908dbd6a7a22888bebe7b2669880059"
+    }
+  ],
+  "permissions_match_le_flags": true,
+  "permission_correction": "Unmodified loader gave every object read-only/non-executable. RepairObjectPermissions.java corrected analysis-project permissions from verified LE flags, leaving all input/mapped bytes unchanged.",
+  "all_checks_passed": true,
+  "limitations": [
+    "Static validation only; original executable never run.",
+    "Object2 lacks 32-bit flag; its 16-bit thunk code is not covered by this 32-bit function tranche.",
+    "Compiler selection borlandcpp is loader default, not compiler identification; register calling conventions require direct instruction inspection.",
+    "Ghidra .image overlay contains original file bytes; exclude it from code-address coordinates."
+  ]
+}

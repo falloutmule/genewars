@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "checks": {
+    "seven_boundary_tests_pass": true,
+    "manifest_rebuild_passes": true,
+    "variant_comparison_rebuild_passes": true,
+    "deterministic_manifest_and_comparison": true,
+    "manifest_assertions_pass": true,
+    "zero_blocked_file_records": true,
+    "zero_blocked_or_partial_containers": true,
+    "disc_scope_inspected": true,
+    "disc_source_unchanged": true,
+    "every_private_file_is_git_ignored": true,
+    "no_private_files_git_tracked": true,
+    "original_archive_hash_unchanged": true
+  },
+  "all_passed": true,
+  "artifact_sha256_before": {
+    "game-files-manifest.json": "6139f4083031cee88bc04849f1959ae1e43aff41eef7c87cb4a62bc8b86e9e6a",
+    "variant-comparison.json": "fa63d42693a0157fa3937255237290b84d3cf6a5f4df93cd5010c66847f9588d"
+  },
+  "artifact_sha256_after": {
+    "game-files-manifest.json": "6139f4083031cee88bc04849f1959ae1e43aff41eef7c87cb4a62bc8b86e9e6a",
+    "variant-comparison.json": "fa63d42693a0157fa3937255237290b84d3cf6a5f4df93cd5010c66847f9588d"
+  },
+  "private_files_checked": 9,
+  "counts": {
+    "entries": 1765,
+    "files": 1681,
+    "directories": 84,
+    "blocked_entries": 0,
+    "blocked_or_partial_containers": 0,
+    "duplicate_content_groups": 457,
+    "classifications": {
+      "archive": 4,
+      "archive_directory": 1,
+      "audio": 10,
+      "audio_or_driver_candidate": 87,
+      "batch_script_not_executed": 2,
+      "compressed_resource_not_decoded": 331,
+      "configuration_or_disc_descriptor": 28,
+      "directory": 29,
+      "dos_extender_candidate": 6,
+      "executable_unknown_role": 35,
+      "game_executable_candidate": 4,
+      "game_resource_not_decoded": 762,
+      "iff_container": 7,
+      "iso9660_directory": 54,
+      "launcher_or_game_entry_candidate": 1,
+      "library_or_driver_candidate": 274,
+      "manual_or_document": 1,
+      "opaque_data": 54,
+      "patcher_candidate": 3,
+      "raw_cd_image": 1,
+      "raw_cd_subchannel_data": 1,
+      "riff_container": 13,
+      "save_or_state_candidate": 3,
+      "sound_setup_candidate": 3,
+      "source_or_build_material": 8,
+      "text_document": 21,
+      "video": 22
+    }
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\scripts",
+        "-p",
+        "test_inventory.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\ntest_sfx_members_duplicate_names_and_blocked_image_are_preserved (test_inventory.Archives.test_sfx_members_duplicate_names_and_blocked_image_are_preserved) ... ok\ntest_stale_disc_inventory_is_rejected (test_inventory.Archives.test_stale_disc_inventory_is_rejected) ... ok\ntest_entry_outside_object_is_flagged (test_inventory.Headers.test_entry_outside_object_is_flagged) ... ok\ntest_invalid_pointer_does_not_scan_for_incidental_le (test_inventory.Headers.test_invalid_pointer_does_not_scan_for_incidental_le) ... ok\ntest_le_header_is_followed_at_actual_offset (test_inventory.Headers.test_le_header_is_followed_at_actual_offset) ... ok\ntest_object_table_cannot_overlap_header (test_inventory.Headers.test_object_table_cannot_overlap_header) ... ok\ntest_truncated_le_and_oversized_object_table_are_flagged (test_inventory.Headers.test_truncated_le_and_oversized_object_table_are_flagged) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.027s\n\nOK\n"
+    },
+    {
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\scripts\\build_manifest.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"output\": \"C:\\\\Users\\\\fallo\\\\Documents\\\\ChatGPT\\\\Freecad\\\\genewars-preflight\\\\research\\\\game-files-manifest.json\", \"counts\": {\"entries\": 1765, \"files\": 1681, \"directories\": 84, \"blocked_entries\": 0, \"blocked_or_partial_containers\": 0, \"duplicate_content_groups\": 457, \"classifications\": {\"archive\": 4, \"archive_directory\": 1, \"audio\": 10, \"audio_or_driver_candidate\": 87, \"batch_script_not_executed\": 2, \"compressed_resource_not_decoded\": 331, \"configuration_or_disc_descriptor\": 28, \"directory\": 29, \"dos_extender_candidate\": 6, \"executable_unknown_role\": 35, \"game_executable_candidate\": 4, \"game_resource_not_decoded\": 762, \"iff_container\": 7, \"iso9660_directory\": 54, \"launcher_or_game_entry_candidate\": 1, \"library_or_driver_candidate\": 274, \"manual_or_document\": 1, \"opaque_data\": 54, \"patcher_candidate\": 3, \"raw_cd_image\": 1, \"raw_cd_subchannel_data\": 1, \"riff_container\": 13, \"save_or_state_candidate\": 3, \"sound_setup_candidate\": 3, \"source_or_build_material\": 8, \"text_document\": 21, \"video\": 22}}, \"checks\": {\"source_hash_unchanged\": true, \"source_matches_planning_hash\": true, \"all_inspected_files_have_sha256\": true, \"all_entries_have_required_fields\": true, \"disc_inventory_present\": true, \"no_pending_containers\": true, \"disc_source_hash_matches\": true, \"entry_ids_unique\": true}}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\scripts\\compare_variants.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"groups\": {\"repack\": {\"source_prefix\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/\", \"file_count\": 341, \"total_file_bytes\": 38152732, \"classifications\": {\"audio\": 1, \"audio_or_driver_candidate\": 29, \"batch_script_not_executed\": 1, \"compressed_resource_not_decoded\": 112, \"configuration_or_disc_descriptor\": 2, \"dos_extender_candidate\": 1, \"game_executable_candidate\": 1, \"game_resource_not_decoded\": 175, \"iff_container\": 1, \"opaque_data\": 3, \"patcher_candidate\": 1, \"riff_container\": 1, \"sound_setup_candidate\": 1, \"source_or_build_material\": 8, \"text_document\": 2, \"video\": 2}, \"directory_groups\": {\"(root)\": 19, \"anims\": 2, \"data\": 176, \"levels\": 92, \"sound\": 34, \"speech\": 18}, \"video_count\": 2, \"scope_note\": \"Files in this package/tree; completeness not established\"}, \"larger_rip\": {\"source_prefix\": \"genewars.zip!/Genewars_DOS_EN_RIP-Version.zip!/\", \"file_count\": 419, \"total_file_bytes\": 76890738, \"classifications\": {\"audio\": 6, \"audio_or_driver_candidate\": 29, \"compressed_resource_not_decoded\": 95, \"configuration_or_disc_descriptor\": 4, \"dos_extender_candidate\": 1, \"executable_unknown_role\": 1, \"game_executable_candidate\": 1, \"game_resource_not_decoded\": 249, \"iff_container\": 3, \"opaque_data\": 15, \"riff_container\": 1, \"save_or_state_candidate\": 2, \"sound_setup_candidate\": 1, \"text_document\": 4, \"video\": 7}, \"directory_groups\": {\"(root)\": 7, \"anims\": 7, \"data\": 176, \"ldata\": 22, \"levels\": 102, \"s\": 45, \"save\": 1, \"sound\": 41, \"speech\": 18}, \"video_count\": 7, \"scope_note\": \"Files in this package/tree; completeness not established\"}, \"patch_payload\": {\"source_prefix\": \"genewars.zip!/Genewars_Patch_DOS_EN_Patch.zip!/Gene_Wars_Patch/Gwp.exe!/patch/\", \"file_count\": 25, \"total_file_bytes\": 4823768, \"classifications\": {\"configuration_or_disc_descriptor\": 1, \"game_executable_candidate\": 1, \"game_resource_not_decoded\": 23}, \"directory_groups\": {\"(root)\": 2, \"data\": 3, \"levels\": 8, \"lscr\": 6, \"text\": 6}, \"video_count\": 0, \"scope_note\": \"Patch payload only; not an installed game\"}, \"disc_game_tree\": {\"source_prefix\": \"genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/\", \"file_count\": 490, \"total_file_bytes\": 186368166, \"classifications\": {\"audio\": 1, \"audio_or_driver_candidate\": 29, \"compressed_resource_not_decoded\": 116, \"dos_extender_candidate\": 2, \"executable_unknown_role\": 1, \"game_executable_candidate\": 1, \"game_resource_not_decoded\": 310, \"iff_container\": 1, \"launcher_or_game_entry_candidate\": 1, \"library_or_driver_candidate\": 6, \"opaque_data\": 10, \"riff_container\": 1, \"save_or_state_candidate\": 1, \"sound_setup_candidate\": 1, \"video\": 9}, \"directory_groups\": {\"(root)\": 12, \"anims\": 6, \"data\": 183, \"intro\": 3, \"levels\": 92, \"s\": 46, \"sound\": 40, \"speech\": 108}, \"video_count\": 9, \"scope_note\": \"Files in this package/tree; completeness not established\"}}, \"pair_counts\": [{\"left\": \"repack\", \"right\": \"larger_rip\", \"common_paths\": 278, \"identical_paths\": 67, \"changed_paths\": 211, \"left_only_count\": 63, \"right_only_count\": 141}, {\"left\": \"repack\", \"right\": \"patch_payload\", \"common_paths\": 3, \"identical_paths\": 0, \"changed_paths\": 3, \"left_only_count\": 338, \"right_only_count\": 22}, {\"left\": \"repack\", \"right\": \"disc_game_tree\", \"common_paths\": 305, \"identical_paths\": 300, \"changed_paths\": 5, \"left_only_count\": 36, \"right_only_count\": 185}, {\"left\": \"larger_rip\", \"right\": \"patch_payload\", \"common_paths\": 3, \"identical_paths\": 0, \"changed_paths\": 3, \"left_only_count\": 416, \"right_only_count\": 22}, {\"left\": \"larger_rip\", \"right\": \"disc_game_tree\", \"common_paths\": 310, \"identical_paths\": 109, \"changed_paths\": 201, \"left_only_count\": 109, \"right_only_count\": 180}, {\"left\": \"patch_payload\", \"right\": \"disc_game_tree\", \"common_paths\": 3, \"identical_paths\": 0, \"changed_paths\": 3, \"left_only_count\": 22, \"right_only_count\": 487}], \"gw_binaries\": [{\"variant\": \"repack\", \"size\": 1265994, \"sha256\": \"6a8c75b7de5f4e7f27c5378b712e04c24fd106778429f5765c49a641fac90e64\", \"le_offset\": 36688}, {\"variant\": \"larger_rip\", \"size\": 5184949, \"sha256\": \"824bcf84a6bff6f3b98ec8eb94e376b37ee55eb0a2fa1dbbb3d4a3b6f3249d1e\", \"le_offset\": 36728}, {\"variant\": \"patch_payload\", \"size\": 1251658, \"sha256\": \"2a0a51a5a8170cb7555cc0a745c08ed371c1500503d5cec08d77190d39822a3f\", \"le_offset\": 36688}, {\"variant\": \"disc_game_tree\", \"size\": 1265994, \"sha256\": \"4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba\", \"le_offset\": 36688}], \"disc_repack_diff_count\": 12, \"source_hash_unchanged\": true}\n",
+      "stderr": "Failed to find real location of C:\\Python314\\python.exe\n"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad",
+        "-c",
+        "safe.directory=C:/Users/fallo/Documents/ChatGPT/Freecad",
+        "check-ignore",
+        "-z",
+        "--stdin"
+      ],
+      "exit_code": 0,
+      "stdout": "genewars-preflight/private/Gwp.exe\u0000genewars-preflight/private/disc-package.7z\u0000genewars-preflight/private/disc/member-001\u0000genewars-preflight/private/disc/member-002.ccd\u0000genewars-preflight/private/disc/member-003.cue\u0000genewars-preflight/private/disc/member-004.img\u0000genewars-preflight/private/disc/member-005.log\u0000genewars-preflight/private/disc/member-006.sfv\u0000genewars-preflight/private/disc/member-007.sub\u0000",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad",
+        "-c",
+        "safe.directory=C:/Users/fallo/Documents/ChatGPT/Freecad",
+        "ls-files",
+        "--",
+        "genewars-preflight/private"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "limits": "Static inventory and parser checks only; no asset decode, Ghidra import, patch execution, game execution, or behavioral tests."
+}

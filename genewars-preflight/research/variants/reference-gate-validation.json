@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "original_execution": false,
+  "fixtures": [
+    {
+      "fixture": "private\\reference-run\\gate-fixture-3C1A0EFE",
+      "release": true,
+      "original_execution": false,
+      "mounts": [
+        [
+          "C",
+          "local directory C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\gate-fixture-3C1A0EFE\\drive-c\\ C_DRIVE     "
+        ],
+        [
+          "D",
+          "CDRom C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\gate-fixture-3C1A0EFE\\media\\GENEWARS.cue\\ Windows     "
+        ],
+        [
+          "Z",
+          "Internal Virtual Drive                                     DOSBOX-X    "
+        ]
+      ],
+      "pid_identity_verified": true,
+      "checks": "Wait before marker; missing lock/wrong mounts/expired time/old marker refused; release sentinel or abort; no original present.",
+      "gate": {
+        "path": "private/reference-run/gate-fixture-3C1A0EFE/drive-c/STARTGW.BAT",
+        "size": 340,
+        "sha256": "477e9444152789d4b66b58017c82cc22254e405b3d0a9021ff37a0b207b8a04c"
+      },
+      "log": {
+        "path": "private/reference-run/gate-fixture-3C1A0EFE/logs/dosbox-x.log",
+        "size": 3913,
+        "sha256": "2d2119e30ab7dd5bd6bae46eca5908ae53fc28606ee7b772a62a02b428b1d4f3"
+      }
+    },
+    {
+      "fixture": "private\\reference-run\\gate-fixture-941A5AF4",
+      "release": false,
+      "original_execution": false,
+      "mounts": [
+        [
+          "C",
+          "local directory C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\gate-fixture-941A5AF4\\drive-c\\ C_DRIVE     "
+        ],
+        [
+          "D",
+          "CDRom C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\reference-run\\gate-fixture-941A5AF4\\media\\GENEWARS.cue\\ Windows     "
+        ],
+        [
+          "Z",
+          "Internal Virtual Drive                                     DOSBOX-X    "
+        ]
+      ],
+      "pid_identity_verified": true,
+      "checks": "Wait before marker; missing lock/wrong mounts/expired time/old marker refused; release sentinel or abort; no original present.",
+      "gate": {
+        "path": "private/reference-run/gate-fixture-941A5AF4/drive-c/STARTGW.BAT",
+        "size": 340,
+        "sha256": "8ea524b194254b3e661ffedb55a8f8ab5392871ce4f882dcb26a5f9ea547ecee"
+      },
+      "log": {
+        "path": "private/reference-run/gate-fixture-941A5AF4/logs/dosbox-x.log",
+        "size": 3830,
+        "sha256": "55b24262124fe1ee40f092c87937c401b2b769bfc91e31d2fd3cbe015b517db8"
+      }
+    }
+  ]
+}

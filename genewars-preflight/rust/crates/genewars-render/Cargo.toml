@@ -1,0 +1,10 @@
+[package]
+name = "genewars-render"
+version = "0.1.0"
+edition = "2021"
+publish = false
+license = "MIT OR Apache-2.0"
+description = "Evidence-bounded CPU renderers for GeneWars indexed assets"
+
+[dependencies]
+genewars-assets = { path = "../genewars-assets" }

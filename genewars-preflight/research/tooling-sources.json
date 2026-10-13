@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "assessed_on_local": "2026-10-12",
+  "timezone": "America/Denver",
+  "metadata_observed_at_utc": "2026-10-12T22:01:03Z",
+  "scope": "Toolchain preflight only. No installation, configuration writes, program import, game execution, or game-binary downloads.",
+  "evidence_levels": {
+    "observed": "Measured in this local process or returned by an upstream metadata endpoint.",
+    "documented": "Claimed by the pinned upstream documentation; no local runtime validation.",
+    "inferred": "Assessment derived from observed or documented facts.",
+    "untested": "No local installation, loader import, or runtime compatibility test performed."
+  },
+  "retrieval": {
+    "methods": [
+      "Browser reads of primary GitHub documentation",
+      "Read-only GitHub REST metadata/content requests; text held in memory"
+    ],
+    "failed_attempt": {
+      "url": "https://api.github.com/repos/yetmorecode/ghidra-lx-loader/releases/latest",
+      "result": "Sandbox DNS lookup failed; a subsequently approved network read succeeded."
+    },
+    "asset_downloads_performed": false,
+    "asset_digest_verification": "Published digest metadata only; no archive bytes downloaded or locally hashed.",
+    "documentation_digest_verification": "SHA-256 computed over text bytes decoded from GitHub contents API; Git blob SHA separately recorded.",
+    "source_content_saved": false
+  },
+  "sources": [
+    {
+      "repository": "morluto/rea",
+      "requested_ref": "main",
+      "resolved_commit": "8fc2043eb8bcedbf34dce064f977e455438635d6",
+      "commit_time": "2026-10-12T21:25:15Z",
+      "files": [
+        {
+          "path": "docs/installation.md",
+          "url": "https://github.com/morluto/rea/blob/8fc2043eb8bcedbf34dce064f977e455438635d6/docs/installation.md",
+          "blob_sha": "02ae1c0afe16565abf35a87300ab500ae528b4e3",
+          "source_sha256": "ab6dc3e5af7aa3818ccabe09d76fe112c30c2a4545afc1634855a094a4dff133"
+        },
+        {
+          "path": "docs/ghidra-dos.md",
+          "url": "https://github.com/morluto/rea/blob/8fc2043eb8bcedbf34dce064f977e455438635d6/docs/ghidra-dos.md",
+          "blob_sha": "487899bb750ab4d795bfffb3705847f5987daeb9",
+          "source_sha256": "41997ae9c4f16a26c3cf33412ecd454ca90459a49a24067c7ca5896365384993"
+        },
+        {
+          "path": "docs/windows-ghidra-p0.md",
+          "url": "https://github.com/morluto/rea/blob/8fc2043eb8bcedbf34dce064f977e455438635d6/docs/windows-ghidra-p0.md",
+          "blob_sha": "d14add07c018b94e1a284b51ef4cfc0841b28247",
+          "source_sha256": "d7248377e08f7f8d5e770f20082e4065105b53a8862dae2c38df8c0a5a4ff2be"
+        },
+        {
+          "path": "docs/raw-binary.md",
+          "url": "https://github.com/morluto/rea/blob/8fc2043eb8bcedbf34dce064f977e455438635d6/docs/raw-binary.md",
+          "blob_sha": "43fcd54f405f58806f42ac94a28c2a6145dc5e75",
+          "source_sha256": "774b1b898e71e608daab99edc422e258129a29b92137522d09b1c415768d2940"
+        },
+        {
+          "path": "package.json",
+          "url": "https://github.com/morluto/rea/blob/8fc2043eb8bcedbf34dce064f977e455438635d6/package.json",
+          "blob_sha": "5635c6d3c91872692d426e94eeb225b7412a2617",
+          "source_sha256": "e364e2c9f8a1ba7aaf8c1d81fd76581e8fec2efba9c975e0821879a3c832754d"
+        }
+      ]
+    },
+    {
+      "repository": "yetmorecode/ghidra-lx-loader",
+      "requested_ref": "v12.0.1",
+      "resolved_commit": "d64fca5e22665571aec050c6804c27359dab2167",
+      "commit_time": "2026-01-29T04:37:22Z",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/yetmorecode/ghidra-lx-loader/blob/d64fca5e22665571aec050c6804c27359dab2167/README.md",
+          "blob_sha": "a1e88942d4620f08c7b51e6c0c27472127454248",
+          "source_sha256": "7dccd29553c3638b0ffc842974554b09c28ffff73da0d913440d0359d4380cbf"
+        },
+        {
+          "path": "build.gradle",
+          "url": "https://github.com/yetmorecode/ghidra-lx-loader/blob/d64fca5e22665571aec050c6804c27359dab2167/build.gradle",
+          "blob_sha": "cddd9953cb1661139345828d153fc3996b4261c9",
+          "source_sha256": "abdf1e17feb33490c80847d51587e617efa7d827b65e646d3df1cfce85f95cfa"
+        },
+        {
+          "path": "extension.properties",
+          "url": "https://github.com/yetmorecode/ghidra-lx-loader/blob/d64fca5e22665571aec050c6804c27359dab2167/extension.properties",
+          "blob_sha": "b00a8205f670da922613190f2f2fae0380a3771d",
+          "source_sha256": "32ae2e30e87f2f0bd09b0cea731fe66865f7e39a901de53c2fe494693304328e"
+        }
+      ]
+    },
+    {
+      "repository": "mefistotelis/genewars-re-helpers",
+      "requested_ref": "main",
+      "resolved_commit": "a85d5c517b524aa4906a720330ed1435bf8b65cf",
+      "commit_time": "2026-09-21T19:17:00Z",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/mefistotelis/genewars-re-helpers/blob/a85d5c517b524aa4906a720330ed1435bf8b65cf/README.md",
+          "blob_sha": "dfd4ae72214bb002e71fbf7a723a098f2d6ec961",
+          "source_sha256": "cbf0b49f9bd5aac68f6b939cba6a6353d036570c45390e84ef107dbccc85997d"
+        }
+      ]
+    },
+    {
+      "repository": "NationalSecurityAgency/ghidra",
+      "requested_ref": "Ghidra_12.0.1_build",
+      "resolved_commit": "0a2b6329eef36c70c9dc261a613f94992a887296",
+      "commit_time": "2026-01-14T16:15:21Z",
+      "files": [
+        {
+          "path": "Ghidra/application.properties",
+          "url": "https://github.com/NationalSecurityAgency/ghidra/blob/0a2b6329eef36c70c9dc261a613f94992a887296/Ghidra/application.properties",
+          "blob_sha": "3da420dccc52b8b090b571b9ddde23cc872e06bb",
+          "source_sha256": "1e71a8322496c14cc28050bdf90d671eab724a36a31dec7c00c0dba8b31c5ff2"
+        }
+      ]
+    },
+    {
+      "repository": "NationalSecurityAgency/ghidra",
+      "requested_ref": "Ghidra_12.1.4_build",
+      "resolved_commit": "8b6bbb857accdfa20dc5b2f5dea471178c2e9fbc",
+      "commit_time": "2026-09-11T10:14:59Z",
+      "files": [
+        {
+          "path": "Ghidra/application.properties",
+          "url": "https://github.com/NationalSecurityAgency/ghidra/blob/8b6bbb857accdfa20dc5b2f5dea471178c2e9fbc/Ghidra/application.properties",
+          "blob_sha": "4820860dce8bdf54c7303e9cdc474b3febc6887c",
+          "source_sha256": "07fe488086a69b2327f1a3ca8cfe72c44e4e2e8cd6f5529ba8d74a08c4df9cc8"
+        }
+      ]
+    }
+  ],
+  "release_metadata": [
+    {
+      "repository": "yetmorecode/ghidra-lx-loader",
+      "api_url": "https://api.github.com/repos/yetmorecode/ghidra-lx-loader/releases/latest",
+      "url": "https://github.com/yetmorecode/ghidra-lx-loader/releases/tag/v12.0.1",
+      "tag_name": "v12.0.1",
+      "target_commitish": "master",
+      "published_at": "2026-01-29T07:02:54Z",
+      "prerelease": false,
+      "commit_sha": "d64fca5e22665571aec050c6804c27359dab2167",
+      "assets": [
+        {
+          "name": "ghidra_12.0.1_PUBLIC_20260129_ghidra-lx-loader.zip",
+          "size": 313312,
+          "digest": "sha256:8b7e7461bd48621faa5e32c27a2c7ff8b17b82c7b765c8c6afe2cee8db693cec",
+          "browser_download_url": "https://github.com/yetmorecode/ghidra-lx-loader/releases/download/v12.0.1/ghidra_12.0.1_PUBLIC_20260129_ghidra-lx-loader.zip",
+          "created_at": "2026-01-29T07:02:51Z",
+          "updated_at": "2026-01-29T07:02:52Z"
+        }
+      ]
+    },
+    {
+      "repository": "NationalSecurityAgency/ghidra",
+      "api_url": "https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/tags/Ghidra_12.0.1_build",
+      "url": "https://github.com/NationalSecurityAgency/ghidra/releases/tag/Ghidra_12.0.1_build",
+      "tag_name": "Ghidra_12.0.1_build",
+      "published_at": "2026-01-15T10:15:50Z",
+      "prerelease": false,
+      "assets": [
+        {
+          "name": "ghidra_12.0.1_PUBLIC_20260114.zip",
+          "size": 512517017,
+          "digest": "sha256:85bd2990945f3a78df4d1e09f1bb1f40ab77be3bac62c6e7678900788c7f0f41",
+          "browser_download_url": "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.0.1_build/ghidra_12.0.1_PUBLIC_20260114.zip"
+        }
+      ]
+    }
+  ],
+  "documented_requirements": {
+    "rea": {
+      "source_repository": "morluto/rea",
+      "source_commit": "8fc2043eb8bcedbf34dce064f977e455438635d6",
+      "manifest_version": "6.4.0",
+      "node_range": "^22.19.0 || ^24.11.0 || >=26.0.0",
+      "unsupported_node": [
+        "23",
+        "25",
+        "prereleases"
+      ],
+      "ghidra_range": "12.1.x",
+      "verified_ghidra": "12.1.4",
+      "jdk": "64-bit full JDK with javac, satisfying Ghidra application.java.min/max; current 12.1.x requires >=21 with no maximum",
+      "verified_jdk": 21,
+      "release_caveat": "Main source is not proof of installed npm package behavior. Installation guide records npm 6.4.0 checked on 2026-10-11; this assessment did not query the npm registry."
+    },
+    "rea_dos": {
+      "admitted_formats": [
+        "Validated DOS MZ real-mode",
+        "Explicit dos-com (1..65280 bytes)"
+      ],
+      "explicitly_rejected_declared_formats": [
+        "NE",
+        "LE",
+        "LX"
+      ],
+      "verified_hosts": [
+        "Linux x64",
+        "macOS arm64"
+      ],
+      "windows_admission": false,
+      "unverified": "macOS x64 DOS verification"
+    },
+    "rea_windows": {
+      "status": "experimental Windows x64 P0",
+      "os": "Windows 10+ x64",
+      "storage": "fixed local NTFS target and temporary volumes",
+      "formats": "native unmanaged x86/x86-64 PE applications and DLLs on main",
+      "release_caveat": "Guide states npm releases through 5.0.0 admit x86-64 PE; main adds x86.",
+      "operations": "25 read-only inventory, memory, and function-analysis operations",
+      "excluded": [
+        "DOS MZ",
+        "COM",
+        "LE",
+        "LX",
+        "raw-binary",
+        "GUI state",
+        "annotations"
+      ],
+      "path_rejections": [
+        "reparse-point paths",
+        "alternate data streams",
+        "UNC",
+        "ambiguous coordinates",
+        "non-NTFS filesystems"
+      ],
+      "verified_boundary_exclusions": [
+        "SUBST aliases",
+        "changing drive-letter/DOS-device namespaces"
+      ],
+      "launch_constraint": "Command-interpreter metacharacters in launch paths unsupported",
+      "python_required": false
+    },
+    "standalone_ghidra_candidate": {
+      "version": "12.0.1",
+      "jdk_min": 21,
+      "jdk_max": null,
+      "java_compiler": 21,
+      "gradle_min_for_builds": "8.5",
+      "gradle_max": null,
+      "loader_tag": "v12.0.1",
+      "loader_commit": "d64fca5e22665571aec050c6804c27359dab2167",
+      "matching_basis": "Loader asset filename explicitly names Ghidra 12.0.1, matching official Ghidra release. README instructs use of a version-matching extension.",
+      "supported_loader_formats": [
+        "OS/2 LX",
+        "DOS/16 LE",
+        "DOS/4 LE",
+        "DOS32A unbound LE/LX",
+        "VxD"
+      ],
+      "compatibility_test_status": "untested",
+      "ghidra_12_1_4_loader_status": "No matching 12.1.4 asset established; 12.0.1 binary compatibility with 12.1.4 not asserted.",
+      "rea_compatibility": "Ghidra 12.0.1 is outside REA's documented 12.1.x admission range."
+    },
+    "genewars_helpers": {
+      "source_commit": "a85d5c517b524aa4906a720330ed1435bf8b65cf",
+      "documented_workflow": "Standalone Ghidra plus compatible LX/LE loader, import the proper LE binary, then matching XML symbols.",
+      "symbol_match_to_user_archive": "untested; no game binaries downloaded",
+      "caution": "Binary build, hashes, addresses and object layout must match before applying symbols."
+    }
+  },
+  "local_assessment": {
+    "path_node": "24.14.0",
+    "bundled_node": "24.19.0",
+    "npm": "11.9.0",
+    "node_meets_rea_requirement": true,
+    "path_java": "1.8.0_211",
+    "path_javac": "1.8.0_211",
+    "java_64_bit": true,
+    "jdk_meets_candidate_requirement": false,
+    "java_home": "C:\\Program Files\\Java\\jdk1.8.0_211",
+    "ghidra_install_dir": null,
+    "rea_analysis_provider": null,
+    "missing_on_path": [
+      "rea",
+      "ghidraRun",
+      "analyzeHeadless",
+      "gradle"
+    ],
+    "ghidra_found_in_bounded_locations": false,
+    "compatible_jdk_found_in_bounded_locations": false,
+    "rea_global_package_manifest_found": false,
+    "absence_limit": "PATH and explicitly logged standard installation directories only; not proof of absence everywhere.",
+    "native_windows_admission": "not run; CIM volume query was denied and no REA native control validation occurred.",
+    "parent_session_observation": "Parent reports no exposed REA or Ghidra MCP tools.",
+    "status": "Standalone Ghidra 12.0.1 plus matching loader is a documented candidate requiring JDK 21+ provisioning and actual import validation; REA is not a documented LE/LX route."
+  },
+  "not_run": [
+    {
+      "command": "rea doctor --json",
+      "status": "not run",
+      "reason": "rea not found on PATH or checked global package location",
+      "exit_code": null
+    },
+    {
+      "command": "rea providers --json",
+      "status": "not run",
+      "reason": "rea not found on PATH or checked global package location",
+      "exit_code": null
+    },
+    {
+      "command": "Ghidra import/analysis",
+      "status": "not run",
+      "reason": "No admitted local toolchain; preflight scope excludes installation and game execution",
+      "exit_code": null
+    }
+  ]
+}
+
