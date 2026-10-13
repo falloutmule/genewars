@@ -73,6 +73,7 @@ def oracle(v,sine,cosine):
  return b'\0'+struct.pack('<4H',seed,len(attempts),sel,cell)+actor+after+beforebp+afterbp+old+prev+nxt+ref+bytes([bool(headkind)])+(ref if headkind else bytes(3))+b''.join(attempts)
 def main():
  WORK.mkdir(parents=True,exist_ok=True);source=ROOT/'rust/crates/genewars-runtime/src/actor_activation.rs';proofpath=ROOT/'research/ghidra/actor-activation-evidence.json';proof=json.loads(proofpath.read_bytes());pins=[pin(source),pin(ROOT/'rust/crates/genewars-runtime/src/identity.rs'),pin(proofpath)]
+ pins.append(pin(ROOT/'rust/crates/genewars-runtime/src/actor_command.rs'))
  for r in proof['instruction_contracts']:assert pin(ROOT/r['private_path'])['sha256']==r['sha256']
  listing=(ROOT/'private/ghidra/command-resolver/instructions-00080ae0.txt').read_text();assert '00080c65 MOV EAX,dword ptr [ESI + 0xc0]'in listing and '00080c6e MOV byte ptr [EAX + 0x1b],DL'in listing
  memory=(ROOT/'private/ghidra/validated/memory-.object3.bin').read_bytes();raws=[memory[a:a+8192]for a in [0x7ee8,0x86e8]];sine,cosine=[struct.unpack('<2048i',b)for b in raws]
@@ -91,7 +92,7 @@ def main():
   for v in cases():
    expected=oracle(v,sine,cosine);actual=f.read(len(expected));assert actual==expected,(count,v,actual[:32].hex(),expected[:32].hex());digest.update(actual);count+=1;outcomes[expected[0]]+=1;byteschecked+=len(expected)
   assert not f.read(1)
- assert pins==[pin(source),pin(ROOT/'rust/crates/genewars-runtime/src/identity.rs'),pin(proofpath)],'source or proof changed during review'
+ assert pins==[pin(source),pin(ROOT/'rust/crates/genewars-runtime/src/identity.rs'),pin(proofpath),pin(ROOT/'rust/crates/genewars-runtime/src/actor_command.rs')],'source or proof changed during review'
  report=dict(status='passed-independent-native-actor-activation-review',utc=datetime.now(timezone.utc).isoformat(),source_pins=pins,instruction_pins=proof['instruction_contracts'],candidate_cases=total,planner_cases=count,outcomes=outcomes,whole_native_output_bytes_compared=total*10+byteschecked,native_output_sha256=digest.hexdigest(),harness=pin(exe),review_sources=[pin(Path(__file__)),pin(Path(__file__).with_suffix('.rs'))],original_execution=False,gui_execution=False,resolved_findings=['resource+1B write corrected; actor frame preserved','eligible actor restricted to type3','record ID and partition slot validated'],limits=['Non-null head tests assume externally validated family bounds and resolved ID/type identity; no record resolver or world commit executed','Explicit terrain/blocker sequence remains caller supplied; original retries and consumes live RNG without this safe cap','Blueprint selector must externally bind native C0; no pointer reconstruction','No associated type5 route, landing/RNG timeline, batch player49D update or whole startup claim'])
  out=Path(__file__).with_suffix('.json');tmp=out.with_suffix('.json.tmp');tmp.write_text(json.dumps(report,indent=2)+'\n');tmp.replace(out);print(json.dumps({k:report[k]for k in ['status','candidate_cases','planner_cases','whole_native_output_bytes_compared']}))
 if __name__=='__main__':main()

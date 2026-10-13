@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-shade-fade-review",
-  "checked_utc": "2026-10-13T12:28:13.718824+00:00",
+  "checked_utc": "2026-10-13T13:15:46.042931+00:00",
   "original_or_gui_execution": false,
   "all_signed16_light_unsigned8_factor_pairs": 16777216,
   "shade_min": -33390592,
@@ -61,7 +61,7 @@
   "harness": {
     "path": "private/review/terrain-shade/review.exe",
     "size": 5087369,
-    "sha256": "262981f77c75ec4e590e32e8ffa069dd684e2225315b9ffa693e8862a5d0127b"
+    "sha256": "7a1b5077116636e82e5a397d5905af6cf69eb149734de298be54088d1059e6df"
   },
   "source": {
     "path": "rust/crates/genewars-render/src/terrain.rs",

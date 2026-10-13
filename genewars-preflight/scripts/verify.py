@@ -100,6 +100,8 @@ def main():
     run('player_creation_contract', py + ['scripts/ghidra/validate_player_creation_bridge.py'])
     run('actor_activation_contract', py + ['scripts/ghidra/validate_actor_activation_bridge.py'])
     run('owned_player_state', py + ['scripts/validate_player_state.py'])
+    run('owned_actor_world', py + ['scripts/validate_actor_world.py'])
+    run('associated_actor_activation', py + ['scripts/validate_associated_activation.py'])
     run('blueprint_generation_and_resources', py + ['scripts/ghidra/validate_blueprint_init_bridge.py'])
     run('actor_initialization_and_creation', py + ['scripts/ghidra/validate_actor_initialization_bridge.py'])
     run('terrain_camera_target_contract', py + ['scripts/validate_camera_target.py'])

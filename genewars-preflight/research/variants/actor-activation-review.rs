@@ -1,4 +1,5 @@
 #[path = "../../rust/crates/genewars-runtime/src/identity.rs"] mod identity;
+#[path = "../../rust/crates/genewars-runtime/src/actor_command.rs"] mod actor_command;
 #[path = "../../rust/crates/genewars-runtime/src/actor_activation.rs"] mod activation;
 use activation::*;
 use std::{fs, io::{BufWriter,Write},path::Path};

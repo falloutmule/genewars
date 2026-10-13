@@ -1,8 +1,20 @@
 # Working state — 2026-10-12 / 2026-10-13 UTC
 
-Active reconstruction; no complete playable game yet. Current priority is the Rust-first actor startup tranche described below; older counts below are dated checkpoints. The CD executable is a provisional analysis candidate, not established canonical retail.
+Active reconstruction; no complete playable game yet. Current priority is connecting the owned actor world to the real landing schedule and native scene; older counts below are dated checkpoints. The CD executable is a provisional analysis candidate, not established canonical retail.
 
-## Current actor startup checkpoint — 2026-10-13 12:30 UTC
+## Current owned actor-world checkpoint — 2026-10-13
+
+The runtime now owns native actors, typed handle bindings, player records, map links and explicit RNG state. Fresh actor preparation and ordered five-slot activation commit atomically; later failures leave every owned component unchanged. The normal associated-type5 branch places actors at the landing object and writes pending destinations toward sampled candidates. It does not teleport actors to those destinations. The separate no-associated path remains available with its correct semantics.
+
+Ground-controller eligibility now feeds the bounded opcode3 setter in this owned world. An independent Python oracle over the exact mission compares 64 synthetic fixture sessions, 128 complete activation/command after-images and 45,463,680 bytes, with 128 rollback checks. These are explicit player/native-gap/RNG/environment fixtures, not observations of the original first controllable frame. Source and implementation hashes are in `research/integration/actor-world-validation.json`; associated activation has its own independent receipt.
+
+The full gate passes **124 checks and 251 Rust tests** at `2026-10-13T13:18:09.592611+00:00`. All **50,993 private files** are ignored, no private files are tracked, and the archive SHA-256 is unchanged. The native runtime passes its 41 automated flow/resource/presentation cases. The associated-activation oracle passes 660 cases. Two initial harness issues (cached dependency selection and a new-module integrity pin) were corrected and the complete gate rerun successfully.
+
+The native screen still uses the plant-only world. Resource-handle resolution, landing factory/physics/contact, earlier shared-RNG consumers, environmental predicates and screen target projection remain integration prerequisites. The actor world's backing bytes alone are not a save file; actors and players live in owned overlays. MilestoneC and the full game remain unfinished. No original program, installation, public upload or global configuration change occurred in this checkpoint. No user tests are required.
+
+See `research/integration/actor-world-contract.md` for contracts and remaining boundaries.
+
+## Previous actor startup checkpoint — 2026-10-13 12:30 UTC
 
 The full gate passes **122 checks and 233 Rust tests** at `2026-10-13T12:30:40.868903+00:00`. All **49,462 private files** are ignored, no private files are tracked, and the original archive SHA-256 remains unchanged. The existing native runtime still passes its 41 automated flow/resource/presentation cases; no user testing is required.
 

@@ -3,8 +3,9 @@
 //! This crate models a deliberately limited plant subsystem. It preserves
 //! packed source bytes for every family and the map, mutates only proved
 //! family-1 fields, and reports suspended work for the other subsystems.
-//! Separate player/blueprint and activation helpers require explicit live
-//! inputs; they do not establish the full startup or landing timeline.
+//! The separate actor world owns native records, typed bindings, player/map
+//! transactions and pending commands. It requires explicit live inputs and
+//! does not establish the full startup or landing timeline.
 
 pub mod world;
 pub mod identity;
@@ -13,6 +14,8 @@ pub mod player_state;
 pub mod blueprint;
 pub mod actor_activation;
 pub mod actor_initialization;
+pub mod actor_pool;
+pub mod actor_world;
 
 pub use world::{
     MissionWorld, PlantParameterTable, PlantParameters, PlantRenderRecord,

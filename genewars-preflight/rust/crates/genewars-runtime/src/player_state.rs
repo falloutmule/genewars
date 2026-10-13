@@ -26,6 +26,7 @@ pub enum PlayerStateError {
     Initialization(crate::actor_initialization::ActorInitializationError),
     FreshCreationStateRequired,
     ActorPartitionOccupied(usize),
+    StaleBlueprint(usize),
 }
 
 impl core::fmt::Display for PlayerStateError {
@@ -140,6 +141,21 @@ impl PlayerState {
         if index >= BLUEPRINT_COUNT { return Err(PlayerStateError::BlueprintIndex(index)); }
         let start = 0x16 + index * BLUEPRINT_BYTES;
         Ok(self.bytes[start..start + BLUEPRINT_BYTES].try_into().unwrap())
+    }
+    pub(crate) fn commit_activation_blueprint(
+        &mut self, index: usize, expected: &[u8; BLUEPRINT_BYTES], after: &[u8; BLUEPRINT_BYTES],
+    ) -> Result<(), PlayerStateError> {
+        if self.blueprint(index)? != expected { return Err(PlayerStateError::StaleBlueprint(index)); }
+        let start = 0x16 + index * BLUEPRINT_BYTES;
+        self.bytes[start..start + BLUEPRINT_BYTES].copy_from_slice(after);
+        Ok(())
+    }
+    pub fn activation_count(&self) -> u32 {
+        u32::from_le_bytes(self.bytes[0x49D..0x4A1].try_into().unwrap())
+    }
+    pub(crate) fn finish_activation_batch(&mut self) {
+        let count = self.activation_count().wrapping_add(1);
+        self.bytes[0x49D..0x4A1].copy_from_slice(&count.to_le_bytes());
     }
     pub fn creation_plan(
         &self, mask: u8, campaign: bool, active_slots: [u8; 5],

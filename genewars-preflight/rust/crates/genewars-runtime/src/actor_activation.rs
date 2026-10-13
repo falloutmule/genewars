@@ -1,7 +1,7 @@
 //! Explicit-seed placement and bounded ready-state activation plans.
 //!
 //! This module models only the proved `0x73E00` candidate generator and the
-//! accepted-point branch of `0x80AE0`. It does not recreate landing physics,
+//! accepted-point branches of `0x80AE0`. It does not recreate landing physics,
 //! earlier shared-RNG consumers, the complete retry loop, or an initial
 //! controllable actor. See `research/ghidra/actor-activation-evidence.json`
 //! and `research/ghidra/actor-activation-bridge.md` for the pinned contract.
@@ -44,6 +44,8 @@ pub enum ActorActivationError {
     UnexpectedResolvedCellHead,
     ResolvedCellHeadMismatch { raw_index: i16, raw_kind: u8, record_id: i16, record_kind: u8 },
     AllocationFailed,
+    AssociatedMoveResolver(crate::actor_command::ResolverError),
+    AssociatedMoveCommand(crate::actor_command::Opcode3MoveOrderError),
 }
 
 impl fmt::Display for ActorActivationError {
@@ -222,6 +224,34 @@ pub fn plan_actor_activation(
     candidate_environments: &[CandidateEnvironment],
     associated_type5_absent: bool,
 ) -> Result<ActivationPlanningOutcome, ActorActivationError> {
+    plan_activation_core(actor_id, slot_index, actor_record, blueprint_table, map,
+        center_u15, seed_before, tables, candidate_environments, associated_type5_absent, None)
+}
+
+/// The associated-type5 branch of0x80AE0. The world owner must resolve the
+/// player's reference against its real family4 store before supplying this
+/// position. Candidates are sampled around the associated object; the actor
+/// is linked at that object's position, with a pending move to the accepted
+/// candidate. `obstacle_present` is the additional0x74270 lookup at that
+/// candidate, performed by0x74A50 after placement acceptance. A blocked
+/// destination or transitive reinitialization is transactionally rejected.
+/// CandidateEnvironment.resolved_cell_head refers to the associated object's
+/// cell, not the candidate destination's cell. Height and shade stay intact.
+pub fn plan_associated_actor_activation(
+    actor_id: i16, slot_index: usize, actor_record: &[u8], blueprint_table: &[u8],
+    map: &[u8], associated_position_u15: [u16; 2], seed_before: u16,
+    tables: &TrigTables, candidate_environments: &[CandidateEnvironment], obstacle_present: bool,
+) -> Result<ActivationPlanningOutcome, ActorActivationError> {
+    plan_activation_core(actor_id, slot_index, actor_record, blueprint_table, map,
+        associated_position_u15, seed_before, tables, candidate_environments, true, Some(obstacle_present))
+}
+
+fn plan_activation_core(
+    actor_id: i16, slot_index: usize, actor_record: &[u8], blueprint_table: &[u8],
+    map: &[u8], center_u15: [u16; 2], seed_before: u16, tables: &TrigTables,
+    candidate_environments: &[CandidateEnvironment], associated_type5_absent: bool,
+    associated_obstacle_present: Option<bool>,
+) -> Result<ActivationPlanningOutcome, ActorActivationError> {
     if !(0..20).contains(&actor_id) {
         return Err(ActorActivationError::InvalidActorId(actor_id));
     }
@@ -299,8 +329,9 @@ pub fn plan_actor_activation(
         return Err(ActorActivationError::CandidateListExhausted { attempts: candidate_environments.len() });
     };
 
-    let x = candidate.position_u15[0];
-    let y = candidate.position_u15[1];
+    let placement = if associated_obstacle_present.is_some() { center_u15 } else { candidate.position_u15 };
+    let x = placement[0];
+    let y = placement[1];
     let map_x = usize::from((x >> 8) & 127);
     let map_y = usize::from((y >> 8) & 127);
     let cell_index = (map_y * 128 + map_x) as u16;
@@ -349,9 +380,26 @@ pub fn plan_actor_activation(
     actor_after[0x70..0x72].copy_from_slice(&flags_after.to_le_bytes());
     actor_after[0x16] &= !0x08;
     actor_after[0x07..0x0B].copy_from_slice(&[
-        candidate.position_u15[0].to_le_bytes()[0], candidate.position_u15[0].to_le_bytes()[1],
-        candidate.position_u15[1].to_le_bytes()[0], candidate.position_u15[1].to_le_bytes()[1],
+        placement[0].to_le_bytes()[0], placement[0].to_le_bytes()[1],
+        placement[1].to_le_bytes()[0], placement[1].to_le_bytes()[1],
     ]);
+
+    if let Some(obstacle_present) = associated_obstacle_present {
+        use crate::actor_command::{apply_opcode3_move_order, resolve_bounded_move_target,
+            Opcode3MoveOrderResult, PrecomputedResolvedTarget, ResolverEnvironment};
+        let requested = candidate.position_u15.map(|n| n as i16);
+        let outcome = apply_opcode3_move_order(actor_id, &mut actor_after, requested,
+            PrecomputedResolvedTarget::new(requested)).map_err(ActorActivationError::AssociatedMoveCommand)?;
+        if outcome != Opcode3MoveOrderResult::NoopFlag71 {
+            let resolved = resolve_bounded_move_target(placement.map(|n| n as i16), requested,
+                ResolverEnvironment { terrain_class: accepted_environment.terrain_class,
+                    actor_avoidance_mask: avoidance_mask, obstacle_present,
+                    blocker_weight: accepted_environment.blocker_weight })
+                .map_err(ActorActivationError::AssociatedMoveResolver)?;
+            apply_opcode3_move_order(actor_id, &mut actor_after, requested, resolved)
+                .map_err(ActorActivationError::AssociatedMoveCommand)?;
+        }
+    }
 
     let blueprint_category = blueprint_before[0x16];
     let blueprint_count = u32::from_le_bytes([

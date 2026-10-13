@@ -1,11 +1,11 @@
 {
   "status": "passed",
-  "utc": "2026-10-13T12:29:58.447400+00:00",
-  "binary_sha256": "8d50d1b3196925b17e72ee052fe83efea8c81cb9ea23663094034532812a5357",
+  "utc": "2026-10-13T13:17:26.849871+00:00",
+  "binary_sha256": "bbf541ecb4b43d694a8e48575233e6b279eee4694be622c91caf2b50529ccfcd",
   "sources": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
-      "sha256": "fd28caad70c98333cd3bc2ff278e11c5562e237d84a2493251617601a4ba52bf"
+      "sha256": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_command.rs",
@@ -14,6 +14,14 @@
     {
       "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
       "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
+      "sha256": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "702cf18d8ec44dcdf6e04e53722aef60443cde819bfcb9077d0472546ad123ed"
     },
     {
       "path": "rust/crates/genewars-runtime/src/blueprint.rs",
@@ -25,11 +33,11 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/lib.rs",
-      "sha256": "e63b6cb6843bae0b6d841ea9e4a1b0531b4fe32a8bec8e139b79458f121e266c"
+      "sha256": "ac7fac8417ef8ea763fa91e67ea5d0231313ec4bdf4189a3791439ebffa57660"
     },
     {
       "path": "rust/crates/genewars-runtime/src/player_state.rs",
-      "sha256": "bd0d46605d9dc76960e35e6ec55ff298f5d45f2772f020a0514d6d9e6b7c5f8a"
+      "sha256": "6c2e36535278e906790ea8d5ca6e7a1b0de477fe010fbffd1431bea40c076348"
     },
     {
       "path": "rust/crates/genewars-runtime/src/world.rs",
@@ -452,7 +460,7 @@
     }
   ],
   "case_count": 41,
-  "private_output": "private/integration/runtime-validation/a30a24f8febd4c658316ee74e0737a4d",
+  "private_output": "private/integration/runtime-validation/ab16d664c4ae41df961a6d21452825c4",
   "milestones": {
     "A": "bounded native menu-to-loaded-world route",
     "B": "transactional plant steps with actual pixel change",

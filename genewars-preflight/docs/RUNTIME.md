@@ -53,3 +53,9 @@ tick 2
 ```
 
 Run the executable with the private bundle and `--headless REPLAY --report NEW_JSON --bmp NEW_BMP`. Optional `--world-output NEW_BIN` exports the owned state privately for bytewise comparison. Output paths must be new. Coordinate events use the same menu packet path as the window; `load` completes the loading scene. The runtime never reads an externally authored GWPLANT1 snapshot as its world state.
+
+## Owned actor integration library
+
+`ActorPool` preserves the inactive loader's native gaps and validates startup transactions with typed handles. `ActorWorld` owns the pool, player records, map/common link headers and an explicit live RNG. It commits both bounded activation routes and ground-controller pending commands atomically. The associated-object route places an actor at the object and issues its sampled destination order; it does not move the actor immediately.
+
+This library is not yet wired into the native screen. Its fixture tests are automatic and do not require a user gameplay test. Factory/landing scheduling, prior RNG consumers, actual environment predicates, resource resolution, screen target projection and movement remain unfinished. The packed backing excludes native actor/player overlays and cannot be used alone as a save file. See `research/integration/actor-world-contract.md`, `actor-world-validation.json` and `associated-activation-validation.json`.

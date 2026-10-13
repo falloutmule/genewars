@@ -1,11 +1,11 @@
 {
   "status": "passed-independent-native-actor-activation-review",
-  "utc": "2026-10-13T12:30:38.728404+00:00",
+  "utc": "2026-10-13T13:18:07.395824+00:00",
   "source_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
-      "bytes": 25799,
-      "sha256": "fd28caad70c98333cd3bc2ff278e11c5562e237d84a2493251617601a4ba52bf"
+      "bytes": 28908,
+      "sha256": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057"
     },
     {
       "path": "rust/crates/genewars-runtime/src/identity.rs",
@@ -16,6 +16,11 @@
       "path": "research/ghidra/actor-activation-evidence.json",
       "bytes": 11668,
       "sha256": "da09aef3351027aac5629cad62ba21d2d40a3b7053325e1a2db1c067d13a06ef"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_command.rs",
+      "bytes": 13433,
+      "sha256": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e"
     }
   ],
   "instruction_pins": [
@@ -84,19 +89,19 @@
   "native_output_sha256": "25c604f6307fbec2a801e039e830e14004900ac6f830a18fb06211bb56366295",
   "harness": {
     "path": "private/review/actor-activation/review.exe",
-    "bytes": 5136262,
-    "sha256": "3c4739af95fe5004500dac8c1c2b44b92d70f7892545cc5cf3a2a072cd8be989"
+    "bytes": 5137619,
+    "sha256": "0bf7e44a1d117fba65fc6774dd8ac59893b746d174941c453ce7396313934631"
   },
   "review_sources": [
     {
       "path": "research/variants/actor-activation-review.py",
-      "bytes": 8382,
-      "sha256": "1e3e608a4427f37651e46e57cc5946479a18f35545811f5dcdff93b4db028e54"
+      "bytes": 8520,
+      "sha256": "a3837e65df52ade01e821a282a80de42125d61975570161a54e16821fc83263e"
     },
     {
       "path": "research/variants/actor-activation-review.rs",
-      "bytes": 6384,
-      "sha256": "89b3760f1cbfdc15e201cbe2f11d1d00c4d52a2fff10f6df0a12cb47d7bcc451"
+      "bytes": 6472,
+      "sha256": "9b629b1bcb2dacf1e4397519924e53ef00cc0999bc3c6fbc52e0a2467012e7ec"
     }
   ],
   "original_execution": false,

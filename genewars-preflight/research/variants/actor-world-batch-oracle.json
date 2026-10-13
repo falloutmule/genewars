@@ -1,0 +1,46 @@
+{
+  "status": "passed-independent-synthetic-batch-oracle-selfcheck",
+  "native_actor_world_compared": false,
+  "cases": 384,
+  "candidate_draws": 960,
+  "late_rejection_cases": 5,
+  "after_state_sha256": "51c162366720b04dbf16003a194358732fe18f5374102b0a80268f853d01d4bb",
+  "original_execution": false,
+  "gui_execution": false,
+  "limits": [
+    "No original startup/landing route",
+    "Synthetic graph fixtures; no native batch comparison yet",
+    "Explicit no-associated-unit path only"
+  ],
+  "read_review_source_pins": [
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "87358b073558f779b68e5f63d87571f8500834e55a5b84d12d7b0908cadcb81b"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
+      "sha256": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
+      "sha256": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/player_state.rs",
+      "sha256": "6c2e36535278e906790ea8d5ca6e7a1b0de477fe010fbffd1431bea40c076348"
+    },
+    {
+      "path": "research/ghidra/actor-activation-evidence.json",
+      "sha256": "da09aef3351027aac5629cad62ba21d2d40a3b7053325e1a2db1c067d13a06ef"
+    },
+    {
+      "path": "research/variants/actor-world-batch-oracle.py",
+      "sha256": "6c6f28743a105fb60460c36d55a07c4e3a5885c93bb9d00fe2e12508604ba78f"
+    }
+  ],
+  "read_review_findings": [
+    "Head previous-reference kind0 must carry owning cell index; terminal next kind0 index remains opaque. Sent root.",
+    "Current private owned-state construction prevents external malformed head injection; no exploit asserted.",
+    "Owned batch ordering/RNG/blueprint/raw-link commit/rollback and ground command gates read-reviewed; no new native batch run by this lane."
+  ]
+}

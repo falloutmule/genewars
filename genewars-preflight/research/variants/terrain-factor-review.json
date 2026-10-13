@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-terrain-factor-plan-review",
-  "checked_utc": "2026-10-13T12:28:19.497807+00:00",
+  "checked_utc": "2026-10-13T13:15:51.804917+00:00",
   "original_or_gui_execution": false,
   "native_plans": 1356,
   "map_variants": 12,
@@ -27,7 +27,7 @@
   "evidence": {
     "path": "research/integration/terrain-factor-contract.json",
     "size": 2043,
-    "sha256": "c3ae30d3da17468b30e9759db4f509c19714f38ab9bf66c46661d75b506de9d0"
+    "sha256": "0ecebd56b38facfdce59685ef920204b32bc66128a7ef1690ed1b35a72ae3b53"
   },
   "private_listings": [
     {
@@ -54,7 +54,7 @@
   "harness": {
     "path": "private/review/terrain-factor/review.exe",
     "size": 5114397,
-    "sha256": "73716e6c55bbaef19ebfd7abbf3bd4fdbf1b603d8ca54cea15bd13ef6702b390"
+    "sha256": "f51c437fbe8748d11fbcd4b054eb111fb6ec9c747d5d891d3578e5e8fb3015ad"
   },
   "review_sources": [
     {
