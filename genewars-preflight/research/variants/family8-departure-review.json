@@ -1,6 +1,6 @@
 {
   "status": "passed-bounded-family8-parent-state9-departure",
-  "utc": "2026-10-13T21:10:47.808825+00:00",
+  "utc": "2026-10-13T21:37:40.323642+00:00",
   "callbacks": 138,
   "compared_bytes": 15594,
   "literal_instructions": 99483,
@@ -86,12 +86,16 @@
       "sha256": "43d1a9c61f2f62fdedd209067039ee29105078e4556cac32106e464a4c7f1a09"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/actor_construction_tail.rs",
+      "sha256": "3f22feef5def16591bb02288573a8037eadb72ca8e8f86472ebf4e4dcb14fea6"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
       "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_motion.rs",
-      "sha256": "cda95cc565830dc8b5a0e7177f68787f99cf1993e6dfb70cb48852c374c9499a"
+      "sha256": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
@@ -107,7 +111,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "40e35ad03759123a144c002bdbc3e8fc7d09797f56b7741f05d03923a4a49f48"
+      "sha256": "b734e36e2da412a9c445c8585975e77055a60292b4ee18f454b3153e8f934aad"
     },
     {
       "path": "rust/crates/genewars-runtime/src/blueprint.rs",
@@ -139,7 +143,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_pool.rs",
-      "sha256": "165d8bde978d5a884e4b69238e0223481de8d0cb10a6c259c5c3be5753acda38"
+      "sha256": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5"
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_progress.rs",
@@ -179,11 +183,19 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_terraform_completion.rs",
-      "sha256": "c61856bc56f50513cc92deba16a4406bb761062b428466fd5f1ffd26247bccc6"
+      "sha256": "031abef43f20a1e04a5b32ea72d00340068e25a7529908d16d72229929e7fecb"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terraform_resume.rs",
+      "sha256": "325b7f0d36e5bea907d1ddf5a9c54b504274ff64fe44203bc602029074cc8971"
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_terrain.rs",
       "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_wait.rs",
+      "sha256": "3e339a034c14c3f7f4fc515418675eb357d844c473d9d5024797750cc3b0f6ae"
     },
     {
       "path": "rust/crates/genewars-runtime/src/countdown_expiry.rs",
@@ -203,7 +215,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_motion.rs",
-      "sha256": "7d82d4429b98c9744342c269ce3d70fe7a7ebcbcde48ed116c8b3fb6fb6dfd00"
+      "sha256": "663aa8b16f81a3ab1dec85c967cb189ad0d63ca64a1fea72ec2f7ac5ae4a21af"
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_particle.rs",
@@ -227,7 +239,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/lib.rs",
-      "sha256": "4e668a87ddfa1d4338f1bc9a6ead00da70fa211041854e3ae608611cd471f5f7"
+      "sha256": "ff4f03c5f9189e75b392fee756c56992cad4c7a54c4cf358bdef3fc16b1cf1bb"
     },
     {
       "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
@@ -275,7 +287,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/building_updates.rs",
-      "sha256": "f2a1b088c56ba609bde1a545d0dd014e71c4570f15a56e928d7c6d9080d4e484"
+      "sha256": "ff4cbe44324236d1c86dd38a8469bc50fd0e6278d91b7084faaa1f1ad7bc9015"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
@@ -291,7 +303,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family8_updates.rs",
-      "sha256": "061f8b3a7deaa467b2e8bdb6e57000c761773c16d9443506fb6460a2a5e4021d"
+      "sha256": "a26fce7a3ace1f0c7cf03f33bc9d5a00d54218902bbff4f070efdcf3cf57bc75"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
@@ -304,6 +316,10 @@
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
       "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/terrain_updates.rs",
+      "sha256": "aa9fb2176ded7f50891520f1418d7276ee0d3926c0461c491b8624b072465dca"
     },
     {
       "path": "rust/crates/genewars-runtime/src/world/plant_creation.rs",
@@ -424,7 +440,7 @@
   "review_pins": [
     {
       "path": "research/variants/family8-departure-review.py",
-      "sha256": "16d6926336aaaee07c4d14221a8d7971dcfe053d093e6d2bf31c85e6645934cb"
+      "sha256": "39e84c7b3e6eedb7a08bf48a51f2c0a7a1a6a9f8e8feefd562749b9b96af1616"
     },
     {
       "path": "research/variants/family8-departure-review.rs",
@@ -506,7 +522,7 @@
   "limits": [
     "Fourexplicit state8-ready seed contexts plus actual before6567slot0 from a27b449717204a89bd5535536ad2d53f. The latter is historical beforeactor-footstep RNG correction; no currentcombinedtimingclaim.",
     "Later callbacks hold otherfamilies fixed. Retirement is an explicit103F0 port; the pure plan leaves kind8/ownlinks intact for the reviewedworldretirementadapter.",
-    "Stationary-to-upward selector0state9 only, accelerationZ640/desiredspeed-1 and null targetreferences. Periodic rejectedpoint, water/damage and other callback states reject.",
+    "Stationary-to-upward selector0state9 only, accelerationZ640/desiredspeed-1 and null targetreferences. Water/damage and other callback states reject; readonly idle search has a separate proof.",
     "Audio and queue request presence is compared. Retirement skips common audio/animation tail; selector0-specific103F0 stoprequests belong to owning retirement adapter."
   ]
 }

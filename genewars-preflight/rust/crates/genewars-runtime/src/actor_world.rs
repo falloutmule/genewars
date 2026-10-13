@@ -189,10 +189,10 @@ pub struct ActorWorld {
     players: [PlayerState; 4],
     rng: BlueprintRng,
     plants: Option<PlantSubsystem>,
-    effects: Option<EffectPool>,
-    creatures: Option<CreaturePool>,
-    family8: Option<Family8Pool>,
-    buildings: Option<BuildingPool>,
+    effects: Option<Box<EffectPool>>,
+    creatures: Option<Box<CreaturePool>>,
+    family8: Option<Box<Family8Pool>>,
+    buildings: Option<Box<BuildingPool>>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -319,10 +319,10 @@ impl ActorWorld {
     }
 
     pub fn actors(&self) -> &ActorPool { &self.actors }
-    pub fn effects(&self) -> Option<&EffectPool> { self.effects.as_ref() }
-    pub fn creatures(&self) -> Option<&CreaturePool> { self.creatures.as_ref() }
-    pub fn family8(&self) -> Option<&Family8Pool> { self.family8.as_ref() }
-    pub fn buildings(&self)->Option<&BuildingPool>{self.buildings.as_ref()}
+    pub fn effects(&self) -> Option<&EffectPool> { self.effects.as_deref() }
+    pub fn creatures(&self) -> Option<&CreaturePool> { self.creatures.as_deref() }
+    pub fn family8(&self) -> Option<&Family8Pool> { self.family8.as_deref() }
+    pub fn buildings(&self)->Option<&BuildingPool>{self.buildings.as_deref()}
 
     /// Promote the current packed kind1 records into their native overlay.
     /// Existing common links are copied exactly. This admits storage only;
@@ -332,7 +332,7 @@ impl ActorWorld {
         let group = self.layouts[0];
         let pool = CreaturePool::from_packed(&self.backing[group.file_offset..group.file_offset + group.count * group.packed_stride], prior)?;
         self.validate_links()?;
-        let mut staged = self.clone();staged.creatures = Some(pool);staged.validate_links()?;
+        let mut staged = self.clone();staged.creatures = Some(Box::new(pool));staged.validate_links()?;
         *self = staged;Ok(())
     }
 
@@ -346,7 +346,7 @@ impl ActorWorld {
         let active = pool.records().iter().filter(|r| r[6] != 0).count();
         if declared < 0 || declared as usize != active { return Err(ActorWorldError::EffectCountMismatch { declared, active }); }
         self.validate_links()?;
-        self.effects = Some(pool);
+        self.effects = Some(Box::new(pool));
         Ok(())
     }
 
@@ -390,7 +390,7 @@ impl ActorWorld {
         let parameters = PlantParameterTable::parse(parameter_bytes)?;
         self.validate_links()?;
         let tick_number = self.plants.as_ref().map_or(0, |p| p.tick_number);
-        MissionWorld::with_shared_storage(SharedPlantStorage { backing: &mut self.backing, actors: &mut self.actors, effects: self.effects.as_mut(), creatures: self.creatures.as_mut(), family8: self.family8.as_mut(), buildings: self.buildings.as_mut() }, parameters.clone(), tick_number)?;
+        MissionWorld::with_shared_storage(SharedPlantStorage { backing: &mut self.backing, actors: &mut self.actors, effects: self.effects.as_deref_mut(), creatures: self.creatures.as_deref_mut(), family8: self.family8.as_deref_mut(), buildings: self.buildings.as_deref_mut() }, parameters.clone(), tick_number)?;
         self.plants = Some(PlantSubsystem { parameters, tick_number });
         Ok(())
     }
@@ -408,7 +408,7 @@ impl ActorWorld {
         let subsystem = self.plants.as_ref().ok_or(ActorWorldError::PlantsNotAdmitted)?.clone();
         self.validate_links()?;
         let mut staged = self.clone();
-        let mut view = MissionWorld::with_shared_storage(SharedPlantStorage { backing: &mut staged.backing, actors: &mut staged.actors, effects: staged.effects.as_mut(), creatures: staged.creatures.as_mut(), family8: staged.family8.as_mut(), buildings: staged.buildings.as_mut() }, subsystem.parameters, subsystem.tick_number)?;
+        let mut view = MissionWorld::with_shared_storage(SharedPlantStorage { backing: &mut staged.backing, actors: &mut staged.actors, effects: staged.effects.as_deref_mut(), creatures: staged.creatures.as_deref_mut(), family8: staged.family8.as_deref_mut(), buildings: staged.buildings.as_deref_mut() }, subsystem.parameters, subsystem.tick_number)?;
         let report = view.tick_plants_inner()?;
         staged.plants.as_mut().unwrap().tick_number = report.tick_number;
         staged.validate_links()?;

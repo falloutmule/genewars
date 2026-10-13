@@ -1,0 +1,94 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T21:51:44.417703+00:00",
+  "cases": [
+    {
+      "seed": 5428,
+      "frame": 450,
+      "compilation_receipt": {
+        "path": "research/integration/trajectory450-seed5428.json",
+        "sha256": "204d00208da890f7885eb6ca35d9f90731e05bd50f1affe24b57612ec453dc07"
+      },
+      "source_trace": {
+        "path": "private/review/family8-trajectory/1ec6309d9937439aa638e03f97669b42/frame450/before-mule/source-trace450.json",
+        "sha256": "1bb820d063f6dbba4c0ebfa7cf8508166db34593e5034a2fce5992eb3534151a"
+      },
+      "native_record": {
+        "path": "private/review/family8-trajectory/1ec6309d9937439aa638e03f97669b42/frame450/after-mule/creatures.bin",
+        "sha256": "5dd141605d36ff4ddf4ab502da93bc9396bb4bd992aff56bf24bf1cac51405f9"
+      },
+      "compared_bytes": 344081,
+      "source_instructions": 1718,
+      "state_animation_target": [
+        1,
+        1,
+        2
+      ],
+      "position": [
+        15303,
+        16198
+      ]
+    },
+    {
+      "seed": 0,
+      "frame": 450,
+      "compilation_receipt": {
+        "path": "research/integration/trajectory450-seed0.json",
+        "sha256": "b8f8fa3433197fa1d5053fdf5529135a183d5317da40bc4ee22b4a756eb4c117"
+      },
+      "source_trace": {
+        "path": "private/review/family8-trajectory/b781801533024171a4c7d22b4167277f/frame450/before-mule/source-trace450.json",
+        "sha256": "6e6d6408ae6a4cf565f34def16ba124f832252b944d92942b85120938d6ef887"
+      },
+      "native_record": {
+        "path": "private/review/family8-trajectory/b781801533024171a4c7d22b4167277f/frame450/after-mule/creatures.bin",
+        "sha256": "f14f4135bc83a69ab53974d8b240268964f36a391a38c30905556484cb526e45"
+      },
+      "compared_bytes": 344081,
+      "source_instructions": 1792,
+      "state_animation_target": [
+        8,
+        4,
+        0
+      ],
+      "position": [
+        16243,
+        15741
+      ]
+    },
+    {
+      "seed": 65535,
+      "frame": 450,
+      "compilation_receipt": {
+        "path": "research/integration/trajectory450-seed65535.json",
+        "sha256": "c2aa5171e6192cf5ec2b1d06ce1d752dfef4367ccb1cb07d0dba01d73b044bc5"
+      },
+      "source_trace": {
+        "path": "private/review/family8-trajectory/d9ea021a12804346a66a3a5681b94feb/frame450/before-mule/source-trace450.json",
+        "sha256": "7fb34465fc4f0fe921b9f51a2b30a40629eeb0a322d0aac0f12207c811d6246e"
+      },
+      "native_record": {
+        "path": "private/review/family8-trajectory/d9ea021a12804346a66a3a5681b94feb/frame450/after-mule/creatures.bin",
+        "sha256": "6b88d42968dfa03587d8626f163ec9d9493b5ff125fff75780422f8f98730380"
+      },
+      "compared_bytes": 344081,
+      "source_instructions": 1867,
+      "state_animation_target": [
+        7,
+        19,
+        2
+      ],
+      "position": [
+        15746,
+        15767
+      ]
+    }
+  ],
+  "compared_bytes": 1032243,
+  "original_execution": false,
+  "scope": "Three corrected-trajectory frame450 Mule callbacks; native pointer gaps excluded, complete backing and RNG compared. Historical beforeimages do not prove preceding callbacks or full-game equivalence.",
+  "validator": {
+    "path": "scripts/validate_landing_450.py",
+    "sha256": "797c81752094363663176504b5ea0c50806cf960539e9695f601e4fc5c31716a"
+  }
+}

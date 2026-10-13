@@ -28,6 +28,6 @@
   "seed_cases": 65536,
   "compared_bytes": 65654098,
   "output_sha256": "660f9a692e31ce4894f104987cefbb3624a1e03cccf0275a05bc45d84e60ff99",
-  "source_sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f",
+  "source_sha256": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
   "scope": "Arrival snap BL1 preservesphysicalheight; arrivalidle21B and52780 globals: count0/6000,override0/1,mode0/1; normalidle0/1/2timer,periodic666chance0/126,empty-source-scorer6BD/6BE; unpoweredclass3clears73; eligible targets explicitlyexcluded."
 }

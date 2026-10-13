@@ -11,7 +11,8 @@ pub struct ArchitectTailPlan {
 /// Select before looking up frame holds. This admits ordinary construction only.
 pub fn architect_tail_animation(before:&[u8;200])->Result<u8,ActorMotionError>{
     if before[6]!=3{return Err(ActorMotionError::Inactive);}
-    if before[0x55]!=9||before[0x7e]!=0||before[0x70]&1==0{return Err(ActorMotionError::UnsupportedState);}
+    let cancelled=before[0x7e]==255&&before[0x82]==0&&before[0x58]==0&&before[0x57]&3==0;
+    if before[0x55]!=9||(!cancelled&&before[0x7e]!=0)||before[0x70]&1==0{return Err(ActorMotionError::UnsupportedState);}
     match actor_motion::actor_selected_animation_state(before)? {
         1=>Ok(before[0x19]),
         8=>{

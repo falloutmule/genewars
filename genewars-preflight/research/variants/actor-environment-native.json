@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-actor-environment-review",
-  "utc": "2026-10-13T20:28:44.613767+00:00",
+  "utc": "2026-10-13T22:06:22.810290+00:00",
   "terrain_cases": 212992,
   "obstacle_null_cases": 212992,
   "blocker_cases": 32768,
@@ -11,7 +11,7 @@
   "source_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "18633907e526995cf776a612e5ac93dc09865a21a017ae22564648c7129e480c"
+      "sha256": "89099632930a7ecb3b6c1200612754209d3baa911b7a42b230c09a1ce963fdab"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
@@ -48,7 +48,7 @@
   },
   "harness": {
     "path": "private/review/actor-environment-native/review.exe",
-    "sha256": "1c172413aa9e1b0b3d8e30012cc29b281dbce43a10a37c5d174d28d985349b87"
+    "sha256": "1cf37cb2a1d1f65f43d8545f78b5a665cf9d92fb3ee3e689eaab2e24ff45102c"
   },
   "review_sources": [
     {

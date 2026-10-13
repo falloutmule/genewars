@@ -1,10 +1,10 @@
 {
-  "compiled_harness_sha256": "6633936e21c9e3a0c13d3cf5ff9d47423a1063ca8247f1636f5c5cb0f35e2483",
+  "compiled_harness_sha256": "8f50c765daef0427c06ff08d090be97f1a34876c69c5a37940a79b5f832730bd",
   "method": "rustc compiled actual production source; result bytes and rejection variants compared against literal 45010/6D490 instruction interpreter.",
   "original_executable_run": false,
   "private_record_bytes_written_to_public_report": false,
   "private_rustc_sha256": "cbd682cf84ccc20bfde002443274f9768f777b68afef63da4462abb490c0a4ff",
-  "production_pool_source_sha256": "165d8bde978d5a884e4b69238e0223481de8d0cb10a6c259c5c3be5753acda38",
+  "production_pool_source_sha256": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5",
   "real_conq001": {
     "complete_byte_match": true,
     "native_bytes_compared": 17152,
@@ -22,7 +22,7 @@
   "source_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/building_pool.rs",
-      "sha256": "165d8bde978d5a884e4b69238e0223481de8d0cb10a6c259c5c3be5753acda38"
+      "sha256": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5"
     },
     {
       "path": "rust/crates/genewars-runtime/src/building.rs",

@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-initial-viewport-context-review",
-  "checked_utc": "2026-10-13T20:32:03.034774+00:00",
+  "checked_utc": "2026-10-13T21:41:55.782432+00:00",
   "original_or_gui_execution": false,
   "evidence": {
     "path": "research/ghidra/terrain-viewport-evidence.json",

@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "utc": "2026-10-13T20:27:58.152144+00:00",
+  "utc": "2026-10-13T22:05:31.813208+00:00",
   "cases": 24,
   "compared_bytes": 8258016,
   "literal_instructions": 14470,
@@ -13,7 +13,7 @@
   "implementation_pins": {
     "rust/crates/genewars-runtime/src/plant_spread.rs": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066",
     "rust/crates/genewars-runtime/src/world/plant_creation.rs": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82",
-    "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs": "56ee5efc10f46d6b40a62861cd2e626aa6f24bf7241fe3b90766118966af3ed2",
+    "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs": "fe53dc13c552bc0b973d3f0fb75f1f06902d7fbeb547a6efd68022161adc69ac",
     "scripts/plant_factory_probe.rs": "3b32b9822660a3cebd9163d7bd63ee88abdc6ec62178e14a070e94522b261020",
     "scripts/validate_plant_factory.py": "86f5bc7bc0386ff5c4e15cf507db86da72b5cb99ae4f6739942b19dc8c91280d"
   },

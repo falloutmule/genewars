@@ -11,6 +11,14 @@ use genewars_runtime::{actor_world::{ActorWorld,LandingEffectCallback,GroundMove
     landing_effect_lifecycle::RetirementUiState,terrain_target::project_terrain_target};
 use super::{runtime_resources::{Resources,Frame,read_bound},actor_scene};
 
+// The desktop debug binary has a small main-thread stack on Windows. Keep
+// large fixed-size native-prior fixtures off the stack while assembling the
+// explicit landing study. These records are zero priors, not source data.
+fn zero_record_box<const N:usize,const M:usize>() -> Box<[[u8;M];N]> {
+    let boxed:Box<[[u8;M]]>=vec![[0;M];N].into_boxed_slice();
+    boxed.try_into().unwrap_or_else(|_|unreachable!("fixed record count"))
+}
+
 #[derive(Clone)]
 pub struct SharedMission {
     pub world:ActorWorld,
@@ -29,11 +37,15 @@ impl SharedMission {
         let source=ConqMissionSource::parse(mission_bytes).map_err(|e|e.to_string())?;
         let target=source.target_words(0).map_err(|e|e.to_string())?.map(|v|v as i16);
         let players=core::array::from_fn(|p|PlayerState::fresh_campaign(p as u8,target,b"Native study\0").unwrap());
-        let mut world=ActorWorld::from_mission(&source,&[[0;200];20],[ActorHandleBindings::empty();20],players,
+        let actor_priors=zero_record_box::<20,200>();
+        let mut world=ActorWorld::from_mission(&source,&actor_priors,[ActorHandleBindings::empty();20],players,
             BlueprintRng{seed,ring:0,draw_count:0}).map_err(|e|e.to_string())?;
-        world.admit_creatures(&[[0;124];300]).map_err(|e|e.to_string())?;
-        world.admit_effects(&[[0;81];200],[None;200]).map_err(|e|e.to_string())?;
-        world.admit_family8(&[[0;102];16],[None;16]).map_err(|e|e.to_string())?;
+        let creature_priors=zero_record_box::<300,124>();
+        world.admit_creatures(&creature_priors).map_err(|e|e.to_string())?;
+        let effect_priors=zero_record_box::<200,81>();
+        world.admit_effects(&effect_priors,[None;200]).map_err(|e|e.to_string())?;
+        let family8_priors=zero_record_box::<16,102>();
+        world.admit_family8(&family8_priors,[None;16]).map_err(|e|e.to_string())?;
         world.admit_plants(&read_bound(&root.join("plant-parameters.bin"))?).map_err(|e|e.to_string())?;
         let text=read_bound(&root.join("menu/text.dat"))?;
         let strings=TextStringTable::parse(&text).map_err(|e|e.to_string())?;

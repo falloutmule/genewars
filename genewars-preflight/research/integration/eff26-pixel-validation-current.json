@@ -21,7 +21,7 @@
     "pitch": 512,
     "width": 512
   },
-  "implementation_sha256": "6ac9a4ebaed70400d10e378a045eab8a84e6d40561acbf71dc854855c9dc460c",
+  "implementation_sha256": "518c5df092de117f19d765f73e39a19499d2f3be29bac8fa41c12534b8a2aa06",
   "pixel_oracle": {
     "all_passed": true,
     "full_buffer_cases": [

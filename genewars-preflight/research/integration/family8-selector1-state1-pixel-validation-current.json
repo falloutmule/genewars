@@ -19,7 +19,7 @@
     "width": 640
   },
   "harness_sha256": "f3ff765fc1b3a66bb0a795e030540c41b02e4551e66db87387ee21f35a78ccc8",
-  "implementation_sha256": "9208773255f0c7fb01e70f5fc6cab613a4a30dd9f93815c7b3c42b3d9fd8219b",
+  "implementation_sha256": "2c0f6e9a7b4f79be8f8e3a9dd3a320e9f949cf2c072ef7e72f96db566bd242fd",
   "instruction_pins": {
     "private\\ghidra\\countdown-expiry\\instructions-00010ea0.txt": "639fdb8a92c1342f206b3ddd7ebf563618988b4943ff53ca3c9bec9aed881dfb",
     "private\\ghidra\\initial-creature\\instructions-0001f060.txt": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7"

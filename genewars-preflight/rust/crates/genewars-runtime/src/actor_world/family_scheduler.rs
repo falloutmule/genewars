@@ -157,7 +157,7 @@ mod tests {
     fn creature_callback_failure_rolls_back_counters_rng_and_backing() {
         let mut world=fixture();
         let mut packed=vec![0;300*116];packed[6]=1;packed[24]=4;packed[0x7a-8]=4;packed[0x5e-8]=8;
-        world.creatures=Some(CreaturePool::from_packed(&packed,&[[0;124];300]).unwrap());
+        world.creatures=Some(Box::new(CreaturePool::from_packed(&packed,&[[0;124];300]).unwrap()));
         world.backing[0x3550..0x3552].copy_from_slice(&1i16.to_le_bytes());
         world.backing[MAP_START+6..MAP_START+9].copy_from_slice(&[0,0,1]);
         let before=world.clone();

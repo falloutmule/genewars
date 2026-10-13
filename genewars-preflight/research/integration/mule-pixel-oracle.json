@@ -1,7 +1,7 @@
 {
   "scope": "Independent Python source-derived framebuffer comparison; not original-execution parity",
-  "cases": 153,
-  "framebuffer_bytes_compared": 500004,
+  "cases": 163,
+  "framebuffer_bytes_compared": 532684,
   "mule_input": {
     "bytes": 57038,
     "sha256": "f6c62221b52a62088f91ae8d00becfef513282cbf98a5990c1a0859cd8b2d346"
@@ -15,22 +15,24 @@
     "sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3"
   },
   "ordinary_shade_cases": 3,
+  "mortality_animation_frames": 10,
+  "mortality_scope": "state 24 / animation 17 (7 metadata frames) and state 25 / animation 18 (3 metadata frames); only unmodified frame 9053 and 9059 snapshots are source-traced records, other frame-byte selections are codec-domain tests",
   "code_pins": {
     "scripts/validate_mule_scene.py": {
-      "bytes": 13427,
-      "sha256": "4a2cadd448445e2241161863aa5297b47470a9d6ec17e0a09cdd1222b7e18adf"
+      "bytes": 14343,
+      "sha256": "7e9bf0f2ed66b14e41e6b421eb190d93bae1603ad5b611ecc00ce198ea5c014a"
     },
     "rust/crates/genewars-desktop/src/bin/support/creature_scene.rs": {
-      "bytes": 45236,
-      "sha256": "dacefce04049ac3151653bf14a9112fc9a2311dc8451ca4cee684980503d348c"
+      "bytes": 50085,
+      "sha256": "368e99c09d36219142a5239afdb960dd7db779e5dda18d2c5d32848c3c37e71a"
     },
     "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs": {
-      "bytes": 49000,
-      "sha256": "2caae2c594fe04897cea4b4adc7cea60c2d8adc34c656c7cefbea8f5b4a5824a"
+      "bytes": 49522,
+      "sha256": "1bf318a36a355a8e793a0c6a837aeb1bdbb16c88d3b166e6e05ebf4e9cd1ccea"
     },
     "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs": {
-      "bytes": 21448,
-      "sha256": "b1b756338a480204b41d89d8649c6002fcc5bf6f5b1e4a0c0439c5b8984b6282"
+      "bytes": 23200,
+      "sha256": "0fbd8da74d9882fc3951d3be06510d22982197e437dd04fcbc199d455044c850"
     },
     "research/ghidra/creature-evidence.json": {
       "bytes": 21352,
@@ -59,6 +61,30 @@
     "private/integration/combined-before-mule415/source-after415.bin": {
       "bytes": 124,
       "sha256": "99180a26ab1b842d90b4188421d30fa644357efaba1fd033b924bef730f8a935"
+    },
+    "private/review/mule-mortality/frame9053/source-after9053.bin": {
+      "bytes": 124,
+      "sha256": "05a69c5622613cc9da069a22597b18dbc7d0918e540e60931a21ca5df346bc0d"
+    },
+    "private/review/mule-mortality/frame9053/source-trace9053.json": {
+      "bytes": 49119,
+      "sha256": "cc7d7afcad2cdc4ff6e457c8d587e246e246d5f0ae71f8068d69b24f2343b2bb"
+    },
+    "private/review/mule-mortality/frame9058/source-after9058.bin": {
+      "bytes": 124,
+      "sha256": "27cc71d75eb5f79478fd6fb6d0f3a084dddcd2580fd83a47e89f3540cc3e619b"
+    },
+    "private/review/mule-mortality/frame9058/source-trace9058.json": {
+      "bytes": 36213,
+      "sha256": "23961dbd73a00c09e7b23d8947e9a7ed8d92194c7b5e71e1942c78e83ef1a543"
+    },
+    "private/review/mule-mortality/frame9059/source-after9059.bin": {
+      "bytes": 124,
+      "sha256": "af935ddafbd0905e5a9af69ad4070ad97af1f459d66ddede60e2cbece09e455a"
+    },
+    "private/review/mule-mortality/frame9059/source-trace9059.json": {
+      "bytes": 38873,
+      "sha256": "ad2b48ec7ec5a1fcc19b8c6ab6d8410754a3e8723669782ed0f2aecd0c6bb509"
     },
     "private/ghidra/actor-activation/instructions-0001f260.txt": {
       "bytes": 155,
@@ -89,8 +115,8 @@
       "sha256": "d27a9d7772a8a565db1cca9bc08e054516f91fe342077377f3919e8c3eb87097"
     },
     "research/formats/mule-render-contract.md": {
-      "bytes": 7545,
-      "sha256": "febaa47a4164be15a83dfedd86e21077fbf310ff46ba50eb2923e1e8f0f3e91b"
+      "bytes": 8211,
+      "sha256": "235dfe730eb1c3869f312c3214eab74debc09c76151ac36a1f6c120ee820e073"
     }
   },
   "comparison": "all Rust framebuffer bytes equal the independently parsed ANB/RLE/scale/flip/fade/GLA model",

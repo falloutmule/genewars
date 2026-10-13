@@ -15,7 +15,7 @@ pub struct TerraformCompletionPlan {
 }
 /// `desired_speed` is the checked virtual80 result (51930) for this blueprint.
 /// This slice admits the ready 526C0 tail and archetypes 0..2; selector5's second site is separate.
-pub fn plan_architect_completed_terraform(
+pub fn plan_architect_completed_terraform_prefix(
     before: &[u8; 200], blueprint: &[u8; 36], job: &[u8; 176],
     seed: u16, desired_speed: i16,
 ) -> Result<TerraformCompletionPlan, TerraformCompletionError> {
@@ -27,9 +27,6 @@ pub fn plan_architect_completed_terraform(
     }
     if i16::from_le_bytes(job[12..14].try_into().unwrap()) >= 0 {
         return Err(TerraformCompletionError::JobStillActive);
-    }
-    if before[0x49] & 0x23 != 0x20 || before[0x70] & 0x20 != 0 {
-        return Err(TerraformCompletionError::MovementRequired);
     }
     let first = seed.wrapping_mul(0xe62d);
     let second = first.wrapping_mul(0xe62d);
@@ -43,15 +40,23 @@ pub fn plan_architect_completed_terraform(
     after[0x5a] = 1;
     after[0x3f..0x41].copy_from_slice(&desired_speed.to_le_bytes());
     after[0x88..0x8a].copy_from_slice(&3i16.to_le_bytes());
-    // 53844 clears working; the ready 526C0 tail clears the newly set move bit.
-    after[0x70] &= !0x90;
-    after[0x16] &= 0x3f;
-    after[0x54] = 0;
-    after[0x49] &= !0x10;
+    //53844 clears working;53973 sets movement before the526C0 tail.
+    after[0x70] = (after[0x70] & !0x80) | 0x10;
     Ok(TerraformCompletionPlan {
         before: *before, after, seed_after: second, rng_journals: [0x78b, 0x7b2],
         stop_audio_channel: 0x29, stop_audio_mode: 4,
         pending_audio_60: before[0x1b] == 2 && before[0x1a] == 0,
         pending_message_16: (first >> 8) % 10 < 5,
     })
+}
+
+/// Completed-job continuation with the previously admitted ready526C0 tail.
+pub fn plan_architect_completed_terraform(before:&[u8;200],blueprint:&[u8;36],job:&[u8;176],seed:u16,desired_speed:i16)
+    ->Result<TerraformCompletionPlan,TerraformCompletionError>{
+    let mut plan=plan_architect_completed_terraform_prefix(before,blueprint,job,seed,desired_speed)?;
+    if before[0x49] & 0x23 != 0x20 || before[0x70] & 0x20 != 0 {
+        return Err(TerraformCompletionError::MovementRequired);
+    }
+    plan.after[0x70]&=!0x10;plan.after[0x16]&=0x3f;plan.after[0x54]=0;plan.after[0x49]&=!0x10;
+    Ok(plan)
 }

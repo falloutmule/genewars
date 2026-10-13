@@ -13,7 +13,7 @@ impl ActorWorld {
         let group=self.layouts[3];
         let pool=BuildingPool::from_packed_inactive(
             &self.backing[group.file_offset..group.file_offset+group.count*group.packed_stride],prior,bindings)?;
-        let mut staged=self.clone();staged.buildings=Some(pool);
+        let mut staged=self.clone();staged.buildings=Some(Box::new(pool));
         staged.validate_building_counts()?;staged.validate_links()?;*self=staged;Ok(())
     }
 

@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-actor-activation-review",
-  "utc": "2026-10-13T20:36:55.861070+00:00",
+  "utc": "2026-10-13T21:48:57.311578+00:00",
   "source_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
@@ -90,7 +90,7 @@
   "harness": {
     "path": "private/review/actor-activation/review.exe",
     "bytes": 5137619,
-    "sha256": "62ad75aa924d973237f0c7aede1da64c2a6614d871138f8a443a2b363f94c330"
+    "sha256": "b4ded9dc27f42c8da19e47e458cb1e4b0cb0cf1f85950a671c451e9795e3fc1c"
   },
   "review_sources": [
     {

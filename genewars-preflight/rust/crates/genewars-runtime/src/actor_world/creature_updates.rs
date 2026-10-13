@@ -26,8 +26,8 @@ impl ActorWorld {
         animations:&MuleAnimations)->Result<MuleCallbackReceipt,ActorWorldError> {
         self.step_mule_followup_inner(context,physics,trig,animations,false)
     }
-    /// Same owned callback with source-backed code30 water factories enabled.
-    /// Unsupported water damage/code15 callbacks still reject atomically.
+    /// Same owned callback with source-backed code30 splash and code15
+    /// deep-water effect factories enabled. Physical damage remains bounded.
     pub fn step_mule_followup_with_water(&mut self,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations)->Result<MuleCallbackReceipt,ActorWorldError> {
         self.step_mule_followup_inner(context,physics,trig,animations,true)
     }
@@ -82,9 +82,13 @@ impl ActorWorld {
         for id in &pending_plant_retirements {staged.retire_mule_food_plant(*id)?;}
         if let Some(request)=water_effect {
             if plan.physics_cell!=plan.new_cell {return Err(CreatureError::MotionEnvironment.into());}
-            if request.code!=0x30 {return Err(CreatureError::MotionEnvironment.into());}
-            if let Some((_slot,events))=staged.create_water_splash(request.position,request.physical_height)? {
-                for event in events {if let crate::landing::LandingEvent::PlayAudio(index)=event {pending_audio.push(index.channel);}}
+            match request.code {
+                0x30=>if let Some((_slot,events))=staged.create_water_splash(request.position,request.physical_height)? {
+                    for event in events {if let crate::landing::LandingEvent::PlayAudio(index)=event {pending_audio.push(index.channel);}}
+                },
+                //6E8CE..6E914 pushes four zero arguments: factory owner0.
+                0x15=>{staged.create_water_effect(0x15,0,request.position,request.physical_height,request.angles,trig)?;},
+                _=>return Err(CreatureError::MotionEnvironment.into()),
             }
         }
         staged.rng=rng;staged.validate_links()?;let mut result=plan;result.after=*staged.creatures.as_ref().unwrap().record(0)?;*self=staged;Ok(MuleCallbackReceipt{motion:result,pending_audio,pending_plant_retirements,pending_portrait_refresh:before[0x5e]==8&&prefix[0x5e]==0})
@@ -94,7 +98,7 @@ impl ActorWorld {
         let own=[0,0,1];let current=[word(before,7),word(before,9)];let final_target=[word(before,11),word(before,13)];
         let mut a=*before;a[0x49]&=0x9f;
         if a[0x49]&3==3||a[0x4f]!=0||a[0x52]!=0||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
-        if a[0x49]&0x10==0&&frame&31==0&&!self.common_move_point_accepted(own,current)? {
+        if a[0x5e]<24&&a[0x49]&0x10==0&&frame&31==0&&!self.common_move_point_accepted(own,current)? {
             if let Some(point)=creature_world::find_common_idle_relocation(current,|point|self.common_move_point_accepted(own,point).map_err(|_|CreatureError::MotionEnvironment))? {a=creature_world::plan_mule_idle_relocation(&a,point)?;a[0x49]&=0xfe;}
         }
         let mut working=if a[0x49]&3!=0 {[word(&a,0x45),word(&a,0x47)]}else{final_target};

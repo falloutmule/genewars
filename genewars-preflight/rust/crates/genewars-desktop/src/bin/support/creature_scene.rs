@@ -1,7 +1,8 @@
 //! Bounded MULE composition for the proved 59470 wrapper path.
 //!
 //! This admits selector 4 and owner 4 in source-pinned states 0, 1, and 8
-//! (animations 0..7), plus state 7 (animation 19), with frame bounds checked
+//! (animations 0..7), state 7 (animation 19), and the bounded mortality pairs
+//! state 24/animation 17 and state 25/animation 18. Frame bounds are checked
 //! against the ANB and ordinary shade rows 0..31. The parity-selected special
 //! shade branch remains rejected. The caller supplies projected origin and
 //! wrapper/global flags. Resource, health-depth, and frame selection come from
@@ -193,6 +194,11 @@ pub fn draw_supported_mule_record(
         1 => animation <= 7,
         7 => animation == 19 && frame_index <= 3,
         8 => animation <= 7,
+        // Literal mortality continuations pin state 24 to animation 17 and
+        // state 25 to corpse animation 18. The ANB remains the authority for
+        // their frame extents (7 and 3 frames respectively).
+        24 => animation == 17,
+        25 => animation == 18,
         _ => false,
     };
     if record[6] != 1 || record[0x18] != 4 || record[0x7a] != 4 || !admitted_pair {
@@ -613,6 +619,33 @@ mod tests {
             0, false, 0, 0, &resources.fade, &resources.gla, [64,48], 64, &mut pixels),
             Err(CreatureDrawError::UnsupportedRecordState));
         assert_eq!(pixels, before);
+        record[0x5e] = 24;
+        record[0x19] = 17;
+        record[0x1b] = 7;
+        assert_eq!(draw_supported_mule_record(&resources.mule, &record, [24,18], 0, 0,
+            0, false, 0, 0, &resources.fade, &resources.gla, [64,48], 64, &mut pixels),
+            Err(CreatureDrawError::UnsupportedRecordState));
+        assert_eq!(pixels, before);
+        record[0x5e] = 25;
+        record[0x19] = 18;
+        record[0x1b] = 3;
+        assert_eq!(draw_supported_mule_record(&resources.mule, &record, [24,18], 0, 0,
+            0, false, 0, 0, &resources.fade, &resources.gla, [64,48], 64, &mut pixels),
+            Err(CreatureDrawError::UnsupportedRecordState));
+        assert_eq!(pixels, before);
+        record[0x5e] = 24;
+        record[0x19] = 18;
+        record[0x1b] = 0;
+        assert_eq!(draw_supported_mule_record(&resources.mule, &record, [24,18], 0, 0,
+            0, false, 0, 0, &resources.fade, &resources.gla, [64,48], 64, &mut pixels),
+            Err(CreatureDrawError::UnsupportedRecordState));
+        assert_eq!(pixels, before);
+        record[0x5e] = 25;
+        record[0x19] = 17;
+        assert_eq!(draw_supported_mule_record(&resources.mule, &record, [24,18], 0, 0,
+            0, false, 0, 0, &resources.fade, &resources.gla, [64,48], 64, &mut pixels),
+            Err(CreatureDrawError::UnsupportedRecordState));
+        assert_eq!(pixels, before);
         record[0x19] = 19;
         record[0x1b] = 4;
         assert_eq!(draw_supported_mule_record(&resources.mule, &record, [24,18], 0, 0,
@@ -822,6 +855,41 @@ mod tests {
             let effective=if record[0x17]==0 {0} else {(i32::from(record[0x17])+(virtual_height>>7)).min(31)};
             let yaw=i16::from_le_bytes([record[0x39],record[0x3a]]);
             writeln!(file,"{{\"source_domain\":\"state7-frame-metadata\",\"state\":7,\"animation\":19,\"frame\":{frame_index},\"scale_a\":{},\"scale_b\":{},\"virtual_height\":{virtual_height},\"raw_shade\":{},\"effective_shade\":{},\"shadow_mode\":0,\"inherited\":0,\"clip_bit\":0,\"origin\":[24,18],\"yaw\":{yaw},\"shadow_color\":7,\"fg_written\":{fg_written},\"fg_clipped\":{fg_clipped},\"sh_written\":{sh_written},\"sh_clipped\":{sh_clipped},\"pixels\":\"{hex}\"}}",record[0x76],record[0x77],record[0x17],effective).unwrap();
+        }
+        // Mortality inputs are literal, source-traced 124-byte records. The
+        // frame substitutions below check every frame admitted by each ANB
+        // animation; only the unmodified fixture frames claim lifecycle
+        // reachability (state 24/frame 1 and state 25/frame 0).
+        for (snapshot_name, relative_path, expected_hash, state, animation, frame_count) in [
+            ("state24-frame1", "private/review/mule-mortality/frame9053/source-after9053.bin",
+                "05a69c5622613cc9da069a22597b18dbc7d0918e540e60931a21ca5df346bc0d", 24u8, 17u8, 7u8),
+            ("state25-frame0", "private/review/mule-mortality/frame9059/source-after9059.bin",
+                "af935ddafbd0905e5a9af69ad4070ad97af1f459d66ddede60e2cbece09e455a", 25u8, 18u8, 3u8),
+        ] {
+            let repository = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+            let bytes = std::fs::read(repository.join(relative_path)).expect("pinned mortality source record");
+            assert_eq!(genewars_runtime::identity::sha256_hex(&bytes), expected_hash);
+            let base: [u8; 124] = bytes.try_into().expect("native creature record size");
+            assert_eq!(base[0x5e], state);
+            assert_eq!(base[0x19], animation);
+            for frame_index in 0..frame_count {
+                let mut record = base;
+                record[0x1b] = frame_index;
+                let virtual_height = i32::from_le_bytes(record[0x27..0x2b].try_into().unwrap())
+                    - i32::from_le_bytes(record[0x11..0x15].try_into().unwrap());
+                let mut pixels = vec![0xa5; 68 * 48 + 4];
+                let receipt = draw_supported_mule_record(&resources.mule, &record, [24,18],
+                    virtual_height, 0, 0, false, 0, 0, &resources.fade, &resources.gla,
+                    [64,48], 68, &mut pixels).expect("source-bound mortality animation frame");
+                let hex = pixels.iter().map(|v| format!("{v:02x}")).collect::<String>();
+                let fg_written = receipt.components.iter().map(|x|x.pixels_written).sum::<usize>();
+                let fg_clipped = receipt.components.iter().map(|x|x.pixels_clipped).sum::<usize>();
+                let sh_written = receipt.shadows.iter().map(|x|x.pixels_written).sum::<usize>();
+                let sh_clipped = receipt.shadows.iter().map(|x|x.pixels_clipped).sum::<usize>();
+                writeln!(file,"{{\"source_domain\":\"mortality-frame-domain\",\"source_snapshot\":\"{snapshot_name}\",\"state\":{state},\"animation\":{animation},\"frame\":{frame_index},\"scale_a\":{},\"scale_b\":{},\"virtual_height\":{virtual_height},\"raw_shade\":{},\"effective_shade\":{},\"shadow_mode\":0,\"inherited\":0,\"clip_bit\":0,\"origin\":[24,18],\"yaw\":{},\"shadow_color\":0,\"fg_written\":{fg_written},\"fg_clipped\":{fg_clipped},\"sh_written\":{sh_written},\"sh_clipped\":{sh_clipped},\"pixels\":\"{hex}\"}}",
+                    record[0x76], record[0x77], record[0x17], receipt.effective_shade,
+                    i16::from_le_bytes([record[0x39], record[0x3a]])).unwrap();
+            }
         }
     }
 }

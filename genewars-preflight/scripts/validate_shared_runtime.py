@@ -67,7 +67,10 @@ def main():
     assert full['mission']['steps']==450 and full['mission']['active_effects']==0
     assert full['mission']['changed_world_frames']>100
     mule=full['mission']['creature_states'][0]
-    assert mule['state']==7 and mule['animation']==19 and mule['target_kind']==2
+    # Corrected footstep RNG interleaving leaves this Mule approaching food.
+    # The captured callback is independently replayed by validate_landing_450.py.
+    assert (mule['state'],mule['animation'],mule['target_kind'])==(1,1,2)
+    assert mule['position']==[15303,16198]
     assert mule['position']!=initial['mission']['creature_states'][0]['position']
     assert all(a['state']==1 and a['position']==a['destination'] for a in full['mission']['actor_states'])
     assert any(a['position']!=[20736,13568]for a in full['mission']['actor_states'])

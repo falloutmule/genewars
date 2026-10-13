@@ -1,0 +1,20 @@
+{
+  "cases": 624,
+  "compared_bytes": 126048,
+  "literal_instruction_steps": 298621,
+  "source_sha256": "031abef43f20a1e04a5b32ea72d00340068e25a7529908d16d72229929e7fecb",
+  "resume_sha256": "325b7f0d36e5bea907d1ddf5a9c54b504274ff64fe44203bc602029074cc8971",
+  "motion_sha256": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
+  "task_motion_sha256": "807b07d32dfd1d93b748c93f8144a34e18ccb8ce5d8ba9199995d8ba34081bcf",
+  "listing_sha256": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "actor-motion/instructions-000526c0.txt": "a6b39ca6b310a62ecb36fdfd08f205ae48e83bde37f949df96023277761c57c2",
+    "actor-motion/instructions-00051930.txt": "f9f2552e82a11b93d3ee858ce9073185ef0e5c74a9bba48775a019b5383730c3",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "activation-rng-refs/instructions-00052340.txt": "a8c4d8761c19c40b94af254de31f43f01d8070ebf40770e67b30f57e43c1befc",
+    "actor-motion/instructions-0001ee30.txt": "3590a299b0f529da8f941168d806f9a5a8edbcc2365e36192d863a006d34d539",
+    "actor-motion/instructions-00057a10.txt": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a"
+  },
+  "tail_sha256": "3f22feef5def16591bb02288573a8037eadb72ca8e8f86472ebf4e4dcb14fea6",
+  "scope": "Whole57A10(post6FB60+queue ports) ordinary selectors stage1/2 completed job; full actor plus seed; source virtual80/actual526C0+52340 ready/unready/blocked tail; audio/UI explicit ports"
+}

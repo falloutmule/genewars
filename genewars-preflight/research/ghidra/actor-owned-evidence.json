@@ -20,7 +20,7 @@
     {
       "seed": 5428,
       "actor_callbacks": 522,
-      "footstep_factories": 37,
+      "footstep_factories": 0,
       "arrivals": [
         {
           "frame": 239,
@@ -40,12 +40,12 @@
         450
       ],
       "late_second_actor_rollback": true,
-      "private_log_sha256": "eaaee4baca77536bb9d46e738427543d801c3b1c05c87f228acef4a19f87fa57"
+      "private_log_sha256": "4a9ed3817105bc9025cbcdf3089ef0ff2d2937201946d35d1d9e689223ad0767"
     },
     {
       "seed": 65535,
       "actor_callbacks": 522,
-      "footstep_factories": 41,
+      "footstep_factories": 0,
       "arrivals": [
         {
           "frame": 243,
@@ -65,7 +65,7 @@
         450
       ],
       "late_second_actor_rollback": true,
-      "private_log_sha256": "30f33fecc5177674b70bc1c801f3e318872517a4e1b482636ead02c302e85438"
+      "private_log_sha256": "1a095ba81cf99bec738a1b0cfb56134792febedc98f426985490465e6166276d"
     }
   ],
   "reorder": {
@@ -78,8 +78,8 @@
   },
   "harness_sha256": "1f82bb25a8df687cc9195aa9bfc5d19076a2c4e3a9aee353e0a8d48ea321a341",
   "production_source_sha256": {
-    "rust/crates/genewars-runtime/src/actor_motion.rs": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f",
-    "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs": "01927dbf45e172e8e507acd925249bc89f2f78815dbfaac8202ea4d83f8b4e77",
-    "rust/crates/genewars-runtime/src/creature_world.rs": "3658a74dc0c1ecc545492489378e80847196457b7775b9a30180be3518d77bf5"
+    "rust/crates/genewars-runtime/src/actor_motion.rs": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
+    "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs": "69a783cb0fa6b3e476be7a42c82ff423eb4c67629e32f0968aa75b0e282050c6",
+    "rust/crates/genewars-runtime/src/creature_world.rs": "f0f4d081c13d1a3aec1beaba2be55048c2cb0f3fae8e9b68744b9547d17e9d5b"
   }
 }

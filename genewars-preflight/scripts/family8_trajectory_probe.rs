@@ -25,7 +25,10 @@ let family8_directions=genewars_runtime::family8_motion::Family8DirectionalAnima
 let family8_animation=genewars_runtime::family8_motion::Family8Animation::from_ethereal_anb(&fs::read(runtime.join("countdown/ETHEREAL.ANB")).unwrap()).unwrap();
 let max_frame=std::env::args().nth(4).map(|s|s.parse::<u32>().unwrap()).unwrap_or(450);
 let capture_stride=std::env::args().nth(6).map(|s|s.parse::<u32>().unwrap()).unwrap_or(1);assert!(capture_stride>0);
+let capture_start=std::env::args().nth(7).map(|s|s.parse::<u32>().unwrap()).unwrap_or(6001);
 for frame in 1..=max_frame {
+    let capture=output.join(format!("frame{frame}"));
+    let sampled=frame==max_frame||(frame>=capture_start&&(frame==capture_start||frame%capture_stride==0));
     let result=(||->Result<(),String>{
         for player in 0..4u8 {let mut index=0usize;loop {let p=world.player(player).unwrap();if index>=p.actor_count()as usize{break;}let id=p.bytes()[4+index]as u16;index+=1;
             if world.actors().record(id as usize).unwrap()[0x70]&1==0{continue;}
@@ -34,18 +37,20 @@ for frame in 1..=max_frame {
         }}
         world.step_empty_building_bookkeeping(0).map_err(|e|format!("building {e:?}"))?;
         if with_mule {
+            if sampled {capture_world(&world,&capture.join("before-mule"));}
             world.step_neutral_creature_callbacks(4,MuleStepContext{frame_counter:frame,gravity:context.gravity,water_height:context.water_height,climate:word(world.backing_bytes(),0x1c61)},&physics,&trig,&mule).map_err(|e|format!("mule {e:?}"))?;
+            if sampled {capture_world(&world,&capture.join("after-mule"));}
         }
         world.tick_plants_with_reproduction(&plant_spread).map_err(|e|format!("plants {e:?}"))?;
-        let capture=output.join(format!("frame{frame}"));
-        let sampled=frame>=6001&&(frame==6001||frame==max_frame||frame%capture_stride==0);
         let fallback=if frame>=6001&&!sampled{Some(world.clone())}else{None};
         if sampled {capture_world(&world,&capture.join("before"));}
         let result=world.step_family8_callbacks(0,4,0,frame,context.water_height,&physics,&trig,&family8_animation,&family8_directions);
         if sampled||result.is_err() {if let Some(ref before)=fallback{capture_world(before,&capture.join("before"));}capture_world(&world,&capture.join("after"));}
         result.map_err(|e|format!("family8 {e:?}"))?;
         world.step_empty_families_7_and_6().map_err(|e|format!("empty67 {e:?}"))?;
+        if sampled {capture_world(&world,&capture.join("before-effects"));}
         ui=world.step_landing_effect_callbacks(context,&physics,&trig,&ui).map_err(|e|format!("effects {e:?}"))?.ui_after;
+        if sampled {capture_world(&world,&capture.join("after-effects"));}
         Ok(())
     })();
     if let Err(e)=result{capture_world(&world,&output.join(format!("frame{frame}/boundary")));println!("STOP frame{frame}: {e}; rng={:?}",world.rng());return;}

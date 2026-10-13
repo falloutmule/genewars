@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "utc": "2026-10-13T20:27:51.332103+00:00",
+  "utc": "2026-10-13T22:05:23.720836+00:00",
   "cases": [
     {
       "seed": 0,
@@ -69,7 +69,7 @@
   "source_pins": {
     "scripts/validate_family_scheduler.py": "e3d8b188daff45388a1813d9906181bfd603c06d8499a8d2b933a1eaa4e9a6b3",
     "scripts/family_scheduler_probe.rs": "35156e4ffa713756dec13a43dd01da93a4be9bc578be77d63cbe3ff106b90066",
-    "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs": "3cfcc1a1e7dbcff0d5bebb5f020c41aa54a359093a5f49660041860f49841cc4",
+    "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs": "827dbdb05ed3415c5038e0e619ab984b28d7b316c53f37377b3b8718bd721ef0",
     "research/variants/initial-creature-source.py": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2"
   },
   "output_sha256": "53951e4e2f45add6f407d177d27b35e32da1a7ec1357e6925b7de4eeee0acfa9",

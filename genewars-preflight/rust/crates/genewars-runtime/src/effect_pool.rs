@@ -5,7 +5,7 @@
 use crate::landing::{LandingFactoryPlan, LandingRecord, FAMILY4_CAPACITY};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum EffectAnimationBinding { EffAnimation49, EffAnimation6, EffAnimation47, EffAnimation48, EffAnimation26 }
+pub enum EffectAnimationBinding { EffAnimation49, EffAnimation6, EffAnimation47, EffAnimation48, EffAnimation26, EffAnimation21, EffAnimation22, EffAnimation44 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum EffectPoolError {
@@ -48,22 +48,35 @@ impl EffectPool {
 
     pub(crate) fn commit_landing_factory(&mut self, plan: &LandingFactoryPlan) -> Result<(), EffectPoolError> {
         let slot = usize::from(plan.slot);
+        self.commit_factory_record(slot, &plan.before, &plan.after_nonpointer, plan.animation_index, plan.animation_pointer_offset)
+    }
+
+    pub(crate) fn commit_building_factory(&mut self, plan: &crate::building_effect::BuildingEffectPlan) -> Result<(), EffectPoolError> {
+        if plan.after[69] != 0x2c || plan.animation_index != 44 { return Err(EffectPoolError::InvalidFactoryPlan); }
+        let slot = u16::from_le_bytes(plan.after[15..17].try_into().unwrap()) as usize;
+        self.commit_factory_record(slot, &plan.before, &plan.after, plan.animation_index, 0x1f)
+    }
+
+    fn commit_factory_record(&mut self, slot: usize, prior: &LandingRecord, after: &LandingRecord,
+        animation_index: u16, pointer_offset: u8) -> Result<(), EffectPoolError> {
         let before = self.record(slot)?;
-        if before != &plan.before { return Err(EffectPoolError::StaleRecord(slot)); }
+        if before != prior { return Err(EffectPoolError::StaleRecord(slot)); }
         if before[6] != 0 { return Err(EffectPoolError::OccupiedSlot(slot)); }
         if self.binding(slot)?.is_some() { return Err(EffectPoolError::StaleBinding(slot)); }
-        let after = &plan.after_nonpointer;
-        let binding = match (after[69],plan.animation_index) {
+        let binding = match (after[69],animation_index) {
             (0x31,49) => EffectAnimationBinding::EffAnimation49,
             (6,6) => EffectAnimationBinding::EffAnimation6,
             (0x30,48) => EffectAnimationBinding::EffAnimation48,
             (0x2F,47) => EffectAnimationBinding::EffAnimation47,
             (0x1A,26) => EffectAnimationBinding::EffAnimation26,
+            (0x15,21) => EffectAnimationBinding::EffAnimation21,
+            (0x16,22) => EffectAnimationBinding::EffAnimation22,
+            (0x2c,44) => EffectAnimationBinding::EffAnimation44,
             _ => return Err(EffectPoolError::InvalidFactoryPlan),
         };
         if self.records.iter().position(|r| r[6] == 0) != Some(slot)
             || after[6] != 5 || word(after,15) != slot as i16 || after[24] >= 4
-            || plan.animation_pointer_offset != 0x1F {
+            || pointer_offset != 0x1F {
             return Err(EffectPoolError::InvalidFactoryPlan);
         }
         if after[31..35] != [0;4] || after[35..39] != before[35..39] {
@@ -85,7 +98,7 @@ impl EffectPool {
     }
     pub(crate) fn retire_checked(&mut self,slot:usize,before:&LandingRecord,after:&LandingRecord)->Result<(),EffectPoolError> {
         if self.record(slot)?!=before { return Err(EffectPoolError::StaleRecord(slot)); }
-        let expected_binding=match before[69] { 0x1A=>EffectAnimationBinding::EffAnimation26,6=>EffectAnimationBinding::EffAnimation6,0x2F=>EffectAnimationBinding::EffAnimation47,0x30=>EffectAnimationBinding::EffAnimation48,0x31=>EffectAnimationBinding::EffAnimation49,_=>return Err(EffectPoolError::InvalidRetirement) };
+        let expected_binding=match before[69] {0x15=>EffectAnimationBinding::EffAnimation21,0x16=>EffectAnimationBinding::EffAnimation22,0x1A=>EffectAnimationBinding::EffAnimation26,6=>EffectAnimationBinding::EffAnimation6,0x2F=>EffectAnimationBinding::EffAnimation47,0x30=>EffectAnimationBinding::EffAnimation48,0x31=>EffectAnimationBinding::EffAnimation49,_=>return Err(EffectPoolError::InvalidRetirement) };
         if before[6]!=5||self.binding(slot)?!=Some(expected_binding) { return Err(EffectPoolError::InvalidRetirement); }
         let mut expected=*before;expected[6]=0;
         if expected[73]==5&&word(&expected,71)==slot as i16 { expected[73]=0; }

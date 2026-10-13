@@ -1670,11 +1670,11 @@
     },
     {
       "path": "research/ghidra/actor-animation-evidence.json",
-      "sha256": "be7da444076b67ec15cf563847c1869f0677033cd68b0df4145b8529dfef144d"
+      "sha256": "ead238b8aa1a05e9bd645fa869cbdefabf50593c4d9daf3f44cf2954fbfbb5a8"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_motion.rs",
-      "sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f"
+      "sha256": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400"
     },
     {
       "path": "private/ghidra/actor-panel-font-color/instructions-0001d770.txt",

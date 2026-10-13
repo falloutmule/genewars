@@ -1,0 +1,110 @@
+{
+  "scope": "Focused pixel/source-receipt repair rerun after aggregate failures; not a full workspace aggregate.",
+  "source_receipt_unittest": {
+    "command": "python -m unittest discover -s scripts/desktop -p test_family8_source_receipts.py -v",
+    "tests": 4,
+    "passed": 4
+  },
+  "pixel_gates": {
+    "family8_state4": {
+      "receipt": "research/integration/family8-initial-selectors-pixel-validation-current.json",
+      "receipt_sha256": "86caf745385caebea83fd23c958073e503f2546ca124faf3e554a5bc888285a4",
+      "cases": 5,
+      "full_pixel_match": true
+    },
+    "family8_state5": {
+      "receipt": "research/integration/family8-state5-pixel-validation-current.json",
+      "receipt_sha256": "d2e111fe36e79e81f4b1ea82cc910892200d1c66736190c426e91092d41b931c",
+      "cases": 1,
+      "full_pixel_match": true
+    },
+    "family8_direction4": {
+      "receipt": "research/integration/family8-selector1-direction4-pixel-validation-current.json",
+      "receipt_sha256": "bbb6a14e0de455e5e2cae2463c654b5072419324edc1a52addc15a78f92b4970",
+      "cases": 2,
+      "full_pixel_match": true
+    },
+    "family8_state1": {
+      "receipt": "research/integration/family8-selector1-state1-pixel-validation-current.json",
+      "receipt_sha256": "c33947fa5d1942beba71ee0fe1cc3a03082e726304336dbe853e317a7d36048a",
+      "cases": 2,
+      "full_pixel_match": true
+    },
+    "family8_state3": {
+      "receipt": "research/integration/family8-selector1-state3-pixels-current.json",
+      "receipt_sha256": "198e3daba92df192bc81734ea84e57e6037311120609fa06c906f19afa097b08",
+      "cases": 2,
+      "full_pixel_match": true
+    },
+    "family8_state3_return": {
+      "receipt": "research/integration/family8-selector1-state3-return-pixels-current.json",
+      "receipt_sha256": "2a597bd8c0a2f7d4c051ce1d9b3fee1d7cdd8e6fb2856bbc17ea1bcc27ae1a50",
+      "cases": 2,
+      "full_pixel_match": true
+    },
+    "family8_parent": {
+      "receipt": "research/integration/family8-parent-pixels-current.json",
+      "receipt_sha256": "41d7b59478e7f3f5a61e3813988ff4c4d73da03b11211cb8ceeedda02ace9d3b",
+      "cases": 2,
+      "full_pixel_match": true
+    },
+    "eff26": {
+      "receipt": "research/integration/eff26-pixel-validation-current.json",
+      "receipt_sha256": "3af6bce37e104b8c6f900fd6bac5ad5e3ff726557a4d2aec872ed35e0f11a469",
+      "cases": 4,
+      "full_pixel_match": true
+    }
+  },
+  "raw_pixel_mismatches": 0,
+  "source_admission_relaxed": false,
+  "code_pins": {
+    "scripts/desktop/test_family8_source_receipts.py": {
+      "bytes": 2955,
+      "sha256": "579756292613b20d3c7fd59506ce403e646b639ef166a7b0e28e8e5d9fb20f42"
+    },
+    "scripts/desktop/family8_source_receipts.py": {
+      "bytes": 7334,
+      "sha256": "19e059687f3b702bce742c67b50ccbe73a42bce69001cac1c8f06157e3ac2db7"
+    },
+    "scripts/desktop/validate_family8_state4_pixels.py": {
+      "bytes": 12608,
+      "sha256": "d7dce55c574c4f5108ea49fe449f47c9c0751508c815a44bf45bc27f8aea84c6"
+    },
+    "scripts/desktop/validate_family8_state5_pixels.py": {
+      "bytes": 8007,
+      "sha256": "e1f72658713ea258d4c70241bb732f90ce66dd45da4f2c8f095a096f1aa0c162"
+    },
+    "scripts/desktop/validate_family8_selector1_direction4_pixels.py": {
+      "bytes": 8233,
+      "sha256": "4c6382ec4dd8ef0400af3d59517d4f79a55e8ebf10300536905e8f513dc8f1f9"
+    },
+    "scripts/desktop/validate_family8_selector1_state1_pixels.py": {
+      "bytes": 8268,
+      "sha256": "3e0ef4781beaa6c439320cc17ee923d7f58798b65d898e9ffb82ffac0e9463af"
+    },
+    "scripts/desktop/validate_family8_selector1_state3_pixels.py": {
+      "bytes": 9455,
+      "sha256": "9ef769d5db6c2502b1220c37571243f8f6385b31912da49fcf1b847832d39b21"
+    },
+    "scripts/desktop/validate_family8_selector1_state3_return_pixels.py": {
+      "bytes": 7849,
+      "sha256": "90850b646d3c1dbb06cea5a2b8b2b22435d50a093b495d462d66b345558959e9"
+    },
+    "scripts/desktop/validate_family8_parent_pixels.py": {
+      "bytes": 9222,
+      "sha256": "4bb40fef63570d2d3c687c9f6b75973220cdbe4124385731f76fb51d3f130cda"
+    },
+    "scripts/desktop/validate_eff26_pixels.py": {
+      "bytes": 5232,
+      "sha256": "ae555a1af25fc2db5729f7bfca2eb7909cde069c1783c396c5d344610d396790"
+    },
+    "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs": {
+      "bytes": 49228,
+      "sha256": "30fb699b62702876092261c7b083696f944bd49ac9bf1b953027b2882eb35a6e"
+    },
+    "rust/crates/genewars-desktop/src/bin/support/creature_scene.rs": {
+      "bytes": 50085,
+      "sha256": "368e99c09d36219142a5239afdb960dd7db779e5dda18d2c5d32848c3c37e71a"
+    }
+  }
+}

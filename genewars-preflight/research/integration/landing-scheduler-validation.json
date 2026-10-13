@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T20:30:36.226078+00:00",
+  "verified_at": "2026-10-13T21:40:20.911594+00:00",
   "sessions": [
     {
       "seed": "0",
@@ -80,15 +80,15 @@
   "implementation_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "18633907e526995cf776a612e5ac93dc09865a21a017ae22564648c7129e480c"
+      "sha256": "b734e36e2da412a9c445c8585975e77055a60292b4ee18f454b3153e8f934aad"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
-      "sha256": "002cb2f1ae45cff667317c7e7f740055e59e2eb33f31806fe2a17a1d92813512"
+      "sha256": "9513ecc802d333c046841a80f8f292ce0e3962233a7e16b870784baa6d92f266"
     },
     {
       "path": "rust/crates/genewars-runtime/src/creature_world.rs",
-      "sha256": "3658a74dc0c1ecc545492489378e80847196457b7775b9a30180be3518d77bf5"
+      "sha256": "2ce6d5bbd8647ffa6d10f423b148461536a1785c2c46bef2f05c17410ef03a50"
     },
     {
       "path": "rust/crates/genewars-runtime/src/player_state.rs",

@@ -1,7 +1,7 @@
 {
   "status": "passed-bounded-family8-parent-notification-state8",
   "draft": false,
-  "utc": "2026-10-13T21:03:35.571286+00:00",
+  "utc": "2026-10-13T21:36:51.661444+00:00",
   "notification_cases": 320,
   "state8_callbacks": 144,
   "compared_bytes": 52176,
@@ -88,12 +88,16 @@
       "sha256": "43d1a9c61f2f62fdedd209067039ee29105078e4556cac32106e464a4c7f1a09"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/actor_construction_tail.rs",
+      "sha256": "3f22feef5def16591bb02288573a8037eadb72ca8e8f86472ebf4e4dcb14fea6"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
       "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_motion.rs",
-      "sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f"
+      "sha256": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
@@ -109,7 +113,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "40e35ad03759123a144c002bdbc3e8fc7d09797f56b7741f05d03923a4a49f48"
+      "sha256": "b734e36e2da412a9c445c8585975e77055a60292b4ee18f454b3153e8f934aad"
     },
     {
       "path": "rust/crates/genewars-runtime/src/blueprint.rs",
@@ -141,7 +145,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_pool.rs",
-      "sha256": "165d8bde978d5a884e4b69238e0223481de8d0cb10a6c259c5c3be5753acda38"
+      "sha256": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5"
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_progress.rs",
@@ -188,6 +192,10 @@
       "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/construction_wait.rs",
+      "sha256": "3e339a034c14c3f7f4fc515418675eb357d844c473d9d5024797750cc3b0f6ae"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/countdown_expiry.rs",
       "sha256": "fdc5b172dc4fbd41ccf52bc877a9b0d7db6999c7166aba74125e7c9097c59dfb"
     },
@@ -205,7 +213,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_motion.rs",
-      "sha256": "b1de818f5405e5adca59e8dc282a39d63c65e8b52d3dfe86c5d999d2fd8760a7"
+      "sha256": "663aa8b16f81a3ab1dec85c967cb189ad0d63ca64a1fea72ec2f7ac5ae4a21af"
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_particle.rs",
@@ -213,7 +221,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_pool.rs",
-      "sha256": "1eef56e452d7736ba11b5d7d29b3cda1fbb38db0955a3f2cdf4258100544318d"
+      "sha256": "5499c31f564672a8c31f39ae10e5d0204c5e96cf16da630cd525113a93df86cc"
     },
     {
       "path": "rust/crates/genewars-runtime/src/identity.rs",
@@ -229,7 +237,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/lib.rs",
-      "sha256": "4e668a87ddfa1d4338f1bc9a6ead00da70fa211041854e3ae608611cd471f5f7"
+      "sha256": "ff4f03c5f9189e75b392fee756c56992cad4c7a54c4cf358bdef3fc16b1cf1bb"
     },
     {
       "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
@@ -277,7 +285,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/building_updates.rs",
-      "sha256": "f2a1b088c56ba609bde1a545d0dd014e71c4570f15a56e928d7c6d9080d4e484"
+      "sha256": "ff4cbe44324236d1c86dd38a8469bc50fd0e6278d91b7084faaa1f1ad7bc9015"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
@@ -289,11 +297,11 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family8_retirement.rs",
-      "sha256": "54854c7c5fdc380d6d85656a12a415131043352218ba4c3c765b673376d46d22"
+      "sha256": "8b8a94836a6c42854af3d0a435293e1f33eae0082c1c02689113c405b98713d6"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family8_updates.rs",
-      "sha256": "3830bac66d12e72d2366f76b96f20bd06af60a0d355a53f626c6185653f4ff16"
+      "sha256": "a26fce7a3ace1f0c7cf03f33bc9d5a00d54218902bbff4f070efdcf3cf57bc75"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
@@ -306,6 +314,10 @@
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
       "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/terrain_updates.rs",
+      "sha256": "aa9fb2176ded7f50891520f1418d7276ee0d3926c0461c491b8624b072465dca"
     },
     {
       "path": "rust/crates/genewars-runtime/src/world/plant_creation.rs",
@@ -419,7 +431,7 @@
   "review_pins": [
     {
       "path": "research/variants/family8-parent-review.py",
-      "sha256": "3aaf0674ae55d9ce11a1bda5f09db1bc62e3af80fb5448024d503391c763bc86"
+      "sha256": "869bc7409f083245deada35a62c0104d7ebee5e74a1bc7df0f2f822b663d91d7"
     },
     {
       "path": "research/variants/family8-parent-review.rs",
@@ -456,8 +468,28 @@
       "sha256": "e9af157f35e70fbd734717a775a2e8127f0c303cfd45ae4bc503a84da46c4105"
     },
     {
+      "path": "private/review/family8-parent/state8-pools.bin",
+      "sha256": "054d0d7311ac450e29d788ef2edc5ce7412db72e2a177fb60c75190f818e5c3a"
+    },
+    {
       "path": "private/review/family8-parent/source.json",
       "sha256": "546a609d394737c742b6f05c821e37df832ef0f47235f7c94c3010f0856c9307"
+    },
+    {
+      "path": "private/review/family8-parent/map.bin",
+      "sha256": "98eb71bc8c8cef7af60e7911225dcd09ce2e6bdc2788e6f89c614082c8ed9091"
+    },
+    {
+      "path": "private/review/family8-parent/angles.bin",
+      "sha256": "1c26f16f88a3e0cedc9c879837b3849567ff70514c033eb6249bd95a264debce"
+    },
+    {
+      "path": "private/review/family8-parent/bounce.bin",
+      "sha256": "c62a747206c89218e01102645341f151f5308fe1259b177f9d0418a67575e5e5"
+    },
+    {
+      "path": "private/review/family8-parent/ethereal.anb",
+      "sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4"
     }
   ],
   "original_execution": false,
@@ -465,7 +497,7 @@
   "limits": [
     "Input parent is actual combined before6442 slot2 after live child retirement. Later callbacks hold other families fixed.",
     "Counter is signed32; threshold is zero-extended unsigned16. Negative branch RNG is interpreted; formatter/module work is an explicit variant request.",
-    "State8 admission is stationary. Allactive selector0 parents must be state8 before transition9 with twoRNG draws. Later state9/6/7 callbacks remain unsupported.",
-    "Periodic false current-point result rejects. Native world supplies actual player counter, threshold, pool and query."
+    "State8 admission is stationary. Allactive selector0 parents must be state8 before transition9 with twoRNG draws. Later state9 has a separate receipt; state6/state7 callbacks remain unsupported.",
+    "Native world supplies actual player counter, threshold, pool and query; separate idle proof admits both numeric query outcomes."
   ]
 }

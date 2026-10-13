@@ -1,0 +1,23 @@
+{
+  "cases": 48,
+  "funded": 24,
+  "insufficient": 24,
+  "compared_bytes": 11106288,
+  "literal_instructions": 20248,
+  "source_pins": {
+    "actor-motion/instructions-00057a10.txt": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a",
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-00051e80.txt": "38a7ad744f800c438cf7b208ed596f919c38c4309a8e8d2cd68f679976202839",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "validated/instructions-0008d5f0.txt": "c66a1e05095397611f83ecfa25aab5c3b1e42f72b165a2b86550b682cc33c23f",
+    "terrain-map-refs/instructions-000753f0.txt": "ea2554be981b0acae18e192ba9827ebdf4e4dea2d8e6fbee83f889ec15f390c5",
+    "validated/instructions-0008d580.txt": "08fc85698d73460faaef4a6dd81457eb199a60c9aacda9380239e5f3278034c3"
+  },
+  "implementation_pins": {
+    "construction_payment": "ce6aa8da2d840279cdeea469a9a60b7dd637e784fd93a2dcbd9ad4917b38328d",
+    "construction_cancellation": "233009cd7be67d22ea0f696b446f68071ae0d88866fc155316f476013ca7881e",
+    "actor_motion": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
+    "actor_construction_tail": "422ea3e71110f4db1782f5880592cb856ac8d8b0c3ef37a2d82c000a62eeb8bb"
+  },
+  "scope": "Whole57A10 post6FB60 port:actual534D0 stage3 paid/zero-fund51E80 cancellation,selectedanimation and7AC00;queue and73970 yaw explicit ports;wholeactor/player/map;zeroRNG;syntheticresourceholds0/flags0."
+}

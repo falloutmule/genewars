@@ -272,7 +272,7 @@ impl ActorWorld {
         let pool = Family8Pool::from_packed_inactive(
             &self.backing[group.file_offset..group.file_offset + group.count * group.packed_stride], prior, bindings)?;
         let mut staged = self.clone();
-        staged.family8 = Some(pool);
+        staged.family8 = Some(Box::new(pool));
         staged.validate_family8_count()?;
         staged.validate_links()?;
         *self = staged;

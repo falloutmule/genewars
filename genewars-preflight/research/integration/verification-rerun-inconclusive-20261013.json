@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "baseline": "research/integration/verification-20261013-214905.json",
+  "baseline_sha256": "50d8a97970badea310c657f0083a62722d770f6de4a615783e916b450bbb9314",
+  "baseline_completed_utc": "2026-10-13T21:49:05.866014+00:00",
+  "failed_check_count": 29,
+  "rerun_count": 5,
+  "scope": "Sequential rerun of checks marked false in the preserved aggregate; does not claim the full aggregate is green.",
+  "results": [
+    {
+      "label": "rust_workspace_tests",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/cargo.py",
+        "test",
+        "--workspace",
+        "--offline",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "da6a3c655714597e29ccc936b9888a4ce52b725e09e50bec89a5a9a085c46aa8",
+      "source_after_sha256": "da6a3c655714597e29ccc936b9888a4ce52b725e09e50bec89a5a9a085c46aa8",
+      "source_stable": true,
+      "changed_source_paths": [],
+      "source_file_count_before": 522,
+      "source_file_count_after": 522,
+      "log": "private/integration/verification-rerun-inconclusive-20261013/01-rust_workspace_tests.log",
+      "duration_seconds": 74.106
+    },
+    {
+      "label": "neutral_plant_initialization",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_plant_initialization.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "da6a3c655714597e29ccc936b9888a4ce52b725e09e50bec89a5a9a085c46aa8",
+      "source_after_sha256": "da6a3c655714597e29ccc936b9888a4ce52b725e09e50bec89a5a9a085c46aa8",
+      "source_stable": true,
+      "changed_source_paths": [],
+      "source_file_count_before": 522,
+      "source_file_count_after": 522,
+      "log": "private/integration/verification-rerun-inconclusive-20261013/02-neutral_plant_initialization.log",
+      "duration_seconds": 5.049
+    },
+    {
+      "label": "owned_mule_water",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/creature-water-review.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "da6a3c655714597e29ccc936b9888a4ce52b725e09e50bec89a5a9a085c46aa8",
+      "source_after_sha256": "da6a3c655714597e29ccc936b9888a4ce52b725e09e50bec89a5a9a085c46aa8",
+      "source_stable": true,
+      "changed_source_paths": [],
+      "source_file_count_before": 522,
+      "source_file_count_after": 522,
+      "log": "private/integration/verification-rerun-inconclusive-20261013/03-owned_mule_water.log",
+      "duration_seconds": 11.276
+    },
+    {
+      "label": "associated_actor_activation",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_associated_activation.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "da6a3c655714597e29ccc936b9888a4ce52b725e09e50bec89a5a9a085c46aa8",
+      "source_after_sha256": "da6a3c655714597e29ccc936b9888a4ce52b725e09e50bec89a5a9a085c46aa8",
+      "source_stable": true,
+      "changed_source_paths": [],
+      "source_file_count_before": 522,
+      "source_file_count_after": 522,
+      "log": "private/integration/verification-rerun-inconclusive-20261013/04-associated_actor_activation.log",
+      "duration_seconds": 0.973
+    },
+    {
+      "label": "owned_actor_motion",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_actor_owned.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "da6a3c655714597e29ccc936b9888a4ce52b725e09e50bec89a5a9a085c46aa8",
+      "source_after_sha256": "da6a3c655714597e29ccc936b9888a4ce52b725e09e50bec89a5a9a085c46aa8",
+      "source_stable": true,
+      "changed_source_paths": [],
+      "source_file_count_before": 522,
+      "source_file_count_after": 522,
+      "log": "private/integration/verification-rerun-inconclusive-20261013/05-owned_actor_motion.log",
+      "duration_seconds": 21.031
+    }
+  ]
+}

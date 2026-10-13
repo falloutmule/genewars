@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "classification": "Corroborated static contract and native pure API comparisons",
-  "utc": "2026-10-13T20:31:42.461705+00:00",
+  "utc": "2026-10-13T21:41:32.866159+00:00",
   "original_execution": false,
   "source_pins": [
     {
@@ -207,7 +207,7 @@
   "native_harness": {
     "path": "private/review/plant-passes/review.exe",
     "size": 5207348,
-    "sha256": "5a399176b882672088d51cf661e7c62e2a1d4f16164e841ecb1ef26ef6b127b1"
+    "sha256": "8b3724fdad479c3a284ebd1ddd953724c15864a90819ec49ff2e8357d6cd30c8"
   },
   "synthetic_anb": {
     "path": "private/review/plant-passes/synthetic.anb",

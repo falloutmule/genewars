@@ -1,0 +1,7 @@
+The native factories and postphysics lifetimes for effects 0x15 and 0x16 match 964 literal listing fixtures: 79,884 bytes and 188,358 instructions. The matrix includes random inactive priors, explicit angles, timer/termination conditions, hold bytes 0/1/127/128/255 and frame clamping beyond the animation bounds. Source 7AC00 clamps holds to zero for these resources; the native API now preserves that behavior.
+
+Effect 0x15 uses mode 3 and two EFF frames. After physics and animation, signed raw water height at 11A9C3 is compared with physical height. Reaching that height requests effect 0x16 before retiring the parent. Otherwise, speed at most 64 while on/below ground retires without a child. Effect 0x16 uses mode 0 and three zero-hold frames, retiring at its final frame when the timer is negative.
+
+The focused lifetime comparison deliberately treats physics as an input boundary. Child allocation returns NULL in the source oracle; its exact request parameters are checked independently of allocation success. Map links, cleanup, same-frame newborn processing, full-pool replacement and full physics are separate adapter concerns. No original program or GUI ran.
+
+The actual seed 65,535 callback 5,859 requests effect 0x15 at [14367, 17372], height 1,073, angles [0, 0, 128], with four zero stack arguments and no RNG draw. Its full factory replay is prepared privately for a subsequent captured whole-world comparison; that preparation is not itself a native comparison.

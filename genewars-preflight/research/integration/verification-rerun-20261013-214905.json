@@ -1,0 +1,517 @@
+{
+  "schema_version": 1,
+  "baseline": "research/integration/verification-20261013-214905.json",
+  "baseline_sha256": "50d8a97970badea310c657f0083a62722d770f6de4a615783e916b450bbb9314",
+  "baseline_completed_utc": "2026-10-13T21:49:05.866014+00:00",
+  "failed_check_count": 29,
+  "rerun_count": 29,
+  "scope": "Sequential rerun of checks marked false in the preserved aggregate; does not claim the full aggregate is green.",
+  "results": [
+    {
+      "label": "rust_workspace_tests",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/cargo.py",
+        "test",
+        "--workspace",
+        "--offline",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "55f95097008ec3e931bf12a1bb761dabc84187ad4e9c23e0393b3afa9d2829d4",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": false,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/01-rust_workspace_tests.log",
+      "duration_seconds": 76.061
+    },
+    {
+      "label": "family8_onward_callback",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/family8-onward-review.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": true,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/02-family8_onward_callback.log",
+      "duration_seconds": 19.55
+    },
+    {
+      "label": "family8_pixel_source_receipts",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/desktop",
+        "-p",
+        "test_family8_source_receipts.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": true,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/03-family8_pixel_source_receipts.log",
+      "duration_seconds": 0.282
+    },
+    {
+      "label": "family8_state4_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/desktop/validate_family8_state4_pixels.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": true,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/04-family8_state4_pixels.log",
+      "duration_seconds": 4.786
+    },
+    {
+      "label": "family8_state5_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/desktop/validate_family8_state5_pixels.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": true,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/05-family8_state5_pixels.log",
+      "duration_seconds": 1.459
+    },
+    {
+      "label": "family8_direction_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/desktop/validate_family8_selector1_direction4_pixels.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": true,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/06-family8_direction_pixels.log",
+      "duration_seconds": 1.487
+    },
+    {
+      "label": "family8_state1_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/desktop/validate_family8_selector1_state1_pixels.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": true,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/07-family8_state1_pixels.log",
+      "duration_seconds": 0.361
+    },
+    {
+      "label": "family8_state3_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/desktop/validate_family8_selector1_state3_pixels.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": true,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/08-family8_state3_pixels.log",
+      "duration_seconds": 1.519
+    },
+    {
+      "label": "family8_state3_return_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/desktop/validate_family8_selector1_state3_return_pixels.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": true,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/09-family8_state3_return_pixels.log",
+      "duration_seconds": 1.354
+    },
+    {
+      "label": "family8_parent_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/desktop/validate_family8_parent_pixels.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": true,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/10-family8_parent_pixels.log",
+      "duration_seconds": 1.515
+    },
+    {
+      "label": "family8_particle_pixels",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/desktop/validate_eff26_pixels.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": true,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/11-family8_particle_pixels.log",
+      "duration_seconds": 2.568
+    },
+    {
+      "label": "neutral_creature_scheduler",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_family_scheduler.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_stable": true,
+      "source_file_count_before": 519,
+      "source_file_count_after": 519,
+      "log": "private/integration/verification-rerun-20261013-214905/12-neutral_creature_scheduler.log",
+      "duration_seconds": 2.254
+    },
+    {
+      "label": "neutral_plant_initialization",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_plant_initialization.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "8c33d915eb0861dee4524630dcd714613661df391f6b8c40f18f69c01847577f",
+      "source_after_sha256": "e7a9033bd098f218323c712f6dc28f6db562d800532b268e4425a9ea434b7a7d",
+      "source_stable": false,
+      "source_file_count_before": 519,
+      "source_file_count_after": 520,
+      "log": "private/integration/verification-rerun-20261013-214905/13-neutral_plant_initialization.log",
+      "duration_seconds": 5.07
+    },
+    {
+      "label": "neutral_plant_factory",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_plant_factory.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "e7a9033bd098f218323c712f6dc28f6db562d800532b268e4425a9ea434b7a7d",
+      "source_after_sha256": "e7a9033bd098f218323c712f6dc28f6db562d800532b268e4425a9ea434b7a7d",
+      "source_stable": true,
+      "source_file_count_before": 520,
+      "source_file_count_after": 520,
+      "log": "private/integration/verification-rerun-20261013-214905/14-neutral_plant_factory.log",
+      "duration_seconds": 2.682
+    },
+    {
+      "label": "owned_mule_water",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/creature-water-review.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "e7a9033bd098f218323c712f6dc28f6db562d800532b268e4425a9ea434b7a7d",
+      "source_after_sha256": "c7dedf596973f0fa10cdd5d01ddc7c329408f426045cf2bca3d2f7cd86ac0f06",
+      "source_stable": false,
+      "source_file_count_before": 520,
+      "source_file_count_after": 520,
+      "log": "private/integration/verification-rerun-20261013-214905/15-owned_mule_water.log",
+      "duration_seconds": 11.581
+    },
+    {
+      "label": "plant_spread_target",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_plant_spread.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "c7dedf596973f0fa10cdd5d01ddc7c329408f426045cf2bca3d2f7cd86ac0f06",
+      "source_after_sha256": "c7dedf596973f0fa10cdd5d01ddc7c329408f426045cf2bca3d2f7cd86ac0f06",
+      "source_stable": true,
+      "source_file_count_before": 520,
+      "source_file_count_after": 520,
+      "log": "private/integration/verification-rerun-20261013-214905/16-plant_spread_target.log",
+      "duration_seconds": 3.649
+    },
+    {
+      "label": "plant_reproduction_scheduler",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_plant_reproduction.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "c7dedf596973f0fa10cdd5d01ddc7c329408f426045cf2bca3d2f7cd86ac0f06",
+      "source_after_sha256": "c7dedf596973f0fa10cdd5d01ddc7c329408f426045cf2bca3d2f7cd86ac0f06",
+      "source_stable": true,
+      "source_file_count_before": 520,
+      "source_file_count_after": 520,
+      "log": "private/integration/verification-rerun-20261013-214905/17-plant_reproduction_scheduler.log",
+      "duration_seconds": 15.979
+    },
+    {
+      "label": "backward_target_resolver",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_target_resolver.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "c7dedf596973f0fa10cdd5d01ddc7c329408f426045cf2bca3d2f7cd86ac0f06",
+      "source_after_sha256": "c7dedf596973f0fa10cdd5d01ddc7c329408f426045cf2bca3d2f7cd86ac0f06",
+      "source_stable": true,
+      "source_file_count_before": 520,
+      "source_file_count_after": 520,
+      "log": "private/integration/verification-rerun-20261013-214905/18-backward_target_resolver.log",
+      "duration_seconds": 8.032
+    },
+    {
+      "label": "independent_mule_scene",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_mule_scene.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "c7dedf596973f0fa10cdd5d01ddc7c329408f426045cf2bca3d2f7cd86ac0f06",
+      "source_after_sha256": "c7dedf596973f0fa10cdd5d01ddc7c329408f426045cf2bca3d2f7cd86ac0f06",
+      "source_stable": true,
+      "source_file_count_before": 520,
+      "source_file_count_after": 520,
+      "log": "private/integration/verification-rerun-20261013-214905/19-independent_mule_scene.log",
+      "duration_seconds": 0.685
+    },
+    {
+      "label": "associated_actor_activation",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_associated_activation.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "c7dedf596973f0fa10cdd5d01ddc7c329408f426045cf2bca3d2f7cd86ac0f06",
+      "source_after_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_stable": false,
+      "source_file_count_before": 520,
+      "source_file_count_after": 521,
+      "log": "private/integration/verification-rerun-20261013-214905/20-associated_actor_activation.log",
+      "duration_seconds": 1.369
+    },
+    {
+      "label": "actor_resource_catalog",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_actor_resources.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_after_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_stable": true,
+      "source_file_count_before": 521,
+      "source_file_count_after": 521,
+      "log": "private/integration/verification-rerun-20261013-214905/21-actor_resource_catalog.log",
+      "duration_seconds": 2.29
+    },
+    {
+      "label": "actor_environment_native",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/actor-environment-native.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_after_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_stable": true,
+      "source_file_count_before": 521,
+      "source_file_count_after": 521,
+      "log": "private/integration/verification-rerun-20261013-214905/22-actor_environment_native.log",
+      "duration_seconds": 6.043
+    },
+    {
+      "label": "actor_render_independent",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research/variants/actor-render-review.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_after_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_stable": true,
+      "source_file_count_before": 521,
+      "source_file_count_after": 521,
+      "log": "private/integration/verification-rerun-20261013-214905/23-actor_render_independent.log",
+      "duration_seconds": 8.482
+    },
+    {
+      "label": "landing_bridge",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_landing_bridge.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_after_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_stable": true,
+      "source_file_count_before": 521,
+      "source_file_count_after": 521,
+      "log": "private/integration/verification-rerun-20261013-214905/24-landing_bridge.log",
+      "duration_seconds": 2.441
+    },
+    {
+      "label": "common_water_callbacks",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_common_water_tail.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_after_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_stable": true,
+      "source_file_count_before": 521,
+      "source_file_count_after": 521,
+      "log": "private/integration/verification-rerun-20261013-214905/25-common_water_callbacks.log",
+      "duration_seconds": 0.85
+    },
+    {
+      "label": "owned_actor_motion",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_actor_owned.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "491dbd9f10b379c0da0ba788878264cd201d9c3f37310b72b11d2470efae862c",
+      "source_after_sha256": "f976c83301e50a094126daae51d6c4bc68c1889ca921588179496ec0b544f954",
+      "source_stable": false,
+      "source_file_count_before": 521,
+      "source_file_count_after": 521,
+      "log": "private/integration/verification-rerun-20261013-214905/26-owned_actor_motion.log",
+      "duration_seconds": 22.252
+    },
+    {
+      "label": "actor_waypoint_motion",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/ghidra/validate_actor_waypoint.py"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "f976c83301e50a094126daae51d6c4bc68c1889ca921588179496ec0b544f954",
+      "source_after_sha256": "f976c83301e50a094126daae51d6c4bc68c1889ca921588179496ec0b544f954",
+      "source_stable": true,
+      "source_file_count_before": 521,
+      "source_file_count_after": 521,
+      "log": "private/integration/verification-rerun-20261013-214905/27-actor_waypoint_motion.log",
+      "duration_seconds": 12.067
+    },
+    {
+      "label": "native_runtime_flow_and_failures",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_runtime.py",
+        "--window-smoke"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "f976c83301e50a094126daae51d6c4bc68c1889ca921588179496ec0b544f954",
+      "source_after_sha256": "f976c83301e50a094126daae51d6c4bc68c1889ca921588179496ec0b544f954",
+      "source_stable": true,
+      "source_file_count_before": 521,
+      "source_file_count_after": 521,
+      "log": "private/integration/verification-rerun-20261013-214905/28-native_runtime_flow_and_failures.log",
+      "duration_seconds": 46.709
+    },
+    {
+      "label": "owned_landing_runtime",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/validate_shared_runtime.py",
+        "--release",
+        "--window-smoke"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_before_sha256": "f976c83301e50a094126daae51d6c4bc68c1889ca921588179496ec0b544f954",
+      "source_after_sha256": "f976c83301e50a094126daae51d6c4bc68c1889ca921588179496ec0b544f954",
+      "source_stable": true,
+      "source_file_count_before": 521,
+      "source_file_count_after": 521,
+      "log": "private/integration/verification-rerun-20261013-214905/29-owned_landing_runtime.log",
+      "duration_seconds": 56.957
+    }
+  ]
+}

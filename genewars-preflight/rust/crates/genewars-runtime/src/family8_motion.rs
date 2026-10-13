@@ -319,7 +319,7 @@ pub fn plan_selector1_state1_travel(before:&Family8Record,map:&[u8],frame:u32,wa
     if map.len()!=229376{return Err(Family8MotionError::MapLength);}
     if rng.ring>=32{return Err(Family8MotionError::InvalidRng);}
     if before[6]!=8||!(0..16).contains(&w(before,15))||before[0x18]>=4||before[0x55]!=1||before[0x56]!=1||before[0x57]!=1
-        ||before[0x15]!=0x20||before[0x16]!=0||w(before,0x49)as u16&!0x2024!=0x210
+        ||before[0x15]!=0x20||before[0x16]!=0||w(before,0x49)as u16&!0x6024!=0x210
         ||before[0x4f]!=0||before[0x52]!=0||w(before,0x3f)<0||w(before,0x41)<0||w(before,0x64)!=0{
         return Err(Family8MotionError::UnsupportedRecord);
     }

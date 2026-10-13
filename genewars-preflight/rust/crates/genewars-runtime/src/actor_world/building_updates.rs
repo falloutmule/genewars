@@ -12,6 +12,8 @@ pub enum ConstructionWorldError {
     TerraformCompletion(crate::construction_terraform_completion::TerraformCompletionError),
     PendingTaskRequired,
     TaskMovement(crate::construction_motion::ConstructionMotionError),
+    Wait(crate::construction_wait::TerraformWaitError),
+    Resume(crate::construction_terraform_resume::TerraformResumeError),
     Cancellation(crate::construction_cancellation::ConstructionCancellationError),
 }
 #[cfg(test)]
@@ -44,17 +46,86 @@ mod tests {
         let mut jobs=crate::terrain_job_pool::TerrainJobPool::admit(std::array::from_fn(|_|{let mut r=[0;176];r[12..14].copy_from_slice(&(-1i16).to_le_bytes());r}),0).unwrap();
         let snapshot=world.clone();let jobs_before=jobs.clone();let physics=crate::physics_tables::PhysicsTables::fixture();let trig=TrigTables::generate_pinned().unwrap();
         let context=LandingPhysicsContext{gravity:1024,water_height:1632};
-        assert!(world.step_architect_stage0_inner(0,1,context,&physics,&trig,&mut jobs,&[0;8192],key,
+        assert!(world.step_architect_stage0_inner(0,1,context,&physics,&trig,&mut jobs,&[0;8192],key,(false,false),
             |_|Ok((Vec::new(),0))).is_err());
         assert_eq!(world,snapshot);assert_eq!(jobs,jobs_before);
         let funds=world.players[0].bytes()[0x4a3..0x4ab].to_vec();let rng=world.rng;
-        let receipt=world.step_architect_stage0_inner(0,1,context,&physics,&trig,&mut jobs,&[0;8192],key,
+        let receipt=world.step_architect_stage0_inner(0,1,context,&physics,&trig,&mut jobs,&[0;8192],key,(false,false),
             |animation|{assert_eq!(animation,13);Ok((vec![0;8],0))}).unwrap();
         assert!(receipt.motion.arrived);assert!(receipt.terraform.as_ref().unwrap().job.is_some());
         assert_eq!(jobs.count(),1);assert_eq!(world.backing[0x2ff7],1);
         assert_eq!(world.actors.record(0).unwrap()[0x88],1);
         assert_eq!(world.players[0].bytes()[0x4a3..0x4ab],funds);assert_eq!(world.rng,rng);
         assert!(receipt.footstep.is_none());
+        let wait=world.step_architect_stage0_inner(0,2,context,&physics,&trig,&mut jobs,&[0;8192],key,(false,false),
+            |_|Ok((vec![0;8],0))).unwrap();
+        assert!(wait.terraform_wait.is_some());assert!(wait.terraform_completion.is_none());
+        let environment=crate::construction_maintenance::TerrainEnvironment{climate_center:[0,0],raw_water_height:816,climate:106,light:[181,0,-181]};
+        for _ in 0..8{if jobs.count()==0{break;}world.step_terrain_jobs_without_height_changes(&mut jobs,environment,&[0;8192]).unwrap();}
+        assert_eq!(jobs.count(),0);assert_eq!(world.backing[0x2ff7],0);
+        let rng=world.rng;
+        let completed=world.step_architect_stage0_inner(0,3,context,&physics,&trig,&mut jobs,&[0;8192],key,(false,false),
+            |_|Ok((vec![0;8],0))).unwrap();
+        assert!(completed.terraform_completion.is_some());assert!(completed.terraform_wait.is_none());
+        assert_eq!(world.actors.record(0).unwrap()[0x88],3);
+        assert_eq!(world.players[0].bytes()[0x4a3..0x4ab],funds);
+        assert_eq!(world.rng.draw_count,rng.draw_count.wrapping_add(2));
+        assert_eq!(world.rng.seed,rng.seed.wrapping_mul(0xe62d).wrapping_mul(0xe62d));
+    }
+    #[test]
+    fn assigned_centered_architect_completes_flat_terraform_cycle(){
+        let mut world=world();
+        //Explicit centered idle fixture; preserve zero desired speed/readiness.
+        let before=*world.actors.record(0).unwrap();let mut centered=before;
+        centered[7..9].copy_from_slice(&19839i16.to_le_bytes());centered[9..11].copy_from_slice(&12927i16.to_le_bytes());
+        let point=centered[7..11].to_vec();centered[11..15].copy_from_slice(&point);
+        world.commit_actor_motion_record(0,&before,&centered).unwrap();
+        assert_eq!(word(&centered,0x3f),0);
+        world.assign_architect_construction(0,0,0x100,false,false).unwrap();
+        world.begin_pending_architect_task(0,&[0;8192]).unwrap();
+        let key=world.actors.bindings(0).unwrap().animation_database.unwrap();
+        let records=std::array::from_fn(|_|{let mut r=[0;176];r[12..14].copy_from_slice(&(-1i16).to_le_bytes());r});
+        let mut jobs=crate::terrain_job_pool::TerrainJobPool::admit(records,0).unwrap();
+        let physics=crate::physics_tables::PhysicsTables::fixture();let trig=TrigTables::generate_pinned().unwrap();
+        let context=LandingPhysicsContext{gravity:1024,water_height:1632};
+        let environment=crate::construction_maintenance::TerrainEnvironment{climate_center:[0,0],raw_water_height:816,climate:106,light:[181,0,-181]};
+        let funds=world.players[0].bytes()[0x4a3..0x4ab].to_vec();let initial_rng=world.rng;
+        let mut allocated=false;let mut completed=false;
+        for frame in 1..=300{
+            let receipt=world.step_architect_stage0_inner(0,frame,context,&physics,&trig,&mut jobs,&[0;8192],key,(false,false),|_|Ok((vec![0;8],0))).unwrap();
+            allocated|=receipt.terraform.as_ref().is_some_and(|p|p.job.is_some());
+            completed|=receipt.terraform_completion.is_some();
+            if completed{break;}
+            world.step_terrain_jobs_without_height_changes(&mut jobs,environment,&[0;8192]).unwrap();
+        }
+        assert!(allocated&&completed);assert_eq!(jobs.count(),0);
+        assert_eq!(world.actors.record(0).unwrap()[0x88],3);
+        assert_eq!(world.players[0].bytes()[0x4a3..0x4ab],funds);
+        assert_eq!(world.rng.draw_count,initial_rng.draw_count.wrapping_add(2));
+    }
+    #[test]
+    fn stage3_payment_and_cancellation_roll_back_on_late_animation_failure(){
+        for funds in [0i32,1000]{
+            let mut world=world();let original=*world.actors.record(0).unwrap();let mut a=original;
+            a[0x55]=9;a[0x57]=0;a[0x58]=1;a[0x7e]=0;a[0x82]=1;a[0x83]=1;a[0x59]=13;
+            a[0x88..0x8a].copy_from_slice(&3i16.to_le_bytes());a[0x70]=0x11;a[0x71]=0;a[0x16]&=!0x68;
+            a[11..15].copy_from_slice(&original[7..11]);a[0x8c..0x90].copy_from_slice(&original[7..11]);
+            a[17..21].copy_from_slice(&6272i32.to_le_bytes());a[39..43].copy_from_slice(&6272i32.to_le_bytes());
+            a[0x2b..0x2d].copy_from_slice(&64i16.to_le_bytes());a[0x2d..0x33].fill(0);
+            a[0x39..0x3f].fill(0);a[0x3f..0x41].copy_from_slice(&960i16.to_le_bytes());a[0x41..0x45].fill(0);a[0x49]=16;a[0x4a]=8;a[0x4f]=0;a[0x52]=0;
+            world.actors.replace_record_checked(0,&original,&a).unwrap();
+            let mut player=*world.players[0].bytes();player[0x4a3..0x4a7].copy_from_slice(&funds.to_le_bytes());world.players[0]=PlayerState::from_record(&player).unwrap();
+            let key=world.actors.bindings(0).unwrap().animation_database.unwrap();
+            let mut jobs=crate::terrain_job_pool::TerrainJobPool::admit(std::array::from_fn(|_|{let mut r=[0;176];r[12..14].copy_from_slice(&(-1i16).to_le_bytes());r}),0).unwrap();
+            let saved=world.clone();let saved_jobs=jobs.clone();let rng=world.rng;
+            let physics=crate::physics_tables::PhysicsTables::fixture();let trig=TrigTables::generate_pinned().unwrap();let context=LandingPhysicsContext{gravity:1024,water_height:1632};
+            assert!(world.step_architect_stage0_inner(0,1,context,&physics,&trig,&mut jobs,&[0;8192],key,(false,false),|_|Ok((Vec::new(),0))).is_err());
+            assert_eq!(world,saved);assert_eq!(jobs,saved_jobs);
+            let receipt=world.step_architect_stage0_inner(0,1,context,&physics,&trig,&mut jobs,&[0;8192],key,(false,false),|_|Ok((vec![0;23],0))).unwrap();
+            if funds==0{assert!(receipt.cancellation.is_some());assert_eq!(world.actors.record(0).unwrap()[0x82],0);assert_eq!(world.actors.record(0).unwrap()[0x7e],255);}
+            else{assert_eq!(receipt.payment.unwrap().cost,688);assert_eq!(world.actors.record(0).unwrap()[0x19],14);}
+            assert_eq!(i32::from_le_bytes(world.players[0].bytes()[0x4a3..0x4a7].try_into().unwrap()),if funds==0{0}else{312});assert_eq!(world.rng,rng);
+        }
     }
     #[test]
     fn construction_arrival_preserves_task_and_seed(){
@@ -88,6 +159,10 @@ pub struct ArchitectMotionReceipt{pub before:[u8;200],pub after:[u8;200],pub arr
 pub struct ArchitectStage0Receipt {
     pub motion:ArchitectMotionReceipt,
     pub terraform:Option<crate::actor_construction_lifecycle::TerraformStartPlan>,
+    pub payment:Option<crate::construction_payment::ConstructionPaymentPlan>,
+    pub cancellation:Option<crate::construction_cancellation::ConstructionCancellationPlan>,
+    pub terraform_wait:Option<crate::construction_wait::TerraformWaitPlan>,
+    pub terraform_completion:Option<crate::construction_terraform_completion::TerraformCompletionPlan>,
     pub selected_animation:u8,
     pub footstep:Option<crate::actor_motion::ActorFootstep>,
     pub created_effect:Option<u16>,
@@ -95,14 +170,32 @@ pub struct ArchitectStage0Receipt {
     pub queue_requested:bool,
 }
 impl ActorWorld {
-    /// Whole ordinary stage0 callback with actual movement/readiness. Later
-    /// stages reject before mutation. The world and job pool commit together.
     pub fn step_architect_stage0_callback<B:AsRef<[u8]>>(&mut self,id:u16,frame:u32,
+        context:LandingPhysicsContext,physics:&crate::physics_tables::PhysicsTables,trig:&TrigTables,
+        jobs:&mut crate::terrain_job_pool::TerrainJobPool,border:&[u8;8192],resource:&crate::actor_resources::ActorAnimationDatabase<B>)
+        ->Result<ArchitectStage0Receipt,ConstructionWorldError>{
+        let before=self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
+        if word(before,0x88)!=0{return Err(ConstructionWorldError::PendingTaskRequired);}
+        self.step_architect_terraform_callback(id,frame,context,physics,trig,jobs,border,resource)
+    }
+    /// Strict terraform-only entry; payment/cancellation requires the explicit
+    /// construction callback with its selected-UI context.
+    pub fn step_architect_terraform_callback<B:AsRef<[u8]>>(&mut self,id:u16,frame:u32,
+        context:LandingPhysicsContext,physics:&crate::physics_tables::PhysicsTables,trig:&TrigTables,
+        jobs:&mut crate::terrain_job_pool::TerrainJobPool,border:&[u8;8192],resource:&crate::actor_resources::ActorAnimationDatabase<B>)
+        ->Result<ArchitectStage0Receipt,ConstructionWorldError>{
+        let before=self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
+        if !(0..=2).contains(&word(before,0x88)){return Err(ConstructionWorldError::PendingTaskRequired);}
+        self.step_architect_construction_callback(id,frame,context,physics,trig,jobs,border,resource,false,false)
+    }
+    /// Ordinary construction stages0..3 with actual movement/readiness. Later
+    /// construction stages reject before mutation. The world and job pool commit together.
+    pub fn step_architect_construction_callback<B:AsRef<[u8]>>(&mut self,id:u16,frame:u32,
         context:LandingPhysicsContext,physics:&crate::physics_tables::PhysicsTables,
         trig:&TrigTables,jobs:&mut crate::terrain_job_pool::TerrainJobPool,border:&[u8;8192],
-        resource:&crate::actor_resources::ActorAnimationDatabase<B>)
+        resource:&crate::actor_resources::ActorAnimationDatabase<B>,owner_selected:bool,actor_selected:bool)
         ->Result<ArchitectStage0Receipt,ConstructionWorldError>{
-        self.step_architect_stage0_inner(id,frame,context,physics,trig,jobs,border,resource.key(),|animation|{
+        self.step_architect_stage0_inner(id,frame,context,physics,trig,jobs,border,resource.key(),(owner_selected,actor_selected),|animation|{
             let count=resource.frame_count(usize::from(animation)).map_err(|_|ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::InvalidAnimation))?;
             let holds=(0..count).map(|i|resource.frame(usize::from(animation),i).map(|f|f.byte_10))
                 .collect::<Result<Vec<_>,_>>().map_err(|_|ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::InvalidAnimation))?;
@@ -113,13 +206,13 @@ impl ActorWorld {
     fn step_architect_stage0_inner<F>(&mut self,id:u16,frame:u32,context:LandingPhysicsContext,
         physics:&crate::physics_tables::PhysicsTables,trig:&TrigTables,
         jobs:&mut crate::terrain_job_pool::TerrainJobPool,border:&[u8;8192],
-        key:crate::actor_initialization::ActorResourceTableKey,mut metadata:F)
+        key:crate::actor_initialization::ActorResourceTableKey,selection:(bool,bool),mut metadata:F)
         ->Result<ArchitectStage0Receipt,ConstructionWorldError>
         where F:FnMut(u8)->Result<(Vec<u8>,u8),ActorWorldError>{
         let before=*self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
         let blueprint=self.construction_blueprint(id)?;
         let bindings=self.actors.bindings(usize::from(id)).map_err(ActorWorldError::from)?;
-        if before[0x55]!=9||before[0x7e]!=0||before[0x82]!=1||word(&before,0x88)!=0
+        if before[0x55]!=9||before[0x7e]!=0||before[0x82]!=1||!(0..=3).contains(&word(&before,0x88))
             ||blueprint[0x15]>=3||blueprint[0x16]!=0||bindings.animation_database!=Some(key){
             return Err(ConstructionWorldError::PendingTaskRequired);
         }
@@ -136,12 +229,46 @@ impl ActorWorld {
         staged.players[usize::from(handle.player_id)].commit_activation_blueprint(
             usize::from(handle.blueprint_index),&blueprint,&blueprint_after).map_err(ActorWorldError::from)?;
         let current=*staged.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
-        let terraform=if current[0x49]&32!=0{
+        if staged.backing[0x2ff7]!=staged_jobs.count(){return Err(ConstructionWorldError::JobCountMismatch);}
+        let mut terraform_wait=None;let mut terraform_completion=None;let mut payment=None;let mut cancellation=None;
+        let terraform=if word(&current,0x88)==0{
+            let start=if current[0x49]&32!=0{
             Some(staged.start_architect_terraform(id,&mut staged_jobs,border)?)
         }else{
             let plan=crate::construction_motion::plan_architect_task_movement(&current,&blueprint_after,physics.angles())
                 .map_err(ConstructionWorldError::TaskMovement)?;
             staged.actors.replace_record_checked(usize::from(id),&current,&plan.after).map_err(ActorWorldError::from)?;
+            None
+            };
+            start
+
+        }else if word(&current,0x88)<=2{
+            let slot=usize::from(current[0x90]);
+            let job=staged_jobs.records().get(slot).ok_or(ConstructionWorldError::Jobs(crate::terrain_job_pool::TerrainJobPoolError::InvalidSlot))?;
+            if i16::from_le_bytes(job[12..14].try_into().unwrap())>=0{
+                let distance=crate::creature_world::common_distance_squared(staged.map(),[word(&current,7),word(&current,9)],[word(&current,11),word(&current,13)]).map_err(ActorWorldError::from)? as u32;
+                terraform_wait=Some(crate::construction_wait::plan_architect_terraform_wait(&current,job,distance).map_err(ConstructionWorldError::Wait)?);
+            }else{
+                let speed=[960i16,576,1088][usize::from(blueprint_after[0x15])];
+                let plan=crate::construction_terraform_resume::plan_architect_terraform_resume(&current,&blueprint_after,job,staged.rng.seed,speed,physics.angles()).map_err(ConstructionWorldError::Resume)?;
+                staged.actors.replace_record_checked(usize::from(id),&current,&plan.after).map_err(ActorWorldError::from)?;
+                staged.rng.seed=plan.seed_after;staged.rng.ring=staged.rng.ring.wrapping_add(2)&31;staged.rng.draw_count=staged.rng.draw_count.wrapping_add(2);
+                terraform_completion=Some(plan);
+            }
+            None
+        }else{
+            if current[0x49]&32!=0{
+                match staged.pay_architect_construction(id,physics){
+                    Ok(plan)=>payment=Some(plan),
+                    Err(ConstructionWorldError::Payment(crate::construction_payment::ConstructionPaymentError::InsufficientCancellationRequired))=>{
+                        cancellation=Some(staged.cancel_insufficient_architect_selector1(id,selection.0,selection.1)?);
+                    },
+                    Err(error)=>return Err(error),
+                }
+            }else{
+                let plan=crate::construction_motion::plan_architect_task_movement(&current,&blueprint_after,physics.angles()).map_err(ConstructionWorldError::TaskMovement)?;
+                staged.actors.replace_record_checked(usize::from(id),&current,&plan.after).map_err(ActorWorldError::from)?;
+            }
             None
         };
         let current=*staged.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
@@ -161,7 +288,7 @@ impl ActorWorld {
         }
         staged.validate_links()?;if staged.effects.is_some(){staged.validate_effect_count()?;}
         *self=staged;*jobs=staged_jobs;
-        Ok(ArchitectStage0Receipt{motion,terraform,selected_animation:animation,footstep,created_effect,factory_draw,queue_requested:true})
+        Ok(ArchitectStage0Receipt{motion,terraform,payment,cancellation,terraform_wait,terraform_completion,selected_animation:animation,footstep,created_effect,factory_draw,queue_requested:true})
     }
 
     /// The actual6FB60 motion/arrival slice for construction. It does not run

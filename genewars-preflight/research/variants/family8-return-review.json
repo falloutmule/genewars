@@ -1,7 +1,7 @@
 {
   "status": "passed-bounded-family8-selector1-return",
   "draft": false,
-  "utc": "2026-10-13T20:51:06.502037+00:00",
+  "utc": "2026-10-13T21:36:08.233614+00:00",
   "callbacks": 309,
   "compared_bytes": 39552,
   "literal_instructions": 331486,
@@ -87,12 +87,16 @@
       "sha256": "43d1a9c61f2f62fdedd209067039ee29105078e4556cac32106e464a4c7f1a09"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/actor_construction_tail.rs",
+      "sha256": "3f22feef5def16591bb02288573a8037eadb72ca8e8f86472ebf4e4dcb14fea6"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
       "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_motion.rs",
-      "sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f"
+      "sha256": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
@@ -108,7 +112,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "e26eea16a798acb0d9641c5541f694c48109cae41e8f2ae341a8e81008e2f26d"
+      "sha256": "b734e36e2da412a9c445c8585975e77055a60292b4ee18f454b3153e8f934aad"
     },
     {
       "path": "rust/crates/genewars-runtime/src/blueprint.rs",
@@ -140,11 +144,15 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_pool.rs",
-      "sha256": "165d8bde978d5a884e4b69238e0223481de8d0cb10a6c259c5c3be5753acda38"
+      "sha256": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5"
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_progress.rs",
       "sha256": "8aa4c5c58e5c3b313d616ecc5dcd95f654430b36889c6b1f2e2cce2e8ad8fed8"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_resources.rs",
+      "sha256": "1d53264d113d1cdf7f339b428f79c32c36f7bb02084db546fd0ab1fcbedc969b"
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_cancellation.rs",
@@ -157,6 +165,10 @@
     {
       "path": "rust/crates/genewars-runtime/src/construction_maintenance.rs",
       "sha256": "1844724feaf2c3d0210b1c0628acec5d04e9ced0ae5ef9aef869dfbfb96a49b2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_motion.rs",
+      "sha256": "807b07d32dfd1d93b748c93f8144a34e18ccb8ce5d8ba9199995d8ba34081bcf"
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_payment.rs",
@@ -179,6 +191,10 @@
       "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/construction_wait.rs",
+      "sha256": "3e339a034c14c3f7f4fc515418675eb357d844c473d9d5024797750cc3b0f6ae"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/countdown_expiry.rs",
       "sha256": "fdc5b172dc4fbd41ccf52bc877a9b0d7db6999c7166aba74125e7c9097c59dfb"
     },
@@ -196,7 +212,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_motion.rs",
-      "sha256": "521cd4be8e7fc07927b841be61eaa8f6b7da456d283655767d64843a11025b6f"
+      "sha256": "663aa8b16f81a3ab1dec85c967cb189ad0d63ca64a1fea72ec2f7ac5ae4a21af"
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_particle.rs",
@@ -204,7 +220,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_pool.rs",
-      "sha256": "1eef56e452d7736ba11b5d7d29b3cda1fbb38db0955a3f2cdf4258100544318d"
+      "sha256": "5499c31f564672a8c31f39ae10e5d0204c5e96cf16da630cd525113a93df86cc"
     },
     {
       "path": "rust/crates/genewars-runtime/src/identity.rs",
@@ -220,7 +236,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/lib.rs",
-      "sha256": "3d6f760ff4fe2650c2921c059fed10360eebc83828602a6a747d07788ee1eada"
+      "sha256": "ff4f03c5f9189e75b392fee756c56992cad4c7a54c4cf358bdef3fc16b1cf1bb"
     },
     {
       "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
@@ -264,11 +280,11 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/building_storage.rs",
-      "sha256": "4f85794af3a8f0c5f9cb8d8ecdad360f3d02abc740e4f5f1ff16b2233edf738f"
+      "sha256": "388faee5e2c9088360b4bcfadfd12771f2e3c87050ad1461698c76384b8462f0"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/building_updates.rs",
-      "sha256": "7bdca1e41c72cc6a025dd7bc8eb556d18953579555811f868fb6840dc002ac00"
+      "sha256": "ff4cbe44324236d1c86dd38a8469bc50fd0e6278d91b7084faaa1f1ad7bc9015"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
@@ -280,11 +296,11 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family8_retirement.rs",
-      "sha256": "54854c7c5fdc380d6d85656a12a415131043352218ba4c3c765b673376d46d22"
+      "sha256": "8b8a94836a6c42854af3d0a435293e1f33eae0082c1c02689113c405b98713d6"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family8_updates.rs",
-      "sha256": "8f95aeba8c441f89c8bd342379f1d2b62f9a94d94805e9569c7fe8e122ffe2bb"
+      "sha256": "a26fce7a3ace1f0c7cf03f33bc9d5a00d54218902bbff4f070efdcf3cf57bc75"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
@@ -297,6 +313,10 @@
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
       "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/terrain_updates.rs",
+      "sha256": "aa9fb2176ded7f50891520f1418d7276ee0d3926c0461c491b8624b072465dca"
     },
     {
       "path": "rust/crates/genewars-runtime/src/world/plant_creation.rs",
@@ -393,7 +413,7 @@
     "private/ghidra/actor-activation/instructions-00073e00.txt": "7869104854e5107e8d711b69704e8e1009dcba41892d0233c4daca72e8f0c5a0",
     "private/ghidra/initial-creature/instructions-0006d230.txt": "3d824f3569182e3b8bc1037c4b74d9adbfcb9bd7f92444e8f562acc9c7ddbf3d",
     "private/ghidra/terrain-map-refs/instructions-000305f0.txt": "9e85edb137efe6c9abfb07e5173b42b3542ebd7c1e339d35613b245d7650db98",
-    "research/variants/family8-return-source.py": "8f4a1f64ec78e0abd435c680a2014d3006d29bb198e6886097a44d7257cf626d",
+    "research/variants/family8-return-source.py": "4f9afa3c69314e61ff97906315fe8b7097142dc7bd5f590390178cafb5bc417b",
     "research/variants/family8-state4-source.py": "cc0d5a38b1c0c2d6369811328c7685818ceb0f15152b5dfae83b753839f7392a",
     "research/variants/initial-creature-source.py": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2",
     "research/variants/actor-environment-terrain-target.py": "b1bd37810e18f3797ffcfb88dd42da33b5a7e179852c6230ff9ec9f101209a2d",
@@ -423,15 +443,15 @@
   "review_pins": [
     {
       "path": "research/variants/family8-return-review.py",
-      "sha256": "d94e7a17125f96e0c9bcf24cf66a3f68a9755fdb5ea318baa38e5d0273e4921d"
+      "sha256": "4ee42de3902d037c084b0bbe9331f0be7b46d7bb7e7e961832ff4e1d29696f8e"
     },
     {
       "path": "research/variants/family8-return-review.rs",
-      "sha256": "11726a9e56d921d3cc519dd342327b568cafc8039250efa4276a4f76c47da74e"
+      "sha256": "4531ad322438d1bbc566354e516268958e2be0a084061c23e33d7735bf89e58c"
     },
     {
       "path": "research/variants/family8-return-source.py",
-      "sha256": "8f4a1f64ec78e0abd435c680a2014d3006d29bb198e6886097a44d7257cf626d"
+      "sha256": "4f9afa3c69314e61ff97906315fe8b7097142dc7bd5f590390178cafb5bc417b"
     }
   ],
   "private_outputs": [
@@ -461,7 +481,23 @@
     },
     {
       "path": "private/review/family8-return/actual6290/source.json",
-      "sha256": "052769698dfd050e0128aed88086d304058660297992d8f6ed3e354854be36ea"
+      "sha256": "385a5df92457d2192f043b0392b4be100f2203776627dfd7771df9724ed1fd4b"
+    },
+    {
+      "path": "private/review/family8-return/actual6290/map.bin",
+      "sha256": "0c847cd9829a97fa6e19b58811f88aa268be150400ca345c4794a42583ec95b4"
+    },
+    {
+      "path": "private/review/family8-return/actual6290/angles.bin",
+      "sha256": "1c26f16f88a3e0cedc9c879837b3849567ff70514c033eb6249bd95a264debce"
+    },
+    {
+      "path": "private/review/family8-return/actual6290/bounce.bin",
+      "sha256": "c62a747206c89218e01102645341f151f5308fe1259b177f9d0418a67575e5e5"
+    },
+    {
+      "path": "private/review/family8-return/actual6290/ethereal.anb",
+      "sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4"
     },
     {
       "path": "private/review/family8-return/isolated6408/input.bin",
@@ -489,7 +525,23 @@
     },
     {
       "path": "private/review/family8-return/isolated6408/source.json",
-      "sha256": "7529f8399381f3438675244e18944938a46f7479c0fe16274a1e88bcd841a109"
+      "sha256": "2de2cb59b972b53f7f946be89c4d7e40148ae17c8a8870211f57e44627a7f871"
+    },
+    {
+      "path": "private/review/family8-return/isolated6408/map.bin",
+      "sha256": "41b14fdb5bbc6143f5d013aec1a41a72f1c503da64187cef8e30e221ca5aa370"
+    },
+    {
+      "path": "private/review/family8-return/isolated6408/angles.bin",
+      "sha256": "1c26f16f88a3e0cedc9c879837b3849567ff70514c033eb6249bd95a264debce"
+    },
+    {
+      "path": "private/review/family8-return/isolated6408/bounce.bin",
+      "sha256": "c62a747206c89218e01102645341f151f5308fe1259b177f9d0418a67575e5e5"
+    },
+    {
+      "path": "private/review/family8-return/isolated6408/ethereal.anb",
+      "sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4"
     }
   ],
   "original_execution": false,
@@ -499,6 +551,6 @@
     "Numeric comparison normalizes first6 intrusive links; full native map and link source writes remain private. World adapter owns commit.",
     "103F0 retirement is an explicit typed port, separately independently reviewed by root. Child retirement must finish before parent57=1; pure plan does neither mutation.",
     "Live parent must be active kind8 same owner selector0/state5/57zero; lookup identity checked. Missing/changed parent rejects.",
-    "Periodic rejected-point search, water/damage, arbitrary active references and other child states remain unsupported."
+    "Water/damage, arbitrary active references and other child states remain unsupported; readonly idle search has a separate proof."
   ]
 }

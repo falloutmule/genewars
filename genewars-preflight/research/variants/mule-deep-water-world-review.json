@@ -1,0 +1,484 @@
+{
+  "status": "passed-whole-mule-deep-water-transaction",
+  "utc": "2026-10-13T22:06:14.878283+00:00",
+  "frame": 5859,
+  "compared_bytes": 410217,
+  "literal_instructions": 3033,
+  "input_hashes": {
+    "backing.bin": "f14abe711d7cf3b92bd85d413e7cd121e3b1a5051998ddec0224f660cf1f7833",
+    "creatures.bin": "55f134c36f2ce11ae0e875e78e7b2ed0bf3001cfe21ba78075f15efa9ec79795",
+    "actors.bin": "54c12a36e363affce785af212bcdd001ee21827e91a89e3a3b9f7c154cbde1e2",
+    "effects.bin": "f0422680d69d059e0059f7134f705f49af48480e429da9a972e76ce0dfa7ce4b",
+    "family8.bin": "6f3ac5ca44788176f31f2edb0605f657c76777052ff7b0b212ac72d2158ddf98",
+    "players.bin": "1ef05353453ef4369537f2fd98abe342905debdb0f42abd0dbc652614fc5d57e",
+    "rng.bin": "ce6b5b42659452d1ee5239b3c33b7bb4105ca3f1a1b9b8e4c2052df6bb9e075f"
+  },
+  "output_hashes": {
+    "backing.bin": "f20de5da0a578b5493810194a2d674651b2ad59c850dca26900d36b2ac5dcc6b",
+    "creatures.bin": "e9f6cdee4860e20f3e2a17e6cec679c683dc00a5d60da09266619f952f7f43c2",
+    "actors.bin": "54c12a36e363affce785af212bcdd001ee21827e91a89e3a3b9f7c154cbde1e2",
+    "effects.bin": "270639eb31ee493781bf1f2a947855471832dab57d4321be30402255ecd3f69f",
+    "family8.bin": "6f3ac5ca44788176f31f2edb0605f657c76777052ff7b0b212ac72d2158ddf98",
+    "players.bin": "1ef05353453ef4369537f2fd98abe342905debdb0f42abd0dbc652614fc5d57e",
+    "rng.bin": "ce6b5b42659452d1ee5239b3c33b7bb4105ca3f1a1b9b8e4c2052df6bb9e075f"
+  },
+  "trajectory_provenance_sha256": "e54353e1e9bda234221b003453619dd9cf81baf3593735f53e218a7603f22a98",
+  "captured_binary_sha256": "75d217947523eb931174e031417d08fdd7e7e1477e6aa256f7c79abd84ac13e0",
+  "compilation_source_pins": {
+    "rust/crates/genewars-assets/src/lib.rs": "7a9571d30a1d3c229281a45223d277d908b61976ff21d27fe763966da7af133d",
+    "rust/crates/genewars-assets/src/map_atlas.rs": "275facee7a4ad590ec68558bcd12016f2178eff73c058eb92d85864bc8aa30a7",
+    "rust/crates/genewars-assets/src/mission_source.rs": "4c7d23930fb35483e7288af90845a28d64e3df228e7adaf2e5c7196c06ed313a",
+    "rust/crates/genewars-core/src/campaign.rs": "a610b74be9c65dd66ef9c84771b1c07422e1efea41d6e9895290a551d061bf78",
+    "rust/crates/genewars-core/src/construction.rs": "4866ff1f9bdd1bffbfb964bf03c495e5a1118d6bc24b0e3f8beea64ff780e5c0",
+    "rust/crates/genewars-core/src/custom_list.rs": "98955b9435e074518a2ee195e54e25779f96e7de7120f9620fdab1c89ea495c8",
+    "rust/crates/genewars-core/src/entity_draw_queue.rs": "b80d62724db689da242800705edfb34319bed786ac9ed91be1d4ffac7f203215",
+    "rust/crates/genewars-core/src/lib.rs": "1793d9674e9278dc0ea81ccabcf34c412bd0a925c126d9e47607a45764364f4c",
+    "rust/crates/genewars-core/src/menu_control.rs": "9def9eafcff361edeac28ff199ab1a241ada086c1bc4e826ba65fa6dbe28a472",
+    "rust/crates/genewars-core/src/mouse_packet.rs": "5763c082b5774e7e9042c3bff2cabf638b22ede7744f60e1c9904493527714fa",
+    "rust/crates/genewars-core/src/opaque_records.rs": "3019eb2459c8fab24c7f3aafdaf75a0d857229692f537881292a6614a293eba9",
+    "rust/crates/genewars-core/src/plant_lifecycle.rs": "b9d38a54ec0dbaebbf86d3c27fed5933ba586cdb381904fbf302df9c5e8d2ac9",
+    "rust/crates/genewars-core/src/player_creation.rs": "7ae09e8231c2c1b5f2d9d846db9edfd4a274a8df95e98834d665a543c04a63ee",
+    "rust/crates/genewars-core/src/terrain.rs": "5b906fdc3ed1809fefd078a1c60cca20cbca5a254df2fe386fe4608cf2450e6a",
+    "rust/crates/genewars-runtime/src/actor_activation.rs": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057",
+    "rust/crates/genewars-runtime/src/actor_command.rs": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e",
+    "rust/crates/genewars-runtime/src/actor_construction.rs": "0988dac1c88cbea6db58b6036cc26e8618ad49ded7de3787009ce2f82f88d182",
+    "rust/crates/genewars-runtime/src/actor_construction_animation.rs": "bf44aec16d67ce3f8b4313a4d27cc30bbd6b9b5f58bca638c963c270c1216505",
+    "rust/crates/genewars-runtime/src/actor_construction_lifecycle.rs": "0425be83f11535eacc231de7cb1cb6c4687613449acfeb6868e512863018015d",
+    "rust/crates/genewars-runtime/src/actor_construction_recovery.rs": "43d1a9c61f2f62fdedd209067039ee29105078e4556cac32106e464a4c7f1a09",
+    "rust/crates/genewars-runtime/src/actor_construction_tail.rs": "422ea3e71110f4db1782f5880592cb856ac8d8b0c3ef37a2d82c000a62eeb8bb",
+    "rust/crates/genewars-runtime/src/actor_initialization.rs": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99",
+    "rust/crates/genewars-runtime/src/actor_motion.rs": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
+    "rust/crates/genewars-runtime/src/actor_pool.rs": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48",
+    "rust/crates/genewars-runtime/src/actor_render.rs": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9",
+    "rust/crates/genewars-runtime/src/actor_resources.rs": "8c94e8afb54d1dbcb0e33de471a9b7d4d4008d3a8782f970ff5b0e95194145a3",
+    "rust/crates/genewars-runtime/src/actor_world.rs": "89099632930a7ecb3b6c1200612754209d3baa911b7a42b230c09a1ce963fdab",
+    "rust/crates/genewars-runtime/src/blueprint.rs": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558",
+    "rust/crates/genewars-runtime/src/bookkeeping.rs": "b1d2a1172c2368a98c3008eb9d14817a5837753e698cd7f71a76c6d4272c3b2a",
+    "rust/crates/genewars-runtime/src/building.rs": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf",
+    "rust/crates/genewars-runtime/src/building_callback.rs": "2b6207286c5d5afc90a6fee57d287954af619b899542fe989a9aa1c486f2f7f8",
+    "rust/crates/genewars-runtime/src/building_effect.rs": "7f906971f7269390e547877d1a7ecfa6c99a744cf2368fe4f7ac412c17894576",
+    "rust/crates/genewars-runtime/src/building_effect_lifecycle.rs": "628490fa538989e3dd663ae4fcb53a1cd5aa865b036086bc20e0eb55ce970400",
+    "rust/crates/genewars-runtime/src/building_obstacle.rs": "b915a8d4d63b5e3b6f5e7d867c3e8896275eda1813c0d0a548bbe8bc2e06a19a",
+    "rust/crates/genewars-runtime/src/building_pool.rs": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5",
+    "rust/crates/genewars-runtime/src/building_progress.rs": "8aa4c5c58e5c3b313d616ecc5dcd95f654430b36889c6b1f2e2cce2e8ad8fed8",
+    "rust/crates/genewars-runtime/src/building_resources.rs": "1d53264d113d1cdf7f339b428f79c32c36f7bb02084db546fd0ab1fcbedc969b",
+    "rust/crates/genewars-runtime/src/construction_cancellation.rs": "233009cd7be67d22ea0f696b446f68071ae0d88866fc155316f476013ca7881e",
+    "rust/crates/genewars-runtime/src/construction_completion.rs": "0b78ab600e361fedbff300f20b10e16beb1a01bda89ba881aa86c53f507231d0",
+    "rust/crates/genewars-runtime/src/construction_maintenance.rs": "1844724feaf2c3d0210b1c0628acec5d04e9ced0ae5ef9aef869dfbfb96a49b2",
+    "rust/crates/genewars-runtime/src/construction_motion.rs": "807b07d32dfd1d93b748c93f8144a34e18ccb8ce5d8ba9199995d8ba34081bcf",
+    "rust/crates/genewars-runtime/src/construction_payment.rs": "ce6aa8da2d840279cdeea469a9a60b7dd637e784fd93a2dcbd9ad4917b38328d",
+    "rust/crates/genewars-runtime/src/construction_setup.rs": "bc7c8aebad792673ffc8b9b7fc89f240ff6caea5ccf089f1ec54c04f2cba0feb",
+    "rust/crates/genewars-runtime/src/construction_site.rs": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2",
+    "rust/crates/genewars-runtime/src/construction_terraform_completion.rs": "031abef43f20a1e04a5b32ea72d00340068e25a7529908d16d72229929e7fecb",
+    "rust/crates/genewars-runtime/src/construction_terraform_resume.rs": "325b7f0d36e5bea907d1ddf5a9c54b504274ff64fe44203bc602029074cc8971",
+    "rust/crates/genewars-runtime/src/construction_terrain.rs": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31",
+    "rust/crates/genewars-runtime/src/construction_wait.rs": "3e339a034c14c3f7f4fc515418675eb357d844c473d9d5024797750cc3b0f6ae",
+    "rust/crates/genewars-runtime/src/countdown_expiry.rs": "fdc5b172dc4fbd41ccf52bc877a9b0d7db6999c7166aba74125e7c9097c59dfb",
+    "rust/crates/genewars-runtime/src/creature_world.rs": "f0f4d081c13d1a3aec1beaba2be55048c2cb0f3fae8e9b68744b9547d17e9d5b",
+    "rust/crates/genewars-runtime/src/effect_pool.rs": "84da3b8ca4cf18dde829ace1cec213d37fd975c1bc6d54fa76a80c5175f2bdf5",
+    "rust/crates/genewars-runtime/src/family8_creation.rs": "0f312593fb963669ec9a98e33abed62e09aa2a2f9cfef9f0799946aa4743a712",
+    "rust/crates/genewars-runtime/src/family8_motion.rs": "d7f9ab653b02b06e3a15d153876822ae488f29cf35fed187847827ac1fefe84e",
+    "rust/crates/genewars-runtime/src/family8_particle.rs": "8ae40f370ea2507b90c386e43fdab2c07a950ce7f75b4e8f57df2f051427cf6d",
+    "rust/crates/genewars-runtime/src/family8_pool.rs": "5499c31f564672a8c31f39ae10e5d0204c5e96cf16da630cd525113a93df86cc",
+    "rust/crates/genewars-runtime/src/identity.rs": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0",
+    "rust/crates/genewars-runtime/src/landing.rs": "38ca22019dc6fe33fccfa8e7f67ed3e627f50224c1626c663c351538a1c691c8",
+    "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs": "c39aa1d5764eb03239d7debd880e88d8f4465faddac05cc3a1e26394077a96e4",
+    "rust/crates/genewars-runtime/src/lib.rs": "584eeb7905afe54c16901248ea82e2541c8947fbf494442609f1ba81f197855b",
+    "rust/crates/genewars-runtime/src/physics_tables.rs": "cc063773f1a08c161bb34aa03751e75dd3c74ea50e78d4d63c0d6a6ad844e685",
+    "rust/crates/genewars-runtime/src/plant_spread.rs": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066",
+    "rust/crates/genewars-runtime/src/player_state.rs": "d7faa11882d551bc009e43e7e6ea89dca3d14dd726341cfeb959981d6da496b0",
+    "rust/crates/genewars-runtime/src/target_projection.rs": "455938c39b889e6e035e2821e74b7d5f4aae980786745c7861dc1aa5dbb38dc6",
+    "rust/crates/genewars-runtime/src/target_resolver.rs": "1412ab3a6a55e95df5b1e5cd1f4bf4169da55523966b1bfec56b3a917628d1c5",
+    "rust/crates/genewars-runtime/src/terrain_job_pool.rs": "dc2c9bce46a72de481100376614758bff9c265860b117e8facde7fc0d17b2d25",
+    "rust/crates/genewars-runtime/src/terrain_target.rs": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16",
+    "rust/crates/genewars-runtime/src/water_effect.rs": "cbcb539955f1edbf002640d5c5d93549b667b50bee4528cffd92ddad1129fc9a",
+    "rust/crates/genewars-runtime/src/world.rs": "3fd7e6a7df779c935836566ba8d9755cf843db7d964a888e7d53a53d405bffe7",
+    "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs": "69a783cb0fa6b3e476be7a42c82ff423eb4c67629e32f0968aa75b0e282050c6",
+    "rust/crates/genewars-runtime/src/actor_world/bookkeeping_updates.rs": "62794fb15814bfa317c521c342fd8b0db71b1675ad5049c38a075301895d2786",
+    "rust/crates/genewars-runtime/src/actor_world/building_storage.rs": "adc81779ba2c6abb3818ff3078b0a88fcbfbdda07c87be25fe5918cf5e93bc4f",
+    "rust/crates/genewars-runtime/src/actor_world/building_updates.rs": "8f70243aa8391768f203e28f66b569359224e28e6bada03014de81cdec286fde",
+    "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs": "29dc78224c2fa5639c4b5c2ffae61902374be19a7d5b65304c451efb275e0dcb",
+    "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs": "77fe5905a9b0d881510db41fc2b1287c72a6050fec3a448b89d01c5a57d46db0",
+    "rust/crates/genewars-runtime/src/actor_world/family8_retirement.rs": "8b8a94836a6c42854af3d0a435293e1f33eae0082c1c02689113c405b98713d6",
+    "rust/crates/genewars-runtime/src/actor_world/family8_updates.rs": "e8735edacf0572f9983de4689ed48d199361860dad908da7327d8cad716d1fea",
+    "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs": "827dbdb05ed3415c5038e0e619ab984b28d7b316c53f37377b3b8718bd721ef0",
+    "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs": "fe53dc13c552bc0b973d3f0fb75f1f06902d7fbeb547a6efd68022161adc69ac",
+    "rust/crates/genewars-runtime/src/actor_world/reveal.rs": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6",
+    "rust/crates/genewars-runtime/src/actor_world/terrain_updates.rs": "aa9fb2176ded7f50891520f1418d7276ee0d3926c0461c491b8624b072465dca",
+    "rust/crates/genewars-runtime/src/world/plant_creation.rs": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82",
+    "scripts/family8_trajectory_probe.rs": "2cab724e147eae98a900e2a5ca302fd8ec81963ff7cd919eb8c09f906b775ece",
+    "scripts/validate_family8_trajectory.py": "692d1dfcb877dc92637af7349b338066ff383704ad7bd7b345060c81cc1833a1"
+  },
+  "listing_pins": [
+    {
+      "path": "private/ghidra/player-creation/instructions-0005ed20.txt",
+      "sha256": "ea29b165354042aaf33dc630322d89b577810f96c2ece1f8998799512e2feed0"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0006fb60.txt",
+      "sha256": "b373e98528fde4ef720bf0b529edbca889efb97bec713ac4d7fe184c868fb736"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0005eb30.txt",
+      "sha256": "2cf7510ee5298d221c299b11244f72adf6ce5831c7aedcb39d3e91e6cacb53ec"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0005e640.txt",
+      "sha256": "cbcd47d0c677749cbcf9adb928ef968ec6f8c0d4a399e2956dd39c13f2626239"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0001ec50.txt",
+      "sha256": "ed1420b97321186a1b7c3146ab315649a872bab54a0fc63686a6aad4e4f677ce"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f980.txt",
+      "sha256": "29a29a39c3cfee69d78fc3bb6ff818953299d0ba57f25500d2015c720e593f3d"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006b150.txt",
+      "sha256": "9395a017642140a42c59b83e6e47c4c77b71e3ee368b811dd02b54f1866156c1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00023800.txt",
+      "sha256": "4227dd9dbd21613fa4e396d702bc66347bfcc4b5085f1d2cdb7b77267bf7bcc5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00023820.txt",
+      "sha256": "dc2ca6ff81274248aafa161ec20efc0d7947fd06fcddc5fee70ce77b433c7ea1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001ec10.txt",
+      "sha256": "4987af3cf6109166c9577008df7d94e772076ce575f10a8601f8a1383b942dbb"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001ec20.txt",
+      "sha256": "60779ead189d0df91af75d7de30ee0726857f9658f0a51c0fbe238dd1cf323ec"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f060.txt",
+      "sha256": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005b400.txt",
+      "sha256": "80c66399500e97ca59bbe76c29dc12f531c9780fdad313ef1a462e40586a741a"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f8f0.txt",
+      "sha256": "79e1953c322d12fdfe9161c53d960cd98af86ad0fefe5d74adf2f3f68259ac7c"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b340.txt",
+      "sha256": "9c96acdce1336ae5bf34b745b501da187f77dcfb618a1194fee5537a3ad77c0b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005ad70.txt",
+      "sha256": "2ca44bf24af651de458c9ee2303cdc272a4ed9d29f4797c6eaa7d6fc74d54c8b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006db00.txt",
+      "sha256": "42e576bafeec8c50c4ab8151c5573f071ac350a4941b263e9ed7d94f25ee12a2"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005a110.txt",
+      "sha256": "5121591cbf165c63dc16fb3de9fb95a8b7772b96162f72a44191d8a8b97d8910"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0006df30.txt",
+      "sha256": "8afe40345a8ecb636ff3af67dd76b4fa4104596032270b0cc61ab26b2affe8b1"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0007b380.txt",
+      "sha256": "a636e0647b1a66cf9eb422bfc86e03f8b2e450a42290ed9ad70c08c3f4792f7d"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f260.txt",
+      "sha256": "0f0c7ee7a26b87418a794e92c763f2dffb749d896335288aa052cfa40aba9ff2"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001ee20.txt",
+      "sha256": "0aa43dc30a3d2399e5d659215c01ed920605684839f5762cfba24f4c3c4b9d1f"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f220.txt",
+      "sha256": "0eda1dc90e070c6c7fc3cfbae1e8e50bb0ebe50c658ae0a199af4f43b3bbbcac"
+    },
+    {
+      "path": "private/ghidra/landing-contact/instructions-000733a0.txt",
+      "sha256": "fca831c451b1c09a39d93188d8cf9428b04ae5b25d8f87f09ecceb87c5f3f736"
+    },
+    {
+      "path": "private/ghidra/landing-contact/instructions-0007ac00.txt",
+      "sha256": "cc002c636ec832486e06fe90af6cfc68a0489d6acae6efcf83d5a5ce735706e1"
+    },
+    {
+      "path": "private/ghidra/primitives/instructions-0007a6c0.txt",
+      "sha256": "038389547efce23a858a88bdc1e89ed6b5e1ec1799704c22fd3fc1b30175d509"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-0005e0b0.txt",
+      "sha256": "89174afadbb823011cf4781900d1894bbb0fceda13d58a7041ea8af8981606ba"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008b520.txt",
+      "sha256": "37342106bfbee451f816f38ffbd92903d81b06fd534da2f6031e26c1be840e49"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0006d390.txt",
+      "sha256": "7f1c49974e62a52382eed53b9dcfa8dcc53b0727c9fdd2a626d57009a8376548"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-000736f0.txt",
+      "sha256": "bc949e97b253e9a9b6c59ca1e14386d72af6a47f73d770d9f4f48b0e98b0d57e"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0007b140.txt",
+      "sha256": "aef70bf9859bc9c21d01f697528a266d30ef1961e47d9697f762f7c74be7a2f4"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001ee10.txt",
+      "sha256": "67284531f9de18e252b503ec89522e7be59fad0a1128732c24c53705f64e1e72"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-00074270.txt",
+      "sha256": "0e6512bf106d649968285420fc325a0cf12afabecaa582ed4b6cc9a486b59a30"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-0008b130.txt",
+      "sha256": "f2505f556f5a3a4f012cd375b6a43cc8029c3f03b5f1c37efe65b8a6cec2d52f"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-00074d90.txt",
+      "sha256": "69e9654b5a4844452ca3995de8814c049a820e745251b4c8e88c402fe46280af"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-00074160.txt",
+      "sha256": "abcc56f1c17963a69d68c85bc4c251b28929235b518cf4b696c18abfcb458c3b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-000401a0.txt",
+      "sha256": "ccc926f2fb858bd725f562c10631e074824b98f5cc5a8771713a5a47918ee612"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008d930.txt",
+      "sha256": "0b85f4c6b25abca474b29c71972d4201a823ad2bdd80367efd02bd7741f4139e"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006b700.txt",
+      "sha256": "763d2e72feee4f9ee6129a3918d74e0671c2ad6e9e2c157e5b2e54eb8c5780fe"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00073970.txt",
+      "sha256": "ab614b5e9d2dd1ee9c1c49247f21ac39540946feade19a4e9c7cde767ae2c461"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b7d0.txt",
+      "sha256": "423a0606ea12770fa2b85abbd7a5803944cb825a05a2aedf5957017dfc3e0750"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005b100.txt",
+      "sha256": "32f6824af152305c75e3639c1917ee35e5e80a2a801a90e768415e73ea51e02d"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b780.txt",
+      "sha256": "96da34b2865718f4a50247df2f77d0c78d441888edfd3af7b20d76dafc6d7028"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-0008d7b0.txt",
+      "sha256": "dfbad38e9039f97aa243cddc0149971c5f01860e7163ee667d99a71757852b30"
+    },
+    {
+      "path": "private/ghidra/primitives/instructions-00073690.txt",
+      "sha256": "a61c7b67cebcd05dbb96053d1fbe7745c703b75be5af996bb0227e4c9691cace"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-000ae028.txt",
+      "sha256": "526b3f9cdc9b43ed6b330383417fad4b6c8acb41a917acf5571e4f01f0a6585b"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-0001ebd0.txt",
+      "sha256": "9f0e86fefaa3c2fc11a9cf4f29e8d3ce4a0724b82b959d21b404b3ea9fd64588"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0005d700.txt",
+      "sha256": "46db7123380194986cc4598e5cb9cc8f44f2b8f48cb4b9f79a4ac41327a4cf33"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-00073c20.txt",
+      "sha256": "b1192da02ccb17b0c4e9117aa0432c6bd47d8a4ee542bea4936bdd60498ad65e"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-00074cc0.txt",
+      "sha256": "701ba3601cd73db82d86a57d1502d53d6ad2a8d5910833c28f6e89784bcf542b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00013e50.txt",
+      "sha256": "2c85f008ec84237004f0eb0e03048a44da01dbdd0c70666a67704bfb44cbeda5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00013e70.txt",
+      "sha256": "48f6ca2435f3ae64caee93657f3fb4952a319d8978ad448b8a7011e497f6f2fc"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005a990.txt",
+      "sha256": "d063df1c8f85cd877b6e1ea913fa88dbc2a9301bc318d79af7d1a6e935867a97"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0003fbe0.txt",
+      "sha256": "a537c544a5cd516bdf2359670ea4b102d06880440f55037a947d2ceff90c4821"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-00013eb0.txt",
+      "sha256": "f39a85cec1eeaf8c6471d4ca65ab9fd26f3f093cafec3efae15cbe694d2c656c"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f410.txt",
+      "sha256": "35c557c5e1042c57cbf5a4f2b90afadb232326d2477a2a6b03d41b367433294a"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-000743c0.txt",
+      "sha256": "085e0737b57e9f7d27248169f23cf35199a03594e4c8547f514ed053e890695c"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008acc0.txt",
+      "sha256": "9e7e750030468985e9d1ed7ae836f8b8ee7606b4b0b51f1fc02345750f8ccb1e"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008ac60.txt",
+      "sha256": "6fd0ff082558f7bc94da0a908710fab78b8d477369a106e15f37f4922ee557fa"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f0c0.txt",
+      "sha256": "37cd520262802d6b6a3e21c88b131522f31a9e129b6d4aa1afa152ce11e7e9e1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006ede0.txt",
+      "sha256": "acc710c7461bee41e527cdded6de067d1577811222b2abdfa3b00f71f2e654d5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f010.txt",
+      "sha256": "9529f80432601ec84b37f26f2263c0bbc9d333b66e5e49efc430dca4ba822aac"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00073770.txt",
+      "sha256": "0fb14f7905a336e918e7651cba16d789204f380f1e194609c350f8bb0c93e47c"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f270.txt",
+      "sha256": "bd463c1d8715675e7418abb8df161d8cbc6fa47e705022eaf22d6772aea80bc1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f450.txt",
+      "sha256": "cb7c70b22b60097ee15f37a91809e072f340b4d1eaf2e3819fea4c3fb8109a0f"
+    },
+    {
+      "path": "private/ghidra/actor-motion/instructions-0006e9e0.txt",
+      "sha256": "9e0d0cd2b98c380f36514b9ff8c7b28a538dedb3516aa1192e5fa38828c9f12e"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0005cc60.txt",
+      "sha256": "732f53cf3c69987464aaa7903bfa1fc99e0e826dad615b979269bf6c55e4d2cb"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00048790.txt",
+      "sha256": "840113f32e4845215dc107850ae4cf6218cd5558af2f2dbd1aae632654da533d"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0001f070.txt",
+      "sha256": "b890bd05c1566c3755c4a62dad58a937ee98d0119013e6f6fe11ef59b84f79c3"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-00049e90.txt",
+      "sha256": "55e976eb9c620d3cd6996d5dfd810532c8ca5c0a93fcb4a34239744049f9e001"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0007b240.txt",
+      "sha256": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0005b580.txt",
+      "sha256": "a80cb1b29915141678be7415d4fc0cf6d15c83bbac93f8b32b133c6b312d7128"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-0005c920.txt",
+      "sha256": "a88be01c81062fc698864ca9ced35d7115bb186eada695751079f6b4d4f6d795"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005d360.txt",
+      "sha256": "3ebb95c283154fd6df2da98ed89c11338375c5d256d5d0e09dff1185eb6c0d75"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-00074a50.txt",
+      "sha256": "c44b051dc39fd5998975fecccd10798615d09cba01a10c6e909646373358861a"
+    },
+    {
+      "path": "private/review/creature-motion/listing-6c900-closed.txt",
+      "sha256": "52af752da376a47255b1d1da30d161749e4373164a587af8f3d063b40c7a5c1e"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005c730.txt",
+      "sha256": "8c89a67d4e46e9386c9be4565add4871c528a3ae50950bebc874dee523d579a2"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0001e810.txt",
+      "sha256": "7a30b56a1ffc4b24228dcebdc978fc38c5c5f73757cdcf7727e38ee778a42c2f"
+    },
+    {
+      "path": "private/ghidra/landing-contact/instructions-000417e0.txt",
+      "sha256": "03d20013bdf21bec7e4a8de00d3e4ad5c9532946f35dd83a302e6ed1528adc20"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0006c780.txt",
+      "sha256": "462f1d606d4212d724b783dfe542df7cc6f8ea322cfd77e218ec26b72fc957d8"
+    },
+    {
+      "path": "private/ghidra/panel-activation-refs/instructions-000724c0.txt",
+      "sha256": "588fd5fdf44fabe33a7e1f1df7c5cf5ab66edaf91f18cad6892015f252b47375"
+    },
+    {
+      "path": "private/ghidra/entity-plant/instructions-0007af00.txt",
+      "sha256": "33cd64e7635baedb406b5e42224a58db24e8c90752255891740d423cb413bf14"
+    },
+    {
+      "path": "private/ghidra/display-geometry/instructions-000979e8.txt",
+      "sha256": "0d63ac4c232eab793e7dad64df3c0316ca5092f861e397156972b27e1cd01f6a"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-000409f0.txt",
+      "sha256": "a1a7d26d1931c802d72a5256a29c491208cde9651cd40d6b785a07043dffad55"
+    },
+    {
+      "path": "private/ghidra/plant-startup/audio-shared-tail.txt",
+      "sha256": "79e756dff496d72dd8a16c951128103d452fdbb5dfef43b96831d5817796111d"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-0002c200.txt",
+      "sha256": "0f6ced29d379bd244077afc2da06c80886c6189d34dcb7317b7f170b5413354d"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006d230.txt",
+      "sha256": "3d824f3569182e3b8bc1037c4b74d9adbfcb9bd7f92444e8f562acc9c7ddbf3d"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-000305f0.txt",
+      "sha256": "9e85edb137efe6c9abfb07e5173b42b3542ebd7c1e339d35613b245d7650db98"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005df20.txt",
+      "sha256": "d573a22101d89ecaf3acf6b7afffac3764615d58530e121a02debee65790bbd9"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006c900.txt",
+      "sha256": "38c75613311a88904db8c21cf22409fdc714d489ba8db832f9bd047706203180"
+    }
+  ],
+  "review_pins": {
+    "research/variants/mule-deep-water-world-review.py": "0d9b7e2d4ba84df9fb24fc86469f43fbf5ef33ae04055d8df0dcca73e7622b44",
+    "research/variants/mule-deep-water-world-source.py": "12053179a2bccef4f553b3307cff5bf78de40b6719a7a4ba20238288f8745a53",
+    "research/variants/creature-hungry-source.py": "31484ef67161f1329cdf78c37d17fb7179834b4b4195122fe9bcd2c55d4560ae",
+    "research/variants/initial-creature-source.py": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2",
+    "private/integration/game-runtime/effects/EFF.ANB": "f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253"
+  },
+  "original_execution": false,
+  "gui_execution": false,
+  "scope": "Full owned Mule callback5859 including water15 factory, map/count/links/native pools/players/RNG. Pointer gaps normalized to prior owned bytes. Otherfamilycallbacks and subsequent effects scheduler are separate captured-pass checks."
+}

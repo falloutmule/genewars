@@ -180,6 +180,9 @@ impl EffectAnimationDatabase {
             (EffectAnimationBinding::EffAnimation48, 12),
             (EffectAnimationBinding::EffAnimation47, 6),
             (EffectAnimationBinding::EffAnimation26, 5),
+            (EffectAnimationBinding::EffAnimation21, 2),
+            (EffectAnimationBinding::EffAnimation22, 3),
+            (EffectAnimationBinding::EffAnimation44, 9),
         ] {
             if value.frame_count(binding)? != expected_frames {
                 return Err(format!("EFF animation {:?} has an unexpected frame count", binding));
@@ -197,6 +200,9 @@ impl EffectAnimationDatabase {
             EffectAnimationBinding::EffAnimation48 => 48,
             EffectAnimationBinding::EffAnimation47 => 47,
             EffectAnimationBinding::EffAnimation26 => 26,
+            EffectAnimationBinding::EffAnimation21 => 21,
+            EffectAnimationBinding::EffAnimation22 => 22,
+            EffectAnimationBinding::EffAnimation44 => 44,
         }
     }
 

@@ -60,7 +60,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_pool.rs",
-      "sha256": "8155470e9bed2248cad0c731e3f6d9fa9e6379648ba100ab32fa9f7d5d4f430b"
+      "sha256": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5"
     },
     {
       "path": "scripts/validate_building_inactive_loader.py",

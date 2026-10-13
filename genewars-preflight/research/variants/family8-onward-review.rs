@@ -11,7 +11,7 @@ fn main(){
    let rng=BlueprintRng{seed:u16::from_le_bytes(r[106..108].try_into().unwrap()),ring:r[108],draw_count:u32::from_le_bytes(r[109..113].try_into().unwrap())};
    let (got,particle,target)=if name=="parent" {
     let got=plan_selector0_state5_wait(&before,&map,frame,1632,&physics,&trig,&animation,rng,true).unwrap_or_else(|e|panic!("parent{frame}: {e:?}"));
-    if frame&31==0 {assert_eq!(plan_selector0_state5_wait(&before,&map,frame,1632,&physics,&trig,&animation,rng,false),Err(Family8MotionError::IdleSearchRequired));checks+=1;}
+    if frame&31==0 {assert_eq!(plan_selector0_state5_wait(&before,&map,frame,1632,&physics,&trig,&animation,rng,false),Ok(got.clone()));checks+=1;}
     (got,None,false)
    }else {let got=plan_selector1_state0(&before,&map,frame,1632,&physics,&trig,&directional,rng).unwrap_or_else(|e|panic!("child{frame}: {e:?}"));(got.motion,got.particle,got.target_selection_required)};
    actual.extend_from_slice(&got.after);actual.extend_from_slice(&got.rng_after.seed.to_le_bytes());actual.push(got.rng_after.ring);actual.extend_from_slice(&got.rng_after.draw_count.to_le_bytes());

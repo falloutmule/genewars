@@ -28,6 +28,7 @@ pub struct LandingStepReceipt {
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct EffectStepReceipt {
     pub slot:u16,
+    pub created_effect:Option<u16>,
     pub changed_cell:bool,
     pub retired:bool,
     pub cleaned_reference_bytes:usize,
@@ -69,7 +70,7 @@ impl ActorWorld {
                     created+=u32::from(e.created_effect.is_some());
                     if let Some(r)=&e.retirement { receipt.ui_after=r.ui_after.clone(); }
                 },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)=>receipt.ui_after=e.ui_after.clone(),
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)=>{created+=u32::from(e.created_effect.is_some());receipt.ui_after=e.ui_after.clone();},
             }
             receipt.primary.push(callback);
         }
@@ -105,6 +106,7 @@ impl ActorWorld {
             6=>self.step_effect6(slot,context,physics,trig,ui).map(LandingEffectCallback::Smoke),
             0x1A=>self.step_particle(slot,0x1A,context,physics,trig,ui).map(LandingEffectCallback::EtherealParticle),
             0x30=>self.step_effect30(slot,ui).map(LandingEffectCallback::WaterSplash),
+            0x15|0x16=>self.step_particle(slot,code,context,physics,trig,ui).map(LandingEffectCallback::WaterSplash),
             0x2F=>self.step_effect2f(slot,context,physics,trig,ui).map(LandingEffectCallback::DepartureParticle),
             _=>Err(lifecycle::LifecycleError::UnknownSelector(code).into()),
         }
@@ -169,7 +171,7 @@ impl ActorWorld {
         if pool.binding(slot as usize)?!=Some(EffectAnimationBinding::EffAnimation48){return Err(ActorWorldError::EffectBinding(slot));}
         let before=*pool.record(slot as usize)?;let plan=landing::plan_water_splash_update(&before)?;
         let mut staged=self.clone();staged.effects.as_mut().unwrap().replace_record_checked(slot as usize,&before,&plan.after)?;
-        let receipt=if plan.retirement_required{staged.retire_effect(slot,&plan.after,ui)?}else{EffectStepReceipt{slot,changed_cell:false,retired:false,cleaned_reference_bytes:0,ui_after:ui.clone(),pending_ui_events:Vec::new()}};
+        let receipt=if plan.retirement_required{staged.retire_effect(slot,&plan.after,ui)?}else{EffectStepReceipt{slot,created_effect:None,changed_cell:false,retired:false,cleaned_reference_bytes:0,ui_after:ui.clone(),pending_ui_events:Vec::new()}};
         staged.validate_links()?;staged.validate_effect_count()?;*self=staged;Ok(receipt)
     }
     pub fn create_water_splash(&mut self,position:[i16;2],physical_height:i32)->Result<Option<(u16,Vec<LandingEvent>)>,ActorWorldError>{
@@ -185,36 +187,63 @@ impl ActorWorld {
         staged.backing[MAP_START+cell*14+6..MAP_START+cell*14+9].copy_from_slice(&id);staged.backing[0x3554..0x3556].copy_from_slice(&p.pool_count_after.to_le_bytes());
         staged.validate_links()?;*self=staged;Ok(Some((p.slot,p.events)))
     }
+    /// Free-slot code15/16 factory, with no random draw or audio request.
+    /// Replacement of a live effect at capacity is a separate atomic boundary.
+    pub fn create_water_effect(&mut self,code:u8,owner:u8,position:[i16;2],physical_height:i32,
+        angles:[u16;3],trig:&TrigTables)->Result<Option<u16>,ActorWorldError> {
+        self.validate_links()?;self.validate_effect_count()?;
+        if !matches!(code,0x15|0x16) {return Err(ActorWorldError::UnsupportedEffectEvent);}
+        let pool=self.effects.as_ref().ok_or(ActorWorldError::EffectsNotAdmitted)?;
+        if word(&self.backing,0x3554)==200 {
+            let priority=if code==0x15 {19}else{20};
+            for r in pool.records() {
+                let p=match r[69] {6=>27,0x15=>19,0x16|0x30=>20,0x1a|0x2f=>35,0x31=>1,_=>return Err(ActorWorldError::UnsupportedEffectEvent)};
+                if r[21]&1==0&&p>priority {return Err(ActorWorldError::UnsupportedEffectEvent);}
+            }
+            return Ok(None);
+        }
+        let cell=floor_cell(position);let raw=reference(self.map(),cell*14+6);
+        let head=if raw[2]==0 {None}else{self.entity(raw)?;Some(landing::ResolvedCellHead{identity:landing::LandingReference{index:word(&raw,0),kind:raw[2]}})};
+        let (ground,shade)=self.effect_ground_sample(position)?;
+        let plan=crate::water_effect::plan_factory(code,pool.records(),word(&self.backing,0x3554),owner,position,ground,shade,physical_height,angles,head,trig.sine().try_into().unwrap(),trig.cosine().try_into().unwrap())?;
+        let mut staged=self.clone();staged.effects.as_mut().unwrap().commit_landing_factory(&plan)?;
+        let id=[plan.slot as u8,(plan.slot>>8)as u8,5];if raw[2]!=0 {staged.replace_previous(raw,id)?;}
+        staged.backing[MAP_START+cell*14+6..MAP_START+cell*14+9].copy_from_slice(&id);
+        staged.backing[0x3554..0x3556].copy_from_slice(&plan.pool_count_after.to_le_bytes());
+        staged.validate_links()?;staged.validate_effect_count()?;*self=staged;Ok(Some(plan.slot))
+    }
     fn step_particle(&mut self,slot:u16,code:u8,context:LandingPhysicsContext,physics:&PhysicsTables,
         trig:&TrigTables,ui:&RetirementUiState)->Result<EffectStepReceipt,ActorWorldError> {
         if !self.validate_links()?.contains(&(5,slot as i16)) { return Err(ActorWorldError::MissingEffectLink(slot)); }
         self.validate_effect_count()?;
         let pool=self.effects.as_ref().ok_or(ActorWorldError::EffectsNotAdmitted)?;
-        let binding=match code {6=>EffectAnimationBinding::EffAnimation6,0x1A=>EffectAnimationBinding::EffAnimation26,_=>EffectAnimationBinding::EffAnimation47};
+        let binding=match code {6=>EffectAnimationBinding::EffAnimation6,0x15=>EffectAnimationBinding::EffAnimation21,0x16=>EffectAnimationBinding::EffAnimation22,0x1A=>EffectAnimationBinding::EffAnimation26,_=>EffectAnimationBinding::EffAnimation47};
         if pool.binding(usize::from(slot))?!=Some(binding) { return Err(ActorWorldError::EffectBinding(slot)); }
         let original=*pool.record(usize::from(slot))?;
         let mut before=original;
         //1A and2F take the same numeric physics branches; animation differs.
         if code==0x1A {before[69]=0x2F;}
-        let at=if code==6 { landing::effect6_physics_candidate(&before)? } else { landing::effect2f_physics_candidate(&before)? };
+        let common6=matches!(code,6|0x15|0x16);
+        if matches!(code,0x15|0x16) {before[69]=6;}
+        let at=if common6 { landing::effect6_physics_candidate(&before)? } else { landing::effect2f_physics_candidate(&before)? };
         let (ground,shade)=self.effect_ground_sample(at)?;
         let old_height=i32::from_le_bytes(before[39..43].try_into().unwrap());
         let old_ground=i32::from_le_bytes(before[17..21].try_into().unwrap());
         let next_height=old_height.wrapping_add(i32::from(word(&before,49).wrapping_add(word(&before,55)))>>3);
         let mut flight=if old_height<=old_ground&&next_height<=ground {
-            let candidate=if code==6 { landing::effect6_grounded_candidate(&before,ground,physics.angles(),
+            let candidate=if common6 { landing::effect6_grounded_candidate(&before,ground,physics.angles(),
                 trig.sine().try_into().unwrap(),trig.cosine().try_into().unwrap())? }
             else { landing::effect2f_grounded_candidate(&before,ground,physics.angles(),
                 trig.sine().try_into().unwrap(),trig.cosine().try_into().unwrap())? };
             let point=[word(&candidate,7),word(&candidate,9)];let(g,s)=self.effect_ground_sample(point)?;
-            if code==6 { landing::plan_effect6_grounded_after_second_sample(&before,&candidate,g,s,context.water_height,!self.move_obstacle_at(point)?)? }
+            if common6 { landing::plan_effect6_grounded_after_second_sample(&before,&candidate,g,s,context.water_height,!self.move_obstacle_at(point)?)? }
             else { landing::plan_effect2f_grounded_after_second_sample(&before,&candidate,g,s,context.water_height)? }
-        } else if code==6 {
+        } else if common6 {
             landing::plan_effect6_flight(&before,ground,shade,context.water_height,!self.move_obstacle_at(at)?,
                 self.effect_height_corners(at),physics.bounce(self.terrain_class_at(at)?)?,physics.angles())?
         } else { landing::plan_effect2f_flight(&before,ground,shade,context.water_height,
             self.effect_height_corners(at),physics.bounce(self.terrain_class_at(at)?)?,physics.angles())? };
-        if code==0x1A {flight.before=original;flight.after[69]=0x1A;}
+        if matches!(code,0x15|0x16|0x1A) {flight.before=original;flight.after[69]=code;}
         let before=original;
         let changed_cell=floor_cell([word(&before,7),word(&before,9)])!=floor_cell([word(&flight.after,7),word(&flight.after,9)]);
         let mut staged=self.clone();
@@ -223,12 +252,25 @@ impl ActorWorld {
         // Type5 virtual88 is1F030 (RET), so relocation has no extra callback.
         if changed_cell { staged.insert_effect_head(slot)?; }
         let moved=*staged.effects.as_ref().unwrap().record(usize::from(slot))?;
-        let animation=match code {6=>landing::plan_effect6_animation_after_physics(&moved)?,0x1A=>crate::family8_particle::plan_animation_after_physics(&moved)?,_=>landing::plan_effect2f_animation_after_physics(&moved)?};
+        let mut create_child=false;
+        let animation=match code {
+            6=>landing::plan_effect6_animation_after_physics(&moved)?,
+            0x15|0x16=>{let p=crate::water_effect::plan_animation_after_physics(&moved,word(&staged.backing,0x1c63))?;create_child=p.create_child;landing::Effect6UpdatePlan{after:p.after,retirement_required:p.retirement_required}},
+            0x1A=>crate::family8_particle::plan_animation_after_physics(&moved)?,
+            _=>landing::plan_effect2f_animation_after_physics(&moved)?};
         staged.effects.as_mut().unwrap().replace_record_checked(usize::from(slot),&moved,&animation.after)?;
-        let mut receipt=EffectStepReceipt { slot,changed_cell,retired:animation.retirement_required,
+        let mut created_effect=None;
+        if create_child {
+            let a=&animation.after;
+            created_effect=staged.create_water_effect(0x16,a[24],[word(a,7),word(a,9)],i32::from_le_bytes(a[39..43].try_into().unwrap()),[0;3],trig)?;
+            if let Some(child)=created_effect {let prior=*staged.effects.as_ref().unwrap().record(child as usize)?;let mut marked=prior;marked[21]|=1;staged.effects.as_mut().unwrap().replace_record_checked(child as usize,&prior,&marked)?;}
+        }
+        let mut receipt=EffectStepReceipt { slot,created_effect,changed_cell,retired:animation.retirement_required,
             cleaned_reference_bytes:0,ui_after:ui.clone(),pending_ui_events:Vec::new() };
         if animation.retirement_required {
-            receipt=staged.retire_effect(slot,&animation.after,ui)?;receipt.changed_cell=changed_cell;
+            // Child insertion can change the parent's previous-link bytes.
+            let current=*staged.effects.as_ref().unwrap().record(slot as usize)?;
+            receipt=staged.retire_effect(slot,&current,ui)?;receipt.changed_cell=changed_cell;receipt.created_effect=created_effect;
         }
         staged.validate_links()?;staged.validate_effect_count()?;*self=staged;Ok(receipt)
     }
@@ -246,7 +288,7 @@ impl ActorWorld {
         }
         self.effects.as_mut().unwrap().retire_checked(usize::from(slot),before,&plan.after)?;
         self.backing[0x3554..0x3556].copy_from_slice(&plan.pool_count_after.to_le_bytes());
-        Ok(EffectStepReceipt { slot,changed_cell:false,retired:true,cleaned_reference_bytes:plan.cleanup.len(),
+        Ok(EffectStepReceipt { slot,created_effect:None,changed_cell:false,retired:true,cleaned_reference_bytes:plan.cleanup.len(),
             ui_after:plan.ui_after,pending_ui_events:plan.ui_events })
     }
 
@@ -435,7 +477,7 @@ impl ActorWorld {
         if declared<0||declared as usize!=active { return Err(ActorWorldError::EffectCountMismatch { declared,active }); }
         Ok(())
     }
-    fn effect_ground_sample(&self,at:[i16;2])->Result<(i32,u8),ActorWorldError> {
+    pub(super) fn effect_ground_sample(&self,at:[i16;2])->Result<(i32,u8),ActorWorldError> {
         let g=genewars_core::cd_candidate::interpolate_height(self.map(),at[0],at[1]).map_err(|e|ActorWorldError::Terrain(e.to_string()))?;
         let s=genewars_core::cd_candidate::interpolate_entity_shade(self.map(),at[0],at[1]).map_err(|e|ActorWorldError::Terrain(e.to_string()))?;
         Ok((g,s))
@@ -518,6 +560,27 @@ fn from_landing_rng(rng:landing::LandingRng)->BlueprintRng {
 #[cfg(test)]
 mod water_tests {
  use super::*;
+ #[test]
+ fn rising_water_effect_spawns_before_retiring_and_newborn_runs_once(){
+  let mut bytes=vec![0;343_958];bytes[..4].copy_from_slice(&0x55336u32.to_le_bytes());bytes[337_054..337_058].copy_from_slice(&0x6beu32.to_le_bytes());
+  let source=ConqMissionSource::parse(&bytes).unwrap();let players=core::array::from_fn(|p|PlayerState::fresh_campaign(p as u8,[4096,4096],b"fixture\0").unwrap());
+  let mut world=ActorWorld::from_parts(&source,&[[0;200];20],core::array::from_fn(|_|ActorHandleBindings::default()),players,BlueprintRng{seed:5428,ring:0,draw_count:0}).unwrap();
+  world.admit_effects(&[[0;81];200],[None;200]).unwrap();let rng=world.rng;
+  let trig=TrigTables::generate_pinned().unwrap();let physics=PhysicsTables::fixture();let ui=RetirementUiState::native_empty();
+  let context=LandingPhysicsContext{water_height:0,gravity:1024};
+  let slot=world.create_water_effect(0x15,0,[4096,4096],1000,[0,0,128],&trig).unwrap().unwrap();
+  assert_eq!(slot,0);assert_eq!(word(world.effects.as_ref().unwrap().record(0).unwrap(),49),128);
+  let pass=world.step_landing_effect_callbacks(context,&physics,&trig,&ui).unwrap();
+  assert_eq!(pass.primary.len(),1);assert_eq!(pass.newborn.len(),1);assert_eq!(pass.queue_candidates,vec![1]);
+  let LandingEffectCallback::WaterSplash(parent)=&pass.primary[0]else{panic!("wrong callback")};
+  assert!(parent.retired);assert_eq!(parent.created_effect,Some(1));
+  let pool=world.effects.as_ref().unwrap();assert_eq!(pool.record(0).unwrap()[6],0);
+  assert_eq!(pool.record(1).unwrap()[69],0x16);assert_eq!(pool.record(1).unwrap()[27],1);assert_eq!(pool.record(1).unwrap()[21]&1,0);
+  assert_eq!(word(&world.backing,0x3554),1);assert_eq!(world.validate_links().unwrap(),[(5,1)].into_iter().collect());assert_eq!(world.rng,rng);
+  let next=world.step_landing_effect_callbacks(context,&physics,&trig,&ui).unwrap();
+  assert_eq!(next.primary.len(),1);assert!(next.newborn.is_empty());assert!(next.queue_candidates.is_empty());
+  assert_eq!(word(&world.backing,0x3554),0);assert!(world.validate_links().unwrap().is_empty());assert_eq!(world.rng,rng);
+ }
  #[test]
  fn splash_is_rng_free_stationary_and_retires_from_shared_map(){
   let mut bytes=vec![0;343_958];bytes[..4].copy_from_slice(&0x55336u32.to_le_bytes());bytes[337_054..337_058].copy_from_slice(&0x6beu32.to_le_bytes());

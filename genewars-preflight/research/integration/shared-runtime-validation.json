@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T20:36:10.919217+00:00",
-  "binary_sha256": "a8252d5393ca82083d5c9cd67803448b8e5e9f1ee331d800540867fc07a6e9d6",
+  "verified_at": "2026-10-13T22:08:53.778849+00:00",
+  "binary_sha256": "fe90c8092920555068274e13453fa1f6f8ae283deaae759d1c5a9c683ed9cd0e",
   "build_profile": "release",
   "cases": [
     {
@@ -105,7 +105,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/f96f6f6461044bc6a5aebc63ec59ab59/initial"
+      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/initial"
     },
     {
       "name": "one",
@@ -208,7 +208,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/f96f6f6461044bc6a5aebc63ec59ab59/one"
+      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/one"
     },
     {
       "name": "early-selection",
@@ -311,7 +311,7 @@
         "other_families_frozen": true
       },
       "error": "actor is not active for this player",
-      "private_output": "private/integration/shared-runtime-validation/f96f6f6461044bc6a5aebc63ec59ab59/early-selection"
+      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/early-selection"
     },
     {
       "name": "contact",
@@ -413,7 +413,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/f96f6f6461044bc6a5aebc63ec59ab59/contact"
+      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/contact"
     },
     {
       "name": "command",
@@ -515,7 +515,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/f96f6f6461044bc6a5aebc63ec59ab59/command"
+      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/command"
     },
     {
       "name": "command-arrival",
@@ -527,9 +527,9 @@
           20736,
           13568
         ],
-        "changed_world_frames": 267,
-        "world_sha256": "756bc49d7945bd741cbe07811da8d290d37e19aaaec221e3c6d1bd6c511760b9",
-        "rgb_sha256": "72b6722d880876422f675831464026b7e077bbb715b08f3b3caa75dd49823154",
+        "changed_world_frames": 241,
+        "world_sha256": "3b7ed657841586e21f278218709dcba35dbb0e4e188adaf498a4f2fc37fa3773",
+        "rgb_sha256": "ebadf5f644e0bf5536193ac30aab7cbe3b3c7b053593a3c2da1642024eb4fb73",
         "queue": [
           29,
           34,
@@ -541,7 +541,7 @@
         "blocked": null,
         "world_mode": "landing-study",
         "seed": 5428,
-        "rng_draws": 872,
+        "rng_draws": 861,
         "selected_actor": 0,
         "issued_move_commands": 1,
         "plant_births": 0,
@@ -597,8 +597,8 @@
             "slot": 0,
             "owner": 4,
             "position": [
-              16430,
-              16355
+              16519,
+              16481
             ],
             "destination": [
               16377,
@@ -606,7 +606,7 @@
             ],
             "state": 8,
             "animation": 1,
-            "frame": 2,
+            "frame": 3,
             "reserve": 51,
             "target_kind": 0
           }
@@ -617,7 +617,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/f96f6f6461044bc6a5aebc63ec59ab59/command-arrival"
+      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/command-arrival"
     },
     {
       "name": "full",
@@ -629,9 +629,9 @@
           20736,
           13568
         ],
-        "changed_world_frames": 399,
-        "world_sha256": "f74a80792d49cf95ded0158f972d2a2816b370e2c4928028a2b665a16d3916d7",
-        "rgb_sha256": "036b0491c966d139f319de25c23230be519906e751f93811b60df251b906bd91",
+        "changed_world_frames": 364,
+        "world_sha256": "b43d14a7b376b9b7b3dbc4df8cd9ee040650546f8500c3bb484241bb42128a06",
+        "rgb_sha256": "b57c86c88d9d4603446f349911698e79e2c97145228b5ade66d35b44954479e1",
         "queue": [
           29,
           34,
@@ -643,12 +643,12 @@
         "blocked": null,
         "world_mode": "landing-study",
         "seed": 5428,
-        "rng_draws": 1279,
+        "rng_draws": 1253,
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
         "reproduction_enabled": true,
-        "pending_presentation_requests": 8556,
+        "pending_presentation_requests": 8554,
         "active_effects": 0,
         "actor_states": [
           {
@@ -699,17 +699,17 @@
             "slot": 0,
             "owner": 4,
             "position": [
-              16243,
-              15741
+              15303,
+              16198
             ],
             "destination": [
-              16243,
-              15741
+              15746,
+              15767
             ],
-            "state": 7,
-            "animation": 19,
-            "frame": 2,
-            "reserve": 65,
+            "state": 1,
+            "animation": 1,
+            "frame": 0,
+            "reserve": 36,
             "target_kind": 2
           }
         ],
@@ -719,7 +719,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/f96f6f6461044bc6a5aebc63ec59ab59/full"
+      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/full"
     },
     {
       "name": "repeat",
@@ -731,9 +731,9 @@
           20736,
           13568
         ],
-        "changed_world_frames": 399,
-        "world_sha256": "f74a80792d49cf95ded0158f972d2a2816b370e2c4928028a2b665a16d3916d7",
-        "rgb_sha256": "036b0491c966d139f319de25c23230be519906e751f93811b60df251b906bd91",
+        "changed_world_frames": 364,
+        "world_sha256": "b43d14a7b376b9b7b3dbc4df8cd9ee040650546f8500c3bb484241bb42128a06",
+        "rgb_sha256": "b57c86c88d9d4603446f349911698e79e2c97145228b5ade66d35b44954479e1",
         "queue": [
           29,
           34,
@@ -745,12 +745,12 @@
         "blocked": null,
         "world_mode": "landing-study",
         "seed": 5428,
-        "rng_draws": 1279,
+        "rng_draws": 1253,
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
         "reproduction_enabled": true,
-        "pending_presentation_requests": 8556,
+        "pending_presentation_requests": 8554,
         "active_effects": 0,
         "actor_states": [
           {
@@ -801,17 +801,17 @@
             "slot": 0,
             "owner": 4,
             "position": [
-              16243,
-              15741
+              15303,
+              16198
             ],
             "destination": [
-              16243,
-              15741
+              15746,
+              15767
             ],
-            "state": 7,
-            "animation": 19,
-            "frame": 2,
-            "reserve": 65,
+            "state": 1,
+            "animation": 1,
+            "frame": 0,
+            "reserve": 36,
             "target_kind": 2
           }
         ],
@@ -821,7 +821,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/f96f6f6461044bc6a5aebc63ec59ab59/repeat"
+      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/repeat"
     },
     {
       "name": "pan-return",
@@ -924,7 +924,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/f96f6f6461044bc6a5aebc63ec59ab59/pan-return"
+      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/pan-return"
     },
     {
       "name": "seed-0",
@@ -936,8 +936,8 @@
           20736,
           13568
         ],
-        "changed_world_frames": 302,
-        "world_sha256": "7b28fa9f3b73faacaa6be1ff5eb62f211a1e40f36c13b1a58cb22cf58fab93f6",
+        "changed_world_frames": 292,
+        "world_sha256": "7a5121d6c71bf6513f83be737d7a36c1c6b67ddee0e9fee69c0d70300bf39c31",
         "rgb_sha256": "2f710cf2d630f6928f76cde14e7c94538f3cbebb5a09842b3555330a324ecce5",
         "queue": [
           29,
@@ -950,7 +950,7 @@
         "blocked": null,
         "world_mode": "landing-study",
         "seed": 0,
-        "rng_draws": 1331,
+        "rng_draws": 1308,
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
@@ -1026,7 +1026,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/f96f6f6461044bc6a5aebc63ec59ab59/seed-0"
+      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/seed-0"
     },
     {
       "name": "seed-65535",
@@ -1038,9 +1038,9 @@
           20736,
           13568
         ],
-        "changed_world_frames": 402,
-        "world_sha256": "5cea83febc9f0c519496da17f72d30f1e5cd746d2a97280e5e659c094386f375",
-        "rgb_sha256": "92213bfa8d3af7d6901a702dbfc71ae0a64e8abd47e649c18c12f0e2e0abbb6c",
+        "changed_world_frames": 370,
+        "world_sha256": "2f5a3fa4470a4e5bb4763b5fa1a38070dd27174a2e62a0888435c0a2cf4147c2",
+        "rgb_sha256": "d59c29c3115b201c2fea9c107fcd414a1b6f37e03a9bcc9ab1b66eb50e72f590",
         "queue": [
           29,
           34,
@@ -1052,7 +1052,7 @@
         "blocked": null,
         "world_mode": "landing-study",
         "seed": 65535,
-        "rng_draws": 1264,
+        "rng_draws": 1243,
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
@@ -1128,7 +1128,7 @@
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/f96f6f6461044bc6a5aebc63ec59ab59/seed-65535"
+      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/seed-65535"
     }
   ],
   "case_count": 12,
@@ -1214,7 +1214,7 @@
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/genewars-game.rs",
-      "sha256": "eaa7f5c939347b11ab6097c43cf69597d87ae9945cff6ee5dc49e6919f1201b3"
+      "sha256": "46ed8e73dd7494b7ab30fd14b93b911e953eda7565ea077e4d7f80ea5285b8ae"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/genewars-menu.rs",
@@ -1230,19 +1230,23 @@
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs",
-      "sha256": "2caae2c594fe04897cea4b4adc7cea60c2d8adc34c656c7cefbea8f5b4a5824a"
+      "sha256": "1bf318a36a355a8e793a0c6a837aeb1bdbb16c88d3b166e6e05ebf4e9cd1ccea"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/building_scene.rs",
+      "sha256": "1481f7882a3336d11e4e910fbba3a2a46581d55b6186321cc300dba3c1168d1a"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/creature_scene.rs",
-      "sha256": "dacefce04049ac3151653bf14a9112fc9a2311dc8451ca4cee684980503d348c"
+      "sha256": "368e99c09d36219142a5239afdb960dd7db779e5dda18d2c5d32848c3c37e71a"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/effect_scene.rs",
-      "sha256": "6ac9a4ebaed70400d10e378a045eab8a84e6d40561acbf71dc854855c9dc460c"
+      "sha256": "518c5df092de117f19d765f73e39a19499d2f3be29bac8fa41c12534b8a2aa06"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/family8_scene.rs",
-      "sha256": "9208773255f0c7fb01e70f5fc6cab613a4a30dd9f93815c7b3c42b3d9fd8219b"
+      "sha256": "2c0f6e9a7b4f79be8f8e3a9dd3a320e9f949cf2c072ef7e72f96db566bd242fd"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/game_window.rs",
@@ -1258,7 +1262,7 @@
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs",
-      "sha256": "b1b756338a480204b41d89d8649c6002fcc5bf6f5b1e4a0c0439c5b8984b6282"
+      "sha256": "0fbd8da74d9882fc3951d3be06510d22982197e437dd04fcbc199d455044c850"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs",
@@ -1266,7 +1270,7 @@
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/shared_scene.rs",
-      "sha256": "d9f873d38da74af555c2de7bba7a869d5889c194714f276fdf2eaeb111970e93"
+      "sha256": "13074874d184eb10d250c11fe43c3b14b23b42c08f260b765dc47506d99d2a1f"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/status_text.rs",
@@ -1337,12 +1341,20 @@
       "sha256": "0425be83f11535eacc231de7cb1cb6c4687613449acfeb6868e512863018015d"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/actor_construction_recovery.rs",
+      "sha256": "43d1a9c61f2f62fdedd209067039ee29105078e4556cac32106e464a4c7f1a09"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction_tail.rs",
+      "sha256": "422ea3e71110f4db1782f5880592cb856ac8d8b0c3ef37a2d82c000a62eeb8bb"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
       "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_motion.rs",
-      "sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f"
+      "sha256": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
@@ -1358,43 +1370,55 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
-      "sha256": "01927dbf45e172e8e507acd925249bc89f2f78815dbfaac8202ea4d83f8b4e77"
+      "sha256": "69a783cb0fa6b3e476be7a42c82ff423eb4c67629e32f0968aa75b0e282050c6"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/bookkeeping_updates.rs",
-      "sha256": "773320d2af41f33455edd846a8558ad233a961470d6eaa376ea1e1fc52022106"
+      "sha256": "62794fb15814bfa317c521c342fd8b0db71b1675ad5049c38a075301895d2786"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/building_storage.rs",
+      "sha256": "adc81779ba2c6abb3818ff3078b0a88fcbfbdda07c87be25fe5918cf5e93bc4f"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/building_updates.rs",
-      "sha256": "0e61ad5d764637217433d7184512067642dba0f0c4b2f53dd788401c2a04933b"
+      "sha256": "29392dc27dd1af88411c4734fd7aef444889a466dd5d5a738dd7fd2ff79649d5"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
-      "sha256": "45d3cf33a20bd35ffa86a20c8e7e8da7dedd40521ab66141a47d3172b8161ab3"
+      "sha256": "29dc78224c2fa5639c4b5c2ffae61902374be19a7d5b65304c451efb275e0dcb"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
-      "sha256": "002cb2f1ae45cff667317c7e7f740055e59e2eb33f31806fe2a17a1d92813512"
+      "sha256": "77fe5905a9b0d881510db41fc2b1287c72a6050fec3a448b89d01c5a57d46db0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/family8_retirement.rs",
+      "sha256": "8b8a94836a6c42854af3d0a435293e1f33eae0082c1c02689113c405b98713d6"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family8_updates.rs",
-      "sha256": "3a50bd0cebc2c55a00e7ccf98a0b2e270c5ab37b8dd2a96f919b37ac23997cd8"
+      "sha256": "e8735edacf0572f9983de4689ed48d199361860dad908da7327d8cad716d1fea"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
-      "sha256": "3cfcc1a1e7dbcff0d5bebb5f020c41aa54a359093a5f49660041860f49841cc4"
+      "sha256": "827dbdb05ed3415c5038e0e619ab984b28d7b316c53f37377b3b8718bd721ef0"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs",
-      "sha256": "56ee5efc10f46d6b40a62861cd2e626aa6f24bf7241fe3b90766118966af3ed2"
+      "sha256": "fe53dc13c552bc0b973d3f0fb75f1f06902d7fbeb547a6efd68022161adc69ac"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
       "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/actor_world/terrain_updates.rs",
+      "sha256": "aa9fb2176ded7f50891520f1418d7276ee0d3926c0461c491b8624b072465dca"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "18633907e526995cf776a612e5ac93dc09865a21a017ae22564648c7129e480c"
+      "sha256": "89099632930a7ecb3b6c1200612754209d3baa911b7a42b230c09a1ce963fdab"
     },
     {
       "path": "rust/crates/genewars-runtime/src/blueprint.rs",
@@ -1421,8 +1445,20 @@
       "sha256": "628490fa538989e3dd663ae4fcb53a1cd5aa865b036086bc20e0eb55ce970400"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/building_obstacle.rs",
+      "sha256": "b915a8d4d63b5e3b6f5e7d867c3e8896275eda1813c0d0a548bbe8bc2e06a19a"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/building_pool.rs",
-      "sha256": "8155470e9bed2248cad0c731e3f6d9fa9e6379648ba100ab32fa9f7d5d4f430b"
+      "sha256": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_progress.rs",
+      "sha256": "8aa4c5c58e5c3b313d616ecc5dcd95f654430b36889c6b1f2e2cce2e8ad8fed8"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_resources.rs",
+      "sha256": "1d53264d113d1cdf7f339b428f79c32c36f7bb02084db546fd0ab1fcbedc969b"
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_cancellation.rs",
@@ -1435,6 +1471,10 @@
     {
       "path": "rust/crates/genewars-runtime/src/construction_maintenance.rs",
       "sha256": "1844724feaf2c3d0210b1c0628acec5d04e9ced0ae5ef9aef869dfbfb96a49b2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_motion.rs",
+      "sha256": "807b07d32dfd1d93b748c93f8144a34e18ccb8ce5d8ba9199995d8ba34081bcf"
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_payment.rs",
@@ -1450,11 +1490,19 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_terraform_completion.rs",
-      "sha256": "c61856bc56f50513cc92deba16a4406bb761062b428466fd5f1ffd26247bccc6"
+      "sha256": "031abef43f20a1e04a5b32ea72d00340068e25a7529908d16d72229929e7fecb"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terraform_resume.rs",
+      "sha256": "325b7f0d36e5bea907d1ddf5a9c54b504274ff64fe44203bc602029074cc8971"
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_terrain.rs",
       "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_wait.rs",
+      "sha256": "3e339a034c14c3f7f4fc515418675eb357d844c473d9d5024797750cc3b0f6ae"
     },
     {
       "path": "rust/crates/genewars-runtime/src/countdown_expiry.rs",
@@ -1462,11 +1510,11 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/creature_world.rs",
-      "sha256": "3658a74dc0c1ecc545492489378e80847196457b7775b9a30180be3518d77bf5"
+      "sha256": "f0f4d081c13d1a3aec1beaba2be55048c2cb0f3fae8e9b68744b9547d17e9d5b"
     },
     {
       "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
-      "sha256": "9294edb98676341c42aaf7b50a20fffc4f3c484f6c872e6846e03e1765b0c91f"
+      "sha256": "84da3b8ca4cf18dde829ace1cec213d37fd975c1bc6d54fa76a80c5175f2bdf5"
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_creation.rs",
@@ -1474,7 +1522,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_motion.rs",
-      "sha256": "2c0aeeaddae2020473610ec04f33c94adc9b49d5ca3f70ffaa05023b3e6a8c4e"
+      "sha256": "d7f9ab653b02b06e3a15d153876822ae488f29cf35fed187847827ac1fefe84e"
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_particle.rs",
@@ -1482,7 +1530,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_pool.rs",
-      "sha256": "f8a66c113f1e13343d5635888359ef8350f86efdc5c24030cfb4081b0e4fd086"
+      "sha256": "5499c31f564672a8c31f39ae10e5d0204c5e96cf16da630cd525113a93df86cc"
     },
     {
       "path": "rust/crates/genewars-runtime/src/identity.rs",
@@ -1494,11 +1542,11 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
-      "sha256": "31674ff4136e00b7f5e0c468150486625a67983e137a5ad6233478966698f452"
+      "sha256": "c39aa1d5764eb03239d7debd880e88d8f4465faddac05cc3a1e26394077a96e4"
     },
     {
       "path": "rust/crates/genewars-runtime/src/lib.rs",
-      "sha256": "f546eeec19aacd7a298ec103f60e12141f1e335c4e9122b5d53bea75109d2e35"
+      "sha256": "584eeb7905afe54c16901248ea82e2541c8947fbf494442609f1ba81f197855b"
     },
     {
       "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
@@ -1527,6 +1575,10 @@
     {
       "path": "rust/crates/genewars-runtime/src/terrain_target.rs",
       "sha256": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/water_effect.rs",
+      "sha256": "cbcb539955f1edbf002640d5c5d93549b667b50bee4528cffd92ddad1129fc9a"
     },
     {
       "path": "rust/crates/genewars-runtime/src/world/plant_creation.rs",
@@ -1586,11 +1638,11 @@
     },
     {
       "path": "research/integration/runtime-resource-catalog.tsv",
-      "sha256": "472bc63a9b311072eb40009085baaec689f6fcc6b0f0a64452da73b23ddfb0a1"
+      "sha256": "406953b3cbb85d958f0e417208630fe41f57749b46a5b1117f516dd9709cdcec"
     },
     {
       "path": "scripts/validate_shared_runtime.py",
-      "sha256": "686aa14dbfbd2f7450b33116b77d8a9f24c30fd6f34b15fd04745ec04bb464d6"
+      "sha256": "3237189cadccdfed53eb5128cb14ec2bfcc6891b7b22e737002e2f29cce7bf2f"
     }
   ],
   "scope": "Explicit seeded world study: numeric reveal, source factory/contact activates actors; player-list actor callbacks consume ground orders, move, arrive and idle; plants, empty-building bookkeeping, mission countdown and full family4 lifecycle run in admitted source order. The neutral Mule shares RNG in source family order, searches for food, approaches, feeds and retires consumed plants; its admitted states are rendered through the verified wrapper. Compilation snapshot pinned before/after build and binary copied privately before tests. Other creature kinds, other families and presentation requests remain pending. No full-game/startup parity or original execution."

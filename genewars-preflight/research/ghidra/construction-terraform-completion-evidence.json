@@ -2,7 +2,7 @@
   "cases": 156,
   "compared_bytes": 31512,
   "literal_instruction_steps": 37758,
-  "source_sha256": "c61856bc56f50513cc92deba16a4406bb761062b428466fd5f1ffd26247bccc6",
+  "source_sha256": "031abef43f20a1e04a5b32ea72d00340068e25a7529908d16d72229929e7fecb",
   "listing_sha256": {
     "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
     "actor-motion/instructions-000526c0.txt": "a6b39ca6b310a62ecb36fdfd08f205ae48e83bde37f949df96023277761c57c2",

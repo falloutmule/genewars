@@ -9,7 +9,7 @@ impl ActorWorld {
         let subsystem=self.plants.as_ref().ok_or(ActorWorldError::PlantsNotAdmitted)?.clone();
         self.validate_links()?;let mut staged=self.clone();
         let mut view=MissionWorld::with_shared_storage(SharedPlantStorage{backing:&mut staged.backing,actors:&mut staged.actors,
-            effects:staged.effects.as_mut(),creatures:staged.creatures.as_mut(),family8:staged.family8.as_mut(),buildings:staged.buildings.as_mut()},subsystem.parameters,subsystem.tick_number)?;
+            effects:staged.effects.as_deref_mut(),creatures:staged.creatures.as_deref_mut(),family8:staged.family8.as_deref_mut(),buildings:staged.buildings.as_deref_mut()},subsystem.parameters,subsystem.tick_number)?;
         let result=view.create_neutral_plant_inner(selector,requested)?;
         staged.validate_links()?;*self=staged;Ok(result)
     }
@@ -22,7 +22,7 @@ impl ActorWorld {
         let height_threshold=word(&staged.backing,0x1c63);
         let mut context=PlantReproductionContext{rng:&mut staged.rng,directions,height_threshold};
         let mut view=MissionWorld::with_shared_storage(SharedPlantStorage{backing:&mut staged.backing,actors:&mut staged.actors,
-            effects:staged.effects.as_mut(),creatures:staged.creatures.as_mut(),family8:staged.family8.as_mut(),buildings:staged.buildings.as_mut()},subsystem.parameters,subsystem.tick_number)?;
+            effects:staged.effects.as_deref_mut(),creatures:staged.creatures.as_deref_mut(),family8:staged.family8.as_deref_mut(),buildings:staged.buildings.as_deref_mut()},subsystem.parameters,subsystem.tick_number)?;
         let report=view.tick_plants_inner_with_reproduction(&mut context)?;
         // 724C0 visits native target references after an actual retirement.
         // UI roots remain pending, but typed actor/creature/other-family references

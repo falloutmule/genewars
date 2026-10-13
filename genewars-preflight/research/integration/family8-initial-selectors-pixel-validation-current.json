@@ -73,13 +73,13 @@
   ],
   "fade_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
   "harness_sha256": "f1f09cc8a0e0e6bb69e9d52eb500de5593dcfd41203905578f447aeb2b0f3d17",
-  "implementation_sha256": "9208773255f0c7fb01e70f5fc6cab613a4a30dd9f93815c7b3c42b3d9fd8219b",
+  "implementation_sha256": "2c0f6e9a7b4f79be8f8e3a9dd3a320e9f949cf2c072ef7e72f96db566bd242fd",
   "instruction_pins": {
     "private/ghidra/countdown-expiry/instructions-00010ea0.txt": "639fdb8a92c1342f206b3ddd7ebf563618988b4943ff53ca3c9bec9aed881dfb",
     "private/ghidra/mission-tail-init/instructions-00010060.txt": "518f7e316012183b083623aca3e4b01b8feedee77b0476c56e24d6f76a7d441d"
   },
   "main_gla_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
-  "oracle_sha256": "d40aeb42dd430f94787b1cc85146e7164d119bb8c3921487fe6618dc5b0c841b",
+  "oracle_sha256": "d7dce55c574c4f5108ea49fe449f47c9c0751508c815a44bf45bc27f8aea84c6",
   "resource": {
     "decoded_bytes": 91123,
     "manifest_entry": "root/2/disc/60",

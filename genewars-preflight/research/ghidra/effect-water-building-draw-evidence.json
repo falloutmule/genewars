@@ -1,0 +1,138 @@
+{
+  "resource_sha256": "f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253",
+  "resource_bytes": 186726,
+  "animations": [
+    {
+      "animation": 21,
+      "first": 1890,
+      "last": 1904,
+      "frame_count": 2,
+      "count_byte": 2,
+      "flags": 0,
+      "frames": [
+        {
+          "offset": 1890,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        },
+        {
+          "offset": 1904,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "animation": 22,
+      "first": 1918,
+      "last": 1946,
+      "frame_count": 3,
+      "count_byte": 3,
+      "flags": 0,
+      "frames": [
+        {
+          "offset": 1918,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        },
+        {
+          "offset": 1932,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        },
+        {
+          "offset": 1946,
+          "hold": 0,
+          "component_flags": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "animation": 44,
+      "first": 3024,
+      "last": 3136,
+      "frame_count": 9,
+      "count_byte": 9,
+      "flags": 0,
+      "frames": [
+        {
+          "offset": 3024,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        },
+        {
+          "offset": 3038,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        },
+        {
+          "offset": 3052,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        },
+        {
+          "offset": 3066,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        },
+        {
+          "offset": 3080,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        },
+        {
+          "offset": 3094,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        },
+        {
+          "offset": 3108,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        },
+        {
+          "offset": 3122,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        },
+        {
+          "offset": 3136,
+          "hold": 0,
+          "component_flags": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "source_draw_sha256": "c1562d884b99ef3145fb69593cd221aec76a0d711b8c780c110dcf911b58bfb9",
+  "draw_path": "4AF26/4AF0B\u21924ACA5 frame\u21924ADD7 code!=11\u21924ADD9\u21924ACF4 shadow96AC0\u21924ADDF height/shade main97A90/97CA0; no code31 decoration",
+  "mapping": "factory2C\u2192animation44 source-proved; water15/16\u2192animations21/22 root-owned factory evidence"
+}

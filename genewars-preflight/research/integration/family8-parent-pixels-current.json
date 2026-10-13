@@ -84,7 +84,7 @@
     "private/integration/rnc-decoded/7660297d85773f47cacc07dcfdf96e8daa118dc52c8a38afc054c1ef9dfa20bc.bin": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4",
     "private/review/family8-parent/state8-after-notification6442.bin": "d9ecf37055c79073615d0660dd7cd455b3e8ff4cb22d70263121b4286442b5e4",
     "private/review/family8-parent/state9-after-group-ready6443.bin": "7f27f8f734bef035382c08163b5e402875992f231bec2c154617bf6d8a444e87",
-    "research/variants/family8-parent-review.json": "f676231ff5290203638168e7f4f240f0f3c311457a9cb496bc51fd50d6c27504",
+    "research/variants/family8-parent-review.json": "0d7311df76820ee48e46451554aa0387c201605b5437859dd4be10df375b1049",
     "rust/crates/genewars-desktop/src/bin/support/family8_scene.rs": "2c0f6e9a7b4f79be8f8e3a9dd3a320e9f949cf2c072ef7e72f96db566bd242fd",
     "scripts/desktop/family8_parent_pixel_harness.rs": "1d781b51db2c2a134d540c8307a5ebe9b28737a0500850e901bcdea7351ba249",
     "scripts/desktop/validate_family8_parent_pixels.py": "4bb40fef63570d2d3c687c9f6b75973220cdbe4124385731f76fb51d3f130cda"

@@ -23,6 +23,9 @@ const CODE_0X30: u8 = 0x30;
 const CODE_6: u8 = 6;
 const CODE_47: u8 = 0x2f;
 const CODE_26: u8 = 0x1a;
+const CODE_15: u8 = 0x15;
+const CODE_16: u8 = 0x16;
+const CODE_2C: u8 = 0x2c;
 const SPECIAL_ANIMATION: usize = 66;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -176,6 +179,9 @@ fn draw_effect_records_inner(
             CODE_0X30 => Some(EffectAnimationBinding::EffAnimation48),
             CODE_47 => Some(EffectAnimationBinding::EffAnimation47),
             CODE_26 => Some(EffectAnimationBinding::EffAnimation26),
+            CODE_15 => Some(EffectAnimationBinding::EffAnimation21),
+            CODE_16 => Some(EffectAnimationBinding::EffAnimation22),
+            CODE_2C => Some(EffectAnimationBinding::EffAnimation44),
             _ => None,
         };
         if expected_binding.is_none() || binding != expected_binding {
@@ -247,8 +253,9 @@ fn draw_effect_records_inner(
             )?;
             item.special_pixels_written = written;
             item.special_pixels_clipped = clipped;
-        } else if code == CODE_6 || code == CODE_0X30 || code == CODE_26 {
-            // Codes 6, 0x30, and 0x1A request the normal component-shadow
+        } else if code == CODE_6 || code == CODE_0X30 || code == CODE_26
+            || code == CODE_15 || code == CODE_16 || code == CODE_2C {
+            // These ordinary wrappers request the mode-0 component-shadow
             // pass before indexed8 color. Their EFF animation ranges differ.
             for component in &main.components {
                 let shadow = draw_normal_component_shadow(
@@ -299,6 +306,9 @@ fn decode_bound_frame(
         EffectAnimationBinding::EffAnimation48 => 48,
         EffectAnimationBinding::EffAnimation47 => 47,
         EffectAnimationBinding::EffAnimation26 => 26,
+        EffectAnimationBinding::EffAnimation21 => 21,
+        EffectAnimationBinding::EffAnimation22 => 22,
+        EffectAnimationBinding::EffAnimation44 => 44,
     };
     decode_frame(anb, animation, relative_frame)
 }
@@ -558,6 +568,23 @@ mod tests {
                 .frame_at(frame26.frame_offset).unwrap().byte_10, 1);
             assert_eq!(frame26.components[0].flags, [0, 0, 0, 0x84, 0x04][frame_index]);
         }
+        for (index, first, last, trailing, count) in [
+            (21usize, 1890u32, 1904u32, 2u16, 2usize),
+            (22, 1918, 1946, 3, 3),
+            (44, 3024, 3136, 9, 9),
+        ] {
+            let metadata = AnbSections::parse(&bytes).unwrap().ui_metadata().unwrap();
+            let animation = metadata.animation(index).unwrap();
+            assert_eq!((animation.first_frame_offset,animation.last_frame_offset,animation.trailing_word),(first,last,trailing));
+            for frame_index in 0..count {
+                let frame = decode_frame(&bytes,index,frame_index).unwrap();
+                assert_eq!(frame.frame_offset,first+(frame_index*14) as u32);
+                let record=metadata.frame_at(frame.frame_offset).unwrap();
+                assert_eq!(record.byte_10,0);
+                assert!(!frame.components.is_empty());
+                assert!(frame.components.iter().all(|component|component.flags==0));
+            }
+        }
         validate_frame_flags(0, &late6, false).unwrap();
         validate_frame_flags(0, &special, true).unwrap();
     }
@@ -717,6 +744,64 @@ mod tests {
             assert_eq!(actual, expected, "code0x30 frame {frame_index}");
             assert_eq!(item.special_pixels_written, 0);
             assert!(item.color_pixels_written > 0);
+        }
+    }
+
+    #[test]
+    fn codes15_16_and2c_use_the_common_shadow_then_fade_framebuffer_path() {
+        let resources=staged_resources();
+        let fade=TerrainFadeTable::parse(resources.fade_bytes()).unwrap();
+        let gla=MainGlaTable::parse(resources.main_gla_bytes()).unwrap();
+        for (code,binding,index) in [
+            (CODE_15,EffectAnimationBinding::EffAnimation21,21usize),
+            (CODE_16,EffectAnimationBinding::EffAnimation22,22),
+            (CODE_2C,EffectAnimationBinding::EffAnimation44,44),
+        ] {
+            let animation=AnbSections::parse(resources.effects.bytes()).unwrap().ui_metadata().unwrap().animation(index).unwrap();
+            let count=((animation.last_frame_offset-animation.first_frame_offset)/14+1) as usize;
+            for frame_index in 0..count {
+                let frame=decode_frame(resources.effects.bytes(),index,frame_index).unwrap();
+                validate_frame_flags(0,&frame,false).unwrap();
+                let mut record=active_effect(code,frame_index as u8,5);
+                record[0x11..0x15].copy_from_slice(&0i32.to_le_bytes());
+                record[0x27..0x2b].copy_from_slice(&512i32.to_le_bytes());
+                let records=[record];
+                let bindings=[Some(binding)];
+                let ground=[240i16,200i16];
+                let mut actual=vec![23u8;512*480];
+                let receipt=draw_effect_records_inner(&resources,&records,&bindings,&[0],&[ground],0,0,
+                    &mut actual,[512,480],512).unwrap();
+                let item=&receipt.items[0];
+                assert_eq!(item.binding,binding);
+                assert_eq!(item.effective_shade,9);
+                assert_eq!(item.special_pixels_written,0);
+                assert!(item.shadow_pixels_written>0);
+                let mut expected=vec![23u8;512*480];
+                for component in &frame.components {
+                    draw_normal_component_shadow(&component.sprite,&gla,ground,component.local,0,
+                        [512,480],512,&mut expected).unwrap();
+                }
+                for component in &frame.components {
+                    for y in 0..usize::from(component.sprite.height) {
+                        for x in 0..usize::from(component.sprite.width) {
+                            let at=y*usize::from(component.sprite.width)+x;
+                            if !component.sprite.opaque[at]{continue;}
+                            let px=i32::from(ground[0])+i32::from(component.local[0])+x as i32;
+                            let py=item.color_origin[1]+i32::from(component.local[1])+y as i32;
+                            if px<0||py<0||px>=512||py>=480{continue;}
+                            expected[py as usize*512+px as usize]=fade.map_palette_index(9,component.sprite.indices[at]).unwrap();
+                        }
+                    }
+                }
+                assert_eq!(actual,expected,"code {code:#x} frame {frame_index} whole clipped framebuffer");
+            }
+            let records=[active_effect(code,count as u8,0)];
+            let bindings=[Some(binding)];
+            let before=vec![0x5au8;512*480];
+            let mut destination=before.clone();
+            assert!(draw_effect_records_inner(&resources,&records,&bindings,&[0],&[[0,0]],0,0,
+                &mut destination,[512,480],512).is_err());
+            assert_eq!(destination,before,"failed frame selection is atomic for code {code:#x}");
         }
     }
 

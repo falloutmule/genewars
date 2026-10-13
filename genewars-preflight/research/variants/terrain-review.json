@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-terrain-review",
-  "checked_utc": "2026-10-13T20:31:11.121189+00:00",
+  "checked_utc": "2026-10-13T21:40:59.787073+00:00",
   "original_or_gui_execution": false,
   "real_cells": 16384,
   "raw_cell_bytes": 229376,
@@ -748,7 +748,7 @@
   "harness": {
     "path": "private/review/terrain/terrain-review.exe",
     "size": 5102388,
-    "sha256": "ce00dc3b770d563975d9a975a93b8594df0b4506b4d3ab1f0b1ed3cda600e7d7"
+    "sha256": "93723446ae481828a02762d1031d37c3cbbff1077de75cc2ad639a2c865a7978"
   },
   "sources": [
     {

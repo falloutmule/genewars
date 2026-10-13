@@ -6,6 +6,7 @@ import copy
 import json
 from pathlib import Path
 import sys
+import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -18,48 +19,50 @@ def load(relative: str):
     return json.loads((ROOT / relative).read_text(encoding="utf-8"))
 
 
-def must_reject(call, label: str) -> None:
-    try:
-        call()
-    except (ValueError, OSError):
-        return
-    raise AssertionError(f"accepted tampered canonical source receipt: {label}")
+class Family8SourceReceiptTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.state5 = load("private/review/family8-state4/source.json")
+        cls.state5_review = load("research/variants/family8-state4-review.json")
+        cls.onward = load("private/review/family8-onward/source.json")
+        cls.target = load("research/variants/family8-target-review.json")
 
+    def test_current_canonical_sources_validate(self):
+        validate_state5_source(ROOT, self.state5, self.state5_review)
+        validate_onward_source(ROOT, self.onward)
+        validate_target_source(ROOT, self.target)
 
-def main() -> int:
-    s5 = load("private/review/family8-state4/source.json")
-    s5_review = load("research/variants/family8-state4-review.json")
-    onward = load("private/review/family8-onward/source.json")
-    target = load("research/variants/family8-target-review.json")
-    validate_state5_source(ROOT, s5, s5_review)
-    validate_onward_source(ROOT, onward)
-    validate_target_source(ROOT, target)
+    def test_volatile_regeneration_metadata_is_tolerated(self):
+        # Regeneration changes timestamps and whole-workspace pin lists.
+        # Canonical facts remain tied to raw inputs and model source hashes.
+        changed = copy.deepcopy(self.target)
+        changed["utc"] = "2099-01-01T00:00:00Z"
+        changed["source_pins"].append({"path": "volatile/irrelevant", "sha256": "0" * 64})
+        changed["input_and_listing_pins"].append({"path": "volatile/irrelevant", "sha256": "1" * 64})
+        validate_target_source(ROOT, changed)
+        changed_s5 = copy.deepcopy(self.state5)
+        changed_s5["pins"]["volatile/irrelevant"] = "2" * 64
+        validate_state5_source(ROOT, changed_s5, self.state5_review)
 
-    # Regeneration changes volatile pins/timestamps. Canonical trace facts and
-    # the raw-input/model pins still validate, so harmless receipt churn passes.
-    changed = copy.deepcopy(target)
-    changed["utc"] = "2099-01-01T00:00:00Z"
-    changed["source_pins"].append({"path": "volatile/irrelevant", "sha256": "0" * 64})
-    changed["input_and_listing_pins"].append({"path": "volatile/irrelevant", "sha256": "1" * 64})
-    validate_target_source(ROOT, changed)
-    changed_s5 = copy.deepcopy(s5)
-    changed_s5["pins"]["volatile/irrelevant"] = "2" * 64
-    validate_state5_source(ROOT, changed_s5, s5_review)
+    def test_raw_target_fixture_tampering_is_rejected(self):
+        bad = copy.deepcopy(self.target)
+        next(entry for entry in bad["input_and_listing_pins"]
+             if entry["path"] == "private/review/family8-onward/child-after6143.bin")["sha256"] = "0" * 64
+        with self.assertRaises((ValueError, OSError)):
+            validate_target_source(ROOT, bad)
 
-    bad_target = copy.deepcopy(target)
-    next(entry for entry in bad_target["input_and_listing_pins"]
-         if entry["path"] == "private/review/family8-onward/child-after6143.bin")["sha256"] = "0" * 64
-    must_reject(lambda: validate_target_source(ROOT, bad_target), "target raw child hash")
-    bad_onward = copy.deepcopy(onward)
-    bad_onward["timeline"]["child"][-1]["state"] = 5
-    must_reject(lambda: validate_onward_source(ROOT, bad_onward), "onward endpoint")
-    bad_s5 = copy.deepcopy(s5)
-    next(row for row in bad_s5["timeline"] if row.get("first_frame") == 6002 and
-         row.get("first_seed") == 5428 and row.get("frame") == 6047)["state"] = 4
-    must_reject(lambda: validate_state5_source(ROOT, bad_s5, s5_review), "state5 endpoint")
-    print("family8 source receipt canonicalization passed (volatile metadata tolerated; pinned identity tampering rejected)")
-    return 0
+    def test_source_endpoints_tampering_is_rejected(self):
+        bad_onward = copy.deepcopy(self.onward)
+        bad_onward["timeline"]["child"][-1]["state"] = 5
+        with self.assertRaises((ValueError, OSError)):
+            validate_onward_source(ROOT, bad_onward)
+        bad_state5 = copy.deepcopy(self.state5)
+        row = next(row for row in bad_state5["timeline"] if row.get("first_frame") == 6002 and
+                   row.get("first_seed") == 5428 and row.get("frame") == 6047)
+        row["state"] = 4
+        with self.assertRaises((ValueError, OSError)):
+            validate_state5_source(ROOT, bad_state5, self.state5_review)
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    unittest.main()

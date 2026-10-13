@@ -42,6 +42,7 @@ pub mod construction_setup;
 pub mod construction_completion;
 pub mod construction_maintenance;
 pub mod construction_terraform_completion;
+pub mod construction_terraform_resume;
 pub mod construction_payment;
 pub mod construction_motion;
 pub mod construction_wait;
@@ -58,6 +59,7 @@ pub mod building_progress;
 pub mod building_obstacle;
 pub mod building_pool;
 pub mod building_resources;
+pub mod water_effect;
 
 pub use world::{
     MissionWorld, PlantParameterTable, PlantParameters, PlantRenderRecord,

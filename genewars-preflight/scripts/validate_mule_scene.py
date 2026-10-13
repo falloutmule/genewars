@@ -222,8 +222,8 @@ def main():
     if run.returncode:
         raise RuntimeError(f"Rust fixture render failed: {run.stdout[-4000:]}\n{run.stderr[-4000:]}")
     actual_lines = rust_output.read_text(encoding="utf-8").splitlines()
-    if len(actual_lines) != 153:
-        raise AssertionError(f"expected 153 Rust oracle cases, got {len(actual_lines)}")
+    if len(actual_lines) != 163:
+        raise AssertionError(f"expected 163 Rust oracle cases, got {len(actual_lines)}")
     compared = 0
     pixels = 0
     for line in actual_lines:
@@ -249,6 +249,12 @@ def main():
                  ROOT / "private" / "integration" / "combined-before-mule375" / "source-after375.bin",
                  ROOT / "private" / "integration" / "combined-before-mule385" / "source-after385.bin",
                  ROOT / "private" / "integration" / "combined-before-mule415" / "source-after415.bin",
+                 ROOT / "private" / "review" / "mule-mortality" / "frame9053" / "source-after9053.bin",
+                 ROOT / "private" / "review" / "mule-mortality" / "frame9053" / "source-trace9053.json",
+                 ROOT / "private" / "review" / "mule-mortality" / "frame9058" / "source-after9058.bin",
+                 ROOT / "private" / "review" / "mule-mortality" / "frame9058" / "source-trace9058.json",
+                 ROOT / "private" / "review" / "mule-mortality" / "frame9059" / "source-after9059.bin",
+                 ROOT / "private" / "review" / "mule-mortality" / "frame9059" / "source-trace9059.json",
                  ROOT / "private" / "ghidra" / "actor-activation" / "instructions-0001f260.txt",
                  ROOT / "private" / "ghidra" / "entity-draw-refs" / "instructions-00094f30.txt",
                  ROOT / "private" / "ghidra" / "entity-draw-refs" / "instructions-00094a60.txt",
@@ -267,6 +273,8 @@ def main():
         "fade_input": {"bytes": len(fade), "sha256": sha(fade)},
         "main_gla_input": {"bytes": len(gla), "sha256": sha(gla)},
         "ordinary_shade_cases": 3,
+        "mortality_animation_frames": 10,
+        "mortality_scope": "state 24 / animation 17 (7 metadata frames) and state 25 / animation 18 (3 metadata frames); only unmodified frame 9053 and 9059 snapshots are source-traced records, other frame-byte selections are codec-domain tests",
         "code_pins": pins,
         "comparison": "all Rust framebuffer bytes equal the independently parsed ANB/RLE/scale/flip/fade/GLA model",
         "shade_contract": "raw zero selects row 0; nonzero adds arithmetic virtual_height >> 7 and caps at 31; negative rows and unresolved parity-special dispatch reject atomically",

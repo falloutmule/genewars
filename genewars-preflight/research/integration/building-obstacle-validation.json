@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "utc": "2026-10-13T20:54:31.537819+00:00",
+  "utc": "2026-10-13T21:42:43.076166+00:00",
   "cases": 403,
   "compared_bytes": 4433,
   "literal_instructions": 149837,
@@ -78,7 +78,7 @@
     "private/ghidra/mission-array-refs/instructions-0005cc60.txt": "732f53cf3c69987464aaa7903bfa1fc99e0e826dad615b979269bf6c55e4d2cb",
     "private/ghidra/landing-contact/instructions-0008b460.txt": "968ab9a9db051de1ca9c5cadada0ebffc08b34dd0681cf33f5db51482258f1dd"
   },
-  "private_run": "private/review/building-obstacle/1329933244474555916d61343b7a1f55",
+  "private_run": "private/review/building-obstacle/f54a9d5509174f8fa45cc5fa5452b722",
   "original_execution": false,
   "scope": "Mask0/negative-height74270 including literal74160/8B460. Exact returned-presence and ordered cell-query sequence: every selector, every ordered offset, extent boundaries, signed-word wrap, reserved empty cell, clear flag and first-candidate rejection. Native map-list traversal is the world adapter; positive-height animation bounds remain unsupported."
 }

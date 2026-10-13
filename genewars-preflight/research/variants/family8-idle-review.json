@@ -1,6 +1,6 @@
 {
   "status": "passed-family8-readonly-idle-search-elision",
-  "utc": "2026-10-13T21:22:33.419261+00:00",
+  "utc": "2026-10-13T21:37:49.430016+00:00",
   "full_callbacks": 1,
   "prefix_cases": 12,
   "compared_bytes": 125,
@@ -266,7 +266,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_pool.rs",
-      "sha256": "165d8bde978d5a884e4b69238e0223481de8d0cb10a6c259c5c3be5753acda38"
+      "sha256": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5"
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_progress.rs",
@@ -306,11 +306,19 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_terraform_completion.rs",
-      "sha256": "c61856bc56f50513cc92deba16a4406bb761062b428466fd5f1ffd26247bccc6"
+      "sha256": "031abef43f20a1e04a5b32ea72d00340068e25a7529908d16d72229929e7fecb"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terraform_resume.rs",
+      "sha256": "325b7f0d36e5bea907d1ddf5a9c54b504274ff64fe44203bc602029074cc8971"
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_terrain.rs",
       "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_wait.rs",
+      "sha256": "3e339a034c14c3f7f4fc515418675eb357d844c473d9d5024797750cc3b0f6ae"
     },
     {
       "path": "rust/crates/genewars-runtime/src/countdown_expiry.rs",
@@ -354,7 +362,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/lib.rs",
-      "sha256": "0bb6411b15750a9a8e2201545de3420c78a5a3b3b2b869a6bb939259b9fc0fa5"
+      "sha256": "ff4f03c5f9189e75b392fee756c56992cad4c7a54c4cf358bdef3fc16b1cf1bb"
     },
     {
       "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
@@ -402,7 +410,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/building_updates.rs",
-      "sha256": "bb5c69fb16f8ec9b1c27e1ade545dcc8947f72911bf991f36550471db5ecc73a"
+      "sha256": "ff4cbe44324236d1c86dd38a8469bc50fd0e6278d91b7084faaa1f1ad7bc9015"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
@@ -434,7 +442,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/terrain_updates.rs",
-      "sha256": "0294b265dd89777eedb951b04cfed105b43815477dee2c034244fa68ae568eb4"
+      "sha256": "aa9fb2176ded7f50891520f1418d7276ee0d3926c0461c491b8624b072465dca"
     },
     {
       "path": "rust/crates/genewars-runtime/src/world/plant_creation.rs",
