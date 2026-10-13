@@ -111,7 +111,7 @@ impl Game {
         if self.scene!=Scene::Mission {return;}
         let Some(m)=&mut self.mission else {return;};
         if m.blocked.is_some() {return;}
-        if self.ticks.len()>=4096 {m.blocked=Some("Development trace limit (4096 steps) reached".into());return;}
+        if self.ticks.len()>=16384 {m.blocked=Some("Development trace limit (16384 steps) reached".into());return;}
         // Cross-subsystem transaction: a drawable frame must exist before the
         // tentative world can replace the currently displayed one.
         let mut proposed=m.world.clone();

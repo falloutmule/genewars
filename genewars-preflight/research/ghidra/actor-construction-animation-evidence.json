@@ -1,0 +1,14 @@
+{
+  "dispatch": {
+    "state9_callback": "58271",
+    "state9_animation": "585BE",
+    "state12_animation": "5850E"
+  },
+  "cases": 144,
+  "compared_bytes": 28800,
+  "literal_instruction_steps": 30683,
+  "source_sha256": "bf44aec16d67ce3f8b4313a4d27cc30bbd6b9b5f58bca638c963c270c1216505",
+  "shared_animation_sha256": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
+  "listing_sha256": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a",
+  "scope": "57A10 settled state9/action13..15 fullactor tail; actual7AC00; explicit frozen movement/stage andqueue ports; mappedstate9dispatch585BE; syntheticflags0/holds0..2"
+}

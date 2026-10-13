@@ -293,8 +293,20 @@
       "sha256": "8aa88c050cdb4229467f43347efcd9a8d88e5651cf2684e92666dcfe886515b6",
       "size": 36,
       "provenance": "validated mapped object3 offset 0x4564; physics-inputs.json"
+    },
+    {
+      "path": "countdown/ETHEREAL.ANB",
+      "sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4",
+      "size": 91123,
+      "provenance": "root/2/disc/60; decoded RNC output"
+    },
+    {
+      "path": "buildings/BTURR.ANB",
+      "sha256": "c26df60af3a3166aec54112f197a4334966eb214eeaa48e0d9284e0510b8cd20",
+      "size": 68030,
+      "provenance": "root/1/303 archive-backed verified BTURR.ANB; indexed8 structural validation only"
     }
   ],
   "original_execution": false,
-  "catalog_sha256": "b4ced7d0c25222e19941f8c00a2c1f93b78ee48bdd2fdbb987e7b01ac9e4fdd4"
+  "catalog_sha256": "406953b3cbb85d958f0e417208630fe41f57749b46a5b1117f516dd9709cdcec"
 }

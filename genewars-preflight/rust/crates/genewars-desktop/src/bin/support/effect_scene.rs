@@ -22,6 +22,7 @@ const CODE_31: u8 = 0x31;
 const CODE_0X30: u8 = 0x30;
 const CODE_6: u8 = 6;
 const CODE_47: u8 = 0x2f;
+const CODE_26: u8 = 0x1a;
 const SPECIAL_ANIMATION: usize = 66;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -174,6 +175,7 @@ fn draw_effect_records_inner(
             CODE_6 => Some(EffectAnimationBinding::EffAnimation6),
             CODE_0X30 => Some(EffectAnimationBinding::EffAnimation48),
             CODE_47 => Some(EffectAnimationBinding::EffAnimation47),
+            CODE_26 => Some(EffectAnimationBinding::EffAnimation26),
             _ => None,
         };
         if expected_binding.is_none() || binding != expected_binding {
@@ -245,9 +247,9 @@ fn draw_effect_records_inner(
             )?;
             item.special_pixels_written = written;
             item.special_pixels_clipped = clipped;
-        } else if code == CODE_6 || code == CODE_0X30 {
-            // Codes 6 and 0x30 both request the normal component-shadow pass
-            // before indexed8 color. Their bound EFF animation ranges differ.
+        } else if code == CODE_6 || code == CODE_0X30 || code == CODE_26 {
+            // Codes 6, 0x30, and 0x1A request the normal component-shadow
+            // pass before indexed8 color. Their EFF animation ranges differ.
             for component in &main.components {
                 let shadow = draw_normal_component_shadow(
                     &component.sprite, &gla, ground_origin, component.local, 0,
@@ -296,6 +298,7 @@ fn decode_bound_frame(
         EffectAnimationBinding::EffAnimation6 => 6,
         EffectAnimationBinding::EffAnimation48 => 48,
         EffectAnimationBinding::EffAnimation47 => 47,
+        EffectAnimationBinding::EffAnimation26 => 26,
     };
     decode_frame(anb, animation, relative_frame)
 }
@@ -546,6 +549,15 @@ mod tests {
             assert_eq!(frame47.frame_offset, 3234 + (frame_index * 14) as u32);
             assert!(frame47.components.iter().all(|c| c.flags == 0));
         }
+        let animation26 = AnbSections::parse(&bytes).unwrap().ui_metadata().unwrap().animation(26).unwrap();
+        assert_eq!((animation26.first_frame_offset, animation26.last_frame_offset, animation26.trailing_word), (2030, 2086, 5));
+        for frame_index in 0..5 {
+            let frame26 = decode_frame(&bytes, 26, frame_index).unwrap();
+            assert_eq!(frame26.frame_offset, 2030 + (frame_index * 14) as u32);
+            assert_eq!(AnbSections::parse(&bytes).unwrap().ui_metadata().unwrap()
+                .frame_at(frame26.frame_offset).unwrap().byte_10, 1);
+            assert_eq!(frame26.components[0].flags, [0, 0, 0, 0x84, 0x04][frame_index]);
+        }
         validate_frame_flags(0, &late6, false).unwrap();
         validate_frame_flags(0, &special, true).unwrap();
     }
@@ -705,6 +717,68 @@ mod tests {
             assert_eq!(actual, expected, "code0x30 frame {frame_index}");
             assert_eq!(item.special_pixels_written, 0);
             assert!(item.color_pixels_written > 0);
+        }
+    }
+
+    #[test]
+    fn code0x1a_uses_its_five_pinned_frames_on_the_generic_shadow_and_main_path() {
+        let resources = staged_resources();
+        let fade = TerrainFadeTable::parse(resources.fade_bytes()).unwrap();
+        let gla = MainGlaTable::parse(resources.main_gla_bytes()).unwrap();
+        assert_eq!(resources.effects.frame_count(EffectAnimationBinding::EffAnimation26).unwrap(), 5);
+
+        for frame_index in [0usize, 2, 3, 4] {
+            let frame = decode_frame(resources.effects.bytes(), 26, frame_index).unwrap();
+            assert_eq!(frame.frame_offset, 2030 + (frame_index * 14) as u32);
+            assert_eq!(frame.components[0].flags, [0, 0, 0, 0x84, 0x04][frame_index]);
+            let mut record = active_effect(CODE_26, frame_index as u8, 3);
+            record[0x27..0x2b].copy_from_slice(&512i32.to_le_bytes());
+            let records = [record];
+            let bindings = [Some(EffectAnimationBinding::EffAnimation26)];
+            let ground = [180i16, 160i16];
+            let mut actual = vec![23u8; 512 * 480];
+            let receipt = draw_effect_records_inner(
+                &resources, &records, &bindings, &[0], &[ground], 0, 0,
+                &mut actual, [512, 480], 512,
+            ).unwrap();
+            let item = &receipt.items[0];
+            assert_eq!(item.binding, EffectAnimationBinding::EffAnimation26);
+            assert_eq!(item.code, CODE_26);
+            assert_eq!(item.animation_frame, frame_index as u8);
+            assert_eq!(item.effective_shade, 7);
+            assert!(item.shadow_pixels_written > 0 && item.color_pixels_written > 0);
+
+            // Independent complete framebuffer walk: shadow first at ground,
+            // then the positive indexed8 literals through FADE row 7.
+            let mut expected = vec![23u8; 512 * 480];
+            for component in &frame.components {
+                draw_normal_component_shadow(
+                    &component.sprite, &gla, ground, component.local, 0,
+                    [512, 480], 512, &mut expected,
+                ).unwrap();
+            }
+            for component in &frame.components {
+                for y in 0..usize::from(component.sprite.height) {
+                    for x in 0..usize::from(component.sprite.width) {
+                        let source = y * usize::from(component.sprite.width) + x;
+                        if !component.sprite.opaque[source] { continue; }
+                        let px = i32::from(ground[0]) + i32::from(component.local[0]) + x as i32;
+                        let py = item.color_origin[1] + i32::from(component.local[1]) + y as i32;
+                        if px < 0 || py < 0 || px >= 512 || py >= 480 { continue; }
+                        let at = py as usize * 512 + px as usize;
+                        let color = fade.map_palette_index(7, component.sprite.indices[source]).unwrap();
+                        expected[at] = if component.flags & 0x0c == 4 {
+                            gla.map_destination(expected[at], color)
+                        } else { color };
+                    }
+                }
+            }
+            assert_eq!(actual, expected, "EFF26 frame {frame_index}");
+            assert_eq!(item.special_pixels_written, 0);
+            println!("EFF26_ORACLE frame={frame_index} sha256={} shadow={} shadow_clipped={} color={} color_clipped={} effective_shade={} color_origin_y={}",
+                genewars_runtime::identity::sha256_hex(&actual), item.shadow_pixels_written,
+                item.shadow_pixels_clipped, item.color_pixels_written, item.color_pixels_clipped,
+                item.effective_shade, item.color_origin[1]);
         }
     }
 

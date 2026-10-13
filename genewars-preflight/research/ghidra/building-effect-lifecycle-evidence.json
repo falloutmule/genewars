@@ -1,0 +1,35 @@
+{
+  "selectors": 14,
+  "callbacks": 166,
+  "compared_bytes": 13612,
+  "literal_instruction_steps": 152562,
+  "output_sha256": "95bae9c1d3fb754393c4f30967ca23e7fae245ca442af326f86eedb072112f36",
+  "source_sha256": "628490fa538989e3dd663ae4fcb53a1cd5aa865b036086bc20e0eb55ce970400",
+  "pins": {
+    "private/ghidra/plant-command/instructions-0004b630.txt": "1686608a6f95caf95f2f963ac824df9f02ecc2ed5d7a6d928fa85638b845ef76",
+    "private/ghidra/mission-array-refs/instructions-0004b3b0.txt": "70d7c3c297a8693f4b7367eab89f440b850efac1e673f52addeeff45597591da",
+    "private/ghidra/actor-activation/instructions-0004b090.txt": "a2850f00a82ef9636d3c1e8175aecccfb5aa99633354dbdad74b5e3b3863cba1",
+    "private/ghidra/landing-contact/instructions-0001e600.txt": "0415a671680b7fb71d925182b25097591272170159fb470a71028deec4bc68ae",
+    "private/ghidra/actor-activation/instructions-0006df30.txt": "8afe40345a8ecb636ff3af67dd76b4fa4104596032270b0cc61ab26b2affe8b1",
+    "private/ghidra/actor-activation/instructions-0007b380.txt": "a636e0647b1a66cf9eb422bfc86e03f8b2e450a42290ed9ad70c08c3f4792f7d",
+    "private/ghidra/landing-contact/instructions-000733a0.txt": "fca831c451b1c09a39d93188d8cf9428b04ae5b25d8f87f09ecceb87c5f3f736",
+    "private/ghidra/landing-contact/instructions-0007ac00.txt": "cc002c636ec832486e06fe90af6cfc68a0489d6acae6efcf83d5a5ce735706e1"
+  },
+  "lifetimes": {
+    "0": 8,
+    "1": 8,
+    "2": 8,
+    "3": 8,
+    "4": 8,
+    "5": 8,
+    "6": 8,
+    "7": 8,
+    "8": 17,
+    "9": 17,
+    "10": 17,
+    "11": 17,
+    "12": 17,
+    "13": 17
+  },
+  "scope": "Full4B630+6DF30 quiet flat-land code2C callback afterimage;49D30 generic retirement explicit port; EFF44 hash-admitted9frames/holds0; noRNG"
+}

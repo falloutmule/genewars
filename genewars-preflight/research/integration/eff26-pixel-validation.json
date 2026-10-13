@@ -1,0 +1,79 @@
+{
+  "animation": {
+    "component_flags_by_frame": [
+      0,
+      0,
+      0,
+      132,
+      4
+    ],
+    "first_frame_offset": 2030,
+    "frame_count": 5,
+    "hold_bytes": 1,
+    "index": 26,
+    "last_frame_offset": 2086
+  },
+  "command": "python -B scripts/cargo.py test -p genewars-desktop --bin genewars-game effect_scene::tests::code0x1a_uses_its_five_pinned_frames_on_the_generic_shadow_and_main_path -- --nocapture",
+  "draw_path": "generic code-6 shadow then normal indexed8 frame; ordinary FADE row 7; frame component flag 0x04 uses the proved MAIN.GLA destination blend; no special code-31 layer",
+  "framebuffer": {
+    "height": 480,
+    "initial_index": 23,
+    "pitch": 512,
+    "width": 512
+  },
+  "implementation_sha256": "b3beb92d6dc256dd194c1c739cc9935978aeb5cde3b9ec9903641fdf9374fb7d",
+  "pixel_oracle": {
+    "all_passed": true,
+    "full_buffer_cases": [
+      {
+        "color_clipped": 0,
+        "color_origin_y": 152,
+        "color_pixels": 44,
+        "effective_shade": 7,
+        "frame": 0,
+        "sha256": "e057b367a641dc15c4f5d5d831c1e39b6ab1a09940d57168bdc6ddc1075260b4",
+        "shadow_clipped": 0,
+        "shadow_pixels": 22
+      },
+      {
+        "color_clipped": 0,
+        "color_origin_y": 152,
+        "color_pixels": 36,
+        "effective_shade": 7,
+        "frame": 2,
+        "sha256": "6534c279d1f58f117327b1c8679abb6b8a71cfce3487d79c7b4aeedf81c56712",
+        "shadow_clipped": 0,
+        "shadow_pixels": 20
+      },
+      {
+        "color_clipped": 0,
+        "color_origin_y": 152,
+        "color_pixels": 15,
+        "effective_shade": 7,
+        "frame": 3,
+        "sha256": "36291e5421960b365f54f87d280406916c29cf5aba558a71b06c3c21ea0cbe08",
+        "shadow_clipped": 0,
+        "shadow_pixels": 10
+      },
+      {
+        "color_clipped": 0,
+        "color_origin_y": 152,
+        "color_pixels": 6,
+        "effective_shade": 7,
+        "frame": 4,
+        "sha256": "e1344deff5f36759f7537a595ad7cba3a55b6470ce07ebdd23f19e715f5c2b35",
+        "shadow_clipped": 0,
+        "shadow_pixels": 4
+      }
+    ]
+  },
+  "resource": {
+    "bytes": 186726,
+    "catalog_line_sha256": "c624026ffbcb84c8cfed570ad4596c7752ab488a976a6a8c9c674ae24d9cf5f5",
+    "path": "effects/EFF.ANB",
+    "sha256": "f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253"
+  },
+  "schema_version": 1,
+  "scope": "EFF effect code 0x1A, binding animation 26, four representative frames. Rust test compares complete 512x480 indexed framebuffers against a separately walked component/shadow/color model; no original executable run.",
+  "source_contract_sha256": "26e5f20f8cf1c2e383055e5b8e966c735db8e83aec977ed90c922cc81cd5e45d"
+}

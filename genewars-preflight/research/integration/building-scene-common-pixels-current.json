@@ -1,0 +1,70 @@
+{
+  "code_pins": {
+    "rust/crates/genewars-desktop/src/bin/support/building_scene.rs": "1481f7882a3336d11e4e910fbba3a2a46581d55b6186321cc300dba3c1168d1a",
+    "rust/crates/genewars-runtime/src/actor_render.rs": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9",
+    "rust/crates/genewars-runtime/src/building_resources.rs": "1d53264d113d1cdf7f339b428f79c32c36f7bb02084db546fd0ab1fcbedc969b",
+    "scripts/desktop/building_scene_pixel_harness.rs": "d48657a81165e9e2e5e425c554b688fb72e76d1780a0f5ff586eae6215a9574a",
+    "scripts/desktop/validate_bturr_common_pixels.py": "35f015b64040095010e955cdd661eca801c2727eedb9b74057980ac5382f8bbb",
+    "scripts/desktop/validate_building_scene_common.py": "a27db931abb0bb079a9c05279d8771121368c61f99f4fae301f657d2cfca43d9"
+  },
+  "framebuffer": {
+    "bytes_per_frame": 34548,
+    "height": 180,
+    "pitch": 192,
+    "width": 180
+  },
+  "frames": [
+    {
+      "clipped": 1848,
+      "components": 1,
+      "frame": 0,
+      "full_addressed_buffer_equal": true,
+      "hash": "7a5b5c5ce0ce9b1557d31d0fcfc1534467662e8e64eb25e40f180971cd4188b5",
+      "omissions": {
+        "post_image_overlays_included": false,
+        "shadow_pass_included": false
+      },
+      "opaque": 2180,
+      "written": 332
+    },
+    {
+      "clipped": 2324,
+      "components": 1,
+      "frame": 1,
+      "full_addressed_buffer_equal": true,
+      "hash": "726817dd3d856fdbfcfad5f6a5b6446691024e9280e58307942a5d77337470e7",
+      "omissions": {
+        "post_image_overlays_included": false,
+        "shadow_pass_included": false
+      },
+      "opaque": 2838,
+      "written": 514
+    },
+    {
+      "clipped": 3786,
+      "components": 2,
+      "frame": 2,
+      "full_addressed_buffer_equal": true,
+      "hash": "799bed1c109d1f338cc503f0e123d5be772bb26116431a265ff2b460175cbcf2",
+      "omissions": {
+        "post_image_overlays_included": false,
+        "shadow_pass_included": false
+      },
+      "opaque": 4624,
+      "written": 838
+    }
+  ],
+  "input_sha256": {
+    "private/integration/game-runtime/terrain/FADE.DAT": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+    "private/integration/game-runtime/terrain/MAIN.GLA": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+    "private/reference-run/run-006/drive-c/GAME/DATA/BUILDING/BTURR.ANB": "c26df60af3a3166aec54112f197a4334966eb214eeaa48e0d9284e0510b8cd20"
+  },
+  "instruction_pins": {
+    "private/ghidra/actor-draw/instructions-00095390.txt": "8ae130718f8bb1c699ccfc7e44a6a83fc9f41c10770fb5b9b4050efc96bfcfa5",
+    "private/ghidra/building-draw/instructions-00043a40.txt": "62a4377cb232402be9cf5a1fb0c7da61d29cc582632c60c217b0357e2961ff1b",
+    "private/ghidra/entity-plant/instructions-0009a660.txt": "f6e10c86aa6ce6cf6b7906b26279ffc9baf4142fd81b0f99779f58b40b3001ee"
+  },
+  "schema_version": 1,
+  "scope": "The desktop adapter forwards the three hash-bound BTURR animation-0 frames through the runtime main-image helper. It does not claim shadow, selection, owner, or post-image UI overlays; each omission is explicit in the returned receipt.",
+  "status": "passed-independent-building-scene-main-image-oracle"
+}

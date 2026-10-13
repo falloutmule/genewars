@@ -1,0 +1,70 @@
+{
+  "compiled_harness_sha256": "6633936e21c9e3a0c13d3cf5ff9d47423a1063ca8247f1636f5c5cb0f35e2483",
+  "method": "rustc compiled actual production source; result bytes and rejection variants compared against literal 45010/6D490 instruction interpreter.",
+  "original_executable_run": false,
+  "private_record_bytes_written_to_public_report": false,
+  "private_rustc_sha256": "cbd682cf84ccc20bfde002443274f9768f777b68afef63da4462abb490c0a4ff",
+  "production_pool_source_sha256": "165d8bde978d5a884e4b69238e0223481de8d0cb10a6c259c5c3be5753acda38",
+  "real_conq001": {
+    "complete_byte_match": true,
+    "native_bytes_compared": 17152,
+    "output_sha256": "c0f2292b8c7b7d8994fa95a678477bf0ca8342ae2c7c891d7266a6fe41fec1bb",
+    "packed_bytes": 15104,
+    "records": 256
+  },
+  "rust_rejections": {
+    "active_record_slot_17": true,
+    "stale_binding_slot_91": true,
+    "wrong_length": true
+  },
+  "schema_version": 1,
+  "scope": "Actual checked-in BuildingPool source copied unchanged into an isolated rustc harness; no production/Cargo files changed.",
+  "source_pins": [
+    {
+      "path": "rust/crates/genewars-runtime/src/building_pool.rs",
+      "sha256": "165d8bde978d5a884e4b69238e0223481de8d0cb10a6c259c5c3be5753acda38"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building.rs",
+      "sha256": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf"
+    },
+    {
+      "path": "scripts/validate_building_inactive_loader.py",
+      "sha256": "db96d55f7d6b1413ca8ca81330b1d87b719ef1e2c028088319dcbcfe476149d6"
+    },
+    {
+      "path": "scripts/validate_building_inactive_loader_rust.py",
+      "sha256": "c2b24e1cff94ff6e6ea5182ef896575740dd47e12217daa94ca036205be3b756"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-00045010.txt",
+      "sha256": "379b68b64d00bc0b00b1dfe07562d58d18d62f9cd07dcf343bac3a832b511389"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-0006d490.txt",
+      "sha256": "5b9e8ac352751ec2e9dbda6bd5abfee4d61ab7602bd7cba97119663b17eb664e"
+    },
+    {
+      "path": "private/integration/game-runtime/terrain/CONQ001.DAT",
+      "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+    },
+    {
+      "path": "research/ghidra/mission-load-evidence.json",
+      "sha256": "2d16d05150c104f59e4939c7c4ab7df2490d1c7a4aa81111d626604906b17d80"
+    },
+    {
+      "path": "private/tools/rust/rustup/toolchains/1.99.0-x86_64-pc-windows-gnu/bin/rustc.exe",
+      "sha256": "cbd682cf84ccc20bfde002443274f9768f777b68afef63da4462abb490c0a4ff"
+    }
+  ],
+  "source_pins_before_and_after_equal": true,
+  "status": "passed-private-rust-inactive-loader-crosscheck",
+  "synthetic": {
+    "aggregate_output_sha256": "e627509caca290b4363cf34922afbeaafe826b86cfe8024f44766f1dfa45c08c",
+    "complete_pool_cases": 4,
+    "complete_pool_outputs_compared": 4,
+    "literal_interpreter_varied_records": 1024,
+    "packed_records": 1024,
+    "rust_successes": 4
+  }
+}

@@ -1,0 +1,7 @@
+Fifteen complete13780 passes from corrected-footstep trajectory47cd341f157240458a305a7527b17016 match the literal source:6,153,255 backing/native/player/RNG bytes and143,760 instructions. The samples include blocked periodic search6332, hover expiry, return movement, child retirement and parent notification, group departure, all four parent retirements and the empty pass6687. Capture hashes, compiled-probe identity and historical compilation pins are verified before replay.
+
+This compares the entire family8 pass, including live ascending slots, shared particles/RNG, map links, cleanup, counts and player-counter mutation. Audio, UI and render-queue consumers remain typed ports. It does not replay every mission frame or claim parity of other scheduler families. The recorded native output is the comparison target; the private instruction interpreter supplies the expected state independently.
+
+The first empty-pass comparison exposed an interpreter width issue, rather than a native mismatch. At139A4, Ghidra's text omits the destination width forMOV[11C2BC],AX. Raw bytes66A3BCC21100 prove a16-bit accumulator store. A local annotated operand prevents the generic text parser from treating it as32-bit and overwriting the first map bytes. The raw object and annotation are pinned; the shared interpreter was left unchanged.
+
+The adjacent Python gate adapts root's captured-pass loader, with explicit provenance in its receipt. No original executable or GUI ran. Later source or RNG changes do not rewrite this recorded-fixture evidence.

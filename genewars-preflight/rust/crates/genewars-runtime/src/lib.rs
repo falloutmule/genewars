@@ -29,6 +29,35 @@ pub mod creature_world;
 pub mod bookkeeping;
 pub mod target_resolver;
 pub mod plant_spread;
+pub mod family8_creation;
+pub mod family8_pool;
+pub mod countdown_expiry;
+pub mod family8_motion;
+pub mod family8_particle;
+pub mod actor_construction;
+pub mod actor_construction_lifecycle;
+pub mod construction_terrain;
+pub mod construction_site;
+pub mod construction_setup;
+pub mod construction_completion;
+pub mod construction_maintenance;
+pub mod construction_terraform_completion;
+pub mod construction_payment;
+pub mod construction_motion;
+pub mod construction_wait;
+pub mod construction_cancellation;
+pub mod actor_construction_animation;
+pub mod actor_construction_recovery;
+pub mod actor_construction_tail;
+pub mod terrain_job_pool;
+pub mod building;
+pub mod building_effect;
+pub mod building_effect_lifecycle;
+pub mod building_callback;
+pub mod building_progress;
+pub mod building_obstacle;
+pub mod building_pool;
+pub mod building_resources;
 
 pub use world::{
     MissionWorld, PlantParameterTable, PlantParameters, PlantRenderRecord,

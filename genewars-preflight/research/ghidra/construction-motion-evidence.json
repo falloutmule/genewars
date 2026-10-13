@@ -1,0 +1,12 @@
+{
+  "cases": 512,
+  "compared_bytes": 102912,
+  "literal_instruction_steps": 11167,
+  "source_sha256": "807b07d32dfd1d93b748c93f8144a34e18ccb8ce5d8ba9199995d8ba34081bcf",
+  "source_pins": {
+    "actor-motion/instructions-000526c0.txt": "a6b39ca6b310a62ecb36fdfd08f205ae48e83bde37f949df96023277761c57c2",
+    "activation-rng-refs/instructions-00052340.txt": "a8c4d8761c19c40b94af254de31f43f01d8070ebf40770e67b30f57e43c1befc",
+    "actor-motion/instructions-0001ee30.txt": "3590a299b0f529da8f941168d806f9a5a8edbcc2365e36192d863a006d34d539"
+  },
+  "scope": "526C0/52340case1 all256low49flagvalues/70bit20 states;fullactor+ALready;actual73970/AE028 angles,zeroRNG;category0 archetype0..2"
+}

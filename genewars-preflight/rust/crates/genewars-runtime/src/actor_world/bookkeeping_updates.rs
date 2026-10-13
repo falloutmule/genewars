@@ -6,6 +6,7 @@ impl ActorWorld {
     /// be inactive. Returned notices require the separate audio/UI subsystem.
     pub fn step_empty_building_bookkeeping(&mut self,selected:u8)->Result<Vec<(u8,BookkeepingNotice)>,ActorWorldError> {
         if selected>=4{return Err(ActorWorldError::InvalidPlayer(selected));}
+        if self.buildings.as_ref().is_some_and(|pool|pool.records().iter().any(|r|r[6]!=0)){return Err(ActorWorldError::UnsupportedBookkeepingFamily(4));}
         // Scan raw activity bytes, including slots outside the declared count.
         let group=self.layouts[3];
         for i in 0..group.count {if self.backing[group.file_offset+i*group.packed_stride+6]!=0{return Err(ActorWorldError::UnsupportedBookkeepingFamily(4));}}
@@ -24,6 +25,9 @@ impl ActorWorld {
     /// explicit118770 byte. Its UI animation/output requests remain external.
     pub fn step_empty_family8_countdown(&mut self,selected:u8,runtime_flags:u8)->Result<CountdownPlan,ActorWorldError> {
         let player=self.player(selected)?;
+        if self.family8.as_ref().is_some_and(|pool|pool.records().iter().any(|r|r[6]!=0)) {
+            return Err(ActorWorldError::UnsupportedBookkeepingFamily(8));
+        }
         let group=self.layouts[7];
         for i in 0..group.count {if self.backing[group.file_offset+i*group.packed_stride+6]!=0{return Err(ActorWorldError::UnsupportedBookkeepingFamily(8));}}
         let count=u16::from_le_bytes(self.backing[0x355c..0x355e].try_into().unwrap());

@@ -1,0 +1,141 @@
+{
+  "status": "Corroborated static candidate source; no original execution",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "native_loader": {
+    "constructor": "1E3F0 writes vtable112120 only",
+    "reader": "45010 calls6D490 for31B header then copies28B payload to native39",
+    "packed_stride": 59,
+    "native_stride": 67,
+    "ranges": [
+      {
+        "packed": [
+          0,
+          31
+        ],
+        "native": [
+          0,
+          31
+        ]
+      },
+      {
+        "packed": [
+          31,
+          59
+        ],
+        "native": [
+          39,
+          67
+        ]
+      }
+    ],
+    "unserialized_native_prior": [
+      31,
+      39
+    ],
+    "active_init": "44FF0 clears native39..43, binds native31 from11685C[signed native45]",
+    "inactive": "native31..39 retains prior; all serialized59 bytes copied",
+    "serialized_input_side_effect": "6D490 normalizes serialized input15 &= E3 and17=20 after copying; native header retains pre-normalization bytes",
+    "count": "per-player resource+1 (player4A2), owner64 partition; totalcapacity256"
+  },
+  "resource_chain": [
+    "1D9AA EDX10388C",
+    "6AC50 preservesEDX (push6AC52,pop6AEF9)",
+    "1D9BF calls154B0 with list10388C",
+    "154B0 walks44B descriptors until first filename byte0",
+    "15410 calls9A09C",
+    "9A111..114 writes allocated file pointer through descriptor+1C",
+    "1DFB0 reads116824[i],98A60 relocates,1DFBF stores11685C[i]",
+    "44FFC selects11685C[signed selector45]"
+  ],
+  "building_descriptors": [
+    {
+      "descriptor_va": "0x10393c",
+      "filename": "data/building/BGENE.ANB",
+      "destination_va": "0x116824",
+      "selector": 0
+    },
+    {
+      "descriptor_va": "0x103968",
+      "filename": "data/building/BFARM.ANB",
+      "destination_va": "0x116834",
+      "selector": 4
+    },
+    {
+      "descriptor_va": "0x103994",
+      "filename": "data/building/BPOWE.ANB",
+      "destination_va": "0x116830",
+      "selector": 3
+    },
+    {
+      "descriptor_va": "0x1039c0",
+      "filename": "data/building/BMINE.ANB",
+      "destination_va": "0x116850",
+      "selector": 11
+    },
+    {
+      "descriptor_va": "0x1039ec",
+      "filename": "data/building/BWIND.ANB",
+      "destination_va": "0x116844",
+      "selector": 8
+    },
+    {
+      "descriptor_va": "0x103a18",
+      "filename": "data/building/BSOLA.ANB",
+      "destination_va": "0x11683c",
+      "selector": 6
+    },
+    {
+      "descriptor_va": "0x103a44",
+      "filename": "data/building/BVAT.ANB",
+      "destination_va": "0x116858",
+      "selector": 13
+    },
+    {
+      "descriptor_va": "0x103a70",
+      "filename": "data/building/BSHIE.ANB",
+      "destination_va": "0x116854",
+      "selector": 12
+    },
+    {
+      "descriptor_va": "0x103a9c",
+      "filename": "data/building/BTURR.ANB",
+      "destination_va": "0x116828",
+      "selector": 1
+    },
+    {
+      "descriptor_va": "0x103ac8",
+      "filename": "data/building/BSAWM.ANB",
+      "destination_va": "0x11682c",
+      "selector": 2
+    },
+    {
+      "descriptor_va": "0x103af4",
+      "filename": "data/building/BLAUN.ANB",
+      "destination_va": "0x116838",
+      "selector": 5
+    },
+    {
+      "descriptor_va": "0x103b20",
+      "filename": "data/building/BOPER.ANB",
+      "destination_va": "0x11684c",
+      "selector": 10
+    },
+    {
+      "descriptor_va": "0x103b4c",
+      "filename": "data/building/BOBSE.ANB",
+      "destination_va": "0x116840",
+      "selector": 7
+    }
+  ],
+  "source_pins": {
+    "private/ghidra/mission-tail-constructors/instructions-0001e3f0.txt": "abc0890ec59a474e9f96d677f3f0c152fac33e398524319ec8e7de2ca3e3c976",
+    "private/ghidra/mission-tail-readers/instructions-00045010.txt": "379b68b64d00bc0b00b1dfe07562d58d18d62f9cd07dcf343bac3a832b511389",
+    "private/ghidra/mission-tail-readers/instructions-0006d490.txt": "5b9e8ac352751ec2e9dbda6bd5abfee4d61ab7602bd7cba97119663b17eb664e",
+    "private/ghidra/mission-tail-init/instructions-00044ff0.txt": "3b8b284ba28ec64221cc52a0b7454b40c76bdd3ba7a3306afce3663a64544905",
+    "private/ghidra/building-loader-refs/instructions-0001d770.txt": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784",
+    "private/ghidra/animal-loader/instructions-0006ac50.txt": "f0792a3ffe1b0ae8ba99379fb8748d001215cf46cc8af98868272e36052f29ce",
+    "private/ghidra/planets-load/instructions-000154b0.txt": "fbbc626a1091a8bd8cef2128396a4246e9e7025065ef415ee1843ad5482ab93c",
+    "private/ghidra/descriptor-loader/instructions-0009a09c.txt": "b6750ccf4cf2f7e8ade257f259173d217d4aa974a3586cb6e5dddabaeba5ce5e",
+    "private/ghidra/validated/memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "status": "local-implementation-checkpoint",
+  "utc": "2026-10-13T21:34:24.752709+00:00",
+  "scope": "Corrected footstep, full ethereal cycle, native6331 repeat/window, building and bounded construction/terrain adapters. Fullgame unfinished; aggregate in progress.",
+  "numeric_default_seed": {
+    "completed": 9051,
+    "boundary_step": 9052,
+    "boundary": "Mule UnsupportedMotionState",
+    "private_capture": "private/review/family8-trajectory/bb1c98b625784fc49cefacf05b8133ff/frame9052/boundary"
+  },
+  "verification": {
+    "previous_workspace_pass_count": 381,
+    "current_aggregate": "running; workspace failed only stale catalog size assertion 50 versus 51",
+    "catalog_repair": "focused test passed; fullworkspace rerun pending next batch"
+  },
+  "receipts": {
+    "family8-corrected-captured-pass-validation.json": "04836888d7d02f9076c5636f8576016d2a1c60bc2c85823adc9b253939c7157c",
+    "family8-retirement-validation.json": "2b317087d41847781b3a3a888b1dcdf2ef8fce29a5e8d9e7e77bea8e22d3f618",
+    "building-progress-world-validation.json": "ee790d6ef0437e9c0a8a030e2da5eb53e249eec1a2b46bd0619db595b4ba7d71",
+    "terrain-jobs-world-validation.json": "4162fbd325544b7cd5ea677949751ee82e5f5ca95248daf42e8ee08923ba14c6",
+    "family8-native-footstep-corrected.json": "dd453adaa029e7165e9fc0821e8940be9eb954af299ca19eb157fd662f3faee3"
+  },
+  "source_archive_sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906",
+  "original_execution": false,
+  "public_upload": false
+}

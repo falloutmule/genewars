@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T21:32:29.242713+00:00",
+  "cases": 240,
+  "compared_bytes": 1200,
+  "literal_instructions": 62522,
+  "private_run": "private/review/countdown-transition/657a6bb021ae4e4dbc8899e39c0aed61",
+  "implementation_pins": {
+    "scripts/validate_countdown_transition.py": "f51a76784161a1cc33bbf34f5ff9a5800a2a1bac15c9e88f95940125ee23d6a5",
+    "scripts/countdown_transition_probe.rs": "370b8cf201cc8cdcac3f6afc442fda362fcac0e1e6fbd3f80a98f116b9f85c87",
+    "rust/crates/genewars-runtime/src/countdown_expiry.rs": "fdc5b172dc4fbd41ccf52bc877a9b0d7db6999c7166aba74125e7c9097c59dfb"
+  },
+  "listing_sha256": "634efec82d190cdf793a444a423709cd2e962031a6b2e20ec05c8606bc3a36b4",
+  "original_execution": false,
+  "scope": "All timer branches, active selector0 restart gate, ordered animation descriptor/state pairs and presentation request counts. Factories and callbacks remain request ports; no complete world pass claimed."
+}

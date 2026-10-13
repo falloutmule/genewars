@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "scope": "Repair/repeatability receipt for the three family-8 pixel gates after replacing volatile whole-review-JSON digests with stable canonical source facts and raw source identities. No original game or GUI execution.",
+  "preserved_prior_aggregate": "research/integration/verification.json (dated 200/203 result retained unchanged)",
+  "upstream_regeneration_commands": [
+    "python -B research/variants/family8-state4-review.py",
+    "python -B research/variants/family8-onward-review.py",
+    "python -B research/variants/family8-target-review.py"
+  ],
+  "pixel_gate_commands": [
+    "python -B scripts/desktop/validate_family8_state5_pixels.py",
+    "python -B scripts/desktop/validate_family8_selector1_direction4_pixels.py",
+    "python -B scripts/desktop/validate_family8_selector1_state1_pixels.py"
+  ],
+  "pixel_gates_run_count_after_repair": 2,
+  "canonical_receipt_validation_test": "python -B scripts/desktop/test_family8_source_receipts.py (passed)",
+  "full_framebuffer_byte_oracle": {
+    "family8-state5-pixel-validation-current.json": true,
+    "family8-selector1-direction4-pixel-validation-current.json": true,
+    "family8-selector1-state1-pixel-validation-current.json": true
+  },
+  "upstream_status": {
+    "family8-state4-review.json": {
+      "status": "passed-bounded-family8-selector0-state4",
+      "cases": null,
+      "callbacks": 276,
+      "parent_wait_callbacks": null,
+      "child_descent_callbacks": null
+    },
+    "family8-onward-review.json": {
+      "status": "passed-bounded-family8-onward",
+      "cases": null,
+      "callbacks": null,
+      "parent_wait_callbacks": 128,
+      "child_descent_callbacks": 98
+    },
+    "family8-target-review.json": {
+      "status": "passed-bounded-family8-initial-target",
+      "cases": 64,
+      "callbacks": null,
+      "parent_wait_callbacks": null,
+      "child_descent_callbacks": null
+    }
+  },
+  "raw_input_sha256": {
+    "private/integration/rnc-decoded/7660297d85773f47cacc07dcfdf96e8daa118dc52c8a38afc054c1ef9dfa20bc.bin": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4",
+    "private/integration/game-runtime/terrain/FADE.DAT": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+    "private/integration/game-runtime/terrain/MAIN.GLA": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+    "private/review/family8-state4/state5-start6002-seed5428.bin": "f54530d8bb8e04aa74347e346d60f9d08eb3abe72e5b21afed1af4ffeee130b0",
+    "private/review/family8-onward/child-after6046.bin": "ad599c9be03f6adf54625c3431ed88b1a15fa8cba93970dbbc3c1ad804238a23",
+    "private/review/family8-onward/actual-state1-slot4-after6143.bin": "03529194bc4d9abc786cfe10ddab81497a44921eb8c913a8c3c315f35a6e0222"
+  },
+  "current_upstream_review_sha256": {
+    "family8-state4-review.json": "5d03c5732f666e94dff00c799dec5ad33fca964627d6932fa9601c94d61c9ee6",
+    "family8-onward-review.json": "8fdc5baf95ca02a5692e6e971d4a2d653bdbacccd389dee877b8479b57317bee",
+    "family8-target-review.json": "1bf7faa91463617090f67bf65a11e7a0446450a00b33cd9360bc9958bc50e5d3"
+  },
+  "implementation_source_sha256": {
+    "scripts/desktop/family8_source_receipts.py": "19e059687f3b702bce742c67b50ccbe73a42bce69001cac1c8f06157e3ac2db7",
+    "scripts/desktop/test_family8_source_receipts.py": "102dd7b2ee78d39a6549c233ffa75f6985a7cc032f644b0b1274cbff62938ea9",
+    "scripts/desktop/validate_family8_state5_pixels.py": "e1f72658713ea258d4c70241bb732f90ce66dd45da4f2c8f095a096f1aa0c162",
+    "scripts/desktop/validate_family8_selector1_direction4_pixels.py": "4c6382ec4dd8ef0400af3d59517d4f79a55e8ebf10300536905e8f513dc8f1f9",
+    "scripts/desktop/validate_family8_selector1_state1_pixels.py": "3e0ef4781beaa6c439320cc17ee923d7f58798b65d898e9ffb82ffac0e9463af",
+    "scripts/desktop/family8_pixel_harness.rs": "f1f09cc8a0e0e6bb69e9d52eb500de5593dcfd41203905578f447aeb2b0f3d17",
+    "scripts/desktop/family8_state5_pixel_harness.rs": "dbd70eb9cb377611b0fc3a7393e7f5f4495a4c719403863ebe7fcec18a827ff0",
+    "scripts/desktop/family8_selector1_direction4_harness.rs": "f3ff765fc1b3a66bb0a795e030540c41b02e4551e66db87387ee21f35a78ccc8",
+    "rust/crates/genewars-desktop/src/bin/support/family8_scene.rs": "9208773255f0c7fb01e70f5fc6cab613a4a30dd9f93815c7b3c42b3d9fd8219b",
+    "research/variants/family8-state4-review.py": "a37a887fe4da416bc71338b41b9fb6bf6957d2312fad117db6993551bdf075a5",
+    "research/variants/family8-state4-source.py": "cc0d5a38b1c0c2d6369811328c7685818ceb0f15152b5dfae83b753839f7392a",
+    "research/variants/family8-onward-review.py": "ed61132ff91222f26939465683f6faccc38dd1b8c5584ff59f4eadc1033728d9",
+    "research/variants/family8-onward-source.py": "dc4ca79d79222e27cbe945f7aa87d80c28ea50a65922c1648f49e23518199ab2",
+    "research/variants/family8-target-review.py": "8d54794003d621600ec80088bae898efcf6eba4cd272f119c8cb841511241734",
+    "research/variants/family8-target-review.rs": "bd7364fd5671a8c7b4763d85044c08617fece08cdeb0fe2b06e255ea00816f98"
+  },
+  "current_pixel_receipt_sha256": {
+    "family8-state5-pixel-validation-current.json": "56eca13dcb88c5da312701e586372f216911307cc7a0f7e97c5640acf1b227e9",
+    "family8-selector1-direction4-pixel-validation-current.json": "38f5064e127de7977ed63b8664cf407140cef4ebbb013f74985b4b7def0bf325",
+    "family8-selector1-state1-pixel-validation-current.json": "1160efba57eefe961ed1b668bbdbb6c924e53d3fa92189e32496401867ab5ee0"
+  },
+  "volatile_metadata_policy": "UTC timestamps and unrelated regenerated source pin entries are not used as identity. Validators enforce canonical callback endpoints/status and revalidate exact source model, CONQ001, selected raw record, and target raw input/output hashes."
+}

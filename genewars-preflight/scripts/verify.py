@@ -23,13 +23,32 @@ def sha256(path):
 def main():
     commands = []
     checks = {}
+    started_utc = datetime.now(timezone.utc).isoformat()
+    journal = ROOT / 'private/integration' / ('verification-progress-' + uuid.uuid4().hex + '.json')
+    journal.parent.mkdir(parents=True, exist_ok=True)
+    print('Progress journal: ' + str(journal.relative_to(ROOT)), flush=True)
+
+    def write_progress(active=None):
+        progress = {'status': 'running', 'started_utc': started_utc,
+                    'updated_utc': datetime.now(timezone.utc).isoformat(),
+                    'active_check': active, 'completed_checks': checks,
+                    'completed_commands': len(commands)}
+        temporary = journal.with_suffix('.tmp')
+        temporary.write_text(json.dumps(progress, indent=2) + '\n', encoding='utf-8')
+        temporary.replace(journal)
 
     def run(label, command, timeout=120, acceptable=(0,)):
         print('Running ' + label, flush=True)
+        write_progress(label)
         result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=timeout)
         commands.append({'label': label, 'command': command, 'exit_code': result.returncode,
                          'stdout': result.stdout, 'stderr': result.stderr})
         checks[label] = result.returncode in acceptable
+        command_directory = journal.with_suffix('')
+        command_directory.mkdir(exist_ok=True)
+        (command_directory / (label + '.json')).write_text(
+            json.dumps(commands[-1], indent=2) + '\n', encoding='utf-8')
+        write_progress()
         return result
 
     py = [sys.executable, '-B']
@@ -110,8 +129,30 @@ def main():
     run('creature_relocation_search', py + ['research/variants/creature-relocation-review.py'], timeout=180)
     run('empty_world_bookkeeping', py + ['scripts/validate_bookkeeping.py'], timeout=300)
     run('countdown_expiry_requests', py + ['scripts/validate_countdown_expiry.py'], timeout=180)
+    run('countdown_timer_transition', py + ['scripts/validate_countdown_transition.py'], timeout=180)
+    run('family8_state4_callback', py + ['research/variants/family8-state4-review.py'], timeout=240)
+    run('family8_onward_callback', py + ['research/variants/family8-onward-review.py'], timeout=240)
+    run('family8_initial_target', py + ['research/variants/family8-target-review.py'], timeout=240)
+    run('family8_particle_lifetime', py + ['scripts/ghidra/validate_family8_particle.py'], timeout=300)
+    run('family8_state1_travel', py + ['research/variants/family8-state1-review.py'], timeout=240)
+    run('family8_state1_hover', py + ['research/variants/family8-hover-review.py'], timeout=240)
+    run('family8_state3_return', py + ['research/variants/family8-return-review.py'], timeout=240)
+    run('family8_parent_notification', py + ['research/variants/family8-parent-review.py'], timeout=240)
+    run('family8_parent_departure', py + ['research/variants/family8-departure-review.py'], timeout=240)
+    run('family8_idle_search', py + ['research/variants/family8-idle-review.py'], timeout=240)
+    run('family8_child_retirement', py + ['scripts/validate_family8_retirement.py'], timeout=240)
+    run('family8_pixel_source_receipts', py + ['-m', 'unittest', 'discover', '-s', 'scripts/desktop', '-p', 'test_family8_source_receipts.py'])
     run('family8_creation_plan', py + ['scripts/validate_family8_creation.py'], timeout=180)
     run('family8_native_pool', py + ['scripts/validate_family8_pool.py'], timeout=180)
+    run('family8_owned_world', py + ['scripts/validate_family8_world.py'], timeout=180)
+    run('family8_state4_pixels', py + ['scripts/desktop/validate_family8_state4_pixels.py'], timeout=180)
+    run('family8_state5_pixels', py + ['scripts/desktop/validate_family8_state5_pixels.py'], timeout=180)
+    run('family8_direction_pixels', py + ['scripts/desktop/validate_family8_selector1_direction4_pixels.py'], timeout=180)
+    run('family8_state1_pixels', py + ['scripts/desktop/validate_family8_selector1_state1_pixels.py'], timeout=180)
+    run('family8_state3_pixels', py + ['scripts/desktop/validate_family8_selector1_state3_pixels.py'], timeout=180)
+    run('family8_state3_return_pixels', py + ['scripts/desktop/validate_family8_selector1_state3_return_pixels.py'], timeout=180)
+    run('family8_parent_pixels', py + ['scripts/desktop/validate_family8_parent_pixels.py'], timeout=180)
+    run('family8_particle_pixels', py + ['scripts/desktop/validate_eff26_pixels.py'], timeout=180)
     run('neutral_creature_scheduler', py + ['scripts/validate_family_scheduler.py'], timeout=180)
     run('neutral_plant_initialization', py + ['scripts/validate_plant_initialization.py'], timeout=180)
     run('neutral_plant_factory', py + ['scripts/validate_plant_factory.py'], timeout=180)
@@ -191,6 +232,17 @@ def main():
     run('construction_debit_bridge', py + ['scripts/ghidra/validate_construction_bridge.py'])
     run('architect_assignment', py + ['scripts/ghidra/validate_architect_assignment.py'])
     run('building_factory', py + ['scripts/ghidra/validate_building_factory.py'])
+    run('building_progress', py + ['scripts/ghidra/validate_building_progress.py'], timeout=180)
+    run('building_owned_world', py + ['scripts/validate_building_world.py'], timeout=240)
+    run('building_progress_world', py + ['scripts/validate_building_world.py','--progress'], timeout=240)
+    run('building_movement_obstacle', py + ['scripts/validate_building_obstacle.py'], timeout=180)
+    run('building_selector1_resource_rust', py + ['scripts/validate_bturr_animation0_rust.py'], timeout=180)
+    run('building_selector1_common_pixels', py + ['scripts/desktop/validate_bturr_common_pixels.py'], timeout=240)
+    run('building_scene_common_pixels', py + ['scripts/desktop/validate_building_scene_common.py'], timeout=180)
+    run('building_inactive_loader', py + ['scripts/validate_building_inactive_loader.py'], timeout=180)
+    run('building_inactive_loader_rust', py + ['scripts/validate_building_inactive_loader_rust.py'], timeout=180)
+    run('building_selector1_animation', py + ['scripts/validate_bturr_animation0.py'], timeout=180)
+    run('category0_construction_animations', py + ['scripts/validate_category0_construction_animations.py'], timeout=180)
     run('construction_terrain_job', py + ['scripts/ghidra/validate_construction_terrain.py'])
     run('construction_material_repair', py + ['scripts/ghidra/validate_construction_material.py'])
     run('construction_classification', py + ['scripts/ghidra/validate_construction_classification.py'])
@@ -202,8 +254,23 @@ def main():
     run('construction_reservation', py + ['scripts/ghidra/validate_construction_reservation.py'], timeout=180)
     run('construction_task_setup', py + ['scripts/ghidra/validate_construction_task.py'], timeout=180)
     run('architect_site_setup', py + ['scripts/ghidra/validate_architect_setup.py'], timeout=180)
+    run('architect_terraform_start', py + ['scripts/ghidra/validate_architect_terraform_start.py'], timeout=180)
+    run('construction_flat_maintenance', py + ['scripts/ghidra/validate_construction_maintenance.py'], timeout=180)
+    run('construction_terraform_completion', py + ['scripts/ghidra/validate_construction_terraform_completion.py'], timeout=180)
+    run('construction_payment', py + ['scripts/ghidra/validate_construction_payment.py'], timeout=180)
+    run('construction_motion', py + ['scripts/ghidra/validate_construction_motion.py'], timeout=180)
+    run('actor_footstep_animation_gate', py + ['scripts/ghidra/validate_actor_footstep.py'], timeout=180)
+    run('construction_cancellation', py + ['scripts/ghidra/validate_construction_cancellation.py'], timeout=180)
+    run('construction_actor_animation', py + ['scripts/ghidra/validate_actor_construction_animation.py'], timeout=180)
+    run('construction_actor_recovery', py + ['scripts/ghidra/validate_actor_construction_recovery.py'], timeout=180)
+    run('construction_actor_tail', py + ['scripts/ghidra/validate_actor_construction_tail.py'], timeout=180)
+    run('terrain_jobs_world', py + ['scripts/validate_terrain_jobs_world.py'], timeout=240)
+    run('construction_wait', py + ['scripts/ghidra/validate_construction_wait.py'], timeout=180)
+    run('architect_terraform_callback', py + ['scripts/ghidra/validate_architect_terraform_callback.py'], timeout=180)
     run('construction_completion', py + ['scripts/ghidra/validate_construction_completion.py'], timeout=180)
     run('building_effect_creation', py + ['scripts/ghidra/validate_building_effect.py'], timeout=180)
+    run('building_effect_lifecycle', py + ['scripts/ghidra/validate_building_effect_lifecycle.py'], timeout=180)
+    run('incomplete_building_callback', py + ['scripts/ghidra/validate_building_incomplete_callback.py'], timeout=180)
     run('independent_construction_debit', py + ['research/variants/construction-review.py'])
     run('planet_texture_bridge', py + ['scripts/ghidra/validate_planet_texture_bridge.py'])
     run('independent_planet_texture_pixels', py + ['research/variants/planet-texture-review.py'])
@@ -281,6 +348,7 @@ def main():
     }
     destination = ROOT / 'research/integration/verification.json'
     destination.write_text(json.dumps(record, indent=2) + '\n', encoding='utf-8')
+    journal.write_text(json.dumps({'status': 'completed', 'all_passed': record['all_passed'], 'completed_utc': record['completed_utc'], 'receipt': str(destination.relative_to(ROOT))}, indent=2) + '\n', encoding='utf-8')
     print(json.dumps({'all_passed': record['all_passed'], 'checks': checks, 'private_files_checked': len(private_files)}))
     return 0 if record['all_passed'] else 1
 

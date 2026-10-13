@@ -1,0 +1,16 @@
+{
+  "scope": "Literal whole57A10 with explicit post6FB60 port and construction-stage port; actual animation selector,7AC00,virtual4; factory/audio request ports. Production selected BL and dust requests compared.",
+  "cases": 144,
+  "compared_bytes": 288,
+  "literal_instructions": 42454,
+  "dust_requests": 32,
+  "source_pins": {
+    "private/ghidra/actor-motion/instructions-00057a10.txt": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a",
+    "private/ghidra/actor-motion/instructions-000526c0.txt": "a6b39ca6b310a62ecb36fdfd08f205ae48e83bde37f949df96023277761c57c2",
+    "private/ghidra/actor-motion/instructions-0001ee30.txt": "3590a299b0f529da8f941168d806f9a5a8edbcc2365e36192d863a006d34d539",
+    "private/ghidra/activation-rng-refs/instructions-00052780.txt": "048be1420c3c58c6e56a11954c565c2f3ea254710600c635d77605020d103a20",
+    "private/ghidra/display-geometry/instructions-00083140.txt": "9d18112e4f02934ede585142dda83c1ea16af0b4f4bbd51acd09226c08f28c52"
+  },
+  "production_sha256": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
+  "output_sha256": "56ab097ad06d248033f675ead464ceaccaf3fda1e00939ad613a3d5e2ec8367b"
+}

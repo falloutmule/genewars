@@ -1,0 +1,60 @@
+{
+  "comparison": {
+    "full_bytes_equal": true,
+    "metadata": {
+      "color": "0",
+      "color_clipped": "7849",
+      "color_y": "-80",
+      "effective_shade": "0",
+      "global_animation": "8",
+      "sha256": "877fcaa68d4ba41fd4de5ec608e0ab7b5468694a06e4bd3e9d269ce3829d0023",
+      "shadow": "3930",
+      "shadow_clipped": "0",
+      "virtual_height": "16030"
+    },
+    "run_directory": "private\\integration\\family8-state5-pixels\\e3e2330cdadb4bf18d4dc92e982f3ea7",
+    "sha256": "877fcaa68d4ba41fd4de5ec608e0ab7b5468694a06e4bd3e9d269ce3829d0023"
+  },
+  "fade_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+  "framebuffer": {
+    "bytes": 311032,
+    "fill": 53,
+    "height": 480,
+    "pitch": 648,
+    "width": 640
+  },
+  "harness_sha256": "dbd70eb9cb377611b0fc3a7393e7f5f4495a4c719403863ebe7fcec18a827ff0",
+  "implementation_sha256": "5e7e5307ddb86e32a7c01598a2721b5de0dcb3be753758be74eee93082865a98",
+  "instruction_pins": {
+    "private/ghidra/countdown-expiry/instructions-00010ea0.txt": "639fdb8a92c1342f206b3ddd7ebf563618988b4943ff53ca3c9bec9aed881dfb"
+  },
+  "main_gla_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+  "oracle_sha256": "9d07b1051dc22e39678418e1678bf784e5f0fdfb4bd0ecd5b32373156810b341",
+  "origin": [
+    280,
+    170
+  ],
+  "resource_sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4",
+  "schema_version": 1,
+  "scope": "Literal selector-0/state-5 source record with explicit diagnostic origin; independent full framebuffer oracle for the common 0x10EA0 wrapper. No original code executed.",
+  "source_record": {
+    "bytes": 102,
+    "fields": {
+      "animation": 0,
+      "flags": 32,
+      "frame": 6,
+      "ground_height": 6272,
+      "kind": 8,
+      "physical_height": 22302,
+      "selector": 0,
+      "state": 5
+    },
+    "sha256": "f54530d8bb8e04aa74347e346d60f9d08eb3abe72e5b21afed1af4ffeee130b0"
+  },
+  "source_replay": {
+    "literal_callbacks": 276,
+    "review_callbacks": 276,
+    "review_status": "passed-bounded-family8-selector0-state4",
+    "timeline_sha256": "60774cf2abcd1669e9990b2cfa1416f47cc1e20ad7fb23acdd92a3a7a398b42b"
+  }
+}

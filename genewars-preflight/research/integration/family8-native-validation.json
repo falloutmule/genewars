@@ -1,0 +1,115 @@
+{
+  "binary": {
+    "copied_path": "private/integration/family8-native/5acf45f2d7a64c4db1d576d6b7c0862c/genewars-game.exe",
+    "profile": "release",
+    "sha256": "93ec8a0cd7e9933981dcf1bd7b2e70747a2eb351f3523b95668e929fa81ee5ce",
+    "size": 3313934,
+    "source_path": "private/build/rust-target/release/genewars-game.exe"
+  },
+  "original_execution": false,
+  "private_run_directory": "private/integration/family8-native/5acf45f2d7a64c4db1d576d6b7c0862c",
+  "replay": {
+    "commands": [
+      "click 312 140",
+      "load",
+      "tick 4096",
+      "tick 2047",
+      "select 0"
+    ],
+    "seed": 5428,
+    "steps": 6143
+  },
+  "resource_catalog_sha256": "472bc63a9b311072eb40009085baaec689f6fcc6b0f0a64452da73b23ddfb0a1",
+  "results": {
+    "cases": [
+      {
+        "active_effects": 80,
+        "actor_states_sha256": "43f8173c949022bf1b0b55ec9f27a7a9dca9d9293070f2fb774b42e968fa4cc1",
+        "blocked": null,
+        "bmp_path": "private/integration/family8-native/5acf45f2d7a64c4db1d576d6b7c0862c/headless-a/frame.bmp",
+        "bmp_sha256": "3e2ab280351b1d9484fcb9bfa6c323cf06fab74289bcf7c6e61de206a1328e4f",
+        "creature_states_sha256": "5833d3a46e8a912a237bf924826ebec07963bcf9e035e828dc0109abbee3a08e",
+        "name": "headless-a",
+        "presented_frames": 0,
+        "report_path": "private/integration/family8-native/5acf45f2d7a64c4db1d576d6b7c0862c/headless-a/report.json",
+        "reported_rgb_sha256": "207e1835bf3f0e67b01a73c460c43c8f6ba8886253e081ed29a26164672b914d",
+        "scene_history": [
+          "Menu",
+          "Loading",
+          "Mission",
+          "SelectedActor:0"
+        ],
+        "selected_actor": 0,
+        "steps": 6143,
+        "window": false,
+        "world_sha256": "1ae7756a7be02dadeb710b46a3b5d9515c0f308af8fa2feccc5ae504732f1048"
+      },
+      {
+        "active_effects": 80,
+        "actor_states_sha256": "43f8173c949022bf1b0b55ec9f27a7a9dca9d9293070f2fb774b42e968fa4cc1",
+        "blocked": null,
+        "bmp_path": "private/integration/family8-native/5acf45f2d7a64c4db1d576d6b7c0862c/headless-b/frame.bmp",
+        "bmp_sha256": "3e2ab280351b1d9484fcb9bfa6c323cf06fab74289bcf7c6e61de206a1328e4f",
+        "creature_states_sha256": "5833d3a46e8a912a237bf924826ebec07963bcf9e035e828dc0109abbee3a08e",
+        "name": "headless-b",
+        "presented_frames": 0,
+        "report_path": "private/integration/family8-native/5acf45f2d7a64c4db1d576d6b7c0862c/headless-b/report.json",
+        "reported_rgb_sha256": "207e1835bf3f0e67b01a73c460c43c8f6ba8886253e081ed29a26164672b914d",
+        "scene_history": [
+          "Menu",
+          "Loading",
+          "Mission",
+          "SelectedActor:0"
+        ],
+        "selected_actor": 0,
+        "steps": 6143,
+        "window": false,
+        "world_sha256": "1ae7756a7be02dadeb710b46a3b5d9515c0f308af8fa2feccc5ae504732f1048"
+      },
+      {
+        "active_effects": 80,
+        "actor_states_sha256": "43f8173c949022bf1b0b55ec9f27a7a9dca9d9293070f2fb774b42e968fa4cc1",
+        "blocked": null,
+        "bmp_path": "private/integration/family8-native/5acf45f2d7a64c4db1d576d6b7c0862c/window-3frames/frame.bmp",
+        "bmp_sha256": "3e2ab280351b1d9484fcb9bfa6c323cf06fab74289bcf7c6e61de206a1328e4f",
+        "creature_states_sha256": "5833d3a46e8a912a237bf924826ebec07963bcf9e035e828dc0109abbee3a08e",
+        "name": "window-3frames",
+        "presented_frames": 3,
+        "report_path": "private/integration/family8-native/5acf45f2d7a64c4db1d576d6b7c0862c/window-3frames/report.json",
+        "reported_rgb_sha256": "207e1835bf3f0e67b01a73c460c43c8f6ba8886253e081ed29a26164672b914d",
+        "scene_history": [
+          "Menu",
+          "Loading",
+          "Mission",
+          "SelectedActor:0"
+        ],
+        "selected_actor": 0,
+        "steps": 6143,
+        "window": true,
+        "world_sha256": "1ae7756a7be02dadeb710b46a3b5d9515c0f308af8fa2feccc5ae504732f1048"
+      }
+    ],
+    "deterministic_headless_repeat": true,
+    "family8_native_dispatch": "selector1 state1; rendering is included in final RGB/BMP hash; no per-slot telemetry is asserted",
+    "family8_transition_snapshot_sha256": "03529194bc4d9abc786cfe10ddab81497a44921eb8c913a8c3c315f35a6e0222",
+    "window_matches_headless": true
+  },
+  "runtime_inputs_receipt_sha256": "e96e94801be058e5dc3a9915a4cc8faf94c4b796a80bbc601eb711426d6ce631",
+  "runtime_resource_count": 50,
+  "schema_version": 1,
+  "scope": "Same copied release binary replays menu load, 6,143 landing-study steps, and actor selection; repeated headless result equality plus a three-frame native window presentation. Not an original executable run or full-game claim.",
+  "source_pins_at_run": {
+    "research/integration/runtime-resource-catalog.tsv": "472bc63a9b311072eb40009085baaec689f6fcc6b0f0a64452da73b23ddfb0a1",
+    "rust/crates/genewars-desktop/src/bin/genewars-game.rs": "eaa7f5c939347b11ab6097c43cf69597d87ae9945cff6ee5dc49e6919f1201b3",
+    "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs": "2caae2c594fe04897cea4b4adc7cea60c2d8adc34c656c7cefbea8f5b4a5824a",
+    "rust/crates/genewars-desktop/src/bin/support/effect_scene.rs": "6ac9a4ebaed70400d10e378a045eab8a84e6d40561acbf71dc854855c9dc460c",
+    "rust/crates/genewars-desktop/src/bin/support/family8_scene.rs": "9208773255f0c7fb01e70f5fc6cab613a4a30dd9f93815c7b3c42b3d9fd8219b",
+    "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs": "b1b756338a480204b41d89d8649c6002fcc5bf6f5b1e4a0c0439c5b8984b6282",
+    "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs": "a16d1db40d89686d810a9c85cb9d0dedb8c0fcd91395eaf6ce6dfbe93fc1102b",
+    "rust/crates/genewars-desktop/src/bin/support/shared_scene.rs": "d9f873d38da74af555c2de7bba7a869d5889c194714f276fdf2eaeb111970e93",
+    "rust/crates/genewars-runtime/src/actor_world/family8_updates.rs": "8902bf1acb01dc20c8acef7807419407bf4200f7717b17d91e7540b1621b5520",
+    "rust/crates/genewars-runtime/src/family8_motion.rs": "506306cbbdec0a9263dedc9de0f55eb606c431eeac0804c3eaa2c20d7c969947"
+  },
+  "status": "passed",
+  "verified_at_utc": "2026-10-13T20:12:49.643759+00:00"
+}

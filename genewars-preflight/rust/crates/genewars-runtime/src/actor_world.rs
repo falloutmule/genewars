@@ -17,6 +17,9 @@ use crate::player_state::{ActorOriginSample, PlayerState, PlayerStateError};
 use crate::world::{MissionWorld, PlantStorage, PlantParameterTable, PlantTickReport, RuntimeError};
 use crate::effect_pool::{EffectPool, EffectPoolError, EffectAnimationBinding};
 use crate::creature_world::{CreaturePool, CreatureRecord, CreatureError};
+use crate::family8_pool::{Family8Pool, AnimationBinding as Family8AnimationBinding};
+use crate::family8_creation::Family8Record;
+use crate::building_pool::BuildingPool;
 use crate::landing::{self, LandingRecord, LandingError, LandingEvent};
 use genewars_assets::{ConqMissionSource, MissionRecordGroupLayout};
 use std::collections::HashSet;
@@ -27,6 +30,15 @@ mod actor_updates;
 mod bookkeeping_updates;
 mod family_scheduler;
 mod plant_updates;
+mod family8_updates;
+mod building_updates;
+mod terrain_updates;
+pub use terrain_updates::{TerrainUpdateError, TerrainUpdateReceipt};
+mod building_storage;
+mod family8_retirement;
+pub use family8_retirement::Family8RetirementReceipt;
+pub use building_updates::{ConstructionWorldError, ArchitectStage0Receipt, ArchitectMotionReceipt};
+pub use family8_updates::{Family8CreationReceipt, Family8StepReceipt, Family8StepPlan, Family8PassReceipt};
 pub use family_scheduler::{CreaturePassReceipt, CreatureUiAnimationRequest};
 pub use actor_updates::ActorMovingReceipt;
 mod reveal;
@@ -65,11 +77,34 @@ pub enum ActorWorldError {
     UnsupportedCreatureSchedule,
     CreatureCountMismatch { declared: i16, active: usize },
     TargetSearchLimit,
+    BuildingPool(crate::building_pool::BuildingPoolError),
+    BuildingFactory(crate::building::BuildingError),
+    BuildingProgress(crate::building_progress::BuildingProgressError),
+    BuildingCallback(crate::building_callback::BuildingCallbackError),
+    BuildingsNotAdmitted, BuildingsAlreadyAdmitted,
+    BuildingCountMismatch{owner:u8,declared:i8,active:usize},
+    Family8Pool(crate::family8_pool::PoolError),
+    Family8Creation(crate::family8_creation::CreationError),
+    Family8NotAdmitted, Family8AlreadyAdmitted,
+    Family8CountMismatch { declared: u8, active: usize },
+    Family8Motion(crate::family8_motion::Family8MotionError),
+    MissingFamily8Link(u16), Family8Binding(u16),
 }
+impl From<crate::building_pool::BuildingPoolError> for ActorWorldError { fn from(e:crate::building_pool::BuildingPoolError)->Self{Self::BuildingPool(e)} }
+impl From<crate::building::BuildingError> for ActorWorldError { fn from(e:crate::building::BuildingError)->Self{Self::BuildingFactory(e)} }
 impl core::fmt::Display for ActorWorldError {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result { write!(f, "{self:?}") }
 }
 impl std::error::Error for ActorWorldError {}
+impl From<crate::family8_pool::PoolError> for ActorWorldError {
+    fn from(e: crate::family8_pool::PoolError) -> Self { Self::Family8Pool(e) }
+}
+impl From<crate::family8_creation::CreationError> for ActorWorldError {
+    fn from(e: crate::family8_creation::CreationError) -> Self { Self::Family8Creation(e) }
+}
+impl From<crate::family8_motion::Family8MotionError> for ActorWorldError {
+    fn from(e: crate::family8_motion::Family8MotionError) -> Self { Self::Family8Motion(e) }
+}
 impl From<ActorPoolError> for ActorWorldError { fn from(e: ActorPoolError) -> Self { Self::Pool(e) } }
 impl From<PlayerStateError> for ActorWorldError { fn from(e: PlayerStateError) -> Self { Self::Player(e) } }
 impl From<ActorActivationError> for ActorWorldError { fn from(e: ActorActivationError) -> Self { Self::Activation(e) } }
@@ -156,6 +191,8 @@ pub struct ActorWorld {
     plants: Option<PlantSubsystem>,
     effects: Option<EffectPool>,
     creatures: Option<CreaturePool>,
+    family8: Option<Family8Pool>,
+    buildings: Option<BuildingPool>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -164,7 +201,7 @@ struct PlantSubsystem { parameters: PlantParameterTable, tick_number: u64 }
 /// A temporary borrow of the world's sole backing and actor pool. Plant
 /// callbacks read and rewrite actor links directly in the native records;
 /// no packed actor mirror or second persistent map exists.
-struct SharedPlantStorage<'a> { backing: &'a mut Vec<u8>, actors: &'a mut ActorPool, effects: Option<&'a mut EffectPool>, creatures: Option<&'a mut CreaturePool> }
+struct SharedPlantStorage<'a> { backing: &'a mut Vec<u8>, actors: &'a mut ActorPool, effects: Option<&'a mut EffectPool>, creatures: Option<&'a mut CreaturePool>, family8: Option<&'a mut Family8Pool>, buildings: Option<&'a mut BuildingPool> }
 impl core::ops::Deref for SharedPlantStorage<'_> {
     type Target = [u8];
     fn deref(&self) -> &[u8] { self.backing }
@@ -174,6 +211,18 @@ impl core::ops::DerefMut for SharedPlantStorage<'_> {
 }
 impl PlantStorage for SharedPlantStorage<'_> {
     fn common_record(&self, kind: u8, index: u16) -> Result<&[u8], RuntimeError> {
+        if kind == 4 {
+            if let Some(pool) = self.buildings.as_ref() {
+                return pool.record(usize::from(index)).map(|r| &r[..31])
+                    .map_err(|_| RuntimeError::InvalidReference { cell: usize::MAX, index: index as i16, kind });
+            }
+        }
+        if kind == 8 {
+            if let Some(pool) = self.family8.as_ref() {
+                return pool.record(usize::from(index)).map(|r| &r[..31])
+                    .map_err(|_| RuntimeError::InvalidReference { cell: usize::MAX, index: index as i16, kind });
+            }
+        }
         if kind == 1 {
             if let Some(pool) = self.creatures.as_ref() {
                 return pool.record(usize::from(index)).map(|r| &r[..31])
@@ -194,6 +243,24 @@ impl PlantStorage for SharedPlantStorage<'_> {
     }
     fn write_common_reference(&mut self, kind: u8, index: u16, offset: usize, value: [u8; 3]) -> Result<(), RuntimeError> {
         if offset != 0 && offset != 3 { return Err(RuntimeError::StorageInvariant("invalid actor link offset")); }
+        if kind == 4 {
+            if let Some(pool) = self.buildings.as_mut() {
+                let before = *pool.record(usize::from(index)).map_err(|_| RuntimeError::StorageInvariant("invalid buildings slot"))?;
+                let mut after = before;
+                after[offset..offset + 3].copy_from_slice(&value);
+                return pool.replace_record_checked(usize::from(index), &before, &after)
+                    .map_err(|_| RuntimeError::StorageInvariant("buildings link replacement rejected"));
+            }
+        }
+        if kind == 8 {
+            if let Some(pool) = self.family8.as_mut() {
+                let before = *pool.record(usize::from(index)).map_err(|_| RuntimeError::StorageInvariant("invalid family8 slot"))?;
+                let mut after = before;
+                after[offset..offset + 3].copy_from_slice(&value);
+                return pool.replace_record_checked(usize::from(index), &before, &after)
+                    .map_err(|_| RuntimeError::StorageInvariant("family8 link replacement rejected"));
+            }
+        }
         if kind == 1 {
             if let Some(pool) = self.creatures.as_mut() {
                 let before = *pool.record(usize::from(index)).map_err(|_| RuntimeError::StorageInvariant("invalid creature slot"))?;
@@ -246,7 +313,7 @@ impl ActorWorld {
         }
         let groups = source.groups();
         let actors = ActorPool::from_packed_inactive(groups[2].bytes(), prior_native, prior_bindings)?;
-        let result = Self { backing: source.bytes().to_vec(), layouts: groups.map(|g| g.layout()), actors, players, rng, plants: None, effects: None, creatures: None };
+        let result = Self { backing: source.bytes().to_vec(), layouts: groups.map(|g| g.layout()), actors, players, rng, plants: None, effects: None, creatures: None, family8: None, buildings: None };
         result.validate_links()?;
         Ok(result)
     }
@@ -254,6 +321,8 @@ impl ActorWorld {
     pub fn actors(&self) -> &ActorPool { &self.actors }
     pub fn effects(&self) -> Option<&EffectPool> { self.effects.as_ref() }
     pub fn creatures(&self) -> Option<&CreaturePool> { self.creatures.as_ref() }
+    pub fn family8(&self) -> Option<&Family8Pool> { self.family8.as_ref() }
+    pub fn buildings(&self)->Option<&BuildingPool>{self.buildings.as_ref()}
 
     /// Promote the current packed kind1 records into their native overlay.
     /// Existing common links are copied exactly. This admits storage only;
@@ -321,7 +390,7 @@ impl ActorWorld {
         let parameters = PlantParameterTable::parse(parameter_bytes)?;
         self.validate_links()?;
         let tick_number = self.plants.as_ref().map_or(0, |p| p.tick_number);
-        MissionWorld::with_shared_storage(SharedPlantStorage { backing: &mut self.backing, actors: &mut self.actors, effects: self.effects.as_mut(), creatures: self.creatures.as_mut() }, parameters.clone(), tick_number)?;
+        MissionWorld::with_shared_storage(SharedPlantStorage { backing: &mut self.backing, actors: &mut self.actors, effects: self.effects.as_mut(), creatures: self.creatures.as_mut(), family8: self.family8.as_mut(), buildings: self.buildings.as_mut() }, parameters.clone(), tick_number)?;
         self.plants = Some(PlantSubsystem { parameters, tick_number });
         Ok(())
     }
@@ -339,7 +408,7 @@ impl ActorWorld {
         let subsystem = self.plants.as_ref().ok_or(ActorWorldError::PlantsNotAdmitted)?.clone();
         self.validate_links()?;
         let mut staged = self.clone();
-        let mut view = MissionWorld::with_shared_storage(SharedPlantStorage { backing: &mut staged.backing, actors: &mut staged.actors, effects: staged.effects.as_mut(), creatures: staged.creatures.as_mut() }, subsystem.parameters, subsystem.tick_number)?;
+        let mut view = MissionWorld::with_shared_storage(SharedPlantStorage { backing: &mut staged.backing, actors: &mut staged.actors, effects: staged.effects.as_mut(), creatures: staged.creatures.as_mut(), family8: staged.family8.as_mut(), buildings: staged.buildings.as_mut() }, subsystem.parameters, subsystem.tick_number)?;
         let report = view.tick_plants_inner()?;
         staged.plants.as_mut().unwrap().tick_number = report.tick_number;
         staged.validate_links()?;
@@ -356,12 +425,26 @@ impl ActorWorld {
         Ok(crate::world::map_terrain_class(self.map(), point)?)
     }
 
-    /// Bounded74270/74160: map byte11 mask01 clear proves NULL before the
-    /// source touches any building, footprint or animation resources.
+    /// Source74270/74160 mask0, negative-height movement query. Reserved
+    /// cells without a linked building return NULL. Positive-height queries
+    /// need separately admitted animation bounds and do not use this API.
     pub fn move_obstacle_at(&self, point: [i16; 2]) -> Result<bool, ActorWorldError> {
-        let cell = floor_cell(point);
-        if self.map()[cell * 14 + 11] & 1 != 0 { return Err(ActorWorldError::UnsupportedBuildingQuery(cell)); }
-        Ok(false)
+        crate::building_obstacle::move_obstacle(self.map(),point,|cell|{
+            let mut raw=reference(self.map(),cell*14+6);let mut seen=HashSet::new();
+            while raw[2]!=0 {
+                if !seen.insert(raw){return Err(ActorWorldError::DuplicateLink(raw));}
+                let record=self.entity(raw)?;
+                if raw[2]==4 {
+                    if self.buildings.is_none(){return Err(ActorWorldError::BuildingsNotAdmitted);}
+                    return Ok(Some(record.try_into().map_err(|_|ActorWorldError::UnsupportedBuildingQuery(cell))?));
+                }
+                raw=reference(record,3);
+            }
+            Ok(None)
+        }).map_err(|e|match e{
+            crate::building_obstacle::BuildingObstacleError::Query(e)=>e,
+            _=>ActorWorldError::UnsupportedBuildingQuery(floor_cell(point)),
+        })
     }
 
     /// Source8B130 for an owned type3 actor. The only weighted objects in
@@ -392,7 +475,7 @@ impl ActorWorld {
             if reference(record, 0) != previous { return Err(ActorWorldError::BrokenPrevious(raw)); }
             if raw != own && Some(raw) != nominated {
                 match raw[2] {
-                    1 | 3 | 5 => (),
+                    1 | 3 | 5 | 8 => (),
                     2 => {
                         let index = word(&raw,0) as usize;
                         let offset = self.layouts[1].file_offset + index * self.layouts[1].packed_stride;
@@ -730,7 +813,9 @@ impl ActorWorld {
         if id as usize >= layout.count { return Err(ActorWorldError::InvalidReference(raw)); }
         let record: &[u8] = if raw[2] == 3 { self.actors.record(id as usize)? }
         else if raw[2] == 1 && self.creatures.is_some() { self.creatures.as_ref().unwrap().record(id as usize)? }
-        else if raw[2] == 5 && self.effects.is_some() { self.effects.as_ref().unwrap().record(id as usize)? } else {
+        else if raw[2] == 5 && self.effects.is_some() { self.effects.as_ref().unwrap().record(id as usize)? }
+        else if raw[2] == 4 && self.buildings.is_some() { self.buildings.as_ref().unwrap().record(id as usize)? }
+        else if raw[2] == 8 && self.family8.is_some() { self.family8.as_ref().unwrap().record(id as usize)? } else {
             let start = layout.file_offset + id as usize * layout.packed_stride;
             &self.backing[start..start + 31]
         };
@@ -743,6 +828,12 @@ impl ActorWorld {
         let id = i16::from_le_bytes([raw[0], raw[1]]);
         if raw[2] == 1 && self.creatures.is_some() {
             let pool = self.creatures.as_mut().unwrap();let before = *pool.record(id as usize)?;let mut after = before;
+            after[..3].copy_from_slice(&previous);pool.replace_record_checked(id as usize,&before,&after)?;
+        } else if raw[2] == 4 && self.buildings.is_some() {
+            let pool = self.buildings.as_mut().unwrap();let before = *pool.record(id as usize)?;let mut after = before;
+            after[..3].copy_from_slice(&previous);pool.replace_record_checked(id as usize,&before,&after)?;
+        } else if raw[2] == 8 && self.family8.is_some() {
+            let pool = self.family8.as_mut().unwrap();let before = *pool.record(id as usize)?;let mut after = before;
             after[..3].copy_from_slice(&previous);pool.replace_record_checked(id as usize,&before,&after)?;
         } else if raw[2] == 3 {
             let before = *self.actors.record(id as usize)?;
@@ -854,6 +945,86 @@ mod tests {
         world.plants = Some(PlantSubsystem { parameters: PlantParameterTable::fixture_for_shared_test(), tick_number: 0 });
         world.validate_links().unwrap();
         world
+    }
+
+    #[test]
+    fn family8_factory_preserves_native_links_and_null_exhaustion() {
+        let mut world = shared_plant_fixture(&[[8,0,2],[0,0,1],[1,0,3],[0,0,3]]);
+        world.admit_creatures(&[[0;124];300]).unwrap();
+        world.admit_family8(&[[0xA5;102];16],[None;16]).unwrap();
+        let point = [word(world.entity([8,0,2]).unwrap(),7),word(world.entity([8,0,2]).unwrap(),9)];
+        let before = world.clone();
+        for slot in 0..16 {
+            let receipt = world.create_family8(slot%3,slot%4,point,25600).unwrap().unwrap();
+            assert_eq!(receipt.slot,slot as u16);
+            assert_eq!(&world.family8().unwrap().record(slot as usize).unwrap()[31..39],&[0xA5;8]);
+            assert_eq!(world.entity([slot,0,8]).unwrap().len(),102);
+        }
+        assert_eq!(world.backing[0x3559],16);
+        assert_eq!(world.validate_links().unwrap().len(),20);
+        assert_eq!(world.rng,before.rng);
+        assert_eq!(world.players,before.players);
+        let group = world.layouts[7];
+        assert_eq!(&world.backing[group.file_offset..group.file_offset+group.count*group.packed_stride],
+            &before.backing[group.file_offset..group.file_offset+group.count*group.packed_stride]);
+        let full=world.clone();assert_eq!(world.create_family8(0,0,point,25600).unwrap(),None);assert_eq!(world,full);
+        assert_eq!(world.step_empty_family8_countdown(0,0),Err(ActorWorldError::UnsupportedBookkeepingFamily(8)));
+        assert_eq!(world,full);
+    }
+
+    #[test]
+    fn family8_expiry_visits_newborns_and_rolls_back_later_unsupported_callback() {
+        let mut world=fixture();world.admit_family8(&[[0;102];16],[None;16]).unwrap();
+        world.backing[0x355c..0x355e].copy_from_slice(&1u16.to_le_bytes());
+        let physics=crate::physics_tables::PhysicsTables::fixture();let trig=TrigTables::generate_pinned().unwrap();
+        let animation=crate::family8_motion::Family8Animation::fixture();
+        let directions=crate::family8_motion::Family8DirectionalAnimations::fixture();
+        let receipt=world.step_family8_callbacks(0,4,0,6001,0,&physics,&trig,&animation,&directions).unwrap();
+        assert!(receipt.countdown.expired);assert_eq!(receipt.expiry_attempts.len(),4);
+        assert_eq!(receipt.callbacks.iter().map(|c|c.slot).collect::<Vec<_>>(),vec![0,1,2,3]);
+        assert_eq!(word(&world.backing,0x355c),0);
+        for record in world.family8().unwrap().records().iter().take(4){assert_eq!(record[0x1b],1);}
+        world.create_family8(2,0,[4000,4000],25000).unwrap();let before=world.clone();
+        assert!(matches!(world.step_family8_callbacks(0,4,0,6002,0,&physics,&trig,&animation,&directions),Err(ActorWorldError::Family8Motion(_))));
+        assert_eq!(world,before);
+    }
+
+    #[test]
+    fn family8_storage_admission_and_stale_factory_failures_are_atomic() {
+        let mut world=fixture();world.backing[0x3559]=1;let before=world.clone();
+        assert_eq!(world.admit_family8(&[[0;102];16],[None;16]),Err(ActorWorldError::Family8CountMismatch{declared:1,active:0}));
+        assert_eq!(world,before);world.backing[0x3559]=0;
+        let mut bindings=[None;16];bindings[0]=Some(Family8AnimationBinding::Offset80);
+        world.admit_family8(&[[0;102];16],bindings).unwrap();let before=world.clone();
+        assert_eq!(world.create_family8(0,0,[4096,4096],25600),Err(ActorWorldError::Family8Pool(crate::family8_pool::PoolError::StaleBinding(0))));
+        assert_eq!(world,before);
+        assert_eq!(world.admit_family8(&[[0;102];16],[None;16]),Err(ActorWorldError::Family8AlreadyAdmitted));
+        assert_eq!(world,before);
+    }
+
+    #[test]
+    fn family8_plant_retirement_relinks_and_cleans_targets_with_late_rollback() {
+        let directions_bytes:Vec<u8>=[[0i16,-256],[256,-256],[256,0],[256,256],[0,256],[-256,256],[-256,0],[-256,-256],[0,0]]
+            .into_iter().flatten().flat_map(i16::to_le_bytes).collect();
+        let directions=crate::plant_spread::SpreadDirections::from_mapped_bytes(&directions_bytes).unwrap();
+        for late_failure in [false,true] {
+            let mut world=shared_plant_fixture(&[[8,0,2],[16,0,2],[0,0,1],[1,0,3],[0,0,3]]);
+            world.admit_creatures(&[[0;124];300]).unwrap();world.admit_family8(&[[0;102];16],[None;16]).unwrap();
+            let plant=world.entity([8,0,2]).unwrap();let point=[word(plant,7),word(plant,9)];
+            world.create_family8(0,0,point,25600).unwrap();
+            let pool=world.family8.as_mut().unwrap();let prior=*pool.record(0).unwrap();let mut after=prior;
+            after[0x59..0x5c].copy_from_slice(&[8,0,2]);pool.replace_record_checked(0,&prior,&after).unwrap();
+            if late_failure {world.backing[world.layouts[1].file_offset+16*41+24]=0;}
+            let before=world.clone();let result=world.tick_plants_with_reproduction(&directions);
+            if late_failure {assert!(result.is_err());assert_eq!(world,before);}
+            else {
+                assert_eq!(result.unwrap().active_plant_count_after,0);
+                assert_eq!(reference(world.entity([0,0,8]).unwrap(),3),[0,0,1]);
+                assert_eq!(reference(world.entity([0,0,1]).unwrap(),0),[0,0,8]);
+                assert_eq!(&world.family8().unwrap().record(0).unwrap()[0x59..0x5c],&[8,0,0]);
+                assert_eq!(world.rng,before.rng);assert_eq!(world.validate_links().unwrap().len(),4);
+            }
+        }
     }
 
     #[test]
@@ -1034,13 +1205,13 @@ mod tests {
         world.backing[MAP_START + floor_cell(near) * 14 + 11] |= 1;
         assert!(matches!(world.apply_bounded_move_order_owned(0,0,near).unwrap(), Opcode3MoveOrderResult::Applied { resolved, .. } if resolved == point));
         world.backing[MAP_START + floor_cell(point) * 14 + 11] |= 1;
-        let before = world.clone();
-        assert_eq!(world.apply_bounded_move_order_owned(0,0,near).unwrap_err(), ActorWorldError::UnsupportedBuildingQuery(floor_cell(point)));
-        assert_eq!(world,before);
+        assert!(!world.move_obstacle_at(point).unwrap());
+        assert!(matches!(world.apply_bounded_move_order_owned(0,0,near).unwrap(), Opcode3MoveOrderResult::Applied { resolved, .. } if resolved == point));
         let far = [point[0].wrapping_add(1024),point[1]];
         world.backing[MAP_START + floor_cell(far) * 14 + 11] |= 1;
-        let before = world.clone();
-        assert_eq!(world.apply_bounded_move_order_owned(0,0,far).unwrap_err(), ActorWorldError::UnsupportedBuildingQuery(floor_cell(far)));
+        assert!(!world.move_obstacle_at(far).unwrap());
+        let before=world.clone();
+        assert_eq!(world.apply_bounded_move_order_owned(0,0,far).unwrap_err(),ActorWorldError::Resolver(ResolverError::BackwardSearchRequired));
         assert_eq!(world,before);
         let prior = *world.actors.record(0).unwrap();
         let mut inhibited = prior;
@@ -1049,6 +1220,43 @@ mod tests {
         let before = world.clone();
         assert_eq!(world.apply_bounded_move_order_owned(0,0,far).unwrap(), Opcode3MoveOrderResult::NoopFlag71);
         assert_eq!(world,before);
+    }
+
+    #[test]
+    fn building_completion_cleans_live_creature_target_and_rolls_back_bad_count() {
+        for bad_count in [false,true] {
+            let mut world=shared_plant_fixture(&[[8,0,2],[0,0,1],[1,0,3],[0,0,3]]);
+            world.admit_creatures(&[[0;124];300]).unwrap();
+            world.admit_buildings(&[[0;67];256],[None;256]).unwrap();
+            let a=world.actors.record(0).unwrap();let at=[word(a,7),word(a,9)];
+            let slot=world.create_building(0,1,at).unwrap().unwrap().slot;
+            let before=*world.creatures.as_ref().unwrap().record(0).unwrap();let mut after=before;
+            after[0x58..0x5a].copy_from_slice(&(slot as i16).to_le_bytes());after[0x5a]=4;
+            after[0x78]=19;after[0x5f]=7;after[0x60]=0xff;
+            world.creatures.as_mut().unwrap().replace_record_checked(0,&before,&after).unwrap();
+            world.backing[0x3550..0x3552].copy_from_slice(&(if bad_count{2i16}else{1i16}).to_le_bytes());
+            let snapshot=world.clone();let result=world.progress_selector1_building(slot,120,false);
+            if bad_count {assert!(result.is_err());assert_eq!(world,snapshot);}
+            else {
+                let receipt=result.unwrap();assert!(receipt.completed);assert_eq!(receipt.creature_changes.len(),1);
+                let a=world.creatures().unwrap().record(0).unwrap();
+                assert_eq!((a[0x5a],a[0x78],a[0x5f],a[0x60]),(0,0,0,0xef));
+                assert_eq!(world.rng(),snapshot.rng());world.validate_links().unwrap();
+            }
+        }
+    }
+
+    #[test]
+    fn reserved_cell_query_uses_native_building_links_and_exact_extent() {
+        let mut world=fixture();let point=[4096i16,3584i16];
+        let cell=floor_cell(point);world.backing[MAP_START+cell*14+11]|=1;
+        assert!(!world.move_obstacle_at(point).unwrap());
+        world.admit_buildings(&[[0;67];256],[None;256]).unwrap();
+        let plan=world.create_building(0,1,point).unwrap().unwrap();
+        assert_eq!(plan.slot,0);assert!(world.move_obstacle_at(point).unwrap());
+        assert!(world.move_obstacle_at([point[0]+85,point[1]]).unwrap());
+        assert!(!world.move_obstacle_at([point[0]+86,point[1]]).unwrap());
+        let before=world.clone();assert!(world.move_obstacle_at(point).unwrap());assert_eq!(world,before);
     }
 
     #[test]
@@ -1062,12 +1270,12 @@ mod tests {
         world.backing[MAP_START + 6..MAP_START + 9].copy_from_slice(&[0,0,5]);
         assert_eq!(world.cell_plant_blocker(0,point).unwrap(),0);
         // A family with an unclosed virtual predicate rejects only if queried.
-        world.backing[MAP_START + 6..MAP_START + 9].copy_from_slice(&[0,0,8]);
-        let offset = world.layouts[7].file_offset;
-        world.backing[offset + 6] = 8;
+        world.backing[MAP_START + 6..MAP_START + 9].copy_from_slice(&[0,0,7]);
+        let offset = world.layouts[6].file_offset;
+        world.backing[offset + 6] = 7;
         assert_eq!(world.placement_environment(0,point).unwrap(), PlacementEnvironment { terrain_class:0, blocker_weight:0 });
         world.backing[MAP_START + 5] = 1;
-        assert_eq!(world.placement_environment(0,point).unwrap_err(), ActorWorldError::UnsupportedBlockerFamily(8));
+        assert_eq!(world.placement_environment(0,point).unwrap_err(), ActorWorldError::UnsupportedBlockerFamily(7));
     }
 
     #[test]

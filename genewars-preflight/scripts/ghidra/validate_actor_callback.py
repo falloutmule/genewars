@@ -31,7 +31,7 @@ for i in range(2048):
  expected.extend(out+bp+bytes([ack]))
 data.extend(struct.pack('<I',2048))
 for i in range(2048):
- a=bytearray(rng.randbytes(200));a[6]=3;frame=i;struct.pack_into('<h',a,15,i%20);ground=i*13-6000;physical=ground+(i%5==0);struct.pack_into('<i',a,17,ground);struct.pack_into('<i',a,39,physical);struct.pack_into('<3h',a,57,i%2048,i*17%2048,i%2000);struct.pack_into('<3h',a,45,0 if i%7==0 else i%100,0,0);terrain=i%4;data.extend(a+struct.pack('<IB',frame,terrain));yes=(frame+word(a,15))&3==3 and physical==ground and word(a,45)!=0 and terrain>1;expected.append(yes)
+ a=bytearray(rng.randbytes(200));a[6]=3;frame=i;struct.pack_into('<h',a,15,i%20);ground=i*13-6000;physical=ground+(i%5==0);struct.pack_into('<i',a,17,ground);struct.pack_into('<i',a,39,physical);struct.pack_into('<3h',a,57,i%2048,i*17%2048,i%2000);struct.pack_into('<3h',a,45,0 if i%7==0 else i%100,0,0);terrain=i%4;data.extend(a+struct.pack('<IB',frame,terrain));selected=6 if a[112]&64 else 8 if a[112]&16 and a[85]!=5 else a[85] if (a[85]-256 if a[85]>=128 else a[85])<9 or struct.unpack_from("<H",a,112)[0]&0x180 else 1;yes=selected==1 and (frame+word(a,15))&3==3 and physical==ground and word(a,45)!=0 and terrain>1;expected.append(yes)
  if yes:expected.extend(a[7:11]+a[39:43]+struct.pack('<3HB',word(a,57),max(0,word(a,59)-256),word(a,61)>>1,0x4b))
 data.extend(struct.pack('<I',2048))
 for i in range(2048):

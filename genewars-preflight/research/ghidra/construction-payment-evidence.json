@@ -1,0 +1,12 @@
+{
+  "cases": 168,
+  "compared_bytes": 336840,
+  "literal_instruction_steps": 17472,
+  "source_sha256": "ce6aa8da2d840279cdeea469a9a60b7dd637e784fd93a2dcbd9ad4917b38328d",
+  "core_debit_sha256": "4866ff1f9bdd1bffbfb964bf03c495e5a1118d6bc24b0e3f8beea64ff780e5c0",
+  "listing_sha256": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1"
+  },
+  "scope": "53A33 paid branch whole200Bactor/1805Bplayer,all14selectors/signedskill/refill/6yawboundaries;73970 result explicitport;insufficient51E80cleanup notclaimed"
+}

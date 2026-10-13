@@ -28,6 +28,13 @@ impl Family8Pool {
         }
         Ok(Self { records, bindings })
     }
+    pub(crate) fn retire_checked(&mut self,slot:usize,before:&Family8Record)->Result<(),PoolError>{
+        if self.record(slot)?!=before{return Err(PoolError::StaleRecord(slot));}
+        if before[6]!=8||before[0x55]>1{return Err(PoolError::InvalidFactoryPlan);}
+        let binding=if before[0x55]==1{AnimationBinding::Base}else{AnimationBinding::Offset80};
+        if self.binding(slot)?!=Some(binding){return Err(PoolError::StaleBinding(slot));}
+        self.records[slot][6]=0;self.bindings[slot]=None;Ok(())
+    }
     pub fn records(&self) -> &[Family8Record; CAPACITY] { &self.records }
     pub fn record(&self, slot: usize) -> Result<&Family8Record, PoolError> {
         self.records.get(slot).ok_or(PoolError::InvalidSlot(slot))

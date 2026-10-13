@@ -337,7 +337,7 @@ impl ActorWorld {
             let entity=self.entity(raw)?;
             if reference(entity,0)!=previous {return Err(ActorWorldError::BrokenPrevious(raw));}
             if raw!=[0,0,1] {match raw[2] {
-                1|3|5=>(),
+                1|3|5|8=>(),
                 2=> {let layout=self.layouts[1];let at=layout.file_offset+word(&raw,0)as usize*layout.packed_stride;
                     if self.backing[at+0x26]&8==0 {weight+=10;}
                 },

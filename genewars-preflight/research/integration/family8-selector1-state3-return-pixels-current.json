@@ -1,0 +1,80 @@
+{
+  "captured_record": {
+    "bytes": 102,
+    "direction": 7,
+    "flags": 16416,
+    "frame": 0,
+    "kind": 8,
+    "path": "private/review/family8-return/actual6290/source-after6329.bin",
+    "selector": 1,
+    "sha256": "7882526bfd84c88178fb5229e28decb8feb914082aa8e4f999ff73c1820bbd15",
+    "state": 3
+  },
+  "cases": [
+    {
+      "case": "state3_clipped",
+      "direction": 7,
+      "full_bytes_equal": true,
+      "metadata": {
+        "color": "394",
+        "color_clipped": "0",
+        "color_y": "138",
+        "effective_shade": "65",
+        "global_animation": "7",
+        "sha256": "84175ab1f2fa1938dbad7b2e2ff93f29bf902938dc46808562e31eb56ddaa83c",
+        "shadow": "197",
+        "shadow_clipped": "0",
+        "virtual_height": "2055"
+      },
+      "origin": [
+        280,
+        170
+      ],
+      "record_is_captured": true,
+      "sha256": "84175ab1f2fa1938dbad7b2e2ff93f29bf902938dc46808562e31eb56ddaa83c"
+    },
+    {
+      "case": "state3_visible",
+      "direction": 7,
+      "full_bytes_equal": true,
+      "metadata": {
+        "color": "394",
+        "color_clipped": "0",
+        "color_y": "318",
+        "effective_shade": "65",
+        "global_animation": "7",
+        "sha256": "effbdd6e9c098820a469bbb962bcdbe94944e4fbead25463b4957fcd26fac11c",
+        "shadow": "197",
+        "shadow_clipped": "0",
+        "virtual_height": "2055"
+      },
+      "origin": [
+        280,
+        350
+      ],
+      "record_is_captured": true,
+      "sha256": "effbdd6e9c098820a469bbb962bcdbe94944e4fbead25463b4957fcd26fac11c"
+    }
+  ],
+  "framebuffer": {
+    "bytes": 311032,
+    "fill": 53,
+    "height": 480,
+    "pitch": 648,
+    "width": 640
+  },
+  "harness_sha256": "c2bd4bda25138d08d5145b3620e94689636553331c14efc42945b9342c23632e",
+  "implementation_sha256": "4cb288b5d2cd1e3bc9c36fc362d046b77b4df01a0c8d56dfbed19366686aa1b1",
+  "inputs": {
+    "ethereal_sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4",
+    "fade_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+    "instruction_pins": {
+      "private/ghidra/countdown-expiry/instructions-00010ea0.txt": "639fdb8a92c1342f206b3ddd7ebf563618988b4943ff53ca3c9bec9aed881dfb",
+      "private/ghidra/initial-creature/instructions-0001f060.txt": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7"
+    },
+    "main_gla_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3"
+  },
+  "schema_version": 1,
+  "scope": "Captured selector1/state3/substate2 flags 0x4020 record at source after6329. Two 640x480 full framebuffers are compared byte-for-byte with an independent 0x10EA0 common-path oracle; origins are diagnostic only. The Rust module separately checks flag equivalence across all eight direction indices.",
+  "validator_sha256": "90850b646d3c1dbb06cea5a2b8b2b22435d50a093b495d462d66b345558959e9"
+}

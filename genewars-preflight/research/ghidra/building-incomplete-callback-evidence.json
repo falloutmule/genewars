@@ -1,0 +1,11 @@
+{
+  "cases": 128,
+  "compared_bytes": 8576,
+  "literal_instruction_steps": 21004,
+  "source_sha256": "2b6207286c5d5afc90a6fee57d287954af619b899542fe989a9aa1c486f2f7f8",
+  "listing_sha256": {
+    "building-update/instructions-000451f0.txt": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+    "landing-contact/instructions-0007ac00.txt": "cc002c636ec832486e06fe90af6cfc68a0489d6acae6efcf83d5a5ce735706e1"
+  },
+  "scope": "451F0 incomplete selector1; full67B building; signedtimer,cooldown,dirtybit,animation0/gradeframe/direction0 actual7AC00; stopaudio23 and83140 queue explicit ports; syntheticholds0/2/255"
+}

@@ -51,7 +51,7 @@ pub fn plan_effect6_retirement(
  dead:&LandingRecord,pool_count:i16,records:&[CleanupRecord<'_>],ui:&RetirementUiState,
 )->Result<EffectRetirementPlan,LifecycleError>{
  if dead[6]!=5{return Err(LifecycleError::InvalidDeadRecord);}
- if !matches!(dead[69],6|0x2f|0x30|0x31)||dead[69]==0x31&&dead[76]!=0{return Err(LifecycleError::UnsupportedRetirementCode(dead[69]));}
+ if !matches!(dead[69],6|0x1a|0x2f|0x30|0x31)||dead[69]==0x31&&dead[76]!=0{return Err(LifecycleError::UnsupportedRetirementCode(dead[69]));}
  let identity=LandingReference{index:i16::from_le_bytes([dead[15],dead[16]]),kind:5};
  if identity.index<0||identity.index>=200{return Err(LifecycleError::RecordIdentity);}
  if !(1..=200).contains(&pool_count){return Err(LifecycleError::InvalidPoolCount);}

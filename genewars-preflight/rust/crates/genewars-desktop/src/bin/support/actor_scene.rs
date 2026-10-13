@@ -92,9 +92,11 @@ pub struct ActorSceneFrame {
     pub mule_receipts: Vec<ActorSceneMuleReceipt>,
     pub pending_effect_slots: Vec<usize>,
     pub effect_scene: Option<EffectSceneReceipt>,
+    pub family8_receipts: Vec<super::family8_scene::Family8DrawReceipt>,
+    pub family8_layer_policy: &'static str,
     /// Explicit selected-actor panel portrait. Its caller controls whether a
     /// selection is active; the source-backed draw origin is the panel call's
-    /// signed coordinate pair (25,42), on the full 640×480 framebuffer.
+    /// signed coordinate pair (25,42), on the full 640Ãƒâ€”480 framebuffer.
     pub selected_portrait: Option<SelectedActorPortraitReceipt>,
     pub actor_order_policy: &'static str,
     pub interfamily_layer_policy: &'static str,
@@ -366,6 +368,32 @@ fn render_actor_world_layers(
     let drawn_effects: HashSet<usize> = effect_order.unwrap_or_default().iter().copied().collect();
     let pending_effect_slots = world.effects().map(|pool| pool.records().iter().enumerate()
         .filter_map(|(slot, record)| (record[6] != 0 && !drawn_effects.contains(&slot)).then_some(slot)).collect()).unwrap_or_default();
+    let mut family8_receipts = Vec::new();
+    if let Some(pool) = world.family8() {
+        let fade = genewars_render::terrain::TerrainFadeTable::parse(resources.fade_bytes()).map_err(|e| e.to_string())?;
+        for (slot, record) in pool.records().iter().enumerate().filter(|(_, r)| r[6] != 0) {
+            if pool.binding(slot).map_err(|e| format!("{e:?}"))?
+                != Some(if record[0x55]==1 {genewars_runtime::family8_pool::AnimationBinding::Base}else{genewars_runtime::family8_pool::AnimationBinding::Offset80}) {
+                return Err(format!("family8 slot {slot} has an unsupported animation binding"));
+            }
+            let position = [i16::from_le_bytes([record[7],record[8]]),i16::from_le_bytes([record[9],record[10]])];
+            let projected = entity_view_position(world.map(), position, camera, 128).map_err(|e| e.to_string())?;
+            let origin = [i16::try_from(projected[0]).map_err(|_| "family8 projected X exceeds signed word")?,
+                i16::try_from(projected[1]).map_err(|_| "family8 projected Y exceeds signed word")?];
+            let draw=match (record[0x55],record[0x56]) {
+                (0,4)=>super::family8_scene::draw_family8_selector0_state4,
+                (0,5)=>super::family8_scene::draw_family8_selector0_state5,
+                (0,8)=>super::family8_scene::draw_family8_selector0_state8,
+                (0,9)=>super::family8_scene::draw_family8_selector0_state9,
+                (1,0)=>super::family8_scene::draw_family8_selector1_state0,
+                (1,1)=>super::family8_scene::draw_family8_selector1_state1,
+                (1,3)=>super::family8_scene::draw_family8_selector1_state3,
+                state=>return Err(format!("family8 slot {slot}: unsupported draw state {state:?}")),
+            };
+            family8_receipts.push(draw(&resources.ethereal,record,origin,&fade,&gla,&mut indexed.indices[128..],[512,480],640)
+                .map_err(|e|format!("family8 slot {slot}: {e}"))?);
+        }
+    }
     let selected_portrait = if let Some(slot) = selected_actor_slot {
         Some(draw_selected_actor_portrait(resources, world, slot, selected_player, frame_counter,
             &mut indexed.indices)?)
@@ -373,7 +401,8 @@ fn render_actor_world_layers(
     let snapshot_sha256 = actor_world_snapshot_sha256(world);
     let frame = resources.finish_indexed(indexed, snapshot_sha256)?;
     Ok(ActorSceneFrame { frame, camera, actor_order: actor_order.to_vec(), actor_receipts, mule_receipts,
-        pending_effect_slots, effect_scene, selected_portrait,
+        pending_effect_slots, effect_scene, selected_portrait, family8_receipts,
+        family8_layer_policy: "active native slots ascending after effects; source interfamily order remains unproved",
         actor_order_policy: "caller-supplied; family2 queue order unproved",
         interfamily_layer_policy: match (creature_order.is_some(), effect_order.is_some()) {
             (true, true) => "caller-supplied family2 order, then family0 MULE order, then family4 order; game interfamily order unproved",
@@ -474,6 +503,20 @@ fn actor_world_snapshot_sha256(world: &ActorWorld) -> String {
                 Some(genewars_runtime::effect_pool::EffectAnimationBinding::EffAnimation6) => 2,
                 Some(genewars_runtime::effect_pool::EffectAnimationBinding::EffAnimation47) => 3,
                 Some(genewars_runtime::effect_pool::EffectAnimationBinding::EffAnimation48) => 4,
+                Some(genewars_runtime::effect_pool::EffectAnimationBinding::EffAnimation26) => 5,
+            });
+        }
+    } else { bytes.push(0); }
+    // Family8 is also an owned overlay once admitted. Persist its logical
+    // animation binding in the snapshot identity, never a host address.
+    if let Some(pool) = world.family8() {
+        bytes.push(1);
+        for (slot, record) in pool.records().iter().enumerate() {
+            bytes.extend_from_slice(record);
+            bytes.push(match pool.binding(slot).ok().flatten() {
+                None => 0,
+                Some(genewars_runtime::family8_pool::AnimationBinding::Base) => 1,
+                Some(genewars_runtime::family8_pool::AnimationBinding::Offset80) => 2,
             });
         }
     } else { bytes.push(0); }
@@ -764,6 +807,24 @@ mod tests {
         assert!(render_actor_world(&resources, &world, target, 0, 0, &[20]).is_err());
         assert!(render_actor_world(&resources, &world, target, 4, 0, &[]).is_err());
         assert_eq!(world, before);
+    }
+
+    #[test]
+    fn family8_overlay_changes_snapshot_and_composes_ground_shadow() {
+        let root=bundle();let (resources,_,_)=Resources::load(&root).unwrap();
+        let (mut world,target)=explicit_fixture_world(&root);
+        let before=actor_world_snapshot_sha256(&world);
+        world.admit_family8(&[[0;102];16],[None;16]).unwrap();
+        assert_ne!(before,actor_world_snapshot_sha256(&world));
+        let ground=genewars_core::cd_candidate::interpolate_height(world.map(),target[0],target[1]).unwrap();
+        world.create_family8(0,0,target,ground+16000).unwrap();
+        let scene=render_actor_world(&resources,&world,target,0,0,&[]).unwrap();
+        assert_eq!(scene.family8_receipts.len(),1);
+        let receipt=&scene.family8_receipts[0];
+        assert_eq!(receipt.virtual_height,16000);
+        assert_eq!(receipt.color_origin[1],receipt.ground_origin[1].wrapping_sub(250));
+        assert!(receipt.shadow_pixels>0);
+        assert_eq!(scene.frame.world_sha256,actor_world_snapshot_sha256(&world));
     }
 
     #[test]

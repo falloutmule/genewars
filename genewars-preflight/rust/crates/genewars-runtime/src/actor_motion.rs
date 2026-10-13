@@ -184,8 +184,19 @@ pub struct ActorFootstep {
 }
 
 /// 5861E..586DE requests8B520 only on this admitted grounded/moving parity.
+///583D1..5841C selects the source BL animation state before83140/7AC00.
+/// It differs from actor55 during movement/override and settled construction.
+pub fn actor_selected_animation_state(a:&ActorMotionRecord)->Result<u8,ActorMotionError> {
+    if a[6]!=3{return Err(ActorMotionError::Inactive);}
+    Ok(if a[0x70]&0x40!=0{6}
+        else if a[0x70]&0x10!=0&&a[0x55]!=5{8}
+        else if (a[0x55]as i8)<9||u16::from_le_bytes(a[0x70..0x72].try_into().unwrap())&0x180!=0{a[0x55]}
+        else{1})
+}
 pub fn actor_footstep_query_position(a:&ActorMotionRecord,frame:u32)->Result<Option<[i16;2]>,ActorMotionError> {
     if a[6]!=3 { return Err(ActorMotionError::Inactive); }
+    //58652 tests the selected BL after virtual4 returns zero, not actor55.
+    if actor_selected_animation_state(a)?!=1{return Ok(None);}
     let physical=i32::from_le_bytes(a[0x27..0x2b].try_into().unwrap());
     let ground=i32::from_le_bytes(a[0x11..0x15].try_into().unwrap());
     let moving=[0x2d,0x2f,0x31].iter().any(|&p|word(a,p)!=0)||physical>ground;
@@ -318,4 +329,23 @@ pub fn plan_actor_idle_with_empty_scorer(before:&ActorMotionRecord,blueprint:&[u
     if b[0x15]==3 {a[0x73]=0;}
     if (b[0x1b]as i8)<(b[0x18]as i8)&&frame&31==0{b[0x1b]=b[0x1b].wrapping_add(1)}
     Ok(ActorIdlePlan{after:a,blueprint_after:b,rng_after:rng,draws})
+}
+
+#[cfg(test)]
+mod footstep_selection_tests {
+    use super::*;
+    #[test]
+    fn footsteps_follow_selected_animation_bl() {
+        let mut a=[0u8;200]; a[6]=3;
+        a[0x2d..0x2f].copy_from_slice(&1i16.to_le_bytes());
+        for (state, flags, selected, dust) in [
+            (8,1,8,false),(1,1,1,true),(9,1,1,true),
+            (9,0x81,9,false),(9,0x101,9,false),
+            (1,0x11,8,false),(1,0x41,6,false),(5,0x11,5,false),
+        ] {
+            a[0x55]=state; a[0x70..0x72].copy_from_slice(&(flags as u16).to_le_bytes());
+            assert_eq!(actor_selected_animation_state(&a).unwrap(),selected);
+            assert_eq!(plan_actor_footstep(&a,3,7).unwrap().is_some(),dust);
+        }
+    }
 }

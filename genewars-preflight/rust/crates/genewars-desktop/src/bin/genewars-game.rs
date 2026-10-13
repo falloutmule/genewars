@@ -3,6 +3,7 @@ use std::{env,fs,io::{Read,Write},path::{Path,PathBuf},process};
 #[path="support/menu_art.rs"] mod menu_art;
 #[path="support/runtime_resources.rs"] mod runtime_resources;
 #[path="support/actor_scene.rs"] mod actor_scene;
+#[path="support/family8_scene.rs"] mod family8_scene;
 #[path="support/effect_scene.rs"] mod effect_scene;
 #[path="support/shared_scene.rs"] mod shared_scene;
 #[path="support/runtime_scene.rs"] mod runtime_scene;
@@ -77,13 +78,13 @@ fn main(){if let Err(e)=run(){eprintln!("{e}");process::exit(1);}}
 #[cfg(test)]
 mod tests{
     use super::*;
-    #[test]fn json_quotes_controls_and_unicode(){assert_eq!(runtime_scene::json_string("a\"\\\n\t☀"),"\"a\\\"\\\\\\n\\t☀\"");}
+    #[test]fn json_quotes_controls_and_unicode(){assert_eq!(runtime_scene::json_string("a\"\\\n\tâ˜€"),"\"a\\\"\\\\\\n\\tâ˜€\"");}
     #[test]fn catalog_is_unique_and_bounded(){
         let mut names=std::collections::HashSet::new();let mut count=0;
         for line in runtime_resources::CATALOG.lines().filter(|l|!l.starts_with('#')){
             let f=line.split('\t').collect::<Vec<_>>();assert_eq!(f.len(),5);assert!(names.insert(f[0]));
             assert_eq!(f[1].len(),64);assert!(f[1].bytes().all(|b|b.is_ascii_hexdigit()));
             assert!(!f[0].contains(".."));assert!(f[2].parse::<usize>().unwrap()<1024*1024);count+=1;
-        }assert_eq!(count,49);
+        }assert_eq!(count,51);
     }
 }

@@ -1,0 +1,77 @@
+{
+  "cases": [
+    {
+      "color": 7185,
+      "color_clipped": 0,
+      "color_y": 240,
+      "effective_shade": 0,
+      "frame_height": 204,
+      "frame_width": 232,
+      "name": "fade0",
+      "sha256": "4f778402d527a2edcc2865be9be5675a514a4f8516e33ac0b12c1c46b6ea6e71",
+      "shadow": 3589,
+      "shadow_clipped": 0,
+      "virtual_height": 0
+    },
+    {
+      "color": 1527,
+      "color_clipped": 6153,
+      "color_y": 1,
+      "effective_shade": 7,
+      "frame_height": 206,
+      "frame_width": 236,
+      "name": "fade7_clip",
+      "sha256": "a420533347fc3fce37608c26ae2d56873ed22bbf8dedc40c170000e2e80b73cc",
+      "shadow": 775,
+      "shadow_clipped": 3058,
+      "virtual_height": 0
+    },
+    {
+      "color": 4095,
+      "color_clipped": 4008,
+      "color_y": 225,
+      "effective_shade": 325,
+      "frame_height": 206,
+      "frame_width": 234,
+      "name": "direct_clip",
+      "sha256": "8806970d198f2d131c8ab490dabaea6b309288bb279a9ea0e6654c04ba6b2ede",
+      "shadow": 1515,
+      "shadow_clipped": 2535,
+      "virtual_height": 16000
+    },
+    {
+      "color": 7185,
+      "color_clipped": 0,
+      "color_y": 130,
+      "effective_shade": 0,
+      "frame_height": 204,
+      "frame_width": 232,
+      "name": "factory_height",
+      "sha256": "4c693a00ecc52ca427ca5b4dbeee8b1e7093416221af24582ac62b92a603a4dd",
+      "shadow": 3589,
+      "shadow_clipped": 0,
+      "virtual_height": 16000
+    }
+  ],
+  "fade_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+  "harness_sha256": "dc2cf2b5a9dd01e01c573055cec9d4640ae5d836a44fae10bfd96acd4dab0894",
+  "implementation_sha256": "f5f43149e1ccd49d05a6c03584bfc52d38f570c2b2e607bf90b37efe92320a75",
+  "instruction_pins": {
+    "private/ghidra/countdown-expiry/instructions-00010ea0.txt": "639fdb8a92c1342f206b3ddd7ebf563618988b4943ff53ca3c9bec9aed881dfb",
+    "private/ghidra/mission-tail-init/instructions-00010060.txt": "518f7e316012183b083623aca3e4b01b8feedee77b0476c56e24d6f76a7d441d"
+  },
+  "main_gla_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+  "oracle_sha256": "3a805d57e8dfd0ab29c2a5431c10f58993cbe061ba45d19f1d57b79d5b45aa25",
+  "resource": {
+    "decoded_bytes": 91123,
+    "manifest_entry": "root/2/disc/60",
+    "selector_animation_base": 8,
+    "sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4"
+  },
+  "result": {
+    "cases": 4,
+    "full_framebuffer_bytes_matched": true
+  },
+  "schema_version": 1,
+  "scope": "Independent Python byte/pixel oracle compared against Rust family8 selector0/state4 helper; no original code executed."
+}

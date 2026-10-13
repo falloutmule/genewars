@@ -1,0 +1,81 @@
+{
+  "admission_guards": {
+    "active_packed_record_rejected_before_virtual_initializer": true,
+    "inactive_record_with_stale_animation_binding_rejected": true
+  },
+  "copy_contract": {
+    "active_prior_type_overwritten_by_inactive_source_cases": 255,
+    "mutation_counts_are_changed_bytes_not_write_counts": true,
+    "mutations_are_on_staging_source_not_native_header": true,
+    "native_prior_gap_31_39_preserved": true,
+    "packed_0_31_to_native_0_31": true,
+    "packed_31_59_to_native_39_67": true,
+    "rep_string_direction": "forward (DF clear caller precondition; these routines do not execute CLD)",
+    "source_mutations_after_first_copy": {
+      "packed_offset_0x15_and_mask_0xe3": 0,
+      "packed_offset_0x17_set_0x20": 256
+    }
+  },
+  "original_executable_run": false,
+  "private_record_bytes_written_to_report": false,
+  "real_checks": {
+    "aggregate_native_sha256": "c0f2292b8c7b7d8994fa95a678477bf0ca8342ae2c7c891d7266a6fe41fec1bb",
+    "all_native_prior_gaps_preserved": true,
+    "full_67_byte_comparisons": 256,
+    "total_interpreted_instructions": 71680
+  },
+  "schema_version": 1,
+  "scope": "Bounded 45010/6D490 packed-to-native copy only. Active virtual construction, live building table binding, and later building updates are excluded.",
+  "source": {
+    "active_packed_slots": [],
+    "bytes": 343958,
+    "family3_group_offset": 301630,
+    "inactive_packed_slots": 256,
+    "native_record_bytes": 67,
+    "packed_record_bytes": 59,
+    "path": "private/integration/game-runtime/terrain/CONQ001.DAT",
+    "record_count": 256,
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  },
+  "source_pins": [
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-00045010.txt",
+      "sha256": "379b68b64d00bc0b00b1dfe07562d58d18d62f9cd07dcf343bac3a832b511389"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-0006d490.txt",
+      "sha256": "5b9e8ac352751ec2e9dbda6bd5abfee4d61ab7602bd7cba97119663b17eb664e"
+    },
+    {
+      "path": "private/ghidra/mission-tail-constructors/instructions-0001e3f0.txt",
+      "sha256": "abc0890ec59a474e9f96d677f3f0c152fac33e398524319ec8e7de2ca3e3c976"
+    },
+    {
+      "path": "research/ghidra/mission-load-evidence.json",
+      "sha256": "2d16d05150c104f59e4939c7c4ab7df2490d1c7a4aa81111d626604906b17d80"
+    },
+    {
+      "path": "research/variants/initial-creature-source.py",
+      "sha256": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_pool.rs",
+      "sha256": "8155470e9bed2248cad0c731e3f6d9fa9e6379648ba100ab32fa9f7d5d4f430b"
+    },
+    {
+      "path": "scripts/validate_building_inactive_loader.py",
+      "sha256": "db96d55f7d6b1413ca8ca81330b1d87b719ef1e2c028088319dcbcfe476149d6"
+    }
+  ],
+  "status": "passed-inactive-building-loader-source-proof",
+  "synthetic_checks": {
+    "aggregate_native_sha256": "3eb06850d5e12ba13d27b8ba77b27bca61181817236fe24043b610b9504a88e8",
+    "full_67_byte_comparisons": 1024,
+    "patterned_records": 1024,
+    "staging_mutation_cases": 1024,
+    "staging_mutation_changed_bytes": {
+      "packed_offset_0x15_and_mask_0xe3": 926,
+      "packed_offset_0x17_set_0x20": 1021
+    }
+  }
+}

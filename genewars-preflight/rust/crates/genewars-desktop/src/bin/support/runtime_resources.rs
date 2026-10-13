@@ -6,7 +6,7 @@ use genewars_core::cd_candidate::{CampaignResourcePlan, camera_cells_for_target,
     interpolate_entity_shade, plan_terrain_factor_raise_4096, queue_family1, family1_draw_packet, ProjectedFamily1};
 use genewars_render::{RgbImage, PlantFrame, PlantColorInputs, PlantSceneRecord, draw_explicit_family1_scene,
     terrain::TerrainFadeTable, terrain_modes::MainGlaTable, terrain_view::{render_initial_terrain_view,compose_left_panel}};
-use genewars_runtime::{actor_initialization::ActorResourceTableKey, actor_resources::{ActorAnimationDatabase, ActorResourceCatalog}, creature_world::MuleAnimations, effect_pool::EffectAnimationBinding, identity::sha256_hex, physics_tables::PhysicsTables, world::MissionWorld};
+use genewars_runtime::{actor_initialization::ActorResourceTableKey, actor_resources::{ActorAnimationDatabase, ActorResourceCatalog}, building_resources::BuildingResourceDatabase, creature_world::MuleAnimations, effect_pool::EffectAnimationBinding, identity::sha256_hex, physics_tables::PhysicsTables, world::MissionWorld};
 
 pub const CATALOG: &str = include_str!("../../../../../../research/integration/runtime-resource-catalog.tsv");
 
@@ -35,6 +35,9 @@ pub struct Resources {
     palette: Palette256, plants: Vec<Vec<u8>>,
     pub actors: ActorResources,
     pub effects: EffectAnimationDatabase,
+    /// Exact selector-1 BTURR database, admitted through the runtime catalog.
+    /// Other building selectors remain unavailable until independently bound.
+    pub bturr_selector1: BuildingResourceDatabase,
     /// Hash-validated CD angle and terrain bounce tables used by landing updates.
     pub physics: PhysicsTables,
     /// Exact CD selector-4 MULE animation database; its sprite codec remains
@@ -43,6 +46,9 @@ pub struct Resources {
     /// Once-parsed animation hold/flag metadata from the exact same
     /// hash-admitted MULE.ANB bytes as `mule`; used by the owned world tick.
     pub mule_animations: MuleAnimations,
+    pub ethereal: crate::family8_scene::EtherealAnimationDatabase,
+    pub family8_animation: genewars_runtime::family8_motion::Family8Animation,
+    pub family8_directions: genewars_runtime::family8_motion::Family8DirectionalAnimations,
 }
 
 pub struct CreatureAnimationDatabase { bytes: Vec<u8>, sprite_records: usize, animations: usize }
@@ -173,6 +179,7 @@ impl EffectAnimationDatabase {
             (EffectAnimationBinding::EffAnimation6, 13),
             (EffectAnimationBinding::EffAnimation48, 12),
             (EffectAnimationBinding::EffAnimation47, 6),
+            (EffectAnimationBinding::EffAnimation26, 5),
         ] {
             if value.frame_count(binding)? != expected_frames {
                 return Err(format!("EFF animation {:?} has an unexpected frame count", binding));
@@ -189,6 +196,7 @@ impl EffectAnimationDatabase {
             EffectAnimationBinding::EffAnimation6 => 6,
             EffectAnimationBinding::EffAnimation48 => 48,
             EffectAnimationBinding::EffAnimation47 => 47,
+            EffectAnimationBinding::EffAnimation26 => 26,
         }
     }
 
@@ -267,12 +275,19 @@ impl Resources {
         let plants = (0..12).map(|slot| read_bound(&root.join(format!("plants/slot-{slot:02}.anb")))).collect::<Result<Vec<_>,_>>()?;
         let actors = ActorResources::load(root)?;
         let effects = EffectAnimationDatabase::load(root)?;
+        let bturr_bytes = read_bound(&root.join("buildings/BTURR.ANB"))?;
+        let bturr_selector1 = BuildingResourceDatabase::load_selector1_bturr(bturr_bytes)
+            .map_err(|e| format!("CD BTURR selector-1 database: {e}"))?;
         let angle = read_bound(&root.join("physics/angle.bin"))?;
         let bounce = read_bound(&root.join("physics/bounce.bin"))?;
         let physics = PhysicsTables::from_mapped_bytes(&angle, &bounce).map_err(|e| e.to_string())?;
         let mule = CreatureAnimationDatabase::load(root)?;
         let mule_animations = MuleAnimations::from_anb(mule.bytes()).map_err(|e| format!("CD MULE animation metadata: {e}"))?;
-        Ok((Self { _header: header, title, atlas, fade, gla, panel, font0_dat, font0_tab, text, palette, plants, actors, effects, physics, mule, mule_animations }, world, target))
+        let ethereal_bytes = read_bound(&root.join("countdown/ETHEREAL.ANB"))?;
+        let ethereal = crate::family8_scene::EtherealAnimationDatabase::from_bytes(&ethereal_bytes).map_err(|e| e.to_string())?;
+        let family8_animation = genewars_runtime::family8_motion::Family8Animation::from_ethereal_anb(&ethereal_bytes).map_err(|e| format!("{e:?}"))?;
+        let family8_directions = genewars_runtime::family8_motion::Family8DirectionalAnimations::from_ethereal_anb(&ethereal_bytes).map_err(|e|format!("{e:?}"))?;
+        Ok((Self { _header: header, title, atlas, fade, gla, panel, font0_dat, font0_tab, text, palette, plants, actors, effects, bturr_selector1, physics, mule, mule_animations, ethereal, family8_animation, family8_directions }, world, target))
     }
 
     pub fn render(&self, world: &MissionWorld, target: [i16;2]) -> Result<Frame,String> {
@@ -347,4 +362,24 @@ impl Resources {
         TextStringTable::parse(&self.text).map_err(|e| e.to_string())
     }
     pub(super) fn panel_palette(&self) -> &Palette256 { &self.palette }
+}
+
+#[cfg(test)]
+mod building_resource_tests {
+    use super::*;
+
+    #[test]
+    fn runtime_bundle_admits_the_catalog_bound_selector1_database() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../../private/integration/game-runtime");
+        let bytes = read_bound(&root.join("buildings/BTURR.ANB"))
+            .expect("BTURR is registered in the runtime resource catalog");
+        let database = BuildingResourceDatabase::load_selector1_bturr(bytes)
+            .expect("selector 1 resolves the pinned BTURR animation database");
+        let animation = database.animation0();
+        assert_eq!(animation.frame_count(), 3);
+        assert_eq!(animation.holds().as_slice(), &[0, 0, 0]);
+        assert_eq!(animation.frames()[0].display_dimensions, (33, 106));
+        assert_eq!(animation.frames()[2].components.len(), 2);
+    }
 }

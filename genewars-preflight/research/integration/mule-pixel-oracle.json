@@ -25,12 +25,12 @@
       "sha256": "dacefce04049ac3151653bf14a9112fc9a2311dc8451ca4cee684980503d348c"
     },
     "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs": {
-      "bytes": 45191,
-      "sha256": "fe2a7263ce0859ee06a954c075942c6cb67700b60b985a2b870e410fc02928fb"
+      "bytes": 49000,
+      "sha256": "2caae2c594fe04897cea4b4adc7cea60c2d8adc34c656c7cefbea8f5b4a5824a"
     },
     "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs": {
-      "bytes": 20514,
-      "sha256": "06cea402d97ba53cfa40b35887a9ac637e5c98bf9de6fb2e5d6da7fd8741dcb2"
+      "bytes": 21448,
+      "sha256": "b1b756338a480204b41d89d8649c6002fcc5bf6f5b1e4a0c0439c5b8984b6282"
     },
     "research/ghidra/creature-evidence.json": {
       "bytes": 21352,

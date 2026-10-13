@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T19:11:27.543249+00:00",
+  "verified_at": "2026-10-13T20:30:36.226078+00:00",
   "sessions": [
     {
       "seed": "0",
@@ -80,15 +80,15 @@
   "implementation_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "c97c4f7e70e1cddf3cb1cdff1ab5112270e12ca585eb8d6021858efe9f771e52"
+      "sha256": "18633907e526995cf776a612e5ac93dc09865a21a017ae22564648c7129e480c"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
-      "sha256": "f3f3077d1904f243e1d495f9712541c181d3fc4d7cb565240115b0a05fd40f85"
+      "sha256": "002cb2f1ae45cff667317c7e7f740055e59e2eb33f31806fe2a17a1d92813512"
     },
     {
       "path": "rust/crates/genewars-runtime/src/creature_world.rs",
-      "sha256": "afabdefae2713abe6f4ac97cc3450ac7700bc7741558bca22252bd53a14725c5"
+      "sha256": "3658a74dc0c1ecc545492489378e80847196457b7775b9a30180be3518d77bf5"
     },
     {
       "path": "rust/crates/genewars-runtime/src/player_state.rs",
@@ -96,7 +96,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
-      "sha256": "944251d5617a636b7b847a51ef00270d06872b5b27a23f5b79286b43c2bc23bd"
+      "sha256": "9294edb98676341c42aaf7b50a20fffc4f3c484f6c872e6846e03e1765b0c91f"
     },
     {
       "path": "rust/crates/genewars-runtime/src/landing.rs",
@@ -104,7 +104,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
-      "sha256": "1ba0b302d1908501fbf05ad46f75b6627fa8172eceb4b49b6d94bed05c90769f"
+      "sha256": "31674ff4136e00b7f5e0c468150486625a67983e137a5ad6233478966698f452"
     },
     {
       "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
@@ -112,7 +112,7 @@
     },
     {
       "path": "scripts/landing_scheduler_probe.rs",
-      "sha256": "782e3c7bc4e661a6ed6d7cb8a140014aeb6a535d823f9a5be2fb6951e7f671d7"
+      "sha256": "c516edbd42b48973da8f472d071159c836bf610a9a2001906563996a80614c4a"
     },
     {
       "path": "scripts/validate_landing_scheduler.py",

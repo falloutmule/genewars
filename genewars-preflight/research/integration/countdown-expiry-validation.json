@@ -1,6 +1,6 @@
 {
   "status": "passed-caller-requests-only",
-  "utc": "2026-10-13T19:08:14.154918+00:00",
+  "utc": "2026-10-13T21:32:21.122633+00:00",
   "cases": 80,
   "factory_requests": 80,
   "compared_bytes": 880,
@@ -13,7 +13,7 @@
   "implementation_pins": {
     "scripts/validate_countdown_expiry.py": "d85342cd9f53a917aefb9cabf01c07c87dc7609d61ca987cda35b6d413ee92cf",
     "scripts/countdown_expiry_probe.rs": "7468331f1fc8c7a6b3a27bd6e389372ebec8457216ac60ff4e8f35f44db09fd2",
-    "rust/crates/genewars-runtime/src/countdown_expiry.rs": "1b3e076d2f1d198d23d3990015f9865775225ca2b0b4df0de69ee1f461983efb",
+    "rust/crates/genewars-runtime/src/countdown_expiry.rs": "fdc5b172dc4fbd41ccf52bc877a9b0d7db6999c7166aba74125e7c9097c59dfb",
     "research/variants/initial-creature-source.py": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2"
   },
   "listing_pins": {
@@ -86,7 +86,7 @@
     "private/ghidra/mission-array-refs/instructions-0005cc60.txt": "732f53cf3c69987464aaa7903bfa1fc99e0e826dad615b979269bf6c55e4d2cb",
     "private/ghidra/mission-array-refs/instructions-00013780.txt": "634efec82d190cdf793a444a423709cd2e962031a6b2e20ec05c8606bc3a36b4"
   },
-  "private_run": "private/review/countdown-expiry/a24cde7fe25440c1a757d012f5c71b7c",
+  "private_run": "private/review/countdown-expiry/8b577580faed46acb41d7602e8b271b0",
   "original_execution": false,
   "scope": "Source13780 expiry caller and literal7B140 height sampling; ordered101D0 arguments match. Factory/audio/UI are request ports. No family8 creation, callback, world integration, or expiry support claimed."
 }

@@ -1,13 +1,13 @@
 {
   "status": "passed-native-creature-storage-review",
-  "utc": "2026-10-13T19:06:10.236799+00:00",
+  "utc": "2026-10-13T21:29:38.197372+00:00",
   "scope": "Exact first-mission native124B family0 copy and typedMule binding only; no AI/tick closure",
   "records": 300,
   "compared_bytes": 37500,
   "active_records": 1,
   "source": {
     "path": "rust/crates/genewars-runtime/src/creature_world.rs",
-    "sha256": "afabdefae2713abe6f4ac97cc3450ac7700bc7741558bca22252bd53a14725c5"
+    "sha256": "3658a74dc0c1ecc545492489378e80847196457b7775b9a30180be3518d77bf5"
   },
   "mission": {
     "path": "private/integration/game-runtime/terrain/CONQ001.DAT",

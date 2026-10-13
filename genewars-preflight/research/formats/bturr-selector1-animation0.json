@@ -1,0 +1,86 @@
+{
+  "anb_layout": {
+    "animation_count": 5,
+    "offsets": [
+      66562,
+      67000,
+      67560,
+      67980
+    ],
+    "section_lengths": [
+      438,
+      560,
+      420,
+      50
+    ]
+  },
+  "animation0": {
+    "first_frame_section_offset": 0,
+    "flags_byte_extraction": "high byte of animation trailing word, as used by the shared animation updater",
+    "flags_byte_high": 0,
+    "frame_count": 3,
+    "frames": [
+      {
+        "component_count": 1,
+        "frame_index": 0,
+        "frame_section_offset": 0,
+        "height_raw": 212,
+        "hold_byte": 0,
+        "width_raw": 66
+      },
+      {
+        "component_count": 1,
+        "frame_index": 1,
+        "frame_section_offset": 14,
+        "height_raw": 228,
+        "hold_byte": 0,
+        "width_raw": 74
+      },
+      {
+        "component_count": 2,
+        "frame_index": 2,
+        "frame_section_offset": 28,
+        "height_raw": 320,
+        "hold_byte": 0,
+        "width_raw": 204
+      }
+    ],
+    "last_frame_section_offset": 28,
+    "raw_trailing_word": 3,
+    "trailing_low_byte": 3,
+    "trailing_word_semantics": "low byte remains uninterpreted; high byte exposed as flags input, no ping-pong behavior inferred here"
+  },
+  "binding": {
+    "descriptor_va": "0x103a9c",
+    "destination_va": "0x116828",
+    "filename": "data/building/BTURR.ANB",
+    "selector": 1
+  },
+  "original_executable_run": false,
+  "private_asset_bytes_written_to_report": false,
+  "resource": {
+    "bytes": 68030,
+    "private_source": "private/reference-run/run-006/drive-c/GAME/DATA/BUILDING/BTURR.ANB",
+    "sha256": "c26df60af3a3166aec54112f197a4334966eb214eeaa48e0d9284e0510b8cd20"
+  },
+  "schema_version": 1,
+  "source_pins": [
+    {
+      "path": "private/reference-run/run-006/drive-c/GAME/DATA/BUILDING/BTURR.ANB",
+      "sha256": "c26df60af3a3166aec54112f197a4334966eb214eeaa48e0d9284e0510b8cd20"
+    },
+    {
+      "path": "research/ghidra/building-loader-contract.json",
+      "sha256": "92f14f841693d74aaf36c0de2bbf11195907bafb29849b8fbcdce1421d4fa633"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
+      "sha256": "69a783cb0fa6b3e476be7a42c82ff423eb4c67629e32f0968aa75b0e282050c6"
+    },
+    {
+      "path": "scripts/validate_bturr_animation0.py",
+      "sha256": "bd3fa881e55f2ae4ab6d6124a17544f98f51d18d98adef042d80476ddf1ba0b3"
+    }
+  ],
+  "status": "passed-bturr-selector1-animation0-metadata"
+}

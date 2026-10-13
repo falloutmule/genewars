@@ -1,6 +1,6 @@
 {
   "status": "passed-static-explicit-target-contract",
-  "checked_utc": "2026-10-13T19:11:29.921408+00:00",
+  "checked_utc": "2026-10-13T20:30:38.591913+00:00",
   "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
   "instruction_contracts": [
     {

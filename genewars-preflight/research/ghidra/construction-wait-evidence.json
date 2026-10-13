@@ -1,0 +1,9 @@
+{
+  "cases": 192,
+  "compared_bytes": 40128,
+  "literal_instructions": 49776,
+  "audio_requests": 16,
+  "production_sha256": "3e339a034c14c3f7f4fc515418675eb357d844c473d9d5024797750cc3b0f6ae",
+  "listing_sha256": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+  "scope": "534D0 stage1/2 active job with exact source736F0 distances0,127,255; whole actor and audio; zero RNG"
+}

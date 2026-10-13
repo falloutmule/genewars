@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-runtime-world-review",
-  "utc": "2026-10-13T19:16:33.423108+00:00",
+  "utc": "2026-10-13T20:36:39.095694+00:00",
   "original_execution": false,
   "gui_execution": false,
   "source_pins": [
@@ -16,13 +16,13 @@
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs",
-      "size": 20514,
-      "sha256": "06cea402d97ba53cfa40b35887a9ac637e5c98bf9de6fb2e5d6da7fd8741dcb2"
+      "size": 21448,
+      "sha256": "b1b756338a480204b41d89d8649c6002fcc5bf6f5b1e4a0c0439c5b8984b6282"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs",
-      "size": 13481,
-      "sha256": "1b08d625c101586b2d92be8b4fce66527b7819105d867aea688b2e7d355de263"
+      "size": 13483,
+      "sha256": "a16d1db40d89686d810a9c85cb9d0dedb8c0fcd91395eaf6ce6dfbe93fc1102b"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/menu_art.rs",
@@ -7867,12 +7867,12 @@
     {
       "steps": 0,
       "report": {
-        "path": "private/review/runtime-world/3c34069e775e448a9bc9bdd2b8b099cc/ticks-0.json",
+        "path": "private/review/runtime-world/0fb57899dc484887a1eafa7194c66e65/ticks-0.json",
         "size": 693,
         "sha256": "05227d649d150f770443ec68400071c88a52c423467ff7fea79d5f0cf435269c"
       },
       "world": {
-        "path": "private/review/runtime-world/3c34069e775e448a9bc9bdd2b8b099cc/ticks-0.bin",
+        "path": "private/review/runtime-world/0fb57899dc484887a1eafa7194c66e65/ticks-0.bin",
         "size": 343958,
         "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
       },
@@ -7881,12 +7881,12 @@
     {
       "steps": 1,
       "report": {
-        "path": "private/review/runtime-world/3c34069e775e448a9bc9bdd2b8b099cc/ticks-1.json",
+        "path": "private/review/runtime-world/0fb57899dc484887a1eafa7194c66e65/ticks-1.json",
         "size": 1785,
         "sha256": "2c9561eb6ce9df1a56df85c88267119b36c7ea667a96c02e2e831b3af1aa74ff"
       },
       "world": {
-        "path": "private/review/runtime-world/3c34069e775e448a9bc9bdd2b8b099cc/ticks-1.bin",
+        "path": "private/review/runtime-world/0fb57899dc484887a1eafa7194c66e65/ticks-1.bin",
         "size": 343958,
         "sha256": "e425abac99b8dceeed0aba550d2f940d095d38adceedd6345c7b4f73afd5ff0a"
       },
@@ -7895,12 +7895,12 @@
     {
       "steps": 128,
       "report": {
-        "path": "private/review/runtime-world/3c34069e775e448a9bc9bdd2b8b099cc/ticks-128.json",
+        "path": "private/review/runtime-world/0fb57899dc484887a1eafa7194c66e65/ticks-128.json",
         "size": 97082,
         "sha256": "e3c936996b155377a99ddfcb3f6fca3b3be2ace481b496feb9c004f157e293ae"
       },
       "world": {
-        "path": "private/review/runtime-world/3c34069e775e448a9bc9bdd2b8b099cc/ticks-128.bin",
+        "path": "private/review/runtime-world/0fb57899dc484887a1eafa7194c66e65/ticks-128.bin",
         "size": 343958,
         "sha256": "01a8fbc0d14580fb2cc04e98876a2803225e707cde6dd611cbae23461f6c0cb4"
       },
@@ -7908,19 +7908,19 @@
     }
   ],
   "extreme_pointer_case": {
-    "path": "private/review/runtime-world/3c34069e775e448a9bc9bdd2b8b099cc/extreme-pointer.json",
+    "path": "private/review/runtime-world/0fb57899dc484887a1eafa7194c66e65/extreme-pointer.json",
     "size": 356,
     "sha256": "a792c57a13d56b9f25c28bb57af502a432131ecfa135138aa923dc67d06f0bcf"
   },
   "app_binary": {
     "path": "private/build/rust-target/debug/genewars-game.exe",
-    "size": 29381057,
-    "sha256": "d2b4362344e0de0ced0f0eea6ed34767df13a793b5b86f019f6e8d456a352ecd"
+    "size": 31809121,
+    "sha256": "a0647c63e3f860747c5612f75b1fc3398066df070f443a6e0be6c1d47357e972"
   },
   "harness": {
     "path": "private/review/runtime-world/review.exe",
-    "size": 5687725,
-    "sha256": "f2bcfaf77525b345a506ff95b4720aca437c1f638387f7bb1fa5471d4ee1fe71"
+    "size": 5814919,
+    "sha256": "031c352718aadb4598515b4b3a311bb87fbd2a07e667c0a9d4a7db01e014446e"
   },
   "review_sources": [
     {

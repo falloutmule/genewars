@@ -1,0 +1,99 @@
+{
+  "fade_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+  "fields": {
+    "entity_flags": 16416,
+    "frame": 0,
+    "ground_height": 6352,
+    "kind": 8,
+    "local_animation": 4,
+    "physical_height": 21982,
+    "raw_shade": 0,
+    "selector": 1,
+    "state": 0
+  },
+  "framebuffer": {
+    "bytes": 311032,
+    "fill": 53,
+    "height": 480,
+    "pitch": 648,
+    "width": 640
+  },
+  "harness_sha256": "f3ff765fc1b3a66bb0a795e030540c41b02e4551e66db87387ee21f35a78ccc8",
+  "implementation_sha256": "9208773255f0c7fb01e70f5fc6cab613a4a30dd9f93815c7b3c42b3d9fd8219b",
+  "instruction_pins": {
+    "private\\ghidra\\countdown-expiry\\instructions-00010ea0.txt": "639fdb8a92c1342f206b3ddd7ebf563618988b4943ff53ca3c9bec9aed881dfb",
+    "private\\ghidra\\initial-creature\\instructions-0001f060.txt": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7"
+  },
+  "main_gla_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+  "oracle_sha256": "4c6382ec4dd8ef0400af3d59517d4f79a55e8ebf10300536905e8f513dc8f1f9",
+  "record_bytes": 102,
+  "record_sha256": "ad599c9be03f6adf54625c3431ed88b1a15fa8cba93970dbbc3c1ad804238a23",
+  "resource_sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4",
+  "result": {
+    "cases": [
+      {
+        "full_bytes_equal": true,
+        "metadata": {
+          "color": "0",
+          "color_clipped": "388",
+          "color_y": "-129",
+          "effective_shade": "0",
+          "global_animation": "4",
+          "sha256": "d08667f900cc913864bdc612f428525dcc05e15e7a3dafba3c1b9d2c861382cb",
+          "shadow": "196",
+          "shadow_clipped": "0",
+          "virtual_height": "15630"
+        },
+        "name": "direction4",
+        "origin": [
+          120,
+          115
+        ],
+        "sha256": "d08667f900cc913864bdc612f428525dcc05e15e7a3dafba3c1b9d2c861382cb"
+      },
+      {
+        "full_bytes_equal": true,
+        "metadata": {
+          "color": "388",
+          "color_clipped": "0",
+          "color_y": "106",
+          "effective_shade": "0",
+          "global_animation": "4",
+          "sha256": "b1f33b18d18badb12629d3ee29143928065e95ac507cc7a0cd80502552bcb7c8",
+          "shadow": "196",
+          "shadow_clipped": "0",
+          "virtual_height": "15630"
+        },
+        "name": "direction4_visible",
+        "origin": [
+          120,
+          350
+        ],
+        "sha256": "b1f33b18d18badb12629d3ee29143928065e95ac507cc7a0cd80502552bcb7c8"
+      }
+    ],
+    "full_bytes_equal": true
+  },
+  "schema_version": 1,
+  "scope": "Exact literal selector-1 state-0 child record at local animation 4/frame 0; source-mapped global animation 4; independent complete indexed framebuffer oracle. Diagnostic placement [120,115] is explicit and not a world projection claim.",
+  "source_model_sha256": "dc4ca79d79222e27cbe945f7aa87d80c28ea50a65922c1648f49e23518199ab2",
+  "source_timeline": {
+    "child_end": {
+      "animation": 4,
+      "animation_frame": 0,
+      "frame": 6143,
+      "state": 1
+    },
+    "child_extent": 98,
+    "child_start": {
+      "animation": 4,
+      "animation_frame": 0,
+      "frame": 6046,
+      "state": 0
+    },
+    "model_path": "research/variants/family8-onward-source.py",
+    "model_sha256": "dc4ca79d79222e27cbe945f7aa87d80c28ea50a65922c1648f49e23518199ab2",
+    "raw_input_path": "private/integration/game-runtime/terrain/CONQ001.DAT",
+    "raw_input_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  }
+}

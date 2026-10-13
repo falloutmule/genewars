@@ -1,0 +1,96 @@
+{
+  "fade_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+  "fields": {
+    "entity_flags": 32,
+    "frame": 0,
+    "ground_height": 6352,
+    "kind": 8,
+    "local_animation": 4,
+    "physical_height": 11278,
+    "raw_shade": 49,
+    "selector": 1,
+    "state": 1
+  },
+  "framebuffer": {
+    "bytes": 311032,
+    "fill": 53,
+    "height": 480,
+    "pitch": 648,
+    "width": 640
+  },
+  "harness_sha256": "f3ff765fc1b3a66bb0a795e030540c41b02e4551e66db87387ee21f35a78ccc8",
+  "implementation_sha256": "9208773255f0c7fb01e70f5fc6cab613a4a30dd9f93815c7b3c42b3d9fd8219b",
+  "instruction_pins": {
+    "private\\ghidra\\countdown-expiry\\instructions-00010ea0.txt": "639fdb8a92c1342f206b3ddd7ebf563618988b4943ff53ca3c9bec9aed881dfb",
+    "private\\ghidra\\initial-creature\\instructions-0001f060.txt": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7"
+  },
+  "main_gla_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+  "oracle_sha256": "3e0ef4781beaa6c439320cc17ee923d7f58798b65d898e9ffb82ffac0e9463af",
+  "record_bytes": 102,
+  "record_sha256": "03529194bc4d9abc786cfe10ddab81497a44921eb8c913a8c3c315f35a6e0222",
+  "resource_sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4",
+  "result": {
+    "cases": [
+      {
+        "full_bytes_equal": true,
+        "metadata": {
+          "color": "388",
+          "color_clipped": "0",
+          "color_y": "39",
+          "effective_shade": "87",
+          "global_animation": "4",
+          "sha256": "854c1cfc44b6fa05662ff16bea5f3b6cd0974e1b1b3a243f9496bcf4f73ee87a",
+          "shadow": "196",
+          "shadow_clipped": "0",
+          "virtual_height": "4926"
+        },
+        "name": "direction4",
+        "origin": [
+          120,
+          115
+        ],
+        "sha256": "854c1cfc44b6fa05662ff16bea5f3b6cd0974e1b1b3a243f9496bcf4f73ee87a"
+      },
+      {
+        "full_bytes_equal": true,
+        "metadata": {
+          "color": "388",
+          "color_clipped": "0",
+          "color_y": "274",
+          "effective_shade": "87",
+          "global_animation": "4",
+          "sha256": "f21d8dfa821408d28dc3fc4e70977b7217f41a4206d26b2a2a0c58316c9764ca",
+          "shadow": "196",
+          "shadow_clipped": "0",
+          "virtual_height": "4926"
+        },
+        "name": "direction4_visible",
+        "origin": [
+          120,
+          350
+        ],
+        "sha256": "f21d8dfa821408d28dc3fc4e70977b7217f41a4206d26b2a2a0c58316c9764ca"
+      }
+    ],
+    "full_bytes_equal": true
+  },
+  "schema_version": 1,
+  "scope": "Exact literal selector-1 state-1 record after 0x114B0 at local animation 4/frame 0; source-mapped global animation 4; independent complete indexed framebuffer oracle. Diagnostic placements are explicit and not a world projection claim.",
+  "source_model_sha256": "dc4ca79d79222e27cbe945f7aa87d80c28ea50a65922c1648f49e23518199ab2",
+  "source_timeline": {
+    "cases": 64,
+    "source_inputs": {
+      "private/integration/game-runtime/terrain/CONQ001.DAT": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+      "private/review/family8-onward/child-after6143.bin": "51bd5831820154fb508cc18f16dd5f2177a2e6d2fad3b24694593e38119f777a",
+      "research/variants/family8-state4-source.py": "cc0d5a38b1c0c2d6369811328c7685818ceb0f15152b5dfae83b753839f7392a",
+      "research/variants/family8-target-review.py": "8d54794003d621600ec80088bae898efcf6eba4cd272f119c8cb841511241734",
+      "research/variants/family8-target-review.rs": "bd7364fd5671a8c7b4763d85044c08617fece08cdeb0fe2b06e255ea00816f98"
+    },
+    "status": "passed-bounded-family8-initial-target",
+    "target_fixture": {
+      "actual_sha256": "0fc3988c7dcc8b4393b5c328bafce434e2268c522e974bf9b740eaddaf28552f",
+      "expected_sha256": "0fc3988c7dcc8b4393b5c328bafce434e2268c522e974bf9b740eaddaf28552f",
+      "input_sha256": "57c37e848d7a719baa265f7b7bb4a0f46f24a49a054367f1f7a7d4037c8a32b3"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cases": 112,
+  "compared_bytes": 26205760,
+  "literal_instruction_steps": 72529,
+  "output_sha256": "ef0007c17f7a446f4b971258d0bf3e66a8aa18c553805cb4b86c5e822cf798db",
+  "source_sha256": "0425be83f11535eacc231de7cb1cb6c4687613449acfeb6868e512863018015d",
+  "task_motion_sha256": "807b07d32dfd1d93b748c93f8144a34e18ccb8ce5d8ba9199995d8ba34081bcf",
+  "tail_sha256": "3f22feef5def16591bb02288573a8037eadb72ca8e8f86472ebf4e4dcb14fea6",
+  "shared_animation_sha256": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
+  "source_pins": {
+    "private/ghidra/terrain-map-refs/instructions-0008b890.txt": "b1b285e56911bee26f33d6aa3c2a5ccd42481e25be7fc4f986f5e55bbb173ad3",
+    "private/ghidra/validated/instructions-0008d580.txt": "08fc85698d73460faaef4a6dd81457eb199a60c9aacda9380239e5f3278034c3",
+    "private/ghidra/construction-command/instructions-000791c0.txt": "da1a6046fa2a0a4153f54ff5f4cce68941a05aae834287ce856ee48a1867f9f2",
+    "private/ghidra/terrain-map-refs/instructions-000753f0.txt": "ea2554be981b0acae18e192ba9827ebdf4e4dea2d8e6fbee83f889ec15f390c5",
+    "private/ghidra/construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "private/ghidra/terrain-map-refs/instructions-00077960.txt": "12195679d3618d63b9833ff52141cac94b7cbde0432025652ccd05b785e52376",
+    "private/ghidra/terrain-map-refs/instructions-0008d1b0.txt": "0b70076ba33011160a5f0cb917d7c89dd0675f9ff33edd129469ef75a27405c8",
+    "private/ghidra/terrain-map-refs/instructions-0008cba0.txt": "8346e2e8cc123527be927e2b30cf62f629864ad94c5637a07d8b7e0297ea9c0e",
+    "private/ghidra/construction-command/instructions-00077b80.txt": "85139763b8a9e9a54a2276436e64854c488951e641e4dd8a93f53019e2d83d4d",
+    "private/ghidra/building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "private/ghidra/actor-motion/instructions-000526c0.txt": "a6b39ca6b310a62ecb36fdfd08f205ae48e83bde37f949df96023277761c57c2",
+    "private/ghidra/activation-rng-refs/instructions-00052340.txt": "a8c4d8761c19c40b94af254de31f43f01d8070ebf40770e67b30f57e43c1befc",
+    "private/ghidra/actor-motion/instructions-00057a10.txt": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a",
+    "private/ghidra/actor-motion/instructions-0001ee30.txt": "3590a299b0f529da8f941168d806f9a5a8edbcc2365e36192d863a006d34d539"
+  },
+  "scope": "Whole57A10 state9 mode0stage0 readiness true/false, actual534D0 then animation tail, post6FB60 and queue ports;791C0 allocation/fullpool,selector5 specialreservation, full200B actor/25jobs/map/audio/viewport"
+}

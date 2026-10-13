@@ -1,6 +1,6 @@
 {
   "status": "passed-numeric-creation-plan",
-  "utc": "2026-10-13T19:15:04.580226+00:00",
+  "utc": "2026-10-13T20:27:40.842862+00:00",
   "cases": 48,
   "compared_bytes": 5232,
   "literal_instructions": 26220,
@@ -83,7 +83,7 @@
     "scripts/family8_creation_probe.rs": "24e3012bfe3904aa1e1932bcd5919cf33f8d908bfd756b7e17c76308357e80ed",
     "rust/crates/genewars-runtime/src/family8_creation.rs": "0f312593fb963669ec9a98e33abed62e09aa2a2f9cfef9f0799946aa4743a712"
   },
-  "private_run": "private/review/family8-creation/0df5759cbe4d40128e1bf4003f92316d",
+  "private_run": "private/review/family8-creation/e6310c8ee3cc44daa1f14415d141dce8",
   "original_execution": false,
   "scope": "Full literal101D0/1EE80 factory on source terrain; 48 native record, typed animation binding, cell-head and old-head previous comparisons. Pointer slots normalized. All three selectors, four owners, slots0/1/7/15, signed positions/heights, plant/Mule heads. Pool allocation/world commit, resources and callbacks are not integrated."
 }

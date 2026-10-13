@@ -148,14 +148,14 @@ impl ActorWorld {
         receipt.rng_after=staged.rng;*self=staged;Ok(receipt)
     }
 
-    fn commit_actor_motion_record(&mut self,id:u16,before:&[u8;200],after:&[u8;200])->Result<(),ActorWorldError> {
+    pub(super) fn commit_actor_motion_record(&mut self,id:u16,before:&[u8;200],after:&[u8;200])->Result<(),ActorWorldError> {
         let changed=floor_cell([word(before,7),word(before,9)])!=floor_cell([word(after,7),word(after,9)]);
         if changed {self.unlink_actor_for_motion(id)?;}
         self.actors.replace_record_checked(usize::from(id),before,after)?;
         if changed {self.insert_actor_motion_head(id)?;}Ok(())
     }
 
-    fn actor_contact_speed(&self,r:&[u8;200],normal:[i32;3],previous:i16)->Result<i16,ActorWorldError> {
+    pub(super) fn actor_contact_speed(&self,r:&[u8;200],normal:[i32;3],previous:i16)->Result<i16,ActorWorldError> {
         let point=[word(r,7),word(r,9)];let target=actor_motion::actor_contact_distance_target(r)?;
         let sample=|p:[i16;2]|genewars_core::cd_candidate::interpolate_height(self.map(),p[0],p[1]).map_err(|e|ActorWorldError::Terrain(e.to_string()));
         let distance=actor_motion::actor_contact_distance_squared(r,sample(point)?,sample(target)?)?;
@@ -174,7 +174,7 @@ impl ActorWorld {
     }
     ///Successful null-obstacle6FB60 boundary routing. Exhausted searches and
     ///the separate retry/backoff branch remain explicit errors.
-    fn actor_route_prefix(&self,raw:[u8;3],before:&[u8;200],counter:u32,physics:&PhysicsTables,trig:&TrigTables,idle_suppressed:bool)->Result<([u8;200],[i16;2]),ActorWorldError>{
+    pub(super) fn actor_route_prefix(&self,raw:[u8;3],before:&[u8;200],counter:u32,physics:&PhysicsTables,trig:&TrigTables,idle_suppressed:bool)->Result<([u8;200],[i16;2]),ActorWorldError>{
         if before[0x16]&0x48!=0||before[0x49]&3==3||before[0x4a]&4!=0||before[0x4f]!=0||before[0x52]!=0{return Err(CreatureError::UnsupportedMotionState.into());}
         let current=[word(before,7),word(before,9)];let target=[word(before,11),word(before,13)];let mut a=*before;a[0x49]&=0x9f;
         if a[0x49]&0x10==0&&counter&31==0&&!idle_suppressed{return Err(CreatureError::UnsupportedMotionState.into());}
@@ -194,7 +194,7 @@ impl ActorWorld {
         if a[0x49]&0x10!=0&&(immediate||counter&1!=0){let yaw=crate::actor_motion::angle(i32::from(working[0].wrapping_sub(current[0]).wrapping_mul(2)),i32::from(working[1].wrapping_sub(current[1]).wrapping_mul(2)),physics.angles());a[0x4b..0x4d].copy_from_slice(&yaw.to_le_bytes());}
         Ok((creature_world::plan_common_ground_steering(&a,trig)?,working))
     }
-    fn actor_idle_scorer_empty(&self,id:u16)->Result<bool,ActorWorldError> {
+    pub(super) fn actor_idle_scorer_empty(&self,id:u16)->Result<bool,ActorWorldError> {
         let actor=self.actors.record(usize::from(id))?;let owner=actor[24];let alliances=self.player(owner)?.bytes()[0x6e5];
         let center=floor_cell([word(actor,7),word(actor,9)]);let cx=(center%128)as i32;let cy=(center/128)as i32;
         for dy in -2..=2 {for dx in -2..=2 {

@@ -1,0 +1,1712 @@
+{
+  "actor_resource_table": {
+    "category": 0,
+    "evidence": "research/ghidra/blueprint-init-evidence.json",
+    "key_rule": "4*style+category"
+  },
+  "animations": [
+    {
+      "anb_animation_count": 18,
+      "animations": [
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 13,
+          "first_frame_index": 81,
+          "first_frame_section_offset": 1134,
+          "frame_count": 8,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1134,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1148,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1162,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1176,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1190,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 4
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1204,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 5
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1218,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1232,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 7
+            }
+          ],
+          "last_frame_index": 88,
+          "last_frame_section_offset": 1232,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 8
+        },
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 14,
+          "first_frame_index": 89,
+          "first_frame_section_offset": 1246,
+          "frame_count": 18,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1246,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1260,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1274,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1288,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1302,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 4
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1316,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 5
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1330,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1344,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 7
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1358,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 8
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1372,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 9
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1386,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 10
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1400,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 11
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1414,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 12
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1428,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 13
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1442,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 14
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1456,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 15
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1470,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 16
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1484,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 17
+            }
+          ],
+          "last_frame_index": 106,
+          "last_frame_section_offset": 1484,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 18
+        },
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 15,
+          "first_frame_index": 107,
+          "first_frame_section_offset": 1498,
+          "frame_count": 8,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1498,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1512,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1526,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1540,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1554,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 4
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1568,
+              "hold_byte_at_frame_plus_10": 2,
+              "index": 5
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1582,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1596,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 7
+            }
+          ],
+          "last_frame_index": 114,
+          "last_frame_section_offset": 1596,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 8
+        }
+      ],
+      "category": 0,
+      "decoded_bytes": 35497,
+      "decoded_sha256": "629a6471e4deabec794f0cffa34b513eea15013ee95927e67b02a4a7e6157b6a",
+      "manifest_entry": "root/2/disc/361",
+      "private_staged_path": "private/integration/game-runtime/actors/key-00.anb",
+      "resource_key": 0,
+      "source_name": "data/spec/harch.anb",
+      "style": 0
+    },
+    {
+      "anb_animation_count": 18,
+      "animations": [
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 13,
+          "first_frame_index": 81,
+          "first_frame_section_offset": 1134,
+          "frame_count": 8,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1134,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1148,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1162,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1176,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1190,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 4
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1204,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 5
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1218,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1232,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 7
+            }
+          ],
+          "last_frame_index": 88,
+          "last_frame_section_offset": 1232,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 8
+        },
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 14,
+          "first_frame_index": 89,
+          "first_frame_section_offset": 1246,
+          "frame_count": 21,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1246,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1260,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1274,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1288,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1302,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 4
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1316,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 5
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1330,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1344,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 7
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1358,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 8
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1372,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 9
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1386,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 10
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1400,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 11
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1414,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 12
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1428,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 13
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1442,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 14
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1456,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 15
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1470,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 16
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1484,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 17
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1498,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 18
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1512,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 19
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1526,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 20
+            }
+          ],
+          "last_frame_index": 109,
+          "last_frame_section_offset": 1526,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 21
+        },
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 15,
+          "first_frame_index": 110,
+          "first_frame_section_offset": 1540,
+          "frame_count": 8,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1540,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1554,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1568,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1582,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1596,
+              "hold_byte_at_frame_plus_10": 2,
+              "index": 4
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1610,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 5
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1624,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1638,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 7
+            }
+          ],
+          "last_frame_index": 117,
+          "last_frame_section_offset": 1638,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 8
+        }
+      ],
+      "category": 0,
+      "decoded_bytes": 40742,
+      "decoded_sha256": "4a232c5debfef3fbef5a54647e6312cc325265fe996b00841b35f1511340bd73",
+      "manifest_entry": "root/2/disc/357",
+      "private_staged_path": "private/integration/game-runtime/actors/key-04.anb",
+      "resource_key": 4,
+      "source_name": "data/spec/carch.anb",
+      "style": 1
+    },
+    {
+      "anb_animation_count": 18,
+      "animations": [
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 13,
+          "first_frame_index": 93,
+          "first_frame_section_offset": 1302,
+          "frame_count": 8,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1302,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1316,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1330,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1344,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1358,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 4
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1372,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 5
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1386,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1400,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 7
+            }
+          ],
+          "last_frame_index": 100,
+          "last_frame_section_offset": 1400,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 8
+        },
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 14,
+          "first_frame_index": 101,
+          "first_frame_section_offset": 1414,
+          "frame_count": 23,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1414,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1428,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1442,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1456,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1470,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 4
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1484,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 5
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1498,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1512,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 7
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1526,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 8
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1540,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 9
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1554,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 10
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1568,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 11
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1582,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 12
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1596,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 13
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1610,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 14
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1624,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 15
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1638,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 16
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1652,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 17
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1666,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 18
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1680,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 19
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1694,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 20
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1708,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 21
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1722,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 22
+            }
+          ],
+          "last_frame_index": 123,
+          "last_frame_section_offset": 1722,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 23
+        },
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 15,
+          "first_frame_index": 124,
+          "first_frame_section_offset": 1736,
+          "frame_count": 8,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1736,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1750,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1764,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1778,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1792,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 4
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1806,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 5
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1820,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1834,
+              "hold_byte_at_frame_plus_10": 2,
+              "index": 7
+            }
+          ],
+          "last_frame_index": 131,
+          "last_frame_section_offset": 1834,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 8
+        }
+      ],
+      "category": 0,
+      "decoded_bytes": 39778,
+      "decoded_sha256": "03c147fb87ad0d30a2de2f4e91ee755575b07a2d63078c9c2bb5611ded2b040f",
+      "manifest_entry": "root/2/disc/365",
+      "private_staged_path": "private/integration/game-runtime/actors/key-08.anb",
+      "resource_key": 8,
+      "source_name": "data/spec/march.anb",
+      "style": 2
+    },
+    {
+      "anb_animation_count": 18,
+      "animations": [
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 13,
+          "first_frame_index": 81,
+          "first_frame_section_offset": 1134,
+          "frame_count": 8,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1134,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1148,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1162,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1176,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1190,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 4
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1204,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 5
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1218,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1232,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 7
+            }
+          ],
+          "last_frame_index": 88,
+          "last_frame_section_offset": 1232,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 8
+        },
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 14,
+          "first_frame_index": 89,
+          "first_frame_section_offset": 1246,
+          "frame_count": 23,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1246,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1260,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1274,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1288,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1302,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 4
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1316,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 5
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1330,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1344,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 7
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1358,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 8
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1372,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 9
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1386,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 10
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1400,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 11
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1414,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 12
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1428,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 13
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1442,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 14
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1456,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 15
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1470,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 16
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1484,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 17
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1498,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 18
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1512,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 19
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1526,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 20
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1540,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 21
+            },
+            {
+              "component_count": 2,
+              "component_flags": [
+                0,
+                0
+              ],
+              "frame_section_offset": 1554,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 22
+            }
+          ],
+          "last_frame_index": 111,
+          "last_frame_section_offset": 1554,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 23
+        },
+        {
+          "animation_flags_high_byte": 0,
+          "animation_index": 15,
+          "first_frame_index": 112,
+          "first_frame_section_offset": 1568,
+          "frame_count": 8,
+          "frames": [
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1568,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 0
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1582,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 1
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1596,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 2
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1610,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 3
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1624,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 4
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1638,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 5
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1652,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 6
+            },
+            {
+              "component_count": 1,
+              "component_flags": [
+                0
+              ],
+              "frame_section_offset": 1666,
+              "hold_byte_at_frame_plus_10": 0,
+              "index": 7
+            }
+          ],
+          "last_frame_index": 119,
+          "last_frame_section_offset": 1666,
+          "ping_pong_flag_bit0": false,
+          "raw_trailing_word": 8
+        }
+      ],
+      "category": 0,
+      "decoded_bytes": 37700,
+      "decoded_sha256": "aef9ba878097884f64674c3273ae8de8139530c31155fbbf6d4db1db11e329c0",
+      "manifest_entry": "root/2/disc/369",
+      "private_staged_path": "private/integration/game-runtime/actors/key-12.anb",
+      "resource_key": 12,
+      "source_name": "data/spec/yarch.anb",
+      "style": 3
+    }
+  ],
+  "building_selector1": {
+    "captured_static_pointer_word_count": 14,
+    "captured_static_pointer_words_all_zero": true,
+    "descriptor_pointer_table_va": "0x116824",
+    "descriptor_va": "0x103a9c",
+    "destination_va": "0x116828",
+    "direct_reference_graph_sites": [
+      {
+        "address": "0001dfb0",
+        "function": "0001d770",
+        "type": "DATA"
+      },
+      {
+        "address": "0001dfbf",
+        "function": "0001d770",
+        "type": "DATA"
+      },
+      {
+        "address": "00044ffc",
+        "function": null,
+        "type": "DATA"
+      },
+      {
+        "address": "000265a8",
+        "function": "00026130",
+        "type": "DATA"
+      }
+    ],
+    "indirect_writer_contract": "154b0 walks the 44-byte descriptor list at 0x10388c; 9a09c writes the allocated file pointer through descriptor+0x1c; descriptor 0x103a9c therefore fills 0x116828",
+    "loader_contract": "startup conditionally loads nonzero descriptor pointers from 0x116824 + 4*i into 0x11685c + 4*i; building hook indexes loaded table by signed selector byte",
+    "note": "Captured object3 pointer words are zero before runtime loading. The descriptor-list path writes them indirectly through descriptor+0x1c; selector1 is BTURR.ANB, not the neighboring BFARM descriptor.",
+    "selector": 1,
+    "selector_hook_va": "0x44ff0",
+    "selector_table_va": "0x11685c",
+    "source_name": "data/building/BTURR.ANB",
+    "status": "proved"
+  },
+  "schema_version": 1,
+  "scope": "Metadata-only summary of category-0 actor ANBs and animations 13\u201315. No sprite payload bytes are emitted and no construction label/visual meaning is inferred.",
+  "source_pins": [
+    {
+      "path": "research/ghidra/blueprint-init-evidence.json",
+      "sha256": "cbff4131044fb3586efb35c031b97540336f14993c3e56e21d7bd8b31d085bb4"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_resources.rs",
+      "sha256": "8c94e8afb54d1dbcb0e33de471a9b7d4d4008d3a8782f970ff5b0e95194145a3"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/lib.rs",
+      "sha256": "7a9571d30a1d3c229281a45223d277d908b61976ff21d27fe763966da7af133d"
+    },
+    {
+      "path": "research/ghidra/actor-animation-evidence.json",
+      "sha256": "be7da444076b67ec15cf563847c1869f0677033cd68b0df4145b8529dfef144d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_motion.rs",
+      "sha256": "ff1e8928e109f02ad84677e3054580ce0a2008e1ea2dbfcdfd13de558f6e053f"
+    },
+    {
+      "path": "private/ghidra/actor-panel-font-color/instructions-0001d770.txt",
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    },
+    {
+      "path": "private/ghidra/construction-refs/module-range.txt",
+      "sha256": "ac3be79128d4b6e766a815dd11f24e94a610ff0d075724ea27188dcfc4432625"
+    },
+    {
+      "path": "private/ghidra/building-loader-refs/reference-graph.json",
+      "sha256": "6445f9826e8420eca05d8fbe356c55070f847c6a281f33d0af9402c821015e5c"
+    },
+    {
+      "path": "research/ghidra/building-loader-contract.json",
+      "sha256": "92f14f841693d74aaf36c0de2bbf11195907bafb29849b8fbcdce1421d4fa633"
+    },
+    {
+      "path": "private/ghidra/descriptor-loader/instructions-0009a09c.txt",
+      "sha256": "b6750ccf4cf2f7e8ade257f259173d217d4aa974a3586cb6e5dddabaeba5ce5e"
+    },
+    {
+      "path": "private/ghidra/planets-load/instructions-000154b0.txt",
+      "sha256": "fbbc626a1091a8bd8cef2128396a4246e9e7025065ef415ee1843ad5482ab93c"
+    },
+    {
+      "path": "private/ghidra/animal-loader/instructions-0006ac50.txt",
+      "sha256": "f0792a3ffe1b0ae8ba99379fb8748d001215cf46cc8af98868272e36052f29ce"
+    },
+    {
+      "path": "private/ghidra/actor-activation/memory-.object3.bin",
+      "sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+    }
+  ]
+}

@@ -4,6 +4,57 @@
 pub const PLAYER_BYTES: usize = 1805;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CountdownTransition {
+    pub before: u16,
+    pub after: u16,
+    pub started: bool,
+    pub expired: bool,
+}
+
+/// Numeric prefix of13780 before factories and the ascending live-slot pass.
+/// A live selector0 prevents restart only while the countdown is already zero.
+pub fn plan_countdown_transition(count: u16, period: u16, progress: i8,
+    player_byte607: u8, runtime_flags: u8, active_selector0: bool) -> CountdownTransition {
+    let special = matches!(progress, 14 | 20);
+    if count == 0 {
+        if active_selector0 { return CountdownTransition { before: count, after: 0, started: false, expired: false }; }
+        let after = if special { 3000 } else if runtime_flags & 0xc0 != 0 { u16::MAX } else { period };
+        return CountdownTransition { before: count, after, started: true, expired: false };
+    }
+    let decrement = if special { player_byte607 != 0 } else { count != u16::MAX };
+    let after = if decrement { count - 1 } else { count };
+    CountdownTransition { before: count, after, started: false, expired: decrement && after == 0 }
+}
+
+/// Pending source presentation operations. These are requests, not audio or
+/// UI execution. Descriptor offsets belong to the hash-bound11680C table.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum CountdownPresentation {
+    StartNarration { selected_player: u8 },
+    ExpiryEffect3a { selected_player: u8 },
+    ExpiryNarration { selected_player: u8 },
+    ResetUiByte185ec1,
+    AdvanceUiAnimation { descriptor_offset: u16, state_address: u32 },
+}
+
+/// Prefix notices in source order. Animation updates follow all callbacks;
+/// callers must append `animation_requests` only after that pass succeeds.
+pub fn transition_requests(plan: CountdownTransition, selected_player: u8) -> Vec<CountdownPresentation> {
+    use CountdownPresentation::*;
+    if plan.started { vec![StartNarration { selected_player }, ResetUiByte185ec1] }
+    else if plan.expired { vec![ExpiryEffect3a { selected_player }, ExpiryEffect3a { selected_player }, ExpiryNarration { selected_player }] }
+    else { Vec::new() }
+}
+
+pub fn animation_requests() -> [CountdownPresentation; 8] {
+    core::array::from_fn(|i| if i == 0 {
+        CountdownPresentation::AdvanceUiAnimation { descriptor_offset: 0x15e, state_address: 0x184d04 }
+    } else {
+        CountdownPresentation::AdvanceUiAnimation { descriptor_offset: 0x118 + (i as u16 - 1) * 10, state_address: 0x184d0c + (i as u32 - 1) * 5 }
+    })
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ExpirySpawnRequest {
     pub owner: u8,
     pub selector: u8,

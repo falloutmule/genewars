@@ -47,7 +47,7 @@ fn main(){
                         messages+=e.pending_events.iter().filter(|e|matches!(e,genewars_runtime::landing::LandingEvent::LandingMessage{owner:0,message_index:79..=86})).count();
                     },
                     LandingEffectCallback::Smoke(e)=>retired+=usize::from(e.retired),
-                    LandingEffectCallback::DepartureParticle(e)=>departure_retired+=usize::from(e.retired),
+                    LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::DepartureParticle(e)=>departure_retired+=usize::from(e.retired),
                     LandingEffectCallback::WaterSplash(_)=>panic!("water splash is outside this landing-only fixture"),
                 }
             }

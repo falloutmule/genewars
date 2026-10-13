@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "utc": "2026-10-13T19:09:17.779226+00:00",
+  "utc": "2026-10-13T20:28:26.512117+00:00",
   "cases": [
     {
       "case": "seed5428-tick1100",
@@ -345,8 +345,8 @@
     "rust/crates/genewars-runtime/src/world.rs": "3fd7e6a7df779c935836566ba8d9755cf843db7d964a888e7d53a53d405bffe7",
     "rust/crates/genewars-runtime/src/world/plant_creation.rs": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82",
     "rust/crates/genewars-runtime/src/plant_spread.rs": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066",
-    "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs": "e85b2309b63ba285f35d45dffc44103af5508405af05a2303bec0c78d362c4a9",
-    "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs": "f3f3077d1904f243e1d495f9712541c181d3fc4d7cb565240115b0a05fd40f85",
+    "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs": "56ee5efc10f46d6b40a62861cd2e626aa6f24bf7241fe3b90766118966af3ed2",
+    "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs": "002cb2f1ae45cff667317c7e7f740055e59e2eb33f31806fe2a17a1d92813512",
     "scripts/plant_reproduction_probe.rs": "ff2bb261ec182c0a57ead6e094932fecc5ae5bf7d31b67756283e4bd12f1fa25",
     "scripts/validate_plant_reproduction.py": "c252a6e893e07a0f111c3a991539c548facab71998e7da148360cb7c88f528bf"
   },
@@ -434,7 +434,7 @@
     "private/ghidra/plant-startup/audio-shared-tail.txt": "79e756dff496d72dd8a16c951128103d452fdbb5dfef43b96831d5817796111d",
     "private/ghidra/entity-order/instructions-0001e760.txt": "13ebd9cffb5087d53f744df5de8cfaee4e4951697463ded7c5034044e012cc16"
   },
-  "private_run": "private/review/plant-reproduction/92bedc2975294258aa88a73d250c8099",
+  "private_run": "private/review/plant-reproduction/bb4957a1d89c4267ade3f433e21b08d0",
   "original_execution": false,
   "scope": "Complete6D0B0 family scheduler, literal6CA90 callback, target/environment/factory, newborn pass and exact ordered queue requests. Three seeded plant-only trajectories with other families frozen; shared and packed implementations match per-step reports/RNG and normalized checkpoint backing. UI2C200 and renderer queue bodies remain pending requests; no full game tick claimed."
 }

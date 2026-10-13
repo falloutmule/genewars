@@ -1,0 +1,14 @@
+{
+  "scope": "selector1grade0 health progress/completion; whole67Bbuilding/1805Bplayer/300nativecreatures;43620aggregateand6A6D0cleanup; selectedUIfalse explicitport, audio4Dexplicitport",
+  "cases": 64,
+  "compared_bytes": 2500608,
+  "literal_instruction_steps": 24248,
+  "source_sha256": "8aa4c5c58e5c3b313d616ecc5dcd95f654430b36889c6b1f2e2cce2e8ad8fed8",
+  "pins": {
+    "resource-helpers/instructions-000441c0.txt": "ef1bb857680bc8a4da9804c94f5e8ee6ebf8e4c66164bc704ef01c468c608825",
+    "resource-helpers/instructions-00043f60.txt": "2b77ec740634f5076ec359fda8258e20995985a0bea5c87f959121cd0101f1fc",
+    "resource-helpers/instructions-00043620.txt": "569a64c285707bb56fa9c44d37909941093274b12ea271a56eb41b9a93d3e57b",
+    "mission-array-refs/instructions-0006a6d0.txt": "d192da0c29c35def9c4645f71ecf61d3589e5482efc069c827e93bab55a93084",
+    "construction-command/instructions-0005e0a3.txt": "1805249dc623bea394203d14bdb53c5642517a159688415f63f642671836ff82"
+  }
+}

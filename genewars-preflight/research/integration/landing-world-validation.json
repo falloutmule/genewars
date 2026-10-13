@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T19:10:37.556543+00:00",
+  "verified_at": "2026-10-13T20:29:46.773353+00:00",
   "sessions": 32,
   "factories": 128,
   "complete_afterimages": 128,
@@ -21,7 +21,7 @@
   "implementation_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "c97c4f7e70e1cddf3cb1cdff1ab5112270e12ca585eb8d6021858efe9f771e52"
+      "sha256": "18633907e526995cf776a612e5ac93dc09865a21a017ae22564648c7129e480c"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
@@ -29,7 +29,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
-      "sha256": "944251d5617a636b7b847a51ef00270d06872b5b27a23f5b79286b43c2bc23bd"
+      "sha256": "9294edb98676341c42aaf7b50a20fffc4f3c484f6c872e6846e03e1765b0c91f"
     },
     {
       "path": "rust/crates/genewars-runtime/src/landing.rs",

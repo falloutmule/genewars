@@ -1,0 +1,8 @@
+{
+  "cases": 56,
+  "compared_bytes": 13104032,
+  "literal_instruction_steps": 195961,
+  "output_sha256": "79445e5fdaab12800632818180a78aef6acba1b3985d309ede2df4e1b69a7853",
+  "source_sha256": "0425be83f11535eacc231de7cb1cb6c4687613449acfeb6868e512863018015d",
+  "scope": "534D0 mode0stage0 readiness true;791C0 allocation/fullpool,selector5 specialreservation, full200B actor/25jobs/map/audio/viewport"
+}

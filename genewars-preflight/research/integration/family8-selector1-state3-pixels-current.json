@@ -1,0 +1,89 @@
+{
+  "cases": [
+    {
+      "full_bytes_equal": true,
+      "metadata": {
+        "color": "394",
+        "color_clipped": "0",
+        "color_y": "110",
+        "effective_shade": "61",
+        "global_animation": "7",
+        "sha256": "181fd050bf5e5b2a0a974a11f093941d28e5f1101de9248ab70ce826844d94ee",
+        "shadow": "197",
+        "shadow_clipped": "0",
+        "virtual_height": "3894"
+      },
+      "name": "state3_clipped",
+      "origin": [
+        280,
+        170
+      ],
+      "sha256": "181fd050bf5e5b2a0a974a11f093941d28e5f1101de9248ab70ce826844d94ee"
+    },
+    {
+      "full_bytes_equal": true,
+      "metadata": {
+        "color": "394",
+        "color_clipped": "0",
+        "color_y": "290",
+        "effective_shade": "61",
+        "global_animation": "7",
+        "sha256": "8c96a14a9011d1eefbf69b6a4d47ed7172c08a8a7d2baee3f65ab45b1e6383a6",
+        "shadow": "197",
+        "shadow_clipped": "0",
+        "virtual_height": "3894"
+      },
+      "name": "state3_visible",
+      "origin": [
+        280,
+        350
+      ],
+      "sha256": "8c96a14a9011d1eefbf69b6a4d47ed7172c08a8a7d2baee3f65ab45b1e6383a6"
+    }
+  ],
+  "framebuffer": {
+    "bytes": 311032,
+    "fill": 53,
+    "height": 480,
+    "pitch": 648,
+    "width": 640
+  },
+  "harness_sha256": "c2bd4bda25138d08d5145b3620e94689636553331c14efc42945b9342c23632e",
+  "implementation_sha256": "3cd0244577a76507fa5afb043d26a6569090f4af384e41ab4701b88f042fd86a",
+  "inputs": {
+    "ethereal_sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4",
+    "fade_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+    "instruction_pins": {
+      "private/ghidra/countdown-expiry/instructions-00010ea0.txt": "639fdb8a92c1342f206b3ddd7ebf563618988b4943ff53ca3c9bec9aed881dfb",
+      "private/ghidra/initial-creature/instructions-0001f060.txt": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7"
+    },
+    "main_gla_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3"
+  },
+  "schema_version": 1,
+  "scope": "Source-captured selector1/state3 slot6 record from the combined local trajectory at frame6289; the common 0x10EA0 indexed sprite path is compared to an independent full-buffer oracle. Diagnostic origins only; no original executable or GUI.",
+  "trajectory": {
+    "captured_family8_sha256": "ccef7dc9dc2adc993ebc3ef638c7c907401d7df9f3ad81fbac4a332140a79bd8",
+    "captured_record_path": "private/review/family8-return/actual-state3-slot6-before6290.bin",
+    "record_bytes": 102,
+    "record_fields": {
+      "animation": 7,
+      "flags": 32,
+      "frame": 0,
+      "ground": 4414,
+      "kind": 8,
+      "physical": 8308,
+      "selector": 1,
+      "state": 3
+    },
+    "record_sha256": "38ddbfa05597908a4b784b8bee0462eaf3747065c379ca5123a61ef19c68d6a9",
+    "slot": 6,
+    "source_result": "private/review/family8-trajectory/e1ec8cf35b6e4f8fbaa276e4a0fee8f1/result.json",
+    "source_result_canonical": {
+      "completed_frames": 6289,
+      "original_execution": false,
+      "seed": 5428,
+      "status": "boundary"
+    }
+  },
+  "validator_sha256": "9ef769d5db6c2502b1220c37571243f8f6385b31912da49fcf1b847832d39b21"
+}

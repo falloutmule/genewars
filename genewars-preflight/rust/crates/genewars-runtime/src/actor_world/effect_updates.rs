@@ -36,7 +36,7 @@ pub struct EffectStepReceipt {
 }
 
 #[derive(Debug,Clone,PartialEq,Eq)]
-pub enum LandingEffectCallback { Landing(LandingStepReceipt), Smoke(EffectStepReceipt), DepartureParticle(EffectStepReceipt), WaterSplash(EffectStepReceipt) }
+pub enum LandingEffectCallback { Landing(LandingStepReceipt), Smoke(EffectStepReceipt), DepartureParticle(EffectStepReceipt), WaterSplash(EffectStepReceipt), EtherealParticle(EffectStepReceipt) }
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct LandingEffectPassReceipt {
     pub primary:Vec<LandingEffectCallback>,
@@ -69,7 +69,7 @@ impl ActorWorld {
                     created+=u32::from(e.created_effect.is_some());
                     if let Some(r)=&e.retirement { receipt.ui_after=r.ui_after.clone(); }
                 },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)=>receipt.ui_after=e.ui_after.clone(),
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)=>receipt.ui_after=e.ui_after.clone(),
             }
             receipt.primary.push(callback);
         }
@@ -80,7 +80,7 @@ impl ActorWorld {
             let callback=staged.landing_effect_callback(slot,context,physics,trig,&receipt.ui_after)?;
             match &callback {
                 LandingEffectCallback::Landing(e)=>if let Some(r)=&e.retirement { receipt.ui_after=r.ui_after.clone(); },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)=>receipt.ui_after=e.ui_after.clone(),
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)=>receipt.ui_after=e.ui_after.clone(),
             }
             receipt.newborn.push(callback);
         }
@@ -103,6 +103,7 @@ impl ActorWorld {
                 }.map(LandingEffectCallback::Landing)
             },
             6=>self.step_effect6(slot,context,physics,trig,ui).map(LandingEffectCallback::Smoke),
+            0x1A=>self.step_particle(slot,0x1A,context,physics,trig,ui).map(LandingEffectCallback::EtherealParticle),
             0x30=>self.step_effect30(slot,ui).map(LandingEffectCallback::WaterSplash),
             0x2F=>self.step_effect2f(slot,context,physics,trig,ui).map(LandingEffectCallback::DepartureParticle),
             _=>Err(lifecycle::LifecycleError::UnknownSelector(code).into()),
@@ -189,15 +190,18 @@ impl ActorWorld {
         if !self.validate_links()?.contains(&(5,slot as i16)) { return Err(ActorWorldError::MissingEffectLink(slot)); }
         self.validate_effect_count()?;
         let pool=self.effects.as_ref().ok_or(ActorWorldError::EffectsNotAdmitted)?;
-        let binding=if code==6 { EffectAnimationBinding::EffAnimation6 } else { EffectAnimationBinding::EffAnimation47 };
+        let binding=match code {6=>EffectAnimationBinding::EffAnimation6,0x1A=>EffectAnimationBinding::EffAnimation26,_=>EffectAnimationBinding::EffAnimation47};
         if pool.binding(usize::from(slot))?!=Some(binding) { return Err(ActorWorldError::EffectBinding(slot)); }
-        let before=*pool.record(usize::from(slot))?;
+        let original=*pool.record(usize::from(slot))?;
+        let mut before=original;
+        //1A and2F take the same numeric physics branches; animation differs.
+        if code==0x1A {before[69]=0x2F;}
         let at=if code==6 { landing::effect6_physics_candidate(&before)? } else { landing::effect2f_physics_candidate(&before)? };
         let (ground,shade)=self.effect_ground_sample(at)?;
         let old_height=i32::from_le_bytes(before[39..43].try_into().unwrap());
         let old_ground=i32::from_le_bytes(before[17..21].try_into().unwrap());
         let next_height=old_height.wrapping_add(i32::from(word(&before,49).wrapping_add(word(&before,55)))>>3);
-        let flight=if old_height<=old_ground&&next_height<=ground {
+        let mut flight=if old_height<=old_ground&&next_height<=ground {
             let candidate=if code==6 { landing::effect6_grounded_candidate(&before,ground,physics.angles(),
                 trig.sine().try_into().unwrap(),trig.cosine().try_into().unwrap())? }
             else { landing::effect2f_grounded_candidate(&before,ground,physics.angles(),
@@ -210,6 +214,8 @@ impl ActorWorld {
                 self.effect_height_corners(at),physics.bounce(self.terrain_class_at(at)?)?,physics.angles())?
         } else { landing::plan_effect2f_flight(&before,ground,shade,context.water_height,
             self.effect_height_corners(at),physics.bounce(self.terrain_class_at(at)?)?,physics.angles())? };
+        if code==0x1A {flight.before=original;flight.after[69]=0x1A;}
+        let before=original;
         let changed_cell=floor_cell([word(&before,7),word(&before,9)])!=floor_cell([word(&flight.after,7),word(&flight.after,9)]);
         let mut staged=self.clone();
         if changed_cell { staged.unlink_effect(slot)?; }
@@ -217,7 +223,7 @@ impl ActorWorld {
         // Type5 virtual88 is1F030 (RET), so relocation has no extra callback.
         if changed_cell { staged.insert_effect_head(slot)?; }
         let moved=*staged.effects.as_ref().unwrap().record(usize::from(slot))?;
-        let animation=if code==6 { landing::plan_effect6_animation_after_physics(&moved)? } else { landing::plan_effect2f_animation_after_physics(&moved)? };
+        let animation=match code {6=>landing::plan_effect6_animation_after_physics(&moved)?,0x1A=>crate::family8_particle::plan_animation_after_physics(&moved)?,_=>landing::plan_effect2f_animation_after_physics(&moved)?};
         staged.effects.as_mut().unwrap().replace_record_checked(usize::from(slot),&moved,&animation.after)?;
         let mut receipt=EffectStepReceipt { slot,changed_cell,retired:animation.retirement_required,
             cleaned_reference_bytes:0,ui_after:ui.clone(),pending_ui_events:Vec::new() };
@@ -253,6 +259,7 @@ impl ActorWorld {
                     1 if self.creatures.is_some()=>self.creatures.as_ref().unwrap().records()[slot].to_vec(),
                     3=>self.actors.records()[slot].to_vec(),
                     5 if self.effects.is_some()=>self.effects.as_ref().unwrap().records()[slot].to_vec(),
+                    8 if self.family8.is_some()=>self.family8.as_ref().unwrap().records()[slot].to_vec(),
                     _=>{
                         let start=layout.file_offset+slot*layout.packed_stride;
                         let packed=&self.backing[start..start+layout.packed_stride];
@@ -267,6 +274,11 @@ impl ActorWorld {
     pub(super) fn apply_cleanup_byte(&mut self,patch:lifecycle::CleanupBytePatch)->Result<(),ActorWorldError> {
         let slot=usize::from(patch.slot);let offset=usize::from(patch.offset);
         match patch.kind {
+            8 if self.family8.is_some()=>{
+                let pool=self.family8.as_mut().unwrap();let before=*pool.record(slot)?;let mut after=before;
+                if before[offset]!=patch.before { return Err(ActorWorldError::CleanupBeforeImage{kind:patch.kind,slot:patch.slot,offset:patch.offset}); }
+                after[offset]=patch.after;pool.replace_record_checked(slot,&before,&after)?;
+            },
             1 if self.creatures.is_some()=>{
                 let pool=self.creatures.as_mut().unwrap();let before=*pool.record(slot)?;let mut after=before;
                 if before[offset]!=patch.before { return Err(ActorWorldError::CleanupBeforeImage{kind:patch.kind,slot:patch.slot,offset:patch.offset}); }
@@ -379,15 +391,15 @@ impl ActorWorld {
         self.create_particle(6,0,position,physical_height,angles,false,context,trig)
     }
 
-    fn create_particle(&mut self,object_code:u8,owner:u8,position:[i16;2],physical_height:i32,angles:[u16;3],
+    pub(super) fn create_particle(&mut self,object_code:u8,owner:u8,position:[i16;2],physical_height:i32,angles:[u16;3],
         mark_newborn:bool,context:LandingPhysicsContext,trig:&TrigTables)->Result<Option<(u16,landing::LandingDraw)>,ActorWorldError> {
         self.validate_effect_count()?;
-        if !matches!(object_code,6|0x2f)||(object_code==6&&owner!=0) {return Err(ActorWorldError::UnsupportedEffectEvent);}
+        if !matches!(object_code,6|0x1a|0x2f)||(matches!(object_code,6|0x1a)&&owner!=0) {return Err(ActorWorldError::UnsupportedEffectEvent);}
         //487AE may replace a lower-priority record. The admitted same/higher
         //priority pool proves NULL; an eligible replacement remains explicit.
         if word(&self.backing,0x3554)==200 {
-            if self.effects.as_ref().unwrap().records().iter().any(|r|!matches!(r[69],6|0x31|0x2f)
-                ||(object_code==6&&r[69]==0x2f&&r[21]&1==0)) {return Err(ActorWorldError::UnsupportedEffectEvent);}
+            if self.effects.as_ref().unwrap().records().iter().any(|r|!matches!(r[69],6|0x31|0x1a|0x2f)
+                ||(object_code==6&&matches!(r[69],0x1a|0x2f)&&r[21]&1==0)) {return Err(ActorWorldError::UnsupportedEffectEvent);}
             return Ok(None);
         }
         let cell=floor_cell(position);let raw=reference(self.map(),cell*14+6);
@@ -399,6 +411,7 @@ impl ActorWorld {
         let plan=if object_code==6 {landing::plan_landing_effect6_factory(pool.records(),word(&self.backing,0x3554),
             position,g,s,physical_height,angles,head,context.gravity,to_landing_rng(self.rng),
             trig.sine().try_into().unwrap(),trig.cosine().try_into().unwrap())?}
+        else if object_code==0x1A {crate::family8_particle::plan_factory(pool.records(),word(&self.backing,0x3554),position,g,s,physical_height,angles,head,context.gravity,to_landing_rng(self.rng),trig.sine().try_into().unwrap(),trig.cosine().try_into().unwrap())?}
         else {landing::plan_landing_effect2f_factory(pool.records(),word(&self.backing,0x3554),owner,
             position,g,s,physical_height,angles,head,context.gravity,to_landing_rng(self.rng),
             trig.sine().try_into().unwrap(),trig.cosine().try_into().unwrap())?};
@@ -456,6 +469,14 @@ impl ActorWorld {
     pub(super) fn replace_next(&mut self,raw:[u8;3],next:[u8;3])->Result<(),ActorWorldError> {
         self.entity(raw)?;let index=word(&raw,0) as usize;
         match raw[2] {
+            4 if self.buildings.is_some()=>{
+                let pool=self.buildings.as_mut().unwrap();let before=*pool.record(index)?;let mut after=before;
+                after[3..6].copy_from_slice(&next);pool.replace_record_checked(index,&before,&after)?;
+            },
+            8 if self.family8.is_some()=>{
+                let pool=self.family8.as_mut().unwrap();let before=*pool.record(index)?;let mut after=before;
+                after[3..6].copy_from_slice(&next);pool.replace_record_checked(index,&before,&after)?;
+            },
             1 if self.creatures.is_some()=>{
                 let pool=self.creatures.as_mut().unwrap();let before=*pool.record(index)?;let mut after=before;
                 after[3..6].copy_from_slice(&next);pool.replace_record_checked(index,&before,&after)?;

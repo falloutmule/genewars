@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T19:10:38.702506+00:00",
+  "verified_at": "2026-10-13T20:29:47.887788+00:00",
   "sessions": 16,
   "callbacks": 128,
   "draws": 512,
@@ -19,15 +19,15 @@
   "implementation_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "c97c4f7e70e1cddf3cb1cdff1ab5112270e12ca585eb8d6021858efe9f771e52"
+      "sha256": "18633907e526995cf776a612e5ac93dc09865a21a017ae22564648c7129e480c"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
-      "sha256": "f3f3077d1904f243e1d495f9712541c181d3fc4d7cb565240115b0a05fd40f85"
+      "sha256": "002cb2f1ae45cff667317c7e7f740055e59e2eb33f31806fe2a17a1d92813512"
     },
     {
       "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
-      "sha256": "944251d5617a636b7b847a51ef00270d06872b5b27a23f5b79286b43c2bc23bd"
+      "sha256": "9294edb98676341c42aaf7b50a20fffc4f3c484f6c872e6846e03e1765b0c91f"
     },
     {
       "path": "rust/crates/genewars-runtime/src/landing.rs",
@@ -39,7 +39,7 @@
     },
     {
       "path": "scripts/landing_step_probe.rs",
-      "sha256": "71331ba61d3bae56417fef0d0aa197f896daed95801bd2513d2618744af2af25"
+      "sha256": "27b6abdf04de83a0d5baf49404be795841b1cf4f7e2968f4cf382b505ab0a7ed"
     },
     {
       "path": "scripts/validate_landing_steps.py",

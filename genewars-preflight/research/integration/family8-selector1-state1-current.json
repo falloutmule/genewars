@@ -1,0 +1,82 @@
+{
+  "fade_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+  "fields": {
+    "entity_flags": 32,
+    "frame": 0,
+    "ground_height": 6352,
+    "kind": 8,
+    "local_animation": 4,
+    "physical_height": 11278,
+    "raw_shade": 49,
+    "selector": 1,
+    "state": 1
+  },
+  "framebuffer": {
+    "bytes": 311032,
+    "fill": 53,
+    "height": 480,
+    "pitch": 648,
+    "width": 640
+  },
+  "harness_sha256": "f3ff765fc1b3a66bb0a795e030540c41b02e4551e66db87387ee21f35a78ccc8",
+  "implementation_sha256": "9208773255f0c7fb01e70f5fc6cab613a4a30dd9f93815c7b3c42b3d9fd8219b",
+  "instruction_pins": {
+    "private\\ghidra\\countdown-expiry\\instructions-00010ea0.txt": "639fdb8a92c1342f206b3ddd7ebf563618988b4943ff53ca3c9bec9aed881dfb",
+    "private\\ghidra\\initial-creature\\instructions-0001f060.txt": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7"
+  },
+  "main_gla_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+  "oracle_sha256": "104759aa7f7344523de6ab430aef8f8ae98248cb950a56295a779daec8f1a705",
+  "record_bytes": 102,
+  "record_sha256": "03529194bc4d9abc786cfe10ddab81497a44921eb8c913a8c3c315f35a6e0222",
+  "resource_sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4",
+  "result": {
+    "cases": [
+      {
+        "full_bytes_equal": true,
+        "metadata": {
+          "color": "388",
+          "color_clipped": "0",
+          "color_y": "39",
+          "effective_shade": "87",
+          "global_animation": "4",
+          "sha256": "854c1cfc44b6fa05662ff16bea5f3b6cd0974e1b1b3a243f9496bcf4f73ee87a",
+          "shadow": "196",
+          "shadow_clipped": "0",
+          "virtual_height": "4926"
+        },
+        "name": "direction4",
+        "origin": [
+          120,
+          115
+        ],
+        "sha256": "854c1cfc44b6fa05662ff16bea5f3b6cd0974e1b1b3a243f9496bcf4f73ee87a"
+      },
+      {
+        "full_bytes_equal": true,
+        "metadata": {
+          "color": "388",
+          "color_clipped": "0",
+          "color_y": "274",
+          "effective_shade": "87",
+          "global_animation": "4",
+          "sha256": "f21d8dfa821408d28dc3fc4e70977b7217f41a4206d26b2a2a0c58316c9764ca",
+          "shadow": "196",
+          "shadow_clipped": "0",
+          "virtual_height": "4926"
+        },
+        "name": "direction4_visible",
+        "origin": [
+          120,
+          350
+        ],
+        "sha256": "f21d8dfa821408d28dc3fc4e70977b7217f41a4206d26b2a2a0c58316c9764ca"
+      }
+    ],
+    "full_bytes_equal": true,
+    "run_directory": "private\\integration\\family8-selector1-direction4\\773273946d58448e9178dc3ae1322f3d"
+  },
+  "schema_version": 1,
+  "scope": "Exact literal selector-1 state-1 record after 0x114B0 at local animation 4/frame 0; source-mapped global animation 4; independent complete indexed framebuffer oracle. Diagnostic placements are explicit and not a world projection claim.",
+  "source_model_sha256": "dc4ca79d79222e27cbe945f7aa87d80c28ea50a65922c1648f49e23518199ab2",
+  "source_timeline_sha256": "6bac310189a16e6b274974e650c42f2479fb49e70e2d2370b7c84b800b1bbf1c"
+}

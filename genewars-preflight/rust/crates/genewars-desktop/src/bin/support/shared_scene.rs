@@ -33,6 +33,7 @@ impl SharedMission {
             BlueprintRng{seed,ring:0,draw_count:0}).map_err(|e|e.to_string())?;
         world.admit_creatures(&[[0;124];300]).map_err(|e|e.to_string())?;
         world.admit_effects(&[[0;81];200],[None;200]).map_err(|e|e.to_string())?;
+        world.admit_family8(&[[0;102];16],[None;16]).map_err(|e|e.to_string())?;
         world.admit_plants(&read_bound(&root.join("plant-parameters.bin"))?).map_err(|e|e.to_string())?;
         let text=read_bound(&root.join("menu/text.dat"))?;
         let strings=TextStringTable::parse(&text).map_err(|e|e.to_string())?;
@@ -92,8 +93,10 @@ impl SharedMission {
         self.plant_births+=plants.events.iter().filter(|event|matches!(event,genewars_runtime::TickEvent::Created{..})).count()as u64;
         self.pending_requests+=plants.events.iter().filter(|event|matches!(event,
             genewars_runtime::TickEvent::OldFrameDirtyCheckPending{..}|genewars_runtime::TickEvent::ReferenceUiAudioCleanupPending{..})).count()as u64;
-        let countdown=self.world.step_empty_family8_countdown(0,0).map_err(|e|e.to_string())?;
-        self.pending_requests+=u64::from(countdown.started);
+        let countdown=self.world.step_family8_callbacks(0,4,0,frame,context.water_height,
+            &resources.physics,&self.trig,&resources.family8_animation,&resources.family8_directions).map_err(|e|e.to_string())?;
+        self.pending_requests+=(countdown.pending_prefix.len()+countdown.pending_ui_animations.len())as u64;
+        self.pending_requests+=countdown.callbacks.iter().map(|c|u64::from(c.plan.pending_audio.is_some())+u64::from(c.plan.pending_ui_message)+c.retirement.as_ref().map_or(0,|r|r.stop_audio.len()as u64+u64::from(r.fade_audio.is_some()))+u64::from(c.parent_response.as_ref().is_some_and(|p|p.state7_message_variant.is_some()))).sum::<u64>();
         self.world.step_empty_families_7_and_6().map_err(|e|e.to_string())?;
         let result=self.world.step_landing_effect_callbacks(context,&resources.physics,&self.trig,&self.ui).map_err(|e|e.to_string())?;
         self.ui=result.ui_after;self.frame_counter+=1;
@@ -105,7 +108,7 @@ impl SharedMission {
                     self.pending_requests+=e.pending_events.len()as u64;
                     if let Some(r)=&e.retirement {self.pending_requests+=r.pending_ui_events.len()as u64;}
                 },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)=>{
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)=>{
                     retired+=usize::from(e.retired);self.pending_requests+=e.pending_ui_events.len()as u64;
                 },
             }

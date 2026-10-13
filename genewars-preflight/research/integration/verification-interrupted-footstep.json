@@ -1,0 +1,8 @@
+{
+  "status": "interrupted",
+  "utc": "2026-10-13T21:07:42.402522+00:00",
+  "command": "python -B scripts/verify.py",
+  "private_log": "private/integration/return-buildings-aggregate-001.log",
+  "reason": "Independent whole57A10 review confirmed incorrect footstep emission for non-1 selected animation states. Stop the aggregate while source fix and new trajectory validation are prepared; this run is not an all-green result.",
+  "original_execution": false
+}

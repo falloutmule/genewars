@@ -1,0 +1,94 @@
+{
+  "comparisons": {
+    "state8": {
+      "draw_fields": {
+        "animation": 0,
+        "flags": 32,
+        "frame": 2,
+        "ground_height": 6272,
+        "kind": 8,
+        "physical_height": 22302,
+        "selector": 0,
+        "shade": 49,
+        "state": 8,
+        "substate": 0
+      },
+      "explicit_origin": [
+        280,
+        430
+      ],
+      "framebuffer_sha256": "3a51502f521f7aae363ff51e382d59ec62d5ea069b8cd9e2156697773e2da7b1",
+      "full_addressed_bytes_equal": true,
+      "metadata": {
+        "color": 7450,
+        "color_clipped": 0,
+        "color_y": 180,
+        "effective_shade": 174,
+        "global_animation": 8,
+        "sha256": "3a51502f521f7aae363ff51e382d59ec62d5ea069b8cd9e2156697773e2da7b1",
+        "shadow": 3719,
+        "shadow_clipped": 0,
+        "virtual_height": 16030
+      },
+      "record_sha256": "d9ecf37055c79073615d0660dd7cd455b3e8ff4cb22d70263121b4286442b5e4"
+    },
+    "state9": {
+      "draw_fields": {
+        "animation": 0,
+        "flags": 32,
+        "frame": 2,
+        "ground_height": 6272,
+        "kind": 8,
+        "physical_height": 22302,
+        "selector": 0,
+        "shade": 49,
+        "state": 9,
+        "substate": 0
+      },
+      "explicit_origin": [
+        280,
+        430
+      ],
+      "framebuffer_sha256": "3a51502f521f7aae363ff51e382d59ec62d5ea069b8cd9e2156697773e2da7b1",
+      "full_addressed_bytes_equal": true,
+      "metadata": {
+        "color": 7450,
+        "color_clipped": 0,
+        "color_y": 180,
+        "effective_shade": 174,
+        "global_animation": 8,
+        "sha256": "3a51502f521f7aae363ff51e382d59ec62d5ea069b8cd9e2156697773e2da7b1",
+        "shadow": 3719,
+        "shadow_clipped": 0,
+        "virtual_height": 16030
+      },
+      "record_sha256": "7f27f8f734bef035382c08163b5e402875992f231bec2c154617bf6d8a444e87"
+    }
+  },
+  "fade_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+  "framebuffer": {
+    "addressed_bytes": 311032,
+    "height": 480,
+    "pitch": 648,
+    "width": 640
+  },
+  "instruction_contract": "private/ghidra/countdown-expiry/instructions-00010ea0.txt",
+  "main_gla_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+  "resource_sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4",
+  "schema_version": 1,
+  "scope": "Two actual selector-0 parent records on the ordinary 0x10EA0 shadow/color wrapper, at an explicit diagnostic origin. No original executable, game timing, caller order, or parent-state callback is claimed.",
+  "source_pins": {
+    "private/ghidra/countdown-expiry/instructions-00010ea0.txt": "639fdb8a92c1342f206b3ddd7ebf563618988b4943ff53ca3c9bec9aed881dfb",
+    "private/integration/game-runtime/terrain/FADE.DAT": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+    "private/integration/game-runtime/terrain/MAIN.GLA": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+    "private/integration/rnc-decoded/7660297d85773f47cacc07dcfdf96e8daa118dc52c8a38afc054c1ef9dfa20bc.bin": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4",
+    "private/review/family8-parent/state8-after-notification6442.bin": "d9ecf37055c79073615d0660dd7cd455b3e8ff4cb22d70263121b4286442b5e4",
+    "private/review/family8-parent/state9-after-group-ready6443.bin": "7f27f8f734bef035382c08163b5e402875992f231bec2c154617bf6d8a444e87",
+    "research/variants/family8-parent-review.json": "f676231ff5290203638168e7f4f240f0f3c311457a9cb496bc51fd50d6c27504",
+    "rust/crates/genewars-desktop/src/bin/support/family8_scene.rs": "2c0f6e9a7b4f79be8f8e3a9dd3a320e9f949cf2c072ef7e72f96db566bd242fd",
+    "scripts/desktop/family8_parent_pixel_harness.rs": "1d781b51db2c2a134d540c8307a5ebe9b28737a0500850e901bcdea7351ba249",
+    "scripts/desktop/validate_family8_parent_pixels.py": "4bb40fef63570d2d3c687c9f6b75973220cdbe4124385731f76fb51d3f130cda"
+  },
+  "source_record_origin": "private/review/family8-parent/source.json; state8 from combined frame6442, state9 from explicit all-parent-ready fixture6443",
+  "status": "passed"
+}
