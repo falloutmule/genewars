@@ -1,0 +1,769 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/planets-texture/instructions-000e1900.txt",
+      "sha256": "b38e9ce5d3b1c506cfb55c01a70baefa2308d04863d09e322a9ddb85eab9eb3b"
+    },
+    {
+      "private_path": "private/ghidra/terrain-triangle/general-right-mode5.txt",
+      "sha256": "0440a6b5dca2d51b20f59ad3a30508118c04262e82db6db1da083f59af7925a6"
+    },
+    {
+      "private_path": "private/ghidra/terrain-triangle/general-left-mode5.txt",
+      "sha256": "be101dbc2f276aedc0ac59ab801ae3945b9a1fb0dca02bbfe4b8ca14bd66a5be"
+    },
+    {
+      "private_path": "private/ghidra/terrain-triangle/flat-bottom-mode5.txt",
+      "sha256": "e7210cb50222cd0d4d427c4bc45fd6b1fa0c1a0fd997cefb77318f7acb5ea454"
+    },
+    {
+      "private_path": "private/ghidra/terrain-triangle/flat-top-mode5.txt",
+      "sha256": "e24a2035404ed0413f84215e040b794475898cd943014a62b320cd6f43d45b9b"
+    },
+    {
+      "private_path": "private/ghidra/triangle-buffer-refs/instructions-000e88a3.txt",
+      "sha256": "a6d4834500ceb20554ae26a3a4ad92db70551850dd9277f949cce154f4e2ab98"
+    },
+    {
+      "private_path": "private/ghidra/terrain-mode5.txt",
+      "sha256": "bc73059ae3b302a185735a2b82c76f40346cf7feaae33da71749a77450fbaaf9"
+    }
+  ],
+  "mode5_dispatch_tables": {
+    "0xe1a67": "0xe1ad3",
+    "0xe2374": "0xe23e0",
+    "0xe2ca2": "0xe2d0e",
+    "0xe3121": "0xe318d",
+    "0xe3513": "0xe3f93"
+  },
+  "scope": "Explicit integer vertex to prepared mode5 rows; sampler has separate mode5-span receipt; no camera or startup state chosen.",
+  "point_layout": "20bytes: signed32 x,y,U,V,S; x/y integer, attributes16.16 bitpatterns",
+  "row_layout": "Each row [y,left16.16,right16.16,U,V,S], attributes anchored to left edge without fractional-x compensation.",
+  "vertical_coverage": "[max(top_y,0),min(bottom_y,clip_height)); top inclusive/bottom exclusive. E88A3 stores framebuffer minus pitch before sampler pre-increment.",
+  "integer_semantics": "Wrapped32 subtraction/addition; signed division truncates toward0; x slopes shift16 before division; general x width uses arithmetic shift of low32 product, attribute numerator uses low32 of signed64 product shifted16.",
+  "middle_edge": "Reset short-edge x to exact middleX<<16; retain accumulated attributes. Left-middle changes attribute vertical gradient at middle without resetting attributes to middle values.",
+  "admission": {
+    "coordinate_min": -4096,
+    "coordinate_max": 4096,
+    "clip_height": [
+      1,
+      480
+    ],
+    "attribute": "all signed32 bitpatterns",
+    "zero_general_width": "reject as uninitialized-gradient source case",
+    "reason": "Explicit safe implementation limits; not original runtime validation"
+  },
+  "vectors": [
+    {
+      "name": "flat_top",
+      "vertices_x_y_u_v_s": [
+        [
+          2,
+          1,
+          0,
+          0,
+          2129920
+        ],
+        [
+          10,
+          1,
+          2097151,
+          0,
+          2129920
+        ],
+        [
+          6,
+          7,
+          1048576,
+          2097151,
+          2129920
+        ]
+      ],
+      "clip_height": 10,
+      "kind": "flat_top",
+      "gradients_du_dv_ds": [
+        262143,
+        0,
+        0
+      ],
+      "rows_y_left_right_u_v_s": [
+        [
+          1,
+          131072,
+          655360,
+          0,
+          0,
+          2129920
+        ],
+        [
+          2,
+          174762,
+          611670,
+          174762,
+          349525,
+          2129920
+        ],
+        [
+          3,
+          218452,
+          567980,
+          349524,
+          699050,
+          2129920
+        ],
+        [
+          4,
+          262142,
+          524290,
+          524286,
+          1048575,
+          2129920
+        ],
+        [
+          5,
+          305832,
+          480600,
+          699048,
+          1398100,
+          2129920
+        ],
+        [
+          6,
+          349522,
+          436910,
+          873810,
+          1747625,
+          2129920
+        ]
+      ]
+    },
+    {
+      "name": "flat_bottom",
+      "vertices_x_y_u_v_s": [
+        [
+          6,
+          1,
+          1048576,
+          0,
+          2129920
+        ],
+        [
+          10,
+          7,
+          2097151,
+          2097151,
+          2129920
+        ],
+        [
+          2,
+          7,
+          0,
+          2097151,
+          2129920
+        ]
+      ],
+      "clip_height": 10,
+      "kind": "flat_bottom",
+      "gradients_du_dv_ds": [
+        262143,
+        0,
+        0
+      ],
+      "rows_y_left_right_u_v_s": [
+        [
+          1,
+          393216,
+          393216,
+          1048576,
+          0,
+          2129920
+        ],
+        [
+          2,
+          349526,
+          436906,
+          873814,
+          349525,
+          2129920
+        ],
+        [
+          3,
+          305836,
+          480596,
+          699052,
+          699050,
+          2129920
+        ],
+        [
+          4,
+          262146,
+          524286,
+          524290,
+          1048575,
+          2129920
+        ],
+        [
+          5,
+          218456,
+          567976,
+          349528,
+          1398100,
+          2129920
+        ],
+        [
+          6,
+          174766,
+          611666,
+          174766,
+          1747625,
+          2129920
+        ]
+      ]
+    },
+    {
+      "name": "right_middle",
+      "vertices_x_y_u_v_s": [
+        [
+          3,
+          1,
+          0,
+          0,
+          2129920
+        ],
+        [
+          12,
+          4,
+          2097151,
+          1048576,
+          2195456
+        ],
+        [
+          5,
+          9,
+          0,
+          2097151,
+          2129920
+        ]
+      ],
+      "clip_height": 10,
+      "kind": "right_middle",
+      "gradients_du_dv_ds": [
+        233016,
+        29127,
+        7281
+      ],
+      "rows_y_left_right_u_v_s": [
+        [
+          1,
+          196608,
+          196608,
+          0,
+          0,
+          2129920
+        ],
+        [
+          2,
+          212992,
+          393216,
+          0,
+          262143,
+          2129920
+        ],
+        [
+          3,
+          229376,
+          589824,
+          0,
+          524286,
+          2129920
+        ],
+        [
+          4,
+          245760,
+          786432,
+          0,
+          786429,
+          2129920
+        ],
+        [
+          5,
+          262144,
+          694682,
+          0,
+          1048572,
+          2129920
+        ],
+        [
+          6,
+          278528,
+          602932,
+          0,
+          1310715,
+          2129920
+        ],
+        [
+          7,
+          294912,
+          511182,
+          0,
+          1572858,
+          2129920
+        ],
+        [
+          8,
+          311296,
+          419432,
+          0,
+          1835001,
+          2129920
+        ]
+      ]
+    },
+    {
+      "name": "left_middle",
+      "vertices_x_y_u_v_s": [
+        [
+          7,
+          1,
+          1048576,
+          0,
+          2129920
+        ],
+        [
+          11,
+          9,
+          2097151,
+          2097151,
+          2129920
+        ],
+        [
+          1,
+          4,
+          0,
+          1048576,
+          2195456
+        ]
+      ],
+      "clip_height": 10,
+      "kind": "left_middle",
+      "gradients_du_dv_ds": [
+        180223,
+        -32768,
+        -8192
+      ],
+      "rows_y_left_right_u_v_s": [
+        [
+          1,
+          458752,
+          458752,
+          1048576,
+          0,
+          2129920
+        ],
+        [
+          2,
+          327680,
+          491520,
+          699051,
+          349525,
+          2151765
+        ],
+        [
+          3,
+          196608,
+          524288,
+          349526,
+          699050,
+          2173610
+        ],
+        [
+          4,
+          65536,
+          557056,
+          1,
+          1048575,
+          2195455
+        ],
+        [
+          5,
+          196608,
+          589824,
+          419431,
+          1258290,
+          2182348
+        ],
+        [
+          6,
+          327680,
+          622592,
+          838861,
+          1468005,
+          2169241
+        ],
+        [
+          7,
+          458752,
+          655360,
+          1258291,
+          1677720,
+          2156134
+        ],
+        [
+          8,
+          589824,
+          688128,
+          1677721,
+          1887435,
+          2143027
+        ]
+      ]
+    },
+    {
+      "name": "top_clip_above_middle",
+      "vertices_x_y_u_v_s": [
+        [
+          3,
+          -5,
+          0,
+          0,
+          2129920
+        ],
+        [
+          12,
+          3,
+          2097151,
+          1048576,
+          2195456
+        ],
+        [
+          5,
+          9,
+          0,
+          2097151,
+          2129920
+        ]
+      ],
+      "clip_height": 6,
+      "kind": "right_middle",
+      "gradients_du_dv_ds": [
+        262143,
+        -18724,
+        8192
+      ],
+      "rows_y_left_right_u_v_s": [
+        [
+          0,
+          243418,
+          565248,
+          0,
+          748980,
+          2129920
+        ],
+        [
+          1,
+          252780,
+          638976,
+          0,
+          898776,
+          2129920
+        ],
+        [
+          2,
+          262142,
+          712704,
+          0,
+          1048572,
+          2129920
+        ],
+        [
+          3,
+          271504,
+          786432,
+          0,
+          1198368,
+          2129920
+        ],
+        [
+          4,
+          280866,
+          709974,
+          0,
+          1348164,
+          2129920
+        ],
+        [
+          5,
+          290228,
+          633516,
+          0,
+          1497960,
+          2129920
+        ]
+      ]
+    },
+    {
+      "name": "top_clip_below_middle",
+      "vertices_x_y_u_v_s": [
+        [
+          7,
+          -7,
+          1048576,
+          0,
+          2129920
+        ],
+        [
+          11,
+          9,
+          2097151,
+          2097151,
+          2129920
+        ],
+        [
+          1,
+          -3,
+          0,
+          1048576,
+          2195456
+        ]
+      ],
+      "clip_height": 6,
+      "kind": "left_middle",
+      "gradients_du_dv_ds": [
+        163839,
+        -65536,
+        -8192
+      ],
+      "rows_y_left_right_u_v_s": [
+        [
+          0,
+          229375,
+          573440,
+          524286,
+          1310719,
+          2179073
+        ],
+        [
+          1,
+          283988,
+          589824,
+          699048,
+          1398100,
+          2173612
+        ],
+        [
+          2,
+          338601,
+          606208,
+          873810,
+          1485481,
+          2168151
+        ],
+        [
+          3,
+          393214,
+          622592,
+          1048572,
+          1572862,
+          2162690
+        ],
+        [
+          4,
+          447827,
+          638976,
+          1223334,
+          1660243,
+          2157229
+        ],
+        [
+          5,
+          502440,
+          655360,
+          1398096,
+          1747624,
+          2151768
+        ]
+      ]
+    },
+    {
+      "name": "negative_rounding",
+      "vertices_x_y_u_v_s": [
+        [
+          0,
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          7,
+          2,
+          -2097151,
+          2097151,
+          -131073
+        ],
+        [
+          1,
+          8,
+          -1048577,
+          -1048577,
+          4194303
+        ]
+      ],
+      "clip_height": 5,
+      "kind": "right_middle",
+      "gradients_du_dv_ds": [
+        -249661,
+        349524,
+        -218450
+      ],
+      "rows_y_left_right_u_v_s": [
+        [
+          0,
+          7281,
+          152917,
+          -116507,
+          -116509,
+          466032
+        ],
+        [
+          1,
+          14562,
+          305834,
+          -233015,
+          -233017,
+          932065
+        ],
+        [
+          2,
+          21843,
+          458752,
+          -349523,
+          -349525,
+          1398098
+        ],
+        [
+          3,
+          29124,
+          393216,
+          -466031,
+          -466033,
+          1864131
+        ],
+        [
+          4,
+          36405,
+          327680,
+          -582539,
+          -582541,
+          2330164
+        ]
+      ]
+    },
+    {
+      "name": "wrapped_attributes",
+      "vertices_x_y_u_v_s": [
+        [
+          1,
+          0,
+          2147483647,
+          -2147483648,
+          2147483647
+        ],
+        [
+          9,
+          3,
+          -2147483648,
+          2147483647,
+          -1
+        ],
+        [
+          2,
+          8,
+          -1,
+          1,
+          -2147483648
+        ]
+      ],
+      "clip_height": 8,
+      "kind": "right_middle",
+      "gradients_du_dv_ds": [
+        -100663295,
+        100663295,
+        268435455
+      ],
+      "rows_y_left_right_u_v_s": [
+        [
+          0,
+          65536,
+          65536,
+          2147483647,
+          -2147483648,
+          2147483647
+        ],
+        [
+          1,
+          73728,
+          240298,
+          1879048191,
+          1879048193,
+          2147483647
+        ],
+        [
+          2,
+          81920,
+          415060,
+          1610612735,
+          1610612738,
+          2147483647
+        ],
+        [
+          3,
+          90112,
+          589824,
+          1342177279,
+          1342177283,
+          2147483647
+        ],
+        [
+          4,
+          98304,
+          498074,
+          1073741823,
+          1073741828,
+          2147483647
+        ],
+        [
+          5,
+          106496,
+          406324,
+          805306367,
+          805306373,
+          2147483647
+        ],
+        [
+          6,
+          114688,
+          314574,
+          536870911,
+          536870918,
+          2147483647
+        ],
+        [
+          7,
+          122880,
+          222824,
+          268435455,
+          268435463,
+          2147483647
+        ]
+      ]
+    }
+  ],
+  "row_stepping_checks": 2528,
+  "limits": [
+    "Positive clip-width and source/FADE address validation remain sampler preconditions.",
+    "Do not replace the rounded general-gradient width+1 with determinant/barycentric division.",
+    "This receipt does not choose camera, visibility, initial factor values, draw order, or gameplay state."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "status": "passed-static-factor-plan-contract",
+  "checked_utc": "2026-10-13T04:14:54.277979+00:00",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00075b00.txt",
+      "sha256": "338546946ce863304620159905fd171845a8d655c4b09f0f6657b6a58fedc966"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00072ad0.txt",
+      "sha256": "b3b313e20205eb57066681414db877493563bd8990149334125f06210936386b"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00084b40.txt",
+      "sha256": "9424f5091c9fdb3baa1f4e27c53310c85cdbf87a51ce4fa0aa11b54dadb363a5"
+    }
+  ],
+  "function_va": "0x75B00",
+  "admitted_radius": 4096,
+  "radius_source": "0x72BC4 loads EDX=0x1000 before0x75B00; center is explicit current selected-player+9",
+  "scan": "33x33 row-major vertices; unsigned byte high coordinates wrap256; source-map cell indices wrap128",
+  "scan_coordinate_cases": 65536,
+  "distance_boundary_cases": 12288,
+  "previous_factor_values": [
+    0,
+    1,
+    31,
+    62,
+    63,
+    64,
+    255
+  ],
+  "distance": "wrapped15dx^2 + wrapped15dy^2 + ((height2_vertex-height2_center)>>3)^2",
+  "factor": "skip old>=63; d2<3840^2 gives63; else d2<4096^2 gives max(old,floor((4095-isqrt(d2))/4)); else unchanged",
+  "maximum_squared_distance": 805306368,
+  "ordered_changes_only": true,
+  "map_mutated": false,
+  "callbacks_executed": false,
+  "original_execution": false,
+  "limits": [
+    "Pure local arithmetic plan on an immutable map snapshot, not whole0x75B00 equivalence",
+    "0x84B40 modifies dirty flags/viewport/minimap and refreshes entity shades via virtual predicates; those side effects are excluded",
+    "Factor gameplay meaning and complete visibility lifecycle remain separate",
+    "No initial selected-player target or mission state inferred; no other radius admitted"
+  ]
+}

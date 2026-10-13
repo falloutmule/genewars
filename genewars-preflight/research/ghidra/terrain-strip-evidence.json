@@ -1,0 +1,719 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-0007b7f0.txt",
+      "sha256": "26769c153064fd73cf9b69c2affe127a2e9ad5f0ff76596d7610e7742b932d25"
+    },
+    {
+      "private_path": "private/ghidra/terrain-strip-refs/instructions-00083b20.txt",
+      "sha256": "8512b45082316cae239397c58fe4971b5dd69c5d94afc0429d92adb78bff7469"
+    }
+  ],
+  "scope": "One complete7B7F0 strip with explicit camera, column, vertical range and contextflags; draw-call planning and dirty AND requests, no original execution.",
+  "inputs": {
+    "camera": [
+      0,
+      127
+    ],
+    "column": [
+      0,
+      19
+    ],
+    "vertical": "0<=top<bottom<=480",
+    "context_flags": "byte, original object+1C",
+    "map": "exact229376B14-byte cells; caller-supplied state"
+  },
+  "start": "n=column>>1,p=column&1,x0=cameraX+n,y0=cameraY-n-1-p; baselineA=-16*(1+p)-top",
+  "pair": "k>=0: A=(x0+k,y0+k),B=(x0+k,y0+k+1),C=(x0+k+1,y0+k+1),D=(x0+k+1,y0+k+2); C/D become nextA/B",
+  "order": "First A,C,B withownerA/corners0,2,3; thenB,C,D withownerB/corners0,1,2. Base thenoptional6 thenoptional15 for eachhalf.",
+  "stop": "After drawing pair stop if bothC.y andD.y>=bottom-top; otherwisecontinue. Signed16 height and bottom<=480 guarantee<=48pairs.",
+  "cull": "Individual triangle skipped if all3projectedY<0; equality0 admits. No driver earlybelow cull; triangle routine clips.",
+  "base_mode": "mode0 onlywhenall3shades==0; otherwise5. Rawpointer16E098 fallback is unreachable in exact map region11C2BE..1542BE.",
+  "shade": "4*signed16(cell+0)*u8(cell+12)+32768, pervertex; textureu8+4 andorientationbits70of+5 fromownerA/B.",
+  "optional_calls": {
+    "mode6": "owner+13>1; tableindex2if>=97else(value-1)//32; texturepointer115E60[index], samegeometry/UV/shade",
+    "mode15": "contextflags40 andowner+11bit0 andnotother+11bit20; other=Bforbothhalves"
+  },
+  "dirty_requests": "Ifcontextflags4, beforeeachhalf cull requestownerA+11&=FB andownerB+11&=F7 respectively; plannerreturnsrequests ratherthanmutatinginput.",
+  "outer_caller_scope": "83B20 main interval startscolumn0ifobject+1D==0else4, endsbeforetrunc(signedword+33/32)+start; optionalrightseam endsbefore20. Scrollwrap/remnant callers remain separate.",
+  "synthetic_vectors": [
+    {
+      "camera": [
+        0,
+        0
+      ],
+      "column": 0,
+      "top": 0,
+      "bottom": 128,
+      "context_flags": 68,
+      "pairs": 5,
+      "first_calls": [
+        {
+          "half": 0,
+          "mode": 5,
+          "owner": 16256,
+          "texture": 96,
+          "orientation": 0,
+          "corner_indices": [
+            0,
+            2,
+            3
+          ],
+          "world": [
+            [
+              0,
+              -1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "positions": [
+            [
+              32,
+              -8
+            ],
+            [
+              32,
+              30
+            ],
+            [
+              0,
+              16
+            ]
+          ],
+          "shades": [
+            32768,
+            26624,
+            32768
+          ]
+        },
+        {
+          "half": 0,
+          "mode": 6,
+          "owner": 16256,
+          "texture": 96,
+          "orientation": 0,
+          "corner_indices": [
+            0,
+            2,
+            3
+          ],
+          "world": [
+            [
+              0,
+              -1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "positions": [
+            [
+              32,
+              -8
+            ],
+            [
+              32,
+              30
+            ],
+            [
+              0,
+              16
+            ]
+          ],
+          "shades": [
+            32768,
+            26624,
+            32768
+          ],
+          "overlay_table_index": 0
+        },
+        {
+          "half": 1,
+          "mode": 5,
+          "owner": 0,
+          "texture": 0,
+          "orientation": 0,
+          "corner_indices": [
+            0,
+            1,
+            2
+          ],
+          "world": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "positions": [
+            [
+              0,
+              16
+            ],
+            [
+              32,
+              30
+            ],
+            [
+              0,
+              28
+            ]
+          ],
+          "shades": [
+            32768,
+            26624,
+            30720
+          ]
+        },
+        {
+          "half": 0,
+          "mode": 5,
+          "owner": 1,
+          "texture": 1,
+          "orientation": 1,
+          "corner_indices": [
+            0,
+            2,
+            3
+          ],
+          "world": [
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "positions": [
+            [
+              32,
+              30
+            ],
+            [
+              32,
+              42
+            ],
+            [
+              0,
+              28
+            ]
+          ],
+          "shades": [
+            26624,
+            32768,
+            30720
+          ]
+        },
+        {
+          "half": 0,
+          "mode": 6,
+          "owner": 1,
+          "texture": 1,
+          "orientation": 1,
+          "corner_indices": [
+            0,
+            2,
+            3
+          ],
+          "world": [
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "positions": [
+            [
+              32,
+              30
+            ],
+            [
+              32,
+              42
+            ],
+            [
+              0,
+              28
+            ]
+          ],
+          "shades": [
+            26624,
+            32768,
+            30720
+          ],
+          "overlay_table_index": 0
+        },
+        {
+          "half": 0,
+          "mode": 15,
+          "owner": 1,
+          "texture": 1,
+          "orientation": 1,
+          "corner_indices": [
+            0,
+            2,
+            3
+          ],
+          "world": [
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "positions": [
+            [
+              32,
+              30
+            ],
+            [
+              32,
+              42
+            ],
+            [
+              0,
+              28
+            ]
+          ],
+          "shades": [
+            26624,
+            32768,
+            30720
+          ]
+        }
+      ],
+      "first_dirty_and_masks": [
+        [
+          16256,
+          251
+        ],
+        [
+          0,
+          247
+        ],
+        [
+          1,
+          251
+        ],
+        [
+          129,
+          247
+        ]
+      ]
+    },
+    {
+      "camera": [
+        0,
+        0
+      ],
+      "column": 1,
+      "top": 0,
+      "bottom": 128,
+      "context_flags": 68,
+      "pairs": 6,
+      "first_calls": [
+        {
+          "half": 0,
+          "mode": 5,
+          "owner": 16128,
+          "texture": 128,
+          "orientation": 0,
+          "corner_indices": [
+            0,
+            2,
+            3
+          ],
+          "world": [
+            [
+              0,
+              -2
+            ],
+            [
+              1,
+              -1
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "positions": [
+            [
+              64,
+              -40
+            ],
+            [
+              64,
+              6
+            ],
+            [
+              32,
+              -8
+            ]
+          ],
+          "shades": [
+            32768,
+            30720,
+            32768
+          ]
+        },
+        {
+          "half": 0,
+          "mode": 6,
+          "owner": 16128,
+          "texture": 128,
+          "orientation": 0,
+          "corner_indices": [
+            0,
+            2,
+            3
+          ],
+          "world": [
+            [
+              0,
+              -2
+            ],
+            [
+              1,
+              -1
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "positions": [
+            [
+              64,
+              -40
+            ],
+            [
+              64,
+              6
+            ],
+            [
+              32,
+              -8
+            ]
+          ],
+          "shades": [
+            32768,
+            30720,
+            32768
+          ],
+          "overlay_table_index": 2
+        },
+        {
+          "half": 1,
+          "mode": 5,
+          "owner": 16256,
+          "texture": 96,
+          "orientation": 0,
+          "corner_indices": [
+            0,
+            1,
+            2
+          ],
+          "world": [
+            [
+              0,
+              -1
+            ],
+            [
+              1,
+              -1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "positions": [
+            [
+              32,
+              -8
+            ],
+            [
+              64,
+              6
+            ],
+            [
+              32,
+              30
+            ]
+          ],
+          "shades": [
+            32768,
+            30720,
+            26624
+          ]
+        },
+        {
+          "half": 1,
+          "mode": 6,
+          "owner": 16256,
+          "texture": 96,
+          "orientation": 0,
+          "corner_indices": [
+            0,
+            1,
+            2
+          ],
+          "world": [
+            [
+              0,
+              -1
+            ],
+            [
+              1,
+              -1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "positions": [
+            [
+              32,
+              -8
+            ],
+            [
+              64,
+              6
+            ],
+            [
+              32,
+              30
+            ]
+          ],
+          "shades": [
+            32768,
+            30720,
+            26624
+          ],
+          "overlay_table_index": 0
+        },
+        {
+          "half": 0,
+          "mode": 5,
+          "owner": 16257,
+          "texture": 97,
+          "orientation": 1,
+          "corner_indices": [
+            0,
+            2,
+            3
+          ],
+          "world": [
+            [
+              1,
+              -1
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "positions": [
+            [
+              64,
+              6
+            ],
+            [
+              64,
+              44
+            ],
+            [
+              32,
+              30
+            ]
+          ],
+          "shades": [
+            30720,
+            24576,
+            26624
+          ]
+        },
+        {
+          "half": 0,
+          "mode": 6,
+          "owner": 16257,
+          "texture": 97,
+          "orientation": 1,
+          "corner_indices": [
+            0,
+            2,
+            3
+          ],
+          "world": [
+            [
+              1,
+              -1
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "positions": [
+            [
+              64,
+              6
+            ],
+            [
+              64,
+              44
+            ],
+            [
+              32,
+              30
+            ]
+          ],
+          "shades": [
+            30720,
+            24576,
+            26624
+          ],
+          "overlay_table_index": 1
+        }
+      ],
+      "first_dirty_and_masks": [
+        [
+          16128,
+          251
+        ],
+        [
+          16256,
+          247
+        ],
+        [
+          16257,
+          251
+        ],
+        [
+          1,
+          247
+        ]
+      ]
+    }
+  ],
+  "synthetic_cache_comparisons": 960,
+  "actual_conq001_fixtures": [
+    {
+      "camera": [
+        0,
+        0
+      ],
+      "column": 0,
+      "top": 0,
+      "bottom": 480,
+      "context_flags": 0,
+      "pairs": 16,
+      "calls": 32,
+      "mode_counts": {
+        "0": 0,
+        "5": 32,
+        "6": 0,
+        "15": 0
+      },
+      "private_output": "private/ghidra/terrain-strip/camera-0-0-column-0.json",
+      "sha256": "791c81aae5a71829b27b28d948ea82c16e74f398c7fffaa9090650f3fe0cbb71"
+    },
+    {
+      "camera": [
+        17,
+        29
+      ],
+      "column": 4,
+      "top": 0,
+      "bottom": 480,
+      "context_flags": 0,
+      "pairs": 16,
+      "calls": 32,
+      "mode_counts": {
+        "0": 0,
+        "5": 32,
+        "6": 0,
+        "15": 0
+      },
+      "private_output": "private/ghidra/terrain-strip/camera-17-29-column-4.json",
+      "sha256": "ec74a9bc6cb6b1c5dcf89603bfa3f7ecb3086ebf36ce75c2b4b228955eed84c0"
+    },
+    {
+      "camera": [
+        127,
+        127
+      ],
+      "column": 19,
+      "top": 64,
+      "bottom": 320,
+      "context_flags": 0,
+      "pairs": 11,
+      "calls": 18,
+      "mode_counts": {
+        "0": 0,
+        "5": 18,
+        "6": 0,
+        "15": 0
+      },
+      "private_output": "private/ghidra/terrain-strip/camera-127-127-column-19.json",
+      "sha256": "400b7e42bf8b1d0091e7f07483ee138f08ce4d01f6f3b9fa358d8d175a0b663c"
+    }
+  ],
+  "source_entry": "root/2/disc/152",
+  "source_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+  "limits": [
+    "Mode6/15 pixel semantics remain unimplemented by thisreceipt; do not silentlyclaimcompleteframewhileomittingthem.",
+    "Camera/initialfactor/viewrectangle choices arecallerinputs, not startupstateclaims.",
+    "Exact20-column scene and viewport placement require explicit outer-context values; thisAPIplansone7B7F0strip."
+  ]
+}

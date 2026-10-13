@@ -1,0 +1,27 @@
+{
+  "recorded_utc": "2026-10-13T04:20:14.857771+00:00",
+  "historical_combined_gate": {
+    "path": "research/integration/verification.json",
+    "sha256": "897f34f7f7f6986523c5f04e512c750d9e3fb04edaa23c9edd59b9837eac2aef",
+    "bytes": 104352
+  },
+  "passed_checks": 79,
+  "passed_rust_tests": 151,
+  "private_files_ignored": 41310,
+  "post_gate_supplement": {
+    "reason": "Mission-load proof expanded from34 to37 listing pins after the combined gate. Its targeted validator and independent review both passed afterwards.",
+    "proof": {
+      "path": "research/ghidra/mission-load-evidence.json",
+      "sha256": "2d16d05150c104f59e4939c7c4ab7df2490d1c7a4aa81111d626604906b17d80",
+      "bytes": 17258
+    },
+    "review": {
+      "path": "research/variants/mission-load-review.json",
+      "sha256": "496d3e42d9e25b2d03bf713a3db2c4d1f75532e0eb271d01f9ce75fd1be17024",
+      "bytes": 13403
+    },
+    "validator_result": "PASS37listingpins/8families/1368records/exactEOF/gatedcamera66,48"
+  },
+  "original_archive_unchanged": true,
+  "scope": "Native terrain and source-only mission evidence; no playable mission or original gameplay parity."
+}

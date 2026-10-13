@@ -1,0 +1,118 @@
+{
+  "status": "passed-independent-native-entity-shade-review",
+  "checked_utc": "2026-10-13T04:15:12.920434+00:00",
+  "original_or_gui_execution": false,
+  "actual_coordinates": 475136,
+  "synthetic_fraction_cases": 1310720,
+  "quad_patterns": 20,
+  "all_signed16_unsigned8_vertex_products": 16777216,
+  "observed_result_domain": [
+    0,
+    64
+  ],
+  "result_histogram": {
+    "16": 32259,
+    "17": 32622,
+    "18": 31341,
+    "19": 31395,
+    "20": 31379,
+    "21": 31387,
+    "22": 30517,
+    "23": 30510,
+    "24": 30515,
+    "25": 30788,
+    "26": 29709,
+    "27": 29721,
+    "28": 29774,
+    "29": 29730,
+    "30": 29020,
+    "31": 29061,
+    "32": 29328,
+    "33": 29238,
+    "34": 28391,
+    "35": 28399,
+    "36": 28378,
+    "37": 28395,
+    "38": 27806,
+    "39": 27803,
+    "40": 27822,
+    "41": 28067,
+    "42": 27251,
+    "43": 27295,
+    "44": 27286,
+    "45": 27275,
+    "46": 26772,
+    "47": 26918,
+    "48": 26900,
+    "49": 27043,
+    "50": 26225,
+    "51": 26231,
+    "52": 26250,
+    "53": 26153,
+    "54": 25679,
+    "55": 25700,
+    "56": 25673,
+    "57": 25830,
+    "58": 25173,
+    "59": 25153,
+    "60": 25117,
+    "61": 25081,
+    "62": 24663,
+    "63": 24637,
+    "64": 6486314,
+    "0": 9740386,
+    "1": 38200,
+    "9": 34462,
+    "13": 32852,
+    "5": 35875,
+    "2": 35854,
+    "6": 34205,
+    "10": 32868,
+    "14": 31676,
+    "3": 35885,
+    "7": 34240,
+    "11": 32846,
+    "15": 31664,
+    "4": 35873,
+    "8": 34238,
+    "12": 32838
+  },
+  "evidence": {
+    "path": "research/integration/entity-shade-contract.json",
+    "size": 988,
+    "sha256": "6713669a4962f8f05f779b774449d6ac3c30177331a6bc05e35f77115dc9daac"
+  },
+  "listing": {
+    "path": "private/ghidra/camera-player-input/instructions-0007b240.txt",
+    "size": 2983,
+    "sha256": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb"
+  },
+  "source": {
+    "path": "rust/crates/genewars-core/src/terrain.rs",
+    "size": 12388,
+    "sha256": "cc9698806ac6949b0152fad1df1f784b1097b3b368bd0508be9fd858ae412d24"
+  },
+  "harness": {
+    "path": "private/review/entity-shade/review.exe",
+    "size": 5095142,
+    "sha256": "ec24061008a8b8e323fb456da44282401990bc6cfac7d340f36512f12ee0e5ec"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/entity-shade-review.py",
+      "size": 5432,
+      "sha256": "dad589a7bb4754e38c8023dc7366610c980bf11d09c7a11eb65b6f65d580ea90"
+    },
+    {
+      "path": "research/variants/entity-shade-review.rs",
+      "size": 1243,
+      "sha256": "521390415109a56c84b2f381f40a3d4f0e971fd87028515d67cf5e8783bd031e"
+    }
+  ],
+  "limits": [
+    "Explicit map/coordinates only; no entity mutation or visibility callbacks",
+    "Vertex product floors before interpolation; 64 endpoint intentionally differs from FADE row admission",
+    "Coordinate seams wrap128 independently of 16bit fraction extraction",
+    "Short/long map regions rejected"
+  ]
+}

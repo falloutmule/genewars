@@ -53,6 +53,23 @@ def main():
         numerator = ((d - c) * fx + (c - a) * fy) if fx < fy else ((b - a) * fx + (d - b) * fy)
         expected_height = 2 * a + numerator // 128
         assert run('terrain-height', mission, x, y)['doubled_height'] == expected_height
+        shifted = expected_height // 64
+        correction = (abs(shifted) // 32) * (-1 if shifted < 0 else 1)
+        camera = run('terrain-camera', mission, x, y)
+        assert camera == dict(target=[x, y], camera_cells=[((x >> 8) - correction - 12) & 255,
+                                                          ((y >> 8) - correction - 2) & 255],
+                              function_va='0x82E20', initial_mission_target_inferred=False)
+        def light(cx, cy):
+            offset = ((cy % 128) * 128 + cx % 128) * 14
+            return (int.from_bytes(raw[offset:offset + 2], 'little', signed=True) * raw[offset + 12]) // 64
+        aa, bb, cc, dd = light(cx, cy), light(cx + 1, cy), light(cx, cy + 1), light(cx + 1, cy + 1)
+        # Barycentric weights are an independent expression of the two
+        # triangular difference formulas. Quantize each vertex first.
+        doubled = ((256 - fy) * aa + (fy - fx) * cc + fx * dd) // 128 if fx < fy else (
+            (256 - fx) * aa + (fx - fy) * bb + fy * dd) // 128
+        shade = max(0, min(64, (doubled - 7680) // 256 + 16))
+        assert run('terrain-shade', mission, x, y) == dict(target=[x, y], entity_shade=shade,
+                                                         function_va='0x7B240', state_modified=False)
     # Actual cells plus seam neighbors; placement is supplied, never inferred
     # as the original camera. UV expectations come from the pinned binary table.
     placements = [(0, 0, 0, 0, 0, 0, 0), (127, 127, 125, 126, 7, 320, 240),
@@ -91,6 +108,8 @@ def main():
                   projection_proof_sha256=sha(projection_path), explicit_cell_placements=len(placements),
                   cell_vertices_compared=len(placements) * 4,
                   height_points=len(points), tiles_compared=160, tile_bytes_compared=163840,
+                  explicit_camera_targets=len(points),
+                  entity_shade_targets=len(points),
                   invalid_inputs_rejected=5, private_tile_outputs=output.relative_to(ROOT).as_posix(),
                   original_execution=False, limits='Native resources and explicitly placed cell vertices only; no terrain frame, inferred camera, draw order, visibility or shading claim.')
     (ROOT / 'research/integration/terrain-cli.json').write_text(json.dumps(record, indent=2) + '\n')

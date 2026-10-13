@@ -1,6 +1,7 @@
 //! Bounded views of the traced CONQ map cell region and B32 terrain atlas.
 //!
-//! Cell fields other than height (+2) and texture selector (+4) remain opaque.
+//! The API names height (+2), texture selector (+4), and orientation bits
+//! (+5 masked by 0x70); other cell fields remain opaque.
 //! The tile API returns indexed bytes only. Palette and rendering policy are
 //! caller supplied; zero is not assigned transparency semantics here.
 
@@ -71,10 +72,20 @@ impl<'a> ConqMapCell<'a> {
         i16::from_le_bytes([self.bytes[2], self.bytes[3]])
     }
 
+    /// Raw signed operand read by the terrain shade path at cell offset `+0`.
+    /// Its higher-level gameplay meaning is unresolved.
+    pub fn raw_light_operand(&self) -> i16 {
+        i16::from_le_bytes([self.bytes[0], self.bytes[1]])
+    }
+
     pub fn texture_selector(&self) -> u8 { self.bytes[4] }
 
     /// Return the traced B32 orientation bits from cell byte 5 (mask `0x70`).
     pub fn orientation_flags(&self) -> u8 { self.bytes[5] & 0x70 }
+
+    /// Raw unsigned operand read by the terrain shade path at cell offset `+12`.
+    /// Its producer and higher-level meaning are unresolved.
+    pub fn raw_factor_operand(&self) -> u8 { self.bytes[12] }
 }
 
 /// Borrowed B32 atlas using the traced 256-byte source row pitch.
@@ -114,16 +125,21 @@ mod tests {
     fn map_fields_are_little_endian_and_other_bytes_remain_raw() {
         let mut bytes = vec![0xA5; MAP_CELLS_BYTES];
         let offset = (127 * MAP_SIDE + 126) * MAP_CELL_BYTES;
+        bytes[offset..offset + 2].copy_from_slice(&(-32000i16).to_le_bytes());
         bytes[offset + 2..offset + 4].copy_from_slice(&(-12345i16).to_le_bytes());
         bytes[offset + 4] = 119;
         bytes[offset + 5] = 0xD7;
+        bytes[offset + 12] = 64;
         let map = ConqMapCells::parse(&bytes).unwrap();
         let cell = map.cell(126, 127).unwrap();
+        assert_eq!(cell.raw_light_operand(), -32000);
         assert_eq!(cell.height(), -12345);
         assert_eq!(cell.texture_selector(), 119);
         assert_eq!(cell.orientation_flags(), 0x50);
-        assert_eq!(cell.raw()[..2], [0xA5, 0xA5]);
-        assert_eq!(cell.raw()[5..], [0xD7, 0xA5, 0xA5, 0xA5, 0xA5, 0xA5, 0xA5, 0xA5, 0xA5]);
+        assert_eq!(cell.raw_factor_operand(), 64);
+        assert_eq!(cell.raw()[..2], (-32000i16).to_le_bytes());
+        assert_eq!(cell.raw()[5..12], [0xD7, 0xA5, 0xA5, 0xA5, 0xA5, 0xA5, 0xA5]);
+        assert_eq!(cell.raw()[13], 0xA5);
         assert_eq!(map.cell(128, 0), Err(Error::CellCoordinateOutOfRange { x: 128, y: 0 }));
     }
 

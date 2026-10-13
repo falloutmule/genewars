@@ -1,0 +1,424 @@
+{
+  "status": "passed-independent-source-mission-load-review",
+  "checked_utc": "2026-10-13T04:19:25.700272+00:00",
+  "original_or_gui_execution": false,
+  "source": {
+    "path": "private/reference-run/run-004/drive-c/GAME/LEVELS/CONQ001.DAT",
+    "size": 343958,
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  },
+  "proof": {
+    "path": "research/ghidra/mission-load-evidence.json",
+    "size": 17258,
+    "sha256": "2d16d05150c104f59e4939c7c4ab7df2490d1c7a4aa81111d626604906b17d80"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/campaign-start/instructions-00080460.txt",
+      "size": 2364,
+      "sha256": "15cf464ceb31fc599bc455e1cf53063eae7368d57cd66ffcd088d2a85ca70ce2"
+    },
+    {
+      "path": "private/ghidra/camera-player-input/instructions-00080590.txt",
+      "size": 707,
+      "sha256": "c454d8a02dd88524f21c3bc7381dc977804aabe214a5f3cdf56b6744757d44d6"
+    },
+    {
+      "path": "private/ghidra/campaign-level/instructions-00071b70.txt",
+      "size": 15482,
+      "sha256": "df0c9245caa952c20d3d319149413fc9d12382b8d65d036bba306ce8d7f19076"
+    },
+    {
+      "path": "private/ghidra/terrain-camera-refs/instructions-0007d090.txt",
+      "size": 14585,
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    },
+    {
+      "path": "private/ghidra/terrain-camera-refs/instructions-00082e20.txt",
+      "size": 2974,
+      "sha256": "66286b34e27300bf69ee0b62c036059c9e981596ae85703fd021a940983c7eb3"
+    },
+    {
+      "path": "private/ghidra/mission-target/instructions-0008a9f0.txt",
+      "size": 1836,
+      "sha256": "b77f0f3b0fd369299e700c13b7507b6a8624e7c5844c8a10dd5f42f89f0ab0b8"
+    },
+    {
+      "path": "private/ghidra/mission-target/instructions-000884d0.txt",
+      "size": 8666,
+      "sha256": "8aa978e0005bc3cb47e85f70f7a05c17f62ac92aa903394056f3e571cc0522ab"
+    },
+    {
+      "path": "private/ghidra/mission-tail-constructors/instructions-0001e280.txt",
+      "size": 1417,
+      "sha256": "c7da6a86d5c1762a101700af490e38133edc114bd1b62af80f5149436e6dc481"
+    },
+    {
+      "path": "private/ghidra/mission-tail-constructors/instructions-000790d0.txt",
+      "size": 372,
+      "sha256": "677aa611bcae17e925c1b474b7007a42549eed5b42b9a6647f40a51c279ec5c3"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-0006d490.txt",
+      "size": 635,
+      "sha256": "5b9e8ac352751ec2e9dbda6bd5abfee4d61ab7602bd7cba97119663b17eb664e"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-000982c0.txt",
+      "size": 240,
+      "sha256": "0228722dc5ad00cce0af2287be4e032591d6760b3d8798ae89bc12e94e317650"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-000b6930.txt",
+      "size": 575,
+      "sha256": "5acb5b90de6c218cabc4f76233b4d245107c49d27467c533e0657639b34321f4"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-000b6967.txt",
+      "size": 1381,
+      "sha256": "879fecc01650d2a1c2a91f41f85d071eacdad89f2d79873fa161f78442b1e1b5"
+    },
+    {
+      "path": "private/ghidra/mission-tail-constructors/instructions-0001e390.txt",
+      "size": 658,
+      "sha256": "527a0819499cbcd4e24f11b89444e89b3ba870ab71f0b92a7d57e358545389af"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-0005a850.txt",
+      "size": 780,
+      "sha256": "e264758a9f7059194b9eecd159732595833af28f16764ef484be1a11f7216a50"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-0005a1c0.txt",
+      "size": 747,
+      "sha256": "02f55f81e196715d686d5427c1475d280f0e4fbf13499355dd7974c629d989b9"
+    },
+    {
+      "path": "private/ghidra/mission-tail-constructors/instructions-0001e3e0.txt",
+      "size": 60,
+      "sha256": "c0e8f233d9252d9bc3e9abe41d00ebe8a6b5a0c49d367cf746675cc83d1bd555"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-0006c950.txt",
+      "size": 778,
+      "sha256": "a23b3c2199717a3f3411fed3df00911bdba20aae97b6e1ab4999464b9db79a65"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-0006c690.txt",
+      "size": 224,
+      "sha256": "2031cd548ca5fbda011cefd4ea96748d54fcc5f73a1c7f86db18e45ab791b624"
+    },
+    {
+      "path": "private/ghidra/mission-tail-constructors/instructions-0001e400.txt",
+      "size": 658,
+      "sha256": "baab823f665e719b3cdb9cc9b6d2a9db796afca7ebcfed65b169672b63fdf730"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-00057540.txt",
+      "size": 780,
+      "sha256": "80b09ef936b94d6b530cdc6ad0158ca5c8db9a2b09d06ed088ab25a88a14fada"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-00056e20.txt",
+      "size": 1178,
+      "sha256": "ea9f9732b2e32af849a86de57a4a416a565f2fe4c6809fed6587fc0dcc99baa0"
+    },
+    {
+      "path": "private/ghidra/mission-tail-constructors/instructions-0001e3f0.txt",
+      "size": 60,
+      "sha256": "abc0890ec59a474e9f96d677f3f0c152fac33e398524319ec8e7de2ca3e3c976"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-00045010.txt",
+      "size": 780,
+      "sha256": "379b68b64d00bc0b00b1dfe07562d58d18d62f9cd07dcf343bac3a832b511389"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-00044ff0.txt",
+      "size": 224,
+      "sha256": "3b8b284ba28ec64221cc52a0b7454b40c76bdd3ba7a3306afce3663a64544905"
+    },
+    {
+      "path": "private/ghidra/mission-tail-constructors/instructions-0001e450.txt",
+      "size": 658,
+      "sha256": "93a27ebe8f32681f4e476559ef905b49056bc913ab9c75415491269a191faa5d"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-00049fd0.txt",
+      "size": 780,
+      "sha256": "1214222816be91f742f679665f6d16b04bccd3d5c780be50f97133febe90c01c"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-00049e90.txt",
+      "size": 2334,
+      "sha256": "55e976eb9c620d3cd6996d5dfd810532c8ca5c0a93fcb4a34239744049f9e001"
+    },
+    {
+      "path": "private/ghidra/mission-tail-constructors/instructions-0001e4a0.txt",
+      "size": 60,
+      "sha256": "c7a50bacec4cecb38e3ee9ea6d96e84e4a0b70adf790271daff095e80fd7aece"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-0004ee80.txt",
+      "size": 778,
+      "sha256": "ddbd113edd627a8fe70a20f53103d9c6c61b3e5e7e3081a5148359dc807eafb4"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-0004ee70.txt",
+      "size": 14,
+      "sha256": "668c4eece244c7dde144bc92bcee5b6dd7eca3249fbf207cdc03a1fcdd0beaa2"
+    },
+    {
+      "path": "private/ghidra/mission-tail-constructors/instructions-0001e4b0.txt",
+      "size": 658,
+      "sha256": "49f92ce18f034f549dc689c37dbc160368b0119d0ba979aa339f0256d65c58b9"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-00013f00.txt",
+      "size": 780,
+      "sha256": "c4fdfbfc58d5f22f89b5a3c7f164130e7b8b8e63f778c0cfbe96c12076ff45ad"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-00013ef0.txt",
+      "size": 133,
+      "sha256": "5ed4fd9d81e85c8d7336d3f04d9bd29829a118a1056cbd1c3dd423277305b534"
+    },
+    {
+      "path": "private/ghidra/mission-tail-constructors/instructions-0001e500.txt",
+      "size": 658,
+      "sha256": "994eedc561a0a6e13a64ec6cb9554d6e9a36d604e96da4190a73329aec24683b"
+    },
+    {
+      "path": "private/ghidra/mission-tail-readers/instructions-00010090.txt",
+      "size": 780,
+      "sha256": "7102a94a9c5d4aac7464a52da36cf7fa882fb73f1455df0b71c2e0320af28a5a"
+    },
+    {
+      "path": "private/ghidra/mission-tail-init/instructions-00010060.txt",
+      "size": 504,
+      "sha256": "518f7e316012183b083623aca3e4b01b8feedee77b0476c56e24d6f76a7d441d"
+    }
+  ],
+  "raw_records": 1368,
+  "active_init_records": 41,
+  "groups": [
+    {
+      "family": 0,
+      "count": 300,
+      "packed": 116,
+      "native": 124,
+      "source_start": 243038,
+      "source_end": 277838,
+      "active": 1,
+      "unserialized_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "synthetic_reconstruction_sha256": "4a99e6ee7ab8b8a934145623b87b4a5a0d1d0a4e45f37e0dc4552cad5fc77930"
+    },
+    {
+      "family": 1,
+      "count": 512,
+      "packed": 41,
+      "native": 49,
+      "source_start": 277838,
+      "source_end": 298830,
+      "active": 40,
+      "unserialized_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "synthetic_reconstruction_sha256": "6d45f2c02deaed07fda883c83ec3ab293f6a129a3217324c24d7324eee05cd8b"
+    },
+    {
+      "family": 2,
+      "count": 20,
+      "packed": 140,
+      "native": 200,
+      "source_start": 298830,
+      "source_end": 301630,
+      "active": 0,
+      "unserialized_ranges": [
+        [
+          31,
+          39
+        ],
+        [
+          148,
+          200
+        ]
+      ],
+      "synthetic_reconstruction_sha256": "51ded2536874dc4aed418df87d70d64d1bdaaf159f0a1557978cbc5547989f25"
+    },
+    {
+      "family": 3,
+      "count": 256,
+      "packed": 59,
+      "native": 67,
+      "source_start": 301630,
+      "source_end": 316734,
+      "active": 0,
+      "unserialized_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "synthetic_reconstruction_sha256": "0bf1be0d02d6b435684835c59bdeaaf1e4540cc781190ea7fc8e95510efafa41"
+    },
+    {
+      "family": 4,
+      "count": 200,
+      "packed": 73,
+      "native": 81,
+      "source_start": 316734,
+      "source_end": 331334,
+      "active": 0,
+      "unserialized_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "synthetic_reconstruction_sha256": "4f5f5f0ec62251ccf68bf9be119019bd70760182412b4c649d04e4ebca2cb94d"
+    },
+    {
+      "family": 5,
+      "count": 32,
+      "packed": 41,
+      "native": 49,
+      "source_start": 331334,
+      "source_end": 332646,
+      "active": 0,
+      "unserialized_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "synthetic_reconstruction_sha256": "83d03bd48bee6f5660fa7c12638320bfbe65b3b84aa6c3d3db8fa00c37df04e6"
+    },
+    {
+      "family": 6,
+      "count": 32,
+      "packed": 89,
+      "native": 97,
+      "source_start": 332646,
+      "source_end": 335494,
+      "active": 0,
+      "unserialized_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "synthetic_reconstruction_sha256": "1a2798bdc0d18c36efc7353a5c6878472b58097c04007bd08a0d36aff8daa053"
+    },
+    {
+      "family": 7,
+      "count": 16,
+      "packed": 94,
+      "native": 102,
+      "source_start": 335494,
+      "source_end": 336998,
+      "active": 0,
+      "unserialized_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "synthetic_reconstruction_sha256": "506da8fd53dad03df2facf90c1c4b815c90ff82fe6c26e9adb391e59378b361c"
+    }
+  ],
+  "globals_offset": 336998,
+  "exact_file_end": 343958,
+  "targets": [
+    {
+      "packed": 889213184,
+      "coordinate": [
+        20736,
+        13568
+      ],
+      "height2": 6272,
+      "camera": [
+        66,
+        48
+      ]
+    },
+    {
+      "packed": 0,
+      "coordinate": [
+        0,
+        0
+      ],
+      "height2": 0,
+      "camera": [
+        244,
+        254
+      ]
+    },
+    {
+      "packed": 0,
+      "coordinate": [
+        0,
+        0
+      ],
+      "height2": 0,
+      "camera": [
+        244,
+        254
+      ]
+    },
+    {
+      "packed": 0,
+      "coordinate": [
+        0,
+        0
+      ],
+      "height2": 0,
+      "camera": [
+        244,
+        254
+      ]
+    }
+  ],
+  "native_helper": {
+    "path": "rust/crates/genewars-core/src/terrain.rs",
+    "size": 12388,
+    "sha256": "cc9698806ac6949b0152fad1df1f784b1097b3b368bd0508be9fd858ae412d24"
+  },
+  "harness": {
+    "path": "private/review/mission-load/review.exe",
+    "size": 5091404,
+    "sha256": "4c186db8148957beb81c22cde7a92685c369e5eaac8b486d045655a201d27626"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/mission-load-review.py",
+      "size": 8802,
+      "sha256": "0fdb7aaeed49923190ceaa7b866f8714a4800657cc991fe6a56c88b514eb842e"
+    },
+    {
+      "path": "research/variants/mission-load-review.rs",
+      "size": 574,
+      "sha256": "de4b47dc2cddad1c4f8c3eefa96e8fc531699d50b7f0de1c12a03acf11071866"
+    }
+  ],
+  "memset_write_extent_checks": 8192,
+  "initializer_memset_native_extent": [
+    148,
+    192
+  ],
+  "scope": "Exactsource structure and gated source-derived player0 camera; not mission execution or complete native-state reconstruction",
+  "limits": [
+    "Successful exact load, activecount1 andselectedplayer0 required; do not claim selection policy or observed original camera",
+    "Campaignflag20 bypasses target permutation; loop writes player+9 before the selected-camera call",
+    "Native pointers and family2 runtime-only bytes are not serialized; synthetic reconstruction is a copy-layout test only",
+    "Transitive982C0/B6930/B6967 fill writes only entity94..C0 for this caller; no complete native-state or allocation reconstruction claimed"
+  ]
+}

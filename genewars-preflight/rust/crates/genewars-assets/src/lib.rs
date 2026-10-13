@@ -296,8 +296,8 @@ impl<'a> ConqFastPrefix<'a> {
         &self.file[CONQ_FAST_PREFIX_BYTES..]
     }
 
-    /// One of the four initial player-record byte ranges passed through the
-    /// traced normalizers. This exposes bytes only, not a live-state schema.
+    /// One of the four initial player-record byte ranges from the copied file
+    /// prefix. Later runtime mutations are not modeled by this byte accessor.
     pub fn initial_player_record(&self, index: usize) -> Result<&'a [u8], Error> {
         if index >= CONQ_INITIAL_PLAYER_COUNT {
             return Err(Error::ConqInitialPlayerOutOfBounds {

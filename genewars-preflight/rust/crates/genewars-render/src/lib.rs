@@ -1,6 +1,9 @@
 //! Small, evidence-bounded CPU rendering helpers for GeneWars indexed assets.
 
 pub mod terrain;
+pub mod terrain_modes;
+pub mod terrain_strip;
+pub mod terrain_view;
 
 use genewars_assets::{AnbSections, FontResource, IndexedSprite, Palette256, PaletteChannelMode, SpriteTable, Error as AssetError};
 use std::fmt;

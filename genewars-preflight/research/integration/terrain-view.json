@@ -1,0 +1,685 @@
+{
+  "status": "passed",
+  "checked_utc": "2026-10-13T04:14:26.098222+00:00",
+  "frames": 14,
+  "rgb_pixels_compared": 4300800,
+  "binary_sha256": "ac1b7668f93fdb9d1774d96184bbcfc85df66e2baa2c34036db1391359825367",
+  "records": [
+    {
+      "target": [
+        -32768,
+        -32768
+      ],
+      "camera_words": [
+        116,
+        126
+      ],
+      "wrapped_camera": [
+        116,
+        126
+      ],
+      "map_policy": "raw",
+      "factor_changes": 0,
+      "columns": 20,
+      "pairs": 320,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 620,
+      "pixel_writes": 307200,
+      "index_crc16": 0,
+      "rgb_crc16": 0,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "0b150fd32588b1daca5569992ebe559c0102c837306b1af4c44d35128ec58366",
+      "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
+      "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
+      "transparent_overlay_samples": 0,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view--32768--32768-raw.bmp"
+    },
+    {
+      "target": [
+        -32768,
+        -32768
+      ],
+      "camera_words": [
+        116,
+        126
+      ],
+      "wrapped_camera": [
+        116,
+        126
+      ],
+      "map_policy": "raise4096",
+      "factor_changes": 793,
+      "columns": 20,
+      "pairs": 320,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 620,
+      "pixel_writes": 307200,
+      "index_crc16": 21586,
+      "rgb_crc16": 22310,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "ed7457b6516cb1a9618c88fc47c55d5b03643628c51d06ad828bf713e3d96841",
+      "index_sha256": "4fff85d5633fcf56c11d475c6104b2ed047e2bdf3a2b6860466e6c99111eb0eb",
+      "bmp_sha256": "11b719ccb86d751ac907f4ed85dfe7c651066bf47533989bdbffa74759f7f67e",
+      "transparent_overlay_samples": 0,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view--32768--32768-raise4096.bmp"
+    },
+    {
+      "target": [
+        10240,
+        12800
+      ],
+      "camera_words": [
+        28,
+        48
+      ],
+      "wrapped_camera": [
+        28,
+        48
+      ],
+      "map_policy": "raw",
+      "factor_changes": 0,
+      "columns": 20,
+      "pairs": 320,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 620,
+      "pixel_writes": 307200,
+      "index_crc16": 0,
+      "rgb_crc16": 0,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "0b150fd32588b1daca5569992ebe559c0102c837306b1af4c44d35128ec58366",
+      "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
+      "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
+      "transparent_overlay_samples": 0,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-10240-12800-raw.bmp"
+    },
+    {
+      "target": [
+        10240,
+        12800
+      ],
+      "camera_words": [
+        28,
+        48
+      ],
+      "wrapped_camera": [
+        28,
+        48
+      ],
+      "map_policy": "raise4096",
+      "factor_changes": 793,
+      "columns": 20,
+      "pairs": 320,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 620,
+      "pixel_writes": 307200,
+      "index_crc16": 5645,
+      "rgb_crc16": 55252,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "a94a0141b5a7453975311d3bfb689fbc00efb3102b9f2cd08d42960b8c1551df",
+      "index_sha256": "314bf6dd1c647197e2e56cd5780b250813c7b096a39318fdaf065bbcd310fc5d",
+      "bmp_sha256": "eab3d904a9e7cc12d29e319a3590aaf4ef469b0bd33bd1cdd5b13b2a5734e7f2",
+      "transparent_overlay_samples": 0,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-10240-12800-raise4096.bmp"
+    },
+    {
+      "target": [
+        32767,
+        -1
+      ],
+      "camera_words": [
+        115,
+        253
+      ],
+      "wrapped_camera": [
+        115,
+        125
+      ],
+      "map_policy": "raw",
+      "factor_changes": 0,
+      "columns": 20,
+      "pairs": 320,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 620,
+      "pixel_writes": 307200,
+      "index_crc16": 0,
+      "rgb_crc16": 0,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "0b150fd32588b1daca5569992ebe559c0102c837306b1af4c44d35128ec58366",
+      "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
+      "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
+      "transparent_overlay_samples": 0,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-32767--1-raw.bmp"
+    },
+    {
+      "target": [
+        32767,
+        -1
+      ],
+      "camera_words": [
+        115,
+        253
+      ],
+      "wrapped_camera": [
+        115,
+        125
+      ],
+      "map_policy": "raise4096",
+      "factor_changes": 793,
+      "columns": 20,
+      "pairs": 320,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 620,
+      "pixel_writes": 307200,
+      "index_crc16": 51691,
+      "rgb_crc16": 52358,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "6cb5a1b08c0f5d3fbef766d4f782abf9cc9517c9857bc81a150851b304c8d679",
+      "index_sha256": "a3778ebc988235af3be9faf2bc23ee8ed4c667361a63e25650f9d528ef8fd4e4",
+      "bmp_sha256": "264d41fed011249b66dd591a9c2ba8b8f696af05b59004d47d4096b7e8806737",
+      "transparent_overlay_samples": 0,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-32767--1-raise4096.bmp"
+    },
+    {
+      "target": [
+        12345,
+        8317
+      ],
+      "camera_words": [
+        36,
+        30
+      ],
+      "wrapped_camera": [
+        36,
+        30
+      ],
+      "map_policy": "raw",
+      "factor_changes": 0,
+      "columns": 20,
+      "pairs": 320,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 620,
+      "pixel_writes": 307200,
+      "index_crc16": 0,
+      "rgb_crc16": 0,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "0b150fd32588b1daca5569992ebe559c0102c837306b1af4c44d35128ec58366",
+      "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
+      "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
+      "transparent_overlay_samples": 0,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-12345-8317-raw.bmp"
+    },
+    {
+      "target": [
+        12345,
+        8317
+      ],
+      "camera_words": [
+        36,
+        30
+      ],
+      "wrapped_camera": [
+        36,
+        30
+      ],
+      "map_policy": "raise4096",
+      "factor_changes": 803,
+      "columns": 20,
+      "pairs": 320,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 620,
+      "pixel_writes": 307200,
+      "index_crc16": 51288,
+      "rgb_crc16": 13112,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "16c29fe967f9c7849a258a6ba3d8af51b477e4ed9c64f1c593d101e9c74b6251",
+      "index_sha256": "b273d30e1560c8fa28b2b382ee746702c5726ad9343158ad96a3dd97f973d7ae",
+      "bmp_sha256": "e97aa8be9fa293d9e3301b3866a5a80dd1ae1cc05b61161ff2c34f5971c72ec6",
+      "transparent_overlay_samples": 0,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-12345-8317-raise4096.bmp"
+    },
+    {
+      "target": [
+        19712,
+        11008
+      ],
+      "camera_words": [
+        65,
+        41
+      ],
+      "wrapped_camera": [
+        65,
+        41
+      ],
+      "map_policy": "raw",
+      "factor_changes": 0,
+      "columns": 20,
+      "pairs": 353,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        706,
+        72,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 759,
+      "pixel_writes": 311192,
+      "index_crc16": 0,
+      "rgb_crc16": 0,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "0b150fd32588b1daca5569992ebe559c0102c837306b1af4c44d35128ec58366",
+      "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
+      "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
+      "transparent_overlay_samples": 26679,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-19712-11008-raw.bmp"
+    },
+    {
+      "target": [
+        19712,
+        11008
+      ],
+      "camera_words": [
+        65,
+        41
+      ],
+      "wrapped_camera": [
+        65,
+        41
+      ],
+      "map_policy": "raise4096",
+      "factor_changes": 792,
+      "columns": 20,
+      "pairs": 353,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        706,
+        72,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 759,
+      "pixel_writes": 311192,
+      "index_crc16": 56759,
+      "rgb_crc16": 19184,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "663f66d6a529b9ddce7a2a438cb8237cacd3ad1c8564450f33659d85cdb2642f",
+      "index_sha256": "9016b5557cab28040f73aa6cb1f80bf544ed9fea826eac6a43adb2be7a2fc6d7",
+      "bmp_sha256": "5a6eb6ec944d2912de13b3cdadce71841878fee3b5c4bdd1284e24a57465f980",
+      "transparent_overlay_samples": 26679,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-19712-11008-raise4096.bmp"
+    },
+    {
+      "target": [
+        20992,
+        11520
+      ],
+      "camera_words": [
+        69,
+        42
+      ],
+      "wrapped_camera": [
+        69,
+        42
+      ],
+      "map_policy": "raw",
+      "factor_changes": 0,
+      "columns": 20,
+      "pairs": 369,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        738,
+        66,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 783,
+      "pixel_writes": 310728,
+      "index_crc16": 0,
+      "rgb_crc16": 0,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "0b150fd32588b1daca5569992ebe559c0102c837306b1af4c44d35128ec58366",
+      "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
+      "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
+      "transparent_overlay_samples": 24201,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-20992-11520-raw.bmp"
+    },
+    {
+      "target": [
+        20992,
+        11520
+      ],
+      "camera_words": [
+        69,
+        42
+      ],
+      "wrapped_camera": [
+        69,
+        42
+      ],
+      "map_policy": "raise4096",
+      "factor_changes": 793,
+      "columns": 20,
+      "pairs": 369,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        738,
+        66,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 783,
+      "pixel_writes": 310728,
+      "index_crc16": 54556,
+      "rgb_crc16": 43268,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "aa468011e9545e51c189c728171976e4dd1617f714534ee4ede8f8a3e228e50b",
+      "index_sha256": "1fc5ed566d02cf18fa60b2b9e46411198a62e0526bd7d1154eefe15a6d2d511a",
+      "bmp_sha256": "00c7b946a2048f603a180ce5f54e205ccf90c1310dd3878cd33f6d3fd853b828",
+      "transparent_overlay_samples": 24201,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-20992-11520-raise4096.bmp"
+    },
+    {
+      "target": [
+        19712,
+        13056
+      ],
+      "camera_words": [
+        62,
+        46
+      ],
+      "wrapped_camera": [
+        62,
+        46
+      ],
+      "map_policy": "raw",
+      "factor_changes": 0,
+      "columns": 20,
+      "pairs": 364,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        728,
+        39,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 748,
+      "pixel_writes": 309166,
+      "index_crc16": 0,
+      "rgb_crc16": 0,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "0b150fd32588b1daca5569992ebe559c0102c837306b1af4c44d35128ec58366",
+      "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
+      "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
+      "transparent_overlay_samples": 12848,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-19712-13056-raw.bmp"
+    },
+    {
+      "target": [
+        19712,
+        13056
+      ],
+      "camera_words": [
+        62,
+        46
+      ],
+      "wrapped_camera": [
+        62,
+        46
+      ],
+      "map_policy": "raise4096",
+      "factor_changes": 784,
+      "columns": 20,
+      "pairs": 364,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        728,
+        39,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "prepared_triangles": 748,
+      "pixel_writes": 309166,
+      "index_crc16": 25777,
+      "rgb_crc16": 10828,
+      "entity_callbacks_applied": false,
+      "gameplay": false,
+      "initial_mission_state_inferred": false,
+      "rgb_sha256": "d1f7dae2c913b461b419125f0b0d5528d30b601b71fdc4e803a32f79d69a0459",
+      "index_sha256": "7c4d21cb8c93c947479f47f9be358fb78460ad20d610fdae2e465b3b4cf54142",
+      "bmp_sha256": "4f67d97951379622088cdaddef64d8967d227e7b817ba23e9884922955d9a8ee",
+      "transparent_overlay_samples": 12848,
+      "private_bmp": "private/integration/terrain-views/7700ace99e7b4306977bb42979ccf282/view-19712-13056-raise4096.bmp"
+    }
+  ],
+  "input_rejections": 3,
+  "original_execution": false,
+  "gameplay": false,
+  "policies": "Explicit target; source camera helper modulo128; full640x480 columns0..19/context0; raw map or pure factor-plan snapshot; no entity callbacks or inferred mission startup."
+}

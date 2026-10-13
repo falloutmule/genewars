@@ -1980,10 +1980,18 @@
     "uninterpreted_map_stride": 14,
     "uninterpreted_map_count": 16384
   },
+  "loaded_player_success_stub": {
+    "va": "0x80810",
+    "return_va": "0x80820",
+    "mapped_bytes_sha256": "d139e253ca1b97d2d875f3ad0b18b95286b1b3280db403e7d2ef3a38f3b368af",
+    "private_listing": "private/ghidra/camera-player-input/80810-range.txt",
+    "listing_sha256": "51a3620116f2f32ca937c87075657eb72d33ad498fdbfd13d4f7854203d80eb2",
+    "behavior": "AL=1; alignment instructions; RET; no loaded-record writes"
+  },
   "safety": [
     "Require exact 699-byte header and an in-bounds NUL after byte32; original reader accepts any nonzero read count.",
     "Preserve opaque header bytes and unknown numeric fields.",
-    "Do not cast CONQ file to a full live-state struct: serialized tail has separate consumers; loaded player records are normalized.",
+    "Do not cast CONQ file to a full live-state struct: serialized tail has separate consumers and selected-player restoration may modify loaded bytes; 80810 is a no-op success-return stub.",
     "Preserve prior system except when signed remainder+1 equals1; backgrounds independently use signed quotient+1.",
     "Original progress arithmetic is signed i8; bounded plan rejects negative and >=24 values."
   ]

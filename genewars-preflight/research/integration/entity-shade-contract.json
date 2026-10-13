@@ -1,0 +1,16 @@
+{
+  "status": "passed-static-entity-shade-contract",
+  "checked_utc": "2026-10-13T04:14:54.855318+00:00",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "function_va": "0x7B240",
+  "listing": "private/ghidra/camera-player-input/instructions-0007b240.txt",
+  "listing_sha256": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb",
+  "barycentric_equivalence_checks": 200000,
+  "vertex": "arithmetic_floor(signed_cell_0 * unsigned_cell_12 / 64) at each wrapped map vertex",
+  "interpolation": "Same two triangular regions as height; doubled value with arithmetic shift by7",
+  "result": "clamp(((doubled-7680)>>8)+16,0,64); endpoint64 is intentional and not a FADE row",
+  "limits": [
+    "Pure explicit-coordinate helper; no entity mutation, virtual predicate, map update, or live-state initialization",
+    "Static mathematical contract only; native CLI real-coordinate comparisons are recorded separately"
+  ]
+}

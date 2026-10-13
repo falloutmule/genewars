@@ -1,0 +1,51 @@
+{
+  "prepared": [
+    {
+      "entry_id": "root/2/disc/152",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/LEVELS/CONQ001.DAT;1",
+      "source_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+      "staged_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+      "staged_bytes": 343958,
+      "representation": "raw_source",
+      "private_path": "private/integration/terrain-inputs/CONQ001.DAT"
+    },
+    {
+      "entry_id": "root/2/disc/40",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/B32A.DAT;1",
+      "source_sha256": "481677e31b05d9e4ba428932a4eaf9003fae4fe320f90daf22a947cbd3e4ef9c",
+      "staged_sha256": "8206e4be65dd7f1fa12df131cf2d1aab5f5b47f7181c8ace86facbb1787bcdb8",
+      "staged_bytes": 163840,
+      "representation": "rnc1_decoded",
+      "private_path": "private/integration/terrain-inputs/B32A.DAT"
+    },
+    {
+      "entry_id": "root/2/disc/61",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/FADE.DAT;1",
+      "source_sha256": "ddef38a3e63fbb3680aac15569f12e02f141036ffa270ddd48cdc82bce361503",
+      "staged_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+      "staged_bytes": 16384,
+      "representation": "rnc1_decoded",
+      "private_path": "private/integration/terrain-inputs/FADE.DAT"
+    },
+    {
+      "entry_id": "root/2/disc/108",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/MAIN.PAL;1",
+      "source_sha256": "8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05",
+      "staged_sha256": "8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05",
+      "staged_bytes": 768,
+      "representation": "raw_source",
+      "private_path": "private/integration/terrain-inputs/MAIN.PAL"
+    },
+    {
+      "entry_id": "root/2/disc/107",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/MAIN.GLA;1",
+      "source_sha256": "c5e12a5b4325c8302cab0fb3ba3aaa654e2e044131763298815766d8a6f47a58",
+      "staged_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+      "staged_bytes": 65536,
+      "representation": "rnc1_decoded",
+      "private_path": "private/integration/terrain-inputs/MAIN.GLA"
+    }
+  ],
+  "original_execution": false,
+  "scope": "Exact resource binding for explicit-input native rendering; not a loaded live mission."
+}

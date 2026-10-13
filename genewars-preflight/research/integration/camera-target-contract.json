@@ -1,0 +1,101 @@
+{
+  "status": "passed-static-explicit-target-contract",
+  "checked_utc": "2026-10-13T04:14:54.214026+00:00",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-00082e20.txt",
+      "sha256": "66286b34e27300bf69ee0b62c036059c9e981596ae85703fd021a940983c7eb3"
+    },
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-0007d090.txt",
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    }
+  ],
+  "function_va": "0x82E20",
+  "caller_va": "0x7D5A5",
+  "target_source": "selected player record +9, stride0x70D; current live state",
+  "height_quantization_values": 131071,
+  "byte_wrap_pairs": 16384,
+  "vectors": [
+    {
+      "target": [
+        0,
+        0
+      ],
+      "doubled_height": 0,
+      "correction": 0,
+      "camera_cells": [
+        244,
+        254
+      ]
+    },
+    {
+      "target": [
+        -256,
+        -32768
+      ],
+      "doubled_height": 0,
+      "correction": 0,
+      "camera_cells": [
+        243,
+        126
+      ]
+    },
+    {
+      "target": [
+        0,
+        0
+      ],
+      "doubled_height": -2,
+      "correction": 0,
+      "camera_cells": [
+        244,
+        254
+      ]
+    },
+    {
+      "target": [
+        0,
+        0
+      ],
+      "doubled_height": -65536,
+      "correction": -32,
+      "camera_cells": [
+        20,
+        30
+      ]
+    },
+    {
+      "target": [
+        0,
+        0
+      ],
+      "doubled_height": 65534,
+      "correction": 31,
+      "camera_cells": [
+        213,
+        223
+      ]
+    },
+    {
+      "target": [
+        32767,
+        -1
+      ],
+      "doubled_height": 2050,
+      "correction": 1,
+      "camera_cells": [
+        114,
+        252
+      ]
+    }
+  ],
+  "formula": "q=trunc_toward_zero((doubled_height>>6)/32); cells=((x_high-q-12)&255,(y_high-q-2)&255), zero-extended words",
+  "original_execution": false,
+  "limits": [
+    "Explicit target only; not an inferred initial mission camera",
+    "Loader restoration and serialized tail prevent assuming raw file player+9 is live target",
+    "Viewport/minimap/sound/redraw side effects of82E20 are excluded"
+  ]
+}

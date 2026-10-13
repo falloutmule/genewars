@@ -1,6 +1,6 @@
 {
   "status": "archive-and-source-checks-passed",
-  "checked_utc": "2026-10-13T03:26:21.213858+00:00",
+  "checked_utc": "2026-10-13T04:15:30.033462+00:00",
   "target": "x86_64-pc-windows-gnu",
   "dependency_kinds": [
     "normal",
@@ -20,8 +20,8 @@
   },
   "private_metadata": {
     "path": "private/review/windows-dependencies/cargo-metadata.json",
-    "size": 216562,
-    "sha256": "1c9495b6d15e736ef912afef72edde28dd672507e456212d5ba8d3b9cd4673ff"
+    "size": 216825,
+    "sha256": "0a5ef3e52c7f668b1d9f81b3110194f9ccd1d2697b6c33a454c15409db095248"
   },
   "actual_windows_tree": {
     "path": "private/review/windows-dependencies/cargo-tree.txt",

@@ -1,0 +1,112 @@
+{
+  "status": "passed-independent-native-terrain-modes-review",
+  "checked_utc": "2026-10-13T04:15:20.321384+00:00",
+  "original_or_gui_execution": false,
+  "native_mode6_spans": 71289,
+  "mode6_samples_compared": 688378,
+  "opaque_mode6_samples": 681943,
+  "span_status_counts": {
+    "0": 70344,
+    "5": 204,
+    "6": 733,
+    "7": 1,
+    "4": 1,
+    "3": 1,
+    "2": 2,
+    "1": 3
+  },
+  "all_65536_shade_fractions": true,
+  "actual_overlay_tiles": [
+    157,
+    158,
+    159
+  ],
+  "all_main_gla_lookup_pairs": 65536,
+  "geometry_cases": 1229,
+  "geometry_status_counts": {
+    "0": 520,
+    "15": 704,
+    "8": 3,
+    "9": 2
+  },
+  "rows_compared": 8616,
+  "complete_frames_compared": 1552,
+  "frame_status_counts": {
+    "0/0": 511,
+    "15/0": 511,
+    "6/0": 501,
+    "6/5": 2,
+    "0/10": 1,
+    "15/10": 1,
+    "6/10": 1,
+    "0/2": 1,
+    "15/2": 1,
+    "6/2": 1,
+    "0/3": 1,
+    "15/3": 1,
+    "6/3": 1,
+    "0/8": 1,
+    "15/8": 1,
+    "6/8": 1,
+    "0/12": 1,
+    "15/12": 1,
+    "6/12": 1,
+    "0/1": 3,
+    "15/1": 3,
+    "6/1": 3,
+    "0/11": 1,
+    "15/11": 1,
+    "6/11": 1
+  },
+  "written_frame_pixels": 200908,
+  "evidence": {
+    "path": "research/ghidra/terrain-modes-evidence.json",
+    "size": 9362,
+    "sha256": "df8062d53cfc6fc60d9eace6c3fbf2aeefa407aef3c34b25c53db981a80799e0"
+  },
+  "source": {
+    "path": "rust/crates/genewars-render/src/terrain_modes.rs",
+    "size": 28195,
+    "sha256": "f0caed325fdf7eec0c7fb62eff5d8ab0bc4976f1483520d52ea56dc54c80a128"
+  },
+  "harness": {
+    "path": "private/review/terrain-modes/review.exe",
+    "size": 5135374,
+    "sha256": "266b364c6feb90259381b0137bd999df17551eb95d10725104dae6fae7fcddb6"
+  },
+  "private_resources": [
+    {
+      "path": "private/integration/rnc-decoded/481677e31b05d9e4ba428932a4eaf9003fae4fe320f90daf22a947cbd3e4ef9c.bin",
+      "size": 163840,
+      "sha256": "8206e4be65dd7f1fa12df131cf2d1aab5f5b47f7181c8ace86facbb1787bcdb8"
+    },
+    {
+      "path": "private/integration/rnc-decoded/ddef38a3e63fbb3680aac15569f12e02f141036ffa270ddd48cdc82bce361503.bin",
+      "size": 16384,
+      "sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392"
+    },
+    {
+      "path": "private/integration/rnc-decoded/c5e12a5b4325c8302cab0fb3ba3aaa654e2e044131763298815766d8a6f47a58.bin",
+      "size": 65536,
+      "sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3"
+    }
+  ],
+  "review_sources": [
+    {
+      "path": "research/variants/terrain-modes-review.py",
+      "size": 13100,
+      "sha256": "282fabf07a85bb5bc83c0ac2df7e905488a9666ba86442384b0a8867a1faa1c3"
+    },
+    {
+      "path": "research/variants/terrain-modes-review.rs",
+      "size": 5958,
+      "sha256": "566f7fab45e37f1072ccdc882b65231af474eb021b44c30641c694b00d760ec0"
+    }
+  ],
+  "limits": [
+    "Explicit snapshots, operands, colors and placements only; no initial lighting or complete scene inferred",
+    "Mode6uses independent24bit sample expressions; sourcezero skipsFADE but stillchecks source bounds",
+    "Geometry0/15 skips attribute-gradient width calculation and admits its roundedzero case",
+    "All caller outputs, fullframes and sentinels stay unmodified on late validation error"
+  ]
+}

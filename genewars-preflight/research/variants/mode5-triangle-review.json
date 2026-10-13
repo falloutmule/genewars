@@ -1,0 +1,115 @@
+{
+  "status": "passed-independent-native-mode5-triangle-review",
+  "checked_utc": "2026-10-13T04:15:04.098974+00:00",
+  "original_or_gui_execution": false,
+  "native_cases": 5880,
+  "case_groups": {
+    "receipt-flat_top": 1,
+    "receipt-flat_bottom": 1,
+    "receipt-right_middle": 1,
+    "receipt-left_middle": 1,
+    "receipt-top_clip_above_middle": 1,
+    "receipt-top_clip_below_middle": 1,
+    "receipt-negative_rounding": 1,
+    "receipt-wrapped_attributes": 1,
+    "permutation-clip": 1350,
+    "random-attributes": 4500,
+    "public-row-mutation-0": 1,
+    "public-row-mutation-1": 1,
+    "public-row-mutation-2": 1,
+    "public-row-mutation-3": 1,
+    "public-row-mutation-4": 1,
+    "public-row-mutation-5": 1,
+    "public-row-mutation-6": 1,
+    "public-row-mutation-7": 1,
+    "public-row-mutation-8": 1,
+    "public-row-mutation-9": 1,
+    "public-row-mutation-10": 1,
+    "draw-admission": 4,
+    "prepare-admission": 3,
+    "coordinate-admission": 4
+  },
+  "prepared_status_counts": {
+    "0": 2181,
+    "1": 3613,
+    "3": 64,
+    "2": 19,
+    "4": 3
+  },
+  "draw_status_counts": {
+    "0": 2169,
+    "5": 2,
+    "6": 1,
+    "7": 2,
+    "4": 2,
+    "10": 1,
+    "8": 3,
+    "9": 1
+  },
+  "rows_compared": 77193,
+  "entire_frames_compared": 2181,
+  "written_pixels_compared": 3145393,
+  "evidence": {
+    "path": "research/ghidra/mode5-triangle-evidence.json",
+    "size": 15012,
+    "sha256": "d614db6f357cc4213a46398a35ee095b9859f37912d3edc20c2c8bc251392e7f"
+  },
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/planets-texture/instructions-000e1900.txt",
+      "sha256": "b38e9ce5d3b1c506cfb55c01a70baefa2308d04863d09e322a9ddb85eab9eb3b"
+    },
+    {
+      "private_path": "private/ghidra/terrain-triangle/general-right-mode5.txt",
+      "sha256": "0440a6b5dca2d51b20f59ad3a30508118c04262e82db6db1da083f59af7925a6"
+    },
+    {
+      "private_path": "private/ghidra/terrain-triangle/general-left-mode5.txt",
+      "sha256": "be101dbc2f276aedc0ac59ab801ae3945b9a1fb0dca02bbfe4b8ca14bd66a5be"
+    },
+    {
+      "private_path": "private/ghidra/terrain-triangle/flat-bottom-mode5.txt",
+      "sha256": "e7210cb50222cd0d4d427c4bc45fd6b1fa0c1a0fd997cefb77318f7acb5ea454"
+    },
+    {
+      "private_path": "private/ghidra/terrain-triangle/flat-top-mode5.txt",
+      "sha256": "e24a2035404ed0413f84215e040b794475898cd943014a62b320cd6f43d45b9b"
+    },
+    {
+      "private_path": "private/ghidra/triangle-buffer-refs/instructions-000e88a3.txt",
+      "sha256": "a6d4834500ceb20554ae26a3a4ad92db70551850dd9277f949cce154f4e2ab98"
+    },
+    {
+      "private_path": "private/ghidra/terrain-mode5.txt",
+      "sha256": "bc73059ae3b302a185735a2b82c76f40346cf7feaae33da71749a77450fbaaf9"
+    }
+  ],
+  "source": {
+    "path": "rust/crates/genewars-render/src/terrain.rs",
+    "size": 42751,
+    "sha256": "36baa11ca1f1d46d6c5bd8a71460b8d9eac3fdf1812fc19a0be45a7a94d611e9"
+  },
+  "harness": {
+    "path": "private/review/mode5-triangle/review.exe",
+    "size": 5102102,
+    "sha256": "7e171820ed4066182e799537025d6acf5b5229cc948d686c2eae12c70d99ea81"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/mode5-triangle-review.py",
+      "size": 10286,
+      "sha256": "8e8991f8767555989d7551aab7de34291c7acd5a6528f5f0d726119143ff15ab"
+    },
+    {
+      "path": "research/variants/mode5-triangle-review.rs",
+      "size": 3111,
+      "sha256": "9e13fdee9df9835c6266fc7ce01932336e194ef5c7325cc0f05de6900f74e56d"
+    }
+  ],
+  "model": "Direct E1913..E199E conditional dispatch; repeated signed32 row additions through clipped rows, exact short-X reset, separate72-bit ADD/ADC span model",
+  "limits": [
+    "Safe coordinate/clip admissions and zero-general-width rejection are deliberate restrictions",
+    "No initial camera, scene ordering, culling producer or live lighting inferred",
+    "Whole frame including pitch padding and external sentinels compared; failed rows must leave all bytes unchanged"
+  ]
+}

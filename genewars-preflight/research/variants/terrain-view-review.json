@@ -1,0 +1,833 @@
+{
+  "status": "passed-independent-native-full-terrain-view-review",
+  "checked_utc": "2026-10-13T04:15:25.133940+00:00",
+  "original_or_gui_execution": false,
+  "native_cases": 24,
+  "complete_frames": 19,
+  "full_index_pixels_compared": 5836800,
+  "pixel_writes_compared": 8294400,
+  "ordered_dirty_requests_compared": 5760,
+  "rejections": [
+    {
+      "case": [
+        3,
+        0,
+        0,
+        68,
+        0,
+        163840,
+        1
+      ],
+      "reason": "MAIN.GLA",
+      "message": "mode15 requires exact MAIN.GLA"
+    },
+    {
+      "case": [
+        5,
+        0,
+        0,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "reason": "selector",
+      "message": "unsupported base texture selector"
+    },
+    {
+      "case": [
+        0,
+        -1,
+        0,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "reason": "camera",
+      "message": "CameraOutOfRange { x: -1, y: 0 }"
+    },
+    {
+      "case": [
+        0,
+        0,
+        128,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "reason": "camera",
+      "message": "CameraOutOfRange { x: 0, y: 128 }"
+    },
+    {
+      "case": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        163839,
+        0
+      ],
+      "reason": "atlas",
+      "message": "AtlasLength { expected: 163840, actual: 163839 }"
+    }
+  ],
+  "frames": [
+    {
+      "case": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-raw",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 0,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    },
+    {
+      "case": [
+        0,
+        17,
+        29,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-raw",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 0,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    },
+    {
+      "case": [
+        0,
+        127,
+        127,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-raw",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 0,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    },
+    {
+      "case": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-factor-plan",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 0,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    },
+    {
+      "case": [
+        1,
+        17,
+        29,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-factor-plan",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 0,
+      "indices_sha256": "dd494a3db2969cd3199926a283751e6cdd486ba002d1a56d0339f44c33c62c35"
+    },
+    {
+      "case": [
+        1,
+        127,
+        127,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-factor-plan",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 0,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    },
+    {
+      "case": [
+        2,
+        0,
+        0,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-debug-flags",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 0,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    },
+    {
+      "case": [
+        2,
+        0,
+        0,
+        4,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-debug-flags",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 640,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    },
+    {
+      "case": [
+        2,
+        0,
+        0,
+        68,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-debug-flags",
+      "pairs": 320,
+      "prepared": 1240,
+      "writes": 614400,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        640
+      ],
+      "dirty_requests": 640,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    },
+    {
+      "case": [
+        2,
+        17,
+        29,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-debug-flags",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 0,
+      "indices_sha256": "dd494a3db2969cd3199926a283751e6cdd486ba002d1a56d0339f44c33c62c35"
+    },
+    {
+      "case": [
+        2,
+        17,
+        29,
+        4,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-debug-flags",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 640,
+      "indices_sha256": "dd494a3db2969cd3199926a283751e6cdd486ba002d1a56d0339f44c33c62c35"
+    },
+    {
+      "case": [
+        2,
+        17,
+        29,
+        68,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-debug-flags",
+      "pairs": 320,
+      "prepared": 1240,
+      "writes": 614400,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        640
+      ],
+      "dirty_requests": 640,
+      "indices_sha256": "4569305fef835855dc13fdef9b954cb03444ae2fba1c933cf296ac21a016824b"
+    },
+    {
+      "case": [
+        2,
+        127,
+        127,
+        0,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-debug-flags",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 0,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    },
+    {
+      "case": [
+        2,
+        127,
+        127,
+        4,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-debug-flags",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 640,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    },
+    {
+      "case": [
+        2,
+        127,
+        127,
+        68,
+        1,
+        163840,
+        0
+      ],
+      "map": "actual-explicit-debug-flags",
+      "pairs": 320,
+      "prepared": 1240,
+      "writes": 614400,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        640
+      ],
+      "dirty_requests": 640,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    },
+    {
+      "case": [
+        3,
+        0,
+        0,
+        68,
+        1,
+        163840,
+        1
+      ],
+      "map": "synthetic-zero-overlay-gla",
+      "pairs": 320,
+      "prepared": 1860,
+      "writes": 921600,
+      "requested_modes": [
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        640
+      ],
+      "dirty_requests": 640,
+      "indices_sha256": "7c9396bed759c383b2279966add4723a5e1ed2e576b15436e450ecf6df307de2"
+    },
+    {
+      "case": [
+        4,
+        127,
+        127,
+        68,
+        1,
+        163840,
+        1
+      ],
+      "map": "unsupported-selector-geometry-only",
+      "pairs": 320,
+      "prepared": 1860,
+      "writes": 921600,
+      "requested_modes": [
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        640
+      ],
+      "dirty_requests": 640,
+      "indices_sha256": "7c9396bed759c383b2279966add4723a5e1ed2e576b15436e450ecf6df307de2"
+    },
+    {
+      "case": [
+        3,
+        0,
+        0,
+        4,
+        0,
+        163840,
+        1
+      ],
+      "map": "synthetic-zero-overlay-gla",
+      "pairs": 320,
+      "prepared": 1240,
+      "writes": 614400,
+      "requested_modes": [
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 640,
+      "indices_sha256": "1aa95500ae5e4a46b5a00c5a36346e2a4b22714fdc7251cb70bbc83a128cba79"
+    },
+    {
+      "case": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        163840,
+        0
+      ],
+      "map": "actual-raw",
+      "pairs": 320,
+      "prepared": 620,
+      "writes": 307200,
+      "requested_modes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dirty_requests": 0,
+      "indices_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf"
+    }
+  ],
+  "sources": [
+    {
+      "path": "rust/crates/genewars-render/src/terrain_view.rs",
+      "size": 6172,
+      "sha256": "fec8521b27c7280da44e31d8606fad634390c9085a8180ab2dace50af3b90821"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/terrain.rs",
+      "size": 42751,
+      "sha256": "36baa11ca1f1d46d6c5bd8a71460b8d9eac3fdf1812fc19a0be45a7a94d611e9"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/terrain_modes.rs",
+      "size": 28195,
+      "sha256": "f0caed325fdf7eec0c7fb62eff5d8ab0bc4976f1483520d52ea56dc54c80a128"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/terrain_strip.rs",
+      "size": 13330,
+      "sha256": "7c24734112832f7b92d75ccdab2ea920134569bf6afb13d390a465ec7a9e50e6"
+    }
+  ],
+  "resources": [
+    {
+      "path": "private/integration/rnc-decoded/481677e31b05d9e4ba428932a4eaf9003fae4fe320f90daf22a947cbd3e4ef9c.bin",
+      "size": 163840,
+      "sha256": "8206e4be65dd7f1fa12df131cf2d1aab5f5b47f7181c8ace86facbb1787bcdb8"
+    },
+    {
+      "path": "private/integration/rnc-decoded/ddef38a3e63fbb3680aac15569f12e02f141036ffa270ddd48cdc82bce361503.bin",
+      "size": 16384,
+      "sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392"
+    },
+    {
+      "path": "private/integration/rnc-decoded/c5e12a5b4325c8302cab0fb3ba3aaa654e2e044131763298815766d8a6f47a58.bin",
+      "size": 65536,
+      "sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3"
+    }
+  ],
+  "harness": {
+    "path": "private/review/terrain-view/review.exe",
+    "size": 5179936,
+    "sha256": "765d7e569af487301696a02f45daa6e9f14d23e5607868fb869e87be5bc86aca"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/terrain-view-review.py",
+      "size": 8124,
+      "sha256": "6041edbb01368d28e981bbcb83755857214cb7f853bf78a1016d733c475fb0ff"
+    },
+    {
+      "path": "research/variants/terrain-view-review.rs",
+      "size": 2026,
+      "sha256": "2e85c9a190249b7314dd7732acde110c88283da08321a37d36533eb7f5782747"
+    }
+  ],
+  "model_dependencies": [
+    {
+      "path": "research/variants/terrain-strip-review.py",
+      "size": 8279,
+      "sha256": "9dc08176def8cd172cef9769ae8885d973ae2489fa61d0b022ae8a61f4d93845"
+    },
+    {
+      "path": "research/variants/mode5-triangle-review.py",
+      "size": 10286,
+      "sha256": "8e8991f8767555989d7551aab7de34291c7acd5a6528f5f0d726119143ff15ab"
+    },
+    {
+      "path": "research/variants/mode5-span-review.py",
+      "size": 8571,
+      "sha256": "766c422e54b2e770b0c8ed57c61cee080de7749aa3095b588ae18d2963606887"
+    },
+    {
+      "path": "research/variants/terrain-modes-review.py",
+      "size": 13100,
+      "sha256": "282fabf07a85bb5bc83c0ac2df7e905488a9666ba86442384b0a8867a1faa1c3"
+    },
+    {
+      "path": "research/variants/terrain-factor-review.py",
+      "size": 6390,
+      "sha256": "26f8936f7228d2dfdc2a717f477ed04adeaf287dbd60c5382845a128dd6d1b66"
+    }
+  ],
+  "limits": [
+    "All20columns/full640x480/context are explicit host policy, not proved startup viewport",
+    "Factor-modified map and debugflags are explicit synthetic policies; no callbacks or live initialization",
+    "MAIN.GLA required at requestedmode15 evenif later geometryculls; absenttable isallowedwhenno15requested",
+    "Fresh framebuffer returned onlyoncomplete success; mapandresourceinputs immutable"
+  ]
+}

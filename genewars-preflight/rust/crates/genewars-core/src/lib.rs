@@ -13,7 +13,8 @@ mod terrain;
 pub mod cd_candidate {
     pub use crate::campaign::{CampaignPlanError, CampaignResourcePlan};
     pub use crate::menu_control::{MenuCallback0State, MenuCallbackResult, MenuControl, MenuPacket};
-    pub use crate::terrain::{interpolate_height, TerrainError};
+    pub use crate::terrain::{camera_cells_for_target, interpolate_height, interpolate_entity_shade, plan_terrain_factor_raise_4096,
+        TerrainError, TerrainFactorChange};
     pub use crate::construction::{construction_stage3_debit, ConstructionSelector,
         InvalidConstructionSelector, ConstructionPools, ConstructionDebit, ConstructionDebitStatus};
     pub use crate::custom_list::{custom_list_offset_step, custom_list_selection, custom_list_name,

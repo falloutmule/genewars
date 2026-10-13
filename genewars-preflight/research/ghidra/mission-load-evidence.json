@@ -1,0 +1,565 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/campaign-start/instructions-00080460.txt",
+      "sha256": "15cf464ceb31fc599bc455e1cf53063eae7368d57cd66ffcd088d2a85ca70ce2"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00080590.txt",
+      "sha256": "c454d8a02dd88524f21c3bc7381dc977804aabe214a5f3cdf56b6744757d44d6"
+    },
+    {
+      "private_path": "private/ghidra/campaign-level/instructions-00071b70.txt",
+      "sha256": "df0c9245caa952c20d3d319149413fc9d12382b8d65d036bba306ce8d7f19076"
+    },
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-0007d090.txt",
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    },
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-00082e20.txt",
+      "sha256": "66286b34e27300bf69ee0b62c036059c9e981596ae85703fd021a940983c7eb3"
+    },
+    {
+      "private_path": "private/ghidra/mission-target/instructions-0008a9f0.txt",
+      "sha256": "b77f0f3b0fd369299e700c13b7507b6a8624e7c5844c8a10dd5f42f89f0ab0b8"
+    },
+    {
+      "private_path": "private/ghidra/mission-target/instructions-000884d0.txt",
+      "sha256": "8aa978e0005bc3cb47e85f70f7a05c17f62ac92aa903394056f3e571cc0522ab"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e280.txt",
+      "sha256": "c7da6a86d5c1762a101700af490e38133edc114bd1b62af80f5149436e6dc481"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-000790d0.txt",
+      "sha256": "677aa611bcae17e925c1b474b7007a42549eed5b42b9a6647f40a51c279ec5c3"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-0006d490.txt",
+      "sha256": "5b9e8ac352751ec2e9dbda6bd5abfee4d61ab7602bd7cba97119663b17eb664e"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-000982c0.txt",
+      "sha256": "0228722dc5ad00cce0af2287be4e032591d6760b3d8798ae89bc12e94e317650"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-000b6930.txt",
+      "sha256": "5acb5b90de6c218cabc4f76233b4d245107c49d27467c533e0657639b34321f4"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-000b6967.txt",
+      "sha256": "879fecc01650d2a1c2a91f41f85d071eacdad89f2d79873fa161f78442b1e1b5"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e390.txt",
+      "sha256": "527a0819499cbcd4e24f11b89444e89b3ba870ab71f0b92a7d57e358545389af"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-0005a850.txt",
+      "sha256": "e264758a9f7059194b9eecd159732595833af28f16764ef484be1a11f7216a50"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-0005a1c0.txt",
+      "sha256": "02f55f81e196715d686d5427c1475d280f0e4fbf13499355dd7974c629d989b9"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e3e0.txt",
+      "sha256": "c0e8f233d9252d9bc3e9abe41d00ebe8a6b5a0c49d367cf746675cc83d1bd555"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-0006c950.txt",
+      "sha256": "a23b3c2199717a3f3411fed3df00911bdba20aae97b6e1ab4999464b9db79a65"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-0006c690.txt",
+      "sha256": "2031cd548ca5fbda011cefd4ea96748d54fcc5f73a1c7f86db18e45ab791b624"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e400.txt",
+      "sha256": "baab823f665e719b3cdb9cc9b6d2a9db796afca7ebcfed65b169672b63fdf730"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-00057540.txt",
+      "sha256": "80b09ef936b94d6b530cdc6ad0158ca5c8db9a2b09d06ed088ab25a88a14fada"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-00056e20.txt",
+      "sha256": "ea9f9732b2e32af849a86de57a4a416a565f2fe4c6809fed6587fc0dcc99baa0"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e3f0.txt",
+      "sha256": "abc0890ec59a474e9f96d677f3f0c152fac33e398524319ec8e7de2ca3e3c976"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-00045010.txt",
+      "sha256": "379b68b64d00bc0b00b1dfe07562d58d18d62f9cd07dcf343bac3a832b511389"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-00044ff0.txt",
+      "sha256": "3b8b284ba28ec64221cc52a0b7454b40c76bdd3ba7a3306afce3663a64544905"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e450.txt",
+      "sha256": "93a27ebe8f32681f4e476559ef905b49056bc913ab9c75415491269a191faa5d"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-00049fd0.txt",
+      "sha256": "1214222816be91f742f679665f6d16b04bccd3d5c780be50f97133febe90c01c"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-00049e90.txt",
+      "sha256": "55e976eb9c620d3cd6996d5dfd810532c8ca5c0a93fcb4a34239744049f9e001"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e4a0.txt",
+      "sha256": "c7a50bacec4cecb38e3ee9ea6d96e84e4a0b70adf790271daff095e80fd7aece"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-0004ee80.txt",
+      "sha256": "ddbd113edd627a8fe70a20f53103d9c6c61b3e5e7e3081a5148359dc807eafb4"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-0004ee70.txt",
+      "sha256": "668c4eece244c7dde144bc92bcee5b6dd7eca3249fbf207cdc03a1fcdd0beaa2"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e4b0.txt",
+      "sha256": "49f92ce18f034f549dc689c37dbc160368b0119d0ba979aa339f0256d65c58b9"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-00013f00.txt",
+      "sha256": "c4fdfbfc58d5f22f89b5a3c7f164130e7b8b8e63f778c0cfbe96c12076ff45ad"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-00013ef0.txt",
+      "sha256": "5ed4fd9d81e85c8d7336d3f04d9bd29829a118a1056cbd1c3dd423277305b534"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-constructors/instructions-0001e500.txt",
+      "sha256": "994eedc561a0a6e13a64ec6cb9554d6e9a36d604e96da4190a73329aec24683b"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-00010090.txt",
+      "sha256": "7102a94a9c5d4aac7464a52da36cf7fa882fb73f1455df0b71c2e0320af28a5a"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-00010060.txt",
+      "sha256": "518f7e316012183b083623aca3e4b01b8feedee77b0476c56e24d6f76a7d441d"
+    }
+  ],
+  "scope": "ExactCDCONQ001 source-only prefix/tail and gatedinitialcamera derivation; not a full live-state emulator.",
+  "source": {
+    "entry_id": "root/2/disc/152",
+    "size": 343958,
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+    "layout_tag": "0x55336"
+  },
+  "start_target_table": {
+    "file_offset": 7294,
+    "count": 4,
+    "entry_stride": 4,
+    "word_layout": "u16x/u16y packedfraction8 coordinates",
+    "values": [
+      889213184,
+      0,
+      0,
+      0
+    ],
+    "first_target_x_y": [
+      20736,
+      13568
+    ],
+    "initial_loaded_player_plus9_allzero": true
+  },
+  "target_producers": {
+    "80460": "Reads11A9DE+4*player into player+9.",
+    "7D090": "Eachactiveplayer iteration unconditionally copies11A9DE+4*player to+9 at7D6E5/6EB before selected-player82E20call7D5A2."
+  },
+  "player_restore_ranges": [
+    [
+      0,
+      1185
+    ],
+    [
+      1562,
+      1783
+    ]
+  ],
+  "serialized_groups": [
+    {
+      "family": 0,
+      "count": 300,
+      "file_offset": 243038,
+      "file_end_exclusive": 277838,
+      "packed_stride": 116,
+      "native_state_offset": 243038,
+      "native_stride": 124,
+      "serialized_header": [
+        0,
+        31
+      ],
+      "serialized_payload": [
+        31,
+        116
+      ],
+      "native_header": [
+        0,
+        31
+      ],
+      "native_payload": [
+        39,
+        124
+      ],
+      "unserialized_native_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "constructor_descriptor": "0x111fc4",
+      "constructor": "0x1e390",
+      "vtable": "0x111fec",
+      "reader": "0x5a850",
+      "active_init": "0x5a1c0",
+      "active_raw_byte_nonzero": 1,
+      "source_sha256": "68f6bc31cefd87bcbf2a14387ea4485e3429427c767a6191a5a2109d0c177ae7"
+    },
+    {
+      "family": 1,
+      "count": 512,
+      "file_offset": 277838,
+      "file_end_exclusive": 298830,
+      "packed_stride": 41,
+      "native_state_offset": 280238,
+      "native_stride": 49,
+      "serialized_header": [
+        0,
+        31
+      ],
+      "serialized_payload": [
+        31,
+        41
+      ],
+      "native_header": [
+        0,
+        31
+      ],
+      "native_payload": [
+        39,
+        49
+      ],
+      "unserialized_native_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "constructor_descriptor": "0x111fb0",
+      "constructor": "0x1e3e0",
+      "vtable": "0x1120ac",
+      "reader": "0x6c950",
+      "active_init": "0x6c690",
+      "active_raw_byte_nonzero": 40,
+      "source_sha256": "99242c414f302ee86cf5b8e611eb1aed031c3a6fff628164d338ea3cac0bbf71"
+    },
+    {
+      "family": 2,
+      "count": 20,
+      "file_offset": 298830,
+      "file_end_exclusive": 301630,
+      "packed_stride": 140,
+      "native_state_offset": 305326,
+      "native_stride": 200,
+      "serialized_header": [
+        0,
+        31
+      ],
+      "serialized_payload": [
+        31,
+        140
+      ],
+      "native_header": [
+        0,
+        31
+      ],
+      "native_payload": [
+        39,
+        148
+      ],
+      "unserialized_native_ranges": [
+        [
+          31,
+          39
+        ],
+        [
+          148,
+          200
+        ]
+      ],
+      "constructor_descriptor": "0x111f9c",
+      "constructor": "0x1e400",
+      "vtable": "0x112194",
+      "reader": "0x57540",
+      "active_init": "0x56e20",
+      "active_raw_byte_nonzero": 0,
+      "source_sha256": "cd99e0d7b38a723658d7bf5eb2e9bb3238a13d62a467a1e7b4608db065cdf744"
+    },
+    {
+      "family": 3,
+      "count": 256,
+      "file_offset": 301630,
+      "file_end_exclusive": 316734,
+      "packed_stride": 59,
+      "native_state_offset": 309326,
+      "native_stride": 67,
+      "serialized_header": [
+        0,
+        31
+      ],
+      "serialized_payload": [
+        31,
+        59
+      ],
+      "native_header": [
+        0,
+        31
+      ],
+      "native_payload": [
+        39,
+        67
+      ],
+      "unserialized_native_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "constructor_descriptor": "0x111f88",
+      "constructor": "0x1e3f0",
+      "vtable": "0x112120",
+      "reader": "0x45010",
+      "active_init": "0x44ff0",
+      "active_raw_byte_nonzero": 0,
+      "source_sha256": "34138c0d8d7238efc547a9e9607a43380142222eb38d413d62d2236442d52580"
+    },
+    {
+      "family": 4,
+      "count": 200,
+      "file_offset": 316734,
+      "file_end_exclusive": 331334,
+      "packed_stride": 73,
+      "native_state_offset": 326478,
+      "native_stride": 81,
+      "serialized_header": [
+        0,
+        31
+      ],
+      "serialized_payload": [
+        31,
+        73
+      ],
+      "native_header": [
+        0,
+        31
+      ],
+      "native_payload": [
+        39,
+        81
+      ],
+      "unserialized_native_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "constructor_descriptor": "0x111f74",
+      "constructor": "0x1e450",
+      "vtable": "0x112254",
+      "reader": "0x49fd0",
+      "active_init": "0x49e90",
+      "active_raw_byte_nonzero": 0,
+      "source_sha256": "6925cf23050445e3eac95965733a52806b0d762f38f2d5bd203d6c09c543fe70"
+    },
+    {
+      "family": 5,
+      "count": 32,
+      "file_offset": 331334,
+      "file_end_exclusive": 332646,
+      "packed_stride": 41,
+      "native_state_offset": 342678,
+      "native_stride": 49,
+      "serialized_header": [
+        0,
+        31
+      ],
+      "serialized_payload": [
+        31,
+        41
+      ],
+      "native_header": [
+        0,
+        31
+      ],
+      "native_payload": [
+        39,
+        49
+      ],
+      "unserialized_native_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "constructor_descriptor": "0x111f60",
+      "constructor": "0x1e4a0",
+      "vtable": "0x1122fc",
+      "reader": "0x4ee80",
+      "active_init": "0x4ee70",
+      "active_raw_byte_nonzero": 0,
+      "source_sha256": "ed4690cf942f0dc9a1bfb02a33e1562bdb4d306a81ffc9507d4a6df716e637ea"
+    },
+    {
+      "family": 6,
+      "count": 32,
+      "file_offset": 332646,
+      "file_end_exclusive": 335494,
+      "packed_stride": 89,
+      "native_state_offset": 344246,
+      "native_stride": 97,
+      "serialized_header": [
+        0,
+        31
+      ],
+      "serialized_payload": [
+        31,
+        89
+      ],
+      "native_header": [
+        0,
+        31
+      ],
+      "native_payload": [
+        39,
+        97
+      ],
+      "unserialized_native_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "constructor_descriptor": "0x111f4c",
+      "constructor": "0x1e4b0",
+      "vtable": "0x11236c",
+      "reader": "0x13f00",
+      "active_init": "0x13ef0",
+      "active_raw_byte_nonzero": 0,
+      "source_sha256": "0f2628bb2eb8125efcba5cde3725191510291f5be1f0001c3734ddcf066102fe"
+    },
+    {
+      "family": 7,
+      "count": 16,
+      "file_offset": 335494,
+      "file_end_exclusive": 336998,
+      "packed_stride": 94,
+      "native_state_offset": 347350,
+      "native_stride": 102,
+      "serialized_header": [
+        0,
+        31
+      ],
+      "serialized_payload": [
+        31,
+        94
+      ],
+      "native_header": [
+        0,
+        31
+      ],
+      "native_payload": [
+        39,
+        102
+      ],
+      "unserialized_native_ranges": [
+        [
+          31,
+          39
+        ]
+      ],
+      "constructor_descriptor": "0x111f38",
+      "constructor": "0x1e500",
+      "vtable": "0x11242c",
+      "reader": "0x10090",
+      "active_init": "0x10060",
+      "active_raw_byte_nonzero": 0,
+      "source_sha256": "162ddab44550b22f90e8d27afd6af7a8789f89c13662ce6351ae7d886cf11b23"
+    }
+  ],
+  "tail_globals": {
+    "file_offset": 336998,
+    "size": 52,
+    "destination": "0x118770",
+    "flags_byte_offset": 0,
+    "flags_value": 56,
+    "active_player_count_byte_offset": 28,
+    "active_player_count": 1,
+    "sha256": "30d9d91f788b07cd1398611e5bba122e5491c9729e8287fc8e86c8b8befad996"
+  },
+  "viewport_snapshot": {
+    "file_offset": 337050,
+    "size": 4,
+    "destination": "0x16e0a8",
+    "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "note": "Later82E20overwritescamera; this is not finalinitialcamera."
+  },
+  "extension": {
+    "file_offset": 337054,
+    "tag": 1726,
+    "payload_offset": 337058,
+    "payload_size": 6900,
+    "payload_sha256": "5497d40caede49ec602afdf3d56389a1b40c9078630ddb440314921af8c10301",
+    "interpretation": "opaque"
+  },
+  "initial_target_gates": [
+    "Successfulfileload exact55336source.",
+    "Selectedplayer0 andactivecount1. Currentselectedindex is retained bymenu; do notgeneralize toarbitrarysessionstate.",
+    "Tailflags38preservecampaign20, so8A9F0targetpermutation is skipped.",
+    "Eightvirtualreadersresolvedthroughconstructorvtable; activeinitwritesonlyentity/stack, so targettable andmapheight survive."
+  ],
+  "first_camera": {
+    "selected_player": 0,
+    "target_u32": 889213184,
+    "target_cell": [
+      81,
+      53
+    ],
+    "target_fraction": [
+      0,
+      0
+    ],
+    "height_record_i16": 3136,
+    "height_helper_output": 6272,
+    "q": 3,
+    "camera_cell": [
+      66,
+      48
+    ]
+  },
+  "b32_file_selector": {
+    "file_offset": 7259,
+    "value": 0,
+    "format": "data\\b32%c.dat",
+    "character": "a",
+    "result": "data/b32a.dat"
+  },
+  "safety": [
+    "Borrowrawserializedrecords; do not inventnativevptr/resourcepointers or copyentirepackedrecords tonativestruct.",
+    "Family2nativeC8 serializesonly[0,1F)and[27,94), leaving94..C8runtime-only.",
+    "Base6D490mutates staginginput+15/+17 aftercopy, notsourcefile; source-onlyparserpreservesoriginalbytes.",
+    "Opaqueextension/globalbytes remainopaque exceptexplicitflag/countfields.",
+    "No original missionexecution or runtime-statecapture occurred."
+  ]
+}

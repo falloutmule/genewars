@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-terrain-vertex-review",
-  "checked_utc": "2026-10-13T03:26:14.088160+00:00",
+  "checked_utc": "2026-10-13T04:14:58.391752+00:00",
   "original_or_gui_execution": false,
   "height_values": 65536,
   "cell_flag_values": 256,
@@ -26,13 +26,13 @@
   },
   "source": {
     "path": "rust/crates/genewars-render/src/terrain.rs",
-    "size": 11819,
-    "sha256": "f96ee7ade46d28bfc125ea91135f26f8a6596d4e5e29b77fe507552d9eba2387"
+    "size": 42751,
+    "sha256": "36baa11ca1f1d46d6c5bd8a71460b8d9eac3fdf1812fc19a0be45a7a94d611e9"
   },
   "harness": {
     "path": "private/review/terrain-vertex/review.exe",
     "size": 5083237,
-    "sha256": "a1b8485eba44dda4b73be59a18202230eaf07cfbccc14bf093c84e5350a29387"
+    "sha256": "bcd36be256b920b529be733b27cc72886d7b5812244807346dcd51459e5b952e"
   },
   "review_sources": [
     {

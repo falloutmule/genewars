@@ -102,7 +102,7 @@ def main():
   source_receipts=[record(x) for x in receipts],private_listings=listings,
   crate_sources=[record(ROOT/f'rust/crates/genewars-{crate}/src/{name}') for crate,name in [('core','campaign.rs'),('core','menu_control.rs'),('assets','lib.rs'),('render','lib.rs')]],
   inputs=[record(x) for x in [anb_path,palette_path,header_path,map_path]],harness=record(exe),review_sources=[record(Path(__file__)),record(Path(__file__).with_suffix('.rs'))],
-  limits=['Progress0..23/system0..3 are safe-port admissions, not original checks or completion policy','Title hit union supports zero component flags; transforms not admitted','Safe complete-row RLE validation stronger than original final-row early-return','Copied mission prefix exposes initial bytes, not post-normalizer live state','No menu input cadence, mission simulation or GUI parity inferred'])
+  limits=['Progress0..23/system0..3 are safe-port admissions, not original checks or completion policy','Title hit union supports zero component flags; transforms not admitted','Safe complete-row RLE validation stronger than original final-row early-return','Copied mission prefix exposes initial serialized bytes; later live-state mutations are not modeled','No menu input cadence, mission simulation or GUI parity inferred'])
  (ROOT/'research/variants/campaign-menu-review.json').write_text(json.dumps(receipt,indent=2)+'\n')
  print(json.dumps({k:v for k,v in receipt.items() if k not in ['private_listings','source_receipts','crate_sources','inputs','harness','review_sources']}))
 

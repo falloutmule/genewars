@@ -1,0 +1,7 @@
+# Independent terrain-strip planner review
+
+The native planner passed 7,868 cases, including 7,860 admitted strips and eight admission failures. The independent model evolves alternating cached vertices and screen baselines, rather than calling the production projection helper. Every ordered event and field was compared: 352,524 events, 122,256 dirty requests, 230,268 triangle requests and 58,988 dirty requests preceding a culled half. The review covers the exact CONQ001 region, both height extrema, zero-shade mode 0, all context bytes, all orientation rows and all texture selector bytes. See [the reproducible receipt](terrain-strip-review.json).
+
+No implementation defect was found. Dirty A/B requests occur before each half's cull, with masks FB/F7. Triangle order is A,C,B then B,C,D, with base, optional mode 6, optional mode 15 in that order. Cache evolution stops only after both new vertices reach the explicit lower extent, including the maximum admitted 48-pair case. Immutable map bytes are preserved.
+
+`OutOfRangeSelector(160..255)` accurately reports unsupported texture addressing. It is distinct from the source's raw cell-pointer fallback at 16E098, which cannot equal a cell in the admitted exact map region. The planner intentionally surfaces modes 0/6/15 and unsupported selectors as requests; it does not imply their pixels have been rendered. No outer viewport interval, initial camera, initial factor state or complete scene is selected by this review.

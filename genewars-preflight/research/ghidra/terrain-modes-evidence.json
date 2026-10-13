@@ -1,0 +1,352 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/terrain-overlay/mode6-span.txt",
+      "sha256": "c9042609cea8a4d372adb9c2f0e5f4bcf7606cf5b5f28fc53990e5d37f75db80"
+    },
+    {
+      "private_path": "private/ghidra/terrain-overlay/mode6-lanes.txt",
+      "sha256": "a22ce6e1486c9eac677207b46792234e6c51a92f54c67986c1c2a80d4af2f28e"
+    },
+    {
+      "private_path": "private/ghidra/terrain-triangle/mode0-span.txt",
+      "sha256": "432ea8db2bb5409ab419ebbada9f2d62bff6fdd070eba0e54befc4c0b7abdc1d"
+    },
+    {
+      "private_path": "private/ghidra/terrain-overlay/mode15-span.txt",
+      "sha256": "f5506212bbe85ad618e16f6a0ed28f88518bb0b8e213de2e1a4e71eb682acb70"
+    },
+    {
+      "private_path": "private/ghidra/terrain-overlay/general-right-mode0.txt",
+      "sha256": "db0f283b30f18b48cdd89e0c21f079afa68b36ca301d30491f94fb42f1e66083"
+    },
+    {
+      "private_path": "private/ghidra/terrain-overlay/general-left-mode0.txt",
+      "sha256": "54e8edb79da04c08c0c8fa9b74521dba60fb712dfcec6dd951163bbac57aeba3"
+    },
+    {
+      "private_path": "private/ghidra/terrain-overlay/flat-bottom-mode0.txt",
+      "sha256": "2cc59113976555d42a2078c96e5b14e51260cab4eb7bcb3ee28dcd4d7877670d"
+    },
+    {
+      "private_path": "private/ghidra/terrain-overlay/flat-top-mode0.txt",
+      "sha256": "ea260a4e9d8f3d709ac2a6d09f52025535de20e7d8bc4da07cd579a877bb10c2"
+    },
+    {
+      "private_path": "private/ghidra/terrain-overlay-resource-refs/instructions-0001d770.txt",
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    }
+  ],
+  "dispatch_targets": {
+    "0xe1a67": {
+      "0": "0xe2161",
+      "5": "0xe1ad3",
+      "6": "0xe1ad3",
+      "15": "0xe2161"
+    },
+    "0xe2374": {
+      "0": "0xe2ac8",
+      "5": "0xe23e0",
+      "6": "0xe23e0",
+      "15": "0xe2ac8"
+    },
+    "0xe2ca2": {
+      "0": "0xe3001",
+      "5": "0xe2d0e",
+      "6": "0xe2d0e",
+      "15": "0xe3001"
+    },
+    "0xe3121": {
+      "0": "0xe347e",
+      "5": "0xe318d",
+      "6": "0xe318d",
+      "15": "0xe347e"
+    },
+    "0xe3513": {
+      "0": "0xe357f",
+      "5": "0xe3f93",
+      "6": "0xe42aa",
+      "15": "0xe5b70"
+    }
+  },
+  "mode0": "Geometry-only rows; fillcoveredspanwithunsignedcolorbyte. Stripcolor=0.",
+  "mode15": "Samegeometry-onlyrows; output=MAIN.GLA[existingdestination*256+unsignedcolorbyte], alwayswrite. Stripcolor=0.",
+  "mode6": "Same20Bpreparedrows/gradientsasmode5; independent24-bit U,V,S fixedpoint (16fraction+8integer), eachsamplefollowedbywrappingaddition. Sourcezero skipsFADElookup/write; nonzero outputFADE[(S>>16&255)*256+source].",
+  "admission": "Coordinates-4096..4096/clipheight1..480 aspriortriangle; spanclipwidth1..640; orderedintegerleft<=right within-4096..4096; exactFADE16384/GLA65536; alltextureaddresseschecked; shade<64onlywhenFADEactuallyread.",
+  "mode0_15_geometry": "Samecyclicorder/slopeculling/shortedge-reset/verticalcoverageaspriortriangle; noattributesorroundedhorizontalgradientwidthcalculation. Generalroundedwidth0isadmittedhere, unlikeunsafeattribute-prep.",
+  "zero_gradient_width_geometry_vector": {
+    "vertices": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        3,
+        2,
+        2,
+        2
+      ]
+    ],
+    "clip_height": 4,
+    "rows": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        21845,
+        65536
+      ],
+      [
+        2,
+        43690,
+        65536
+      ]
+    ]
+  },
+  "mode6_synthetic_vectors": [
+    {
+      "name": "opaque_zero_skip",
+      "clip_width": 8,
+      "left_fixed": 0,
+      "right_fixed": 524288,
+      "attrs_u_v_s": [
+        0,
+        0,
+        2097152
+      ],
+      "steps_du_dv_ds": [
+        65536,
+        0,
+        0
+      ],
+      "output": {
+        "start": 0,
+        "pixels": [
+          0,
+          227,
+          230,
+          233,
+          236,
+          239,
+          242,
+          245
+        ],
+        "mask": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "negative_clip",
+      "clip_width": 8,
+      "left_fixed": -196608,
+      "right_fixed": 327680,
+      "attrs_u_v_s": [
+        98304,
+        147456,
+        2129920
+      ],
+      "steps_du_dv_ds": [
+        32768,
+        16384,
+        -4096
+      ],
+      "output": {
+        "start": 0,
+        "pixels": [
+          248,
+          248,
+          251,
+          251,
+          3
+        ],
+        "mask": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "negative_steps",
+      "clip_width": 8,
+      "left_fixed": 0,
+      "right_fixed": 524288,
+      "attrs_u_v_s": [
+        425984,
+        475136,
+        2129920
+      ],
+      "steps_du_dv_ds": [
+        -32768,
+        -16384,
+        -4096
+      ],
+      "output": {
+        "start": 0,
+        "pixels": [
+          21,
+          21,
+          13,
+          13,
+          10,
+          10,
+          2,
+          2
+        ],
+        "mask": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "retained_shade_fraction",
+      "clip_width": 8,
+      "left_fixed": 0,
+      "right_fixed": 524288,
+      "attrs_u_v_s": [
+        98304,
+        147456,
+        2162686
+      ],
+      "steps_du_dv_ds": [
+        0,
+        0,
+        1
+      ],
+      "output": {
+        "start": 0,
+        "pixels": [
+          237,
+          237,
+          244,
+          244,
+          244,
+          244,
+          244,
+          244
+        ],
+        "mask": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "independent24bit_chain_checks": 1088,
+  "mode6_actual_fixtures": [
+    {
+      "tile": 157,
+      "texture_base": 155808,
+      "shade_row": 32,
+      "opaque": 37,
+      "pixels_sha256": "1c3599b8cc268af68dc9f30bcd8ae5abb29a31dbb2f1151aaaac67756977a8e0",
+      "mask_sha256": "c4f9adafe3e69d81fe897b2ebb86b4f091f7a8b5ff6299da2fdbfc478d4b9d55",
+      "private_output": "private/ghidra/terrain-overlay/mode6-tile-157.bin"
+    },
+    {
+      "tile": 158,
+      "texture_base": 155840,
+      "shade_row": 32,
+      "opaque": 102,
+      "pixels_sha256": "e2c435ae1465e6c0c03aaa1bac8e4c7c4a5a82183681677262fa392c3eab2e2a",
+      "mask_sha256": "b9996569b93ad3759c80fa8b6d91c8cc61996dfd494f608ae3a9cce36334346f",
+      "private_output": "private/ghidra/terrain-overlay/mode6-tile-158.bin"
+    },
+    {
+      "tile": 159,
+      "texture_base": 155872,
+      "shade_row": 32,
+      "opaque": 177,
+      "pixels_sha256": "44d80de0cd063eef9edc6527862b56f204c9440a7869945781c2dfd54af384be",
+      "mask_sha256": "6d9b7d07e2024af64b7aa19465333ac393b5063997ea2996fca44bd00594b74b",
+      "private_output": "private/ghidra/terrain-overlay/mode6-tile-159.bin"
+    }
+  ],
+  "mode15_actual_fixtures": [
+    {
+      "color": 0,
+      "destination_input": "0..255",
+      "output_sha256": "054b2b5f1f5101b9ec2301075c899586829f4bbd2bbc37701fb98753cd067128",
+      "private_output": "private/ghidra/terrain-overlay/mode15-color-0.bin"
+    },
+    {
+      "color": 97,
+      "destination_input": "0..255",
+      "output_sha256": "4b333f3dfe647574f7ac60b36c7a8c990ccc88d6d393903cfa52394f68d32832",
+      "private_output": "private/ghidra/terrain-overlay/mode15-color-97.bin"
+    },
+    {
+      "color": 255,
+      "destination_input": "0..255",
+      "output_sha256": "5a7329fd1823e0a6fb50602aa78a68cb4ce54971e0cfcc79f313d48ce9692ab7",
+      "private_output": "private/ghidra/terrain-overlay/mode15-color-255.bin"
+    }
+  ],
+  "overlay_pointer_producer": {
+    "function": "0x1d770",
+    "table_base": "0x115bec",
+    "overlay_table": "0x115e60",
+    "atlas_tiles": [
+      157,
+      158,
+      159
+    ],
+    "formula": "base+(tile//8)*8192+(tile%8)*32",
+    "source_entry": "root/2/disc/40",
+    "source_sha256": "481677e31b05d9e4ba428932a4eaf9003fae4fe320f90daf22a947cbd3e4ef9c",
+    "decoded_sha256": "8206e4be65dd7f1fa12df131cf2d1aab5f5b47f7181c8ace86facbb1787bcdb8"
+  },
+  "mode15_resource": {
+    "entry_id": "root/2/disc/107",
+    "path": "GAME/DATA/MAIN.GLA",
+    "source_size": 34551,
+    "source_sha256": "c5e12a5b4325c8302cab0fb3ba3aaa654e2e044131763298815766d8a6f47a58",
+    "decoded_size": 65536,
+    "decoded_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
+    "load_call": "0x1dc88",
+    "destination": "0x18cf48"
+  },
+  "limits": [
+    "Explicitcallerinputs; no startupcamera/factor choices.",
+    "Negativezero-width originalunroll behavior is excluded bypositiveclipwidth admission.",
+    "Mode6 masks must preserveexistingdestination onzeros; no arbitrary transparency color."
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "status": "passed-independent-native-mode5-span-review",
+  "checked_utc": "2026-10-13T04:15:01.897017+00:00",
+  "original_or_gui_execution": false,
+  "cases": 7979,
+  "written_pixels_compared": 583275,
+  "case_groups": {
+    "receipt-positive_steps": 1,
+    "receipt-left_fraction_clipped": 1,
+    "receipt-right_clipped_negative_u": 1,
+    "receipt-negative_shade_carry": 1,
+    "receipt-byte_coordinate_wrap": 1,
+    "receipt-subpixel_empty": 1,
+    "receipt-unroll_residue_19": 1,
+    "receipt-negative_v": 1,
+    "actual-0": 1,
+    "actual-7": 1,
+    "actual-8": 1,
+    "actual-159": 1,
+    "unroll": 640,
+    "coverage-extreme": 320,
+    "random-valid": 3500,
+    "random-bounds": 3500,
+    "late-shade": 1,
+    "late-source": 1,
+    "address-overflow": 1,
+    "short-output": 1,
+    "negative-width": 1,
+    "zero-source-emits": 1,
+    "zero-width-safe-deviation": 1
+  },
+  "status_counts": {
+    "0": 5162,
+    "5": 1713,
+    "3": 1101,
+    "4": 1,
+    "2": 1,
+    "1": 1
+  },
+  "independent_model": "One72-bit accumulator C|D<<32|v<<64 and one72-bit gradient addition; full32 clipping happens before packing",
+  "atomic_output": "Entireprefix/output/tail buffer checked for everycase; rejectedlate-shade/source andshort-output remainunmodified",
+  "zero_width": "Safe empty behavior differs from originalnegative-left zero-width unroll; original equivalence restricted topositiveclipwidth",
+  "evidence": {
+    "path": "research/ghidra/mode5-span-evidence.json",
+    "size": 15414,
+    "sha256": "47c2d5c3354907bd59ecefeaf8f97dfb0c67d2b1296b1217fb8614da958aee32"
+  },
+  "listing": {
+    "path": "private/ghidra/terrain-mode5.txt",
+    "size": 6934,
+    "sha256": "bc73059ae3b302a185735a2b82c76f40346cf7feaae33da71749a77450fbaaf9"
+  },
+  "inputs": [
+    {
+      "path": "private/integration/rnc-decoded/481677e31b05d9e4ba428932a4eaf9003fae4fe320f90daf22a947cbd3e4ef9c.bin",
+      "size": 163840,
+      "sha256": "8206e4be65dd7f1fa12df131cf2d1aab5f5b47f7181c8ace86facbb1787bcdb8"
+    },
+    {
+      "path": "private/integration/rnc-decoded/ddef38a3e63fbb3680aac15569f12e02f141036ffa270ddd48cdc82bce361503.bin",
+      "size": 16384,
+      "sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392"
+    }
+  ],
+  "production_source": {
+    "path": "rust/crates/genewars-render/src/terrain.rs",
+    "size": 42751,
+    "sha256": "36baa11ca1f1d46d6c5bd8a71460b8d9eac3fdf1812fc19a0be45a7a94d611e9"
+  },
+  "harness": {
+    "path": "private/review/mode5-span/review.exe",
+    "size": 5090377,
+    "sha256": "7301cb4ee645c1436e826e49a94a97bdbd106eb9c58604189f3af1bdbb68e387"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/mode5-span-review.py",
+      "size": 8571,
+      "sha256": "766c422e54b2e770b0c8ed57c61cee080de7749aa3095b588ae18d2963606887"
+    },
+    {
+      "path": "research/variants/mode5-span-review.rs",
+      "size": 2205,
+      "sha256": "5a20d622cdfba34253922b19edf3f0c305c519132fc7380425781eb1158e2c08"
+    }
+  ],
+  "limits": [
+    "Preparedhorizontalspan only; no triangleedge/gradientsetup/verticalcoverage/culling",
+    "Texturecoordinates arebytes into fullpitchedallocation, not compact32x32tilebounds",
+    "Original unchecked source/shadebounds are safelyrejected; no clamping",
+    "No originalrender/frame/cadence equivalence claimed"
+  ]
+}

@@ -75,7 +75,7 @@ def main():
   integer_bound=dict(max_abs_difference=65535,max_fraction=255,max_abs_two_product_sum=2*65535*255,result_min=-65536,result_max=65534),
   evidence=record(proof_path),private_listings=listings,inputs=[record(source),record(atlas_path)],harness=record(exe),
   sources=[record(ROOT/'rust/crates/genewars-assets/src/map_atlas.rs'),record(ROOT/'rust/crates/genewars-core/src/terrain.rs'),record(Path(__file__)),record(Path(__file__).with_suffix('.rs'))],
-  limits=['No complete triangle rasterization/shading/camera/frame parity inferred','Map exposes initial serialized fields before runtime normalization','Atlas raw indices assign no transparency; mode5 zero-write remains explicit static evidence','Doubled interpolation result differs from separately rounded vertex projection'])
+  limits=['No complete triangle rasterization/shading/camera/frame parity inferred','Map exposes initial serialized bytes; later live-state mutations are not modeled','Atlas raw indices assign no transparency; mode5 zero-write remains explicit static evidence','Doubled interpolation result differs from separately rounded vertex projection'])
  (ROOT/'research/variants/terrain-review.json').write_text(json.dumps(receipt,indent=2)+'\n')
  print(json.dumps({k:v for k,v in receipt.items() if k not in ['tile_hashes','private_listings','sources','inputs','harness']}))
 

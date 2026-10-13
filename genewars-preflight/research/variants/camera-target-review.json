@@ -1,0 +1,55 @@
+{
+  "status": "passed-independent-native-explicit-camera-review",
+  "checked_utc": "2026-10-13T04:15:05.701593+00:00",
+  "original_or_gui_execution": false,
+  "real_target_coordinates": 475136,
+  "synthetic_target_coordinates": 917504,
+  "constant_height_sets": 14,
+  "all_coordinate_high_byte_pairs_per_set": 65536,
+  "bounds": "Short/long map extents rejected",
+  "evidence": {
+    "path": "research/integration/camera-target-contract.json",
+    "size": 2364,
+    "sha256": "15afd8665ff5cbb89a6d37b56276488eeb9ae102f650d7fdc7173496b0b0f134"
+  },
+  "private_listings": [
+    {
+      "path": "private/ghidra/terrain-camera-refs/instructions-00082e20.txt",
+      "size": 2974,
+      "sha256": "66286b34e27300bf69ee0b62c036059c9e981596ae85703fd021a940983c7eb3"
+    },
+    {
+      "path": "private/ghidra/terrain-camera-refs/instructions-0007d090.txt",
+      "size": 14585,
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    }
+  ],
+  "source": {
+    "path": "rust/crates/genewars-core/src/terrain.rs",
+    "size": 12388,
+    "sha256": "cc9698806ac6949b0152fad1df1f784b1097b3b368bd0508be9fd858ae412d24"
+  },
+  "harness": {
+    "path": "private/review/camera-target/review.exe",
+    "size": 5093462,
+    "sha256": "7c0fa39e2854cb4751bb893511aa1e90ab6f8a8e9aa4365915566091360fe967"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/camera-target-review.py",
+      "size": 5008,
+      "sha256": "d54eb851a358b78cb81b100fb15297c8de53b048c9b3709620bee4189e321c93"
+    },
+    {
+      "path": "research/variants/camera-target-review.rs",
+      "size": 1241,
+      "sha256": "b49d4365d493b5895d3d35ff9c03d54fa50299ed2135137a432604bf988b2d0d"
+    }
+  ],
+  "limits": [
+    "Explicit targets only; no startupcamera orrawfileplayer targetassumed",
+    "Resultwords zeroextendbytewrapping, range0..255; maplookups separaterepeatmod128",
+    "Viewport,minimap,sound/redraw sideeffects excluded",
+    "Negative correction truncatestowardzero afterarithmeticheightshift; no directfloor divide substitution"
+  ]
+}

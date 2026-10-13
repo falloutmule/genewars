@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-terrain-review",
-  "checked_utc": "2026-10-13T03:26:13.589470+00:00",
+  "checked_utc": "2026-10-13T04:14:57.855577+00:00",
   "original_or_gui_execution": false,
   "real_cells": 16384,
   "raw_cell_bytes": 229376,
@@ -748,23 +748,23 @@
   "harness": {
     "path": "private/review/terrain/terrain-review.exe",
     "size": 5119462,
-    "sha256": "91600bb9be9ce609d9936d4aff15b6a73c9f2a4802962aa126624fede8748277"
+    "sha256": "5895a935b16a426121691d95741724cb9931760e1ecbe7bc8af0b2fa050f771d"
   },
   "sources": [
     {
       "path": "rust/crates/genewars-assets/src/map_atlas.rs",
-      "size": 5976,
-      "sha256": "6abaa5e15d1bf99c98caef1edc7b849e43d4941b058ca44a772ac106e487a938"
+      "size": 6745,
+      "sha256": "275facee7a4ad590ec68558bcd12016f2178eff73c058eb92d85864bc8aa30a7"
     },
     {
       "path": "rust/crates/genewars-core/src/terrain.rs",
-      "size": 4225,
-      "sha256": "4b544671060013930ec38d36471deae7f442a9dcbf7bdd95473b6ce61865a611"
+      "size": 12388,
+      "sha256": "cc9698806ac6949b0152fad1df1f784b1097b3b368bd0508be9fd858ae412d24"
     },
     {
       "path": "research/variants/terrain-review.py",
-      "size": 6827,
-      "sha256": "d4164397209552b1d62ad34bd1314316791ea5112c19d6687ffbdfd1609c99ce"
+      "size": 6841,
+      "sha256": "1347049b4051647eb14065faa6de914b70b063f3018b483fb9717a6a391d9a59"
     },
     {
       "path": "research/variants/terrain-review.rs",
@@ -774,7 +774,7 @@
   ],
   "limits": [
     "No complete triangle rasterization/shading/camera/frame parity inferred",
-    "Map exposes initial serialized fields before runtime normalization",
+    "Map exposes initial serialized bytes; later live-state mutations are not modeled",
     "Atlas raw indices assign no transparency; mode5 zero-write remains explicit static evidence",
     "Doubled interpolation result differs from separately rounded vertex projection"
   ]

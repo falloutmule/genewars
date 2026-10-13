@@ -9,6 +9,9 @@ G = P / 'private/ghidra'
 digest = lambda b: hashlib.sha256(b).hexdigest()
 candidate = '4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba'
 assert digest((G / 'GW-CD-candidate.exe').read_bytes()) == candidate
+code = (G / 'validated/memory-.object1.bin').read_bytes()
+assert code[0x80810-0x10000:0x80821-0x10000].hex() == 'b0018d80000000008d92000000008bc0c3'
+assert '00080820 RET' in (G / 'camera-player-input/80810-range.txt').read_text()
 mapped = (G / 'validated/memory-.object3.bin').read_bytes()
 u32 = lambda va: struct.unpack_from('<I', mapped, va - 0x100000)[0]
 def string(va):
@@ -81,6 +84,7 @@ receipt = {'candidate_sha256': candidate, 'scope': 'Bounded static campaign entr
  'vectors': vectors, 'assets': assets,
  'first_header': {'entry_id': 'root/2/disc/190', 'size': 699, 'sha256': digest(header), 'title_offset': 32, 'title_length': title_end - 32, 'title_search_end_exclusive': 699, 'title_sha256': digest(header[32:title_end])},
  'first_mission': {'entry_id': 'root/2/disc/152', 'size': len(level), 'sha256': digest(level), 'layout_tag': '0x55336', 'direct_prefix_size': prefix_size, 'direct_prefix_sha256': digest(level[:prefix_size]), 'serialized_tail_size': len(level) - prefix_size, 'player_offset': 20, 'player_stride': 1805, 'player_count': 4, 'uninterpreted_map_offset': '0x355e', 'uninterpreted_map_stride': 14, 'uninterpreted_map_count': 16384},
- 'safety': ['Require exact 699-byte header and an in-bounds NUL after byte32; original reader accepts any nonzero read count.', 'Preserve opaque header bytes and unknown numeric fields.', 'Do not cast CONQ file to a full live-state struct: serialized tail has separate consumers; loaded player records are normalized.', 'Preserve prior system except when signed remainder+1 equals1; backgrounds independently use signed quotient+1.', 'Original progress arithmetic is signed i8; bounded plan rejects negative and >=24 values.']}
+ 'loaded_player_success_stub': {'va': '0x80810', 'return_va': '0x80820', 'mapped_bytes_sha256': digest(code[0x80810-0x10000:0x80821-0x10000]), 'private_listing': 'private/ghidra/camera-player-input/80810-range.txt', 'listing_sha256': digest((G / 'camera-player-input/80810-range.txt').read_bytes()), 'behavior': 'AL=1; alignment instructions; RET; no loaded-record writes'},
+ 'safety': ['Require exact 699-byte header and an in-bounds NUL after byte32; original reader accepts any nonzero read count.', 'Preserve opaque header bytes and unknown numeric fields.', 'Do not cast CONQ file to a full live-state struct: serialized tail has separate consumers and selected-player restoration may modify loaded bytes; 80810 is a no-op success-return stub.', 'Preserve prior system except when signed remainder+1 equals1; backgrounds independently use signed quotient+1.', 'Original progress arithmetic is signed i8; bounded plan rejects negative and >=24 values.']}
 (P / 'research/ghidra/campaign-entry-evidence.json').write_text(json.dumps(receipt, indent=2) + '\n')
 print(f'PASS {len(listings)} instruction contracts; {len(vectors)} state-aware plans; {len(assets)} exact CD resource identities; first header and level prefix bounds')

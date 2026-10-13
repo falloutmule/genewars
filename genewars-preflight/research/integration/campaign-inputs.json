@@ -2,7 +2,7 @@
   "schema_version": 1,
   "purpose": "hash-bound first-mission input staging; no game execution or resource interpretation",
   "manifest_sha256": "6139f4083031cee88bc04849f1959ae1e43aff41eef7c87cb4a62bc8b86e9e6a",
-  "campaign_entry_evidence_sha256": "49f6920e492706f96833c35ddef8a5482e54ad276e21e9ada32f6e3de8f09005",
+  "campaign_entry_evidence_sha256": "2bc91a3444e09434ed6247f8c49629febf4136a0c62f23ed994b4d3d5e047789",
   "campaign_entry_candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
   "selected_rnc_records": [
     {

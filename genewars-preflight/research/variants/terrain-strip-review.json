@@ -1,0 +1,120 @@
+{
+  "status": "passed-independent-native-terrain-strip-review",
+  "checked_utc": "2026-10-13T04:15:09.032930+00:00",
+  "original_or_gui_execution": false,
+  "native_cases": 7868,
+  "case_groups": {
+    "actual-conq001": 960,
+    "all-context-flags": 2560,
+    "mixed-flags": 960,
+    "maximum-height": 960,
+    "minimum-height": 960,
+    "zero-shade": 960,
+    "random-context": 500,
+    "admission": 8
+  },
+  "status_counts": {
+    "0": 7860,
+    "1": 2,
+    "2": 2,
+    "3": 4
+  },
+  "pairs_histogram": {
+    "1": 2004,
+    "16": 2199,
+    "5": 610,
+    "11": 635,
+    "2": 305,
+    "6": 124,
+    "17": 116,
+    "12": 127,
+    "33": 240,
+    "48": 768,
+    "37": 243,
+    "43": 244,
+    "47": 14,
+    "36": 1,
+    "45": 9,
+    "10": 19,
+    "40": 9,
+    "13": 22,
+    "15": 42,
+    "14": 39,
+    "8": 13,
+    "7": 9,
+    "46": 22,
+    "9": 19,
+    "41": 4,
+    "4": 5,
+    "19": 1,
+    "42": 6,
+    "44": 9,
+    "3": 1,
+    "38": 1
+  },
+  "ordered_events_compared": 352524,
+  "dirty_events": 122256,
+  "culled_halves": 116821,
+  "dirty_events_before_culled_halves": 58988,
+  "triangle_mode_counts": {
+    "5": 95841,
+    "6": 95089,
+    "15": 8614,
+    "0": 30724
+  },
+  "texture_source_counts": {
+    "0": 150884,
+    "1": 79384
+  },
+  "all_256_selectors": true,
+  "all_8_orientations": true,
+  "all_256_context_flags": true,
+  "evidence": {
+    "path": "research/ghidra/terrain-strip-evidence.json",
+    "size": 15217,
+    "sha256": "358122373aaa691744e46e0f6de79f433459b4df0457fc873903a9314bbfab27"
+  },
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-0007b7f0.txt",
+      "sha256": "26769c153064fd73cf9b69c2affe127a2e9ad5f0ff76596d7610e7742b932d25"
+    },
+    {
+      "private_path": "private/ghidra/terrain-strip-refs/instructions-00083b20.txt",
+      "sha256": "8512b45082316cae239397c58fe4971b5dd69c5d94afc0429d92adb78bff7469"
+    }
+  ],
+  "source": {
+    "path": "rust/crates/genewars-render/src/terrain_strip.rs",
+    "size": 13330,
+    "sha256": "7c24734112832f7b92d75ccdab2ea920134569bf6afb13d390a465ec7a9e50e6"
+  },
+  "assets_source": {
+    "path": "rust/crates/genewars-assets/src/map_atlas.rs",
+    "size": 6745,
+    "sha256": "275facee7a4ad590ec68558bcd12016f2178eff73c058eb92d85864bc8aa30a7"
+  },
+  "harness": {
+    "path": "private/review/terrain-strip/review.exe",
+    "size": 5142299,
+    "sha256": "f54115b221e2bc6228d129a58f5e63eeb5fa38819a299035ccaf9bd50079be76"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/terrain-strip-review.py",
+      "size": 8279,
+      "sha256": "9dc08176def8cd172cef9769ae8885d973ae2489fa61d0b022ae8a61f4d93845"
+    },
+    {
+      "path": "research/variants/terrain-strip-review.rs",
+      "size": 2314,
+      "sha256": "b9a80b92d727e6402d5b01d5d69a67b95d796b9362ee6c95f21d404165865b1f"
+    }
+  ],
+  "limits": [
+    "One explicit strip; no initial camera, viewport interval or live factor chosen",
+    "Modes0/6/15 remain visible requests, not implemented pixels",
+    "Selectors160..255 are surfaced as OutOfRangeSelector, independent of unreachable rawpointer16E098 fallback",
+    "Immutable snapshot planner emits ordered dirtyAND requests without mutating map"
+  ]
+}
