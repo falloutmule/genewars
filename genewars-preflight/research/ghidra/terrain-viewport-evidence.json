@@ -1,0 +1,327 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-00082bd0.txt",
+      "sha256": "f2452de57036b4ff1b35e9e213c83bac658e77314a8e75e3a6cef167990961b6"
+    },
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-00082e20.txt",
+      "sha256": "66286b34e27300bf69ee0b62c036059c9e981596ae85703fd021a940983c7eb3"
+    },
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-00086c20.txt",
+      "sha256": "678fb24160c99fd8a7660ce5f1d08e1ce499d1011996d2926cb7fe34d4014200"
+    },
+    {
+      "private_path": "private/ghidra/terrain-strip-refs/instructions-00086840.txt",
+      "sha256": "18fe095b9393f395b4fee67cc43d0f12eed5beebd9f62de3eb8bb7f0a0d091d3"
+    },
+    {
+      "private_path": "private/ghidra/terrain-overlay-resource-refs/instructions-0001d770.txt",
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    },
+    {
+      "private_path": "private/ghidra/triangle-buffer-refs/instructions-000e88a3.txt",
+      "sha256": "a6d4834500ceb20554ae26a3a4ad92db70551850dd9277f949cce154f4e2ab98"
+    },
+    {
+      "private_path": "private/ghidra/panel-verified/instructions-00024ad0.txt",
+      "sha256": "fa373332d2ada300d5b3a7492ff0de48d2b1ab7f7c52037ca9edcb77f5e4fc70"
+    },
+    {
+      "private_path": "private/ghidra/panel-verified/instructions-00024770.txt",
+      "sha256": "dd59f4f3b8fc7a3cffbd69473a05c96feb80954bec0752792d5c1c673ae9bbcb"
+    }
+  ],
+  "scope": "Initialnon-scrolled640x480context after82E20camera reset, withpositivepanelmargin and inheritedinitializedsamplerpitch640; scenecomposition geometry and base-terrain dispatch, not allGUI/entity/timing callbacks.",
+  "pitch_precondition": "86840passesEBX0toE88A3, preserving100110. Requireinheritedpitch640;1D770setsitfromdisplaywidth at1DB51onlywhenitsdisplaylockpathreturnsEDX1. No unconditionalpitchinitializationclaim.",
+  "initializer": {
+    "va": "0x82bd0",
+    "caller": "0x1e00f",
+    "context": "0x16e0a8",
+    "fields": {
+      "0x1d": 128,
+      "0x8": 128,
+      "0xa": 0,
+      "0x33": 512,
+      "0x35": 480
+    }
+  },
+  "camera_reset": {
+    "va": "0x82e20",
+    "retains_panel_margin": true,
+    "rewrites_offsets_dimensions": true,
+    "dirty_byte_count": 20,
+    "dirty_fill_value": 2
+  },
+  "initial_strip_calls": [
+    {
+      "column": 4,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 5,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 6,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 7,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 8,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 9,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 10,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 11,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 12,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 13,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 14,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 15,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 16,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 17,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 18,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    },
+    {
+      "column": 19,
+      "buffer_delta": 0,
+      "pitch": 640,
+      "clip_width": 640,
+      "clip_height": 480,
+      "top": 0,
+      "bottom": 480,
+      "dirty_input": 2,
+      "context_flags_delta": {
+        "or_before": 4,
+        "and_after": 251
+      }
+    }
+  ],
+  "rectangles": {
+    "panel": {
+      "x": 0,
+      "y": 0,
+      "width": 128,
+      "height": 480,
+      "source_pitch": 128,
+      "destination_pitch": 640
+    },
+    "terrain": {
+      "x": 128,
+      "y": 0,
+      "width": 512,
+      "height": 480,
+      "source_pitch": 640,
+      "destination_pitch": 640
+    }
+  },
+  "palette": "MAIN.PAL association established inrenderer-evidence.json; preserveindices and declareRGB6displayconversion.",
+  "panel_resource_selection": {
+    "table": "0x105604",
+    "selector": "signedbytepanelobject+4",
+    "names": [
+      "data/mainpanl.dat",
+      "data/genepanl.dat",
+      "data/lpanel.dat"
+    ],
+    "initial_panel_selector": "UNRESOLVED",
+    "diagnostic_GENEPANL": "Explicitresourcechoice only, not yetconfirmedfirstmissionpanel."
+  },
+  "target_gate_reference": "research/ghidra/mission-load-evidence.json",
+  "selected_player0_camera": [
+    66,
+    48
+  ],
+  "partition_pixel_checks": 307200,
+  "limits": [
+    "Currentselectedplayer/starttarget gates remain asmission-loadreceipt.",
+    "Dirtycontext4doesnotchange5/6pixels, butitsmap+11ANDrequests mustremainvisible.",
+    "Startupcontextflags beyondtemporarybit4 are notinvented; explicitcalleroldflags combinewithOR4.",
+    "Panelbackgroundidentity andGUIoverlays must notbeclaimedfromplacementalone.",
+    "Scrollwrap, incrementalredraw, alternatevideomodes, entities and completeoriginalvisibility remainoutside thisreceipt."
+  ]
+}

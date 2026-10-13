@@ -1,0 +1,301 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/entity-plant/instructions-0007af00.txt",
+      "sha256": "33cd64e7635baedb406b5e42224a58db24e8c90752255891740d423cb413bf14"
+    }
+  ],
+  "function": "0x7af00",
+  "scale_precondition": {
+    "height_factor": 2,
+    "horizontal_scale": 32,
+    "vertical_scale": 16,
+    "proof": "terrain-evidence.json"
+  },
+  "inputs": {
+    "position": "two signed16wordswith8fractionbits",
+    "camera": "two unsigned16bitpatterns; allu16admitted",
+    "map": "exact229376B; signedheightwordcell+2; 128wrap",
+    "margin": "unsigned16 zeroextended"
+  },
+  "formula": "dx=signextend15(positionX-(cameraX<<8));dy=signextend15(positionY-(cameraY<<8));x=((dx-dy)*32>>8)-margin;y=((dx+dy)*16>>8)-(piecewise_doubled_height>>6)",
+  "semantics": "Arithmeticfloor shifts; worddouble/subtract/SAR1implements15-bitwrap, preserving128-celltorusdelta. Height interpolationidentical7B140factor2/shift7. Fullsigned32outputstores, nofinalwordnarrowing.",
+  "vectors": [
+    {
+      "position_i16": [
+        -32768,
+        -32768
+      ],
+      "camera_u16": [
+        0,
+        0
+      ],
+      "height2": -65536,
+      "margin_u16": 0,
+      "output_i32": [
+        0,
+        1024
+      ]
+    },
+    {
+      "position_i16": [
+        -32768,
+        -32768
+      ],
+      "camera_u16": [
+        128,
+        0
+      ],
+      "height2": 0,
+      "margin_u16": 65535,
+      "output_i32": [
+        -65535,
+        0
+      ]
+    },
+    {
+      "position_i16": [
+        -32768,
+        -32768
+      ],
+      "camera_u16": [
+        65535,
+        1
+      ],
+      "height2": 65534,
+      "margin_u16": 128,
+      "output_i32": [
+        -64,
+        -1023
+      ]
+    },
+    {
+      "position_i16": [
+        -32768,
+        0
+      ],
+      "camera_u16": [
+        0,
+        64
+      ],
+      "height2": -65536,
+      "margin_u16": 0,
+      "output_i32": [
+        2048,
+        0
+      ]
+    },
+    {
+      "position_i16": [
+        -32768,
+        0
+      ],
+      "camera_u16": [
+        128,
+        64
+      ],
+      "height2": 0,
+      "margin_u16": 65535,
+      "output_i32": [
+        -63487,
+        -1024
+      ]
+    },
+    {
+      "position_i16": [
+        -32768,
+        0
+      ],
+      "camera_u16": [
+        65535,
+        127
+      ],
+      "height2": 65534,
+      "margin_u16": 128,
+      "output_i32": [
+        -128,
+        -991
+      ]
+    },
+    {
+      "position_i16": [
+        -32768,
+        32767
+      ],
+      "camera_u16": [
+        0,
+        64
+      ],
+      "height2": -65536,
+      "margin_u16": 65535,
+      "output_i32": [
+        -67583,
+        2047
+      ]
+    },
+    {
+      "position_i16": [
+        -32768,
+        32767
+      ],
+      "camera_u16": [
+        128,
+        64
+      ],
+      "height2": 0,
+      "margin_u16": 128,
+      "output_i32": [
+        -2176,
+        1023
+      ]
+    },
+    {
+      "position_i16": [
+        -32768,
+        32767
+      ],
+      "camera_u16": [
+        65535,
+        127
+      ],
+      "height2": 65534,
+      "margin_u16": 0,
+      "output_i32": [
+        0,
+        -992
+      ]
+    },
+    {
+      "position_i16": [
+        0,
+        -32768
+      ],
+      "camera_u16": [
+        0,
+        32768
+      ],
+      "height2": -65536,
+      "margin_u16": 0,
+      "output_i32": [
+        0,
+        1024
+      ]
+    },
+    {
+      "position_i16": [
+        0,
+        -32768
+      ],
+      "camera_u16": [
+        128,
+        65535
+      ],
+      "height2": 0,
+      "margin_u16": 65535,
+      "output_i32": [
+        -65567,
+        16
+      ]
+    },
+    {
+      "position_i16": [
+        0,
+        -32768
+      ],
+      "camera_u16": [
+        65535,
+        65535
+      ],
+      "height2": 65534,
+      "margin_u16": 128,
+      "output_i32": [
+        -128,
+        -991
+      ]
+    },
+    {
+      "position_i16": [
+        0,
+        0
+      ],
+      "camera_u16": [
+        0,
+        0
+      ],
+      "height2": 0,
+      "margin_u16": 65535,
+      "output_i32": [
+        -65535,
+        0
+      ]
+    },
+    {
+      "position_i16": [
+        16384,
+        0
+      ],
+      "camera_u16": [
+        0,
+        0
+      ],
+      "height2": 0,
+      "margin_u16": 0,
+      "output_i32": [
+        -2048,
+        -1024
+      ]
+    },
+    {
+      "position_i16": [
+        -16384,
+        0
+      ],
+      "camera_u16": [
+        0,
+        0
+      ],
+      "height2": 0,
+      "margin_u16": 0,
+      "output_i32": [
+        -2048,
+        -1024
+      ]
+    },
+    {
+      "position_i16": [
+        0,
+        0
+      ],
+      "camera_u16": [
+        65535,
+        32768
+      ],
+      "height2": -1,
+      "margin_u16": 128,
+      "output_i32": [
+        -96,
+        17
+      ]
+    }
+  ],
+  "word_delta_equivalence_checks": 3179,
+  "actual_fixture": {
+    "source_entry": "root/2/disc/152",
+    "source_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+    "numeric_family": 1,
+    "active_points": 40,
+    "camera": [
+      66,
+      48
+    ],
+    "panel_margin": 128,
+    "private_path": "private/ghidra/entity-plant/point-fixture.json",
+    "sha256": "0b868c187f8858d1ce7d1fdceabb28811e602d85f1b309615e79aa558b1efcc9"
+  },
+  "limits": [
+    "Pointhelperonly; caller83140laterstoresx/relativeywordsandsorts/clipsentities, separately.",
+    "No startupselectedplayer/factor/visibilitystateinferred; explicitcamera66,48testusespriorgatedmissionreceipt.",
+    "Do notreplaceheight2>>6with2*(height>>6)vertexroundingoruseunwrappeddeltas."
+  ]
+}

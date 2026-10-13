@@ -128262,7 +128262,7 @@
       }
     }
   ],
-  "decoder_executable_sha256": "ac1b7668f93fdb9d1774d96184bbcfc85df66e2baa2c34036db1391359825367",
+  "decoder_executable_sha256": "48c6ffe364c2c04aa3c93a64e0ab884ca007df47e59076ec549a09b014b921d4",
   "codec_evidence": {
     "path": "research\\ghidra\\creature-evidence.json",
     "sha256": "9f06ff9bafc7dc3ba4389e0ae214971b671ec29908e83b9c2fbcac3cfbd5b365"

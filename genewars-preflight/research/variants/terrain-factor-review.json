@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-terrain-factor-plan-review",
-  "checked_utc": "2026-10-13T04:15:07.051238+00:00",
+  "checked_utc": "2026-10-13T04:37:39.239893+00:00",
   "original_or_gui_execution": false,
   "native_plans": 1356,
   "map_variants": 12,
@@ -27,7 +27,7 @@
   "evidence": {
     "path": "research/integration/terrain-factor-contract.json",
     "size": 2043,
-    "sha256": "4d594943ce553153d8a63c1c8d755e1a8e2d3e439d98b06890a0a43cd7e21426"
+    "sha256": "202834a9f2504049283778c41f5aa214773f56c83002c16af448ca315d8c21a4"
   },
   "private_listings": [
     {
@@ -48,13 +48,13 @@
   ],
   "source": {
     "path": "rust/crates/genewars-core/src/terrain.rs",
-    "size": 12388,
-    "sha256": "cc9698806ac6949b0152fad1df1f784b1097b3b368bd0508be9fd858ae412d24"
+    "size": 14495,
+    "sha256": "5b906fdc3ed1809fefd078a1c60cca20cbca5a254df2fe386fe4608cf2450e6a"
   },
   "harness": {
     "path": "private/review/terrain-factor/review.exe",
-    "size": 5097781,
-    "sha256": "79d6e6cfb9cb986de03a21d25f16abb0f2ec6a72f44effdd09b595cd1ea25e4e"
+    "size": 5098377,
+    "sha256": "0fe4323c1e9a8867ef69a2a692eabd2b7e29764b5400b93785d3f942b39169ec"
   },
   "review_sources": [
     {

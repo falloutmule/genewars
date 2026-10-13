@@ -67,6 +67,27 @@ pub fn camera_cells_for_target(map: &[u8], x: i16, y: i16) -> Result<[u16; 2], T
     Ok([u16::from(cx), u16::from(cy)])
 }
 
+/// Project a world position into the local scene coordinates of CD0x7AF00.
+///
+/// Relative coordinates wrap into signed15-bit deltas on the128-cell torus.
+/// Height is interpolated before its arithmetic shift, unlike the terrain
+/// vertex's doubled already-shifted height. The panel margin is an unsigned
+/// word; results are full signed32-bit values, including off-screen points.
+/// Downstream object storage, visibility, sorting and drawing are separate.
+pub fn entity_view_position(
+    map: &[u8], position: [i16; 2], camera: [u16; 2], panel_margin: u16,
+) -> Result<[i32; 2], TerrainError> {
+    let doubled_height = interpolate_height(map, position[0], position[1])?;
+    let delta = |value: i16, origin: u16| {
+        let word = (value as u16).wrapping_sub(origin.wrapping_shl(8));
+        i32::from((word.wrapping_shl(1) as i16) >> 1)
+    };
+    let dx = delta(position[0], camera[0]);
+    let dy = delta(position[1], camera[1]);
+    Ok([(((dx - dy) * 32) >> 8) - i32::from(panel_margin),
+        (((dx + dy) * 16) >> 8) - (doubled_height >> 6)])
+}
+
 /// Return the bounded entity-shade result of CD helper 0x7B240.
 ///
 /// Multiply signed cell+0 by unsigned cell+12 and arithmetic-shift each
@@ -235,6 +256,25 @@ mod tests {
         let max = map_with_heights(&[(0, 0, i16::MAX)]);
         assert_eq!(camera_cells_for_target(&max, 0, 0), Ok([213, 223]));
         assert!(camera_cells_for_target(&map[..map.len() - 1], 0, 0).is_err());
+    }
+
+    #[test]
+    fn entity_projection_wraps_signed15_deltas_and_keeps_full_width_outputs() {
+        let map = map_with_heights(&[]);
+        assert_eq!(entity_view_position(&map, [-1, -1], [0, 0], 128), Ok([-128, -1]));
+        assert_eq!(entity_view_position(&map, [16384, 0], [0, 0], 128), Ok([-2176, -1024]));
+        assert_eq!(entity_view_position(&map, [i16::MIN, i16::MIN], [0, 0], 128), Ok([-128, 0]));
+        assert_eq!(entity_view_position(&map, [0, 0], [65535, 65535], 65535), Ok([-65535, 32]));
+        assert_eq!(entity_view_position(&map, [0, 0], [32768, 32768], 0), Ok([0, 0]));
+        assert!(entity_view_position(&map[..map.len() - 1], [0, 0], [0, 0], 128).is_err());
+    }
+
+    #[test]
+    fn entity_projection_interpolates_height_before_shifting() {
+        let map = map_with_heights(&[(1, 0, 100)]);
+        assert_eq!(entity_view_position(&map, [128, 0], [0, 0], 0), Ok([16, 7]));
+        let low = map_with_heights(&[(0, 0, -1)]);
+        assert_eq!(entity_view_position(&low, [0, 0], [0, 0], 0), Ok([0, 1]));
     }
 
     #[test]

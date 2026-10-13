@@ -1,11 +1,11 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T04:14:52.266380+00:00",
+  "checked_utc": "2026-10-13T04:37:21.039439+00:00",
   "original_execution": false,
   "corpus": {
     "path": "research/integration/sprite-corpus.json",
     "size": 3400879,
-    "sha256": "8846bc88ae09d2e6a0428a1206053913868c291f824646112c2353890ae8f83b"
+    "sha256": "4aa0bfb856cf2baadbe1714c307010193ae91999c4ea73aaa85772b5e7f54b03"
   },
   "admission_evidence": {
     "path": "research/ghidra/creature-evidence.json",
@@ -14,8 +14,8 @@
   },
   "native_tool": {
     "path": "private/build/rust-target/debug/genewars-tools.exe",
-    "size": 8724895,
-    "sha256": "ac1b7668f93fdb9d1774d96184bbcfc85df66e2baa2c34036db1391359825367"
+    "size": 8992387,
+    "sha256": "48c6ffe364c2c04aa3c93a64e0ab884ca007df47e59076ec549a09b014b921d4"
   },
   "listing_checks": [
     {

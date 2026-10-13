@@ -1,0 +1,71 @@
+{
+  "status": "passed-independent-initial-viewport-context-review",
+  "checked_utc": "2026-10-13T04:38:04.272003+00:00",
+  "original_or_gui_execution": false,
+  "evidence": {
+    "path": "research/ghidra/terrain-viewport-evidence.json",
+    "size": 8641,
+    "sha256": "13224213d85b576caab382edf3ddf0ac5cb1b9ebd203cd14cd665a1044d75163"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/display-geometry/instructions-00082bd0.txt",
+      "size": 3999,
+      "sha256": "f2452de57036b4ff1b35e9e213c83bac658e77314a8e75e3a6cef167990961b6"
+    },
+    {
+      "path": "private/ghidra/terrain-camera-refs/instructions-00082e20.txt",
+      "size": 2974,
+      "sha256": "66286b34e27300bf69ee0b62c036059c9e981596ae85703fd021a940983c7eb3"
+    },
+    {
+      "path": "private/ghidra/display-geometry/instructions-00086c20.txt",
+      "size": 3808,
+      "sha256": "678fb24160c99fd8a7660ce5f1d08e1ce499d1011996d2926cb7fe34d4014200"
+    },
+    {
+      "path": "private/ghidra/terrain-strip-refs/instructions-00086840.txt",
+      "size": 7249,
+      "sha256": "18fe095b9393f395b4fee67cc43d0f12eed5beebd9f62de3eb8bb7f0a0d091d3"
+    },
+    {
+      "path": "private/ghidra/terrain-overlay-resource-refs/instructions-0001d770.txt",
+      "size": 17969,
+      "sha256": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+    },
+    {
+      "path": "private/ghidra/triangle-buffer-refs/instructions-000e88a3.txt",
+      "size": 1043,
+      "sha256": "a6d4834500ceb20554ae26a3a4ad92db70551850dd9277f949cce154f4e2ab98"
+    },
+    {
+      "path": "private/ghidra/panel-verified/instructions-00024ad0.txt",
+      "size": 713,
+      "sha256": "fa373332d2ada300d5b3a7492ff0de48d2b1ab7f7c52037ca9edcb77f5e4fc70"
+    },
+    {
+      "path": "private/ghidra/panel-verified/instructions-00024770.txt",
+      "size": 1888,
+      "sha256": "dd59f4f3b8fc7a3cffbd69473a05c96feb80954bec0752792d5c1c673ae9bbcb"
+    }
+  ],
+  "strip_argument_vectors": 16,
+  "all_old_flag_column_cases": 4096,
+  "rectangle_positions_checked": 307200,
+  "panel_source_indices_checked": 61440,
+  "initial_static_sampler_pitch": 0,
+  "inherited_runtime_pitch_precondition": 640,
+  "temporary_flag_semantics": "Each strip sees oldflags|4; source then clears4 rather than restoring an originally set4",
+  "panel_selection": "UNRESOLVED; GENEPANL only explicit diagnostic resource choice",
+  "review_source": {
+    "path": "research/variants/viewport-context-review.py",
+    "size": 5061,
+    "sha256": "76d94ebbe64d66a79965b76d0a3b2f1d0d4bfb780c245835d4195a92b0b897bb"
+  },
+  "limits": [
+    "Initial non-scrolled positive128margin/display640x480, initialized samplerpitch640 anddirty2 gates required",
+    "Display-lock pitch initialization is conditional; zeroEBX sampler call onlypreserves inheritedpitch",
+    "Selectedplayer0camera66,48 stillsubject tosuccessful source-load/campaign/selection gates",
+    "No scrollwrap, incremental redrawing, foreground entities, visibility callbacks or GUI timing reconstructed"
+  ]
+}

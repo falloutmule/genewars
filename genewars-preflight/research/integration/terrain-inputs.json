@@ -44,6 +44,15 @@
       "staged_bytes": 65536,
       "representation": "rnc1_decoded",
       "private_path": "private/integration/terrain-inputs/MAIN.GLA"
+    },
+    {
+      "entry_id": "root/2/disc/86",
+      "source_path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/GENEPANL.DAT;1",
+      "source_sha256": "8116b2b883320b8573c50496a570f0f3fa978e4c20b9c85a284339ff1f920e24",
+      "staged_sha256": "af9741b4545fb6f28a1dd0e50da0570e39992e75c872bc2249891f3330f59951",
+      "staged_bytes": 61440,
+      "representation": "rnc1_decoded",
+      "private_path": "private/integration/terrain-inputs/GENEPANL.DAT"
     }
   ],
   "original_execution": false,

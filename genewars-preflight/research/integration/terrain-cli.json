@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T04:14:12.083895+00:00",
-  "binary_sha256": "ac1b7668f93fdb9d1774d96184bbcfc85df66e2baa2c34036db1391359825367",
+  "checked_utc": "2026-10-13T04:36:40.750177+00:00",
+  "binary_sha256": "48c6ffe364c2c04aa3c93a64e0ab884ca007df47e59076ec549a09b014b921d4",
   "proof_sha256": "baf2d7e399f1ab40937cca5771a7fc611b7e15f2d54a4194f3ced1d13e0a21ba",
   "map_info": {
     "width_cells": 128,
@@ -22,7 +22,7 @@
   "explicit_camera_targets": 37,
   "entity_shade_targets": 37,
   "invalid_inputs_rejected": 5,
-  "private_tile_outputs": "private/integration/terrain/33cff8a19b2144808f6669d4f97fd0e5",
+  "private_tile_outputs": "private/integration/terrain/781eecbb97d74bf2a1c89af4c374f978",
   "original_execution": false,
   "limits": "Native resources and explicitly placed cell vertices only; no terrain frame, inferred camera, draw order, visibility or shading claim."
 }

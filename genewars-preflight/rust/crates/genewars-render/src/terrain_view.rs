@@ -1,6 +1,6 @@
-//! Full-size explicit terrain viewport assembled from verified strip requests.
-//! The 640x480 extent and all twenty columns are an explicit caller policy,
-//! not a reconstruction of the original mission's viewport initialization.
+//! Terrain backing buffers assembled from verified strip requests.
+//! The initial layout preserves the proved 128-pixel left margin. A full
+//! twenty-column diagnostic remains available as an explicit caller policy.
 use genewars_assets::{B32Atlas, ConqMapCells};
 use crate::{terrain, terrain_modes as modes, terrain_strip::{self, TerrainStripEvent, TerrainTextureSource}};
 
@@ -23,10 +23,43 @@ pub fn render_full_terrain_view(
     fade: &terrain::TerrainFadeTable<'_>, gla: Option<&modes::MainGlaTable<'_>>,
     context_flags: u8,
 ) -> Result<TerrainView, String> {
+    render_columns(map, camera, atlas, fade, gla, context_flags, 0)
+}
+
+/// Initial dirty-column traversal from context0x16E0A8: columns4..19,
+/// top0/bottom480, full640-pixel clip/pitch, and temporary context bit4.
+/// Other context flags are explicit caller state. This does not initialize
+/// live entities, execute dirty callbacks, or select a panel background.
+pub fn render_initial_terrain_view(
+    map: &ConqMapCells<'_>, camera: [i32; 2], atlas: &[u8],
+    fade: &terrain::TerrainFadeTable<'_>, gla: Option<&modes::MainGlaTable<'_>>,
+    context_flags: u8,
+) -> Result<TerrainView, String> {
+    render_columns(map, camera, atlas, fade, gla, context_flags | 4, 4)
+}
+
+/// Copy a caller-selected 128x480 indexed background into the left panel.
+/// This is the proved copy geometry; background selection and widgets are
+/// separate. Invalid inputs leave the frame unchanged.
+pub fn compose_left_panel(view: &mut TerrainView, panel: &[u8]) -> Result<(), String> {
+    if panel.len() != 128 * 480 || view.indices.len() != 640 * 480 {
+        return Err("panel composition requires a128x480 panel and640x480 frame".into());
+    }
+    for (source, row) in panel.chunks_exact(128).zip(view.indices.chunks_exact_mut(640)) {
+        row[..128].copy_from_slice(source);
+    }
+    Ok(())
+}
+
+fn render_columns(
+    map: &ConqMapCells<'_>, camera: [i32; 2], atlas: &[u8],
+    fade: &terrain::TerrainFadeTable<'_>, gla: Option<&modes::MainGlaTable<'_>>,
+    context_flags: u8, first_column: i32,
+) -> Result<TerrainView, String> {
     B32Atlas::parse(atlas).map_err(|e| e.to_string())?;
     let mut view = TerrainView { indices: vec![0; 640 * 480], pairs: 0, requested_modes: [0; 16],
         prepared_triangles: 0, pixels_written: 0, dirty_requests: Vec::new() };
-    for column in 0..20 {
+    for column in first_column..20 {
         let plan = terrain_strip::plan_terrain_strip(map, camera, column, 0, 480, context_flags)
             .map_err(|e| e.to_string())?;
         view.pairs += plan.pairs;

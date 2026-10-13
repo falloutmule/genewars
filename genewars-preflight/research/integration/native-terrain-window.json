@@ -1,15 +1,15 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T04:14:55.575217+00:00",
+  "checked_utc": "2026-10-13T04:37:25.286192+00:00",
   "current_binary": {
     "path": "private/build/rust-target/debug/genewars-terrain.exe",
-    "bytes": 17497342,
-    "sha256": "01261a744739ed6d5639756ccd016cfc52740579557afbc6d17d9d0337cd3d16"
+    "bytes": 17713918,
+    "sha256": "062369ca3f9f86db3e1466ed114b02d4cf9fb9b3e94dcc67fc01364c9bee59a9"
   },
   "current_bounded_run": {
-    "path": "private/integration/terrain-window-a0279279d1c44ee9b8b889fde5e49c57.json",
-    "bytes": 309,
-    "sha256": "e2d213feba0df802a5bf00b854cd36c8d81d3ef1e7eb3d3e6fb6933bef18f672"
+    "path": "private/integration/terrain-window-3bb3a1cfc3f44486b9c1b3c94f283f3f.json",
+    "bytes": 425,
+    "sha256": "62fea0c0fe88e5973551618a0cd562400a1336096b59ee53e17bb76975465046"
   },
   "bounded_result": {
     "width": 640,
@@ -40,7 +40,11 @@
         "policy": "raise4096"
       }
     ],
-    "history_truncated": false
+    "history_truncated": false,
+    "layout": "full",
+    "initial_source_player": null,
+    "original_initial_panel_inferred": false,
+    "live_callbacks_applied": false
   },
   "supervised_observation": {
     "path": "private/integration/terrain-interactive-20261013-0414.json",

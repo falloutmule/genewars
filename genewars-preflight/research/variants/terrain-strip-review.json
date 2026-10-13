@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-terrain-strip-review",
-  "checked_utc": "2026-10-13T04:15:09.032930+00:00",
+  "checked_utc": "2026-10-13T04:37:41.026891+00:00",
   "original_or_gui_execution": false,
   "native_cases": 7868,
   "case_groups": {
@@ -96,8 +96,8 @@
   },
   "harness": {
     "path": "private/review/terrain-strip/review.exe",
-    "size": 5142299,
-    "sha256": "f54115b221e2bc6228d129a58f5e63eeb5fa38819a299035ccaf9bd50079be76"
+    "size": 5124707,
+    "sha256": "6fc2188485da6298084d3fe2afe322b768403087822f58527ed39961482ca939"
   },
   "review_sources": [
     {

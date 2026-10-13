@@ -1,9 +1,9 @@
 //! Native diagnostic viewer for an explicitly selected CONQ terrain snapshot.
 //! Camera target, factor snapshot, full viewport, and key policy are caller
 //! inputs; this is not an original mission startup or input-cadence claim.
-use genewars_assets::{B32Atlas, ConqFastPrefix, ConqMapCells, Palette256, PaletteChannelMode};
+use genewars_assets::{B32Atlas, ConqFastPrefix, ConqMapCells, ConqMissionSource, Palette256, PaletteChannelMode};
 use genewars_core::cd_candidate::{camera_cells_for_target, plan_terrain_factor_raise_4096};
-use genewars_render::{terrain::TerrainFadeTable, terrain_view::render_full_terrain_view, RgbImage};
+use genewars_render::{terrain::TerrainFadeTable, terrain_view::{render_full_terrain_view, render_initial_terrain_view, compose_left_panel}, RgbImage};
 use std::{env, fs, io::{Read, Write}, num::NonZeroU32, path::{Path, PathBuf}, process, sync::Arc};
 use softbuffer::{Context, Surface};
 use winit::{application::ApplicationHandler, dpi::PhysicalSize,
@@ -16,6 +16,16 @@ const INPUT_LIMIT: u64 = 64 * 1024 * 1024;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum Policy { Raw, Raise4096 }
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Layout { Full, InitialGenePanel }
+
+impl Layout {
+    fn name(self) -> &'static str { match self { Self::Full => "full", Self::InitialGenePanel => "initial-genepanl" } }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum TargetInput { Explicit([i16; 2]), SourcePlayer(usize) }
 
 impl Policy {
     fn name(self) -> &'static str { match self { Self::Raw => "raw", Self::Raise4096 => "raise4096" } }
@@ -42,6 +52,7 @@ struct Resources {
     atlas: Vec<u8>,
     fade: Vec<u8>,
     palette: Palette256,
+    panel: Option<Vec<u8>>,
 }
 
 impl Resources {
@@ -53,7 +64,7 @@ impl Resources {
         Ok(bytes)
     }
 
-    fn open(dir: &Path) -> Result<Self, String> {
+    fn open(dir: &Path, layout: Layout) -> Result<Self, String> {
         let mission = Self::read(&dir.join("CONQ001.DAT"))?;
         let atlas = Self::read(&dir.join("B32A.DAT"))?;
         let fade = Self::read(&dir.join("FADE.DAT"))?;
@@ -66,7 +77,12 @@ impl Resources {
         if palette.entries().iter().flatten().any(|&v| v > 63) {
             return Err("MAIN.PAL contains a channel outside the traced RGB6 range 0..63".into());
         }
-        Ok(Self { mission, atlas, fade, palette })
+        let panel = if layout == Layout::InitialGenePanel {
+            let data = Self::read(&dir.join("GENEPANL.DAT"))?;
+            if data.len() != 128 * 480 { return Err("GENEPANL.DAT must contain61440 decoded indices".into()); }
+            Some(data)
+        } else { None };
+        Ok(Self { mission, atlas, fade, palette, panel })
     }
 
     fn snapshot(&self, target: [i16; 2], policy: Policy) -> Result<(RgbImage, [u16; 2], [u16; 2], usize, usize), String> {
@@ -86,8 +102,12 @@ impl Resources {
         let camera = [raw_camera[0] & 127, raw_camera[1] & 127];
         let cells = ConqMapCells::parse(&map).map_err(|e| e.to_string())?;
         let fade = TerrainFadeTable::parse(&self.fade).map_err(|e| e.to_string())?;
-        let rendered = render_full_terrain_view(&cells, [i32::from(camera[0]), i32::from(camera[1])],
-            &self.atlas, &fade, None, 0)?;
+        let mut rendered = if self.panel.is_some() {
+            render_initial_terrain_view(&cells, camera.map(i32::from), &self.atlas, &fade, None, 0)?
+        } else {
+            render_full_terrain_view(&cells, camera.map(i32::from), &self.atlas, &fade, None, 0)?
+        };
+        if let Some(panel) = &self.panel { compose_left_panel(&mut rendered, panel)?; }
         let mut rgb = Vec::with_capacity(WIDTH * HEIGHT * 3);
         for &index in &rendered.indices {
             let [r, g, b] = self.palette.entries()[usize::from(index)];
@@ -119,6 +139,8 @@ struct TerrainWindow {
     reason: &'static str,
     error: Option<String>,
     report_path: Option<PathBuf>,
+    layout: Layout,
+    source_player: Option<usize>,
 }
 
 impl TerrainWindow {
@@ -127,7 +149,7 @@ impl TerrainWindow {
             Ok((image, raw_camera, camera, pairs, pixels)) => {
                 self.image = image; self.raw_camera = raw_camera; self.camera = camera; self.pairs = pairs; self.pixels_written = pixels;
                 if self.history.len() < 1024 { self.history.push(self.state); }
-                self.window.as_ref().unwrap().set_title(&format!("Terrain preview — target {},{} — {}", self.state.target[0], self.state.target[1], self.state.policy.name()));
+                self.window.as_ref().unwrap().set_title(&format!("Terrain preview — {} — target {},{} — {}", self.layout.name(), self.state.target[0], self.state.target[1], self.state.policy.name()));
                 self.window.as_ref().unwrap().request_redraw();
             }
             Err(e) => { self.error = Some(e); events.exit(); }
@@ -157,8 +179,9 @@ impl TerrainWindow {
     fn finish_report(&self) -> Result<(), String> {
         let Some(path) = &self.report_path else { return Ok(()); };
         let states = self.history.iter().map(|s| format!("{{\"target\":[{},{}],\"policy\":\"{}\"}}", s.target[0], s.target[1], s.policy.name())).collect::<Vec<_>>().join(",");
-        let report = format!("{{\"width\":640,\"height\":480,\"presented_frames\":{},\"exit_reason\":\"{}\",\"final_target\":[{},{}],\"camera_words\":[{},{}],\"view_camera_cells\":[{},{}],\"final_policy\":\"{}\",\"pairs\":{},\"pixels_written\":{},\"state_history\":[{}],\"history_truncated\":{}}}\n",
-            self.frames, self.reason, self.state.target[0], self.state.target[1], self.raw_camera[0], self.raw_camera[1], self.camera[0], self.camera[1], self.state.policy.name(), self.pairs, self.pixels_written, states, self.history.len() >= 1024);
+        let player = self.source_player.map(|v| v.to_string()).unwrap_or_else(|| "null".to_owned());
+        let report = format!("{{\"width\":640,\"height\":480,\"presented_frames\":{},\"exit_reason\":\"{}\",\"final_target\":[{},{}],\"camera_words\":[{},{}],\"view_camera_cells\":[{},{}],\"final_policy\":\"{}\",\"pairs\":{},\"pixels_written\":{},\"state_history\":[{}],\"history_truncated\":{},\"layout\":\"{}\",\"initial_source_player\":{player},\"original_initial_panel_inferred\":false,\"live_callbacks_applied\":false}}\n",
+            self.frames, self.reason, self.state.target[0], self.state.target[1], self.raw_camera[0], self.raw_camera[1], self.camera[0], self.camera[1], self.state.policy.name(), self.pairs, self.pixels_written, states, self.history.len() >= 1024, self.layout.name());
         let mut file = fs::OpenOptions::new().write(true).create_new(true).open(path)
             .map_err(|e| format!("refusing to overwrite or unable to create {}: {e}", path.display()))?;
         file.write_all(report.as_bytes()).map_err(|e| e.to_string())
@@ -168,7 +191,7 @@ impl TerrainWindow {
 impl ApplicationHandler for TerrainWindow {
     fn resumed(&mut self, events: &ActiveEventLoop) {
         if self.window.is_some() { return; }
-        let attrs = Window::default_attributes().with_title("Terrain preview — diagnostic, explicit target")
+        let attrs = Window::default_attributes().with_title(format!("Terrain preview — {} — target {},{} — {}", self.layout.name(), self.state.target[0], self.state.target[1], self.state.policy.name()))
             .with_inner_size(PhysicalSize::new(WIDTH as u32, HEIGHT as u32)).with_resizable(false);
         let window = match events.create_window(attrs) { Ok(w) => Arc::new(w), Err(e) => { self.error = Some(e.to_string()); events.exit(); return; } };
         let context = match Context::new(window.clone()) { Ok(c) => c, Err(e) => { self.error = Some(e.to_string()); events.exit(); return; } };
@@ -207,15 +230,28 @@ impl ApplicationHandler for TerrainWindow {
     }
 }
 
-fn parse_args_from(args: &[String]) -> Result<(PathBuf, [i16; 2], Policy, Option<u64>, Option<PathBuf>), String> {
-    if args.len() < 6 { return Err("usage: genewars-terrain DECODED_RESOURCE_DIR --target X Y --policy raw|raise4096 [--frames N] [--report NEW_JSON]".into()); }
+struct Options {
+    dir: PathBuf, target: TargetInput, policy: Policy, frames: Option<u64>,
+    report: Option<PathBuf>, layout: Layout,
+}
+
+fn parse_args_from(args: &[String]) -> Result<Options, String> {
+    if args.len() < 5 { return Err("usage: genewars-terrain DECODED_RESOURCE_DIR (--target X Y | --source-player0..3) --policy raw|raise4096 [--layout full|initial-genepanl] [--frames N] [--report NEW_JSON]".into()); }
     let dir = PathBuf::from(&args[0]);
-    let (mut target, mut policy, mut frames, mut report) = (None, None, None, None);
+    let (mut target, mut policy, mut frames, mut report, mut layout) = (None, None, None, None, None);
     let mut i = 1;
     while i < args.len() {
         match args[i].as_str() {
             "--target" if target.is_none() && i + 2 < args.len() => {
-                target = Some([args[i + 1].parse().map_err(|_| "target X must be signed16")?, args[i + 2].parse().map_err(|_| "target Y must be signed16")?]); i += 3;
+                target = Some(TargetInput::Explicit([args[i + 1].parse().map_err(|_| "target X must be signed16")?, args[i + 2].parse().map_err(|_| "target Y must be signed16")?])); i += 3;
+            }
+            "--source-player" if target.is_none() && i + 1 < args.len() => {
+                let player: usize = args[i + 1].parse().map_err(|_| "source player must be0..3")?;
+                if player >= 4 { return Err("source player must be0..3".into()); }
+                target = Some(TargetInput::SourcePlayer(player)); i += 2;
+            }
+            "--layout" if layout.is_none() && i + 1 < args.len() => {
+                layout = Some(match args[i + 1].as_str() { "full" => Layout::Full, "initial-genepanl" => Layout::InitialGenePanel, _ => return Err("layout must be full or initial-genepanl".into()) }); i += 2;
             }
             "--policy" if policy.is_none() && i + 1 < args.len() => {
                 policy = Some(match args[i + 1].as_str() { "raw" => Policy::Raw, "raise4096" => Policy::Raise4096, _ => return Err("policy must be raw or raise4096".into()) }); i += 2;
@@ -229,21 +265,31 @@ fn parse_args_from(args: &[String]) -> Result<(PathBuf, [i16; 2], Policy, Option
             option => return Err(format!("unknown, duplicate or incomplete option: {option}")),
         }
     }
-    Ok((dir, target.ok_or("--target is required")?, policy.ok_or("--policy is required")?, frames, report))
+    Ok(Options { dir, target: target.ok_or("--target or --source-player is required")?,
+        policy: policy.ok_or("--policy is required")?, frames, report, layout: layout.unwrap_or(Layout::Full) })
 }
 
-fn parse_args() -> Result<(PathBuf, [i16; 2], Policy, Option<u64>, Option<PathBuf>), String> {
+fn parse_args() -> Result<Options, String> {
     let args: Vec<String> = env::args().skip(1).collect();
     parse_args_from(&args)
 }
 
 fn run() -> Result<(), String> {
-    let (dir, target, policy, frame_limit, report_path) = parse_args()?;
-    let resources = Resources::open(&dir)?;
+    let options = parse_args()?;
+    let resources = Resources::open(&options.dir, options.layout)?;
+    let (target, source_player) = match options.target {
+        TargetInput::Explicit(target) => (target, None),
+        TargetInput::SourcePlayer(player) => {
+            let source = ConqMissionSource::parse(&resources.mission).map_err(|e| e.to_string())?;
+            (source.target_words(player).map_err(|e| e.to_string())?.map(|v| v as i16), Some(player))
+        }
+    };
+    let policy = options.policy;
     let (image, raw_camera, camera, pairs, pixels_written) = resources.snapshot(target, policy)?;
     let mut app = TerrainWindow { resources, state: State { target, policy }, image, raw_camera, camera, pairs, pixels_written,
         history: vec![State { target, policy }], window: None, context: None, surface: None, frames: 0,
-        frame_limit, reason: "window_closed", error: None, report_path };
+        frame_limit: options.frames, reason: "window_closed", error: None, report_path: options.report,
+        layout: options.layout, source_player };
     let event_loop = EventLoop::new().map_err(|e| e.to_string())?;
     event_loop.run_app(&mut app).map_err(|e| e.to_string())?;
     if let Some(error) = app.error { return Err(error); }
@@ -271,12 +317,25 @@ mod tests {
     #[test]
     fn cli_accepts_bounded_frame_limit_and_fresh_report_path() {
         let parsed = parse_args_from(&args(&["assets", "--target", "-256", "512", "--policy", "raise4096", "--frames", "3", "--report", "fresh.json"])).unwrap();
-        assert_eq!(parsed.0, PathBuf::from("assets"));
-        assert_eq!(parsed.1, [-256, 512]);
-        assert_eq!(parsed.2, Policy::Raise4096);
-        assert_eq!(parsed.3, Some(3));
-        assert_eq!(parsed.4, Some(PathBuf::from("fresh.json")));
+        assert_eq!(parsed.dir, PathBuf::from("assets"));
+        assert_eq!(parsed.target, TargetInput::Explicit([-256, 512]));
+        assert_eq!(parsed.policy, Policy::Raise4096);
+        assert_eq!(parsed.frames, Some(3));
+        assert_eq!(parsed.report, Some(PathBuf::from("fresh.json")));
         assert!(parse_args_from(&args(&["assets", "--target", "0", "0", "--policy", "raw", "--frames", "0"])).is_err());
+    }
+
+    #[test]
+    fn source_player_and_layout_are_explicit_and_conflicting_targets_rejected() {
+        let parsed = parse_args_from(&args(&["assets", "--source-player", "0", "--policy", "raw", "--layout", "initial-genepanl"])).unwrap();
+        assert_eq!(parsed.target, TargetInput::SourcePlayer(0));
+        assert_eq!(parsed.layout, Layout::InitialGenePanel);
+        for tail in [["--source-player", "4"], ["--source-player", "-1"], ["--layout", "guessed"]] {
+            let mut values = args(&["assets", "--source-player", "0", "--policy", "raw"]);
+            values.extend(args(&tail));
+            assert!(parse_args_from(&values).is_err());
+        }
+        assert!(parse_args_from(&args(&["assets", "--target", "0", "0", "--source-player", "0", "--policy", "raw"])).is_err());
     }
 
     #[test]

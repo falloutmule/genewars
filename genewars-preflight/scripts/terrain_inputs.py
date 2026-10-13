@@ -17,6 +17,8 @@ SOURCES = {
     'MAIN.PAL': ('root/2/disc/108', '8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05', None),
     'MAIN.GLA': ('root/2/disc/107', 'c5e12a5b4325c8302cab0fb3ba3aaa654e2e044131763298815766d8a6f47a58',
                  'bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3'),
+    'GENEPANL.DAT': ('root/2/disc/86', '8116b2b883320b8573c50496a570f0f3fa978e4c20b9c85a284339ff1f920e24',
+                     'af9741b4545fb6f28a1dd0e50da0570e39992e75c872bc2249891f3330f59951'),
 }
 
 

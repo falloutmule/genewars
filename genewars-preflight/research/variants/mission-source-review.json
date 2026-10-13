@@ -1,0 +1,416 @@
+{
+  "status": "passed-independent-native-mission-source-parser-review",
+  "checked_utc": "2026-10-13T04:38:04.196563+00:00",
+  "original_or_gui_execution": false,
+  "real_sources": 5,
+  "opaque_synthetic_sources": 3,
+  "raw_records_compared": 10944,
+  "all_source_bytes_compared": 2751664,
+  "family1_field_records_compared": 4096,
+  "all_truncation_lengths": 343958,
+  "unsupported_long_lengths": [
+    343959,
+    375830
+  ],
+  "individual_tag_bitflips": 64,
+  "index_bounds": "All target/group/count/usizeMAX record accesses reject; borrowed slice pointers checked against source offsets",
+  "source_immutability": true,
+  "source": {
+    "path": "rust/crates/genewars-assets/src/mission_source.rs",
+    "size": 14883,
+    "sha256": "2191e76efaae8708ec373a123836d689eed95e939bdb5b5e469d20a3f1aa8077"
+  },
+  "proof": {
+    "path": "research/ghidra/mission-load-evidence.json",
+    "size": 17258,
+    "sha256": "2d16d05150c104f59e4939c7c4ab7df2490d1c7a4aa81111d626604906b17d80"
+  },
+  "inputs": [
+    {
+      "path": "private/reference-run/run-004/drive-c/GAME/LEVELS/CONQ001.DAT",
+      "size": 343958,
+      "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+    },
+    {
+      "path": "private/reference-run/run-004/drive-c/GAME/LEVELS/CONQ002.DAT",
+      "size": 343958,
+      "sha256": "4042c6df3b161132c12a424dace7b9fcbf253a197261f1cf76e0db4af41ea27a"
+    },
+    {
+      "path": "private/reference-run/run-004/drive-c/GAME/LEVELS/CONQ003.DAT",
+      "size": 343958,
+      "sha256": "f4ab595f5f66402f13a11789af75aff873145f6092d06f3f5ff642b74c10d277"
+    },
+    {
+      "path": "private/reference-run/run-004/drive-c/GAME/LEVELS/CONQ024.DAT",
+      "size": 343958,
+      "sha256": "65366e1ac92aebdb2de715fd42e4ec9ba3a3ed18a2e57f005339e295c98efd7f"
+    },
+    {
+      "path": "private/reference-run/run-004/drive-c/GAME/LEVELS/CONQ040.DAT",
+      "size": 343958,
+      "sha256": "12fd5c5c753075ea47a96d3a6a614e024565b90f3a20c826491fcd367ff3d3d4"
+    }
+  ],
+  "groups_by_sample": [
+    [
+      {
+        "family": 0,
+        "records": 300,
+        "active_byte6": 1
+      },
+      {
+        "family": 1,
+        "records": 512,
+        "active_byte6": 40
+      },
+      {
+        "family": 2,
+        "records": 20,
+        "active_byte6": 0
+      },
+      {
+        "family": 3,
+        "records": 256,
+        "active_byte6": 0
+      },
+      {
+        "family": 4,
+        "records": 200,
+        "active_byte6": 0
+      },
+      {
+        "family": 5,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 6,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 7,
+        "records": 16,
+        "active_byte6": 0
+      }
+    ],
+    [
+      {
+        "family": 0,
+        "records": 300,
+        "active_byte6": 4
+      },
+      {
+        "family": 1,
+        "records": 512,
+        "active_byte6": 25
+      },
+      {
+        "family": 2,
+        "records": 20,
+        "active_byte6": 0
+      },
+      {
+        "family": 3,
+        "records": 256,
+        "active_byte6": 0
+      },
+      {
+        "family": 4,
+        "records": 200,
+        "active_byte6": 0
+      },
+      {
+        "family": 5,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 6,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 7,
+        "records": 16,
+        "active_byte6": 0
+      }
+    ],
+    [
+      {
+        "family": 0,
+        "records": 300,
+        "active_byte6": 9
+      },
+      {
+        "family": 1,
+        "records": 512,
+        "active_byte6": 49
+      },
+      {
+        "family": 2,
+        "records": 20,
+        "active_byte6": 0
+      },
+      {
+        "family": 3,
+        "records": 256,
+        "active_byte6": 5
+      },
+      {
+        "family": 4,
+        "records": 200,
+        "active_byte6": 0
+      },
+      {
+        "family": 5,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 6,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 7,
+        "records": 16,
+        "active_byte6": 0
+      }
+    ],
+    [
+      {
+        "family": 0,
+        "records": 300,
+        "active_byte6": 21
+      },
+      {
+        "family": 1,
+        "records": 512,
+        "active_byte6": 84
+      },
+      {
+        "family": 2,
+        "records": 20,
+        "active_byte6": 0
+      },
+      {
+        "family": 3,
+        "records": 256,
+        "active_byte6": 1
+      },
+      {
+        "family": 4,
+        "records": 200,
+        "active_byte6": 0
+      },
+      {
+        "family": 5,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 6,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 7,
+        "records": 16,
+        "active_byte6": 0
+      }
+    ],
+    [
+      {
+        "family": 0,
+        "records": 300,
+        "active_byte6": 32
+      },
+      {
+        "family": 1,
+        "records": 512,
+        "active_byte6": 110
+      },
+      {
+        "family": 2,
+        "records": 20,
+        "active_byte6": 0
+      },
+      {
+        "family": 3,
+        "records": 256,
+        "active_byte6": 0
+      },
+      {
+        "family": 4,
+        "records": 200,
+        "active_byte6": 0
+      },
+      {
+        "family": 5,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 6,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 7,
+        "records": 16,
+        "active_byte6": 0
+      }
+    ],
+    [
+      {
+        "family": 0,
+        "records": 300,
+        "active_byte6": 0
+      },
+      {
+        "family": 1,
+        "records": 512,
+        "active_byte6": 0
+      },
+      {
+        "family": 2,
+        "records": 20,
+        "active_byte6": 0
+      },
+      {
+        "family": 3,
+        "records": 256,
+        "active_byte6": 0
+      },
+      {
+        "family": 4,
+        "records": 200,
+        "active_byte6": 0
+      },
+      {
+        "family": 5,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 6,
+        "records": 32,
+        "active_byte6": 0
+      },
+      {
+        "family": 7,
+        "records": 16,
+        "active_byte6": 0
+      }
+    ],
+    [
+      {
+        "family": 0,
+        "records": 300,
+        "active_byte6": 300
+      },
+      {
+        "family": 1,
+        "records": 512,
+        "active_byte6": 512
+      },
+      {
+        "family": 2,
+        "records": 20,
+        "active_byte6": 20
+      },
+      {
+        "family": 3,
+        "records": 256,
+        "active_byte6": 256
+      },
+      {
+        "family": 4,
+        "records": 200,
+        "active_byte6": 200
+      },
+      {
+        "family": 5,
+        "records": 32,
+        "active_byte6": 32
+      },
+      {
+        "family": 6,
+        "records": 32,
+        "active_byte6": 32
+      },
+      {
+        "family": 7,
+        "records": 16,
+        "active_byte6": 16
+      }
+    ],
+    [
+      {
+        "family": 0,
+        "records": 300,
+        "active_byte6": 300
+      },
+      {
+        "family": 1,
+        "records": 512,
+        "active_byte6": 510
+      },
+      {
+        "family": 2,
+        "records": 20,
+        "active_byte6": 20
+      },
+      {
+        "family": 3,
+        "records": 256,
+        "active_byte6": 255
+      },
+      {
+        "family": 4,
+        "records": 200,
+        "active_byte6": 199
+      },
+      {
+        "family": 5,
+        "records": 32,
+        "active_byte6": 32
+      },
+      {
+        "family": 6,
+        "records": 32,
+        "active_byte6": 32
+      },
+      {
+        "family": 7,
+        "records": 16,
+        "active_byte6": 16
+      }
+    ]
+  ],
+  "harness": {
+    "path": "private/review/mission-source/review.exe",
+    "size": 5111856,
+    "sha256": "523d35e27de94be1ad1c76fabcbabe22fb8018506a48ecbe1e8fdc06c569caf7"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/mission-source-review.py",
+      "size": 5234,
+      "sha256": "758802c50f9b5ed3942652c305ced7f9b5c0634c1420791f1894045649f91404"
+    },
+    {
+      "path": "research/variants/mission-source-review.rs",
+      "size": 4140,
+      "sha256": "3e3d9e1cce982c3708ea665e33e3bfd838091dc01ebdbccb6a2d26ef66665c03"
+    }
+  ],
+  "limits": [
+    "Exact layout/version extent plus tags, not hash-only admission or generic all-variant parser",
+    "Record byte6 and flags/count bytes remain raw; no active-count policy or entity meaning invented",
+    "No native runtime gaps/pointers filled and no live-state reconstruction",
+    "Other same-name resource sizes are unsupported variants, not corruption claims"
+  ]
+}

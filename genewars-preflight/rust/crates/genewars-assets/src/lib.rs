@@ -6,6 +6,9 @@
 use std::fmt;
 pub mod map_atlas;
 pub use map_atlas::{B32Atlas, ConqMapCells, ConqMapCell, Error as MapAtlasError};
+pub mod mission_source;
+pub use mission_source::{ConqMissionSource, MissionFamily1SpriteFields, MissionRecordGroup, MissionRecordGroupLayout, MissionSourceError,
+    CONQ_MISSION_BYTES, CONQ_MISSION_LAYOUT_VERSION};
 
 const RNC_HEADER_LEN: usize = 18;
 const PALETTE256_BYTES: usize = 256 * 3;

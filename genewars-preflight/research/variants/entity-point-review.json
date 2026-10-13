@@ -1,0 +1,72 @@
+{
+  "status": "passed-independent-native-entity-point-review",
+  "checked_utc": "2026-10-13T04:37:55.487398+00:00",
+  "original_or_gui_execution": false,
+  "native_points": 4276264,
+  "real_coordinate_cases": 475136,
+  "active_family1_points": 40,
+  "all_camera_word_values": true,
+  "all_position_word_values": true,
+  "all_fraction_pairs_on_checker": 65536,
+  "explicit_margins": [
+    0,
+    128,
+    65535
+  ],
+  "observed_output_bounds": [
+    [
+      -69630,
+      4094
+    ],
+    [
+      -3057,
+      3056
+    ]
+  ],
+  "invalid_map_lengths": [
+    0,
+    1,
+    229375,
+    229377
+  ],
+  "proof": {
+    "path": "research/ghidra/entity-point-evidence.json",
+    "size": 5901,
+    "sha256": "dab6aef94d1ffa20b9100c5fdb9df70666e34e92c0b94cc37f5c0ae23f418ea5"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/entity-plant/instructions-0007af00.txt",
+      "size": 4125,
+      "sha256": "33cd64e7635baedb406b5e42224a58db24e8c90752255891740d423cb413bf14"
+    }
+  ],
+  "source": {
+    "path": "rust/crates/genewars-core/src/terrain.rs",
+    "size": 14495,
+    "sha256": "5b906fdc3ed1809fefd078a1c60cca20cbca5a254df2fe386fe4608cf2450e6a"
+  },
+  "harness": {
+    "path": "private/review/entity-point/review.exe",
+    "size": 5094545,
+    "sha256": "80e1b06ba15be1952017cbe3234c43d460c90312a73ba5e52a6981eef3f305e3"
+  },
+  "review_sources": [
+    {
+      "path": "research/variants/entity-point-review.py",
+      "size": 6177,
+      "sha256": "eeb83c0e4f4a67c0ccdf25f52a2e0f50c0acfd0c4aab30f23e507a1cee9613ce"
+    },
+    {
+      "path": "research/variants/entity-point-review.rs",
+      "size": 763,
+      "sha256": "bb6a90a28bd08d0d9c88aff2e28028710d44801cf10879e74319064b2dacb3eb"
+    }
+  ],
+  "limits": [
+    "Fixedheightfactor2/horizontalscale32/verticalscale16 source preconditions",
+    "Modulo32768 ring deltas and nonnegative barycentric height weights independent of native doubleword implementation",
+    "Unsignedmargin is not signed16; output fullsigned32 with no final narrowing",
+    "No caller visibility, sort, word-storage narrowing, entity timing or initial camera policy inferred"
+  ]
+}

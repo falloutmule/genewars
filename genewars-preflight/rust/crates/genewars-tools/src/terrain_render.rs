@@ -1,6 +1,6 @@
 //! Explicitly placed real-resource diagnostics. These commands do not infer
 //! the original initial camera or live visibility state.
-use genewars_assets::{B32Atlas, ConqFastPrefix, ConqMapCells, Palette256, PaletteChannelMode};
+use genewars_assets::{B32Atlas, ConqFastPrefix, ConqMapCells, ConqMissionSource, Palette256, PaletteChannelMode};
 use genewars_render::{RgbImage, terrain::{self, Mode5TriangleVertex, TerrainFadeTable}};
 use std::path::Path;
 
@@ -67,13 +67,30 @@ pub fn cell(args: &[String]) -> Result<(), String> {
 /// map snapshot policy. The full 640x480 viewport and columns 0..20 are a tool
 /// policy; the mission's initial context/player state remains unestablished.
 pub fn view(args: &[String]) -> Result<(), String> {
+    view_with_layout(args, None)
+}
+
+/// Select a raw target-table entry from the bounded source parser. The caller
+/// explicitly chooses the player index; no current-player state is inferred.
+pub fn mission_view(args: &[String]) -> Result<(), String> {
+    let player: usize = args[1].parse().map_err(|_| "source player must be0..3")?;
+    let translated = [args[0].clone(), "0".to_owned(), "0".to_owned(), args[2].clone(), args[3].clone()];
+    view_with_layout(&translated, Some(player))
+}
+
+fn view_with_layout(args: &[String], source_player: Option<usize>) -> Result<(), String> {
     use genewars_core::cd_candidate::{camera_cells_for_target, plan_terrain_factor_raise_4096};
-    let target: [i16; 2] = [args[1].parse().map_err(|_| "target x must fit signed 16-bit")?,
-                           args[2].parse().map_err(|_| "target y must fit signed 16-bit")?];
     if !matches!(args[3].as_str(), "raw" | "raise4096") {
         return Err("terrain-view policy must be raw or raise4096".into());
     }
     let mission_bytes = resource(&args[0], "CONQ001.DAT")?;
+    let target: [i16; 2] = if let Some(player) = source_player {
+        ConqMissionSource::parse(&mission_bytes).map_err(|e| e.to_string())?
+            .target_words(player).map_err(|e| e.to_string())?.map(|v| v as i16)
+    } else {
+        [args[1].parse().map_err(|_| "target x must fit signed 16-bit")?,
+         args[2].parse().map_err(|_| "target y must fit signed 16-bit")?]
+    };
     let atlas = resource(&args[0], "B32A.DAT")?;
     let fade_bytes = resource(&args[0], "FADE.DAT")?;
     let palette_bytes = resource(&args[0], "MAIN.PAL")?;
@@ -99,14 +116,27 @@ pub fn view(args: &[String]) -> Result<(), String> {
         }
     }
     let map = ConqMapCells::parse(&map_bytes).map_err(|e| e.to_string())?;
-    let view = genewars_render::terrain_view::render_full_terrain_view(&map, camera, &atlas, &fade, None, 0)?;
+    let mut view = if source_player.is_some() {
+        genewars_render::terrain_view::render_initial_terrain_view(&map, camera, &atlas, &fade, None, 0)?
+    } else {
+        genewars_render::terrain_view::render_full_terrain_view(&map, camera, &atlas, &fade, None, 0)?
+    };
+    if source_player.is_some() {
+        let panel = resource(&args[0], "GENEPANL.DAT")?;
+        genewars_render::terrain_view::compose_left_panel(&mut view, &panel)?;
+    }
+    let dirty_count = view.dirty_requests.len();
     let (indices, requested, pairs, prepared_count, pixels) = (view.indices, view.requested_modes,
         view.pairs, view.prepared_triangles, view.pixels_written);
     let rgb = indices.iter().flat_map(|&index| palette.entries()[usize::from(index)]
         .map(|component| (u16::from(component) * 255 / 63) as u8)).collect();
     let image = RgbImage::from_rgb24(640, 480, rgb).map_err(|e| e.to_string())?;
     super::write_output(&args[4], &image.to_bmp_bytes().map_err(|e| e.to_string())?)?;
-    println!("{{\"target\":{:?},\"camera_words\":{:?},\"wrapped_camera\":{:?},\"map_policy\":\"{}\",\"factor_changes\":{changed},\"columns\":20,\"pairs\":{pairs},\"requested_modes\":{:?},\"prepared_triangles\":{prepared_count},\"pixel_writes\":{pixels},\"index_crc16\":{},\"rgb_crc16\":{},\"entity_callbacks_applied\":false,\"gameplay\":false,\"initial_mission_state_inferred\":false}}",
+    let (columns, layout, panel, player) = match source_player {
+        Some(player) => (16, "initial-viewport", "explicit-GENEPANL", player.to_string()),
+        None => (20, "full-diagnostic", "none", "null".to_owned()),
+    };
+    println!("{{\"target\":{:?},\"camera_words\":{:?},\"wrapped_camera\":{:?},\"map_policy\":\"{}\",\"factor_changes\":{changed},\"columns\":{columns},\"pairs\":{pairs},\"requested_modes\":{:?},\"prepared_triangles\":{prepared_count},\"pixel_writes\":{pixels},\"index_crc16\":{},\"rgb_crc16\":{},\"layout\":\"{layout}\",\"panel_policy\":\"{panel}\",\"source_player\":{player},\"dirty_requests\":{dirty_count},\"entity_callbacks_applied\":false,\"gameplay\":false,\"initial_mission_state_inferred\":false}}",
         target, camera_words, camera, args[3], requested, genewars_assets::crc16_rnc(&indices), genewars_assets::crc16_rnc(image.rgb_bytes()));
     Ok(())
 }

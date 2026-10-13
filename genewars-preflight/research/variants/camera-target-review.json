@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-explicit-camera-review",
-  "checked_utc": "2026-10-13T04:15:05.701593+00:00",
+  "checked_utc": "2026-10-13T04:37:37.963081+00:00",
   "original_or_gui_execution": false,
   "real_target_coordinates": 475136,
   "synthetic_target_coordinates": 917504,
@@ -10,7 +10,7 @@
   "evidence": {
     "path": "research/integration/camera-target-contract.json",
     "size": 2364,
-    "sha256": "15afd8665ff5cbb89a6d37b56276488eeb9ae102f650d7fdc7173496b0b0f134"
+    "sha256": "18920cb684ee15e41a1d2cf03a250ad63903caae0bc8158d46d55780d49fbf75"
   },
   "private_listings": [
     {
@@ -26,13 +26,13 @@
   ],
   "source": {
     "path": "rust/crates/genewars-core/src/terrain.rs",
-    "size": 12388,
-    "sha256": "cc9698806ac6949b0152fad1df1f784b1097b3b368bd0508be9fd858ae412d24"
+    "size": 14495,
+    "sha256": "5b906fdc3ed1809fefd078a1c60cca20cbca5a254df2fe386fe4608cf2450e6a"
   },
   "harness": {
     "path": "private/review/camera-target/review.exe",
-    "size": 5093462,
-    "sha256": "7c0fa39e2854cb4751bb893511aa1e90ab6f8a8e9aa4365915566091360fe967"
+    "size": 5094058,
+    "sha256": "f28c4a6816454283ff03851fed6206d0c37f6193ba3fe8af8410c977f411117c"
   },
   "review_sources": [
     {
