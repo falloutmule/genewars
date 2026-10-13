@@ -72,16 +72,26 @@ pub struct MissionRecordGroup<'a> {
     bytes: &'a [u8],
 }
 
-/// Raw fields read by the traced family-1 sprite consumer. These accessors
-/// expose source values only: no world projection, resource-family name,
-/// animation timing, draw mode, or runtime object is inferred.
+/// Raw source fields read by the traced family-1 sprite consumer. These
+/// accessors expose source bytes/words only: they do not apply initialization,
+/// world projection, visibility, animation timing, drawing, or runtime state.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct MissionFamily1SpriteFields {
     pub record_index: usize,
     pub signed_position_words: [i16; 2],
+    /// Source byte at family-1 record offset +0x15.
+    pub flags_at_15: u8,
+    /// Unsigned source byte at family-1 record offset +0x17.
+    pub shade_at_17: u8,
     pub animation_selector: u8,
     pub frame_selector: u8,
+    /// Raw source byte at +0x23, retained for compatibility with earlier callers.
     pub resource_slot: u8,
+    /// The same source byte at +0x23 interpreted as the signed selector read by
+    /// the traced initializer.
+    pub signed_resource_selector: i8,
+    /// Source byte at +0x26, which the native copy places at +0x2E.
+    pub native_flags_at_2e: u8,
 }
 
 impl<'a> MissionRecordGroup<'a> {
@@ -160,9 +170,9 @@ impl<'a> ConqMissionSource<'a> {
         })
     }
 
-    /// Read only the source offsets directly consumed by the known family-1
-    /// draw route. Their use is documented in the format note and Ghidra
-    /// receipt; later projection/rendering still requires separate evidence.
+    /// Read only family-1 source offsets pinned by the traced consumer. This
+    /// returns serialized source values and does not construct or initialize
+    /// the wider native runtime record.
     pub fn family1_sprite_fields(&self, index: usize) -> Result<MissionFamily1SpriteFields, MissionSourceError> {
         let record = self.group(1)?.record(index)?;
         Ok(MissionFamily1SpriteFields {
@@ -171,9 +181,13 @@ impl<'a> ConqMissionSource<'a> {
                 i16::from_le_bytes([record[7], record[8]]),
                 i16::from_le_bytes([record[9], record[10]]),
             ],
+            flags_at_15: record[0x15],
+            shade_at_17: record[0x17],
             animation_selector: record[0x19],
             frame_selector: record[0x1B],
             resource_slot: record[0x23],
+            signed_resource_selector: record[0x23] as i8,
+            native_flags_at_2e: record[0x26],
         })
     }
 
@@ -241,9 +255,12 @@ mod tests {
         let record = CONQ_FAMILY1_FILE_OFFSET;
         bytes[record + 7..record + 9].copy_from_slice(&(-123i16).to_le_bytes());
         bytes[record + 9..record + 11].copy_from_slice(&(456i16).to_le_bytes());
+        bytes[record + 0x15] = 0x92;
+        bytes[record + 0x17] = 0xff;
         bytes[record + 0x19] = 8;
         bytes[record + 0x1B] = 9;
-        bytes[record + 0x23] = 3;
+        bytes[record + 0x23] = 0x80;
+        bytes[record + 0x26] = 0xa5;
         bytes
     }
 
@@ -268,13 +285,39 @@ mod tests {
         assert_eq!(source.family1_sprite_fields(0), Ok(MissionFamily1SpriteFields {
             record_index: 0,
             signed_position_words: [-123, 456],
+            flags_at_15: 0x92,
+            shade_at_17: 0xff,
             animation_selector: 8,
             frame_selector: 9,
-            resource_slot: 3,
+            resource_slot: 0x80,
+            signed_resource_selector: i8::MIN,
+            native_flags_at_2e: 0xa5,
         }));
         assert_eq!(source.family1_sprite_fields(512), Err(MissionSourceError::RecordIndexOutOfBounds {
             family: 1, index: 512, count: 512,
         }));
+    }
+
+    #[test]
+    fn family1_source_fields_preserve_extreme_signed_selectors_and_raw_bytes() {
+        let mut bytes = synthetic();
+        let record = CONQ_FAMILY1_FILE_OFFSET + 7 * CONQ_FAMILY1_PACKED_STRIDE;
+        bytes[record + 0x15] = 0x10;
+        bytes[record + 0x17] = 30;
+        bytes[record + 0x19] = 0xff;
+        bytes[record + 0x1b] = 0x80;
+        bytes[record + 0x23] = 0xff;
+        bytes[record + 0x26] = 0x02;
+        let source = ConqMissionSource::parse(&bytes).unwrap();
+        let fields = source.family1_sprite_fields(7).unwrap();
+        assert_eq!(fields.flags_at_15, 0x10);
+        assert_eq!(fields.shade_at_17, 30);
+        assert_eq!(fields.animation_selector, 0xff);
+        assert_eq!(fields.frame_selector, 0x80);
+        assert_eq!(fields.resource_slot, 0xff);
+        assert_eq!(fields.signed_resource_selector, -1);
+        assert_eq!(fields.native_flags_at_2e, 0x02);
+        assert_eq!(source.group(1).unwrap().record(7).unwrap()[0x23], 0xff);
     }
 
     #[test]

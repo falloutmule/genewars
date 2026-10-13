@@ -8,9 +8,13 @@ mod construction;
 mod campaign;
 mod menu_control;
 mod terrain;
+mod entity_draw_queue;
 
 /// Helpers whose evidence is restricted to the supplied CD analysis candidate.
 pub mod cd_candidate {
+    pub use crate::entity_draw_queue::{queue_family1, family1_draw_packet, family1_admission_packet,
+        ProjectedFamily1, QueuedFamily1, Family1Queue, QueueError, DrawPacket,
+        AdmissionPacketInput, AdmissionPacket, FAMILY1_QUEUE_CAPACITY};
     pub use crate::campaign::{CampaignPlanError, CampaignResourcePlan};
     pub use crate::menu_control::{MenuCallback0State, MenuCallbackResult, MenuControl, MenuPacket};
     pub use crate::terrain::{camera_cells_for_target, entity_view_position, interpolate_height, interpolate_entity_shade, plan_terrain_factor_raise_4096,

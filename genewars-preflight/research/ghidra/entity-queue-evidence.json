@@ -1,0 +1,309 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-00083140.txt",
+      "sha256": "9d18112e4f02934ede585142dda83c1ea16af0b4f4bbd51acd09226c08f28c52"
+    },
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-00083930.txt",
+      "sha256": "0597f7ba5a896b525f2a0a7c51a3cbc97be051fedc77fd4dce37eada02739439"
+    },
+    {
+      "private_path": "private/ghidra/terrain-visibility/instructions-00083710.txt",
+      "sha256": "04c5063f1ff44ff7fea409e40648a5cc0d24e5bb56360b07a9424b85904be0cd"
+    },
+    {
+      "private_path": "private/ghidra/entity-order/instructions-0001f440.txt",
+      "sha256": "4601eef6b773e61642e08e67d7f027b2e68421f50e467782b32910a61e2f6fe1"
+    },
+    {
+      "private_path": "private/ghidra/entity-plant/instructions-0001f280.txt",
+      "sha256": "dba12fb47f1658bff3d7fa8bfcee4cc648c065194e697f4a85f5958592291223"
+    },
+    {
+      "private_path": "private/ghidra/entity-order/instructions-0001e760.txt",
+      "sha256": "13ebd9cffb5087d53f744df5de8cfaee4e4951697463ded7c5034044e012cc16"
+    },
+    {
+      "private_path": "private/ghidra/entity-order-refs/instructions-0001c120.txt",
+      "sha256": "fd6d61b6f562770b3e34fe65b6fa6ecb9c700ae7aaaa3876f3826e3285670255"
+    },
+    {
+      "private_path": "private/ghidra/entity-order-refs/instructions-0006d0b0.txt",
+      "sha256": "5d247a6771c89370366d39bca5bd24483a9222796b32e360b957d512ed7857ba"
+    },
+    {
+      "private_path": "private/ghidra/entity-order/instructions-0006ca90.txt",
+      "sha256": "056c0c9a3cfab3cc4cfbfb15851895551fa672bb546f1e5f459f7a258315769b"
+    },
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-00082bd0.txt",
+      "sha256": "f2452de57036b4ff1b35e9e213c83bac658e77314a8e75e3a6cef167990961b6"
+    },
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-00086c20.txt",
+      "sha256": "678fb24160c99fd8a7660ce5f1d08e1ce499d1011996d2926cb7fe34d4014200"
+    },
+    {
+      "private_path": "private/ghidra/entity-order/instructions-0007a900.txt",
+      "sha256": "dee38f2f10e0606920437b20b63b01306356c6e41b0aa662c000f5395f3b235a"
+    },
+    {
+      "private_path": "private/ghidra/entity-order/instructions-0007a810.txt",
+      "sha256": "7ef237387b5da4137443c21cf9ec4312cc25a2e50224f8e1fa9614b9f58acd4b"
+    }
+  ],
+  "domain": {
+    "display_pitch": 640,
+    "display_height": 480,
+    "margin_u16": [
+      0,
+      128
+    ],
+    "count_i16": "safe0..256; original onlysigned>=256rejects, negative unsafe count excluded",
+    "capacity": 256,
+    "active_module": "global116974 ==1863A2",
+    "input_coordinates": "explicit signed32 projected point from7AF00; admitted bounds fit signed16",
+    "input_sequence": "caller supplied; not implicitly source order; other entity families may consume capacity"
+  },
+  "family1": "native type byte+6=2, vtable1120AC:+4=1F440 returns0;+6C=1F280 returns1;+70=1E760 dry dirty-mark oldframe ifcachedpointer+27 nonnull",
+  "admission": "x>=-40 AND x<640-margin+40 AND y>=-10 AND y<520, modulegate andcount<256; family1virtualheight0. No perentity shade check before queue insertion.",
+  "queue": "y<=0:bucket0,residual=y, sorted signedresidualascending stableequal.0<y<480:buckety,residual0, inserthead/reverseequal. y>=480:bucket479,residual=y-480, sorted signedresidualascending stableequal. Iterate buckets0..479 andlinkedchain; xstoredsigned16, drawY=signed16(bucket+residual). Bottomy>=480 reconstructsy-1.",
+  "admission_packet": "Optional separate83140 post-insertion helper, native type2 and context+1C mask01 clear (no selection interaction). Ifshade+17==0 preserveflags and do notraisecontext11D8. Otherwise raise11D8; ifsignedbytecontext11D6>0 setflags+15mask04; ifflags04 thenOR08 andrequestoldframe dirtymark virtual70. Cachedframe-null suppressesdirtycallbody, notflags08.",
+  "draw_packet": "83930 family1predicatealways1, selectedentityNone. Requirescontext11D8nonzero; draws iffcontext11D5u8!=0 ORentityflags+15mask08. Onactualdraw dirtyclass10AA14=3 ifflags04else1, callsvirtual24 (1F290), thenflags &=F3. Skippedflags unchanged. Allheads/count/context11D8 resetafterpass.",
+  "dirty_prepass": "83710 disablespixelwrite10AA15=0, predicate1, skipsflags08; flags04 bypassesdirtybboxquery. Otherwise1E840 selectsclampedframe and7A900/7A810 checksnonzero32x32dirtyblocks, notpixelopacity. Onaccepted drydraw ORflags0C; restartbucket0 so newlydirty components can propagate. Finally10AA15=1. This prepass is not implemented by the purequeue/drawpacket helpers.",
+  "runtime_vs_source": "RawCONQ00140plants have type2/flags04/shade00/animation00/frame00.6C690initializesruntimepointersbutdoesnotrefreshshade.72960updatesnative+17 fromexplicitmaplight/factor;6CA90scheduledvirtual64 mutatesruntimefields;83140and83710alsochangeflags. Rawsource is not a full live-state snapshot.",
+  "source_order_routes": "1C120 full-table path when flags118770mask04clear OR118968mask02set inserts active family0 ascending thenfamily1 ascending thenotherfamilies. Ordinaryupdate calls6D0B0: scans ascendinguntilsignedcount11C2B2 activeunflaggedslotsconsumed, maycallvirtual64 forupto2scheduledrecords, excludesnative2E mask10, thensecondpassclearsflags01 fornewrecords. Mustnotassert sourceorder withoutthese runtimegates/counts.",
+  "initial_context": "82BD0sets11D5=1; no universalfirstdraw11D8value assumed. Any admittedpositive-shade entity can raiseglobalcontext11D8; zero-shadeplant maystilldraw whenanotherentityraisesit.",
+  "ordering_cases": 225,
+  "draw_packet_cases": 131072,
+  "synthetic_order_vector": {
+    "input_y": [
+      -1,
+      0,
+      1,
+      1,
+      -1,
+      480,
+      479,
+      480,
+      519,
+      479,
+      0
+    ],
+    "output": [
+      {
+        "id": 0,
+        "x_i16": 0,
+        "draw_y_i16": -1,
+        "projected_y": -1,
+        "bucket": 0,
+        "residual_i16": -1
+      },
+      {
+        "id": 4,
+        "x_i16": 0,
+        "draw_y_i16": -1,
+        "projected_y": -1,
+        "bucket": 0,
+        "residual_i16": -1
+      },
+      {
+        "id": 1,
+        "x_i16": 0,
+        "draw_y_i16": 0,
+        "projected_y": 0,
+        "bucket": 0,
+        "residual_i16": 0
+      },
+      {
+        "id": 10,
+        "x_i16": 0,
+        "draw_y_i16": 0,
+        "projected_y": 0,
+        "bucket": 0,
+        "residual_i16": 0
+      },
+      {
+        "id": 3,
+        "x_i16": 0,
+        "draw_y_i16": 1,
+        "projected_y": 1,
+        "bucket": 1,
+        "residual_i16": 0
+      },
+      {
+        "id": 2,
+        "x_i16": 0,
+        "draw_y_i16": 1,
+        "projected_y": 1,
+        "bucket": 1,
+        "residual_i16": 0
+      },
+      {
+        "id": 9,
+        "x_i16": 0,
+        "draw_y_i16": 479,
+        "projected_y": 479,
+        "bucket": 479,
+        "residual_i16": 0
+      },
+      {
+        "id": 6,
+        "x_i16": 0,
+        "draw_y_i16": 479,
+        "projected_y": 479,
+        "bucket": 479,
+        "residual_i16": 0
+      },
+      {
+        "id": 5,
+        "x_i16": 0,
+        "draw_y_i16": 479,
+        "projected_y": 480,
+        "bucket": 479,
+        "residual_i16": 0
+      },
+      {
+        "id": 7,
+        "x_i16": 0,
+        "draw_y_i16": 479,
+        "projected_y": 480,
+        "bucket": 479,
+        "residual_i16": 0
+      },
+      {
+        "id": 8,
+        "x_i16": 0,
+        "draw_y_i16": 518,
+        "projected_y": 519,
+        "bucket": 479,
+        "residual_i16": 39
+      }
+    ]
+  },
+  "packet_vectors": [
+    {
+      "flags_before": 4,
+      "shade_u8": 0,
+      "countdown_i8": 1,
+      "flags_after_admission": 4,
+      "raises_context_gate": false,
+      "mode0_draw_packet": {
+        "draw": false,
+        "dirty_class": null,
+        "flags_after": 4
+      },
+      "mode1_draw_packet": {
+        "draw": false,
+        "dirty_class": null,
+        "flags_after": 4
+      }
+    },
+    {
+      "flags_before": 4,
+      "shade_u8": 1,
+      "countdown_i8": 0,
+      "flags_after_admission": 12,
+      "raises_context_gate": true,
+      "mode0_draw_packet": {
+        "draw": true,
+        "dirty_class": 3,
+        "flags_after": 0
+      },
+      "mode1_draw_packet": {
+        "draw": true,
+        "dirty_class": 3,
+        "flags_after": 0
+      }
+    },
+    {
+      "flags_before": 0,
+      "shade_u8": 1,
+      "countdown_i8": 0,
+      "flags_after_admission": 0,
+      "raises_context_gate": true,
+      "mode0_draw_packet": {
+        "draw": false,
+        "dirty_class": null,
+        "flags_after": 0
+      },
+      "mode1_draw_packet": {
+        "draw": true,
+        "dirty_class": 1,
+        "flags_after": 0
+      }
+    },
+    {
+      "flags_before": 0,
+      "shade_u8": 1,
+      "countdown_i8": 1,
+      "flags_after_admission": 12,
+      "raises_context_gate": true,
+      "mode0_draw_packet": {
+        "draw": true,
+        "dirty_class": 3,
+        "flags_after": 0
+      },
+      "mode1_draw_packet": {
+        "draw": true,
+        "dirty_class": 3,
+        "flags_after": 0
+      }
+    },
+    {
+      "flags_before": 16,
+      "shade_u8": 255,
+      "countdown_i8": -128,
+      "flags_after_admission": 16,
+      "raises_context_gate": true,
+      "mode0_draw_packet": {
+        "draw": false,
+        "dirty_class": null,
+        "flags_after": 16
+      },
+      "mode1_draw_packet": {
+        "draw": true,
+        "dirty_class": 1,
+        "flags_after": 16
+      }
+    },
+    {
+      "flags_before": 255,
+      "shade_u8": 255,
+      "countdown_i8": 127,
+      "flags_after_admission": 255,
+      "raises_context_gate": true,
+      "mode0_draw_packet": {
+        "draw": true,
+        "dirty_class": 3,
+        "flags_after": 243
+      },
+      "mode1_draw_packet": {
+        "draw": true,
+        "dirty_class": 3,
+        "flags_after": 243
+      }
+    }
+  ],
+  "actual_fixture": {
+    "source_entry": "root/2/disc/152",
+    "camera": [
+      66,
+      48
+    ],
+    "margin": 128,
+    "input_points": 40,
+    "admitted_points": 7,
+    "private_path": "private/ghidra/entity-plant/queue-fixture.json",
+    "sha256": "da5ba2c5fee3c9115201ccb8483adebdc157f2a6d38946048a9d2101aeabe8df",
+    "scope": "Only40explicitfamily1points, emptyqueue, nootherfamilies/capacitycompetition; notcompletefirstscene"
+  },
+  "limits": [
+    "No complete live-state/first-scene admission or opaque callbacks simulated.",
+    "Purequeue assumes fresh empty buckets and count0; inputsequenceexplicit.",
+    "Selectedentity/flash interaction excluded byselectedNone andcontext+1Cmask01clear.",
+    "Incrementaldirty bookkeeping andprepass need explicitseparatemodel, notassumedallvisible."
+  ]
+}

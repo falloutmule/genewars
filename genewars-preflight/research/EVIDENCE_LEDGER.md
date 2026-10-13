@@ -52,7 +52,7 @@ Common archive SHA256: 8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e
 | RUN-03 | Readable menu/options with English runtime copies | [outcome](variants/reference-run-003-outcome.md) | Observed original execution | mouse_emulation=always; guest motion unresolved. Verified-PID termination after536s, exit15, no timeout. All immutable input checks passed; no mission/save/reload |
 | RUN-04 | Raw input diagnostic | [outcome](variants/reference-run-004-outcome.md), [source diagnostic](variants/reference-mouse-diagnostic.md) | Observed original execution and separate source analysis | raw_mouse_input=true plus capture request did not resolve injected motion. Closed after146s, exit15, no timeout; immutable inputs pass. No physical-mouse/game-compatibility conclusion |
 
-Actual commands and preservation/Git checks: [integration verification](integration/verification.json), now 79 checks passed, including 151 Rust tests and independent menu/font/campaign/terrain/vertex/shade checks. The preceding [receipt-write failure](integration/verification-20261013-receipt-write-failure.json) remains preserved; atomic publication and bounded transient-error handling fixed the Windows write failure, with pixel assertions unchanged. Commercial bytes, manual text/images and raw decompilation remain ignored under private/. No incompatible maps or third-party implementation source copied into Rust.
+Actual commands and preservation/Git checks: [integration verification](integration/verification.json), at the historical terrain checkpoint, 79 checks passed, including 151 Rust tests and independent menu/font/campaign/terrain/vertex/shade checks. The preceding [receipt-write failure](integration/verification-20261013-receipt-write-failure.json) remains preserved; atomic publication and bounded transient-error handling fixed the Windows write failure, with pixel assertions unchanged. Commercial bytes, manual text/images and raw decompilation remain ignored under private/. No incompatible maps or third-party implementation source copied into Rust.
 
 
 ## Terrain rendering checkpoint
@@ -65,3 +65,14 @@ Actual commands and preservation/Git checks: [integration verification](integrat
 | TERRAIN-07 | integration/terrain-cell-render.json and terrain-view.json | Observed native output; 84 cell and14 viewport compositions match source models. Explicit target/map policies, no original framebuffer comparison |
 | TERRAIN-08 | integration/native-terrain-window.json | Observed native window: all4 arrows, R/R and Escape,7 presentations. Earlier physical-key navigation miss preserved; logical-key fix verified. Inspector controls, not original input cadence |
 | MISSION-02 | ghidra/mission-load-evidence.json | Static source layout accounts for8 families /1,368 serialized records and exact EOF. First player0 target81,53/camera66,48 is campaign/selection gated. Runtime pointers and initialization remain separate |
+
+
+## Plant rendering and explicit draw queue
+
+| ID | Evidence | Status and limits |
+|---|---|---|
+| PLANT-01 | [Foreground proof](ghidra/plant-color-bridge.md), [shadow proof](ghidra/plant-shadow-bridge.md), [independent review](variants/plant-passes-review.md) | Corroborated exact12-resource binding,108 real frames and339,594 normal/composed cases; no live timing inferred |
+| PLANT-02 | [Scene check](integration/mission-plant-view.json), [native controls](integration/plant-controls-observed.json) | Observed native21-frame /6,451,200-pixel agreement with independent static models; selected source record only, no original framebuffer comparison |
+| QUEUE-01 | [Queue proof](ghidra/entity-queue-bridge.md), [review](variants/entity-queue-review.md) | Corroborated admission, bucket ordering and flag packets for explicit inputs; dirty prepass and full live sequence excluded |
+| PANEL-02 | [Conditional MAINPANL route](ghidra/initial-panel-bridge.md) | Static caller/selector witness under campaign, signedprogress<4 and nullactivechild gates; raw source does not prove live gates |
+| RUN-05 | [Absolute mouse diagnostic](variants/reference-run-005-outcome.md) | Observed menu/options; guest movement unresolved, no mission/save. Closed514s, operator exit15; immutable inputs passed |

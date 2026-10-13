@@ -1,0 +1,54 @@
+{
+  "status": "work-in-progress-pending-independent-native-review",
+  "recorded_utc": "2026-10-13T08:35:30.623096+00:00",
+  "last_complete_gate_commit": "9b9e56e",
+  "last_complete_gate_checks": 86,
+  "last_complete_gate_rust_tests": 158,
+  "renderer_unit_tests": {
+    "command": "python -B scripts/cargo.py test -p genewars-render --offline --locked",
+    "exit_code": 0,
+    "passed": 48
+  },
+  "static_validators": {
+    "plant_color": "PASS13 instruction pins,12 exact resources,40 source mappings,65536 dispatch cases",
+    "plant_shadow": "PASS4 pins,757 cached/stream comparisons,12 real GLA fixtures",
+    "entity_shade": "PASS2 pins,458752 comparisons,42 vectors,40 source points"
+  },
+  "independent_native_plant_review": "not run",
+  "plant_scene_integration": "not run",
+  "updated_aggregate_gate": "not run",
+  "worker_status": "All three active Sol/Luna agents returned usage-limit errors; no model substitution.",
+  "root_repairs": [
+    "Color destination validation uses the minimal addressed last-row extent for an offset viewport.",
+    "Synthetic plant fixture separates six sprite data bytes from its table."
+  ],
+  "files": [
+    {
+      "path": "rust/crates/genewars-render/src/plant.rs",
+      "sha256": "700ce459b589f87e0f1dc864589402b7231295cbf11a0ee1217eb2c9e27d9833"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/entity_shadow.rs",
+      "sha256": "e0f3a50f7ec896817d12bc31a61fa7718e189749431ec32ff0f1eb03d0e4c102"
+    },
+    {
+      "path": "rust/crates/genewars-render/src/lib.rs",
+      "sha256": "eaaa0efb287c7283942cdaa6ea65657694471aa82e182c1f3d3eccd003486957"
+    },
+    {
+      "path": "research/ghidra/plant-color-evidence.json",
+      "sha256": "9f0568aa744110941ee0a3e787c4dfd57bbb80a8e45da99f949cfee804267659"
+    },
+    {
+      "path": "research/ghidra/plant-shadow-evidence.json",
+      "sha256": "6584e055485134abb7404c708543f958e4a05519e9ae740a7bc44b9e2cd4df74"
+    },
+    {
+      "path": "research/ghidra/entity-shade-evidence.json",
+      "sha256": "e6cc23b7f8f733b11c0bd1bd611e663f8261983ccccf635111ed924e409fde2c"
+    }
+  ],
+  "original_execution": false,
+  "gameplay": false,
+  "public_upload": false
+}

@@ -1,0 +1,3390 @@
+{
+  "schema_version": 1,
+  "status": "completed-runtime-observed",
+  "session": "run-005",
+  "original_execution": true,
+  "emulator_execution": false,
+  "emulator_runtime_restrictions_tested": false,
+  "empty_emulator_validation": null,
+  "tool": {
+    "version": "2026.10.01",
+    "url": "https://github.com/joncampbell123/dosbox-x/releases/download/dosbox-x-v2026.10.01/dosbox-x-vsbuild-win64-2026.10.01-portable.zip",
+    "archive": {
+      "path": "private/tools/dosbox-x/dosbox-x-vsbuild-win64-2026.10.01-portable.zip",
+      "size": 44575207,
+      "sha256": "3c50915e63aefe35777d65ebb4391a06b4a2c2342e4c75cbee6bbda4c6916e33"
+    },
+    "executable": {
+      "path": "private/tools/dosbox-x/2026.10.01/bin/x64/Release SDL2/dosbox-x.exe",
+      "size": 25836544,
+      "sha256": "a82adcfa7af2784566cfeff74c077cefed08505396db2948b7e6aa7d4cee0832"
+    },
+    "reference_config": {
+      "path": "private/tools/dosbox-x/2026.10.01/bin/x64/Release SDL2/dosbox-x.reference.full.conf",
+      "size": 293719,
+      "sha256": "a33ddd908c7c58361985044b01e93b15f56e562d5485fa8baf17221ea6ebe14c"
+    },
+    "license": {
+      "path": "private/tools/dosbox-x/2026.10.01/COPYING",
+      "size": 18334,
+      "sha256": "93c59ba0fd92fef7746f0e0809cb49a0c27ab21376da0ac6a583688401afd441"
+    },
+    "members_verified": 311,
+    "license_note": "Packaged COPYING is GNU GPL v2 text. Private tool use only; no redistribution or source copying into reconstruction."
+  },
+  "runtime": {
+    "files": [
+      {
+        "entry_id": "root/2/disc/13",
+        "path": "private/reference-run/run-005/drive-c/GAME/AWEMAN32.DLL",
+        "size": 35328,
+        "sha256": "1249d7496d68f42569d983d0ae026beaa86090a77ebe3b58e3eb5352f3ee5aef"
+      },
+      {
+        "entry_id": "root/2/disc/14",
+        "path": "private/reference-run/run-005/drive-c/GAME/DOS4GW.EXE",
+        "size": 265396,
+        "sha256": "b8265123ac8a189637448618409ef3ecd2e9f3e1a47062c685a02240f688dec1"
+      },
+      {
+        "entry_id": "root/2/disc/15",
+        "path": "private/reference-run/run-005/drive-c/GAME/FROGVLNK.DLL",
+        "size": 78848,
+        "sha256": "15304d399341512d4f70e2054fd3d012f300c4566ef808c458cb95e5d43df9ed"
+      },
+      {
+        "entry_id": "root/2/disc/16",
+        "path": "private/reference-run/run-005/drive-c/GAME/GENEWARS.EXE",
+        "size": 37660,
+        "sha256": "964103130ff485fbb375aae7c7f2fb12913376cbad24373cf8b12341c89b8c1a"
+      },
+      {
+        "entry_id": "root/2/disc/17",
+        "path": "private/reference-run/run-005/drive-c/GAME/GW.ERR",
+        "size": 45,
+        "sha256": "e758e8e330d7c6ab2bb8a39cde9d4199a3f25a05172bab482a81ec51c92f03c3"
+      },
+      {
+        "entry_id": "root/2/disc/18",
+        "path": "private/reference-run/run-005/drive-c/GAME/GW.EXE",
+        "size": 1265994,
+        "sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba"
+      },
+      {
+        "entry_id": "root/2/disc/19",
+        "path": "private/reference-run/run-005/drive-c/GAME/MAIN.MAP",
+        "size": 191079,
+        "sha256": "50c396cc3860c1c599d05714184bc2de610524275ef07ddfe92595bb49d9f837"
+      },
+      {
+        "entry_id": "root/2/disc/20",
+        "path": "private/reference-run/run-005/drive-c/GAME/SETSOUND.EXE",
+        "size": 211855,
+        "sha256": "b7d240370f1bf8dc093fb646469ebbcffd36798fb089079375abf7bd89cc5fec"
+      },
+      {
+        "entry_id": "root/2/disc/21",
+        "path": "private/reference-run/run-005/drive-c/GAME/SMACKW32.DLL",
+        "size": 66048,
+        "sha256": "f8b07026e3db64d19de2d08ec97900ef4418fa675a9fcae77b260a4138e51870"
+      },
+      {
+        "entry_id": "root/2/disc/22",
+        "path": "private/reference-run/run-005/drive-c/GAME/WAIL32.DLL",
+        "size": 135680,
+        "sha256": "1a9c8bf6fe5e08f8e28e80eb10b21b5b53f934fdda1dc28728961350d817b61e"
+      },
+      {
+        "entry_id": "root/2/disc/23",
+        "path": "private/reference-run/run-005/drive-c/GAME/WSND7D.DLL",
+        "size": 99840,
+        "sha256": "de2a61a35ddcdff469998da0467f18787027298db53e5d8dcec218646c9f1fa2"
+      },
+      {
+        "entry_id": "root/2/disc/24",
+        "path": "private/reference-run/run-005/drive-c/GAME/WSND7R.DLL",
+        "size": 116736,
+        "sha256": "f909f3c3937af505347cd01411a782e3750103696c8feb09c443ad20580a7f6d"
+      },
+      {
+        "entry_id": "root/2/disc/33",
+        "path": "private/reference-run/run-005/drive-c/GAME/ANIMS/BIOLOSE.SMK",
+        "size": 1545908,
+        "sha256": "bc8723cf516626ea7344a9c2dfb5670110e1cd87bc8c992818cd0580cec29c4a"
+      },
+      {
+        "entry_id": "root/2/disc/34",
+        "path": "private/reference-run/run-005/drive-c/GAME/ANIMS/BIOWIN.SMK",
+        "size": 1198972,
+        "sha256": "4891c8410012a3f05054b0cf267ce73ed3e74e201be7504ef52c58fb2de8bf04"
+      },
+      {
+        "entry_id": "root/2/disc/35",
+        "path": "private/reference-run/run-005/drive-c/GAME/ANIMS/SYSTEM1.SMK",
+        "size": 1003996,
+        "sha256": "28448a99c85e917ee546f432acb714b57fd365da6ab02bc1f4d2a2abad0fa5a3"
+      },
+      {
+        "entry_id": "root/2/disc/36",
+        "path": "private/reference-run/run-005/drive-c/GAME/ANIMS/SYSTEM2.SMK",
+        "size": 1418992,
+        "sha256": "a8ad4c3defe6743eac5aeab2f4abce110ca2fda1b3c652fdefba2b2690ca2e22"
+      },
+      {
+        "entry_id": "root/2/disc/37",
+        "path": "private/reference-run/run-005/drive-c/GAME/ANIMS/SYSTEM3.SMK",
+        "size": 1395676,
+        "sha256": "1ee1c31e32864f85865aee760f7d08edc804ed6ca96a48084c6fff2fefe50565"
+      },
+      {
+        "entry_id": "root/2/disc/38",
+        "path": "private/reference-run/run-005/drive-c/GAME/ANIMS/SYSTEM4.SMK",
+        "size": 1282920,
+        "sha256": "da5e6562a0580b33e251d76801416c0374da68c8371d5cb9c60d6800b5eb43bd"
+      },
+      {
+        "entry_id": "root/2/disc/40",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/B32A.DAT",
+        "size": 56355,
+        "sha256": "481677e31b05d9e4ba428932a4eaf9003fae4fe320f90daf22a947cbd3e4ef9c"
+      },
+      {
+        "entry_id": "root/2/disc/41",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/B32B.DAT",
+        "size": 55418,
+        "sha256": "7a34f6d9083c357576f60431ca7c137eddcd8c8e9270283ac1a962b49bf8352b"
+      },
+      {
+        "entry_id": "root/2/disc/42",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/B32C.DAT",
+        "size": 55949,
+        "sha256": "1722c9770684df18aca7f2f5c7aac776763f541fd06570c41de5b38c51592ae7"
+      },
+      {
+        "entry_id": "root/2/disc/43",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/B32D.DAT",
+        "size": 53944,
+        "sha256": "77376b9dc9f3118771fbdd56fccc2afebecea16ef1332c4eca3dc1a767ba4306"
+      },
+      {
+        "entry_id": "root/2/disc/44",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CEDITOR.DAT",
+        "size": 4971,
+        "sha256": "bc8818767ae68255a0aeed4e378de5431e014dedc2cf1bc8b6fa508401b03ffd"
+      },
+      {
+        "entry_id": "root/2/disc/45",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CUSTOM.PAL",
+        "size": 633,
+        "sha256": "35e22d67449148678f428756aa42b60d4a8ed3c6cb4de48687554f45edc462de"
+      },
+      {
+        "entry_id": "root/2/disc/46",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CUSTOMEN.DAT",
+        "size": 154761,
+        "sha256": "66b0efc62283c1c21d2b955d2dc9c432783094342454b0035c833e19cc600f95"
+      },
+      {
+        "entry_id": "root/2/disc/47",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CUSTOMFR.DAT",
+        "size": 155739,
+        "sha256": "37a423e35a4ec4f8c99da8d5c323633792b62b7a345388e76a670ee4f0800bc7"
+      },
+      {
+        "entry_id": "root/2/disc/48",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CUSTOMGE.DAT",
+        "size": 155524,
+        "sha256": "c1be874298078180d20911e33d1d426ff0191f38d350b352ddd169162d31a24e"
+      },
+      {
+        "entry_id": "root/2/disc/49",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CUSTOMIT.DAT",
+        "size": 139134,
+        "sha256": "33c6258be2612bcff2fcd10c8d2c29894ad2099b71b7d939afc24136a9072ffa"
+      },
+      {
+        "entry_id": "root/2/disc/50",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CUSTOMSP.DAT",
+        "size": 154974,
+        "sha256": "9188155296438016446eca6046cf0b88c2240e6eb44d73913dc980cf4c38c918"
+      },
+      {
+        "entry_id": "root/2/disc/51",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CUSTOMSW.DAT",
+        "size": 155710,
+        "sha256": "fbb4c85eb435a61ee2fe5acc09cd05b2cf86929505ffed83e6c81493089cc2de"
+      },
+      {
+        "entry_id": "root/2/disc/52",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CYAN.DAT",
+        "size": 205,
+        "sha256": "2ce480d8a59e4c6bb54bad99c5df08fa005865c42fd2cba48eb670d411e0a03b"
+      },
+      {
+        "entry_id": "root/2/disc/53",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/DEMOEND1.DAT",
+        "size": 126768,
+        "sha256": "d8693658491a787214130b483c481209a4a855b9331d5542f6d897d49e19dfd1"
+      },
+      {
+        "entry_id": "root/2/disc/54",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/DEMOEND1.PAL",
+        "size": 708,
+        "sha256": "12691dde15d5d809874e8fc0cc3120f1586bec98aeb4278af2f067c743036261"
+      },
+      {
+        "entry_id": "root/2/disc/55",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/DEMOEND2.DAT",
+        "size": 83853,
+        "sha256": "8a814db89150b3dffd13f7234e3a12603fc2d75d52a58804ec5cf75f7bb63595"
+      },
+      {
+        "entry_id": "root/2/disc/56",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/DEMOEND2.PAL",
+        "size": 695,
+        "sha256": "315f6acd0be1241b9c336ae4d99b85d92ed6f640a2381394622c6ce5b809ae98"
+      },
+      {
+        "entry_id": "root/2/disc/57",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/EDITOR.DAT",
+        "size": 4463,
+        "sha256": "ce0643774ae55d86092a44facbb25f07e6c4da9e4230b1208a6a86027f741837"
+      },
+      {
+        "entry_id": "root/2/disc/58",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/EDITOR.PAL",
+        "size": 765,
+        "sha256": "3e84e11e599fe536d1983ea468528eccfa8076582d899234022d6176f1952ce2"
+      },
+      {
+        "entry_id": "root/2/disc/59",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/EFF.ANB",
+        "size": 85337,
+        "sha256": "74c282b4aff35204da78399a3f2674cabda56b0a76dc9a9974635ae5ad878b8d"
+      },
+      {
+        "entry_id": "root/2/disc/60",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/ETHEREAL.ANB",
+        "size": 52085,
+        "sha256": "7660297d85773f47cacc07dcfdf96e8daa118dc52c8a38afc054c1ef9dfa20bc"
+      },
+      {
+        "entry_id": "root/2/disc/61",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FADE.DAT",
+        "size": 7766,
+        "sha256": "ddef38a3e63fbb3680aac15569f12e02f141036ffa270ddd48cdc82bce361503"
+      },
+      {
+        "entry_id": "root/2/disc/62",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FILEEN.DAT",
+        "size": 150863,
+        "sha256": "98902c34587768832b1c40ddbccf8db8f2982f875c3ea8631170f15347a6cf40"
+      },
+      {
+        "entry_id": "root/2/disc/63",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FILEFR.DAT",
+        "size": 150863,
+        "sha256": "98902c34587768832b1c40ddbccf8db8f2982f875c3ea8631170f15347a6cf40"
+      },
+      {
+        "entry_id": "root/2/disc/64",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FILEGE.DAT",
+        "size": 151107,
+        "sha256": "66fc547df0f88c912b4f3d8724bc9d7ba159941a14da5abf293b67f73ce9a3f9"
+      },
+      {
+        "entry_id": "root/2/disc/65",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FILEIT.DAT",
+        "size": 151197,
+        "sha256": "b694af13595f0229644d266fb75a6c710ff4f7484064fb68a3ccdb69a14910d3"
+      },
+      {
+        "entry_id": "root/2/disc/66",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FILESCR.ANB",
+        "size": 6325,
+        "sha256": "33c9c1f394a249209ff20319490393afa844d46dec84455cf43aca5ff24cf957"
+      },
+      {
+        "entry_id": "root/2/disc/67",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FILESCR.GLA",
+        "size": 26084,
+        "sha256": "a312c491d16681660ea42f719c6da39d4b9500b8efed72b68b00b2d5c5b6267b"
+      },
+      {
+        "entry_id": "root/2/disc/68",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FILESCR.PAL",
+        "size": 618,
+        "sha256": "997a3711fbed107cc0025fd30f15760345139dcdccc842c6433ce8fb2b29a5ec"
+      },
+      {
+        "entry_id": "root/2/disc/69",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FILESP.DAT",
+        "size": 151137,
+        "sha256": "2dc236e4e8f2e8018d67a98af11835b1febb2bd9a013934d998ff2a4c875f0a9"
+      },
+      {
+        "entry_id": "root/2/disc/70",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FILESW.DAT",
+        "size": 151113,
+        "sha256": "ae10331aa8ac961c12c6f1bd2cbfdf71b34feb6ae233ef94ceecc5a70672d8aa"
+      },
+      {
+        "entry_id": "root/2/disc/71",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT0.DAT",
+        "size": 892,
+        "sha256": "ee30f263c450c2611d8bfc0b7d3511d532477d320b7fa245076db28b766209af"
+      },
+      {
+        "entry_id": "root/2/disc/72",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT0.TAB",
+        "size": 482,
+        "sha256": "f08fe66f5be70bde22e2a59d160d1a097cc36d0dbcb011f254a8220275cef161"
+      },
+      {
+        "entry_id": "root/2/disc/73",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT1.DAT",
+        "size": 1401,
+        "sha256": "50d2e0c756f15266af732d189d4513a8a0b97885adcb1f865dbfbed43ff9af95"
+      },
+      {
+        "entry_id": "root/2/disc/74",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT1.TAB",
+        "size": 476,
+        "sha256": "6ceee14277701550731d4bda0db32032ca8fa3bc1c1b185648036b2dd5b035a4"
+      },
+      {
+        "entry_id": "root/2/disc/75",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT2.DAT",
+        "size": 9586,
+        "sha256": "2f3d275f88f2ff6671562a819cbc7a791b16ad4510a4020f3b6078c917f60dba"
+      },
+      {
+        "entry_id": "root/2/disc/76",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT2.TAB",
+        "size": 641,
+        "sha256": "f54057e1b19cc1711a1596b6459cfdfb359a170f5ed739df71fd852befba4bab"
+      },
+      {
+        "entry_id": "root/2/disc/77",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT3.DAT",
+        "size": 408,
+        "sha256": "098da83c84bbbcc11f1ffd966bd203f069866f4d273851bc2db0747d7afcc25a"
+      },
+      {
+        "entry_id": "root/2/disc/78",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT3.TAB",
+        "size": 104,
+        "sha256": "73349c1ecacd83a86f4701bcee28efc787d5deb3666ea9b3eed018574000c71e"
+      },
+      {
+        "entry_id": "root/2/disc/79",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT4.DAT",
+        "size": 6452,
+        "sha256": "fc7c09bfa5bfba95ca2c22fe49faf9b32e4f3c2f31e18a1fd76a8ae81b75251f"
+      },
+      {
+        "entry_id": "root/2/disc/80",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT4.TAB",
+        "size": 1170,
+        "sha256": "b421792e9eeb38e8c1ff8cb97310e1d02e4f1bd2395bd77b54bb796c05270fde"
+      },
+      {
+        "entry_id": "root/2/disc/81",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT5.DAT",
+        "size": 2734,
+        "sha256": "a301b2028bb6637325048a27c00a9688a32f7c240744202cdddee1b3fc2c135b"
+      },
+      {
+        "entry_id": "root/2/disc/82",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT5.TAB",
+        "size": 564,
+        "sha256": "8107e02da5491f7c825d09774b4b3eeea4613570e0870dca24c839f37f2dc6c1"
+      },
+      {
+        "entry_id": "root/2/disc/83",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT7.DAT",
+        "size": 1541,
+        "sha256": "cd7ccbfb005ee78ef29e29d620a34cb9e275522c4c96b963f84c3abda5757326"
+      },
+      {
+        "entry_id": "root/2/disc/84",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/FONT7.TAB",
+        "size": 551,
+        "sha256": "62a8476b908544ee6c1d4c6a9c28b1c294c41cdd520f45cc589ed69f90221ff8"
+      },
+      {
+        "entry_id": "root/2/disc/85",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/GENEPANL.ANB",
+        "size": 1614,
+        "sha256": "83e7010ccc0631db4937ab96395d058f8931458124eb004a7fa91d1c01c3648e"
+      },
+      {
+        "entry_id": "root/2/disc/86",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/GENEPANL.DAT",
+        "size": 16204,
+        "sha256": "8116b2b883320b8573c50496a570f0f3fa978e4c20b9c85a284339ff1f920e24"
+      },
+      {
+        "entry_id": "root/2/disc/87",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/ICE.DAT",
+        "size": 1723,
+        "sha256": "512e40b2b4291f752e00657b5ae717691429ad85414c869f535492ca1269a0c9"
+      },
+      {
+        "entry_id": "root/2/disc/88",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/IFCEDIT.ANB",
+        "size": 1160,
+        "sha256": "238b16e83d1ed92a9d42b05215082d471be0a82ad517e9ad50bf1db75e85607c"
+      },
+      {
+        "entry_id": "root/2/disc/89",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/IFCUSTOM.ANB",
+        "size": 19338,
+        "sha256": "1f69d8bca8bed9d9e15ee1cc79e0ce0856bb4cb6d7e3791e704b31d02b0006b4"
+      },
+      {
+        "entry_id": "root/2/disc/90",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/IFEDITOR.ANB",
+        "size": 2395,
+        "sha256": "fb0b03b787bc2290be450e3d0b4444fad3db4daf9558e8e80fc375b32491748e"
+      },
+      {
+        "entry_id": "root/2/disc/91",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/IFEDITOR.TAB",
+        "size": 184,
+        "sha256": "99ea7243ef207d75531e4880e8fd20be402a60554dce423fd2fe4b96a49726ee"
+      },
+      {
+        "entry_id": "root/2/disc/92",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/IFTITLE.ANB",
+        "size": 30050,
+        "sha256": "c7d2dfc5d774c69337436249ec74e4d0fa6ae1d06bd5ae785f9f73ee2ac0f707"
+      },
+      {
+        "entry_id": "root/2/disc/93",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LEVSCR01.DAT",
+        "size": 105717,
+        "sha256": "fa70fb20318dceab350402fe962744248f9127bb91b64cb0b11526f9bb7f88d6"
+      },
+      {
+        "entry_id": "root/2/disc/94",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LEVSCR01.PAL",
+        "size": 706,
+        "sha256": "678f226e78ab61eb7ec30afa6c54f2686dca550850e0267a4824e79e7ec1e44d"
+      },
+      {
+        "entry_id": "root/2/disc/95",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LEVSCR02.DAT",
+        "size": 58555,
+        "sha256": "f66d0cddd20f96066133a958729ecc04030a4efd99569bd15fd370b0745ad17f"
+      },
+      {
+        "entry_id": "root/2/disc/96",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LEVSCR02.PAL",
+        "size": 706,
+        "sha256": "678f226e78ab61eb7ec30afa6c54f2686dca550850e0267a4824e79e7ec1e44d"
+      },
+      {
+        "entry_id": "root/2/disc/97",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LEVSCR03.DAT",
+        "size": 72527,
+        "sha256": "e888f36cf0a8e04bab03a1ce9a3774b76ed21cb9bdbb89393218154b488dbb78"
+      },
+      {
+        "entry_id": "root/2/disc/98",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LEVSCR03.PAL",
+        "size": 706,
+        "sha256": "678f226e78ab61eb7ec30afa6c54f2686dca550850e0267a4824e79e7ec1e44d"
+      },
+      {
+        "entry_id": "root/2/disc/99",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LEVSCR04.DAT",
+        "size": 93636,
+        "sha256": "49fd5f3da7fb288865c3f6926060fbb68f336351ad66e414cb5c60b73d08223d"
+      },
+      {
+        "entry_id": "root/2/disc/100",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LEVSCR04.PAL",
+        "size": 706,
+        "sha256": "678f226e78ab61eb7ec30afa6c54f2686dca550850e0267a4824e79e7ec1e44d"
+      },
+      {
+        "entry_id": "root/2/disc/101",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LEVSCR05.DAT",
+        "size": 117100,
+        "sha256": "45850d50b925c7b6a930334552e6a2d7cd7aeaa4d43219711c7a51547a22395d"
+      },
+      {
+        "entry_id": "root/2/disc/102",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LEVSCR05.PAL",
+        "size": 729,
+        "sha256": "e02ae9390923f1fc36e793571eeebb5622ba5d41e6904458112b3dcf4647873c"
+      },
+      {
+        "entry_id": "root/2/disc/103",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LOSESCR.DAT",
+        "size": 51764,
+        "sha256": "5c904ad5e516ba097d0e9038254102d41a78afea59fc7715797a63eb6fb34dac"
+      },
+      {
+        "entry_id": "root/2/disc/104",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LOSESCR.PAL",
+        "size": 630,
+        "sha256": "6a94405c552dd420c474d41d6c055b799678cafa922882968fed9f6a8dd884ea"
+      },
+      {
+        "entry_id": "root/2/disc/105",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LPANEL.ANB",
+        "size": 1939,
+        "sha256": "e91e4dab04218a1091d6f158b6f68f8d56193b8361167db35818a00fca9dd2ac"
+      },
+      {
+        "entry_id": "root/2/disc/106",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/LPANEL.DAT",
+        "size": 16014,
+        "sha256": "68ab411edded7e3f6c020f40376300cfb1706f3779dcc25898280f9f09cb3238"
+      },
+      {
+        "entry_id": "root/2/disc/107",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/MAIN.GLA",
+        "size": 34551,
+        "sha256": "c5e12a5b4325c8302cab0fb3ba3aaa654e2e044131763298815766d8a6f47a58"
+      },
+      {
+        "entry_id": "root/2/disc/108",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/MAIN.PAL",
+        "size": 768,
+        "sha256": "8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05"
+      },
+      {
+        "entry_id": "root/2/disc/109",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/MAINPANL.ANB",
+        "size": 28464,
+        "sha256": "592b8edec4980015755927fa0cbac93f4575664faf385ddf2dbb19aff01bec27"
+      },
+      {
+        "entry_id": "root/2/disc/110",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/MAINPANL.DAT",
+        "size": 17203,
+        "sha256": "18712cbeb0bbe1990b307dc1650a5b054e511afc2597b71c598407a29664ea95"
+      },
+      {
+        "entry_id": "root/2/disc/111",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PDISK1.ANB",
+        "size": 884,
+        "sha256": "b17473f0b531a494b33d9ee185278a0acd58a9cae851a05828607132143d3fe1"
+      },
+      {
+        "entry_id": "root/2/disc/112",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PDISK2.ANB",
+        "size": 991,
+        "sha256": "531dfc0c8a816931ea1de40894f1b9af587180b113dbe89d93e7ab4fcb81c1c8"
+      },
+      {
+        "entry_id": "root/2/disc/113",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PDISK3.ANB",
+        "size": 846,
+        "sha256": "c8096b09125e77096bd8330ca7d4235bf7f1063575eb5a0222876d1dd3c77e33"
+      },
+      {
+        "entry_id": "root/2/disc/114",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PDISK4.ANB",
+        "size": 1026,
+        "sha256": "91c0ae42a8b1b19be454acf2c0b0287d366ebef0f1db550f08c3efa6fd73d88d"
+      },
+      {
+        "entry_id": "root/2/disc/115",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PICONS.ANB",
+        "size": 35816,
+        "sha256": "6a3ca1f55d40f8f206705f930df62a2e735e6371bcffa004440d07c02a39ae91"
+      },
+      {
+        "entry_id": "root/2/disc/116",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PICONS8.ANB",
+        "size": 16035,
+        "sha256": "d8bfdbb4ae0a966bfd42b754f78cfe4510f5a7cd8bb33174de1f48d780fe678c"
+      },
+      {
+        "entry_id": "root/2/disc/117",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PL1.DAT",
+        "size": 35346,
+        "sha256": "4283af614d54519e2a9f6c59a881ba58ad356b8844c9e489a51501c51e2aeeac"
+      },
+      {
+        "entry_id": "root/2/disc/118",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PL2.DAT",
+        "size": 35170,
+        "sha256": "5d16ceef343f85fe8a250b1b554e2d1ae7c2748580c772e2ed08b9ad0ca2ad32"
+      },
+      {
+        "entry_id": "root/2/disc/119",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PL3.DAT",
+        "size": 40842,
+        "sha256": "32d3f630178e1b123465d47d1af5dbb39e670d9f8fe6a1d27dda2fad565fa2b0"
+      },
+      {
+        "entry_id": "root/2/disc/120",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PL4.DAT",
+        "size": 39244,
+        "sha256": "8c07e6acd8741e413a8ab63441f85f41fd95d001271d7e541f8c8ab47789d8f2"
+      },
+      {
+        "entry_id": "root/2/disc/121",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANETS.ANB",
+        "size": 5666,
+        "sha256": "e1a167148f02580ce2a170743502dc91460277a086f83bb9af83d26242cb1801"
+      },
+      {
+        "entry_id": "root/2/disc/122",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANETS.DAT",
+        "size": 50679,
+        "sha256": "1e3b70c2b6856c645af01db2a98f8a71f99b7c823324c24f6406bce734c5e23c"
+      },
+      {
+        "entry_id": "root/2/disc/123",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLFADE.DAT",
+        "size": 7700,
+        "sha256": "1e76b2368974812f0e815e7b1defa6dc41bbed4a8bb83614be72038c77712d39"
+      },
+      {
+        "entry_id": "root/2/disc/124",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLGBL.ANB",
+        "size": 13697,
+        "sha256": "cce0f7de88f2dc8ec251e70925de93d6e406c109d0bea9a82f4ee7f1592c9a30"
+      },
+      {
+        "entry_id": "root/2/disc/125",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/POINTERS.DAT",
+        "size": 1749,
+        "sha256": "2e9341f8a8aa4589752881d514245f1007ccde81ea3322ce226c04a996879948"
+      },
+      {
+        "entry_id": "root/2/disc/126",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/POINTERS.TAB",
+        "size": 63,
+        "sha256": "a5b2d5f7f5163e5134e9fc82033f5155f604b9e2478f3c74c4050a1d1f1794a9"
+      },
+      {
+        "entry_id": "root/2/disc/127",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/QUIT.DAT",
+        "size": 106073,
+        "sha256": "9be4e8d54437d137ddf08c7087eaa3765130cf685d43005ff7d2ba4c11c0a784"
+      },
+      {
+        "entry_id": "root/2/disc/128",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/QUIT.PAL",
+        "size": 718,
+        "sha256": "4bcb55e695c4574733b4e56a3a68ce169563408148aed83fd1cdbdddb1aada88"
+      },
+      {
+        "entry_id": "root/2/disc/129",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/QUITFONT.DAT",
+        "size": 7596,
+        "sha256": "3649fbacafd083409640debf4cbbe91b975cb47e872d6fb1d8feef5b0f2e8846"
+      },
+      {
+        "entry_id": "root/2/disc/130",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/QUITFONT.TAB",
+        "size": 548,
+        "sha256": "9efbea9a3412d6ca6bb94ec52080bd75e6ef1d53b34eff025c8482de46e2301c"
+      },
+      {
+        "entry_id": "root/2/disc/131",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/RED.DAT",
+        "size": 267,
+        "sha256": "0ee9e3df0ab4d8ede87b7ff58874125a2e8dacfacd4263ddba224cf4e040e03b"
+      },
+      {
+        "entry_id": "root/2/disc/132",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/ROCKET.DAT",
+        "size": 2706,
+        "sha256": "9d62ed0161e99df26aa2e42be250455d0c797e07d6ac17d8660905ceef39cab7"
+      },
+      {
+        "entry_id": "root/2/disc/133",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/STATS.ANB",
+        "size": 3847,
+        "sha256": "016dcb0cd1fdc42c65800fd08ff2dc1b5dd9d1510094c0d6c10840d37edd91fa"
+      },
+      {
+        "entry_id": "root/2/disc/134",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/STATSCR.DAT",
+        "size": 105336,
+        "sha256": "210a149c90b5fd5fde3be79306c612ad2a3c747846584d9828c6c88e9dd220f7"
+      },
+      {
+        "entry_id": "root/2/disc/135",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TITLESCR.DAT",
+        "size": 139405,
+        "sha256": "2548b024fede333b49fc4011541939fc8ce294cb95b48cdb41ed7d0cec54a0b9"
+      },
+      {
+        "entry_id": "root/2/disc/136",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TITLESCR.PAL",
+        "size": 667,
+        "sha256": "d5ec91e731c2ff7e8d74dbbde6a3fe0410ec602ff0da52eb1e6f6bb1a44307c7"
+      },
+      {
+        "entry_id": "root/2/disc/137",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TOPLNT0.DAT",
+        "size": 128679,
+        "sha256": "678b8ea509bc5e0c8a609b74c77293604c89e293351ab5f62ff4b6a3a078ffd0"
+      },
+      {
+        "entry_id": "root/2/disc/138",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TOPLNT0.PAL",
+        "size": 662,
+        "sha256": "fb584c8f2c241f3dabd94a9a5e30f21ede0f37bed08c18ecbde8ebf972ee5ff4"
+      },
+      {
+        "entry_id": "root/2/disc/139",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TOPLNT1.DAT",
+        "size": 86715,
+        "sha256": "8be0986b62c78107fb2b5eefb4bbc58e2f4ae7283711099dc306694c7572dbde"
+      },
+      {
+        "entry_id": "root/2/disc/140",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TOPLNT1.PAL",
+        "size": 688,
+        "sha256": "46aacd549372869faeca1319cf907c1a385cf5fb503331626004a51e170e33f6"
+      },
+      {
+        "entry_id": "root/2/disc/141",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TOPLNT2.DAT",
+        "size": 104503,
+        "sha256": "2b90ac0bad9bb13c2046a421d8185136069c69faef36da7b857a5c11953a4e3e"
+      },
+      {
+        "entry_id": "root/2/disc/142",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TOPLNT2.PAL",
+        "size": 586,
+        "sha256": "4fbb7ef44b4717cc3a10032edf238c2f04fff39a45e4debdb4caf266ad6b43cf"
+      },
+      {
+        "entry_id": "root/2/disc/143",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TOPLNT3.DAT",
+        "size": 108138,
+        "sha256": "0bead3ea7133818fb00e24bb23ce2ea8054a03bf3294a179a39045a227ddc834"
+      },
+      {
+        "entry_id": "root/2/disc/144",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TOPLNT3.PAL",
+        "size": 669,
+        "sha256": "2cfcfc66f1368e857fe2fd2a26ab91338bb70f891216f395ca5666ad40135cb9"
+      },
+      {
+        "entry_id": "root/2/disc/145",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/WINSCR.DAT",
+        "size": 40515,
+        "sha256": "5e73b027974f8b1d33c04ee89193aa237b0450b09aea4ed63f2a9996e307d0df"
+      },
+      {
+        "entry_id": "root/2/disc/146",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/WINSCR.PAL",
+        "size": 701,
+        "sha256": "2d084db840f3085df0b956d7f64260432df07b48fdd9e61860cedbb7a9ab7788"
+      },
+      {
+        "entry_id": "root/2/disc/148",
+        "path": "private/reference-run/run-005/drive-c/GAME/INTRO/BIOINTRO.SMK",
+        "size": 24897308,
+        "sha256": "fcd3dcddb1ace394b882f240f8cec3625a57d471be5cd66f1db75e543688a4ef"
+      },
+      {
+        "entry_id": "root/2/disc/149",
+        "path": "private/reference-run/run-005/drive-c/GAME/INTRO/GW.SMK",
+        "size": 1006812,
+        "sha256": "36b336f3ca11c56599698701225b8b719446b9be5132a820304295f6acd0140b"
+      },
+      {
+        "entry_id": "root/2/disc/150",
+        "path": "private/reference-run/run-005/drive-c/GAME/INTRO/LOGO.SMK",
+        "size": 1134528,
+        "sha256": "b0d7e9923de1fca2cf1a57963d91438a3c2d3d3ecc3bce6c97d9261deb6db6a3"
+      },
+      {
+        "entry_id": "root/2/disc/152",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ001.DAT",
+        "size": 343958,
+        "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+      },
+      {
+        "entry_id": "root/2/disc/153",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ002.DAT",
+        "size": 343958,
+        "sha256": "4042c6df3b161132c12a424dace7b9fcbf253a197261f1cf76e0db4af41ea27a"
+      },
+      {
+        "entry_id": "root/2/disc/154",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ003.DAT",
+        "size": 343958,
+        "sha256": "f4ab595f5f66402f13a11789af75aff873145f6092d06f3f5ff642b74c10d277"
+      },
+      {
+        "entry_id": "root/2/disc/155",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ004.DAT",
+        "size": 343958,
+        "sha256": "097f862d765273ebd2171d7c38e3f24a0a43d761bfdcc23aa8058b96ca1ae5e7"
+      },
+      {
+        "entry_id": "root/2/disc/156",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ005.DAT",
+        "size": 343958,
+        "sha256": "b48be531d51c6e30f74afa0b3043e9002ddfcf0694078c5fb9baf8cb07ea932c"
+      },
+      {
+        "entry_id": "root/2/disc/157",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ006.DAT",
+        "size": 343958,
+        "sha256": "bd5eec1140264ed4751ba517efdb19e3ae991407262b4c9319e03b2a37c6f06f"
+      },
+      {
+        "entry_id": "root/2/disc/158",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ007.DAT",
+        "size": 343958,
+        "sha256": "91403ebc351812186f81c3d2e6545d996b91447ca3f1478d41c52b8834ee4372"
+      },
+      {
+        "entry_id": "root/2/disc/159",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ008.DAT",
+        "size": 343958,
+        "sha256": "60b7a657dfc6b691748cf530e4aec284ac03df25ca52383c661a79f134de11a8"
+      },
+      {
+        "entry_id": "root/2/disc/160",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ009.DAT",
+        "size": 343958,
+        "sha256": "026448ac710e1cf423a22796cdc0b33cd29035900a0f23fa6d852b5142fc3c49"
+      },
+      {
+        "entry_id": "root/2/disc/161",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ010.DAT",
+        "size": 343958,
+        "sha256": "b828cd287e04a330d413f17e6a29bc638056b9fc90fb5c9113fc6355c87115b6"
+      },
+      {
+        "entry_id": "root/2/disc/162",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ011.DAT",
+        "size": 343958,
+        "sha256": "4bb99e82435bcd794349be27546571e08c4c2980403b199513ebfeb29cf01286"
+      },
+      {
+        "entry_id": "root/2/disc/163",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ012.DAT",
+        "size": 343958,
+        "sha256": "dd2eb17f01eb4687cee6aad1242797bf515357bc411a616695d686a8253c010d"
+      },
+      {
+        "entry_id": "root/2/disc/164",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ013.DAT",
+        "size": 343958,
+        "sha256": "01bf2f46b5c3d9ec731c27a07d57f067a6cd03314b9622a4ea9c8e102145e75e"
+      },
+      {
+        "entry_id": "root/2/disc/165",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ014.DAT",
+        "size": 343958,
+        "sha256": "7be8b5117e094f3cd9b7f93b0d771abf419f04a4bde328eebd28b26c43202e76"
+      },
+      {
+        "entry_id": "root/2/disc/166",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ015.DAT",
+        "size": 343958,
+        "sha256": "4e5019095ab6f53b993305a220db4c03262c98734262c00f0696943d08d47ecd"
+      },
+      {
+        "entry_id": "root/2/disc/167",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ016.DAT",
+        "size": 343958,
+        "sha256": "d38f56d6e3042fd339c7851f226c37da0d0db57c9f10fd835e5b84bef2f8cfc1"
+      },
+      {
+        "entry_id": "root/2/disc/168",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ017.DAT",
+        "size": 343958,
+        "sha256": "d51fea127cd4095a21678cea122fc3b7facaa91adcd7c621b8d8bef4e8e02fdb"
+      },
+      {
+        "entry_id": "root/2/disc/169",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ018.DAT",
+        "size": 343958,
+        "sha256": "ac4f3a0ebce0234dfa461aaae1b52944df21c0a1f2eba659a4a97675d545987f"
+      },
+      {
+        "entry_id": "root/2/disc/170",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ019.DAT",
+        "size": 343958,
+        "sha256": "f6b2477e6619d2b537e1138e3dbf3ae8a0eaf7d47b3f51b1b9ed5f276c68b6a9"
+      },
+      {
+        "entry_id": "root/2/disc/171",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ020.DAT",
+        "size": 343958,
+        "sha256": "0be8ff033d7eeb7cb65132971576344e0d7f69ec2551a36457f531ce3451a8c0"
+      },
+      {
+        "entry_id": "root/2/disc/172",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ021.DAT",
+        "size": 343958,
+        "sha256": "bb4ad953c894aeaa6ac87c901a53fe63477d45d37f85e91a816c028461647fca"
+      },
+      {
+        "entry_id": "root/2/disc/173",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ022.DAT",
+        "size": 343958,
+        "sha256": "0cc59566f78d1b72b793e77e307bd70b2076737363114e804e7c4290cb240814"
+      },
+      {
+        "entry_id": "root/2/disc/174",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ023.DAT",
+        "size": 343958,
+        "sha256": "b29ac020da243e9f6e99f9136812ca7d0d13dd69d9f225c445acb2545c0c0b42"
+      },
+      {
+        "entry_id": "root/2/disc/175",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ024.DAT",
+        "size": 343958,
+        "sha256": "65366e1ac92aebdb2de715fd42e4ec9ba3a3ed18a2e57f005339e295c98efd7f"
+      },
+      {
+        "entry_id": "root/2/disc/176",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ030.DAT",
+        "size": 343958,
+        "sha256": "99ae3ab4636d4be4f43dc89413d3da85468b4e691a601c5862503aa4625f1af6"
+      },
+      {
+        "entry_id": "root/2/disc/177",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CONQ040.DAT",
+        "size": 343958,
+        "sha256": "12fd5c5c753075ea47a96d3a6a614e024565b90f3a20c826491fcd367ff3d3d4"
+      },
+      {
+        "entry_id": "root/2/disc/178",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST001.DAT",
+        "size": 343958,
+        "sha256": "dcd73a438d98b041551cdef7078438e480df716c3ba8953cf3b945321c94cacc"
+      },
+      {
+        "entry_id": "root/2/disc/179",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST002.DAT",
+        "size": 343958,
+        "sha256": "a3ca5d85e242f6edf2eaa3523c7844b7bdc56d98c1618f18eb89bb81dd8946a9"
+      },
+      {
+        "entry_id": "root/2/disc/180",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST003.DAT",
+        "size": 343958,
+        "sha256": "09a68b1dfe13dc13b0cd47e284731ad4ef40f22a9924d8ef92cacc0b16e42ee7"
+      },
+      {
+        "entry_id": "root/2/disc/181",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST004.DAT",
+        "size": 343958,
+        "sha256": "0653cb2385299f9c31cba17bcc0cef21598200ee1f1c909eac34ad1431903f4d"
+      },
+      {
+        "entry_id": "root/2/disc/182",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST005.DAT",
+        "size": 343958,
+        "sha256": "40e71e8eccc215f18c93a3e5d01001b5dd8c14884c498122603051ad4df1036f"
+      },
+      {
+        "entry_id": "root/2/disc/183",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST006.DAT",
+        "size": 343958,
+        "sha256": "1265290b845db93ded87ddf06d205c0a17bd5a735a15e276f184ba277409c779"
+      },
+      {
+        "entry_id": "root/2/disc/184",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST007.DAT",
+        "size": 343958,
+        "sha256": "524db23c23cd5d56f8ad77bff0ce5bd543071cefead9041a72a63baaa3886ec6"
+      },
+      {
+        "entry_id": "root/2/disc/185",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST008.DAT",
+        "size": 343958,
+        "sha256": "e6cf1ec924be30500bf5ed54941090315416a7f23f70e0e1fbbc2d43dbdcd0b2"
+      },
+      {
+        "entry_id": "root/2/disc/186",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST009.DAT",
+        "size": 343958,
+        "sha256": "ca7fd317cd23a86329241fbbbe6f2f5a1ecfee33697655c4a6d56b0d36f2c604"
+      },
+      {
+        "entry_id": "root/2/disc/187",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST010.DAT",
+        "size": 343958,
+        "sha256": "dcbae8cca4b23dabfb127f37d92bdcb15fb2f52ed206e84b4295e289f231cf0f"
+      },
+      {
+        "entry_id": "root/2/disc/188",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST011.DAT",
+        "size": 343958,
+        "sha256": "acf99f6b6409b8e8d4447d6a942a56adf56709eb03d5d2b0d2e0eaec7a336bde"
+      },
+      {
+        "entry_id": "root/2/disc/189",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/CUST012.DAT",
+        "size": 343958,
+        "sha256": "ad70164d8108466033500a8eb1faf4a8404774a4ee58b18718273d55533e60d7"
+      },
+      {
+        "entry_id": "root/2/disc/190",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO1.DAT",
+        "size": 699,
+        "sha256": "5e1f382ea68f57f1cec03a3f7de2c4903ca127519481da98232a7f1c3a46aa11"
+      },
+      {
+        "entry_id": "root/2/disc/191",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO10.DAT",
+        "size": 699,
+        "sha256": "2de4e1b0d3c2d95067b0e5e79632e8c53ddea2fe7a4e96d8db814d134d8ea83c"
+      },
+      {
+        "entry_id": "root/2/disc/192",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO11.DAT",
+        "size": 699,
+        "sha256": "c66b000e595a4b2a311d0b20f9f97d3d6022339d18f3d7e8f90423ffadb47de7"
+      },
+      {
+        "entry_id": "root/2/disc/193",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO12.DAT",
+        "size": 699,
+        "sha256": "4a6ac4fd7a1072cd97fb5167232d0ce98370842a61127f33dbdd86e0b56fe138"
+      },
+      {
+        "entry_id": "root/2/disc/194",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO13.DAT",
+        "size": 699,
+        "sha256": "51013c5d509575ac6207a5e554bc23732c148acfc08bb099e65e3d3ae36eb3df"
+      },
+      {
+        "entry_id": "root/2/disc/195",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO14.DAT",
+        "size": 699,
+        "sha256": "432bf92ce00cdd0f80bda82e082a3d634264e5679bc86e9aca5da6a2309b96e0"
+      },
+      {
+        "entry_id": "root/2/disc/196",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO15.DAT",
+        "size": 699,
+        "sha256": "63665d97cb59efb9dcf1ac3c61524756e59611f2bb3331d200582b5865d8e8ea"
+      },
+      {
+        "entry_id": "root/2/disc/197",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO16.DAT",
+        "size": 699,
+        "sha256": "da1011997fd88088f64f9b7add362f042663b2d2a24fb318002a8393467552da"
+      },
+      {
+        "entry_id": "root/2/disc/198",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO17.DAT",
+        "size": 699,
+        "sha256": "7caebf42513cadeb7c8aa7f06ba964a263e57fdd4a162bf93e244401a964cd87"
+      },
+      {
+        "entry_id": "root/2/disc/199",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO18.DAT",
+        "size": 699,
+        "sha256": "9d0002ba7f8aa33fb82de01433802d8f8da85f83e7008056d892cbd6930cfc8a"
+      },
+      {
+        "entry_id": "root/2/disc/200",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO19.DAT",
+        "size": 699,
+        "sha256": "c96e25bcadd0da8ebf2128fed4ff0cd0df94c640d7e48d02f45b651cef0c54ef"
+      },
+      {
+        "entry_id": "root/2/disc/201",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO2.DAT",
+        "size": 699,
+        "sha256": "5a42310026365e8c36ddce8ecba48fe099c42accc6c878933d2360c1ebb6e80c"
+      },
+      {
+        "entry_id": "root/2/disc/202",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO20.DAT",
+        "size": 699,
+        "sha256": "22394348c7c56c879d5d50e2ba6b8b22530a679a0acd7e98d9224ae077842a97"
+      },
+      {
+        "entry_id": "root/2/disc/203",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO21.DAT",
+        "size": 699,
+        "sha256": "39fdbf21c50bb0cda98ca881403dc8e5cc7e2d7de4280ad32f0ef853ac0bf79c"
+      },
+      {
+        "entry_id": "root/2/disc/204",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO22.DAT",
+        "size": 699,
+        "sha256": "e4c7e6271540ef069aaf997007191f3a315f57f80e50a06d4618cd3da5607362"
+      },
+      {
+        "entry_id": "root/2/disc/205",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO23.DAT",
+        "size": 699,
+        "sha256": "0dcf693e7e6240d0eeb830d4730a501043bb9eecd8c2fc5e10c88a27ea809e99"
+      },
+      {
+        "entry_id": "root/2/disc/206",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO24.DAT",
+        "size": 699,
+        "sha256": "2324373d5e84700c1fd3b5becb954787712dd58f27c7a67e7be982b043b92bbe"
+      },
+      {
+        "entry_id": "root/2/disc/207",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO25.DAT",
+        "size": 699,
+        "sha256": "668bab6e232f32fe24c99e82f7367591cbd23b2b3be5e3b5a4a34c8b4cb6e1ce"
+      },
+      {
+        "entry_id": "root/2/disc/208",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO3.DAT",
+        "size": 699,
+        "sha256": "ac0e268924e29ed4fbd42a064e30b10c779c8850bc6a9aed31c69061156359b8"
+      },
+      {
+        "entry_id": "root/2/disc/209",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO30.DAT",
+        "size": 699,
+        "sha256": "68e6a8e74668583bf9453c2f017cadb1d5dbf0907476d54710c4a79c5cee57b0"
+      },
+      {
+        "entry_id": "root/2/disc/210",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO4.DAT",
+        "size": 699,
+        "sha256": "66b5737201827b7a3dcf1419a9082b93056071d02c24375d0601d124d44f3eca"
+      },
+      {
+        "entry_id": "root/2/disc/211",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO40.DAT",
+        "size": 699,
+        "sha256": "1cd8dc7aadc443f3261e5b519379d2c8ddac9e1137fa4fcb745b18b7f270496e"
+      },
+      {
+        "entry_id": "root/2/disc/212",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO5.DAT",
+        "size": 699,
+        "sha256": "bf77687931e3b7a4c02320e9499c98ef787432d681a5bc063bc51e00466edeb7"
+      },
+      {
+        "entry_id": "root/2/disc/213",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO6.DAT",
+        "size": 699,
+        "sha256": "2079f74466eeaf07105523a0a83d46d77f6509ed941dcc984fa858a0f9ca6406"
+      },
+      {
+        "entry_id": "root/2/disc/214",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO7.DAT",
+        "size": 699,
+        "sha256": "b988cc2c2b74c37a1d0cb3bed42ec4efbd193737d8c242c37425be630b3a8b3c"
+      },
+      {
+        "entry_id": "root/2/disc/215",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO8.DAT",
+        "size": 699,
+        "sha256": "47b825b56e2734d371b9d449baaa89ec2affda9794d53c27ee22ffdc75b6f422"
+      },
+      {
+        "entry_id": "root/2/disc/216",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCO9.DAT",
+        "size": 699,
+        "sha256": "5e5ac423fa15afa9aa6d796ef48279bc7d5df6f08c8378ff6f2459bc915ed78c"
+      },
+      {
+        "entry_id": "root/2/disc/217",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU1.DAT",
+        "size": 699,
+        "sha256": "a629ab68b506287f8071459ac9a990a6721e953a2e326771e5adfc197f459c5f"
+      },
+      {
+        "entry_id": "root/2/disc/218",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU10.DAT",
+        "size": 699,
+        "sha256": "40a1bb0ded98395040d0f0e2dcef9a07f2d2b35f3bd35083d2e98839d9337afe"
+      },
+      {
+        "entry_id": "root/2/disc/219",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU11.DAT",
+        "size": 699,
+        "sha256": "eb514a5cd8188df3180ccf48e452086c9776fece54ac74cf8454a2cf6d55b9b7"
+      },
+      {
+        "entry_id": "root/2/disc/220",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU12.DAT",
+        "size": 699,
+        "sha256": "fa892d614cf63cfd9a5a6f37c19e6afc6e9851fa4aca1991eedc09c3e1791924"
+      },
+      {
+        "entry_id": "root/2/disc/221",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU2.DAT",
+        "size": 699,
+        "sha256": "02cc0b498c952f2b7dd31b8e2ae27e082af2e7ecc061bc3791159ae37622b058"
+      },
+      {
+        "entry_id": "root/2/disc/222",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU3.DAT",
+        "size": 699,
+        "sha256": "4fa936e91539df883c3b5b20d199f58325ab5517bc43d2f712180753cd13fd91"
+      },
+      {
+        "entry_id": "root/2/disc/223",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU4.DAT",
+        "size": 699,
+        "sha256": "a1a0d3e348c5a4973f8770dafd000937db5ea3359ce8994bc1234cd01e92a088"
+      },
+      {
+        "entry_id": "root/2/disc/224",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU5.DAT",
+        "size": 699,
+        "sha256": "0a1481ef465f06a58a176f2dd931b4a3f6051f8c00f1ce95b6a15af446bc1508"
+      },
+      {
+        "entry_id": "root/2/disc/225",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU6.DAT",
+        "size": 699,
+        "sha256": "6abf9ba8b898b8b4ea024a64e1d131f4d2bfa73d466c335b56f77d30f56ffa1b"
+      },
+      {
+        "entry_id": "root/2/disc/226",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU7.DAT",
+        "size": 699,
+        "sha256": "887932bbc6c7be66a2be7edf25a21e3d55ee0dd04a07d09f079131920fa8b99c"
+      },
+      {
+        "entry_id": "root/2/disc/227",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU8.DAT",
+        "size": 699,
+        "sha256": "888fb9a823c20238f1e3c80fce38642059f6e08d9de471e8fd205c16b3c81f44"
+      },
+      {
+        "entry_id": "root/2/disc/228",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/HDRCU9.DAT",
+        "size": 699,
+        "sha256": "3c3e709bf79ceb3c07fa5abce3ec1567de78db3144790e4512d62066090feb1c"
+      },
+      {
+        "entry_id": "root/2/disc/229",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR1.DAT",
+        "size": 142,
+        "sha256": "84605b6deb410f97c381e5631e62d27d6ac31675c83715c2824d4cf3f293fd3f"
+      },
+      {
+        "entry_id": "root/2/disc/230",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR10.DAT",
+        "size": 142,
+        "sha256": "6197eb618afa874565b8a0c0e27a9ea4a93c0eb046ce04c1c113b71b15ef665f"
+      },
+      {
+        "entry_id": "root/2/disc/231",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR11.DAT",
+        "size": 142,
+        "sha256": "a5696a4589d8812108b76c5276dbd6064e04658c691d3a6c330bfcc9c5d86b07"
+      },
+      {
+        "entry_id": "root/2/disc/232",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR12.DAT",
+        "size": 142,
+        "sha256": "e0e95781e12fa1d813ebc82c4c329a43211da6c8bcde76a34955c1716ba4b3ff"
+      },
+      {
+        "entry_id": "root/2/disc/233",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR13.DAT",
+        "size": 142,
+        "sha256": "bf4d08f747b0244ab8bdbf9aacec705c004f86a9c0955c7c863feaa91f088d9e"
+      },
+      {
+        "entry_id": "root/2/disc/234",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR2.DAT",
+        "size": 142,
+        "sha256": "2910bec6bb72a73068f2b439708edbbe72c529acdc8a91ff625da4183bc4f082"
+      },
+      {
+        "entry_id": "root/2/disc/235",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR23.DAT",
+        "size": 142,
+        "sha256": "c50ac8ec3fc3c68345e014865383aad8f14bedbccbd226a90125a8a91a159383"
+      },
+      {
+        "entry_id": "root/2/disc/236",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR24.DAT",
+        "size": 142,
+        "sha256": "ca13ed29e9bc86a45f73f94cbd229a454068ddf55f6550de22dbd12faf26000a"
+      },
+      {
+        "entry_id": "root/2/disc/237",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR3.DAT",
+        "size": 142,
+        "sha256": "daa8cfe05f0aa50ed056f207ac99c64b69a5c1f32d3144575c4eae751e98f0f4"
+      },
+      {
+        "entry_id": "root/2/disc/238",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR4.DAT",
+        "size": 142,
+        "sha256": "d865630a085534498630855c77325b955a34fb63b88751faa71c268e4728069d"
+      },
+      {
+        "entry_id": "root/2/disc/239",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR5.DAT",
+        "size": 142,
+        "sha256": "59e4c60b8dec02a68afa974f5671acc758d8e561e99ed95b28cad2bea55d98b8"
+      },
+      {
+        "entry_id": "root/2/disc/240",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR6.DAT",
+        "size": 142,
+        "sha256": "0e42e1e97272d985613f29c4dbeff740c9b9545d52a85c2385922a8f5e38e5e1"
+      },
+      {
+        "entry_id": "root/2/disc/241",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR7.DAT",
+        "size": 142,
+        "sha256": "255541fe676dc20b129a76dd543758d060d4f7d951c692dfa41d549291d2cd2a"
+      },
+      {
+        "entry_id": "root/2/disc/242",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR8.DAT",
+        "size": 142,
+        "sha256": "d1fdc8fadb5dc185bf84b5de5673c5e517d81d9d06fc008f5dc79018fb6bb04a"
+      },
+      {
+        "entry_id": "root/2/disc/243",
+        "path": "private/reference-run/run-005/drive-c/GAME/LEVELS/PLR9.DAT",
+        "size": 142,
+        "sha256": "e5591c34cf18adce7b99979d035a64f698eabf22a7b6d0d04f20c8fec9e730ff"
+      },
+      {
+        "entry_id": "root/2/disc/245",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DOS4GW.EXE",
+        "size": 265396,
+        "sha256": "b8265123ac8a189637448618409ef3ecd2e9f3e1a47062c685a02240f688dec1"
+      },
+      {
+        "entry_id": "root/2/disc/246",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/S.EXE",
+        "size": 398995,
+        "sha256": "67a0e626aeaf6d56ea4f2504e3c05ccfa7259997c8efc37ed8638c15dcab9b32"
+      },
+      {
+        "entry_id": "root/2/disc/248",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/ADLIB.MDI",
+        "size": 14986,
+        "sha256": "6c5f2faacf426b5c0fd127bd5d0e8b3b11a59b7ec22bb3b0017d7cfe6ae0a4aa"
+      },
+      {
+        "entry_id": "root/2/disc/249",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/ADLIBG.MDI",
+        "size": 16377,
+        "sha256": "13b77fefc77060472c8c60f4816406a86a01f6a673dd2fb041d2ad02ccc10f56"
+      },
+      {
+        "entry_id": "root/2/disc/250",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/ADRV688.DIG",
+        "size": 11278,
+        "sha256": "294a7de77d88a7f38f58b32fc7166ced87a4c44e6c9be760f78b1724744d7161"
+      },
+      {
+        "entry_id": "root/2/disc/251",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/AILDRVR.LST",
+        "size": 17340,
+        "sha256": "03d90c1c0e5c029b9016e593fce2ce3d4ceb6f67d016d291821031f0406388f8"
+      },
+      {
+        "entry_id": "root/2/disc/252",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/AILDRVRF.LST",
+        "size": 17981,
+        "sha256": "504c482a48e0ba41e82a82aa4a0a4052f6d89ea2b7d824761fc5818cbaf2ae27"
+      },
+      {
+        "entry_id": "root/2/disc/253",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/AILDRVRG.LST",
+        "size": 18253,
+        "sha256": "ab7dd3601794b7c03624d7fd5dee2763e795299703fd61d0398cee5bcc985d90"
+      },
+      {
+        "entry_id": "root/2/disc/254",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/AILDRVRG.OLD",
+        "size": 18343,
+        "sha256": "b352403b8a91b53dc5a92315425178666a68fe877b02d2934a9946472ada27e4"
+      },
+      {
+        "entry_id": "root/2/disc/255",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/AILDRVRI.LST",
+        "size": 17423,
+        "sha256": "a84d1f604c5b288118b434138009ff35fd3946cd824dd5c6a3651053f99c3e26"
+      },
+      {
+        "entry_id": "root/2/disc/256",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/AILDRVRS.LST",
+        "size": 18076,
+        "sha256": "6212ce4bb4fc38432ffdd7c350e1e5301a1c3d42ebfd4f9db1af27daa8d269c2"
+      },
+      {
+        "entry_id": "root/2/disc/257",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/AILDRVRW.LST",
+        "size": 17207,
+        "sha256": "1ab976305082980091ff3992bc34a0f949e79acded23c60a4b5d51daf659e4d5"
+      },
+      {
+        "entry_id": "root/2/disc/258",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/BULLFROG.SBK",
+        "size": 4032,
+        "sha256": "f56aa9766318f8066002473e2f5f10c871e09cf95ab1e8c0f9112239ea90acdb"
+      },
+      {
+        "entry_id": "root/2/disc/259",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/ESFM.MDI",
+        "size": 15084,
+        "sha256": "d258ed5119eaf3c1499ddd49536efab238d228ef5ff60a49c0caf710f613d19a"
+      },
+      {
+        "entry_id": "root/2/disc/260",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/INSTALL.AD",
+        "size": 3242,
+        "sha256": "6077a16a83abd39bd6c9773fc148746efaa67f19e49209897882b49fe74f4ee9"
+      },
+      {
+        "entry_id": "root/2/disc/261",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/INSTALL.OPL",
+        "size": 3242,
+        "sha256": "6077a16a83abd39bd6c9773fc148746efaa67f19e49209897882b49fe74f4ee9"
+      },
+      {
+        "entry_id": "root/2/disc/262",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/JAMMER.DIG",
+        "size": 3219,
+        "sha256": "cca38c28eabe00b88e4bddd627fa68a68b2559029098b777129ca00201831a9c"
+      },
+      {
+        "entry_id": "root/2/disc/263",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/MPU401.MDI",
+        "size": 1915,
+        "sha256": "a8d2aa84b8ffc7d5f7313c244ca45d632d748e19370c4744788818ab1b4b4b67"
+      },
+      {
+        "entry_id": "root/2/disc/264",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/MT32MPU.MDI",
+        "size": 1915,
+        "sha256": "a8d2aa84b8ffc7d5f7313c244ca45d632d748e19370c4744788818ab1b4b4b67"
+      },
+      {
+        "entry_id": "root/2/disc/265",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/MUSIC.DAT",
+        "size": 9500,
+        "sha256": "f44df055b37abb0a2a9a7a33289f59aae26caaee48091e011d954410ddfe3aad"
+      },
+      {
+        "entry_id": "root/2/disc/266",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/NULL.MDI",
+        "size": 1609,
+        "sha256": "4c0365a62c555fcca735ab4d32e4fab8ef36114b15dc2cf1d020b2bb9ae86c23"
+      },
+      {
+        "entry_id": "root/2/disc/267",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/OPL3.MDI",
+        "size": 16387,
+        "sha256": "a3f9d21fbcf134afcc4cee9cf46f29b11c8a3b573aefa33cc8595faec5f4b90e"
+      },
+      {
+        "entry_id": "root/2/disc/268",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/PAS.MDI",
+        "size": 15425,
+        "sha256": "a4e458908be7f51fbefbafdcbe52a918b2bca2933e58469fe27f6cd346181aae"
+      },
+      {
+        "entry_id": "root/2/disc/269",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/PASPLUS.MDI",
+        "size": 16458,
+        "sha256": "db6d71b5d197b23755470044adb62f1ca21d0687b8e915286d20dd220e3db6d9"
+      },
+      {
+        "entry_id": "root/2/disc/270",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/PROAUDIO.DIG",
+        "size": 2127,
+        "sha256": "63cc6ba6c0bebf80ebb073cfbef2b0de1ce508d006a94180095a0223ac4bb33c"
+      },
+      {
+        "entry_id": "root/2/disc/271",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/RAP10.DIG",
+        "size": 2849,
+        "sha256": "d4e03dd5313e02291df43d41be2d289f7006a30ed24a195d8e872518999566bf"
+      },
+      {
+        "entry_id": "root/2/disc/272",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SAMPLE.AD",
+        "size": 3242,
+        "sha256": "0ed092ee38681d9057f637aea6937226d87f58d48067a0068eabe6c1c367cbb8"
+      },
+      {
+        "entry_id": "root/2/disc/273",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SAMPLE.OPL",
+        "size": 3242,
+        "sha256": "0ed092ee38681d9057f637aea6937226d87f58d48067a0068eabe6c1c367cbb8"
+      },
+      {
+        "entry_id": "root/2/disc/274",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SB16.DIG",
+        "size": 2836,
+        "sha256": "c8a1e7a0e14c8b696e665520e338711e4c20cc3bb4733f83527add41dd6f6b38"
+      },
+      {
+        "entry_id": "root/2/disc/275",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SBAWE32.MDI",
+        "size": 36880,
+        "sha256": "492d59bf2da69488d4cf44788c431f3866224d4b5a336999e9f8a3ae780b0c2c"
+      },
+      {
+        "entry_id": "root/2/disc/276",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SBLASTER.DIG",
+        "size": 2914,
+        "sha256": "16bf4c0911f6ac6591ebf57eea77c209b22a4033e42b764b01708f4538ee4381"
+      },
+      {
+        "entry_id": "root/2/disc/277",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SBLASTER.MDI",
+        "size": 15118,
+        "sha256": "41191272282f2a88b3d3769c7c0aafab318e214afd393363b12834e9cbf19bc9"
+      },
+      {
+        "entry_id": "root/2/disc/278",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SBPRO.DIG",
+        "size": 2763,
+        "sha256": "250c3afdb960a8b3c6fb268e7e610db4a2a43f626c0e1ddee7ff952150a94dae"
+      },
+      {
+        "entry_id": "root/2/disc/279",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SBPRO1.MDI",
+        "size": 15471,
+        "sha256": "a08018190b4a4d34b5ca07323be1d5563275b8d0f2d080bb7211c94938fb2a41"
+      },
+      {
+        "entry_id": "root/2/disc/280",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SBPRO2.MDI",
+        "size": 16541,
+        "sha256": "2aa48568783f6c41df8dfb7e699181299e306fa330415a178fc48b23036c9a77"
+      },
+      {
+        "entry_id": "root/2/disc/281",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SNDSCAPE.DIG",
+        "size": 4171,
+        "sha256": "a1459763f2fdcb1ada4f9fc6d28c9ea33077c00dad91b5809ee899f5a1b6c05c"
+      },
+      {
+        "entry_id": "root/2/disc/282",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SNDSCAPE.MDI",
+        "size": 2971,
+        "sha256": "f541a45fc4f5c4c9a5f68c6addcd451a261b0b4b20a00239d4c8e47320ff31c0"
+      },
+      {
+        "entry_id": "root/2/disc/283",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SNDSYS.DIG",
+        "size": 3328,
+        "sha256": "9136ab36e22a6bf3140180a4e8cabe025fd678f3e30338bb90209c1921834196"
+      },
+      {
+        "entry_id": "root/2/disc/284",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/SOUND.DAT",
+        "size": 12282542,
+        "sha256": "6cdf9b501ddf888f7beb43062876515a26d1d87fc3a776db9fb000a33d7d7388"
+      },
+      {
+        "entry_id": "root/2/disc/285",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/STATE.RST",
+        "size": 207,
+        "sha256": "e3bd0ceae3c4453368402413c2b53a1928c2283c3c58510e699bf3190c67639d"
+      },
+      {
+        "entry_id": "root/2/disc/286",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/ULTRA.DIG",
+        "size": 9478,
+        "sha256": "4e63a94e272f37907910cc2a73120d2d21f3651a66bd06fcac7e80c93af55478"
+      },
+      {
+        "entry_id": "root/2/disc/287",
+        "path": "private/reference-run/run-005/drive-c/GAME/SOUND/ULTRA.MDI",
+        "size": 49672,
+        "sha256": "e7034fb38cd05821bb0960537745db75348c193c7a9889373bbcc86eb1cac17f"
+      },
+      {
+        "entry_id": "root/2/disc/300",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BFARM.ANB",
+        "size": 40373,
+        "sha256": "98a5ad7150d0060769fad37f6d6c48da42f67373424d0114f7e9ae61478f9773"
+      },
+      {
+        "entry_id": "root/2/disc/301",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BGENE.ANB",
+        "size": 62062,
+        "sha256": "a71f03d3cce3d36798cd7f8ad578d665e65883bfe9b541ba93d0ad9eff814cab"
+      },
+      {
+        "entry_id": "root/2/disc/302",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BLAUN.ANB",
+        "size": 7796,
+        "sha256": "7c79b69c03500264d82e543a23fbbc1bb8b1932c13142138aeeea876694069ce"
+      },
+      {
+        "entry_id": "root/2/disc/303",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BMINE.ANB",
+        "size": 34955,
+        "sha256": "218b117a4b0f84c6e5a362e5afdc46d29fb1525930c6131e2ffff3bcfcda2142"
+      },
+      {
+        "entry_id": "root/2/disc/304",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BOBSE.ANB",
+        "size": 65144,
+        "sha256": "980063d96cc4e66a9b707e90e7432885aa41a512e7af45280385bb928af6e47e"
+      },
+      {
+        "entry_id": "root/2/disc/305",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BOPER.ANB",
+        "size": 19607,
+        "sha256": "3780893e81bc5939f38e6f160c86b61c53890a0e7bb4499f26704efe01971622"
+      },
+      {
+        "entry_id": "root/2/disc/306",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BPOWE.ANB",
+        "size": 77457,
+        "sha256": "4145c098f3d35dd9c39003ae8289c3d32fdb8d822327b2a23dfd52c60ca2a8cc"
+      },
+      {
+        "entry_id": "root/2/disc/307",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BSAWM.ANB",
+        "size": 53444,
+        "sha256": "6dd22877ce33bb54d4cfbb76337242699366c9cb77f339dc6aa4be55c9439662"
+      },
+      {
+        "entry_id": "root/2/disc/308",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BSHIE.ANB",
+        "size": 40619,
+        "sha256": "ca698f957704e9fa52821e39981ee3252326a373f59e3859b6aa6b20fb56b67b"
+      },
+      {
+        "entry_id": "root/2/disc/309",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BSOLA.ANB",
+        "size": 35327,
+        "sha256": "26ac960d7e68d97bddf7b0c13740976af4cf955ecfe98a4bea51ee95c292958b"
+      },
+      {
+        "entry_id": "root/2/disc/310",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BTURR.ANB",
+        "size": 68030,
+        "sha256": "c26df60af3a3166aec54112f197a4334966eb214eeaa48e0d9284e0510b8cd20"
+      },
+      {
+        "entry_id": "root/2/disc/311",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BVAT.ANB",
+        "size": 9853,
+        "sha256": "06bcbd03dcaf8421570b07519d9d945f40326d90033ecc0b4004ad5c0d7f4e69"
+      },
+      {
+        "entry_id": "root/2/disc/312",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/BUILDING/BWIND.ANB",
+        "size": 55040,
+        "sha256": "8da0c5b0d3734f1c016253360f2c1dce8385c7d9423c793df437bd75cbc9e4de"
+      },
+      {
+        "entry_id": "root/2/disc/314",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/BIRD.ANB",
+        "size": 59082,
+        "sha256": "5ba1cc74cc4f2dfec20e0cad9b5656a59bc9e93c8c626a8caf562ea7800b79ec"
+      },
+      {
+        "entry_id": "root/2/disc/315",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/BIRDCRAB.ANB",
+        "size": 70951,
+        "sha256": "2f5e7e8fb8268017bc313fa888f8232a88e515fd77d9133a719d37d7ec53b6b6"
+      },
+      {
+        "entry_id": "root/2/disc/316",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/BIRDDINO.ANB",
+        "size": 57817,
+        "sha256": "39fefa9ac416bccfae2c069150a0e066d8ca7eb580b502d9253af9c86bc82475"
+      },
+      {
+        "entry_id": "root/2/disc/317",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/BIRDFROG.ANB",
+        "size": 89665,
+        "sha256": "c793e0f2ba034cee39e0bac7c9cffcdf3d24461605f09945d95485c41a57ed8d"
+      },
+      {
+        "entry_id": "root/2/disc/318",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/BIRDMULE.ANB",
+        "size": 75059,
+        "sha256": "82ee6a6f05fad2de224049f6d9b80ba1ba5a746e439d2361f3a993a622a029ee"
+      },
+      {
+        "entry_id": "root/2/disc/319",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/BONES.ANB",
+        "size": 4077,
+        "sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f"
+      },
+      {
+        "entry_id": "root/2/disc/320",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/CRAB.ANB",
+        "size": 74969,
+        "sha256": "14a75aa9a0787ad041b80c384ea9a268edf7f5ef30c4ac4d6661bfe363bcd81e"
+      },
+      {
+        "entry_id": "root/2/disc/321",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/CRABBIRD.ANB",
+        "size": 91655,
+        "sha256": "9a588b42098597778560ba95a890529efa2b25969e2b162849441cfb72e478cc"
+      },
+      {
+        "entry_id": "root/2/disc/322",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/CRABDINO.ANB",
+        "size": 94429,
+        "sha256": "bdbba070209f032194286a928bc50b461be38fd981ca394325e330c5c96625ca"
+      },
+      {
+        "entry_id": "root/2/disc/323",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/CRABFROG.ANB",
+        "size": 69835,
+        "sha256": "1483536ff084d24a4898166756d058ccc5be4b38a0a3b90f3b3a7d55c6c7fb04"
+      },
+      {
+        "entry_id": "root/2/disc/324",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/CRABMULE.ANB",
+        "size": 87013,
+        "sha256": "380caaeefa791bc2735cad0f460639794ff2e42adffe2c97e27902829780ac2e"
+      },
+      {
+        "entry_id": "root/2/disc/325",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/DINO.ANB",
+        "size": 48939,
+        "sha256": "0c9d9dbbcb29e39ab29aac17eca97da9a404791febdb79123b6c0eb44af78767"
+      },
+      {
+        "entry_id": "root/2/disc/326",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/DINOBIRD.ANB",
+        "size": 47979,
+        "sha256": "d2c46b9948c05491f730f9c8e3a51b5bb509fe92416ce711e371711e9879eb80"
+      },
+      {
+        "entry_id": "root/2/disc/327",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/DINOCRAB.ANB",
+        "size": 48556,
+        "sha256": "fe1fb252f9c2fddb1bb32625acd4624087ac3a17828c51c96256167e352bbe00"
+      },
+      {
+        "entry_id": "root/2/disc/328",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/DINOFROG.ANB",
+        "size": 48174,
+        "sha256": "10b7fdb9fedfdd18fa2189fc8e142a6f3d942dd81db38433b373559edec6c854"
+      },
+      {
+        "entry_id": "root/2/disc/329",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/DINOMULE.ANB",
+        "size": 45748,
+        "sha256": "382182e0e1c7778ffc66b5dcdd5bdf6288d6ac72135946edc854cc5f55a06ef2"
+      },
+      {
+        "entry_id": "root/2/disc/330",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/FROG.ANB",
+        "size": 51601,
+        "sha256": "841e7772da00934befd3e8055c6ee9c8487735c73d1d10e383a5c7b715cb4ce3"
+      },
+      {
+        "entry_id": "root/2/disc/331",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/FROGBIRD.ANB",
+        "size": 61996,
+        "sha256": "241287861ce99cb867879e5a34877407d9389393b5b0337755418cc09bfaff00"
+      },
+      {
+        "entry_id": "root/2/disc/332",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/FROGCRAB.ANB",
+        "size": 57163,
+        "sha256": "175383dc29ebfdf56c08f44d3a53719a7f9a3fdce0530d24ce5b237db7d1ca42"
+      },
+      {
+        "entry_id": "root/2/disc/333",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/FROGDINO.ANB",
+        "size": 53373,
+        "sha256": "dc71401469ecb4e5a47634f932a9a517686fc188881579c600fea22b1d90baa8"
+      },
+      {
+        "entry_id": "root/2/disc/334",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/FROGMULE.ANB",
+        "size": 50466,
+        "sha256": "92cf65b5c0b9989fa35868c8ef69dc0bb18993750dc96d79bf715b863b16fad1"
+      },
+      {
+        "entry_id": "root/2/disc/335",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/MULE.ANB",
+        "size": 57038,
+        "sha256": "f6c62221b52a62088f91ae8d00becfef513282cbf98a5990c1a0859cd8b2d346"
+      },
+      {
+        "entry_id": "root/2/disc/336",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/MULEBIRD.ANB",
+        "size": 61258,
+        "sha256": "93fce7be86fe31c4dbb94d90513255b8c3c58891d6284a458709ef587afe9edb"
+      },
+      {
+        "entry_id": "root/2/disc/337",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/MULECRAB.ANB",
+        "size": 59709,
+        "sha256": "32c43a3e485b07d5cbccc36ede1465d170b09e7a9fa8445a1badb041217fd55e"
+      },
+      {
+        "entry_id": "root/2/disc/338",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/MULEDINO.ANB",
+        "size": 55499,
+        "sha256": "c141a7f5be79141aa570ff0f0086d916d09f15223fd72f0d85309146a17fe287"
+      },
+      {
+        "entry_id": "root/2/disc/339",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/CREATURE/MULEFROG.ANB",
+        "size": 46921,
+        "sha256": "273bc86685a7512629592abdad2c9059b75c81ef4959e92f22ef345ee47dcfa2"
+      },
+      {
+        "entry_id": "root/2/disc/341",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/ALL1.ANB",
+        "size": 4377,
+        "sha256": "df9180a4dace76f722637f6b35f00114ea6a183603fd57c32502957c37378faa"
+      },
+      {
+        "entry_id": "root/2/disc/342",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/ALL2.ANB",
+        "size": 1954,
+        "sha256": "fd207e9bf58cc5c7320e278be60eb4924941da6c99d593883df31df48aef7170"
+      },
+      {
+        "entry_id": "root/2/disc/343",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/ALL3.ANB",
+        "size": 2664,
+        "sha256": "3340bf97d82fe34731bbbcc65be884ec1168e34c14120df2b65e8b1c36f2bcf5"
+      },
+      {
+        "entry_id": "root/2/disc/344",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/DESERT1.ANB",
+        "size": 5433,
+        "sha256": "79c0df3028c6553e5a2884644d0061e5b347cbe6183e8313e648daf1eba04984"
+      },
+      {
+        "entry_id": "root/2/disc/345",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/DESERT2.ANB",
+        "size": 6437,
+        "sha256": "7310d57e5a6571017752c1bda1cf6fea0fd4cddc6919c9881d31c556a301193c"
+      },
+      {
+        "entry_id": "root/2/disc/346",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/DESERT3.ANB",
+        "size": 3069,
+        "sha256": "caf8094dcd560dd4da88d9482fa91233bfa126296146bc45e3bfc1be8dbac209"
+      },
+      {
+        "entry_id": "root/2/disc/347",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/GRASS1.ANB",
+        "size": 4955,
+        "sha256": "c233be78010920286672e26dba1501947bbb3bff92ed4477045539c3996c6486"
+      },
+      {
+        "entry_id": "root/2/disc/348",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/GRASS2.ANB",
+        "size": 5010,
+        "sha256": "52eb03c7076ccf67b2d33a33c75ff04bd07b8a97fedbf5b2c3ddace3efb0e9d3"
+      },
+      {
+        "entry_id": "root/2/disc/349",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/GRASS3.ANB",
+        "size": 4698,
+        "sha256": "e856fcc0afca3091f50d49b0c79db29f9815804398594245d80576b21604c142"
+      },
+      {
+        "entry_id": "root/2/disc/350",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/SNOW1.ANB",
+        "size": 4613,
+        "sha256": "69c5b560bdd741ed1206ffbda67cac4a731183f5e9f21c501d187dd656e29044"
+      },
+      {
+        "entry_id": "root/2/disc/351",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/SNOW2.ANB",
+        "size": 3095,
+        "sha256": "5d1e22180251f8d1a490817cb18574c3d9ddabdc90e27c40e7afd14ffb347a33"
+      },
+      {
+        "entry_id": "root/2/disc/352",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/PLANT/SNOW3.ANB",
+        "size": 3082,
+        "sha256": "7a978fb3b44444a11f3cbb60a7611c172550b64febf4712e9e46e0efeb48661a"
+      },
+      {
+        "entry_id": "root/2/disc/354",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/REQ/PREQ.DAT",
+        "size": 232320,
+        "sha256": "2829021b72f319bb97fe657139a7f438b940e5aa1b0bd36043ba8473ead9743a"
+      },
+      {
+        "entry_id": "root/2/disc/355",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/REQ/REQ.DAT",
+        "size": 642752,
+        "sha256": "7a7db72c2f4438efadee638288ee06d532d3b8f5f35f93cc284b63725208ebeb"
+      },
+      {
+        "entry_id": "root/2/disc/357",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/CARCH.ANB",
+        "size": 40742,
+        "sha256": "4a232c5debfef3fbef5a54647e6312cc325265fe996b00841b35f1511340bd73"
+      },
+      {
+        "entry_id": "root/2/disc/358",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/CFARM.ANB",
+        "size": 28983,
+        "sha256": "8946c2d3dfd8fe059fb8c72a74a71d0eaab48d43015a28d563beec095e38023b"
+      },
+      {
+        "entry_id": "root/2/disc/359",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/CSCIE.ANB",
+        "size": 41317,
+        "sha256": "63a3623d75f761aa5e09737074e5f5ab4a9cc40bf85334d69863536241874184"
+      },
+      {
+        "entry_id": "root/2/disc/360",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/CSHEP.ANB",
+        "size": 35249,
+        "sha256": "6576a2ffc66893d8eacb21a44165ac11118dd7256f74237f6992210148dee847"
+      },
+      {
+        "entry_id": "root/2/disc/361",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/HARCH.ANB",
+        "size": 35497,
+        "sha256": "629a6471e4deabec794f0cffa34b513eea15013ee95927e67b02a4a7e6157b6a"
+      },
+      {
+        "entry_id": "root/2/disc/362",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/HFARM.ANB",
+        "size": 26921,
+        "sha256": "4421b2f6570face0e323f0444e3d10b972f0f7705fe128bac54963e9e0911563"
+      },
+      {
+        "entry_id": "root/2/disc/363",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/HSCIE.ANB",
+        "size": 38076,
+        "sha256": "93e5aeb581d83ebd33ad55b8068adbe427fcb9a606e88a5f8bab079ea75be7cb"
+      },
+      {
+        "entry_id": "root/2/disc/364",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/HSHEP.ANB",
+        "size": 35797,
+        "sha256": "38d32a18a8b94bf2411a184506dbcbf76c344292fae8ef81971d2c02f91c4929"
+      },
+      {
+        "entry_id": "root/2/disc/365",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/MARCH.ANB",
+        "size": 39778,
+        "sha256": "03c147fb87ad0d30a2de2f4e91ee755575b07a2d63078c9c2bb5611ded2b040f"
+      },
+      {
+        "entry_id": "root/2/disc/366",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/MFARM.ANB",
+        "size": 32231,
+        "sha256": "73cdf337d6ff63cc4d120bdd9c3e0b0dcc59c000a4193e40f8a98c3cf72d03d9"
+      },
+      {
+        "entry_id": "root/2/disc/367",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/MSCIE.ANB",
+        "size": 38301,
+        "sha256": "b4eb05c610c7d135dc9de8876608302032b0428b0afdcb052fc174b9bd2eea7a"
+      },
+      {
+        "entry_id": "root/2/disc/368",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/MSHEP.ANB",
+        "size": 35744,
+        "sha256": "b51ef5a703a89dcf00c2465ddc7666fe842a9ce726363c2a36b2f2f0ac1d6277"
+      },
+      {
+        "entry_id": "root/2/disc/369",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/YARCH.ANB",
+        "size": 37700,
+        "sha256": "aef9ba878097884f64674c3273ae8de8139530c31155fbbf6d4db1db11e329c0"
+      },
+      {
+        "entry_id": "root/2/disc/370",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/YFARM.ANB",
+        "size": 27293,
+        "sha256": "662b6358b87eff43624009881701ff9eec243d05800a79ed7478fc6736b724b0"
+      },
+      {
+        "entry_id": "root/2/disc/371",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/YSCIE.ANB",
+        "size": 34865,
+        "sha256": "9f4ef097c5db8ad10c41b8992345bb2b26b6b4045a30c96e03c867f2ef968f0d"
+      },
+      {
+        "entry_id": "root/2/disc/372",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/SPEC/YSHEP.ANB",
+        "size": 32699,
+        "sha256": "6e6a81c03e5b8ec50706ca85c77161190183a9d44202dd155a9fc249043df559"
+      },
+      {
+        "entry_id": "root/2/disc/375",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/BACK0-0.DAT",
+        "size": 307200,
+        "sha256": "abeb090143c61502e5c5389dc6a452568d9a02d960eb25db2c5df7df1037f32c"
+      },
+      {
+        "entry_id": "root/2/disc/376",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/BACK0-1.DAT",
+        "size": 307200,
+        "sha256": "a57ad71bdb7543bf63bf312d831674861a305088ce90d521d54128dfaacde7c8"
+      },
+      {
+        "entry_id": "root/2/disc/377",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/BACK0-2.DAT",
+        "size": 307200,
+        "sha256": "4b9c32e9a8291f03a93004c19ae9a425b5ae4ce5707541f5a42db237c64a083d"
+      },
+      {
+        "entry_id": "root/2/disc/378",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/BACK0-3.DAT",
+        "size": 307200,
+        "sha256": "63f0bd638bfab13d1d8f2440977ce3281d47c494ad5f694362ca0e2deca830a4"
+      },
+      {
+        "entry_id": "root/2/disc/379",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/BACK0-4.DAT",
+        "size": 307200,
+        "sha256": "d06d94eff7503712e45d248471e99011a119c18ec7db9191befaf22dd0e96b32"
+      },
+      {
+        "entry_id": "root/2/disc/380",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/BACK0-5.DAT",
+        "size": 307200,
+        "sha256": "47a6894108dd566c246e33eb67040bbb7649696c1c3206fc51971eaf9c8d663c"
+      },
+      {
+        "entry_id": "root/2/disc/381",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/CREDITEN.DAT",
+        "size": 2611,
+        "sha256": "45dfd47c08852b7a0473c8e2f2d3f45bd189bb655bc6c20e9fddfee434d6673c"
+      },
+      {
+        "entry_id": "root/2/disc/382",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/CREDITFR.DAT",
+        "size": 2574,
+        "sha256": "154bcb081993d8c537680418479834328c4db09407de786c8db4be3c79511cb7"
+      },
+      {
+        "entry_id": "root/2/disc/383",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/CREDITGE.DAT",
+        "size": 2515,
+        "sha256": "06ab672aabc609d8d1afeafc97cae29b06aab34abe8fdffadbd2c36c8eb2a5a5"
+      },
+      {
+        "entry_id": "root/2/disc/384",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/CREDITIT.DAT",
+        "size": 2620,
+        "sha256": "aea70f4397e2a86363ec8a0308d130ff7b55518c01c9c65fab524f4ae33a28c1"
+      },
+      {
+        "entry_id": "root/2/disc/385",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/CREDITS.DAT",
+        "size": 2254,
+        "sha256": "1409495a807b55f3449754315682051663f20607422a6f06eb5d04652b82110c"
+      },
+      {
+        "entry_id": "root/2/disc/386",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/CREDITSP.DAT",
+        "size": 2526,
+        "sha256": "5e1b4e4f0989762c236c4c4c03aaf06fc298620638f42d361b8ad410bde2c24e"
+      },
+      {
+        "entry_id": "root/2/disc/387",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/CREDITSW.DAT",
+        "size": 2532,
+        "sha256": "3befe67d21c7fa877d5d69f7fd6138d9296525eaa88723bd1a7d1419c79eff4e"
+      },
+      {
+        "entry_id": "root/2/disc/388",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-0.DAT",
+        "size": 20582,
+        "sha256": "ff17bf4e86fe3bee7d39c800d6f5c5518c887a7140eaf398bfd10ee82fd52fb3"
+      },
+      {
+        "entry_id": "root/2/disc/389",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-0.TAB",
+        "size": 810,
+        "sha256": "e6e5e757c78007f2edbfde08dc76a7ef25f5afcb3ef63409980005e148af38fc"
+      },
+      {
+        "entry_id": "root/2/disc/390",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-1.DAT",
+        "size": 10058,
+        "sha256": "62355795fbf5009b074b4ca9bd8ac6761fa645d44aa9792f6c497339ee5fc1c3"
+      },
+      {
+        "entry_id": "root/2/disc/391",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-1.TAB",
+        "size": 582,
+        "sha256": "4efed69c3898589e7c9897fd7c95caadfab9c9641d9d4727ed8b6c058dbe4005"
+      },
+      {
+        "entry_id": "root/2/disc/392",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-2.DAT",
+        "size": 7359,
+        "sha256": "7a1ec9c1100a13d71a8902c7a06af35f559c8574007c180c269f85f5bcadc342"
+      },
+      {
+        "entry_id": "root/2/disc/393",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-2.TAB",
+        "size": 582,
+        "sha256": "d35694ee6ecf936f2b3bb333bebb9e0657e873fb6f238c332f62fb372587a2ad"
+      },
+      {
+        "entry_id": "root/2/disc/394",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-3.DAT",
+        "size": 7665,
+        "sha256": "1ed313138237d3f41a85578575b5926471cd1419a3ff6880abdad694234f6782"
+      },
+      {
+        "entry_id": "root/2/disc/395",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-3.TAB",
+        "size": 582,
+        "sha256": "47e579d5d0bc4a56a67c8905db35783a19b58141441d9e301b6bb66f73b3614d"
+      },
+      {
+        "entry_id": "root/2/disc/396",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-4.DAT",
+        "size": 14935,
+        "sha256": "db24820e4e30a884a978fd6a87a11b282568da9d72aa2a5a5cf2a048bcbd055d"
+      },
+      {
+        "entry_id": "root/2/disc/397",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-4.TAB",
+        "size": 582,
+        "sha256": "af51d01656b1175d6924a60c6ed31aa3e252c621a1332fff1c4b7242bcc39b77"
+      },
+      {
+        "entry_id": "root/2/disc/398",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-5.DAT",
+        "size": 7665,
+        "sha256": "9f0fae07269364bc2015dd1566a572d8dd876974487c5b2efe3b7180b11651f2"
+      },
+      {
+        "entry_id": "root/2/disc/399",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-5.TAB",
+        "size": 582,
+        "sha256": "47e579d5d0bc4a56a67c8905db35783a19b58141441d9e301b6bb66f73b3614d"
+      },
+      {
+        "entry_id": "root/2/disc/400",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-6.DAT",
+        "size": 14935,
+        "sha256": "82df0292b6035661254398f6318c74e4b1a57917d0e69294b93ed19cdf1a56ba"
+      },
+      {
+        "entry_id": "root/2/disc/401",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-6.TAB",
+        "size": 582,
+        "sha256": "af51d01656b1175d6924a60c6ed31aa3e252c621a1332fff1c4b7242bcc39b77"
+      },
+      {
+        "entry_id": "root/2/disc/402",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-7.DAT",
+        "size": 7359,
+        "sha256": "7a1ec9c1100a13d71a8902c7a06af35f559c8574007c180c269f85f5bcadc342"
+      },
+      {
+        "entry_id": "root/2/disc/403",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/FONT0-7.TAB",
+        "size": 582,
+        "sha256": "1bffa08c94f366e576bb018838ffd53bbe369272effb8a89d25b5390a301970c"
+      },
+      {
+        "entry_id": "root/2/disc/404",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/GLASS0-1.DAT",
+        "size": 65536,
+        "sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3"
+      },
+      {
+        "entry_id": "root/2/disc/405",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/PALET0-0.DAT",
+        "size": 768,
+        "sha256": "ec411c6bc7ea97b2f75d5fc014b9cfa686904da12bdd0974cf11863cc3b79f7a"
+      },
+      {
+        "entry_id": "root/2/disc/406",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/PALET0-1.DAT",
+        "size": 768,
+        "sha256": "8d9a27bca8ed203629da4ee72bb982150fae5dd876743b50a99ad90dba0f4b05"
+      },
+      {
+        "entry_id": "root/2/disc/407",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/PALET0-2.DAT",
+        "size": 768,
+        "sha256": "ad24b0c2fcdac78cd957a3d261fad23f8dd845dc8d23c5b923b4ba4b2854a8aa"
+      },
+      {
+        "entry_id": "root/2/disc/408",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/PALET0-3.DAT",
+        "size": 768,
+        "sha256": "ad4ad790cbe0017c0feade575e716c904a27b0d00b301ef83cb4bfafb6196edb"
+      },
+      {
+        "entry_id": "root/2/disc/409",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/PALET0-4.DAT",
+        "size": 768,
+        "sha256": "f9b99a049aab5301377d17c9a471f5377f2014a84e8ede879317bc7d333bfb2f"
+      },
+      {
+        "entry_id": "root/2/disc/410",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/PALET0-5.DAT",
+        "size": 768,
+        "sha256": "e85663b727a6a3d0883e79a967622bf90e336c1d80e907ce21eb407b8cdbe82a"
+      },
+      {
+        "entry_id": "root/2/disc/411",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/POINT0-0.DAT",
+        "size": 115,
+        "sha256": "36e3a9e06b4462061699e6aaee71dc6b03ec0a26a0f5e10581b7b2ec37a7ab3b"
+      },
+      {
+        "entry_id": "root/2/disc/412",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/POINT0-0.TAB",
+        "size": 12,
+        "sha256": "9bee6bbb632cd22f6ddeb47c1ea016d995ce5af35d0c57ff06e147f91556be3d"
+      },
+      {
+        "entry_id": "root/2/disc/413",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/SPR0-0.DAT",
+        "size": 91594,
+        "sha256": "fb083fc1b0e8c018c324e16505d7c46a9dfbabedbf110e31bfa51a7f09a2f4bc"
+      },
+      {
+        "entry_id": "root/2/disc/414",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/SPR0-0.TAB",
+        "size": 342,
+        "sha256": "b5431c424dce38c2218e07f06b36480fd850b2f33b3332d0befbae1516d0e319"
+      },
+      {
+        "entry_id": "root/2/disc/415",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/SPR0-1.DAT",
+        "size": 280996,
+        "sha256": "ed77539f419bca0dd88d85a00af29f03bf6252293cfa7c6a01e8069bfd34b2ee"
+      },
+      {
+        "entry_id": "root/2/disc/416",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/SPR0-1.TAB",
+        "size": 1020,
+        "sha256": "a6598620f55cfa3cae1775c9e7b38af30ee79f33a2aea1ccdca07a031dc19ba6"
+      },
+      {
+        "entry_id": "root/2/disc/417",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/TITLE0-1.DAT",
+        "size": 307200,
+        "sha256": "4989ae5bdf2497ca18bebabfa4259f142da7dca75d73bec99c94421a0edb7ef0"
+      },
+      {
+        "entry_id": "root/2/disc/418",
+        "path": "private/reference-run/run-005/drive-c/GAME/S/DATA/TPALT0-1.DAT",
+        "size": 768,
+        "sha256": "121ab8aa73d9103efae987aeb23d237dfa36ace60a4cea26f3de255a7f4cd2d8"
+      },
+      {
+        "entry_id": "root/2/disc/420",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/BBOT.SPE",
+        "size": 801970,
+        "sha256": "30d6429190a898c31e677dfeef780b27b0d904da697dade6eb979511b9966243"
+      },
+      {
+        "entry_id": "root/2/disc/421",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/BENG.SPE",
+        "size": 680498,
+        "sha256": "2f3d823b308130194f4ad8b767cdaafdfc377ba625c025b9ddf454df3aeecbac"
+      },
+      {
+        "entry_id": "root/2/disc/422",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/BGEN.SPE",
+        "size": 1478164,
+        "sha256": "9f59b9bba1cd0c2192a2614c325c03d1bd20a9b5d6f51a1b4d9239c908b8fbbd"
+      },
+      {
+        "entry_id": "root/2/disc/423",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/BRAN.SPE",
+        "size": 494540,
+        "sha256": "4ec90e0cc0c3cb4923def1db10bacd619ffdbda0894123cb56abf2e0febdd1e9"
+      },
+      {
+        "entry_id": "root/2/disc/424",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/HBOT.SPE",
+        "size": 616772,
+        "sha256": "c36dd994963ce4d77941d32b95c89abc9e97d1cd85bd45dd1e3d6f3f6cb838e8"
+      },
+      {
+        "entry_id": "root/2/disc/425",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/HENG.SPE",
+        "size": 515722,
+        "sha256": "f9bcf168a695b5e9de420d5ee5d3557ef57ec66a185f7c8ed95a4992bbf2799b"
+      },
+      {
+        "entry_id": "root/2/disc/426",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/HGEN.SPE",
+        "size": 1414266,
+        "sha256": "b57565e7e45147ef514a99df01800dc118ea87666fb99adf34e94094a7e064a5"
+      },
+      {
+        "entry_id": "root/2/disc/427",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/HRAN.SPE",
+        "size": 511818,
+        "sha256": "36e6af0bc72441642c805c95d2525c9c391e82a16842d54ab1e8798c0b659a19"
+      },
+      {
+        "entry_id": "root/2/disc/428",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/MISC.SPE",
+        "size": 940718,
+        "sha256": "1bac429ca69ec03112b355ec8a10150578c078c8b0e50082fa93848aeae2ad7e"
+      },
+      {
+        "entry_id": "root/2/disc/429",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/NARR.SPE",
+        "size": 4354332,
+        "sha256": "472add108a6c810806060549161b0ca6dc975a0cc02afba7e6cc0ec8cc9ed7e0"
+      },
+      {
+        "entry_id": "root/2/disc/430",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/SBOT.SPE",
+        "size": 761556,
+        "sha256": "4d166de3e60fd1a12e3a27a44e5ae5bd6c62689f25dbd6a591bc5200c9b2289d"
+      },
+      {
+        "entry_id": "root/2/disc/431",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/SENG.SPE",
+        "size": 543598,
+        "sha256": "4695f2196e02e6f0a38df246585ef9888c0f6fbdc0b6baba641a710e23dfc863"
+      },
+      {
+        "entry_id": "root/2/disc/432",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/SGEN.SPE",
+        "size": 1948000,
+        "sha256": "f1ea2165cfcf6b0bbff95d61bb4dda9eeb8707a08d89a930786bb08f1df9d910"
+      },
+      {
+        "entry_id": "root/2/disc/433",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/SRAN.SPE",
+        "size": 595602,
+        "sha256": "26d8f41b745129dfaf2654a0852dbb09367aaebab8953bec043de77c26972305"
+      },
+      {
+        "entry_id": "root/2/disc/434",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/ZBOT.SPE",
+        "size": 678118,
+        "sha256": "308a79dac53f4f4faf774bb6bed87d497c6b369c1c73f8b25d894f1a86afe255"
+      },
+      {
+        "entry_id": "root/2/disc/435",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/ZENG.SPE",
+        "size": 583856,
+        "sha256": "7426318d8723b1ae2012194ff483135a06cff8ac3517fffea37f551e5e6c9da9"
+      },
+      {
+        "entry_id": "root/2/disc/436",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/ZGEN.SPE",
+        "size": 1834598,
+        "sha256": "52f23331fbec20f94eea3cf65efc7341e20a622734a6acf9558bd521b9ee50d7"
+      },
+      {
+        "entry_id": "root/2/disc/437",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ENG/ZRAN.SPE",
+        "size": 411978,
+        "sha256": "a51dd4c1235066443312178bb210bb93063389dde4898c2abbe4c3d6a65f5771"
+      },
+      {
+        "entry_id": "root/2/disc/439",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/BBOT.SPE",
+        "size": 590164,
+        "sha256": "9b2428bbff88f6f43614884f7fe1047ee9881f974dd8c860697a39cf0a233d8b"
+      },
+      {
+        "entry_id": "root/2/disc/440",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/BENG.SPE",
+        "size": 524524,
+        "sha256": "b4868b1604c98cd26168ddbf314b8499fe15800bcede4ada6b549eb7ddc76e7b"
+      },
+      {
+        "entry_id": "root/2/disc/441",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/BGEN.SPE",
+        "size": 1103676,
+        "sha256": "83c333aa24ad6441ee6b39bbc3cf000cd550520c0e01d4e5f4d2bb34fa48750e"
+      },
+      {
+        "entry_id": "root/2/disc/442",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/BRAN.SPE",
+        "size": 463108,
+        "sha256": "837b3742774aec3e7652c8c8b1e7446fb98b9fb21bb93368c70ed9bd053fb676"
+      },
+      {
+        "entry_id": "root/2/disc/443",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/HBOT.SPE",
+        "size": 577620,
+        "sha256": "2822827ad81979185737f71c7e7b118b96151cdbef9ca88e0bb8a033528a98a6"
+      },
+      {
+        "entry_id": "root/2/disc/444",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/HENG.SPE",
+        "size": 558060,
+        "sha256": "4405394719ddd98fc09a5d9752ec3e2659539afbee2eb3934a62ecc885676161"
+      },
+      {
+        "entry_id": "root/2/disc/445",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/HGEN.SPE",
+        "size": 1137980,
+        "sha256": "9827a5de60c8bf3dbd682c59397748435d0d74f7209dd4b5629c85d70d591298"
+      },
+      {
+        "entry_id": "root/2/disc/446",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/HRAN.SPE",
+        "size": 459268,
+        "sha256": "0cc4bd130f1f7df0297508dba8f589750aa15496bc646b300b13cd82be9a020b"
+      },
+      {
+        "entry_id": "root/2/disc/447",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/MISC.SPE",
+        "size": 705596,
+        "sha256": "9ebef82b3c289e33b83c70e1c757f67143c6fc40605cdf60b6d2b1c46a208925"
+      },
+      {
+        "entry_id": "root/2/disc/448",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/NARR.SPE",
+        "size": 3536786,
+        "sha256": "d4355547a53563a24546d85cb84a6ba40cb65102f265786afeab8926a1dc8099"
+      },
+      {
+        "entry_id": "root/2/disc/449",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/SBOT.SPE",
+        "size": 543828,
+        "sha256": "c5562ab15324e7571c565a4cec132f2525c2c07775b6c44d88d077eacb877b63"
+      },
+      {
+        "entry_id": "root/2/disc/450",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/SENG.SPE",
+        "size": 559340,
+        "sha256": "9297ef6cb8f286becc5ca76a83499e691e792149483624d0c6a0ad2515246736"
+      },
+      {
+        "entry_id": "root/2/disc/451",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/SGEN.SPE",
+        "size": 1487548,
+        "sha256": "dc05cefedcb1f10c11f3ebd8bdf853eb4d5f842c758ff8a5f2f2b72f59b5bbcf"
+      },
+      {
+        "entry_id": "root/2/disc/452",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/SRAN.SPE",
+        "size": 511748,
+        "sha256": "33eb12d227e4a422ee4aebede8f1b7731d08aba8ef0caf0f11cf5b0843a57854"
+      },
+      {
+        "entry_id": "root/2/disc/453",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/ZBOT.SPE",
+        "size": 582036,
+        "sha256": "12c95dd99000dd68cd2d346b088df87ca564843031fd90dc837bf7485b1a0b29"
+      },
+      {
+        "entry_id": "root/2/disc/454",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/ZENG.SPE",
+        "size": 518764,
+        "sha256": "16436f87a19046fb7a8a5e07f9ed6f42d051ff4e461d6137a693ebe446b3ff60"
+      },
+      {
+        "entry_id": "root/2/disc/455",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/ZGEN.SPE",
+        "size": 1367548,
+        "sha256": "4c9f199eaed6345dd5b82ccf2d0f868c4b16e4b6b2b6eb20c9857634b92af16f"
+      },
+      {
+        "entry_id": "root/2/disc/456",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/FRE/ZRAN.SPE",
+        "size": 458820,
+        "sha256": "4bbcee764123e3328284ca5eaafe1e2e384dd4d360b47c7e3ba02970258c8235"
+      },
+      {
+        "entry_id": "root/2/disc/458",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/BBOT.SPE",
+        "size": 918208,
+        "sha256": "b088a1c15e087b1f9a9e3e20750e54d800c7ecd1f2c703643dea8a5742c4037b"
+      },
+      {
+        "entry_id": "root/2/disc/459",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/BENG.SPE",
+        "size": 920636,
+        "sha256": "319a7bbf39c4dd0aa7939f45e1e0364e6394b0ffcb81b153f54481deaaa69187"
+      },
+      {
+        "entry_id": "root/2/disc/460",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/BGEN.SPE",
+        "size": 2048520,
+        "sha256": "86be2ce1042893762f3cc3b31dbc1ed7be28d4571f421ddda82176d20ef84277"
+      },
+      {
+        "entry_id": "root/2/disc/461",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/BRAN.SPE",
+        "size": 781362,
+        "sha256": "a2ab065069f903af43f88a5e7af27447bd33cbeefe351a5552ace551e03c3383"
+      },
+      {
+        "entry_id": "root/2/disc/462",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/HBOT.SPE",
+        "size": 793614,
+        "sha256": "5bb528863d6c5b01e9832ac9ffe40b414a69f1a0800b9e4c2cd18ddd06e2c792"
+      },
+      {
+        "entry_id": "root/2/disc/463",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/HENG.SPE",
+        "size": 679994,
+        "sha256": "b15ab0a2016eeb9be875f4696e1c7187ad10e11e2c500b3f870e29e9af097c5a"
+      },
+      {
+        "entry_id": "root/2/disc/464",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/HGEN.SPE",
+        "size": 1827388,
+        "sha256": "a1694179c7bc0f15e7e0e553781fa128d0e47afd686865a67706f095e9a0bc39"
+      },
+      {
+        "entry_id": "root/2/disc/465",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/HRAN.SPE",
+        "size": 655784,
+        "sha256": "8c1561609017aa4b335bfde5fa0a123b6f6665bb68b18f8b6efd0cb5aa970191"
+      },
+      {
+        "entry_id": "root/2/disc/466",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/MISC.SPE",
+        "size": 682814,
+        "sha256": "a1460e9b57d900d3464a6c24d9bc1ad8dadbff6e609d8027ed6f1c51408673f8"
+      },
+      {
+        "entry_id": "root/2/disc/467",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/NARR.SPE",
+        "size": 4079566,
+        "sha256": "d396659cb0f07179fe90c5c688e8dd0b48ad0d3c3f27ded84e00e3ec29d954ae"
+      },
+      {
+        "entry_id": "root/2/disc/468",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/SBOT.SPE",
+        "size": 949768,
+        "sha256": "05b4bb335347d11d434092a7d4d75b6485e55bf9434b7247bad9e9543a54c994"
+      },
+      {
+        "entry_id": "root/2/disc/469",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/SENG.SPE",
+        "size": 665000,
+        "sha256": "0f512336311de6765d603fe8006fe094a7f158440dc1bfb6b582dbf0d78931db"
+      },
+      {
+        "entry_id": "root/2/disc/470",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/SGEN.SPE",
+        "size": 1845152,
+        "sha256": "08dd2f7b1a6b09ad8414842414927c765a4cf2f8e84128291e957d5e3745f883"
+      },
+      {
+        "entry_id": "root/2/disc/471",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/SRAN.SPE",
+        "size": 648150,
+        "sha256": "d32dfd0a21e3c48f9207ed11cc5c01b050d8fe45627a8ea7088b34ce0291d319"
+      },
+      {
+        "entry_id": "root/2/disc/472",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/ZBOT.SPE",
+        "size": 1004232,
+        "sha256": "73dfb0fcd9fc95a643517f17b43296cc7ced05e678325f3d60352c87718c1523"
+      },
+      {
+        "entry_id": "root/2/disc/473",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/ZENG.SPE",
+        "size": 842808,
+        "sha256": "668b17f2203db411a1a8a5fa6aae537744e2281b1efadbf596542cd7bf922cd9"
+      },
+      {
+        "entry_id": "root/2/disc/474",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/ZGEN.SPE",
+        "size": 2250684,
+        "sha256": "d38cdca5cc4f4a6a8fc876b08be84be27077dcee68ea81d300dd9cb06dc06082"
+      },
+      {
+        "entry_id": "root/2/disc/475",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/GER/ZRAN.SPE",
+        "size": 764656,
+        "sha256": "62ee205e96fb890689fea708fe0c18cc102e07805e4a7029b5b35337d43f56f2"
+      },
+      {
+        "entry_id": "root/2/disc/477",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/BBOT.SPE",
+        "size": 630740,
+        "sha256": "401cd5f2d63440caccffa90903c9048cd16869f0f4c646c98a64e34e1c83c6db"
+      },
+      {
+        "entry_id": "root/2/disc/478",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/BENG.SPE",
+        "size": 608728,
+        "sha256": "13f3ed994969e4805e070f6c2cc7da542daa9403f0db02c117b5fbf745fdbd46"
+      },
+      {
+        "entry_id": "root/2/disc/479",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/BGEN.SPE",
+        "size": 1729754,
+        "sha256": "9533d427a649e6b0ed018ffd8835a5e40ceafb2b1edb84d3254476472f3c181c"
+      },
+      {
+        "entry_id": "root/2/disc/480",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/BRAN.SPE",
+        "size": 461082,
+        "sha256": "f1b4ddd651cb150ab9b07b2a2177a389f031b1f3ad4e905bb52beb8b55a71f26"
+      },
+      {
+        "entry_id": "root/2/disc/481",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/HBOT.SPE",
+        "size": 668270,
+        "sha256": "11f9425a68f0b8c3919559241c9bf7d488097c0a22e07bc8741b9694b8924fba"
+      },
+      {
+        "entry_id": "root/2/disc/482",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/HENG.SPE",
+        "size": 478766,
+        "sha256": "786f6932c98cd6f777ee2a8ed85851bda23377cd0ad07aedcb475a5caeca3d3d"
+      },
+      {
+        "entry_id": "root/2/disc/483",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/HGEN.SPE",
+        "size": 1701928,
+        "sha256": "6f447129206bca44920976ef18ebe03e97ff18c63a6bd76a0cabee984cf905d9"
+      },
+      {
+        "entry_id": "root/2/disc/484",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/HRAN.SPE",
+        "size": 475478,
+        "sha256": "8428dc810aa268d097cbf5c1abf25d5d77a66bd6cbdd490aee97d87b96479e0a"
+      },
+      {
+        "entry_id": "root/2/disc/485",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/MISC.SPE",
+        "size": 735742,
+        "sha256": "72c13fb3bcb3900cc4830c5ac9f180d95af014dacc51eec12bdbc7ab16a13d73"
+      },
+      {
+        "entry_id": "root/2/disc/486",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/NARR.SPE",
+        "size": 4313810,
+        "sha256": "c56a0d1b34f0d20faca53205208350a0131a66633ea4f8d5667f866ddd807278"
+      },
+      {
+        "entry_id": "root/2/disc/487",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/SBOT.SPE",
+        "size": 962446,
+        "sha256": "180c662fc65eb9f1ad832e8e4589a15b8eb767a268d5963aee9e10862a519b96"
+      },
+      {
+        "entry_id": "root/2/disc/488",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/SENG.SPE",
+        "size": 851434,
+        "sha256": "05f49e64b790f46031c04571dc752fd86664f9a97d0100836cf0402cabd26a6e"
+      },
+      {
+        "entry_id": "root/2/disc/489",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/SGEN.SPE",
+        "size": 1994350,
+        "sha256": "dce9607f911b0be2336b799d23dd1e0e48ac28bba15a1c37e3df76a5732ebf0c"
+      },
+      {
+        "entry_id": "root/2/disc/490",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/SRAN.SPE",
+        "size": 612406,
+        "sha256": "e10c5459932480f78f0b9bfd9d1bad7b49def23112e2579cfd14aeac738e3d43"
+      },
+      {
+        "entry_id": "root/2/disc/491",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/ZBOT.SPE",
+        "size": 920330,
+        "sha256": "1049b9a40b780ef832f24a3db3ea06c92faaf4fb72dc1fe1a2ed8be9fd526da3"
+      },
+      {
+        "entry_id": "root/2/disc/492",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/ZENG.SPE",
+        "size": 680690,
+        "sha256": "cec1f217d3f7fac7e6ebbcef4ec0845f2a2556c9d5c3264e5f333d88289ba78d"
+      },
+      {
+        "entry_id": "root/2/disc/493",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/ZGEN.SPE",
+        "size": 1557634,
+        "sha256": "b89c5f681aa5220c4776de80c38e2d42a2ae588b6f517bb324cc45371536cf25"
+      },
+      {
+        "entry_id": "root/2/disc/494",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ITA/ZRAN.SPE",
+        "size": 522654,
+        "sha256": "dad51a2745c812948407c4e28224dfd33d9ecb700bd31be50fa95d99928212b1"
+      },
+      {
+        "entry_id": "root/2/disc/496",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/BBOT.SPE",
+        "size": 545642,
+        "sha256": "02df5adf300c5cd2a65205a039db996e44ec344011aa3466c1ebddebd8c865da"
+      },
+      {
+        "entry_id": "root/2/disc/497",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/BENG.SPE",
+        "size": 441016,
+        "sha256": "db44b3fb577902472ac85f70ac1ee919aacfbb72a62a343d3b790e447c05d565"
+      },
+      {
+        "entry_id": "root/2/disc/498",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/BGEN.SPE",
+        "size": 1160616,
+        "sha256": "7fa22df3afc2abd69c6006d3a83e5bee339e58d938c682d7b2922748f1bcf9c7"
+      },
+      {
+        "entry_id": "root/2/disc/499",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/BRAN.SPE",
+        "size": 418420,
+        "sha256": "e07a01e9ea92372a3a2b3ef372f187c2dbe2eedc7e0b329a370de0e7760e36a2"
+      },
+      {
+        "entry_id": "root/2/disc/500",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/HBOT.SPE",
+        "size": 494512,
+        "sha256": "bb60020f5a273489ab735ecd2a76ad1009e5535787cf1003d5cb6b010a68ca96"
+      },
+      {
+        "entry_id": "root/2/disc/501",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/HENG.SPE",
+        "size": 393484,
+        "sha256": "eab5b2c434c4e85c4693cad1ebb6d0a6b430e77f1cf0fc2a218e0bc7fab77e1a"
+      },
+      {
+        "entry_id": "root/2/disc/502",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/HGEN.SPE",
+        "size": 1230628,
+        "sha256": "535f657fe81c2cb19980946d8225e17f98a6acdd522fd1a4acf3a76cf6d9b16e"
+      },
+      {
+        "entry_id": "root/2/disc/503",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/HRAN.SPE",
+        "size": 408986,
+        "sha256": "f5404b7a71edb84bd5294ae539c2d0265ab400e59d2617a126bf8d7f711a5c30"
+      },
+      {
+        "entry_id": "root/2/disc/504",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/MISC.SPE",
+        "size": 544068,
+        "sha256": "6ac816b393658502b0b84ce7ce0a65b4de7b2312458477f319267cb206f2f88e"
+      },
+      {
+        "entry_id": "root/2/disc/505",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/NARR.SPE",
+        "size": 3107432,
+        "sha256": "b229350965b359f5e386aa6cd97ab11d79519a6aa1b4a58be5acd6629c462a07"
+      },
+      {
+        "entry_id": "root/2/disc/506",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/SBOT.SPE",
+        "size": 664314,
+        "sha256": "556a1e9d785bee2e821e47e907bfdf6704e88777721c5dffc90e3c22f44cc2c5"
+      },
+      {
+        "entry_id": "root/2/disc/507",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/SENG.SPE",
+        "size": 470284,
+        "sha256": "3505463727b43132d723271476fa35342f0954a73d7927e4582a64a133824630"
+      },
+      {
+        "entry_id": "root/2/disc/508",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/SGEN.SPE",
+        "size": 1051170,
+        "sha256": "d73d25ab893f855373e5874e928840c5d6e79994ad45547dc2406837cf6d9227"
+      },
+      {
+        "entry_id": "root/2/disc/509",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/SRAN.SPE",
+        "size": 503552,
+        "sha256": "4d4ae953183d7c952239a5ee3ed34bb24a3a0996688c11e2cb30a5a08a917a94"
+      },
+      {
+        "entry_id": "root/2/disc/510",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/ZBOT.SPE",
+        "size": 728284,
+        "sha256": "719b5063cffa8070d57b8ffcde5f04e1d0727144252c238697cdc91fd952903f"
+      },
+      {
+        "entry_id": "root/2/disc/511",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/ZENG.SPE",
+        "size": 519938,
+        "sha256": "f347fc8ea62f0cb48dfd1a1b38b3917481747de630c62a4a679e4a1422d8343c"
+      },
+      {
+        "entry_id": "root/2/disc/512",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/ZGEN.SPE",
+        "size": 1465744,
+        "sha256": "053764172ff96527a5f25844f1392cedd045a524b10b93dc197f7029713f9fad"
+      },
+      {
+        "entry_id": "root/2/disc/513",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SPA/ZRAN.SPE",
+        "size": 433288,
+        "sha256": "d7957e150b19f78c2eafd5442922cb266a5157ff93e6f568fad72cbcd22ae00c"
+      },
+      {
+        "entry_id": "root/2/disc/515",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/BBOT.SPE",
+        "size": 803914,
+        "sha256": "ced6938bdc11445f69f12bd115f6c9c951639f6d781234976515bcd678d36d76"
+      },
+      {
+        "entry_id": "root/2/disc/516",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/BENG.SPE",
+        "size": 734260,
+        "sha256": "677848e77a4b5c90047dac074aaae97ee64de48345e670840e034fecfed4364d"
+      },
+      {
+        "entry_id": "root/2/disc/517",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/BGEN.SPE",
+        "size": 1624280,
+        "sha256": "62c37d441dd38f2ba5086f38ba660adc9416e718bdb80a5bc139369603b8c559"
+      },
+      {
+        "entry_id": "root/2/disc/518",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/BRAN.SPE",
+        "size": 622884,
+        "sha256": "58f662dd9533523d999ed4ba3a1909ef4e38da0f40229f91df2b10b14d6ada8a"
+      },
+      {
+        "entry_id": "root/2/disc/519",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/HBOT.SPE",
+        "size": 721608,
+        "sha256": "de24794d819e3c04596d4813b9217953a6652aa91b4f53e47bd40e17509ec8a7"
+      },
+      {
+        "entry_id": "root/2/disc/520",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/HENG.SPE",
+        "size": 640980,
+        "sha256": "f8e49d2728c205492de1be4edd1f069df8047abe987704e8f179c757e356bf3f"
+      },
+      {
+        "entry_id": "root/2/disc/521",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/HGEN.SPE",
+        "size": 1592898,
+        "sha256": "60cf03b21f6957220a0162e10ab764ab5a375b45314067b29a9161f1ba53ecc4"
+      },
+      {
+        "entry_id": "root/2/disc/522",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/HRAN.SPE",
+        "size": 539322,
+        "sha256": "843813fe6b9273f005031e765bf2e099a8fc3ee60ecb09968f641cd287d8155e"
+      },
+      {
+        "entry_id": "root/2/disc/523",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/MISC.SPE",
+        "size": 726350,
+        "sha256": "235c82ec97d1ac291b201170ca2f9343af2fb0180ed2be9a3ca6d104b67573cc"
+      },
+      {
+        "entry_id": "root/2/disc/524",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/NARR.SPE",
+        "size": 3971366,
+        "sha256": "c3de17bd1f901bba78484da797aba217bd2b678a8e366eea99c378ac37807dab"
+      },
+      {
+        "entry_id": "root/2/disc/525",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/SBOT.SPE",
+        "size": 689200,
+        "sha256": "e5594f95f51825cb4624fd0769a0a6ec419be04a7a83727a6ed5d3bf0d386c21"
+      },
+      {
+        "entry_id": "root/2/disc/526",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/SENG.SPE",
+        "size": 576480,
+        "sha256": "0910cb7720193c4433c07b9d1bf62a75736246203d5946f325905b9a9ba1a321"
+      },
+      {
+        "entry_id": "root/2/disc/527",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/SGEN.SPE",
+        "size": 1786862,
+        "sha256": "d8897335f66c6b1c65e1eea1361cc580931a0b30d8717a318ae810a2b12f74a2"
+      },
+      {
+        "entry_id": "root/2/disc/528",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/SRAN.SPE",
+        "size": 540506,
+        "sha256": "53cc7691ff079f122a45a655dc6d210f724162c921fc6a408d64596ca2103f9d"
+      },
+      {
+        "entry_id": "root/2/disc/529",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/ZBOT.SPE",
+        "size": 917334,
+        "sha256": "396c76e2cebf743d8e5f720c4bb185b8eceefd135c73c79acde311d6343fcacf"
+      },
+      {
+        "entry_id": "root/2/disc/530",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/ZENG.SPE",
+        "size": 933462,
+        "sha256": "9b04f15c3b06696d81a6c724de6b90db0c5356f111be6ae1df0f6f7b54ee2f94"
+      },
+      {
+        "entry_id": "root/2/disc/531",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/ZGEN.SPE",
+        "size": 1788350,
+        "sha256": "11758f63eaa0bf7294abcbdb8c9434dcf391c1bfc48d9c7d67cad675ddeef4b3"
+      },
+      {
+        "entry_id": "root/2/disc/532",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SWE/ZRAN.SPE",
+        "size": 712376,
+        "sha256": "1b18de2e0b10f51ac2011d4eddbc5caba9022348b3a41274a496537fb856bab6"
+      },
+      {
+        "entry_id": "root/2/disc/592",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TEXT/ENG/TEXT.DAT",
+        "size": 36610,
+        "sha256": "23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786"
+      },
+      {
+        "entry_id": "root/2/disc/593",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TEXT/ENG/TEXT.OLD",
+        "size": 37146,
+        "sha256": "3517ba16035ac7aae75f08f20839e8b45bba8ad0332461059ff1a4591f94f293"
+      },
+      {
+        "entry_id": "root/2/disc/595",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TEXT/FRE/TEXT.DAT",
+        "size": 40783,
+        "sha256": "8f54fd722ad261240738f5cea1e4426333b9f2f68b3e3037f81e5d60f342c9ac"
+      },
+      {
+        "entry_id": "root/2/disc/597",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TEXT/GER/TEXT.DAT",
+        "size": 43984,
+        "sha256": "de37732b3d451759208d10451eaba485d4c3cabdb02535bc3886bdbc067c2ab5"
+      },
+      {
+        "entry_id": "root/2/disc/599",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TEXT/ITA/TEXT.DAT",
+        "size": 37308,
+        "sha256": "ff55cf00c8be7cf5142d034c6470e4be1194d04714550df5c73f75650af7843a"
+      },
+      {
+        "entry_id": "root/2/disc/601",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TEXT/SPA/TEXT.DAT",
+        "size": 38296,
+        "sha256": "0f4aa68b2d207f9eaa13a1658ded4fa1cfa2a9687d8382124cddb19f2d4bd1f6"
+      },
+      {
+        "entry_id": "root/2/disc/603",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TEXT/SWE/TEXT.DAT",
+        "size": 38956,
+        "sha256": "19f8010d916c3cc01ca1124ea6c7197be3c31d4fd1b7d93700202d4bc2eb89a0"
+      }
+    ],
+    "file_count": 490,
+    "game_bytes": 186368166,
+    "generated_game_inputs": [
+      {
+        "path": "private/reference-run/run-005/drive-c/GAME/config.ini",
+        "size": 126,
+        "sha256": "ff0c1921640bb81cd0b73fc4a995316ea9ff1b8d60ed288e5d52a1be4e7c0d5f",
+        "provenance": "Independently generated from exact static setup writer/parser contract"
+      }
+    ],
+    "copied_game_inputs": [
+      {
+        "source_entry_id": "root/2/disc/592",
+        "runtime_relative_path": "GAME/DATA/TEXT.DAT",
+        "path": "private/reference-run/run-005/drive-c/GAME/DATA/TEXT.DAT",
+        "size": 36610,
+        "sha256": "23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/420",
+        "runtime_relative_path": "GAME/SPEECH/BBOT.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/BBOT.SPE",
+        "size": 801970,
+        "sha256": "30d6429190a898c31e677dfeef780b27b0d904da697dade6eb979511b9966243",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/421",
+        "runtime_relative_path": "GAME/SPEECH/BENG.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/BENG.SPE",
+        "size": 680498,
+        "sha256": "2f3d823b308130194f4ad8b767cdaafdfc377ba625c025b9ddf454df3aeecbac",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/422",
+        "runtime_relative_path": "GAME/SPEECH/BGEN.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/BGEN.SPE",
+        "size": 1478164,
+        "sha256": "9f59b9bba1cd0c2192a2614c325c03d1bd20a9b5d6f51a1b4d9239c908b8fbbd",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/423",
+        "runtime_relative_path": "GAME/SPEECH/BRAN.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/BRAN.SPE",
+        "size": 494540,
+        "sha256": "4ec90e0cc0c3cb4923def1db10bacd619ffdbda0894123cb56abf2e0febdd1e9",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/424",
+        "runtime_relative_path": "GAME/SPEECH/HBOT.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/HBOT.SPE",
+        "size": 616772,
+        "sha256": "c36dd994963ce4d77941d32b95c89abc9e97d1cd85bd45dd1e3d6f3f6cb838e8",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/425",
+        "runtime_relative_path": "GAME/SPEECH/HENG.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/HENG.SPE",
+        "size": 515722,
+        "sha256": "f9bcf168a695b5e9de420d5ee5d3557ef57ec66a185f7c8ed95a4992bbf2799b",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/426",
+        "runtime_relative_path": "GAME/SPEECH/HGEN.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/HGEN.SPE",
+        "size": 1414266,
+        "sha256": "b57565e7e45147ef514a99df01800dc118ea87666fb99adf34e94094a7e064a5",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/427",
+        "runtime_relative_path": "GAME/SPEECH/HRAN.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/HRAN.SPE",
+        "size": 511818,
+        "sha256": "36e6af0bc72441642c805c95d2525c9c391e82a16842d54ab1e8798c0b659a19",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/428",
+        "runtime_relative_path": "GAME/SPEECH/MISC.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/MISC.SPE",
+        "size": 940718,
+        "sha256": "1bac429ca69ec03112b355ec8a10150578c078c8b0e50082fa93848aeae2ad7e",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/429",
+        "runtime_relative_path": "GAME/SPEECH/NARR.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/NARR.SPE",
+        "size": 4354332,
+        "sha256": "472add108a6c810806060549161b0ca6dc975a0cc02afba7e6cc0ec8cc9ed7e0",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/430",
+        "runtime_relative_path": "GAME/SPEECH/SBOT.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SBOT.SPE",
+        "size": 761556,
+        "sha256": "4d166de3e60fd1a12e3a27a44e5ae5bd6c62689f25dbd6a591bc5200c9b2289d",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/431",
+        "runtime_relative_path": "GAME/SPEECH/SENG.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SENG.SPE",
+        "size": 543598,
+        "sha256": "4695f2196e02e6f0a38df246585ef9888c0f6fbdc0b6baba641a710e23dfc863",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/432",
+        "runtime_relative_path": "GAME/SPEECH/SGEN.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SGEN.SPE",
+        "size": 1948000,
+        "sha256": "f1ea2165cfcf6b0bbff95d61bb4dda9eeb8707a08d89a930786bb08f1df9d910",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/433",
+        "runtime_relative_path": "GAME/SPEECH/SRAN.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/SRAN.SPE",
+        "size": 595602,
+        "sha256": "26d8f41b745129dfaf2654a0852dbb09367aaebab8953bec043de77c26972305",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/434",
+        "runtime_relative_path": "GAME/SPEECH/ZBOT.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ZBOT.SPE",
+        "size": 678118,
+        "sha256": "308a79dac53f4f4faf774bb6bed87d497c6b369c1c73f8b25d894f1a86afe255",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/435",
+        "runtime_relative_path": "GAME/SPEECH/ZENG.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ZENG.SPE",
+        "size": 583856,
+        "sha256": "7426318d8723b1ae2012194ff483135a06cff8ac3517fffea37f551e5e6c9da9",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/436",
+        "runtime_relative_path": "GAME/SPEECH/ZGEN.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ZGEN.SPE",
+        "size": 1834598,
+        "sha256": "52f23331fbec20f94eea3cf65efc7341e20a622734a6acf9558bd521b9ee50d7",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      },
+      {
+        "source_entry_id": "root/2/disc/437",
+        "runtime_relative_path": "GAME/SPEECH/ZRAN.SPE",
+        "path": "private/reference-run/run-005/drive-c/GAME/SPEECH/ZRAN.SPE",
+        "size": 411978,
+        "sha256": "a51dd4c1235066443312178bb210bb93063389dde4898c2abbe4c3d6a65f5771",
+        "provenance": "Byte-identical source copy to statically proved installed runtime path",
+        "evidence": {
+          "path": "research/ghidra/english-install-evidence.json",
+          "size": 16813,
+          "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+        }
+      }
+    ],
+    "media": [
+      {
+        "entry_id": "root/2/disc/3",
+        "path": "private/reference-run/run-005/media/GENEWARS.cue",
+        "size": 238,
+        "sha256": "ba85aeb6a808145b43998a34faf6904956866539625bd45ead6dba0c2fd10ee5"
+      },
+      {
+        "entry_id": "root/2/disc/4",
+        "path": "private/reference-run/run-005/media/GENEWARS.img",
+        "size": 630947520,
+        "sha256": "3ae5f2154a84898a7d1652e550d741a0a431fe67fd0b3eb20121e3b11fd4e5de"
+      }
+    ],
+    "source_archive": {
+      "sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906",
+      "revalidated_by": "SourceReader constructor"
+    },
+    "config": {
+      "path": "private/reference-run/run-005/dosbox-x.conf",
+      "size": 20819,
+      "sha256": "506802e42d08c46d77f176efcd0efab03cbf57e2b8fbe15f8242d0b9284a285b"
+    },
+    "config_parameter_count": 895,
+    "config_overrides": {
+      "sdl": {
+        "fullscreen": "false",
+        "output": "surface",
+        "autolock": "false",
+        "clip_mouse_button": "none",
+        "mapperfile": "logs/mapper.map",
+        "mapperfile_sdl2": "logs/mapper.map",
+        "waitonerror": "false",
+        "mouse_emulation": "never",
+        "raw_mouse_input": "false"
+      },
+      "log": {
+        "logfile": "logs/dosbox-x.log"
+      },
+      "dosbox": {
+        "machine": "svga_s3",
+        "memsize": "64",
+        "captures": "captures",
+        "mcp_server": "0",
+        "call binary on reset": "",
+        "call binary on boot": "",
+        "video debug at startup": "false",
+        "working directory option": "noprompt",
+        "working directory default": ""
+      },
+      "script": {
+        "startup.js": ""
+      },
+      "render": {
+        "frameskip": "0",
+        "aspect": "false",
+        "scaler": "none"
+      },
+      "video": {
+        "enable supermegazeux tweakmode": "false"
+      },
+      "cpu": {
+        "core": "normal",
+        "cputype": "auto",
+        "cycles": "fixed 30000"
+      },
+      "dos": {
+        "automount": "false",
+        "automountall": "false",
+        "automount drive directories": "false",
+        "network redirector": "false",
+        "startcmd": "false",
+        "starttranspath": "false",
+        "vmware": "false",
+        "dos clipboard device enable": "false",
+        "dos clipboard api": "false",
+        "log console": "true"
+      },
+      "ipx": {
+        "ipx": "false"
+      },
+      "ne2000": {
+        "ne2000": "false",
+        "backend": "none"
+      },
+      "ethernet, slirp": {
+        "restricted": "true",
+        "disable_host_loopback": "true",
+        "tcp_port_forwards": "",
+        "udp_port_forwards": ""
+      },
+      "serial": {
+        "serial1": "disabled",
+        "serial2": "disabled",
+        "serial3": "disabled",
+        "serial4": "disabled",
+        "serial5": "disabled",
+        "serial6": "disabled",
+        "serial7": "disabled",
+        "serial8": "disabled",
+        "serial9": "disabled"
+      },
+      "parallel": {
+        "parallel1": "disabled",
+        "parallel2": "disabled",
+        "parallel3": "disabled",
+        "parallel4": "disabled",
+        "parallel5": "disabled",
+        "parallel6": "disabled",
+        "parallel7": "disabled",
+        "parallel8": "disabled",
+        "parallel9": "disabled"
+      },
+      "printer": {
+        "printer": "false"
+      },
+      "midi": {
+        "mpu401": "none",
+        "mididevice": "none"
+      },
+      "sblaster": {
+        "recording source": "silence",
+        "listen to recording source": "false"
+      },
+      "sblaster2": {
+        "recording source": "silence",
+        "listen to recording source": "false"
+      }
+    },
+    "executable_sections_empty": [
+      "autoexec",
+      "config",
+      "4dos",
+      "devices"
+    ]
+  },
+  "scope": "One supervised <=20-minute direct GW.EXE/DOS4GW session only after separate human approval.",
+  "security_limit": "DOSBox controls are not an OS sandbox. Process retains host user permissions.",
+  "reproduce": "python -B scripts/reference/run005.py prepare --stage",
+  "verify_only": "python -B scripts/reference/run005.py prepare",
+  "config_evidence": {
+    "path": "research/ghidra/config-evidence.json",
+    "size": 4050,
+    "sha256": "75414dd497336a7a9d51addf7b253bea918152ead4bf9d8c53ac81932b25e546"
+  },
+  "human_approval_record": "research/variants/reference-run-005-approval.json",
+  "text_install_evidence": {
+    "path": "research/ghidra/english-install-evidence.json",
+    "size": 16813,
+    "sha256": "541c851fe27e78c78b2bebe83b1c33e848fc39c40aa82ef014c1e16a02f47970"
+  },
+  "reference_run_result": "research/variants/reference-run-005-result.json",
+  "checker_grants_execution_authorization": false
+}

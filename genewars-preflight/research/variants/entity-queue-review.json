@@ -1,0 +1,136 @@
+{
+  "status": "passed-independent-native-entity-queue-review",
+  "utc": "2026-10-13T09:08:55.015482+00:00",
+  "original_execution": false,
+  "source": {
+    "path": "rust/crates/genewars-core/src/entity_draw_queue.rs",
+    "size": 12711,
+    "sha256": "b80d62724db689da242800705edfb34319bed786ac9ed91be1d4ffac7f203215"
+  },
+  "evidence": {
+    "path": "research/ghidra/entity-queue-evidence.json",
+    "size": 10971,
+    "sha256": "6555e64951c1bf10eee7261251f42edfcfc74bad20906a67dfcf99b6d93ffed9"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/display-geometry/instructions-00083140.txt",
+      "size": 12479,
+      "sha256": "9d18112e4f02934ede585142dda83c1ea16af0b4f4bbd51acd09226c08f28c52"
+    },
+    {
+      "path": "private/ghidra/display-geometry/instructions-00083930.txt",
+      "size": 4404,
+      "sha256": "0597f7ba5a896b525f2a0a7c51a3cbc97be051fedc77fd4dce37eada02739439"
+    },
+    {
+      "path": "private/ghidra/terrain-visibility/instructions-00083710.txt",
+      "size": 4771,
+      "sha256": "04c5063f1ff44ff7fea409e40648a5cc0d24e5bb56360b07a9424b85904be0cd"
+    },
+    {
+      "path": "private/ghidra/entity-order/instructions-0001f440.txt",
+      "size": 36,
+      "sha256": "4601eef6b773e61642e08e67d7f027b2e68421f50e467782b32910a61e2f6fe1"
+    },
+    {
+      "path": "private/ghidra/entity-plant/instructions-0001f280.txt",
+      "size": 35,
+      "sha256": "dba12fb47f1658bff3d7fa8bfcee4cc648c065194e697f4a85f5958592291223"
+    },
+    {
+      "path": "private/ghidra/entity-order/instructions-0001e760.txt",
+      "size": 452,
+      "sha256": "13ebd9cffb5087d53f744df5de8cfaee4e4951697463ded7c5034044e012cc16"
+    },
+    {
+      "path": "private/ghidra/entity-order-refs/instructions-0001c120.txt",
+      "size": 16082,
+      "sha256": "fd6d61b6f562770b3e34fe65b6fa6ecb9c700ae7aaaa3876f3826e3285670255"
+    },
+    {
+      "path": "private/ghidra/entity-order-refs/instructions-0006d0b0.txt",
+      "size": 2676,
+      "sha256": "5d247a6771c89370366d39bca5bd24483a9222796b32e360b957d512ed7857ba"
+    },
+    {
+      "path": "private/ghidra/entity-order/instructions-0006ca90.txt",
+      "size": 11964,
+      "sha256": "056c0c9a3cfab3cc4cfbfb15851895551fa672bb546f1e5f459f7a258315769b"
+    },
+    {
+      "path": "private/ghidra/display-geometry/instructions-00082bd0.txt",
+      "size": 3999,
+      "sha256": "f2452de57036b4ff1b35e9e213c83bac658e77314a8e75e3a6cef167990961b6"
+    },
+    {
+      "path": "private/ghidra/display-geometry/instructions-00086c20.txt",
+      "size": 3808,
+      "sha256": "678fb24160c99fd8a7660ce5f1d08e1ce499d1011996d2926cb7fe34d4014200"
+    },
+    {
+      "path": "private/ghidra/entity-order/instructions-0007a900.txt",
+      "size": 2251,
+      "sha256": "dee38f2f10e0606920437b20b63b01306356c6e41b0aa662c000f5395f3b235a"
+    },
+    {
+      "path": "private/ghidra/entity-order/instructions-0007a810.txt",
+      "size": 2386,
+      "sha256": "7ef237387b5da4137443c21cf9ec4312cc25a2e50224f8e1fa9614b9f58acd4b"
+    }
+  ],
+  "queue_cases": 277831,
+  "categories": {
+    "proof_and_actual_vectors": 4,
+    "all_signed_word_coordinate_axes": 65536,
+    "all_high_word_coordinates": 65536,
+    "signed32_boundary_crossproducts": 5776,
+    "all_initial_count_words": 65536,
+    "all_margin_words": 65536,
+    "mixed_bottom_bucket_permutations": 5040,
+    "every_capacity_reservation": 771,
+    "mixed_random_explicit_sequences": 4096
+  },
+  "valid_queue_results": 147018,
+  "rejected_queue_requests": 130813,
+  "ordered_entries": 190479,
+  "draw_packet_cases": 131072,
+  "admission_packet_cases": 2359296,
+  "actual_source_points": 40,
+  "actual_admitted_points": 7,
+  "source_mission": {
+    "path": "private/reference-run/run-004/drive-c/GAME/LEVELS/CONQ001.DAT",
+    "size": 343958,
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  },
+  "native_output_sha256": "8e4b65ba5a7f934aba1c61aa986545d2eba102321027ed6e5f8f3a90290c9f06",
+  "limits": [
+    "Explicit family1 sequence only; no full scene/live state inferred",
+    "Initial count reserves capacity only; no merge/traversal of existing other-family chains is modeled",
+    "Queue helper does not execute dirty prepass, draw callbacks or clear real global context",
+    "Admission packet only type2/context selection bit clear; draw packet selectedNone/family predicate true",
+    "Full signed32 projected inputs checked before narrowing; negative original counts excluded safely"
+  ],
+  "review_sources": [
+    {
+      "path": "research/variants/entity-queue-review.py",
+      "size": 10869,
+      "sha256": "d807cb2d0bf6398777705ba329eba153d88a4bab7e9f7699b3c5cc79a9873729"
+    },
+    {
+      "path": "research/variants/entity-queue-review.rs",
+      "size": 3166,
+      "sha256": "0b33e9a9ed4efeca6d62af1b53f1fd665b854ae5851d15457248ec6451a7ea70"
+    }
+  ],
+  "native_harness": {
+    "path": "private/review/entity-queue/review.exe",
+    "size": 5098541,
+    "sha256": "1af0410f38c80bced7964ac6c634c2235b3e4fc36bcc59bea00d69cd6df6f900"
+  },
+  "private_cases": {
+    "path": "private/review/entity-queue/queues.bin",
+    "size": 46555905,
+    "sha256": "780142fcf3c5056a4e0a79f436b8305dbc7656a4f3a7b696d1a58e4442c039c3"
+  }
+}

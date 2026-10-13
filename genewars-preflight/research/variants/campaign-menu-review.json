@@ -1,6 +1,6 @@
 {
   "status": "passed-bounded-independent-native-review",
-  "checked_utc": "2026-10-13T04:38:13.181143+00:00",
+  "checked_utc": "2026-10-13T09:06:23.757121+00:00",
   "original_or_gui_execution": false,
   "campaign_plans": 96,
   "admission_pairs": 65536,
@@ -220,8 +220,8 @@
     },
     {
       "path": "rust/crates/genewars-render/src/lib.rs",
-      "size": 38991,
-      "sha256": "ee6f9cefad3cdf0ebd66e38847417d8bbb693ba120dbca6cfacc304eda36ef68"
+      "size": 39272,
+      "sha256": "2de3cd069770e7131c056c8557fc6ba6e372b2aeac6ea245ef93a77a37e480c7"
     }
   ],
   "inputs": [
@@ -248,8 +248,8 @@
   ],
   "harness": {
     "path": "private/review/campaign-menu/review.exe",
-    "size": 5248407,
-    "sha256": "652f709b26dd5695432f5c601ba7b052cb2e27fe6169ca2690e54d02ee8e499c"
+    "size": 5269225,
+    "sha256": "b5ee4228c2b6a9af2711b0861a9abfe65dff46e47c9330435f1f5d42b1fe703d"
   },
   "review_sources": [
     {

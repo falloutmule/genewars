@@ -4,6 +4,7 @@
 use genewars_assets::{B32Atlas, ConqFastPrefix, ConqMapCells, ConqMissionSource, Palette256, PaletteChannelMode};
 use genewars_core::cd_candidate::{camera_cells_for_target, plan_terrain_factor_raise_4096};
 use genewars_render::{terrain::TerrainFadeTable, terrain_view::{render_full_terrain_view, render_initial_terrain_view, compose_left_panel}, RgbImage};
+use genewars_render::{PlantFrame, PlantColorInputs, draw_normal_plant, terrain_modes::MainGlaTable};
 use std::{env, fs, io::{Read, Write}, num::NonZeroU32, path::{Path, PathBuf}, process, sync::Arc};
 use softbuffer::{Context, Surface};
 use winit::{application::ApplicationHandler, dpi::PhysicalSize,
@@ -53,6 +54,21 @@ struct Resources {
     fade: Vec<u8>,
     palette: Palette256,
     panel: Option<Vec<u8>>,
+    plant: Option<SelectedPlant>,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum PlantShade { Source, Sampled }
+impl PlantShade {
+    fn name(self) -> &'static str { match self { Self::Source => "source", Self::Sampled => "sampled" } }
+}
+
+struct PlantSelection { directory: PathBuf, record: usize, shade: PlantShade }
+struct SelectedPlant {
+    frame: PlantFrame,
+    fields: genewars_assets::MissionFamily1SpriteFields,
+    shade: PlantShade,
+    gla: Vec<u8>,
 }
 
 impl Resources {
@@ -64,7 +80,7 @@ impl Resources {
         Ok(bytes)
     }
 
-    fn open(dir: &Path, layout: Layout) -> Result<Self, String> {
+    fn open(dir: &Path, layout: Layout, selection: Option<&PlantSelection>) -> Result<Self, String> {
         let mission = Self::read(&dir.join("CONQ001.DAT"))?;
         let atlas = Self::read(&dir.join("B32A.DAT"))?;
         let fade = Self::read(&dir.join("FADE.DAT"))?;
@@ -82,7 +98,23 @@ impl Resources {
             if data.len() != 128 * 480 { return Err("GENEPANL.DAT must contain61440 decoded indices".into()); }
             Some(data)
         } else { None };
-        Ok(Self { mission, atlas, fade, palette, panel })
+        let plant = if let Some(selection) = selection {
+            if layout != Layout::InitialGenePanel { return Err("selected plant requires initial-genepanl layout".into()); }
+            let source = ConqMissionSource::parse(&mission).map_err(|e| e.to_string())?;
+            let fields = source.family1_sprite_fields(selection.record).map_err(|e| e.to_string())?;
+            if source.group(1).map_err(|e| e.to_string())?.raw_byte_6(selection.record).map_err(|e| e.to_string())? == 0 {
+                return Err("selected plant source record has zero byte6".into());
+            }
+            let slot = fields.signed_resource_selector;
+            if !(0..12).contains(&slot) { return Err("plant signed resource selector must be0..11".into()); }
+            let data = Self::read(&selection.directory.join(format!("slot-{slot:02}.anb")))?;
+            let frame = PlantFrame::parse_indexed8(&data, fields.animation_selector, fields.frame_selector)
+                .map_err(|e| e.to_string())?;
+            let gla = Self::read(&dir.join("MAIN.GLA"))?;
+            MainGlaTable::parse(&gla).map_err(|e| e.to_string())?;
+            Some(SelectedPlant { frame, fields, shade: selection.shade, gla })
+        } else { None };
+        Ok(Self { mission, atlas, fade, palette, panel, plant })
     }
 
     fn snapshot(&self, target: [i16; 2], policy: Policy) -> Result<(RgbImage, [u16; 2], [u16; 2], usize, usize), String> {
@@ -108,6 +140,22 @@ impl Resources {
             render_full_terrain_view(&cells, camera.map(i32::from), &self.atlas, &fade, None, 0)?
         };
         if let Some(panel) = &self.panel { compose_left_panel(&mut rendered, panel)?; }
+        if let Some(plant) = &self.plant {
+            let fields = plant.fields;
+            let position = fields.signed_position_words;
+            let origin = genewars_core::cd_candidate::entity_view_position(&map, position, raw_camera, 128)
+                .map_err(|e| e.to_string())?;
+            let shade = match plant.shade {
+                PlantShade::Source => fields.shade_at_17,
+                PlantShade::Sampled => genewars_core::cd_candidate::interpolate_entity_shade(&map, position[0], position[1])
+                    .map_err(|e| e.to_string())?,
+            };
+            let gla = MainGlaTable::parse(&plant.gla).map_err(|e| e.to_string())?;
+            draw_normal_plant(&plant.frame, &mut rendered.indices[128..], [512, 480], 640, origin,
+                PlantColorInputs { context_flags_at_16e0c4: 0, entity_flags_at_15: fields.flags_at_15,
+                    native_flags_at_2e: fields.native_flags_at_2e, shade_at_17: shade }, Some(&fade), &gla)
+                .map_err(|e| e.to_string())?;
+        }
         let mut rgb = Vec::with_capacity(WIDTH * HEIGHT * 3);
         for &index in &rendered.indices {
             let [r, g, b] = self.palette.entries()[usize::from(index)];
@@ -180,7 +228,10 @@ impl TerrainWindow {
         let Some(path) = &self.report_path else { return Ok(()); };
         let states = self.history.iter().map(|s| format!("{{\"target\":[{},{}],\"policy\":\"{}\"}}", s.target[0], s.target[1], s.policy.name())).collect::<Vec<_>>().join(",");
         let player = self.source_player.map(|v| v.to_string()).unwrap_or_else(|| "null".to_owned());
-        let report = format!("{{\"width\":640,\"height\":480,\"presented_frames\":{},\"exit_reason\":\"{}\",\"final_target\":[{},{}],\"camera_words\":[{},{}],\"view_camera_cells\":[{},{}],\"final_policy\":\"{}\",\"pairs\":{},\"pixels_written\":{},\"state_history\":[{}],\"history_truncated\":{},\"layout\":\"{}\",\"initial_source_player\":{player},\"original_initial_panel_inferred\":false,\"live_callbacks_applied\":false}}\n",
+        let plant = self.resources.plant.as_ref().map(|p| format!("{{\"record\":{},\"slot\":{},\"shade_policy\":\"{}\",\"selection_policy\":\"explicit-single-source-record\",\"live_visibility_inferred\":false,\"live_order_inferred\":false}}",
+            p.fields.record_index, p.fields.signed_resource_selector, p.shade.name())).unwrap_or_else(|| "null".to_owned());
+        let rgb_crc16 = genewars_assets::crc16_rnc(self.image.rgb_bytes());
+        let report = format!("{{\"width\":640,\"height\":480,\"presented_frames\":{},\"exit_reason\":\"{}\",\"final_target\":[{},{}],\"camera_words\":[{},{}],\"view_camera_cells\":[{},{}],\"final_policy\":\"{}\",\"pairs\":{},\"pixels_written\":{},\"state_history\":[{}],\"history_truncated\":{},\"layout\":\"{}\",\"initial_source_player\":{player},\"plant\":{plant},\"rgb_crc16\":{rgb_crc16},\"original_initial_panel_inferred\":false,\"live_callbacks_applied\":false}}\n",
             self.frames, self.reason, self.state.target[0], self.state.target[1], self.raw_camera[0], self.raw_camera[1], self.camera[0], self.camera[1], self.state.policy.name(), self.pairs, self.pixels_written, states, self.history.len() >= 1024, self.layout.name());
         let mut file = fs::OpenOptions::new().write(true).create_new(true).open(path)
             .map_err(|e| format!("refusing to overwrite or unable to create {}: {e}", path.display()))?;
@@ -233,15 +284,31 @@ impl ApplicationHandler for TerrainWindow {
 struct Options {
     dir: PathBuf, target: TargetInput, policy: Policy, frames: Option<u64>,
     report: Option<PathBuf>, layout: Layout,
+    plant: Option<PlantSelection>,
 }
 
 fn parse_args_from(args: &[String]) -> Result<Options, String> {
-    if args.len() < 5 { return Err("usage: genewars-terrain DECODED_RESOURCE_DIR (--target X Y | --source-player0..3) --policy raw|raise4096 [--layout full|initial-genepanl] [--frames N] [--report NEW_JSON]".into()); }
+    if args.len() < 5 { return Err("usage: genewars-terrain DECODED_RESOURCE_DIR (--target X Y | --source-player0..3) --policy raw|raise4096 [--layout full|initial-genepanl] [--plant-record INDEX --plant-resources DIR --plant-shade source|sampled] [--frames N] [--report NEW_JSON]".into()); }
     let dir = PathBuf::from(&args[0]);
     let (mut target, mut policy, mut frames, mut report, mut layout) = (None, None, None, None, None);
+    let (mut plant_record, mut plant_dir, mut plant_shade) = (None, None, None);
     let mut i = 1;
     while i < args.len() {
         match args[i].as_str() {
+            "--plant-record" if plant_record.is_none() && i + 1 < args.len() => {
+                let record: usize = args[i + 1].parse().map_err(|_| "plant record must be0..511")?;
+                if record >= 512 { return Err("plant record must be0..511".into()); }
+                plant_record = Some(record); i += 2;
+            }
+            "--plant-resources" if plant_dir.is_none() && i + 1 < args.len() => {
+                plant_dir = Some(PathBuf::from(&args[i + 1])); i += 2;
+            }
+            "--plant-shade" if plant_shade.is_none() && i + 1 < args.len() => {
+                plant_shade = Some(match args[i + 1].as_str() {
+                    "source" => PlantShade::Source, "sampled" => PlantShade::Sampled,
+                    _ => return Err("plant shade policy must be source or sampled".into()),
+                }); i += 2;
+            }
             "--target" if target.is_none() && i + 2 < args.len() => {
                 target = Some(TargetInput::Explicit([args[i + 1].parse().map_err(|_| "target X must be signed16")?, args[i + 2].parse().map_err(|_| "target Y must be signed16")?])); i += 3;
             }
@@ -265,8 +332,15 @@ fn parse_args_from(args: &[String]) -> Result<Options, String> {
             option => return Err(format!("unknown, duplicate or incomplete option: {option}")),
         }
     }
+    let layout = layout.unwrap_or(Layout::Full);
+    let plant = match (plant_record, plant_dir, plant_shade) {
+        (None, None, None) => None,
+        (Some(record), Some(directory), Some(shade)) if layout == Layout::InitialGenePanel =>
+            Some(PlantSelection { directory, record, shade }),
+        _ => return Err("plant selection requires --plant-record, --plant-resources, --plant-shade and --layout initial-genepanl".into()),
+    };
     Ok(Options { dir, target: target.ok_or("--target or --source-player is required")?,
-        policy: policy.ok_or("--policy is required")?, frames, report, layout: layout.unwrap_or(Layout::Full) })
+        policy: policy.ok_or("--policy is required")?, frames, report, layout, plant })
 }
 
 fn parse_args() -> Result<Options, String> {
@@ -276,7 +350,7 @@ fn parse_args() -> Result<Options, String> {
 
 fn run() -> Result<(), String> {
     let options = parse_args()?;
-    let resources = Resources::open(&options.dir, options.layout)?;
+    let resources = Resources::open(&options.dir, options.layout, options.plant.as_ref())?;
     let (target, source_player) = match options.target {
         TargetInput::Explicit(target) => (target, None),
         TargetInput::SourcePlayer(player) => {
@@ -336,6 +410,23 @@ mod tests {
             assert!(parse_args_from(&values).is_err());
         }
         assert!(parse_args_from(&args(&["assets", "--target", "0", "0", "--source-player", "0", "--policy", "raw"])).is_err());
+    }
+
+    #[test]
+    fn plant_selection_requires_all_inputs_and_the_offset_viewport() {
+        let base = args(&["assets", "--source-player", "0", "--policy", "raw", "--layout", "initial-genepanl"]);
+        let mut valid = base.clone();
+        valid.extend(args(&["--plant-record", "29", "--plant-resources", "plants", "--plant-shade", "sampled"]));
+        let selection = parse_args_from(&valid).unwrap().plant.unwrap();
+        assert_eq!((selection.record, selection.shade), (29, PlantShade::Sampled));
+        assert_eq!(selection.directory, PathBuf::from("plants"));
+        for tail in [vec!["--plant-record", "29"], vec!["--plant-record", "512"],
+                     vec!["--plant-record", "-1"], vec!["--plant-shade", "guessed"]] {
+            let mut invalid = base.clone(); invalid.extend(args(&tail));
+            assert!(parse_args_from(&invalid).is_err());
+        }
+        let mut full = valid; full[6] = "full".to_owned();
+        assert!(parse_args_from(&full).is_err());
     }
 
     #[test]

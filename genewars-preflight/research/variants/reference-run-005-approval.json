@@ -1,0 +1,13 @@
+{
+  "run_id": "run-005",
+  "approved": true,
+  "human_statement": "Continue where you left off. Full access is enabled now\u2014retry the approved reference session, then keep implementing and testing GeneWars. I\u2019ll be unavailable. re run what ever you need too. stop asking permission",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "generated_config_sha256": "ff0c1921640bb81cd0b73fc4a995316ea9ff1b8d60ed288e5d52a1be4e7c0d5f",
+  "scope": "One root-supervised <=1200-host-second exact CD GW.EXE/DOS4GW session with unchanged generated config.ini and19 English aliases. New mouse diagnostic: mouse_emulation=never, raw_mouse_input=false, autolock=false. Observe menu/first mission and optional save/reload. No installer, patch, alternate variant, networking, upload, or global changes.",
+  "note": "Records existing user authorization. Does not claim approval was newly requested.",
+  "flattened_text_sha256": "23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786",
+  "runtime_aliases_sha256": "55c352cd19e90344f4c07c97b3dc65b70c437ae763a6555c78b42d869ca3f0f6",
+  "recorded_utc": "2026-10-13T08:46:35.331125+00:00",
+  "authorization_source": "Direct user statement in this conversation; necessary scoped reruns are already authorized."
+}

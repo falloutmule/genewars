@@ -1,0 +1,267 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/mouse-callback-refs/instructions-000a3164.txt",
+      "sha256": "e729db9adf2b94e567e1936e02affd0bb1affd69cd0392ea22c8fd210f466eff"
+    },
+    {
+      "private_path": "private/ghidra/mouse-callback/instructions-000a3524.txt",
+      "sha256": "f34144576fdb8a7fbed0be241831487c9e2ccc0212f46fbbcea4fc672c2933e2"
+    },
+    {
+      "private_path": "private/ghidra/mouse-motion/instructions-000a710c.txt",
+      "sha256": "59495f198e93997d5827018316c879e7e87473a738e54fa2f69fdf9c9708cbe7"
+    },
+    {
+      "private_path": "private/ghidra/mouse-callback-refs/instructions-000a3118.txt",
+      "sha256": "2ae37892154415da6952feaded3a384cc0ae6e881c8c6c66015ee9db48bea9d1"
+    },
+    {
+      "private_path": "private/ghidra/mouse-callback-refs/instructions-000a3458.txt",
+      "sha256": "941ef9fe5edd6aa5caa3b3f2a15a6538a40acb60d06677c4bb5c0e1b400e2fc9"
+    },
+    {
+      "private_path": "private/ghidra/mouse-motion/instructions-000a340c.txt",
+      "sha256": "c7eeaf50bce5d28f3a2944ae3a622d67dc603fa0aa8df19dde92a494c0e1955d"
+    },
+    {
+      "private_path": "private/ghidra/mouse-motion/instructions-000a3884.txt",
+      "sha256": "4e8cfea4bbb60ea36d308553a2dc5d776223b7c609bf875f66c9d6aa2fd8b11c"
+    },
+    {
+      "private_path": "private/ghidra/mouse-motion-refs/instructions-000a2ed4.txt",
+      "sha256": "623c6ca11064cedf752f981623428addb13ca7844b9bf70b5596ecde3dee9014"
+    },
+    {
+      "private_path": "private/ghidra/packet-fields/instructions-00070e40.txt",
+      "sha256": "d9e28b4cd2565e951d112522fde407f6186667f3e7f3840837f0619304ddc83d"
+    },
+    {
+      "private_path": "private/ghidra/mouse-motion/instructions-00013b10.txt",
+      "sha256": "4b43d38b3c52a33bc5cffdc7702fa7267ffca19f8d95a6843c38f9448103a397"
+    },
+    {
+      "private_path": "private/ghidra/mouse-motion/instructions-00023a80.txt",
+      "sha256": "0488c3e07dfb0c64666419a80751c3c93ebb1c66f44a562f00cf56b85700a3d7"
+    },
+    {
+      "private_path": "private/ghidra/mouse-motion/instructions-00024200.txt",
+      "sha256": "e3be474965ba87a316e24857ebc834a8cf6e2ba6a9b1c671017ef3c2ce925b2e"
+    },
+    {
+      "private_path": "private/ghidra/input-scheduling/instructions-00070b00.txt",
+      "sha256": "3e0ae3e530d45f9dfe5a66fdd3669d532cc428f04ba769bae00d9b24bbdc84eb"
+    },
+    {
+      "private_path": "private/ghidra/ui-input/instructions-000a87d0.txt",
+      "sha256": "1fe8f247f251c7b1a5a333b71d830d93ddca2feb1f6d557448894131510afd58"
+    },
+    {
+      "private_path": "private/ghidra/mouse-motion/keyboard-irq.txt",
+      "sha256": "3cc3a03acc0af8f3cd0cfb5ce3229128b291b097c1a483df0a8dde541578197a"
+    }
+  ],
+  "registration": "A3164 registers INT33 function0C,mask007F,callbackA3524. A710C changesDSonly; incomingSI/DI remainavailable.",
+  "absolute_vs_relative": "Callbackmovement consumes SI/DI words, not CX/DX absolute coordinates. Copiesoldcounterwords, storesnewSI/DI, subtractssignextendedpreviousfromsignextendedcurrent independently. No16-bitwrap correction inthat subtraction.",
+  "axis_formula": "For sensitivity1..63 and remainder0..s-1: (delta, new_remainder)=divmod(current_i16-previous_i16+remainder,s), floor division/nonnegative remainder. Difference computed in signed32. Current andprevious eachsigned16.",
+  "gates": "active19D31C nonzero andeventmask01 required for countermovement. Immediateadditiontoowncursor19CF9C/A0 onlywhen19F350==0 and19D220==0. Newcounters/deltas stillstoredbeforeimmediategates. A2ED4 canlaterapplypending19F35C/360 deltas when19F364set, thenclamps/resets; do notinfer permanentfreezefromimmediategatealone.",
+  "software_cursor": "InitializationA3458 setsownpositiontohalfofdisplaywidth/height (320,240for640x480), withoutDOSfunction4positioncall. A340Csetsownclamporigin0,size640x480; A3884clamps0..639/0..479. Packet70E40copiesowncurrentlowwords. Buttons latchownpositions, notincomingCX/DX.",
+  "hypothesis": "If hostabsoluteeventschangeCX/DXorbuttonsbutleaveSI/DI unchanged, owncursorremainsatsoftwarecenter whilebuttonlatcheswork. This is a static conditionalexplanation; actualDOSBox/hostcallbackregistervaluesnotobservedyet.",
+  "options_keyboard": "Module18653C:vtable112838+8=13B10->24200. Optionsinitializationsetseditingindex+126=-1; handlerusesmousemanagerA87D0. ControlID9branch245B6restorespreviousmodulefromobject+9. No standaloneEscapeexitbranch inOptionshandler/mousemanager. Global70B00 dispatchesevent19D0E4only10,19,23,4A; event01falls throughandclears. Activeeditfield157A0hasseparatekeyboardbehavior, outsideclaim.",
+  "keyboard_input_source": "IRQrangeA6B44 readsport60andstoresrawbyte19D0E4; options Escape non-exit alone doesnotprove missingkeyboarddelivery.",
+  "interface_documentation": {
+    "url": "https://raw.githubusercontent.com/FDOS/mouse/master/int33.lst",
+    "checked": "INT33 function0C receivesAXcondition,BXbuttonstate,CX/DXcursorposition,SI/DI mickeycounts; mask0movement,1/2leftedges. No documentation codecopied."
+  },
+  "axis_cases": 516096,
+  "vectors": [
+    {
+      "event_mask": 1,
+      "absolute_cx_dx": [
+        10,
+        20
+      ],
+      "signed_si_di": [
+        0,
+        0
+      ],
+      "immediate_inhibition": false,
+      "output": {
+        "position": [
+          320,
+          240
+        ],
+        "previous": [
+          0,
+          0
+        ],
+        "remainder": [
+          0,
+          0
+        ],
+        "delta": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "event_mask": 1,
+      "absolute_cx_dx": [
+        600,
+        400
+      ],
+      "signed_si_di": [
+        0,
+        0
+      ],
+      "immediate_inhibition": false,
+      "output": {
+        "position": [
+          320,
+          240
+        ],
+        "previous": [
+          0,
+          0
+        ],
+        "remainder": [
+          0,
+          0
+        ],
+        "delta": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "event_mask": 2,
+      "absolute_cx_dx": [
+        10,
+        20
+      ],
+      "signed_si_di": [
+        0,
+        0
+      ],
+      "immediate_inhibition": false,
+      "output": {
+        "position": [
+          320,
+          240
+        ],
+        "previous": [
+          0,
+          0
+        ],
+        "remainder": [
+          0,
+          0
+        ],
+        "delta": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "event_mask": 3,
+      "absolute_cx_dx": [
+        10,
+        20
+      ],
+      "signed_si_di": [
+        40,
+        -20
+      ],
+      "immediate_inhibition": false,
+      "output": {
+        "position": [
+          360,
+          220
+        ],
+        "previous": [
+          40,
+          -20
+        ],
+        "remainder": [
+          0,
+          0
+        ],
+        "delta": [
+          40,
+          -20
+        ]
+      }
+    },
+    {
+      "event_mask": 1,
+      "absolute_cx_dx": [
+        320,
+        240
+      ],
+      "signed_si_di": [
+        400,
+        400
+      ],
+      "immediate_inhibition": false,
+      "output": {
+        "position": [
+          639,
+          479
+        ],
+        "previous": [
+          400,
+          400
+        ],
+        "remainder": [
+          0,
+          0
+        ],
+        "delta": [
+          400,
+          400
+        ]
+      }
+    },
+    {
+      "event_mask": 1,
+      "absolute_cx_dx": [
+        320,
+        240
+      ],
+      "signed_si_di": [
+        40,
+        -20
+      ],
+      "immediate_inhibition": true,
+      "output": {
+        "position": [
+          320,
+          240
+        ],
+        "previous": [
+          40,
+          -20
+        ],
+        "remainder": [
+          0,
+          0
+        ],
+        "delta": [
+          40,
+          -20
+        ]
+      }
+    }
+  ],
+  "next_probe": "IndependentemptyDOSprogram: callbackregistration0C/007F; logAX,BX,CX,DX,SI,DI andsequenceinmemoryonlyduringcallback; outputafterunregister. Comparehostabsoluteinjectionversusrelative/capturedmovement. NoINT330Bpollingduringcapture, nooriginalassets/exe.",
+  "limits": [
+    "Actualemulatormotionpathnotdiagnoseduntilregisterloggerreceipt.",
+    "No claimallmouseinhibitionstatescurrentlyzero.",
+    "Originalasyncinterrupt/foregroundracesnotmodeled.",
+    "StandaloneOptionsEscapeconclusionexcludesactivefieldediting/modalUI."
+  ]
+}

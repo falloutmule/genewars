@@ -1,0 +1,142 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/terrain-constructor/instructions-0008db90.txt",
+      "sha256": "b68c2cedc7bf7904a58293c448423f5408f65061548769d78245f5961f0a7c8c"
+    },
+    {
+      "private_path": "private/ghidra/entity-shadow-panel/instructions-0002b7e0.txt",
+      "sha256": "aa968be1655cb0a96d153c2d8fca757cbef5848dafb53968acb3b0c7b57b37bd"
+    },
+    {
+      "private_path": "private/ghidra/panel-activation-extra/instructions-000252b0.txt",
+      "sha256": "c9b3a27b019ad54a2efddbffebd5f515002622cb81ec9d47606c7fd7fc9e12ef"
+    },
+    {
+      "private_path": "private/ghidra/panel-activation-extra/instructions-00021940.txt",
+      "sha256": "deed72fbce96acda55cb17f2f1515f8d0c33dc119d739b6b009184e6da77b812"
+    },
+    {
+      "private_path": "private/ghidra/terrain-camera-refs/instructions-0007d090.txt",
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    },
+    {
+      "private_path": "private/ghidra/module-transition-refs/instructions-0001bbc0.txt",
+      "sha256": "0fb22c2e71579e6128d50664eb5f40c886a0ed3e327b19b9f0fdfed330db28fb"
+    },
+    {
+      "private_path": "private/ghidra/panel-activation-refs/range-30110.txt",
+      "sha256": "38656b0d05b4914be85c9ea214277946a213ea6b9a19fd9ffb85366efa724047"
+    },
+    {
+      "private_path": "private/ghidra/entity-order/instructions-0002bbe0.txt",
+      "sha256": "22f6962e80bfdcbb6dd4c8b03adb98963b3dd4f4d87d213f0961381d81835283"
+    },
+    {
+      "private_path": "private/ghidra/terrain-viewport-refs/instructions-00025150.txt",
+      "sha256": "1158f06e7360f1962222bba54a906dfaa217e814dc41f5d4fcb362cd2cc6818a"
+    },
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-00024770.txt",
+      "sha256": "dd59f4f3b8fc7a3cffbd69473a05c96feb80954bec0752792d5c1c673ae9bbcb"
+    },
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-00024ad0.txt",
+      "sha256": "fa373332d2ada300d5b3a7492ff0de48d2b1ab7f7c52037ca9edcb77f5e4fc70"
+    }
+  ],
+  "transition": "7D090 setsnextmodule116978=1863A2.1BBC0 calls[module+7].vtable0; ctorbinds11257C->30120, thunksubtractsbackadjust5A6 andjumps2BBE0withobject185DFC.2BBE0setsactive116974=1863A2. Transitive252B0 preservesEAX (onlyADD19/SUB19pair), substantiatingctorroot+530andmodulebackslotwrites.",
+  "condition": "object185DFC+C8 mustbeNULL; campaignflags118770mask20set; selectedplayer signedbyte+6E7<4. Underthesegates defaultchild selectedregardlessprior module or11AC22. This isconditional startup proof, notuniversalfirstpanel.",
+  "binding": {
+    "object": "0x185dfc",
+    "module": "0x1863a2",
+    "default_child": "0x185ec8",
+    "default_child_descriptor": "0x111f04",
+    "descriptor_delta": 12,
+    "active_panel": "0x185ed4",
+    "selector_signed_byte": 0,
+    "name_table": "0x105604",
+    "runtime_name": "data/mainpanl.dat",
+    "loader": "0x24770",
+    "activation": "0x25150",
+    "buffer_bytes": 61440,
+    "width": 128,
+    "height": 480,
+    "source_pitch": 128,
+    "destination_pitch_gate": 640,
+    "palette_reference": "renderer-evidence.json MAIN.PAL binding"
+  },
+  "resource": {
+    "entry_id": "root/2/disc/110",
+    "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/MAINPANL.DAT;1",
+    "input_size": 17203,
+    "input_sha256": "18712cbeb0bbe1990b307dc1650a5b054e511afc2597b71c598407a29664ea95",
+    "decoded_size": 61440,
+    "decoded_sha256": "4018df75dfed846618c2a591de7526d7d9941f127413495c99312058e163838a",
+    "hash_identical_aliases": [
+      {
+        "entry_id": "root/1/280",
+        "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version (1).zip!/Gene_Wars_RePack/DATA/MAINPANL.DAT"
+      },
+      {
+        "entry_id": "root/4/141",
+        "path": "genewars.zip!/Genewars_DOS_EN_RIP-Version.zip!/DATA/MAINPANL.DAT"
+      },
+      {
+        "entry_id": "root/2/disc/110",
+        "path": "genewars.zip!/Genewars_DOS_EN_ISO-Version.7z!/Gene_Wars_ISO/GENEWARS.img!/GAME/DATA/MAINPANL.DAT;1"
+      }
+    ]
+  },
+  "truth_cases": 4096,
+  "vectors": [
+    {
+      "child_active": false,
+      "special_old": true,
+      "pending": false,
+      "campaign": true,
+      "progress_i8": 0,
+      "selection": "default-MAINPANL"
+    },
+    {
+      "child_active": false,
+      "special_old": true,
+      "pending": false,
+      "campaign": true,
+      "progress_i8": 3,
+      "selection": "default-MAINPANL"
+    },
+    {
+      "child_active": false,
+      "special_old": true,
+      "pending": false,
+      "campaign": true,
+      "progress_i8": 4,
+      "selection": "alternate-child"
+    },
+    {
+      "child_active": false,
+      "special_old": false,
+      "pending": false,
+      "campaign": false,
+      "progress_i8": 4,
+      "selection": "default-MAINPANL"
+    },
+    {
+      "child_active": true,
+      "special_old": true,
+      "pending": false,
+      "campaign": true,
+      "progress_i8": 0,
+      "selection": "preserve-existing-child"
+    }
+  ],
+  "limits": [
+    "R+C8 null is a runtime gate, not inferred merely fromrawCONQ source.",
+    "Selectedplayer/progress andfirstmissiongates remainexplicit.",
+    "7D090 clearsglobal185EC4ononeentrybranch; itdoesnotclearR+C8.",
+    "GENEPANL remains a validexplicitdiagnostic but is notthisconditionaldefaultpanel.",
+    "Panelartonly; dynamicallydrawn controls/entities overlays separately."
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "status": "corroborated-conditional-default-MAINPANL",
+  "utc": "2026-10-13T09:12:04.679764+00:00",
+  "original_execution": false,
+  "evidence": {
+    "path": "research/ghidra/initial-panel-evidence.json",
+    "size": 5592,
+    "sha256": "4e4889fa7069a519ae2044daa1900da175df069f0d345e91adce472033fbd2da"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/terrain-constructor/instructions-0008db90.txt",
+      "size": 4282,
+      "sha256": "b68c2cedc7bf7904a58293c448423f5408f65061548769d78245f5961f0a7c8c"
+    },
+    {
+      "path": "private/ghidra/entity-shadow-panel/instructions-0002b7e0.txt",
+      "size": 6921,
+      "sha256": "aa968be1655cb0a96d153c2d8fca757cbef5848dafb53968acb3b0c7b57b37bd"
+    },
+    {
+      "path": "private/ghidra/panel-activation-extra/instructions-000252b0.txt",
+      "size": 1102,
+      "sha256": "c9b3a27b019ad54a2efddbffebd5f515002622cb81ec9d47606c7fd7fc9e12ef"
+    },
+    {
+      "path": "private/ghidra/panel-activation-extra/instructions-00021940.txt",
+      "size": 1814,
+      "sha256": "deed72fbce96acda55cb17f2f1515f8d0c33dc119d739b6b009184e6da77b812"
+    },
+    {
+      "path": "private/ghidra/terrain-camera-refs/instructions-0007d090.txt",
+      "size": 14585,
+      "sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac"
+    },
+    {
+      "path": "private/ghidra/module-transition-refs/instructions-0001bbc0.txt",
+      "size": 3633,
+      "sha256": "0fb22c2e71579e6128d50664eb5f40c886a0ed3e327b19b9f0fdfed330db28fb"
+    },
+    {
+      "path": "private/ghidra/panel-activation-refs/range-30110.txt",
+      "size": 132,
+      "sha256": "38656b0d05b4914be85c9ea214277946a213ea6b9a19fd9ffb85366efa724047"
+    },
+    {
+      "path": "private/ghidra/entity-order/instructions-0002bbe0.txt",
+      "size": 9461,
+      "sha256": "22f6962e80bfdcbb6dd4c8b03adb98963b3dd4f4d87d213f0961381d81835283"
+    },
+    {
+      "path": "private/ghidra/terrain-viewport-refs/instructions-00025150.txt",
+      "size": 2297,
+      "sha256": "1158f06e7360f1962222bba54a906dfaa217e814dc41f5d4fcb362cd2cc6818a"
+    },
+    {
+      "path": "private/ghidra/display-geometry/instructions-00024770.txt",
+      "size": 1888,
+      "sha256": "dd59f4f3b8fc7a3cffbd69473a05c96feb80954bec0752792d5c1c673ae9bbcb"
+    },
+    {
+      "path": "private/ghidra/display-geometry/instructions-00024ad0.txt",
+      "size": 713,
+      "sha256": "fa373332d2ada300d5b3a7492ff0de48d2b1ab7f7c52037ca9edcb77f5e4fc70"
+    }
+  ],
+  "constructor_root_relative_offsets": [
+    204,
+    226,
+    377,
+    403,
+    452,
+    496,
+    671,
+    1328
+  ],
+  "branch_cases": 2752512,
+  "default_cases": 1278976,
+  "alternate_cases": 97280,
+  "preserved_cases": 1376256,
+  "module": 1598370,
+  "root_object": 1596924,
+  "default_child": 1597128,
+  "active_panel": 1597140,
+  "selector": 0,
+  "resource_input": {
+    "path": "private/reference-run/run-004/drive-c/GAME/DATA/MAINPANL.DAT",
+    "size": 17203,
+    "sha256": "18712cbeb0bbe1990b307dc1650a5b054e511afc2597b71c598407a29664ea95"
+  },
+  "resource_decoded": {
+    "path": "private/integration/rnc-decoded/18712cbeb0bbe1990b307dc1650a5b054e511afc2597b71c598407a29664ea95.bin",
+    "size": 61440,
+    "sha256": "4018df75dfed846618c2a591de7526d7d9941f127413495c99312058e163838a"
+  },
+  "required_runtime_gates": [
+    "Actual module transition requests1863A2 and enters2BBE0",
+    "R+C8 null at conditional initializer",
+    "Campaign bit20 set",
+    "Selected player progress signed byte below4",
+    "Successful panel resource load or valid selector0 cache; inherited initialized640destinationpitch"
+  ],
+  "unresolved": [
+    "Null R+C8 not established solely by raw CONQ001 bytes",
+    "Retained selected-player progress is live state, not inferred from raw zero",
+    "No universal initial active panel, later panel selection or dynamic controls claim"
+  ]
+}

@@ -143,22 +143,22 @@ def main():
             raise SystemExit('Unexpected preexisting gate/marker: refusing launch.')
         yield_helper = None
         yield_proof = None
-        if SESSION in ('run-003','run-004'):
+        if SESSION in ('run-003','run-004','run-005'):
             from input_free_yield import CODE, verified_probe
             yield_proof = verified_probe(ROOT)
             helper = checked(RUN / 'drive-c/YIELD.COM', RUN)
             with helper.open('xb') as stream:
                 stream.write(CODE)
             yield_helper = file_record(helper)
-        batch = gate_batch(token, original=True, yielding=SESSION in ('run-003','run-004'))
+        batch = gate_batch(token, original=True, yielding=SESSION in ('run-003','run-004','run-005'))
         with checked(gate, RUN).open('xb') as stream:
             stream.write(batch)
         # Original GW stays behind the host marker. Run003 adds one read-only
         # query to prove its sole changed mouse setting in the startup log.
         startup_commands = commands[:5]
-        if SESSION in ('run-003','run-004'):
+        if SESSION in ('run-003','run-004','run-005'):
             startup_commands += ['CONFIG -GET sdl "mouse_emulation"']
-        if SESSION == 'run-004':
+        if SESSION in ('run-004','run-005'):
             startup_commands += ['CONFIG -GET sdl "raw_mouse_input"']
         startup_commands += commands[5:7] + ['C:\\STARTGW.BAT']
         for dos_command in startup_commands:

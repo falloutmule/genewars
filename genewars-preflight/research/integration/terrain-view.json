@@ -1,9 +1,9 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T04:36:54.674955+00:00",
+  "checked_utc": "2026-10-13T09:04:40.095847+00:00",
   "frames": 14,
   "rgb_pixels_compared": 4300800,
-  "binary_sha256": "48c6ffe364c2c04aa3c93a64e0ab884ca007df47e59076ec549a09b014b921d4",
+  "binary_sha256": "0fd545306bb9dd2bab77d0212bec633c7618e68e1b5e369837cef2f706c14261",
   "records": [
     {
       "target": [
@@ -48,6 +48,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -55,7 +56,7 @@
       "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
       "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
       "transparent_overlay_samples": 0,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view--32768--32768-raw.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view--32768--32768-raw.bmp"
     },
     {
       "target": [
@@ -100,6 +101,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -107,7 +109,7 @@
       "index_sha256": "4fff85d5633fcf56c11d475c6104b2ed047e2bdf3a2b6860466e6c99111eb0eb",
       "bmp_sha256": "11b719ccb86d751ac907f4ed85dfe7c651066bf47533989bdbffa74759f7f67e",
       "transparent_overlay_samples": 0,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view--32768--32768-raise4096.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view--32768--32768-raise4096.bmp"
     },
     {
       "target": [
@@ -152,6 +154,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -159,7 +162,7 @@
       "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
       "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
       "transparent_overlay_samples": 0,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-10240-12800-raw.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-10240-12800-raw.bmp"
     },
     {
       "target": [
@@ -204,6 +207,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -211,7 +215,7 @@
       "index_sha256": "314bf6dd1c647197e2e56cd5780b250813c7b096a39318fdaf065bbcd310fc5d",
       "bmp_sha256": "eab3d904a9e7cc12d29e319a3590aaf4ef469b0bd33bd1cdd5b13b2a5734e7f2",
       "transparent_overlay_samples": 0,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-10240-12800-raise4096.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-10240-12800-raise4096.bmp"
     },
     {
       "target": [
@@ -256,6 +260,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -263,7 +268,7 @@
       "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
       "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
       "transparent_overlay_samples": 0,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-32767--1-raw.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-32767--1-raw.bmp"
     },
     {
       "target": [
@@ -308,6 +313,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -315,7 +321,7 @@
       "index_sha256": "a3778ebc988235af3be9faf2bc23ee8ed4c667361a63e25650f9d528ef8fd4e4",
       "bmp_sha256": "264d41fed011249b66dd591a9c2ba8b8f696af05b59004d47d4096b7e8806737",
       "transparent_overlay_samples": 0,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-32767--1-raise4096.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-32767--1-raise4096.bmp"
     },
     {
       "target": [
@@ -360,6 +366,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -367,7 +374,7 @@
       "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
       "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
       "transparent_overlay_samples": 0,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-12345-8317-raw.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-12345-8317-raw.bmp"
     },
     {
       "target": [
@@ -412,6 +419,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -419,7 +427,7 @@
       "index_sha256": "b273d30e1560c8fa28b2b382ee746702c5726ad9343158ad96a3dd97f973d7ae",
       "bmp_sha256": "e97aa8be9fa293d9e3301b3866a5a80dd1ae1cc05b61161ff2c34f5971c72ec6",
       "transparent_overlay_samples": 0,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-12345-8317-raise4096.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-12345-8317-raise4096.bmp"
     },
     {
       "target": [
@@ -464,6 +472,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -471,7 +480,7 @@
       "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
       "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
       "transparent_overlay_samples": 26679,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-19712-11008-raw.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-19712-11008-raw.bmp"
     },
     {
       "target": [
@@ -516,6 +525,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -523,7 +533,7 @@
       "index_sha256": "9016b5557cab28040f73aa6cb1f80bf544ed9fea826eac6a43adb2be7a2fc6d7",
       "bmp_sha256": "5a6eb6ec944d2912de13b3cdadce71841878fee3b5c4bdd1284e24a57465f980",
       "transparent_overlay_samples": 26679,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-19712-11008-raise4096.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-19712-11008-raise4096.bmp"
     },
     {
       "target": [
@@ -568,6 +578,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -575,7 +586,7 @@
       "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
       "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
       "transparent_overlay_samples": 24201,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-20992-11520-raw.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-20992-11520-raw.bmp"
     },
     {
       "target": [
@@ -620,6 +631,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -627,7 +639,7 @@
       "index_sha256": "1fc5ed566d02cf18fa60b2b9e46411198a62e0526bd7d1154eefe15a6d2d511a",
       "bmp_sha256": "00c7b946a2048f603a180ce5f54e205ccf90c1310dd3878cd33f6d3fd853b828",
       "transparent_overlay_samples": 24201,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-20992-11520-raise4096.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-20992-11520-raise4096.bmp"
     },
     {
       "target": [
@@ -672,6 +684,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -679,7 +692,7 @@
       "index_sha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
       "bmp_sha256": "a6ff748a2c1b386844bf8afd790540cf5f4642a1251d2958196f2b25ae413a12",
       "transparent_overlay_samples": 12848,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-19712-13056-raw.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-19712-13056-raw.bmp"
     },
     {
       "target": [
@@ -724,6 +737,7 @@
       "panel_policy": "none",
       "source_player": null,
       "dirty_requests": 0,
+      "plant": null,
       "entity_callbacks_applied": false,
       "gameplay": false,
       "initial_mission_state_inferred": false,
@@ -731,7 +745,7 @@
       "index_sha256": "7c4d21cb8c93c947479f47f9be358fb78460ad20d610fdae2e465b3b4cf54142",
       "bmp_sha256": "4f67d97951379622088cdaddef64d8967d227e7b817ba23e9884922955d9a8ee",
       "transparent_overlay_samples": 12848,
-      "private_bmp": "private/integration/terrain-views/e5d97b9682e3471d8e9909d423b5a92e/view-19712-13056-raise4096.bmp"
+      "private_bmp": "private/integration/terrain-views/1f312905c40d4a60ae83d67e38a7abe8/view-19712-13056-raise4096.bmp"
     }
   ],
   "input_rejections": 3,

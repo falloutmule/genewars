@@ -1,0 +1,107 @@
+{
+  "status": "observed-and-receipt-validated",
+  "utc": "2026-10-13T09:05:25.878624+00:00",
+  "original_execution": false,
+  "supervision": "Root used returned native window through Computer Use; one key then observation.",
+  "pid": 22980,
+  "actions": [
+    "Right",
+    "r",
+    "Left",
+    "r",
+    "Escape"
+  ],
+  "observed": "Plant and terrain shifted together; raw snapshot darkened the right view; returning target and raise4096 restored visible plant and terrain.",
+  "window": {
+    "path": "private/integration/plant-ui/run-001/window.json",
+    "size": 787,
+    "sha256": "370496b814758606553214ac328d330c1804c5643619bbc8a60b6a83d722816a"
+  },
+  "capture": {
+    "path": "private/integration/plant-ui/run-001/restored-view.jpg",
+    "size": 32414,
+    "sha256": "14aaa83c049f4ea24afc607d41a7fd8ea9fb63d8162685f4633d6dbf1e8b9adb"
+  },
+  "stdout": {
+    "path": "private/integration/plant-ui/run-001/stdout.txt",
+    "size": 215,
+    "sha256": "0e448c081913a9475c4c8f4bbc4c77c40c7643d1ad35959a2cf712cdba04a707"
+  },
+  "result": {
+    "width": 640,
+    "height": 480,
+    "presented_frames": 5,
+    "exit_reason": "escape",
+    "final_target": [
+      20736,
+      13568
+    ],
+    "camera_words": [
+      66,
+      48
+    ],
+    "view_camera_cells": [
+      66,
+      48
+    ],
+    "final_policy": "raise4096",
+    "pairs": 294,
+    "pixels_written": 248784,
+    "state_history": [
+      {
+        "target": [
+          20736,
+          13568
+        ],
+        "policy": "raise4096"
+      },
+      {
+        "target": [
+          20992,
+          13568
+        ],
+        "policy": "raise4096"
+      },
+      {
+        "target": [
+          20992,
+          13568
+        ],
+        "policy": "raw"
+      },
+      {
+        "target": [
+          20736,
+          13568
+        ],
+        "policy": "raw"
+      },
+      {
+        "target": [
+          20736,
+          13568
+        ],
+        "policy": "raise4096"
+      }
+    ],
+    "history_truncated": false,
+    "layout": "initial-genepanl",
+    "initial_source_player": 0,
+    "plant": {
+      "record": 29,
+      "slot": 0,
+      "shade_policy": "sampled",
+      "selection_policy": "explicit-single-source-record",
+      "live_visibility_inferred": false,
+      "live_order_inferred": false
+    },
+    "rgb_crc16": 59730,
+    "original_initial_panel_inferred": false,
+    "live_callbacks_applied": false
+  },
+  "limits": [
+    "Host-window capture, not original-game framebuffer",
+    "Binary hash at interactive launch was not recorded; current verifier builds and tests the native binary separately",
+    "Inspector navigation and explicit single-source-record rendering; no gameplay or live entity queue claim"
+  ]
+}

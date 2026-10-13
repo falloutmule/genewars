@@ -1,0 +1,12 @@
+{
+  "hypothesis": "Forced relative emulation in run003/004 conflicts with absolute host cursor injection. Test documented never setting while unlocked; success is untested.",
+  "source_sha256": "66bbeb5e435487ebd0d838e1985df7cc43f1c632154e6c73f397b6afb1efb005",
+  "source_path": "private/review/input-free-yield/src-ints-mouse.cpp",
+  "source_lines": [
+    928,
+    950
+  ],
+  "official_guide": "https://dosbox-x.com/wiki/Guide%3AMouse-support-in-DOSBox%E2%80%90X",
+  "config_sha256": "506802e42d08c46d77f176efcd0efab03cbf57e2b8fbe15f8242d0b9284a285b",
+  "original_execution": false
+}

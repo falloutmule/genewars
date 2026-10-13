@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "checkpoint_utc": "2026-10-13T09:17:49.548905+00:00",
+  "status": "implemented-reviewed-bounded-plant-and-queue",
+  "full_gate": {
+    "completed_utc": "2026-10-13T09:06:32.943375+00:00",
+    "checks": 95,
+    "rust_tests": 175,
+    "all_passed": true
+  },
+  "post_gate_followup": "Two Rust source files were normalized back to their original LF endings. Tools and terrain binaries were rebuilt, and validate_mission_plant_view.py passed21 frames/6451200 pixels, five invalid inputs, and a native3-frame comparison against those exact current binaries. Conditional panel review subsequently closed the constructor-return witness. Mouse-motion is an additional static proof; neither followup is claimed as part of the earlier95-check gate.",
+  "receipts": [
+    {
+      "path": "research/integration/verification.json",
+      "bytes": 133538,
+      "sha256": "54b7ed17838e090b82af581c1ae23a293120e82f32ddb17184d5ae34fd4b2b33"
+    },
+    {
+      "path": "research/integration/mission-plant-view.json",
+      "bytes": 47097,
+      "sha256": "c35823ca8a96b94a9ed5fa438f503b1b36961fb99bd04c08f97a946a49ad3570"
+    },
+    {
+      "path": "research/integration/plant-controls-observed.json",
+      "bytes": 2795,
+      "sha256": "453f23758c50cbd052de9e6bc792856e1e04481c1ab96bf504d72c37a3fbde36"
+    },
+    {
+      "path": "research/integration/plant-inputs.json",
+      "bytes": 6405,
+      "sha256": "144243afd566360bf6297e6ca305098379a44cf6ddf2ea458f0c6e42ec2a2f67"
+    },
+    {
+      "path": "research/variants/plant-passes-review.json",
+      "bytes": 8881,
+      "sha256": "07a6f17fdba4caba9ab12da8fda5b125f91bb9b06729785e80c04f666b79d3ac"
+    },
+    {
+      "path": "research/variants/entity-queue-review.json",
+      "bytes": 5319,
+      "sha256": "0b0c22dead7b4cc8303f672686d66ca6f48fe2e992a98aa4553313bb8a605d79"
+    },
+    {
+      "path": "research/variants/initial-panel-review.json",
+      "bytes": 3951,
+      "sha256": "b3986e3753c5dc47550f29872dbed8d7d06c21ca200a9988d8e9fa7eaae74a83"
+    },
+    {
+      "path": "research/variants/reference-run-005-result.json",
+      "bytes": 8460,
+      "sha256": "e4090727f9e2cf365de114e0ebb4571909d0fa8c134eeba141bcffed7534e4dd"
+    },
+    {
+      "path": "research/ghidra/mouse-motion-evidence.json",
+      "bytes": 8632,
+      "sha256": "07d17ede8eecf792fdd1ade72120a8057ed5495e45a372cffb7c34d9903927a9"
+    }
+  ],
+  "limits": [
+    "Explicit single source record is inspectable; complete mission initialization, callbacks and gameplay are not implemented.",
+    "Original run005 reached menus/options; cursor motion is unresolved and no mission or save was observed.",
+    "Empty mouse callback probe is prepared separately, not executed at this checkpoint."
+  ],
+  "original_archive_sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906"
+}

@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-mission-source-parser-review",
-  "checked_utc": "2026-10-13T04:38:04.196563+00:00",
+  "checked_utc": "2026-10-13T09:06:14.733974+00:00",
   "original_or_gui_execution": false,
   "real_sources": 5,
   "opaque_synthetic_sources": 3,
@@ -17,8 +17,8 @@
   "source_immutability": true,
   "source": {
     "path": "rust/crates/genewars-assets/src/mission_source.rs",
-    "size": 14883,
-    "sha256": "2191e76efaae8708ec373a123836d689eed95e939bdb5b5e469d20a3f1aa8077"
+    "size": 16806,
+    "sha256": "4c7d23930fb35483e7288af90845a28d64e3df228e7adaf2e5c7196c06ed313a"
   },
   "proof": {
     "path": "research/ghidra/mission-load-evidence.json",
@@ -392,8 +392,8 @@
   ],
   "harness": {
     "path": "private/review/mission-source/review.exe",
-    "size": 5111856,
-    "sha256": "523d35e27de94be1ad1c76fabcbabe22fb8018506a48ecbe1e8fdc06c569caf7"
+    "size": 5111862,
+    "sha256": "a55212857bd638c57f5dee40422e57dcedef7a0e6bdc79964c6f798964e56c69"
   },
   "review_sources": [
     {

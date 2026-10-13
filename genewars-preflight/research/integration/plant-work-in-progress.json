@@ -1,5 +1,5 @@
 {
-  "status": "work-in-progress-pending-independent-native-review",
+  "status": "integrated-and-independently-reviewed",
   "recorded_utc": "2026-10-13T08:35:30.623096+00:00",
   "last_complete_gate_commit": "9b9e56e",
   "last_complete_gate_checks": 86,
@@ -14,10 +14,10 @@
     "plant_shadow": "PASS4 pins,757 cached/stream comparisons,12 real GLA fixtures",
     "entity_shade": "PASS2 pins,458752 comparisons,42 vectors,40 source points"
   },
-  "independent_native_plant_review": "not run",
-  "plant_scene_integration": "not run",
-  "updated_aggregate_gate": "not run",
-  "worker_status": "All three active Sol/Luna agents returned usage-limit errors; no model substitution.",
+  "independent_native_plant_review": "passed;339594cases/26442504destinationbytes",
+  "plant_scene_integration": "passed;21frames/6451200pixels; explicitsingle-record inspector",
+  "updated_aggregate_gate": "passed;95checks/175Rusttests",
+  "worker_status": "Existing Sol/Luna lanes resumed successfully; transient same-model capacity errors recorded, no model substitution.",
   "root_repairs": [
     "Color destination validation uses the minimal addressed last-row extent for an offset viewport.",
     "Synthetic plant fixture separates six sprite data bytes from its table."
@@ -50,5 +50,8 @@
   ],
   "original_execution": false,
   "gameplay": false,
-  "public_upload": false
+  "public_upload": false,
+  "resumed_utc": "2026-10-13T09:08:05.149553+00:00",
+  "current_gate": "research/integration/verification.json",
+  "previous_receipt": "research/integration/plant-work-in-progress-20261013-before-resume.json"
 }
