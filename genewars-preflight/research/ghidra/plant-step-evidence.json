@@ -1,0 +1,524 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/entity-order/instructions-0006ca90.txt",
+      "sha256": "056c0c9a3cfab3cc4cfbfb15851895551fa672bb546f1e5f459f7a258315769b"
+    },
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-0006c780.txt",
+      "sha256": "462f1d606d4212d724b783dfe542df7cc6f8ea322cfd77e218ec26b72fc957d8"
+    }
+  ],
+  "scope": "Complete entity-field plan only for explicitly admitted no-RNG callback paths; not whole growth/reproduction/world tick.",
+  "input": "Active numeric-family1 type2; owner0..4; signed16 growth; u8 animation/flags15/flags2E/counter2F/retirement30; explicit parameter bytes, nine-cell neighbor sum, terrain delta, cell13 and liveplantcount0..512.",
+  "early_suppression": "flags15mask01 orflags2Emask10 ->AL0 and noentityfieldchanges; no finaldirtyflag logic.",
+  "counter": "Only positive starting growth increments counter2F withbytewrap. Check OLDcounter unsigned againstparameter1B. Old>=threshold orcell13==0 goesdirectsignedwordsubtract4 andskipsneighbors/period/RNG. Negative/zero startinggrowth preservescounter.",
+  "checked_growth": "Whenold<threshold andcell13>0, neighborbyte>crowdlimit1A sets growth0 and skipsperiod/RNG. Otherwise addsignedterrain delta withi16wrap/capupper32, then tests NEWcounter modulo unsignedperiod18. Period0 is originaldividefault and saferejected.",
+  "reproduction_boundary": "IfperioddividesNEWcounter and liveplantcount <412 forowner4 or<512 forowner0..3, thisplan rejects asneedsreproduction; do notsilentlysuppressspawn/RNG. At/aboveowner-specificcap, originalskipsRNG andthe parentfieldplan isadmitted. Reproductioncanbeattemptedbeforethe finalnonpositivegrowthretirementcheck.",
+  "animation": "Afterpositive-growth branch, stage=min(arithmetic_shift(growth,3),2); animationchanges onlyif stage>unsignedoldanimation. No lowerclamp; negativestagecannotincreaseu8animation. Finalflags15OR04 ifanimationchanged orflags2Emask02set, evenwhenretirementclearsactive.",
+  "retirement": "Fornonpositivegrowth,6C780 initializes onlywhen(flags2E&88)==0: adds6toanimationwithu8wrap,growth0,flags2EOR80,retirement30=param1D. Otherwisepreservesanimation/growth/flags/current30, includingnegativegrowth. Ifcurrent30>=4 subtract4 andremainactive; elseclearactive,requestunlink/dirty/724C0,plantcountDECword,cell13+2 onlyifold<64,owner0..3DECwordrequest,owner4none. Numberofcallsfromfreshdelay isfloor(delay/4)+1. Paramdelayread-only.",
+  "state_mapping_receipt": "research/ghidra/plant-state-evidence.json",
+  "cleanup_receipt": "research/ghidra/plant-startup-evidence.json",
+  "vectors": [
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 22,
+        "flags15": 4,
+        "flags2e": 0,
+        "counter": 1,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {},
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 23,
+          "flags15": 4,
+          "flags2e": 0,
+          "counter": 2,
+          "retirement": 77,
+          "animation": 2
+        },
+        "phase": "delta",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 22,
+        "flags15": 4,
+        "flags2e": 0,
+        "counter": 7,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {
+        "period": 3
+      },
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 23,
+          "flags15": 4,
+          "flags2e": 0,
+          "counter": 8,
+          "retirement": 77,
+          "animation": 2
+        },
+        "phase": "delta",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 22,
+        "flags15": 4,
+        "flags2e": 0,
+        "counter": 8,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {},
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 18,
+          "flags15": 4,
+          "flags2e": 0,
+          "counter": 9,
+          "retirement": 77,
+          "animation": 2
+        },
+        "phase": "subtract-four",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 22,
+        "flags15": 4,
+        "flags2e": 0,
+        "counter": 255,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {},
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 18,
+          "flags15": 4,
+          "flags2e": 0,
+          "counter": 0,
+          "retirement": 77,
+          "animation": 2
+        },
+        "phase": "subtract-four",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 22,
+        "flags15": 4,
+        "flags2e": 0,
+        "counter": 1,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {
+        "cell13": 0
+      },
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 18,
+          "flags15": 4,
+          "flags2e": 0,
+          "counter": 2,
+          "retirement": 77,
+          "animation": 2
+        },
+        "phase": "subtract-four",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 3,
+        "flags15": 4,
+        "flags2e": 0,
+        "counter": 8,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {
+        "delay": 8
+      },
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 0,
+          "flags15": 4,
+          "flags2e": 128,
+          "counter": 9,
+          "retirement": 4,
+          "animation": 6
+        },
+        "phase": "subtract-four:delayed-retirement",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 0,
+        "flags15": 4,
+        "flags2e": 128,
+        "counter": 0,
+        "retirement": 8,
+        "animation": 0
+      },
+      "parameters": {},
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 0,
+          "flags15": 4,
+          "flags2e": 128,
+          "counter": 0,
+          "retirement": 4,
+          "animation": 0
+        },
+        "phase": "existing-nonpositive:delayed-retirement",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 0,
+        "flags15": 4,
+        "flags2e": 128,
+        "counter": 0,
+        "retirement": 4,
+        "animation": 0
+      },
+      "parameters": {},
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 0,
+          "flags15": 4,
+          "flags2e": 128,
+          "counter": 0,
+          "retirement": 0,
+          "animation": 0
+        },
+        "phase": "existing-nonpositive:delayed-retirement",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 0,
+        "growth": -3,
+        "flags15": 4,
+        "flags2e": 128,
+        "counter": 0,
+        "retirement": 3,
+        "animation": 0
+      },
+      "parameters": {
+        "cell13": 63
+      },
+      "result": {
+        "state": {
+          "active_type": 0,
+          "owner": 0,
+          "growth": -3,
+          "flags15": 4,
+          "flags2e": 128,
+          "counter": 0,
+          "retirement": 3,
+          "animation": 0
+        },
+        "phase": "existing-nonpositive:retire",
+        "requests": [
+          "unlink-cell-list",
+          "old-frame-dirty-check",
+          "724C0-reference/UI/audio-cleanup",
+          {
+            "plant_count_delta": -1,
+            "cell13_after": 65,
+            "owner_count_decrement": 0
+          }
+        ],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 0,
+        "flags15": 4,
+        "flags2e": 8,
+        "counter": 0,
+        "retirement": 3,
+        "animation": 0
+      },
+      "parameters": {},
+      "result": {
+        "state": {
+          "active_type": 0,
+          "owner": 4,
+          "growth": 0,
+          "flags15": 4,
+          "flags2e": 8,
+          "counter": 0,
+          "retirement": 3,
+          "animation": 0
+        },
+        "phase": "existing-nonpositive:retire",
+        "requests": [
+          "unlink-cell-list",
+          "old-frame-dirty-check",
+          "724C0-reference/UI/audio-cleanup",
+          {
+            "plant_count_delta": -1,
+            "cell13_after": 3,
+            "owner_count_decrement": null
+          }
+        ],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 22,
+        "flags15": 4,
+        "flags2e": 2,
+        "counter": 1,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {
+        "period": 4
+      },
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 23,
+          "flags15": 4,
+          "flags2e": 2,
+          "counter": 2,
+          "retirement": 77,
+          "animation": 2
+        },
+        "phase": "delta",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 22,
+        "flags15": 5,
+        "flags2e": 0,
+        "counter": 0,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {},
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 22,
+          "flags15": 5,
+          "flags2e": 0,
+          "counter": 0,
+          "retirement": 77,
+          "animation": 0
+        },
+        "phase": "suppressed",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 22,
+        "flags15": 4,
+        "flags2e": 16,
+        "counter": 0,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {},
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 22,
+          "flags15": 4,
+          "flags2e": 16,
+          "counter": 0,
+          "retirement": 77,
+          "animation": 0
+        },
+        "phase": "suppressed",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 22,
+        "flags15": 4,
+        "flags2e": 0,
+        "counter": 3,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {
+        "plant_count": 412
+      },
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 4,
+          "growth": 23,
+          "flags15": 4,
+          "flags2e": 0,
+          "counter": 4,
+          "retirement": 77,
+          "animation": 2
+        },
+        "phase": "delta",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 0,
+        "growth": 22,
+        "flags15": 4,
+        "flags2e": 0,
+        "counter": 3,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {
+        "plant_count": 512
+      },
+      "result": {
+        "state": {
+          "active_type": 2,
+          "owner": 0,
+          "growth": 23,
+          "flags15": 4,
+          "flags2e": 0,
+          "counter": 4,
+          "retirement": 77,
+          "animation": 2
+        },
+        "phase": "delta",
+        "requests": [],
+        "created_count": 0
+      }
+    },
+    {
+      "state": {
+        "active_type": 2,
+        "owner": 4,
+        "growth": 22,
+        "flags15": 4,
+        "flags2e": 0,
+        "counter": 2,
+        "retirement": 77,
+        "animation": 0
+      },
+      "parameters": {
+        "neighbors": 4,
+        "period": 0
+      },
+      "result": {
+        "state": {
+          "active_type": 0,
+          "owner": 4,
+          "growth": 0,
+          "flags15": 4,
+          "flags2e": 128,
+          "counter": 3,
+          "retirement": 3,
+          "animation": 6
+        },
+        "phase": "crowded:retire",
+        "requests": [
+          "unlink-cell-list",
+          "old-frame-dirty-check",
+          "724C0-reference/UI/audio-cleanup",
+          {
+            "plant_count_delta": -1,
+            "cell13_after": 3,
+            "owner_count_decrement": null
+          }
+        ],
+        "created_count": 0
+      }
+    }
+  ],
+  "old_counter_gate_cases": 131072,
+  "retirement_cases": 1024,
+  "limits": [
+    "No reproduction RNG, targetselection, allocation, transitive cleanup or fullscheduleexecution in thisplan.",
+    "Explicitliveworld/map inputs stillmustaccountforprecedingfamilyupdates.",
+    "Safeerrorsdo notapplypartialnativewrites; originalwouldalreadyhaveincrementedcounter/growth beforefault/pendingreproduction."
+  ]
+}

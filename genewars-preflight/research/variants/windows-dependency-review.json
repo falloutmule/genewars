@@ -1,6 +1,6 @@
 {
   "status": "archive-and-source-checks-passed",
-  "checked_utc": "2026-10-13T10:14:30.982459+00:00",
+  "checked_utc": "2026-10-13T11:25:20.676957+00:00",
   "target": "x86_64-pc-windows-gnu",
   "dependency_kinds": [
     "normal",
@@ -10,23 +10,23 @@
   "originals_or_gui_executed": false,
   "cargo_lock": {
     "path": "rust/Cargo.lock",
-    "size": 42624,
-    "sha256": "1864506f79e1014a735910fb07aa63b93d06b266da7a4ca26254f1921b79abe7"
+    "size": 42759,
+    "sha256": "37750a04776d56fe248c353a378446b510d5699fc0890975ee519c1cfea1b663"
   },
   "desktop_manifest": {
     "path": "rust/crates/genewars-desktop/Cargo.toml",
-    "size": 579,
-    "sha256": "72d0750660ec73f4201a4b2f5566871d43eb1edcce9a22f6265ea4835233f413"
+    "size": 631,
+    "sha256": "16bb9c09e4a05129deac3a1b649ac7e4dc740cf73a77858bcca5ff9d15358eb2"
   },
   "private_metadata": {
     "path": "private/review/windows-dependencies/cargo-metadata.json",
-    "size": 216825,
-    "sha256": "0a5ef3e52c7f668b1d9f81b3110194f9ccd1d2697b6c33a454c15409db095248"
+    "size": 220066,
+    "sha256": "14ba02e373f05cc74664abcae9c1548a1c6507fda0ff0b6cc95cbce8975956c7"
   },
   "actual_windows_tree": {
     "path": "private/review/windows-dependencies/cargo-tree.txt",
-    "size": 2043,
-    "sha256": "c9795573c61d02174e7031a546e33ef408bcb28468368e63def1de052b5034ed"
+    "size": 2383,
+    "sha256": "159bd45ab822d0490b7113cb605684cc48263b066456da51b70b0e4df99c1532"
   },
   "registry_packages": 24,
   "new_backend_closure_packages": 17,

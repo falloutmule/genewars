@@ -10,3 +10,4 @@ research/tooling-sources.json whitespace=cr-at-eol,-blank-at-eof
 *.java -text whitespace=cr-at-eol
 *.toml -text whitespace=cr-at-eol
 *.lock -text whitespace=cr-at-eol
+*.tsv -text whitespace=cr-at-eol

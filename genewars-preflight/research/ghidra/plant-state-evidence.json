@@ -1,0 +1,244 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/entity-order/instructions-0006ca90.txt",
+      "sha256": "056c0c9a3cfab3cc4cfbfb15851895551fa672bb546f1e5f459f7a258315769b"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-init/instructions-0006c690.txt",
+      "sha256": "2031cd548ca5fbda011cefd4ea96748d54fcc5f73a1c7f86db18e45ab791b624"
+    },
+    {
+      "private_path": "private/ghidra/mission-tail-readers/instructions-0006c950.txt",
+      "sha256": "a23b3c2199717a3f3411fed3df00911bdba20aae97b6e1ab4999464b9db79a65"
+    },
+    {
+      "private_path": "private/ghidra/mission-array-refs/instructions-0006d390.txt",
+      "sha256": "7f1c49974e62a52382eed53b9dcfa8dcc53b0727c9fdd2a626d57009a8376548"
+    },
+    {
+      "private_path": "private/ghidra/display-geometry/instructions-0006c780.txt",
+      "sha256": "462f1d606d4212d724b783dfe542df7cc6f8ea322cfd77e218ec26b72fc957d8"
+    }
+  ],
+  "parameters": {
+    "source": "candidate executable LE object3 initialized data; independent of ANB image data",
+    "mapped_va": "0x104B80",
+    "mapped_offset": "0x4B80",
+    "file_offset": "0x126980",
+    "file_end_exclusive": "0x126B00",
+    "count": 12,
+    "stride": 32,
+    "size": 384,
+    "sha256": "297a1da0e9c30d6d4cb7c88addb8234be260e0e93b7d4b2b1c4c3ad8b7df2b7c",
+    "private_path": "private/ghidra/plant-state/parameter-block.bin",
+    "runtime": "Offline extract once from pinned candidate, then runtime reads the standalone hash-bound table; executable input is not required at runtime. Preserve unproved bytes opaque.",
+    "fields": {
+      "growth_deltas_i8": {
+        "offset": 16,
+        "count": 8
+      },
+      "spread_period_u8": 24,
+      "random_walk_steps_u8": 25,
+      "crowding_limit_u8": 26,
+      "check_threshold_u8": 27,
+      "retirement_delay_u8": 29
+    },
+    "bindings": [
+      {
+        "slot": 0,
+        "image_entry_id": "root/2/disc/347",
+        "image_input_sha256": "c233be78010920286672e26dba1501947bbb3bff92ed4477045539c3996c6486",
+        "parameter_record_sha256": "f6b7502b8b0f373458cf7a88200573c818b486011c0a02e112b079d8b7c47cfa"
+      },
+      {
+        "slot": 1,
+        "image_entry_id": "root/2/disc/348",
+        "image_input_sha256": "52eb03c7076ccf67b2d33a33c75ff04bd07b8a97fedbf5b2c3ddace3efb0e9d3",
+        "parameter_record_sha256": "910cccb8dab5bb715b9168138da657764b8ff8e9ca99e11f18852b1403cd1028"
+      },
+      {
+        "slot": 2,
+        "image_entry_id": "root/2/disc/349",
+        "image_input_sha256": "e856fcc0afca3091f50d49b0c79db29f9815804398594245d80576b21604c142",
+        "parameter_record_sha256": "8d24edf1fe0a57dd52cfa2e2a5242761654bdf22945aec85207ba8b2a369222a"
+      },
+      {
+        "slot": 3,
+        "image_entry_id": "root/2/disc/344",
+        "image_input_sha256": "79c0df3028c6553e5a2884644d0061e5b347cbe6183e8313e648daf1eba04984",
+        "parameter_record_sha256": "2dd5c36bffb9c9ad9770d496168041357b40a84c95fba5426c1095e4414960cf"
+      },
+      {
+        "slot": 4,
+        "image_entry_id": "root/2/disc/345",
+        "image_input_sha256": "7310d57e5a6571017752c1bda1cf6fea0fd4cddc6919c9881d31c556a301193c",
+        "parameter_record_sha256": "e0e089fb93989616d71654ffec355c14094c72798d280db8cc453296da208835"
+      },
+      {
+        "slot": 5,
+        "image_entry_id": "root/2/disc/346",
+        "image_input_sha256": "caf8094dcd560dd4da88d9482fa91233bfa126296146bc45e3bfc1be8dbac209",
+        "parameter_record_sha256": "34e6ebd874be74749c96eacfc12eac743b83dc579b1f3624d3f595a927a7406a"
+      },
+      {
+        "slot": 6,
+        "image_entry_id": "root/2/disc/350",
+        "image_input_sha256": "69c5b560bdd741ed1206ffbda67cac4a731183f5e9f21c501d187dd656e29044",
+        "parameter_record_sha256": "23c79479f8df8971db65518682fd6f9149d26e29df6727c9a3704c4442e7d82f"
+      },
+      {
+        "slot": 7,
+        "image_entry_id": "root/2/disc/351",
+        "image_input_sha256": "5d1e22180251f8d1a490817cb18574c3d9ddabdc90e27c40e7afd14ffb347a33",
+        "parameter_record_sha256": "3797f3322250a2e5ce82eaa118fa07d652349fe216c50b73c16fb17b5a59a70b"
+      },
+      {
+        "slot": 8,
+        "image_entry_id": "root/2/disc/352",
+        "image_input_sha256": "7a978fb3b44444a11f3cbb60a7611c172550b64febf4712e9e46e0efeb48661a",
+        "parameter_record_sha256": "c734aef24148f6b8ed26bcb2c1557288fb64552036a7e6199be981f2c1dcf4a8"
+      },
+      {
+        "slot": 9,
+        "image_entry_id": "root/2/disc/341",
+        "image_input_sha256": "df9180a4dace76f722637f6b35f00114ea6a183603fd57c32502957c37378faa",
+        "parameter_record_sha256": "9d94e6162819d85a4f7162be5ed0f16244f994de65441aacfe6a6b216a487e21"
+      },
+      {
+        "slot": 10,
+        "image_entry_id": "root/2/disc/342",
+        "image_input_sha256": "fd207e9bf58cc5c7320e278be60eb4924941da6c99d593883df31df48aef7170",
+        "parameter_record_sha256": "bb932eb59f6d1678c0e9b315e225501764842855060fe97a9ca624ca7cb412b0"
+      },
+      {
+        "slot": 11,
+        "image_entry_id": "root/2/disc/343",
+        "image_input_sha256": "3340bf97d82fe34731bbbcc65be884ec1168e34c14120df2b65e8b1c36f2bcf5",
+        "parameter_record_sha256": "2dba59259ed13d77e1ef24a5e7e268db93482dfd56c5921c20a7c0e44fd495f5"
+      }
+    ]
+  },
+  "plant_fields": {
+    "file_base": "0x43D4E",
+    "count": 512,
+    "packed_stride": 41,
+    "native_stride": 49,
+    "fields_source_native": {
+      "previous_reference": [
+        0,
+        0
+      ],
+      "next_reference": [
+        3,
+        3
+      ],
+      "active_type_u8": [
+        6,
+        6
+      ],
+      "position_x_i16": [
+        7,
+        7
+      ],
+      "position_y_i16": [
+        9,
+        9
+      ],
+      "flags15_u8": [
+        21,
+        21
+      ],
+      "source_shade_u8": [
+        23,
+        23
+      ],
+      "owner_u8": [
+        24,
+        24
+      ],
+      "animation_u8": [
+        25,
+        25
+      ],
+      "frame_u8": [
+        27,
+        27
+      ],
+      "selector_i8": [
+        35,
+        43
+      ],
+      "growth_i16": [
+        36,
+        44
+      ],
+      "flags2e_u8": [
+        38,
+        46
+      ],
+      "update_counter_u8": [
+        39,
+        47
+      ],
+      "retirement_counter_u8": [
+        40,
+        48
+      ]
+    },
+    "reference": "three bytes: signed little-endian i16 index plus u8 kind; kind2 identifies numeric family1 plants. Negative index or kind0 gives null. Validate kind/index bounds before following. Native resource/vtable/cache pointers are runtime-only."
+  },
+  "map_links": {
+    "file_base": "0x355E",
+    "size": 229376,
+    "dimensions": [
+      128,
+      128
+    ],
+    "cell_stride": 14,
+    "cell_index": "(y&127)*128+(x&127)",
+    "head_reference_offset": 6,
+    "cell_counter_u8_offset": 13,
+    "position_cell": "((i16_position>>8)&127) per axis",
+    "neighbor_count": "Nine wrapped cells; follow all linked kinds safely, count only kind2 with active type2 and signed growth>0, accumulate with u8 wrap. All40plant memberships independently verified in plant-startup proof."
+  },
+  "owner_counts": {
+    "source_file_base": "0x14",
+    "player_stride": "0x70D",
+    "count": 4,
+    "player_relative_word_offset": "0x5FA",
+    "initial_raw_words": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "retirement": "Owner0..3 requests wrapping DECword; owner4 skips. Live retained/player-updated counts must be caller state, not replaced by these raw zeros."
+  },
+  "plant_count": {
+    "source_word_offset": "0x3552",
+    "native_va": "0x11C2B2",
+    "type": "signed i16",
+    "initial_raw": 40
+  },
+  "scheduler_cursor": {
+    "source_word_offset": "0x355A",
+    "native_va": "0x11C2BA",
+    "initial_raw": 0
+  },
+  "fixture": {
+    "source_entry_id": "root/2/disc/152",
+    "source_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+    "private_path": "private/ghidra/plant-state/initial-conq001-plants.json",
+    "fixture_sha256": "a55acdf8001cb93981b8802200aff3c5be087b6b12f872e4544980ceee95ec30",
+    "plants": 40,
+    "nonempty_cell_heads": 41,
+    "scope": "Typed raw source snapshot before player/other-family/visibility updates; source shade is not final runtime shade."
+  },
+  "limits": [
+    "Parameter names and unproved bytes remain opaque; no full public original data dump.",
+    "This source fixture cannot establish live prior-family effects, selected-player gates or current shade.",
+    "No original execution, implicit user command or reproduction RNG in this extraction."
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "status": "passed-recorded-runtime-ui",
+  "checked_utc": "2026-10-13T11:30:51.925969+00:00",
+  "original_execution": false,
+  "input_replayed_by_checker": false,
+  "launch": {
+    "path": "private/integration/runtime-ui/7cf7ef61a8af4fe488a91e6e3069bc22/launch.json",
+    "size": 7730,
+    "sha256": "9ee73b325df5e4f31d16e8b03e5f4ea09d02a73118f76b8082233e59817362e7"
+  },
+  "process": {
+    "path": "private/integration/runtime-ui/7cf7ef61a8af4fe488a91e6e3069bc22/process.json",
+    "size": 7916,
+    "sha256": "09e39e908c991f6866aea9a17f70f385bfa11a1fc4425ba2b291c9ceee78e0e0"
+  },
+  "report": {
+    "path": "private/integration/runtime-ui/7cf7ef61a8af4fe488a91e6e3069bc22/report.json",
+    "size": 39736,
+    "sha256": "a331e585ac538cb0d92f63f0620dcacbd130b2c96b3c48b8c9826bf48b2e24a8"
+  },
+  "tested_binary": {
+    "path": "private/integration/runtime-ui/7cf7ef61a8af4fe488a91e6e3069bc22/genewars-game.exe",
+    "size": 21378523,
+    "sha256": "ee36cae6669c4a5a44155dde8f93f7425bb29c22ff5c1b353e23edc042234acf"
+  },
+  "tested_source_pins": [
+    {
+      "path": "rust/crates/genewars-runtime/src/identity.rs",
+      "size": 3433,
+      "sha256": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/lib.rs",
+      "size": 537,
+      "sha256": "1d5ba3804ab61b83afc0d4950a03bf55ac6795de64f2760ed1a0ebd75f1fb44e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world.rs",
+      "size": 43596,
+      "sha256": "f9d763553f7656c602bddc0a75ff0892d3945187eacc2a386d517bc19d782553"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-game.rs",
+      "size": 5280,
+      "sha256": "88570a970faaf5e7a20deb427862825273142d7757054be1bc72e7f488fc0271"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs",
+      "size": 7644,
+      "sha256": "8693f154843e29c4653e8ba591acad69c8c5423ab5d5d5c057a7965577c4d501"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs",
+      "size": 9370,
+      "sha256": "fe538a8247deaaa0706e90d1c1d9eb9e92cf3f54ae686a4ac9dda88cbfb26b9b"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/game_window.rs",
+      "size": 6352,
+      "sha256": "41c12a3ee9bd8e316c692704ee7b3d9e4871fa7ef1bd8fa114dd12d35c7a21ad"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/menu_art.rs",
+      "size": 2365,
+      "sha256": "dfbd19461070bc28a053af62a72f4051629f46950a641e92266ec6590ce581e9"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/status_text.rs",
+      "size": 2801,
+      "sha256": "dcd958b362233af08c48caab97dbcf543f248ca6f01d6fe273f40ce6b1603fec"
+    },
+    {
+      "path": "research/integration/runtime-resource-catalog.tsv",
+      "size": 3926,
+      "sha256": "fdfd24ea0237b9851b2522a233e8f973531740df2223d1042592254acbd8de26"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "private/integration/runtime-ui/7cf7ef61a8af4fe488a91e6e3069bc22/menu.jpg",
+      "size": 129241,
+      "sha256": "b05001156e39c492c479e811b3141ff4ca543fb2a8d3b51ab81dfdf2b3574090"
+    },
+    {
+      "path": "private/integration/runtime-ui/7cf7ef61a8af4fe488a91e6e3069bc22/world-step-0.jpg",
+      "size": 137321,
+      "sha256": "950fc902e8ec3452d048e332af0857d2cbdb43d2d37a0e2552809f1c9fb3a706"
+    },
+    {
+      "path": "private/integration/runtime-ui/7cf7ef61a8af4fe488a91e6e3069bc22/world-step-2.jpg",
+      "size": 137365,
+      "sha256": "43466637d1baec04f465044496e0ba275df8f8a50b0a60f6861904f36bb362dd"
+    },
+    {
+      "path": "private/integration/runtime-ui/7cf7ef61a8af4fe488a91e6e3069bc22/view-right.jpg",
+      "size": 139917,
+      "sha256": "d992f18c3b2f3b4d4c5c57225dfa0517f1ba249abcc59c17d45df3163720fb5f"
+    },
+    {
+      "path": "private/integration/runtime-ui/7cf7ef61a8af4fe488a91e6e3069bc22/world-paused-52.jpg",
+      "size": 137667,
+      "sha256": "395f013b6fd388b6c3c9ce9f4ade5e24c4a2c738c790d122af0032f50786a8a4"
+    },
+    {
+      "path": "private/integration/runtime-ui/7cf7ef61a8af4fe488a91e6e3069bc22/options-on.jpg",
+      "size": 51137,
+      "sha256": "7f0f498aee2cf5fe5bc08e77fcf71165e72aa6f69a6d352d223102f1522a3ea5"
+    }
+  ],
+  "observations": [
+    "Single Player loaded the world in the same window",
+    "Two Space presses gave 40 to 38 to 37 plants; second step visibly removed a plant",
+    "Right/Left reprojected terrain and plants then restored the view",
+    "Enter started automatic steps, second Enter paused at step52",
+    "Escape returned to menu; Options opened; Space toggled OFF to ON; Escape returned",
+    "Quit exited normally; assets and tested sources remained unchanged"
+  ],
+  "limits": [
+    "Historical supervised binary/source pins; subsequent builds are covered separately by runtime-validation",
+    "Window captures include host cursor/scaling; they are not raw original-game framebuffers",
+    "No player gameplay command, full world tick, save/load or original-game parity established"
+  ]
+}

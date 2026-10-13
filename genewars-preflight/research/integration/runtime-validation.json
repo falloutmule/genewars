@@ -1,0 +1,448 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T11:30:27.425477+00:00",
+  "binary_sha256": "a59a3cf62928830007e8ca95f23140a5a2d9437e3424341180490c9ade870e3f",
+  "sources": [
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_command.rs",
+      "sha256": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/identity.rs",
+      "sha256": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/lib.rs",
+      "sha256": "a9ac8f4b0569766ce47326333158835593d100438631fe34d624b2c212903cee"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world.rs",
+      "sha256": "f9d763553f7656c602bddc0a75ff0892d3945187eacc2a386d517bc19d782553"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/genewars-game.rs",
+      "sha256": "88570a970faaf5e7a20deb427862825273142d7757054be1bc72e7f488fc0271"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs",
+      "sha256": "8693f154843e29c4653e8ba591acad69c8c5423ab5d5d5c057a7965577c4d501"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs",
+      "sha256": "fe538a8247deaaa0706e90d1c1d9eb9e92cf3f54ae686a4ac9dda88cbfb26b9b"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/menu_art.rs",
+      "sha256": "ed4c36e97472e90abd25c9d916297cc45b827545c2d606de7dcbe5005475ac81"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/game_window.rs",
+      "sha256": "41c12a3ee9bd8e316c692704ee7b3d9e4871fa7ef1bd8fa114dd12d35c7a21ad"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/status_text.rs",
+      "sha256": "dcd958b362233af08c48caab97dbcf543f248ca6f01d6fe273f40ce6b1603fec"
+    },
+    {
+      "path": "research/integration/runtime-resource-catalog.tsv",
+      "sha256": "fdfd24ea0237b9851b2522a233e8f973531740df2223d1042592254acbd8de26"
+    },
+    {
+      "path": "scripts/validate_runtime.py",
+      "sha256": "2130aa19d5365e2c99d90e7972962f5375f096c7f95e00a99f663cb9fedc3ce2"
+    }
+  ],
+  "cases": [
+    {
+      "name": "transparent-corner",
+      "passed": true,
+      "scene": "Menu",
+      "mission": null
+    },
+    {
+      "name": "release-outside",
+      "passed": true,
+      "scene": "Menu",
+      "mission": null
+    },
+    {
+      "name": "press-only",
+      "passed": true,
+      "scene": "Menu",
+      "mission": null
+    },
+    {
+      "name": "focus-cancel",
+      "passed": true,
+      "scene": "Menu",
+      "mission": null
+    },
+    {
+      "name": "extreme-coordinate-miss",
+      "passed": true,
+      "scene": "Menu",
+      "mission": null
+    },
+    {
+      "name": "options-return-quit",
+      "passed": true,
+      "scene": "Quit",
+      "mission": null
+    },
+    {
+      "name": "initial",
+      "passed": true,
+      "scene": "Mission",
+      "mission": {
+        "steps": 0,
+        "plants": 40,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 0,
+        "world_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+        "rgb_sha256": "adbc34fa1b7d0313f75abcf5d3afa6f26de3e63293920003697b5adde8c7bb83",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31,
+          32
+        ],
+        "blocked": null
+      }
+    },
+    {
+      "name": "one-step",
+      "passed": true,
+      "scene": "Mission",
+      "mission": {
+        "steps": 1,
+        "plants": 38,
+        "cursor": 24,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 0,
+        "world_sha256": "e425abac99b8dceeed0aba550d2f940d095d38adceedd6345c7b4f73afd5ff0a",
+        "rgb_sha256": "adbc34fa1b7d0313f75abcf5d3afa6f26de3e63293920003697b5adde8c7bb83",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31,
+          32
+        ],
+        "blocked": null
+      }
+    },
+    {
+      "name": "two-steps",
+      "passed": true,
+      "scene": "Mission",
+      "mission": {
+        "steps": 2,
+        "plants": 37,
+        "cursor": 40,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 1,
+        "world_sha256": "87cab435b0b768a7d59c0e7b097557ba8ed6bceaa42242881f51fef161d62242",
+        "rgb_sha256": "71cd1f332aed8dd5c4d1969c096f6be5fb8edefdc3b1a2630da4493eec1725f8",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31
+        ],
+        "blocked": null
+      }
+    },
+    {
+      "name": "repeat-two-steps",
+      "passed": true,
+      "scene": "Mission",
+      "mission": {
+        "steps": 2,
+        "plants": 37,
+        "cursor": 40,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 1,
+        "world_sha256": "87cab435b0b768a7d59c0e7b097557ba8ed6bceaa42242881f51fef161d62242",
+        "rgb_sha256": "71cd1f332aed8dd5c4d1969c096f6be5fb8edefdc3b1a2630da4493eec1725f8",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31
+        ],
+        "blocked": null
+      }
+    },
+    {
+      "name": "longer-run",
+      "passed": true,
+      "scene": "Mission",
+      "mission": {
+        "steps": 128,
+        "plants": 33,
+        "cursor": 82,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 3,
+        "world_sha256": "01a8fbc0d14580fb2cc04e98876a2803225e707cde6dd611cbae23461f6c0cb4",
+        "rgb_sha256": "bd34d41d66d608608a453b016e0cc0a3f8e8fe5915869b499735998172c78a5c",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31
+        ],
+        "blocked": null
+      }
+    },
+    {
+      "name": "repeat-longer-run",
+      "passed": true,
+      "scene": "Mission",
+      "mission": {
+        "steps": 128,
+        "plants": 33,
+        "cursor": 82,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 3,
+        "world_sha256": "01a8fbc0d14580fb2cc04e98876a2803225e707cde6dd611cbae23461f6c0cb4",
+        "rgb_sha256": "bd34d41d66d608608a453b016e0cc0a3f8e8fe5915869b499735998172c78a5c",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31
+        ],
+        "blocked": null
+      }
+    },
+    {
+      "name": "pan-roundtrip",
+      "passed": true,
+      "scene": "Mission",
+      "mission": {
+        "steps": 0,
+        "plants": 40,
+        "cursor": 0,
+        "target": [
+          20736,
+          13568
+        ],
+        "changed_world_frames": 0,
+        "world_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+        "rgb_sha256": "adbc34fa1b7d0313f75abcf5d3afa6f26de3e63293920003697b5adde8c7bb83",
+        "queue": [
+          29,
+          34,
+          35,
+          30,
+          33,
+          31,
+          32
+        ],
+        "blocked": null
+      }
+    },
+    {
+      "name": "corrupt-00",
+      "passed": true,
+      "outcome": "rejected before menu"
+    },
+    {
+      "name": "corrupt-01",
+      "passed": true,
+      "outcome": "rejected before menu"
+    },
+    {
+      "name": "corrupt-02",
+      "passed": true,
+      "outcome": "rejected before menu"
+    },
+    {
+      "name": "corrupt-03",
+      "passed": true,
+      "outcome": "rejected before menu"
+    },
+    {
+      "name": "corrupt-04",
+      "passed": true,
+      "outcome": "rejected before menu"
+    },
+    {
+      "name": "corrupt-05",
+      "passed": true,
+      "outcome": "rejected before menu"
+    },
+    {
+      "name": "corrupt-06",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-07",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-08",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-09",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-10",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-11",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-12",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-13",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-14",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-15",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-16",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-17",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-18",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-19",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-20",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-21",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-22",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-23",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-24",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "corrupt-25",
+      "passed": true,
+      "scene": "Error",
+      "mission": null
+    },
+    {
+      "name": "missing-mission-return",
+      "passed": true,
+      "scene": "Menu",
+      "mission": null
+    },
+    {
+      "name": "native-three-frame-smoke",
+      "passed": true
+    }
+  ],
+  "case_count": 41,
+  "private_output": "private/integration/runtime-validation/48a48257373544dbbbc5bcbafe8052ee",
+  "milestones": {
+    "A": "bounded native menu-to-loaded-world route",
+    "B": "transactional plant steps with actual pixel change",
+    "C": "not implemented"
+  },
+  "original_execution": false,
+  "full_world_tick": false,
+  "gameplay": false
+}

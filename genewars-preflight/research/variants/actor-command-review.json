@@ -1,0 +1,94 @@
+{
+  "status": "passed-independent-native-actor-command-review",
+  "utc": "2026-10-13T11:26:37.640715+00:00",
+  "original_execution": false,
+  "gui_execution": false,
+  "source": {
+    "path": "rust/crates/genewars-runtime/src/actor_command.rs",
+    "size": 13433,
+    "sha256": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e"
+  },
+  "evidence": {
+    "path": "research/ghidra/move-order-evidence.json",
+    "size": 8555,
+    "sha256": "36e2eea9e63f8c77c7dee2c8f0173a313296c5a5e80d5d70e6776b446bc43465"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/plant-command/instructions-0002c300.txt",
+      "size": 42950,
+      "sha256": "abde156149564619af16812d8d0d3fcbc377eadef511a9ba9849f55f28cd0b89"
+    },
+    {
+      "path": "private/ghidra/entity-order-refs/instructions-0001c120.txt",
+      "size": 16082,
+      "sha256": "fd6d61b6f562770b3e34fe65b6fa6ecb9c700ae7aaaa3876f3826e3285670255"
+    },
+    {
+      "path": "private/ghidra/plant-command/instructions-00080fc0.txt",
+      "size": 1755,
+      "sha256": "0a05e93b8a23470e67f8ce78d2fe94e5b6ed13ff2956c0222920cb9d97a7c8cd"
+    },
+    {
+      "path": "private/ghidra/plant-command/instructions-00074a50.txt",
+      "size": 5363,
+      "sha256": "c44b051dc39fd5998975fecccd10798615d09cba01a10c6e909646373358861a"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-000ae028.txt",
+      "size": 2571,
+      "sha256": "526b3f9cdc9b43ed6b330383417fad4b6c8acb41a917acf5571e4f01f0a6585b"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-00074270.txt",
+      "size": 2931,
+      "sha256": "0e6512bf106d649968285420fc325a0cf12afabecaa582ed4b6cc9a486b59a30"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-0008b130.txt",
+      "size": 3544,
+      "sha256": "f2505f556f5a3a4f012cd375b6a43cc8029c3f03b5f1c37efe65b8a6cec2d52f"
+    }
+  ],
+  "setter_cases": 323532,
+  "setter_outcomes": {
+    "applied": 67591,
+    "source_noop": 100332,
+    "invalid_id": 67922,
+    "invalid_length": 2400,
+    "reinitialization_required": 85287
+  },
+  "record_and_guard_bytes_compared": 69599999,
+  "resolver_cases": 754688,
+  "resolver_outcomes": {
+    "resolved": 452624,
+    "invalid_terrain": 992,
+    "negative_weight": 16,
+    "backward_search_required": 301056
+  },
+  "native_output_sha256": "9e4f37a168f6395f47cf4f783f5bcab950ba37707a44c86e37e0961aa5fe9f92",
+  "review_sources": [
+    {
+      "path": "research/variants/actor-command-review.py",
+      "size": 7215,
+      "sha256": "cc2956675e35378b74103637ab2074a3f0c11d5459bb76ace88b10b3d692b129"
+    },
+    {
+      "path": "research/variants/actor-command-review.rs",
+      "size": 2351,
+      "sha256": "ed1a50112c58c0dcb27a73351f348129d11d2c6841524f5cd5b1ac2e0e6a947b"
+    }
+  ],
+  "harness": {
+    "path": "private/review/actor-command/review.exe",
+    "size": 5086245,
+    "sha256": "5e750524bc9902c2c51549d75e0d78e6d075a024abfa4fc211a0af9f8e5c045f"
+  },
+  "limits": [
+    "Single supplied record must be externally bound to globalactorID; no pool/owner/type gate inferred",
+    "PrecomputedResolvedTarget is an explicit caller value, not proof of world occupancy or a trusted provenance token",
+    "Resolver outputs only under admitted explicit environment values; virtual effects and backward search excluded",
+    "Invalid environment rejected even fornearpoint as deliberate safe input validation",
+    "No travel/animation/landing activation, readybit producer, physical input conversion or wholemission command dispatch executed"
+  ]
+}

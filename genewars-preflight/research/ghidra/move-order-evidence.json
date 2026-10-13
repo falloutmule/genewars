@@ -1,0 +1,292 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/plant-command/instructions-0002c300.txt",
+      "sha256": "abde156149564619af16812d8d0d3fcbc377eadef511a9ba9849f55f28cd0b89"
+    },
+    {
+      "private_path": "private/ghidra/entity-order-refs/instructions-0001c120.txt",
+      "sha256": "fd6d61b6f562770b3e34fe65b6fa6ecb9c700ae7aaaa3876f3826e3285670255"
+    },
+    {
+      "private_path": "private/ghidra/plant-command/instructions-00080fc0.txt",
+      "sha256": "0a05e93b8a23470e67f8ce78d2fe94e5b6ed13ff2956c0222920cb9d97a7c8cd"
+    },
+    {
+      "private_path": "private/ghidra/plant-command/instructions-00074a50.txt",
+      "sha256": "c44b051dc39fd5998975fecccd10798615d09cba01a10c6e909646373358861a"
+    },
+    {
+      "private_path": "private/ghidra/command-resolver/instructions-000ae028.txt",
+      "sha256": "526b3f9cdc9b43ed6b330383417fad4b6c8acb41a917acf5571e4f01f0a6585b"
+    },
+    {
+      "private_path": "private/ghidra/command-resolver/instructions-00074270.txt",
+      "sha256": "0e6512bf106d649968285420fc325a0cf12afabecaa582ed4b6cc9a486b59a30"
+    },
+    {
+      "private_path": "private/ghidra/command-resolver/instructions-0008b130.txt",
+      "sha256": "f2505f556f5a3a4f012cd375b6a43cc8029c3f03b5f1c37efe65b8a6cec2d52f"
+    }
+  ],
+  "opcode_table": {
+    "va": "0x1c094",
+    "length": 140,
+    "sha256": "387a6ff254096e524eaac19a63d71b4e128c581c67dfd60d0dbcf4f8e07cfaf1",
+    "opcode3_target": "0x1c528"
+  },
+  "actor_layout": {
+    "base": "0x16360e",
+    "stride_decimal": 200,
+    "packet_actor_id": "signed i16 at packet+4; safe range0..19; global ID, not player-local",
+    "type6": "u8",
+    "owner18": "u8",
+    "state55": "i8",
+    "ready70": "u8 mask01",
+    "flags71": "u8 mask10 inhibits setter",
+    "flags57": "u8 mask02 pending move; mask01 invokes reinit",
+    "byte82": "u8 nonzero invokes reinit",
+    "byte5b": "u8",
+    "target5c": "two signed i16 words, four bytes",
+    "destination0b": "two signed i16 words, four bytes"
+  },
+  "producer_scope": "Ground world control route2C64C after current module/hit dispatch, with explicit874B0-projected world point. Require packet19FF70mask08 (left release), modifier19FF71mask0Aclear, pause118968mask02clear, rootgroup526word=0 and52Fbyte=0, selected entity present/type3/owned, signedstate55not2..5, ready70mask01set, signed current portrait index<signed player count. Safe input current index0..4/count0..5; original lacks lower bound. Emit packet+A=3,+0/+2targetwords,+4globalactorID. UIfeedback/audio37 are separate requests.",
+  "dispatcher_scope": "Opcode3 table target1C528 calls80FC0. Outer player activity/tick gates remain explicit; this is not whole1C120.",
+  "setter_scope": "flags71mask10set returns unchanged before any stores. Otherwise flags57|02, requestedpoint->5C,5B=0, resolver74A50, resolvedpoint->5C and+B. Admitted complete setter excludes byte82!=0 or OLDflags57mask01set, which invoke51E80. Safe errors are atomic; original can already have prefix writes.",
+  "resolver_scope": "Only return-value subcontracts: signed15 torus squared distance<=4096 replaces candidate by current and eventually returns current; otherwise accepted candidate returns requested when obstacle74270=NULL, ((1<<terrainclass8B520)&actor53)==0 and blockerweight8B130<10. Type3 avoids type1 special class shortcut. Environmental helper results are explicit validated inputs; no map occupancy algorithm or virtual helper effects claimed. Other cases require original backward trig search and are rejected.",
+  "vectors": [
+    {
+      "current": [
+        0,
+        0
+      ],
+      "requested": [
+        64,
+        0
+      ],
+      "terrain_class": 0,
+      "avoid_mask": 255,
+      "obstacle_nonnull": true,
+      "blocker_weight": 10,
+      "distance_squared": 4096,
+      "result": {
+        "resolved": [
+          0,
+          0
+        ],
+        "case": "near-current-snap"
+      }
+    },
+    {
+      "current": [
+        0,
+        0
+      ],
+      "requested": [
+        65,
+        0
+      ],
+      "terrain_class": 0,
+      "avoid_mask": 0,
+      "obstacle_nonnull": false,
+      "blocker_weight": 0,
+      "distance_squared": 4225,
+      "result": {
+        "resolved": [
+          65,
+          0
+        ],
+        "case": "accepted-request"
+      }
+    },
+    {
+      "current": [
+        32767,
+        -32768
+      ],
+      "requested": [
+        -32768,
+        32767
+      ],
+      "terrain_class": 7,
+      "avoid_mask": 255,
+      "obstacle_nonnull": true,
+      "blocker_weight": 255,
+      "distance_squared": 2,
+      "result": {
+        "resolved": [
+          32767,
+          -32768
+        ],
+        "case": "near-current-snap"
+      }
+    },
+    {
+      "current": [
+        0,
+        0
+      ],
+      "requested": [
+        65,
+        0
+      ],
+      "terrain_class": 2,
+      "avoid_mask": 4,
+      "obstacle_nonnull": false,
+      "blocker_weight": 0,
+      "distance_squared": 4225,
+      "result": {
+        "unsupported": "backward-search-required"
+      }
+    },
+    {
+      "current": [
+        0,
+        0
+      ],
+      "requested": [
+        65,
+        0
+      ],
+      "terrain_class": 2,
+      "avoid_mask": 0,
+      "obstacle_nonnull": false,
+      "blocker_weight": 10,
+      "distance_squared": 4225,
+      "result": {
+        "unsupported": "backward-search-required"
+      }
+    },
+    {
+      "current": [
+        0,
+        0
+      ],
+      "requested": [
+        65,
+        0
+      ],
+      "terrain_class": 2,
+      "avoid_mask": 0,
+      "obstacle_nonnull": true,
+      "blocker_weight": 0,
+      "distance_squared": 4225,
+      "result": {
+        "unsupported": "backward-search-required"
+      }
+    },
+    {
+      "current": [
+        0,
+        0
+      ],
+      "requested": [
+        64,
+        1
+      ],
+      "terrain_class": 2,
+      "avoid_mask": 0,
+      "obstacle_nonnull": false,
+      "blocker_weight": 9,
+      "distance_squared": 4097,
+      "result": {
+        "resolved": [
+          64,
+          1
+        ],
+        "case": "accepted-request"
+      }
+    }
+  ],
+  "setter_vectors": [
+    {
+      "actor_id": 0,
+      "flags71": 0,
+      "flags57": 0,
+      "byte82": 0,
+      "result": {
+        "kind": "set-move-order",
+        "writes": {
+          "flags57_u8": 2,
+          "byte5b_u8": 0,
+          "target5c_i16_pair": [
+            101,
+            201
+          ],
+          "destination0b_i16_pair": [
+            101,
+            201
+          ]
+        },
+        "requested_before_resolver": [
+          100,
+          200
+        ]
+      }
+    },
+    {
+      "actor_id": 0,
+      "flags71": 0,
+      "flags57": 254,
+      "byte82": 0,
+      "result": {
+        "kind": "set-move-order",
+        "writes": {
+          "flags57_u8": 254,
+          "byte5b_u8": 0,
+          "target5c_i16_pair": [
+            101,
+            201
+          ],
+          "destination0b_i16_pair": [
+            101,
+            201
+          ]
+        },
+        "requested_before_resolver": [
+          100,
+          200
+        ]
+      }
+    },
+    {
+      "actor_id": 0,
+      "flags71": 16,
+      "flags57": 1,
+      "byte82": 1,
+      "result": {
+        "kind": "source-noop",
+        "writes": {}
+      }
+    },
+    {
+      "actor_id": 0,
+      "flags71": 0,
+      "flags57": 1,
+      "byte82": 0,
+      "result": {
+        "kind": "unsupported-reinitialize",
+        "writes": {}
+      }
+    },
+    {
+      "actor_id": 0,
+      "flags71": 0,
+      "flags57": 0,
+      "byte82": 1,
+      "result": {
+        "kind": "unsupported-reinitialize",
+        "writes": {}
+      }
+    }
+  ],
+  "eligibility_cases": 1048576,
+  "setter_branch_cases": 131072,
+  "limits": [
+    "No claim that raw or newly created actors are already ready.80830 produces flags700400;80AE0 is the ready-bit producer after landing/placement.",
+    "No harvest/cut meaning established; plant hover can fall through generic move producer.",
+    "No automatic world coordinate/hit conversion, occupancy resolution, physical mouse adapter or actor movement simulation.",
+    "Opcode3 consumer lacks owner/type/bounds rechecks; safe API must admit trusted producer result or validate these externally."
+  ]
+}

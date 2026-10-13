@@ -374,6 +374,7 @@ dependencies = [
  "genewars-assets",
  "genewars-core",
  "genewars-render",
+ "genewars-runtime",
  "minifb",
  "softbuffer",
  "winit",
@@ -384,6 +385,14 @@ name = "genewars-render"
 version = "0.1.0"
 dependencies = [
  "genewars-assets",
+]
+
+[[package]]
+name = "genewars-runtime"
+version = "0.1.0"
+dependencies = [
+ "genewars-assets",
+ "genewars-core",
 ]
 
 [[package]]

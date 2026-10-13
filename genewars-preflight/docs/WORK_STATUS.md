@@ -1,6 +1,24 @@
 # Working state — 2026-10-12 / 2026-10-13 UTC
 
-Active reconstruction; no playable game yet. The CD executable is a provisional analysis candidate, not established canonical retail.
+Active reconstruction; no complete playable game yet. Current priority is the Rust-first runtime tranche described below; older counts below are dated checkpoints. The CD executable is a provisional analysis candidate, not established canonical retail.
+
+## Current Rust-first checkpoint
+
+The full integration gate passes **117 checks and 214 Rust tests** at 2026-10-13T11:26:39.755478+00:00. All 48,172 private files are ignored, no private file is tracked, and the original archive SHA-256 remains unchanged. The separate new actor-activation proof also passes 9 listing pins, 4,096 trigonometric entries, 65,536 seeds, 131,072 flag cases and 19 vectors; it is a static follow-up beyond the aggregate gate's registered implementation checks.
+
+`genewars-game` now dispatches actual menu packets through loading into an owned mission world, Options and Quit. Twenty-six exact CD resources are checked by size/SHA-256 at staging and load. The world preserves opaque bytes and derives plant callbacks from its own map/list/parameter state. It commits admitted updates transactionally and reprojects current records into terrain/plant frames. The new options are explicitly development controls; the direct first-mission route bypasses the original campaign transition.
+
+The native input check loaded 40 plants, stepped 40→38→37, visibly removed record 32 on the second step, reprojected plants while moving/restoring the view, ran/paused automatic steps at 52, toggled Options and exited with Quit. It lasted 145.44 seconds, exit 0, with inputs and tested sources unchanged. Its six window captures remain private. The automated runtime gate passes 41 flow/resource-failure/presentation cases.
+
+Independent world comparison covers 1,100 passes, 55 callbacks and 378,353,800 exact packed-state bytes. Attempt 1,101 rejects record 10 reproduction without changing state, cursor or tick. Review found and corrected floor-cell terrain fallback, retired self-link preservation and exact raw null reference writes before this gate. The actor move-order setter and bounded resolver also pass 323,532 setter cases and 754,688 resolver cases with 69,599,999 record/guard bytes compared; these are explicit-input primitives, not integrated player movement.
+
+**Milestones A/B are implemented as a plant subsystem; C/D and the full game remain unfinished.** Initial raw mission records contain no player-owned actors. Startup must reconstruct blueprints/resource handles, selected-player restoration, landing/placement and intervening RNG before activation and commands can be connected. The new activation proof permits explicit-seed/accepted-point plans, but does not establish the real landing seed. Other-family AI, reproduction and target-reference/UI/audio cleanup remain suspended or blocked. Camera controls and plant-step keys are development controls, not player gameplay commands.
+
+Run `python -B scripts/run_game.py` from this project for the current application. See RUNTIME.md, EVIDENCE_LEDGER.md and NEXT_ACTIONS.md. DOSBox is optional targeted reference; no original program ran in this tranche. No public upload, push, installation or global configuration change occurred.
+
+A final whitespace-only cleanup in shared menu artwork was followed by rebuilding both affected binaries and five passing focused source/hash checks; see `research/integration/runtime-post-gate.json`. The aggregate117-check result remains the dated gate above.
+
+## Dated implementation history
 
 The existing Sol and Luna workers resumed on the same model routes. Plant foreground, normal shadows, atomic combined drawing and source flags are independently reviewed and integrated into an explicit single-record terrain inspector. The new queue helper is independently reviewed. The expanded gate passes95 checks and175 Rust tests, with43,314 private files excluded from Git. Run005 is closed: absolute mouse mode reproduced the guest-motion blocker, with all immutable inputs intact. An empty INT33 callback logger is being prepared to test the newly traced relative-counter input path without loading original game code.
 

@@ -153,7 +153,7 @@ def main():
  (scratch/'menu-oracle.rgb').write_bytes(expected)
  result=dict(status='passed',checked_utc=datetime.now(timezone.utc).isoformat(),original_or_gui_execution=False,
   evidence=record(proof_path),candidate_sha256=proof['candidate_sha256'],listing_hash_checks=listings,
-  assets_source=record(ROOT/'rust/crates/genewars-assets/src/lib.rs'),render_source=record(ROOT/'rust/crates/genewars-render/src/lib.rs'),menu_source=record(ROOT/'rust/crates/genewars-desktop/src/bin/genewars-menu.rs'),harness=record(source),native_harness=record(exe),
+  assets_source=record(ROOT/'rust/crates/genewars-assets/src/lib.rs'),render_source=record(ROOT/'rust/crates/genewars-render/src/lib.rs'),menu_source=record(ROOT/'rust/crates/genewars-desktop/src/bin/genewars-menu.rs'),menu_art_source=record(ROOT/'rust/crates/genewars-desktop/src/bin/support/menu_art.rs'),harness=record(source),native_harness=record(exe),
   font_count=len(fonts),glyph_count=totalglyphs,indices_compared=totalpixels,opacity_bytes_compared=totalpixels,opaque_pixels=totalopaque,rows=totalrows,fonts=fonts,
   text=dict(source=record(runtime/'DATA/TEXT.DAT'),entries=604,consumed=at,trailing_bytes=1),
   menu=dict(width=640,height=480,pixels_compared=307200,channels_compared=921600,bmp=record(bmp_path),rgb_sha256=sha(expected),normal_frame=0,animation=0,parts=parts,labels=labels),

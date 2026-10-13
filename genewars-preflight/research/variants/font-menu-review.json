@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T10:14:35.357210+00:00",
+  "checked_utc": "2026-10-13T11:29:48.378836+00:00",
   "original_or_gui_execution": false,
   "evidence": {
     "path": "research/ghidra/font-menu-evidence.json",
@@ -92,8 +92,13 @@
   },
   "menu_source": {
     "path": "rust/crates/genewars-desktop/src/bin/genewars-menu.rs",
-    "size": 5378,
-    "sha256": "abf5a0fcccaa87c4ad4072d521b85854ab7d761dc66fb44edd1de2be98add0dd"
+    "size": 3279,
+    "sha256": "b5998fd0ba96ee80c8b0b4a0ce1d8816aefd8bee1210da3dcc625d97e7cba094"
+  },
+  "menu_art_source": {
+    "path": "rust/crates/genewars-desktop/src/bin/support/menu_art.rs",
+    "size": 2363,
+    "sha256": "ed4c36e97472e90abd25c9d916297cc45b827545c2d606de7dcbe5005475ac81"
   },
   "harness": {
     "path": "research/variants/font-menu-review.rs",
@@ -103,7 +108,7 @@
   "native_harness": {
     "path": "private/review/font-menu/font-menu-review.exe",
     "size": 5256682,
-    "sha256": "89f54a859c9f50fb80b6b92fa11444faab0f8442b3878f1035ab3165c9cf1efc"
+    "sha256": "37dc99d4b0be56ed2613637386995db56ede964c4e5d4e8aedc262e4ba235e7d"
   },
   "font_count": 7,
   "glyph_count": 1190,

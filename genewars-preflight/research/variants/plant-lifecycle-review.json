@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-plant-lifecycle-review",
-  "utc": "2026-10-13T10:14:05.128132+00:00",
+  "utc": "2026-10-13T11:24:54.709290+00:00",
   "original_execution": false,
   "source": {
     "path": "rust/crates/genewars-core/src/plant_lifecycle.rs",
@@ -9,8 +9,8 @@
   },
   "evidence": {
     "path": "research/ghidra/plant-startup-evidence.json",
-    "size": 18436,
-    "sha256": "5b8930db2a6becd1f3ed468da0fbd411c7ae4f0778689151f0719d103f8df9bb"
+    "size": 19158,
+    "sha256": "87794fcd86a131c8495b010d07ff63a5d2cb351c1b6a0ff1a0b76c49dd1a81f3"
   },
   "instruction_pins": [
     {
@@ -183,8 +183,8 @@
   },
   "fixture": {
     "path": "private/ghidra/plant-startup/first-scheduled-fixture.json",
-    "size": 1044,
-    "sha256": "405f649cc2645c18fec92ee0eae2cf26d314acf517cdcbe6e6257045bbd05618"
+    "size": 1274,
+    "sha256": "0a6b8f48b85465ba721a19039b05d400258e1d95db10fe8d1e697dd15c741f25"
   },
   "native_output_sha256": "41a3c8b56ec3f47421f6971392ab8d97d1809e9b79a445b61d09b38d8d910bd6",
   "review_sources": [
@@ -202,7 +202,7 @@
   "native_harness": {
     "path": "private/review/plant-lifecycle/review.exe",
     "size": 5098794,
-    "sha256": "d27f3455a03f6a29bea21ad007d31516071ac0fb373f90ef5620ed5abaf1fec4"
+    "sha256": "a959cd737697635fb36515ed6f0b56ed18b2f65b1e8b5ee46d798815c5bbe59a"
   },
   "resolved_findings": [
     "Growmustpreserveoldnative30; fixedbyexplicitoldcountdowninput/regression",

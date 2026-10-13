@@ -1,0 +1,166 @@
+{
+  "status": "bounded-command-eligibility-audit-blocked-on-controller-consumer",
+  "utc": "2026-10-13T11:26:32.502408+00:00",
+  "original_execution": false,
+  "source_mission": {
+    "path": "private/ghidra/campaign-resources/152.dat",
+    "size": 343958,
+    "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+  },
+  "mission_layout_proof": {
+    "path": "research/ghidra/mission-load-evidence.json",
+    "size": 17258,
+    "sha256": "2d16d05150c104f59e4939c7c4ab7df2490d1c7a4aa81111d626604906b17d80"
+  },
+  "manual_index": {
+    "path": "research/manual/manual-index.json",
+    "size": 14427,
+    "sha256": "abe3c58fc73b7829393a0709c9476e204c3f86d22ae918227d910af2cbcc3ad0"
+  },
+  "controller_partial_export": {
+    "path": "private/ghidra/panel-activation-extra/instructions-0002cb00.txt",
+    "size": 25973,
+    "sha256": "8d95ccd9659386264b9df0a830f6cf3b7194f0bc7e070cc851e643b865b959db"
+  },
+  "groups": [
+    {
+      "family": 0,
+      "active_count": 1,
+      "active_types": {
+        "1": 1
+      },
+      "owner_bytes": {
+        "4": 1
+      },
+      "active_indices": [
+        0
+      ]
+    },
+    {
+      "family": 1,
+      "active_count": 40,
+      "active_types": {
+        "2": 40
+      },
+      "owner_bytes": {
+        "4": 40
+      },
+      "active_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ]
+    },
+    {
+      "family": 2,
+      "active_count": 0,
+      "active_types": {},
+      "owner_bytes": {},
+      "active_indices": []
+    },
+    {
+      "family": 3,
+      "active_count": 0,
+      "active_types": {},
+      "owner_bytes": {},
+      "active_indices": []
+    },
+    {
+      "family": 4,
+      "active_count": 0,
+      "active_types": {},
+      "owner_bytes": {},
+      "active_indices": []
+    },
+    {
+      "family": 5,
+      "active_count": 0,
+      "active_types": {},
+      "owner_bytes": {},
+      "active_indices": []
+    },
+    {
+      "family": 6,
+      "active_count": 0,
+      "active_types": {},
+      "owner_bytes": {},
+      "active_indices": []
+    },
+    {
+      "family": 7,
+      "active_count": 0,
+      "active_types": {},
+      "owner_bytes": {},
+      "active_indices": []
+    }
+  ],
+  "manual_candidates": [
+    {
+      "command": "Botanist harvest plant",
+      "input": "left-click existing plant while the appropriate specialist is active",
+      "status": "manual-documented; physical/native command binding unknown"
+    },
+    {
+      "command": "Botanist cut plant",
+      "input": "Control+left-click",
+      "status": "manual-documented; target/order mutation and actor eligibility unknown"
+    }
+  ],
+  "blocking_facts": [
+    "Loaded source has no active family2 player actors; all41 active serialized entities have ownerbyte4",
+    "Reviewed producer branch accepts owner equality with selected player record byte1 and active types1/3, excluding type2 plants as command recipients",
+    "Type3 producer branch additionally needs flags70bit01 and excludes signed state55 values2/3/4/5; newly placed flags70word0400 does not satisfy that bit",
+    "Producer command bytes03/11 are not given manual meanings until physical trigger, consumer dispatch and exact writes are pinned",
+    "Mask5 actor creation provides category0/2 requests under explicit gates, but role mapping and full initialized/live eligible actor cannot be inferred from this source file"
+  ],
+  "architecture_limits": [
+    "A loaded40plant world is a bounded subsystem, not original1C120; suspend other families explicitly",
+    "Apply proved plant/link/cell/count mutations transactionally; retain external target/UI/audio/bookkeeping cleanup requests without claiming them executed",
+    "Do not rebrand a growth/retirement debug mutation as a manual player command",
+    "Unsupported later growth/spawn/random paths require explicit suspension/request status, not invented rates or outcomes",
+    "Host scheduling cadence, runtime shade/visibility and original callback timing remain separate inputs"
+  ],
+  "next_evidence": [
+    "Trace selected actor role/resource mapping and actual physical modifier/click route",
+    "Pin command packet consumer, target reference validation, owning player check and exact state writes",
+    "Separate command submission/world-state mutation from later movement/work/completion callbacks",
+    "Review stateful adapter against source-linked invariant and unsupported-branch tests once stable"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T11:30:51.931306+00:00",
+  "reason": "Removed a trailing blank line at EOF after the full117-check gate; no behavioral code change. Rebuilt both menu/game binaries and refreshed affected source/hash-bound validations.",
+  "source_sha256": "ed4c36e97472e90abd25c9d916297cc45b827545c2d606de7dcbe5005475ac81",
+  "commands": [
+    {
+      "script": "scripts/render_menu.py",
+      "args": [],
+      "exit_code": 0,
+      "stdout": "{\"native_report\": {\"width\": 640, \"height\": 480, \"layout\": \"three_button_normal\", \"text_entries\": 604, \"text_consumed_bytes\": 36609, \"text_trailing_bytes\": 1, \"presented_frames\": 0, \"exit_reason\": \"bmp_written\", \"activation_requests\": [], \"input_updates\": 0, \"scene_dispatch\": false, \"gameplay\": false}, \"private_preview\": \"private/integration/menu/menu-9a65f99b5a044164abfe458468205ae6.png\", \"rgb_sha256\": \"49d107894bd481bdd9bee30fa89bf68a307b85eccad3e67419d20cbd79a1959f\"}\n",
+      "stderr": ""
+    },
+    {
+      "script": "research/variants/font-menu-review.py",
+      "args": [],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"fonts\": 7, \"glyphs\": 1190, \"indices\": 142315, \"opaque\": 65162, \"menu_pixels\": 307200, \"menu_channels\": 921600}\n",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/validate_runtime.py",
+      "args": [
+        "--window-smoke"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed\", \"cases\": 41, \"initial\": {\"steps\": 0, \"plants\": 40, \"cursor\": 0, \"target\": [20736, 13568], \"changed_world_frames\": 0, \"world_sha256\": \"72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2\", \"rgb_sha256\": \"adbc34fa1b7d0313f75abcf5d3afa6f26de3e63293920003697b5adde8c7bb83\", \"queue\": [29, 34, 35, 30, 33, 31, 32], \"blocked\": null}, \"two_steps\": {\"steps\": 2, \"plants\": 37, \"cursor\": 40, \"target\": [20736, 13568], \"changed_world_frames\": 1, \"world_sha256\": \"87cab435b0b768a7d59c0e7b097557ba8ed6bceaa42242881f51fef161d62242\", \"rgb_sha256\": \"71cd1f332aed8dd5c4d1969c096f6be5fb8edefdc3b1a2630da4493eec1725f8\", \"queue\": [29, 34, 35, 30, 33, 31], \"blocked\": null}, \"longer\": {\"steps\": 128, \"plants\": 33, \"cursor\": 82, \"target\": [20736, 13568], \"changed_world_frames\": 3, \"world_sha256\": \"01a8fbc0d14580fb2cc04e98876a2803225e707cde6dd611cbae23461f6c0cb4\", \"rgb_sha256\": \"bd34d41d66d608608a453b016e0cc0a3f8e8fe5915869b499735998172c78a5c\", \"queue\": [29, 34, 35, 30, 33, 31], \"blocked\": null}}\n",
+      "stderr": ""
+    },
+    {
+      "script": "research/variants/runtime-world-review.py",
+      "args": [],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed-independent-native-runtime-world-review\", \"successful_steps\": 1100, \"callback_count\": 55, \"full_state_bytes_compared\": 378353800, \"atomic_reproduction_boundary\": {\"attempted_tick\": 1101, \"reason\": \"reproduction\", \"native_error\": \"UnsupportedScheduledPlantState { index: 10, reason: \\\"scheduled reproduction/RNG path is not implemented\\\" }\", \"callbacks_before_reject\": [10]}}\n",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/validate_runtime_ui.py",
+      "args": [],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"passed-recorded-runtime-ui\", \"steps\": 52, \"screenshots\": 6, \"exit_code\": 0}\n",
+      "stderr": ""
+    }
+  ],
+  "original_execution": false
+}

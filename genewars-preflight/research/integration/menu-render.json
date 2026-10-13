@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "completed_utc": "2026-10-13T10:14:33.442967+00:00",
+  "completed_utc": "2026-10-13T11:29:46.480790+00:00",
   "sources": [
     {
       "entry_id": "root/2/disc/75",
@@ -67,8 +67,8 @@
     "text_entries": 604,
     "text_consumed_bytes": 36609,
     "text_trailing_bytes": 1,
-    "presented_frames": 3,
-    "exit_reason": "frame_limit",
+    "presented_frames": 0,
+    "exit_reason": "bmp_written",
     "activation_requests": [],
     "input_updates": 0,
     "scene_dispatch": false,
@@ -78,19 +78,17 @@
     "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\genewars-menu.exe",
     "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\menu",
     "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\menu\\titlescr.pal",
-    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\menu\\menu-362a8c700c474f5ea96e097afc0bcbe4.bmp",
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\menu\\menu-9a65f99b5a044164abfe458468205ae6.bmp",
     "--report",
-    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\menu\\menu-362a8c700c474f5ea96e097afc0bcbe4.json",
-    "--frames",
-    "3"
+    "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\integration\\menu\\menu-9a65f99b5a044164abfe458468205ae6.json"
   ],
-  "native_executable_sha256": "dac876f8ccb0d97d1efd4bca460f77678ce1b992f88ee1d73b4fcfe2d18d2122",
+  "native_executable_sha256": "bf93bdd6f8ccf91a25514f2dda6c8ed82a5e01f089974721682c7965feb3f1ff",
   "bmp_sha256": "0686d19dd9e58b3441abab757095876bce4e3f34b9a03de7469a9b62425bede0",
   "rgb_sha256": "49d107894bd481bdd9bee30fa89bf68a307b85eccad3e67419d20cbd79a1959f",
   "png_sha256": "61543ffe6f438c52f16b1b760e9b33236484a000e0103036f8d99a902e466b49",
-  "private_bmp": "private/integration/menu/menu-362a8c700c474f5ea96e097afc0bcbe4.bmp",
-  "private_preview": "private/integration/menu/menu-362a8c700c474f5ea96e097afc0bcbe4.png",
-  "private_report": "private/integration/menu/menu-362a8c700c474f5ea96e097afc0bcbe4.json",
+  "private_bmp": "private/integration/menu/menu-9a65f99b5a044164abfe458468205ae6.bmp",
+  "private_preview": "private/integration/menu/menu-9a65f99b5a044164abfe458468205ae6.png",
+  "private_report": "private/integration/menu/menu-9a65f99b5a044164abfe458468205ae6.json",
   "display_conversion": "Explicit floor(RGB6*255/63); original monitor transfer not measured.",
   "scope": "Static initial non-network three-button normal-frame composition. No interaction, command dispatch, mission loading, timing or original-game parity claim. Independent pixel comparison has a separate receipt."
 }

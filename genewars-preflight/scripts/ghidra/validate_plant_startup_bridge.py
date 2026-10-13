@@ -27,7 +27,7 @@ pin('plant-startup/instructions-0001ebd0.txt',['0001ebd0 MOVSX EAX,word ptr [EAX
 pin('plant-startup/instructions-0008b520.txt',['0008b52f MOV CL,BL','0008b539 INC BH','0008b541 JGE 0x0008b566','0008b56d INC AH','0008b5e1 AND DL,0x7','0008b5ea JNZ 0x0008b6e2','0008b6e0 MOV DL,0x1'])
 pin('mission-array-refs/instructions-0006d390.txt',['0006d393 MOVSX EAX,word ptr [EAX]','0006d468 MOV DL,byte ptr [EDX + 0x2]','0006d47c JMP dword ptr CS:[EDX*0x4 + 0x6d370]'])
 pin('display-geometry/instructions-0006c780.txt',['0006c79e ADD byte ptr [ESI + 0x19],0x6','0006c7a5 MOV AL,byte ptr [EAX + 0x1d]','0006c7ae OR BL,0x80','0006c7bc CMP EAX,0x4','0006c812 CALL 0x0008acc0','0006c8dd CALL 0x000724c0','0006c8e2 MOV byte ptr [ESI + 0x6],0x0','0006c8e6 DEC word ptr [0x0011c2b2]'])
-pin('terrain-map-refs/instructions-0008acc0.txt',['0008ad3e MOV word ptr [EAX],BX','0008ad58 MOV word ptr [EAX + 0x3],DX','0008adf5 MOV word ptr [EBX + 0x6],AX'])
+pin('terrain-map-refs/instructions-0008acc0.txt',['0008ad3e MOV word ptr [EAX],BX','0008ad58 MOV word ptr [EAX + 0x3],DX','0008adaa MOV byte ptr [EBX + 0x8],AL','0008adf5 MOV word ptr [EBX + 0x6],AX'])
 pin('panel-activation-refs/instructions-000724c0.txt',['0007254d MOV byte ptr [EDI + 0x2],0x0','000728aa CALL 0x000409f0','000728ca CALL 0x0002c200'])
 pin('plant-startup/instructions-000409f0.txt',['00040a0c CMP EBX,dword ptr [EAX + 0x4]','00040a11 MOV dword ptr [EAX + 0x4],0x0'])
 pin('plant-startup/audio-shared-tail.txt',['0004080b POP ECX','0004080c POP EBX','0004080d RET'])
@@ -96,10 +96,18 @@ def bounded_first_growth(growth,animation,counter,flags15,flags2e,overlay,neighb
 
 def unlink_source_record(index,gx,gy):
  r=plants[index];prev=reference(r,0);nxt=reference(r,3)
- if nxt is not None:records[nxt][:3]=r[:3]
- if prev is not None:records[prev][3:6]=r[3:6]
- else:region[cell(gx,gy)+6:cell(gx,gy)+9]=r[3:6]
+ own_links=bytes(r[:6]);head=cell(gx,gy)+6;head_before=bytes(region[head:head+3])
+ if r[2]==0 and r[5]==0:
+  # 8AD94..8ADB5: singleton head nulling preserves its index word.
+  region[head+2]=0
+  assert bytes(region[head:head+2])==head_before[:2]
+ else:
+  if nxt is not None:records[nxt][:3]=r[:3]
+  if prev is not None:records[prev][3:6]=r[3:6]
+  else:region[head:head+3]=r[3:6]
+ assert bytes(r[:6])==own_links
  cell_plants[gx,gy].remove(index)
+ return {'head_before_hex':head_before.hex(),'head_after_hex':bytes(region[head:head+3]).hex(),'removed_links_preserved_hex':own_links.hex()}
 
 cursor=cursor_next(0);scheduled=[]
 for index,r in plants.items():
@@ -116,7 +124,7 @@ for index in scheduled:
  result=bounded_first_growth(growth,r[0x19],r[0x2f],r[0x15],r[0x2e],region[cell(gx,gy)+13],neighbors,params[27],params[26],params[24],delta,params[29],r[24])
  fixtures.append({'record':index,'resource_slot':selector,'growth_before':growth,'terrain_class':t,'growth_delta':delta,'neighbor_positive_growth_count':neighbors,'crowding_threshold':params[26],'period':params[24],'result':result})
  if result['phase']=='retire':
-  unlink_source_record(index,gx,gy);region[cell(gx,gy)+13]=result['cell13_after'];r[6]=0;r[0x2e]=result['flags2e_u8'];r[0x30]=result['retirement_counter_u8']
+  fixtures[-1]['unlink_bytes']=unlink_source_record(index,gx,gy);region[cell(gx,gy)+13]=result['cell13_after'];r[6]=0;r[0x2e]=result['flags2e_u8'];r[0x30]=result['retirement_counter_u8']
  struct.pack_into('<h',r,0x2c,result['growth_i16']);r[0x2f]=1;r[0x19]=result['animation_u8'];r[0x15]=result['flags15_u8']
 private=G/'plant-startup/first-scheduled-fixture.json';payload=(json.dumps(fixtures,separators=(',',':'))+'\n').encode();private.write_bytes(payload)
 assert sum(bool(r[6]) for r in plants.values())==38
@@ -158,6 +166,7 @@ receipt={'candidate_sha256':candidate,'instruction_contracts':pins,
  'growth_slice':'Closed first-counter update: flags15mask01clear; flags2Emask9Aclear; growthsigned16>0; oldcounter0; celloverlay13>0; parameterthreshold1B>0; periodparameter18>1. Incrementcounterto1. Ifpositive-growth neighborcount>crowdingparameter1A: growth0, enterretirement below. Else addsignedparameter[10+terrainclass] withsigned16wrap/capupper32; nonpositiveoutputalsoretires. Counter1modperiod!=0 bypassesspawn/RNG; positivegrowthanimation=max(oldanimation,min(growth>>3,2)). ORflag04ifanimationchanged, frameunchanged, returncreatedcount0.',
  'retirement_slice':'Withadmittedfreshflags2E mask88clear:6C780 adds6tou8animation, setsgrowth0, flags2E|80 andcounter30=resourcecounter1D. Ifcounter>=4: subtract4andreturnactive. Ifcounter<4: immediatelyunlink; cell13 increasesby2 onlyifold<64 (63becomes65); owner0..3requestsDECwordatplayer+5FA, owner4skips; request724C0bookkeeping, cleartype6anddecrementplantcount. Immediatebranchdoesnotrenderanimation6 becauseactivebytecleared. Requestoldframe-dirtycheckinexplicitcurrentview; originalcallsvirtual70onlywhenprojectedpointinside[0,640-margin)x[0,480), andcachedframe27NULL suppressesitsbody.',
  'bookkeeping':'724C0 clears matching3-byte target-reference typebytes in activeotherfamilies (notplantgrowthfields), mayreactivatepanel ifremovedentityselected, andcalls409F0audio/objectnotification plus2C200UIselectioncleanup.409F0scans9attachmentrecordsstride16hex andclearsmatchingpointer+4;2C200onlyclearsmatchingpanelpointersR+19F/R+1CC. These areexplicitpendingrequests, notsilentlyexecutedbythepurestateplan. Actualworld/selection/audioinputsremaincallerresponsibility.',
+ 'unlink_byte_policy':'8ACC0 leaves removed entity own previous/next triples unchanged. In found-head singleton case previous.kind=next.kind=0, it clears only cell head kind byte+8 and preserves head index word+6. Otherwise it copies raw previous/next reference triples into neighbors/head, including null-kind reference index bytes; no canonical null normalization.',
  'terrain_class':'8B520 samples cell+5low3 atpositionroundedupindependentlywhenfraction>=128. Ifthatclass0, return1ifany of3x3neighbors aroundunroundedfloorcellhasnonzerolow3, else0.128wrap. This is separatefromtextureUVorientation.',
  'neighbor_contract':'8B300(mask0) establishesatleastone type2linkedentitypercell;8B6F0(mode0) countstype2whosevirtual68 returnsfalse.1EBD0 returnsgrowth<=0, socountpositivegrowth.6D390resolves3-byte signed16index/u8familyreferences. All40sourceplantmaplinksvalidatedexactlyonce andpositioncellconsistent.',
  'source_fixture':{'entry_id':'root/2/disc/152','source_sha256':sha(source),'active_family_counts':[g['active_raw_byte_nonzero'] for g in groups],'plant_links_before':len(plant_links),'plant_links_after':len(post_links),'scheduled_indices':scheduled,'cursor_after':cursor,'private_path':'private/ghidra/plant-startup/first-scheduled-fixture.json','fixture_sha256':sha(payload),'results_metadata':fixtures},

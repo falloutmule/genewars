@@ -94,6 +94,9 @@ def main():
     run('conditional_initial_panel_contract', py + ['scripts/ghidra/validate_initial_panel_bridge.py'])
     run('mouse_motion_contract', py + ['scripts/ghidra/validate_mouse_motion_bridge.py'])
     run('plant_startup_contract', py + ['scripts/ghidra/validate_plant_startup_bridge.py'])
+    run('plant_state_provider_contract', py + ['scripts/ghidra/validate_plant_state_bridge.py'])
+    run('plant_subsequent_step_contract', py + ['scripts/ghidra/validate_plant_step_bridge.py'])
+    run('move_order_contract', py + ['scripts/ghidra/validate_move_order_bridge.py'])
     run('player_creation_contract', py + ['scripts/ghidra/validate_player_creation_bridge.py'])
     run('terrain_camera_target_contract', py + ['scripts/validate_camera_target.py'])
     run('terrain_factor_plan_contract', py + ['scripts/validate_terrain_factor_contract.py'])
@@ -177,6 +180,15 @@ def main():
             reviewed = json.loads((ROOT / 'research/variants/font-menu-review.json').read_bytes())
             checks['current_native_menu_pixels_match_oracle'] = (reviewed['status'] == 'passed'
                 and rendered['rgb_sha256'] == reviewed['menu']['rgb_sha256'])
+
+    runtime_build = run('native_runtime_build', py + ['scripts/cargo.py', 'build', '-p', 'genewars-desktop', '--bin', 'genewars-game', '--offline', '--locked'])
+    if runtime_build.returncode == 0:
+        run('runtime_resource_staging', py + ['scripts/runtime_inputs.py'])
+        run('native_runtime_flow_and_failures', py + ['scripts/validate_runtime.py', '--window-smoke'], timeout=180)
+        run('independent_runtime_world', py + ['research/variants/runtime-world-review.py'], timeout=180)
+        run('recorded_runtime_ui', py + ['scripts/validate_runtime_ui.py'])
+    run('first_world_command_eligibility', py + ['research/variants/first-world-command-review.py'])
+    run('independent_actor_command', py + ['research/variants/actor-command-review.py'], timeout=180)
 
     baseline = json.loads((ROOT / 'research/verification.json').read_text(encoding='utf-8'))
     checks['dated_preflight_twelve_checks_passed'] = baseline['all_passed'] and len(baseline['checks']) == 12 and all(baseline['checks'].values())

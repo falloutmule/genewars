@@ -1,0 +1,392 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/command-resolver/instructions-00080ae0.txt",
+      "sha256": "f6abb34796b3a71a8443f62f35547b049f371968f15a7365dea2c367858739a6"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-00073e00.txt",
+      "sha256": "7869104854e5107e8d711b69704e8e1009dcba41892d0233c4daca72e8f0c5a0"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-00074cc0.txt",
+      "sha256": "701ba3601cd73db82d86a57d1502d53d6ad2a8d5910833c28f6e89784bcf542b"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-0008ac60.txt",
+      "sha256": "6fd0ff082558f7bc94da0a908710fab78b8d477369a106e15f37f4922ee557fa"
+    },
+    {
+      "private_path": "private/ghidra/camera-player-input/instructions-00080830.txt",
+      "sha256": "e9fda91b7c0fe5071443cf03bb73cd028996fdc32e7273e1a10f389d114c6973"
+    },
+    {
+      "private_path": "private/ghidra/plant-command/instructions-0004b630.txt",
+      "sha256": "1686608a6f95caf95f2f963ac824df9f02ecc2ed5d7a6d928fa85638b845ef76"
+    },
+    {
+      "private_path": "private/ghidra/actor-activation/instructions-0006df30.txt",
+      "sha256": "8afe40345a8ecb636ff3af67dd76b4fa4104596032270b0cc61ab26b2affe8b1"
+    },
+    {
+      "private_path": "private/ghidra/entity-shadow-panel/instructions-0007f3b0.txt",
+      "sha256": "6c128d79d263a395544aef8a99cac717c4b43bcebaf9271d742d4c1dfcff2034"
+    },
+    {
+      "private_path": "private/ghidra/campaign-level/instructions-00071b70.txt",
+      "sha256": "df0c9245caa952c20d3d319149413fc9d12382b8d65d036bba306ce8d7f19076"
+    }
+  ],
+  "tables": [
+    {
+      "va": "0x107ee8",
+      "length": 8192,
+      "sha256": "84dfe6902e4c8947b75f4ff0a54d82fced478dd9682255eaa973a88cbf76cf3c",
+      "identity": "trunc65536sin"
+    },
+    {
+      "va": "0x1086e8",
+      "length": 8192,
+      "sha256": "688e629369dc1c5379bae04b5e11100a4fd0aabd89745f2c0b5b6309ce0261c9",
+      "identity": "trunc65536cos"
+    }
+  ],
+  "rng": "73E00 updates shared11878A u16 seed=(seed*E62D)&FFFF, uses highbyte*8 as angle. One invocation consumes one draw and logs one RNG event. Explicit live seed required; source seed is not necessarily landing seed.",
+  "placement": "Radius fixed512. Double center low16words; dx=floor(1024*cos[(angle-512)&2047]/65536),dy=floor(1024*sin[index]/65536); add into words, arithmetic shift signedword by1, mask7FFF. Result0..32767. Full2048mappedtables match independently generated trunc65536sin/cos, not rounded values.",
+  "placement_acceptance": "Type3 actor avoids type1 special shortcut.74CC0 accepts iff ((1<<8B520class)&actor53)==0 and8B130blockerweight<10. It does not call74270 building obstacle lookup. The original repeatedly draws until accepted, without attempt cap. Safe bounded API rejects exhausted supplied candidates atomically; do not substitute center.",
+  "activation_loop": "For the player+1 partition of five200-byte slots in ascending order, activebyte6!=0 and flags71mask04 qualify. Before each retry: word70=(word70&FBFE)|0001 and byte16&=F7. Only no-associated-unit branch admitted: player+496kind!=5, so placement centered on player+9. Associated type5 route invokes move resolver and is excluded. After accepted point copy to actor+7, insert8AC60; resourceC0+1B=resource+18,+20|02,+1CINC u32; ifnewcount1andcategory+16==1 setactor+72=40. Preserveheight11,shade17,animation/frame/state55. After allfive slots INCplayer49D u32 even ifnone eligible.",
+  "link_byte_policy": "Actor.prev.kind=0,prev.index=cellID. Ifoldheadresolvesnonnull: oldhead.prev={actorID,actor.type}; actor.next={oldhead.ID,oldhead.type}. Else clearonlyactor.next.kind, preservingnext.index. Newhead={actorID,actor.type}. No canonical null rewrite.",
+  "landing_route": "7F3B0 creates objectcode0x31 at target with physicalheight27=terrainheight+25600 and orientation0,1024,speed1088 -> verticalvelocity-1088.112254+94 resolves6DF30 physics before4B630 objectdispatch; code0x31 dispatches4D089. Phase0 tests terrainheight>=physicalheight27 afterphysics; then snapsheight27 toterrain, clearsvelocity2D/2F/31, incrementsphase46, timer4A=150, calls80AE0(ownerplayer), and emits effects/audio. Nonlandingphase0 consumes RNG and creates effect0x06 everyupdate. Thus applying80AE0 atstartup bypasses real descent and prior shared RNG consumption.",
+  "source_seed": {
+    "entry_id": "root/2/disc/152",
+    "source_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+    "file_offset": 337024,
+    "initial_loaded_seed_u16": 5428,
+    "binding": "52-byte tail copied to118770; seed+26"
+  },
+  "placement_vectors": [
+    {
+      "seed_before": 0,
+      "center": [
+        20736,
+        13568
+      ],
+      "result": {
+        "seed_after": 0,
+        "angle": 0,
+        "position_u15_pair": [
+          20736,
+          13056
+        ]
+      }
+    },
+    {
+      "seed_before": 0,
+      "center": [
+        0,
+        0
+      ],
+      "result": {
+        "seed_after": 0,
+        "angle": 0,
+        "position_u15_pair": [
+          0,
+          32256
+        ]
+      }
+    },
+    {
+      "seed_before": 0,
+      "center": [
+        32767,
+        32767
+      ],
+      "result": {
+        "seed_after": 0,
+        "angle": 0,
+        "position_u15_pair": [
+          32767,
+          32255
+        ]
+      }
+    },
+    {
+      "seed_before": 1,
+      "center": [
+        20736,
+        13568
+      ],
+      "result": {
+        "seed_after": 58925,
+        "angle": 1840,
+        "position_u15_pair": [
+          20431,
+          13156
+        ]
+      }
+    },
+    {
+      "seed_before": 1,
+      "center": [
+        0,
+        0
+      ],
+      "result": {
+        "seed_after": 58925,
+        "angle": 1840,
+        "position_u15_pair": [
+          32463,
+          32356
+        ]
+      }
+    },
+    {
+      "seed_before": 1,
+      "center": [
+        32767,
+        32767
+      ],
+      "result": {
+        "seed_after": 58925,
+        "angle": 1840,
+        "position_u15_pair": [
+          32462,
+          32355
+        ]
+      }
+    },
+    {
+      "seed_before": 5428,
+      "center": [
+        20736,
+        13568
+      ],
+      "result": {
+        "seed_after": 29220,
+        "angle": 912,
+        "position_u15_pair": [
+          20908,
+          14050
+        ]
+      }
+    },
+    {
+      "seed_before": 5428,
+      "center": [
+        0,
+        0
+      ],
+      "result": {
+        "seed_after": 29220,
+        "angle": 912,
+        "position_u15_pair": [
+          172,
+          482
+        ]
+      }
+    },
+    {
+      "seed_before": 5428,
+      "center": [
+        32767,
+        32767
+      ],
+      "result": {
+        "seed_after": 29220,
+        "angle": 912,
+        "position_u15_pair": [
+          171,
+          481
+        ]
+      }
+    },
+    {
+      "seed_before": 32768,
+      "center": [
+        20736,
+        13568
+      ],
+      "result": {
+        "seed_after": 32768,
+        "angle": 1024,
+        "position_u15_pair": [
+          20736,
+          14080
+        ]
+      }
+    },
+    {
+      "seed_before": 32768,
+      "center": [
+        0,
+        0
+      ],
+      "result": {
+        "seed_after": 32768,
+        "angle": 1024,
+        "position_u15_pair": [
+          0,
+          512
+        ]
+      }
+    },
+    {
+      "seed_before": 32768,
+      "center": [
+        32767,
+        32767
+      ],
+      "result": {
+        "seed_after": 32768,
+        "angle": 1024,
+        "position_u15_pair": [
+          32767,
+          511
+        ]
+      }
+    },
+    {
+      "seed_before": 65535,
+      "center": [
+        20736,
+        13568
+      ],
+      "result": {
+        "seed_after": 6611,
+        "angle": 200,
+        "position_u15_pair": [
+          21030,
+          13149
+        ]
+      }
+    },
+    {
+      "seed_before": 65535,
+      "center": [
+        0,
+        0
+      ],
+      "result": {
+        "seed_after": 6611,
+        "angle": 200,
+        "position_u15_pair": [
+          294,
+          32349
+        ]
+      }
+    },
+    {
+      "seed_before": 65535,
+      "center": [
+        32767,
+        32767
+      ],
+      "result": {
+        "seed_after": 6611,
+        "angle": 200,
+        "position_u15_pair": [
+          293,
+          32348
+        ]
+      }
+    }
+  ],
+  "activation_vectors": [
+    {
+      "eligible": true,
+      "actor_writes": {
+        "flags70_u16": 1,
+        "flags16_u8": 128,
+        "position7_i16_pair": [
+          100,
+          200
+        ]
+      },
+      "resource_writes": {
+        "byte1b_u8": 7,
+        "flags20_u8": 2,
+        "count1c_u32": 1
+      },
+      "requests": [
+        "insert-cell-head-preserving-raw-reference-indices"
+      ],
+      "preserved": [
+        "height11_i32",
+        "shade17_u8",
+        "animation19_u8",
+        "frame1b_u8",
+        "state55_i8",
+        "pending-move-fields"
+      ]
+    },
+    {
+      "eligible": true,
+      "actor_writes": {
+        "flags70_u16": 1,
+        "flags16_u8": 128,
+        "position7_i16_pair": [
+          100,
+          200
+        ],
+        "byte72_u8": 40
+      },
+      "resource_writes": {
+        "byte1b_u8": 7,
+        "flags20_u8": 2,
+        "count1c_u32": 1
+      },
+      "requests": [
+        "insert-cell-head-preserving-raw-reference-indices"
+      ],
+      "preserved": [
+        "height11_i32",
+        "shade17_u8",
+        "animation19_u8",
+        "frame1b_u8",
+        "state55_i8",
+        "pending-move-fields"
+      ]
+    },
+    {
+      "eligible": true,
+      "actor_writes": {
+        "flags70_u16": 1,
+        "flags16_u8": 0,
+        "position7_i16_pair": [
+          100,
+          200
+        ]
+      },
+      "resource_writes": {
+        "byte1b_u8": 7,
+        "flags20_u8": 2,
+        "count1c_u32": 0
+      },
+      "requests": [
+        "insert-cell-head-preserving-raw-reference-indices"
+      ],
+      "preserved": [
+        "height11_i32",
+        "shade17_u8",
+        "animation19_u8",
+        "frame1b_u8",
+        "state55_i8",
+        "pending-move-fields"
+      ]
+    },
+    {
+      "eligible": false,
+      "actor_writes": {},
+      "resource_writes": {}
+    }
+  ],
+  "validated_seed_cases": 65536,
+  "validated_flag_cases": 131072,
+  "limits": [
+    "No whole initial tick/RNG schedule, descent frame count or first controllable-frame claim.",
+    "Explicit accepted candidates/terrain and blocker results, live RNG seed, resource metadata and player counters are required. No invented native pointers.",
+    "No associated type5 unit route; no resource/audio effects executed by pure plans.",
+    "Activation alone does not perform portrait selection/controller gates or immediate actor motion."
+  ]
+}
