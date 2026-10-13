@@ -1,0 +1,274 @@
+{
+  "status": "passed-independent-menu-replay-review",
+  "utc": "2026-10-13T10:23:39.029274+00:00",
+  "original_execution": false,
+  "gui_execution": false,
+  "evidence": {
+    "path": "research/ghidra/menu-replay-evidence.json",
+    "size": 33141,
+    "sha256": "6e6c1ff9a38971621fc9c6357dd82802c435b532739b509789111f84773b1ca5"
+  },
+  "instruction_pins": [
+    {
+      "path": "private/ghidra/font-menu-state/instructions-0007c6a0.txt",
+      "size": 2709,
+      "sha256": "f59af2770a13393f74bc1e4f5daa4fd0078a9158d899771cba99769891b56209"
+    },
+    {
+      "path": "private/ghidra/font-menu/instructions-0007c870.txt",
+      "size": 3523,
+      "sha256": "f46fc13eef1df0bc64238de65ae7355f73a889194b4c870f0a6b50ac91e52f07"
+    },
+    {
+      "path": "private/ghidra/font-menu/instructions-0007ca70.txt",
+      "size": 1305,
+      "sha256": "871ac5bcdd4ea2cf5add8feeea364367b0945ad28eba02e034535321d60f5382"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-0007c7f0.txt",
+      "size": 845,
+      "sha256": "6be02e606266ac60f0005e81366f3b74eef7426f5c1a86f211fc1892fb456c3a"
+    },
+    {
+      "path": "private/ghidra/ui-input/instructions-000a87d0.txt",
+      "size": 16702,
+      "sha256": "1fe8f247f251c7b1a5a333b71d830d93ddca2feb1f6d557448894131510afd58"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-000a4f96.txt",
+      "size": 25,
+      "sha256": "2ba34fae4d5548a4fa8c253d23b0fe8c00847fe7291fa748beb67467b62a59a4"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-000bba90.txt",
+      "size": 381,
+      "sha256": "507a5e3909ec29fcc950b2836a59dd9aaa834335205fcdf88f39d80970eb6ef9"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-000bba2a.txt",
+      "size": 863,
+      "sha256": "201c4e3b82b54f15352209041df78b2a2fb2eb5d45b21ba3f7da4fd30bbc0a51"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-000d4427.txt",
+      "size": 1045,
+      "sha256": "b1ff739d341744ce5a444b6b1438becc58523c17ac95d2defad327c809b0010c"
+    },
+    {
+      "path": "private/ghidra/terrain-constructor/instructions-0008db90.txt",
+      "size": 4282,
+      "sha256": "b68c2cedc7bf7904a58293c448423f5408f65061548769d78245f5961f0a7c8c"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-0008de50.txt",
+      "size": 635,
+      "sha256": "df7fe2bf415a11a3009f2493ca3328eda9fbc672337e21260a051aa6250f3810"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-0008de30.txt",
+      "size": 391,
+      "sha256": "cf9aeb689eea92945947d516e22aef9f2355435ac5b9b690d1e9b0c2a923a1d7"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-0008de40.txt",
+      "size": 47,
+      "sha256": "38c408354daa7b5fe83f855687f3b2d94df95791ab47a8b2a235157f57f6a601"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-0008de20.txt",
+      "size": 47,
+      "sha256": "416cfa7e3c179fa21b658adaba90a7f75c8ce8b86cf66d7c32fc3eab9c234f7c"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-0001bdb0.txt",
+      "size": 1037,
+      "sha256": "3b1d2328dc05417af2f88d4406d8f7dd3b508564ad389bd1366caaffebd1c73f"
+    },
+    {
+      "path": "private/ghidra/font-menu-state/instructions-0001be50.txt",
+      "size": 3102,
+      "sha256": "29e74a47878b1f8aaf350545727c9b901320d68eae52ddaae628f8f69cc314e3"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-000a4fc0.txt",
+      "size": 459,
+      "sha256": "e32f1431cf98daef809755125a535512ef2c8c9ab03eedc98befefe0592d4792"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-000a4ff8.txt",
+      "size": 3966,
+      "sha256": "34c9028e9dd5144f27b1cc60f0ef771a8df23da2b78ac857a462ca185c5d14a7"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-000a51c8.txt",
+      "size": 3101,
+      "sha256": "23a7f89ef2c1ac0f9a2e8bea853e28a16d1d980f65b1f033bfdbcb2e81dba5f8"
+    },
+    {
+      "path": "private/ghidra/mode-functions/instructions-000979a0.txt",
+      "size": 162,
+      "sha256": "d672e55dcb9e0e191be23f909a69d8df052f0127801d7b6326443aacc88f8b0f"
+    },
+    {
+      "path": "private/ghidra/mode-functions/instructions-000a13f0.txt",
+      "size": 2738,
+      "sha256": "d3197593d72dc4d5166b5dbf2f089b60712316f7a8d62f7c19ba9750a4701501"
+    },
+    {
+      "path": "private/ghidra/mouse-motion-refs/instructions-000a33a8.txt",
+      "size": 810,
+      "sha256": "7a72a7ffc19f128569181272190cb4c387f7a4f377c947038d5f7cd28543b608"
+    },
+    {
+      "path": "private/ghidra/mouse-callback-refs/instructions-000a3164.txt",
+      "size": 3524,
+      "sha256": "e729db9adf2b94e567e1936e02affd0bb1affd69cd0392ea22c8fd210f466eff"
+    },
+    {
+      "path": "private/ghidra/menu-replay-refs/instructions-000a3118.txt",
+      "size": 537,
+      "sha256": "2ae37892154415da6952feaded3a384cc0ae6e881c8c6c66015ee9db48bea9d1"
+    },
+    {
+      "path": "private/ghidra/mouse-motion-refs/instructions-000a3458.txt",
+      "size": 1078,
+      "sha256": "941ef9fe5edd6aa5caa3b3f2a15a6538a40acb60d06677c4bb5c0e1b400e2fc9"
+    },
+    {
+      "path": "private/ghidra/mouse-motion-refs/instructions-000a2ed4.txt",
+      "size": 1668,
+      "sha256": "623c6ca11064cedf752f981623428addb13ca7844b9bf70b5596ecde3dee9014"
+    },
+    {
+      "path": "private/ghidra/menu-replay-refs/instructions-0001cdf0.txt",
+      "size": 9116,
+      "sha256": "476c28e193b3bc5e7fdff41c0ae127f34b140f6ec56a69f94faa8523de475be2"
+    },
+    {
+      "path": "private/ghidra/ui-objects/instructions-00080130.txt",
+      "size": 930,
+      "sha256": "125c1861119065794c9b2a3429201f6d7bc3c408d30d861f8c4526389be3436c"
+    },
+    {
+      "path": "private/ghidra/menu-replay/instructions-0007ad10.txt",
+      "size": 612,
+      "sha256": "0401dfe1f59cea8f3501eca607c874e9b6ef8bd74044f7917f4e7e5fd080d1d5"
+    },
+    {
+      "path": "private/ghidra/mouse-callback-refs/instructions-000a2f98.txt",
+      "size": 217,
+      "sha256": "2530b633283696048071e1de7bdaf1c48931b4129e3f5d1ce56009cc3c21ca46"
+    },
+    {
+      "path": "private/ghidra/mouse-callback/instructions-000a3524.txt",
+      "size": 6300,
+      "sha256": "f34144576fdb8a7fbed0be241831487c9e2ccc0212f46fbbcea4fc672c2933e2"
+    },
+    {
+      "path": "private/ghidra/module-transition-refs/instructions-0001bbc0.txt",
+      "size": 3633,
+      "sha256": "0fb22c2e71579e6128d50664eb5f40c886a0ed3e327b19b9f0fdfed330db28fb"
+    }
+  ],
+  "additional_bounds_pins": [
+    {
+      "path": "private/ghidra/mouse-motion/instructions-000a340c.txt",
+      "size": 459,
+      "sha256": "c7eeaf50bce5d28f3a2944ae3a622d67dc603fa0aa8df19dde92a494c0e1955d"
+    },
+    {
+      "path": "private/ghidra/mouse-motion/instructions-000a3884.txt",
+      "size": 947,
+      "sha256": "4e8cfea4bbb60ea36d308553a2dc5d776223b7c609bf875f66c9d6aa2fd8b11c"
+    }
+  ],
+  "formal_timer_vectors": 84,
+  "clock_arithmetic_vectors": 108,
+  "clock_phase_vectors": [
+    {
+      "case": "midnight",
+      "baseline": 0,
+      "start": 8639999,
+      "now": 0,
+      "elapsed": 4286327297
+    },
+    {
+      "case": "daily-baseline-crossing",
+      "baseline": 0,
+      "prior_raw": 8639999,
+      "start": 8639999,
+      "now": 0,
+      "elapsed": 4286327297
+    },
+    {
+      "case": "midnight",
+      "baseline": 1,
+      "start": 8639998,
+      "now": 8639999,
+      "elapsed": 1
+    },
+    {
+      "case": "daily-baseline-crossing",
+      "baseline": 1,
+      "prior_raw": 0,
+      "start": 8639999,
+      "now": 0,
+      "elapsed": 4286327297
+    },
+    {
+      "case": "midnight",
+      "baseline": 10000,
+      "start": 8629999,
+      "now": 8630000,
+      "elapsed": 1
+    },
+    {
+      "case": "daily-baseline-crossing",
+      "baseline": 10000,
+      "prior_raw": 9999,
+      "start": 8639999,
+      "now": 0,
+      "elapsed": 4286327297
+    },
+    {
+      "case": "midnight",
+      "baseline": 8639999,
+      "start": 0,
+      "now": 1,
+      "elapsed": 1
+    },
+    {
+      "case": "daily-baseline-crossing",
+      "baseline": 8639999,
+      "prior_raw": 8639998,
+      "start": 8639999,
+      "now": 0,
+      "elapsed": 4286327297
+    }
+  ],
+  "threshold_elapsed_centiseconds": 3100,
+  "mouse_saved_addresses_outside_zeroed_buffers": [
+    "0x19f354",
+    "0x19f358",
+    "0x19f35a",
+    "0x19d314",
+    "0x19d318",
+    "0x19d220"
+  ],
+  "source": {
+    "path": "research/variants/menu-replay-review.py",
+    "size": 5476,
+    "sha256": "ae6fa03e4156a4b87813d492d7c8e558d1c2f3bcc21ed2dc104ce014d4750cc3"
+  },
+  "findings": [
+    "No mismatch in3100centisecond unsigned threshold, sharedtail actionoverride or explicitly gated normal mode reinitialization",
+    "BBA90 dailyphase discontinuity occurs on raw clock crossing fixedbaseline; atmidnight subtraction is continuous onlywhen baseline isnotzero",
+    "Old19F358/35A are copied to temporary19D310/312 before currentSI/DIoverwrite; savedcounter/remainders surviveknownteardownbufferzeroes"
+  ],
+  "limits": [
+    "3100 logicalclock centiseconds is not a guaranteed31.00 hostwallclock delay; handler cadence/DOSclock granularity external",
+    "No measured run006 clock/start/action state; replay cannot establish failed or successfulclick",
+    "Successful640x480restore required for center320x240 andsensitivity1/1; activeinitreturnsfailureandregisteredcallbackskip assumesdriverpersistence",
+    "No new original run, emulator,GUI or mouse-driver simulation"
+  ]
+}

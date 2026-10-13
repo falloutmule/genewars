@@ -1,0 +1,55 @@
+{
+  "status": "passed-targeted-static-followup",
+  "recorded_utc": "2026-10-13T10:24:25.755172+00:00",
+  "parent_checkpoint": "a3b80d7",
+  "last_full_gate_checks": 105,
+  "last_full_gate_rust_tests": 195,
+  "next_registered_gate_checks": 107,
+  "production_changed": false,
+  "original_execution": false,
+  "validation": {
+    "static_listing_pins": 32,
+    "mapped_tables": 4,
+    "clock_cases": 259200,
+    "timer_vectors": 84,
+    "gated_mouse_transitions": 16,
+    "independent_clock_vectors": 108
+  },
+  "source_pins": [
+    {
+      "path": "research/ghidra/menu-replay-evidence.json",
+      "bytes": 33141,
+      "sha256": "6e6c1ff9a38971621fc9c6357dd82802c435b532739b509789111f84773b1ca5"
+    },
+    {
+      "path": "research/ghidra/menu-replay-bridge.md",
+      "bytes": 4226,
+      "sha256": "27d2026bc2fd2af2bfda8e2963a82817521558595b591e95186538d7bd4d017f"
+    },
+    {
+      "path": "scripts/ghidra/validate_menu_replay_bridge.py",
+      "bytes": 13202,
+      "sha256": "ee7700753ecde9745b17636f09ec6c77800f01b8b4bc89a8a809b499fc3c67f5"
+    },
+    {
+      "path": "research/variants/menu-replay-review.json",
+      "bytes": 9612,
+      "sha256": "1364f667e13f2b270dbb7b0d35f0ac8294a9a44c2aee92129ce76772d057fb73"
+    },
+    {
+      "path": "research/variants/menu-replay-review.py",
+      "bytes": 5476,
+      "sha256": "ae6fa03e4156a4b87813d492d7c8e558d1c2f3bcc21ed2dc104ce014d4750cc3"
+    },
+    {
+      "path": "research/variants/menu-replay-review.md",
+      "bytes": 2325,
+      "sha256": "db6468c09e0096c1490fb498a9043c49ebf6e3f3d6579dda746683fe48dfed2c"
+    }
+  ],
+  "limits": [
+    "No whole aggregate rerun is claimed after registering two new focused checks",
+    "3100 logical DOS centiseconds is not a guaranteed31-second host delay",
+    "Original input delivery and run006 replay cause remain unproved"
+  ]
+}

@@ -1,0 +1,1179 @@
+{
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "instruction_contracts": [
+    {
+      "private_path": "private/ghidra/font-menu-state/instructions-0007c6a0.txt",
+      "sha256": "f59af2770a13393f74bc1e4f5daa4fd0078a9158d899771cba99769891b56209"
+    },
+    {
+      "private_path": "private/ghidra/font-menu/instructions-0007c870.txt",
+      "sha256": "f46fc13eef1df0bc64238de65ae7355f73a889194b4c870f0a6b50ac91e52f07"
+    },
+    {
+      "private_path": "private/ghidra/font-menu/instructions-0007ca70.txt",
+      "sha256": "871ac5bcdd4ea2cf5add8feeea364367b0945ad28eba02e034535321d60f5382"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-0007c7f0.txt",
+      "sha256": "6be02e606266ac60f0005e81366f3b74eef7426f5c1a86f211fc1892fb456c3a"
+    },
+    {
+      "private_path": "private/ghidra/ui-input/instructions-000a87d0.txt",
+      "sha256": "1fe8f247f251c7b1a5a333b71d830d93ddca2feb1f6d557448894131510afd58"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-000a4f96.txt",
+      "sha256": "2ba34fae4d5548a4fa8c253d23b0fe8c00847fe7291fa748beb67467b62a59a4"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-000bba90.txt",
+      "sha256": "507a5e3909ec29fcc950b2836a59dd9aaa834335205fcdf88f39d80970eb6ef9"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-000bba2a.txt",
+      "sha256": "201c4e3b82b54f15352209041df78b2a2fb2eb5d45b21ba3f7da4fd30bbc0a51"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-000d4427.txt",
+      "sha256": "b1ff739d341744ce5a444b6b1438becc58523c17ac95d2defad327c809b0010c"
+    },
+    {
+      "private_path": "private/ghidra/terrain-constructor/instructions-0008db90.txt",
+      "sha256": "b68c2cedc7bf7904a58293c448423f5408f65061548769d78245f5961f0a7c8c"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-0008de50.txt",
+      "sha256": "df7fe2bf415a11a3009f2493ca3328eda9fbc672337e21260a051aa6250f3810"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-0008de30.txt",
+      "sha256": "cf9aeb689eea92945947d516e22aef9f2355435ac5b9b690d1e9b0c2a923a1d7"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-0008de40.txt",
+      "sha256": "38c408354daa7b5fe83f855687f3b2d94df95791ab47a8b2a235157f57f6a601"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-0008de20.txt",
+      "sha256": "416cfa7e3c179fa21b658adaba90a7f75c8ce8b86cf66d7c32fc3eab9c234f7c"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-0001bdb0.txt",
+      "sha256": "3b1d2328dc05417af2f88d4406d8f7dd3b508564ad389bd1366caaffebd1c73f"
+    },
+    {
+      "private_path": "private/ghidra/font-menu-state/instructions-0001be50.txt",
+      "sha256": "29e74a47878b1f8aaf350545727c9b901320d68eae52ddaae628f8f69cc314e3"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-000a4fc0.txt",
+      "sha256": "e32f1431cf98daef809755125a535512ef2c8c9ab03eedc98befefe0592d4792"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-000a4ff8.txt",
+      "sha256": "34c9028e9dd5144f27b1cc60f0ef771a8df23da2b78ac857a462ca185c5d14a7"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-000a51c8.txt",
+      "sha256": "23a7f89ef2c1ac0f9a2e8bea853e28a16d1d980f65b1f033bfdbcb2e81dba5f8"
+    },
+    {
+      "private_path": "private/ghidra/mode-functions/instructions-000979a0.txt",
+      "sha256": "d672e55dcb9e0e191be23f909a69d8df052f0127801d7b6326443aacc88f8b0f"
+    },
+    {
+      "private_path": "private/ghidra/mode-functions/instructions-000a13f0.txt",
+      "sha256": "d3197593d72dc4d5166b5dbf2f089b60712316f7a8d62f7c19ba9750a4701501"
+    },
+    {
+      "private_path": "private/ghidra/mouse-motion-refs/instructions-000a33a8.txt",
+      "sha256": "7a72a7ffc19f128569181272190cb4c387f7a4f377c947038d5f7cd28543b608"
+    },
+    {
+      "private_path": "private/ghidra/mouse-callback-refs/instructions-000a3164.txt",
+      "sha256": "e729db9adf2b94e567e1936e02affd0bb1affd69cd0392ea22c8fd210f466eff"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay-refs/instructions-000a3118.txt",
+      "sha256": "2ae37892154415da6952feaded3a384cc0ae6e881c8c6c66015ee9db48bea9d1"
+    },
+    {
+      "private_path": "private/ghidra/mouse-motion-refs/instructions-000a3458.txt",
+      "sha256": "941ef9fe5edd6aa5caa3b3f2a15a6538a40acb60d06677c4bb5c0e1b400e2fc9"
+    },
+    {
+      "private_path": "private/ghidra/mouse-motion-refs/instructions-000a2ed4.txt",
+      "sha256": "623c6ca11064cedf752f981623428addb13ca7844b9bf70b5596ecde3dee9014"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay-refs/instructions-0001cdf0.txt",
+      "sha256": "476c28e193b3bc5e7fdff41c0ae127f34b140f6ec56a69f94faa8523de475be2"
+    },
+    {
+      "private_path": "private/ghidra/ui-objects/instructions-00080130.txt",
+      "sha256": "125c1861119065794c9b2a3429201f6d7bc3c408d30d861f8c4526389be3436c"
+    },
+    {
+      "private_path": "private/ghidra/menu-replay/instructions-0007ad10.txt",
+      "sha256": "0401dfe1f59cea8f3501eca607c874e9b6ef8bd74044f7917f4e7e5fd080d1d5"
+    },
+    {
+      "private_path": "private/ghidra/mouse-callback-refs/instructions-000a2f98.txt",
+      "sha256": "2530b633283696048071e1de7bdaf1c48931b4129e3f5d1ce56009cc3c21ca46"
+    },
+    {
+      "private_path": "private/ghidra/mouse-callback/instructions-000a3524.txt",
+      "sha256": "f34144576fdb8a7fbed0be241831487c9e2ccc0212f46fbbcea4fc672c2933e2"
+    },
+    {
+      "private_path": "private/ghidra/module-transition-refs/instructions-0001bbc0.txt",
+      "sha256": "0fb22c2e71579e6128d50664eb5f40c886a0ed3e327b19b9f0fdfed330db28fb"
+    }
+  ],
+  "mapped_module_tables": [
+    {
+      "va": "0x1127b8",
+      "length": 8,
+      "sha256": "7b742c398b1a841a160d67298c4e11857acc1db71c3f90509722ca74733cb814",
+      "values": [
+        "0x0",
+        "0x8"
+      ]
+    },
+    {
+      "va": "0x112798",
+      "length": 16,
+      "sha256": "6fac926504938db6f270d82e652b40d7fe802f13a6bbd4d6a37ad23c3013b139",
+      "values": [
+        "0x8de50",
+        "0x8de40",
+        "0x8de30",
+        "0x8de20"
+      ]
+    },
+    {
+      "va": "0x111ed4",
+      "length": 8,
+      "sha256": "f976b84a6792a2ba0959787a04b09482a1b8c68d44c7aefe7751b1b66629e0dd",
+      "values": [
+        "0x0",
+        "0x20"
+      ]
+    },
+    {
+      "va": "0x112898",
+      "length": 16,
+      "sha256": "be683be60874b1fe4c30ccd87ced08b41a5b8514ff68ff6ca96ef4027e8aef8d",
+      "values": [
+        "0x13c30",
+        "0x13c20",
+        "0x13c10",
+        "0x13c00"
+      ]
+    }
+  ],
+  "movie_paths": [
+    {
+      "va": "0x10d138",
+      "relative_path": "intro\\logo.smk",
+      "length": 15,
+      "sha256": "16f000489b851aa8a9dd82ac50cfa65516567d56fbb82bc8a0de281764d60506"
+    },
+    {
+      "va": "0x10d147",
+      "relative_path": "intro\\biointro.smk",
+      "length": 19,
+      "sha256": "8ca35287a89de02fba4841f7011289d0ecb5a4a77d4dd06560b1e88749a083b6"
+    },
+    {
+      "va": "0x10d15a",
+      "relative_path": "intro\\gw.smk",
+      "length": 13,
+      "sha256": "fbf640aaa805da7ca9424a0cd78a3d27ae639d7deccacb504f71f923656ae48f"
+    }
+  ],
+  "timer": {
+    "start_store": "7C7DB/E0: A4F96 -> menu object+0x14, at end of menu initialization",
+    "test": "7CA30..7CA54: ((now_u32-start_u32) mod2^32)/100 >30 using unsigned DIV",
+    "threshold_centiseconds": 3100,
+    "threshold_seconds": 31,
+    "activity": "The menu input/draw/exit functions and control-manager call do not reset this timestamp for motion, a press or release. This is a residence timer, not a demonstrated input-reset inactivity timer.",
+    "precedence": "Timer runs at the shared tail after action selection. Once expired, it overwrites any earlier next-module request with186F2C in that handler invocation. A terminal process exit need not return to the timer.",
+    "clock": "A4F96 jumpsBBA90; BBA2A callsINT21/AH2C throughD4427 and forms ((hours*60+minutes)*60+seconds)*100+hundredths. BBA90 subtracts baseline1A109C, adding8640000 if day counter is below baseline. Clock changes/wrap can also cause unsigned timer underflow; normal31s derivation assumes forward clock progression."
+  },
+  "replay_chain": "8DB90 constructs186F24 descriptoroffset8, so186F2C vtable112798 has init8DE50\u21927CB20\u21921BDB0. That calls1BE50 forlogo.smk,biointro.smk,gw.smk. Next module handler8DE30\u21927CB80 schedulesmenu185008. Module initialization re-enters7C6A0 and refreshes its timestamp. Movie helper can skip playback when118968mask08 set.",
+  "mouse_mode_path": {
+    "admission": "Successful mode setup/mouse initialization, playback not skipped, restoreflag118969mask20set. Does not establish actual run006 branch state.",
+    "logo_and_bio": "1BE50 low-resolution argumentDL1 calls979A0(mode1,320,200), thenA3164(NULL,1,1). After playback it restores979A0(mode13,640,480) andA3164(NULL,1,1) under restoreflag20.",
+    "gw_movie": "Third call has DL0 and no mode switch/reinitialization in1BE50; preserves preceding restored mouse state.",
+    "deactivation": "979A0\u2192A13F0 callsA33A8. Successful active teardown sets19D31C=0 and19F350=0; it does not clear already-registered19F354.",
+    "reinitialization": "A3164 returns-1 without changes if already active. Otherwise it installs sensitivity1/1, bounds from own display dimensions and centered ownposition (320,240 for640x480); clears19F350. When19F354 is nonzero it skipsDOSreset/function0C re-registration. Only initial registration sets mask007F/callbackA3524.",
+    "counter_preservation": "Known teardown/reinit zeroed regions [19D320,19E340),[19E350,19F350) exclude saved mickeywords19F358/35A and division remainders19D314/318. These routines do not reset those fields. Driver counter behavior across graphics modes remains external."
+  },
+  "menu_cursor": "7C6A0\u219280130 selects menu cursor record5 at115E74+30, then7AD10 updates image/hotspot throughA2FB8/A2F98. This does not callA3458/recenter orA3118/change sensitivity. Returning to center can result from preceding mode reinitialization, not an observed movement failure diagnosis.",
+  "inhibition": {
+    "foreground19F350": "Mode teardown/reinitialization and completed image setter clear it; A2DA0 temporarily sets it during cursor/background drawing andA2ED4 clears it/appends pending motion. No claim about an asynchronous sampled runtime value.",
+    "command_line19D220": "Only direct write in reference graph is1CF50, setting1 for command-line L/l. Normal video/menu functions reviewed do not clear it. Direct-reference analysis does not rule out every indirect write; actual process arguments/runtime memory remain external evidence.",
+    "movement": "A3524 still needs active19D31C andeventmask01; consumes signedSI/DI, notabsoluteCX/DX. Immediate ownposition addition requires19F350=0 and19D220=0; pending path must also be considered."
+  },
+  "clock_cases": 259200,
+  "timer_vectors": [
+    {
+      "start_u32": 0,
+      "now_u32": 0,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 0,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 0,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 2999,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 2999,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 2999,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3000,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3000,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3000,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3099,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3099,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3099,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3100,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3100,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3100,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3101,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3101,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 3101,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 4294967295,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 4294967295,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 0,
+      "now_u32": 4294967295,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 1,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 1,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 1,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3000,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3000,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3000,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3001,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3001,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3001,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3100,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3100,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3100,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3101,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3101,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3101,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3102,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3102,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 3102,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 0,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 0,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 1,
+      "now_u32": 0,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305419896,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305419896,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305419896,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422895,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422895,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422895,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422896,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422896,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422896,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422995,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422995,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422995,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422996,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422996,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422996,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422997,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422997,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305422997,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305419895,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305419895,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 305419896,
+      "now_u32": 305419895,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 4294967280,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 4294967280,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 4294967280,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 0,
+        "quotient": 0,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 2983,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 2983,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 2983,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 2999,
+        "quotient": 29,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 2984,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 2984,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 2984,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3000,
+        "quotient": 30,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 3083,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": null
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 3083,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": "0x18653C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 3083,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3099,
+        "quotient": 30,
+        "next_module": "0x186F19"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 3084,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 3084,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 3084,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3100,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 3085,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 3085,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 3085,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 3101,
+        "quotient": 31,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 4294967279,
+      "requested_module": null,
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 4294967279,
+      "requested_module": "0x18653C",
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    },
+    {
+      "start_u32": 4294967280,
+      "now_u32": 4294967279,
+      "requested_module": "0x186F19",
+      "result": {
+        "elapsed_u32": 4294967295,
+        "quotient": 42949672,
+        "next_module": "0x186F2C"
+      }
+    }
+  ],
+  "mouse_transition_cases": 16,
+  "mouse_transition_vectors": [
+    {
+      "initially_registered": false,
+      "cli_inhibition": 0,
+      "after_normal_restore": {
+        "active": true,
+        "registered": true,
+        "sensitivity": [
+          1,
+          1
+        ],
+        "position": [
+          320,
+          240
+        ],
+        "foreground_inhibition": 0,
+        "cli_inhibition": 0,
+        "previous_mickeys": [
+          123,
+          -456
+        ],
+        "remainders": [
+          3,
+          4
+        ],
+        "registration_calls": 1
+      }
+    },
+    {
+      "initially_registered": true,
+      "cli_inhibition": 0,
+      "after_normal_restore": {
+        "active": true,
+        "registered": true,
+        "sensitivity": [
+          1,
+          1
+        ],
+        "position": [
+          320,
+          240
+        ],
+        "foreground_inhibition": 0,
+        "cli_inhibition": 0,
+        "previous_mickeys": [
+          123,
+          -456
+        ],
+        "remainders": [
+          3,
+          4
+        ],
+        "registration_calls": 0
+      }
+    },
+    {
+      "initially_registered": false,
+      "cli_inhibition": 1,
+      "after_normal_restore": {
+        "active": true,
+        "registered": true,
+        "sensitivity": [
+          1,
+          1
+        ],
+        "position": [
+          320,
+          240
+        ],
+        "foreground_inhibition": 0,
+        "cli_inhibition": 1,
+        "previous_mickeys": [
+          123,
+          -456
+        ],
+        "remainders": [
+          3,
+          4
+        ],
+        "registration_calls": 1
+      }
+    },
+    {
+      "initially_registered": true,
+      "cli_inhibition": 1,
+      "after_normal_restore": {
+        "active": true,
+        "registered": true,
+        "sensitivity": [
+          1,
+          1
+        ],
+        "position": [
+          320,
+          240
+        ],
+        "foreground_inhibition": 0,
+        "cli_inhibition": 1,
+        "previous_mickeys": [
+          123,
+          -456
+        ],
+        "remainders": [
+          3,
+          4
+        ],
+        "registration_calls": 0
+      }
+    }
+  ],
+  "diagnostic": "For a future authorized reference session, timestamp the first labelled menu and complete calibrated captured relative movement, visible cursor-position check and press/release within20s; stop before31s. Do not interpret replay afterthatboundary as evidenceofclickactivation. Ifmovement fails, preservecapture/timestamps andstop ratherthanrepeatblindtargetclicks. An independent empty logger could first exercise matching low/high graphics mode changes, since same-mode callback success doesnotprove across-mode driver counters/registration. No original-code modification is proposed.",
+  "limits": [
+    "No original execution in this lane; no claim about run006 host action success or exact transition cause.",
+    "No emulator-driver callback registers measured here; probe012 observations are external.",
+    "No whole-menu keyboard behavior or arbitrary graphics/video transitive library semantics emulated."
+  ]
+}
