@@ -36,13 +36,13 @@ impl ActorWorld {
                     .ok_or(ActorWorldError::MissingBlueprintBinding(id))?;
                 let resource=resources.iter().find(|r|r.key()==key).ok_or(ActorWorldError::MissingBlueprintBinding(id))?;
                 let cancelled=actor[0x55]==9&&actor[0x7e]==0xff&&actor[0x82]==0;
-                let callback=if actor[0x55]==9&&!cancelled {
+                let attempt=|staged:&mut ActorWorld,staged_jobs:&mut TerrainJobPool|->Result<ConstructionAwareActorCallback,ConstructionWorldError>{Ok(if actor[0x55]==9&&!cancelled {
                     ConstructionAwareActorCallback::Architect{id:id as u16,receipt:staged.step_architect_construction_callback(
-                        id as u16,frame,context,physics,trig,&mut staged_jobs,border,resource,
+                        id as u16,frame,context,physics,trig,staged_jobs,border,resource,
                         owner==selected_owner,selected_actor==Some(id as u16))?}
                 }else if actor[0x55]==1&&actor[0x57]&3==1 {
                     ConstructionAwareActorCallback::Architect{id:id as u16,receipt:staged.step_pending_architect_callback(
-                        id as u16,frame,context,physics,trig,&mut staged_jobs,border,resource,
+                        id as u16,frame,context,physics,trig,staged_jobs,border,resource,
                         owner==selected_owner,selected_actor==Some(id as u16))?}
                 }else if actor[0x55]==8&&actor[0x57]&3==1&&actor[0x58]==2&&actor[0x82]==1&&actor[0x7e]==0 {
                     // Preview common motion on an owned clone to select the
@@ -52,8 +52,8 @@ impl ActorWorld {
                     let motion=arrival_world.step_architect_motion(id as u16,frame,context,physics,trig)?;
                     if motion.arrived {
                         let receipt=arrival_world.finish_arrived_architect_callback(id as u16,frame,context,physics,trig,
-                            &mut staged_jobs,border,resource,(owner==selected_owner,selected_actor==Some(id as u16)),motion)?;
-                        staged=arrival_world;ConstructionAwareActorCallback::Architect{id:id as u16,receipt}
+                            staged_jobs,border,resource,(owner==selected_owner,selected_actor==Some(id as u16)),motion)?;
+                        *staged=arrival_world;ConstructionAwareActorCallback::Architect{id:id as u16,receipt}
                     }else{
                         let idle=ActorIdleContext{runtime_mode,override_180d80,runtime_count_11c2bc:word(&staged.backing,0x355c)as u16,player_mode:staged.player(owner)?.bytes()[2]};
                         ConstructionAwareActorCallback::Ordinary(staged.step_actor_callback_with_idle(id as u16,frame,context,physics,trig,resource,idle)?)
@@ -64,6 +64,12 @@ impl ActorWorld {
                         player_mode:staged.player(owner)?.bytes()[2]};
                     ConstructionAwareActorCallback::Ordinary(staged.step_actor_callback_with_idle(
                         id as u16,frame,context,physics,trig,resource,idle)?)
+                })};
+                let callback=match attempt(&mut staged,&mut staged_jobs){
+                    Err(ConstructionWorldError::Setup(crate::construction_setup::ArchitectSetupError::UnsupportedSite(crate::construction_site::ConstructionSiteClass::Blocked)))=>{
+                        let idle=ActorIdleContext{runtime_mode,override_180d80,runtime_count_11c2bc:word(&staged.backing,0x355c)as u16,player_mode:staged.player(owner)?.bytes()[2]};
+                        ConstructionAwareActorCallback::Architect{id:id as u16,receipt:staged.step_blocked_site_callback(id as u16,frame,context,physics,trig,border,resource,idle,(owner==selected_owner,selected_actor==Some(id as u16)))?}
+                    },other=>other?,
                 };
                 receipts.push(callback);
             }

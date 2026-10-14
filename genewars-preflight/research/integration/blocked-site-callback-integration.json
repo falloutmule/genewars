@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "utc": "2026-10-14T23:34:00.522206+00:00",
+  "scope": "Source class1 invalid construction site becomes ordinary cancellation, with shared post-motion continuation",
+  "sha256": {
+    "rust/crates/genewars-runtime/src/construction_cancellation.rs": "8571aea167284e7a64a365027db110cdab777e645244f1576b98ebb55c18e0c0",
+    "rust/crates/genewars-runtime/src/actor_world/building_updates.rs": "897c9cb6742223f9d2feb6ab0a8634b5693b12797b69d28d9b573207541d34f4",
+    "rust/crates/genewars-runtime/src/actor_world/construction_scheduler.rs": "337ad8e3bbb105eb973dc74f987d374ff0efd130b9f43ec486d333ba411510a3"
+  },
+  "verified": [
+    "Literal51E80 cleanup48cases/11019648actor+map bytes including corrected507D0 prefix.",
+    "Focused building_updates tests9passed, including late mismatchedresource fullworldrollback then validcancellation.",
+    "Corrected freshordinarycommand capture continues through2526 withoutblocker."
+  ],
+  "preserved_test_failure": "Initial invalid-animation test assumption failed because ordinary idle resets animation8; corrected test induces invalid runtime count after cancellation and asserts atomic rejection. No gameplay defect inferred.",
+  "pending": [
+    "Class2/3 remain explicit unsupported boundaries.",
+    "No completed first mission or new native acceptance asserted."
+  ],
+  "mission_acceptance": false,
+  "preserved_source_failure": "Independent literal57A10 found omitted pre-query55=9/+81=0 writes; preserved state1-draft capture and corrected production. Ordinary idle occurs next callback, not rejection callback.",
+  "isolated_callback": "private\\review\\blocked-photon-site\\7855fd5421dc49388fdc6e3d60245d1f\\2523-callback",
+  "independent_source_comparison": {
+    "status": "passed",
+    "result": "private/review/blocked-photon-source/e7b1b7ec6240478f96eac54d8f383092/result.json",
+    "compared_bytes": 229619,
+    "literal_instructions": 933,
+    "ports": [
+      "6FB60 post-common-motion captured state",
+      "audio/UI/queue"
+    ],
+    "exact": [
+      "actor200B",
+      "blueprint36B",
+      "map229376B",
+      "RNG7B"
+    ]
+  },
+  "observed_sequence": {
+    "2523-callback": {
+      "state55": 9,
+      "target_type81": 0,
+      "reason7a": 6
+    },
+    "2524": {
+      "state55": 9
+    },
+    "2525": {
+      "state55": 1
+    },
+    "2526": {
+      "state55": 1,
+      "blocked": null
+    }
+  }
+}

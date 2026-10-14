@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "result": "private/review/blocked-photon-source/e7b1b7ec6240478f96eac54d8f383092/result.json",
+  "comparisons": {
+    "actor0": {
+      "bytes": 200,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    "map": {
+      "bytes": 229376,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    "rng": {
+      "bytes": 7,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    "blueprint0": {
+      "bytes": 36,
+      "difference_count": 0,
+      "first_differences": []
+    }
+  },
+  "scope": "Literal57A10 wrapper,507D0 site query and51E80 cancellation, idle/tail. Virtual94 movement at57A3E is replaced by captured post-common-motion actor/map/RNG; queue/audio/UI are explicit no-state ports. Whole frame next map and RNG may include other callbacks; differences are retained without attribution.",
+  "harness_sha256": "5c397ee9929463542c569dc8bd1cdc1770369515dee4961b77faa4ba4decc1b6"
+}

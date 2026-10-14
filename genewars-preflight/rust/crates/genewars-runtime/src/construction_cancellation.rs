@@ -1,4 +1,4 @@
-//! Source53A95ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢51E80 insufficient-funds cancellation for selector1, stage3.
+//! Source53A95ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢51E80 insufficient-funds cancellation for selector1, stage3.
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub enum ConstructionCancellationError{UnsupportedActor,InvalidMap,InvalidSite,NotInsufficient}
 #[derive(Debug,Clone,PartialEq,Eq)]
@@ -57,4 +57,29 @@ pub fn plan_finished_cancellation(map:&[u8],before:&[u8;200],blueprint:&[u8;36],
 pub fn plan_finished_selector1_cancellation(map:&[u8],before:&[u8;200],blueprint:&[u8;36],building:&[u8;67],owner_selected:bool,actor_selected:bool)->Result<ConstructionCancellationPlan,ConstructionCancellationError>{
  if before[0x83]!=1{return Err(ConstructionCancellationError::UnsupportedActor);}
  plan_finished_cancellation(map,before,blueprint,building,owner_selected,actor_selected)
+}
+
+///507D0 category0 prefix sets55=9/81=0 before class1 rejection.
+///51E80 preserves that state and consumes no RNG; stage0 releases the task footprint.
+pub fn plan_blocked_site_cancellation(map:&[u8],before:&[u8;200],blueprint:&[u8;36],owner_selected:bool,actor_selected:bool)
+ ->Result<ConstructionCancellationPlan,ConstructionCancellationError>{
+ if before[6]!=3||blueprint[0x16]!=0||before[0x55]!=1||before[0x7e]!=0||before[0x82]!=1||!matches!(before[0x83],1|3|6|11){return Err(ConstructionCancellationError::UnsupportedActor);}
+ if map.len()!=229376{return Err(ConstructionCancellationError::InvalidMap);}
+ let mut after=*before;let mut map_after=map.to_vec();after[0x70]&=!4;after[0x81]=0;after[0x55]=9;after[0x88..0x8a].fill(0);after[0x7a]=6;
+ if before[0x58]&1!=0{
+  after[0x4a]&=!8;
+  let footprint=if matches!(before[0x83],1|6){1}else{3};
+  let point=[i16::from_le_bytes(before[0x8c..0x8e].try_into().unwrap()),i16::from_le_bytes(before[0x8e..0x90].try_into().unwrap())];
+  let x=(i32::from(point[0])>>8)&127;let y=(i32::from(point[1])>>8)&127;
+  let range=if footprint==1{0..=0}else{-1..=1};
+  for dy in range.clone(){for dx in range.clone(){map_after[((((y+dy)&127)*128+((x+dx)&127))as usize)*14+11]&=!1;}}
+  let low=if footprint==1{[x,y]}else{[x-1,y-1]};let size=footprint+1;
+  for row in 0..size{let start=(((low[1]+row)&127)*128+(low[0]&127))as usize;if start+size as usize>16384{return Err(ConstructionCancellationError::InvalidSite);}for col in 0..size as usize{map_after[(start+col)*14+11]&=!16;}}
+  after[0x58]&=!1;
+ }
+ after[0x82]=0;after[0x7e]=255;
+ let flags=u16::from_le_bytes(after[0x70..0x72].try_into().unwrap())&0xee69;after[0x70..0x72].copy_from_slice(&flags.to_le_bytes());
+ after[0x3f..0x41].fill(0);after[0x54]=0;after[0x16]&=0x3f;
+ let flags=u16::from_le_bytes(after[0x49..0x4b].try_into().unwrap())&0xefe8;after[0x49..0x4b].copy_from_slice(&flags.to_le_bytes());
+ Ok(ConstructionCancellationPlan{before:*before,after,map_after,panel_refresh_pending:owner_selected&&actor_selected})
 }

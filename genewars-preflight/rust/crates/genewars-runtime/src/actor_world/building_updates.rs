@@ -35,6 +35,30 @@ mod tests {
         let before=*world.actors.record(0).unwrap();let mut after=before;after[0x55]=1;world.actors.replace_record_checked(0,&before,&after).unwrap();world
     }
     #[test]
+    fn blocked_site_continuation_rolls_back_late_resource_mismatch(){
+        let mut world=world();world.assign_architect_construction(0,0,0x600,true,true).unwrap();
+        let old=*world.actors.record(0).unwrap();let mut actor=old;actor[0x19]=8;actor[0x1a]=0;
+        actor[0x70]=1;actor[0x71]=0;actor[0x58]=0;actor[0x57]=1;
+        world.actors.replace_record_checked(0,&old,&actor).unwrap();
+        let cell=floor_cell([word(&actor,7),word(&actor,9)]);
+        world.backing[MAP_START+usize::from(cell)*14+11]|=1;
+        let key=world.actors.bindings(0).unwrap().animation_database.unwrap();
+        let path=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(format!("../../../private/integration/game-runtime/actors/key-{:02}.anb",key.flat_index));
+        let resource=crate::actor_resources::ActorAnimationDatabase::load(key,std::fs::read(path).unwrap()).unwrap();
+        let physics=crate::physics_tables::PhysicsTables::fixture();let trig=TrigTables::generate_pinned().unwrap();
+        let context=LandingPhysicsContext{gravity:1024,water_height:1632};
+        let idle=crate::actor_motion::ActorIdleContext{runtime_mode:0,override_180d80:0,runtime_count_11c2bc:word(&world.backing,0x355c)as u16,player_mode:world.players[0].bytes()[2]};
+        let other_key=crate::actor_resources::ACTOR_RESOURCE_SPECS[if key.flat_index==0{4}else{0}].key;
+        let path=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(format!("../../../private/integration/game-runtime/actors/key-{:02}.anb",other_key.flat_index));
+        let other=crate::actor_resources::ActorAnimationDatabase::load(other_key,std::fs::read(path).unwrap()).unwrap();
+        let saved=world.clone();let error=world.step_blocked_site_callback(0,1,context,&physics,&trig,&[0;8192],&other,idle,(true,true)).unwrap_err();
+        assert!(matches!(error,ConstructionWorldError::World(ActorWorldError::MissingBlueprintBinding(_))),"{error:?}");assert_eq!(world,saved);
+        let before=*world.actors.record(0).unwrap();let mut after=before;after[0x19]=8;world.actors.replace_record_checked(0,&before,&after).unwrap();
+        let funds=world.players.clone();let receipt=world.step_blocked_site_callback(0,1,context,&physics,&trig,&[0;8192],&resource,idle,(true,true)).unwrap();
+        assert_eq!(receipt.rejected_site_message_index,Some(12));assert_eq!(world.actors.record(0).unwrap()[0x7a],6);
+        assert_eq!(world.actors.record(0).unwrap()[0x82],0);assert_eq!(world.players,funds);
+    }
+    #[test]
     fn stage0_callback_allocates_and_late_tail_failure_rolls_back(){
         let mut world=world();let old=*world.actors.record(0).unwrap();let mut a=old;
         a[0x55]=9;a[0x57]=0;a[0x58]=1;a[0x7e]=0;a[0x82]=1;a[0x83]=1;
@@ -223,6 +247,7 @@ pub struct ArchitectMotionReceipt{pub before:[u8;200],pub after:[u8;200],pub arr
 pub struct ArchitectStage0Receipt {
     pub motion:ArchitectMotionReceipt,
     pub setup:Option<ArchitectSetupPlan>,
+    pub rejected_site_message_index:Option<u8>,
     pub terraform:Option<crate::actor_construction_lifecycle::TerraformStartPlan>,
     pub payment:Option<crate::construction_payment::ConstructionPaymentPlan>,
     pub cancellation:Option<crate::construction_cancellation::ConstructionCancellationPlan>,
@@ -440,7 +465,7 @@ impl ActorWorld {
         }
         staged.validate_links()?;if staged.effects.is_some(){staged.validate_effect_count()?;}
         *self=staged;*jobs=staged_jobs;
-        Ok(ArchitectStage0Receipt{motion,setup:None,terraform,payment,cancellation,building_effect,progress,work,work_point,completion_message_index,terraform_wait,terraform_completion,selected_animation:animation,footstep,created_effect,factory_draw,queue_requested:true})
+        Ok(ArchitectStage0Receipt{motion,setup:None,rejected_site_message_index:None,terraform,payment,cancellation,building_effect,progress,work,work_point,completion_message_index,terraform_wait,terraform_completion,selected_animation:animation,footstep,created_effect,factory_draw,queue_requested:true})
     }
 
     /// The actual6FB60 motion/arrival slice for construction. It does not run
@@ -674,5 +699,60 @@ impl ActorWorld {
         staged.insert_effect_head(slot)?;
         staged.validate_links()?;staged.validate_effect_count()?;staged.validate_building_counts()?;
         *self=staged;Ok(Some(BuildingEffectCreationReceipt{slot,building,effect}))
+    }
+}
+
+impl ActorWorld {
+    /// Retry a proven class1 rejected setup from the original callback boundary.
+    /// Common motion executes once on this transaction; no failed staged state survives.
+    ///507D0 sets state9 before querying, so cancellation keeps9 until next callback.
+    pub(super) fn step_blocked_site_callback<B:AsRef<[u8]>>(&mut self,id:u16,frame:u32,
+        context:LandingPhysicsContext,physics:&crate::physics_tables::PhysicsTables,trig:&TrigTables,
+        border:&[u8;8192],resource:&crate::actor_resources::ActorAnimationDatabase<B>,
+        _idle:crate::actor_motion::ActorIdleContext,selection:(bool,bool))->Result<ArchitectStage0Receipt,ConstructionWorldError>{
+        let mut staged=self.clone();let before=*staged.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
+        let motion=staged.step_architect_motion(id,frame,context,physics,trig)?;
+        let binding=staged.actors.bindings(usize::from(id)).map_err(ActorWorldError::from)?;
+        let handle=binding.blueprint.ok_or(ActorWorldError::MissingBlueprintBinding(id as i16))?;
+        let blueprint=staged.construction_blueprint(id)?;let mut blueprint_after=blueprint;
+        let mask=if blueprint[0x15]==2{127}else{255};
+        if frame.wrapping_add(i32::from(word(&before,15))as u32)&mask==0&&(blueprint[0x1a]as i8)<(blueprint[0x19]as i8){blueprint_after[0x1a]=blueprint_after[0x1a].wrapping_add(1);}
+        staged.players[usize::from(handle.player_id)].commit_activation_blueprint(usize::from(handle.blueprint_index),&blueprint,&blueprint_after).map_err(ActorWorldError::from)?;
+        if before[0x55]==8 {
+            if !motion.arrived{return Err(ConstructionWorldError::PendingTaskRequired);}
+            let current=*staged.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
+            let bp=staged.construction_blueprint(id)?;
+            let rng=crate::actor_motion::ActorCallbackRng{seed:staged.rng.seed,ring:staged.rng.ring,draw_count:staged.rng.draw_count};
+            let plan=crate::actor_motion::plan_actor_arrival_pending_architect(&current,&bp,rng).map_err(ActorWorldError::from)?;
+            staged.actors.replace_record_checked(usize::from(id),&current,&plan.after).map_err(ActorWorldError::from)?;
+            staged.rng=BlueprintRng{seed:plan.rng_after.seed,ring:plan.rng_after.ring,draw_count:plan.rng_after.draw_count};
+        }
+        // Validate actual74E80 class before admitting ordinary rejection.
+        match staged.begin_pending_architect_task(id,border){
+            Err(ConstructionWorldError::Setup(crate::construction_setup::ArchitectSetupError::UnsupportedSite(crate::construction_site::ConstructionSiteClass::Blocked)))=>{},
+            Err(e)=>return Err(e),Ok(_)=>return Err(ConstructionWorldError::PendingTaskRequired),
+        }
+        let current=*staged.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;let mut prefix=current;
+        prefix[0x57]&=!1;prefix[0x58]|=1;prefix[0x7a]=0;
+        let blueprint=staged.construction_blueprint(id)?;
+        let cancellation=crate::construction_cancellation::plan_blocked_site_cancellation(staged.map(),&prefix,&blueprint,selection.0,selection.1).map_err(ConstructionWorldError::Cancellation)?;
+        staged.actors.replace_record_checked(usize::from(id),&current,&cancellation.after).map_err(ActorWorldError::from)?;
+        staged.backing[MAP_START..MAP_START+MAP_BYTES].copy_from_slice(&cancellation.map_after);
+        let binding=staged.actors.bindings(usize::from(id)).map_err(ActorWorldError::from)?;
+        if binding.animation_database!=Some(resource.key()){return Err(ActorWorldError::MissingBlueprintBinding(id as i16).into());}
+        let current=*staged.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
+        let animation=crate::actor_construction_tail::architect_tail_animation(&current).map_err(ActorWorldError::from)?;
+        let count=resource.frame_count(usize::from(animation)).map_err(|_|ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::InvalidAnimation))?;
+        let holds=(0..count).map(|i|resource.frame(usize::from(animation),i).map(|f|f.byte_10)).collect::<Result<Vec<_>,_>>().map_err(|_|ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::InvalidAnimation))?;
+        let flags=(resource.animation(usize::from(animation)).map_err(|_|ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::InvalidAnimation))?.trailing_word>>8)as u8;
+        let tail=crate::actor_construction_tail::plan_architect_callback_tail(&current,frame,&holds,flags).map_err(ActorWorldError::from)?;
+        staged.actors.replace_record_checked(usize::from(id),&current,&tail.after).map_err(ActorWorldError::from)?;
+        let mut footstep=None;let mut created_effect=None;let mut factory_draw=None;
+        if let Some(point)=tail.footstep_query{let class=staged.terrain_class_at(point)?;if let Some(request)=crate::actor_motion::plan_actor_footstep(&tail.after,frame,class).map_err(ActorWorldError::from)?{
+            if let Some((slot,draw))=staged.create_unmarked_smoke(request.position,request.physical_height,request.angles,context,trig)?{created_effect=Some(slot);factory_draw=Some(draw);}footstep=Some(request);
+        }}
+        staged.validate_links()?;if staged.effects.is_some(){staged.validate_effect_count()?;}
+        let receipt=ArchitectStage0Receipt{motion,setup:None,rejected_site_message_index:Some(12),terraform:None,payment:None,cancellation:Some(cancellation),building_effect:None,progress:None,work:None,work_point:None,completion_message_index:None,terraform_wait:None,terraform_completion:None,selected_animation:animation,footstep,created_effect,factory_draw,queue_requested:tail.queue_requested};
+        *self=staged;Ok(receipt)
     }
 }

@@ -1,0 +1,16 @@
+{
+  "cases": 48,
+  "compared_bytes": 11019648,
+  "literal_instruction_steps": 14520,
+  "source_sha256": "8571aea167284e7a64a365027db110cdab777e645244f1576b98ebb55c18e0c0",
+  "listing_sha256": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-00051e80.txt": "38a7ad744f800c438cf7b208ed596f919c38c4309a8e8d2cd68f679976202839",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "terrain-map-refs/instructions-000753f0.txt": "ea2554be981b0acae18e192ba9827ebdf4e4dea2d8e6fbee83f889ec15f390c5",
+    "validated/instructions-0008d580.txt": "08fc85698d73460faaef4a6dd81457eb199a60c9aacda9380239e5f3278034c3",
+    "validated/instructions-0008d5f0.txt": "c66a1e05095397611f83ecfa25aab5c3b1e42f72b165a2b86550b682cc33c23f"
+  },
+  "status": "passed",
+  "scope": "Literal51E80 cleanup after explicit507D0 prefix: selectors1/3/6/11 stage0, whole200B actor and229376B map, both58bit1 states; not full callback proof"
+}
