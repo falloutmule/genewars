@@ -1,0 +1,399 @@
+{
+  "status": "passed",
+  "cases": 64,
+  "compared_actor_bytes": 12800,
+  "scope": "Literal811A0 and51960;74A50 two ordered query results are explicit ports. Owned-world search and screen placement are separate integration obligations.",
+  "pins": {
+    "private/ghidra/construction-ui-refs/instructions-000811a0.txt": "e7ffdd56e1be87243917314dd6c0fffb32a1c861909bff04cf47d2c2820461ea",
+    "private/ghidra/construction-ui-refs/instructions-00051960.txt": "320c9cd20991011bea99937b34cc95da75660f92c35181cbec346a240218b43e",
+    "rust/crates/genewars-runtime/src/actor_construction.rs": "0988dac1c88cbea6db58b6036cc26e8618ad49ded7de3787009ce2f82f88d182",
+    "rust/crates/genewars-runtime/src/actor_construction_placement.rs": "4918c4a6aa9fe956d0452b684c605ac709ccb9726c7a7759495442535394c9b2"
+  },
+  "work": "private/review/construction-placement/85b4499da2ee489d991baf2bbee7c0cb",
+  "details": [
+    {
+      "selector": 1,
+      "mode": 0,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 1,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 2,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 3,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 4,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 5,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 6,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 7,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 8,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 9,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 10,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 11,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 12,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 13,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 14,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 15,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 0,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 1,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 2,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 3,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 4,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 5,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 6,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 7,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 8,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 9,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 10,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 11,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 12,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 13,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 14,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 15,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 0,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 1,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 2,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 3,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 4,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 5,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 6,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 7,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 8,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 9,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 10,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 11,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 12,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 13,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 14,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 15,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 0,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 1,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 2,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 3,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 4,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 5,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 6,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 7,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 8,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 9,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 10,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 11,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 1,
+      "mode": 12,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 3,
+      "mode": 13,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 6,
+      "mode": 14,
+      "steps": 140,
+      "resolver_calls": 2
+    },
+    {
+      "selector": 11,
+      "mode": 15,
+      "steps": 140,
+      "resolver_calls": 2
+    }
+  ]
+}

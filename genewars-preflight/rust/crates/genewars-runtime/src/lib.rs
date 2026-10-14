@@ -89,3 +89,4 @@ pub mod mission_outcome;
 
 pub mod mission_bootstrap;
 pub mod result_transition;
+pub mod actor_construction_placement;

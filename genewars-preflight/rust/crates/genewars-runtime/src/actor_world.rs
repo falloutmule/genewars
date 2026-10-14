@@ -1829,3 +1829,4 @@ mod bootstrap_updates;
 mod mission_outcome;
 pub use mission_outcome::OutcomeRuntimeInputs;
 pub use bootstrap_updates::{BootstrapVisibilityReceipt, BootstrapWorldError};
+mod construction_placement;
