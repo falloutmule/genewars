@@ -78,3 +78,7 @@ pub mod building_availability;
 pub mod extractor_production;
 
 pub mod projectile_impact;
+
+pub mod mission_context;
+
+pub mod terrain_height;

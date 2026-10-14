@@ -1,0 +1,19 @@
+{
+  "status": "passed-ordered-terrain-height-plan",
+  "cases": 64,
+  "compared_event_bytes": 14518,
+  "literal_instructions": 40987,
+  "production_sha256": "0503c210aefd5ccb86c2bf808cb7ad9924ba3583bd2fbfccc656aa5b3a27ecef",
+  "slope_sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31",
+  "source_pins": {
+    "private/ghidra/terrain-map-refs/instructions-0008c550.txt": "49e50fc30aac9eb8a55499f5792630e163f28b6904d258da36bbe552555c9446",
+    "private/ghidra/terrain-map-refs/instructions-0008bee0.txt": "7153008e93b676377a22bb27f8e9ff7e16471c6e7a0ae37af2eb9d406e5f7d94"
+  },
+  "ports": [
+    "84960 vertex viewport/shade refresh",
+    "8C290 slope shade refresh",
+    "84B40 slope viewport refresh",
+    "8B840 actual linked-object height refresh"
+  ],
+  "scope": "Exact mutation/request order, before/after heights, RNG seed/ring/count and signed return lowword; no world refresh implementation claimed."
+}
