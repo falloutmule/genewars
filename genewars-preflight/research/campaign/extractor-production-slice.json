@@ -1,0 +1,21 @@
+{
+  "status": "passed-numeric-slice",
+  "cases": 64,
+  "literal_instructions": 68323,
+  "rust_sha256": "0c006e4b4e66ea7c63b0694e9473986de04744c4c3a79f15a4c5cc27f0ab7e3c",
+  "compared_bytes": 1168384,
+  "source_listing_sha256": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+  "scope": "46F0C through4707B: 7x7 maximum-resource selection, depletion byte, capped unsigned secondary funds, empty-resource flags, cooldown3F",
+  "explicit_ports_not_validated": [
+    "8CBA0 depleted-cell terrain cleanup",
+    "84E10 viewport dirty request",
+    "44E50 depletion notification",
+    "audio virtual44"
+  ],
+  "not_claimed": [
+    "full451F0 callback",
+    "powered/animation gates",
+    "preceding RNG/particle/contact damage",
+    "production Rust integration"
+  ]
+}
