@@ -78,11 +78,20 @@ impl ActorWorld {
     /// leaves every pool unchanged. Audio and selected UI remain requests.
     pub fn progress_selector1_building(&mut self, slot:u16, increment:i16, loading:bool)
         ->Result<crate::building_progress::BuildingProgressPlan,ActorWorldError> {
+        let pool=self.buildings.as_ref().ok_or(ActorWorldError::BuildingsNotAdmitted)?;
+        if pool.record(usize::from(slot))?[45]!=1{return Err(ActorWorldError::BuildingProgress(crate::building_progress::BuildingProgressError::InvalidBuilding));}
+        self.progress_admitted_grade0_building(slot,increment,loading)
+    }
+
+    /// Shared441C0 completion for reviewed selectors1 and6. This does not
+    /// admit their per-frame behavior or bypass construction/menu gates.
+    pub fn progress_admitted_grade0_building(&mut self,slot:u16,increment:i16,loading:bool)
+        ->Result<crate::building_progress::BuildingProgressPlan,ActorWorldError> {
         self.validate_links()?;self.validate_building_counts()?;
         let pool=self.buildings.as_ref().ok_or(ActorWorldError::BuildingsNotAdmitted)?;
         let record=pool.record(usize::from(slot))?;
         let creatures=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;
-        let plan=crate::building_progress::plan_selector1_progress(pool.records(),slot,
+        let plan=crate::building_progress::plan_admitted_grade0_progress(pool.records(),slot,
             self.player(record[24])?.bytes(),creatures.records(),word(&self.backing,0x3550),increment,loading)
             .map_err(ActorWorldError::BuildingProgress)?;
         let mut staged=self.clone();
@@ -116,6 +125,24 @@ impl ActorWorld {
 }
 
 impl ActorWorld {
+    /// Incomplete first-mission buildings using their exact source resource.
+    /// Completed callbacks are deliberately separate and cannot fall through.
+    pub fn step_incomplete_source_building(&mut self,slot:u16,
+        resource:&crate::source_building_resources::SourceBuildingResourceDatabase)
+        ->Result<crate::building_callback::IncompleteBuildingPlan,ActorWorldError> {
+        self.validate_links()?;self.validate_building_counts()?;
+        let pool=self.buildings.as_ref().ok_or(ActorWorldError::BuildingsNotAdmitted)?;
+        let before=*pool.record(usize::from(slot))?;
+        if before[45]!=resource.selector()||pool.binding(usize::from(slot))?!=Some(BuildingAnimationBinding{selector:resource.selector()}) {
+            return Err(crate::building_pool::BuildingPoolError::InvalidBinding(usize::from(slot)).into());
+        }
+        let holds=resource.animation(0).map_err(|_|ActorWorldError::BuildingCallback(crate::building_callback::BuildingCallbackError::InvalidAnimation))?.iter().map(|f|f.hold).collect::<Vec<_>>();
+        let plan=crate::building_callback::plan_incomplete_admitted(&before,&holds).map_err(ActorWorldError::BuildingCallback)?;
+        let mut staged=self.clone();
+        staged.buildings.as_mut().unwrap().replace_record_checked(usize::from(slot),&plan.before,&plan.after)?;
+        staged.validate_links()?;staged.validate_building_counts()?;*self=staged;Ok(plan)
+    }
+
     /// Actual8B000 cell-list reader. It returns the first eligible kind1,
     /// before48540 applies its separate state18/timer and distance filters.
     fn first_turret_cell_target(&self,owner:u8,point:[i16;2])

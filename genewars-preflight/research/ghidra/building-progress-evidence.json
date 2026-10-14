@@ -1,9 +1,11 @@
 {
-  "scope": "selector1grade0 health progress/completion; whole67Bbuilding/1805Bplayer/300nativecreatures;43620aggregateand6A6D0cleanup; selectedUIfalse explicitport, audio4Dexplicitport",
+  "status": "passed",
+  "selector": 1,
+  "scope": "admitted grade0 health progress/completion; whole67Bbuilding/1805Bplayer/300nativecreatures;43620aggregateand6A6D0cleanup; selectedUIfalse explicitport, audio4Dexplicitport",
   "cases": 64,
   "compared_bytes": 2500608,
   "literal_instruction_steps": 24248,
-  "source_sha256": "8aa4c5c58e5c3b313d616ecc5dcd95f654430b36889c6b1f2e2cce2e8ad8fed8",
+  "source_sha256": "dfe9f4712a18d92411c45c8f3db38cab903baf24958229cbfe1253fd39651960",
   "pins": {
     "resource-helpers/instructions-000441c0.txt": "ef1bb857680bc8a4da9804c94f5e8ee6ebf8e4c66164bc704ef01c468c608825",
     "resource-helpers/instructions-00043f60.txt": "2b77ec740634f5076ec359fda8258e20995985a0bea5c87f959121cd0101f1fc",

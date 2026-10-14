@@ -1,14 +1,15 @@
-//!534D0 stage5 incomplete selector1 work start and nonterminal timer prefix.
+//!534D0 stage5 admitted construction work and nonterminal timer prefix.
 //! A zero post-decrement timer requests the separately composed progress tail.
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub enum ConstructionWorkError{UnsupportedActor,InvalidBuilding,InvalidBlueprint,InvalidYaw,MovementRequired}
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct ConstructionWorkPlan{pub after:[u8;200],pub seed_after:u16,pub draws:u8,pub audio_4a:bool,pub progress_required:bool}
-pub fn plan_incomplete_selector1_work(before:&[u8;200],blueprint:&[u8;36],building:&[u8;67],frame:u32,seed:u16,yaw:u16)->Result<ConstructionWorkPlan,ConstructionWorkError>{
+pub fn plan_incomplete_work(before:&[u8;200],blueprint:&[u8;36],building:&[u8;67],frame:u32,seed:u16,yaw:u16)->Result<ConstructionWorkPlan,ConstructionWorkError>{
     let word=|b:&[u8],p:usize|i16::from_le_bytes(b[p..p+2].try_into().unwrap());
-    if before[6]!=3||before[0x55]!=9||before[0x7e]!=0||before[0x82]!=1||before[0x83]!=1||word(before,0x88)!=5{return Err(ConstructionWorkError::UnsupportedActor);}
+    let maximum=match before[0x83]{1=>120i16,3=>240,6=>80,11=>280,_=>return Err(ConstructionWorkError::UnsupportedActor)};
+    if before[6]!=3||before[0x55]!=9||before[0x7e]!=0||before[0x82]!=1||word(before,0x88)!=5{return Err(ConstructionWorkError::UnsupportedActor);}
     if blueprint[0x16]!=0{return Err(ConstructionWorkError::InvalidBlueprint);}
-    if building[6]!=4||building[24]!=before[24]||building[45]!=1||building[46]!=0||building[47]!=0||word(building,49)!=0||!(0..120).contains(&word(building,43))||before[0x81]!=4||word(before,0x7f)!=word(building,15){return Err(ConstructionWorkError::InvalidBuilding);}
+    if building[6]!=4||building[24]!=before[24]||building[45]!=before[0x83]||building[46]!=0||building[47]!=0||word(building,49)!=0||!(0..maximum).contains(&word(building,43))||before[0x81]!=4||word(before,0x7f)!=word(building,15){return Err(ConstructionWorkError::InvalidBuilding);}
     let mut after=*before;let mut seed_after=seed;let mut draws=0;let mut audio_4a=false;let mut progress_required=false;
     if before[0x49]&32!=0{
         if yaw>=2048{return Err(ConstructionWorkError::InvalidYaw);}
@@ -39,11 +40,12 @@ pub fn sample_construction_work_point(center:[i16;2],seed:u16,cosine:&[i32;2048]
 }
 ///The caller commits441C0 first; incomplete work moves around the building,
 ///completed work installs the source departure order and building reference.
-pub fn finish_selector1_work_progress(plan:&ConstructionWorkPlan,building_after:&[u8;67],completed:bool,random_point:[i16;2],speed:i16,yaw:u16)->Result<[u8;200],ConstructionWorkError>{
+pub fn finish_work_progress(plan:&ConstructionWorkPlan,building_after:&[u8;67],completed:bool,random_point:[i16;2],speed:i16,yaw:u16)->Result<[u8;200],ConstructionWorkError>{
     let word=|b:&[u8],p:usize|i16::from_le_bytes(b[p..p+2].try_into().unwrap());
     if !plan.progress_required{return Err(ConstructionWorkError::UnsupportedActor);}
     let before=&plan.after;
-    if building_after[6]!=4||building_after[24]!=before[24]||building_after[45]!=1||word(building_after,15)!=word(before,0x7f)||word(building_after,49)!=i16::from(completed)||(if completed{word(building_after,43)!=120}else{!(1..120).contains(&word(building_after,43))}){return Err(ConstructionWorkError::InvalidBuilding);}
+    let maximum=match before[0x83]{1=>120i16,3=>240,6=>80,11=>280,_=>return Err(ConstructionWorkError::UnsupportedActor)};
+    if building_after[6]!=4||building_after[24]!=before[24]||building_after[45]!=before[0x83]||word(building_after,15)!=word(before,0x7f)||word(building_after,49)!=i16::from(completed)||(if completed{word(building_after,43)!=maximum}else{!(1..maximum).contains(&word(building_after,43))}){return Err(ConstructionWorkError::InvalidBuilding);}
     let mut after=*before;after[0x70]&=0x7b;after[0x5a]=1;after[0x3f..0x41].copy_from_slice(&speed.to_le_bytes());after[0x70]|=16;
     if completed{
         if yaw>=2048{return Err(ConstructionWorkError::InvalidYaw);}
@@ -57,4 +59,14 @@ pub fn finish_selector1_work_progress(plan:&ConstructionWorkPlan,building_after:
         after[0x86..0x88].copy_from_slice(&before[0x84..0x86]);
     }
     Ok(after)
+}
+
+/// Retained selector1 API rejects other construction kinds.
+pub fn plan_incomplete_selector1_work(before:&[u8;200],blueprint:&[u8;36],building:&[u8;67],frame:u32,seed:u16,yaw:u16)->Result<ConstructionWorkPlan,ConstructionWorkError>{
+ if before[0x83]!=1{return Err(ConstructionWorkError::UnsupportedActor);}
+ plan_incomplete_work(before,blueprint,building,frame,seed,yaw)
+}
+pub fn finish_selector1_work_progress(plan:&ConstructionWorkPlan,building:&[u8;67],completed:bool,point:[i16;2],speed:i16,yaw:u16)->Result<[u8;200],ConstructionWorkError>{
+ if plan.after[0x83]!=1{return Err(ConstructionWorkError::UnsupportedActor);}
+ finish_work_progress(plan,building,completed,point,speed,yaw)
 }

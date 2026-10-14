@@ -2,10 +2,15 @@
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub enum BuildingCallbackError{UnsupportedBuilding,InvalidAnimation}
 #[derive(Debug,Clone,PartialEq,Eq)]
-pub struct IncompleteBuildingPlan{pub before:[u8;67],pub after:[u8;67],pub stop_audio_23:bool,pub queue_requested:bool}
+pub struct IncompleteBuildingPlan{pub before:[u8;67],pub after:[u8;67],pub stop_audio_23:bool,pub stop_audio_2f:bool,pub queue_requested:bool}
 pub fn plan_incomplete_selector1(before:&[u8;67],animation0_holds:&[u8])->Result<IncompleteBuildingPlan,BuildingCallbackError>{
+    if before[0x2d]!=1{return Err(BuildingCallbackError::UnsupportedBuilding);}
+    plan_incomplete_admitted(before,animation0_holds)
+}
+/// Common451F0 incomplete path with source selector-specific audio stops.
+pub fn plan_incomplete_admitted(before:&[u8;67],animation0_holds:&[u8])->Result<IncompleteBuildingPlan,BuildingCallbackError>{
     let flags=u16::from_le_bytes(before[0x31..0x33].try_into().unwrap());
-    if before[6]!=4||before[0x18]>=4||before[0x2d]!=1||flags&0x841!=0 {
+    if before[6]!=4||before[0x18]>=4||!matches!(before[0x2d],1|3|6|11)||flags&0x841!=0 {
         return Err(BuildingCallbackError::UnsupportedBuilding);
     }
     let mut after=*before;
@@ -26,5 +31,5 @@ pub fn plan_incomplete_selector1(before:&[u8;67],animation0_holds:&[u8])->Result
             if hold==0{after[0x1a]=animation0_holds[frame];}
         }
     }
-    Ok(IncompleteBuildingPlan{before:*before,after,stop_audio_23:true,queue_requested})
+    Ok(IncompleteBuildingPlan{before:*before,after,stop_audio_23:matches!(before[0x2d],1|6),stop_audio_2f:before[0x2d]==11,queue_requested})
 }

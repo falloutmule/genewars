@@ -383,7 +383,7 @@ impl ActorWorld {
                     let mut after=crate::construction_stage4::finish_architect_stage4(&plan,&building,speed).map_err(ConstructionWorldError::Stage4)?;
                     let linked=*staged.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
                     after[..6].copy_from_slice(&linked[..6]);
-                    progress=Some(staged.progress_selector1_building(created.building.slot,1,false)?);
+                    progress=Some(staged.progress_admitted_grade0_building(created.building.slot,1,false)?);
                     staged.actors.replace_record_checked(usize::from(id),&linked,&after).map_err(ActorWorldError::from)?;
                     building_effect=Some(created);
                 }
@@ -393,8 +393,8 @@ impl ActorWorld {
             if current[0x81]!=4{return Err(ConstructionWorldError::Work(crate::construction_work::ConstructionWorkError::InvalidBuilding));}
             let slot=u16::try_from(word(&current,0x7f)).map_err(|_|ConstructionWorldError::Work(crate::construction_work::ConstructionWorkError::InvalidBuilding))?;
             let building=*staged.buildings.as_ref().ok_or(ActorWorldError::BuildingsNotAdmitted)?.record(usize::from(slot)).map_err(ActorWorldError::from)?;
-            if current[0x49]&32!=0&&word(&building,0x31)==1&&word(&building,0x2b)==120{
-                let plan=staged.cancel_finished_architect_selector1(id,selection.0,selection.1)?;
+            if current[0x49]&32!=0&&word(&building,0x31)==1&&word(&building,0x2b)==match building[45]{1=>120,3=>240,6=>80,11=>280,_=>-1}{
+                let plan=staged.cancel_finished_architect(id,selection.0,selection.1)?;
                 cancellation=Some(plan);completion_message_index=Some(17);
             }else if current[0x49]&32==0&&current[0x70]&0x80==0{
                 let plan=crate::construction_motion::plan_architect_task_movement(&current,&blueprint_after,physics.angles()).map_err(ConstructionWorldError::TaskMovement)?;
@@ -403,19 +403,19 @@ impl ActorWorld {
                 let dx=word(&building,7).wrapping_sub(word(&current,7)).wrapping_mul(2);
                 let dy=word(&building,9).wrapping_sub(word(&current,9)).wrapping_mul(2);
                 let yaw=crate::actor_motion::angle(i32::from(dx),i32::from(dy),physics.angles());
-                let plan=crate::construction_work::plan_incomplete_selector1_work(&current,&blueprint_after,&building,frame,staged.rng.seed,yaw).map_err(ConstructionWorldError::Work)?;
+                let plan=crate::construction_work::plan_incomplete_work(&current,&blueprint_after,&building,frame,staged.rng.seed,yaw).map_err(ConstructionWorldError::Work)?;
                 staged.actors.replace_record_checked(usize::from(id),&current,&plan.after).map_err(ActorWorldError::from)?;
                 staged.rng.seed=plan.seed_after;staged.rng.ring=staged.rng.ring.wrapping_add(plan.draws)&31;staged.rng.draw_count=staged.rng.draw_count.wrapping_add(u32::from(plan.draws));
                 if plan.progress_required{
                     let increment=i16::from(blueprint_after[0x17]as i8).wrapping_mul(2);
-                    let step=staged.progress_selector1_building(slot,increment,false)?;
+                    let step=staged.progress_admitted_grade0_building(slot,increment,false)?;
                     let mut point=[0,0];
                     if !step.completed{
                         let sampled=crate::construction_work::sample_construction_work_point([word(&building,7),word(&building,9)],staged.rng.seed,trig.cosine().try_into().unwrap(),trig.sine().try_into().unwrap());
                         point=sampled.point;staged.rng.seed=sampled.seed_after;staged.rng.ring=staged.rng.ring.wrapping_add(sampled.draws)&31;staged.rng.draw_count=staged.rng.draw_count.wrapping_add(u32::from(sampled.draws));work_point=Some(sampled);
                     }
                     let speed=[960i16,576,1088][usize::from(blueprint_after[0x15])];
-                    let after=crate::construction_work::finish_selector1_work_progress(&plan,&step.after,step.completed,point,speed,yaw).map_err(ConstructionWorldError::Work)?;
+                    let after=crate::construction_work::finish_work_progress(&plan,&step.after,step.completed,point,speed,yaw).map_err(ConstructionWorldError::Work)?;
                     staged.actors.replace_record_checked(usize::from(id),&plan.after,&after).map_err(ActorWorldError::from)?;
                     progress=Some(step);
                 }
@@ -496,11 +496,16 @@ impl ActorWorld {
     }
     pub fn cancel_finished_architect_selector1(&mut self,id:u16,owner_selected:bool,actor_selected:bool)
         ->Result<crate::construction_cancellation::ConstructionCancellationPlan,ConstructionWorldError>{
+        if self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?[0x83]!=1{return Err(ConstructionWorldError::Cancellation(crate::construction_cancellation::ConstructionCancellationError::UnsupportedActor));}
+        self.cancel_finished_architect(id,owner_selected,actor_selected)
+    }
+    pub fn cancel_finished_architect(&mut self,id:u16,owner_selected:bool,actor_selected:bool)
+        ->Result<crate::construction_cancellation::ConstructionCancellationPlan,ConstructionWorldError>{
         let before=*self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
         let blueprint=self.construction_blueprint(id)?;
         let slot=usize::try_from(word(&before,0x7f)).map_err(|_|ConstructionWorldError::Cancellation(crate::construction_cancellation::ConstructionCancellationError::UnsupportedActor))?;
         let building=self.buildings.as_ref().ok_or(ActorWorldError::BuildingsNotAdmitted)?.record(slot).map_err(ActorWorldError::from)?;
-        let plan=crate::construction_cancellation::plan_finished_selector1_cancellation(self.map(),&before,&blueprint,building,owner_selected,actor_selected).map_err(ConstructionWorldError::Cancellation)?;
+        let plan=crate::construction_cancellation::plan_finished_cancellation(self.map(),&before,&blueprint,building,owner_selected,actor_selected).map_err(ConstructionWorldError::Cancellation)?;
         let mut staged=self.clone();staged.actors.replace_record_checked(usize::from(id),&before,&plan.after).map_err(ActorWorldError::from)?;
         staged.backing[MAP_START..MAP_START+MAP_BYTES].copy_from_slice(&plan.map_after);*self=staged;Ok(plan)
     }

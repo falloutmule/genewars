@@ -1,4 +1,4 @@
-//! Source53A95Ã¢â€ â€™51E80 insufficient-funds cancellation for selector1, stage3.
+//! Source53A95ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢51E80 insufficient-funds cancellation for selector1, stage3.
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub enum ConstructionCancellationError{UnsupportedActor,InvalidMap,InvalidSite,NotInsufficient}
 #[derive(Debug,Clone,PartialEq,Eq)]
@@ -34,9 +34,10 @@ pub fn plan_insufficient_selector1_cancellation(map:&[u8],before:&[u8;200],bluep
 }
 
 ///53CB3 completed selector1 task calls51E80 without the insufficiency reason8.
-pub fn plan_finished_selector1_cancellation(map:&[u8],before:&[u8;200],blueprint:&[u8;36],building:&[u8;67],owner_selected:bool,actor_selected:bool)->Result<ConstructionCancellationPlan,ConstructionCancellationError>{
+pub fn plan_finished_cancellation(map:&[u8],before:&[u8;200],blueprint:&[u8;36],building:&[u8;67],owner_selected:bool,actor_selected:bool)->Result<ConstructionCancellationPlan,ConstructionCancellationError>{
+    let maximum=match before[0x83]{1=>120i16,3=>240,6=>80,11=>280,_=>return Err(ConstructionCancellationError::UnsupportedActor)};
     let word=|b:&[u8],p:usize|i16::from_le_bytes(b[p..p+2].try_into().unwrap());
-    if before[6]!=3||blueprint[0x16]!=0||before[0x55]!=9||before[0x7e]!=0||before[0x82]!=1||before[0x83]!=1||word(before,0x88)!=5||before[0x49]&32==0||before[0x81]!=4||word(before,0x7f)!=word(building,15)||building[6]!=4||building[24]!=before[24]||building[45]!=1||word(building,43)!=120||word(building,49)!=1{return Err(ConstructionCancellationError::UnsupportedActor);}
+    if before[6]!=3||blueprint[0x16]!=0||before[0x55]!=9||before[0x7e]!=0||before[0x82]!=1||word(before,0x88)!=5||before[0x49]&32==0||before[0x81]!=4||word(before,0x7f)!=word(building,15)||building[6]!=4||building[24]!=before[24]||building[45]!=before[0x83]||word(building,43)!=maximum||word(building,49)!=1{return Err(ConstructionCancellationError::UnsupportedActor);}
     if map.len()!=229376{return Err(ConstructionCancellationError::InvalidMap);}
     let mut after=*before;let map_after=map.to_vec();
     if before[0x58]&1!=0{
@@ -51,4 +52,9 @@ pub fn plan_finished_selector1_cancellation(map:&[u8],before:&[u8;200],blueprint
     let flags=u16::from_le_bytes(after[0x49..0x4b].try_into().unwrap())&0xefe8;
     after[0x49..0x4b].copy_from_slice(&flags.to_le_bytes());
     Ok(ConstructionCancellationPlan{before:*before,after,map_after,panel_refresh_pending:owner_selected&&actor_selected})
+}
+/// Retained selector1 boundary for older callers.
+pub fn plan_finished_selector1_cancellation(map:&[u8],before:&[u8;200],blueprint:&[u8;36],building:&[u8;67],owner_selected:bool,actor_selected:bool)->Result<ConstructionCancellationPlan,ConstructionCancellationError>{
+ if before[0x83]!=1{return Err(ConstructionCancellationError::UnsupportedActor);}
+ plan_finished_cancellation(map,before,blueprint,building,owner_selected,actor_selected)
 }

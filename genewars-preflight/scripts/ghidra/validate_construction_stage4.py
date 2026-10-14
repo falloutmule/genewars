@@ -1,0 +1,23 @@
+from pathlib import Path
+import importlib.util,struct,random,subprocess,hashlib,json,uuid
+P=Path(__file__).resolve().parents[2];W=P/'private/ghidra/construction-command'/uuid.uuid4().hex;W.mkdir(parents=True)
+s=importlib.util.spec_from_file_location('source',P/'research/variants/initial-creature-source.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+class Source(m.Source):
+ def get(self,o):
+  if self.pc==0x53c0b:
+   assert self.r['EAX']==44 and self.r['EDX']==self.point and self.load(self.r['ESP'],4)==self.selector and self.load(self.r['ESP']+4,4)==self.owner
+   self.factory=True;self.r['EAX']=0x2e0200 if self.allocated else 0;return 0x2e0000
+  if self.pc==0x53c74:
+   assert self.r['EAX']==self.building and self.r['EDX']==1 and self.r['EBX']==0
+   self.progress=True;return 0x2e0010
+  return super().get(o)
+x=Source();files=[P/'private/ghidra/building-cost-refs/instructions-000534d0.txt',P/'private/ghidra/actor-motion/instructions-00051930.txt'];expected_pins=['4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141','f9f2552e82a11b93d3ee858ce9073185ef0e5c74a9bba48775a019b5383730c3'];assert all(hashlib.sha256(f.read_bytes()).hexdigest()==h for f,h in zip(files,expected_pins));x.code.update(m.m.Model(files,b'').code);x.code[0x2e0000]=('RET',['0x10']);x.code[0x2e0010]=('RET',[]);order=sorted(x.code);x.next=dict(zip(order,order[1:]));rng=random.Random(0x53b68);data=bytearray();expected=bytearray();steps=0
+for case in range(768):
+ a=bytearray(rng.randbytes(200));a[6]=3;a[24]=case%4;a[0x55]=9;a[0x7e]=0;a[0x82]=1;a[0x83]=[1,3,6,11][case//192];a[0x59]=14;a[0x19]=14;struct.pack_into('<h',a,0x88,4);struct.pack_into('<hh',a,0x8c,40*256+127,60*256+127)
+ count=[18,21,23][case%3];flags=case//3%2;a[0x1b]=[0,count-1,count-2][case//6%3];a[0x1a]=case//18%2;a[0x1e]=case//36%2
+ allocated=case//72%2;bp=bytearray(36);bp[0x15]=case%3;building=bytearray(67);building[6]=4;building[24]=a[24];building[45]=a[0x83];id=a[24]*64+case%64;struct.pack_into('<H',building,15,id);building[7:11]=a[0x8c:0x90]
+ native=bytearray(a);native[31:35]=(0x2c0000).to_bytes(4,'little');native[35:39]=(0x112194).to_bytes(4,'little');native[192:196]=(0x2d0000).to_bytes(4,'little');x.building=0x1645ae+id*67;x.point=int.from_bytes(a[0x8c:0x90],'little');x.owner=a[24];x.selector=a[0x83];x.allocated=allocated;x.factory=x.progress=False
+ state={0x16360e+i:b for i,b in enumerate(native)};state.update({0x2d0000+i:b for i,b in enumerate(bp)});state.update({x.building+i:b for i,b in enumerate(building)});state.update({0x2c0000+140+i:b for i,b in enumerate(struct.pack('<IIBB',0,14*(count-1),count,flags))});state.update({0x2e0200+71+i:b for i,b in enumerate(struct.pack('<HB',id,4))})
+ report,_,_=x.run(entry=0x534d0,state_before=state,registers={'EAX':0x16360e});after=bytearray(x.load(0x16360e+i,1)for i in range(200));after[31:39]=a[31:39];after[192:196]=a[192:196];speed=x.load(0x104ae8+bp[0x15]*16,2);data+=a+building+bytes([count,flags,allocated])+struct.pack('<H',speed);expected+=after+bytes([x.factory,x.progress]);steps+=report['steps'];assert report['draws']==0
+module=P/'rust/crates/genewars-runtime/src/construction_stage4.rs';h=W/'stage4.rs';h.write_text(f'#[path="{module.as_posix()}"]mod stage4;'+r'''use std::io::{Read,Write};fn main(){let mut b=Vec::new();std::io::stdin().read_to_end(&mut b).unwrap();let mut out=Vec::new();for c in b.chunks_exact(272){let p=stage4::plan_architect_stage4(c[..200].try_into().unwrap(),c[267],c[268]).unwrap();let requested=p.request.is_some();let progress=requested&&c[269]!=0;let after=if progress{stage4::finish_architect_stage4(&p,c[200..267].try_into().unwrap(),i16::from_le_bytes(c[270..].try_into().unwrap())).unwrap()}else{p.after};out.extend(after);out.extend([requested as u8,progress as u8]);}std::io::stdout().write_all(&out).unwrap();}''');exe=W/'stage4.exe';subprocess.run([str(P/'private/tools/rust/rustup/toolchains/1.99.0-x86_64-pc-windows-gnu/bin/rustc.exe'),'--edition=2021','-Awarnings',str(h),'-o',str(exe)],check=True);out=subprocess.run([str(exe)],input=data,capture_output=True,check=True).stdout;assert out==expected,next((i for i,(a,b)in enumerate(zip(out,expected))if a!=b),None)
+r={'status':'passed','cases':768,'compared_bytes':len(out),'literal_instructions':steps,'module_sha256':hashlib.sha256(module.read_bytes()).hexdigest(),'source_pins':{f.relative_to(P).as_posix():hashlib.sha256(f.read_bytes()).hexdigest()for f in files},'scope':'534D0 stage4 selectors1/3/6/11 animation14 completion flags0/1/count18/21/23/hold/counter gates, factoryNULL/nonNULL and441C0+1 ports asserted,wholeactor/orderedrequests,zeroRNG'};(P/'research/ghidra/construction-stage4-admitted-evidence.json').write_text(json.dumps(r,indent=2)+'\n');print(r)

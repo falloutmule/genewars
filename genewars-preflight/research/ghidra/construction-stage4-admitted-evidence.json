@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "cases": 768,
+  "compared_bytes": 155136,
+  "literal_instructions": 48849,
+  "module_sha256": "10c6aabe43fe584adff130254dfb0071de02ff7f193f2f8f8834a9e949947ef2",
+  "source_pins": {
+    "private/ghidra/building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "private/ghidra/actor-motion/instructions-00051930.txt": "f9f2552e82a11b93d3ee858ce9073185ef0e5c74a9bba48775a019b5383730c3"
+  },
+  "scope": "534D0 stage4 selectors1/3/6/11 animation14 completion flags0/1/count18/21/23/hold/counter gates, factoryNULL/nonNULL and441C0+1 ports asserted,wholeactor/orderedrequests,zeroRNG"
+}
