@@ -88,3 +88,4 @@ pub mod terrain_border_table;
 pub mod mission_outcome;
 
 pub mod mission_bootstrap;
+pub mod result_transition;
