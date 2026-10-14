@@ -198,8 +198,41 @@ impl ActorWorld {
     }
     pub(super) fn actor_route_prefix(&self,raw:[u8;3],before:&[u8;200],counter:u32,physics:&PhysicsTables,trig:&TrigTables,idle_suppressed:bool)->Result<([u8;200],[i16;2]),ActorWorldError>{
         if before[0x16]&0x48!=0||before[0x49]&3==3||before[0x4a]&4!=0||!matches!(before[0x4f],0|4)||before[0x52]!=0{return Err(CreatureError::UnsupportedMotionState.into());}
-        let current=[word(before,7),word(before,9)];let target=[word(before,11),word(before,13)];let mut a=*before;a[0x49]&=0x9f;
-        if a[0x49]&0x10==0&&counter&31==0&&!idle_suppressed{return Err(CreatureError::UnsupportedMotionState.into());}
+        let current=[word(before,7),word(before,9)];let mut a=*before;a[0x49]&=0x9f;
+        if a[0x49]&0x10==0&&counter&31==0&&!idle_suppressed {
+            // 6FB60 -> 305F0/6D230: deterministic eight-ring search. Unlike
+            // the current-point gate, candidate74D90 has no nominated building.
+            let id=word(&raw,0);
+            let found=creature_world::find_common_idle_relocation(current,|point| {
+                let accepts=||->Result<bool,ActorWorldError>{
+                    if self.move_obstacle_at_excluding(point,None)? {return Ok(false);}
+                    let environment=self.placement_environment(id,point)?;
+                    Ok(before[0x53]&(1<<environment.terrain_class)==0&&environment.blocker_weight<10)
+                };
+                accepts().map_err(|_|CreatureError::MotionEnvironment)
+            })?;
+            if let Some(requested)=found {
+                // Virtual52280 resolves through74A50 using mask0 obstacles.
+                let resolved=crate::target_resolver::resolve_target(current,requested,physics,trig,|point| {
+                    let obstacle=self.move_obstacle_at(point)?;
+                    let class=self.terrain_class_at(point)?;
+                    if before[0x53]&(1<<class)!=0||obstacle {return Ok(false);}
+                    Ok(self.cell_plant_blocker(id,point)?<10)
+                }).map_err(|e|match e {
+                    crate::target_resolver::TargetResolverError::Query(error)=>error,
+                    crate::target_resolver::TargetResolverError::IterationLimit=>ActorWorldError::TargetSearchLimit,
+                })?;
+                a[0x5b]=0;
+                for offset in [0x0b,0x5c] {
+                    a[offset..offset+2].copy_from_slice(&resolved.point[0].to_le_bytes());
+                    a[offset+2..offset+4].copy_from_slice(&resolved.point[1].to_le_bytes());
+                }
+                a[0x57]|=2;
+                // The caller sets bit0 around virtual52280, then clears it.
+                a[0x49]&=!1;
+            }
+        }
+        let target=[word(&a,11),word(&a,13)];
         let mut working=if a[0x49]&3!=0{[word(&a,0x45),word(&a,0x47)]}else{target};let mut immediate=false;
         if a[0x49]&0x10!=0&&a[0x49]&12!=0{
             if !self.actor_route_point_accepted(raw,target)?{return Err(CreatureError::TargetSearchRequired.into());}
