@@ -1,0 +1,38 @@
+{
+  "status": "source-inspected",
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "conclusion": "Movie open/allocation failure returns without blocking victory entry, statistics or Continue.",
+  "checks": {
+    "A4FF8": "A5048 open; A504F test; A5051 zero jumps A51BE return.",
+    "A51C8": "A5218 open; A5223 zero jumps A5322 return; allocation failure A523D closes movie, A5243 returns zero.",
+    "1BE50": "A4FC0 call at1BF5D followed unconditionally by715A0 at1BF62; playback return not checked.",
+    "7DBC0": "1BE50 call at7DC6D followed by display lock/copy logic; return not checked.",
+    "mode8": "1BE5F skips playback when118968 bit8 is set; do not fabricate this mode.",
+    "continue": "7DDD0 requires fresh118779 bit1 and selects campaign186F19 unless ending progress24."
+  },
+  "source_order": [
+    "Load WINSCR palette/background; clear flag4; prepare display/audio; close old widgets.",
+    "Set stage5, save current frame, set modebit2.",
+    "Attempt BIOWIN; open/allocation failure is nonblocking; clear consumed input edges via715A0.",
+    "Lock/copy/unlock framebuffer where available; lock failure also falls through.",
+    "Reset frame0 and increment selected-player progress at7DD0A.",
+    "Set drawing bounds1F490, derive eight palette mappings715E0, reset serviceA2FB8.",
+    "Render result statistics/feedback; accept fresh input; perform72E50 cleanup on departure."
+  ],
+  "host_requirements": [
+    "Record MovieUnavailable separately from MoviePlayed.",
+    "A missing decoder is a documented presentation limitation, not evidence of original asset failure.",
+    "Prepare static original result resources, palette mappings, bounds and input reset before atomic entry commit.",
+    "Do not claim movie playback or full presentation fidelity from fallback; full-game animation remains required."
+  ],
+  "listing_sha256": {
+    "private/ghidra/mission-result-refs/result-view-range.txt": "95362779881a8261abae65a13e155405221402ab4adec1661542fd2e751de30a",
+    "private/ghidra/campaign-refs/instructions-0001be50.txt": "29e74a47878b1f8aaf350545727c9b901320d68eae52ddaae628f8f69cc314e3",
+    "private/ghidra/input-producer/instructions-000a4fc0.txt": "e32f1431cf98daef809755125a535512ef2c8c9ab03eedc98befefe0592d4792",
+    "private/ghidra/input-producer/instructions-000a4ff8.txt": "34c9028e9dd5144f27b1cc60f0ef771a8df23da2b78ac857a462ca185c5d14a7",
+    "private/ghidra/input-producer/instructions-000a51c8.txt": "23a7f89ef2c1ac0f9a2e8bea853e28a16d1d980f65b1f033bfdbcb2e81dba5f8",
+    "private/ghidra/input-producer/instructions-000715a0.txt": "c312d02f09220aeac475e07f0ddcdab99d0a04bd5ebc1d4f4a7551040d4a2d8b",
+    "private/ghidra/font-menu-bind/instructions-000715e0.txt": "42e0b050ff8e1744378af27d08a13893c4367d4cdc422dbcd635993c1e915af2"
+  },
+  "tests": "not run; bounded inspection of existing exported listings only"
+}

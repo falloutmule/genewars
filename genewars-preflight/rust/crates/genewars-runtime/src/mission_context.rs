@@ -159,6 +159,17 @@ impl MissionRuntimeContext {
         if plan.flags_after!=flags || plan.result_request!=request {return Err("mission outcome flags or request do not match typed result");}
         self.runtime_flags=flags;self.outcome=plan.outcome;Ok(())
     }
+    /// Internal numeric half of7DBC0. Presentation evidence is validated by
+    /// ActorWorld before this checked context transaction is applied.
+    pub(crate) fn apply_victory_entry_checked(&mut self,before:&Self,selected:u8,
+        plan:&crate::result_transition::VictoryEntryPlan)->Result<(),&'static str>{
+        if self!=before{return Err("stale victory entry context");}
+        if self.outcome!=(crate::mission_outcome::MissionOutcome::Won{player:selected}){return Err("victory entry requires selected winner");}
+        let mode=self.runtime_mode.ok_or("runtime mode unknown")?;
+        if self.callback_gate()!=CallbackGate::Ready||self.runtime_flags&0x60!=0x60||mode&3!=0{return Err("victory entry context is not admitted");}
+        if plan.flags_after!=self.runtime_flags&!4||plan.mode_after!=mode|2||plan.frame_after!=0||plan.saved_frame!=self.frame||plan.stage_after!=5||!plan.exit_cleanup_72e50_required{return Err("victory entry numeric result mismatch");}
+        self.runtime_flags=plan.flags_after;self.runtime_mode=Some(plan.mode_after);self.frame=plan.frame_after;Ok(())
+    }
     pub fn startup_blockers(&self) -> &'static [StartupBlocker] {
         match self.origin {
             ContextOrigin::Development | ContextOrigin::FreshCdConq001 => &[],

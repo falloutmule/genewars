@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "utc": "2026-10-14T23:41:01.183592+00:00",
+  "scope": "Atomic owned numeric victory-entry adapter; synthetic presentation-port unit tests only",
+  "command": "CARGO_BUILD_JOBS=2 C:/Python314/python.exe -B scripts/cargo.py test -p genewars-runtime victory_entry --offline --locked",
+  "test_result": {
+    "passed": 3,
+    "failed": 0,
+    "filtered": 176,
+    "exit_code": 0
+  },
+  "sha256": {
+    "rust/crates/genewars-runtime/src/actor_world/victory_entry.rs": "4d257d8a1b5cc9de9042cf312e7bb5bfb9419948cee03e0d57e3bb80deff219a",
+    "rust/crates/genewars-runtime/src/mission_context.rs": "8d5e9a585fa121ae52d5397c0291ddc45f7c071c5f467ef85a0bf6667e82778d",
+    "rust/crates/genewars-runtime/src/actor_world.rs": "bf3b2e851d1cfdc8b3900903658708484dec2d13556afba68bb74d08886b171a",
+    "rust/crates/genewars-runtime/src/result_transition.rs": "0416022aa796b39b3f675a22e8a98444be8a05d7d3667b494f75f655dc36c766"
+  },
+  "api": [
+    "prepare_victory_entry(context,selected,video_lock_depth) -> immutable ticket and sourceordered service obligations",
+    "commit_victory_entry(context,ticket,VictoryPresentationStatus) -> numeric plan only after explicit Completed port evidence"
+  ],
+  "checks": [
+    "Typed Won selected player, participating-player range, live flags/mode/callback readiness and unlocked surface required.",
+    "Pending/unsupported services, missing or reordered service list, and stale context/any player beforeimage reject without mutation.",
+    "Completed port advances selected progress exactly once, applies source flags/mode/frame; saved frame/stage5/exit cleanup returned to host.",
+    "Repeated entry and reused ticket reject atomically."
+  ],
+  "limitations": [
+    "Completion evidence is a host trust boundary, not an engine implementation of BIOWIN/audio. Nonempty receipt identifiers and exact ordered service list are required.",
+    "Tests deliberately use synthetic service receipts and synthetic victory setup; no actual presentation service or authentic mission verified.",
+    "Host must retain returned stage/saved frame and perform required exit72E50 cleanup; no automatic campaign continuation."
+  ],
+  "authentic_missions_completable": 0
+}

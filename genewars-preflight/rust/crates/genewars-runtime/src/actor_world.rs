@@ -1831,3 +1831,6 @@ pub use mission_outcome::{OutcomeRuntimeInputs,OwnedMissionOutcomeError};
 pub use bootstrap_updates::{BootstrapVisibilityReceipt, BootstrapWorldError};
 mod construction_placement;
 mod mission_runtime;
+
+mod victory_entry;
+pub use victory_entry::{VictoryEntryTicket,VictoryPresentationStatus,OwnedVictoryEntryError};
