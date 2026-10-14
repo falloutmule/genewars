@@ -10,6 +10,7 @@ pub enum AdmittedBuildingCallback {
     Turret{slot:u16,plan:crate::completed_building::TurretTrackingPlan},
     Extractor{slot:u16,plan:crate::extractor_production::ExtractorIdlePlan},
     ProducingExtractor{receipt:ExtractorWorldReceipt},
+    PowerProducer{receipt:PowerBuildingReceipt},
 }
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct AdmittedBuildingPass {
@@ -60,6 +61,11 @@ impl ActorWorld {
                     AdmittedBuildingCallback::Incomplete{slot:slot as u16,plan}
                 }else if selector==1 {
                     AdmittedBuildingCallback::Turret{slot:slot as u16,plan:staged.step_tracking_completed_selector1_building(slot as u16,turret,frame,physics)?}
+                }else if matches!(selector,3|6) && production.is_some(){
+                    let (_,trig,_)=production.unwrap();
+                    let resource=resources.iter().find(|r|r.selector()==selector).ok_or(ActorWorldError::EnvironmentUnavailable)?;
+                    let solar_generation=word(staged.backing_bytes(),0x1c5f);
+                    AdmittedBuildingCallback::PowerProducer{receipt:staged.step_completed_power_building(slot as u16,resource,frame,solar_generation,physics,trig)?}
                 }else if selector==11 && production.is_some(){
                     let (context,trig,table)=production.unwrap();
                     let resource=resources.iter().find(|r|r.selector()==11).ok_or(ActorWorldError::EnvironmentUnavailable)?;

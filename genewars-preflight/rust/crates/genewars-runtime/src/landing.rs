@@ -625,7 +625,7 @@ pub fn plan_water_splash_update(before:&LandingRecord)->Result<Effect6UpdatePlan
 /// Replacement cleanup needs an explicit UI state and remains a world boundary.
 pub fn water_splash_replacement(pool:&[LandingRecord;200])->Result<Option<u16>,LandingError>{
  let mut priority=20;let mut selected=None;
- for(i,r)in pool.iter().enumerate(){let p=match r[69]{6=>27,0x2f=>35,0x30=>20,0x31=>1,_=>return Err(LandingError::UnsupportedPhysicsState)};
+ for(i,r)in pool.iter().enumerate(){let p=match r[69]{6=>27,0x2f=>35,0x30=>20,0x21|0x31=>1,_=>return Err(LandingError::UnsupportedPhysicsState)};
   if p>priority&&r[21]&1==0{priority=p;selected=Some(i as u16);}
  }Ok(selected)
 }

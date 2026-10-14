@@ -309,6 +309,7 @@ fn decode_bound_frame(
         EffectAnimationBinding::EffAnimation21 => 21,
         EffectAnimationBinding::EffAnimation22 => 22,
         EffectAnimationBinding::EffAnimation44 => 44,
+            EffectAnimationBinding::EffAnimation33 => 33,
     };
     decode_frame(anb, animation, relative_frame)
 }

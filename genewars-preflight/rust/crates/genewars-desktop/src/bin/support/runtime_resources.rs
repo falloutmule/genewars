@@ -316,6 +316,7 @@ impl EffectAnimationDatabase {
             EffectAnimationBinding::EffAnimation21 => 21,
             EffectAnimationBinding::EffAnimation22 => 22,
             EffectAnimationBinding::EffAnimation44 => 44,
+            EffectAnimationBinding::EffAnimation33 => 33,
         }
     }
 

@@ -82,3 +82,5 @@ pub mod projectile_impact;
 pub mod mission_context;
 
 pub mod terrain_height;
+
+pub mod building_power;

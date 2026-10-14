@@ -37,7 +37,7 @@ pub struct EffectStepReceipt {
 }
 
 #[derive(Debug,Clone,PartialEq,Eq)]
-pub enum LandingEffectCallback { Landing(LandingStepReceipt), Smoke(EffectStepReceipt), DepartureParticle(EffectStepReceipt), WaterSplash(EffectStepReceipt), EtherealParticle(EffectStepReceipt), Construction(EffectStepReceipt) }
+pub enum LandingEffectCallback { Landing(LandingStepReceipt), Smoke(EffectStepReceipt), DepartureParticle(EffectStepReceipt), WaterSplash(EffectStepReceipt), EtherealParticle(EffectStepReceipt), Construction(EffectStepReceipt), Power(EffectStepReceipt) }
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct LandingEffectPassReceipt {
     pub primary:Vec<LandingEffectCallback>,
@@ -70,7 +70,7 @@ impl ActorWorld {
                     created+=u32::from(e.created_effect.is_some());
                     if let Some(r)=&e.retirement { receipt.ui_after=r.ui_after.clone(); }
                 },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)=>{created+=u32::from(e.created_effect.is_some());receipt.ui_after=e.ui_after.clone();},
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)|LandingEffectCallback::Power(e)=>{created+=u32::from(e.created_effect.is_some());receipt.ui_after=e.ui_after.clone();},
             }
             receipt.primary.push(callback);
         }
@@ -81,7 +81,7 @@ impl ActorWorld {
             let callback=staged.landing_effect_callback(slot,context,physics,trig,&receipt.ui_after)?;
             match &callback {
                 LandingEffectCallback::Landing(e)=>if let Some(r)=&e.retirement { receipt.ui_after=r.ui_after.clone(); },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)=>receipt.ui_after=e.ui_after.clone(),
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)|LandingEffectCallback::Power(e)=>receipt.ui_after=e.ui_after.clone(),
             }
             receipt.newborn.push(callback);
         }
@@ -103,6 +103,7 @@ impl ActorWorld {
                     _=>Err(LandingError::UnsupportedPhase(phase).into()),
                 }.map(LandingEffectCallback::Landing)
             },
+            0x21=>self.step_power_transfer33(slot,context,physics,ui).map(|r|LandingEffectCallback::Power(r.effect)),
             6=>self.step_effect6(slot,context,physics,trig,ui).map(LandingEffectCallback::Smoke),
             0x1A=>self.step_particle(slot,0x1A,context,physics,trig,ui).map(LandingEffectCallback::EtherealParticle),
             0x30=>self.step_effect30(slot,ui).map(LandingEffectCallback::WaterSplash),
@@ -219,7 +220,7 @@ impl ActorWorld {
         if word(&self.backing,0x3554)==200 {
             let priority=if code==0x15 {19}else{20};
             for r in pool.records() {
-                let p=match r[69] {6=>27,0x15=>19,0x16|0x30=>20,0x1a|0x2f=>35,0x31=>1,_=>return Err(ActorWorldError::UnsupportedEffectEvent)};
+                let p=match r[69] {6=>27,0x15=>19,0x16|0x30=>20,0x1a|0x2f=>35,0x21|0x31=>1,_=>return Err(ActorWorldError::UnsupportedEffectEvent)};
                 if r[21]&1==0&&p>priority {return Err(ActorWorldError::UnsupportedEffectEvent);}
             }
             return Ok(None);
@@ -297,7 +298,7 @@ impl ActorWorld {
         staged.validate_links()?;staged.validate_effect_count()?;*self=staged;Ok(receipt)
     }
 
-    fn retire_effect(&mut self,slot:u16,before:&LandingRecord,ui:&RetirementUiState)->Result<EffectStepReceipt,ActorWorldError> {
+    pub(super) fn retire_effect(&mut self,slot:u16,before:&LandingRecord,ui:&RetirementUiState)->Result<EffectStepReceipt,ActorWorldError> {
         // Temporary projection scaffolding is only used for families whose
         // native overlays have not been admitted. It is never persisted.
         let records=self.effect_cleanup_records();
@@ -511,7 +512,7 @@ impl ActorWorld {
 
     /// Intrusive list removal preserves the removed object's own reference
     /// triples. Callers replace/retire that object within the outer clone.
-    fn unlink_effect(&mut self,slot:u16)->Result<(),ActorWorldError> {
+    pub(super) fn unlink_effect(&mut self,slot:u16)->Result<(),ActorWorldError> {
         let raw=[slot as u8,(slot>>8) as u8,5];
         let record=self.entity(raw)?;
         let previous=reference(record,0);let next=reference(record,3);

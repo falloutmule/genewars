@@ -1817,3 +1817,9 @@ mod tests {
 }
 
 mod terrain_refresh;
+
+mod power_updates;
+pub use power_updates::PowerStepReceipt;
+
+mod power_buildings;
+pub use power_buildings::PowerBuildingReceipt;
