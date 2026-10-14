@@ -1,0 +1,18 @@
+{
+  "status": "passed-contact-request-planner",
+  "cases": 128,
+  "compared_bytes": 2944,
+  "literal_instructions": 13054,
+  "rust_sha256": "8afbfaf08b248bc1861bff2eeda2190331dc0f6b0148940c7cae347d84a27ae7",
+  "listing_sha256": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+  "ports": [
+    "height sample",
+    "effect6 allocation",
+    "ordered enemy8B000 then own8B080 queries returning empty"
+  ],
+  "unverified": [
+    "occupied contact cell predicates and damage",
+    "factory allocation side effects",
+    "whole-world callback composition"
+  ]
+}

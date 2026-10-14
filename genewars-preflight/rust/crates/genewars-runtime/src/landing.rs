@@ -295,12 +295,14 @@ pub fn plan_landing_effect6_factory(
     sine:&[i32;2048],cosine:&[i32;2048],
 )->Result<LandingEffect6FactoryPlan,LandingError>{
     if rng.ring>=32{return Err(LandingError::InvalidRing(rng.ring));}
-    if angles[0]>2048||angles[1]>2048||angles[2]>32767{return Err(LandingError::UnsupportedPhysicsState);}
+    // Source1F070/48790 sign-extend both angles before indexing the two
+    // 2048-entry trig tables. Extractor smoke can launch with negative pitch.
+    if angles[..2].iter().any(|&v|!(-1536..=2559).contains(&(v as i16)))||angles[2]>32767{return Err(LandingError::UnsupportedPhysicsState);}
     let mut factory=plan_landing_factory(pool,pool_count,0,0,at,ground,shade,old_head)?;
     let prior=factory.before;let a=&mut factory.after_nonpointer;
     put_dword(a,39,physical_height);a[69]=6;a[73]=prior[73];a[76]=prior[76];
     for(i,v)in angles.into_iter().enumerate(){put_word(a,57+i*2,v as i16);}
-    fn shift(v:u16)->usize{if v<512{v as usize+1536}else{v as usize-512}}
+    fn shift(v:u16)->usize{let signed=i32::from(v as i16);if signed<512{(signed+1536)as usize}else{(signed-512)as usize}}
     let horizontal=((i64::from(cosine[shift(angles[1])])*i64::from(angles[2]))>>16) as i32;
     put_word(a,45,((i64::from(cosine[shift(angles[0])])*i64::from(horizontal))>>16) as i16);
     put_word(a,47,((i64::from(sine[shift(angles[0])])*i64::from(horizontal))>>16) as i16);

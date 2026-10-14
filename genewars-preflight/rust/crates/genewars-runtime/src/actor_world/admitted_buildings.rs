@@ -9,6 +9,7 @@ pub enum AdmittedBuildingCallback {
     Incomplete{slot:u16,plan:crate::building_callback::IncompleteBuildingPlan},
     Turret{slot:u16,plan:crate::completed_building::TurretTrackingPlan},
     Extractor{slot:u16,plan:crate::extractor_production::ExtractorIdlePlan},
+    ProducingExtractor{receipt:ExtractorWorldReceipt},
 }
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct AdmittedBuildingPass {
@@ -20,6 +21,20 @@ impl ActorWorld {
         turret:&BuildingResourceDatabase,resources:&[SourceBuildingResourceDatabase],
         frame:u32,physics:&crate::physics_tables::PhysicsTables,
         work_audio_active:impl Fn(u16)->bool)->Result<AdmittedBuildingPass,ActorWorldError> {
+        self.step_admitted_buildings_inner(player_count,selected,turret,resources,frame,physics,work_audio_active,None)
+    }
+    pub fn step_admitted_buildings_with_production(&mut self,player_count:u8,selected:u8,
+        turret:&BuildingResourceDatabase,resources:&[SourceBuildingResourceDatabase],
+        frame:u32,physics:&crate::physics_tables::PhysicsTables,
+        work_audio_active:impl Fn(u16)->bool,context:LandingPhysicsContext,trig:&TrigTables,table:&[u8;8192])
+        ->Result<AdmittedBuildingPass,ActorWorldError>{
+        self.step_admitted_buildings_inner(player_count,selected,turret,resources,frame,physics,work_audio_active,Some((context,trig,table)))
+    }
+    fn step_admitted_buildings_inner(&mut self,player_count:u8,selected:u8,
+        turret:&BuildingResourceDatabase,resources:&[SourceBuildingResourceDatabase],
+        frame:u32,physics:&crate::physics_tables::PhysicsTables,
+        work_audio_active:impl Fn(u16)->bool,production:Option<(LandingPhysicsContext,&TrigTables,&[u8;8192])>)
+        ->Result<AdmittedBuildingPass,ActorWorldError>{
         if player_count>4||selected>=4{return Err(ActorWorldError::InvalidPlayer(player_count.max(selected)));}
         self.validate_links()?;self.validate_building_counts()?;
         let period=u16::from_le_bytes(self.backing[0x1c7a..0x1c7c].try_into().unwrap());
@@ -45,6 +60,10 @@ impl ActorWorld {
                     AdmittedBuildingCallback::Incomplete{slot:slot as u16,plan}
                 }else if selector==1 {
                     AdmittedBuildingCallback::Turret{slot:slot as u16,plan:staged.step_tracking_completed_selector1_building(slot as u16,turret,frame,physics)?}
+                }else if selector==11 && production.is_some(){
+                    let (context,trig,table)=production.unwrap();
+                    let resource=resources.iter().find(|r|r.selector()==11).ok_or(ActorWorldError::EnvironmentUnavailable)?;
+                    AdmittedBuildingCallback::ProducingExtractor{receipt:staged.step_completed_extractor(slot as u16,resource,frame,work_audio_active(slot as u16),context,trig,table)?}
                 }else if selector==11 {
                     let player=*staged.players[usize::from(owner)].bytes();
                     let plan=crate::extractor_production::plan_completed_idle(&record,&player,work_audio_active(slot as u16))

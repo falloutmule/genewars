@@ -1,0 +1,27 @@
+{
+  "status": "passed-producing-extractor-with-ports",
+  "cases": 64,
+  "compared_bytes": 1168384,
+  "literal_instructions": 54974,
+  "rust_sha256": "8afbfaf08b248bc1861bff2eeda2190331dc0f6b0148940c7cae347d84a27ae7",
+  "listing_sha256": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+  "resource_sha256": "218b117a4b0f84c6e5a362e5afdc46d29fb1525930c6131e2ffff3bcfcda2142",
+  "ports": [
+    "audio service queryfalse",
+    "audio requests",
+    "render queue",
+    "height sample",
+    "effect6 factory",
+    "empty enemy and own kind1 queries",
+    "terrain depletion8CBA0",
+    "map dirty84E10"
+  ],
+  "exclusions": [
+    "empty-resource shutdown",
+    "occupied contact cell",
+    "terrain depletion mutations",
+    "effect6 allocation mutations",
+    "disabled/destruction/repair states",
+    "whole-world scheduler"
+  ]
+}

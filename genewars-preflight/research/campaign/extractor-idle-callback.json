@@ -3,7 +3,7 @@
   "cases": 96,
   "compared_bytes": 179712,
   "literal_instructions": 29417,
-  "rust_sha256": "a9815f0bcbfc8e7a04cf50799af5070fb6695a071cac58cbda3ca25d1f352003",
+  "rust_sha256": "8afbfaf08b248bc1861bff2eeda2190331dc0f6b0148940c7cae347d84a27ae7",
   "listing_sha256": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
   "resource_sha256": "218b117a4b0f84c6e5a362e5afdc46d29fb1525930c6131e2ffff3bcfcda2142",
   "ports": [

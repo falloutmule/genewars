@@ -154,8 +154,8 @@ impl SharedMission {
         }}
         // Audio is still a queued presentation request in this development host.
         // No active mixer channel is asserted; mission acceptance requires audio integration.
-        let buildings=self.world.step_admitted_building_callbacks(4,0,&resources.bturr_selector1,&resources.source_buildings,
-            frame,&resources.physics,|_|false).map_err(|e|e.to_string())?;
+        let buildings=self.world.step_admitted_buildings_with_production(4,0,&resources.bturr_selector1,&resources.source_buildings,
+            frame,&resources.physics,|_|false,context,&self.trig,&resources.construction_border).map_err(|e|e.to_string())?;
         self.pending_requests+=buildings.notices.len()as u64;
         for callback in &buildings.callbacks {
             use genewars_runtime::actor_world::AdmittedBuildingCallback;
@@ -163,6 +163,7 @@ impl SharedMission {
                 AdmittedBuildingCallback::Incomplete{plan,..}=>self.pending_requests+=u64::from(plan.stop_audio_23)+u64::from(plan.stop_audio_2f),
                 AdmittedBuildingCallback::Turret{plan,..}=>self.pending_requests+=u64::from(plan.audio.is_some()),
                 AdmittedBuildingCallback::Extractor{plan,..}=>self.pending_requests+=plan.audio.len()as u64,
+                AdmittedBuildingCallback::ProducingExtractor{receipt}=>self.pending_requests+=(receipt.plan.state.audio.len()+receipt.terrain_invalidations.len())as u64,
             }
         }
         let climate=i16::from_le_bytes(self.world.backing_bytes()[0x1c61..0x1c63].try_into().unwrap());
@@ -189,7 +190,7 @@ impl SharedMission {
         let environment=genewars_runtime::construction_maintenance::TerrainEnvironment{
             climate_center:[word(0x1ea2),word(0x1ea4)],raw_water_height:word(0x1c63),
             climate:word(0x1c61),light:[181,0,-181]};
-        let terrain=self.world.step_terrain_jobs_without_height_changes(&mut self.terrain_jobs,environment,&resources.construction_border)
+        let terrain=self.world.step_terrain_jobs(&mut self.terrain_jobs,environment,&resources.construction_border)
             .map_err(|e|format!("terrain-job pass: {e:?}"))?;
         self.pending_requests+=terrain.iter().map(|r|r.viewport_invalidations.len()as u64).sum::<u64>();
         self.frame_counter+=1;

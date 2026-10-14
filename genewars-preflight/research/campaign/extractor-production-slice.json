@@ -2,7 +2,7 @@
   "status": "passed-numeric-slice",
   "cases": 64,
   "literal_instructions": 68323,
-  "rust_sha256": "a9815f0bcbfc8e7a04cf50799af5070fb6695a071cac58cbda3ca25d1f352003",
+  "rust_sha256": "8afbfaf08b248bc1861bff2eeda2190331dc0f6b0148940c7cae347d84a27ae7",
   "compared_bytes": 1168384,
   "source_listing_sha256": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
   "scope": "46F0C through4707B: 7x7 maximum-resource selection, depletion byte, capped unsigned secondary funds, empty-resource flags, cooldown3F",

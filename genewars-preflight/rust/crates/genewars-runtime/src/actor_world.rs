@@ -41,6 +41,8 @@ pub use terrain_updates::{TerrainUpdateError, TerrainUpdateReceipt};
 mod building_storage;
 mod building_scheduler;
 mod admitted_buildings;
+mod extractor_updates;
+pub use extractor_updates::ExtractorWorldReceipt;
 pub use admitted_buildings::{AdmittedBuildingCallback,AdmittedBuildingPass};
 pub use building_scheduler::{IncompleteBuildingPass,Selector1BuildingPass,Selector1BuildingCallback};
 mod construction_scheduler;
