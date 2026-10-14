@@ -152,14 +152,17 @@ impl SharedMission {
                 self.pending_requests+=r.progress.as_ref().map_or(0,|p|u64::from(p.pending_audio_4d)+u64::from(p.ui_refresh_required));
             },
         }}
-        let buildings=self.world.step_tracking_selector1_building_callbacks(4,0,&resources.bturr_selector1,frame,&resources.physics).map_err(|e|e.to_string())?;
+        // Audio is still a queued presentation request in this development host.
+        // No active mixer channel is asserted; mission acceptance requires audio integration.
+        let buildings=self.world.step_admitted_building_callbacks(4,0,&resources.bturr_selector1,&resources.source_buildings,
+            frame,&resources.physics,|_|false).map_err(|e|e.to_string())?;
         self.pending_requests+=buildings.notices.len()as u64;
         for callback in &buildings.callbacks {
-            use genewars_runtime::actor_world::Selector1BuildingCallback;
+            use genewars_runtime::actor_world::AdmittedBuildingCallback;
             match callback {
-                Selector1BuildingCallback::Incomplete{plan,..}=>self.pending_requests+=u64::from(plan.stop_audio_23),
-                Selector1BuildingCallback::TrackingCompleted{plan,..}=>self.pending_requests+=u64::from(plan.audio.is_some()),
-                Selector1BuildingCallback::QuietCompleted{..}=>{},
+                AdmittedBuildingCallback::Incomplete{plan,..}=>self.pending_requests+=u64::from(plan.stop_audio_23)+u64::from(plan.stop_audio_2f),
+                AdmittedBuildingCallback::Turret{plan,..}=>self.pending_requests+=u64::from(plan.audio.is_some()),
+                AdmittedBuildingCallback::Extractor{plan,..}=>self.pending_requests+=plan.audio.len()as u64,
             }
         }
         let climate=i16::from_le_bytes(self.world.backing_bytes()[0x1c61..0x1c63].try_into().unwrap());
@@ -223,6 +226,20 @@ impl SharedMission {
             0,0x0100,true,true).map_err(|e|format!("{e:?}"))?;
         self.world=staged;
         Ok(plan)
+    }
+    /// Source43960 menu admission followed by the shared opcode5 command.
+    /// This does not change the development host's startup provenance.
+    pub fn assign_selected_building(&mut self,selector:u8)->Result<genewars_runtime::actor_construction::ArchitectAssignmentPlan,String> {
+        let slot=self.selected.ok_or("select an architect first")?;
+        let owner=self.world.actors().record(slot).map_err(|e|e.to_string())?[24];
+        let player=self.world.player(owner).map_err(|e|e.to_string())?;
+        if !genewars_runtime::building_availability::available(player.bytes(),selector).map_err(|e|format!("{e:?}"))? {
+            return Err(format!("building selector {selector} is not available at this campaign progress and prerequisite state"));
+        }
+        let mut staged=self.world.clone();
+        let plan=staged.assign_architect_construction(u16::try_from(slot).map_err(|_|"actor slot outside native range")?,
+            0,u16::from(selector)<<8,true,true).map_err(|e|format!("{e:?}"))?;
+        self.world=staged;Ok(plan)
     }
     pub fn actor_state_json(&self)->String {
         let word=|r:&[u8],p:usize|i16::from_le_bytes([r[p],r[p+1]]);

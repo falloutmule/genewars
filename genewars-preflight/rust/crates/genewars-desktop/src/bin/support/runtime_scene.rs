@@ -6,6 +6,7 @@ use genewars_render::{RgbImage,CdTitleButton};
 use genewars_runtime::world::MissionWorld;
 use super::{menu_art,runtime_resources::{read_bound,Resources,Frame},status_text};
 use super::shared_scene::SharedMission;
+#[path="building_menu.rs"] mod building_menu;
 
 #[derive(Clone,Copy,Debug,PartialEq,Eq)]
 pub enum Scene { Menu, Loading, Mission, Options, Error, Quit }
@@ -45,6 +46,7 @@ pub struct Mission {
 
 pub struct Game {
     root: PathBuf,
+    pub building_menu_open:bool, building_menu_capture:Option<u8>, building_feedback:Option<String>,
     pub scene: Scene, pub mission: Option<Mission>,
     images: Vec<RgbImage>, button: CdTitleButton,
     controls: MenuCallback0State, cursor: Option<(i32,i32)>, left: bool, right: bool, mask: u8,
@@ -63,12 +65,13 @@ impl Game {
     pub fn open(root:&Path)->Result<Self,String> {
         let palette=Palette256::parse(&read_bound(&root.join("menu/titlescr.pal"))?,PaletteChannelMode::Rgb).map_err(|e|e.to_string())?;
         let (images,button,_,_)=menu_art::compose(&root.join("menu"),&palette)?;
-        Ok(Self { root:root.into(), scene:Scene::Menu,mission:None,images,button,
+        Ok(Self { root:root.into(),building_menu_open:false,building_menu_capture:None,building_feedback:None, scene:Scene::Menu,mission:None,images,button,
             controls:MenuCallback0State::default(),cursor:None,left:false,right:false,mask:0,
             automatic:false,start_running:false,error:None,landing_seed:None,trace:vec!["Menu".into()],ticks:Vec::new(),presented:0 })
     }
 
     fn transition(&mut self, scene:Scene) {
+        self.building_menu_open=false;self.building_menu_capture=None;self.building_feedback=None;
         self.scene=scene; self.trace.push(format!("{scene:?}"));
         self.controls=MenuCallback0State::default();self.mask=0;self.left=false;self.right=false;
     }
@@ -80,9 +83,37 @@ impl Game {
     }
 
     pub fn pointer(&mut self,cursor:Option<(i32,i32)>) {self.cursor=cursor;self.packet(false,false);}
-    pub fn left(&mut self,down:bool) {let changed=self.left!=down;self.left=down;if changed {self.packet(down,!down);}}
-    pub fn right(&mut self,down:bool) {let pressed=down&&!self.right;self.right=down;self.packet(false,false);if pressed&&self.scene==Scene::Mission {if let Some((x,y))=self.cursor {self.order([x,y]);}}}
-    pub fn cancel_capture(&mut self) {self.cursor=None;self.left=false;self.right=false;self.packet(false,true);}
+    pub fn left(&mut self,down:bool) {
+        let changed=self.left!=down;self.left=down;if !changed{return;}
+        if self.building_menu_open {
+            let choices=self.building_choices();let hit=building_menu::hit(&choices,self.cursor);
+            if down{self.building_menu_capture=hit;}else{
+                let captured=self.building_menu_capture.take();
+                if captured.is_some()&&captured==hit{
+                    let selector=captured.unwrap();
+                    match self.start_selected_building_type(selector){
+                        Ok(())=>{self.building_menu_open=false;self.building_feedback=Some(format!("ASSIGNED {}",building_menu::label(selector)));},
+                        Err(error)=>{self.error=Some(error.clone());self.building_feedback=Some(error);}
+                    }
+                }
+            }
+            return;
+        }
+        self.packet(down,!down);
+    }
+    fn building_choices(&self)->Vec<u8>{
+        let Some(m)=&self.mission else{return Vec::new();};
+        let MissionState::Landing(w)=&m.world else{return Vec::new();};
+        w.world.player(0).map(|p|building_menu::choices(p.bytes())).unwrap_or_default()
+    }
+    pub fn toggle_building_menu(&mut self){
+        if self.scene==Scene::Mission&&self.mission.as_ref().is_some_and(|m|matches!(m.world,MissionState::Landing(_))){
+            self.building_menu_open=!self.building_menu_open;self.building_menu_capture=None;self.building_feedback=None;
+            self.automatic=false;self.trace.push(format!("ConstructionMenu:{}",self.building_menu_open));
+        }
+    }
+    pub fn right(&mut self,down:bool) {let pressed=down&&!self.right;self.right=down;self.packet(false,false);if pressed&&!self.building_menu_open&&self.scene==Scene::Mission {if let Some((x,y))=self.cursor {self.order([x,y]);}}}
+    pub fn cancel_capture(&mut self) {self.building_menu_capture=None;self.cursor=None;self.left=false;self.right=false;self.packet(false,true);}
 
     fn packet(&mut self,press:bool,release:bool) {
         if self.scene!=Scene::Menu {return;}
@@ -177,12 +208,18 @@ impl Game {
     /// architect, idle state 1, no reinitialization, and selector bounds.
     /// This does not set readiness, choose a site, or advance callbacks.
     pub fn start_selected_building(&mut self)->Result<(),String> {
+        self.start_building_command(None)
+    }
+    pub fn start_selected_building_type(&mut self,selector:u8)->Result<(),String> {
+        self.start_building_command(Some(selector))
+    }
+    fn start_building_command(&mut self,selector:Option<u8>)->Result<(),String> {
         if self.scene!=Scene::Mission {return Err("build-start requires the mission scene".into());}
         let m=self.mission.as_mut().ok_or("mission scene lacks world")?;
         let MissionState::Landing(current)=&m.world else{return Err("build-start requires the architect development world".into());};
         let mut proposed=current.clone();
         let slot=proposed.selected.ok_or("select an architect first")?;
-        let plan=proposed.assign_selected_bturr()?;
+        let plan=match selector{Some(selector)=>proposed.assign_selected_building(selector)?,None=>proposed.assign_selected_bturr()?};
         let frame=proposed.render(&m.resources,m.target)?;
         m.world=MissionState::Landing(proposed);
         m.frame=frame;
@@ -192,6 +229,7 @@ impl Game {
     }
 
     pub fn escape(&mut self) {
+        if self.building_menu_open{self.building_menu_open=false;self.building_menu_capture=None;return;}
         match self.scene {Scene::Menu=>self.transition(Scene::Quit),Scene::Quit=>{},_=>{self.automatic=false;self.mission=None;self.error=None;self.transition(Scene::Menu);}}
     }
     pub fn toggle_run(&mut self) {
@@ -211,19 +249,25 @@ impl Game {
                 let status=m.blocked.as_deref().map(|e|format!("STOPPED: {e}")).unwrap_or_else(||format!("{} - SPACE: STEP / ENTER: RUN / ESC: MENU",if self.automatic{"RUNNING"}else{"PAUSED"}));
                 let lines=if let MissionState::Landing(w)=&m.world {
                     vec![format!("LANDING STUDY - STEP {} - ACTOR {}",m.ticks,w.selected.map(|s|s.to_string()).unwrap_or("NONE".into())),
-                        self.error.clone().unwrap_or(status),"TAB: SELECT / RIGHT CLICK: PICK AND MOVE / B: ASSIGN BTURR AFTER ARRIVAL".into(),"DEV BUILD INPUT; OPCODE5 GUARDS APPLY, SETUP IS CALLBACK-DRIVEN".into()]
+                        self.error.clone().or_else(||self.building_feedback.clone()).unwrap_or(status),"TAB: SELECT / RIGHT CLICK: MOVE / C: CONSTRUCTION / B: DEV BTURR".into(),"DEV BUILD INPUT; OPCODE5 GUARDS APPLY, SETUP IS CALLBACK-DRIVEN".into()]
                 }else{vec![format!("PLANTS {} - STEP {} - CURSOR {}",m.world.plant_count(),m.ticks,m.world.schedule_cursor()),status,"ARROWS: VIEW - OTHER ENTITY SYSTEMS SUSPENDED".into()]};
                 (&m.frame.image,lines)
             },
             Scene::Error=>(&flat,vec!["MISSION LOAD FAILED - NO WORLD COMMITTED".into(),self.error.clone().unwrap_or_default(),"ESC: RETURN TO MENU".into()]),
             Scene::Quit=>(&self.images[0],vec!["CLOSING".into()]),
         };
+        if self.scene==Scene::Mission&&self.building_menu_open {
+            let m=self.mission.as_ref().unwrap();let MissionState::Landing(w)=&m.world else{return Err("construction chooser requires actor world".into());};
+            let player=w.world.player(0).map_err(|e|format!("{e:?}"))?;
+            let funds=i32::from_le_bytes(player.bytes()[0x4a3..0x4a7].try_into().unwrap());
+            return status_text::overlay(base,&building_menu::lines(&self.building_choices(),funds,w.selected,self.building_feedback.as_deref()));
+        }
         if self.scene==Scene::Mission {status_text::mission_overlay(base,&lines)}else{status_text::overlay(base,&lines)}
     }
 
     pub fn report(&self)->String {
         let trace=self.trace.iter().map(|s|json_string(s)).collect::<Vec<_>>().join(",");
         let mission=self.mission.as_ref().map(|m|format!("{{\"steps\":{},\"plants\":{},\"cursor\":{},\"target\":[{},{}],\"changed_world_frames\":{},\"world_sha256\":{},\"rgb_sha256\":{},\"queue\":{:?},\"blocked\":{},{}}}",m.ticks,m.world.plant_count(),m.world.schedule_cursor(),m.target[0],m.target[1],m.changed_frames,json_string(&m.frame.world_sha256),json_string(&m.frame.rgb_sha256),m.frame.queue,m.blocked.as_ref().map(|s|json_string(s)).unwrap_or("null".into()),m.world.extra_report())).unwrap_or("null".into());
-        format!("{{\"scene\":{},\"scene_history\":[{}],\"mission\":{},\"ticks\":[{}],\"presented_frames\":{},\"error\":{},\"scene_dispatch\":true,\"gameplay\":false,\"full_world_tick\":false,\"original_startup_sequence\":false,\"timer_policy\":\"port-owned 10 Hz when enabled\",\"render_policy\":\"full redraw; source-player0 view; radius4096 view-only factor; GENEPANL development backing\"}}\n",json_string(&format!("{:?}",self.scene)),trace,mission,self.ticks.join(","),self.presented,self.error.as_ref().map(|s|json_string(s)).unwrap_or("null".into()))
+        format!("{{\"scene\":{},\"scene_history\":[{}],\"mission\":{},\"ticks\":[{}],\"presented_frames\":{},\"error\":{},\"construction_menu_open\":{},\"construction_choices\":{:?},\"scene_dispatch\":true,\"gameplay\":false,\"full_world_tick\":false,\"original_startup_sequence\":false,\"timer_policy\":\"port-owned 10 Hz when enabled\",\"render_policy\":\"full redraw; source-player0 view; radius4096 view-only factor; GENEPANL development backing\"}}\n",json_string(&format!("{:?}",self.scene)),trace,mission,self.ticks.join(","),self.presented,self.error.as_ref().map(|s|json_string(s)).unwrap_or("null".into()),self.building_menu_open,self.building_choices())
     }
 }

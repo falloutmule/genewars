@@ -40,6 +40,7 @@ fn replay(game:&mut Game,text:&str)->Result<(),String>{
             // The admitted selector-1 command is guarded by opcode-5; normal
             // callbacks retain responsibility for subsequent site setup.
             ["build-start"]=>game.start_selected_building()?,
+            ["build-start",selector]=>game.start_selected_building_type(selector.parse().map_err(|_|"invalid building selector")?)?,
             _=>return Err(format!("unknown replay command at line {}",line+1)),
         }
         if game.scene==runtime_scene::Scene::Quit{break;}
