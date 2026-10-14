@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "recovered_utc": "2026-10-14T09:04:08.802747+00:00",
+  "scope": "Read-only recovery; no checks rerun and no original program executed.",
+  "git": {
+    "branch": "codex/genewars-reconstruction",
+    "head": "e2493cc9f8cf82981e12a5f9bb29ae61996737b1",
+    "tracked_changed_paths": 164,
+    "untracked_paths": 114,
+    "private_tracked": false
+  },
+  "aggregate": {
+    "path": "research/integration/verification.json",
+    "sha256": "61714b6fef502664d20aeb041d00eb62545e014b31f38a469f1acc06134d832e",
+    "completed_utc": "2026-10-14T00:04:51.964379+00:00",
+    "passed": 270,
+    "total": 271,
+    "all_passed": false,
+    "failed_checks": [
+      "building_selector1_common_pixels"
+    ],
+    "rust_tests_passed": 416,
+    "production_stable_during_run": true,
+    "private_files_checked_then": 181375
+  },
+  "current_production": {
+    "pinned_paths": 132,
+    "matches_aggregate": true,
+    "different_paths": []
+  },
+  "registered_checks_absent_from_aggregate": [
+    "mission_bootstrap_context",
+    "saved_architect_return",
+    "turret_target_tracking_pass"
+  ],
+  "baseline_hashes": {
+    "game-files-manifest.json": {
+      "expected": "6139f4083031cee88bc04849f1959ae1e43aff41eef7c87cb4a62bc8b86e9e6a",
+      "actual": "6139f4083031cee88bc04849f1959ae1e43aff41eef7c87cb4a62bc8b86e9e6a"
+    },
+    "variant-comparison.json": {
+      "expected": "fa63d42693a0157fa3937255237290b84d3cf6a5f4df93cd5010c66847f9588d",
+      "actual": "fa63d42693a0157fa3937255237290b84d3cf6a5f4df93cd5010c66847f9588d"
+    }
+  },
+  "failure_details": [
+    {
+      "label": "building_selector1_common_pixels",
+      "exit_code": 1,
+      "timed_out": false,
+      "stderr_tail": "Traceback (most recent call last):\n  File \"C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\scripts\\desktop\\validate_bturr_common_pixels.py\", line 291, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\scripts\\desktop\\validate_bturr_common_pixels.py\", line 198, in main\n    check(ROOT / rel, digest)\n    ~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\scripts\\desktop\\validate_bturr_common_pixels.py\", line 76, in check\n    raise ValueError(f\"pinned input mismatch: {path}\")\nValueError: pinned input mismatch: C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\research\\variants\\completed-building-world-review.json\n"
+    }
+  ],
+  "archive": {
+    "path": "C:\\Users\\fallo\\Downloads\\genewars.zip",
+    "sha256": "8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906",
+    "unchanged": true
+  }
+}

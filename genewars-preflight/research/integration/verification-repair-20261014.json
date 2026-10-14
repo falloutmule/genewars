@@ -1,0 +1,27 @@
+{
+  "status": "passed-focused-repair",
+  "completed_utc": "2026-10-14T09:05:23.708863+00:00",
+  "aggregate_sha256": "61714b6fef502664d20aeb041d00eb62545e014b31f38a469f1acc06134d832e",
+  "aggregate_result_unchanged": "270/271; not a new all-green aggregate",
+  "failed_check": "building_selector1_common_pixels",
+  "repair": "Removed an unrelated generated world-review JSON from source-listing pins. All primary listing/resource and implementation pins remain.",
+  "command": [
+    "C:/Python314/python.exe",
+    "-B",
+    "scripts/desktop/validate_bturr_common_pixels.py"
+  ],
+  "exit_code": 0,
+  "case_count": 896,
+  "atomic_rejections": {
+    "blend": "atomic",
+    "blink": "atomic",
+    "destruction": "atomic",
+    "fade": "atomic",
+    "frame": "atomic",
+    "global": "atomic"
+  },
+  "receipt_path": "research/integration/bturr-common-pixels-current.json",
+  "receipt_sha256": "2393f69d28dfc8168f0e3ddbd667cea6a1b4b7a2cfd0d0a5c3137a263420c055",
+  "script_sha256": "c0269b1ce31f7b7d62647ceb0fb123baf6881f14f11e442e576e2dda25deb34b",
+  "log_path": "private/integration/bturr-common-recovery-20261014.log"
+}

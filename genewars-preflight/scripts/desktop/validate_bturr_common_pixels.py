@@ -20,6 +20,8 @@ HARNESS = ROOT / "scripts/desktop/bturr_common_pixel_harness.rs"
 IMPLEMENTATION = ROOT / "rust/crates/genewars-runtime/src/building_resources.rs"
 ACTOR_RENDER = ROOT / "rust/crates/genewars-runtime/src/actor_render.rs"
 ASSET_PARSER = ROOT / "rust/crates/genewars-assets/src/lib.rs"
+ACTOR_SCENE = ROOT / "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs"
+BUILDING_SCENE = ROOT / "rust/crates/genewars-desktop/src/bin/support/building_scene.rs"
 SCRIPT = Path(__file__).resolve()
 INPUTS = {
     ANB: ("c26df60af3a3166aec54112f197a4334966eb214eeaa48e0d9284e0510b8cd20", 68_030),
@@ -34,7 +36,12 @@ LISTINGS = {
     "private/ghidra/actor-draw/instructions-00096990.txt": "318a4d5f9fea633f859a291e7449239393e54f7c889eeb970cf9b4d3c229398c",
     "private/ghidra/entity-plant/instructions-0009a660.txt": "f6e10c86aa6ce6cf6b7906b26279ffc9baf4142fd81b0f99779f58b40b3001ee",
     "private/ghidra/entity-plant/instructions-0009b0d0.txt": "b8516427e8601213d500caa4fdf5fcfd0dbba6885f73a0f1890a6dbb6d2f26a0",
+    "private/ghidra/building-loader-refs/instructions-00047f80.txt": "bae7d9800c80bce7b1419e5b7a2193b1f934b5080dd30285c7a2a15b50a2a4e4",
 }
+# The completed-building world review is an independent aggregate check, not
+# an input to this pixel oracle. Its regenerated receipt includes changing
+# run metadata; pinning that receipt makes unrelated successful reruns fail.
+# Keep the actual source listings, resource bytes and compiled code pinned.
 WIDTH, HEIGHT, PITCH, FILL = 640, 480, 648, 0x35
 CASES = []
 for frame in range(3):
@@ -44,10 +51,22 @@ for frame in range(3):
             for global_flags in (0, 4):
                 for origin_name, x, y, phase in (("center", 320, 240, 0), ("top_left", 1, 1, 0),
                                                  ("edge", 637, 475, 2), ("signed", -32768, 32767, 3)):
-                    CASES.append({"id": len(CASES), "frame": frame, "owner": owner,
+                    CASES.append({"id": len(CASES), "animation": 0, "frame": frame, "owner": owner,
                                   "route": label, "shade": shade, "actor_flags": actor_flags,
                                   "global_flags": global_flags, "origin_name": origin_name,
-                                  "origin": [x, y], "phase": phase})
+                                  "origin": [x, y], "phase": phase,
+                                  "building_flags": 0x0040 | ((frame + owner) & 1)})
+for frame in range(8):
+    for owner in range(4):
+        for label, shade, actor_flags in (("completed_fade_zero", 0, 0), ("completed_fade_17", 17, 0),
+                                          ("completed_direct_30", 30, 0), ("completed_direct_flag", 11, 2)):
+            for origin_name, x, y, phase in (("center", 320, 240, 0), ("top_left", 1, 1, 0),
+                                             ("edge", 637, 475, 2), ("signed", -32768, 32767, 3)):
+                CASES.append({"id": len(CASES), "animation": 1, "frame": frame, "owner": owner,
+                              "route": label, "shade": shade, "actor_flags": actor_flags,
+                              "global_flags": 0, "origin_name": origin_name,
+                          "origin": [x, y], "phase": phase,
+                          "building_flags": 0x0040 | ((frame + owner) & 1)})
 
 
 def sha(data: bytes) -> str:
@@ -69,23 +88,25 @@ def s16(data: bytes, pos: int) -> int:
     return int.from_bytes(data[pos:pos + 2], "little", signed=True)
 
 
-def decode_frame(anb: bytes, frame_index: int):
+def decode_frame(anb: bytes, frame_index: int, animation: int = 0):
     count = int.from_bytes(anb[:2], "little")
     sections = tuple(int.from_bytes(anb[2 + 4 * i:6 + 4 * i], "little") for i in range(4))
     if count != 5 or sections != (66_562, 67_000, 67_560, 67_980):
         raise ValueError("BTURR ANB section signature changed")
     sprite_start, component_start, frame_start, animation_start = sections
-    first = int.from_bytes(anb[animation_start:animation_start + 4], "little")
-    last = int.from_bytes(anb[animation_start + 4:animation_start + 8], "little")
-    trailing = int.from_bytes(anb[animation_start + 8:animation_start + 10], "little")
-    if (first, last, trailing) != (0, 28, 3):
-        raise ValueError("animation-0 source range changed")
-    frame_pos = frame_start + frame_index * 14
+    animation_pos = animation_start + animation * 10
+    first = int.from_bytes(anb[animation_pos:animation_pos + 4], "little")
+    last = int.from_bytes(anb[animation_pos + 4:animation_pos + 8], "little")
+    trailing = int.from_bytes(anb[animation_pos + 8:animation_pos + 10], "little")
+    expected = (0, 28, 3) if animation == 0 else (42, 140, 8) if animation == 1 else None
+    if expected is None or (first, last, trailing) != expected or frame_index >= trailing:
+        raise ValueError(f"BTURR animation-{animation} source range changed or frame is invalid")
+    frame_pos = frame_start + first + frame_index * 14
     component_offset = int.from_bytes(anb[frame_pos:frame_pos + 4], "little")
     component_count = anb[frame_pos + 11]
     width_raw = s16(anb, frame_pos + 4)
     height_raw = s16(anb, frame_pos + 6)
-    if component_count != (2 if frame_index == 2 else 1):
+    if animation == 0 and component_count != (2 if frame_index == 2 else 1):
         raise ValueError("expected source component cardinality differs")
     components = []
     stats = []
@@ -137,7 +158,7 @@ def decode_frame(anb: bytes, frame_index: int):
 
 
 def oracle(anb: bytes, fade: bytes, gla: bytes, case: dict) -> dict:
-    frame = decode_frame(anb, case["frame"])
+    frame = decode_frame(anb, case["frame"], case.get("animation", 0))
     output = bytearray([FILL]) * ((HEIGHT - 1) * PITCH + WIDTH)
     phase = case["phase"]
     adjust = (phase & 1) if phase > 1 else 0
@@ -180,6 +201,7 @@ def main() -> int:
         check(ROOT / rel, digest)
     pins_before = {"harness": sha(HARNESS.read_bytes()), "script": sha(SCRIPT.read_bytes()),
                    "building_resources": sha(IMPLEMENTATION.read_bytes()),
+                   "actor_scene": sha(ACTOR_SCENE.read_bytes()), "building_scene": sha(BUILDING_SCENE.read_bytes()),
                    "actor_render": sha(ACTOR_RENDER.read_bytes()), "assets_parser": sha(ASSET_PARSER.read_bytes())}
     anb, fade, gla = raw_inputs[ANB], raw_inputs[FADE], raw_inputs[GLA]
     scratch = ROOT / "private/integration/bturr-common-pixels" / uuid.uuid4().hex
@@ -188,8 +210,8 @@ def main() -> int:
     case_lines = []
     expected = []
     for case in CASES:
-        case_lines.append(" ".join(map(str, (case["id"], case["frame"], case["owner"], case["shade"],
-            case["actor_flags"], case["global_flags"], *case["origin"], case["phase"]))))
+        case_lines.append(" ".join(map(str, (case["id"], case["animation"], case["frame"], case["owner"], case["shade"],
+            case["actor_flags"], case["global_flags"], *case["origin"], case["phase"], case["building_flags"]))))
         expected.append(oracle(anb, fade, gla, case))
     cases_path.write_text("\n".join(case_lines) + "\n", encoding="ascii")
     manifest = scratch / "Cargo.toml"
@@ -229,7 +251,8 @@ def main() -> int:
                               "x": wanted["draw_origin"][0], "y": wanted["draw_origin"][1]}[key]
             if got.get(key) != str(expected_value):
                 raise AssertionError(f"BTURR case={case} {key}: Rust={got.get(key)} oracle={expected_value}")
-        summaries.append({"id": case["id"], "frame": case["frame"], "owner": case["owner"],
+        summaries.append({"id": case["id"], "animation": case["animation"], "frame": case["frame"], "owner": case["owner"],
+                          "building_flags": case["building_flags"],
                           "route": case["route"], "global_flags": case["global_flags"],
                           "input_origin": case["origin"], "phase": case["phase"],
                           "draw_origin": wanted["draw_origin"], "components": wanted["components"],
@@ -238,22 +261,24 @@ def main() -> int:
                           "opaque": wanted["opaque"], "written": wanted["written"], "clipped": wanted["clipped"]})
     pins_after = {"harness": sha(HARNESS.read_bytes()), "script": sha(SCRIPT.read_bytes()),
                   "building_resources": sha(IMPLEMENTATION.read_bytes()),
+                  "actor_scene": sha(ACTOR_SCENE.read_bytes()), "building_scene": sha(BUILDING_SCENE.read_bytes()),
                   "actor_render": sha(ACTOR_RENDER.read_bytes()), "assets_parser": sha(ASSET_PARSER.read_bytes())}
     if pins_before != pins_after:
         raise RuntimeError("BTURR source changed during Rust comparison")
     report = {
         "schema_version": 1,
         "status": "passed-independent-bturr-common-image-pixel-oracle",
-        "scope": "Exact hash-bound BTURR animation 0 frames 0–2, owner recolor and indexed8 masks compared against an independent Python ANB/RLE/color model for all four owners, fade/direct dispatch, global GLA mode 0/4, signed/clipped origins, and wrapper +0x30 X adjustment. The production Rust helper is exercised; six unsupported branches must reject before destination writes.",
+        "scope": "Exact hash-bound BTURR animation 0 frames 0–2 and animation 1 frames 0–7, owner recolor and indexed8 masks compared against an independent Python ANB/RLE/color model for all four owners, fade/direct dispatch, global GLA mode 0/4 on animation 0, signed/clipped origins, and wrapper +0x30 X adjustment. Completion/overlay flags 0x0040 and 0x0041 are varied across both animation families to confirm they do not gate the common main image; six unsupported branches reject before destination writes.",
         "inputs": {"bturr_sha256": INPUTS[ANB][0], "fade_sha256": INPUTS[FADE][0], "main_gla_sha256": INPUTS[GLA][0],
                    "source_listings": LISTINGS},
         "code_pins": pins_before,
         "framebuffer": {"width": WIDTH, "height": HEIGHT, "pitch": PITCH, "fill_index": FILL,
                         "bytes_compared_per_case": (HEIGHT - 1) * PITCH + WIDTH},
         "case_count": len(summaries), "rejections_atomic": rejected,
-        "frames": {str(i): {"components": next(s["components"] for s in summaries if s["frame"] == i),
-                             "raw_dimensions": next(s["display_dimensions_raw"] for s in summaries if s["frame"] == i),
-                             "component_stats": next(s["component_stats"] for s in summaries if s["frame"] == i)} for i in range(3)},
+        "frames": {f"{animation}:{i}": {"components": next(s["components"] for s in summaries if s["animation"] == animation and s["frame"] == i),
+                             "raw_dimensions": next(s["display_dimensions_raw"] for s in summaries if s["animation"] == animation and s["frame"] == i),
+                             "component_stats": next(s["component_stats"] for s in summaries if s["animation"] == animation and s["frame"] == i)}
+                   for animation, count in ((0, 3), (1, 8)) for i in range(count)},
         "cases": summaries,
     }
     receipt = ROOT / "research/integration/bturr-common-pixels-current.json"
