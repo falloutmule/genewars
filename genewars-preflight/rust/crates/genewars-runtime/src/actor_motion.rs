@@ -148,7 +148,8 @@ pub fn plan_actor_post_motion_prefix(before:&ActorMotionRecord,blueprint:&[u8;36
 /// That branch clears actor73 and never invokes the charge callback57860.
 pub fn plan_actor_post_motion_prefix_with_class3(before:&ActorMotionRecord,blueprint:&[u8;36],frame:u32,class_speeds:&[i16;4],atan:&[u16;257],class3_unpowered:bool)->Result<ActorPostMotionPrefix,ActorMotionError> {
     if before[6]!=3 || before[0x70]&1==0 { return Err(ActorMotionError::Inactive); }
-    if !matches!(before[0x55],1|8) || before[0x58]&1!=0 || before[0x57]&1!=0 || before[0x70]&0x40!=0 || blueprint[0x15]>3 || (blueprint[0x15]==3&&!class3_unpowered) || blueprint[0x16]>3 { return Err(ActorMotionError::UnsupportedState); }
+    let queued_architect=before[0x7e]==0&&before[0x82]==1&&matches!(before[0x83],1|3|6|11)&&blueprint[0x16]==0;
+    if !matches!(before[0x55],1|8) || before[0x58]&1!=0 || (before[0x57]&1!=0&&!queued_architect) || before[0x70]&0x40!=0 || blueprint[0x15]>3 || (blueprint[0x15]==3&&!class3_unpowered) || blueprint[0x16]>3 { return Err(ActorMotionError::UnsupportedState); }
     if before[0x55]==8 && (before[0x49]&0x60!=0 || before[0x58]==0) { return Err(ActorMotionError::UnsupportedState); }
     let mut a=*before;let mut b=*blueprint;
     if matches!(b[0x16],2|3) {
@@ -274,6 +275,19 @@ pub fn plan_actor_arrival_snap(before:&ActorMotionRecord,target:[i16;2],ground:i
 /// Animation resource selection and7AC00 follow this plan.
 pub fn plan_actor_arrival_idle(before:&ActorMotionRecord,blueprint:&[u8;36],frame:u32,rng:ActorCallbackRng,context:ActorIdleContext)->Result<ActorIdlePlan,ActorMotionError> {
     plan_actor_arrival_idle_with_empty_scorer(before,blueprint,frame,rng,context,false,false)
+}
+///57D4F..57E0F state8 arrival prefix for a queued architect. The following
+///57F72 dispatch must run507D0 and construction in this same callback, not52780.
+///Periodic blueprint recovery remains the owning callback's responsibility.
+pub fn plan_actor_arrival_pending_architect(before:&ActorMotionRecord,blueprint:&[u8;36],mut rng:ActorCallbackRng)->Result<ActorIdlePlan,ActorMotionError>{
+    if rng.ring>=32{return Err(ActorMotionError::InvalidRng);}
+    if before[6]!=3||before[0x55]!=8||before[0x49]&0x73!=0x20||before[0x58]!=2||before[0x57]&3!=1||before[0x70]&0x70!=0||before[0x71]&16!=0||before[0x7e]!=0||before[0x82]!=1||!matches!(before[0x83],1|3|6|11)||blueprint[0x16]!=0||blueprint[0x15]>=3{return Err(ActorMotionError::UnsupportedState);}
+    let mut a=*before;let mut draws=Vec::new();
+    //526C0 success withDL1 precedes the57D4F state reset.
+    a[0x16]&=0x3f;a[0x54]=0;a[0x49]&=!16;a[0x58]&=!2;
+    a[0x55]=1;a[0x68..0x6c].fill(0);a[0x19]=8;a[0x1c]=1;a[0x1b]=0;a[0x1d]=16;
+    if actor_draw(&mut rng,&mut draws,0x21b)%4<2{a[0x70]|=4}else{a[0x70]&=!4}
+    Ok(ActorIdlePlan{after:a,blueprint_after:*blueprint,rng_after:rng,draws})
 }
 /// `empty` must be proved by the source512-radius cell scorer over the current
 /// world; it is not an instruction to discard eligible targets.

@@ -44,6 +44,20 @@ impl ActorWorld {
                     ConstructionAwareActorCallback::Architect{id:id as u16,receipt:staged.step_pending_architect_callback(
                         id as u16,frame,context,physics,trig,&mut staged_jobs,border,resource,
                         owner==selected_owner,selected_actor==Some(id as u16))?}
+                }else if actor[0x55]==8&&actor[0x57]&3==1&&actor[0x58]==2&&actor[0x82]==1&&actor[0x7e]==0 {
+                    // Preview common motion on an owned clone to select the
+                    // same-callback arrival continuation. Only one result is
+                    // committed; no external clock, RNG or audio is consumed.
+                    let mut arrival_world=staged.clone();
+                    let motion=arrival_world.step_architect_motion(id as u16,frame,context,physics,trig)?;
+                    if motion.arrived {
+                        let receipt=arrival_world.finish_arrived_architect_callback(id as u16,frame,context,physics,trig,
+                            &mut staged_jobs,border,resource,(owner==selected_owner,selected_actor==Some(id as u16)),motion)?;
+                        staged=arrival_world;ConstructionAwareActorCallback::Architect{id:id as u16,receipt}
+                    }else{
+                        let idle=ActorIdleContext{runtime_mode,override_180d80,runtime_count_11c2bc:word(&staged.backing,0x355c)as u16,player_mode:staged.player(owner)?.bytes()[2]};
+                        ConstructionAwareActorCallback::Ordinary(staged.step_actor_callback_with_idle(id as u16,frame,context,physics,trig,resource,idle)?)
+                    }
                 }else{
                     let idle=ActorIdleContext{runtime_mode,override_180d80,
                         runtime_count_11c2bc:word(&staged.backing,0x355c)as u16,

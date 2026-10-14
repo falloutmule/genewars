@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "cases": 12,
+  "compared_bytes": 2754912,
+  "literal_instruction_steps": 2112,
+  "source_sha256": "90874462cc9d992ef8a898502f07d5b7e710a553c25aaf75860b694a7049d1d9",
+  "listing_sha256": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-00051e80.txt": "38a7ad744f800c438cf7b208ed596f919c38c4309a8e8d2cd68f679976202839",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "terrain-map-refs/instructions-000753f0.txt": "ea2554be981b0acae18e192ba9827ebdf4e4dea2d8e6fbee83f889ec15f390c5",
+    "validated/instructions-0008d580.txt": "08fc85698d73460faaef4a6dd81457eb199a60c9aacda9380239e5f3278034c3",
+    "validated/instructions-0008d5f0.txt": "c66a1e05095397611f83ecfa25aab5c3b1e42f72b165a2b86550b682cc33c23f"
+  },
+  "scope": "Actual534D0/51E80 completed selectors1/3/6/11, flags1/5/257: source53D58 masks lowbit1, ignores powerbit4 and highbyte. Whole200B actor+229376B map; existing UI/text ports retained.",
+  "fixture_driver_sha256": "9b47ebe26a36dddcadf5c38331952e3831fa840c9f218c7edef0a8a03ea736a5",
+  "shared_oracle_sha256": "b0c05a5f95f1eeeaa305053f5c51e715b91d563fd793017ef3e97b6a6c90fcb4",
+  "building_flag_words": [
+    1,
+    5,
+    257
+  ]
+}

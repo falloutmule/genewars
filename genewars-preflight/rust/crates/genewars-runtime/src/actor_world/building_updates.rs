@@ -393,7 +393,7 @@ impl ActorWorld {
             if current[0x81]!=4{return Err(ConstructionWorldError::Work(crate::construction_work::ConstructionWorkError::InvalidBuilding));}
             let slot=u16::try_from(word(&current,0x7f)).map_err(|_|ConstructionWorldError::Work(crate::construction_work::ConstructionWorkError::InvalidBuilding))?;
             let building=*staged.buildings.as_ref().ok_or(ActorWorldError::BuildingsNotAdmitted)?.record(usize::from(slot)).map_err(ActorWorldError::from)?;
-            if current[0x49]&32!=0&&word(&building,0x31)==1&&word(&building,0x2b)==match building[45]{1=>120,3=>240,6=>80,11=>280,_=>-1}{
+            if current[0x49]&32!=0&&word(&building,0x31)&1!=0&&word(&building,0x2b)==match building[45]{1=>120,3=>240,6=>80,11=>280,_=>-1}{
                 let plan=staged.cancel_finished_architect(id,selection.0,selection.1)?;
                 cancellation=Some(plan);completion_message_index=Some(17);
             }else if current[0x49]&32==0&&current[0x70]&0x80==0{
@@ -451,7 +451,7 @@ impl ActorWorld {
         let before=*self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
         let blueprint=self.construction_blueprint(id)?;
         if before[6]!=3||before[0x70]&1==0||before[0x16]&0x20!=0||blueprint[0x16]!=0
-            ||!(before[0x55]==9||(before[0x55]==1&&before[0x57]&3==1)){
+            ||!(before[0x55]==9||(before[0x55]==1&&before[0x57]&3==1)||(before[0x55]==8&&before[0x57]&3==1&&before[0x58]==2&&before[0x82]==1&&before[0x7e]==0)){
             return Err(ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::UnsupportedState).into());
         }
         let raw=[id as u8,(id>>8)as u8,3];let target=[word(&before,11),word(&before,13)];
@@ -522,6 +522,29 @@ impl ActorWorld {
         staged.actors.replace_record_checked(usize::from(id),&before,&prefix).map_err(ActorWorldError::from)?;
         let plan=staged.prepare_architect_construction_site(id,table)?;
         *self=staged;Ok(plan)
+    }
+    ///Continuation of the same57A10 callback after a queued architect arrives.
+    ///The caller supplies its already-committed6FB60 motion; do not run it twice.
+    pub(super) fn finish_arrived_architect_callback<B:AsRef<[u8]>>(&mut self,id:u16,frame:u32,
+        context:LandingPhysicsContext,physics:&crate::physics_tables::PhysicsTables,trig:&TrigTables,
+        jobs:&mut crate::terrain_job_pool::TerrainJobPool,border:&[u8;8192],
+        resource:&crate::actor_resources::ActorAnimationDatabase<B>,selection:(bool,bool),motion:ArchitectMotionReceipt)
+        ->Result<ArchitectStage0Receipt,ConstructionWorldError>{
+        let before=*self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
+        let blueprint=self.construction_blueprint(id)?;
+        let rng=crate::actor_motion::ActorCallbackRng{seed:self.rng.seed,ring:self.rng.ring,draw_count:self.rng.draw_count};
+        let prefix=crate::actor_motion::plan_actor_arrival_pending_architect(&before,&blueprint,rng).map_err(ActorWorldError::from)?;
+        let mut staged=self.clone();let mut staged_jobs=jobs.clone();
+        staged.actors.replace_record_checked(usize::from(id),&before,&prefix.after).map_err(ActorWorldError::from)?;
+        staged.rng=BlueprintRng{seed:prefix.rng_after.seed,ring:prefix.rng_after.ring,draw_count:prefix.rng_after.draw_count};
+        let setup=staged.begin_pending_architect_task(id,border)?;
+        let mut result=staged.step_architect_after_motion(id,frame,context,physics,trig,&mut staged_jobs,border,resource.key(),selection,Some(motion),|animation|{
+            let count=resource.frame_count(usize::from(animation)).map_err(|_|ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::InvalidAnimation))?;
+            let holds=(0..count).map(|i|resource.frame(usize::from(animation),i).map(|f|f.byte_10)).collect::<Result<Vec<_>,_>>().map_err(|_|ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::InvalidAnimation))?;
+            let flags=(resource.animation(usize::from(animation)).map_err(|_|ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::InvalidAnimation))?.trailing_word>>8)as u8;
+            Ok((holds,flags))
+        })?;
+        result.setup=Some(setup);*self=staged;*jobs=staged_jobs;Ok(result)
     }
     pub fn complete_architect_terraform(&mut self,id:u16,jobs:&crate::terrain_job_pool::TerrainJobPool)
         ->Result<crate::construction_terraform_completion::TerraformCompletionPlan,ConstructionWorldError>{
