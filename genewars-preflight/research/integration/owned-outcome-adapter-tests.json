@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "utc": "2026-10-14T23:20:29.346602+00:00",
+  "scope": "Synthetic unit fixtures for transactional owned mission outcome adapter; not mission acceptance",
+  "command": "CARGO_BUILD_JOBS=2 C:/Python314/python.exe -B scripts/cargo.py test -p genewars-runtime outcome_adapter --offline --locked",
+  "passed": 3,
+  "failed": 0,
+  "filtered": 172,
+  "exit_code": 0,
+  "sha256": {
+    "rust/crates/genewars-runtime/src/actor_world/mission_outcome.rs": "5e9651a0626a8b4931c0ae6e0dab33f16e96bb62ed13c4bc114f9e39a2b48243"
+  },
+  "checks": [
+    "Running commit matches read-only plan and all four player afterimages; backing and actors unchanged.",
+    "Invalid selected player, disabled mode and unsupported partial startup context reject with complete ActorWorld and context equality.",
+    "Won and Lost typed results commit once; repeated calls reject with complete ActorWorld/context equality."
+  ],
+  "limitations": [
+    "Fixtures deliberately edit player/objective records to isolate adapter semantics.",
+    "No authentic mission completion, native interface acceptance, original binary comparison or campaign transition claimed."
+  ],
+  "production_logic_changed": false
+}

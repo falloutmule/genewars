@@ -71,6 +71,7 @@ pub struct MissionRuntimeContext {
     countdown: u16,
     frame: u32,
     rng: RngProvenance,
+    outcome: crate::mission_outcome::MissionOutcome,
 }
 
 impl MissionRuntimeContext {
@@ -87,6 +88,7 @@ impl MissionRuntimeContext {
             countdown: input.countdown,
             frame: input.frame,
             rng: RngProvenance::ReplayOverride { seed: input.replay_seed },
+            outcome: crate::mission_outcome::MissionOutcome::Running,
         })
     }
 
@@ -104,6 +106,7 @@ impl MissionRuntimeContext {
             frame: 0,
             rng: replay_seed.map_or(RngProvenance::OriginalStartupUnknown,
                 |seed| RngProvenance::ReplayOverride { seed }),
+            outcome: crate::mission_outcome::MissionOutcome::Running,
         }
     }
 
@@ -126,7 +129,8 @@ impl MissionRuntimeContext {
         Ok(Self{origin:ContextOrigin::FreshCdConq001,participating_players:1,
             runtime_flags:0x3e,runtime_mode:Some(0),countdown:1000,frame:0,
             rng:RngProvenance::CdConq001SerializedThenBlueprints{
-                seed:10548,draw_count:16919,diagnostic_ring:rng_after_blueprints.ring}})
+                seed:10548,draw_count:16919,diagnostic_ring:rng_after_blueprints.ring},
+            outcome:crate::mission_outcome::MissionOutcome::Running})
     }
 
     pub fn origin(&self) -> ContextOrigin { self.origin }
@@ -136,6 +140,25 @@ impl MissionRuntimeContext {
     pub fn countdown(&self) -> u16 { self.countdown }
     pub fn frame(&self) -> u32 { self.frame }
     pub fn rng_provenance(&self) -> RngProvenance { self.rng }
+    pub fn outcome(&self) -> crate::mission_outcome::MissionOutcome { self.outcome }
+    /// Internal half of the owned72ED0 transaction. No public plan-apply API:
+    /// callers evaluate against the current world through ActorWorld instead.
+    pub(crate) fn apply_outcome_checked(&mut self, before:&Self,
+        plan:&crate::mission_outcome::MissionOutcomePlan)->Result<(),&'static str>{
+        use crate::mission_outcome::{MissionOutcome,MissionResultRequest};
+        if self!=before || plan.flags_before!=self.runtime_flags {return Err("stale mission outcome context");}
+        if self.callback_gate()!=CallbackGate::Ready {return Err("mission outcome callback is not admitted");}
+        if self.outcome!=MissionOutcome::Running {return Err("mission outcome already latched");}
+        let (flags,request)=match plan.outcome {
+            MissionOutcome::Running=>(self.runtime_flags,None),
+            MissionOutcome::Won{player} if player<self.participating_players =>
+                (self.runtime_flags|0x40,Some(MissionResultRequest::EnterVictoryModule185DFC)),
+            MissionOutcome::Lost{player,..} if player<self.participating_players =>(self.runtime_flags|0x80,None),
+            _=>return Err("mission outcome player is outside participating players"),
+        };
+        if plan.flags_after!=flags || plan.result_request!=request {return Err("mission outcome flags or request do not match typed result");}
+        self.runtime_flags=flags;self.outcome=plan.outcome;Ok(())
+    }
     pub fn startup_blockers(&self) -> &'static [StartupBlocker] {
         match self.origin {
             ContextOrigin::Development | ContextOrigin::FreshCdConq001 => &[],
