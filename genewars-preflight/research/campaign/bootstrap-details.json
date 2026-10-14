@@ -1,0 +1,57 @@
+{
+  "status": "passed-bounded-bootstrap-details",
+  "rust_generator_sha256": "07df7e0623491df6e56b96cefcb9a875c2dcbe30c9ff6e7b3461b1fdd8bd98da",
+  "patterns_address": "00105060",
+  "patterns_length": 640,
+  "patterns_sha256": "d848e423b7a76a2c2dbf517fc595e33a789df7382697b56f382cc7606b18939e",
+  "rust_compared_bytes": 8192,
+  "length_rejection_cases": 2,
+  "original_execution": false,
+  "whole_startup_proven": false,
+  "source_sha256": "8aa978e0005bc3cb47e85f70f7a05c17f62ac92aa903394056f3e571cc0522ab",
+  "object3_sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
+  "mission_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+  "border_table_sha256": "422f124eac806197ba95d2438516284c3bf828a1db8e8aabe330661fff23ef8a",
+  "mapped_prior_table_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+  "mapped_prior_nonzero_bytes": 0,
+  "mapped_prior_differs": true,
+  "cases": [
+    {
+      "allocation_fallback": false,
+      "retain": 0,
+      "instructions": 171909,
+      "draws": 0,
+      "table_matches": true
+    },
+    {
+      "allocation_fallback": false,
+      "retain": 1,
+      "instructions": 171903,
+      "draws": 0,
+      "table_matches": true
+    },
+    {
+      "allocation_fallback": true,
+      "retain": 0,
+      "instructions": 171906,
+      "draws": 0,
+      "table_matches": true
+    },
+    {
+      "allocation_fallback": true,
+      "retain": 1,
+      "instructions": 171904,
+      "draws": 0,
+      "table_matches": true
+    }
+  ],
+  "884D0_effect_scope": "Only scratch allocation/stack and8192-byte terrain-border table112D24; no runtime context or RNG mutation. Malloc/free are explicit ports.",
+  "serialized_fields": {
+    "live_seed_11878a": 5428,
+    "rng_draw_count_118782": 16855,
+    "frame_11877e": 0,
+    "frame_backup_118786": 0,
+    "active_players_11878c": 1
+  },
+  "remaining": "Transitive player preparation, native inherited state, MAINPANL entry and first callback timing are not proved by this narrow check."
+}

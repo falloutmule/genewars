@@ -1,0 +1,10 @@
+{
+  "source_sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
+  "source_va": "0x105060",
+  "size": 640,
+  "patterns_sha256": "d848e423b7a76a2c2dbf517fc595e33a789df7382697b56f382cc7606b18939e",
+  "destination": "private\\integration\\physics-tables\\terrain-patterns.bin",
+  "generated_table_sha256": "422f124eac806197ba95d2438516284c3bf828a1db8e8aabe330661fff23ef8a",
+  "evidence": "research/campaign/bootstrap-details.json",
+  "original_execution": false
+}

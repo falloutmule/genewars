@@ -13,7 +13,7 @@ def stage():
     stage_physics()
     from creature_inputs import stage as stage_creature
     stage_creature()
-    from construction_inputs import stage as stage_construction
+    from terrain_pattern_inputs import stage as stage_construction
     stage_construction()
     private = (ROOT / 'private').resolve()
     destination = private / 'integration/game-runtime'

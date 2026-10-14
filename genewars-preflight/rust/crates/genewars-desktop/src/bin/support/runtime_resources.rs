@@ -45,8 +45,8 @@ pub struct Resources {
     pub source_buildings: Vec<SourceBuildingResourceDatabase>,
     /// Hash-validated CD angle and terrain bounce tables used by landing updates.
     pub physics: PhysicsTables,
-    /// Hash-bound 8192-byte construction border lookup copied from validated
-    /// mapped object3 VA 0x112D24. It is not a CD-disc asset.
+    /// Source884D0 lookup generated from hash-bound corner patterns.
+    /// Mapped object3 at112D24 is zero-initialized storage, not this table.
     pub construction_border: Box<[u8; 8192]>,
     /// Exact CD selector-4 MULE animation database; its sprite codec remains
     /// explicitly selected by the creature draw path.
@@ -411,8 +411,8 @@ impl Resources {
         let corpse_friction = read_bound(&root.join("physics/corpse-friction.bin"))?;
         let physics = PhysicsTables::from_mapped_bytes(&angle, &bounce).map_err(|e| e.to_string())?
             .with_corpse_friction(&corpse_friction).map_err(|e| e.to_string())?;
-        let construction_border: Box<[u8; 8192]> = read_bound(&root.join("construction/border.bin"))?
-            .into_boxed_slice().try_into().map_err(|_| "construction border table must be exactly 8192 bytes")?;
+        let patterns=read_bound(&root.join("construction/terrain-patterns.bin"))?;
+        let construction_border=Box::new(genewars_runtime::terrain_border_table::build(&patterns).map_err(|e|format!("terrain border generation: {e:?}"))?);
         let mule = CreatureAnimationDatabase::load(root)?;
         let bones = BonesAnimationDatabase::load(root)?;
         let mule_animations = MuleAnimations::from_anb(mule.bytes())
@@ -519,13 +519,14 @@ mod building_resource_tests {
     }
 
     #[test]
-    fn runtime_bundle_admits_the_validated_construction_border_slice() {
+    fn runtime_bundle_generates_original_startup_border_table() {
         let root = Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("../../../private/integration/game-runtime");
-        let bytes = read_bound(&root.join("construction/border.bin"))
-            .expect("the mapped construction border table is catalog-bound");
+        let bytes = read_bound(&root.join("construction/terrain-patterns.bin"))
+            .expect("the construction patterns are catalog-bound");
+        let bytes=genewars_runtime::terrain_border_table::build(&bytes).unwrap();
         assert_eq!(bytes.len(), 8192);
-        assert_eq!(sha256_hex(&bytes), "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47");
+        assert_eq!(sha256_hex(&bytes), "422f124eac806197ba95d2438516284c3bf828a1db8e8aabe330661fff23ef8a");
     }
 
     #[test]

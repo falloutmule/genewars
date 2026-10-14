@@ -1,0 +1,410 @@
+{
+  "status": "passed",
+  "border_table_input": "generated884D0",
+  "border_table_sha256": "422f124eac806197ba95d2438516284c3bf828a1db8e8aabe330661fff23ef8a",
+  "height_setter_calls": 260,
+  "rng_draws": 128,
+  "cases": 14,
+  "rollback_cases": 2,
+  "compared_bytes": 5796730,
+  "literal_instructions": 551470,
+  "ordered_viewport_requests": 799,
+  "scope": "Whole79220/78E30 height-changing jobs on actual raw/reservedCONQ4x4site76,49 counters1/2/4 sparse overlapping jobs, including retirement. Actual8C550/8BEE0/8B840, shader andterrainmaintenance; viewport cache847D0 isexplicitport. Externalnative jobs authoritative.",
+  "fixture_admission_delta": "Only fn from_parts visibility widened in private runtime copy; production hash admission unchanged",
+  "runtime_source_copy_pins": {
+    "actor_activation.rs": {
+      "original": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057",
+      "copy": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057"
+    },
+    "actor_command.rs": {
+      "original": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e",
+      "copy": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e"
+    },
+    "actor_construction.rs": {
+      "original": "0988dac1c88cbea6db58b6036cc26e8618ad49ded7de3787009ce2f82f88d182",
+      "copy": "0988dac1c88cbea6db58b6036cc26e8618ad49ded7de3787009ce2f82f88d182"
+    },
+    "actor_construction_animation.rs": {
+      "original": "bf44aec16d67ce3f8b4313a4d27cc30bbd6b9b5f58bca638c963c270c1216505",
+      "copy": "bf44aec16d67ce3f8b4313a4d27cc30bbd6b9b5f58bca638c963c270c1216505"
+    },
+    "actor_construction_lifecycle.rs": {
+      "original": "0425be83f11535eacc231de7cb1cb6c4687613449acfeb6868e512863018015d",
+      "copy": "0425be83f11535eacc231de7cb1cb6c4687613449acfeb6868e512863018015d"
+    },
+    "actor_construction_recovery.rs": {
+      "original": "43d1a9c61f2f62fdedd209067039ee29105078e4556cac32106e464a4c7f1a09",
+      "copy": "43d1a9c61f2f62fdedd209067039ee29105078e4556cac32106e464a4c7f1a09"
+    },
+    "actor_construction_tail.rs": {
+      "original": "422ea3e71110f4db1782f5880592cb856ac8d8b0c3ef37a2d82c000a62eeb8bb",
+      "copy": "422ea3e71110f4db1782f5880592cb856ac8d8b0c3ef37a2d82c000a62eeb8bb"
+    },
+    "actor_initialization.rs": {
+      "original": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99",
+      "copy": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+    },
+    "actor_motion.rs": {
+      "original": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
+      "copy": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400"
+    },
+    "actor_pool.rs": {
+      "original": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48",
+      "copy": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48"
+    },
+    "actor_render.rs": {
+      "original": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9",
+      "copy": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9"
+    },
+    "actor_resources.rs": {
+      "original": "8c94e8afb54d1dbcb0e33de471a9b7d4d4008d3a8782f970ff5b0e95194145a3",
+      "copy": "8c94e8afb54d1dbcb0e33de471a9b7d4d4008d3a8782f970ff5b0e95194145a3"
+    },
+    "actor_world.rs": {
+      "original": "3a4ec021c93492199ea69356b7778d78e13cbd3334be7e0afad20a1a442f9cf9",
+      "copy": "d12a28d7a7d543d1d0539b2a5dcb79cb4cd2503433ec746129deabe0ec483d24"
+    },
+    "blueprint.rs": {
+      "original": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558",
+      "copy": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
+    },
+    "bookkeeping.rs": {
+      "original": "53138bf3ac2e84522b611d406fa5c7af3bf7cdf7a666cb8859b55030916fed95",
+      "copy": "53138bf3ac2e84522b611d406fa5c7af3bf7cdf7a666cb8859b55030916fed95"
+    },
+    "building.rs": {
+      "original": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf",
+      "copy": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf"
+    },
+    "building_availability.rs": {
+      "original": "bd445c702b16aa8834c63941236aee251f37d94f9731d3336c58bc3f019fb0c9",
+      "copy": "bd445c702b16aa8834c63941236aee251f37d94f9731d3336c58bc3f019fb0c9"
+    },
+    "building_callback.rs": {
+      "original": "b43d8c4efc3859595fda80dd0eb6b5e68e64be56747bd4f132f87d068c3b696e",
+      "copy": "b43d8c4efc3859595fda80dd0eb6b5e68e64be56747bd4f132f87d068c3b696e"
+    },
+    "building_effect.rs": {
+      "original": "7f906971f7269390e547877d1a7ecfa6c99a744cf2368fe4f7ac412c17894576",
+      "copy": "7f906971f7269390e547877d1a7ecfa6c99a744cf2368fe4f7ac412c17894576"
+    },
+    "building_effect_lifecycle.rs": {
+      "original": "628490fa538989e3dd663ae4fcb53a1cd5aa865b036086bc20e0eb55ce970400",
+      "copy": "628490fa538989e3dd663ae4fcb53a1cd5aa865b036086bc20e0eb55ce970400"
+    },
+    "building_obstacle.rs": {
+      "original": "b740160c499e2c72c6f07a7e55a68d1783ce120b688551f879ad8a9322093020",
+      "copy": "b740160c499e2c72c6f07a7e55a68d1783ce120b688551f879ad8a9322093020"
+    },
+    "building_pool.rs": {
+      "original": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5",
+      "copy": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5"
+    },
+    "building_power.rs": {
+      "original": "39cf56c4eab5616ec05a6594e54f808fc9941ac3a6fbb53c92b83ffdc18bee61",
+      "copy": "39cf56c4eab5616ec05a6594e54f808fc9941ac3a6fbb53c92b83ffdc18bee61"
+    },
+    "building_progress.rs": {
+      "original": "dfe9f4712a18d92411c45c8f3db38cab903baf24958229cbfe1253fd39651960",
+      "copy": "dfe9f4712a18d92411c45c8f3db38cab903baf24958229cbfe1253fd39651960"
+    },
+    "building_resources.rs": {
+      "original": "1180b6772277f7a91f7f49d9d618331da8b93c2013a58cd6947f62239f34239e",
+      "copy": "1180b6772277f7a91f7f49d9d618331da8b93c2013a58cd6947f62239f34239e"
+    },
+    "completed_building.rs": {
+      "original": "195416a09a65b15b213b549144cb3be0eb52f37c6d9069261e85f3da5780c13a",
+      "copy": "195416a09a65b15b213b549144cb3be0eb52f37c6d9069261e85f3da5780c13a"
+    },
+    "construction_cancellation.rs": {
+      "original": "977d6859d98a5a0d586ccadd5e3cb8e97e1ff82da1aabc1f7315225fc9d7cb61",
+      "copy": "977d6859d98a5a0d586ccadd5e3cb8e97e1ff82da1aabc1f7315225fc9d7cb61"
+    },
+    "construction_completion.rs": {
+      "original": "0b78ab600e361fedbff300f20b10e16beb1a01bda89ba881aa86c53f507231d0",
+      "copy": "0b78ab600e361fedbff300f20b10e16beb1a01bda89ba881aa86c53f507231d0"
+    },
+    "construction_maintenance.rs": {
+      "original": "691dc7953fda4af1e9828ba29694f9ea062def7ad25426be4dfa70fe6f754f42",
+      "copy": "691dc7953fda4af1e9828ba29694f9ea062def7ad25426be4dfa70fe6f754f42"
+    },
+    "construction_motion.rs": {
+      "original": "807b07d32dfd1d93b748c93f8144a34e18ccb8ce5d8ba9199995d8ba34081bcf",
+      "copy": "807b07d32dfd1d93b748c93f8144a34e18ccb8ce5d8ba9199995d8ba34081bcf"
+    },
+    "construction_payment.rs": {
+      "original": "ce6aa8da2d840279cdeea469a9a60b7dd637e784fd93a2dcbd9ad4917b38328d",
+      "copy": "ce6aa8da2d840279cdeea469a9a60b7dd637e784fd93a2dcbd9ad4917b38328d"
+    },
+    "construction_setup.rs": {
+      "original": "bc7c8aebad792673ffc8b9b7fc89f240ff6caea5ccf089f1ec54c04f2cba0feb",
+      "copy": "bc7c8aebad792673ffc8b9b7fc89f240ff6caea5ccf089f1ec54c04f2cba0feb"
+    },
+    "construction_site.rs": {
+      "original": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2",
+      "copy": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2"
+    },
+    "construction_stage4.rs": {
+      "original": "10c6aabe43fe584adff130254dfb0071de02ff7f193f2f8f8834a9e949947ef2",
+      "copy": "10c6aabe43fe584adff130254dfb0071de02ff7f193f2f8f8834a9e949947ef2"
+    },
+    "construction_terraform_completion.rs": {
+      "original": "031abef43f20a1e04a5b32ea72d00340068e25a7529908d16d72229929e7fecb",
+      "copy": "031abef43f20a1e04a5b32ea72d00340068e25a7529908d16d72229929e7fecb"
+    },
+    "construction_terraform_resume.rs": {
+      "original": "325b7f0d36e5bea907d1ddf5a9c54b504274ff64fe44203bc602029074cc8971",
+      "copy": "325b7f0d36e5bea907d1ddf5a9c54b504274ff64fe44203bc602029074cc8971"
+    },
+    "construction_terrain.rs": {
+      "original": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31",
+      "copy": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
+    },
+    "construction_wait.rs": {
+      "original": "3e339a034c14c3f7f4fc515418675eb357d844c473d9d5024797750cc3b0f6ae",
+      "copy": "3e339a034c14c3f7f4fc515418675eb357d844c473d9d5024797750cc3b0f6ae"
+    },
+    "construction_work.rs": {
+      "original": "9c2810cf50c6224d4e78b87d90bf643cfe5abd7a365ffa790bd5e0ec708d67c1",
+      "copy": "9c2810cf50c6224d4e78b87d90bf643cfe5abd7a365ffa790bd5e0ec708d67c1"
+    },
+    "countdown_expiry.rs": {
+      "original": "fdc5b172dc4fbd41ccf52bc877a9b0d7db6999c7166aba74125e7c9097c59dfb",
+      "copy": "fdc5b172dc4fbd41ccf52bc877a9b0d7db6999c7166aba74125e7c9097c59dfb"
+    },
+    "creature_world.rs": {
+      "original": "63a66b4a1772c35bd6a26f0062d8b0569146866c07403cd76b59ba2210a64033",
+      "copy": "63a66b4a1772c35bd6a26f0062d8b0569146866c07403cd76b59ba2210a64033"
+    },
+    "effect_pool.rs": {
+      "original": "14cb6a5b0d717a71fde6f3f8074dfd3206dcebf72da99e48bfa75b560c028663",
+      "copy": "14cb6a5b0d717a71fde6f3f8074dfd3206dcebf72da99e48bfa75b560c028663"
+    },
+    "extractor_production.rs": {
+      "original": "8afbfaf08b248bc1861bff2eeda2190331dc0f6b0148940c7cae347d84a27ae7",
+      "copy": "8afbfaf08b248bc1861bff2eeda2190331dc0f6b0148940c7cae347d84a27ae7"
+    },
+    "family8_creation.rs": {
+      "original": "0f312593fb963669ec9a98e33abed62e09aa2a2f9cfef9f0799946aa4743a712",
+      "copy": "0f312593fb963669ec9a98e33abed62e09aa2a2f9cfef9f0799946aa4743a712"
+    },
+    "family8_motion.rs": {
+      "original": "d7f9ab653b02b06e3a15d153876822ae488f29cf35fed187847827ac1fefe84e",
+      "copy": "d7f9ab653b02b06e3a15d153876822ae488f29cf35fed187847827ac1fefe84e"
+    },
+    "family8_particle.rs": {
+      "original": "8ae40f370ea2507b90c386e43fdab2c07a950ce7f75b4e8f57df2f051427cf6d",
+      "copy": "8ae40f370ea2507b90c386e43fdab2c07a950ce7f75b4e8f57df2f051427cf6d"
+    },
+    "family8_pool.rs": {
+      "original": "5499c31f564672a8c31f39ae10e5d0204c5e96cf16da630cd525113a93df86cc",
+      "copy": "5499c31f564672a8c31f39ae10e5d0204c5e96cf16da630cd525113a93df86cc"
+    },
+    "identity.rs": {
+      "original": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0",
+      "copy": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
+    },
+    "landing.rs": {
+      "original": "110cefbff7fb5043c1c1957ad195e0da0889c29be3abf42bdd9ddc6e5ba749d7",
+      "copy": "110cefbff7fb5043c1c1957ad195e0da0889c29be3abf42bdd9ddc6e5ba749d7"
+    },
+    "landing_effect_lifecycle.rs": {
+      "original": "eef1fbd1ec11d98aba18517ef9a5bd2f08f2e403ecc929053d1839a6d2f57cac",
+      "copy": "eef1fbd1ec11d98aba18517ef9a5bd2f08f2e403ecc929053d1839a6d2f57cac"
+    },
+    "lib.rs": {
+      "original": "c94673de5780804924e515f860e5f9a3557c87c3ffbaa5bf807ae8a24d9611ee",
+      "copy": "c94673de5780804924e515f860e5f9a3557c87c3ffbaa5bf807ae8a24d9611ee"
+    },
+    "mission_context.rs": {
+      "original": "0ac5d1dc935951be9291b581a466a51d9fc5c2881647afdaac691e814ab55960",
+      "copy": "0ac5d1dc935951be9291b581a466a51d9fc5c2881647afdaac691e814ab55960"
+    },
+    "mission_player_funds.rs": {
+      "original": "e569e64c5180e22aff20b3e3c5b8bfa06372fffc1cafd5db4056210d17066516",
+      "copy": "e569e64c5180e22aff20b3e3c5b8bfa06372fffc1cafd5db4056210d17066516"
+    },
+    "mission_status.rs": {
+      "original": "bbf80de06f576ef05c3ade9a3b85370a4b9a55b5744bc3370dba06f2392b438a",
+      "copy": "bbf80de06f576ef05c3ade9a3b85370a4b9a55b5744bc3370dba06f2392b438a"
+    },
+    "physics_tables.rs": {
+      "original": "07f196e2244445296e4274247dfb827969f261100416a0e6cc6c07ce87e04ed2",
+      "copy": "07f196e2244445296e4274247dfb827969f261100416a0e6cc6c07ce87e04ed2"
+    },
+    "plant_spread.rs": {
+      "original": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066",
+      "copy": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066"
+    },
+    "player_state.rs": {
+      "original": "d7faa11882d551bc009e43e7e6ea89dca3d14dd726341cfeb959981d6da496b0",
+      "copy": "d7faa11882d551bc009e43e7e6ea89dca3d14dd726341cfeb959981d6da496b0"
+    },
+    "projectile_impact.rs": {
+      "original": "49631ef3384c9af4f524417cdc3a1119eba63315cd0c35eef728831935c5132d",
+      "copy": "49631ef3384c9af4f524417cdc3a1119eba63315cd0c35eef728831935c5132d"
+    },
+    "source_building_resources.rs": {
+      "original": "927198d0feb354fb492e210e09409a36179dc10af032d54c6b590c828a044f9c",
+      "copy": "927198d0feb354fb492e210e09409a36179dc10af032d54c6b590c828a044f9c"
+    },
+    "target_projection.rs": {
+      "original": "455938c39b889e6e035e2821e74b7d5f4aae980786745c7861dc1aa5dbb38dc6",
+      "copy": "455938c39b889e6e035e2821e74b7d5f4aae980786745c7861dc1aa5dbb38dc6"
+    },
+    "target_resolver.rs": {
+      "original": "1412ab3a6a55e95df5b1e5cd1f4bf4169da55523966b1bfec56b3a917628d1c5",
+      "copy": "1412ab3a6a55e95df5b1e5cd1f4bf4169da55523966b1bfec56b3a917628d1c5"
+    },
+    "terrain_border_table.rs": {
+      "original": "07df7e0623491df6e56b96cefcb9a875c2dcbe30c9ff6e7b3461b1fdd8bd98da",
+      "copy": "07df7e0623491df6e56b96cefcb9a875c2dcbe30c9ff6e7b3461b1fdd8bd98da"
+    },
+    "terrain_height.rs": {
+      "original": "0503c210aefd5ccb86c2bf808cb7ad9924ba3583bd2fbfccc656aa5b3a27ecef",
+      "copy": "0503c210aefd5ccb86c2bf808cb7ad9924ba3583bd2fbfccc656aa5b3a27ecef"
+    },
+    "terrain_job_pool.rs": {
+      "original": "dc2c9bce46a72de481100376614758bff9c265860b117e8facde7fc0d17b2d25",
+      "copy": "dc2c9bce46a72de481100376614758bff9c265860b117e8facde7fc0d17b2d25"
+    },
+    "terrain_target.rs": {
+      "original": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16",
+      "copy": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16"
+    },
+    "water_effect.rs": {
+      "original": "cbcb539955f1edbf002640d5c5d93549b667b50bee4528cffd92ddad1129fc9a",
+      "copy": "cbcb539955f1edbf002640d5c5d93549b667b50bee4528cffd92ddad1129fc9a"
+    },
+    "world.rs": {
+      "original": "3fd7e6a7df779c935836566ba8d9755cf843db7d964a888e7d53a53d405bffe7",
+      "copy": "3fd7e6a7df779c935836566ba8d9755cf843db7d964a888e7d53a53d405bffe7"
+    },
+    "actor_world/actor_updates.rs": {
+      "original": "1e0eb545bf644359fd453466a36af1833e96b34861c3ad642fbdbed692e7ff70",
+      "copy": "1e0eb545bf644359fd453466a36af1833e96b34861c3ad642fbdbed692e7ff70"
+    },
+    "actor_world/admitted_buildings.rs": {
+      "original": "629fe51260f737f793e038a8252466372068fe0b306ee3235479b7932314c4ed",
+      "copy": "629fe51260f737f793e038a8252466372068fe0b306ee3235479b7932314c4ed"
+    },
+    "actor_world/bookkeeping_updates.rs": {
+      "original": "62794fb15814bfa317c521c342fd8b0db71b1675ad5049c38a075301895d2786",
+      "copy": "62794fb15814bfa317c521c342fd8b0db71b1675ad5049c38a075301895d2786"
+    },
+    "actor_world/building_scheduler.rs": {
+      "original": "36b9c61ff25ab00fb05e123cc9430db0c40b8e0a294b64a04194d26a36c0e05e",
+      "copy": "36b9c61ff25ab00fb05e123cc9430db0c40b8e0a294b64a04194d26a36c0e05e"
+    },
+    "actor_world/building_storage.rs": {
+      "original": "53ddbe23bb04b8e644c58574a48070589e670184b5d7b907864e2758f58735c9",
+      "copy": "53ddbe23bb04b8e644c58574a48070589e670184b5d7b907864e2758f58735c9"
+    },
+    "actor_world/building_updates.rs": {
+      "original": "521b95b8f80598b1c59fa4d81f59450a9c1dd5a407ac2c7bb8850b2942c31e3e",
+      "copy": "521b95b8f80598b1c59fa4d81f59450a9c1dd5a407ac2c7bb8850b2942c31e3e"
+    },
+    "actor_world/construction_scheduler.rs": {
+      "original": "300f2254bfd2b61d9a0ff1ae9db4c65dcb63ba639cf0bb0b08d3fa17045b0672",
+      "copy": "300f2254bfd2b61d9a0ff1ae9db4c65dcb63ba639cf0bb0b08d3fa17045b0672"
+    },
+    "actor_world/creature_retirement.rs": {
+      "original": "3e4ccf2a41de45cd10e5ad1f80a8f47b99e34b2d8915ce4285b18dad2d7dec99",
+      "copy": "3e4ccf2a41de45cd10e5ad1f80a8f47b99e34b2d8915ce4285b18dad2d7dec99"
+    },
+    "actor_world/creature_updates.rs": {
+      "original": "71351bc1b763f95503889ff08cd8a01e9c4b1da400ff5090c9b68f59bc3d7b2a",
+      "copy": "71351bc1b763f95503889ff08cd8a01e9c4b1da400ff5090c9b68f59bc3d7b2a"
+    },
+    "actor_world/effect_updates.rs": {
+      "original": "caa6a3617eb638be73f430a2e9a02a5158a50bd4e3da894196cd14c2c7111fa4",
+      "copy": "caa6a3617eb638be73f430a2e9a02a5158a50bd4e3da894196cd14c2c7111fa4"
+    },
+    "actor_world/extractor_updates.rs": {
+      "original": "6b287998ba94f614a175d940888c22999e16e3f89b112a130716fa85bbe77ab5",
+      "copy": "6b287998ba94f614a175d940888c22999e16e3f89b112a130716fa85bbe77ab5"
+    },
+    "actor_world/family8_retirement.rs": {
+      "original": "8b8a94836a6c42854af3d0a435293e1f33eae0082c1c02689113c405b98713d6",
+      "copy": "8b8a94836a6c42854af3d0a435293e1f33eae0082c1c02689113c405b98713d6"
+    },
+    "actor_world/family8_updates.rs": {
+      "original": "e8735edacf0572f9983de4689ed48d199361860dad908da7327d8cad716d1fea",
+      "copy": "e8735edacf0572f9983de4689ed48d199361860dad908da7327d8cad716d1fea"
+    },
+    "actor_world/family_scheduler.rs": {
+      "original": "d6ee58ea8249f01a9b07181e77d7ff833b487cd198583d5e7e72d1787a9c0d42",
+      "copy": "d6ee58ea8249f01a9b07181e77d7ff833b487cd198583d5e7e72d1787a9c0d42"
+    },
+    "actor_world/mission_funds.rs": {
+      "original": "756c22d9cf2f0e4f9a640765ac0d6a61dcf269017e38379e8d811ebe2741afdb",
+      "copy": "756c22d9cf2f0e4f9a640765ac0d6a61dcf269017e38379e8d811ebe2741afdb"
+    },
+    "actor_world/mission_status.rs": {
+      "original": "601731f8d826090943bddbeb72363ca286c17bb52912f83b310b97cb348faaf9",
+      "copy": "601731f8d826090943bddbeb72363ca286c17bb52912f83b310b97cb348faaf9"
+    },
+    "actor_world/plant_updates.rs": {
+      "original": "fe53dc13c552bc0b973d3f0fb75f1f06902d7fbeb547a6efd68022161adc69ac",
+      "copy": "fe53dc13c552bc0b973d3f0fb75f1f06902d7fbeb547a6efd68022161adc69ac"
+    },
+    "actor_world/power_buildings.rs": {
+      "original": "77c82e9ca78d4e7f3133b5989625f83697b0a3dc55b35016be07d6051431cb14",
+      "copy": "77c82e9ca78d4e7f3133b5989625f83697b0a3dc55b35016be07d6051431cb14"
+    },
+    "actor_world/power_updates.rs": {
+      "original": "96f8c22c3f818d386911810347bfd2693a1ff66033fb667215aaa970cea435e9",
+      "copy": "96f8c22c3f818d386911810347bfd2693a1ff66033fb667215aaa970cea435e9"
+    },
+    "actor_world/reveal.rs": {
+      "original": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6",
+      "copy": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    },
+    "actor_world/terrain_refresh.rs": {
+      "original": "c174ad011c4e5c52e5be3e6a7c8fe276cc87ff722faa67210a52c5a46de2a67d",
+      "copy": "c174ad011c4e5c52e5be3e6a7c8fe276cc87ff722faa67210a52c5a46de2a67d"
+    },
+    "actor_world/terrain_updates.rs": {
+      "original": "143c4297ae10dc91c9abc9b55cecd837b73cbb99d5747387c7259482bb0582c9",
+      "copy": "143c4297ae10dc91c9abc9b55cecd837b73cbb99d5747387c7259482bb0582c9"
+    },
+    "world/plant_creation.rs": {
+      "original": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82",
+      "copy": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82"
+    }
+  },
+  "probe_sha256": "f062add3de6cdef0a40b006d36713fffb1385b3e46ac554fc6f3db33f6849e3b",
+  "validator_sha256": "dfececdc747ca801d0b7d40fa50b45c53081fbfa8a822e14bc63eb9d9d1d1eb9",
+  "dependency_rlib_sha256": {
+    "assets": "104be05e87420555da3bc6579813839ccb54d58db93056e9f6fdff2d1c4a012f",
+    "core": "9bd29d1d276e93a95c3cf98473b5200417bc22075ad43395b7837ca6b5b34343"
+  },
+  "source_pins": {
+    "private/ghidra/construction-command/instructions-00078e30.txt": "35df6f54b4c51a4b974cb11de1e2aac0357f5e31308f9c7a83ce4ed252fe44d6",
+    "private/ghidra/construction-command/instructions-0008c1c0.txt": "c7be373421095700644a1fcb13f7e3de744c886bebc54ab304fbe708b3a1b586",
+    "private/ghidra/construction-command/instructions-0008c290.txt": "dcd3cda09865c093a5e1df220935f2a51a6b2c33bd35a62d5528e4eac08a952b",
+    "private/ghidra/construction-command/instructions-0008cde0.txt": "eb4efe6a450c354651410f3240dc5709035f28c44866dcd99251433c94cd4850",
+    "private/ghidra/terrain-map-refs/instructions-0008cb00.txt": "2c35541f4b44258aec8419dda54367ad5ad45366e3030108b87eb8a4fb45a921",
+    "private/ghidra/terrain-map-refs/instructions-0008c990.txt": "1a60f5357184688c8da3b86e88d20f7b53cdf7aafafe46cfcb10ca527a978837",
+    "private/ghidra/terrain-map-refs/instructions-0008b890.txt": "b1b285e56911bee26f33d6aa3c2a5ccd42481e25be7fc4f986f5e55bbb173ad3",
+    "private/ghidra/terrain-map-refs/instructions-0008d1b0.txt": "0b70076ba33011160a5f0cb917d7c89dd0675f9ff33edd129469ef75a27405c8",
+    "private/ghidra/terrain-map-refs/instructions-0008d660.txt": "f6a40917d785effe8a93813bbbb45708d5d9dde3cd58c251e908899693309d0d",
+    "private/ghidra/terrain-map-refs/instructions-0008cba0.txt": "8346e2e8cc123527be927e2b30cf62f629864ad94c5637a07d8b7e0297ea9c0e",
+    "private/ghidra/validated/instructions-00097910.txt": "8581fffdf51047b5d57eaa70409790ab8757ddaed1c977624a8f75958be3600a",
+    "private/ghidra/terrain-map-refs/instructions-000753f0.txt": "ea2554be981b0acae18e192ba9827ebdf4e4dea2d8e6fbee83f889ec15f390c5",
+    "private/ghidra/validated/instructions-0008d580.txt": "08fc85698d73460faaef4a6dd81457eb199a60c9aacda9380239e5f3278034c3",
+    "private/ghidra/construction-command/instructions-000791c0.txt": "da1a6046fa2a0a4153f54ff5f4cce68941a05aae834287ce856ee48a1867f9f2",
+    "private/ghidra/keyboard-event-refs/instructions-00075f60.txt": "c238f6c3e2331244305dc67d0f7fcbec6496ae8cbb165da62222da9a8ad1e0cb",
+    "private/ghidra/terrain-map-refs/instructions-0008c550.txt": "49e50fc30aac9eb8a55499f5792630e163f28b6904d258da36bbe552555c9446",
+    "private/ghidra/terrain-map-refs/instructions-0008bee0.txt": "7153008e93b676377a22bb27f8e9ff7e16471c6e7a0ae37af2eb9d406e5f7d94",
+    "private/ghidra/terrain-map-refs/instructions-00084960.txt": "bc4a86fe7ae050df26e5cece56336273e07541b6045ab13e553ef0f608e70265",
+    "private/ghidra/terrain-map-refs/instructions-00084b40.txt": "9424f5091c9fdb3baa1f4e27c53310c85cdbf87a51ce4fa0aa11b54dadb363a5",
+    "private/ghidra/construction-command/instructions-0008b840.txt": "c6687b1203992cc88103442c36ae0933f15ce3fe67a3b5d3f88a1d216c93e231",
+    "private/ghidra/camera-player-input/instructions-0008b800.txt": "6ae63cd69b0f93d01d7a7850c7a2c9c7c56d11b5ff22db129edd1cc7e2819832",
+    "private/ghidra/terrain-map-refs/instructions-0007b240.txt": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb",
+    "private/ghidra/entity-order/instructions-0001f440.txt": "4601eef6b773e61642e08e67d7f027b2e68421f50e467782b32910a61e2f6fe1",
+    "private/ghidra/entity-plant/instructions-0001f240.txt": "b91628625841cfa04088d9babedbb03644231d8e019edd92ac86e8a806241e69",
+    "private/ghidra/entity-plant/instructions-0001f280.txt": "dba12fb47f1658bff3d7fa8bfcee4cc648c065194e697f4a85f5958592291223"
+  },
+  "private_run": "private/ghidra/construction-command/4eebb9ae3b554c538fc727891cb611cd"
+}

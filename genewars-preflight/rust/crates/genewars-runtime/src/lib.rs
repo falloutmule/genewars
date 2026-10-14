@@ -61,6 +61,7 @@ pub mod building_effect;
 pub mod building_effect_lifecycle;
 pub mod building_callback;
 pub mod building_progress;
+pub mod building_availability;
 pub mod building_obstacle;
 pub mod building_pool;
 pub mod building_resources;
@@ -73,14 +74,13 @@ pub use world::{
 
 pub mod source_building_resources;
 
-pub mod building_availability;
-
-pub mod extractor_production;
-
 pub mod projectile_impact;
-
-pub mod mission_context;
+pub mod extractor_production;
 
 pub mod terrain_height;
 
+pub mod mission_context;
+
 pub mod building_power;
+
+pub mod terrain_border_table;
