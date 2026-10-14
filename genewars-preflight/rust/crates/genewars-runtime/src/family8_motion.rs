@@ -286,29 +286,52 @@ pub fn plan_selector1_state0(before:&Family8Record,map:&[u8],frame:u32,water:i32
 
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct Family8TargetPlan {pub after:Family8Record,pub rng_after:BlueprintRng,pub target:[i16;2],pub target_height:i32}
-/// Exact114B0 first state1 fallback when all64 owner buildings are inactive.
-/// `owner_buildings` is the native67-byte-per-record owner partition. No
-/// active-building choice or guessed player target is accepted here.
+/// Exact114B0 initial state1 scan of the64 owner buildings, followed by
+/// the source player-position fallback when no eligible completed target exists.
+/// The compatibility name is retained for existing fixture callers.
 pub fn plan_selector1_initial_empty_building_target(before:&Family8Record,map:&[u8],player_target:[i16;2],
     owner_buildings:&[u8],trig:&TrigTables,rng:BlueprintRng)->Result<Family8TargetPlan,Family8MotionError>{
+    if before[0x57]!=0||before[0x5b]!=0{return Err(Family8MotionError::UnsupportedRecord);}
+    plan_selector1_building_target(before,map,player_target,owner_buildings,trig,rng)?
+        .ok_or(Family8MotionError::UnsupportedRecord)
+}
+
+pub fn plan_selector1_building_target(before:&Family8Record,map:&[u8],player_target:[i16;2],
+    owner_buildings:&[u8],trig:&TrigTables,rng:BlueprintRng)->Result<Option<Family8TargetPlan>,Family8MotionError>{
     if map.len()!=229376{return Err(Family8MotionError::MapLength);}
     if rng.ring>=32{return Err(Family8MotionError::InvalidRng);}
-    if before[6]!=8||before[0x55]!=1||before[0x56]!=1||before[0x57]!=0||before[0x18]>=4||before[0x5b]!=0
-        ||owner_buildings.len()!=64*67||owner_buildings.chunks_exact(67).any(|r|r[6]!=0){return Err(Family8MotionError::UnsupportedRecord);}
-    let mut a=*before;let mut rng_after=rng;let high=rng_draw(&mut rng_after);let idx=(usize::from(high)*8+1536)&2047;
+    if before[6]!=8||before[0x55]!=1||before[0x56]!=1||before[0x18]>=4||!matches!(before[0x5b],0|4)
+        ||owner_buildings.len()!=64*67{return Err(Family8MotionError::UnsupportedRecord);}
+    let mut a=*before;let mut rng_after=rng;
+    //115B3..1165E: inactive/incomplete and selector2/3/5/6/8/9/10
+    // records are skipped. Flag0100 restricts candidates to selector11.
+    let first=if before[0x5b]==4 {
+        let next=i32::from(w(before,0x59))+1-i32::from(before[0x18])*64;
+        if next<0{return Err(Family8MotionError::UnsupportedRecord);}next as usize
+    }else{0};
+    let candidate=owner_buildings.chunks_exact(67).skip(first).find(|r| {
+        let flags=u16::from_le_bytes([r[0x31],r[0x32]]);
+        r[6]!=0 && flags&1!=0 && matches!(r[0x2d],0|1|4|7|11)
+            && (flags&0x100==0 || r[0x2d]==11)
+    });
+    let center=if let Some(r)=candidate {
+        a[0x59..0x5b].copy_from_slice(&r[0xf..0x11]);a[0x5b]=r[6];
+        [i16::from_le_bytes([r[7],r[8]]),i16::from_le_bytes([r[9],r[10]])]
+    }else if before[0x57]==0 {player_target}else{return Ok(None)};
+    let high=rng_draw(&mut rng_after);let idx=(usize::from(high)*8+1536)&2047;
     //73E00: double signed lowword coordinates, add the lowword scaled
     // radius vector, arithmetic halve, then mask to15 bits.
     let target=std::array::from_fn(|axis|{
         let term=if axis==0{trig.cosine()[idx]}else{trig.sine()[idx]};
         let offset=(2048i32.wrapping_mul(term)>>16)as i16;
-        (player_target[axis].wrapping_mul(2).wrapping_add(offset)>>1)&0x7fff
+        (center[axis].wrapping_mul(2).wrapping_add(offset)>>1)&0x7fff
     });
-    for axis in 0..2{pw(&mut a,0x5c+axis*2,player_target[axis]);pw(&mut a,0xb+axis*2,target[axis]);}
+    for axis in 0..2{pw(&mut a,0x5c+axis*2,center[axis]);pw(&mut a,0xb+axis*2,target[axis]);}
     let target_height=genewars_core::cd_candidate::interpolate_height(map,target[0],target[1]).map_err(|_|Family8MotionError::MapLength)?.wrapping_add(2560);
     a[0x54]=20;a[0x49]|=0x14;a[0x16]&=0x3f;let flags=(w(&a,0x49)as u16&0xeffc)as i16;pw(&mut a,0x49,flags);
     a[0x16]&=0x7f;a[0x4f]=0;a[0x52]=0;pd(&mut a,0x60,target_height);a[0x4a]&=0x3f;
     pw(&mut a,0x64,0);pw(&mut a,0x3f,3840);a[0x57]=a[0x57].wrapping_add(1);
-    Ok(Family8TargetPlan{after:a,rng_after,target,target_height})
+    Ok(Some(Family8TargetPlan{after:a,rng_after,target,target_height}))
 }
 
 /// Selector1/state1's initial travel and first arrival (timer64==0).
@@ -381,8 +404,8 @@ pub fn plan_selector1_state1_hover(before:&Family8Record,map:&[u8],frame:u32,wat
     if rng.ring>=32{return Err(Family8MotionError::InvalidRng);}
     if before[6]!=8||!(0..16).contains(&w(before,15))||before[0x18]>=4||before[0x55]!=1||before[0x56]!=1||before[0x57]!=1
         ||before[0x15]!=0x20||before[0x16]!=0||w(before,0x49)as u16&!0x6020!=0x200
-        ||before[0x4f]!=0||before[0x52]!=0||before[0x5b]!=0||w(before,0x3f)<0||w(before,0x41)<0||w(before,0x64)<=0
-        ||owner_buildings.len()!=64*67||owner_buildings.chunks_exact(67).any(|r|r[6]!=0)||site_count!=0{
+        ||before[0x4f]!=0||before[0x52]!=0||!matches!(before[0x5b],0|4)||w(before,0x3f)<0||w(before,0x41)<0||w(before,0x64)<=0
+        ||owner_buildings.len()!=64*67||site_count!=0{
         return Err(Family8MotionError::UnsupportedRecord);
     }
     // Family8 A8 is RET; the read-only neighborhood search has no numeric effect.
@@ -406,10 +429,11 @@ pub fn plan_selector1_state1_hover(before:&Family8Record,map:&[u8],frame:u32,wat
         let center=[w(&a,0x5c),w(&a,0x5e)];let height=genewars_core::cd_candidate::interpolate_height(map,center[0],center[1]).map_err(|_|Family8MotionError::MapLength)?.wrapping_add(4800);
         hover_acceleration(&mut a,center,height,physics,trig)?;
     }else{
-        //114B0 state1 finds no owner building and does not repeat the first
-        //player fallback because57!=0. State2 then finds no sites. Both
-        //returns are false;130CE entersstate3 and clears only kind5B/accels.
-        a[0x57]=0;a[0x56]=3;a[0x5b]=0;a[0x33..0x39].fill(0);
+        //114B0 continues after the current building. With no next target,
+        //site_count0 closes the state2 search and source130CE entersstate3.
+        if let Some(next)=plan_selector1_building_target(&a,map,[0,0],owner_buildings,trig,rng_after)? {
+            a=next.after;rng_after=next.rng_after;
+        }else{a[0x57]=0;a[0x56]=3;a[0x5b]=0;a[0x33..0x39].fill(0);}
     }
     let direction=usize::from(a[0x19]);animate(&mut a,&animations.directions[direction])?;
     Ok(Family8OnwardPlan{motion:Family8MotionPlan{new_cell:cell(point(&a)),after:a,rng_after,old_cell:cell(point(before)),child:None,

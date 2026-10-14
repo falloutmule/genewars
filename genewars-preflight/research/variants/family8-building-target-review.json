@@ -1,0 +1,849 @@
+{
+  "status": "passed-bounded-family8-initial-target",
+  "utc": "2026-10-14T23:15:47.138890+00:00",
+  "cases": 64,
+  "compared_bytes": 7488,
+  "literal_instructions": 64803,
+  "source_pins": [
+    {
+      "path": "rust/crates/genewars-assets/src/lib.rs",
+      "sha256": "7a9571d30a1d3c229281a45223d277d908b61976ff21d27fe763966da7af133d"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/map_atlas.rs",
+      "sha256": "275facee7a4ad590ec68558bcd12016f2178eff73c058eb92d85864bc8aa30a7"
+    },
+    {
+      "path": "rust/crates/genewars-assets/src/mission_source.rs",
+      "sha256": "4c7d23930fb35483e7288af90845a28d64e3df228e7adaf2e5c7196c06ed313a"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/campaign.rs",
+      "sha256": "a610b74be9c65dd66ef9c84771b1c07422e1efea41d6e9895290a551d061bf78"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/construction.rs",
+      "sha256": "4866ff1f9bdd1bffbfb964bf03c495e5a1118d6bc24b0e3f8beea64ff780e5c0"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/custom_list.rs",
+      "sha256": "98955b9435e074518a2ee195e54e25779f96e7de7120f9620fdab1c89ea495c8"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/entity_draw_queue.rs",
+      "sha256": "b80d62724db689da242800705edfb34319bed786ac9ed91be1d4ffac7f203215"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/lib.rs",
+      "sha256": "1793d9674e9278dc0ea81ccabcf34c412bd0a925c126d9e47607a45764364f4c"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/menu_control.rs",
+      "sha256": "9def9eafcff361edeac28ff199ab1a241ada086c1bc4e826ba65fa6dbe28a472"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/mouse_packet.rs",
+      "sha256": "5763c082b5774e7e9042c3bff2cabf638b22ede7744f60e1c9904493527714fa"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/opaque_records.rs",
+      "sha256": "3019eb2459c8fab24c7f3aafdaf75a0d857229692f537881292a6614a293eba9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/plant_lifecycle.rs",
+      "sha256": "b9d38a54ec0dbaebbf86d3c27fed5933ba586cdb381904fbf302df9c5e8d2ac9"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/player_creation.rs",
+      "sha256": "7ae09e8231c2c1b5f2d9d846db9edfd4a274a8df95e98834d665a543c04a63ee"
+    },
+    {
+      "path": "rust/crates/genewars-core/src/terrain.rs",
+      "sha256": "5b906fdc3ed1809fefd078a1c60cca20cbca5a254df2fe386fe4608cf2450e6a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_activation.rs",
+      "sha256": "3cbe24a5c40c491c171815acd0eba407377aa3ef5bd54004db429ee292dd4057"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_command.rs",
+      "sha256": "9fffffe91e97165868822ad45cd0ac79b6c307d6a1414b6d2a0467cb5f79990e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction.rs",
+      "sha256": "0988dac1c88cbea6db58b6036cc26e8618ad49ded7de3787009ce2f82f88d182"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction_animation.rs",
+      "sha256": "bf44aec16d67ce3f8b4313a4d27cc30bbd6b9b5f58bca638c963c270c1216505"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction_lifecycle.rs",
+      "sha256": "0425be83f11535eacc231de7cb1cb6c4687613449acfeb6868e512863018015d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction_placement.rs",
+      "sha256": "23bcfa7070e87958aab071f6041ab58fb658c3de4e80d26c5c54d90e803c484f"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction_recovery.rs",
+      "sha256": "43d1a9c61f2f62fdedd209067039ee29105078e4556cac32106e464a4c7f1a09"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_construction_tail.rs",
+      "sha256": "422ea3e71110f4db1782f5880592cb856ac8d8b0c3ef37a2d82c000a62eeb8bb"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_initialization.rs",
+      "sha256": "b13d4a9fe4d2e8eadd1024d72cdd07b331f249cc51f490916c53dc498d8e8c99"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_motion.rs",
+      "sha256": "75cde64c611b8ba7598a23d6af0310f400d4b2e31de644de9faccb678848283e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_pool.rs",
+      "sha256": "d3dc70d5c66d36ef1e7cb5f7e05f6af14050cba982514251992303fa1f383f48"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_render.rs",
+      "sha256": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_resources.rs",
+      "sha256": "8c94e8afb54d1dbcb0e33de471a9b7d4d4008d3a8782f970ff5b0e95194145a3"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "b066d310a45a96c9c59a4b880032c17a989a22506febfdef66e342b9f3b7469a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/blueprint.rs",
+      "sha256": "0ad7cc0e290c821f7d0991b09c83aa6e4b964c3e635244e73622ecebd34aa558"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/bookkeeping.rs",
+      "sha256": "53138bf3ac2e84522b611d406fa5c7af3bf7cdf7a666cb8859b55030916fed95"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building.rs",
+      "sha256": "792600452c5db29cf047e48f19be52630cbbc98016b00ff1eaaf92d9a3c052cf"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_availability.rs",
+      "sha256": "bd445c702b16aa8834c63941236aee251f37d94f9731d3336c58bc3f019fb0c9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_callback.rs",
+      "sha256": "b43d8c4efc3859595fda80dd0eb6b5e68e64be56747bd4f132f87d068c3b696e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_effect.rs",
+      "sha256": "7f906971f7269390e547877d1a7ecfa6c99a744cf2368fe4f7ac412c17894576"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_effect_lifecycle.rs",
+      "sha256": "628490fa538989e3dd663ae4fcb53a1cd5aa865b036086bc20e0eb55ce970400"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_obstacle.rs",
+      "sha256": "b740160c499e2c72c6f07a7e55a68d1783ce120b688551f879ad8a9322093020"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_pool.rs",
+      "sha256": "8a193939d2a0c64a34cc9a32ffd712ddd41ad03f791ba46b5d388d49703d97e5"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_power.rs",
+      "sha256": "39cf56c4eab5616ec05a6594e54f808fc9941ac3a6fbb53c92b83ffdc18bee61"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_progress.rs",
+      "sha256": "dfe9f4712a18d92411c45c8f3db38cab903baf24958229cbfe1253fd39651960"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/building_resources.rs",
+      "sha256": "1180b6772277f7a91f7f49d9d618331da8b93c2013a58cd6947f62239f34239e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/completed_building.rs",
+      "sha256": "195416a09a65b15b213b549144cb3be0eb52f37c6d9069261e85f3da5780c13a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_cancellation.rs",
+      "sha256": "90874462cc9d992ef8a898502f07d5b7e710a553c25aaf75860b694a7049d1d9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_completion.rs",
+      "sha256": "0b78ab600e361fedbff300f20b10e16beb1a01bda89ba881aa86c53f507231d0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_maintenance.rs",
+      "sha256": "691dc7953fda4af1e9828ba29694f9ea062def7ad25426be4dfa70fe6f754f42"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_motion.rs",
+      "sha256": "807b07d32dfd1d93b748c93f8144a34e18ccb8ce5d8ba9199995d8ba34081bcf"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_payment.rs",
+      "sha256": "ce6aa8da2d840279cdeea469a9a60b7dd637e784fd93a2dcbd9ad4917b38328d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_setup.rs",
+      "sha256": "bc7c8aebad792673ffc8b9b7fc89f240ff6caea5ccf089f1ec54c04f2cba0feb"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_site.rs",
+      "sha256": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_stage4.rs",
+      "sha256": "10c6aabe43fe584adff130254dfb0071de02ff7f193f2f8f8834a9e949947ef2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terraform_completion.rs",
+      "sha256": "031abef43f20a1e04a5b32ea72d00340068e25a7529908d16d72229929e7fecb"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terraform_resume.rs",
+      "sha256": "325b7f0d36e5bea907d1ddf5a9c54b504274ff64fe44203bc602029074cc8971"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_terrain.rs",
+      "sha256": "a4385758658c56cc6a2f5062d7422e7be8eccd8e4db5304be0a5657e88a61f31"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_wait.rs",
+      "sha256": "3e339a034c14c3f7f4fc515418675eb357d844c473d9d5024797750cc3b0f6ae"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/construction_work.rs",
+      "sha256": "9c2810cf50c6224d4e78b87d90bf643cfe5abd7a365ffa790bd5e0ec708d67c1"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/countdown_expiry.rs",
+      "sha256": "fdc5b172dc4fbd41ccf52bc877a9b0d7db6999c7166aba74125e7c9097c59dfb"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/creature_world.rs",
+      "sha256": "527bee46b3cc5d747a8a0e2e6a2a6526b229530334ea8e48f5533d593620257c"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
+      "sha256": "14cb6a5b0d717a71fde6f3f8074dfd3206dcebf72da99e48bfa75b560c028663"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/extractor_production.rs",
+      "sha256": "8afbfaf08b248bc1861bff2eeda2190331dc0f6b0148940c7cae347d84a27ae7"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/family8_creation.rs",
+      "sha256": "0f312593fb963669ec9a98e33abed62e09aa2a2f9cfef9f0799946aa4743a712"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/family8_motion.rs",
+      "sha256": "2e73d651dcd17098cc591efadfcc6587260a8cb223b2d1d0020e6063110f693c"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/family8_particle.rs",
+      "sha256": "8ae40f370ea2507b90c386e43fdab2c07a950ce7f75b4e8f57df2f051427cf6d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/family8_pool.rs",
+      "sha256": "5499c31f564672a8c31f39ae10e5d0204c5e96cf16da630cd525113a93df86cc"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/identity.rs",
+      "sha256": "50ec804f69a97ce4cb025ea08c9bda8bb6eab5013b8ab851c5fa144f13a573c0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing.rs",
+      "sha256": "a38c2f9a5b01d3d7b97b92cf676c584833005451799ef11fb9362ca6770295ea"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
+      "sha256": "eef1fbd1ec11d98aba18517ef9a5bd2f08f2e403ecc929053d1839a6d2f57cac"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/lib.rs",
+      "sha256": "7053b71553da7f191d9291d231e95fe5d3dbace34e54aa838835264a12243174"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/loss_transition.rs",
+      "sha256": "c6f1538c4b2de7f561e40cace22d64438f0617ea4ef8e00bcb550b726e7b646a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/mission_bootstrap.rs",
+      "sha256": "802bf836ae1e4fa92cf144171c16872e9c52b362e1dd8dc22ceb000953aca229"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/mission_context.rs",
+      "sha256": "e9b1a5095d6c4c49223073dc346bccc95f9893cc0760910eb0ebaee43b998e55"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/mission_outcome.rs",
+      "sha256": "922870abbfdd917f1b80687d1810aba8a8d8767234611c5371fcc5c11f4cd60a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/mission_player_funds.rs",
+      "sha256": "e569e64c5180e22aff20b3e3c5b8bfa06372fffc1cafd5db4056210d17066516"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/mission_status.rs",
+      "sha256": "bbf80de06f576ef05c3ade9a3b85370a4b9a55b5744bc3370dba06f2392b438a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
+      "sha256": "07f196e2244445296e4274247dfb827969f261100416a0e6cc6c07ce87e04ed2"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/plant_spread.rs",
+      "sha256": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/player_state.rs",
+      "sha256": "d7faa11882d551bc009e43e7e6ea89dca3d14dd726341cfeb959981d6da496b0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/projectile_impact.rs",
+      "sha256": "49631ef3384c9af4f524417cdc3a1119eba63315cd0c35eef728831935c5132d"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/result_carry.rs",
+      "sha256": "79cc7806ff09fb03d45f0c1ae28d944dd065926327cbb5a2f8ef0aae8429d49e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/result_transition.rs",
+      "sha256": "0416022aa796b39b3f675a22e8a98444be8a05d7d3667b494f75f655dc36c766"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/source_building_resources.rs",
+      "sha256": "927198d0feb354fb492e210e09409a36179dc10af032d54c6b590c828a044f9c"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_projection.rs",
+      "sha256": "455938c39b889e6e035e2821e74b7d5f4aae980786745c7861dc1aa5dbb38dc6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/target_resolver.rs",
+      "sha256": "1412ab3a6a55e95df5b1e5cd1f4bf4169da55523966b1bfec56b3a917628d1c5"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/terrain_border_table.rs",
+      "sha256": "07df7e0623491df6e56b96cefcb9a875c2dcbe30c9ff6e7b3461b1fdd8bd98da"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/terrain_height.rs",
+      "sha256": "0503c210aefd5ccb86c2bf808cb7ad9924ba3583bd2fbfccc656aa5b3a27ecef"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/terrain_job_pool.rs",
+      "sha256": "dc2c9bce46a72de481100376614758bff9c265860b117e8facde7fc0d17b2d25"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/terrain_target.rs",
+      "sha256": "b7a6401fb0e0bff7fe50ca6a7f28700ac88656d5e87e63006c58fd94c0a8ab16"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/water_effect.rs",
+      "sha256": "cbcb539955f1edbf002640d5c5d93549b667b50bee4528cffd92ddad1129fc9a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world.rs",
+      "sha256": "3fd7e6a7df779c935836566ba8d9755cf843db7d964a888e7d53a53d405bffe7"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
+      "sha256": "1e0eb545bf644359fd453466a36af1833e96b34861c3ad642fbdbed692e7ff70"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/admitted_buildings.rs",
+      "sha256": "1c053eaf009ae039f04f11617013081c9a77de38d4df52ec6428fb44930c2d65"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/bookkeeping_updates.rs",
+      "sha256": "62794fb15814bfa317c521c342fd8b0db71b1675ad5049c38a075301895d2786"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/bootstrap_updates.rs",
+      "sha256": "189cb1313d306123126e45baf52a1024f9fd9d5af1f861144bf12a4dbb09b7e0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/building_scheduler.rs",
+      "sha256": "36b9c61ff25ab00fb05e123cc9430db0c40b8e0a294b64a04194d26a36c0e05e"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/building_storage.rs",
+      "sha256": "53ddbe23bb04b8e644c58574a48070589e670184b5d7b907864e2758f58735c9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/building_updates.rs",
+      "sha256": "46f0e2b00358070d1257a86379d95f6e0760cd7dbd13e76fa4a3519302df50c5"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/construction_placement.rs",
+      "sha256": "740313bde0c59815c7c823e4a36691dec777c7b3aa619a5c56593534da2b3437"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/construction_scheduler.rs",
+      "sha256": "e9d2a713a849b802288b2da9a2b0dd0f1b9bf94f4830c20d891ab447c38e91e7"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/creature_retirement.rs",
+      "sha256": "3e4ccf2a41de45cd10e5ad1f80a8f47b99e34b2d8915ce4285b18dad2d7dec99"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
+      "sha256": "71351bc1b763f95503889ff08cd8a01e9c4b1da400ff5090c9b68f59bc3d7b2a"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
+      "sha256": "caa6a3617eb638be73f430a2e9a02a5158a50bd4e3da894196cd14c2c7111fa4"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/extractor_updates.rs",
+      "sha256": "6b287998ba94f614a175d940888c22999e16e3f89b112a130716fa85bbe77ab5"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/family8_retirement.rs",
+      "sha256": "8b8a94836a6c42854af3d0a435293e1f33eae0082c1c02689113c405b98713d6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/family8_updates.rs",
+      "sha256": "e8735edacf0572f9983de4689ed48d199361860dad908da7327d8cad716d1fea"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
+      "sha256": "914a284a9229ad4d9a5acda78de69fb53102f383b5a6165b990789485bbaf681"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/mission_funds.rs",
+      "sha256": "756c22d9cf2f0e4f9a640765ac0d6a61dcf269017e38379e8d811ebe2741afdb"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/mission_outcome.rs",
+      "sha256": "14f804ce8d662c3b5f717eb7c28b5a7ecad2c35818649175bbd78f36f8bafd67"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/mission_runtime.rs",
+      "sha256": "11c2743ff78ef89e85312de9a32584888ce5d0c0c550d1dc1cce390411e017f0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/mission_status.rs",
+      "sha256": "601731f8d826090943bddbeb72363ca286c17bb52912f83b310b97cb348faaf9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs",
+      "sha256": "fe53dc13c552bc0b973d3f0fb75f1f06902d7fbeb547a6efd68022161adc69ac"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/power_buildings.rs",
+      "sha256": "77c82e9ca78d4e7f3133b5989625f83697b0a3dc55b35016be07d6051431cb14"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/power_updates.rs",
+      "sha256": "96f8c22c3f818d386911810347bfd2693a1ff66033fb667215aaa970cea435e9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",
+      "sha256": "7db901a3dea4bb3c6569129116a049ca3f68e37f0c297e9f4aa7a8595bd739a6"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/terrain_refresh.rs",
+      "sha256": "3af8f2953f1a8b717b12578d4352537e822167497e132e5b6d5eaa74a5fd1bbc"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/terrain_updates.rs",
+      "sha256": "143c4297ae10dc91c9abc9b55cecd837b73cbb99d5747387c7259482bb0582c9"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/world/plant_creation.rs",
+      "sha256": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82"
+    }
+  ],
+  "input_and_listing_pins": [
+    {
+      "path": "private/ghidra/player-creation/instructions-0005ed20.txt",
+      "sha256": "ea29b165354042aaf33dc630322d89b577810f96c2ece1f8998799512e2feed0"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0006fb60.txt",
+      "sha256": "b373e98528fde4ef720bf0b529edbca889efb97bec713ac4d7fe184c868fb736"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0005eb30.txt",
+      "sha256": "2cf7510ee5298d221c299b11244f72adf6ce5831c7aedcb39d3e91e6cacb53ec"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0005e640.txt",
+      "sha256": "cbcd47d0c677749cbcf9adb928ef968ec6f8c0d4a399e2956dd39c13f2626239"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0001ec50.txt",
+      "sha256": "ed1420b97321186a1b7c3146ab315649a872bab54a0fc63686a6aad4e4f677ce"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f980.txt",
+      "sha256": "29a29a39c3cfee69d78fc3bb6ff818953299d0ba57f25500d2015c720e593f3d"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006b150.txt",
+      "sha256": "9395a017642140a42c59b83e6e47c4c77b71e3ee368b811dd02b54f1866156c1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00023800.txt",
+      "sha256": "4227dd9dbd21613fa4e396d702bc66347bfcc4b5085f1d2cdb7b77267bf7bcc5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00023820.txt",
+      "sha256": "dc2ca6ff81274248aafa161ec20efc0d7947fd06fcddc5fee70ce77b433c7ea1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001ec10.txt",
+      "sha256": "4987af3cf6109166c9577008df7d94e772076ce575f10a8601f8a1383b942dbb"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001ec20.txt",
+      "sha256": "60779ead189d0df91af75d7de30ee0726857f9658f0a51c0fbe238dd1cf323ec"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f060.txt",
+      "sha256": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005b400.txt",
+      "sha256": "80c66399500e97ca59bbe76c29dc12f531c9780fdad313ef1a462e40586a741a"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f8f0.txt",
+      "sha256": "79e1953c322d12fdfe9161c53d960cd98af86ad0fefe5d74adf2f3f68259ac7c"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b340.txt",
+      "sha256": "9c96acdce1336ae5bf34b745b501da187f77dcfb618a1194fee5537a3ad77c0b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005ad70.txt",
+      "sha256": "2ca44bf24af651de458c9ee2303cdc272a4ed9d29f4797c6eaa7d6fc74d54c8b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006db00.txt",
+      "sha256": "42e576bafeec8c50c4ab8151c5573f071ac350a4941b263e9ed7d94f25ee12a2"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005a110.txt",
+      "sha256": "5121591cbf165c63dc16fb3de9fb95a8b7772b96162f72a44191d8a8b97d8910"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0006df30.txt",
+      "sha256": "8afe40345a8ecb636ff3af67dd76b4fa4104596032270b0cc61ab26b2affe8b1"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0007b380.txt",
+      "sha256": "a636e0647b1a66cf9eb422bfc86e03f8b2e450a42290ed9ad70c08c3f4792f7d"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f260.txt",
+      "sha256": "0f0c7ee7a26b87418a794e92c763f2dffb749d896335288aa052cfa40aba9ff2"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001ee20.txt",
+      "sha256": "0aa43dc30a3d2399e5d659215c01ed920605684839f5762cfba24f4c3c4b9d1f"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f220.txt",
+      "sha256": "0eda1dc90e070c6c7fc3cfbae1e8e50bb0ebe50c658ae0a199af4f43b3bbbcac"
+    },
+    {
+      "path": "private/ghidra/landing-contact/instructions-000733a0.txt",
+      "sha256": "fca831c451b1c09a39d93188d8cf9428b04ae5b25d8f87f09ecceb87c5f3f736"
+    },
+    {
+      "path": "private/ghidra/landing-contact/instructions-0007ac00.txt",
+      "sha256": "cc002c636ec832486e06fe90af6cfc68a0489d6acae6efcf83d5a5ce735706e1"
+    },
+    {
+      "path": "private/ghidra/primitives/instructions-0007a6c0.txt",
+      "sha256": "038389547efce23a858a88bdc1e89ed6b5e1ec1799704c22fd3fc1b30175d509"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-0005e0b0.txt",
+      "sha256": "89174afadbb823011cf4781900d1894bbb0fceda13d58a7041ea8af8981606ba"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008b520.txt",
+      "sha256": "37342106bfbee451f816f38ffbd92903d81b06fd534da2f6031e26c1be840e49"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0006d390.txt",
+      "sha256": "7f1c49974e62a52382eed53b9dcfa8dcc53b0727c9fdd2a626d57009a8376548"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-000736f0.txt",
+      "sha256": "bc949e97b253e9a9b6c59ca1e14386d72af6a47f73d770d9f4f48b0e98b0d57e"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0007b140.txt",
+      "sha256": "aef70bf9859bc9c21d01f697528a266d30ef1961e47d9697f762f7c74be7a2f4"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001ee10.txt",
+      "sha256": "67284531f9de18e252b503ec89522e7be59fad0a1128732c24c53705f64e1e72"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-00074270.txt",
+      "sha256": "0e6512bf106d649968285420fc325a0cf12afabecaa582ed4b6cc9a486b59a30"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-0008b130.txt",
+      "sha256": "f2505f556f5a3a4f012cd375b6a43cc8029c3f03b5f1c37efe65b8a6cec2d52f"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-00074d90.txt",
+      "sha256": "69e9654b5a4844452ca3995de8814c049a820e745251b4c8e88c402fe46280af"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-00074160.txt",
+      "sha256": "abcc56f1c17963a69d68c85bc4c251b28929235b518cf4b696c18abfcb458c3b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-000401a0.txt",
+      "sha256": "ccc926f2fb858bd725f562c10631e074824b98f5cc5a8771713a5a47918ee612"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008d930.txt",
+      "sha256": "0b85f4c6b25abca474b29c71972d4201a823ad2bdd80367efd02bd7741f4139e"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006b700.txt",
+      "sha256": "763d2e72feee4f9ee6129a3918d74e0671c2ad6e9e2c157e5b2e54eb8c5780fe"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00073970.txt",
+      "sha256": "ab614b5e9d2dd1ee9c1c49247f21ac39540946feade19a4e9c7cde767ae2c461"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b7d0.txt",
+      "sha256": "423a0606ea12770fa2b85abbd7a5803944cb825a05a2aedf5957017dfc3e0750"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005b100.txt",
+      "sha256": "32f6824af152305c75e3639c1917ee35e5e80a2a801a90e768415e73ea51e02d"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b780.txt",
+      "sha256": "96da34b2865718f4a50247df2f77d0c78d441888edfd3af7b20d76dafc6d7028"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-0008d7b0.txt",
+      "sha256": "dfbad38e9039f97aa243cddc0149971c5f01860e7163ee667d99a71757852b30"
+    },
+    {
+      "path": "private/ghidra/primitives/instructions-00073690.txt",
+      "sha256": "a61c7b67cebcd05dbb96053d1fbe7745c703b75be5af996bb0227e4c9691cace"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-000ae028.txt",
+      "sha256": "526b3f9cdc9b43ed6b330383417fad4b6c8acb41a917acf5571e4f01f0a6585b"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-0001ebd0.txt",
+      "sha256": "9f0e86fefaa3c2fc11a9cf4f29e8d3ce4a0724b82b959d21b404b3ea9fd64588"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0005d700.txt",
+      "sha256": "46db7123380194986cc4598e5cb9cc8f44f2b8f48cb4b9f79a4ac41327a4cf33"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-00073c20.txt",
+      "sha256": "b1192da02ccb17b0c4e9117aa0432c6bd47d8a4ee542bea4936bdd60498ad65e"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-00074cc0.txt",
+      "sha256": "701ba3601cd73db82d86a57d1502d53d6ad2a8d5910833c28f6e89784bcf542b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00013e50.txt",
+      "sha256": "2c85f008ec84237004f0eb0e03048a44da01dbdd0c70666a67704bfb44cbeda5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00013e70.txt",
+      "sha256": "48f6ca2435f3ae64caee93657f3fb4952a319d8978ad448b8a7011e497f6f2fc"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005a990.txt",
+      "sha256": "d063df1c8f85cd877b6e1ea913fa88dbc2a9301bc318d79af7d1a6e935867a97"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0003fbe0.txt",
+      "sha256": "a537c544a5cd516bdf2359670ea4b102d06880440f55037a947d2ceff90c4821"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-00013eb0.txt",
+      "sha256": "f39a85cec1eeaf8c6471d4ca65ab9fd26f3f093cafec3efae15cbe694d2c656c"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f410.txt",
+      "sha256": "35c557c5e1042c57cbf5a4f2b90afadb232326d2477a2a6b03d41b367433294a"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-000743c0.txt",
+      "sha256": "085e0737b57e9f7d27248169f23cf35199a03594e4c8547f514ed053e890695c"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008acc0.txt",
+      "sha256": "9e7e750030468985e9d1ed7ae836f8b8ee7606b4b0b51f1fc02345750f8ccb1e"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008ac60.txt",
+      "sha256": "6fd0ff082558f7bc94da0a908710fab78b8d477369a106e15f37f4922ee557fa"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f0c0.txt",
+      "sha256": "37cd520262802d6b6a3e21c88b131522f31a9e129b6d4aa1afa152ce11e7e9e1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006ede0.txt",
+      "sha256": "acc710c7461bee41e527cdded6de067d1577811222b2abdfa3b00f71f2e654d5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f010.txt",
+      "sha256": "9529f80432601ec84b37f26f2263c0bbc9d333b66e5e49efc430dca4ba822aac"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00073770.txt",
+      "sha256": "0fb14f7905a336e918e7651cba16d789204f380f1e194609c350f8bb0c93e47c"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f270.txt",
+      "sha256": "bd463c1d8715675e7418abb8df161d8cbc6fa47e705022eaf22d6772aea80bc1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f450.txt",
+      "sha256": "cb7c70b22b60097ee15f37a91809e072f340b4d1eaf2e3819fea4c3fb8109a0f"
+    },
+    {
+      "path": "private/ghidra/actor-motion/instructions-0006e9e0.txt",
+      "sha256": "9e0d0cd2b98c380f36514b9ff8c7b28a538dedb3516aa1192e5fa38828c9f12e"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0005cc60.txt",
+      "sha256": "732f53cf3c69987464aaa7903bfa1fc99e0e826dad615b979269bf6c55e4d2cb"
+    },
+    {
+      "path": "private/ghidra/countdown-expiry/instructions-000118e0.txt",
+      "sha256": "f9c62f70c20cbe05e7356ce36fafc7ad572b630129d5c2a0c79e235b210faa6c"
+    },
+    {
+      "path": "private/ghidra/countdown-expiry/instructions-00011943.txt",
+      "sha256": "d0dee7d018d252b453340aee38465475e99e5fc4c0ea8acd870c8274fdf82d88"
+    },
+    {
+      "path": "private/ghidra/countdown-expiry/instructions-0001eab0.txt",
+      "sha256": "7c5f1ccdc3747e7ef7ab0195fe5b9b17f722464b2d8eded23ecbfd8ae0492d0e"
+    },
+    {
+      "path": "private/ghidra/countdown-expiry/instructions-0001eac0.txt",
+      "sha256": "c0b7eb9edcbd8bd16bd006831c9414dcf294bb07c6758bd847b0d243c3eb5d38"
+    },
+    {
+      "path": "private/ghidra/countdown-expiry/instructions-0001ea90.txt",
+      "sha256": "2d4bc2ddfbcaf74cb5a21fec11555addd2cf4fafad0981cffb1753f84eead059"
+    },
+    {
+      "path": "private/ghidra/countdown-expiry/instructions-00011270.txt",
+      "sha256": "763ebfffe1b11c8348afd0436ad22a66692895581e6fa0f35d8a9b7ee2646ae2"
+    },
+    {
+      "path": "private/ghidra/countdown-expiry/instructions-00011380.txt",
+      "sha256": "c56d7e88f4b03300af0af4a1d2c90d28cd4c48c25b6332a12da954e95a975c6f"
+    },
+    {
+      "path": "private/ghidra/countdown-expiry/instructions-00011aeb.txt",
+      "sha256": "7a3feef62b4f4c1a40cb1d21ec1a058136bfbfa4178026e0157376ebab61aa37"
+    },
+    {
+      "path": "private/ghidra/countdown-expiry/instructions-00012e11.txt",
+      "sha256": "76bc16026dd7aaa66ab8f761b6f824fa594ab1c78be117dad435eac103038001"
+    },
+    {
+      "path": "private/ghidra/construction-command/instructions-0001ee40.txt",
+      "sha256": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1"
+    },
+    {
+      "path": "private/ghidra/countdown-expiry/instructions-000114b0.txt",
+      "sha256": "b7b6789864e90543ef45c8435d14cf48448f23d12cdd2ef638aa38d24bf83a0b"
+    },
+    {
+      "path": "private/ghidra/countdown-expiry/instructions-00013e60.txt",
+      "sha256": "c53006dcb695e17de2a4ffb232fa0223fc86b1a7ff0219a35caeaead047e4052"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-00073e00.txt",
+      "sha256": "7869104854e5107e8d711b69704e8e1009dcba41892d0233c4daca72e8f0c5a0"
+    },
+    {
+      "path": "research/variants/family8-building-target-review.py",
+      "sha256": "2ba192be93b5c308abe9d64d5b24fe486d8558a769c25b9df3f31d3a102b16ae"
+    },
+    {
+      "path": "research/variants/family8-building-target-review.rs",
+      "sha256": "4a16630973e17c2aa5c3f69b0a84c55c790f0382891321b109dd3f5fdcd0e902"
+    },
+    {
+      "path": "research/variants/family8-state4-source.py",
+      "sha256": "cc0d5a38b1c0c2d6369811328c7685818ceb0f15152b5dfae83b753839f7392a"
+    },
+    {
+      "path": "research/variants/initial-creature-source.py",
+      "sha256": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2"
+    },
+    {
+      "path": "private/integration/game-runtime/terrain/CONQ001.DAT",
+      "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
+    },
+    {
+      "path": "private/review/family8-onward/child-after6143.bin",
+      "sha256": "51bd5831820154fb508cc18f16dd5f2177a2e6d2fad3b24694593e38119f777a"
+    },
+    {
+      "path": "private/integration/rnc-decoded/7660297d85773f47cacc07dcfdf96e8daa118dc52c8a38afc054c1ef9dfa20bc.bin",
+      "sha256": "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4"
+    },
+    {
+      "path": "private/ghidra/validated/memory-.object1.bin",
+      "sha256": "92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe"
+    },
+    {
+      "path": "private/ghidra/validated/memory-.object3.bin",
+      "sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "private/review/family8-building-target/input.bin",
+      "sha256": "58c567ebe1aa03c4fa70c94661ae087557be060a3155ce6128d89dadd0aef9ac"
+    },
+    {
+      "path": "private/review/family8-building-target/expected.bin",
+      "sha256": "1bd377b220a5a6fcfd17f80b4a051d9d694b5023924c8ab2dfa94378d80ee281"
+    },
+    {
+      "path": "private/review/family8-building-target/actual.bin",
+      "sha256": "1bd377b220a5a6fcfd17f80b4a051d9d694b5023924c8ab2dfa94378d80ee281"
+    },
+    {
+      "path": "private/review/family8-building-target/buildings.bin",
+      "sha256": "70a2bf18bde479b2497340c6cf27b78b3eadd268897d219c4f225e9017e2c951"
+    }
+  ],
+  "original_execution": false,
+  "gui_execution": false,
+  "limits": [
+    "Initial state1 scan; all14 selectors, completion/restriction flags and varied slots; later target callbacks are separate",
+    "Player target is explicit raw player+9 input, not inferred from camera",
+    "Source one73E00 draw/threaded seed/ring/count; pointer/link/opaque nullindex preserved",
+    "No world commit or subsequent state1 callback claimed"
+  ]
+}
