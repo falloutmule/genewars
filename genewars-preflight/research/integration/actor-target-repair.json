@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "utc": "2026-10-14T23:45:31.196569+00:00",
+  "scope": "Source6FEC0..6FED3 invalid active destination repair for actor routing without existing waypoint",
+  "sha256": {
+    "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs": "8f1098cc796033bb5dfa8e4b4d007c470735c20ae272bf03b1473a55d6f05524"
+  },
+  "source_comparison": {
+    "result": "private/review/actor-invalid-target-source/b99a2bed68f1405296d2beb6ca508dea/result.json",
+    "actor_bytes": 200,
+    "working_target_bytes": 4,
+    "literal_instructions": 6747,
+    "gameplay_ports": false,
+    "rng_draws": 0,
+    "normalization": "host vtable/blueprint pointers only"
+  },
+  "captured_boundary": {
+    "step": 2636,
+    "current": [
+      21641,
+      13431
+    ],
+    "requested": [
+      21375,
+      13695
+    ],
+    "resolved": [
+      21420,
+      13650
+    ],
+    "query_count": 2
+  },
+  "focused_tests": {
+    "building_updates_passed": 9,
+    "failed": 0,
+    "filtered": 170,
+    "build_jobs": 2
+  },
+  "integrated_observation": "Same ordinary fresh player commands continue to2640 withoutblocker; isolatedarchitectcallbackOk.",
+  "limitations": [
+    "Existing waypoint invalidtarget variants retain explicit TargetSearchRequired; no broaderrouteadmission.",
+    "No native acceptance or completed Photon claimed in this packet."
+  ],
+  "files": [
+    "scripts/desktop/actor_target_repair_probe.py",
+    "scripts/desktop/actor_target_repair_probe.rs",
+    "research/integration/actor-target-repair-capture.json"
+  ]
+}

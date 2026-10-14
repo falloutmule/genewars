@@ -232,10 +232,23 @@ impl ActorWorld {
                 a[0x49]&=!1;
             }
         }
-        let target=[word(&a,11),word(&a,13)];
+        let mut target=[word(&a,11),word(&a,13)];
         let mut working=if a[0x49]&3!=0{[word(&a,0x45),word(&a,0x47)]}else{target};let mut immediate=false;
         if a[0x49]&0x10!=0&&a[0x49]&12!=0{
-            if !self.actor_route_point_accepted(raw,target)?{return Err(CreatureError::TargetSearchRequired.into());}
+            if !self.actor_route_point_accepted(raw,target)?{
+                // Existing waypoint/current-point retry variants remain bounded.
+                if a[0x49]&3!=0{return Err(CreatureError::TargetSearchRequired.into());}
+                //6FEC0..6FED3: repair the working destination with74A50's
+                //mask1/nominated-building predicate. This is not52280: only+B
+                //changes; pending target5C, flags57 and mode5B remain intact.
+                let resolved=crate::target_resolver::resolve_target(current,target,physics,trig,
+                    |point|self.actor_route_point_accepted(raw,point)).map_err(|e|match e{
+                        crate::target_resolver::TargetResolverError::Query(error)=>error,
+                        crate::target_resolver::TargetResolverError::IterationLimit=>ActorWorldError::TargetSearchLimit,
+                    })?;
+                target=resolved.point;
+                a[11..13].copy_from_slice(&target[0].to_le_bytes());a[13..15].copy_from_slice(&target[1].to_le_bytes());
+            }
             let from=if a[0x49]&3!=0{working}else{current};
             let ray=crate::actor_motion::actor_straight_ray::<CreatureError,_>(from,target,physics.angles(),trig.sine().try_into().unwrap(),trig.cosine().try_into().unwrap(),|p|self.actor_route_point_accepted(raw,p).map_err(|_|CreatureError::MotionEnvironment))?;
             if ray.clear{if a[0x49]&3!=0{let f=word(&a,0x49)as u16&0xeffc;a[0x49..0x4b].copy_from_slice(&f.to_le_bytes());a[0x16]&=0x7f;immediate=true;}working=target;}
