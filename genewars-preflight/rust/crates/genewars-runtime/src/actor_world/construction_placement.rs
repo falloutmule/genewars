@@ -1,6 +1,6 @@
 //! Transactional owned-world opcode16 placement, with two original target searches.
 use super::*;
-use crate::actor_construction::{ArchitectAssignmentPlan,plan_architect_assignment};
+use crate::actor_construction::ArchitectAssignmentPlan;
 use super::building_updates::ConstructionWorldError;
 
 impl ActorWorld {
@@ -15,7 +15,7 @@ impl ActorWorld {
         let handle=self.actors.bindings(usize::from(id)).map_err(ActorWorldError::from)?.blueprint.ok_or(ActorWorldError::MissingBlueprintBinding(id as i16))?;
         if handle.player_id!=player{return Err(ActorWorldError::ActorOwner(id as i16).into());}
         let blueprint=*self.player(player)?.blueprint(usize::from(handle.blueprint_index)).map_err(ActorWorldError::from)?;
-        plan_architect_assignment(&before,&blueprint,0,u16::from(selector)<<8,owner_selected,actor_selected).map_err(ConstructionWorldError::Assignment)?;
+        crate::actor_construction_placement::plan_architect_placement(&before,&blueprint,10,u16::from(selector)<<8,[requested;2],owner_selected,actor_selected).map_err(ConstructionWorldError::Assignment)?;
         let resolve=|requested|{
             crate::target_resolver::resolve_target([word(&before,7),word(&before,9)],requested,physics,trig,|point|{
                 let obstacle=self.move_obstacle_at(point)?;let class=self.terrain_class_at(point)?;
@@ -27,7 +27,7 @@ impl ActorWorld {
             })
         };
         let first=resolve(requested)?;let second=resolve(first)?;
-        let plan=crate::actor_construction_placement::plan_architect_placement(&before,&blueprint,0,u16::from(selector)<<8,[first,second],owner_selected,actor_selected).map_err(ConstructionWorldError::Assignment)?;
+        let plan=crate::actor_construction_placement::plan_architect_placement(&before,&blueprint,10,u16::from(selector)<<8,[first,second],owner_selected,actor_selected).map_err(ConstructionWorldError::Assignment)?;
         self.actors.replace_record_checked(usize::from(id),&before,&plan.after).map_err(ActorWorldError::from)?;
         Ok(plan)
     }

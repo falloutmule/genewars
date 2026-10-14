@@ -16,13 +16,14 @@ def main():
    if o=='PORT_VALUE':return self.port_value
    if o=='0x000273b0':return 0x2e0008
    return super().get(o)
- model=Source();files=[P/'private/ghidra/construction-ui-refs'/f'instructions-000{x}.txt'for x in ['811a0','51960']]
+ model=Source();files=[P/'private/ghidra/construction-ui-refs'/f'instructions-000{x}.txt'for x in ['811a0','51960']]+[P/'private/ghidra/placement-75080.txt']
+ mapped=P/'private/ghidra/validated/memory-.object3.bin';assert mapped.read_bytes()[0x4de0:0x4dee]==bytes([3,1,2,3,2,2,1,2,1,2,3,3,2,1])
  model.code.update(m.m.Model(files,b'').code);model.code.update({0x2e0000:('MOV',['EAX','PORT_VALUE']),0x2e0001:('RET',['0x4']),0x2e0008:('RET',[])})
  order=sorted(model.code);model.next=dict(zip(order,order[1:]));inputs=bytearray();expected=bytearray();cases=[]
  for i in range(64):
-  actor=bytearray((j*37+i*11)&255 for j in range(200));actor[6]=3;actor[24]=0;actor[0x55]=1;actor[0x82]=0;struct.pack_into('<I',actor,192,0x2d0000)
-  bp=bytearray(36);bp[22]=0;selector=[1,3,6,11][i%4];mode=i%16
-  first=[-30000+i*101,21000-i*77];second=[first[0]+i,first[1]-i];requested=[19839+i,12927-i]
+  actor=bytearray((j*37+i*11)&255 for j in range(200));actor[6]=3;actor[24]=0;actor[0x55]=1 if i%2 else 8;actor[0x82]=0;struct.pack_into('<I',actor,192,0x2d0000)
+  bp=bytearray(36);bp[22]=0;selector=i%14;mode=i%16
+  first=[-30000+i*101,21000-i*77];second=[first[0]+i,first[1]-i];requested=[[-32768,-1,0,32767][i%4],12927-i]
   packet=struct.pack('<HHHhhB',0,mode,selector<<8,*requested,16)
   state={0x16360e+j:b for j,b in enumerate(actor)};state.update({0x2d0000+j:b for j,b in enumerate(bp)});state.update({0x2c0000+j:b for j,b in enumerate(packet)});state.update({0x118740+j:b for j,b in enumerate(struct.pack('<I',0))})
   model.outputs=[struct.unpack('<I',struct.pack('<hh',*v))[0]for v in [first,second]];model.queries=[]
@@ -31,17 +32,20 @@ def main():
   assert model.queries[0][1]==struct.unpack('<I',struct.pack('<hh',*requested))[0]
   assert model.queries[1][1]==model.outputs[0]
   assert all(q[0]==0x163615 and q[2]==actor[0x53] and q[3]==0x16360e for q in model.queries)
-  inputs+=actor+bp+struct.pack('<HHhhhh',mode,selector<<8,*first,*second);expected+=after
+  footprint=[3,1,2,3,2,2,1,2,1,2,3,3,2,1][selector]
+  snapstate={0x2c0000+j:b for j,b in enumerate(struct.pack('<hh',*requested))}
+  model.run(entry=0x75080,registers={'EAX':0x2c0000,'EDX':footprint,'ECX':10},state_before=snapstate);assert model.r['ECX']==10
+  inputs+=actor+bp+struct.pack('<HHhhhhhh',mode,selector<<8,*first,*second,*requested);expected+=after+struct.pack('<I',model.r['EAX'])
   cases.append(dict(selector=selector,mode=mode,steps=report['steps'],resolver_calls=2))
  (work/'input.bin').write_bytes(inputs);(work/'expected.bin').write_bytes(expected)
  source=P/'rust/crates/genewars-runtime/src'
  harness='#[path="'+(source/'actor_construction.rs').as_posix()+'"] mod actor_construction;\n#[path="'+(source/'actor_construction_placement.rs').as_posix()+'"] mod actor_construction_placement;\n'+r'''
-fn main(){let args:Vec<_>=std::env::args().collect();let input=std::fs::read(&args[1]).unwrap();let mut output=Vec::new();for c in input.chunks_exact(248){let a:[u8;200]=c[..200].try_into().unwrap();let b:[u8;36]=c[200..236].try_into().unwrap();let w=|p|u16::from_le_bytes(c[p..p+2].try_into().unwrap());let plan=actor_construction_placement::plan_architect_placement(&a,&b,w(236),w(238),[[w(240)as i16,w(242)as i16],[w(244)as i16,w(246)as i16]],true,false).unwrap();output.extend_from_slice(&plan.after);}std::fs::write(&args[2],output).unwrap();}
+fn main(){let args:Vec<_>=std::env::args().collect();let input=std::fs::read(&args[1]).unwrap();let mut output=Vec::new();for c in input.chunks_exact(252){let a:[u8;200]=c[..200].try_into().unwrap();let b:[u8;36]=c[200..236].try_into().unwrap();let w=|p|u16::from_le_bytes(c[p..p+2].try_into().unwrap());let plan=actor_construction_placement::plan_architect_placement(&a,&b,w(236),w(238),[[w(240)as i16,w(242)as i16],[w(244)as i16,w(246)as i16]],true,false).unwrap();output.extend_from_slice(&plan.after);for v in actor_construction_placement::construction_placement_point([w(248)as i16,w(250)as i16],(w(238)>>8)as u8).unwrap(){output.extend_from_slice(&v.to_le_bytes());}}std::fs::write(&args[2],output).unwrap();}
 '''
  (work/'main.rs').write_text(harness)
  subprocess.run([str(P/'private/tools/rust/cargo/bin/rustc.exe'),'--edition=2021','--cap-lints=allow',str(work/'main.rs'),'-o',str(work/'probe.exe')],check=True,cwd=P,env=environment())
  subprocess.run([str(work/'probe.exe'),str(work/'input.bin'),str(work/'actual.bin')],check=True)
  assert (work/'actual.bin').read_bytes()==expected
- result=dict(status='passed',cases=64,compared_actor_bytes=len(expected),scope='Literal811A0 and51960;74A50 two ordered query results are explicit ports. Owned-world search and screen placement are separate integration obligations.',pins={p.relative_to(P).as_posix():sha(p)for p in files+[source/'actor_construction.rs',source/'actor_construction_placement.rs']},work=work.relative_to(P).as_posix(),details=cases)
+ result=dict(status='passed',cases=64,compared_actor_bytes=64*200,compared_snapped_point_bytes=64*4,scope='Literal811A0 and51960 plus75080 snapping for all14 selectors and signed coordinate boundaries;74A50 two ordered query results are explicit ports. Owned-world search and interactive screen placement are separate integration obligations.',pins={p.relative_to(P).as_posix():sha(p)for p in files+[mapped,source/'actor_construction.rs',source/'actor_construction_placement.rs']},work=work.relative_to(P).as_posix(),details=cases)
  (P/'research/integration/construction-placement.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({k:v for k,v in result.items()if k!='details'}))
 if __name__=='__main__':main()
