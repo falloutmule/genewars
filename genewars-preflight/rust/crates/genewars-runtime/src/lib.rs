@@ -72,3 +72,5 @@ pub use world::{
 };
 
 pub mod source_building_resources;
+
+pub mod building_availability;

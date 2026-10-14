@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "scope": "General43960 construction-menu admission versus production Rust; no placement or construction side effects",
+  "cases": 2048,
+  "literal_instructions": 55473,
+  "listing_sha256": "040eb8ce18f3c955ed97564b718ac9e58d1c4edd7f70509cc8cf7ff934b7224d",
+  "rust_sha256": "bd445c702b16aa8834c63941236aee251f37d94f9731d3336c58bc3f019fb0c9",
+  "first_mission_sequence": [
+    11,
+    3,
+    6
+  ],
+  "negative_progress_and_locked_thresholds": true
+}

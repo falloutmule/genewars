@@ -1,0 +1,135 @@
+{
+  "status": "passed-static-contract",
+  "original_execution": false,
+  "reference": "Verified CD, volume label GENEWARS QA BETA V5; retail equivalence unestablished",
+  "input_sha256": {
+    "GW-CD-candidate.exe": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+    "campaign-resources/152.dat": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+    "campaign-resources/190.dat": "5e1f382ea68f57f1cec03a3f7de2c4903ca127519481da98232a7f1c3a46aa11",
+    "validated/memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+  },
+  "listing_sha256": {
+    "campaign-level/instructions-0007d090.txt": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac",
+    "campaign-header-consumer/instructions-0008ab70.txt": "73e30902668744ea25f5c83660ffbfa745fdcab76db6e30d6ef4afcf15808032",
+    "font-menu-state/instructions-00072ed0.txt": "6e946043309c2166a5666ed7c7d97ad202f05b822e3cebb533a7f499c82382d7",
+    "resource-helpers/instructions-00043f60.txt": "2b77ec740634f5076ec359fda8258e20995985a0bea5c87f959121cd0101f1fc",
+    "actor-panel-font-color/instructions-00024c50.txt": "510bc3dc8b5c49b6eb5f5f80d3313687b718c3e07deba9edc857e952582fd38b",
+    "mission-contract-refs/43960-range.txt": "040eb8ce18f3c955ed97564b718ac9e58d1c4edd7f70509cc8cf7ff934b7224d",
+    "actor-name-trace/instructions-0002ab70.txt": "a7e0cf211f471dbe8cc7c9884b4cacbad95eb7265e3d1720f645e4734a85fbb1"
+  },
+  "mission": {
+    "progress": 0,
+    "number": 1,
+    "title": "Exceland",
+    "header": "LEVELS/HDRCO1.DAT",
+    "world": "LEVELS/CONQ001.DAT",
+    "active_players": 1
+  },
+  "briefing": {
+    "text_index": 452,
+    "sha256": "d0b8cea814a8b8a799ec004fc7dace6bf06ec4281e122faae339a97f985b8427",
+    "required_actions": [
+      "Engineer constructs Extractor",
+      "Engineer constructs First Stage Distributor",
+      "Engineer constructs three Photon Processors"
+    ],
+    "advice": "Geneticist researches Mules"
+  },
+  "winning_predicate": {
+    "campaign_progress": 0,
+    "selected_player_completed_selector6_count_at_0x606_minimum": 3,
+    "guards": "72ED0 campaign/selected-player eligible branch; terminal bit clear; complete earlier eligibility logic required",
+    "other_loaded_objective_fields": {
+      "target_count": 0,
+      "terrain_object_count": 0
+    }
+  },
+  "selector6": {
+    "resource": "DATA/BUILDING/BSOLA.ANB",
+    "entry_id": "root/2/disc/309",
+    "size": 35327,
+    "sha256": "26ac960d7e68d97bddf7b0c13740976af4cf955ecfe98a4bea51ee95c292958b",
+    "health_per_grade": [
+      80,
+      200,
+      360
+    ],
+    "completion_count": "player+0x4A1+0x15F+selector, for grade0 completion or loading",
+    "completion_audio_0x4d": false
+  },
+  "required_buildings": [
+    {
+      "selector": 11,
+      "name": "Extractor",
+      "grade": 0,
+      "campaign_progress_threshold": 0,
+      "requires_completed_selector": null,
+      "base_cost_before_signed_skill_discount": 650,
+      "health": 280,
+      "footprint_parameter": 3,
+      "resource": {
+        "entry_id": "root/2/disc/303",
+        "normalized_iso_path": "GAME/DATA/BUILDING/BMINE.ANB",
+        "sha256": "218b117a4b0f84c6e5a362e5afdc46d29fb1525930c6131e2ffff3bcfcda2142",
+        "size": 34955
+      }
+    },
+    {
+      "selector": 3,
+      "name": "First Stage Distributor",
+      "grade": 0,
+      "campaign_progress_threshold": 0,
+      "requires_completed_selector": 11,
+      "base_cost_before_signed_skill_discount": 400,
+      "health": 240,
+      "footprint_parameter": 3,
+      "resource": {
+        "entry_id": "root/2/disc/306",
+        "normalized_iso_path": "GAME/DATA/BUILDING/BPOWE.ANB",
+        "sha256": "4145c098f3d35dd9c39003ae8289c3d32fdb8d822327b2a23dfd52c60ca2a8cc",
+        "size": 77457
+      }
+    },
+    {
+      "selector": 6,
+      "name": "Photon Processor",
+      "grade": 0,
+      "campaign_progress_threshold": 0,
+      "requires_completed_selector": 3,
+      "base_cost_before_signed_skill_discount": 250,
+      "health": 80,
+      "footprint_parameter": 1,
+      "resource": {
+        "entry_id": "root/2/disc/309",
+        "normalized_iso_path": "GAME/DATA/BUILDING/BSOLA.ANB",
+        "sha256": "26ac960d7e68d97bddf7b0c13740976af4cf955ecfe98a4bea51ee95c292958b",
+        "size": 35327
+      }
+    }
+  ],
+  "availability": {
+    "callee": "43960, called by native construction menu2AB70",
+    "rule": "signed progress >= unsigned grade0 threshold and threshold<30; then prerequisite FF, completed prerequisite count>0, or own selector bit already set in player60E",
+    "first_unlocked_sequence": [
+      11,
+      3,
+      6
+    ],
+    "cost_rule": "base_cost - 2*signed engineer blueprint byte17; debit source player funds, not synthetic mission budget"
+  },
+  "outcome": {
+    "selected_win": "sets runtime118770 bit40 then calls2F810 when mode bit0 clear",
+    "failure": "selected eliminated byte6E3 sets runtime80; complete predicates in72ED0 and805E0",
+    "transition": "2F810 internal result/continue behavior still requires recovery"
+  },
+  "unknowns": [
+    "Required building running callbacks, source placement and power/economy behavior not all integrated",
+    "Complete native campaign startup and live RNG provenance",
+    "2F810 result presentation and progression",
+    "Cross-variant mission equivalence"
+  ],
+  "acceptance": {
+    "automated_mission_complete": false,
+    "native_interactive_mission_complete": false
+  }
+}
