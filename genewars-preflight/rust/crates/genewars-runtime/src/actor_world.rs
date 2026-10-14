@@ -1813,3 +1813,5 @@ mod tests {
         assert_eq!(word(world.backing_bytes(),0x3554),200);assert!(world.validate_links().is_ok());
     }
 }
+
+mod terrain_refresh;

@@ -3,7 +3,7 @@
   "compared_bytes": 1836640,
   "literal_instruction_steps": 90506,
   "output_sha256": "78a6b7b9cf58ac37ed14bd27f9e23581107fc8e71cce9c0dad5f85d33fb64d4e",
-  "source_sha256": "1844724feaf2c3d0210b1c0628acec5d04e9ced0ae5ef9aef869dfbfb96a49b2",
+  "source_sha256": "691dc7953fda4af1e9828ba29694f9ea062def7ad25426be4dfa70fe6f754f42",
   "pins": {
     "private/ghidra/construction-command/instructions-00078e30.txt": "35df6f54b4c51a4b974cb11de1e2aac0357f5e31308f9c7a83ce4ed252fe44d6",
     "private/ghidra/terrain-map-refs/instructions-0008cb00.txt": "2c35541f4b44258aec8419dda54367ad5ad45366e3030108b87eb8a4fb45a921",
