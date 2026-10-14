@@ -84,3 +84,7 @@ pub mod mission_context;
 pub mod building_power;
 
 pub mod terrain_border_table;
+
+pub mod mission_outcome;
+
+pub mod mission_bootstrap;

@@ -1823,3 +1823,9 @@ pub use power_updates::PowerStepReceipt;
 
 mod power_buildings;
 pub use power_buildings::PowerBuildingReceipt;
+
+mod bootstrap_updates;
+
+mod mission_outcome;
+pub use mission_outcome::OutcomeRuntimeInputs;
+pub use bootstrap_updates::{BootstrapVisibilityReceipt, BootstrapWorldError};

@@ -1,0 +1,76 @@
+{
+  "status": "passed-explicit-prior-player-composition",
+  "whole_startup_proven": false,
+  "cases": [
+    {
+      "case": 0,
+      "scratch_fill": 0,
+      "ring": 0,
+      "rng_after": {
+        "seed": 10548,
+        "count": 16919
+      },
+      "actor_blueprint_indices": [
+        0,
+        10
+      ],
+      "source_backfill_instructions": 474,
+      "snapshot_sha256": "c223488792b36d2b57c9dbf53779765a4ea60c805c91076a75702d8d4b3b23c1"
+    },
+    {
+      "case": 1,
+      "scratch_fill": 165,
+      "ring": 0,
+      "rng_after": {
+        "seed": 10548,
+        "count": 16919
+      },
+      "actor_blueprint_indices": [
+        0,
+        10
+      ],
+      "source_backfill_instructions": 474,
+      "snapshot_sha256": "25a7e526d9a4de6daa99d95b8bb619b350d551095dad2f644ad99544f5a2b885"
+    },
+    {
+      "case": 2,
+      "scratch_fill": 0,
+      "ring": 31,
+      "rng_after": {
+        "seed": 10548,
+        "count": 16919
+      },
+      "actor_blueprint_indices": [
+        0,
+        10
+      ],
+      "source_backfill_instructions": 474,
+      "snapshot_sha256": "c223488792b36d2b57c9dbf53779765a4ea60c805c91076a75702d8d4b3b23c1"
+    },
+    {
+      "case": 3,
+      "scratch_fill": 165,
+      "ring": 31,
+      "rng_after": {
+        "seed": 10548,
+        "count": 16919
+      },
+      "actor_blueprint_indices": [
+        0,
+        10
+      ],
+      "source_backfill_instructions": 474,
+      "snapshot_sha256": "25a7e526d9a4de6daa99d95b8bb619b350d551095dad2f644ad99544f5a2b885"
+    }
+  ],
+  "source7F950_sha256": "10e8e7a07e41366c7765db91186a32f0d7479773371bc3522225643b8e785602",
+  "production_sha256": "802bf836ae1e4fa92cf144171c16872e9c52b362e1dd8dc22ceb000953aca229",
+  "private_run": "private/review/bootstrap-player/75354c9746ac49c699ecf66c3802c893",
+  "proven": "Existing source-verified blueprint andfresh-actor APIs compose with exact serialized seed/count, mask5 andspecialactivation0; generatedcategorycoverage makes actual7F950 no-op.",
+  "ports": "Unused7F950 REP instruction replaced withNOP for parser, asserted never reached; no source external calls.",
+  "remaining": [
+    "Retained campaign label andnative prior provenance remain caller inputs.",
+    "Blueprint scratch18/1B are uninitialized source bytes; both zero andA5 fixtures remain explicit.",
+    "Landing factory,72AD0 map/entity-shade refresh andMAINPANL/frame integration pending."
+  ]
+}

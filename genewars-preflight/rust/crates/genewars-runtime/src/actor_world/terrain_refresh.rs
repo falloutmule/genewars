@@ -60,7 +60,7 @@ impl ActorWorld {
         Ok(())
     }
 
-    fn replace_terrain_entity(&mut self,raw:[u8;3],before:&[u8],after:&[u8])->Result<(),ActorWorldError>{
+    pub(super) fn replace_terrain_entity(&mut self,raw:[u8;3],before:&[u8],after:&[u8])->Result<(),ActorWorldError>{
         let id=usize::from(u16::from_le_bytes([raw[0],raw[1]]));
         match raw[2] {
             1=>self.creatures.as_mut().ok_or(ActorWorldError::EnvironmentUnavailable)?

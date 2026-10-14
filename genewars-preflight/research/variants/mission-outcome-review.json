@@ -1,0 +1,3295 @@
+{
+  "status": "passed",
+  "private_run": "private/review/mission-outcome/360b7f54fb984a7da5a8fecd390e5d25",
+  "cases": [
+    {
+      "case": 0,
+      "result": 2,
+      "instructions": 124
+    },
+    {
+      "case": 1,
+      "result": 1,
+      "instructions": 178
+    },
+    {
+      "case": 2,
+      "result": 2,
+      "instructions": 212
+    },
+    {
+      "case": 3,
+      "result": 1,
+      "instructions": 210
+    },
+    {
+      "case": 4,
+      "result": 2,
+      "instructions": 218
+    },
+    {
+      "case": 5,
+      "result": 0,
+      "instructions": 129
+    },
+    {
+      "case": 6,
+      "result": 2,
+      "instructions": 234
+    },
+    {
+      "case": 7,
+      "result": 1,
+      "instructions": 236
+    },
+    {
+      "case": 8,
+      "result": 1,
+      "instructions": 268
+    },
+    {
+      "case": 9,
+      "result": 1,
+      "instructions": 314
+    },
+    {
+      "case": 10,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 11,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 12,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 13,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 14,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 15,
+      "result": 2,
+      "instructions": 133
+    },
+    {
+      "case": 16,
+      "result": 2,
+      "instructions": 175
+    },
+    {
+      "case": 17,
+      "result": 2,
+      "instructions": 237
+    },
+    {
+      "case": 18,
+      "result": 2,
+      "instructions": 409
+    },
+    {
+      "case": 19,
+      "result": 2,
+      "instructions": 256
+    },
+    {
+      "case": 20,
+      "result": 0,
+      "instructions": 111
+    },
+    {
+      "case": 21,
+      "result": 4,
+      "instructions": 37
+    },
+    {
+      "case": 22,
+      "result": 2,
+      "instructions": 260
+    },
+    {
+      "case": 23,
+      "result": 0,
+      "instructions": 551
+    },
+    {
+      "case": 24,
+      "result": 0,
+      "instructions": 443
+    },
+    {
+      "case": 25,
+      "result": 2,
+      "instructions": 132
+    },
+    {
+      "case": 26,
+      "result": 0,
+      "instructions": 227
+    },
+    {
+      "case": 27,
+      "result": 1,
+      "instructions": 292
+    },
+    {
+      "case": 28,
+      "result": 2,
+      "instructions": 236
+    },
+    {
+      "case": 29,
+      "result": 2,
+      "instructions": 250
+    },
+    {
+      "case": 30,
+      "result": 5,
+      "instructions": 50
+    },
+    {
+      "case": 31,
+      "result": 5,
+      "instructions": 90
+    },
+    {
+      "case": 32,
+      "result": 5,
+      "instructions": 123
+    },
+    {
+      "case": 33,
+      "result": 5,
+      "instructions": 181
+    },
+    {
+      "case": 34,
+      "result": 5,
+      "instructions": 175
+    },
+    {
+      "case": 35,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 36,
+      "result": 0,
+      "instructions": 223
+    },
+    {
+      "case": 37,
+      "result": 5,
+      "instructions": 120
+    },
+    {
+      "case": 38,
+      "result": 0,
+      "instructions": 463
+    },
+    {
+      "case": 39,
+      "result": 5,
+      "instructions": 131
+    },
+    {
+      "case": 40,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 41,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 42,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 43,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 44,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 45,
+      "result": 2,
+      "instructions": 127
+    },
+    {
+      "case": 46,
+      "result": 2,
+      "instructions": 137
+    },
+    {
+      "case": 47,
+      "result": 5,
+      "instructions": 156
+    },
+    {
+      "case": 48,
+      "result": 2,
+      "instructions": 325
+    },
+    {
+      "case": 49,
+      "result": 4,
+      "instructions": 34
+    },
+    {
+      "case": 50,
+      "result": 0,
+      "instructions": 117
+    },
+    {
+      "case": 51,
+      "result": 5,
+      "instructions": 94
+    },
+    {
+      "case": 52,
+      "result": 5,
+      "instructions": 101
+    },
+    {
+      "case": 53,
+      "result": 5,
+      "instructions": 231
+    },
+    {
+      "case": 54,
+      "result": 0,
+      "instructions": 537
+    },
+    {
+      "case": 55,
+      "result": 5,
+      "instructions": 58
+    },
+    {
+      "case": 56,
+      "result": 0,
+      "instructions": 153
+    },
+    {
+      "case": 57,
+      "result": 5,
+      "instructions": 103
+    },
+    {
+      "case": 58,
+      "result": 5,
+      "instructions": 211
+    },
+    {
+      "case": 59,
+      "result": 5,
+      "instructions": 230
+    },
+    {
+      "case": 60,
+      "result": 2,
+      "instructions": 124
+    },
+    {
+      "case": 61,
+      "result": 0,
+      "instructions": 157
+    },
+    {
+      "case": 62,
+      "result": 2,
+      "instructions": 292
+    },
+    {
+      "case": 63,
+      "result": 2,
+      "instructions": 188
+    },
+    {
+      "case": 64,
+      "result": 2,
+      "instructions": 266
+    },
+    {
+      "case": 65,
+      "result": 2,
+      "instructions": 132
+    },
+    {
+      "case": 66,
+      "result": 0,
+      "instructions": 221
+    },
+    {
+      "case": 67,
+      "result": 2,
+      "instructions": 404
+    },
+    {
+      "case": 68,
+      "result": 2,
+      "instructions": 336
+    },
+    {
+      "case": 69,
+      "result": 2,
+      "instructions": 258
+    },
+    {
+      "case": 70,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 71,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 72,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 73,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 74,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 75,
+      "result": 2,
+      "instructions": 133
+    },
+    {
+      "case": 76,
+      "result": 2,
+      "instructions": 179
+    },
+    {
+      "case": 77,
+      "result": 4,
+      "instructions": 34
+    },
+    {
+      "case": 78,
+      "result": 2,
+      "instructions": 412
+    },
+    {
+      "case": 79,
+      "result": 2,
+      "instructions": 248
+    },
+    {
+      "case": 80,
+      "result": 2,
+      "instructions": 114
+    },
+    {
+      "case": 81,
+      "result": 2,
+      "instructions": 208
+    },
+    {
+      "case": 82,
+      "result": 0,
+      "instructions": 253
+    },
+    {
+      "case": 83,
+      "result": 2,
+      "instructions": 376
+    },
+    {
+      "case": 84,
+      "result": 1,
+      "instructions": 540
+    },
+    {
+      "case": 85,
+      "result": 2,
+      "instructions": 132
+    },
+    {
+      "case": 86,
+      "result": 0,
+      "instructions": 159
+    },
+    {
+      "case": 87,
+      "result": 2,
+      "instructions": 324
+    },
+    {
+      "case": 88,
+      "result": 0,
+      "instructions": 349
+    },
+    {
+      "case": 89,
+      "result": 2,
+      "instructions": 314
+    },
+    {
+      "case": 90,
+      "result": 5,
+      "instructions": 50
+    },
+    {
+      "case": 91,
+      "result": 5,
+      "instructions": 117
+    },
+    {
+      "case": 92,
+      "result": 0,
+      "instructions": 237
+    },
+    {
+      "case": 93,
+      "result": 5,
+      "instructions": 92
+    },
+    {
+      "case": 94,
+      "result": 5,
+      "instructions": 181
+    },
+    {
+      "case": 95,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 96,
+      "result": 5,
+      "instructions": 84
+    },
+    {
+      "case": 97,
+      "result": 5,
+      "instructions": 112
+    },
+    {
+      "case": 98,
+      "result": 0,
+      "instructions": 309
+    },
+    {
+      "case": 99,
+      "result": 5,
+      "instructions": 115
+    },
+    {
+      "case": 100,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 101,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 102,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 103,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 104,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 105,
+      "result": 4,
+      "instructions": 34
+    },
+    {
+      "case": 106,
+      "result": 2,
+      "instructions": 137
+    },
+    {
+      "case": 107,
+      "result": 5,
+      "instructions": 148
+    },
+    {
+      "case": 108,
+      "result": 2,
+      "instructions": 349
+    },
+    {
+      "case": 109,
+      "result": 5,
+      "instructions": 91
+    },
+    {
+      "case": 110,
+      "result": 5,
+      "instructions": 47
+    },
+    {
+      "case": 111,
+      "result": 5,
+      "instructions": 95
+    },
+    {
+      "case": 112,
+      "result": 6,
+      "instructions": 84
+    },
+    {
+      "case": 113,
+      "result": 5,
+      "instructions": 252
+    },
+    {
+      "case": 114,
+      "result": 0,
+      "instructions": 535
+    },
+    {
+      "case": 115,
+      "result": 5,
+      "instructions": 58
+    },
+    {
+      "case": 116,
+      "result": 6,
+      "instructions": 75
+    },
+    {
+      "case": 117,
+      "result": 5,
+      "instructions": 114
+    },
+    {
+      "case": 118,
+      "result": 5,
+      "instructions": 207
+    },
+    {
+      "case": 119,
+      "result": 0,
+      "instructions": 655
+    },
+    {
+      "case": 120,
+      "result": 0,
+      "instructions": 121
+    },
+    {
+      "case": 121,
+      "result": 0,
+      "instructions": 165
+    },
+    {
+      "case": 122,
+      "result": 0,
+      "instructions": 309
+    },
+    {
+      "case": 123,
+      "result": 1,
+      "instructions": 208
+    },
+    {
+      "case": 124,
+      "result": 2,
+      "instructions": 282
+    },
+    {
+      "case": 125,
+      "result": 0,
+      "instructions": 129
+    },
+    {
+      "case": 126,
+      "result": 2,
+      "instructions": 178
+    },
+    {
+      "case": 127,
+      "result": 1,
+      "instructions": 370
+    },
+    {
+      "case": 128,
+      "result": 6,
+      "instructions": 112
+    },
+    {
+      "case": 129,
+      "result": 2,
+      "instructions": 274
+    },
+    {
+      "case": 130,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 131,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 132,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 133,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 134,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 135,
+      "result": 2,
+      "instructions": 133
+    },
+    {
+      "case": 136,
+      "result": 2,
+      "instructions": 165
+    },
+    {
+      "case": 137,
+      "result": 2,
+      "instructions": 233
+    },
+    {
+      "case": 138,
+      "result": 2,
+      "instructions": 359
+    },
+    {
+      "case": 139,
+      "result": 1,
+      "instructions": 276
+    },
+    {
+      "case": 140,
+      "result": 2,
+      "instructions": 114
+    },
+    {
+      "case": 141,
+      "result": 2,
+      "instructions": 182
+    },
+    {
+      "case": 142,
+      "result": 2,
+      "instructions": 238
+    },
+    {
+      "case": 143,
+      "result": 2,
+      "instructions": 240
+    },
+    {
+      "case": 144,
+      "result": 1,
+      "instructions": 378
+    },
+    {
+      "case": 145,
+      "result": 0,
+      "instructions": 129
+    },
+    {
+      "case": 146,
+      "result": 2,
+      "instructions": 210
+    },
+    {
+      "case": 147,
+      "result": 2,
+      "instructions": 232
+    },
+    {
+      "case": 148,
+      "result": 1,
+      "instructions": 352
+    },
+    {
+      "case": 149,
+      "result": 2,
+      "instructions": 514
+    },
+    {
+      "case": 150,
+      "result": 0,
+      "instructions": 123
+    },
+    {
+      "case": 151,
+      "result": 0,
+      "instructions": 193
+    },
+    {
+      "case": 152,
+      "result": 5,
+      "instructions": 118
+    },
+    {
+      "case": 153,
+      "result": 5,
+      "instructions": 125
+    },
+    {
+      "case": 154,
+      "result": 5,
+      "instructions": 179
+    },
+    {
+      "case": 155,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 156,
+      "result": 5,
+      "instructions": 94
+    },
+    {
+      "case": 157,
+      "result": 5,
+      "instructions": 141
+    },
+    {
+      "case": 158,
+      "result": 5,
+      "instructions": 156
+    },
+    {
+      "case": 159,
+      "result": 5,
+      "instructions": 320
+    },
+    {
+      "case": 160,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 161,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 162,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 163,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 164,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 165,
+      "result": 2,
+      "instructions": 127
+    },
+    {
+      "case": 166,
+      "result": 2,
+      "instructions": 181
+    },
+    {
+      "case": 167,
+      "result": 5,
+      "instructions": 92
+    },
+    {
+      "case": 168,
+      "result": 2,
+      "instructions": 277
+    },
+    {
+      "case": 169,
+      "result": 5,
+      "instructions": 84
+    },
+    {
+      "case": 170,
+      "result": 0,
+      "instructions": 117
+    },
+    {
+      "case": 171,
+      "result": 0,
+      "instructions": 229
+    },
+    {
+      "case": 172,
+      "result": 5,
+      "instructions": 152
+    },
+    {
+      "case": 173,
+      "result": 5,
+      "instructions": 126
+    },
+    {
+      "case": 174,
+      "result": 5,
+      "instructions": 247
+    },
+    {
+      "case": 175,
+      "result": 5,
+      "instructions": 58
+    },
+    {
+      "case": 176,
+      "result": 5,
+      "instructions": 84
+    },
+    {
+      "case": 177,
+      "result": 5,
+      "instructions": 154
+    },
+    {
+      "case": 178,
+      "result": 5,
+      "instructions": 166
+    },
+    {
+      "case": 179,
+      "result": 5,
+      "instructions": 308
+    },
+    {
+      "case": 180,
+      "result": 2,
+      "instructions": 124
+    },
+    {
+      "case": 181,
+      "result": 2,
+      "instructions": 182
+    },
+    {
+      "case": 182,
+      "result": 2,
+      "instructions": 230
+    },
+    {
+      "case": 183,
+      "result": 2,
+      "instructions": 322
+    },
+    {
+      "case": 184,
+      "result": 2,
+      "instructions": 366
+    },
+    {
+      "case": 185,
+      "result": 0,
+      "instructions": 129
+    },
+    {
+      "case": 186,
+      "result": 0,
+      "instructions": 175
+    },
+    {
+      "case": 187,
+      "result": 2,
+      "instructions": 250
+    },
+    {
+      "case": 188,
+      "result": 0,
+      "instructions": 435
+    },
+    {
+      "case": 189,
+      "result": 4,
+      "instructions": 64
+    },
+    {
+      "case": 190,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 191,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 192,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 193,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 194,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 195,
+      "result": 2,
+      "instructions": 133
+    },
+    {
+      "case": 196,
+      "result": 2,
+      "instructions": 171
+    },
+    {
+      "case": 197,
+      "result": 2,
+      "instructions": 188
+    },
+    {
+      "case": 198,
+      "result": 2,
+      "instructions": 355
+    },
+    {
+      "case": 199,
+      "result": 2,
+      "instructions": 503
+    },
+    {
+      "case": 200,
+      "result": 0,
+      "instructions": 111
+    },
+    {
+      "case": 201,
+      "result": 2,
+      "instructions": 174
+    },
+    {
+      "case": 202,
+      "result": 0,
+      "instructions": 361
+    },
+    {
+      "case": 203,
+      "result": 2,
+      "instructions": 470
+    },
+    {
+      "case": 204,
+      "result": 1,
+      "instructions": 270
+    },
+    {
+      "case": 205,
+      "result": 2,
+      "instructions": 132
+    },
+    {
+      "case": 206,
+      "result": 2,
+      "instructions": 252
+    },
+    {
+      "case": 207,
+      "result": 1,
+      "instructions": 258
+    },
+    {
+      "case": 208,
+      "result": 2,
+      "instructions": 346
+    },
+    {
+      "case": 209,
+      "result": 1,
+      "instructions": 304
+    },
+    {
+      "case": 210,
+      "result": 0,
+      "instructions": 123
+    },
+    {
+      "case": 211,
+      "result": 5,
+      "instructions": 102
+    },
+    {
+      "case": 212,
+      "result": 0,
+      "instructions": 261
+    },
+    {
+      "case": 213,
+      "result": 5,
+      "instructions": 80
+    },
+    {
+      "case": 214,
+      "result": 5,
+      "instructions": 158
+    },
+    {
+      "case": 215,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 216,
+      "result": 5,
+      "instructions": 108
+    },
+    {
+      "case": 217,
+      "result": 4,
+      "instructions": 46
+    },
+    {
+      "case": 218,
+      "result": 5,
+      "instructions": 194
+    },
+    {
+      "case": 219,
+      "result": 5,
+      "instructions": 372
+    },
+    {
+      "case": 220,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 221,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 222,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 223,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 224,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 225,
+      "result": 2,
+      "instructions": 127
+    },
+    {
+      "case": 226,
+      "result": 2,
+      "instructions": 137
+    },
+    {
+      "case": 227,
+      "result": 5,
+      "instructions": 95
+    },
+    {
+      "case": 228,
+      "result": 2,
+      "instructions": 389
+    },
+    {
+      "case": 229,
+      "result": 5,
+      "instructions": 95
+    },
+    {
+      "case": 230,
+      "result": 0,
+      "instructions": 117
+    },
+    {
+      "case": 231,
+      "result": 5,
+      "instructions": 141
+    },
+    {
+      "case": 232,
+      "result": 6,
+      "instructions": 132
+    },
+    {
+      "case": 233,
+      "result": 5,
+      "instructions": 218
+    },
+    {
+      "case": 234,
+      "result": 5,
+      "instructions": 224
+    },
+    {
+      "case": 235,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 236,
+      "result": 5,
+      "instructions": 88
+    },
+    {
+      "case": 237,
+      "result": 5,
+      "instructions": 101
+    },
+    {
+      "case": 238,
+      "result": 5,
+      "instructions": 213
+    },
+    {
+      "case": 239,
+      "result": 5,
+      "instructions": 162
+    },
+    {
+      "case": 240,
+      "result": 0,
+      "instructions": 121
+    },
+    {
+      "case": 241,
+      "result": 2,
+      "instructions": 204
+    },
+    {
+      "case": 242,
+      "result": 2,
+      "instructions": 250
+    },
+    {
+      "case": 243,
+      "result": 1,
+      "instructions": 256
+    },
+    {
+      "case": 244,
+      "result": 0,
+      "instructions": 405
+    },
+    {
+      "case": 245,
+      "result": 4,
+      "instructions": 37
+    },
+    {
+      "case": 246,
+      "result": 0,
+      "instructions": 221
+    },
+    {
+      "case": 247,
+      "result": 2,
+      "instructions": 236
+    },
+    {
+      "case": 248,
+      "result": 1,
+      "instructions": 352
+    },
+    {
+      "case": 249,
+      "result": 0,
+      "instructions": 585
+    },
+    {
+      "case": 250,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 251,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 252,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 253,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 254,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 255,
+      "result": 2,
+      "instructions": 133
+    },
+    {
+      "case": 256,
+      "result": 2,
+      "instructions": 178
+    },
+    {
+      "case": 257,
+      "result": 2,
+      "instructions": 180
+    },
+    {
+      "case": 258,
+      "result": 2,
+      "instructions": 417
+    },
+    {
+      "case": 259,
+      "result": 2,
+      "instructions": 210
+    },
+    {
+      "case": 260,
+      "result": 2,
+      "instructions": 114
+    },
+    {
+      "case": 261,
+      "result": 2,
+      "instructions": 198
+    },
+    {
+      "case": 262,
+      "result": 2,
+      "instructions": 264
+    },
+    {
+      "case": 263,
+      "result": 2,
+      "instructions": 334
+    },
+    {
+      "case": 264,
+      "result": 6,
+      "instructions": 200
+    },
+    {
+      "case": 265,
+      "result": 0,
+      "instructions": 129
+    },
+    {
+      "case": 266,
+      "result": 0,
+      "instructions": 197
+    },
+    {
+      "case": 267,
+      "result": 2,
+      "instructions": 408
+    },
+    {
+      "case": 268,
+      "result": 1,
+      "instructions": 452
+    },
+    {
+      "case": 269,
+      "result": 1,
+      "instructions": 434
+    },
+    {
+      "case": 270,
+      "result": 5,
+      "instructions": 50
+    },
+    {
+      "case": 271,
+      "result": 5,
+      "instructions": 77
+    },
+    {
+      "case": 272,
+      "result": 0,
+      "instructions": 225
+    },
+    {
+      "case": 273,
+      "result": 4,
+      "instructions": 34
+    },
+    {
+      "case": 274,
+      "result": 0,
+      "instructions": 437
+    },
+    {
+      "case": 275,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 276,
+      "result": 0,
+      "instructions": 191
+    },
+    {
+      "case": 277,
+      "result": 5,
+      "instructions": 101
+    },
+    {
+      "case": 278,
+      "result": 5,
+      "instructions": 225
+    },
+    {
+      "case": 279,
+      "result": 5,
+      "instructions": 115
+    },
+    {
+      "case": 280,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 281,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 282,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 283,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 284,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 285,
+      "result": 2,
+      "instructions": 127
+    },
+    {
+      "case": 286,
+      "result": 2,
+      "instructions": 201
+    },
+    {
+      "case": 287,
+      "result": 5,
+      "instructions": 80
+    },
+    {
+      "case": 288,
+      "result": 5,
+      "instructions": 144
+    },
+    {
+      "case": 289,
+      "result": 5,
+      "instructions": 130
+    },
+    {
+      "case": 290,
+      "result": 0,
+      "instructions": 117
+    },
+    {
+      "case": 291,
+      "result": 0,
+      "instructions": 263
+    },
+    {
+      "case": 292,
+      "result": 5,
+      "instructions": 117
+    },
+    {
+      "case": 293,
+      "result": 5,
+      "instructions": 106
+    },
+    {
+      "case": 294,
+      "result": 5,
+      "instructions": 251
+    },
+    {
+      "case": 295,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 296,
+      "result": 0,
+      "instructions": 153
+    },
+    {
+      "case": 297,
+      "result": 5,
+      "instructions": 135
+    },
+    {
+      "case": 298,
+      "result": 0,
+      "instructions": 401
+    },
+    {
+      "case": 299,
+      "result": 5,
+      "instructions": 143
+    },
+    {
+      "case": 300,
+      "result": 2,
+      "instructions": 124
+    },
+    {
+      "case": 301,
+      "result": 4,
+      "instructions": 34
+    },
+    {
+      "case": 302,
+      "result": 2,
+      "instructions": 224
+    },
+    {
+      "case": 303,
+      "result": 1,
+      "instructions": 208
+    },
+    {
+      "case": 304,
+      "result": 2,
+      "instructions": 328
+    },
+    {
+      "case": 305,
+      "result": 0,
+      "instructions": 129
+    },
+    {
+      "case": 306,
+      "result": 2,
+      "instructions": 170
+    },
+    {
+      "case": 307,
+      "result": 1,
+      "instructions": 318
+    },
+    {
+      "case": 308,
+      "result": 1,
+      "instructions": 256
+    },
+    {
+      "case": 309,
+      "result": 1,
+      "instructions": 328
+    },
+    {
+      "case": 310,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 311,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 312,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 313,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 314,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 315,
+      "result": 2,
+      "instructions": 133
+    },
+    {
+      "case": 316,
+      "result": 2,
+      "instructions": 161
+    },
+    {
+      "case": 317,
+      "result": 2,
+      "instructions": 275
+    },
+    {
+      "case": 318,
+      "result": 2,
+      "instructions": 365
+    },
+    {
+      "case": 319,
+      "result": 2,
+      "instructions": 468
+    },
+    {
+      "case": 320,
+      "result": 2,
+      "instructions": 114
+    },
+    {
+      "case": 321,
+      "result": 0,
+      "instructions": 293
+    },
+    {
+      "case": 322,
+      "result": 1,
+      "instructions": 252
+    },
+    {
+      "case": 323,
+      "result": 1,
+      "instructions": 292
+    },
+    {
+      "case": 324,
+      "result": 6,
+      "instructions": 98
+    },
+    {
+      "case": 325,
+      "result": 0,
+      "instructions": 129
+    },
+    {
+      "case": 326,
+      "result": 2,
+      "instructions": 220
+    },
+    {
+      "case": 327,
+      "result": 2,
+      "instructions": 222
+    },
+    {
+      "case": 328,
+      "result": 1,
+      "instructions": 352
+    },
+    {
+      "case": 329,
+      "result": 4,
+      "instructions": 64
+    },
+    {
+      "case": 330,
+      "result": 5,
+      "instructions": 50
+    },
+    {
+      "case": 331,
+      "result": 5,
+      "instructions": 85
+    },
+    {
+      "case": 332,
+      "result": 0,
+      "instructions": 263
+    },
+    {
+      "case": 333,
+      "result": 5,
+      "instructions": 95
+    },
+    {
+      "case": 334,
+      "result": 5,
+      "instructions": 95
+    },
+    {
+      "case": 335,
+      "result": 5,
+      "instructions": 58
+    },
+    {
+      "case": 336,
+      "result": 5,
+      "instructions": 71
+    },
+    {
+      "case": 337,
+      "result": 5,
+      "instructions": 126
+    },
+    {
+      "case": 338,
+      "result": 5,
+      "instructions": 203
+    },
+    {
+      "case": 339,
+      "result": 5,
+      "instructions": 131
+    },
+    {
+      "case": 340,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 341,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 342,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 343,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 344,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 345,
+      "result": 2,
+      "instructions": 127
+    },
+    {
+      "case": 346,
+      "result": 2,
+      "instructions": 209
+    },
+    {
+      "case": 347,
+      "result": 2,
+      "instructions": 349
+    },
+    {
+      "case": 348,
+      "result": 2,
+      "instructions": 313
+    },
+    {
+      "case": 349,
+      "result": 5,
+      "instructions": 186
+    },
+    {
+      "case": 350,
+      "result": 5,
+      "instructions": 47
+    },
+    {
+      "case": 351,
+      "result": 5,
+      "instructions": 101
+    },
+    {
+      "case": 352,
+      "result": 0,
+      "instructions": 301
+    },
+    {
+      "case": 353,
+      "result": 5,
+      "instructions": 149
+    },
+    {
+      "case": 354,
+      "result": 5,
+      "instructions": 259
+    },
+    {
+      "case": 355,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 356,
+      "result": 0,
+      "instructions": 215
+    },
+    {
+      "case": 357,
+      "result": 4,
+      "instructions": 46
+    },
+    {
+      "case": 358,
+      "result": 5,
+      "instructions": 184
+    },
+    {
+      "case": 359,
+      "result": 5,
+      "instructions": 357
+    },
+    {
+      "case": 360,
+      "result": 0,
+      "instructions": 121
+    },
+    {
+      "case": 361,
+      "result": 2,
+      "instructions": 202
+    },
+    {
+      "case": 362,
+      "result": 2,
+      "instructions": 196
+    },
+    {
+      "case": 363,
+      "result": 2,
+      "instructions": 212
+    },
+    {
+      "case": 364,
+      "result": 2,
+      "instructions": 184
+    },
+    {
+      "case": 365,
+      "result": 2,
+      "instructions": 132
+    },
+    {
+      "case": 366,
+      "result": 0,
+      "instructions": 237
+    },
+    {
+      "case": 367,
+      "result": 2,
+      "instructions": 326
+    },
+    {
+      "case": 368,
+      "result": 2,
+      "instructions": 390
+    },
+    {
+      "case": 369,
+      "result": 2,
+      "instructions": 268
+    },
+    {
+      "case": 370,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 371,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 372,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 373,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 374,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 375,
+      "result": 2,
+      "instructions": 133
+    },
+    {
+      "case": 376,
+      "result": 2,
+      "instructions": 191
+    },
+    {
+      "case": 377,
+      "result": 2,
+      "instructions": 180
+    },
+    {
+      "case": 378,
+      "result": 2,
+      "instructions": 317
+    },
+    {
+      "case": 379,
+      "result": 2,
+      "instructions": 188
+    },
+    {
+      "case": 380,
+      "result": 0,
+      "instructions": 111
+    },
+    {
+      "case": 381,
+      "result": 2,
+      "instructions": 208
+    },
+    {
+      "case": 382,
+      "result": 2,
+      "instructions": 266
+    },
+    {
+      "case": 383,
+      "result": 2,
+      "instructions": 264
+    },
+    {
+      "case": 384,
+      "result": 1,
+      "instructions": 518
+    },
+    {
+      "case": 385,
+      "result": 4,
+      "instructions": 37
+    },
+    {
+      "case": 386,
+      "result": 0,
+      "instructions": 159
+    },
+    {
+      "case": 387,
+      "result": 0,
+      "instructions": 445
+    },
+    {
+      "case": 388,
+      "result": 2,
+      "instructions": 244
+    },
+    {
+      "case": 389,
+      "result": 2,
+      "instructions": 316
+    },
+    {
+      "case": 390,
+      "result": 0,
+      "instructions": 123
+    },
+    {
+      "case": 391,
+      "result": 5,
+      "instructions": 93
+    },
+    {
+      "case": 392,
+      "result": 5,
+      "instructions": 135
+    },
+    {
+      "case": 393,
+      "result": 5,
+      "instructions": 101
+    },
+    {
+      "case": 394,
+      "result": 5,
+      "instructions": 198
+    },
+    {
+      "case": 395,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 396,
+      "result": 0,
+      "instructions": 223
+    },
+    {
+      "case": 397,
+      "result": 5,
+      "instructions": 97
+    },
+    {
+      "case": 398,
+      "result": 0,
+      "instructions": 455
+    },
+    {
+      "case": 399,
+      "result": 5,
+      "instructions": 128
+    },
+    {
+      "case": 400,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 401,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 402,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 403,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 404,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 405,
+      "result": 2,
+      "instructions": 127
+    },
+    {
+      "case": 406,
+      "result": 2,
+      "instructions": 195
+    },
+    {
+      "case": 407,
+      "result": 2,
+      "instructions": 303
+    },
+    {
+      "case": 408,
+      "result": 2,
+      "instructions": 321
+    },
+    {
+      "case": 409,
+      "result": 5,
+      "instructions": 97
+    },
+    {
+      "case": 410,
+      "result": 5,
+      "instructions": 47
+    },
+    {
+      "case": 411,
+      "result": 5,
+      "instructions": 112
+    },
+    {
+      "case": 412,
+      "result": 5,
+      "instructions": 119
+    },
+    {
+      "case": 413,
+      "result": 4,
+      "instructions": 55
+    },
+    {
+      "case": 414,
+      "result": 5,
+      "instructions": 124
+    },
+    {
+      "case": 415,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 416,
+      "result": 5,
+      "instructions": 101
+    },
+    {
+      "case": 417,
+      "result": 5,
+      "instructions": 126
+    },
+    {
+      "case": 418,
+      "result": 5,
+      "instructions": 135
+    },
+    {
+      "case": 419,
+      "result": 5,
+      "instructions": 138
+    },
+    {
+      "case": 420,
+      "result": 0,
+      "instructions": 121
+    },
+    {
+      "case": 421,
+      "result": 1,
+      "instructions": 208
+    },
+    {
+      "case": 422,
+      "result": 0,
+      "instructions": 223
+    },
+    {
+      "case": 423,
+      "result": 2,
+      "instructions": 342
+    },
+    {
+      "case": 424,
+      "result": 2,
+      "instructions": 234
+    },
+    {
+      "case": 425,
+      "result": 2,
+      "instructions": 132
+    },
+    {
+      "case": 426,
+      "result": 2,
+      "instructions": 216
+    },
+    {
+      "case": 427,
+      "result": 1,
+      "instructions": 384
+    },
+    {
+      "case": 428,
+      "result": 0,
+      "instructions": 427
+    },
+    {
+      "case": 429,
+      "result": 1,
+      "instructions": 354
+    },
+    {
+      "case": 430,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 431,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 432,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 433,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 434,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 435,
+      "result": 2,
+      "instructions": 133
+    },
+    {
+      "case": 436,
+      "result": 2,
+      "instructions": 191
+    },
+    {
+      "case": 437,
+      "result": 1,
+      "instructions": 224
+    },
+    {
+      "case": 438,
+      "result": 1,
+      "instructions": 256
+    },
+    {
+      "case": 439,
+      "result": 2,
+      "instructions": 422
+    },
+    {
+      "case": 440,
+      "result": 0,
+      "instructions": 111
+    },
+    {
+      "case": 441,
+      "result": 4,
+      "instructions": 37
+    },
+    {
+      "case": 442,
+      "result": 1,
+      "instructions": 356
+    },
+    {
+      "case": 443,
+      "result": 2,
+      "instructions": 232
+    },
+    {
+      "case": 444,
+      "result": 2,
+      "instructions": 510
+    },
+    {
+      "case": 445,
+      "result": 0,
+      "instructions": 129
+    },
+    {
+      "case": 446,
+      "result": 2,
+      "instructions": 228
+    },
+    {
+      "case": 447,
+      "result": 2,
+      "instructions": 238
+    },
+    {
+      "case": 448,
+      "result": 6,
+      "instructions": 143
+    },
+    {
+      "case": 449,
+      "result": 0,
+      "instructions": 413
+    },
+    {
+      "case": 450,
+      "result": 0,
+      "instructions": 123
+    },
+    {
+      "case": 451,
+      "result": 5,
+      "instructions": 96
+    },
+    {
+      "case": 452,
+      "result": 0,
+      "instructions": 209
+    },
+    {
+      "case": 453,
+      "result": 5,
+      "instructions": 80
+    },
+    {
+      "case": 454,
+      "result": 5,
+      "instructions": 92
+    },
+    {
+      "case": 455,
+      "result": 5,
+      "instructions": 58
+    },
+    {
+      "case": 456,
+      "result": 5,
+      "instructions": 100
+    },
+    {
+      "case": 457,
+      "result": 5,
+      "instructions": 172
+    },
+    {
+      "case": 458,
+      "result": 5,
+      "instructions": 204
+    },
+    {
+      "case": 459,
+      "result": 5,
+      "instructions": 177
+    },
+    {
+      "case": 460,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 461,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 462,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 463,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 464,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 465,
+      "result": 2,
+      "instructions": 127
+    },
+    {
+      "case": 466,
+      "result": 2,
+      "instructions": 173
+    },
+    {
+      "case": 467,
+      "result": 5,
+      "instructions": 84
+    },
+    {
+      "case": 468,
+      "result": 2,
+      "instructions": 377
+    },
+    {
+      "case": 469,
+      "result": 4,
+      "instructions": 34
+    },
+    {
+      "case": 470,
+      "result": 5,
+      "instructions": 47
+    },
+    {
+      "case": 471,
+      "result": 5,
+      "instructions": 89
+    },
+    {
+      "case": 472,
+      "result": 0,
+      "instructions": 267
+    },
+    {
+      "case": 473,
+      "result": 5,
+      "instructions": 225
+    },
+    {
+      "case": 474,
+      "result": 5,
+      "instructions": 288
+    },
+    {
+      "case": 475,
+      "result": 5,
+      "instructions": 58
+    },
+    {
+      "case": 476,
+      "result": 5,
+      "instructions": 87
+    },
+    {
+      "case": 477,
+      "result": 5,
+      "instructions": 162
+    },
+    {
+      "case": 478,
+      "result": 5,
+      "instructions": 118
+    },
+    {
+      "case": 479,
+      "result": 5,
+      "instructions": 237
+    },
+    {
+      "case": 480,
+      "result": 2,
+      "instructions": 124
+    },
+    {
+      "case": 481,
+      "result": 0,
+      "instructions": 157
+    },
+    {
+      "case": 482,
+      "result": 0,
+      "instructions": 245
+    },
+    {
+      "case": 483,
+      "result": 2,
+      "instructions": 404
+    },
+    {
+      "case": 484,
+      "result": 2,
+      "instructions": 262
+    },
+    {
+      "case": 485,
+      "result": 2,
+      "instructions": 132
+    },
+    {
+      "case": 486,
+      "result": 0,
+      "instructions": 239
+    },
+    {
+      "case": 487,
+      "result": 2,
+      "instructions": 222
+    },
+    {
+      "case": 488,
+      "result": 2,
+      "instructions": 356
+    },
+    {
+      "case": 489,
+      "result": 2,
+      "instructions": 402
+    },
+    {
+      "case": 490,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 491,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 492,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 493,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 494,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 495,
+      "result": 2,
+      "instructions": 133
+    },
+    {
+      "case": 496,
+      "result": 2,
+      "instructions": 131
+    },
+    {
+      "case": 497,
+      "result": 4,
+      "instructions": 34
+    },
+    {
+      "case": 498,
+      "result": 2,
+      "instructions": 265
+    },
+    {
+      "case": 499,
+      "result": 2,
+      "instructions": 208
+    },
+    {
+      "case": 500,
+      "result": 0,
+      "instructions": 111
+    },
+    {
+      "case": 501,
+      "result": 0,
+      "instructions": 277
+    },
+    {
+      "case": 502,
+      "result": 2,
+      "instructions": 380
+    },
+    {
+      "case": 503,
+      "result": 2,
+      "instructions": 304
+    },
+    {
+      "case": 504,
+      "result": 0,
+      "instructions": 559
+    },
+    {
+      "case": 505,
+      "result": 0,
+      "instructions": 129
+    },
+    {
+      "case": 506,
+      "result": 2,
+      "instructions": 246
+    },
+    {
+      "case": 507,
+      "result": 1,
+      "instructions": 256
+    },
+    {
+      "case": 508,
+      "result": 1,
+      "instructions": 244
+    },
+    {
+      "case": 509,
+      "result": 1,
+      "instructions": 264
+    },
+    {
+      "case": 510,
+      "result": 5,
+      "instructions": 50
+    },
+    {
+      "case": 511,
+      "result": 5,
+      "instructions": 97
+    },
+    {
+      "case": 512,
+      "result": 0,
+      "instructions": 225
+    },
+    {
+      "case": 513,
+      "result": 5,
+      "instructions": 89
+    },
+    {
+      "case": 514,
+      "result": 5,
+      "instructions": 179
+    },
+    {
+      "case": 515,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 516,
+      "result": 5,
+      "instructions": 82
+    },
+    {
+      "case": 517,
+      "result": 5,
+      "instructions": 121
+    },
+    {
+      "case": 518,
+      "result": 5,
+      "instructions": 141
+    },
+    {
+      "case": 519,
+      "result": 5,
+      "instructions": 370
+    },
+    {
+      "case": 520,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 521,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 522,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 523,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 524,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 525,
+      "result": 4,
+      "instructions": 34
+    },
+    {
+      "case": 526,
+      "result": 5,
+      "instructions": 85
+    },
+    {
+      "case": 527,
+      "result": 5,
+      "instructions": 110
+    },
+    {
+      "case": 528,
+      "result": 5,
+      "instructions": 153
+    },
+    {
+      "case": 529,
+      "result": 5,
+      "instructions": 95
+    },
+    {
+      "case": 530,
+      "result": 5,
+      "instructions": 47
+    },
+    {
+      "case": 531,
+      "result": 5,
+      "instructions": 98
+    },
+    {
+      "case": 532,
+      "result": 5,
+      "instructions": 152
+    },
+    {
+      "case": 533,
+      "result": 5,
+      "instructions": 200
+    },
+    {
+      "case": 534,
+      "result": 5,
+      "instructions": 288
+    },
+    {
+      "case": 535,
+      "result": 5,
+      "instructions": 58
+    },
+    {
+      "case": 536,
+      "result": 5,
+      "instructions": 84
+    },
+    {
+      "case": 537,
+      "result": 5,
+      "instructions": 101
+    },
+    {
+      "case": 538,
+      "result": 5,
+      "instructions": 203
+    },
+    {
+      "case": 539,
+      "result": 5,
+      "instructions": 162
+    },
+    {
+      "case": 540,
+      "result": 0,
+      "instructions": 121
+    },
+    {
+      "case": 541,
+      "result": 0,
+      "instructions": 165
+    },
+    {
+      "case": 542,
+      "result": 2,
+      "instructions": 226
+    },
+    {
+      "case": 543,
+      "result": 2,
+      "instructions": 464
+    },
+    {
+      "case": 544,
+      "result": 2,
+      "instructions": 304
+    },
+    {
+      "case": 545,
+      "result": 0,
+      "instructions": 129
+    },
+    {
+      "case": 546,
+      "result": 2,
+      "instructions": 170
+    },
+    {
+      "case": 547,
+      "result": 2,
+      "instructions": 244
+    },
+    {
+      "case": 548,
+      "result": 1,
+      "instructions": 310
+    },
+    {
+      "case": 549,
+      "result": 0,
+      "instructions": 515
+    },
+    {
+      "case": 550,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 551,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 552,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 553,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 554,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 555,
+      "result": 2,
+      "instructions": 133
+    },
+    {
+      "case": 556,
+      "result": 2,
+      "instructions": 186
+    },
+    {
+      "case": 557,
+      "result": 2,
+      "instructions": 233
+    },
+    {
+      "case": 558,
+      "result": 2,
+      "instructions": 391
+    },
+    {
+      "case": 559,
+      "result": 2,
+      "instructions": 222
+    },
+    {
+      "case": 560,
+      "result": 2,
+      "instructions": 114
+    },
+    {
+      "case": 561,
+      "result": 2,
+      "instructions": 216
+    },
+    {
+      "case": 562,
+      "result": 2,
+      "instructions": 236
+    },
+    {
+      "case": 563,
+      "result": 2,
+      "instructions": 352
+    },
+    {
+      "case": 564,
+      "result": 2,
+      "instructions": 526
+    },
+    {
+      "case": 565,
+      "result": 2,
+      "instructions": 132
+    },
+    {
+      "case": 566,
+      "result": 2,
+      "instructions": 154
+    },
+    {
+      "case": 567,
+      "result": 2,
+      "instructions": 232
+    },
+    {
+      "case": 568,
+      "result": 1,
+      "instructions": 426
+    },
+    {
+      "case": 569,
+      "result": 2,
+      "instructions": 290
+    },
+    {
+      "case": 570,
+      "result": 0,
+      "instructions": 123
+    },
+    {
+      "case": 571,
+      "result": 5,
+      "instructions": 81
+    },
+    {
+      "case": 572,
+      "result": 5,
+      "instructions": 93
+    },
+    {
+      "case": 573,
+      "result": 5,
+      "instructions": 89
+    },
+    {
+      "case": 574,
+      "result": 5,
+      "instructions": 88
+    },
+    {
+      "case": 575,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 576,
+      "result": 0,
+      "instructions": 223
+    },
+    {
+      "case": 577,
+      "result": 5,
+      "instructions": 115
+    },
+    {
+      "case": 578,
+      "result": 5,
+      "instructions": 118
+    },
+    {
+      "case": 579,
+      "result": 5,
+      "instructions": 131
+    },
+    {
+      "case": 580,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 581,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 582,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 583,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 584,
+      "result": 3,
+      "instructions": 18
+    },
+    {
+      "case": 585,
+      "result": 2,
+      "instructions": 127
+    },
+    {
+      "case": 586,
+      "result": 2,
+      "instructions": 183
+    },
+    {
+      "case": 587,
+      "result": 2,
+      "instructions": 285
+    },
+    {
+      "case": 588,
+      "result": 2,
+      "instructions": 297
+    },
+    {
+      "case": 589,
+      "result": 5,
+      "instructions": 144
+    },
+    {
+      "case": 590,
+      "result": 0,
+      "instructions": 117
+    },
+    {
+      "case": 591,
+      "result": 5,
+      "instructions": 85
+    },
+    {
+      "case": 592,
+      "result": 0,
+      "instructions": 239
+    },
+    {
+      "case": 593,
+      "result": 0,
+      "instructions": 283
+    },
+    {
+      "case": 594,
+      "result": 5,
+      "instructions": 267
+    },
+    {
+      "case": 595,
+      "result": 0,
+      "instructions": 139
+    },
+    {
+      "case": 596,
+      "result": 5,
+      "instructions": 92
+    },
+    {
+      "case": 597,
+      "result": 5,
+      "instructions": 109
+    },
+    {
+      "case": 598,
+      "result": 5,
+      "instructions": 157
+    },
+    {
+      "case": 599,
+      "result": 5,
+      "instructions": 132
+    },
+    {
+      "case": 600,
+      "result": 0,
+      "instructions": 169
+    },
+    {
+      "case": 601,
+      "result": 2,
+      "instructions": 202
+    },
+    {
+      "case": 602,
+      "result": 6,
+      "instructions": 71
+    },
+    {
+      "case": 603,
+      "result": 0,
+      "instructions": 265
+    },
+    {
+      "case": 604,
+      "result": 2,
+      "instructions": 262
+    },
+    {
+      "case": 605,
+      "result": 1,
+      "instructions": 210
+    },
+    {
+      "case": 606,
+      "result": 1,
+      "instructions": 210
+    },
+    {
+      "case": 607,
+      "result": 2,
+      "instructions": 262
+    },
+    {
+      "case": 608,
+      "result": 0,
+      "instructions": 169
+    },
+    {
+      "case": 609,
+      "result": 2,
+      "instructions": 202
+    },
+    {
+      "case": 610,
+      "result": 2,
+      "instructions": 254
+    },
+    {
+      "case": 611,
+      "result": 6,
+      "instructions": 75
+    },
+    {
+      "case": 612,
+      "result": 0,
+      "instructions": 265
+    },
+    {
+      "case": 613,
+      "result": 1,
+      "instructions": 210
+    },
+    {
+      "case": 614,
+      "result": 1,
+      "instructions": 210
+    },
+    {
+      "case": 615,
+      "result": 0,
+      "instructions": 265
+    },
+    {
+      "case": 616,
+      "result": 0,
+      "instructions": 169
+    },
+    {
+      "case": 617,
+      "result": 2,
+      "instructions": 202
+    },
+    {
+      "case": 618,
+      "result": 0,
+      "instructions": 257
+    },
+    {
+      "case": 619,
+      "result": 2,
+      "instructions": 262
+    },
+    {
+      "case": 620,
+      "result": 6,
+      "instructions": 75
+    },
+    {
+      "case": 621,
+      "result": 1,
+      "instructions": 210
+    },
+    {
+      "case": 622,
+      "result": 1,
+      "instructions": 210
+    },
+    {
+      "case": 623,
+      "result": 6,
+      "instructions": 75
+    },
+    {
+      "case": 624,
+      "result": 0,
+      "instructions": 169
+    },
+    {
+      "case": 625,
+      "result": 2,
+      "instructions": 202
+    },
+    {
+      "case": 626,
+      "result": 6,
+      "instructions": 71
+    },
+    {
+      "case": 627,
+      "result": 0,
+      "instructions": 265
+    },
+    {
+      "case": 628,
+      "result": 2,
+      "instructions": 262
+    },
+    {
+      "case": 629,
+      "result": 1,
+      "instructions": 210
+    },
+    {
+      "case": 630,
+      "result": 1,
+      "instructions": 210
+    },
+    {
+      "case": 631,
+      "result": 2,
+      "instructions": 262
+    },
+    {
+      "case": 632,
+      "result": 0,
+      "instructions": 169
+    },
+    {
+      "case": 633,
+      "result": 2,
+      "instructions": 202
+    },
+    {
+      "case": 634,
+      "result": 2,
+      "instructions": 254
+    },
+    {
+      "case": 635,
+      "result": 6,
+      "instructions": 75
+    },
+    {
+      "case": 636,
+      "result": 0,
+      "instructions": 265
+    },
+    {
+      "case": 637,
+      "result": 1,
+      "instructions": 210
+    },
+    {
+      "case": 638,
+      "result": 1,
+      "instructions": 210
+    },
+    {
+      "case": 639,
+      "result": 0,
+      "instructions": 265
+    }
+  ],
+  "result_counts": {
+    "0": 114,
+    "1": 48,
+    "2": 188,
+    "3": 100,
+    "4": 17,
+    "5": 160,
+    "6": 13,
+    "7": 0
+  },
+  "source_pins": {
+    "private/ghidra/player-creation/instructions-0005ed20.txt": "ea29b165354042aaf33dc630322d89b577810f96c2ece1f8998799512e2feed0",
+    "private/ghidra/player-creation/instructions-0006fb60.txt": "b373e98528fde4ef720bf0b529edbca889efb97bec713ac4d7fe184c868fb736",
+    "private/ghidra/player-creation/instructions-0005eb30.txt": "2cf7510ee5298d221c299b11244f72adf6ce5831c7aedcb39d3e91e6cacb53ec",
+    "private/ghidra/player-creation/instructions-0005e640.txt": "cbcd47d0c677749cbcf9adb928ef968ec6f8c0d4a399e2956dd39c13f2626239",
+    "private/ghidra/player-creation/instructions-0001ec50.txt": "ed1420b97321186a1b7c3146ab315649a872bab54a0fc63686a6aad4e4f677ce",
+    "private/ghidra/initial-creature/instructions-0006f980.txt": "29a29a39c3cfee69d78fc3bb6ff818953299d0ba57f25500d2015c720e593f3d",
+    "private/ghidra/initial-creature/instructions-0006b150.txt": "9395a017642140a42c59b83e6e47c4c77b71e3ee368b811dd02b54f1866156c1",
+    "private/ghidra/initial-creature/instructions-00023800.txt": "4227dd9dbd21613fa4e396d702bc66347bfcc4b5085f1d2cdb7b77267bf7bcc5",
+    "private/ghidra/initial-creature/instructions-00023820.txt": "dc2ca6ff81274248aafa161ec20efc0d7947fd06fcddc5fee70ce77b433c7ea1",
+    "private/ghidra/initial-creature/instructions-0001ec10.txt": "4987af3cf6109166c9577008df7d94e772076ce575f10a8601f8a1383b942dbb",
+    "private/ghidra/initial-creature/instructions-0001ec20.txt": "60779ead189d0df91af75d7de30ee0726857f9658f0a51c0fbe238dd1cf323ec",
+    "private/ghidra/initial-creature/instructions-0001f060.txt": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7",
+    "private/ghidra/initial-creature/instructions-0005b400.txt": "80c66399500e97ca59bbe76c29dc12f531c9780fdad313ef1a462e40586a741a",
+    "private/ghidra/initial-creature/instructions-0006f8f0.txt": "79e1953c322d12fdfe9161c53d960cd98af86ad0fefe5d74adf2f3f68259ac7c",
+    "private/ghidra/initial-creature/instructions-0008b340.txt": "9c96acdce1336ae5bf34b745b501da187f77dcfb618a1194fee5537a3ad77c0b",
+    "private/ghidra/initial-creature/instructions-0005ad70.txt": "2ca44bf24af651de458c9ee2303cdc272a4ed9d29f4797c6eaa7d6fc74d54c8b",
+    "private/ghidra/initial-creature/instructions-0006db00.txt": "42e576bafeec8c50c4ab8151c5573f071ac350a4941b263e9ed7d94f25ee12a2",
+    "private/ghidra/initial-creature/instructions-0005a110.txt": "5121591cbf165c63dc16fb3de9fb95a8b7772b96162f72a44191d8a8b97d8910",
+    "private/ghidra/actor-activation/instructions-0006df30.txt": "8afe40345a8ecb636ff3af67dd76b4fa4104596032270b0cc61ab26b2affe8b1",
+    "private/ghidra/actor-activation/instructions-0007b380.txt": "a636e0647b1a66cf9eb422bfc86e03f8b2e450a42290ed9ad70c08c3f4792f7d",
+    "private/ghidra/actor-activation/instructions-0001f260.txt": "0f0c7ee7a26b87418a794e92c763f2dffb749d896335288aa052cfa40aba9ff2",
+    "private/ghidra/actor-activation/instructions-0001ee20.txt": "0aa43dc30a3d2399e5d659215c01ed920605684839f5762cfba24f4c3c4b9d1f",
+    "private/ghidra/actor-activation/instructions-0001f220.txt": "0eda1dc90e070c6c7fc3cfbae1e8e50bb0ebe50c658ae0a199af4f43b3bbbcac",
+    "private/ghidra/landing-contact/instructions-000733a0.txt": "fca831c451b1c09a39d93188d8cf9428b04ae5b25d8f87f09ecceb87c5f3f736",
+    "private/ghidra/landing-contact/instructions-0007ac00.txt": "cc002c636ec832486e06fe90af6cfc68a0489d6acae6efcf83d5a5ce735706e1",
+    "private/ghidra/primitives/instructions-0007a6c0.txt": "038389547efce23a858a88bdc1e89ed6b5e1ec1799704c22fd3fc1b30175d509",
+    "private/ghidra/activation-rng-refs/instructions-0005e0b0.txt": "89174afadbb823011cf4781900d1894bbb0fceda13d58a7041ea8af8981606ba",
+    "private/ghidra/terrain-map-refs/instructions-0008b520.txt": "37342106bfbee451f816f38ffbd92903d81b06fd534da2f6031e26c1be840e49",
+    "private/ghidra/mission-array-refs/instructions-0006d390.txt": "7f1c49974e62a52382eed53b9dcfa8dcc53b0727c9fdd2a626d57009a8376548",
+    "private/ghidra/initial-creature/instructions-000736f0.txt": "bc949e97b253e9a9b6c59ca1e14386d72af6a47f73d770d9f4f48b0e98b0d57e",
+    "private/ghidra/terrain-map-refs/instructions-0007b140.txt": "aef70bf9859bc9c21d01f697528a266d30ef1961e47d9697f762f7c74be7a2f4",
+    "private/ghidra/actor-activation/instructions-0001ee10.txt": "67284531f9de18e252b503ec89522e7be59fad0a1128732c24c53705f64e1e72",
+    "private/ghidra/command-resolver/instructions-00074270.txt": "0e6512bf106d649968285420fc325a0cf12afabecaa582ed4b6cc9a486b59a30",
+    "private/ghidra/command-resolver/instructions-0008b130.txt": "f2505f556f5a3a4f012cd375b6a43cc8029c3f03b5f1c37efe65b8a6cec2d52f",
+    "private/ghidra/terrain-map-refs/instructions-00074d90.txt": "69e9654b5a4844452ca3995de8814c049a820e745251b4c8e88c402fe46280af",
+    "private/ghidra/terrain-map-refs/instructions-00074160.txt": "abcc56f1c17963a69d68c85bc4c251b28929235b518cf4b696c18abfcb458c3b",
+    "private/ghidra/initial-creature/instructions-000401a0.txt": "ccc926f2fb858bd725f562c10631e074824b98f5cc5a8771713a5a47918ee612",
+    "private/ghidra/initial-creature/instructions-0008d930.txt": "0b85f4c6b25abca474b29c71972d4201a823ad2bdd80367efd02bd7741f4139e",
+    "private/ghidra/initial-creature/instructions-0006b700.txt": "763d2e72feee4f9ee6129a3918d74e0671c2ad6e9e2c157e5b2e54eb8c5780fe",
+    "private/ghidra/initial-creature/instructions-00073970.txt": "ab614b5e9d2dd1ee9c1c49247f21ac39540946feade19a4e9c7cde767ae2c461",
+    "private/ghidra/initial-creature/instructions-0008b7d0.txt": "423a0606ea12770fa2b85abbd7a5803944cb825a05a2aedf5957017dfc3e0750",
+    "private/ghidra/initial-creature/instructions-0005b100.txt": "32f6824af152305c75e3639c1917ee35e5e80a2a801a90e768415e73ea51e02d",
+    "private/ghidra/initial-creature/instructions-0008b780.txt": "96da34b2865718f4a50247df2f77d0c78d441888edfd3af7b20d76dafc6d7028",
+    "private/ghidra/activation-rng-refs/instructions-0008d7b0.txt": "dfbad38e9039f97aa243cddc0149971c5f01860e7163ee667d99a71757852b30",
+    "private/ghidra/primitives/instructions-00073690.txt": "a61c7b67cebcd05dbb96053d1fbe7745c703b75be5af996bb0227e4c9691cace",
+    "private/ghidra/command-resolver/instructions-000ae028.txt": "526b3f9cdc9b43ed6b330383417fad4b6c8acb41a917acf5571e4f01f0a6585b",
+    "private/ghidra/plant-startup/instructions-0001ebd0.txt": "9f0e86fefaa3c2fc11a9cf4f29e8d3ce4a0724b82b959d21b404b3ea9fd64588",
+    "private/ghidra/mission-array-refs/instructions-0005d700.txt": "46db7123380194986cc4598e5cb9cc8f44f2b8f48cb4b9f79a4ac41327a4cf33",
+    "private/ghidra/activation-rng-refs/instructions-00073c20.txt": "b1192da02ccb17b0c4e9117aa0432c6bd47d8a4ee542bea4936bdd60498ad65e",
+    "private/ghidra/actor-activation/instructions-00074cc0.txt": "701ba3601cd73db82d86a57d1502d53d6ad2a8d5910833c28f6e89784bcf542b",
+    "private/ghidra/initial-creature/instructions-00013e50.txt": "2c85f008ec84237004f0eb0e03048a44da01dbdd0c70666a67704bfb44cbeda5",
+    "private/ghidra/initial-creature/instructions-00013e70.txt": "48f6ca2435f3ae64caee93657f3fb4952a319d8978ad448b8a7011e497f6f2fc",
+    "private/ghidra/initial-creature/instructions-0005a990.txt": "d063df1c8f85cd877b6e1ea913fa88dbc2a9301bc318d79af7d1a6e935867a97",
+    "private/ghidra/initial-creature/instructions-0003fbe0.txt": "a537c544a5cd516bdf2359670ea4b102d06880440f55037a947d2ceff90c4821",
+    "private/ghidra/player-creation/instructions-00013eb0.txt": "f39a85cec1eeaf8c6471d4ca65ab9fd26f3f093cafec3efae15cbe694d2c656c",
+    "private/ghidra/actor-activation/instructions-0001f410.txt": "35c557c5e1042c57cbf5a4f2b90afadb232326d2477a2a6b03d41b367433294a",
+    "private/ghidra/terrain-map-refs/instructions-000743c0.txt": "085e0737b57e9f7d27248169f23cf35199a03594e4c8547f514ed053e890695c",
+    "private/ghidra/terrain-map-refs/instructions-0008acc0.txt": "9e7e750030468985e9d1ed7ae836f8b8ee7606b4b0b51f1fc02345750f8ccb1e",
+    "private/ghidra/terrain-map-refs/instructions-0008ac60.txt": "6fd0ff082558f7bc94da0a908710fab78b8d477369a106e15f37f4922ee557fa",
+    "private/ghidra/initial-creature/instructions-0006f0c0.txt": "37cd520262802d6b6a3e21c88b131522f31a9e129b6d4aa1afa152ce11e7e9e1",
+    "private/ghidra/initial-creature/instructions-0006ede0.txt": "acc710c7461bee41e527cdded6de067d1577811222b2abdfa3b00f71f2e654d5",
+    "private/ghidra/initial-creature/instructions-0001f010.txt": "9529f80432601ec84b37f26f2263c0bbc9d333b66e5e49efc430dca4ba822aac",
+    "private/ghidra/initial-creature/instructions-00073770.txt": "0fb14f7905a336e918e7651cba16d789204f380f1e194609c350f8bb0c93e47c",
+    "private/ghidra/initial-creature/instructions-0001f270.txt": "bd463c1d8715675e7418abb8df161d8cbc6fa47e705022eaf22d6772aea80bc1",
+    "private/ghidra/initial-creature/instructions-0001f450.txt": "cb7c70b22b60097ee15f37a91809e072f340b4d1eaf2e3819fea4c3fb8109a0f",
+    "private/ghidra/actor-motion/instructions-0006e9e0.txt": "9e0d0cd2b98c380f36514b9ff8c7b28a538dedb3516aa1192e5fa38828c9f12e",
+    "private/ghidra/mission-array-refs/instructions-0005cc60.txt": "732f53cf3c69987464aaa7903bfa1fc99e0e826dad615b979269bf6c55e4d2cb",
+    "private/ghidra/font-menu-state/instructions-00072ed0.txt": "6e946043309c2166a5666ed7c7d97ad202f05b822e3cebb533a7f499c82382d7",
+    "private/ghidra/construction-command/instructions-0008ab30.txt": "49395029ce01325efe16d5d11fdfce3011ec88c7923a5f5b1cdde99c22556672",
+    "research/variants/initial-creature-source.py": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2",
+    "research/variants/actor-environment-terrain-target.py": "b1bd37810e18f3797ffcfb88dd42da33b5a7e179852c6230ff9ec9f101209a2d",
+    "private/ghidra/validated/memory-.object1.bin": "92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe",
+    "private/ghidra/validated/memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
+    "rust/crates/genewars-runtime/src/mission_outcome.rs": "922870abbfdd917f1b80687d1810aba8a8d8767234611c5371fcc5c11f4cd60a",
+    "research/variants/mission-outcome-review.py": "f275c72edfba932f8f12e090b159ced4cd2c1d3b02b59647105329a18861d634",
+    "research/variants/mission-outcome-review.rs": "e0ec8b7fe54e12da1b4d430d0f4ee626bd1004338e660c2d1ffe6230ace97ca3"
+  },
+  "scope": "Actual72ED0 numeric scan and ordinary terminal flags;805E0 capability boolean and2F810 result request are explicit ports; no campaign advancement or original execution"
+}
