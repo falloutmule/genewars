@@ -40,9 +40,16 @@ pub struct Resources {
     pub bturr_selector1: BuildingResourceDatabase,
     /// Hash-validated CD angle and terrain bounce tables used by landing updates.
     pub physics: PhysicsTables,
+    /// Hash-bound 8192-byte construction border lookup copied from validated
+    /// mapped object3 VA 0x112D24. It is not a CD-disc asset.
+    pub construction_border: Box<[u8; 8192]>,
     /// Exact CD selector-4 MULE animation database; its sprite codec remains
     /// explicitly selected by the creature draw path.
     pub mule: CreatureAnimationDatabase,
+    /// Exact CD BONES database selected by the selector-4 state>=26 route.
+    /// Its packed4 decoder is hash-bound separately from MULE; drawing policy
+    /// remains the caller's responsibility.
+    pub bones: BonesAnimationDatabase,
     /// Once-parsed animation hold/flag metadata from the exact same
     /// hash-admitted MULE.ANB bytes as `mule`; used by the owned world tick.
     pub mule_animations: MuleAnimations,
@@ -52,6 +59,107 @@ pub struct Resources {
 }
 
 pub struct CreatureAnimationDatabase { bytes: Vec<u8>, sprite_records: usize, animations: usize }
+
+/// Independently hash-bound BONES.ANB data. It deliberately has its own type
+/// so a MULE selector cannot accidentally decode these sprite records.
+pub struct BonesAnimationDatabase { bytes: Vec<u8>, sprite_records: usize, animations: usize }
+
+impl BonesAnimationDatabase {
+    fn load(root: &Path) -> Result<Self, String> {
+        let bytes = read_bound(&root.join("creatures/BONES.ANB"))?;
+        Self::from_catalog_bytes(bytes)
+    }
+
+    fn from_catalog_bytes(bytes: Vec<u8>) -> Result<Self, String> {
+        // The exact selector-4 BONES input has five animation records, ten
+        // frames/components, and eleven sprite records including record zero.
+        // Keep these identity-specific extents strict; generic ANB structural
+        // validity alone does not admit a BONES resource.
+        let sections = AnbSections::parse(&bytes).map_err(|e| e.to_string())?;
+        if sections.header_word() != 5 || sections.offsets() != [3721, 3787, 3887, 4027] {
+            return Err("CD BONES ANB section layout differs from its pinned selector proof".into());
+        }
+        let metadata = sections.ui_metadata().map_err(|e| e.to_string())?;
+        let table = SpriteTable::from_anb(&bytes).map_err(|e| e.to_string())?;
+        if metadata.animation_count() != 5 || metadata.frame_count() != 10
+            || metadata.component_count() != 10 || table.records().len() != 11 {
+            return Err("CD BONES ANB record counts differ from its pinned selector proof".into());
+        }
+        let expected = [
+            (0u8, 0u8), (73, 30), (73, 30), (55, 34), (55, 34),
+            (65, 36), (65, 36), (56, 45), (56, 45), (72, 44), (72, 44),
+        ];
+        for (index, descriptor) in table.records().iter().enumerate() {
+            if (descriptor.width, descriptor.height) != expected[index] {
+                return Err(format!("CD BONES sprite record {index} differs from its pinned descriptor"));
+            }
+            if index != 0 {
+                table.decode_packed4(index, &bytes, 0)
+                    .map_err(|e| format!("CD BONES packed4 sprite record {index}: {e}"))?;
+            }
+        }
+        for animation_index in 0..metadata.animation_count() {
+            let animation = metadata.animation(animation_index).map_err(|e| e.to_string())?;
+            if animation.first_frame_offset != (animation_index * 28) as u32
+                || animation.last_frame_offset != (animation_index * 28 + 14) as u32
+                || animation.trailing_word != 2 {
+                return Err(format!("CD BONES animation {animation_index} differs from its pinned frame range"));
+            }
+        }
+        let sprite_records = table.records().len();
+        let animations = metadata.animation_count();
+        // These views borrow `bytes`; release them before retaining ownership.
+        drop(table);
+        Ok(Self { bytes, sprite_records, animations })
+    }
+
+    pub fn bytes(&self) -> &[u8] { &self.bytes }
+    pub fn sprite_record_count(&self) -> usize { self.sprite_records }
+    pub fn animation_count(&self) -> usize { self.animations }
+    pub fn frame_count(&self, animation_index: usize) -> Result<usize, String> {
+        let sections = AnbSections::parse(&self.bytes).map_err(|e| e.to_string())?;
+        let metadata = sections.ui_metadata().map_err(|e| e.to_string())?;
+        let animation = metadata.animation(animation_index).map_err(|e| e.to_string())?;
+        if animation.last_frame_offset < animation.first_frame_offset
+            || (animation.last_frame_offset - animation.first_frame_offset) % 14 != 0 {
+            return Err(format!("CD BONES animation {animation_index} has an invalid frame range"));
+        }
+        Ok(((animation.last_frame_offset - animation.first_frame_offset) / 14 + 1) as usize)
+    }
+
+    /// Decode a caller-selected animation/frame using the independently
+    /// admitted BONES high-first packed4 representation. `base` remains an
+    /// explicit color input; this API does not claim the runtime palette path.
+    pub fn decode_frame_packed4(
+        &self, animation_index: usize, frame_index: usize, base: u8,
+    ) -> Result<CreatureFramePixels, String> {
+        let sections = AnbSections::parse(&self.bytes).map_err(|e| e.to_string())?;
+        let metadata = sections.ui_metadata().map_err(|e| e.to_string())?;
+        let animation = metadata.animation(animation_index).map_err(|e| e.to_string())?;
+        let frame_count = self.frame_count(animation_index)?;
+        if frame_index >= frame_count {
+            return Err(format!("CD BONES animation {animation_index} frame {frame_index} is out of range"));
+        }
+        let offset = usize::try_from(animation.first_frame_offset).map_err(|e| e.to_string())?
+            .checked_add(frame_index.checked_mul(14).ok_or("BONES frame offset overflow")?)
+            .ok_or("BONES frame offset overflow")?;
+        let frame = metadata.frame_at(u32::try_from(offset).map_err(|e| e.to_string())?)
+            .map_err(|e| e.to_string())?;
+        let table = SpriteTable::from_anb(&self.bytes).map_err(|e| e.to_string())?;
+        let mut components = Vec::with_capacity(usize::from(frame.component_count));
+        for index in 0..usize::from(frame.component_count) {
+            let component = metadata.frame_component(frame, index).map_err(|e| e.to_string())?;
+            let sprite_record = usize::try_from(component.sprite_offset).map_err(|e| e.to_string())? / 6;
+            let sprite = table.decode_packed4(sprite_record, &self.bytes, base)
+                .map_err(|e| format!("CD BONES sprite record {sprite_record}: {e}"))?;
+            components.push(CreatureFrameComponent {
+                local_position: component.local_position(), flags: component.flags,
+                sprite_record, sprite,
+            });
+        }
+        Ok(CreatureFramePixels { animation: animation_index, frame_index, frame, components })
+    }
+}
 
 /// Decoded pixels and source component metadata for one explicitly selected
 /// packed-four-bit creature frame. This exposes asset contents only; a
@@ -286,14 +394,21 @@ impl Resources {
             .map_err(|e| format!("CD BTURR selector-1 database: {e}"))?;
         let angle = read_bound(&root.join("physics/angle.bin"))?;
         let bounce = read_bound(&root.join("physics/bounce.bin"))?;
-        let physics = PhysicsTables::from_mapped_bytes(&angle, &bounce).map_err(|e| e.to_string())?;
+        let corpse_friction = read_bound(&root.join("physics/corpse-friction.bin"))?;
+        let physics = PhysicsTables::from_mapped_bytes(&angle, &bounce).map_err(|e| e.to_string())?
+            .with_corpse_friction(&corpse_friction).map_err(|e| e.to_string())?;
+        let construction_border: Box<[u8; 8192]> = read_bound(&root.join("construction/border.bin"))?
+            .into_boxed_slice().try_into().map_err(|_| "construction border table must be exactly 8192 bytes")?;
         let mule = CreatureAnimationDatabase::load(root)?;
-        let mule_animations = MuleAnimations::from_anb(mule.bytes()).map_err(|e| format!("CD MULE animation metadata: {e}"))?;
+        let bones = BonesAnimationDatabase::load(root)?;
+        let mule_animations = MuleAnimations::from_anb(mule.bytes())
+            .and_then(|animations| animations.with_bones_anb(bones.bytes()))
+            .map_err(|e| format!("CD MULE/BONES animation metadata: {e}"))?;
         let ethereal_bytes = read_bound(&root.join("countdown/ETHEREAL.ANB"))?;
         let ethereal = crate::family8_scene::EtherealAnimationDatabase::from_bytes(&ethereal_bytes).map_err(|e| e.to_string())?;
         let family8_animation = genewars_runtime::family8_motion::Family8Animation::from_ethereal_anb(&ethereal_bytes).map_err(|e| format!("{e:?}"))?;
         let family8_directions = genewars_runtime::family8_motion::Family8DirectionalAnimations::from_ethereal_anb(&ethereal_bytes).map_err(|e|format!("{e:?}"))?;
-        Ok((Self { _header: header, title, atlas, fade, gla, panel, font0_dat, font0_tab, text, palette, plants, actors, effects, bturr_selector1, physics, mule, mule_animations, ethereal, family8_animation, family8_directions }, world, target))
+        Ok((Self { _header: header, title, atlas, fade, gla, panel, font0_dat, font0_tab, text, palette, plants, actors, effects, bturr_selector1, physics, construction_border, mule, bones, mule_animations, ethereal, family8_animation, family8_directions }, world, target))
     }
 
     pub fn render(&self, world: &MissionWorld, target: [i16;2]) -> Result<Frame,String> {
@@ -387,5 +502,85 @@ mod building_resource_tests {
         assert_eq!(animation.holds().as_slice(), &[0, 0, 0]);
         assert_eq!(animation.frames()[0].display_dimensions, (33, 106));
         assert_eq!(animation.frames()[2].components.len(), 2);
+    }
+
+    #[test]
+    fn runtime_bundle_admits_the_validated_construction_border_slice() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../../private/integration/game-runtime");
+        let bytes = read_bound(&root.join("construction/border.bin"))
+            .expect("the mapped construction border table is catalog-bound");
+        assert_eq!(bytes.len(), 8192);
+        assert_eq!(sha256_hex(&bytes), "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47");
+    }
+
+    #[test]
+    fn bones_selector_database_matches_all_pinned_raw_sprite_pixels_and_masks() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../../private/integration/game-runtime");
+        let bytes = read_bound(&root.join("creatures/BONES.ANB"))
+            .expect("exact selector-4 BONES resource is catalog-bound");
+        let database = BonesAnimationDatabase::from_catalog_bytes(bytes).unwrap();
+        assert_eq!(database.animation_count(), 5);
+        assert_eq!(database.sprite_record_count(), 11);
+        let expected: [(usize, &str, &str); 10] = [
+            (1, "adb2762e279b460f548c5d1ec166cd19cfa3b7365823498f72a3bbc12fbf08dc", "0c742d6101e72146710977acc8ad63d0f86f59fbe763a477176187276e7c7ed3"),
+            (2, "d61ade207c337276a99f106f469db1aff9b29a445f03a5aa54c3fad7b84a8ffc", "14ccd3e3d8114831d765a4a820951a318e1b75f819d55cff74e974084f6b6de5"),
+            (3, "946d9724e8c678728c90debe0ef3a7c309aa3cd4ebc94d2bb57867ae7b349443", "916fea846ee727a585371100317a8957882980d33772ea72064138a13e7f37f2"),
+            (4, "b17dd6abf4174a66c9171506080784abc5c01283c92e32ee3981a76d9585a706", "97893f58a152b94fad600e5c389f65f4deffe211bc8efaaf0fb2d3a43fa70d9a"),
+            (5, "53efdcfcd2593ed696d684ab6eb53ed4e6af9d738e6b897c228fe666be3b6996", "b164948123a83c86524e172994fc50720abe9ef1f4a3ef9c8635580dd7c21f46"),
+            (6, "b21d332324bb0090e69af2feedaefbb955be45a3eef01cfde0e4263c059b2424", "206f50d3e105574ada6802aee17aac24cea681ab152fe41854d3915c4ec948d9"),
+            (7, "388a8c3182e91b129a5a4d74024014005dc07f90ad0bc0ad4e62ee46ec62f797", "cc46c0fe15dc42d0fc2a415cb9f352c970f0eb997b59bf30f8380c63145ef969"),
+            (8, "54076d35917730b2d2ec826a7e12ac0cbd26129dea9dbf93f61d2f8ed31163c5", "6aa5be339dfcc14ad7b35fe666a49cf29f3af271b2481add63541df4d7f10391"),
+            (9, "c2d43f2268adbc20c151589f77291ba28cf6a6a6364c66a6b1d0c41fd2ab587d", "b4f6fa41e6c7cb9abde87824481cd89693ec6da79eb94db9b877971a4a10df22"),
+            (10, "3de4568ab234a2f375408d229feb75feddf43e85d235009c4cfa4b92d5466fcc", "e9461a79c2bd19741922a37e60f2500307d77287fbd2b34656204f7f34edeea8"),
+        ];
+        let mut seen = std::collections::BTreeSet::new();
+        for animation in 0..database.animation_count() {
+            for frame_index in 0..database.frame_count(animation).unwrap() {
+                let frame = database.decode_frame_packed4(animation, frame_index, 0).unwrap();
+                assert_eq!(frame.components.len(), 1);
+                let component = &frame.components[0];
+                seen.insert(component.sprite_record);
+                let (_, expected_pixels, expected_mask) = expected.iter()
+                    .find(|(record, _, _)| *record == component.sprite_record).unwrap();
+                let mask = component.sprite.opaque.iter().map(|&v| u8::from(v)).collect::<Vec<_>>();
+                assert_eq!(sha256_hex(&component.sprite.indices), *expected_pixels, "sprite {} pixels", component.sprite_record);
+                assert_eq!(sha256_hex(&mask), *expected_mask, "sprite {} mask", component.sprite_record);
+            }
+        }
+        assert_eq!(seen, (1usize..=10).collect());
+    }
+
+    #[test]
+    fn mule_state26_metadata_requires_the_hash_bound_bones_database() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../../private/integration/game-runtime");
+        let mule = CreatureAnimationDatabase::load(&root).unwrap();
+        let bones = BonesAnimationDatabase::load(&root).unwrap();
+        let mule_only = MuleAnimations::from_anb(mule.bytes()).unwrap();
+        assert!(mule_only.frame_metadata(25, 4, 0).is_ok(), "pre-BONES selector remains in MULE");
+        assert!(mule_only.frame_metadata(26, 4, 0).is_err(), "state26 must not fall back to MULE animation4");
+
+        let bound = mule_only.with_bones_anb(bones.bytes()).unwrap();
+        assert!(bound.frame_metadata(26, 4, 0).is_ok(), "state26 animation4 frame0 uses BONES");
+        assert!(bound.frame_metadata(27, 4, 1).is_ok(), "state27 animation4 frame1 uses BONES");
+        assert!(bound.frame_metadata(26, 4, 2).is_err(), "BONES animation4 has only the admitted two frames");
+        assert!(MuleAnimations::from_anb(mule.bytes()).unwrap()
+            .with_bones_anb(&bones.bytes()[..bones.bytes().len() - 1]).is_err(),
+            "truncated BONES cannot satisfy the separate database binding");
+    }
+
+    #[test]
+    fn runtime_load_keeps_the_hash_bound_bones_database_attached_to_mule_metadata() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../../private/integration/game-runtime");
+        let (resources, _, _) = Resources::load(&root)
+            .expect("runtime load admits the catalog-bound MULE and BONES resources");
+        let metadata = resources.mule_animations.frame_metadata(26, 4, 0)
+            .expect("state 26 selector 4 resolves through BONES after production loading");
+        assert_eq!(metadata, (0, 0));
+        assert!(resources.mule_animations.frame_metadata(26, 4, 2).is_err(),
+            "the loaded BONES binding still enforces its two-frame bound");
     }
 }

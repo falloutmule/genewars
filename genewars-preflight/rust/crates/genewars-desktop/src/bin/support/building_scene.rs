@@ -61,14 +61,47 @@ pub fn draw_bturr_incomplete_common(
     })
 }
 
+/// Draw the proved completed BTURR selector-1 main image. The completed-state
+/// status/owner decoration branch remains omitted, as does the shadow pass.
+pub fn draw_bturr_completed_common(
+    resource: &BuildingResourceDatabase,
+    record: &[u8; 67],
+    origin: [i16; 2],
+    global_flags: u8,
+    fade_row: Option<&[u8]>,
+    blend_table: Option<&[u8]>,
+    destination: &mut [u8],
+    width: usize,
+    height: usize,
+    pitch: usize,
+) -> Result<BuildingSceneReceipt, BuildingResourceError> {
+    let main_image = resource.draw_completed_selector1_common(
+        record,
+        BuildingCommonDrawContext { origin, global_flags },
+        fade_row,
+        blend_table,
+        destination,
+        width,
+        height,
+        pitch,
+    )?;
+    Ok(BuildingSceneReceipt {
+        main_image,
+        omissions: BuildingSceneOmissions {
+            shadow_pass_included: false,
+            post_image_overlays_included: false,
+        },
+    })
+}
+
 /// Type-level marker for callers that persist a renderer policy alongside a
 /// frame. The only supported policy is a common main-image diagnostic.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum BuildingScenePolicy {
-    BturrIncompleteMainImageOnly,
+    BturrSelector1CommonMainImageOnly,
 }
 
-pub const BUILDING_SCENE_POLICY: BuildingScenePolicy = BuildingScenePolicy::BturrIncompleteMainImageOnly;
+pub const BUILDING_SCENE_POLICY: BuildingScenePolicy = BuildingScenePolicy::BturrSelector1CommonMainImageOnly;
 
 #[cfg(test)]
 mod tests {
@@ -98,7 +131,7 @@ mod tests {
     #[test]
     fn wrapper_reports_main_image_and_explicitly_omits_later_layers() {
         let resource = resource();
-        assert_eq!(BUILDING_SCENE_POLICY, BuildingScenePolicy::BturrIncompleteMainImageOnly);
+        assert_eq!(BUILDING_SCENE_POLICY, BuildingScenePolicy::BturrSelector1CommonMainImageOnly);
         for frame_index in 0..3 {
             let mut pixels = vec![0x55u8; (180 - 1) * 192 + 180];
             let receipt = draw_bturr_incomplete_common(
@@ -111,6 +144,30 @@ mod tests {
             assert!(!receipt.omissions.post_image_overlays_included);
             for row in 0..179 {
                 assert!(pixels[row * 192 + 180..(row + 1) * 192].iter().all(|pixel| *pixel == 0x55));
+            }
+        }
+    }
+
+    #[test]
+    fn completed_wrapper_draws_animation_one_and_keeps_omissions_explicit() {
+        let resource = resource();
+        for frame in 0..8u8 {
+            let mut completed = record(frame);
+            completed[0x19] = 1;
+            completed[0x31..0x33].copy_from_slice(&1u16.to_le_bytes());
+            completed[0x17] = 30;
+            let mut pixels = vec![0x5a; (480 - 1) * 648 + 640];
+            let receipt = draw_bturr_completed_common(
+                &resource, &completed, [320, 240], 0, None, None,
+                &mut pixels, 640, 480, 648,
+            ).unwrap();
+            assert_eq!(receipt.main_image.animation_index, 1);
+            assert_eq!(receipt.main_image.frame_index, frame);
+            assert!(receipt.main_image.color.pixels_written > 0);
+            assert!(!receipt.omissions.shadow_pass_included);
+            assert!(!receipt.omissions.post_image_overlays_included);
+            for row in 0..479 {
+                assert!(pixels[row * 648 + 640..(row + 1) * 648].iter().all(|pixel| *pixel == 0x5a));
             }
         }
     }

@@ -4,7 +4,7 @@
 use std::path::Path;
 use genewars_assets::{ConqMissionSource,TextStringTable};
 use genewars_core::cd_candidate::{interpolate_height,interpolate_entity_shade,camera_cells_for_target};
-use genewars_runtime::{actor_world::{ActorWorld,LandingEffectCallback,GroundMoveInput,GroundMoveOutcome},
+use genewars_runtime::{actor_world::{ActorWorld,LandingEffectCallback,GroundMoveInput,GroundMoveOutcome,ConstructionAwareActorCallback},
     actor_pool::ActorHandleBindings,blueprint::{BlueprintNames,BlueprintRng},
     player_state::{PlayerState,ActorOriginSample},actor_activation::TrigTables,
     creature_world::MuleStepContext,plant_spread::SpreadDirections,
@@ -25,6 +25,7 @@ pub struct SharedMission {
     trig:TrigTables,
     plant_spread:SpreadDirections,
     ui:RetirementUiState,
+    terrain_jobs:genewars_runtime::terrain_job_pool::TerrainJobPool,
     pub frame_counter:u64,
     pub selected:Option<usize>,
     pub command_count:u64,
@@ -40,6 +41,13 @@ impl SharedMission {
         let actor_priors=zero_record_box::<20,200>();
         let mut world=ActorWorld::from_mission(&source,&actor_priors,[ActorHandleBindings::empty();20],players,
             BlueprintRng{seed,ring:0,draw_count:0}).map_err(|e|e.to_string())?;
+        world.initialize_mission_player_funds(source.active_count_byte()).map_err(|e|e.to_string())?;
+        let building_priors=zero_record_box::<256,67>();
+        world.admit_buildings(&building_priors,[None;256]).map_err(|e|e.to_string())?;
+        // Preserve every source job byte, including opaque inactive data.
+        let job_records=core::array::from_fn(|slot|mission_bytes[0x1ec7+176*slot..0x1ec7+176*(slot+1)].try_into().unwrap());
+        let terrain_jobs=genewars_runtime::terrain_job_pool::TerrainJobPool::admit(job_records,mission_bytes[0x2ff7])
+            .map_err(|e|format!("terrain-job admission: {e:?}"))?;
         let creature_priors=zero_record_box::<300,124>();
         world.admit_creatures(&creature_priors).map_err(|e|e.to_string())?;
         let effect_priors=zero_record_box::<200,81>();
@@ -65,7 +73,7 @@ impl SharedMission {
         }
         let plant_spread=SpreadDirections::from_mapped_bytes(&read_bound(&root.join("physics/plant-spread.bin"))?).map_err(|e|e.to_string())?;
         Ok(Self{world,trig:TrigTables::generate_pinned().map_err(|e|e.to_string())?,plant_spread,ui:RetirementUiState::native_empty(),
-            frame_counter:0,selected:None,command_count:0,pending_requests,plant_births:0,seed})
+            terrain_jobs,frame_counter:0,selected:None,command_count:0,pending_requests,plant_births:0,seed})
     }
     pub fn render(&self,resources:&Resources,target:[i16;2])->Result<Frame,String> {
         // Until original admission/order is integrated, only linked active
@@ -74,13 +82,50 @@ impl SharedMission {
             (r[6]==3&&r[0x70]&1!=0).then_some(slot)).collect::<Vec<_>>();
         let effects=self.world.effects().ok_or("effects not admitted")?.records().iter().enumerate()
             .filter_map(|(slot,r)|(r[6]!=0).then_some(slot)).collect::<Vec<_>>();
-        let mut frame=actor_scene::render_actor_world_with_selected_portrait(resources,&self.world,target,0,self.frame_counter as u8,&actors,&[0],
+        let creatures=self.world.creatures().map(|pool|pool.records().iter().enumerate()
+            .filter_map(|(slot,r)|(r[6]==1).then_some(slot)).collect::<Vec<_>>()).unwrap_or_default();
+        let mut frame=actor_scene::render_actor_world_with_selected_portrait(resources,&self.world,target,0,self.frame_counter as u8,&actors,&creatures,
             actor_scene::MuleSceneGlobals{global_shadow_mode:0,inherited_wrapper_flags:0,clip_flag_bit0:false},&effects,self.selected)?.frame;
         if let Some(slot)=self.selected {
             actor_scene::draw_selected_actor_text(resources,&self.world,slot,&mut frame.image)?;
             frame.rgb_sha256=genewars_runtime::identity::sha256_hex(frame.image.rgb_bytes());
         }
+        // The job overlay is authoritative and is not mirrored into backing.
+        // Include it in replay identity; this remains a diagnostic, not a save.
+        let mut identity=b"GeneWars SharedMission jobs v1\0".to_vec();
+        identity.extend_from_slice(frame.world_sha256.as_bytes());
+        identity.push(self.terrain_jobs.count());
+        for record in self.terrain_jobs.records(){identity.extend_from_slice(record);}
+        frame.world_sha256=genewars_runtime::identity::sha256_hex(&identity);
         Ok(frame)
+    }
+    /// Read-only receipt for the owned terrain-job pool, used by development
+    /// acceptance checks; no task or job state is synthesized by this view.
+    pub fn active_terrain_job_count(&self)->u8 { self.terrain_jobs.count() }
+    pub fn terrain_job_records(&self)->&[[u8;176];25] {
+        self.terrain_jobs.records()
+    }
+    pub fn player_funds_json(&self)->String {
+        let entries=(0..4u8).map(|slot| {
+            let funds=i32::from_le_bytes(self.world.player(slot).unwrap().bytes()[0x4a3..0x4a7].try_into().unwrap());
+            format!("{{\"slot\":{slot},\"balance\":{funds}}}")
+        }).collect::<Vec<_>>().join(",");
+        format!("[{entries}]")
+    }
+    pub fn building_state_json(&self)->String {
+        let word=|r:&[u8],p:usize|i16::from_le_bytes([r[p],r[p+1]]);
+        let entries=self.world.buildings().into_iter().flat_map(|pool|pool.records().iter().enumerate())
+            .filter(|(_,r)|r[6]==4).map(|(slot,r)|
+                format!("{{\"slot\":{slot},\"owner\":{},\"selector\":{},\"position\":[{},{}],\"animation\":{},\"frame\":{},\"progress_word_2b\":{},\"phase_byte_2f\":{},\"flags_word_31\":{}}}",
+                    r[24],r[0x2d],word(r,7),word(r,9),r[0x19],r[0x1b],word(r,0x2b),r[0x2f],u16::from_le_bytes([r[0x31],r[0x32]])))
+            .collect::<Vec<_>>().join(",");
+        format!("[{entries}]")
+    }
+    pub fn terrain_job_state_json(&self)->String {
+        let entries=self.terrain_jobs.records().iter().enumerate().filter(|(_,r)|i16::from_le_bytes([r[12],r[13]])>=0)
+            .map(|(slot,r)|format!("{{\"slot\":{slot},\"raw\":\"{}\"}}",r.iter().map(|b|format!("{b:02x}")).collect::<String>()))
+            .collect::<Vec<_>>().join(",");
+        format!("{{\"count\":{},\"records\":[{entries}]}}",self.terrain_jobs.count())
     }
     pub fn step(&mut self,resources:&Resources)->Result<String,String> {
         let mut staged=self.clone();let event=staged.step_inner(resources)?;*self=staged;Ok(event)
@@ -90,17 +135,39 @@ impl SharedMission {
         let frame=u32::try_from(self.frame_counter+1).map_err(|_|"source frame counter exceeds u32")?;
         // 58780 visits players and their current actor lists. 57A10 returns
         // immediately before the ready bit is set by the landing callback.
-        let actors=self.world.step_actor_callbacks_in_player_order(4,frame,context,&resources.physics,&self.trig,
-            resources.actors.databases(),0,0).map_err(|e|e.to_string())?;
+        let actors=self.world.step_actor_callbacks_with_construction(4,frame,context,&resources.physics,&self.trig,
+            resources.actors.databases(),&mut self.terrain_jobs,&resources.construction_border,
+            0,self.selected.map(|slot|slot as u16),0,0).map_err(|e|format!("actor pass: {e:?}"))?;
         let callbacks=actors.len();
-        self.pending_requests+=actors.iter().filter(|r|r.acknowledgement.is_some()).count()as u64;
-        self.pending_requests+=actors.iter().map(|r|r.pending_events.len()as u64).sum::<u64>();
-        self.pending_requests+=self.world.step_empty_building_bookkeeping(0).map_err(|e|e.to_string())?.len()as u64;
+        for callback in &actors {match callback {
+            ConstructionAwareActorCallback::Ordinary(r)=>self.pending_requests+=u64::from(r.acknowledgement.is_some())+r.pending_events.len()as u64,
+            ConstructionAwareActorCallback::Architect{receipt:r,..}=>{
+                self.pending_requests+=r.motion.pending_events.len()as u64;
+                self.pending_requests+=r.setup.as_ref().map_or(0,|p|p.viewport_invalidations.len()as u64+1);
+                self.pending_requests+=r.terraform.as_ref().map_or(0,|p|p.viewport_invalidations.len()as u64+u64::from(p.pending_audio.is_some()));
+                self.pending_requests+=r.terraform_wait.as_ref().map_or(0,|p|u64::from(p.pending_audio.is_some()));
+                self.pending_requests+=r.cancellation.as_ref().map_or(0,|p|u64::from(p.panel_refresh_pending));
+                self.pending_requests+=u64::from(r.building_effect.is_some());
+                self.pending_requests+=u64::from(r.completion_message_index.is_some());
+                self.pending_requests+=r.progress.as_ref().map_or(0,|p|u64::from(p.pending_audio_4d)+u64::from(p.ui_refresh_required));
+            },
+        }}
+        let buildings=self.world.step_tracking_selector1_building_callbacks(4,0,&resources.bturr_selector1,frame,&resources.physics).map_err(|e|e.to_string())?;
+        self.pending_requests+=buildings.notices.len()as u64;
+        for callback in &buildings.callbacks {
+            use genewars_runtime::actor_world::Selector1BuildingCallback;
+            match callback {
+                Selector1BuildingCallback::Incomplete{plan,..}=>self.pending_requests+=u64::from(plan.stop_audio_23),
+                Selector1BuildingCallback::TrackingCompleted{plan,..}=>self.pending_requests+=u64::from(plan.audio.is_some()),
+                Selector1BuildingCallback::QuietCompleted{..}=>{},
+            }
+        }
         let climate=i16::from_le_bytes(self.world.backing_bytes()[0x1c61..0x1c63].try_into().unwrap());
         let creatures=self.world.step_neutral_creature_callbacks(4,
             MuleStepContext{frame_counter:frame,gravity:context.gravity,water_height:context.water_height,climate},
             &resources.physics,&self.trig,&resources.mule_animations).map_err(|e|e.to_string())?;
         self.pending_requests+=(creatures.pending_ui_animations.len()+creatures.pending_audio.len()+creatures.pending_plant_retirements.len()+creatures.pending_portrait_refreshes.len())as u64;
+        self.pending_requests+=creatures.retirements.iter().map(|r|1+r.pending_ui_cleanup.len()as u64).sum::<u64>();
         let plants=self.world.tick_plants_with_reproduction(&self.plant_spread).map_err(|e|e.to_string())?;
         self.plant_births+=plants.events.iter().filter(|event|matches!(event,genewars_runtime::TickEvent::Created{..})).count()as u64;
         self.pending_requests+=plants.events.iter().filter(|event|matches!(event,
@@ -111,7 +178,18 @@ impl SharedMission {
         self.pending_requests+=countdown.callbacks.iter().map(|c|u64::from(c.plan.pending_audio.is_some())+u64::from(c.plan.pending_ui_message)+c.retirement.as_ref().map_or(0,|r|r.stop_audio.len()as u64+u64::from(r.fade_audio.is_some()))+u64::from(c.parent_response.as_ref().is_some_and(|p|p.state7_message_variant.is_some()))).sum::<u64>();
         self.world.step_empty_families_7_and_6().map_err(|e|e.to_string())?;
         let result=self.world.step_landing_effect_callbacks(context,&resources.physics,&self.trig,&self.ui).map_err(|e|e.to_string())?;
-        self.ui=result.ui_after;self.frame_counter+=1;
+        self.ui=result.ui_after;
+        //1C120 runs79220 after effects. Initial light is the pinned mapped
+        // candidate vector106604/608/60C; later light changes remain unproved.
+        let backing=self.world.backing_bytes();
+        let word=|offset|i16::from_le_bytes([backing[offset],backing[offset+1]]);
+        let environment=genewars_runtime::construction_maintenance::TerrainEnvironment{
+            climate_center:[word(0x1ea2),word(0x1ea4)],raw_water_height:word(0x1c63),
+            climate:word(0x1c61),light:[181,0,-181]};
+        let terrain=self.world.step_terrain_jobs_without_height_changes(&mut self.terrain_jobs,environment,&resources.construction_border)
+            .map_err(|e|format!("terrain-job pass: {e:?}"))?;
+        self.pending_requests+=terrain.iter().map(|r|r.viewport_invalidations.len()as u64).sum::<u64>();
+        self.frame_counter+=1;
         let(mut created,mut retired)=(0,0);
         for callback in result.primary.iter().chain(&result.newborn) {
             match callback {
@@ -120,12 +198,12 @@ impl SharedMission {
                     self.pending_requests+=e.pending_events.len()as u64;
                     if let Some(r)=&e.retirement {self.pending_requests+=r.pending_ui_events.len()as u64;}
                 },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)=>{
-                    retired+=usize::from(e.retired);self.pending_requests+=e.pending_ui_events.len()as u64;
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)=>{
+                    created+=usize::from(e.created_effect.is_some());retired+=usize::from(e.retired);self.pending_requests+=e.pending_ui_events.len()as u64;
                 },
             }
         }
-        Ok(format!("world pass {}; actors {callbacks}; created {created}; retired {retired}; active {}; RNG draws {}; neutral Mule active; remaining systems frozen",
+        Ok(format!("world pass {}; actors {callbacks}; created {created}; retired {retired}; active {}; RNG draws {}; bounded world callbacks",
             self.frame_counter,result.queue_candidates.len(),self.world.rng().draw_count))
     }
     pub fn select(&mut self,slot:usize)->Result<(),String> {
@@ -133,11 +211,24 @@ impl SharedMission {
         if actor[6]!=3||actor[24]!=0||actor[0x70]&1==0 {return Err("actor is not active for this player".into());}
         self.selected=Some(slot);Ok(())
     }
+    /// Development-only opcode-5 assignment for the selected, already-arrived
+    /// architect. Selector 1 is the only admitted construction resource in
+    /// this host. The source assignment planner owns the state/category and
+    /// reinitialization guards; no site coordinates or readiness are supplied.
+    pub fn assign_selected_bturr(&mut self)->Result<genewars_runtime::actor_construction::ArchitectAssignmentPlan,String> {
+        let slot=self.selected.ok_or("select an architect first")?;
+        let mut staged=self.world.clone();
+        let plan=staged.assign_architect_construction(
+            u16::try_from(slot).map_err(|_|"selected architect slot is outside the native range")?,
+            0,0x0100,true,true).map_err(|e|format!("{e:?}"))?;
+        self.world=staged;
+        Ok(plan)
+    }
     pub fn actor_state_json(&self)->String {
         let word=|r:&[u8],p:usize|i16::from_le_bytes([r[p],r[p+1]]);
         let entries=self.world.actors().records().iter().enumerate().filter(|(_,r)|r[6]==3).map(|(slot,r)|
-            format!("{{\"slot\":{slot},\"owner\":{},\"position\":[{},{}],\"destination\":[{},{}],\"pending_destination\":[{},{}],\"state\":{},\"ready\":{},\"pending_move\":{},\"animation\":{},\"frame\":{}}}",
-                r[24],word(r,7),word(r,9),word(r,11),word(r,13),word(r,0x5c),word(r,0x5e),r[0x55],r[0x70]&1!=0,r[0x57]&2!=0,r[0x19],r[0x1b]))
+            format!("{{\"slot\":{slot},\"owner\":{},\"position\":[{},{}],\"destination\":[{},{}],\"pending_destination\":[{},{}],\"state\":{},\"ready\":{},\"pending_move\":{},\"assignment_pending\":{},\"building_selector\":{},\"animation\":{},\"frame\":{},\"action_byte_59\":{},\"construction_stage_word_88\":{},\"job_slot_byte_90\":{}}}",
+                r[24],word(r,7),word(r,9),word(r,11),word(r,13),word(r,0x5c),word(r,0x5e),r[0x55],r[0x70]&1!=0,r[0x57]&2!=0,r[0x82]!=0,r[0x83],r[0x19],r[0x1b],r[0x59],word(r,0x88),r[0x90]))
             .collect::<Vec<_>>().join(",");
         format!("[{entries}]")
     }

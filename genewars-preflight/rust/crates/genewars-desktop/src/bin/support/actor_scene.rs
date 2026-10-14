@@ -18,8 +18,9 @@ use genewars_runtime::{
     identity::sha256_hex,
 };
 
-use super::runtime_resources::creature_scene::{draw_supported_mule_record, CreatureDrawError, CreatureFrameReceipt};
+use super::runtime_resources::creature_scene::{draw_supported_bones_record, draw_supported_mule_record, CreatureDrawError, CreatureFrameReceipt};
 use super::effect_scene::{draw_effect_slots, EffectSceneReceipt};
+use super::building_scene::{draw_bturr_completed_common, draw_bturr_incomplete_common, BuildingSceneReceipt};
 use super::runtime_resources::{Frame, Resources};
 
 #[path = "actor_panel_text.rs"]
@@ -76,6 +77,13 @@ pub struct ActorSceneMuleReceipt {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ActorSceneBuildingReceipt {
+    pub building_slot: usize,
+    pub projected_origin: [i16; 2],
+    pub main_image: BuildingSceneReceipt,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct SelectedActorPortraitReceipt {
     pub actor_slot: usize,
     pub origin: [i16; 2],
@@ -92,6 +100,8 @@ pub struct ActorSceneFrame {
     pub mule_receipts: Vec<ActorSceneMuleReceipt>,
     pub pending_effect_slots: Vec<usize>,
     pub effect_scene: Option<EffectSceneReceipt>,
+    pub building_receipts: Vec<ActorSceneBuildingReceipt>,
+    pub building_layer_policy: &'static str,
     pub family8_receipts: Vec<super::family8_scene::Family8DrawReceipt>,
     pub family8_layer_policy: &'static str,
     /// Explicit selected-actor panel portrait. Its caller controls whether a
@@ -308,18 +318,22 @@ fn render_actor_world_layers(
                 });
                 continue;
             }
-            if pool.binding(slot).map_err(|e| e.to_string())?
-                != Some(genewars_runtime::creature_world::CreatureAnimationBinding::MuleSelector4) {
-                return Err(format!("creature slot {slot} has no admitted MULE animation binding"));
-            }
+            let binding = pool.binding(slot).map_err(|e| format!("{e:?}"))?;
             let virtual_height = i32::from_le_bytes(record[0x27..0x2b].try_into().unwrap())
                 .wrapping_sub(i32::from_le_bytes(record[0x11..0x15].try_into().unwrap()));
-            let health = i32::from(i16::from_le_bytes([record[0x6a], record[0x6b]]));
-            let maximum = i32::from(i16::from_le_bytes([record[0x64], record[0x65]]));
-            if maximum == 0 { return Err(format!("creature slot {slot} has zero health maximum for wrapper depth")); }
-            let quotient = health.checked_mul(8).ok_or("MULE depth numerator overflow")? / maximum;
-            let depth_value = 8i32.checked_sub(quotient).ok_or("MULE wrapper depth overflow")?;
-            let depth = u8::try_from(depth_value).map_err(|_| format!("creature slot {slot} wrapper depth {depth_value} is outside byte range"))?;
+            let depth = if binding == Some(genewars_runtime::creature_world::CreatureAnimationBinding::MuleSelector4) {
+                let health = i32::from(i16::from_le_bytes([record[0x6a], record[0x6b]]));
+                let maximum = i32::from(i16::from_le_bytes([record[0x64], record[0x65]]));
+                if maximum == 0 { return Err(format!("creature slot {slot} has zero health maximum for wrapper depth")); }
+                let quotient = health.checked_mul(8).ok_or("MULE depth numerator overflow")? / maximum;
+                let depth_value = 8i32.checked_sub(quotient).ok_or("MULE wrapper depth overflow")?;
+                u8::try_from(depth_value).map_err(|_| format!("creature slot {slot} wrapper depth {depth_value} is outside byte range"))?
+            } else if binding == Some(genewars_runtime::creature_world::CreatureAnimationBinding::BonesSelector4) {
+                if !matches!(record[0x5e], 26 | 27) { return Err(format!("creature slot {slot} BONES binding is outside state 26/27")); }
+                0
+            } else {
+                return Err(format!("creature slot {slot} has no admitted MULE or BONES animation binding"));
+            };
             let world_position = [
                 i16::from_le_bytes([record[7], record[8]]),
                 i16::from_le_bytes([record[9], record[10]]),
@@ -330,11 +344,20 @@ fn render_actor_world_layers(
                 i16::try_from(point[0]).map_err(|_| format!("creature slot {slot} projected X is outside signed-word range"))?,
                 i16::try_from(point[1]).map_err(|_| format!("creature slot {slot} projected Y is outside signed-word range"))?,
             ];
-            let composition = draw_supported_mule_record(&resources.mule, record,
-                [i32::from(ground_origin[0]), i32::from(ground_origin[1])],
-                virtual_height, globals.global_shadow_mode, globals.inherited_wrapper_flags,
-                globals.clip_flag_bit0, shadow_color, depth, resources.fade_bytes(),
-                resources.main_gla_bytes(), [512, 480], 640, &mut indexed.indices[128..])
+            let projected = [i32::from(ground_origin[0]), i32::from(ground_origin[1])];
+            let composition = match binding {
+                Some(genewars_runtime::creature_world::CreatureAnimationBinding::MuleSelector4) =>
+                    draw_supported_mule_record(&resources.mule, record, projected,
+                        virtual_height, globals.global_shadow_mode, globals.inherited_wrapper_flags,
+                        globals.clip_flag_bit0, shadow_color, depth, resources.fade_bytes(),
+                        resources.main_gla_bytes(), [512, 480], 640, &mut indexed.indices[128..]),
+                Some(genewars_runtime::creature_world::CreatureAnimationBinding::BonesSelector4) =>
+                    draw_supported_bones_record(&resources.bones, record, projected,
+                        virtual_height, globals.global_shadow_mode, globals.inherited_wrapper_flags,
+                        globals.clip_flag_bit0, shadow_color, resources.fade_bytes(),
+                        resources.main_gla_bytes(), [512, 480], 640, &mut indexed.indices[128..]),
+                None => unreachable!("binding admitted above"),
+            }
                 .map_err(|error| format!("creature slot {slot}: {}", mule_draw_error(error)))?;
             mule_receipts.push(ActorSceneMuleReceipt {
                 creature_slot: slot, drawn: true, projected_ground_origin: Some(ground_origin),
@@ -394,6 +417,47 @@ fn render_actor_world_layers(
                 .map_err(|e|format!("family8 slot {slot}: {e}"))?);
         }
     }
+    // Selector-1 animations 0 and 1 use the common source 43A40 main-image
+    // path. Completion flags control later overlays, not this image pass.
+    // Projection and ascending pool-slot
+    // order are explicit development policies; shadow and post-image owner/
+    // status overlays remain omitted. Empty pools add no pixels.
+    let mut building_receipts = Vec::new();
+    if let Some(pool) = world.buildings() {
+        for (slot, record) in pool.records().iter().enumerate().filter(|(_, r)| r[6] != 0) {
+            let binding = pool.binding(slot).map_err(|e| format!("{e:?}"))?;
+            if binding.map(|v| v.selector) != Some(1) || record[0x2d] != 1 {
+                return Err(format!("building slot {slot} has unsupported selector binding {binding:?}"));
+            }
+            let position = [
+                i16::from_le_bytes([record[7], record[8]]),
+                i16::from_le_bytes([record[9], record[10]]),
+            ];
+            let projected = entity_view_position(world.map(), position, camera, 128)
+                .map_err(|e| format!("building slot {slot} projection: {e}"))?;
+            let origin = [
+                i16::try_from(projected[0]).map_err(|_| format!("building slot {slot} projected X is outside signed-word range"))?,
+                i16::try_from(projected[1]).map_err(|_| format!("building slot {slot} projected Y is outside signed-word range"))?,
+            ];
+            let fade_row = if record[0x15] & 0x02 == 0 && record[0x17] < 30 {
+                let start = usize::from(record[0x17]) * 256;
+                Some(resources.fade_bytes().get(start..start + 256)
+                    .ok_or_else(|| format!("building slot {slot} fade row is outside FADE.DAT"))?)
+            } else { None };
+            let main_image = if record[0x19] == 1 {
+                draw_bturr_completed_common(
+                    &resources.bturr_selector1, record, origin, 0, fade_row,
+                    Some(resources.main_gla_bytes()), &mut indexed.indices[128..], 512, 480, 640,
+                )
+            } else {
+                draw_bturr_incomplete_common(
+                    &resources.bturr_selector1, record, origin, 0, fade_row,
+                    Some(resources.main_gla_bytes()), &mut indexed.indices[128..], 512, 480, 640,
+                )
+            }.map_err(|e| format!("building slot {slot}: {e}; candidate_record={}",record.iter().map(|b|format!("{b:02x}")).collect::<String>()))?;
+            building_receipts.push(ActorSceneBuildingReceipt { building_slot: slot, projected_origin: origin, main_image });
+        }
+    }
     let selected_portrait = if let Some(slot) = selected_actor_slot {
         Some(draw_selected_actor_portrait(resources, world, slot, selected_player, frame_counter,
             &mut indexed.indices)?)
@@ -401,7 +465,9 @@ fn render_actor_world_layers(
     let snapshot_sha256 = actor_world_snapshot_sha256(world);
     let frame = resources.finish_indexed(indexed, snapshot_sha256)?;
     Ok(ActorSceneFrame { frame, camera, actor_order: actor_order.to_vec(), actor_receipts, mule_receipts,
-        pending_effect_slots, effect_scene, selected_portrait, family8_receipts,
+        pending_effect_slots, effect_scene, building_receipts,
+        building_layer_policy: "active selector-1 buildings ascending slot after family8; admitted BTURR common main images for animation 0 and 1, shadow/overlays omitted",
+        selected_portrait, family8_receipts,
         family8_layer_policy: "active native slots ascending after effects; source interfamily order remains unproved",
         actor_order_policy: "caller-supplied; family2 queue order unproved",
         interfamily_layer_policy: match (creature_order.is_some(), effect_order.is_some()) {
@@ -510,6 +576,17 @@ fn actor_world_snapshot_sha256(world: &ActorWorld) -> String {
             });
         }
     } else { bytes.push(0); }
+    if let Some(buildings) = world.buildings() {
+        bytes.push(1);
+        for (slot, record) in buildings.records().iter().enumerate() {
+            bytes.extend_from_slice(record);
+            bytes.push(match buildings.binding(slot).ok().flatten() {
+                None => 0,
+                Some(genewars_runtime::building::BuildingAnimationBinding { selector: 1 }) => 1,
+                Some(genewars_runtime::building::BuildingAnimationBinding { selector }) => selector.wrapping_add(2),
+            });
+        }
+    } else { bytes.push(0); }
     // Family8 is also an owned overlay once admitted. Persist its logical
     // animation binding in the snapshot identity, never a host address.
     if let Some(pool) = world.family8() {
@@ -533,6 +610,7 @@ fn actor_world_snapshot_sha256(world: &ActorWorld) -> String {
             bytes.push(match creatures.binding(slot).ok().flatten() {
                 None => 0,
                 Some(genewars_runtime::creature_world::CreatureAnimationBinding::MuleSelector4) => 1,
+                Some(genewars_runtime::creature_world::CreatureAnimationBinding::BonesSelector4) => 9,
             });
         }
     } else { bytes.push(0); }
@@ -549,6 +627,7 @@ fn actor_world_snapshot_sha256(world: &ActorWorld) -> String {
 mod tests {
     use super::*;
     use genewars_assets::ConqMissionSource;
+    use super::super::shared_scene::SharedMission;
     use genewars_runtime::{
         actor_activation::TrigTables,
         actor_pool::ActorHandleBindings,
@@ -684,6 +763,30 @@ mod tests {
             "at least one active actor must exercise its indexed8 color path against the real map");
         assert_ne!(drawn.frame.image, legacy_frame.image, "the explicit actor layer should alter rendered pixels");
         assert_eq!(actor_world.actors().records().iter().filter(|record| record[6] == 3).count(), active.len());
+    }
+
+    #[test]
+    fn active_selector1_building_is_projected_and_drawn_as_main_image_only() {
+        let root = bundle();
+        let (resources, _, target) = Resources::load(&root).unwrap();
+        let mission_bytes = fs::read(root.join("terrain/CONQ001.DAT")).unwrap();
+        let mut shared = SharedMission::load(&root, &mission_bytes, 5428).unwrap();
+
+        let empty = render_actor_world(&resources, &shared.world, target, 0, 0, &[]).unwrap();
+        assert!(empty.building_receipts.is_empty());
+        let factory = shared.world.create_building(0, 1, [19839, 12927]).unwrap()
+            .expect("source factory admits the selector-1 building at the proved site");
+        let built = render_actor_world(&resources, &shared.world, target, 0, 0, &[]).unwrap();
+        assert_eq!(built.building_receipts.len(), 1);
+        let receipt = &built.building_receipts[0];
+        assert_eq!(receipt.building_slot, usize::from(factory.slot));
+        assert!(receipt.main_image.main_image.color.pixels_written > 0);
+        assert!(!receipt.main_image.omissions.shadow_pass_included);
+        assert!(!receipt.main_image.omissions.post_image_overlays_included);
+        assert_eq!(built.building_layer_policy,
+            "active selector-1 buildings ascending slot after family8; admitted BTURR common main images for animation 0 and 1, shadow/overlays omitted");
+        assert_ne!(built.frame.image.rgb_bytes(), empty.frame.image.rgb_bytes(),
+            "an on-screen factory record must change the actual indexed-to-RGB frame");
     }
 
     #[test]

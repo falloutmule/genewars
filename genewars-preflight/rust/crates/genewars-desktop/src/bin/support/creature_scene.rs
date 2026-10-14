@@ -7,10 +7,11 @@
 //! shade branch remains rejected. The caller supplies projected origin and
 //! wrapper/global flags. Resource, health-depth, and frame selection come from
 //! the checked record and ANB. Other creature states and shade paths remain
-//! unsupported.
+//! unsupported, except the independently admitted BONES selector-4 state
+//! 26/27 pair implemented by `draw_supported_bones_record`.
 
 use genewars_assets::IndexedSprite;
-use crate::runtime_resources::{CreatureAnimationDatabase, CreatureFramePixels};
+use crate::runtime_resources::{BonesAnimationDatabase, CreatureAnimationDatabase, CreatureFramePixels};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct CreatureForegroundInputs {
@@ -270,6 +271,87 @@ pub fn draw_supported_mule_record(
     Ok(receipt)
 }
 
+/// Draw the narrowly source-pinned BONES selector-4 state-26/27 pair through
+/// the ordinary 59470 shadow and 94F30 owner-palette color path. These states
+/// use animation 4, whose two frames and all sprite records are admitted by
+/// the exact BONES.ANB hash-bound database. Caller projection and global
+/// wrapper inputs remain explicit.
+pub fn draw_supported_bones_record(
+    database: &BonesAnimationDatabase,
+    record: &genewars_runtime::creature_world::CreatureRecord,
+    screen_origin: [i32; 2],
+    virtual_height: i32,
+    global_shadow_mode: u8,
+    incoming_wrapper_flags: u8,
+    clip_flag_bit0: bool,
+    shadow_color: u8,
+    fade: &[u8],
+    main_gla: &[u8],
+    clip: [usize; 2],
+    pitch: usize,
+    destination: &mut [u8],
+) -> Result<CreatureFrameReceipt, CreatureDrawError> {
+    if record[6] != 1 || record[0x18] != 4 || record[0x7a] != 4
+        || !matches!(record[0x5e], 26 | 27) || record[0x19] != 4 || record[0x1b] > 1
+        || record[0x15] & 0x10 != 0 {
+        return Err(CreatureDrawError::UnsupportedRecordState);
+    }
+    let frame = database.decode_frame_packed4(4, usize::from(record[0x1b]), 0)
+        .map_err(|_| CreatureDrawError::UnsupportedRecordState)?;
+    if frame.components.is_empty() || frame.components.iter().any(|component| component.flags != 0) {
+        return Err(CreatureDrawError::UnsupportedRecordState);
+    }
+    let factor = if record[0x77] == 255 && record[0x76] >= 100 {
+        256
+    } else {
+        (u16::from(record[0x76]) * u16::from(record[0x77]) / 100).clamp(150, 256)
+    };
+    let wrapper_flags = mule_wrapper_flags(record, incoming_wrapper_flags);
+    let origin = [screen_origin[0], if global_shadow_mode == 0 {
+        screen_origin[1].checked_sub(virtual_height >> 6).ok_or(CreatureDrawError::ArithmeticOverflow)?
+    } else { screen_origin[1] }];
+    let raw_shade = record[0x17];
+    let shade = if raw_shade == 0 { 0 } else {
+        let adjusted = i32::from(raw_shade) + (virtual_height >> 7);
+        if adjusted < 0 { return Err(CreatureDrawError::NegativeFadeRow(adjusted)); }
+        adjusted.min(31) as u8
+    };
+    let fade_start = usize::from(shade) * 256;
+    let fade_row = fade.get(fade_start..fade_start + 256)
+        .ok_or(CreatureDrawError::InvalidFadeRow(usize::from(shade)))?;
+    // BONES 59470's state>=26 branch fixes health depth to zero. Its special
+    // parity draw remains excluded by the record admission above.
+    let mut scratch = destination.to_vec();
+    let mut shadows = Vec::new();
+    if global_shadow_mode == 0 {
+        if main_gla.len() != 65536 { return Err(CreatureDrawError::InvalidGlaTable(main_gla.len())); }
+        for component in &frame.components {
+            let factor_usize = usize::from(factor);
+            let width = usize::from(component.sprite.width);
+            let height = usize::from(component.sprite.height);
+            let out_w = width.checked_mul(factor_usize).ok_or(CreatureDrawError::ArithmeticOverflow)? >> 8;
+            let scaled_x = (i32::from(component.local_position.0) * i32::from(factor)) >> 8;
+            let scaled_y = (i32::from(component.local_position.1) * i32::from(factor)) >> 9;
+            let x_offset = if wrapper_flags & 1 != 0 { -scaled_x - out_w as i32 } else { scaled_x };
+            let out_h = height.checked_mul(factor_usize).ok_or(CreatureDrawError::ArithmeticOverflow)? >> 8;
+            let y_offset = if wrapper_flags & 2 != 0 { -scaled_y - out_h as i32 } else { scaled_y };
+            let shadow_y = screen_origin[1].checked_add(i32::from(factor >> 5))
+                .ok_or(CreatureDrawError::ArithmeticOverflow)?;
+            let shadow_origin = [screen_origin[0].checked_add(x_offset).ok_or(CreatureDrawError::ArithmeticOverflow)?,
+                shadow_y.checked_add(y_offset).ok_or(CreatureDrawError::ArithmeticOverflow)?];
+            shadows.push(draw_mule_shadow_component(&component.sprite, shadow_origin, factor,
+                wrapper_flags, shadow_color, main_gla, clip, pitch, &mut scratch)?);
+        }
+    }
+    let mut receipt = draw_mule_color_frame(&frame, origin, factor, wrapper_flags,
+        clip_flag_bit0, 0, 135, fade_row, clip, pitch, &mut scratch)?;
+    destination.copy_from_slice(&scratch);
+    receipt.shadow_pending = false;
+    receipt.shadows = shadows;
+    receipt.effective_shade = shade;
+    Ok(receipt)
+}
+
 /// Draw the foreground components of MULE's caller-selected frame through
 /// 94F30/93F80. `origin` is the already projected and height-adjusted frame
 /// origin supplied by the caller. The caller also supplies the incoming
@@ -501,6 +583,92 @@ mod tests {
                 assert_eq!(receipt.components.len(), frame.components.len());
                 assert!(receipt.components.iter().all(|c| c.output_size[0] <= 255 && c.output_size[1] <= 255));
             }
+        }
+    }
+
+    #[test]
+    fn bones_state26_source_frame_draws_shadow_then_owner_fade_atomically() {
+        let repository = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+        let expected = std::fs::read(repository.join("private/review/mule-bones/expected.bin")).unwrap();
+        assert_eq!(expected.len(), 112 * 124);
+        let mut record = [0u8; 124];
+        record.copy_from_slice(&expected[..124]);
+        assert_eq!(genewars_runtime::identity::sha256_hex(&record),
+            "26ca8cf70ac39dd9e324cdbd10a82341cb860367c9b960882120a181047bbac3");
+        assert_eq!(record[6], 1);
+        assert_eq!(record[0x18], 4);
+        assert_eq!(record[0x19], 4);
+        assert_eq!(record[0x1b], 0);
+        assert_eq!(record[0x5e], 26);
+        assert_eq!(record[0x7a], 4);
+        let root = repository.join("private/integration/game-runtime");
+        let (resources, _, _) = super::super::Resources::load(&root)
+            .expect("exact 53-resource runtime bundle");
+        let mut destination = vec![0x5au8; 640 * 479 + 512 + 16];
+        let before = destination.clone();
+        let receipt = draw_supported_bones_record(&resources.bones, &record, [32, 48], 0,
+            0, 0, false, 0, resources.fade_bytes(), resources.main_gla_bytes(),
+            [512, 480], 640, &mut destination).expect("pinned BONES state26 draw path");
+        assert_eq!(receipt.animation, 4);
+        assert_eq!(receipt.frame_index, 0);
+        assert_eq!(receipt.effective_shade, 0);
+        assert!(!receipt.shadow_pending);
+        assert_eq!(receipt.components.len(), 1);
+        assert_eq!(receipt.shadows.len(), 1);
+        assert!(receipt.components[0].pixels_written > 0);
+        assert!(receipt.shadows[0].pixels_written > 0);
+        for y in 0..480 {
+            let start = y * 640 + 512;
+            let end = (start + 128).min(destination.len());
+            assert_eq!(&destination[start..end], &before[start..end], "row padding {y}");
+        }
+        let mut invalid = record;
+        invalid[0x5e] = 25;
+        let before_reject = destination.clone();
+        assert!(draw_supported_bones_record(&resources.bones, &invalid, [32, 48], 0,
+            0, 0, false, 0, resources.fade_bytes(), resources.main_gla_bytes(),
+            [512, 480], 640, &mut destination).is_err());
+        assert_eq!(destination, before_reject);
+    }
+
+    #[test]
+    fn export_source_bones_pixel_oracle_cases_when_requested() {
+        let Ok(output_path) = std::env::var("GENEWARS_BONES_ORACLE_OUT") else { return; };
+        use std::io::Write;
+        let repository = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+        let root = repository.join("private/integration/game-runtime");
+        let (resources, _, _) = super::super::Resources::load(&root)
+            .expect("exact hash-bound runtime resources");
+        let source = std::fs::read(repository.join("private/review/mule-bones/expected.bin"))
+            .expect("source-traced BONES selector-4 fixture");
+        assert_eq!(source.len(), 112 * 124);
+        let cases = [
+            (0usize, 26u8, 0u8, "26ca8cf70ac39dd9e324cdbd10a82341cb860367c9b960882120a181047bbac3"),
+            (41usize, 27u8, 1u8, "91a81188484deaa31508163a1152a1b5d63aa27d676ebb46aaf6919b1206b5de"),
+        ];
+        let path = std::path::Path::new(&output_path);
+        let mut file = std::fs::OpenOptions::new().write(true).create_new(true).open(path)
+            .expect("oracle output path must be new");
+        for (record_index, state, frame_index, expected_hash) in cases {
+            let record_start = record_index * 124;
+            let selected: [u8; 124] = source[record_start..record_start + 124]
+                .try_into().expect("pinned BONES wrapper record");
+            assert_eq!(genewars_runtime::identity::sha256_hex(&selected), expected_hash);
+            assert_eq!(selected[0x5e], state);
+            assert_eq!(selected[0x19], 4);
+            assert_eq!(selected[0x1b], frame_index);
+            let mut pixels = vec![0xa5; 68 * 48 + 4];
+            let receipt = draw_supported_bones_record(&resources.bones, &selected, [24,18], 0,
+                0, 0, false, 0, resources.fade_bytes(), resources.main_gla_bytes(),
+                [64,48], 68, &mut pixels).expect("admitted BONES owner-4 wrapper branch");
+            let hex = pixels.iter().map(|v| format!("{v:02x}")).collect::<String>();
+            let fg_written = receipt.components.iter().map(|x|x.pixels_written).sum::<usize>();
+            let fg_clipped = receipt.components.iter().map(|x|x.pixels_clipped).sum::<usize>();
+            let sh_written = receipt.shadows.iter().map(|x|x.pixels_written).sum::<usize>();
+            let sh_clipped = receipt.shadows.iter().map(|x|x.pixels_clipped).sum::<usize>();
+            writeln!(file,"{{\"state\":{state},\"animation\":4,\"frame\":{frame_index},\"scale_a\":{},\"scale_b\":{},\"virtual_height\":0,\"raw_shade\":{},\"effective_shade\":{},\"shadow_mode\":0,\"inherited\":0,\"clip_bit\":0,\"origin\":[24,18],\"yaw\":{},\"shadow_color\":0,\"fg_written\":{fg_written},\"fg_clipped\":{fg_clipped},\"sh_written\":{sh_written},\"sh_clipped\":{sh_clipped},\"pixels\":\"{hex}\"}}",
+                selected[0x76],selected[0x77],selected[0x17],receipt.effective_shade,
+                i16::from_le_bytes([selected[0x39],selected[0x3a]])).unwrap();
         }
     }
 

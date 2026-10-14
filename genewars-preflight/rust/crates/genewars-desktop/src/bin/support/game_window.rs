@@ -70,7 +70,10 @@ impl ApplicationHandler for Host<'_> {
                     Key::Named(NamedKey::Space)=>if self.game.scene==Scene::Options{self.game.toggle_run()}else{self.game.tick()},
                     Key::Named(NamedKey::Tab)=>self.game.select_actor(None),
                     Key::Named(NamedKey::ArrowLeft)=>self.game.pan(-256,0),Key::Named(NamedKey::ArrowRight)=>self.game.pan(256,0),
-                    Key::Named(NamedKey::ArrowUp)=>self.game.pan(0,-256),Key::Named(NamedKey::ArrowDown)=>self.game.pan(0,256),_=>{}
+                    Key::Named(NamedKey::ArrowUp)=>self.game.pan(0,-256),Key::Named(NamedKey::ArrowDown)=>self.game.pan(0,256),
+                    Key::Character(ref c) if c.eq_ignore_ascii_case("b")=>{
+                        if let Err(error)=self.game.start_selected_building(){self.game.error=Some(error);}
+                    },_=>{}
                 }self.redraw();
             },
             WindowEvent::Resized(_)=>self.redraw(),

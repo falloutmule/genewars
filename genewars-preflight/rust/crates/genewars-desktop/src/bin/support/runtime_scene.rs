@@ -31,9 +31,9 @@ impl MissionState {
     fn extra_report(&self)->String {
         match self {
             Self::Plants(_)=>"\"world_mode\":\"plants\"".into(),
-            Self::Landing(w)=>format!("\"world_mode\":\"landing-study\",\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"plant_births\":{},\"reproduction_enabled\":true,\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
+            Self::Landing(w)=>format!("\"world_mode\":\"landing-study\",\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"plant_births\":{},\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"player_funds\":{},\"buildings\":{},\"terrain_jobs\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
                 w.seed,w.world.rng().draw_count,w.selected.map(|s|s.to_string()).unwrap_or("null".into()),w.command_count,w.plant_births,w.pending_requests,
-                w.world.effects().unwrap().records().iter().filter(|r|r[6]!=0).count(),w.actor_state_json(),w.creature_state_json()),
+                w.world.effects().unwrap().records().iter().filter(|r|r[6]!=0).count(),w.actor_state_json(),w.creature_state_json(),w.player_funds_json(),w.building_state_json(),w.terrain_job_state_json()),
         }
     }
 }
@@ -111,7 +111,7 @@ impl Game {
         if self.scene!=Scene::Mission {return;}
         let Some(m)=&mut self.mission else {return;};
         if m.blocked.is_some() {return;}
-        if self.ticks.len()>=16384 {m.blocked=Some("Development trace limit (16384 steps) reached".into());return;}
+        if self.ticks.len()>=32768 {m.blocked=Some("Development trace limit (32768 steps) reached".into());return;}
         // Cross-subsystem transaction: a drawable frame must exist before the
         // tentative world can replace the currently displayed one.
         let mut proposed=m.world.clone();
@@ -160,6 +160,37 @@ impl Game {
         }
     }
 
+    /// Explicit development command for a picked ground move. It uses the
+    /// same screen-to-terrain projection and owned opcode-3 resolver as a
+    /// right-click; no building site is synthesized from these coordinates.
+    pub fn build_order(&mut self,screen:[i32;2]) {
+        if self.scene!=Scene::Mission {return;}
+        let before=self.trace.len();
+        self.order(screen);
+        if self.trace.len()>before {
+            if let Some(entry)=self.trace.last_mut(){*entry=format!("DevelopmentBuildMove: {entry}");}
+        }
+    }
+
+    /// Assign the selected architect to the only admitted native build
+    /// selector (1 / BTURR). The opcode-5 planner enforces active category-0
+    /// architect, idle state 1, no reinitialization, and selector bounds.
+    /// This does not set readiness, choose a site, or advance callbacks.
+    pub fn start_selected_building(&mut self)->Result<(),String> {
+        if self.scene!=Scene::Mission {return Err("build-start requires the mission scene".into());}
+        let m=self.mission.as_mut().ok_or("mission scene lacks world")?;
+        let MissionState::Landing(current)=&m.world else{return Err("build-start requires the architect development world".into());};
+        let mut proposed=current.clone();
+        let slot=proposed.selected.ok_or("select an architect first")?;
+        let plan=proposed.assign_selected_bturr()?;
+        let frame=proposed.render(&m.resources,m.target)?;
+        m.world=MissionState::Landing(proposed);
+        m.frame=frame;
+        self.error=None;
+        self.trace.push(format!("DevelopmentBuildStart: architect {slot}, selector {}, setup remains callback-driven",plan.building_selector));
+        Ok(())
+    }
+
     pub fn escape(&mut self) {
         match self.scene {Scene::Menu=>self.transition(Scene::Quit),Scene::Quit=>{},_=>{self.automatic=false;self.mission=None;self.error=None;self.transition(Scene::Menu);}}
     }
@@ -180,7 +211,7 @@ impl Game {
                 let status=m.blocked.as_deref().map(|e|format!("STOPPED: {e}")).unwrap_or_else(||format!("{} - SPACE: STEP / ENTER: RUN / ESC: MENU",if self.automatic{"RUNNING"}else{"PAUSED"}));
                 let lines=if let MissionState::Landing(w)=&m.world {
                     vec![format!("LANDING STUDY - STEP {} - ACTOR {}",m.ticks,w.selected.map(|s|s.to_string()).unwrap_or("NONE".into())),
-                        self.error.clone().unwrap_or(status),"TAB: SELECT / RIGHT CLICK: MOVE / ARROWS: VIEW".into(),"ACTORS, MULE AND PLANTS LIVE - OTHER SYSTEMS PAUSED".into()]
+                        self.error.clone().unwrap_or(status),"TAB: SELECT / RIGHT CLICK: PICK AND MOVE / B: ASSIGN BTURR AFTER ARRIVAL".into(),"DEV BUILD INPUT; OPCODE5 GUARDS APPLY, SETUP IS CALLBACK-DRIVEN".into()]
                 }else{vec![format!("PLANTS {} - STEP {} - CURSOR {}",m.world.plant_count(),m.ticks,m.world.schedule_cursor()),status,"ARROWS: VIEW - OTHER ENTITY SYSTEMS SUSPENDED".into()]};
                 (&m.frame.image,lines)
             },
