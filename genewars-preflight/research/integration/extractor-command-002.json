@@ -1,0 +1,13 @@
+{
+  "status": "blocked",
+  "classification": "unsupported behavior",
+  "scope": "ordinary-command Extractor construction with development startup; not mission acceptance",
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "binary_sha256": "eee0a7055a347d75d1605f870edd14240c667d6dd1d8fce22b99fd0bf0aab42a",
+  "replay_sha256": "9afbd36daaad32bbfba3d6744e4301636547c974f5528b67b97c79e7ce02aa56",
+  "report_sha256": "bb4db9de9bfc8f49df0e6f22118ab3c17059ebd88b0badb9a199e63b9cc1101c",
+  "step": 290,
+  "boundary": "terrain-job pass: Maintenance(HeightSetterRequired)",
+  "private_fixture": "genewars-preflight\\private\\integration\\extractor-command-002",
+  "resolution": "Implement source8C550 with slope repair and linked-object refresh; preserve this nonflat-site regression."
+}

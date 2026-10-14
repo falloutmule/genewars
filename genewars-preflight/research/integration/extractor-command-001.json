@@ -1,0 +1,89 @@
+{
+  "status": "blocked",
+  "classification": "unsupported behavior",
+  "scope": "ordinary command Extractor construction in explicitly development startup; not mission acceptance",
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "binary_sha256": "33de8d88c7976265df9b770fdf55dffc47aa25caaee680e4a9ce133882866526",
+  "replay_sha256": "9afbd36daaad32bbfba3d6744e4301636547c974f5528b67b97c79e7ce02aa56",
+  "report_sha256": "cfe666d6dc257c225d7b57cda1eb5677352902a452631b7bd6898f47864a8654",
+  "steps": 289,
+  "blocked": "actor pass: PendingTaskRequired",
+  "actors": [
+    {
+      "slot": 0,
+      "owner": 0,
+      "position": [
+        19839,
+        12928
+      ],
+      "destination": [
+        19839,
+        12928
+      ],
+      "pending_destination": [
+        19839,
+        12928
+      ],
+      "state": 1,
+      "ready": true,
+      "pending_move": false,
+      "assignment_pending": true,
+      "building_selector": 11,
+      "animation": 8,
+      "frame": 2,
+      "action_byte_59": 0,
+      "construction_stage_word_88": 0,
+      "job_slot_byte_90": 0
+    },
+    {
+      "slot": 1,
+      "owner": 0,
+      "position": [
+        20884,
+        13078
+      ],
+      "destination": [
+        20884,
+        13078
+      ],
+      "pending_destination": [
+        20884,
+        13078
+      ],
+      "state": 1,
+      "ready": true,
+      "pending_move": false,
+      "assignment_pending": false,
+      "building_selector": 0,
+      "animation": 8,
+      "frame": 2,
+      "action_byte_59": 0,
+      "construction_stage_word_88": 0,
+      "job_slot_byte_90": 0
+    }
+  ],
+  "buildings": [],
+  "funds": [
+    {
+      "slot": 0,
+      "balance": 2000
+    },
+    {
+      "slot": 1,
+      "balance": 0
+    },
+    {
+      "slot": 2,
+      "balance": 0
+    },
+    {
+      "slot": 3,
+      "balance": 0
+    }
+  ],
+  "private_fixture": "private/integration/extractor-command-001",
+  "next_repair": "step_pending_architect_callback still restricted task selector1; admit source-proved 3/6/11 after generalized pending callback comparison",
+  "original_startup": false,
+  "automated_mission_pass": false,
+  "native_mission_pass": false
+}

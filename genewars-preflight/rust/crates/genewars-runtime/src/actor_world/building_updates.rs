@@ -281,7 +281,7 @@ impl ActorWorld {
         resource:&crate::actor_resources::ActorAnimationDatabase<B>,owner_selected:bool,actor_selected:bool)
         ->Result<ArchitectStage0Receipt,ConstructionWorldError>{
         let before=self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
-        if before[0x55]!=1||before[0x58]!=0||before[0x57]&3!=1||before[0x7e]!=0||before[0x82]!=1||before[0x83]!=1{
+        if before[0x55]!=1||before[0x58]!=0||before[0x57]&3!=1||before[0x7e]!=0||before[0x82]!=1||!matches!(before[0x83],1|3|6|11){
             return Err(ConstructionWorldError::PendingTaskRequired);
         }
         let mut staged=self.clone();let mut staged_jobs=jobs.clone();
