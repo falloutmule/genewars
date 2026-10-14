@@ -1,6 +1,6 @@
-//! Normal, unflipped component shadow from CD0x96AC0 -> 0x92F80.
+//! Normal and component-horizontal-flip shadows from CD0x96AC0 -> 0x92F80.
 //!
-//! Admission: drawing enabled, context/component flags zero, extra argument
+//! Admission: drawing enabled, context flags zero, component flags zero or1, extra argument
 //! zero, positive clip within640x480, and a previously decoded indexed8 sprite.
 //! Visibility, frame selection and foreground drawing are separate contracts.
 use genewars_assets::IndexedSprite;
@@ -46,6 +46,25 @@ pub fn draw_normal_component_shadow(
     component_offset: [i16; 2], color: u8, clip: [usize; 2], pitch: usize,
     destination: &mut [u8],
 ) -> Result<ShadowDrawReceipt, ShadowError> {
+    draw_component_shadow(sprite, table, origin, component_offset, color, clip, pitch, destination, false)
+}
+
+/// Global wrapper flags0, component flag1, extra argument0.96AC0 leaves
+/// placement unchanged;92F80 reverses the horizontal opacity traversal.
+/// This is not a globally flipped frame (which would also reflect offsets).
+pub fn draw_hflipped_component_shadow(
+    sprite: &IndexedSprite, table: &MainGlaTable<'_>, origin: [i16; 2],
+    component_offset: [i16; 2], color: u8, clip: [usize; 2], pitch: usize,
+    destination: &mut [u8],
+) -> Result<ShadowDrawReceipt, ShadowError> {
+    draw_component_shadow(sprite, table, origin, component_offset, color, clip, pitch, destination, true)
+}
+
+fn draw_component_shadow(
+    sprite: &IndexedSprite, table: &MainGlaTable<'_>, origin: [i16; 2],
+    component_offset: [i16; 2], color: u8, clip: [usize; 2], pitch: usize,
+    destination: &mut [u8], horizontal_flip: bool,
+) -> Result<ShadowDrawReceipt, ShadowError> {
     let [width, height] = clip;
     if !(1..=640).contains(&width) || !(1..=480).contains(&height) {
         return Err(ShadowError::InvalidClip { width, height });
@@ -73,7 +92,7 @@ pub fn draw_normal_component_shadow(
         for x in 0..source_width {
             if !sprite.opaque[source_y * source_width + x] { continue; }
             receipt.opaque_samples += 1;
-            let screen_x = position[0] + x as i32;
+            let screen_x = position[0] + if horizontal_flip { (source_width - 1 - x) as i32 } else { x as i32 };
             if screen_x < 0 || y < 0 || screen_x >= width as i32 || y >= height as i32 {
                 receipt.clipped_opaque_samples += 1;
                 continue;

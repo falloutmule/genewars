@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "scope": "Actual EFF33 admission and component hflip, common shadow/color path; all10 effect_scene tests passed. Wholeframe independentcolor loops with shared shadowhelper; separate source shadow oracle owned by Sol2.",
+  "resource_sha256": "f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253",
+  "frame_counts": {
+    "21": 2,
+    "22": 3,
+    "33": 4,
+    "44": 9
+  },
+  "wholeframe_compared_bytes": 4423680,
+  "command": "python -B scripts/cargo.py test -p genewars-desktop --bin genewars-game effect_scene::tests --offline --locked",
+  "source_evidence": "4A07F ->4AF01 admits21 ->4ACA5;4ADD7 not11 ->4ACF4 shadow96AC0;4ADDF main.97CA0 wrapperflags0 leaves componentoffset unchanged, componentflag1 reverses source traversal.",
+  "pins": {
+    "rust/crates/genewars-desktop/src/bin/support/effect_scene.rs": "9033c0be9a9325e71c528c19edf18509e30b76c934724e3850d8ada1e42fa713",
+    "private/ghidra/entity-plant/instructions-00097ca0.txt": "a08451b7623fdefcec8650da29e4edd0387c1b73ba2a74e6fead993f031c518b",
+    "private/ghidra/entity-plant/instructions-00096ac0.txt": "8146aa37b06d9236b517db22efb7b12f2993607380b9df262faa024a68bbc891",
+    "private/ghidra/entity-shadow-panel/instructions-00092f80.txt": "10281988674a0779a1481f9813aad7054da5b25f11a04155341f9e78c813ecf4",
+    "private/ghidra/effect-draw/instructions-0004a060.txt": "c1562d884b99ef3145fb69593cd221aec76a0d711b8c780c110dcf911b58bfb9"
+  }
+}

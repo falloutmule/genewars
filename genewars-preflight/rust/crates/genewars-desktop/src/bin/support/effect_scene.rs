@@ -6,7 +6,7 @@ use std::collections::HashSet;
 
 use genewars_assets::{AnbFrameRecord, AnbSections, IndexedSprite, SpriteTable};
 use genewars_render::{
-    entity_shadow::draw_normal_component_shadow,
+    entity_shadow::{draw_normal_component_shadow,draw_hflipped_component_shadow},
     terrain::TerrainFadeTable,
     terrain_modes::MainGlaTable,
 };
@@ -26,6 +26,7 @@ const CODE_26: u8 = 0x1a;
 const CODE_15: u8 = 0x15;
 const CODE_16: u8 = 0x16;
 const CODE_2C: u8 = 0x2c;
+const CODE_21: u8 = 0x21;
 const SPECIAL_ANIMATION: usize = 66;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -182,6 +183,7 @@ fn draw_effect_records_inner(
             CODE_15 => Some(EffectAnimationBinding::EffAnimation21),
             CODE_16 => Some(EffectAnimationBinding::EffAnimation22),
             CODE_2C => Some(EffectAnimationBinding::EffAnimation44),
+            CODE_21 => Some(EffectAnimationBinding::EffAnimation33),
             _ => None,
         };
         if expected_binding.is_none() || binding != expected_binding {
@@ -205,6 +207,8 @@ fn draw_effect_records_inner(
                     });
                 }
             }
+        } else if code == CODE_21 {
+            validate_power_frame_flags(slot,&main)?;
         } else {
             validate_frame_flags(slot, &main, false)?;
         }
@@ -254,11 +258,12 @@ fn draw_effect_records_inner(
             item.special_pixels_written = written;
             item.special_pixels_clipped = clipped;
         } else if code == CODE_6 || code == CODE_0X30 || code == CODE_26
-            || code == CODE_15 || code == CODE_16 || code == CODE_2C {
+            || code == CODE_15 || code == CODE_16 || code == CODE_2C || code == CODE_21 {
             // These ordinary wrappers request the mode-0 component-shadow
             // pass before indexed8 color. Their EFF animation ranges differ.
             for component in &main.components {
-                let shadow = draw_normal_component_shadow(
+                let draw_shadow=if code==CODE_21&&component.flags&1!=0{draw_hflipped_component_shadow}else{draw_normal_component_shadow};
+                let shadow = draw_shadow(
                     &component.sprite, &gla, ground_origin, component.local, 0,
                     clip, pitch, &mut staged,
                 ).map_err(|e| EffectSceneError::Shadow(e.to_string()))?;
@@ -355,6 +360,11 @@ fn validate_frame_flags(slot: usize, frame: &DecodedFrame, special: bool) -> Res
     }
     Ok(())
 }
+fn validate_power_frame_flags(slot:usize,frame:&DecodedFrame)->Result<(),EffectSceneError>{
+    for (component,value) in frame.components.iter().enumerate(){
+        if !matches!(value.flags,0|1){return Err(EffectSceneError::UnsupportedComponentFlags{slot,frame:frame.frame_offset as usize,component,flags:value.flags});}
+    }Ok(())
+}
 
 fn draw_components(
     frame: &DecodedFrame, origin: [i16; 2], wrapper_flags: Option<u8>, fade_row: Option<u8>,
@@ -415,9 +425,11 @@ fn draw_component_with_recolor(
     let hflip = flags & 1 != 0;
     let vflip = flags & 2 != 0;
     let blend_order = flags & 0x0c;
-    let offset_x = if hflip { -i64::from(sprite.width) - i64::from(component.local[0]) }
+    //97A90/97CA0 transforms component placement by wrapper flags only;
+    //component-local flips change source traversal at the existing position.
+    let offset_x = if wrapper_flags & 1 != 0 { -i64::from(sprite.width) - i64::from(component.local[0]) }
         else { i64::from(component.local[0]) };
-    let offset_y = if vflip { -i64::from(sprite.height) - i64::from(component.local[1]) }
+    let offset_y = if wrapper_flags & 2 != 0 { -i64::from(sprite.height) - i64::from(component.local[1]) }
         else { i64::from(component.local[1]) };
     let left = i64::from(origin[0]) + offset_x;
     let top = i64::from(origin[1]) + offset_y;
@@ -749,7 +761,7 @@ mod tests {
     }
 
     #[test]
-    fn codes15_16_and2c_use_the_common_shadow_then_fade_framebuffer_path() {
+    fn codes15_16_21_and2c_use_the_common_shadow_then_fade_framebuffer_path() {
         let resources=staged_resources();
         let fade=TerrainFadeTable::parse(resources.fade_bytes()).unwrap();
         let gla=MainGlaTable::parse(resources.main_gla_bytes()).unwrap();
@@ -757,12 +769,13 @@ mod tests {
             (CODE_15,EffectAnimationBinding::EffAnimation21,21usize),
             (CODE_16,EffectAnimationBinding::EffAnimation22,22),
             (CODE_2C,EffectAnimationBinding::EffAnimation44,44),
+            (CODE_21,EffectAnimationBinding::EffAnimation33,33),
         ] {
             let animation=AnbSections::parse(resources.effects.bytes()).unwrap().ui_metadata().unwrap().animation(index).unwrap();
             let count=((animation.last_frame_offset-animation.first_frame_offset)/14+1) as usize;
             for frame_index in 0..count {
                 let frame=decode_frame(resources.effects.bytes(),index,frame_index).unwrap();
-                validate_frame_flags(0,&frame,false).unwrap();
+                if code==CODE_21{validate_power_frame_flags(0,&frame).unwrap();}else{validate_frame_flags(0,&frame,false).unwrap();}
                 let mut record=active_effect(code,frame_index as u8,5);
                 record[0x11..0x15].copy_from_slice(&0i32.to_le_bytes());
                 record[0x27..0x2b].copy_from_slice(&512i32.to_le_bytes());
@@ -779,13 +792,15 @@ mod tests {
                 assert!(item.shadow_pixels_written>0);
                 let mut expected=vec![23u8;512*480];
                 for component in &frame.components {
-                    draw_normal_component_shadow(&component.sprite,&gla,ground,component.local,0,
+                    let draw_shadow=if component.flags&1!=0{draw_hflipped_component_shadow}else{draw_normal_component_shadow};
+                    draw_shadow(&component.sprite,&gla,ground,component.local,0,
                         [512,480],512,&mut expected).unwrap();
                 }
                 for component in &frame.components {
                     for y in 0..usize::from(component.sprite.height) {
                         for x in 0..usize::from(component.sprite.width) {
-                            let at=y*usize::from(component.sprite.width)+x;
+                            let source_x=if component.flags&1!=0{usize::from(component.sprite.width)-1-x}else{x};
+                            let at=y*usize::from(component.sprite.width)+source_x;
                             if !component.sprite.opaque[at]{continue;}
                             let px=i32::from(ground[0])+i32::from(component.local[0])+x as i32;
                             let py=item.color_origin[1]+i32::from(component.local[1])+y as i32;

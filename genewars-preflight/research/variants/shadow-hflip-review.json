@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "cases": 210,
+  "bytes_compared": 675360,
+  "private_run": "private/review/shadow-hflip/7f30324486fa4474a331943e1e1ea79c",
+  "source_pins": {
+    "rust/crates/genewars-render/src/entity_shadow.rs": "ace9d778e29ff2edc7d8d0fba431dff37bba7d2a5538ee2df97a3a3633f882e3",
+    "research/variants/shadow-hflip-review.py": "67e230a4a3be81889c587ccacfeffcedd64fe643b5ce9301023c8a347d63ecfe",
+    "research/variants/shadow-hflip-review.rs": "b96fc46586c4f3e0c748e8f3696798bc7fe5d33b6bd301a2288d3b04ea2778b8",
+    "private/ghidra/entity-plant/instructions-00096ac0.txt": "8146aa37b06d9236b517db22efb7b12f2993607380b9df262faa024a68bbc891",
+    "private/ghidra/entity-shadow-panel/instructions-00092f80.txt": "10281988674a0779a1481f9813aad7054da5b25f11a04155341f9e78c813ecf4"
+  },
+  "scope": "wrapperflags0 componentflags0/1 extra0; four actualEFF33 sprites plus asymmetric odd-height/opaque-zero fixture; normal and hflip source-control traversal; full pitched buffers preserve padding",
+  "original_execution": false
+}
