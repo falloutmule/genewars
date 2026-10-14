@@ -42,13 +42,10 @@ impl ActorWorld {
     ) -> Result<CreaturePassReceipt, ActorWorldError> {
         self.neutral_creature_pass_with(player_count, |world, slot| {
             if slot != 0 { return Err(ActorWorldError::UnsupportedCreatureSchedule); }
-            if context.frame_counter == 1 {
-                world.step_initial_mule_choice(context.frame_counter, trig)?;
-                Ok((Vec::new(),Vec::new(),false,None))
-            } else {
-                let receipt=world.step_mule_followup_with_water(context, physics, trig, animations)?;
-                Ok((receipt.pending_audio,receipt.pending_plant_retirements,receipt.pending_portrait_refresh,receipt.retirement))
-            }
+            // The callback must consume the current world even at frame1:
+            // authentic startup has already executed frame0 and refreshed shade.
+            let receipt=world.step_mule_followup_with_water(context, physics, trig, animations)?;
+            Ok((receipt.pending_audio,receipt.pending_plant_retirements,receipt.pending_portrait_refresh,receipt.retirement))
         })
     }
 

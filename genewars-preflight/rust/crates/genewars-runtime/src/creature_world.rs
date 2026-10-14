@@ -329,11 +329,13 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     if matches!(before[0x5e],24..=27)||(before[0x5e]==8&&motion_word(before,0x66)==1&&context.frame_counter&1!=0) {
         return plan_mule_mortality_after_prefix(before,prefix,map,context,physics,trig,contact,obstacle,animations,admit_water);
     }
-    let neutral=before[0x5e]==8&&matches!(before[0x61],0|0x40|0x80)&&matches!(before[0x60],8|0x88);
+    // The serialized idle Mule starts with action flags0; frame0 performs
+    // ordinary physics before the first odd-frame choice establishes bit8.
+    let neutral=before[0x5e]==8&&matches!(before[0x61],0|0x40|0x80)&&matches!(before[0x60],0|8|0x88);
     let relocation=before[0x5e]==0&&before[0x61]==0x80&&before[0x60]==8&&before[0x57]==0;
     let food_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&before[0x57]==2;
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
-    if context.frame_counter<2||before[6]!=1||before[0x18]!=4||!(neutral||relocation||food_approach||feeding_wait)||before[0x7a]!=4||before[0x76]!=30
+    if before[6]!=1||before[0x18]!=4||!(neutral||relocation||food_approach||feeding_wait)||before[0x7a]!=4||before[0x76]!=30
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
        ||before[0x4f]!=0||before[0x52]!=0||motion_word(before,0x49)as u16&!0x337f!=0||before[0x49]&3==3
        ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=if context.frame_counter&1==0{0}else{2}{return Err(CreatureError::UnsupportedMotionState);}
@@ -642,13 +644,13 @@ pub fn plan_mule_retry_wait(before:&CreatureRecord,rng_before:crate::blueprint::
     let delay=i16::from(draw(&mut rng,CreatureRngPurpose::RetryDelay,&mut draws)%20)+10;after[0x5e]=8;motion_put(&mut after,0x6c,delay);
     Ok(InitialMuleChoice{before:*before,after,rng_before,rng_after:rng,draws,sampled_points:Vec::new(),chosen_target:None,queue_requested:true})
 }
-/// Owner4 healthy/neutral-neighborhood rechoice at timer0, after the common
+/// Owner4 living/neutral-neighborhood rechoice at timer0, after the common
 /// movement and5E0B0 prefix. Caller establishes the neighborhood scorer's
 /// no-action gates and false current-cell predicate before invoking this.
 pub fn plan_neutral_mule_rechoice<F>(before:&CreatureRecord,rng_before:crate::blueprint::BlueprintRng,tables:&crate::actor_activation::TrigTables,mut accept:F)->Result<InitialMuleChoice,CreatureError>
 where F:FnMut([i16;2])->Result<bool,CreatureError> {
     if rng_before.ring>=32||before[6]!=1||before[0x18]!=4||before[0x5e]!=8||before[0x7a]!=4||before[0x76]!=30||before[0x7b]!=255
-        ||motion_word(before,0x6a)<motion_word(before,0x64)||motion_word(before,0x6c)!=0 {return Err(CreatureError::UnsupportedMotionState);}
+        ||motion_word(before,0x6a)<=0||motion_word(before,0x6c)!=0 {return Err(CreatureError::UnsupportedMotionState);}
     let mut after=*before;let mut rng=rng_before;let mut draws=Vec::new();let mut sampled_points=Vec::new();
     draw(&mut rng,CreatureRngPurpose::NeighborhoodX,&mut draws);draw(&mut rng,CreatureRngPurpose::NeighborhoodY,&mut draws);
     if after[0x60]&8==0 {after[0x72..0x76].copy_from_slice(&before[7..11]);after[0x60]|=8;}

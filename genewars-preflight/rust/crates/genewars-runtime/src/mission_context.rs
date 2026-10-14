@@ -1,4 +1,4 @@
-//! Explicit scheduling context, not a reconstruction of complete campaign entry.
+//! Explicit scheduling context for development and bounded fresh CD entry.
 //!
 //! Evidence: research/ghidra/mission-bootstrap-context-evidence.json. The partial
 //! reference constructor records only the CONQ001 tail and the known 7D090
@@ -12,11 +12,16 @@ pub enum ContextOrigin {
     Development,
     /// Bound to the constants above; not interchangeable with other missions.
     PartialCdConq001,
+    /// First mission after fresh constructors and completed source bootstrap.
+    FreshCdConq001,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum RngProvenance {
     OriginalStartupUnknown,
+    /// Serialized5428/count16855 followed by exactly64 blueprint draws.
+    /// Ring position is diagnostic metadata, explicitly retained by caller.
+    CdConq001SerializedThenBlueprints { seed:u16, draw_count:u32, diagnostic_ring:u8 },
     /// Caller-specified replay input. Does not prove original seed generation,
     /// RNG ring contents, draw count, or transitive startup draws.
     ReplayOverride { seed: u16 },
@@ -102,6 +107,28 @@ impl MissionRuntimeContext {
         }
     }
 
+    /// Admit the first MAINPANL frame after the bounded fresh CD pipeline.
+    ///
+    /// Caller must complete restored-player preparation, the landing factory
+    /// and72AD0 visibility/shade initialization before using this context.
+    /// This is fresh process/no special CLI mode/no previous gameplay only.
+    /// Static constructors leave185EC4 null; the initial MAINPANL entry calls
+    ///25150 and sets flags4. Old mission-view exit7D020 resets frame to0 before
+    /// that entry. It does not continue a saved or previously played world.
+    /// Opaque blueprint scratch bytes are preserved by the separate bootstrap
+    /// input; this context makes no claim about their values.
+    pub fn fresh_cd_conq001(rng_after_blueprints:crate::blueprint::BlueprintRng)
+        ->Result<Self,&'static str>{
+        if rng_after_blueprints.seed!=10548 || rng_after_blueprints.draw_count!=16919 {
+            return Err("fresh CD context requires serialized RNG followed by64 blueprint draws");
+        }
+        if rng_after_blueprints.ring>=32 {return Err("diagnostic RNG ring must be below32");}
+        Ok(Self{origin:ContextOrigin::FreshCdConq001,participating_players:1,
+            runtime_flags:0x3e,runtime_mode:Some(0),countdown:1000,frame:0,
+            rng:RngProvenance::CdConq001SerializedThenBlueprints{
+                seed:10548,draw_count:16919,diagnostic_ring:rng_after_blueprints.ring}})
+    }
+
     pub fn origin(&self) -> ContextOrigin { self.origin }
     pub fn participating_players(&self) -> u8 { self.participating_players }
     pub fn known_runtime_flags(&self) -> u8 { self.runtime_flags }
@@ -111,7 +138,7 @@ impl MissionRuntimeContext {
     pub fn rng_provenance(&self) -> RngProvenance { self.rng }
     pub fn startup_blockers(&self) -> &'static [StartupBlocker] {
         match self.origin {
-            ContextOrigin::Development => &[],
+            ContextOrigin::Development | ContextOrigin::FreshCdConq001 => &[],
             ContextOrigin::PartialCdConq001 => &REFERENCE_BLOCKERS,
         }
     }
@@ -133,6 +160,8 @@ impl MissionRuntimeContext {
     /// presentation have completed (1BBC0). Also advances gated-off frames.
     /// Do not call after a failed transactional frame. This is not a world tick.
     pub fn finish_outer_frame(&mut self) { self.frame = self.frame.wrapping_add(1); }
+    /// Mirror the live serialized countdown after a completed callback transaction.
+    pub fn observe_countdown_after_callbacks(&mut self, countdown:u16) { self.countdown=countdown; }
 }
 
 #[cfg(test)]
@@ -143,6 +172,15 @@ mod tests {
             participating_players: 1, runtime_flags: flags, runtime_mode: mode,
             countdown: 1000, frame: 0, replay_seed: 5428,
         }).unwrap()
+    }
+    #[test]
+    fn fresh_reference_requires_completed_blueprint_rng_and_starts_at_frame_zero(){
+        let rng=crate::blueprint::BlueprintRng{seed:10548,ring:31,draw_count:16919};
+        let mut context=MissionRuntimeContext::fresh_cd_conq001(rng).unwrap();
+        assert_eq!((context.participating_players(),context.known_runtime_flags(),context.runtime_mode(),context.countdown(),context.frame()),(1,0x3e,Some(0),1000,0));
+        assert_eq!(context.callback_gate(),CallbackGate::Ready);
+        context.finish_outer_frame();assert_eq!(context.frame(),1);
+        for invalid in [crate::blueprint::BlueprintRng{seed:5428,..rng},crate::blueprint::BlueprintRng{draw_count:0,..rng},crate::blueprint::BlueprintRng{ring:32,..rng}]{assert!(MissionRuntimeContext::fresh_cd_conq001(invalid).is_err());}
     }
     #[test]
     fn partial_reference_preserves_known_writes_without_admitting_startup() {

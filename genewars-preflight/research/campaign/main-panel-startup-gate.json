@@ -1,0 +1,268 @@
+{
+  "mission_view_exit_cases": [
+    {
+      "before_frame": 0,
+      "display_branch": 0,
+      "after_frame": 0,
+      "instructions": 27
+    },
+    {
+      "before_frame": 0,
+      "display_branch": 1,
+      "after_frame": 0,
+      "instructions": 32
+    },
+    {
+      "before_frame": 1,
+      "display_branch": 0,
+      "after_frame": 0,
+      "instructions": 27
+    },
+    {
+      "before_frame": 1,
+      "display_branch": 1,
+      "after_frame": 0,
+      "instructions": 32
+    },
+    {
+      "before_frame": 99,
+      "display_branch": 0,
+      "after_frame": 0,
+      "instructions": 27
+    },
+    {
+      "before_frame": 99,
+      "display_branch": 1,
+      "after_frame": 0,
+      "instructions": 32
+    },
+    {
+      "before_frame": 4294967295,
+      "display_branch": 0,
+      "after_frame": 0,
+      "instructions": 27
+    },
+    {
+      "before_frame": 4294967295,
+      "display_branch": 1,
+      "after_frame": 0,
+      "instructions": 32
+    }
+  ],
+  "exit_source_sha256": "7d841bc60d1905cad202f920c6e176810c2de8fad551b1b1fe5731b9bbc84685",
+  "startup_static_pins": {
+    "campaign-refs/instructions-0008dfe0.txt": "5c01a78d7d0f68a98819f5cd34748b879ccde2b8c8477e5f1d595753e1968496",
+    "mission-bootstrap-mode/instructions-0001cdf0.txt": "476c28e193b3bc5e7fdff41c0ae127f34b140f6ec56a69f94faa8523de475be2",
+    "ui-objects/constructor-range.txt": "c343d27b3ab0d5609b46dff3bf899e8830c241aa82b5f3e4c8025401d71e7249"
+  },
+  "frame_inference": "Correction to earlier frame1 inference:7D090 loadsframe0 during8DFE0; outer increment yields1. Next1BBC0 transition calls mission exit7D020 first, which resetsframe0, thenMAINPANL entry enablesflags4. Ordinary mode0 first eligible callback therefore usesframe0, withincrementaftercallbacks. This includes the previously omitted old-view exit.",
+  "mode_inference": "1CDF0 masks startup mode with40; mapped initial mode0 and no mode-changing command-line switches yield0. Campaign exit16170 clears network bit0. This does not cover resumed/special-mode sessions.",
+  "status": "passed-first-mission-main-panel-conditional-gate",
+  "cases": [
+    {
+      "panel_present": false,
+      "previous": "0x0",
+      "intro": 0,
+      "mode": 0,
+      "flags_after": 62,
+      "instructions": 18
+    },
+    {
+      "panel_present": false,
+      "previous": "0x0",
+      "intro": 0,
+      "mode": 1,
+      "flags_after": 62,
+      "instructions": 19
+    },
+    {
+      "panel_present": false,
+      "previous": "0x0",
+      "intro": 1,
+      "mode": 0,
+      "flags_after": 62,
+      "instructions": 18
+    },
+    {
+      "panel_present": false,
+      "previous": "0x0",
+      "intro": 1,
+      "mode": 1,
+      "flags_after": 62,
+      "instructions": 19
+    },
+    {
+      "panel_present": false,
+      "previous": "0x185def",
+      "intro": 0,
+      "mode": 0,
+      "flags_after": 62,
+      "instructions": 26
+    },
+    {
+      "panel_present": false,
+      "previous": "0x185def",
+      "intro": 0,
+      "mode": 1,
+      "flags_after": 62,
+      "instructions": 27
+    },
+    {
+      "panel_present": false,
+      "previous": "0x185def",
+      "intro": 1,
+      "mode": 0,
+      "flags_after": 62,
+      "instructions": 18
+    },
+    {
+      "panel_present": false,
+      "previous": "0x185def",
+      "intro": 1,
+      "mode": 1,
+      "flags_after": 62,
+      "instructions": 19
+    },
+    {
+      "panel_present": false,
+      "previous": "0x1863b8",
+      "intro": 0,
+      "mode": 0,
+      "flags_after": 62,
+      "instructions": 28
+    },
+    {
+      "panel_present": false,
+      "previous": "0x1863b8",
+      "intro": 0,
+      "mode": 1,
+      "flags_after": 62,
+      "instructions": 29
+    },
+    {
+      "panel_present": false,
+      "previous": "0x1863b8",
+      "intro": 1,
+      "mode": 0,
+      "flags_after": 62,
+      "instructions": 20
+    },
+    {
+      "panel_present": false,
+      "previous": "0x1863b8",
+      "intro": 1,
+      "mode": 1,
+      "flags_after": 62,
+      "instructions": 21
+    },
+    {
+      "panel_present": true,
+      "previous": "0x0",
+      "intro": 0,
+      "mode": 0,
+      "flags_after": 58,
+      "instructions": 3
+    },
+    {
+      "panel_present": true,
+      "previous": "0x0",
+      "intro": 0,
+      "mode": 1,
+      "flags_after": 58,
+      "instructions": 3
+    },
+    {
+      "panel_present": true,
+      "previous": "0x0",
+      "intro": 1,
+      "mode": 0,
+      "flags_after": 58,
+      "instructions": 3
+    },
+    {
+      "panel_present": true,
+      "previous": "0x0",
+      "intro": 1,
+      "mode": 1,
+      "flags_after": 58,
+      "instructions": 3
+    },
+    {
+      "panel_present": true,
+      "previous": "0x185def",
+      "intro": 0,
+      "mode": 0,
+      "flags_after": 58,
+      "instructions": 3
+    },
+    {
+      "panel_present": true,
+      "previous": "0x185def",
+      "intro": 0,
+      "mode": 1,
+      "flags_after": 58,
+      "instructions": 3
+    },
+    {
+      "panel_present": true,
+      "previous": "0x185def",
+      "intro": 1,
+      "mode": 0,
+      "flags_after": 58,
+      "instructions": 3
+    },
+    {
+      "panel_present": true,
+      "previous": "0x185def",
+      "intro": 1,
+      "mode": 1,
+      "flags_after": 58,
+      "instructions": 3
+    },
+    {
+      "panel_present": true,
+      "previous": "0x1863b8",
+      "intro": 0,
+      "mode": 0,
+      "flags_after": 58,
+      "instructions": 3
+    },
+    {
+      "panel_present": true,
+      "previous": "0x1863b8",
+      "intro": 0,
+      "mode": 1,
+      "flags_after": 58,
+      "instructions": 3
+    },
+    {
+      "panel_present": true,
+      "previous": "0x1863b8",
+      "intro": 1,
+      "mode": 0,
+      "flags_after": 58,
+      "instructions": 3
+    },
+    {
+      "panel_present": true,
+      "previous": "0x1863b8",
+      "intro": 1,
+      "mode": 1,
+      "flags_after": 58,
+      "instructions": 3
+    }
+  ],
+  "source_sha256": "22f6962e80bfdcbb6dd4c8b03adb98963b3dd4f4d87d213f0961381d81835283",
+  "claim": "For campaign progress0 and entry flags3A, null MAINPANL+C8 always calls25150 then enables simulation bit4, independently of tested prior views and intro flag. Non-null panel skips that gate.",
+  "ports": [
+    "9A244 exit text, A1610/A3DA0 display ports; no gameplay state effects modeled",
+    "99AD0 startup platform call",
+    "25150 panel initialization",
+    "20880 intro initialization"
+  ],
+  "unresolved": [
+    "Prove MAINPANL+C8 is null at this entry, or recover prior flags when non-null.",
+    "25150 transitive presentation effects remain explicit; no direct frame write exists in MAINPANL entry."
+  ],
+  "original_execution": false
+}

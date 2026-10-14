@@ -1,0 +1,102 @@
+{
+  "status": "passed-fresh-constructor-footprints",
+  "native_constructors": [
+    {
+      "kind": 1,
+      "base": "0x1542be",
+      "stride": 124,
+      "count": 300,
+      "constructor": "0x1e390",
+      "vtable": "0x111fec",
+      "nonpointer_bytes_zero": true,
+      "instructions": 20
+    },
+    {
+      "kind": 2,
+      "base": "0x15d40e",
+      "stride": 49,
+      "count": 512,
+      "constructor": "0x1e3e0",
+      "vtable": "0x1120ac",
+      "nonpointer_bytes_zero": true,
+      "instructions": 2
+    },
+    {
+      "kind": 3,
+      "base": "0x16360e",
+      "stride": 200,
+      "count": 20,
+      "constructor": "0x1e400",
+      "vtable": "0x112194",
+      "nonpointer_bytes_zero": true,
+      "instructions": 20
+    },
+    {
+      "kind": 4,
+      "base": "0x1645ae",
+      "stride": 67,
+      "count": 256,
+      "constructor": "0x1e3f0",
+      "vtable": "0x112120",
+      "nonpointer_bytes_zero": true,
+      "instructions": 2
+    },
+    {
+      "kind": 5,
+      "base": "0x1688ae",
+      "stride": 81,
+      "count": 200,
+      "constructor": "0x1e450",
+      "vtable": "0x112254",
+      "nonpointer_bytes_zero": true,
+      "instructions": 20
+    },
+    {
+      "kind": 7,
+      "base": "0x16ce16",
+      "stride": 97,
+      "count": 32,
+      "constructor": "0x1e4b0",
+      "vtable": "0x11236c",
+      "nonpointer_bytes_zero": true,
+      "instructions": 20
+    },
+    {
+      "kind": 8,
+      "base": "0x16da36",
+      "stride": 102,
+      "count": 16,
+      "constructor": "0x1e500",
+      "vtable": "0x11242c",
+      "nonpointer_bytes_zero": true,
+      "instructions": 20
+    }
+  ],
+  "main_panel": {
+    "base": "185DFC",
+    "panel_field": "185EC4",
+    "mapped_prior": 0,
+    "after_constructor": 0,
+    "constructor_instructions": 281,
+    "field_written": false
+  },
+  "source_pins": {
+    "private/ghidra/entity-shadow-panel/instructions-0002b7e0.txt": "aa968be1655cb0a96d153c2d8fca757cbef5848dafb53968acb3b0c7b57b37bd",
+    "private/ghidra/panel-activation-extra/instructions-00021940.txt": "deed72fbce96acda55cb17f2f1515f8d0c33dc119d739b6b009184e6da77b812",
+    "private/ghidra/panel-activation-extra/instructions-000252b0.txt": "c9b3a27b019ad54a2efddbffebd5f515002622cb81ec9d47606c7fd7fc9e12ef",
+    "private/ghidra/mission-tail-constructors/instructions-0001e390.txt": "527a0819499cbcd4e24f11b89444e89b3ba870ab71f0b92a7d57e358545389af",
+    "private/ghidra/mission-tail-constructors/instructions-0001e3e0.txt": "c0e8f233d9252d9bc3e9abe41d00ebe8a6b5a0c49d367cf746675cc83d1bd555",
+    "private/ghidra/mission-tail-constructors/instructions-0001e400.txt": "baab823f665e719b3cdb9cc9b6d2a9db796afca7ebcfed65b169672b63fdf730",
+    "private/ghidra/mission-tail-constructors/instructions-0001e3f0.txt": "abc0890ec59a474e9f96d677f3f0c152fac33e398524319ec8e7de2ca3e3c976",
+    "private/ghidra/mission-tail-constructors/instructions-0001e450.txt": "93a27ebe8f32681f4e476559ef905b49056bc913ab9c75415491269a191faa5d",
+    "private/ghidra/mission-tail-constructors/instructions-0001e4b0.txt": "49f92ce18f034f549dc689c37dbc160368b0119d0ba979aa339f0256d65c58b9",
+    "private/ghidra/mission-tail-constructors/instructions-0001e500.txt": "994eedc561a0a6e13a64ec6cb9554d6e9a36d604e96da4190a73329aec24683b"
+  },
+  "object3_sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
+  "limits": [
+    "Fresh process mapped state only; does not authorize zero priors after an earlier mission.",
+    "Later1D770 pool resets set IDs for some families;71B70 serialized loaders overwrite those numeric fields.",
+    "MAINPANL field may change through prior panel activation; fresh menu route still needs module path audit."
+  ],
+  "original_execution": false
+}

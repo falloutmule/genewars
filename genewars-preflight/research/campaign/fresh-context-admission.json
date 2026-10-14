@@ -1,0 +1,45 @@
+{
+  "status": "passed-bounded-fresh-context-contract",
+  "scope": "First MAINPANL entry in fresh process, ordinary no-special-CLI campaign route, no prior gameplay or subpanel activation. Caller completes source-bootstrap stages before callback admission. Not resumed/loaded campaign compatibility.",
+  "runtime_context": {
+    "flags": 62,
+    "mode": 0,
+    "participating_players": 1,
+    "countdown": 1000,
+    "first_callback_frame": 0,
+    "seed_after_blueprints": 10548,
+    "draw_count_after_blueprints": 16919
+  },
+  "frame_correction": "Earlier frame1 inference omitted old-view exit7D020. Its explicit reset0 precedesMAINPANLentry in1BBC0. Eightliteralexitcases corroborate this.",
+  "panel_writer_audit": {
+    "xref_sha256": "3430d557e608a5158d7e2ac93a4d9a91a1b4d36a9807dc866f40c818793eee8b",
+    "nonzero_writers": [
+      "25150 ordinarypanel",
+      "20880 intro",
+      "21A10 buildingpanel",
+      "27430 specialistpanel",
+      "258E0 constructionpanel",
+      "278D0 creaturepanel",
+      "25330 alternatepanel"
+    ],
+    "zero_writers": [
+      "24850",
+      "7D090 conditionalreset"
+    ],
+    "fresh_entry_basis": "Mappedzero plus literal2B7E0 constructor preserves185EC4. The admitted route has no prior gameplay/subpanel activation; campaign views are distinct module objects."
+  },
+  "completed_component_receipts": {
+    "bootstrap-details.json": "cc2bd12bd15c2e28daac5423214457042b5b62f936ba3adc5954eb46aee2aa08",
+    "bootstrap-player-composition.json": "240f99c6d8e4b15d3d7ffa63f0828075f6b006500c83b5c50b5dbf773bfbd6ba",
+    "bootstrap-visibility-world.json": "ab9f1251604194ff9fc79b79b78315a75b2ad4dc9560f08254988fd7faf982c9",
+    "main-panel-startup-gate.json": "a48aeac1f068d17c33841a0b00a525767e3d7480ab5cdaf86d3b46982148378e",
+    "startup-constructor-priors.json": "622eaf875ef6f862543027cd188254c41f426fcec3dd5f311e7855f10ad150d7"
+  },
+  "production_sha256": "3a7cebb1d13b8e9b6aac19c41918accf16198d7e6f7248b91f0dbf48f468ca6d",
+  "remaining_explicit_inputs": [
+    "Opaque blueprint stack18/1B: constructor does notassert their values; preserve caller-supplied bytes.",
+    "Diagnostic RNG ring retained asinput0..31; ringdoesnotaffect drawseedsequence.",
+    "Full native ordinary-command mission acceptance remains separate."
+  ],
+  "callback_order": "Observe frame0/currentcountdown first;1C120 calls7A280,58780,47F80,6A540,6D0B0,13780,14EC0,4F580,4E950,79220,72ED0 in that order.13780 decrements the ordinary positive countdown;1BBC0 increments frame after callbacks and presentation."
+}

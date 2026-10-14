@@ -1,0 +1,41 @@
+{
+  "status": "passed-bounded-first-countdown",
+  "cases": [
+    {
+      "before": 1000,
+      "after_7a280": 1000,
+      "after_13780": 999,
+      "steps_7a280": 21,
+      "steps_13780": 37
+    },
+    {
+      "before": 999,
+      "after_7a280": 999,
+      "after_13780": 998,
+      "steps_7a280": 21,
+      "steps_13780": 37
+    },
+    {
+      "before": 2,
+      "after_7a280": 2,
+      "after_13780": 1,
+      "steps_7a280": 21,
+      "steps_13780": 37
+    },
+    {
+      "before": 65535,
+      "after_7a280": 65535,
+      "after_13780": 65535,
+      "steps_7a280": 21,
+      "steps_13780": 35
+    }
+  ],
+  "source_pins": {
+    "private/ghidra/config-defaults/instructions-00013780.txt": "634efec82d190cdf793a444a423709cd2e962031a6b2e20ec05c8606bc3a36b4",
+    "private/ghidra/mission-array-refs/instructions-0007a280.txt": "acbd6194b3d051e6f0f252221bac3df6f4e8bbbe9e80bfefbad4d7adb38ccc31"
+  },
+  "first_callback": "Frame0: initial countdown1000 survives7A280; later13780 changes it to999. Outer frame increment follows callbacks and presentation.",
+  "scope": "Progress0 and positive countdown excluding transition tozero. Does not prove countdown-zero activation or special progress14/20 branches.",
+  "boundary": "139D2 redirected to original13A33 epilogue; family8 callbacks and presentation text tail are outside this prefix proof.",
+  "original_execution": false
+}
