@@ -32,8 +32,8 @@ impl MissionState {
     fn extra_report(&self)->String {
         match self {
             Self::Plants(_)=>"\"world_mode\":\"plants\"".into(),
-            Self::Landing(w)=>format!("\"world_mode\":\"landing-study\",\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"plant_births\":{},\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"player_funds\":{},\"buildings\":{},\"terrain_jobs\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
-                w.seed,w.world.rng().draw_count,w.selected.map(|s|s.to_string()).unwrap_or("null".into()),w.command_count,w.plant_births,w.pending_requests,
+            Self::Landing(w)=>format!("\"world_mode\":{},\"runtime_context\":{},\"outcome\":{},\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"plant_births\":{},\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"player_funds\":{},\"buildings\":{},\"terrain_jobs\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
+                json_string(if w.runtime_context.is_some(){"fresh-cd-explicit-opaque-priors"}else{"landing-study"}),json_string(&format!("{:?}",w.runtime_context)),w.outcome_json(),w.seed,w.world.rng().draw_count,w.selected.map(|s|s.to_string()).unwrap_or("null".into()),w.command_count,w.plant_births,w.pending_requests,
                 w.world.effects().unwrap().records().iter().filter(|r|r[6]!=0).count(),w.actor_state_json(),w.creature_state_json(),w.player_funds_json(),w.building_state_json(),w.terrain_job_state_json()),
         }
     }
@@ -46,12 +46,13 @@ pub struct Mission {
 
 pub struct Game {
     root: PathBuf,
-    pub building_menu_open:bool, building_menu_capture:Option<u8>, building_feedback:Option<String>,
+    pub building_menu_open:bool, building_menu_capture:Option<u8>, building_feedback:Option<String>, pub placement_selector:Option<u8>,
     pub scene: Scene, pub mission: Option<Mission>,
     images: Vec<RgbImage>, button: CdTitleButton,
     controls: MenuCallback0State, cursor: Option<(i32,i32)>, left: bool, right: bool, mask: u8,
     pub automatic: bool, pub start_running: bool, pub error: Option<String>,
     pub landing_seed: Option<u16>,
+    pub reference_startup:bool,
     pub trace: Vec<String>, pub ticks: Vec<String>, pub presented: u64,
 }
 
@@ -65,13 +66,13 @@ impl Game {
     pub fn open(root:&Path)->Result<Self,String> {
         let palette=Palette256::parse(&read_bound(&root.join("menu/titlescr.pal"))?,PaletteChannelMode::Rgb).map_err(|e|e.to_string())?;
         let (images,button,_,_)=menu_art::compose(&root.join("menu"),&palette)?;
-        Ok(Self { root:root.into(),building_menu_open:false,building_menu_capture:None,building_feedback:None, scene:Scene::Menu,mission:None,images,button,
+        Ok(Self { root:root.into(),building_menu_open:false,building_menu_capture:None,building_feedback:None,placement_selector:None, scene:Scene::Menu,mission:None,images,button,
             controls:MenuCallback0State::default(),cursor:None,left:false,right:false,mask:0,
-            automatic:false,start_running:false,error:None,landing_seed:None,trace:vec!["Menu".into()],ticks:Vec::new(),presented:0 })
+            automatic:false,start_running:false,error:None,landing_seed:None,reference_startup:false,trace:vec!["Menu".into()],ticks:Vec::new(),presented:0 })
     }
 
     fn transition(&mut self, scene:Scene) {
-        self.building_menu_open=false;self.building_menu_capture=None;self.building_feedback=None;
+        self.building_menu_open=false;self.building_menu_capture=None;self.building_feedback=None;self.placement_selector=None;
         self.scene=scene; self.trace.push(format!("{scene:?}"));
         self.controls=MenuCallback0State::default();self.mask=0;self.left=false;self.right=false;
     }
@@ -91,8 +92,8 @@ impl Game {
                 let captured=self.building_menu_capture.take();
                 if captured.is_some()&&captured==hit{
                     let selector=captured.unwrap();
-                    match self.start_selected_building_type(selector){
-                        Ok(())=>{self.building_menu_open=false;self.building_feedback=Some(format!("ASSIGNED {}",building_menu::label(selector)));},
+                    match self.choose_building_type(selector){
+                        Ok(())=>{self.building_menu_open=false;},
                         Err(error)=>{self.error=Some(error.clone());self.building_feedback=Some(error);}
                     }
                 }
@@ -112,7 +113,7 @@ impl Game {
             self.automatic=false;self.trace.push(format!("ConstructionMenu:{}",self.building_menu_open));
         }
     }
-    pub fn right(&mut self,down:bool) {let pressed=down&&!self.right;self.right=down;self.packet(false,false);if pressed&&!self.building_menu_open&&self.scene==Scene::Mission {if let Some((x,y))=self.cursor {self.order([x,y]);}}}
+    pub fn right(&mut self,down:bool) {let pressed=down&&!self.right;self.right=down;self.packet(false,false);if pressed&&!self.building_menu_open&&self.scene==Scene::Mission {if let Some((x,y))=self.cursor {if let Some(selector)=self.placement_selector{if let Err(e)=self.place_selected_building_type(selector,[x,y]){self.error=Some(e);}}else{self.order([x,y]);}}}}
     pub fn cancel_capture(&mut self) {self.building_menu_capture=None;self.cursor=None;self.left=false;self.right=false;self.packet(false,true);}
 
     fn packet(&mut self,press:bool,release:bool) {
@@ -130,7 +131,7 @@ impl Game {
     pub fn finish_loading(&mut self) {
         if self.scene!=Scene::Loading {return;}
         let loaded=Resources::load(&self.root).and_then(|(resources,world,target)| {
-            let world=if let Some(seed)=self.landing_seed {MissionState::Landing(SharedMission::load(&self.root,world.source_bytes(),seed)?)}else{MissionState::Plants(world)};
+            let world=if self.reference_startup {MissionState::Landing(SharedMission::load_fresh_cd(&self.root,world.source_bytes(),[0;36],0)?)}else if let Some(seed)=self.landing_seed {MissionState::Landing(SharedMission::load(&self.root,world.source_bytes(),seed)?)}else{MissionState::Plants(world)};
             let frame=world.render(&resources,target)?;
             Ok(Mission {resources,world,target,frame,ticks:0,blocked:None,changed_frames:0})
         });
@@ -147,7 +148,9 @@ impl Game {
         // tentative world can replace the currently displayed one.
         let mut proposed=m.world.clone();
         let result=proposed.step(&m.resources).and_then(|event| {
-            let frame=proposed.render(&m.resources,m.target)?; Ok((event,frame))
+            let frame=proposed.render(&m.resources,m.target)?;
+            if let MissionState::Landing(w)=&mut proposed{w.finish_outer_frame();}
+            Ok((event,frame))
         });
         match result {
             Ok((event,frame))=>{
@@ -213,6 +216,23 @@ impl Game {
     pub fn start_selected_building_type(&mut self,selector:u8)->Result<(),String> {
         self.start_building_command(Some(selector))
     }
+    /// Port chooser geometry, original select-then-target construction semantics.
+    pub fn choose_building_type(&mut self,selector:u8)->Result<(),String>{
+        if self.scene!=Scene::Mission||!self.building_choices().contains(&selector){return Err("building is not available".into());}
+        self.placement_selector=Some(selector);self.error=None;
+        self.building_feedback=Some(format!("{} SELECTED - RIGHT CLICK GROUND TO BUILD",building_menu::label(selector)));
+        self.trace.push(format!("ConstructionSelected: {selector}"));Ok(())
+    }
+    pub fn place_selected_building_type(&mut self,selector:u8,screen:[i32;2])->Result<(),String>{
+        if self.scene!=Scene::Mission{return Err("construction placement requires mission scene".into());}
+        let m=self.mission.as_mut().ok_or("mission scene lacks world")?;
+        let MissionState::Landing(current)=&m.world else{return Err("construction placement requires owned actor world".into());};
+        let mut proposed=current.clone();
+        let result=proposed.place_selected_building(&m.resources,m.target,screen,selector)?;
+        let frame=proposed.render(&m.resources,m.target)?;m.world=MissionState::Landing(proposed);m.frame=frame;
+        self.placement_selector=None;self.error=None;self.building_feedback=Some(format!("BUILD ORDER: {}",building_menu::label(selector)));
+        self.trace.push(format!("ConstructionPlacement: {result}"));Ok(())
+    }
     fn start_building_command(&mut self,selector:Option<u8>)->Result<(),String> {
         if self.scene!=Scene::Mission {return Err("build-start requires the mission scene".into());}
         let m=self.mission.as_mut().ok_or("mission scene lacks world")?;
@@ -230,6 +250,7 @@ impl Game {
 
     pub fn escape(&mut self) {
         if self.building_menu_open{self.building_menu_open=false;self.building_menu_capture=None;return;}
+        if self.placement_selector.take().is_some(){self.building_feedback=None;return;}
         match self.scene {Scene::Menu=>self.transition(Scene::Quit),Scene::Quit=>{},_=>{self.automatic=false;self.mission=None;self.error=None;self.transition(Scene::Menu);}}
     }
     pub fn toggle_run(&mut self) {
@@ -241,15 +262,22 @@ impl Game {
         let selected=match self.controls.selected(){Some(MenuControl::Id0)=>1,Some(MenuControl::Id3)=>2,Some(MenuControl::Id2)=>3,_=>0};
         let flat = RgbImage::from_rgb24(640,480,vec![18;640*480*3]).map_err(|e|e.to_string())?;
         let (base,lines)=match self.scene {
-            Scene::Menu=>(&self.images[selected],vec!["RUST DEVELOPMENT BUILD - SINGLE PLAYER: LOAD WORLD".into(),if self.landing_seed.is_some(){"LANDING STUDY - OTHER SYSTEMS PAUSED".into()}else{"PLANTS ONLY - PLAYER COMMANDS NOT IMPLEMENTED".into()}]),
+            Scene::Menu=>(&self.images[selected],vec!["RUST DEVELOPMENT BUILD - SINGLE PLAYER: LOAD WORLD".into(),if self.reference_startup{"FIRST MISSION - RECONSTRUCTION IN PROGRESS".into()}else if self.landing_seed.is_some(){"LANDING STUDY - OTHER SYSTEMS PAUSED".into()}else{"PLANTS ONLY - PLAYER COMMANDS NOT IMPLEMENTED".into()}]),
             Scene::Loading=>(&self.images[0],vec!["LOADING CONQ001 - VERIFYING RESOURCE HASHES AND WORLD LINKS".into()]),
             Scene::Options=>(&flat,vec!["DEVELOPMENT OPTIONS".into(),format!("AUTOMATIC WORLD STEPS: {} - SPACE / ENTER: TOGGLE",if self.start_running{"ON"}else{"OFF"}),"10 STEPS/SECOND - ORIGINAL TIMING NOT ESTABLISHED".into(),"ESC: RETURN TO MENU".into()]),
             Scene::Mission=>{
                 let m=self.mission.as_ref().ok_or("mission scene lacks world")?;
                 let status=m.blocked.as_deref().map(|e|format!("STOPPED: {e}")).unwrap_or_else(||format!("{} - SPACE: STEP / ENTER: RUN / ESC: MENU",if self.automatic{"RUNNING"}else{"PAUSED"}));
+                let status=if let MissionState::Landing(w)=&m.world {
+                    match w.runtime_context.as_ref().map(|c|c.outcome()) {
+                        Some(genewars_runtime::mission_outcome::MissionOutcome::Won{..})=>"MISSION WON - RESULT FLOW INTEGRATION PENDING".into(),
+                        Some(genewars_runtime::mission_outcome::MissionOutcome::Lost{..})=>"MISSION LOST - RESULT FLOW INTEGRATION PENDING".into(),
+                        _=>status,
+                    }
+                }else{status};
                 let lines=if let MissionState::Landing(w)=&m.world {
-                    vec![format!("LANDING STUDY - STEP {} - ACTOR {}",m.ticks,w.selected.map(|s|s.to_string()).unwrap_or("NONE".into())),
-                        self.error.clone().or_else(||self.building_feedback.clone()).unwrap_or(status),"TAB: SELECT / RIGHT CLICK: MOVE / C: CONSTRUCTION / B: DEV BTURR".into(),"DEV BUILD INPUT; OPCODE5 GUARDS APPLY, SETUP IS CALLBACK-DRIVEN".into()]
+                    vec![format!("{} - STEP {} - ACTOR {}",if w.runtime_context.is_some(){"EXCELAND - RECONSTRUCTION"}else{"LANDING STUDY"},m.ticks,w.selected.map(|s|s.to_string()).unwrap_or("NONE".into())),
+                        self.error.clone().or_else(||self.building_feedback.clone()).unwrap_or(status),"TAB: SELECT / RIGHT CLICK: MOVE OR PLACE / C: CONSTRUCTION".into(),"PORT CONTROLS; SOURCE OPCODE16 PLACEMENT / B: DEV BTURR".into()]
                 }else{vec![format!("PLANTS {} - STEP {} - CURSOR {}",m.world.plant_count(),m.ticks,m.world.schedule_cursor()),status,"ARROWS: VIEW - OTHER ENTITY SYSTEMS SUSPENDED".into()]};
                 (&m.frame.image,lines)
             },

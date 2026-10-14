@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "utc": "2026-10-14T23:16:33.759965+00:00",
+  "scope": "recovered headless replay fail-fast focused regression and native harness static review",
+  "command": "CARGO_BUILD_JOBS=2 C:/Python314/python.exe -B scripts/cargo.py test -p genewars-desktop --bin genewars-game blocked_replay_preserves_failure_fixture_before_later_commands --offline --locked",
+  "result": {
+    "exit_code": 0,
+    "passed": 1,
+    "failed": 0,
+    "filtered": 63,
+    "test_seconds": 0.63
+  },
+  "sha256": {
+    "rust/crates/genewars-desktop/src/bin/genewars-game.rs": "90b38de3e011b4d6b0df2c68fac34531cb5232763afc214af09f62a23175b2eb",
+    "scripts/desktop/validate_native_building_chain.py": "29bc220d7e28b4b3e3de87cf3c3d9e79d5067237ff0e133a5158e7a820ead2db"
+  },
+  "observed": [
+    "Preexisting explicit harness boundary rejects replay at line 1, step 0 before pan, select, build-place or tick can execute.",
+    "Entire before/after game report is identical, including world SHA-256.",
+    "Native chain Python parses; fresh startup uses serialized RNG option, 200 initial ticks, 1100 Extractor ticks and 1200 Distributor ticks.",
+    "Harness stops before second run on first observed blocked mission."
+  ],
+  "reviewed_not_executed": [
+    "Headless tick loop checks the boundary after every tick; output/report serialization precedes nonzero replay-error return."
+  ],
+  "limitations": [
+    "Focused test injects a harness boundary; it does not reproduce the genuine step-1137 gameplay defect.",
+    "No process-level artifact-write test, new native session, release build or broad suite was run.",
+    "Native frozen replay can dispatch later events after a gameplay boundary; validator detects and records it only after the process returns. Native fail-fast remains separate.",
+    "Native --expect blocked currently preserves a blocked receipt but raises BoundaryBlocked and exits nonzero; no expected-boundary success claim.",
+    "No authentic mission acceptance or campaign transition established."
+  ],
+  "authentic_missions_completable": 0,
+  "native_harness_syntax": "passed"
+}

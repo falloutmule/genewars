@@ -1,0 +1,272 @@
+{
+  "status": "passed",
+  "utc": "2026-10-14T23:21:25.634089+00:00",
+  "scope": "native Extractor/Distributor construction from source-backed fresh startup",
+  "authentic_missions_completable": 0,
+  "border_policy": "generated",
+  "construction_border_sha256": "422f124eac806197ba95d2438516284c3bf828a1db8e8aabe330661fff23ef8a",
+  "patterns_sha256": "d848e423b7a76a2c2dbf517fc595e33a789df7382697b56f382cc7606b18939e",
+  "binary_sha256": "7faee70d70fa4f21859dea0576ac13b66b3f84c6bf49935c89f939e50d47a850",
+  "input_sha256": "cc4f1ad5545fbd15f8cdd29aa51ea317be01f082ef7901acd3ae631a26174db7",
+  "chooser_source_sha256": "1bdb2cfd64c13c596c4903ffe1d97637d8b30bb40bac54fa101eef2f51ab705e",
+  "probe": "private\\integration\\fresh-building-chain-003",
+  "work": "private\\integration\\native-building-chain\\91422442df0f44ff92771849acf9ef4c",
+  "runs": [
+    {
+      "menu": {
+        "bmp_sha256": "e160b5f68528077bc3165817bcd7bd6657f5dffda9d2f06a8cf9ffca1b71db1b",
+        "world_sha256": null,
+        "steps": null,
+        "blocked": null
+      },
+      "loaded": {
+        "bmp_sha256": "8a86eaaa15993b09c59f2a3810d03c6227de30493e17a68c9e6150f1a4dbfa93",
+        "world_sha256": "594c4ba8da72612e6230922a749d5f50eb76601b555b1681a2ba87cff79d55e0",
+        "steps": 0,
+        "blocked": null
+      },
+      "selected": {
+        "bmp_sha256": "2d39adbfc349084f228e50397f442d11448abc9376ed6356ba82c7b31ce862f8",
+        "world_sha256": "d1f9008c1fa7735cf8e888bf470dd13d74557fb6b2c8bc00350fc55d3a1f3521",
+        "steps": 200,
+        "blocked": null
+      },
+      "extractor-unlock": {
+        "bmp_sha256": "af3727930b8990c9f0491f9c0949494151ff9f0fc2ce4c7d9fbeb7724ac2e83c",
+        "world_sha256": "d1f9008c1fa7735cf8e888bf470dd13d74557fb6b2c8bc00350fc55d3a1f3521",
+        "steps": 200,
+        "blocked": null
+      },
+      "extractor-armed": {
+        "bmp_sha256": "c255a73ba9d0d6715fc73aa2d9025e304d9d5bb33445721f6d2579df1359b1bc",
+        "world_sha256": "d1f9008c1fa7735cf8e888bf470dd13d74557fb6b2c8bc00350fc55d3a1f3521",
+        "steps": 200,
+        "blocked": null
+      },
+      "extractor-assigned": {
+        "bmp_sha256": "82e01a5fcbaa08e79833217515e7a398f5ebd1adc27c709ec823cab8bcf2f673",
+        "world_sha256": "8227f8c35bb84ff991c3c210564fd04600fd782bebf6c334cad6699b60e63d41",
+        "steps": 200,
+        "blocked": null
+      },
+      "extractor-work100": {
+        "bmp_sha256": "1d5da35a8cddeb37715b7a8d065b717f31aea218828c5ed91ec9aee1217fea92",
+        "world_sha256": "8938a9790ca720e66f6bc36ab8d50d68b85bbde4e4cf5a5fa6632a59b6cdeb3d",
+        "steps": 300,
+        "blocked": null
+      },
+      "extractor-work300": {
+        "bmp_sha256": "baab88316376ad39a247cf4f477f5019ab802e7fd5590fc3894ce3fd4f6b02a4",
+        "world_sha256": "e8f272057e8eee408bc242eb21bee18e680412fa5d7db5ef13a7a603b66c9c93",
+        "steps": 500,
+        "blocked": null
+      },
+      "extractor-work600": {
+        "bmp_sha256": "d44a3e19db8d92be701bf4af1ce9ef04fde7c1bf9151c3a8145b47a7eddad2a9",
+        "world_sha256": "077b231e19c761ac2f93d7b5c89c12812174923c3d3b2ed1b3f2098a9130afcd",
+        "steps": 800,
+        "blocked": null
+      },
+      "extractor-work1100": {
+        "bmp_sha256": "62706aac912a5241860d13c8d35cc5a291f46c8eedda42774b24d6a57cf1d673",
+        "world_sha256": "6e6c7a49146c4eea7f2187c93a150c10ce397c5c309fbcc8af3db418026fbe07",
+        "steps": 1300,
+        "blocked": null
+      },
+      "extractor-next-choices": {
+        "bmp_sha256": "dff7b750c6ecf0b4705232edbb17ba5426882088bdc75b3b71c312b53ea7bac1",
+        "world_sha256": "6e6c7a49146c4eea7f2187c93a150c10ce397c5c309fbcc8af3db418026fbe07",
+        "steps": 1300,
+        "blocked": null
+      },
+      "distributor-unlock": {
+        "bmp_sha256": "dff7b750c6ecf0b4705232edbb17ba5426882088bdc75b3b71c312b53ea7bac1",
+        "world_sha256": "6e6c7a49146c4eea7f2187c93a150c10ce397c5c309fbcc8af3db418026fbe07",
+        "steps": 1300,
+        "blocked": null
+      },
+      "distributor-armed": {
+        "bmp_sha256": "c0a06e5a2b3ae2633a6479f93fe829fd5fcbf289c99f7af67176a4119a5fc8d8",
+        "world_sha256": "6e6c7a49146c4eea7f2187c93a150c10ce397c5c309fbcc8af3db418026fbe07",
+        "steps": 1300,
+        "blocked": null
+      },
+      "distributor-assigned": {
+        "bmp_sha256": "e92d966317170d1cff9fa4887a09cf2f328cea354ba61eba78d3a9b351d39b17",
+        "world_sha256": "8bca44f76e135c3c7fff2c3ce0b21361579a20afb9ec12abd20cdf7cb0836c86",
+        "steps": 1300,
+        "blocked": null
+      },
+      "distributor-work100": {
+        "bmp_sha256": "973fbd8a11de508a6fbef38182cce35c262c3b8a624234260e0aca17a3304bf4",
+        "world_sha256": "d5f00f2dcc072b14728c71152f4eb4a714849860257faa37153493ce0706aa91",
+        "steps": 1400,
+        "blocked": null
+      },
+      "distributor-work300": {
+        "bmp_sha256": "521a4dbcfa88d01c11f4c171804d8f785d2a8392f53be204e26a62a27cdf2674",
+        "world_sha256": "6e549fb7ead5c8808a909a190a0907d892ad501bfdae6f6e16c8a0ba42a7fb48",
+        "steps": 1600,
+        "blocked": null
+      },
+      "distributor-work600": {
+        "bmp_sha256": "ab6340642546fc968a90ba8ae11a3582189139a6409a18d96b42396cc2ba487a",
+        "world_sha256": "e35f2e586a3376e7c7049716fa8b3cf185047ecbda2c8d9ec194c6f0bb0c057a",
+        "steps": 1900,
+        "blocked": null
+      },
+      "distributor-work1200": {
+        "bmp_sha256": "a0666f3c1eaf32104e4981280a5f4b2166e5d52cede0fab9e1c45beaea6ab914",
+        "world_sha256": "a84d101ca9a23626223820e2edf4f6685f648c8d0a3c2efce9845c4d9bb62fee",
+        "steps": 2500,
+        "blocked": null
+      },
+      "distributor-next-choices": {
+        "bmp_sha256": "666c487642ce61d497c6d6ff6a287b7a70fe0073106c18132438dd32c7b50aa0",
+        "world_sha256": "a84d101ca9a23626223820e2edf4f6685f648c8d0a3c2efce9845c4d9bb62fee",
+        "steps": 2500,
+        "blocked": null
+      }
+    },
+    {
+      "menu": {
+        "bmp_sha256": "e160b5f68528077bc3165817bcd7bd6657f5dffda9d2f06a8cf9ffca1b71db1b",
+        "world_sha256": null,
+        "steps": null,
+        "blocked": null
+      },
+      "loaded": {
+        "bmp_sha256": "8a86eaaa15993b09c59f2a3810d03c6227de30493e17a68c9e6150f1a4dbfa93",
+        "world_sha256": "594c4ba8da72612e6230922a749d5f50eb76601b555b1681a2ba87cff79d55e0",
+        "steps": 0,
+        "blocked": null
+      },
+      "selected": {
+        "bmp_sha256": "2d39adbfc349084f228e50397f442d11448abc9376ed6356ba82c7b31ce862f8",
+        "world_sha256": "d1f9008c1fa7735cf8e888bf470dd13d74557fb6b2c8bc00350fc55d3a1f3521",
+        "steps": 200,
+        "blocked": null
+      },
+      "extractor-unlock": {
+        "bmp_sha256": "af3727930b8990c9f0491f9c0949494151ff9f0fc2ce4c7d9fbeb7724ac2e83c",
+        "world_sha256": "d1f9008c1fa7735cf8e888bf470dd13d74557fb6b2c8bc00350fc55d3a1f3521",
+        "steps": 200,
+        "blocked": null
+      },
+      "extractor-armed": {
+        "bmp_sha256": "c255a73ba9d0d6715fc73aa2d9025e304d9d5bb33445721f6d2579df1359b1bc",
+        "world_sha256": "d1f9008c1fa7735cf8e888bf470dd13d74557fb6b2c8bc00350fc55d3a1f3521",
+        "steps": 200,
+        "blocked": null
+      },
+      "extractor-assigned": {
+        "bmp_sha256": "82e01a5fcbaa08e79833217515e7a398f5ebd1adc27c709ec823cab8bcf2f673",
+        "world_sha256": "8227f8c35bb84ff991c3c210564fd04600fd782bebf6c334cad6699b60e63d41",
+        "steps": 200,
+        "blocked": null
+      },
+      "extractor-work100": {
+        "bmp_sha256": "1d5da35a8cddeb37715b7a8d065b717f31aea218828c5ed91ec9aee1217fea92",
+        "world_sha256": "8938a9790ca720e66f6bc36ab8d50d68b85bbde4e4cf5a5fa6632a59b6cdeb3d",
+        "steps": 300,
+        "blocked": null
+      },
+      "extractor-work300": {
+        "bmp_sha256": "baab88316376ad39a247cf4f477f5019ab802e7fd5590fc3894ce3fd4f6b02a4",
+        "world_sha256": "e8f272057e8eee408bc242eb21bee18e680412fa5d7db5ef13a7a603b66c9c93",
+        "steps": 500,
+        "blocked": null
+      },
+      "extractor-work600": {
+        "bmp_sha256": "d44a3e19db8d92be701bf4af1ce9ef04fde7c1bf9151c3a8145b47a7eddad2a9",
+        "world_sha256": "077b231e19c761ac2f93d7b5c89c12812174923c3d3b2ed1b3f2098a9130afcd",
+        "steps": 800,
+        "blocked": null
+      },
+      "extractor-work1100": {
+        "bmp_sha256": "62706aac912a5241860d13c8d35cc5a291f46c8eedda42774b24d6a57cf1d673",
+        "world_sha256": "6e6c7a49146c4eea7f2187c93a150c10ce397c5c309fbcc8af3db418026fbe07",
+        "steps": 1300,
+        "blocked": null
+      },
+      "extractor-next-choices": {
+        "bmp_sha256": "dff7b750c6ecf0b4705232edbb17ba5426882088bdc75b3b71c312b53ea7bac1",
+        "world_sha256": "6e6c7a49146c4eea7f2187c93a150c10ce397c5c309fbcc8af3db418026fbe07",
+        "steps": 1300,
+        "blocked": null
+      },
+      "distributor-unlock": {
+        "bmp_sha256": "dff7b750c6ecf0b4705232edbb17ba5426882088bdc75b3b71c312b53ea7bac1",
+        "world_sha256": "6e6c7a49146c4eea7f2187c93a150c10ce397c5c309fbcc8af3db418026fbe07",
+        "steps": 1300,
+        "blocked": null
+      },
+      "distributor-armed": {
+        "bmp_sha256": "c0a06e5a2b3ae2633a6479f93fe829fd5fcbf289c99f7af67176a4119a5fc8d8",
+        "world_sha256": "6e6c7a49146c4eea7f2187c93a150c10ce397c5c309fbcc8af3db418026fbe07",
+        "steps": 1300,
+        "blocked": null
+      },
+      "distributor-assigned": {
+        "bmp_sha256": "e92d966317170d1cff9fa4887a09cf2f328cea354ba61eba78d3a9b351d39b17",
+        "world_sha256": "8bca44f76e135c3c7fff2c3ce0b21361579a20afb9ec12abd20cdf7cb0836c86",
+        "steps": 1300,
+        "blocked": null
+      },
+      "distributor-work100": {
+        "bmp_sha256": "973fbd8a11de508a6fbef38182cce35c262c3b8a624234260e0aca17a3304bf4",
+        "world_sha256": "d5f00f2dcc072b14728c71152f4eb4a714849860257faa37153493ce0706aa91",
+        "steps": 1400,
+        "blocked": null
+      },
+      "distributor-work300": {
+        "bmp_sha256": "521a4dbcfa88d01c11f4c171804d8f785d2a8392f53be204e26a62a27cdf2674",
+        "world_sha256": "6e549fb7ead5c8808a909a190a0907d892ad501bfdae6f6e16c8a0ba42a7fb48",
+        "steps": 1600,
+        "blocked": null
+      },
+      "distributor-work600": {
+        "bmp_sha256": "ab6340642546fc968a90ba8ae11a3582189139a6409a18d96b42396cc2ba487a",
+        "world_sha256": "e35f2e586a3376e7c7049716fa8b3cf185047ecbda2c8d9ec194c6f0bb0c057a",
+        "steps": 1900,
+        "blocked": null
+      },
+      "distributor-work1200": {
+        "bmp_sha256": "a0666f3c1eaf32104e4981280a5f4b2166e5d52cede0fab9e1c45beaea6ab914",
+        "world_sha256": "a84d101ca9a23626223820e2edf4f6685f648c8d0a3c2efce9845c4d9bb62fee",
+        "steps": 2500,
+        "blocked": null
+      },
+      "distributor-next-choices": {
+        "bmp_sha256": "666c487642ce61d497c6d6ff6a287b7a70fe0073106c18132438dd32c7b50aa0",
+        "world_sha256": "a84d101ca9a23626223820e2edf4f6685f648c8d0a3c2efce9845c4d9bb62fee",
+        "steps": 2500,
+        "blocked": null
+      }
+    }
+  ],
+  "limitations": [
+    "Fresh reference startup uses serialized RNG; full mission acceptance remains separate",
+    "Port-owned input mapping and chooser layout",
+    "No mission outcome or campaign transition asserted"
+  ],
+  "startup_arguments": [
+    "--reference-startup",
+    "fresh"
+  ],
+  "original_execution": false,
+  "classification": "completed_fresh_distributor",
+  "visual_review": {
+    "observed": [
+      "Completed Extractor and Distributor visible at steps1900 and2500 with architect beside Distributor.",
+      "Prepared terrain is textured and building stages have visibly changed."
+    ],
+    "presentation_gap": "HUD still labels fresh startup LANDING STUDY; port controls/layout remain development presentation.",
+    "inspected_frames": [
+      "first/distributor-work600.bmp",
+      "first/distributor-work1200.bmp"
+    ]
+  },
+  "validator_sha256": "94dab47d14ebfe7e14aa444c42922272c942008430d15868ad8078900b640e33",
+  "validator_note": "Classification label corrected to fresh after successful frozen run; assertions unchanged."
+}

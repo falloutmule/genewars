@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "scope": "Fresh CD ordinary-command Extractor and Distributor construction; no mission outcome acceptance",
+  "steps": 2500,
+  "blocked": null,
+  "buildings": [
+    {
+      "slot": 0,
+      "owner": 0,
+      "selector": 11,
+      "position": [
+        19839,
+        12927
+      ],
+      "animation": 1,
+      "frame": 4,
+      "progress_word_2b": 280,
+      "phase_byte_2f": 0,
+      "flags_word_31": 5
+    },
+    {
+      "slot": 1,
+      "owner": 0,
+      "selector": 3,
+      "position": [
+        21119,
+        13439
+      ],
+      "animation": 1,
+      "frame": 0,
+      "progress_word_2b": 240,
+      "phase_byte_2f": 0,
+      "flags_word_31": 5
+    }
+  ],
+  "player_funds": [
+    {
+      "slot": 0,
+      "balance": 1074
+    },
+    {
+      "slot": 1,
+      "balance": 0
+    },
+    {
+      "slot": 2,
+      "balance": 0
+    },
+    {
+      "slot": 3,
+      "balance": 0
+    }
+  ],
+  "original_missions_completable": 0,
+  "sha256": {
+    "genewars-game.exe": "7faee70d70fa4f21859dea0576ac13b66b3f84c6bf49935c89f939e50d47a850",
+    "replay.txt": "4a2b9b8ad3209ba89aa74d6442ac44b5ad9110672f9ffdf9f62cb2004d534f81",
+    "report.json": "b86fa0e6d7e92f314db5f7bcb2af24b08a2159961a3680d7b541af31af3d746a"
+  }
+}

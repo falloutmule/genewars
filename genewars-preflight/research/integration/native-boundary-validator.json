@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "utc": "2026-10-14T23:18:36.603842+00:00",
+  "scope": "Native validator blocked-outcome classification, no native execution",
+  "test_command": "C:/Python314/python.exe -B scripts/desktop/test_native_boundary_receipt.py",
+  "tests_passed": 2,
+  "tests_failed": 0,
+  "sha256": {
+    "scripts/desktop/validate_native_building_chain.py": "b614cb5257d186dd959760c3798730b1f7a92c23c1b1a2052157245369071f07",
+    "scripts/desktop/test_native_boundary_receipt.py": "831706b87d974d92e5e90d9df39fae7910be23d820fa4e874546bc92575ac295"
+  },
+  "behavior": [
+    "Read __outcome.json and matching __blocked.json before check_returncode.",
+    "Expected blocked requires --blocked-reason and --blocked-step; exact matching reason and step required.",
+    "Matching expected boundary exits successfully with receipt status still blocked and expected_boundary_check passed.",
+    "Missing outcome falls through normal exit checks; malformed or contradictory outcome is an error; no second run after blocked state."
+  ],
+  "limitations": [
+    "No native run yet.",
+    "Focused outcome adapter execution not performed: no checked-in test caller of step_mission_outcome was found; source review shows staged players/context commit only after planning and validation.",
+    "Complete missions remain zero."
+  ]
+}

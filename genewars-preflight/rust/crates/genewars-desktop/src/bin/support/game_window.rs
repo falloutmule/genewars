@@ -51,6 +51,13 @@ impl ApplicationHandler for Host<'_> {
     }
     fn window_event(&mut self,events:&ActiveEventLoop,id:WindowId,event:WindowEvent) {
         if self.window.as_ref().is_none_or(|w|w.id()!=id){return;}
+        if let Some(replay)=&mut self.replay {
+            if let Some(m)=&self.game.mission {if m.blocked.is_some() {
+                let reason=replay.next(self.game).unwrap_err();
+                let diagnostic=replay.preserve_blocked(self.game,&reason);
+                return self.fail(events,match diagnostic {Ok(())=>reason,Err(e)=>format!("{reason}; diagnostic error: {e}")});
+            }}
+        }
         match event {
             WindowEvent::CloseRequested=>events.exit(),
             WindowEvent::Focused(false)=>{self.game.cancel_capture();self.game.automatic=false;self.redraw();},
@@ -81,17 +88,18 @@ impl ApplicationHandler for Host<'_> {
                 match self.present(){Ok(true)=>self.game.presented+=1,Ok(false)=>return,Err(e)=>return self.fail(events,e)}
                 if self.game.scene==Scene::Loading {self.game.finish_loading();self.next_step=Instant::now()+Duration::from_millis(100);self.redraw();if self.replay.is_some(){return;}}
                 if let Some(replay)=&mut self.replay {
-                    match replay.actions.pop_front() {
-                        Some(Action::Input(input))=>native_input::dispatch(self.game,input),
-                        Some(Action::Wait)=>{},
-                        Some(Action::Observe(name))=>{
+                    match replay.next(self.game) {
+                        Err(e)=>return self.fail(events,e),
+                        Ok(Some(Action::Input(input)))=>native_input::dispatch(self.game,input),
+                        Ok(Some(Action::Wait))=>{},
+                        Ok(Some(Action::Observe(name)))=>{
                             let result=(||->Result<(),String>{
                                 super::save_new(&replay.output.join(format!("{name}.json")),self.game.report().as_bytes())?;
                                 super::save_new(&replay.output.join(format!("{name}.bmp")),&self.game.image()?.to_bmp_bytes().map_err(|e|e.to_string())?)?;Ok(())
                             })();
                             if let Err(e)=result{return self.fail(events,e);}
                         },
-                        None=>{self.replay_complete=true;events.exit();return;}
+                        Ok(None)=>{self.replay_complete=true;events.exit();return;}
                     }
                     self.redraw();
                 }

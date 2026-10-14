@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "utc": "2026-10-14T23:17:32.214461+00:00",
+  "scope": "Native replay boundary guard and diagnostic preservation, focused non-window test",
+  "test": "blocked_native_replay_preserves_world_and_diagnostics",
+  "result": {
+    "passed": 1,
+    "failed": 0,
+    "filtered": 64,
+    "seconds": 0.44,
+    "exit_code": 0
+  },
+  "build_jobs": 2,
+  "sha256": {
+    "rust/crates/genewars-desktop/src/bin/support/native_input.rs": "d7224dc4ea382386546ca974cc4c26fb87b720f1f38fd2e8988ce2e6ff623fc6",
+    "rust/crates/genewars-desktop/src/bin/support/game_window.rs": "b8ec65ab4f8fa6e48f81f9e155b66990a5daacf1fd92a5d39f03f7f87b00b776"
+  },
+  "observed": [
+    "Blocked replay next action returns error without dequeuing or dispatching input.",
+    "Full game report including world hash remains unchanged.",
+    "Reserved __blocked.json reproduces exact report, __blocked.bmp is written, __outcome.json explicitly records blocked status and pending action count.",
+    "Later requested observation is not fabricated."
+  ],
+  "integration": "Host checks blocked state before any subsequent window event, saves diagnostics and returns explicit blocked error. Replay also checks before dequeuing each action.",
+  "limitations": [
+    "No native window run in this packet; frozen fresh002 acceptance pending.",
+    "Injected harness boundary validates stopping mechanics, not original-game fidelity or mission completion.",
+    "Callers must read __outcome.json on nonzero exit; historical harness check_returncode currently classifies nonzero as generic error until adapted."
+  ]
+}

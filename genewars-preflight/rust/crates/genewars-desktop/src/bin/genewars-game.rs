@@ -9,6 +9,7 @@ use std::{env,fs,io::{Read,Write},path::{Path,PathBuf},process};
 #[path="support/shared_scene.rs"] mod shared_scene;
 #[path="support/runtime_scene.rs"] mod runtime_scene;
 #[path="support/status_text.rs"] mod status_text;
+#[path="support/result_scene.rs"] mod result_scene;
 #[path="support/game_window.rs"] mod game_window;
 #[path="support/native_input.rs"] mod native_input;
 use runtime_scene::Game;
@@ -23,13 +24,14 @@ fn replay(game:&mut Game,text:&str)->Result<(),String>{
     for (line,text) in text.lines().enumerate(){
         let words=text.split_whitespace().collect::<Vec<_>>();
         if words.is_empty()||words[0].starts_with('#'){continue;}
+        replay_gameplay_ready(game,line+1)?;
         let n=|i:usize|->Result<i32,String>{words.get(i).ok_or("missing number")?.parse().map_err(|_|"invalid number".into())};
         match words.as_slice(){
             ["move",_,_]=>game.pointer(Some((n(1)?,n(2)?))),
             ["down"]=>game.left(true),["up"]=>game.left(false),["cancel"]=>game.cancel_capture(),
             ["click",_,_]=>{game.pointer(Some((n(1)?,n(2)?)));game.left(true);game.left(false);},
             ["load"]=>game.finish_loading(),
-            ["tick",_]=>{let count=n(1)?;if !(1..=4096).contains(&count){return Err("tick count must be 1..4096".into());}for _ in 0..count {game.tick();}},
+            ["tick",_]=>{let count=n(1)?;if !(1..=4096).contains(&count){return Err("tick count must be 1..4096".into());}for _ in 0..count {game.tick();replay_gameplay_ready(game,line+1)?;}},
             ["pan",_,_]=>game.pan(i16::try_from(n(1)?).map_err(|_|"pan dx outside i16")?,i16::try_from(n(2)?).map_err(|_|"pan dy outside i16")?),
             ["escape"]=>game.escape(),["toggle"]=>game.toggle_run(),
             ["select",_]=>game.select_actor(Some(usize::try_from(n(1)?).map_err(|_|"negative actor slot")?)),
@@ -39,6 +41,7 @@ fn replay(game:&mut Game,text:&str)->Result<(),String>{
             ["build-order",_,_]=>game.build_order([n(1)?,n(2)?]),
             // The admitted selector-1 command is guarded by opcode-5; normal
             // callbacks retain responsibility for subsequent site setup.
+            ["build-place",selector,_,_]=>game.place_selected_building_type(selector.parse().map_err(|_|"invalid building selector")?,[n(2)?,n(3)?])?,
             ["build-start"]=>game.start_selected_building()?,
             ["build-start",selector]=>game.start_selected_building_type(selector.parse().map_err(|_|"invalid building selector")?)?,
             _=>return Err(format!("unknown replay command at line {}",line+1)),
@@ -46,12 +49,17 @@ fn replay(game:&mut Game,text:&str)->Result<(),String>{
         if game.scene==runtime_scene::Scene::Quit{break;}
     }Ok(())
 }
+fn replay_gameplay_ready(game:&Game,line:usize)->Result<(),String>{
+    if let Some(m)=&game.mission{if let Some(reason)=&m.blocked{return Err(format!("replay blocked at line {line}, step {}: {reason}",m.ticks));}}
+    Ok(())
+}
 fn run()->Result<(),String>{
     let args=env::args().skip(1).collect::<Vec<_>>();
     if args.is_empty(){return Err("usage: genewars-game PRIVATE_RUNTIME_DIR [--landing-seed 0..65535] [--headless REPLAY | --window-replay REPLAY | --native-input-replay INPUT --observations NEW_DIR] [--report NEW_JSON] [--bmp NEW_BMP] [--frames N] [--seconds N]".into());}
     let(mut headless,mut report,mut bmp):(Option<PathBuf>,Option<PathBuf>,Option<PathBuf>)=(None,None,None);
     let mut world_output: Option<PathBuf> = None;
     let mut landing_seed=None;
+    let mut reference_startup=false;
     let mut window_replay:Option<PathBuf>=None;
     let mut native_replay:Option<PathBuf>=None;
     let mut observations:Option<PathBuf>=None;
@@ -66,6 +74,7 @@ fn run()->Result<(),String>{
             "--report" if report.is_none()=>report=Some(args[i+1].clone().into()),
             "--bmp" if bmp.is_none()=>bmp=Some(args[i+1].clone().into()),
             "--world-output" if world_output.is_none()=>world_output=Some(args[i+1].clone().into()),
+            "--reference-startup" if !reference_startup&&args[i+1]=="fresh"=>reference_startup=true,
             "--landing-seed" if landing_seed.is_none()=>landing_seed=Some(args[i+1].parse::<u16>().map_err(|_|"landing seed must be 0..65535")?),
             "--frames" if frames.is_none()=>{let n=args[i+1].parse::<u64>().map_err(|_|"invalid frame count")?;if !(1..=100000).contains(&n){return Err("frames outside 1..100000".into());}frames=Some(n);},
             "--seconds" if seconds.is_none()=>{let n=args[i+1].parse::<u64>().map_err(|_|"invalid seconds")?;if !(1..=1200).contains(&n){return Err("seconds outside 1..1200".into());}seconds=Some(n);},
@@ -80,24 +89,33 @@ fn run()->Result<(),String>{
     if landing_seed.is_some()&&world_output.is_some(){return Err("landing study requires full-state export; --world-output only supports the plant world".into());}
     for p in [&report,&bmp,&world_output].into_iter().flatten(){if p.exists(){return Err(format!("refusing to overwrite {}",p.display()));}}
     let mut game=Game::open(Path::new(&args[0]))?;
-    game.landing_seed=landing_seed;
+    if reference_startup&&landing_seed.is_some(){return Err("reference startup uses the serialized RNG; omit --landing-seed".into());}
+    game.landing_seed=landing_seed;game.reference_startup=reference_startup;
     let show_window=headless.is_none();
-    if let Some(path)=headless.or(window_replay){let mut text=String::new();fs::File::open(path).map_err(|e|e.to_string())?.take(65537).read_to_string(&mut text).map_err(|e|e.to_string())?;replay(&mut game,&text)?;}
+    let mut replay_error=None;
+    if let Some(path)=headless.or(window_replay){let mut text=String::new();fs::File::open(path).map_err(|e|e.to_string())?.take(65537).read_to_string(&mut text).map_err(|e|e.to_string())?;replay_error=replay(&mut game,&text).err();}
     let native=if let Some(path)=native_replay {
         let mut text=String::new();fs::File::open(path).map_err(|e|e.to_string())?.take(65537).read_to_string(&mut text).map_err(|e|e.to_string())?;
         let output=observations.unwrap();let replay=native_input::Replay::parse(&text,output.clone())?;
         fs::create_dir(&output).map_err(|e|format!("{}: {e}",output.display()))?;Some(replay)
     }else{None};
-    if show_window{game_window::show(&mut game,frames,seconds,native)?;}
+    if show_window&&replay_error.is_none(){game_window::show(&mut game,frames,seconds,native)?;}
     if let Some(path)=bmp{save_new(&path,&game.image()?.to_bmp_bytes().map_err(|e|e.to_string())?)?;}
     if let Some(path)=world_output {save_new(&path,game.mission.as_ref().ok_or("no mission to export")?.world.source_bytes()?)?;}
-    let json=game.report();if let Some(path)=report{save_new(&path,json.as_bytes())?;}print!("{json}");Ok(())
+    let json=game.report();if let Some(path)=report{save_new(&path,json.as_bytes())?;}print!("{json}");if let Some(error)=replay_error{return Err(error);}Ok(())
 }
 fn main(){if let Err(e)=run(){eprintln!("{e}");process::exit(1);}}
 
 #[cfg(test)]
 mod tests{
     use super::*;
+    #[test]fn blocked_replay_preserves_failure_fixture_before_later_commands(){
+        let root=Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../private/integration/game-runtime");
+        let mut game=Game::open(&root).unwrap();game.landing_seed=Some(5428);game.scene=runtime_scene::Scene::Loading;game.finish_loading();
+        game.mission.as_mut().unwrap().blocked=Some("explicit harness boundary".into());
+        let before=game.report();let error=replay(&mut game,"pan 256 256\nselect 0\nbuild-place 3 400 370\ntick 100\n").unwrap_err();
+        assert!(error.contains("line 1, step 0: explicit harness boundary"));assert_eq!(game.report(),before);
+    }
     #[test]fn json_quotes_controls_and_unicode(){assert_eq!(runtime_scene::json_string("a\"\\\n\tâ˜€"),"\"a\\\"\\\\\\n\\tâ˜€\"");}
     #[test]fn catalog_is_unique_and_bounded(){
         let mut names=std::collections::HashSet::new();let mut count=0;

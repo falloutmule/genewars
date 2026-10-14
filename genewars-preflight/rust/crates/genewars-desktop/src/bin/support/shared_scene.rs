@@ -32,15 +32,28 @@ pub struct SharedMission {
     pub pending_requests:u64,
     pub plant_births:u64,
     pub seed:u16,
+    pub runtime_context:Option<genewars_runtime::mission_context::MissionRuntimeContext>,
+    awaiting_presentation:bool,
 }
 impl SharedMission {
     pub fn load(root:&Path,mission_bytes:&[u8],seed:u16)->Result<Self,String> {
+        Self::load_internal(root,mission_bytes,seed,None)
+    }
+    /// Recovered fresh CD pipeline; opaque source stack bytes remain explicit inputs.
+    pub fn load_fresh_cd(root:&Path,mission_bytes:&[u8],scratch:[u8;36],diagnostic_ring:u8)->Result<Self,String>{
+        Self::load_internal(root,mission_bytes,5428,Some((scratch,diagnostic_ring)))
+    }
+    fn load_internal(root:&Path,mission_bytes:&[u8],seed:u16,fresh:Option<([u8;36],u8)>)->Result<Self,String>{
         let source=ConqMissionSource::parse(mission_bytes).map_err(|e|e.to_string())?;
         let target=source.target_words(0).map_err(|e|e.to_string())?.map(|v|v as i16);
-        let players=core::array::from_fn(|p|PlayerState::fresh_campaign(p as u8,target,b"Native study\0").unwrap());
+        let players=if fresh.is_some(){
+            let retained=PlayerState::fresh_campaign(0,target,b"Player\0").map_err(|e|e.to_string())?;
+            let mut players=core::array::from_fn(|p|PlayerState::from_record(&mission_bytes[20+p*1805..20+(p+1)*1805]).unwrap());
+            players[0]=PlayerState::restored_for_mission(&mission_bytes[20..1825],0,&retained).map_err(|e|e.to_string())?;players
+        }else{core::array::from_fn(|p|PlayerState::fresh_campaign(p as u8,target,b"Native study\0").unwrap())};
         let actor_priors=zero_record_box::<20,200>();
         let mut world=ActorWorld::from_mission(&source,&actor_priors,[ActorHandleBindings::empty();20],players,
-            BlueprintRng{seed,ring:0,draw_count:0}).map_err(|e|e.to_string())?;
+            BlueprintRng{seed,ring:fresh.map_or(0,|(_,ring)|ring),draw_count:if fresh.is_some(){16855}else{0}}).map_err(|e|e.to_string())?;
         world.initialize_mission_player_funds(source.active_count_byte()).map_err(|e|e.to_string())?;
         let building_priors=zero_record_box::<256,67>();
         world.admit_buildings(&building_priors,[None;256]).map_err(|e|e.to_string())?;
@@ -58,10 +71,10 @@ impl SharedMission {
         let text=read_bound(&root.join("menu/text.dat"))?;
         let strings=TextStringTable::parse(&text).map_err(|e|e.to_string())?;
         let names=BlueprintNames::new(&strings.strings()[..128]).map_err(|e|e.to_string())?;
-        world.regenerate_player_blueprints(0,[0;36],&names,true).map_err(|e|e.to_string())?;
+        world.regenerate_player_blueprints(0,fresh.map_or([0;36],|(scratch,_)|scratch),&names,true).map_err(|e|e.to_string())?;
         let origin=ActorOriginSample{position:[0,0],height:interpolate_height(world.map(),0,0).map_err(|e|e.to_string())?,
             shade:interpolate_entity_shade(world.map(),0,0).map_err(|e|e.to_string())?};
-        world.prepare_fresh_player(0,5,origin,target).map_err(|e|e.to_string())?;
+        world.prepare_fresh_player(0,if fresh.is_some(){mission_bytes[0x1ebd]}else{5},origin,target).map_err(|e|e.to_string())?;
         let factory=world.create_landing_core(0,0).map_err(|e|e.to_string())?;
         let mut pending_requests=0;
         for event in &factory.pending_events {
@@ -71,9 +84,30 @@ impl SharedMission {
                 pending_requests+=reveal.pending_presentation_vertices.len()as u64;
             } else {pending_requests+=1;}
         }
+        let runtime_context=if fresh.is_some(){
+            let context=genewars_runtime::mission_context::MissionRuntimeContext::fresh_cd_conq001(world.rng().clone()).map_err(str::to_owned)?;
+            world.initialize_fresh_runtime_countdown(&context).map_err(str::to_owned)?;
+            let visibility=world.initialize_mission_visibility(0).map_err(|e|format!("startup visibility: {e:?}"))?;
+            pending_requests+=visibility.reveal.pending_presentation_vertices.len()as u64;
+            Some(context)
+        }else{None};
         let plant_spread=SpreadDirections::from_mapped_bytes(&read_bound(&root.join("physics/plant-spread.bin"))?).map_err(|e|e.to_string())?;
         Ok(Self{world,trig:TrigTables::generate_pinned().map_err(|e|e.to_string())?,plant_spread,ui:RetirementUiState::native_empty(),
-            terrain_jobs,frame_counter:0,selected:None,command_count:0,pending_requests,plant_births:0,seed})
+            terrain_jobs,frame_counter:0,selected:None,command_count:0,pending_requests,plant_births:0,seed,runtime_context,awaiting_presentation:false})
+    }
+    /// Typed terminal state; an engine block remains a separate host field.
+    pub fn outcome_json(&self)->String {
+        use genewars_runtime::mission_outcome::MissionOutcome;
+        match self.runtime_context.as_ref().map(|c|c.outcome()) {
+            None=>"null".into(),
+            Some(MissionOutcome::Running)=>"{\"state\":\"running\"}".into(),
+            Some(MissionOutcome::Won{player})=>format!("{{\"state\":\"won\",\"player\":{player}}}"),
+            Some(MissionOutcome::Lost{player,winner})=>format!("{{\"state\":\"lost\",\"player\":{player},\"winner\":{}}}",winner.map_or("null".into(),|v|v.to_string())),
+        }
+    }
+    /// Called only after successful rendering of the complete callback frame.
+    pub fn finish_outer_frame(&mut self){
+        if self.awaiting_presentation{let countdown=u16::from_le_bytes(self.world.backing_bytes()[0x355c..0x355e].try_into().unwrap());let context=self.runtime_context.as_mut().unwrap();context.observe_countdown_after_callbacks(countdown);context.finish_outer_frame();self.awaiting_presentation=false;}
     }
     pub fn render(&self,resources:&Resources,target:[i16;2])->Result<Frame,String> {
         // Until original admission/order is integrated, only linked active
@@ -84,7 +118,7 @@ impl SharedMission {
             .filter_map(|(slot,r)|(r[6]!=0).then_some(slot)).collect::<Vec<_>>();
         let creatures=self.world.creatures().map(|pool|pool.records().iter().enumerate()
             .filter_map(|(slot,r)|(r[6]==1).then_some(slot)).collect::<Vec<_>>()).unwrap_or_default();
-        let mut frame=actor_scene::render_actor_world_with_selected_portrait(resources,&self.world,target,0,self.frame_counter as u8,&actors,&creatures,
+        let mut frame=actor_scene::render_actor_world_with_selected_portrait(resources,&self.world,target,0,self.runtime_context.as_ref().map_or(self.frame_counter as u8,|c|c.frame()as u8),&actors,&creatures,
             actor_scene::MuleSceneGlobals{global_shadow_mode:0,inherited_wrapper_flags:0,clip_flag_bit0:false},&effects,self.selected)?.frame;
         if let Some(slot)=self.selected {
             actor_scene::draw_selected_actor_text(resources,&self.world,slot,&mut frame.image)?;
@@ -131,11 +165,15 @@ impl SharedMission {
         let mut staged=self.clone();let event=staged.step_inner(resources)?;*self=staged;Ok(event)
     }
     fn step_inner(&mut self,resources:&Resources)->Result<String,String> {
+        if self.awaiting_presentation{return Err("finish the previous frame presentation before another callback".into());}
+        let player_count=self.runtime_context.as_ref().map_or(4,|c|c.participating_players());
+        let runtime_flags=self.runtime_context.as_ref().map_or(0,|c|c.known_runtime_flags());
+        if self.runtime_context.as_ref().is_some_and(|c|c.callback_gate()!=genewars_runtime::mission_context::CallbackGate::Ready){return Err("mission callback gate is not ready".into());}
         let context=self.world.mission_loading_physics();
-        let frame=u32::try_from(self.frame_counter+1).map_err(|_|"source frame counter exceeds u32")?;
+        let frame=self.runtime_context.as_ref().map_or_else(||u32::try_from(self.frame_counter+1).map_err(|_|"source frame counter exceeds u32"),|c|Ok(c.frame()))?;
         // 58780 visits players and their current actor lists. 57A10 returns
         // immediately before the ready bit is set by the landing callback.
-        let actors=self.world.step_actor_callbacks_with_construction(4,frame,context,&resources.physics,&self.trig,
+        let actors=self.world.step_actor_callbacks_with_construction(player_count,frame,context,&resources.physics,&self.trig,
             resources.actors.databases(),&mut self.terrain_jobs,&resources.construction_border,
             0,self.selected.map(|slot|slot as u16),0,0).map_err(|e|format!("actor pass: {e:?}"))?;
         let callbacks=actors.len();
@@ -154,7 +192,7 @@ impl SharedMission {
         }}
         // Audio is still a queued presentation request in this development host.
         // No active mixer channel is asserted; mission acceptance requires audio integration.
-        let buildings=self.world.step_admitted_buildings_with_production(4,0,&resources.bturr_selector1,&resources.source_buildings,
+        let buildings=self.world.step_admitted_buildings_with_production(player_count,0,&resources.bturr_selector1,&resources.source_buildings,
             frame,&resources.physics,|_|false,context,&self.trig,&resources.construction_border).map_err(|e|e.to_string())?;
         self.pending_requests+=buildings.notices.len()as u64;
         for callback in &buildings.callbacks {
@@ -177,7 +215,7 @@ impl SharedMission {
         self.plant_births+=plants.events.iter().filter(|event|matches!(event,genewars_runtime::TickEvent::Created{..})).count()as u64;
         self.pending_requests+=plants.events.iter().filter(|event|matches!(event,
             genewars_runtime::TickEvent::OldFrameDirtyCheckPending{..}|genewars_runtime::TickEvent::ReferenceUiAudioCleanupPending{..})).count()as u64;
-        let countdown=self.world.step_family8_callbacks(0,4,0,frame,context.water_height,
+        let countdown=self.world.step_family8_callbacks(0,player_count,runtime_flags,frame,context.water_height,
             &resources.physics,&self.trig,&resources.family8_animation,&resources.family8_directions).map_err(|e|e.to_string())?;
         self.pending_requests+=(countdown.pending_prefix.len()+countdown.pending_ui_animations.len())as u64;
         self.pending_requests+=countdown.callbacks.iter().map(|c|u64::from(c.plan.pending_audio.is_some())+u64::from(c.plan.pending_ui_message)+c.retirement.as_ref().map_or(0,|r|r.stop_audio.len()as u64+u64::from(r.fade_audio.is_some()))+u64::from(c.parent_response.as_ref().is_some_and(|p|p.state7_message_variant.is_some()))).sum::<u64>();
@@ -194,7 +232,15 @@ impl SharedMission {
         let terrain=self.world.step_terrain_jobs(&mut self.terrain_jobs,environment,&resources.construction_border)
             .map_err(|e|format!("terrain-job pass: {e:?}"))?;
         self.pending_requests+=terrain.iter().map(|r|r.viewport_invalidations.len()as u64).sum::<u64>();
+        //1C120 tail evaluates72ED0 after terrain maintenance, using this
+        //frame's live context. A latched result is retained on later frames.
+        if let Some(context)=self.runtime_context.as_mut(){
+            if context.outcome()==genewars_runtime::mission_outcome::MissionOutcome::Running {
+                self.world.step_mission_outcome(context,0).map_err(|e|format!("mission-outcome pass: {e:?}"))?;
+            }
+        }
         self.frame_counter+=1;
+        self.awaiting_presentation=self.runtime_context.is_some();
         let(mut created,mut retired)=(0,0);
         for callback in result.primary.iter().chain(&result.newborn) {
             match callback {
@@ -242,6 +288,20 @@ impl SharedMission {
         let plan=staged.assign_architect_construction(u16::try_from(slot).map_err(|_|"actor slot outside native range")?,
             0,u16::from(selector)<<8,true,true).map_err(|e|format!("{e:?}"))?;
         self.world=staged;Ok(plan)
+    }
+    /// Source26890 ground construction:75080 snap, then opcode16/811A0.
+    pub fn place_selected_building(&mut self,resources:&Resources,target:[i16;2],screen:[i32;2],selector:u8)->Result<String,String>{
+        let slot=self.selected.ok_or("select an architect first")?;
+        if screen[0]<128{return Err("point is inside the panel".into());}
+        let owner=self.world.actors().record(slot).map_err(|e|e.to_string())?[24];
+        let player=self.world.player(owner).map_err(|e|e.to_string())?;
+        if !genewars_runtime::building_availability::available(player.bytes(),selector).map_err(|e|format!("{e:?}"))?{return Err("building is not available".into());}
+        let camera=camera_cells_for_target(self.world.map(),target[0],target[1]).map_err(|e|e.to_string())?;
+        let projected=project_terrain_target(self.world.map(),camera,screen).map_err(|e|e.to_string())?.point;
+        let point=genewars_runtime::actor_construction_placement::construction_placement_point(projected,selector).map_err(|e|format!("{e:?}"))?;
+        self.world.place_architect_construction(owner,u16::try_from(slot).map_err(|_|"actor slot outside native range")?,point,selector,&resources.physics,&self.trig,true,true).map_err(|e|format!("{e:?}"))?;
+        self.command_count+=1;
+        Ok(format!("actor {slot}, selector {selector}, projected {projected:?}, placement {point:?}"))
     }
     pub fn actor_state_json(&self)->String {
         let word=|r:&[u8],p:usize|i16::from_le_bytes([r[p],r[p+1]]);

@@ -9,7 +9,7 @@ pub fn choices(player:&[u8;1805])->Vec<u8>{MENU_ORDER.into_iter().filter(|s|avai
 pub fn lines(choices:&[u8],funds:i32,actor:Option<usize>,feedback:Option<&str>)->Vec<String>{
     let mut lines=vec!["CONSTRUCTION - PORT CONTROLS".into(),
         format!("FUNDS {funds} - ARCHITECT {}",actor.map(|v|v.to_string()).unwrap_or("NOT SELECTED".into())),
-        "CLICK TO ASSIGN AT CURRENT ARCHITECT SITE".into()];
+        "SELECT BUILDING THEN RIGHT CLICK GROUND".into()];
     lines.extend(choices.iter().map(|s|format!("{} - AVAILABLE",label(*s))));
     lines.push(feedback.unwrap_or("C / ESC: CLOSE - ONLY UNLOCKED BUILDINGS SHOWN").chars().take(51).collect());lines
 }
