@@ -8,6 +8,10 @@ use genewars_render::{RgbImage, PlantFrame, PlantColorInputs, PlantSceneRecord, 
     terrain::TerrainFadeTable, terrain_modes::MainGlaTable, terrain_view::{render_initial_terrain_view,compose_left_panel}};
 use genewars_runtime::{actor_initialization::ActorResourceTableKey, actor_resources::{ActorAnimationDatabase, ActorResourceCatalog}, building_resources::BuildingResourceDatabase, creature_world::MuleAnimations, effect_pool::EffectAnimationBinding, identity::sha256_hex, physics_tables::PhysicsTables, world::MissionWorld};
 
+use genewars_runtime::source_building_resources::{SourceBuildingBinding,SourceBuildingResourceDatabase};
+
+pub enum BuildingResourceRef<'a> { Bturr(&'a BuildingResourceDatabase), Source(&'a SourceBuildingResourceDatabase) }
+
 pub const CATALOG: &str = include_str!("../../../../../../research/integration/runtime-resource-catalog.tsv");
 
 pub fn read_bound(path: &Path) -> Result<Vec<u8>, String> {
@@ -36,8 +40,9 @@ pub struct Resources {
     pub actors: ActorResources,
     pub effects: EffectAnimationDatabase,
     /// Exact selector-1 BTURR database, admitted through the runtime catalog.
-    /// Other building selectors remain unavailable until independently bound.
+    /// Additional independently bound mission-one resources are stored below.
     pub bturr_selector1: BuildingResourceDatabase,
+    pub source_buildings: Vec<SourceBuildingResourceDatabase>,
     /// Hash-validated CD angle and terrain bounce tables used by landing updates.
     pub physics: PhysicsTables,
     /// Hash-bound 8192-byte construction border lookup copied from validated
@@ -356,6 +361,11 @@ pub struct IndexedFrame {
 }
 
 impl Resources {
+    pub fn building_resource(&self,selector:u8)->Result<BuildingResourceRef<'_>,String>{
+        if selector==1{return Ok(BuildingResourceRef::Bturr(&self.bturr_selector1));}
+        self.source_buildings.iter().find(|r|r.selector()==selector).map(BuildingResourceRef::Source)
+            .ok_or_else(||format!("unadmitted building resource selector {selector}"))
+    }
     pub fn load(root: &Path) -> Result<(Self, MissionWorld, [i16;2]), String> {
         let plan = CampaignResourcePlan::new(0,0).map_err(|e| format!("{e:?}"))?;
         if plan.mission != "levels/conq001.dat" || plan.header != "LEVELS/hdrco1.dat" {
@@ -392,6 +402,9 @@ impl Resources {
         let bturr_bytes = read_bound(&root.join("buildings/BTURR.ANB"))?;
         let bturr_selector1 = BuildingResourceDatabase::load_selector1_bturr(bturr_bytes)
             .map_err(|e| format!("CD BTURR selector-1 database: {e}"))?;
+        let source_buildings=[("BSOLA",SourceBuildingBinding::CdBsolaSelector6),("BMINE",SourceBuildingBinding::CdBmineSelector11),("BPOWE",SourceBuildingBinding::CdBpoweSelector3)]
+            .into_iter().map(|(name,binding)|SourceBuildingResourceDatabase::load(binding,read_bound(&root.join(format!("buildings/{name}.ANB")))?)
+                .map_err(|e|format!("CD {name} database: {e}"))).collect::<Result<Vec<_>,String>>()?;
         let angle = read_bound(&root.join("physics/angle.bin"))?;
         let bounce = read_bound(&root.join("physics/bounce.bin"))?;
         let corpse_friction = read_bound(&root.join("physics/corpse-friction.bin"))?;
@@ -408,7 +421,7 @@ impl Resources {
         let ethereal = crate::family8_scene::EtherealAnimationDatabase::from_bytes(&ethereal_bytes).map_err(|e| e.to_string())?;
         let family8_animation = genewars_runtime::family8_motion::Family8Animation::from_ethereal_anb(&ethereal_bytes).map_err(|e| format!("{e:?}"))?;
         let family8_directions = genewars_runtime::family8_motion::Family8DirectionalAnimations::from_ethereal_anb(&ethereal_bytes).map_err(|e|format!("{e:?}"))?;
-        Ok((Self { _header: header, title, atlas, fade, gla, panel, font0_dat, font0_tab, text, palette, plants, actors, effects, bturr_selector1, physics, construction_border, mule, bones, mule_animations, ethereal, family8_animation, family8_directions }, world, target))
+        Ok((Self { _header: header, title, atlas, fade, gla, panel, font0_dat, font0_tab, text, palette, plants, actors, effects, bturr_selector1, source_buildings, physics, construction_border, mule, bones, mule_animations, ethereal, family8_animation, family8_directions }, world, target))
     }
 
     pub fn render(&self, world: &MissionWorld, target: [i16;2]) -> Result<Frame,String> {

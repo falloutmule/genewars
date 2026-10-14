@@ -305,8 +305,44 @@
       "sha256": "c26df60af3a3166aec54112f197a4334966eb214eeaa48e0d9284e0510b8cd20",
       "size": 68030,
       "provenance": "root/1/303 archive-backed verified BTURR.ANB; indexed8 structural validation only"
+    },
+    {
+      "path": "creatures/BONES.ANB",
+      "sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f",
+      "size": 4077,
+      "provenance": "root/2/disc/319; exact-hash selector4 state>=26 packed4 proof bones-evidence.json"
+    },
+    {
+      "path": "construction/border.bin",
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "size": 8192,
+      "provenance": "validated mapped object3 VA 0x112D24; construction-border-evidence.json"
+    },
+    {
+      "path": "physics/corpse-friction.bin",
+      "sha256": "d56e59eae4da3dcb6d5cd9451d25e0ca49259a3a3004f43a40b47c40ae63a707",
+      "size": 16,
+      "provenance": "CD mapped object3 offset 0x4520; physics-inputs.json"
+    },
+    {
+      "path": "buildings/BSOLA.ANB",
+      "sha256": "26ac960d7e68d97bddf7b0c13740976af4cf955ecfe98a4bea51ee95c292958b",
+      "size": 35327,
+      "provenance": "root/2/disc/309; exact CD raw ANB animation0/1 admission"
+    },
+    {
+      "path": "buildings/BMINE.ANB",
+      "sha256": "218b117a4b0f84c6e5a362e5afdc46d29fb1525930c6131e2ffff3bcfcda2142",
+      "size": 34955,
+      "provenance": "root/2/disc/303; exact CD raw ANB animation0/1 admission"
+    },
+    {
+      "path": "buildings/BPOWE.ANB",
+      "sha256": "4145c098f3d35dd9c39003ae8289c3d32fdb8d822327b2a23dfd52c60ca2a8cc",
+      "size": 77457,
+      "provenance": "root/2/disc/306; exact CD raw ANB animation0/1 admission"
     }
   ],
   "original_execution": false,
-  "catalog_sha256": "406953b3cbb85d958f0e417208630fe41f57749b46a5b1117f516dd9709cdcec"
+  "catalog_sha256": "43fad12418511409f96bba48cd14613ed7d209dadc50e4d01fb3ede004ec3bf2"
 }

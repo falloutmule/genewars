@@ -417,7 +417,7 @@ fn render_actor_world_layers(
                 .map_err(|e|format!("family8 slot {slot}: {e}"))?);
         }
     }
-    // Selector-1 animations 0 and 1 use the common source 43A40 main-image
+    // Hash-bound building animations 0 and 1 use the common source 43A40 main-image
     // path. Completion flags control later overlays, not this image pass.
     // Projection and ascending pool-slot
     // order are explicit development policies; shadow and post-image owner/
@@ -426,7 +426,7 @@ fn render_actor_world_layers(
     if let Some(pool) = world.buildings() {
         for (slot, record) in pool.records().iter().enumerate().filter(|(_, r)| r[6] != 0) {
             let binding = pool.binding(slot).map_err(|e| format!("{e:?}"))?;
-            if binding.map(|v| v.selector) != Some(1) || record[0x2d] != 1 {
+            if binding.map(|v| v.selector) != Some(record[0x2d]) {
                 return Err(format!("building slot {slot} has unsupported selector binding {binding:?}"));
             }
             let position = [
@@ -444,16 +444,17 @@ fn render_actor_world_layers(
                 Some(resources.fade_bytes().get(start..start + 256)
                     .ok_or_else(|| format!("building slot {slot} fade row is outside FADE.DAT"))?)
             } else { None };
-            let main_image = if record[0x19] == 1 {
-                draw_bturr_completed_common(
-                    &resources.bturr_selector1, record, origin, 0, fade_row,
-                    Some(resources.main_gla_bytes()), &mut indexed.indices[128..], 512, 480, 640,
-                )
-            } else {
-                draw_bturr_incomplete_common(
-                    &resources.bturr_selector1, record, origin, 0, fade_row,
-                    Some(resources.main_gla_bytes()), &mut indexed.indices[128..], 512, 480, 640,
-                )
+            let main_image = match resources.building_resource(record[0x2d])? {
+                super::runtime_resources::BuildingResourceRef::Bturr(resource)=>if record[0x19] == 1 {
+                    draw_bturr_completed_common(resource,record,origin,0,fade_row,Some(resources.main_gla_bytes()),&mut indexed.indices[128..],512,480,640)
+                }else{
+                    draw_bturr_incomplete_common(resource,record,origin,0,fade_row,Some(resources.main_gla_bytes()),&mut indexed.indices[128..],512,480,640)
+                },
+                super::runtime_resources::BuildingResourceRef::Source(resource)=>resource.draw_common(record,
+                    genewars_runtime::building_resources::BuildingCommonDrawContext{origin,global_flags:0},
+                    fade_row,Some(resources.main_gla_bytes()),&mut indexed.indices[128..],512,480,640)
+                    .map(|main_image|BuildingSceneReceipt{main_image,omissions:super::building_scene::BuildingSceneOmissions{
+                        shadow_pass_included:false,post_image_overlays_included:false}}),
             }.map_err(|e| format!("building slot {slot}: {e}; candidate_record={}",record.iter().map(|b|format!("{b:02x}")).collect::<String>()))?;
             building_receipts.push(ActorSceneBuildingReceipt { building_slot: slot, projected_origin: origin, main_image });
         }
@@ -466,7 +467,7 @@ fn render_actor_world_layers(
     let frame = resources.finish_indexed(indexed, snapshot_sha256)?;
     Ok(ActorSceneFrame { frame, camera, actor_order: actor_order.to_vec(), actor_receipts, mule_receipts,
         pending_effect_slots, effect_scene, building_receipts,
-        building_layer_policy: "active selector-1 buildings ascending slot after family8; admitted BTURR common main images for animation 0 and 1, shadow/overlays omitted",
+        building_layer_policy: "active hash-bound selector 1/3/6/11 buildings ascending slot after family8; common main images for animation 0 and 1, overlays omitted",
         selected_portrait, family8_receipts,
         family8_layer_policy: "active native slots ascending after effects; source interfamily order remains unproved",
         actor_order_policy: "caller-supplied; family2 queue order unproved",
@@ -766,6 +767,24 @@ mod tests {
     }
 
     #[test]
+    fn mission_one_buildings_resolve_exact_resources_and_render_factory_records() {
+        let root=bundle();let (resources,_,target)=Resources::load(&root).unwrap();
+        let mission_bytes=fs::read(root.join("terrain/CONQ001.DAT")).unwrap();
+        assert!(resources.building_resource(0).is_err());
+        assert!(matches!(resources.building_resource(1).unwrap(),super::super::runtime_resources::BuildingResourceRef::Bturr(_)));
+        for selector in [3,6,11] {
+            let mut shared=SharedMission::load(&root,&mission_bytes,5428).unwrap();
+            let empty=render_actor_world(&resources,&shared.world,target,0,0,&[]).unwrap();
+            let factory=shared.world.create_building(0,selector,[19839,12927]).unwrap().unwrap();
+            let built=render_actor_world(&resources,&shared.world,target,0,0,&[]).unwrap();
+            assert_eq!(built.building_receipts.len(),1);
+            assert_eq!(built.building_receipts[0].building_slot,factory.slot as usize);
+            assert!(built.building_receipts[0].main_image.main_image.color.pixels_written>0);
+            assert_ne!(built.frame.image.rgb_bytes(),empty.frame.image.rgb_bytes());
+        }
+    }
+
+    #[test]
     fn active_selector1_building_is_projected_and_drawn_as_main_image_only() {
         let root = bundle();
         let (resources, _, target) = Resources::load(&root).unwrap();
@@ -784,7 +803,7 @@ mod tests {
         assert!(!receipt.main_image.omissions.shadow_pass_included);
         assert!(!receipt.main_image.omissions.post_image_overlays_included);
         assert_eq!(built.building_layer_policy,
-            "active selector-1 buildings ascending slot after family8; admitted BTURR common main images for animation 0 and 1, shadow/overlays omitted");
+            "active hash-bound selector 1/3/6/11 buildings ascending slot after family8; common main images for animation 0 and 1, overlays omitted");
         assert_ne!(built.frame.image.rgb_bytes(), empty.frame.image.rgb_bytes(),
             "an on-screen factory record must change the actual indexed-to-RGB frame");
     }

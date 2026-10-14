@@ -17,6 +17,27 @@ def stage():
     stage_construction()
     private = (ROOT / 'private').resolve()
     destination = private / 'integration/game-runtime'
+    # These raw ANBs were not part of the earlier decoder corpus. Reproduce
+    # missing private copies through the manifest-bound disc reader.
+    new_buildings = {'buildings/BSOLA.ANB', 'buildings/BMINE.ANB', 'buildings/BPOWE.ANB'}
+    missing = []
+    for line in CATALOG.read_text(encoding='utf-8').splitlines():
+        fields = line.split('\t')
+        if len(fields) == 5 and fields[0] in new_buildings and not (ROOT / fields[3]).exists():
+            missing.append(fields)
+    if missing:
+        from source_member import SourceReader
+        with SourceReader() as reader:
+            for name, digest, length, origin, provenance in missing:
+                data = reader.read(provenance.split(';')[0], max_bytes=1024*1024)
+                if len(data) != int(length) or hashlib.sha256(data).hexdigest() != digest:
+                    raise ValueError('Building source differs: ' + name)
+                output = (ROOT / origin).resolve()
+                if not output.is_relative_to(private):
+                    raise ValueError('Building staging escaped private storage')
+                output.parent.mkdir(parents=True, exist_ok=True)
+                with output.open('xb') as stream:
+                    stream.write(data)
     pending = []
     for line in CATALOG.read_text(encoding='utf-8').splitlines():
         if not line or line.startswith('#'):

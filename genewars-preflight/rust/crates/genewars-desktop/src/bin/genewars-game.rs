@@ -104,7 +104,7 @@ mod tests{
             let f=line.split('\t').collect::<Vec<_>>();assert_eq!(f.len(),5);assert!(names.insert(f[0]));
             assert_eq!(f[1].len(),64);assert!(f[1].bytes().all(|b|b.is_ascii_hexdigit()));
             assert!(!f[0].contains(".."));assert!(f[2].parse::<usize>().unwrap()<1024*1024);count+=1;
-        }assert_eq!(count,54);
+        }assert_eq!(count,57);
     }
 
     fn development_build_fixture() -> Game {
