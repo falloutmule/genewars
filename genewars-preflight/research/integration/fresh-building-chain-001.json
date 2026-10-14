@@ -1,0 +1,159 @@
+{
+  "status": "blocked",
+  "classification": "unsupported behavior",
+  "reference_build": "GENEWARS QA BETA V5",
+  "probe": "private\\integration\\fresh-building-chain-001",
+  "mission": {
+    "steps": 1137,
+    "plants": 24,
+    "cursor": 0,
+    "target": [
+      19839,
+      12927
+    ],
+    "changed_world_frames": 923,
+    "world_sha256": "6a7950155b960a4d864d7199ae7f3376e650f0442856b778b86e07bff0c4af9e",
+    "rgb_sha256": "c2f66b75daea4cf6c4615c211a059252c6e3586dbb7c0e069e8b298d988ac1c1",
+    "queue": [
+      39,
+      29,
+      34,
+      35,
+      30,
+      31,
+      33
+    ],
+    "blocked": "Family8Motion(UnsupportedRecord)",
+    "world_mode": "fresh-cd-explicit-opaque-priors",
+    "runtime_context": "Some(MissionRuntimeContext { origin: FreshCdConq001, participating_players: 1, runtime_flags: 62, runtime_mode: Some(0), countdown: 0, frame: 1137, rng: CdConq001SerializedThenBlueprints { seed: 10548, draw_count: 16919, diagnostic_ring: 0 } })",
+    "seed": 5428,
+    "rng_draws": 18720,
+    "selected_actor": 0,
+    "issued_move_commands": 2,
+    "plant_births": 0,
+    "pending_presentation_requests": 23010,
+    "active_effects": 21,
+    "actor_states": [
+      {
+        "slot": 0,
+        "owner": 0,
+        "position": [
+          20223,
+          13311
+        ],
+        "destination": [
+          21119,
+          13439
+        ],
+        "pending_destination": [
+          21119,
+          13439
+        ],
+        "state": 1,
+        "ready": true,
+        "pending_move": true,
+        "assignment_pending": true,
+        "building_selector": 3,
+        "animation": 8,
+        "frame": 2,
+        "action_byte_59": 15,
+        "construction_stage_word_88": 5,
+        "job_slot_byte_90": 0
+      },
+      {
+        "slot": 1,
+        "owner": 0,
+        "position": [
+          20920,
+          14045
+        ],
+        "destination": [
+          20920,
+          14045
+        ],
+        "pending_destination": [
+          20920,
+          14045
+        ],
+        "state": 1,
+        "ready": true,
+        "pending_move": false,
+        "assignment_pending": false,
+        "building_selector": 0,
+        "animation": 11,
+        "frame": 0,
+        "action_byte_59": 0,
+        "construction_stage_word_88": 0,
+        "job_slot_byte_90": 0
+      }
+    ],
+    "creature_states": [
+      {
+        "slot": 0,
+        "owner": 4,
+        "position": [
+          16224,
+          15199
+        ],
+        "destination": [
+          15505,
+          15749
+        ],
+        "state": 8,
+        "animation": 6,
+        "frame": 3,
+        "reserve": 121,
+        "target_kind": 0
+      }
+    ],
+    "player_funds": [
+      {
+        "slot": 0,
+        "balance": 1412
+      },
+      {
+        "slot": 1,
+        "balance": 0
+      },
+      {
+        "slot": 2,
+        "balance": 0
+      },
+      {
+        "slot": 3,
+        "balance": 0
+      }
+    ],
+    "buildings": [
+      {
+        "slot": 0,
+        "owner": 0,
+        "selector": 11,
+        "position": [
+          19839,
+          12927
+        ],
+        "animation": 1,
+        "frame": 0,
+        "progress_word_2b": 280,
+        "phase_byte_2f": 0,
+        "flags_word_31": 1
+      }
+    ],
+    "terrain_jobs": {
+      "count": 0,
+      "records": []
+    },
+    "actor_movement": true,
+    "plant_updates": true,
+    "creature_ai": true,
+    "other_families_frozen": true
+  },
+  "acceptance": false,
+  "harness_limitation": "Replay issued later placement after blocked tick; final world contains that later command. Capture pre-boundary world separately.",
+  "sha256": {
+    "genewars-game.exe": "99b3414128b74ed7a0e482947609564cdd711f455fcbd6f5d5f05e0d257ec885",
+    "replay.txt": "4a2b9b8ad3209ba89aa74d6442ac44b5ad9110672f9ffdf9f62cb2004d534f81",
+    "report.json": "4aaf71cfaba8d08abdc4140d9f3b2d03adde2022626802ff28bc24637f1559c1"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "status": "blocked",
+  "classification": "unsupported_behavior",
+  "steps": 2523,
+  "reason": "actor pass: Setup(UnsupportedSite(Blocked))",
+  "last_placement": "ConstructionPlacement: actor 0, selector 6, projected [20967, 13176], placement [20863, 13183]",
+  "buildings": [
+    {
+      "slot": 0,
+      "owner": 0,
+      "selector": 11,
+      "position": [
+        19839,
+        12927
+      ],
+      "animation": 1,
+      "frame": 7,
+      "progress_word_2b": 280,
+      "phase_byte_2f": 0,
+      "flags_word_31": 5
+    },
+    {
+      "slot": 1,
+      "owner": 0,
+      "selector": 3,
+      "position": [
+        21119,
+        13439
+      ],
+      "animation": 1,
+      "frame": 0,
+      "progress_word_2b": 240,
+      "phase_byte_2f": 0,
+      "flags_word_31": 5
+    }
+  ],
+  "funds": 1074,
+  "acceptance": false,
+  "sha256": {
+    "genewars-game.exe": "7faee70d70fa4f21859dea0576ac13b66b3f84c6bf49935c89f939e50d47a850",
+    "replay.txt": "22898ab1de3740c9b3139179799b0445de9a494168e7d09e04fe7525db43b751",
+    "report.json": "99db8bda40c0893ee65984a5c232190db8a8f6b2b71c88483cd1b07b6923556d"
+  }
+}

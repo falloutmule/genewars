@@ -1,0 +1,16 @@
+{
+  "status": "blocked",
+  "classification": "unsupported_behavior",
+  "steps": 1226,
+  "reason": "Family8Motion(UnsupportedRecord)",
+  "previous_boundary1137_passed": true,
+  "later_commands_dispatched": false,
+  "reference_build": "GENEWARS QA BETA V5",
+  "sha256": {
+    "genewars-game.exe": "cb542bd0b8e8275257f74877cb6aa5f7fc35fc28602935c428106d234b54ef22",
+    "replay.txt": "4a2b9b8ad3209ba89aa74d6442ac44b5ad9110672f9ffdf9f62cb2004d534f81",
+    "report.json": "89c6563efb31eef99b245ad5029a44b95a267df296783b6076b068a6932d9a7e"
+  },
+  "captured_fixture": "private/review/family8-fresh-stall/1e3375f3b6f54dab9b0dc1bdd6ab5598/1226",
+  "acceptance": false
+}

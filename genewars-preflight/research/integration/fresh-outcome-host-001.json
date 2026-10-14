@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "scope": "Fresh CD ten-callback host integration of source72ED0 outcome tail; no terminal/campaign acceptance",
+  "steps": 10,
+  "blocked": null,
+  "context": "Some(MissionRuntimeContext { origin: FreshCdConq001, participating_players: 1, runtime_flags: 62, runtime_mode: Some(0), countdown: 990, frame: 10, rng: CdConq001SerializedThenBlueprints { seed: 10548, draw_count: 16919, diagnostic_ring: 0 }, outcome: Running })",
+  "sha256": {
+    "genewars-game.exe": "f55d8dc3d0d8e72995c8e3e90eb0ca3e163683f4e7cc0bb453eb9857bf6d53fb",
+    "replay.txt": "23450bd464c823ae8eb08c0899b50bb0b8e7e2d7eaec0f5bec3872a4a08f3a40",
+    "report.json": "36fc875aafb737a0f2ce4f7a541b42cd70a1a36e599189fcd26dbf8cbe3e65e5"
+  }
+}
