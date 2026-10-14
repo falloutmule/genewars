@@ -76,3 +76,5 @@ pub mod source_building_resources;
 pub mod building_availability;
 
 pub mod extractor_production;
+
+pub mod projectile_impact;
