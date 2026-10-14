@@ -75,7 +75,7 @@ impl ActorWorld {
         let target=[word(&before,11),word(&before,13)];let raw=[id as u8,(id>>8)as u8,3];
         let counter=frame.wrapping_add(i32::from(word(&before,15)) as u32);
         let idle_suppressed=if before[0x49]&0x10==0&&counter&31==0 {
-            (blueprint[0x1a] as i8)<=0||self.common_move_point_accepted(raw,[word(&before,7),word(&before,9)])?
+            (blueprint[0x1a] as i8)<=0||self.actor_route_point_accepted(raw,[word(&before,7),word(&before,9)])?
         }else{false};
         let(prefix,working_target)=self.actor_route_prefix(raw,&before,counter,physics,trig,idle_suppressed)?;
         let(motion,water_request)=creature_world::plan_common_nonflight_physics_with_water_tail(&prefix,self.map(),frame,context.gravity,context.water_height,physics,trig,
@@ -109,6 +109,16 @@ impl ActorWorld {
             let rng=ActorCallbackRng{seed:staged.rng.seed,ring:staged.rng.ring,draw_count:staged.rng.draw_count};
             let plan=match actor_motion::plan_actor_arrival_idle_with_empty_scorer(&snap,&blueprint,frame,rng,idle,false,class3_unpowered) {
                 Err(ActorMotionError::IdleNeighborhoodRequired) if staged.actor_idle_scorer_empty(id)?=>actor_motion::plan_actor_arrival_idle_with_empty_scorer(&snap,&blueprint,frame,rng,idle,true,class3_unpowered)?,
+                result=>result?,
+            };
+            staged.rng=BlueprintRng{seed:plan.rng_after.seed,ring:plan.rng_after.ring,draw_count:plan.rng_after.draw_count};
+            (plan.after,plan.blueprint_after,None,plan.draws)
+        }else if moved[0x55]==9&&moved[0x7e]==255&&moved[0x82]==0 {
+            let idle=idle.ok_or(ActorMotionError::UnsupportedState)?;
+            if idle.player_mode!=staged.player(handle.player_id)?.bytes()[2]||idle.runtime_count_11c2bc!=word(&staged.backing,0x355c)as u16{return Err(ActorMotionError::UnsupportedState.into());}
+            let rng=ActorCallbackRng{seed:staged.rng.seed,ring:staged.rng.ring,draw_count:staged.rng.draw_count};
+            let plan=match crate::actor_construction_recovery::plan_cancelled_architect_idle(&moved,&blueprint,frame,rng,idle,false){
+                Err(ActorMotionError::IdleNeighborhoodRequired)if staged.actor_idle_scorer_empty(id)?=>crate::actor_construction_recovery::plan_cancelled_architect_idle(&moved,&blueprint,frame,rng,idle,true)?,
                 result=>result?,
             };
             staged.rng=BlueprintRng{seed:plan.rng_after.seed,ring:plan.rng_after.ring,draw_count:plan.rng_after.draw_count};
@@ -174,18 +184,30 @@ impl ActorWorld {
     }
     ///Successful null-obstacle6FB60 boundary routing. Exhausted searches and
     ///the separate retry/backoff branch remain explicit errors.
+    ///74D90 uses mask1 and exempts only its already-selected nominated building.
+    pub(super) fn actor_route_point_accepted(&self,raw:[u8;3],point:[i16;2])->Result<bool,ActorWorldError>{
+        let actor=self.entity(raw)?;if raw[2]!=3{return Err(CreatureError::UnsupportedMotionState.into());}
+        let nominated=if actor[0x4f]==4{let reference=reference(actor,0x4d);self.entity(reference)?;Some(word(&reference,0)as u16)}else if actor[0x4f]==0{None}else{return Err(CreatureError::UnsupportedMotionState.into());};
+        if self.move_obstacle_at_excluding(point,nominated)?{return Ok(false);}
+        let environment=self.placement_environment(word(&raw,0),point)?;
+        Ok(actor[0x53]&(1<<environment.terrain_class)==0&&environment.blocker_weight<10)
+    }
+    fn actor_route_ray(&self,raw:[u8;3],from:[i16;2],to:[i16;2],physics:&PhysicsTables,trig:&TrigTables)->Result<bool,ActorWorldError>{
+        let ray=actor_motion::actor_straight_ray::<CreatureError,_>(from,to,physics.angles(),trig.sine().try_into().unwrap(),trig.cosine().try_into().unwrap(),|point|self.actor_route_point_accepted(raw,point).map_err(|_|CreatureError::MotionEnvironment))?;
+        Ok(ray.clear)
+    }
     pub(super) fn actor_route_prefix(&self,raw:[u8;3],before:&[u8;200],counter:u32,physics:&PhysicsTables,trig:&TrigTables,idle_suppressed:bool)->Result<([u8;200],[i16;2]),ActorWorldError>{
-        if before[0x16]&0x48!=0||before[0x49]&3==3||before[0x4a]&4!=0||before[0x4f]!=0||before[0x52]!=0{return Err(CreatureError::UnsupportedMotionState.into());}
+        if before[0x16]&0x48!=0||before[0x49]&3==3||before[0x4a]&4!=0||!matches!(before[0x4f],0|4)||before[0x52]!=0{return Err(CreatureError::UnsupportedMotionState.into());}
         let current=[word(before,7),word(before,9)];let target=[word(before,11),word(before,13)];let mut a=*before;a[0x49]&=0x9f;
         if a[0x49]&0x10==0&&counter&31==0&&!idle_suppressed{return Err(CreatureError::UnsupportedMotionState.into());}
         let mut working=if a[0x49]&3!=0{[word(&a,0x45),word(&a,0x47)]}else{target};let mut immediate=false;
         if a[0x49]&0x10!=0&&a[0x49]&12!=0{
-            if !self.common_move_point_accepted(raw,target)?{return Err(CreatureError::TargetSearchRequired.into());}
+            if !self.actor_route_point_accepted(raw,target)?{return Err(CreatureError::TargetSearchRequired.into());}
             let from=if a[0x49]&3!=0{working}else{current};
-            let ray=crate::actor_motion::actor_straight_ray::<CreatureError,_>(from,target,physics.angles(),trig.sine().try_into().unwrap(),trig.cosine().try_into().unwrap(),|p|self.common_move_point_accepted(raw,p).map_err(|_|CreatureError::MotionEnvironment))?;
+            let ray=crate::actor_motion::actor_straight_ray::<CreatureError,_>(from,target,physics.angles(),trig.sine().try_into().unwrap(),trig.cosine().try_into().unwrap(),|p|self.actor_route_point_accepted(raw,p).map_err(|_|CreatureError::MotionEnvironment))?;
             if ray.clear{if a[0x49]&3!=0{let f=word(&a,0x49)as u16&0xeffc;a[0x49..0x4b].copy_from_slice(&f.to_le_bytes());a[0x16]&=0x7f;immediate=true;}working=target;}
             else{
-                let walk=|start,side,limit|creature_world::plan_common_waypoint(current,start,target,side,limit,physics,|p|self.common_move_point_accepted(raw,p).map_err(|_|CreatureError::MotionEnvironment),|x,y|self.common_straight_move_ray(raw,x,y,physics,trig).map_err(|_|CreatureError::MotionEnvironment));
+                let walk=|start,side,limit|creature_world::plan_common_waypoint(current,start,target,side,limit,physics,|p|self.actor_route_point_accepted(raw,p).map_err(|_|CreatureError::MotionEnvironment),|x,y|self.actor_route_ray(raw,x,y,physics,trig).map_err(|_|CreatureError::MotionEnvironment));
                 if a[0x49]&3!=0{if a[0x49]&8==0{return Err(CreatureError::UnsupportedMotionState.into());}let r=walk(from,a[0x49]&1!=0,120)?;if r.cost>=120{return Err(CreatureError::MotionRayBlocked.into());}working=r.point.ok_or(CreatureError::MotionEnvironment)?;}
                 else{let start=ray.failure_point.ok_or(CreatureError::MotionEnvironment)?;let left=walk(start,false,120)?;let right=walk(start,true,if left.cost<120{left.cost+1}else{120})?;let(r,flag)=if left.cost<right.cost{(left,0x1002u16)}else{(right,0x1001u16)};if r.cost>=120{return Err(CreatureError::MotionRayBlocked.into());}working=r.point.ok_or(CreatureError::MotionEnvironment)?;let f=(word(&a,0x49)as u16&0xeffc)|flag;a[0x49..0x4b].copy_from_slice(&f.to_le_bytes());a[0x16]&=0x7f;a[0x54]=20;}
                 a[0x45..0x47].copy_from_slice(&working[0].to_le_bytes());a[0x47..0x49].copy_from_slice(&working[1].to_le_bytes());immediate=true;

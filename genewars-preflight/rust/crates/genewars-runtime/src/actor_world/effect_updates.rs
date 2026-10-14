@@ -37,7 +37,7 @@ pub struct EffectStepReceipt {
 }
 
 #[derive(Debug,Clone,PartialEq,Eq)]
-pub enum LandingEffectCallback { Landing(LandingStepReceipt), Smoke(EffectStepReceipt), DepartureParticle(EffectStepReceipt), WaterSplash(EffectStepReceipt), EtherealParticle(EffectStepReceipt) }
+pub enum LandingEffectCallback { Landing(LandingStepReceipt), Smoke(EffectStepReceipt), DepartureParticle(EffectStepReceipt), WaterSplash(EffectStepReceipt), EtherealParticle(EffectStepReceipt), Construction(EffectStepReceipt) }
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct LandingEffectPassReceipt {
     pub primary:Vec<LandingEffectCallback>,
@@ -70,7 +70,7 @@ impl ActorWorld {
                     created+=u32::from(e.created_effect.is_some());
                     if let Some(r)=&e.retirement { receipt.ui_after=r.ui_after.clone(); }
                 },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)=>{created+=u32::from(e.created_effect.is_some());receipt.ui_after=e.ui_after.clone();},
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)=>{created+=u32::from(e.created_effect.is_some());receipt.ui_after=e.ui_after.clone();},
             }
             receipt.primary.push(callback);
         }
@@ -81,7 +81,7 @@ impl ActorWorld {
             let callback=staged.landing_effect_callback(slot,context,physics,trig,&receipt.ui_after)?;
             match &callback {
                 LandingEffectCallback::Landing(e)=>if let Some(r)=&e.retirement { receipt.ui_after=r.ui_after.clone(); },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)=>receipt.ui_after=e.ui_after.clone(),
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)=>receipt.ui_after=e.ui_after.clone(),
             }
             receipt.newborn.push(callback);
         }
@@ -107,6 +107,7 @@ impl ActorWorld {
             0x1A=>self.step_particle(slot,0x1A,context,physics,trig,ui).map(LandingEffectCallback::EtherealParticle),
             0x30=>self.step_effect30(slot,ui).map(LandingEffectCallback::WaterSplash),
             0x15|0x16=>self.step_particle(slot,code,context,physics,trig,ui).map(LandingEffectCallback::WaterSplash),
+            0x2C=>self.step_building_effect_quiet(slot,context,ui).map(LandingEffectCallback::Construction),
             0x2F=>self.step_effect2f(slot,context,physics,trig,ui).map(LandingEffectCallback::DepartureParticle),
             _=>Err(lifecycle::LifecycleError::UnknownSelector(code).into()),
         }
@@ -164,6 +165,27 @@ impl ActorWorld {
     pub fn step_effect2f(&mut self,slot:u16,context:LandingPhysicsContext,physics:&PhysicsTables,
         trig:&TrigTables,ui:&RetirementUiState)->Result<EffectStepReceipt,ActorWorldError> {
         self.step_particle(slot,0x2F,context,physics,trig,ui)
+    }
+    /// Source4B630 code2C on the proved flat, grounded surface. The full
+    /// transaction includes shared-map unlink, five-pool references and UI
+    /// cleanup when EFF44 reaches its terminal frame after timer expiry.
+    pub fn step_building_effect_quiet(&mut self,slot:u16,context:LandingPhysicsContext,
+        ui:&RetirementUiState)->Result<EffectStepReceipt,ActorWorldError> {
+        if !self.validate_links()?.contains(&(5,slot as i16)) { return Err(ActorWorldError::MissingEffectLink(slot)); }
+        self.validate_effect_count()?;
+        let pool=self.effects.as_ref().ok_or(ActorWorldError::EffectsNotAdmitted)?;
+        if pool.binding(slot as usize)?!=Some(EffectAnimationBinding::EffAnimation44) { return Err(ActorWorldError::EffectBinding(slot)); }
+        let before=*pool.record(slot as usize)?;let at=[word(&before,7),word(&before,9)];
+        let(ground,shade)=self.effect_ground_sample(at)?;
+        let plan=crate::building_effect_lifecycle::plan_building_effect_quiet_grounded(
+            &before,ground,shade,context.water_height,self.effect_height_corners(at))
+            .map_err(ActorWorldError::BuildingEffectLifecycle)?;
+        let mut staged=self.clone();
+        staged.effects.as_mut().unwrap().replace_record_checked(slot as usize,&before,&plan.after)?;
+        let receipt=if plan.retirement_required { staged.retire_effect(slot,&plan.after,ui)? }
+            else { EffectStepReceipt{slot,created_effect:None,changed_cell:false,retired:false,
+                cleaned_reference_bytes:0,ui_after:ui.clone(),pending_ui_events:Vec::new()} };
+        staged.validate_links()?;staged.validate_effect_count()?;*self=staged;Ok(receipt)
     }
     pub fn step_effect30(&mut self,slot:u16,ui:&RetirementUiState)->Result<EffectStepReceipt,ActorWorldError>{
         if !self.validate_links()?.contains(&(5,slot as i16)){return Err(ActorWorldError::MissingEffectLink(slot));}self.validate_effect_count()?;
@@ -592,5 +614,40 @@ mod water_tests {
   let before=*world.effects.as_ref().unwrap().record(0).unwrap();let mut calls=0;
   loop{calls+=1;let r=world.step_effect30(0,&RetirementUiState::native_empty()).unwrap();assert_eq!(world.rng,rng);if r.retired{break;}let a=world.effects.as_ref().unwrap().record(0).unwrap();assert_eq!(&a[7..21],&before[7..21]);assert_eq!(&a[39..63],&before[39..63]);assert!(calls<40);}
   assert_eq!(calls,33);assert_eq!(world.effects.as_ref().unwrap().record(0).unwrap()[6],0);assert_eq!(word(&world.backing,0x3554),0);assert!(world.validate_links().unwrap().is_empty());
+ }
+}
+
+#[cfg(test)]
+mod construction_effect_tests {
+ use super::*;
+ fn world_with_effect()->ActorWorld {
+  let mut bytes=vec![0;343_958];bytes[..4].copy_from_slice(&0x55336u32.to_le_bytes());bytes[337_054..337_058].copy_from_slice(&0x6beu32.to_le_bytes());
+  for cell in 0..128*128 {bytes[MAP_START+cell*14+2..MAP_START+cell*14+4].copy_from_slice(&500i16.to_le_bytes());}
+  let source=ConqMissionSource::parse(&bytes).unwrap();let players=core::array::from_fn(|p|PlayerState::fresh_campaign(p as u8,[4096,4096],b"fixture\0").unwrap());
+  let mut world=ActorWorld::from_parts(&source,&[[0;200];20],core::array::from_fn(|_|ActorHandleBindings::default()),players,BlueprintRng{seed:5428,ring:0,draw_count:0}).unwrap();
+  world.admit_effects(&[[0;81];200],[None;200]).unwrap();
+  let before=*world.effects.as_ref().unwrap().record(0).unwrap();
+  let plan=crate::building_effect::plan_building_effect_numeric(&before,0,[4096,4096],1000,0,1000,0,0,None).unwrap();
+  world.effects.as_mut().unwrap().commit_building_factory(&plan).unwrap();world.insert_effect_head(0).unwrap();
+  world.backing[0x3554..0x3556].copy_from_slice(&1i16.to_le_bytes());world
+ }
+ #[test]
+ fn construction_effect_pass_retires_and_late_cleanup_failure_rolls_back(){
+  let mut world=world_with_effect();let rng=world.rng;let physics=PhysicsTables::fixture();let trig=TrigTables::generate_pinned().unwrap();
+  let context=LandingPhysicsContext{water_height:0,gravity:1024};let mut ui=RetirementUiState::native_empty();
+  ui.pointer_slots[3]=Some(landing::LandingReference{index:0,kind:5});
+  for frame in 1..=7 {let pass=world.step_landing_effect_callbacks(context,&physics,&trig,&ui).unwrap();assert_eq!(pass.primary.len(),1);assert!(pass.newborn.is_empty());assert_eq!(world.effects.as_ref().unwrap().record(0).unwrap()[27],frame);}
+  let mut broken=world.clone();let group=broken.layouts[6];broken.backing[group.file_offset+6]=7;broken.backing[group.file_offset+15..group.file_offset+17].copy_from_slice(&9i16.to_le_bytes());
+  let unchanged=broken.clone();assert!(broken.step_landing_effect_callbacks(context,&physics,&trig,&ui).is_err());assert_eq!(broken,unchanged);
+  let pass=world.step_landing_effect_callbacks(context,&physics,&trig,&ui).unwrap();
+  let LandingEffectCallback::Construction(done)=&pass.primary[0]else{panic!("wrong callback")};
+  assert!(done.retired);assert_eq!(done.ui_after.pointer_slots[3],None);assert_eq!(done.pending_ui_events,vec![RetirementUiEvent::ClearPointerSlot409F0(3)]);
+  assert!(world.validate_links().unwrap().is_empty());assert_eq!(word(&world.backing,0x3554),0);assert_eq!(world.effects.as_ref().unwrap().binding(0).unwrap(),None);assert_eq!(world.rng,rng);
+ }
+ #[test]
+ fn construction_effect_rejects_unproved_sloped_physics_atomically(){
+  let mut world=world_with_effect();let cell=16*128+17;world.backing[MAP_START+cell*14+2..MAP_START+cell*14+4].copy_from_slice(&501i16.to_le_bytes());
+  let before=world.clone();let result=world.step_building_effect_quiet(0,LandingPhysicsContext{water_height:0,gravity:1024},&RetirementUiState::native_empty());
+  assert_eq!(result.unwrap_err(),ActorWorldError::BuildingEffectLifecycle(crate::building_effect_lifecycle::BuildingEffectLifecycleError::UnsupportedPhysics));assert_eq!(world,before);
  }
 }

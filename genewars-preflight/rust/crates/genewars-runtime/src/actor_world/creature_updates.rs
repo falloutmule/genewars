@@ -7,6 +7,7 @@ use crate::physics_tables::PhysicsTables;
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct MuleCallbackReceipt {
     pub motion:creature_world::CommonPhysicsPlan<124>,
+    pub retirement:Option<MuleRetirementReceipt>,
     /// Requests made at the source virtual44 interface. Playback/mixer
     /// admission remains separate; no audio device is executed here.
     pub pending_audio:Vec<u8>,
@@ -34,11 +35,18 @@ impl ActorWorld {
     fn step_mule_followup_inner(&mut self,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations,admit_water:bool)->Result<MuleCallbackReceipt,ActorWorldError> {
         self.validate_links()?;
         let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;
-        if pool.binding(0)?!=Some(CreatureAnimationBinding::MuleSelector4)||pool.records().iter().skip(1).any(|r|r[6]!=0){return Err(CreatureError::UnsupportedMotionState.into());}
+        let binding=if pool.record(0)?[0x5e]>=26{CreatureAnimationBinding::BonesSelector4}else{CreatureAnimationBinding::MuleSelector4};
+        if pool.binding(0)?!=Some(binding)||pool.records().iter().skip(1).any(|r|r[6]!=0){return Err(CreatureError::UnsupportedMotionState.into());}
         let before=*pool.record(0)?;
         if matches!(before[0x5e],1|7) {let target=self.entity(reference(&before,0x55))?;let expected=if before[0x5e]==7{1}else{0};if before[0x57]!=2||target[0x18]!=4||self.mule_plant_flags(word(&before,0x55))?&9!=expected {return Err(CreatureError::UnsupportedMotionState.into());}}
         let mut rng=self.rng;
         let (prefix,working_target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng)?;
+        if before[0x5e]==27&&context.frame_counter&1!=0&&word(&before,0x6c)&15==0&&(0..=1).contains(&word(&before,0x68)) {
+            let plan=creature_world::plan_mule_bones_retirement_after_prefix(&before,&prefix,self.map(),context,physics,trig,animations)?;
+            let mut staged=self.clone();let retirement=staged.retire_mule_bones_after_callback(&before,&plan.motion)?;
+            staged.rng=rng;let mut motion=plan.motion;motion.after=retirement.after;*self=staged;
+            return Ok(MuleCallbackReceipt{motion,retirement:Some(retirement),pending_audio:Vec::new(),pending_plant_retirements:Vec::new(),pending_portrait_refresh:false});
+        }
         let mut reserve_plant=None;let mut release_plant=None;let mut fed_plant=None;let mut pending_audio=Vec::new();let mut pending_plant_retirements=Vec::new();
         let(plan,water_effect)=creature_world::plan_mule_after_admitted_prefix_with_water_policy(&before,&prefix,working_target,self.map(),context,physics,trig,
             |record,normal,previous|self.mule_contact_speed(record,normal,previous).map_err(|_|CreatureError::MotionEnvironment),
@@ -91,7 +99,7 @@ impl ActorWorld {
                 _=>return Err(CreatureError::MotionEnvironment.into()),
             }
         }
-        staged.rng=rng;staged.validate_links()?;let mut result=plan;result.after=*staged.creatures.as_ref().unwrap().record(0)?;*self=staged;Ok(MuleCallbackReceipt{motion:result,pending_audio,pending_plant_retirements,pending_portrait_refresh:before[0x5e]==8&&prefix[0x5e]==0})
+        staged.rng=rng;staged.validate_links()?;let mut result=plan;result.after=*staged.creatures.as_ref().unwrap().record(0)?;*self=staged;Ok(MuleCallbackReceipt{motion:result,retirement:None,pending_audio,pending_plant_retirements,pending_portrait_refresh:before[0x5e]==8&&prefix[0x5e]==0})
     }
 
     fn mule_route_prefix(&self,before:&CreatureRecord,frame:u32,physics:&PhysicsTables,trig:&TrigTables,rng:&mut BlueprintRng)->Result<(CreatureRecord,[i16;2]),ActorWorldError> {
@@ -268,7 +276,7 @@ impl ActorWorld {
             _=>{let l=self.layouts[usize::from(raw[2]-1)];let at=l.file_offset+id*l.packed_stride+3;self.backing[at..at+3].copy_from_slice(&next);},
         }Ok(())
     }
-    fn unlink_mule(&mut self,cell:usize)->Result<(),ActorWorldError> {
+    pub(super) fn unlink_mule(&mut self,cell:usize)->Result<(),ActorWorldError> {
         let raw=[0,0,1];let record=self.entity(raw)?;let previous=reference(record,0);let next=reference(record,3);
         if previous[2]==0 {if word(&previous,0)as usize!=cell||reference(self.map(),cell*14+6)!=raw{return Err(ActorWorldError::StaleLink);}
             if next[2]!=0 {self.backing[MAP_START+cell*14+6..MAP_START+cell*14+9].copy_from_slice(&next);}else{self.backing[MAP_START+cell*14+8]=0;}

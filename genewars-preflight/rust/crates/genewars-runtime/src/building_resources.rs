@@ -1,9 +1,9 @@
 //! Hash-bound BTURR animation data used by the incomplete selector-1 callback.
 //!
 //! The loader admits only the CD resource reached through building selector 1
-//! at descriptor 0x103a9c / destination 0x116828. It exposes animation 0's
-//! three frames and their raw zero hold bytes; the trailing low byte is kept
-//! opaque. Rendering policy and callback state remain separate.
+//! at descriptor 0x103a9c / destination 0x116828. It exposes the admitted
+//! incomplete animation 0 and completed animation 1 frame ranges. Rendering
+//! policy and callback state remain separate.
 
 use genewars_assets::{AnbAnimationRecord, AnbComponentRecord, AnbFrameRecord, AnbSections, Error as AssetError, IndexedSprite, SpriteTable};
 use std::fmt;
@@ -19,6 +19,7 @@ pub const BTURR_SELECTOR: u8 = 1;
 pub const BTURR_BYTES: usize = 68_030;
 pub const BTURR_SHA256: &str = "c26df60af3a3166aec54112f197a4334966eb214eeaa48e0d9284e0510b8cd20";
 pub const BTURR_ANIMATION0_FRAME_COUNT: usize = 3;
+pub const BTURR_ANIMATION1_FRAME_COUNT: usize = 8;
 const BTURR_SECTION_OFFSETS: [u32; 4] = [66_562, 67_000, 67_560, 67_980];
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -79,6 +80,21 @@ pub struct BuildingAnimation0 {
     animation_record: AnbAnimationRecord,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct BuildingAnimation1 {
+    frames: [BuildingAnimation0Frame; BTURR_ANIMATION1_FRAME_COUNT],
+    animation_record: AnbAnimationRecord,
+}
+
+impl BuildingAnimation1 {
+    pub fn frame_count(&self) -> usize { self.frames.len() }
+    pub fn animation_record(&self) -> AnbAnimationRecord { self.animation_record }
+    pub fn frame(&self, index: usize) -> Result<&BuildingAnimation0Frame, BuildingResourceError> {
+        self.frames.get(index).ok_or(BuildingResourceError::FrameOutOfBounds(index))
+    }
+    pub fn frames(&self) -> &[BuildingAnimation0Frame; BTURR_ANIMATION1_FRAME_COUNT] { &self.frames }
+}
+
 /// The caller-supplied screen origin and the already-resolved low global draw
 /// flags from the 43A40 caller. Only the normal unscaled 0/0x04 common path is
 /// admitted here; selection, destruction transforms and blink are excluded.
@@ -90,6 +106,7 @@ pub struct BuildingCommonDrawContext {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct BuildingCommonDrawReceipt {
+    pub animation_index: u8,
     pub frame_index: u8,
     /// X after the wrapper's proved +0x30 parity adjustment.
     pub draw_origin: [i16; 2],
@@ -114,6 +131,7 @@ impl BuildingAnimation0 {
 pub struct BuildingResourceDatabase {
     bytes: Vec<u8>,
     animation0: BuildingAnimation0,
+    animation1: BuildingAnimation1,
 }
 
 impl BuildingResourceDatabase {
@@ -178,14 +196,49 @@ impl BuildingResourceDatabase {
             .try_into().map_err(|_| BuildingResourceError::AnimationLayout)?;
         let holds = [frames[0].hold, frames[1].hold, frames[2].hold];
         if holds != [0, 0, 0] { return Err(BuildingResourceError::AnimationLayout); }
+        let animation1_record = metadata.animation(1).map_err(BuildingResourceError::Anb)?;
+        if animation1_record.first_frame_offset != 42
+            || animation1_record.last_frame_offset != 140
+            || animation1_record.trailing_word != 8
+        {
+            return Err(BuildingResourceError::AnimationLayout);
+        }
+        let mut animation1_frames = Vec::with_capacity(BTURR_ANIMATION1_FRAME_COUNT);
+        for index in 0..BTURR_ANIMATION1_FRAME_COUNT {
+            let offset = animation1_record.first_frame_offset + (index as u32 * 14);
+            let frame = metadata.frame_at(offset).map_err(BuildingResourceError::Anb)?;
+            if frame.byte_10 != 0 {
+                return Err(BuildingResourceError::FrameLayout { frame: index });
+            }
+            let mut components = Vec::with_capacity(usize::from(frame.component_count));
+            for component_index in 0..usize::from(frame.component_count) {
+                let component = metadata.frame_component(frame, component_index).map_err(BuildingResourceError::Anb)?;
+                if component.flags != 0 {
+                    return Err(BuildingResourceError::ComponentLayout { frame: index, component: component_index });
+                }
+                let sprite_record = component.sprite_offset as usize / 6;
+                let sprite = table.decode(sprite_record, &decoded_anb).map_err(BuildingResourceError::Anb)?;
+                components.push(BuildingAnimation0Component { record: component, sprite_record, sprite });
+            }
+            animation1_frames.push(BuildingAnimation0Frame {
+                index: index as u8,
+                hold: frame.byte_10,
+                metadata: frame,
+                display_dimensions: frame.display_dimensions(),
+                components,
+            });
+        }
+        let animation1_frames: [BuildingAnimation0Frame; BTURR_ANIMATION1_FRAME_COUNT] = animation1_frames
+            .try_into().map_err(|_| BuildingResourceError::AnimationLayout)?;
         Ok(Self { bytes: decoded_anb, animation0: BuildingAnimation0 {
             frames, holds: BuildingAnimation0Holds(holds), animation_record: animation,
-        } })
+        }, animation1: BuildingAnimation1 { frames: animation1_frames, animation_record: animation1_record } })
     }
 
     pub fn selector(&self) -> u8 { BTURR_SELECTOR }
     pub fn bytes(&self) -> &[u8] { &self.bytes }
     pub fn animation0(&self) -> &BuildingAnimation0 { &self.animation0 }
+    pub fn animation1(&self) -> &BuildingAnimation1 { &self.animation1 }
 
     /// Draw the ordinary main-image pass for the admitted incomplete selector-1
     /// building. The caller chooses screen origin and the source global flags;
@@ -201,16 +254,47 @@ impl BuildingResourceDatabase {
         height: usize,
         pitch: usize,
     ) -> Result<BuildingCommonDrawReceipt, BuildingResourceError> {
+        self.draw_selector1_common(record, 0, context, fade_row, blend_table, destination, width, height, pitch)
+    }
+
+    /// Draw the proved BTURR selector-1 animation-1 common main-image pass.
+    /// The caller selects this by the record's animation byte; the completion
+    /// bit controls later owner/status decorations and does not gate this pass.
+    pub fn draw_completed_selector1_common(
+        &self,
+        record: &[u8; 67],
+        context: BuildingCommonDrawContext,
+        fade_row: Option<&[u8]>,
+        blend_table: Option<&[u8]>,
+        destination: &mut [u8],
+        width: usize,
+        height: usize,
+        pitch: usize,
+    ) -> Result<BuildingCommonDrawReceipt, BuildingResourceError> {
+        self.draw_selector1_common(record, 1, context, fade_row, blend_table, destination, width, height, pitch)
+    }
+
+    fn draw_selector1_common(
+        &self,
+        record: &[u8; 67],
+        expected_animation: u8,
+        context: BuildingCommonDrawContext,
+        fade_row: Option<&[u8]>,
+        blend_table: Option<&[u8]>,
+        destination: &mut [u8],
+        width: usize,
+        height: usize,
+        pitch: usize,
+    ) -> Result<BuildingCommonDrawReceipt, BuildingResourceError> {
         let source_flags = u16::from_le_bytes([record[0x31], record[0x32]]);
         let actor_id = i16::from_le_bytes([record[0x0f], record[0x10]]);
         let owner = record[0x18];
         let frame_index = record[0x1b];
         // 43A40's selected/destruction and special blink paths are outside this
-        // bounded common pass. The callback's incomplete selector-1 gate is
-        // also enforced here so a caller cannot reuse the renderer for a
-        // completed, demolishing, or differently bound building.
+        // bounded common pass. Completion and other overlay fields do not gate
+        // the source main-image blitter.
         if record[0x06] != 4 || owner >= 4 || record[0x2d] != 1
-            || record[0x19] != 0
+            || record[0x19] != expected_animation
             || source_flags & 0x0800 != 0 || record[0x15] & 0x10 != 0
             || actor_id < 0 || usize::from(actor_id as u16) >= 256
         {
@@ -219,7 +303,11 @@ impl BuildingResourceDatabase {
         if context.global_flags & !0x04 != 0 {
             return Err(BuildingResourceError::UnsupportedDrawFlags(context.global_flags));
         }
-        let frame = self.animation0.frame(usize::from(frame_index))?;
+        let frame = if expected_animation == 0 {
+            self.animation0.frame(usize::from(frame_index))?
+        } else {
+            self.animation1.frame(usize::from(frame_index))?
+        };
         let phase = if record[0x30] > 1 { i16::from(record[0x30] & 1) } else { 0 };
         let draw_origin = [context.origin[0].wrapping_sub(phase), context.origin[1]];
         let components = frame.components.iter().map(|component| component.record).collect::<Vec<_>>();
@@ -242,7 +330,7 @@ impl BuildingResourceDatabase {
             virtual_height: 0,
             shade: record[0x17],
             actor_flags_15: record[0x15],
-            animation_index: 0,
+            animation_index: expected_animation,
             frame_index,
             draw_flags_55: 0,
             draw_flag_58: 0,
@@ -266,6 +354,7 @@ impl BuildingResourceDatabase {
             pitch,
         )?;
         Ok(BuildingCommonDrawReceipt {
+            animation_index: expected_animation,
             frame_index,
             draw_origin,
             component_count: decoded.len(),
@@ -304,6 +393,63 @@ mod tests {
         assert_eq!(animation.holds().as_array(), &[0, 0, 0]);
         assert_eq!([animation.frames()[0].hold, animation.frames()[1].hold, animation.frames()[2].hold], [0, 0, 0]);
         assert_eq!([animation.frames()[0].components.len(), animation.frames()[1].components.len(), animation.frames()[2].components.len()], [1, 1, 2]);
+    }
+
+    #[test]
+    fn cd_bturr_completed_animation_one_has_eight_source_frames_and_draws_atomically() {
+        let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../../private/reference-run/run-006/drive-c/GAME/DATA/BUILDING/BTURR.ANB");
+        let database = BuildingResourceDatabase::load_selector1_bturr(std::fs::read(path).unwrap()).unwrap();
+        let animation = database.animation1();
+        assert_eq!(animation.frame_count(), 8);
+        assert_eq!(animation.animation_record(), AnbAnimationRecord {
+            first_frame_offset: 42, last_frame_offset: 140, trailing_word: 8,
+        });
+        assert!(animation.frames().iter().all(|frame| frame.hold == 0));
+        assert!(animation.frames().iter().all(|frame| !frame.components.is_empty()));
+
+        for frame_index in 0..8u8 {
+            let mut record = [0u8; 67];
+            record[6] = 4;
+            record[15..17].copy_from_slice(&17i16.to_le_bytes());
+            record[18] = 0;
+            record[0x19] = 1;
+            record[0x1b] = frame_index;
+            record[0x2d] = 1;
+            record[0x31..0x33].copy_from_slice(&1u16.to_le_bytes());
+            record[0x17] = 30;
+            let width = 240usize;
+            let height = 220usize;
+            let pitch = 256usize;
+            let mut pixels = vec![0x5a; (height - 1) * pitch + width];
+            let receipt = database.draw_completed_selector1_common(
+                &record,
+                BuildingCommonDrawContext { origin: [120, 110], global_flags: 0 },
+                None, None, &mut pixels, width, height, pitch,
+            ).unwrap();
+            assert_eq!(receipt.frame_index, frame_index);
+            assert!(receipt.color.pixels_written > 0);
+            assert!(!receipt.post_image_overlays_rendered);
+            for row in 0..height - 1 {
+                assert!(pixels[row * pitch + width..(row + 1) * pitch].iter().all(|v| *v == 0x5a));
+            }
+        }
+
+        let mut record = [0u8; 67];
+        record[6] = 4;
+        record[15..17].copy_from_slice(&17i16.to_le_bytes());
+        record[18] = 0;
+        record[0x19] = 1;
+        record[0x1b] = 8;
+        record[0x2d] = 1;
+        record[0x31..0x33].copy_from_slice(&1u16.to_le_bytes());
+        let mut pixels = [0x77; 64];
+        let before = pixels;
+        assert_eq!(database.draw_completed_selector1_common(
+            &record, BuildingCommonDrawContext { origin: [0, 0], global_flags: 0 },
+            None, None, &mut pixels, 8, 8, 8,
+        ), Err(BuildingResourceError::FrameOutOfBounds(8)));
+        assert_eq!(pixels, before);
     }
 
     #[test]

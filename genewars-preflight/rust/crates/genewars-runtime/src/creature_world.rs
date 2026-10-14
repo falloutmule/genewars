@@ -15,6 +15,8 @@ const MISSION_SHA256: &str = "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b58
 pub enum CreatureAnimationBinding {
     /// 5A1C0 selector4 -> creature loader slot4; exact CD MULE.ANB.
     MuleSelector4,
+    /// Source state>=26 routes animation lookups to the admitted BONES.ANB.
+    BonesSelector4,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -142,7 +144,8 @@ fn common_nonflight_physics_water<const N:usize,F,O>(before:&[u8;N],map:&[u8],fr
  physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,mut contact:F,mut obstacle:O,admit_water:bool,virtual90:bool)->Result<(CommonPhysicsPlan<N>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>{
     if N<0x55||map.len()!=229376||before[0x16]&9!=0||before[0x15]&0x20!=0||motion_word(before,0x49)as u16&0x400!=0
-        ||motion_word(before,0x3f)<0 {return Err(CreatureError::UnsupportedMotionState);}
+        ||(motion_word(before,0x3f)<0&&!(motion_word(before,0x3f)==-1&&N>=124&&before[6]==1&&before[0x5e]>=24&&before[0x15]&0x80!=0
+            &&motion_dword(before,0x27)<=motion_dword(before,0x11)&&(0..3).all(|i|motion_word(before,0x33+2*i)==0))) {return Err(CreatureError::UnsupportedMotionState);}
     let mut a=*before;let old_cell=motion_cell(motion_point(before));let old_ground=motion_dword(before,0x11);
     let was_grounded=motion_dword(before,0x27)<=old_ground;
     for axis in 0..3 {let mut v=motion_word(before,0x2d+axis*2).wrapping_add(motion_word(before,0x33+axis*2));if axis==2{v=v.wrapping_sub(gravity);}motion_put(&mut a,0x2d+axis*2,v);}
@@ -153,9 +156,20 @@ where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->
         motion_put32(&mut a,0x27,ground);
         if was_grounded||before[0x15]&0x40!=0 {
             let normal=crate::landing::landing_terrain_normal(motion_point(before),motion_sample(map,motion_point(before))?.2);
+            let corpse=motion_word(before,0x3f)==-1;
+            if corpse{
+                let sum=(0..3).fold(0u32,|sum,i|{let v=i32::from(motion_word(&a,0x2d+2*i));sum.wrapping_add(v.wrapping_mul(v)as u32)});
+                let speed=genewars_core::cd_candidate::integer_sqrt(sum)as i32;
+                if speed!=0{
+                    let class=crate::world::map_terrain_class(map,motion_point(before)).map_err(|_|CreatureError::MotionEnvironment)?;
+                    let friction=i32::from(physics.friction(class).map_err(|_|CreatureError::MotionEnvironment)?);
+                    if speed<=friction {a[0x2d..0x33].fill(0);}
+                    else{let factor=((speed-friction)<<6)/speed;for axis in 0..3{let v=((i64::from(motion_word(&a,0x2d+2*axis))*i64::from(factor))>>6)as i16;motion_put(&mut a,0x2d+2*axis,v);}}
+                }
+            }
             motion_put(&mut a,0x31,(ground as i16).wrapping_sub(old_ground as i16).wrapping_mul(8));
             motion_angles(&mut a,physics);
-            let speed=contact(&a,normal,old_ground as i16)?;motion_put(&mut a,0x41,speed);motion_put(&mut a,0x3d,speed);
+            if !corpse{let speed=contact(&a,normal,old_ground as i16)?;motion_put(&mut a,0x41,speed);motion_put(&mut a,0x3d,speed);}
             motion_velocity(&mut a,trig)?;
             for axis in 0..2 {let v=motion_fixed(&a,axis);motion_put(&mut a,7+2*axis,(v>>16)as i16);a[0x43+axis]=(v>>8)as u8;}
             let (g,s,_)=motion_sample(map,motion_point(&a))?;motion_put32(&mut a,0x11,g);motion_put32(&mut a,0x27,g);a[0x17]=s;
@@ -170,6 +184,7 @@ where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->
             motion_angles(&mut a,physics);
         }
     }else{
+        if motion_word(before,0x3f)==-1{return Err(CreatureError::UnsupportedMotionState);}
         for axis in 0..2 {motion_put(&mut a,7+2*axis,at[axis]);a[0x43+axis]=(fixed[axis]>>8)as u8;}
         motion_put32(&mut a,0x27,candidate_height.max(0));motion_angles(&mut a,physics);
         if !(0..=0x4b00).contains(&motion_word(&a,0x3d)){return Err(CreatureError::UnsupportedMotionState);}
@@ -221,7 +236,9 @@ pub fn plan_common_ground_steering<const N:usize>(before:&[u8;N],trig:&crate::ac
 #[derive(Debug,Clone,Copy,PartialEq,Eq)]
 pub struct MuleStepContext {pub frame_counter:u32,pub gravity:i16,pub water_height:i32,pub climate:i16}
 #[derive(Debug,Clone,PartialEq,Eq)]
-pub struct MuleAnimations {holds:[Vec<u8>;24],flags:[u8;24]}
+pub struct MuleAnimations {holds:[Vec<u8>;24],flags:[u8;24],bones:Option<BonesAnimations>}
+#[derive(Debug,Clone,PartialEq,Eq)]
+struct BonesAnimations {holds:[Vec<u8>;5],flags:[u8;5]}
 impl MuleAnimations {
     /// Exact admitted CD MULE.ANB; all24 source descriptors are exposed for bounded walking and feeding.
     /// This is metadata access, not another sprite decoder.
@@ -230,7 +247,28 @@ impl MuleAnimations {
         let frames=u32::from_le_bytes(bytes[10..14].try_into().unwrap())as usize;
         let descriptors=u32::from_le_bytes(bytes[14..18].try_into().unwrap())as usize;
         let holds=std::array::from_fn(|i|{let d=descriptors+i*10;let base=u32::from_le_bytes(bytes[d..d+4].try_into().unwrap())as usize;(0..usize::from(bytes[d+8])).map(|j|bytes[frames+base+j*14+10]).collect()});
-        let flags=std::array::from_fn(|i|bytes[descriptors+i*10+9]);Ok(Self{holds,flags})
+        let flags=std::array::from_fn(|i|bytes[descriptors+i*10+9]);Ok(Self{holds,flags,bones:None})
+    }
+    /// Explicit optional binding for corpse states26/27; no MULE fallback.
+    pub fn with_bones_anb(mut self,bytes:&[u8])->Result<Self,CreatureError>{
+        if bytes.len()!=4077||crate::identity::sha256_hex(bytes)!="2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f"{return Err(CreatureError::UnsupportedMotionState);}
+        let frames=u32::from_le_bytes(bytes[10..14].try_into().unwrap())as usize;
+        let descriptors=u32::from_le_bytes(bytes[14..18].try_into().unwrap())as usize;
+        let holds=std::array::from_fn(|i|{let d=descriptors+i*10;let base=u32::from_le_bytes(bytes[d..d+4].try_into().unwrap())as usize;(0..usize::from(bytes[d+8])).map(|j|bytes[frames+base+j*14+10]).collect()});
+        let flags=std::array::from_fn(|i|bytes[descriptors+i*10+9]);self.bones=Some(BonesAnimations{holds,flags});Ok(self)
+    }
+    fn metadata(&self,state:u8,id:usize)->Result<(&[u8],u8),CreatureError>{
+        if state>=26{let bones=self.bones.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;Ok((bones.holds.get(id).ok_or(CreatureError::UnsupportedMotionState)?,*bones.flags.get(id).ok_or(CreatureError::UnsupportedMotionState)?))}
+        else{Ok((self.holds.get(id).ok_or(CreatureError::UnsupportedMotionState)?,*self.flags.get(id).ok_or(CreatureError::UnsupportedMotionState)?))}
+    }
+    /// Read the proved frame hold and animation flags for the state-selected
+    /// database. States26+ require the separately hash-bound BONES table;
+    /// there is no fallback to the corresponding MULE animation index.
+    pub fn frame_metadata(&self,state:u8,id:usize,frame:usize)->Result<(u8,u8),CreatureError>{
+        let (holds,flags)=self.metadata(state,id)?;
+        let hold=*holds.get(frame).ok_or(CreatureError::UnsupportedMotionState)?;
+        if flags&!1!=0 {return Err(CreatureError::UnsupportedMotionState);}
+        Ok((hold,flags))
     }
 }
 /// Admitted straight-move portion of6FB60 through its6F980 steering call.
@@ -288,7 +326,7 @@ pub fn plan_mule_after_admitted_prefix_with_water_policy<F,O,C>(before:&Creature
     physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
     contact:F,obstacle:O,animations:&MuleAnimations,mut choice:C,admit_water:bool)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
-    if matches!(before[0x5e],24|25)||(before[0x5e]==8&&motion_word(before,0x66)==1&&context.frame_counter&1!=0) {
+    if matches!(before[0x5e],24..=27)||(before[0x5e]==8&&motion_word(before,0x66)==1&&context.frame_counter&1!=0) {
         return plan_mule_mortality_after_prefix(before,prefix,map,context,physics,trig,contact,obstacle,animations,admit_water);
     }
     let neutral=before[0x5e]==8&&matches!(before[0x61],0|0x40|0x80)&&matches!(before[0x60],8|0x88);
@@ -377,28 +415,59 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     }
     Ok((CommonPhysicsPlan{new_cell:motion_cell(motion_point(&a)),after:a,old_cell:plan.old_cell,physics_cell:plan.new_cell},water_effect))
 }
-/// Natural owner4 Mule mortality and stationary state24/25 continuation.
-/// External references, nonzero corpse motion and BONES conversion reject.
+/// Natural owner4 Mule mortality, grounded corpse friction and BONES decay.
+/// External references, airborne corpse motion and final retirement reject.
 fn plan_mule_mortality_after_prefix<F,O>(before:&CreatureRecord,prefix:&CreatureRecord,map:&[u8],context:MuleStepContext,
     physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
     contact:F,obstacle:O,animations:&MuleAnimations,admit_water:bool)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError> {
+    plan_mule_mortality_after_prefix_inner(before,prefix,map,context,physics,trig,contact,obstacle,animations,admit_water,false)
+}
+
+#[derive(Debug,Clone,PartialEq,Eq)]
+pub struct MuleRetirementPlan {
+    /// Numeric epilogue afterimage retains kind1 for the owning transaction.
+    /// Unlink8ACC0, cleanup724C0, count decrement and final kind clear are ports.
+    pub motion:CommonPhysicsPlan<124>,
+    pub retirement_required:bool,
+}
+/// Opt-in stationary final BONES callback. Legacy mortality planners retain
+/// their atomic retirement-boundary rejection. The owner must commit source
+/// unlink/cleanup/kind/count mutations together with this complete epilogue.
+pub fn plan_mule_bones_retirement_after_prefix(before:&CreatureRecord,prefix:&CreatureRecord,map:&[u8],context:MuleStepContext,
+    physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,animations:&MuleAnimations)
+    ->Result<MuleRetirementPlan,CreatureError>{
+    if before[0x5e]!=27||context.frame_counter&1==0||motion_word(before,0x6c)&15!=0
+        ||!(0..=1).contains(&motion_word(before,0x68))||motion_word(prefix,0x3d)!=0||motion_word(prefix,0x41)<0
+        ||(0..3).any(|i|motion_word(prefix,0x2d+2*i)!=0){return Err(CreatureError::UnsupportedMotionState);}
+    let (motion,effect)=plan_mule_mortality_after_prefix_inner(before,prefix,map,context,physics,trig,
+        |_,_,_|Err(CreatureError::UnsupportedMotionState),|_|Ok(false),animations,true,true)?;
+    if effect.is_some(){return Err(CreatureError::MotionEnvironment);}
+    Ok(MuleRetirementPlan{motion,retirement_required:true})
+}
+
+fn plan_mule_mortality_after_prefix_inner<F,O>(before:&CreatureRecord,prefix:&CreatureRecord,map:&[u8],context:MuleStepContext,
+    physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
+    contact:F,obstacle:O,animations:&MuleAnimations,admit_water:bool,admit_retirement:bool)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError> {
     let entering=before[0x5e]==8&&motion_word(before,0x66)==1&&context.frame_counter&1!=0;
     if before[6]!=1||before[0x18]!=4||before[0x7a]!=4||before[0x76]!=30||before[0x7b]!=255
         ||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)||before[0x57]!=0||before[0x5d]!=0||before[0x60]&2!=0
         ||before[0x4f]!=0||before[0x52]!=0||before[0x61]!=0||motion_word(before,0x6c)<0
-        ||(!entering&&!matches!(before[0x5e],24|25)){return Err(CreatureError::UnsupportedMotionState);}
+        ||(!entering&&!matches!(before[0x5e],24..=27)){return Err(CreatureError::UnsupportedMotionState);}
+    if before[0x5e]>=26&&(animations.bones.is_none()||before[0x19]!=4||before[0x1b]>1||before[0x1c]!=0||before[0x1d]!=0){return Err(CreatureError::UnsupportedMotionState);}
     let (plan,water_effect)=if entering {
         if admit_water{plan_common_nonflight_physics_with_water_tail(prefix,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,obstacle,true)?}
         else{(plan_common_nonflight_physics(prefix,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,obstacle)?,None)}
     }else{
-        if motion_word(before,0x66)!=0||motion_word(prefix,0x3f)!=-1||motion_word(prefix,0x41)!=0||motion_word(prefix,0x3d)!=0
-            ||(0..3).any(|i|motion_word(prefix,0x2d+i*2)!=0||motion_word(prefix,0x33+i*2)!=0)
+        if motion_word(before,0x66)!=0||motion_word(prefix,0x3f)!=-1||motion_word(prefix,0x41)<0||motion_word(prefix,0x3d)<0
+            ||(0..3).any(|i|motion_word(prefix,0x33+i*2)!=0)
             ||motion_dword(prefix,0x27)!=motion_dword(prefix,0x11){return Err(CreatureError::UnsupportedMotionState);}
-        //Source skips A4 at desired=-1. For an explicitly stationary corpse,
+        //Source skips A4 and the3D<-41 copy at desired=-1. For a stationary corpse,
         //the zero-speed contact arithmetic with desired0 is identical; the
         //constant closure has no world-query effects and restores sentinel.
-        let mut numeric=*prefix;motion_put(&mut numeric,0x3f,0);
+        let stationary=(0..3).all(|i|motion_word(prefix,0x2d+i*2)==0)&&motion_word(prefix,0x3d)==0&&motion_word(prefix,0x41)==0;
+        let mut numeric=*prefix;if stationary{motion_put(&mut numeric,0x3f,0);}
         let (mut result,effect)=if admit_water{plan_common_nonflight_physics_with_water_tail(&numeric,map,context.frame_counter,context.gravity,context.water_height,physics,trig,|_,_,_|Ok(0),obstacle,true)?}
             else{(plan_common_nonflight_physics(&numeric,map,context.frame_counter,context.gravity,context.water_height,physics,trig,|_,_,_|Ok(0),obstacle)?,None)};
         motion_put(&mut result.after,0x3f,-1);(result,effect)
@@ -422,20 +491,34 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
         }
     }
     if context.frame_counter&1!=0{
-        if a[0x5e]==25&&motion_word(&a,0x6c)&31==0{
+        match a[0x5e]{
+          25 if motion_word(&a,0x6c)&31==0=>{
+            let reserve=motion_word(&a,0x68).saturating_sub(1).max(0);motion_put(&mut a,0x68,reserve);motion_put(&mut a,0x6c,32767);
+            if reserve<=motion_word(&a,0x62)>>1{
+                if animations.bones.is_none(){return Err(CreatureError::UnsupportedMotionState);}
+                a[0x5e]=26;a[0x19]=4;a[0x1b]=0;a[0x1c]=0;
+            }
+          },
+          26 if motion_word(&a,0x6c)&31==0=>{
+            let reserve=motion_word(&a,0x68).saturating_sub(1).max(0);motion_put(&mut a,0x68,reserve);motion_put(&mut a,0x6c,32767);
+            if reserve<=motion_word(&a,0x62)>>2{a[0x5e]=27;a[0x1b]=1;}
+          },
+          27 if motion_word(&a,0x6c)&15==0=>{
             let reserve=motion_word(&a,0x68).saturating_sub(1).max(0);
-            if reserve<=motion_word(&a,0x62)>>1{return Err(CreatureError::UnsupportedMotionState);}
+            if reserve<=0&&!admit_retirement{return Err(CreatureError::UnsupportedMotionState);}
             motion_put(&mut a,0x68,reserve);motion_put(&mut a,0x6c,32767);
+          },
+          _=>{},
         }
         let timer=motion_word(&a,0x6c);if timer>0{motion_put(&mut a,0x6c,timer-1);}
     }
-    let animation=if a[0x5e]==24{17}else{18};
+    let animation=match a[0x5e]{24=>17,25=>18,_=>4};
     if a[0x19]!=animation{a[0x19]=animation;a[0x1a]=0;a[0x1b]=0;a[0x1c]=if animation==17{1}else{0};a[0x1d]=0;a[0x1e]=0;}
     advance_mule_mortality_frame(&mut a,animations)?;
     Ok((CommonPhysicsPlan{new_cell:motion_cell(motion_point(&a)),after:a,old_cell:plan.old_cell,physics_cell:plan.new_cell},water_effect))
 }
 fn advance_mule_mortality_frame(a:&mut CreatureRecord,animations:&MuleAnimations)->Result<(),CreatureError>{
-    let id=usize::from(a[0x19]);let holds=&animations.holds[id];let flags=animations.flags[id];
+    let id=usize::from(a[0x19]);let (holds,flags)=animations.metadata(a[0x5e],id)?;
     if holds.is_empty()||holds.len()>255||flags&!1!=0{return Err(CreatureError::UnsupportedMotionState);}
     let last=holds.len()-1;let frame=usize::from(a[0x1b]).min(last);a[0x1b]=frame as u8;
     if(a[0x1e]as i8)>(a[0x1d]as i8){a[0x1e]=a[0x1d];}
@@ -745,8 +828,18 @@ impl CreaturePool {
         if self.record(slot)?!=before { return Err(CreatureError::StaleRecord(slot)); }
         if before[6]!=after[6] || before[15..17]!=after[15..17] || before[24]!=after[24] || before[0x7a]!=after[0x7a] { return Err(CreatureError::IdentityChanged(slot)); }
         if before[31..39]!=after[31..39] { return Err(CreatureError::PointerBytesChanged(slot)); }
+        if after[6]==1&&after[0x5e]>=26{
+            if before[0x5e]<25||after[0x7a]!=4{return Err(CreatureError::UnsupportedMotionState);}
+            self.bindings[slot]=Some(CreatureAnimationBinding::BonesSelector4);
+        }
         self.records[slot]=*after;
         Ok(())
+    }
+    pub(crate) fn retire_bones_checked(&mut self,slot:usize,before:&CreatureRecord)->Result<(),CreatureError>{
+        if self.record(slot)?!=before{return Err(CreatureError::StaleRecord(slot));}
+        if self.binding(slot)?!=Some(CreatureAnimationBinding::BonesSelector4)||before[6]!=1||before[24]!=4||before[0x7a]!=4
+            ||before[0x5e]!=27||motion_word(before,0x68)!=0||motion_word(before,15)as u16 as usize!=slot{return Err(CreatureError::UnsupportedMotionState);}
+        self.records[slot][6]=0;self.bindings[slot]=None;Ok(())
     }
 }
 
@@ -758,7 +851,7 @@ mod tests {
         let mut map=vec![0;229376];for cell in map.chunks_exact_mut(14){cell[2..4].copy_from_slice(&100i16.to_le_bytes());}
         let mut before=[0u8;124];before[6]=1;before[24]=4;before[0x7a]=4;before[0x76]=30;before[0x7b]=255;before[0x15]=0x80;before[0x16]=2;before[0x5e]=8;before[0x60]=8;
         before[31..39].fill(0x55);motion_put32(&mut before,0x11,200);motion_put32(&mut before,0x27,200);motion_put(&mut before,0x66,1);motion_put(&mut before,0x6a,55);motion_put(&mut before,0x62,100);motion_put(&mut before,0x68,100);
-        let mut animations=MuleAnimations{holds:std::array::from_fn(|_|vec![0]),flags:[0;24]};animations.holds[17]=vec![0;7];
+        let mut animations=MuleAnimations{holds:std::array::from_fn(|_|vec![0]),flags:[0;24],bones:None};animations.holds[17]=vec![0;7];
         let physics=crate::physics_tables::PhysicsTables::fixture();let trig=crate::actor_activation::TrigTables::generate_pinned().unwrap();let context=MuleStepContext{frame_counter:3,gravity:1024,water_height:0,climate:106};
         let (death,request)=plan_mule_mortality_after_prefix(&before,&before,&map,context,&physics,&trig,|_,_,_|Ok(0),|_|Ok(false),&animations,true).unwrap();
         assert!(request.is_none());assert_eq!(death.after[0x5e],24);assert_eq!(death.after[0x19],17);assert_eq!(death.after[0x1b],1);assert_eq!(motion_word(&death.after,0x66),0);assert_eq!(motion_word(&death.after,0x3f),-1);assert_eq!(&death.after[31..39],&before[31..39]);
@@ -768,6 +861,15 @@ mod tests {
         let (corpse,_)=plan_mule_mortality_after_prefix(&finished,&finished,&map,context,&physics,&trig,|_,_,_|panic!("source skips A4"),|_|Ok(false),&animations,true).unwrap();assert_eq!(corpse.after[0x5e],25);assert_eq!(corpse.after[0x19],18);assert_eq!(motion_word(&corpse.after,0x68),200);
         let mut bones=corpse.after;motion_put(&mut bones,0x6c,0);motion_put(&mut bones,0x68,51);
         assert!(plan_mule_mortality_after_prefix(&bones,&bones,&map,context,&physics,&trig,|_,_,_|panic!("source skips A4"),|_|Ok(false),&animations,true).is_err());
+        animations.bones=Some(BonesAnimations{holds:std::array::from_fn(|_|vec![0;2]),flags:[0;5]});
+        let (converted,_)=plan_mule_mortality_after_prefix(&bones,&bones,&map,context,&physics,&trig,|_,_,_|panic!("source skips A4"),|_|Ok(false),&animations,true).unwrap();
+        assert_eq!((converted.after[0x5e],converted.after[0x19],converted.after[0x1b]),(26,4,0));assert_eq!(&converted.after[31..39],&bones[31..39]);
+        let mut pool=CreaturePool{records:[[0;124];300],bindings:[None;300]};pool.records[0]=bones;pool.bindings[0]=Some(CreatureAnimationBinding::MuleSelector4);
+        pool.replace_record_checked(0,&bones,&converted.after).unwrap();assert_eq!(pool.binding(0).unwrap(),Some(CreatureAnimationBinding::BonesSelector4));
+        let mut faded=converted.after;motion_put(&mut faded,0x6c,0);motion_put(&mut faded,0x68,26);
+        let (last,_)=plan_mule_mortality_after_prefix(&faded,&faded,&map,context,&physics,&trig,|_,_,_|panic!("source skips A4"),|_|Ok(false),&animations,true).unwrap();assert_eq!((last.after[0x5e],last.after[0x1b]),(27,1));
+        let mut retired=last.after;motion_put(&mut retired,0x6c,0);motion_put(&mut retired,0x68,1);let prior=retired;
+        assert!(plan_mule_mortality_after_prefix(&retired,&retired,&map,context,&physics,&trig,|_,_,_|panic!("source skips A4"),|_|Ok(false),&animations,true).is_err());assert_eq!(retired,prior);
     }
     #[test]
     fn retry_wait_consumes_one_draw_preserves_motion_and_null_indices() {

@@ -11,6 +11,10 @@ pub enum ConstructionWorldError {
     Payment(crate::construction_payment::ConstructionPaymentError),
     TerraformCompletion(crate::construction_terraform_completion::TerraformCompletionError),
     PendingTaskRequired,
+    Stage4(crate::construction_stage4::ConstructionStage4Error),
+    Work(crate::construction_work::ConstructionWorkError),
+    BuildingEffect(crate::building_effect::BuildingEffectError),
+    EffectReplacementRequired,EffectPositionUnsupported,BuildingFactoryReturnedNull,
     TaskMovement(crate::construction_motion::ConstructionMotionError),
     Wait(crate::construction_wait::TerraformWaitError),
     Resume(crate::construction_terraform_resume::TerraformResumeError),
@@ -128,6 +132,66 @@ mod tests {
         }
     }
     #[test]
+    fn stage4_factory_progress_and_late_tail_rollback(){
+            let mut world=world();let original=*world.actors.record(0).unwrap();let mut a=original;
+            a[0x55]=9;a[0x57]=0;a[0x58]=1;a[0x7e]=0;a[0x82]=1;a[0x83]=1;a[0x59]=14;
+            a[0x88..0x8a].copy_from_slice(&4i16.to_le_bytes());a[0x70]=0x11;a[0x71]=0;a[0x16]&=!0x68;
+            a[11..15].copy_from_slice(&original[7..11]);a[0x8c..0x90].copy_from_slice(&original[7..11]);
+            a[17..21].copy_from_slice(&6272i32.to_le_bytes());a[39..43].copy_from_slice(&6272i32.to_le_bytes());
+            a[0x2b..0x2d].copy_from_slice(&64i16.to_le_bytes());a[0x2d..0x33].fill(0);
+            a[0x39..0x3f].fill(0);a[0x3f..0x41].copy_from_slice(&960i16.to_le_bytes());a[0x41..0x45].fill(0);a[0x49]=16;a[0x4a]=8;a[0x4f]=0;a[0x52]=0;
+            world.actors.replace_record_checked(0,&original,&a).unwrap();
+            let before=*world.actors.record(0).unwrap();let mut a=before;a[0x19]=14;a[0x1a]=0;a[0x1b]=22;a[0x1e]=0;
+            world.actors.replace_record_checked(0,&before,&a).unwrap();
+            world.admit_creatures(&[[0;124];300]).unwrap();world.admit_buildings(&[[0xa5;67];256],[None;256]).unwrap();world.admit_effects(&[[0;81];200],[None;200]).unwrap();
+            let key=world.actors.bindings(0).unwrap().animation_database.unwrap();
+            let mut jobs=crate::terrain_job_pool::TerrainJobPool::admit(std::array::from_fn(|_|{let mut r=[0;176];r[12..14].copy_from_slice(&(-1i16).to_le_bytes());r}),0).unwrap();
+            let saved=world.clone();let saved_jobs=jobs.clone();let rng=world.rng;
+            let physics=crate::physics_tables::PhysicsTables::fixture();let trig=TrigTables::generate_pinned().unwrap();let context=LandingPhysicsContext{gravity:1024,water_height:1632};
+            let mut metadata_calls=0;
+            assert!(world.step_architect_stage0_inner(0,1,context,&physics,&trig,&mut jobs,&[0;8192],key,(false,false),|_|{metadata_calls+=1;Ok((if metadata_calls==2{Vec::new()}else{vec![0;23]},0))}).is_err());
+            assert_eq!(world,saved);assert_eq!(jobs,saved_jobs);
+            let result=world.step_architect_stage0_inner(0,1,context,&physics,&trig,&mut jobs,&[0;8192],key,(false,false),|animation|Ok((vec![0;if animation==15{8}else{23}],0))).unwrap();
+            let created=result.building_effect.unwrap();assert_eq!(created.slot,0);assert_eq!(created.building.slot,0);
+            assert_eq!(word(world.actors.record(0).unwrap(),0x88),5);assert_eq!(world.actors.record(0).unwrap()[0x59],15);assert!(result.selected_animation<8);
+            assert_eq!(word(world.buildings.as_ref().unwrap().record(0).unwrap(),0x2b),1);assert_eq!(world.rng,rng);
+            let mut increments=0;let mut late_checked=false;
+            for frame in 2..=500{
+                let a=world.actors.record(0).unwrap();
+                if word(a,0x86)==1&&a[0x70]&0x80!=0{
+                    let saved=world.clone();let saved_jobs=jobs.clone();
+                    assert!(world.step_architect_stage0_inner(0,frame,context,&physics,&trig,&mut jobs,&[0;8192],key,(false,false),|_|Ok((Vec::new(),0))).is_err());assert_eq!(world,saved);assert_eq!(jobs,saved_jobs);late_checked=true;
+                }
+                let result=world.step_architect_stage0_inner(0,frame,context,&physics,&trig,&mut jobs,&[0;8192],key,(false,false),|_|Ok((vec![0;8],0))).unwrap();
+                if let Some(progress)=result.progress{increments+=1;if progress.completed{break;}}
+            }
+            assert!(late_checked);assert_eq!(increments,2);assert_eq!(word(world.buildings.as_ref().unwrap().record(0).unwrap(),0x2b),120);assert_eq!(world.player(0).unwrap().bytes()[0x601],1);
+    }
+    #[test]
+    fn code2c_factory_links_native_child_and_rolls_back_late_stale_binding(){
+        for stale in [false,true]{
+            let mut world=world();world.admit_creatures(&[[0;124];300]).unwrap();world.admit_buildings(&[[0xa5;67];256],[None;256]).unwrap();
+            let mut bindings=[None;200];if stale{bindings[0]=Some(crate::effect_pool::EffectAnimationBinding::EffAnimation44);}
+            world.admit_effects(&[[0;81];200],bindings).unwrap();let saved=world.clone();let rng=world.rng;
+            let result=world.create_building_effect(0,1,[19839,12927],6272);
+            if stale{assert!(result.is_err());assert_eq!(world,saved);continue;}
+            let receipt=result.unwrap().unwrap();assert_eq!(receipt.slot,0);assert_eq!(receipt.building.slot,0);
+            assert_eq!(world.effects.as_ref().unwrap().binding(0).unwrap(),Some(crate::effect_pool::EffectAnimationBinding::EffAnimation44));
+            assert_eq!(&world.effects.as_ref().unwrap().record(0).unwrap()[71..74],&[0,0,4]);
+            assert_eq!(world.player(0).unwrap().bytes()[0x4a2],1);assert_eq!(word(&world.backing,0x3554),1);assert_eq!(world.rng,rng);
+            let saved=world.clone();assert!(matches!(world.create_building_effect(0,1,[19966,12927],6272),Err(ConstructionWorldError::EffectPositionUnsupported)));assert_eq!(world,saved);
+        }
+    }
+    #[test]
+    fn code2c_full_pool_requires_source_priority_replacement_or_returns_null(){
+        let mut world=world();world.admit_effects(&[[0;81];200],[None;200]).unwrap();
+        let trig=TrigTables::generate_pinned().unwrap();let context=LandingPhysicsContext{gravity:1024,water_height:1632};
+        for _ in 0..200{world.create_unmarked_smoke([19839,12927],6272,[0,0,0],context,&trig).unwrap().unwrap();}
+        let saved=world.clone();assert!(matches!(world.create_building_effect(0,1,[19839,12927],6272),Err(ConstructionWorldError::EffectReplacementRequired)));assert_eq!(world,saved);
+        for slot in 0..200{let before=*world.effects.as_ref().unwrap().record(slot).unwrap();let mut after=before;after[21]|=1;world.effects.as_mut().unwrap().replace_record_checked(slot,&before,&after).unwrap();}
+        let saved=world.clone();assert!(world.create_building_effect(0,1,[19839,12927],6272).unwrap().is_none());assert_eq!(world,saved);
+    }
+    #[test]
     fn construction_arrival_preserves_task_and_seed(){
         let mut world=world();let before=*world.actors.record(0).unwrap();let mut a=before;
         a[0x55]=9;a[0x57]=0;a[0x58]=1;a[0x7e]=0;a[0x82]=1;a[0x83]=1;a[0x70]=0x91;a[0x71]=0;a[0x16]&=!0x68;
@@ -158,9 +222,15 @@ pub struct ArchitectMotionReceipt{pub before:[u8;200],pub after:[u8;200],pub arr
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct ArchitectStage0Receipt {
     pub motion:ArchitectMotionReceipt,
+    pub setup:Option<ArchitectSetupPlan>,
     pub terraform:Option<crate::actor_construction_lifecycle::TerraformStartPlan>,
     pub payment:Option<crate::construction_payment::ConstructionPaymentPlan>,
     pub cancellation:Option<crate::construction_cancellation::ConstructionCancellationPlan>,
+    pub building_effect:Option<BuildingEffectCreationReceipt>,
+    pub progress:Option<crate::building_progress::BuildingProgressPlan>,
+    pub work:Option<crate::construction_work::ConstructionWorkPlan>,
+    pub work_point:Option<crate::construction_work::ConstructionWorkPoint>,
+    pub completion_message_index:Option<u16>,
     pub terraform_wait:Option<crate::construction_wait::TerraformWaitPlan>,
     pub terraform_completion:Option<crate::construction_terraform_completion::TerraformCompletionPlan>,
     pub selected_animation:u8,
@@ -188,7 +258,7 @@ impl ActorWorld {
         if !(0..=2).contains(&word(before,0x88)){return Err(ConstructionWorldError::PendingTaskRequired);}
         self.step_architect_construction_callback(id,frame,context,physics,trig,jobs,border,resource,false,false)
     }
-    /// Ordinary construction stages0..3 with actual movement/readiness. Later
+    /// Ordinary construction stages0..5 with actual movement/readiness. Later
     /// construction stages reject before mutation. The world and job pool commit together.
     pub fn step_architect_construction_callback<B:AsRef<[u8]>>(&mut self,id:u16,frame:u32,
         context:LandingPhysicsContext,physics:&crate::physics_tables::PhysicsTables,
@@ -203,22 +273,52 @@ impl ActorWorld {
             Ok((holds,flags))
         })
     }
+    /// Whole pending state1 callback: common motion, source setup, stage0 and tail.
+    /// World and external terrain jobs commit together after every dependency succeeds.
+    pub fn step_pending_architect_callback<B:AsRef<[u8]>>(&mut self,id:u16,frame:u32,
+        context:LandingPhysicsContext,physics:&crate::physics_tables::PhysicsTables,trig:&TrigTables,
+        jobs:&mut crate::terrain_job_pool::TerrainJobPool,border:&[u8;8192],
+        resource:&crate::actor_resources::ActorAnimationDatabase<B>,owner_selected:bool,actor_selected:bool)
+        ->Result<ArchitectStage0Receipt,ConstructionWorldError>{
+        let before=self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
+        if before[0x55]!=1||before[0x58]!=0||before[0x57]&3!=1||before[0x7e]!=0||before[0x82]!=1||before[0x83]!=1{
+            return Err(ConstructionWorldError::PendingTaskRequired);
+        }
+        let mut staged=self.clone();let mut staged_jobs=jobs.clone();
+        let motion=staged.step_architect_motion(id,frame,context,physics,trig)?;
+        let setup=staged.begin_pending_architect_task(id,border)?;
+        let mut result=staged.step_architect_after_motion(id,frame,context,physics,trig,&mut staged_jobs,border,resource.key(),(owner_selected,actor_selected),Some(motion),|animation|{
+            let count=resource.frame_count(usize::from(animation)).map_err(|_|ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::InvalidAnimation))?;
+            let holds=(0..count).map(|i|resource.frame(usize::from(animation),i).map(|f|f.byte_10)).collect::<Result<Vec<_>,_>>().map_err(|_|ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::InvalidAnimation))?;
+            let flags=(resource.animation(usize::from(animation)).map_err(|_|ActorWorldError::ActorMotion(crate::actor_motion::ActorMotionError::InvalidAnimation))?.trailing_word>>8)as u8;
+            Ok((holds,flags))
+        })?;
+        result.setup=Some(setup);*self=staged;*jobs=staged_jobs;Ok(result)
+    }
     fn step_architect_stage0_inner<F>(&mut self,id:u16,frame:u32,context:LandingPhysicsContext,
         physics:&crate::physics_tables::PhysicsTables,trig:&TrigTables,
         jobs:&mut crate::terrain_job_pool::TerrainJobPool,border:&[u8;8192],
-        key:crate::actor_initialization::ActorResourceTableKey,selection:(bool,bool),mut metadata:F)
+        key:crate::actor_initialization::ActorResourceTableKey,selection:(bool,bool),metadata:F)
+        ->Result<ArchitectStage0Receipt,ConstructionWorldError>
+        where F:FnMut(u8)->Result<(Vec<u8>,u8),ActorWorldError>{
+        self.step_architect_after_motion(id,frame,context,physics,trig,jobs,border,key,selection,None,metadata)
+    }
+    fn step_architect_after_motion<F>(&mut self,id:u16,frame:u32,context:LandingPhysicsContext,
+        physics:&crate::physics_tables::PhysicsTables,trig:&TrigTables,
+        jobs:&mut crate::terrain_job_pool::TerrainJobPool,border:&[u8;8192],
+        key:crate::actor_initialization::ActorResourceTableKey,selection:(bool,bool),motion:Option<ArchitectMotionReceipt>,mut metadata:F)
         ->Result<ArchitectStage0Receipt,ConstructionWorldError>
         where F:FnMut(u8)->Result<(Vec<u8>,u8),ActorWorldError>{
         let before=*self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
         let blueprint=self.construction_blueprint(id)?;
         let bindings=self.actors.bindings(usize::from(id)).map_err(ActorWorldError::from)?;
-        if before[0x55]!=9||before[0x7e]!=0||before[0x82]!=1||!(0..=3).contains(&word(&before,0x88))
+        if before[0x55]!=9||before[0x7e]!=0||before[0x82]!=1||!(0..=5).contains(&word(&before,0x88))
             ||blueprint[0x15]>=3||blueprint[0x16]!=0||bindings.animation_database!=Some(key){
             return Err(ConstructionWorldError::PendingTaskRequired);
         }
         let handle=bindings.blueprint.ok_or(ActorWorldError::MissingBlueprintBinding(id as i16))?;
         let mut staged=self.clone();let mut staged_jobs=jobs.clone();
-        let motion=staged.step_architect_motion(id,frame,context,physics,trig)?;
+        let motion=match motion{Some(value)=>value,None=>staged.step_architect_motion(id,frame,context,physics,trig)?};
         //57A10's periodic blueprint recovery precedes the action dispatch.
         let mut blueprint_after=blueprint;
         let mask=if blueprint[0x15]==2{127}else{255};
@@ -230,7 +330,7 @@ impl ActorWorld {
             usize::from(handle.blueprint_index),&blueprint,&blueprint_after).map_err(ActorWorldError::from)?;
         let current=*staged.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
         if staged.backing[0x2ff7]!=staged_jobs.count(){return Err(ConstructionWorldError::JobCountMismatch);}
-        let mut terraform_wait=None;let mut terraform_completion=None;let mut payment=None;let mut cancellation=None;
+        let mut terraform_wait=None;let mut terraform_completion=None;let mut payment=None;let mut cancellation=None;let mut building_effect=None;let mut progress=None;let mut work=None;let mut work_point=None;let mut completion_message_index=None;
         let terraform=if word(&current,0x88)==0{
             let start=if current[0x49]&32!=0{
             Some(staged.start_architect_terraform(id,&mut staged_jobs,border)?)
@@ -256,7 +356,7 @@ impl ActorWorld {
                 terraform_completion=Some(plan);
             }
             None
-        }else{
+        }else if word(&current,0x88)==3{
             if current[0x49]&32!=0{
                 match staged.pay_architect_construction(id,physics){
                     Ok(plan)=>payment=Some(plan),
@@ -268,6 +368,58 @@ impl ActorWorld {
             }else{
                 let plan=crate::construction_motion::plan_architect_task_movement(&current,&blueprint_after,physics.angles()).map_err(ConstructionWorldError::TaskMovement)?;
                 staged.actors.replace_record_checked(usize::from(id),&current,&plan.after).map_err(ActorWorldError::from)?;
+            }
+            None
+        }else if word(&current,0x88)==4{
+            let (holds,flags)=metadata(14)?;
+            let count=u8::try_from(holds.len()).map_err(|_|ConstructionWorldError::Stage4(crate::construction_stage4::ConstructionStage4Error::InvalidAnimation))?;
+            let plan=crate::construction_stage4::plan_architect_stage4(&current,count,flags).map_err(ConstructionWorldError::Stage4)?;
+            staged.actors.replace_record_checked(usize::from(id),&current,&plan.after).map_err(ActorWorldError::from)?;
+            if let Some(request)=&plan.request{
+                let (height,_)=staged.effect_ground_sample(request.position)?;
+                if let Some(created)=staged.create_building_effect(request.owner,request.selector,request.position,height)?{
+                    let building=*staged.buildings.as_ref().unwrap().record(usize::from(created.building.slot)).map_err(ActorWorldError::from)?;
+                    let speed=[960i16,576,1088][usize::from(blueprint_after[0x15])];
+                    let mut after=crate::construction_stage4::finish_architect_stage4(&plan,&building,speed).map_err(ConstructionWorldError::Stage4)?;
+                    let linked=*staged.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
+                    after[..6].copy_from_slice(&linked[..6]);
+                    progress=Some(staged.progress_selector1_building(created.building.slot,1,false)?);
+                    staged.actors.replace_record_checked(usize::from(id),&linked,&after).map_err(ActorWorldError::from)?;
+                    building_effect=Some(created);
+                }
+            }
+            None
+        }else{
+            if current[0x81]!=4{return Err(ConstructionWorldError::Work(crate::construction_work::ConstructionWorkError::InvalidBuilding));}
+            let slot=u16::try_from(word(&current,0x7f)).map_err(|_|ConstructionWorldError::Work(crate::construction_work::ConstructionWorkError::InvalidBuilding))?;
+            let building=*staged.buildings.as_ref().ok_or(ActorWorldError::BuildingsNotAdmitted)?.record(usize::from(slot)).map_err(ActorWorldError::from)?;
+            if current[0x49]&32!=0&&word(&building,0x31)==1&&word(&building,0x2b)==120{
+                let plan=staged.cancel_finished_architect_selector1(id,selection.0,selection.1)?;
+                cancellation=Some(plan);completion_message_index=Some(17);
+            }else if current[0x49]&32==0&&current[0x70]&0x80==0{
+                let plan=crate::construction_motion::plan_architect_task_movement(&current,&blueprint_after,physics.angles()).map_err(ConstructionWorldError::TaskMovement)?;
+                staged.actors.replace_record_checked(usize::from(id),&current,&plan.after).map_err(ActorWorldError::from)?;
+            }else{
+                let dx=word(&building,7).wrapping_sub(word(&current,7)).wrapping_mul(2);
+                let dy=word(&building,9).wrapping_sub(word(&current,9)).wrapping_mul(2);
+                let yaw=crate::actor_motion::angle(i32::from(dx),i32::from(dy),physics.angles());
+                let plan=crate::construction_work::plan_incomplete_selector1_work(&current,&blueprint_after,&building,frame,staged.rng.seed,yaw).map_err(ConstructionWorldError::Work)?;
+                staged.actors.replace_record_checked(usize::from(id),&current,&plan.after).map_err(ActorWorldError::from)?;
+                staged.rng.seed=plan.seed_after;staged.rng.ring=staged.rng.ring.wrapping_add(plan.draws)&31;staged.rng.draw_count=staged.rng.draw_count.wrapping_add(u32::from(plan.draws));
+                if plan.progress_required{
+                    let increment=i16::from(blueprint_after[0x17]as i8).wrapping_mul(2);
+                    let step=staged.progress_selector1_building(slot,increment,false)?;
+                    let mut point=[0,0];
+                    if !step.completed{
+                        let sampled=crate::construction_work::sample_construction_work_point([word(&building,7),word(&building,9)],staged.rng.seed,trig.cosine().try_into().unwrap(),trig.sine().try_into().unwrap());
+                        point=sampled.point;staged.rng.seed=sampled.seed_after;staged.rng.ring=staged.rng.ring.wrapping_add(sampled.draws)&31;staged.rng.draw_count=staged.rng.draw_count.wrapping_add(u32::from(sampled.draws));work_point=Some(sampled);
+                    }
+                    let speed=[960i16,576,1088][usize::from(blueprint_after[0x15])];
+                    let after=crate::construction_work::finish_selector1_work_progress(&plan,&step.after,step.completed,point,speed,yaw).map_err(ConstructionWorldError::Work)?;
+                    staged.actors.replace_record_checked(usize::from(id),&plan.after,&after).map_err(ActorWorldError::from)?;
+                    progress=Some(step);
+                }
+                work=Some(plan);
             }
             None
         };
@@ -288,7 +440,7 @@ impl ActorWorld {
         }
         staged.validate_links()?;if staged.effects.is_some(){staged.validate_effect_count()?;}
         *self=staged;*jobs=staged_jobs;
-        Ok(ArchitectStage0Receipt{motion,terraform,payment,cancellation,terraform_wait,terraform_completion,selected_animation:animation,footstep,created_effect,factory_draw,queue_requested:true})
+        Ok(ArchitectStage0Receipt{motion,setup:None,terraform,payment,cancellation,building_effect,progress,work,work_point,completion_message_index,terraform_wait,terraform_completion,selected_animation:animation,footstep,created_effect,factory_draw,queue_requested:true})
     }
 
     /// The actual6FB60 motion/arrival slice for construction. It does not run
@@ -304,7 +456,7 @@ impl ActorWorld {
         }
         let raw=[id as u8,(id>>8)as u8,3];let target=[word(&before,11),word(&before,13)];
         let counter=frame.wrapping_add(i32::from(word(&before,15))as u32);
-        let idle_suppressed=if before[0x49]&16==0&&counter&31==0{(blueprint[0x1a]as i8)<=0||self.common_move_point_accepted(raw,[word(&before,7),word(&before,9)])?}else{false};
+        let idle_suppressed=if before[0x49]&16==0&&counter&31==0{(blueprint[0x1a]as i8)<=0||self.actor_route_point_accepted(raw,[word(&before,7),word(&before,9)])?}else{false};
         let(prefix,working)=self.actor_route_prefix(raw,&before,counter,physics,trig,idle_suppressed)?;
         let(motion,water)=crate::creature_world::plan_common_nonflight_physics_with_water_tail(&prefix,self.map(),frame,context.gravity,context.water_height,physics,trig,
             |r,n,p|self.actor_contact_speed(r,n,p).map_err(|_|CreatureError::MotionEnvironment),
@@ -341,6 +493,16 @@ impl ActorWorld {
         staged.actors.replace_record_checked(usize::from(id),&before,&plan.after).map_err(ActorWorldError::from)?;
         staged.backing[MAP_START..MAP_START+MAP_BYTES].copy_from_slice(&plan.map_after);
         *self=staged;Ok(plan)
+    }
+    pub fn cancel_finished_architect_selector1(&mut self,id:u16,owner_selected:bool,actor_selected:bool)
+        ->Result<crate::construction_cancellation::ConstructionCancellationPlan,ConstructionWorldError>{
+        let before=*self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
+        let blueprint=self.construction_blueprint(id)?;
+        let slot=usize::try_from(word(&before,0x7f)).map_err(|_|ConstructionWorldError::Cancellation(crate::construction_cancellation::ConstructionCancellationError::UnsupportedActor))?;
+        let building=self.buildings.as_ref().ok_or(ActorWorldError::BuildingsNotAdmitted)?.record(slot).map_err(ActorWorldError::from)?;
+        let plan=crate::construction_cancellation::plan_finished_selector1_cancellation(self.map(),&before,&blueprint,building,owner_selected,actor_selected).map_err(ConstructionWorldError::Cancellation)?;
+        let mut staged=self.clone();staged.actors.replace_record_checked(usize::from(id),&before,&plan.after).map_err(ActorWorldError::from)?;
+        staged.backing[MAP_START..MAP_START+MAP_BYTES].copy_from_slice(&plan.map_after);*self=staged;Ok(plan)
     }
     ///57F62 pending construction entry from an idle, enabled architect.
     /// Run after this callback's real movement and blueprint periodic update.
@@ -446,5 +608,43 @@ impl ActorWorld {
         staged.actors.replace_record_checked(usize::from(id),&before,&plan.after).map_err(ActorWorldError::from)?;
         staged.backing[MAP_START..MAP_START+MAP_BYTES].copy_from_slice(&plan.map_after);
         *self=staged;Ok(plan)
+    }
+}
+
+#[derive(Debug,Clone,PartialEq,Eq)]
+pub struct BuildingEffectCreationReceipt {
+    pub slot:u16,
+    pub building:crate::building::BuildingFactoryPlan,
+    pub effect:crate::building_effect::BuildingEffectPlan,
+}
+impl ActorWorld {
+    ///48790 code2C free-slot branch, actual42FA0 and source map insertion.
+    ///Eligible full-pool replacement and unbound building results are explicit.
+    pub fn create_building_effect(&mut self,owner:u8,selector:u8,position:[i16;2],physical_height:i32)
+        ->Result<Option<BuildingEffectCreationReceipt>,ConstructionWorldError>{
+        self.validate_effect_count()?;self.validate_links()?;
+        let pool=self.effects.as_ref().ok_or(ActorWorldError::EffectsNotAdmitted)?;
+        if word(&self.backing,0x3554)==200{
+            for record in pool.records(){
+                let priority=match record[69]{6=>27,0x15=>19,0x16=>20,0x1a=>35,0x2c=>5,0x2f=>35,0x30=>20,0x31=>1,_=>return Err(ActorWorldError::UnsupportedEffectEvent.into())};
+                if priority>5&&record[21]&1==0{return Err(ConstructionWorldError::EffectReplacementRequired);}
+            }
+            return Ok(None);
+        }
+        let slot=pool.records().iter().position(|record|record[6]==0).ok_or(ActorWorldError::UnsupportedEffectEvent)? as u16;
+        let before=*pool.record(usize::from(slot)).map_err(ActorWorldError::from)?;
+        //The source factory inserts at position+64 without moving record7.
+        //Construction's aligned0/127 points satisfy this bounded shared-cell domain.
+        if floor_cell(position)!=floor_cell(position.map(|v|v.wrapping_add(64))){return Err(ConstructionWorldError::EffectPositionUnsupported);}
+        let(ground,shade)=self.effect_ground_sample(position)?;
+        let mut staged=self.clone();
+        let building=staged.create_building(owner,selector,position)?.ok_or(ConstructionWorldError::BuildingFactoryReturnedNull)?;
+        let effect=crate::building_effect::plan_building_effect_numeric(&before,slot,position,ground,shade,physical_height,selector,owner,Some(building.slot))
+            .map_err(ConstructionWorldError::BuildingEffect)?;
+        staged.effects.as_mut().unwrap().commit_building_factory(&effect).map_err(ActorWorldError::from)?;
+        let count=word(&staged.backing,0x3554).wrapping_add(1);staged.backing[0x3554..0x3556].copy_from_slice(&count.to_le_bytes());
+        staged.insert_effect_head(slot)?;
+        staged.validate_links()?;staged.validate_effect_count()?;staged.validate_building_counts()?;
+        *self=staged;Ok(Some(BuildingEffectCreationReceipt{slot,building,effect}))
     }
 }

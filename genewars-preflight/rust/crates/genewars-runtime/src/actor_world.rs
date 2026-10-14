@@ -26,8 +26,12 @@ use std::collections::HashSet;
 
 mod effect_updates;
 mod creature_updates;
+mod creature_retirement;
+pub use creature_retirement::{MuleRetirementReceipt,MuleUiCleanupRequest};
 mod actor_updates;
 mod bookkeeping_updates;
+mod mission_funds;
+mod mission_status;
 mod family_scheduler;
 mod plant_updates;
 mod family8_updates;
@@ -35,6 +39,10 @@ mod building_updates;
 mod terrain_updates;
 pub use terrain_updates::{TerrainUpdateError, TerrainUpdateReceipt};
 mod building_storage;
+mod building_scheduler;
+pub use building_scheduler::{IncompleteBuildingPass,Selector1BuildingPass,Selector1BuildingCallback};
+mod construction_scheduler;
+pub use construction_scheduler::ConstructionAwareActorCallback;
 mod family8_retirement;
 pub use family8_retirement::Family8RetirementReceipt;
 pub use building_updates::{ConstructionWorldError, ArchitectStage0Receipt, ArchitectMotionReceipt};
@@ -52,6 +60,8 @@ const MAP_BYTES: usize = 128 * 128 * 14;
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ActorWorldError {
     MissionHash(String), InvalidPlayer(u8), PlayerIdentity { slot: usize, actual: u8 },
+    MissionFunds(crate::mission_player_funds::MissionFundsError),
+    MissionStatus(crate::mission_status::MissionStatusError),
     InvalidRngRing(u8), Pool(ActorPoolError), Player(PlayerStateError),
     Activation(ActorActivationError), Command(Opcode3MoveOrderError), Resolver(ResolverError),
     InvalidReference([u8; 3]), EntityIdentity([u8; 3]), BrokenPrevious([u8; 3]),
@@ -68,6 +78,7 @@ pub enum ActorWorldError {
     Physics(crate::physics_tables::PhysicsTableError),
     UnsupportedEffectEvent, MissingEffectLink(u16), EffectBinding(u16),
     Lifecycle(crate::landing_effect_lifecycle::LifecycleError),
+    BuildingEffectLifecycle(crate::building_effect_lifecycle::BuildingEffectLifecycleError),
     CleanupBeforeImage { kind:u8, slot:u16, offset:u16 },
     InvalidPortraitState { current: i8, count: i8 },
     UnsupportedRevealFamily(u8),
@@ -81,6 +92,7 @@ pub enum ActorWorldError {
     BuildingFactory(crate::building::BuildingError),
     BuildingProgress(crate::building_progress::BuildingProgressError),
     BuildingCallback(crate::building_callback::BuildingCallbackError),
+    QuietBuilding(crate::completed_building::QuietBuildingError),
     BuildingsNotAdmitted, BuildingsAlreadyAdmitted,
     BuildingCountMismatch{owner:u8,declared:i8,active:usize},
     Family8Pool(crate::family8_pool::PoolError),
@@ -429,7 +441,16 @@ impl ActorWorld {
     /// cells without a linked building return NULL. Positive-height queries
     /// need separately admitted animation bounds and do not use this API.
     pub fn move_obstacle_at(&self, point: [i16; 2]) -> Result<bool, ActorWorldError> {
-        crate::building_obstacle::move_obstacle(self.map(),point,|cell|{
+        self.move_obstacle_with_flags(point,0,None)
+    }
+    ///74D90 nominated-building exception, preserving74270's first-result
+    /// query order. The caller supplies an already resolved type4 identity.
+    pub fn move_obstacle_at_excluding(&self,point:[i16;2],nominated:Option<u16>)->Result<bool,ActorWorldError> {
+        self.move_obstacle_with_flags(point,1,nominated)
+    }
+    fn move_obstacle_with_flags(&self,point:[i16;2],required_flags:u8,nominated:Option<u16>)->Result<bool,ActorWorldError> {
+        if let Some(slot)=nominated{self.entity([slot as u8,(slot>>8)as u8,4])?;}
+        crate::building_obstacle::move_obstacle_filtered(self.map(),point,required_flags,nominated,|cell|{
             let mut raw=reference(self.map(),cell*14+6);let mut seen=HashSet::new();
             while raw[2]!=0 {
                 if !seen.insert(raw){return Err(ActorWorldError::DuplicateLink(raw));}
@@ -475,7 +496,8 @@ impl ActorWorld {
             if reference(record, 0) != previous { return Err(ActorWorldError::BrokenPrevious(raw)); }
             if raw != own && Some(raw) != nominated {
                 match raw[2] {
-                    1 | 3 | 5 | 8 => (),
+                    // Building vtable +0x10 is 1F410 (false); 8B130 adds weight only for plants.
+                    1 | 3 | 4 | 5 | 8 => (),
                     2 => {
                         let index = word(&raw,0) as usize;
                         let offset = self.layouts[1].file_offset + index * self.layouts[1].packed_stride;
