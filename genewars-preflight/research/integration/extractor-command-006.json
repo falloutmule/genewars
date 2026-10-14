@@ -1,0 +1,113 @@
+{
+  "status": "passed",
+  "scope": "Extractor completes through ordinary commands using generated terrain table; development startup only.",
+  "original_campaign_missions_completable": 0,
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "private_fixture": "private/integration/extractor-command-006",
+  "hashes": {
+    "genewars-game.exe": "2a003cd118072972aa26df7a0a15f224b7c8faf1acac53f1286435e592d1d209",
+    "replay.txt": "9afbd36daaad32bbfba3d6744e4301636547c974f5528b67b97c79e7ce02aa56",
+    "report.json": "f9c1e4c73ac47251e54581a8bd331edbbdb1b3c122d5334a2e561d490dcf694c",
+    "frame.bmp": "744bdf35fdd743e9f9aff2771cef65a2764c5f3e442cfb5a998190b8fe512f39"
+  },
+  "steps": 1289,
+  "engine_blocked": null,
+  "buildings": [
+    {
+      "slot": 0,
+      "owner": 0,
+      "selector": 11,
+      "position": [
+        19839,
+        12927
+      ],
+      "animation": 1,
+      "frame": 0,
+      "progress_word_2b": 280,
+      "phase_byte_2f": 0,
+      "flags_word_31": 1
+    }
+  ],
+  "actor_states": [
+    {
+      "slot": 0,
+      "owner": 0,
+      "position": [
+        20223,
+        13311
+      ],
+      "destination": [
+        20223,
+        13311
+      ],
+      "pending_destination": [
+        19839,
+        12928
+      ],
+      "state": 1,
+      "ready": true,
+      "pending_move": false,
+      "assignment_pending": false,
+      "building_selector": 11,
+      "animation": 8,
+      "frame": 6,
+      "action_byte_59": 15,
+      "construction_stage_word_88": 5,
+      "job_slot_byte_90": 0
+    },
+    {
+      "slot": 1,
+      "owner": 0,
+      "position": [
+        20884,
+        13078
+      ],
+      "destination": [
+        20884,
+        13078
+      ],
+      "pending_destination": [
+        20884,
+        13078
+      ],
+      "state": 1,
+      "ready": true,
+      "pending_move": false,
+      "assignment_pending": false,
+      "building_selector": 0,
+      "animation": 8,
+      "frame": 2,
+      "action_byte_59": 0,
+      "construction_stage_word_88": 0,
+      "job_slot_byte_90": 0
+    }
+  ],
+  "player_funds": [
+    {
+      "slot": 0,
+      "balance": 1412
+    },
+    {
+      "slot": 1,
+      "balance": 0
+    },
+    {
+      "slot": 2,
+      "balance": 0
+    },
+    {
+      "slot": 3,
+      "balance": 0
+    }
+  ],
+  "terrain_jobs_remaining": 0,
+  "world_sha256": "04c7e173bd1b33bbf981a873b89ee18afc53c1ba19bc129eea085c73871748aa",
+  "original_startup_sequence": false,
+  "remaining_acceptance": "Authentic startup, full build chain, objectives, result flow and campaign transition remain required.",
+  "native_acceptance_receipt": "research/integration/native-extractor-generated-passed.json",
+  "build_inputs": {
+    "border_policy": "generated",
+    "border_sha256": "422f124eac806197ba95d2438516284c3bf828a1db8e8aabe330661fff23ef8a",
+    "catalog_sha256": "380e6974a0f683c8d674c46ab051fe99ab277b0aab5bdcdafb5e62915f32380f"
+  }
+}

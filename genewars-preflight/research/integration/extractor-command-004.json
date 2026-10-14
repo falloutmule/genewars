@@ -1,0 +1,9 @@
+{
+  "status": "error",
+  "classification": "harness/infrastructure failure",
+  "scope": "debug ordinary-command replay; no gameplay result available",
+  "binary_sha256": "356ba55e7f6246ad1f5fe90f1a6ad5e0864f101f3ff3b69c8de4617c26e1f24d",
+  "replay_sha256": "9afbd36daaad32bbfba3d6744e4301636547c974f5528b67b97c79e7ce02aa56",
+  "timeout_seconds": 240,
+  "resolution": "Same replay on optimized build in probe005; debug timeout is not a gameplay loss."
+}

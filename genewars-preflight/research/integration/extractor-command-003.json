@@ -1,0 +1,10 @@
+{
+  "status": "error",
+  "classification": "harness/infrastructure failure",
+  "scope": "ordinary Extractor replay setup; game commands not executed",
+  "binary_sha256": "356ba55e7f6246ad1f5fe90f1a6ad5e0864f101f3ff3b69c8de4617c26e1f24d",
+  "replay_sha256": "9afbd36daaad32bbfba3d6744e4301636547c974f5528b67b97c79e7ce02aa56",
+  "exit_code": 1,
+  "error": "landing study requires full-state export; --world-output only supports the plant world",
+  "resolution": "Rerun same binary/replay without unsupported --world-output in probe004; preserve complete state through source-world fixtures."
+}

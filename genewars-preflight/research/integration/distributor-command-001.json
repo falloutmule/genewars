@@ -1,0 +1,109 @@
+{
+  "status": "blocked",
+  "scope": "Distributor assigned but architect remains in positioning stage0 after1000 ticks; no Distributor created. Root cause under source comparison.",
+  "original_campaign_missions_completable": 0,
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "private_fixture": "private/integration/distributor-command-001",
+  "hashes": {
+    "genewars-game.exe": "bdc505b1023e3703f4994918a86d867802dc6d6bec3268ce7821218eda4025e3",
+    "replay.txt": "0384976b58e8df5f4d96a2337a9558f06104795f267aed3b009ae8e9258c0034",
+    "report.json": "51584ef70ff59f875c1c0c3af4afba04a948107803500878d231bedae6d80952",
+    "frame.bmp": "70d2439c54c12397b8bd8a13093b01ed539ebaafa1d8ba1e8208b9242c9e0d8a"
+  },
+  "steps": 2489,
+  "engine_blocked": null,
+  "buildings": [
+    {
+      "slot": 0,
+      "owner": 0,
+      "selector": 11,
+      "position": [
+        19839,
+        12927
+      ],
+      "animation": 1,
+      "frame": 0,
+      "progress_word_2b": 280,
+      "phase_byte_2f": 0,
+      "flags_word_31": 1
+    }
+  ],
+  "actor_states": [
+    {
+      "slot": 0,
+      "owner": 0,
+      "position": [
+        21049,
+        13497
+      ],
+      "destination": [
+        21119,
+        13439
+      ],
+      "pending_destination": [
+        21049,
+        13497
+      ],
+      "state": 9,
+      "ready": true,
+      "pending_move": false,
+      "assignment_pending": true,
+      "building_selector": 3,
+      "animation": 8,
+      "frame": 2,
+      "action_byte_59": 15,
+      "construction_stage_word_88": 0,
+      "job_slot_byte_90": 255
+    },
+    {
+      "slot": 1,
+      "owner": 0,
+      "position": [
+        20884,
+        13078
+      ],
+      "destination": [
+        20884,
+        13078
+      ],
+      "pending_destination": [
+        20884,
+        13078
+      ],
+      "state": 1,
+      "ready": true,
+      "pending_move": false,
+      "assignment_pending": false,
+      "building_selector": 0,
+      "animation": 8,
+      "frame": 0,
+      "action_byte_59": 0,
+      "construction_stage_word_88": 0,
+      "job_slot_byte_90": 0
+    }
+  ],
+  "player_funds": [
+    {
+      "slot": 0,
+      "balance": 1412
+    },
+    {
+      "slot": 1,
+      "balance": 0
+    },
+    {
+      "slot": 2,
+      "balance": 0
+    },
+    {
+      "slot": 3,
+      "balance": 0
+    }
+  ],
+  "terrain_jobs_remaining": 0,
+  "world_sha256": "9bb6da1b359a1cd30d558cfd7f68effa468abfda879bb5c69b51e8c38dd6d071",
+  "original_startup_sequence": false,
+  "remaining_acceptance": "Authentic startup, full build chain, objectives, result flow and campaign transition remain required.",
+  "capture_receipt": "research/integration/distributor-stall-capture.json",
+  "failure_classification": "gameplay stall; engine or command-path fidelity cause unresolved"
+}

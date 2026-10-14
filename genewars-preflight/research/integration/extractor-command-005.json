@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "scope": "ordinary-command Extractor construction in development startup; not authentic mission acceptance",
+  "original_campaign_missions_completable": 0,
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "binary_sha256": "9188d26b3e0e233087edaaec0acd03e7e4442c0b8cc663721b60582470812157",
+  "replay_sha256": "9afbd36daaad32bbfba3d6744e4301636547c974f5528b67b97c79e7ce02aa56",
+  "report_sha256": "b2cd1aeac25f7ea97e4d5d74c9bd1897e9e2347a1e150071a6e80cd05ecd6074",
+  "bmp_sha256": "e65d8b8737b1d4ed22db8cbf576ce89f36e257317843cfdd2fe9d52f9bda65b3",
+  "elapsed_seconds": 27.253837,
+  "steps": 1289,
+  "blocked": null,
+  "building": {
+    "slot": 0,
+    "owner": 0,
+    "selector": 11,
+    "position": [
+      19839,
+      12927
+    ],
+    "animation": 1,
+    "frame": 0,
+    "progress_word_2b": 280,
+    "phase_byte_2f": 0,
+    "flags_word_31": 1
+  },
+  "funds_before": 2000,
+  "funds_after": 1412,
+  "paid": 588,
+  "actor_final_state": 1,
+  "terrain_jobs_remaining": 0,
+  "world_sha256": "40e9d7cc2e90bb186714b2e90024fd294a0f8a4ce09e9c447715e899a423fe4e",
+  "private_fixture": "private\\integration\\extractor-command-005",
+  "remaining_acceptance": "Native replay pending; authentic startup/objectives/results/campaign remain unimplemented."
+}

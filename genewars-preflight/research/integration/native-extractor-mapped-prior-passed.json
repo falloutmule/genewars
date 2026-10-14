@@ -1,0 +1,166 @@
+{
+  "status": "passed",
+  "utc": "2026-10-14T10:40:12.928920+00:00",
+  "scope": "native development seed5428 ordinary-command construction, not authentic mission acceptance",
+  "authentic_missions_completable": 0,
+  "probe": "private\\integration\\extractor-command-005",
+  "binary_sha256": "9188d26b3e0e233087edaaec0acd03e7e4442c0b8cc663721b60582470812157",
+  "input_sha256": "35cd9b7b0863abdc49eb641bfc595bf42b105da42b454285996a03dd7000b4fc",
+  "work": "private\\integration\\native-extractor\\fae881d448ad406786adc1e570364962",
+  "expected": "completed",
+  "runs": [
+    {
+      "menu": {
+        "bmp_sha256": "c46783c4cfcc6f7d2a410f44e0f92fd7964511eb327a2af0950db2993603f256",
+        "world_sha256": null,
+        "steps": null,
+        "blocked": null
+      },
+      "loaded": {
+        "bmp_sha256": "5db3d7baa1f82636b88623f35736866a182888d0bdae2e86a2bb585346749288",
+        "world_sha256": "e07fcc00670cc655d482583f46b7b9296349a13697a26a23da2653dc2256e032",
+        "steps": 0,
+        "blocked": null
+      },
+      "selected": {
+        "bmp_sha256": "d6460ee1b3ae43b593928a7ecfb97f889319bc21f695a8934a4cf9ecbc84f08d",
+        "world_sha256": "f00718c7f7b964fe3501bc52aa22e2c41d8e9463e1fd93d65c49ec3fa48b8949",
+        "steps": 189,
+        "blocked": null
+      },
+      "ordered": {
+        "bmp_sha256": "d6460ee1b3ae43b593928a7ecfb97f889319bc21f695a8934a4cf9ecbc84f08d",
+        "world_sha256": "cd50b5185d9572410d28d74599dbdeaf3c6fb7b1da87700e065b92f74d847985",
+        "steps": 189,
+        "blocked": null
+      },
+      "arrived": {
+        "bmp_sha256": "e44e1d0ad3e194ed07e380d9b6d8d3515043817d70f7d70d5f391fac1003c4e9",
+        "world_sha256": "a533ffd47e4bdc08a19de0c38a7a2d62175f985d5ce19aae2e3555afaa8f1491",
+        "steps": 289,
+        "blocked": null
+      },
+      "choices": {
+        "bmp_sha256": "b78b9741c56a6893ac6e58dee6ec425f355d9225ac9763a055914cfada2d37de",
+        "world_sha256": "a533ffd47e4bdc08a19de0c38a7a2d62175f985d5ce19aae2e3555afaa8f1491",
+        "steps": 289,
+        "blocked": null
+      },
+      "assigned": {
+        "bmp_sha256": "bd2fd7719b9bfb07f7352f9f888c17a815746e6c11e386e78ce018448cd7042c",
+        "world_sha256": "5ea3c9a3dc668715743a56e4a8a3a033e5925bf38193b4db810d44254b2054a6",
+        "steps": 289,
+        "blocked": null
+      },
+      "construction100": {
+        "bmp_sha256": "1e653457a9aa41e9ae9e84cd64b2de576e37383c948d38633c318a859a332765",
+        "world_sha256": "9fb0d46ea79fcffc30ba849dfae671730b726df1a498495e9e7c45c2c031cd42",
+        "steps": 389,
+        "blocked": null
+      },
+      "construction300": {
+        "bmp_sha256": "daf63dee131c83e981d6b17bd8d1824822d49a1a11a25657fd6f3162995588a7",
+        "world_sha256": "d39ab3c550bec843c8a52ee0da1e5ce482c296417b729b63d0ebc4fa928422f9",
+        "steps": 589,
+        "blocked": null
+      },
+      "construction600": {
+        "bmp_sha256": "8b2bd87319c6b41125f06d479224d8dc1172a574a45159243ea674f190c167cc",
+        "world_sha256": "d36346088f09d0358ebdaead52116f1398cb0873904b5833145e950e9d64467b",
+        "steps": 889,
+        "blocked": null
+      },
+      "final": {
+        "bmp_sha256": "c9a7d9ebd25c50048ca5aa73d9db831d0d3c7118fab94d7b469bde7cf79aea8a",
+        "world_sha256": "40e9d7cc2e90bb186714b2e90024fd294a0f8a4ce09e9c447715e899a423fe4e",
+        "steps": 1289,
+        "blocked": null
+      }
+    },
+    {
+      "menu": {
+        "bmp_sha256": "c46783c4cfcc6f7d2a410f44e0f92fd7964511eb327a2af0950db2993603f256",
+        "world_sha256": null,
+        "steps": null,
+        "blocked": null
+      },
+      "loaded": {
+        "bmp_sha256": "5db3d7baa1f82636b88623f35736866a182888d0bdae2e86a2bb585346749288",
+        "world_sha256": "e07fcc00670cc655d482583f46b7b9296349a13697a26a23da2653dc2256e032",
+        "steps": 0,
+        "blocked": null
+      },
+      "selected": {
+        "bmp_sha256": "d6460ee1b3ae43b593928a7ecfb97f889319bc21f695a8934a4cf9ecbc84f08d",
+        "world_sha256": "f00718c7f7b964fe3501bc52aa22e2c41d8e9463e1fd93d65c49ec3fa48b8949",
+        "steps": 189,
+        "blocked": null
+      },
+      "ordered": {
+        "bmp_sha256": "d6460ee1b3ae43b593928a7ecfb97f889319bc21f695a8934a4cf9ecbc84f08d",
+        "world_sha256": "cd50b5185d9572410d28d74599dbdeaf3c6fb7b1da87700e065b92f74d847985",
+        "steps": 189,
+        "blocked": null
+      },
+      "arrived": {
+        "bmp_sha256": "e44e1d0ad3e194ed07e380d9b6d8d3515043817d70f7d70d5f391fac1003c4e9",
+        "world_sha256": "a533ffd47e4bdc08a19de0c38a7a2d62175f985d5ce19aae2e3555afaa8f1491",
+        "steps": 289,
+        "blocked": null
+      },
+      "choices": {
+        "bmp_sha256": "b78b9741c56a6893ac6e58dee6ec425f355d9225ac9763a055914cfada2d37de",
+        "world_sha256": "a533ffd47e4bdc08a19de0c38a7a2d62175f985d5ce19aae2e3555afaa8f1491",
+        "steps": 289,
+        "blocked": null
+      },
+      "assigned": {
+        "bmp_sha256": "bd2fd7719b9bfb07f7352f9f888c17a815746e6c11e386e78ce018448cd7042c",
+        "world_sha256": "5ea3c9a3dc668715743a56e4a8a3a033e5925bf38193b4db810d44254b2054a6",
+        "steps": 289,
+        "blocked": null
+      },
+      "construction100": {
+        "bmp_sha256": "1e653457a9aa41e9ae9e84cd64b2de576e37383c948d38633c318a859a332765",
+        "world_sha256": "9fb0d46ea79fcffc30ba849dfae671730b726df1a498495e9e7c45c2c031cd42",
+        "steps": 389,
+        "blocked": null
+      },
+      "construction300": {
+        "bmp_sha256": "daf63dee131c83e981d6b17bd8d1824822d49a1a11a25657fd6f3162995588a7",
+        "world_sha256": "d39ab3c550bec843c8a52ee0da1e5ce482c296417b729b63d0ebc4fa928422f9",
+        "steps": 589,
+        "blocked": null
+      },
+      "construction600": {
+        "bmp_sha256": "8b2bd87319c6b41125f06d479224d8dc1172a574a45159243ea674f190c167cc",
+        "world_sha256": "d36346088f09d0358ebdaead52116f1398cb0873904b5833145e950e9d64467b",
+        "steps": 889,
+        "blocked": null
+      },
+      "final": {
+        "bmp_sha256": "c9a7d9ebd25c50048ca5aa73d9db831d0d3c7118fab94d7b469bde7cf79aea8a",
+        "world_sha256": "40e9d7cc2e90bb186714b2e90024fd294a0f8a4ce09e9c447715e899a423fe4e",
+        "steps": 1289,
+        "blocked": null
+      }
+    }
+  ],
+  "original_execution": false,
+  "limitations": [
+    "Development startup, four-player scheduling and explicit replay RNG remain distinct from original bootstrap",
+    "C chooser/Tab selection/right-click movement are port controls; original input mapping unresolved",
+    "No mission outcome or campaign transition is asserted",
+    "Mapped zero construction-border prior differs from source884D0 generated422f124e table; affected construction must be rerun after integration"
+  ],
+  "classification": "completed_development_extractor",
+  "construction_border_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+  "startup_resource_provenance": "mapped-zero-prior-development",
+  "visual_review": {
+    "observations": [
+      "construction300.bmp",
+      "final.bmp"
+    ],
+    "finding": "Incomplete and completed Extractor visible; prepared ground is teal, fidelity unresolved under mapped zero border prior."
+  }
+}
