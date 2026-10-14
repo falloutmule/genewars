@@ -56,3 +56,7 @@ physics/corpse-friction.bin	d56e59eae4da3dcb6d5cd9451d25e0ca49259a3a3004f43a40b4
 buildings/BSOLA.ANB	26ac960d7e68d97bddf7b0c13740976af4cf955ecfe98a4bea51ee95c292958b	35327	private/integration/sprites/26ac960d7e68d97bddf7b0c13740976af4cf955ecfe98a4bea51ee95c292958b.anb	root/2/disc/309; exact CD raw ANB animation0/1 admission
 buildings/BMINE.ANB	218b117a4b0f84c6e5a362e5afdc46d29fb1525930c6131e2ffff3bcfcda2142	34955	private/integration/sprites/218b117a4b0f84c6e5a362e5afdc46d29fb1525930c6131e2ffff3bcfcda2142.anb	root/2/disc/303; exact CD raw ANB animation0/1 admission
 buildings/BPOWE.ANB	4145c098f3d35dd9c39003ae8289c3d32fdb8d822327b2a23dfd52c60ca2a8cc	77457	private/integration/sprites/4145c098f3d35dd9c39003ae8289c3d32fdb8d822327b2a23dfd52c60ca2a8cc.anb	root/2/disc/306; exact CD raw ANB animation0/1 admission
+results/WINSCR.DAT	2dee4b93857b9de395b89919b66baa7e3086f00c0de072f62f8bca3824c12ea1	307200	private/integration/result-inputs/WINSCR.DAT	root/2/disc/145
+results/WINSCR.PAL	78105d9cf6835259782ee5559a8ec455f8668d4e40d2ae6215f05fc59bc30af9	768	private/integration/result-inputs/WINSCR.PAL	root/2/disc/146
+results/FONT7.DAT	60dbffae53efe67f5ce634c71c0e97b91a2d4514d8eaf7796d947fc106ad6e0e	14994	private/integration/result-inputs/FONT7.DAT	root/2/disc/83
+results/FONT7.TAB	73d5433364795a4d2fabdab1489e130120483f30e3d07e13c5a75aab55b3102b	1170	private/integration/result-inputs/FONT7.TAB	root/2/disc/84

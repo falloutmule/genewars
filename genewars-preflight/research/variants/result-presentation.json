@@ -1,0 +1,54 @@
+{
+  "status": "source_contract_recovered_not_native_acceptance",
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "source_pins": {
+    "private/ghidra/mission-contract-refs/2f810-range.txt": "377fff7430f54ce44e00e0d6d0d2bb2070536fca7875d421fb3051c6f468923d",
+    "private/ghidra/mission-result-refs/result-view-range.txt": "95362779881a8261abae65a13e155405221402ab4adec1661542fd2e751de30a",
+    "private/ghidra/actor-panel-font-color/instructions-0007d800.txt": "f2c1befdcd40fc28d38eac6140aff3548fc917cc79c27e66c0c5c5c456034b2f",
+    "private/ghidra/terrain-entry/instructions-000715e0.txt": "42e0b050ff8e1744378af27d08a13893c4367d4cdc422dbcd635993c1e915af2",
+    "private/ghidra/result-presentation/palette.txt": "2a8271de70bf68b3f9dd12fb21fe7eee2ff9a9b9b2f7ecc46bd4f9f1cbb6ee8f",
+    "private/ghidra/bones-consumer/instructions-0001d770.txt": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784"
+  },
+  "private_run006_asset_observations": {
+    "DATA/WINSCR.PAL": {
+      "size": 701,
+      "sha256": "2d084db840f3085df0b956d7f64260432df07b48fdd9e61860cedbb7a9ab7788"
+    },
+    "DATA/WINSCR.DAT": {
+      "size": 40515,
+      "sha256": "5e73b027974f8b1d33c04ee89193aa237b0450b09aea4ed63f2a9996e307d0df"
+    },
+    "DATA/LOSESCR.PAL": {
+      "size": 630,
+      "sha256": "6a94405c552dd420c474d41d6c055b799678cafa922882968fed9f6a8dd884ea"
+    },
+    "DATA/LOSESCR.DAT": {
+      "size": 51764,
+      "sha256": "5c904ad5e516ba097d0e9038254102d41a78afea59fc7715797a63eb6fb34dac"
+    },
+    "ANIMS/BIOWIN.SMK": {
+      "size": 1198972,
+      "sha256": "4891c8410012a3f05054b0cf267ce73ed3e74e201be7504ef52c58fb2de8bf04"
+    },
+    "ANIMS/BIOLOSE.SMK": {
+      "size": 1545908,
+      "sha256": "bc8723cf516626ea7344a9c2dfb5670110e1cd87bc8c992818cd0580cec29c4a"
+    },
+    "DATA/TEXT/ENG/TEXT.DAT": {
+      "size": 36610,
+      "sha256": "23e60305a9fa028a0f6541456ab453b7e7cc439f787a2b75e4b8d088e0b01786"
+    }
+  },
+  "text_table_base": "0x115E90",
+  "victory_widget_text_index": 555,
+  "victory_campaign_text_index": "477 + signed progress after entry increment",
+  "loss_campaign_text_index": "508 + signed progress",
+  "stat_label_indices": [
+    546,
+    547,
+    548,
+    549,
+    550,
+    551
+  ]
+}

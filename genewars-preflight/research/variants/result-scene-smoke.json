@@ -1,0 +1,13 @@
+{
+  "status": "passed_render_smoke_not_source_pixel_equality",
+  "run": "private\\review\\result-scene\\66717a410eec40698b962b8080676cef",
+  "renderer_sha256": "69e44df31666177fa3fe8410bfb826ffad0eb2b8e138bb7929624eb514921b44",
+  "rlib_pins": {
+    "private\\build\\rust-target\\debug\\deps\\libgenewars_assets-09d3d17ccb040052.rlib": "c2f62251b7bbccd705f28241528941e5b5963026e08a78fcfc8931192f2cc8ac",
+    "private\\build\\rust-target\\debug\\deps\\libgenewars_render-1ab5c171609c55dd.rlib": "20f23508cda18fa48eed89c6e5725efe5c2374ff783064b02154f7b27fb17d65"
+  },
+  "rgb_sha256": "9b45cb456feaeac3e4ac119ac310633267128f9ba781830741ad87dd492b3961",
+  "receipt": "VictoryScreenReceipt { feedback_text_index: 478, statistic_values: [0, 0, 0, 0, 0, 0], feedback_lines: 3, palette_service_indices: [249, 0, 151, 140, 112, 39, 34, 61], animation_pending: true, native_input_acceptance: false }",
+  "animation": "pending",
+  "native_input": "not_run"
+}

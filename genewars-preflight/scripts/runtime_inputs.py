@@ -15,6 +15,8 @@ def stage():
     stage_creature()
     from terrain_pattern_inputs import stage as stage_construction
     stage_construction()
+    from result_inputs import stage as stage_results
+    stage_results()
     private = (ROOT / 'private').resolve()
     destination = private / 'integration/game-runtime'
     # These raw ANBs were not part of the earlier decoder corpus. Reproduce

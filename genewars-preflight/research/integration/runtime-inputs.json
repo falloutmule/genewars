@@ -313,10 +313,10 @@
       "provenance": "root/2/disc/319; exact-hash selector4 state>=26 packed4 proof bones-evidence.json"
     },
     {
-      "path": "construction/border.bin",
-      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
-      "size": 8192,
-      "provenance": "validated mapped object3 VA 0x112D24; construction-border-evidence.json"
+      "path": "construction/terrain-patterns.bin",
+      "sha256": "d848e423b7a76a2c2dbf517fc595e33a789df7382697b56f382cc7606b18939e",
+      "size": 640,
+      "provenance": "validated object3 VA0x105060;884D0 generates border table;bootstrap-details.json"
     },
     {
       "path": "physics/corpse-friction.bin",
@@ -341,8 +341,32 @@
       "sha256": "4145c098f3d35dd9c39003ae8289c3d32fdb8d822327b2a23dfd52c60ca2a8cc",
       "size": 77457,
       "provenance": "root/2/disc/306; exact CD raw ANB animation0/1 admission"
+    },
+    {
+      "path": "results/WINSCR.DAT",
+      "sha256": "2dee4b93857b9de395b89919b66baa7e3086f00c0de072f62f8bca3824c12ea1",
+      "size": 307200,
+      "provenance": "root/2/disc/145"
+    },
+    {
+      "path": "results/WINSCR.PAL",
+      "sha256": "78105d9cf6835259782ee5559a8ec455f8668d4e40d2ae6215f05fc59bc30af9",
+      "size": 768,
+      "provenance": "root/2/disc/146"
+    },
+    {
+      "path": "results/FONT7.DAT",
+      "sha256": "60dbffae53efe67f5ce634c71c0e97b91a2d4514d8eaf7796d947fc106ad6e0e",
+      "size": 14994,
+      "provenance": "root/2/disc/83"
+    },
+    {
+      "path": "results/FONT7.TAB",
+      "sha256": "73d5433364795a4d2fabdab1489e130120483f30e3d07e13c5a75aab55b3102b",
+      "size": 1170,
+      "provenance": "root/2/disc/84"
     }
   ],
   "original_execution": false,
-  "catalog_sha256": "43fad12418511409f96bba48cd14613ed7d209dadc50e4d01fb3ede004ec3bf2"
+  "catalog_sha256": "6123d05fc653f5a490bf6d0c572877d3b92d655a97ad43108dfd88aac48a1cb3"
 }
