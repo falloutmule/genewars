@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "scope": "exact animation0/1 metadata and all component sprite pixels/opacity; no callback/draw-policy claim",
+  "resources": [
+    {
+      "name": "BSOLA",
+      "selector": 6,
+      "bytes": 35327,
+      "sha256": "26ac960d7e68d97bddf7b0c13740976af4cf955ecfe98a4bea51ee95c292958b",
+      "section_offsets": [
+        33753,
+        34035,
+        34745,
+        35277
+      ],
+      "animation_frame_counts": [
+        3,
+        10
+      ]
+    },
+    {
+      "name": "BMINE",
+      "selector": 11,
+      "bytes": 34955,
+      "sha256": "218b117a4b0f84c6e5a362e5afdc46d29fb1525930c6131e2ffff3bcfcda2142",
+      "section_offsets": [
+        32421,
+        32691,
+        33981,
+        34905
+      ],
+      "animation_frame_counts": [
+        3,
+        20
+      ]
+    },
+    {
+      "name": "BPOWE",
+      "selector": 3,
+      "bytes": 77457,
+      "sha256": "4145c098f3d35dd9c39003ae8289c3d32fdb8d822327b2a23dfd52c60ca2a8cc",
+      "section_offsets": [
+        75947,
+        76127,
+        76917,
+        77407
+      ],
+      "animation_frame_counts": [
+        3,
+        9
+      ]
+    }
+  ],
+  "compared_bytes": 680726,
+  "work": "private\\integration\\source-building-resources\\4bea6ed637d645c9b190b5c1095d5110",
+  "implementation_sha256": "927198d0feb354fb492e210e09409a36179dc10af032d54c6b590c828a044f9c"
+}

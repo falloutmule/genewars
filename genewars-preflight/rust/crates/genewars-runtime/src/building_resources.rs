@@ -308,6 +308,16 @@ impl BuildingResourceDatabase {
         } else {
             self.animation1.frame(usize::from(frame_index))?
         };
+        draw_common_frame(record, frame, context, fade_row, blend_table, destination, width, height, pitch)
+    }
+}
+
+/// Shared already-guarded 43A40 main-image operation. Admission belongs to each exact resource.
+pub(crate) fn draw_common_frame(record:&[u8;67],frame:&BuildingAnimation0Frame,
+    context:BuildingCommonDrawContext,fade_row:Option<&[u8]>,blend_table:Option<&[u8]>,
+    destination:&mut [u8],width:usize,height:usize,pitch:usize)->Result<BuildingCommonDrawReceipt,BuildingResourceError>{
+    let actor_id=i16::from_le_bytes([record[0x0f],record[0x10]]);
+    let owner=record[0x18];let expected_animation=record[0x19];let frame_index=record[0x1b];
         let phase = if record[0x30] > 1 { i16::from(record[0x30] & 1) } else { 0 };
         let draw_origin = [context.origin[0].wrapping_sub(phase), context.origin[1]];
         let components = frame.components.iter().map(|component| component.record).collect::<Vec<_>>();
@@ -361,7 +371,6 @@ impl BuildingResourceDatabase {
             color,
             post_image_overlays_rendered: false,
         })
-    }
 }
 
 #[cfg(test)]

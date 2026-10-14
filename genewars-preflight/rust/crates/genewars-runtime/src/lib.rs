@@ -70,3 +70,5 @@ pub use world::{
     MissionWorld, PlantParameterTable, PlantParameters, PlantRenderRecord,
     PlantTickReport, RuntimeError, SuspendedSubsystems, TickEvent,
 };
+
+pub mod source_building_resources;

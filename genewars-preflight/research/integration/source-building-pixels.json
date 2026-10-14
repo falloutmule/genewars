@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "scope": "source43A40 common main image only; no callbacks, projection, overlays or completed building behavior",
+  "cases": 192,
+  "resources": [
+    {
+      "resource": "BSOLA",
+      "cases": 52,
+      "atomic_rejections": 6
+    },
+    {
+      "resource": "BMINE",
+      "cases": 92,
+      "atomic_rejections": 6
+    },
+    {
+      "resource": "BPOWE",
+      "cases": 48,
+      "atomic_rejections": 6
+    }
+  ],
+  "framebuffer_bytes_per_case": 311032,
+  "work": "private\\integration\\source-building-pixels\\8e689b75fc1041728d960cba264bd620",
+  "implementation_pins": {
+    "rust/crates/genewars-runtime/src/building_resources.rs": "1180b6772277f7a91f7f49d9d618331da8b93c2013a58cd6947f62239f34239e",
+    "rust/crates/genewars-runtime/src/source_building_resources.rs": "927198d0feb354fb492e210e09409a36179dc10af032d54c6b590c828a044f9c"
+  }
+}
