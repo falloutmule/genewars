@@ -40,6 +40,8 @@ mod terrain_updates;
 pub use terrain_updates::{TerrainUpdateError, TerrainUpdateReceipt};
 mod building_storage;
 mod building_scheduler;
+mod admitted_buildings;
+pub use admitted_buildings::{AdmittedBuildingCallback,AdmittedBuildingPass};
 pub use building_scheduler::{IncompleteBuildingPass,Selector1BuildingPass,Selector1BuildingCallback};
 mod construction_scheduler;
 pub use construction_scheduler::ConstructionAwareActorCallback;
@@ -93,6 +95,7 @@ pub enum ActorWorldError {
     BuildingProgress(crate::building_progress::BuildingProgressError),
     BuildingCallback(crate::building_callback::BuildingCallbackError),
     QuietBuilding(crate::completed_building::QuietBuildingError),
+    ExtractorCallback(crate::extractor_production::ExtractorCallbackError),
     BuildingsNotAdmitted, BuildingsAlreadyAdmitted,
     BuildingCountMismatch{owner:u8,declared:i8,active:usize},
     Family8Pool(crate::family8_pool::PoolError),

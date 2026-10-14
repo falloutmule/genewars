@@ -27,7 +27,7 @@ pub fn plan_empty_building_player(before:&[u8;PLAYER_RECORD_BYTES],selected:u8,c
 /// must already have run in source order. Other selectors/completion reject.
 pub fn plan_incomplete_selector1_player(before:&[u8;PLAYER_RECORD_BYTES],records:&[[u8;67]],
     selected:u8,countdown_period:u16)->Result<PlayerBookkeepingPlan,BookkeepingError> {
-    plan_selector1_player_inner(before,records,selected,countdown_period,false)
+    plan_selector1_player_inner(before,records,selected,countdown_period,false,false)
 }
 
 ///47F80 numeric maintenance over caller-supplied post-callback selector1
@@ -35,11 +35,42 @@ pub fn plan_incomplete_selector1_player(before:&[u8;PLAYER_RECORD_BYTES],records
 /// is set. This does not execute451F0 or its target-search/RNG behavior.
 pub fn plan_selector1_player(before:&[u8;PLAYER_RECORD_BYTES],records:&[[u8;67]],
     selected:u8,countdown_period:u16)->Result<PlayerBookkeepingPlan,BookkeepingError> {
-    plan_selector1_player_inner(before,records,selected,countdown_period,true)
+    plan_selector1_player_inner(before,records,selected,countdown_period,true,false)
+}
+
+/// Post-callback numeric47F80/437A0 for the admitted grade0 building set.
+/// Source437A0 can write extractor allocation records; callers must apply both
+/// player and record afterimages atomically. No building callback is executed.
+#[derive(Debug,Clone,PartialEq,Eq)]
+pub struct AdmittedBuildingPlayerPlan {
+    pub player:PlayerBookkeepingPlan,
+    pub records_after:Vec<[u8;67]>,
+}
+pub fn plan_admitted_building_player(before:&[u8;PLAYER_RECORD_BYTES],records:&[[u8;67]],
+    selected:u8,countdown_period:u16)->Result<AdmittedBuildingPlayerPlan,BookkeepingError>{
+    let mut records_after=records.to_vec();
+    let original=i32::from_le_bytes(before[0x4a7..0x4ab].try_into().unwrap());
+    let mut remaining=original;
+    if remaining>0 {
+        for record in &mut records_after {
+            if remaining<=0{break;}
+            if record[6]!=0&&record[0x2d]==11 {
+                // Other storage selectors4/13 remain rejected by admission.
+                let amount=remaining.min(600);remaining-=amount;
+                record[0x36..0x3a].copy_from_slice(&amount.to_le_bytes());
+            }
+        }
+    }
+    let mut adjusted=*before;
+    adjusted[0x4a7..0x4ab].copy_from_slice(&remaining.to_le_bytes());
+    let mut player=plan_selector1_player_inner(&adjusted,records,selected,countdown_period,true,true)?;
+    let retained=if original>0{original-remaining}else{original};
+    player.after[0x4a7..0x4ab].copy_from_slice(&retained.to_le_bytes());
+    Ok(AdmittedBuildingPlayerPlan{player,records_after})
 }
 
 fn plan_selector1_player_inner(before:&[u8;PLAYER_RECORD_BYTES],records:&[[u8;67]],
-    selected:u8,countdown_period:u16,completed_allowed:bool)->Result<PlayerBookkeepingPlan,BookkeepingError> {
+    selected:u8,countdown_period:u16,completed_allowed:bool,admitted:bool)->Result<PlayerBookkeepingPlan,BookkeepingError> {
     if records.len()!=64 {return Err(BookkeepingError::UnsupportedBuilding)}
     let declared=usize::from(before[0x4a2]);
     if declared>64{return Err(BookkeepingError::BuildingsPresent)}
@@ -50,12 +81,12 @@ fn plan_selector1_player_inner(before:&[u8;PLAYER_RECORD_BYTES],records:&[[u8;67
         // Newborn scheduling still requires its separate callback contract.
         if r[6]==0 {continue}
         active+=1;
-        if r[6]!=4||r[24]!=before[1]||r[0x2d]!=1||r[0x2e]!=0||r[0x15]&1!=0
+        if r[6]!=4||r[24]!=before[1]||(!matches!(r[0x2d],1|3|6|11)||(!admitted&&r[0x2d]!=1))||r[0x2e]!=0||r[0x15]&1!=0
             ||word(r,0x31)&(if completed_allowed{0x840}else{0x841})!=0
             ||word(r,15)as usize!=usize::from(before[1])*64+slot {
             return Err(BookkeepingError::UnsupportedBuilding)
         }
-        if word(r,0x31)&0x101==1 {
+        if !matches!(r[0x2d],3|6)&&word(r,0x31)&0x101==1 {
             let timer=word(r,0x3d)as i16;
             sum+=i32::from(timer);samples+=1;
             minimum=minimum.min(timer);maximum=maximum.max(timer);
