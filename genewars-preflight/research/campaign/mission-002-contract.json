@@ -1,0 +1,284 @@
+{
+  "status": "passed-static-contract-and-zone-credit-primitive",
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "mission": {
+    "progress": 1,
+    "number": 2,
+    "title": "Krell",
+    "assets": {
+      "CONQ002.DAT": {
+        "entry_id": "root/2/disc/153",
+        "sha256": "4042c6df3b161132c12a424dace7b9fcbf253a197261f1cf76e0db4af41ea27a",
+        "size": 343958
+      },
+      "HDRCO2.DAT": {
+        "entry_id": "root/2/disc/201",
+        "sha256": "5a42310026365e8c36ddce8ecba48fe099c42accc6c878933d2360c1ebb6e80c",
+        "size": 699
+      }
+    }
+  },
+  "briefing": {
+    "text_index": 453,
+    "sha256": "5c1d3b4daa7bf04668ccc071c214c2f07d60530a3292eb4379cd07e4f9165ce9",
+    "paraphrase": "Build a Gene Pod, create Mules and move them into the marked zone."
+  },
+  "initial_data": {
+    "players": 1,
+    "funds_before_engineer_costs": 2000,
+    "target": [
+      1536,
+      15360
+    ],
+    "actor_mask": 7,
+    "serialized_seed": 47117,
+    "serialized_draw_count": 33620,
+    "active_counts": {
+      "1": 4,
+      "2": 25,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
+    }
+  },
+  "zone": {
+    "center": [
+      256,
+      24320
+    ],
+    "radius": 1024,
+    "selector": 12,
+    "species": 4,
+    "initial_quota": 1024,
+    "scan_every_frames": 64,
+    "requires_countdown_zero": true,
+    "mule_primary_credit": 16,
+    "mule_secondary_credit": 8,
+    "neutral_credit_divisor": 4,
+    "credit_is_capped_by_remaining_quota": true
+  },
+  "victory": {
+    "predicate": "Eligible selected-player score at+d >=1000 while terrain_count nonzero; otherwise existing exhausted-zone highest-score fallback may apply. Full72ED0 eligibility/failure rules still apply.",
+    "target_count": 0
+  },
+  "new_building": {
+    "selector": 0,
+    "name": "Genepod",
+    "progress_threshold": 1,
+    "requires_completed_selector": 3,
+    "base_cost": 600
+  },
+  "continuity": "7D090 skips7F580 at progress1 when carried blueprint count is nonzero. Actor mask7 selects the previously gated category at progress>=1. Do not reuse fresh-first-mission regeneration or force carried blueprint state.",
+  "numeric_credit_cases": [
+    {
+      "owner": 0,
+      "remaining": 0,
+      "weight": 8,
+      "credit": 0,
+      "instructions": 20
+    },
+    {
+      "owner": 0,
+      "remaining": 0,
+      "weight": 16,
+      "credit": 0,
+      "instructions": 20
+    },
+    {
+      "owner": 0,
+      "remaining": 1,
+      "weight": 8,
+      "credit": 1,
+      "instructions": 87
+    },
+    {
+      "owner": 0,
+      "remaining": 1,
+      "weight": 16,
+      "credit": 1,
+      "instructions": 87
+    },
+    {
+      "owner": 0,
+      "remaining": 4,
+      "weight": 8,
+      "credit": 4,
+      "instructions": 87
+    },
+    {
+      "owner": 0,
+      "remaining": 4,
+      "weight": 16,
+      "credit": 4,
+      "instructions": 87
+    },
+    {
+      "owner": 0,
+      "remaining": 8,
+      "weight": 8,
+      "credit": 8,
+      "instructions": 87
+    },
+    {
+      "owner": 0,
+      "remaining": 8,
+      "weight": 16,
+      "credit": 8,
+      "instructions": 87
+    },
+    {
+      "owner": 0,
+      "remaining": 16,
+      "weight": 8,
+      "credit": 8,
+      "instructions": 88
+    },
+    {
+      "owner": 0,
+      "remaining": 16,
+      "weight": 16,
+      "credit": 16,
+      "instructions": 87
+    },
+    {
+      "owner": 0,
+      "remaining": 1024,
+      "weight": 8,
+      "credit": 8,
+      "instructions": 88
+    },
+    {
+      "owner": 0,
+      "remaining": 1024,
+      "weight": 16,
+      "credit": 16,
+      "instructions": 88
+    },
+    {
+      "owner": 4,
+      "remaining": 0,
+      "weight": 8,
+      "credit": 0,
+      "instructions": 20
+    },
+    {
+      "owner": 4,
+      "remaining": 0,
+      "weight": 16,
+      "credit": 0,
+      "instructions": 20
+    },
+    {
+      "owner": 4,
+      "remaining": 1,
+      "weight": 8,
+      "credit": 0,
+      "instructions": 74
+    },
+    {
+      "owner": 4,
+      "remaining": 1,
+      "weight": 16,
+      "credit": 0,
+      "instructions": 74
+    },
+    {
+      "owner": 4,
+      "remaining": 4,
+      "weight": 8,
+      "credit": 1,
+      "instructions": 75
+    },
+    {
+      "owner": 4,
+      "remaining": 4,
+      "weight": 16,
+      "credit": 1,
+      "instructions": 75
+    },
+    {
+      "owner": 4,
+      "remaining": 8,
+      "weight": 8,
+      "credit": 2,
+      "instructions": 75
+    },
+    {
+      "owner": 4,
+      "remaining": 8,
+      "weight": 16,
+      "credit": 2,
+      "instructions": 75
+    },
+    {
+      "owner": 4,
+      "remaining": 16,
+      "weight": 8,
+      "credit": 2,
+      "instructions": 76
+    },
+    {
+      "owner": 4,
+      "remaining": 16,
+      "weight": 16,
+      "credit": 4,
+      "instructions": 75
+    },
+    {
+      "owner": 4,
+      "remaining": 1024,
+      "weight": 8,
+      "credit": 2,
+      "instructions": 76
+    },
+    {
+      "owner": 4,
+      "remaining": 1024,
+      "weight": 16,
+      "credit": 4,
+      "instructions": 76
+    }
+  ],
+  "listing_sha256": {
+    "private/ghidra/mission-zone-792c0.txt": "2e0b2ef83619996b8b65742268596db17536701db4420abe870922d8b096a5e2",
+    "private/ghidra/mission-zone-score.txt": "07161547757871ee3cf960c43bc9e8cbec9124b290443185817086ef3a4b1d13",
+    "private/ghidra/mission-array-refs/instructions-000793c0.txt": "582931be2b990b0a0b51ebd619dbd868a75a9c253fd5ab38af74ce50a5a4a380",
+    "private/ghidra/mission-array-refs/instructions-0007a280.txt": "acbd6194b3d051e6f0f252221bac3df6f4e8bbbe9e80bfefbad4d7adb38ccc31",
+    "private/ghidra/font-menu-state/instructions-00072ed0.txt": "6e946043309c2166a5666ed7c7d97ad202f05b822e3cebb533a7f499c82382d7",
+    "private/ghidra/campaign-level/instructions-0007d090.txt": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac",
+    "private/ghidra/mission-target-refs/instructions-000801c0.txt": "7ed3b8931a9da7fdd2be47a09f41b1b06dfb27c77c4fdf9ed604fe1885e0b4c0"
+  },
+  "unknowns": [
+    "Whole793C0 zone callback including effects/audio and creature state gates needs owned-world proof.",
+    "Gene Pod production, creature ownership/control and research requirements need source-backed integration.",
+    "Prior-world cleanup and carried-state restoration must compose with the independently recovered result transition.",
+    "Cross-variant campaign equivalence remains unestablished."
+  ],
+  "acceptance": {
+    "automated": false,
+    "native_interactive": false,
+    "campaign_transition": false
+  },
+  "original_execution": false,
+  "variant_comparison": {
+    "root/1/80": {
+      "size": 699,
+      "sha256": "5a42310026365e8c36ddce8ecba48fe099c42accc6c878933d2360c1ebb6e80c"
+    },
+    "root/1/117": {
+      "size": 343958,
+      "sha256": "4042c6df3b161132c12a424dace7b9fcbf253a197261f1cf76e0db4af41ea27a"
+    },
+    "root/4/221": {
+      "size": 375830,
+      "sha256": "91fc795e508a2b03c699a08e7f52ba1902a3b0f56dcf4134a1f40b85eb5ebef6"
+    },
+    "root/4/276": {
+      "size": 699,
+      "sha256": "8c60bf9f1fbe61d1003b4bf4585963831ee6163645fea044c516816c7d3031d9"
+    }
+  }
+}
