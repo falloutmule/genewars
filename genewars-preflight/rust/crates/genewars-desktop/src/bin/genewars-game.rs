@@ -10,6 +10,7 @@ use std::{env,fs,io::{Read,Write},path::{Path,PathBuf},process};
 #[path="support/runtime_scene.rs"] mod runtime_scene;
 #[path="support/status_text.rs"] mod status_text;
 #[path="support/game_window.rs"] mod game_window;
+#[path="support/native_input.rs"] mod native_input;
 use runtime_scene::Game;
 
 fn read(path:&Path)->Result<Vec<u8>,String>{runtime_resources::read_bound(path)}
@@ -46,17 +47,21 @@ fn replay(game:&mut Game,text:&str)->Result<(),String>{
 }
 fn run()->Result<(),String>{
     let args=env::args().skip(1).collect::<Vec<_>>();
-    if args.is_empty(){return Err("usage: genewars-game PRIVATE_RUNTIME_DIR [--landing-seed 0..65535] [--headless REPLAY | --window-replay REPLAY] [--report NEW_JSON] [--bmp NEW_BMP] [--frames N] [--seconds N]".into());}
+    if args.is_empty(){return Err("usage: genewars-game PRIVATE_RUNTIME_DIR [--landing-seed 0..65535] [--headless REPLAY | --window-replay REPLAY | --native-input-replay INPUT --observations NEW_DIR] [--report NEW_JSON] [--bmp NEW_BMP] [--frames N] [--seconds N]".into());}
     let(mut headless,mut report,mut bmp):(Option<PathBuf>,Option<PathBuf>,Option<PathBuf>)=(None,None,None);
     let mut world_output: Option<PathBuf> = None;
     let mut landing_seed=None;
     let mut window_replay:Option<PathBuf>=None;
+    let mut native_replay:Option<PathBuf>=None;
+    let mut observations:Option<PathBuf>=None;
     let(mut frames,mut seconds)=(None,None);let mut i=1;
     while i<args.len(){
         if i+1>=args.len(){return Err("missing option value".into());}
         match args[i].as_str(){
             "--headless" if headless.is_none()=>headless=Some(args[i+1].clone().into()),
             "--window-replay" if window_replay.is_none()=>window_replay=Some(args[i+1].clone().into()),
+            "--native-input-replay" if native_replay.is_none()=>native_replay=Some(args[i+1].clone().into()),
+            "--observations" if observations.is_none()=>observations=Some(args[i+1].clone().into()),
             "--report" if report.is_none()=>report=Some(args[i+1].clone().into()),
             "--bmp" if bmp.is_none()=>bmp=Some(args[i+1].clone().into()),
             "--world-output" if world_output.is_none()=>world_output=Some(args[i+1].clone().into()),
@@ -67,6 +72,8 @@ fn run()->Result<(),String>{
         }i+=2;
     }
     if headless.is_some()&&(frames.is_some()||seconds.is_some()){return Err("window bounds cannot be used with headless replay".into());}
+    if native_replay.is_some()&&(headless.is_some()||window_replay.is_some()||seconds.is_none()||observations.is_none()){return Err("native input replay requires --seconds and --observations, and excludes other replay modes".into());}
+    if observations.is_some()&&native_replay.is_none(){return Err("observations require native input replay".into());}
     if headless.is_some()&&window_replay.is_some(){return Err("choose one replay mode".into());}
     if window_replay.is_some()&&frames.is_none()&&seconds.is_none(){return Err("window replay requires a frame or time bound".into());}
     if landing_seed.is_some()&&world_output.is_some(){return Err("landing study requires full-state export; --world-output only supports the plant world".into());}
@@ -75,7 +82,12 @@ fn run()->Result<(),String>{
     game.landing_seed=landing_seed;
     let show_window=headless.is_none();
     if let Some(path)=headless.or(window_replay){let mut text=String::new();fs::File::open(path).map_err(|e|e.to_string())?.take(65537).read_to_string(&mut text).map_err(|e|e.to_string())?;replay(&mut game,&text)?;}
-    if show_window{game_window::show(&mut game,frames,seconds)?;}
+    let native=if let Some(path)=native_replay {
+        let mut text=String::new();fs::File::open(path).map_err(|e|e.to_string())?.take(65537).read_to_string(&mut text).map_err(|e|e.to_string())?;
+        let output=observations.unwrap();let replay=native_input::Replay::parse(&text,output.clone())?;
+        fs::create_dir(&output).map_err(|e|format!("{}: {e}",output.display()))?;Some(replay)
+    }else{None};
+    if show_window{game_window::show(&mut game,frames,seconds,native)?;}
     if let Some(path)=bmp{save_new(&path,&game.image()?.to_bmp_bytes().map_err(|e|e.to_string())?)?;}
     if let Some(path)=world_output {save_new(&path,game.mission.as_ref().ok_or("no mission to export")?.world.source_bytes()?)?;}
     let json=game.report();if let Some(path)=report{save_new(&path,json.as_bytes())?;}print!("{json}");Ok(())
