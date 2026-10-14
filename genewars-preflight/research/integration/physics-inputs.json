@@ -16,6 +16,13 @@
       "sha256": "c62a747206c89218e01102645341f151f5308fe1259b177f9d0418a67575e5e5"
     },
     {
+      "path": "private/integration/physics-tables/corpse-friction.bin",
+      "source": "private/ghidra/validated/memory-.object3.bin",
+      "offset": 17696,
+      "size": 16,
+      "sha256": "d56e59eae4da3dcb6d5cd9451d25e0ca49259a3a3004f43a40b47c40ae63a707"
+    },
+    {
       "path": "private/integration/physics-tables/plant-spread.bin",
       "source": "private/ghidra/validated/memory-.object3.bin",
       "offset": 17764,
@@ -23,5 +30,5 @@
       "sha256": "8aa88c050cdb4229467f43347efcd9a8d88e5651cf2684e92666dcfe886515b6"
     }
   ],
-  "scope": "Pinned AE134 angle,104530 terrain bounce and104564 plant spread direction tables. Runtime gravity/water are explicit state; neither is selected here."
+  "scope": "Pinned AE134 angle,104520 corpse friction,104530 terrain bounce and104564 plant spread direction tables. Runtime gravity/water are explicit state; neither is selected here."
 }

@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T22:08:53.778849+00:00",
-  "binary_sha256": "fe90c8092920555068274e13453fa1f6f8ae283deaae759d1c5a9c683ed9cd0e",
+  "verified_at": "2026-10-14T00:03:01.065481+00:00",
+  "binary_sha256": "c3e7fe2c25238c0226600e9cf5f50ad3437397c6600fb94f147d9ffb18e0d8b8",
   "build_profile": "release",
   "cases": [
     {
@@ -15,7 +15,7 @@
           13568
         ],
         "changed_world_frames": 0,
-        "world_sha256": "09cd61bf8b0364e35983af0da30c4e5e7287a8d91016506d7aa5693b23731393",
+        "world_sha256": "e07fcc00670cc655d482583f46b7b9296349a13697a26a23da2653dc2256e032",
         "rgb_sha256": "3a8851460584531e99e510d0efd72d658fcc993ce68573e01c64e5dc92a9b081",
         "queue": [
           29,
@@ -33,7 +33,6 @@
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
-        "reproduction_enabled": true,
         "pending_presentation_requests": 787,
         "active_effects": 1,
         "actor_states": [
@@ -55,8 +54,13 @@
             "state": 1,
             "ready": false,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           },
           {
             "slot": 1,
@@ -76,8 +80,13 @@
             "state": 1,
             "ready": false,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           }
         ],
         "creature_states": [
@@ -99,13 +108,36 @@
             "target_kind": 0
           }
         ],
+        "player_funds": [
+          {
+            "slot": 0,
+            "balance": 2000
+          },
+          {
+            "slot": 1,
+            "balance": 0
+          },
+          {
+            "slot": 2,
+            "balance": 0
+          },
+          {
+            "slot": 3,
+            "balance": 0
+          }
+        ],
+        "buildings": [],
+        "terrain_jobs": {
+          "count": 0,
+          "records": []
+        },
         "actor_movement": true,
         "plant_updates": true,
         "creature_ai": true,
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/initial"
+      "private_output": "private/integration/shared-runtime-validation/e917099d34a84466be8285803ee33367/initial"
     },
     {
       "name": "one",
@@ -118,7 +150,7 @@
           13568
         ],
         "changed_world_frames": 1,
-        "world_sha256": "6776bde45763e1e3cf9afc4c7036ca513cfcb4f6438b3f30550354d1bea092aa",
+        "world_sha256": "7261ae048ed96a43cb7cf8b38fb0db79d3bd8c5868834ebd29d68e586e8aa87e",
         "rgb_sha256": "7ee8a3e13f53bd332588708861277e85072568918001af61a2cefd5d633bb6aa",
         "queue": [
           29,
@@ -136,7 +168,6 @@
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
-        "reproduction_enabled": true,
         "pending_presentation_requests": 811,
         "active_effects": 2,
         "actor_states": [
@@ -158,8 +189,13 @@
             "state": 1,
             "ready": false,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           },
           {
             "slot": 1,
@@ -179,8 +215,13 @@
             "state": 1,
             "ready": false,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           }
         ],
         "creature_states": [
@@ -202,13 +243,36 @@
             "target_kind": 0
           }
         ],
+        "player_funds": [
+          {
+            "slot": 0,
+            "balance": 2000
+          },
+          {
+            "slot": 1,
+            "balance": 0
+          },
+          {
+            "slot": 2,
+            "balance": 0
+          },
+          {
+            "slot": 3,
+            "balance": 0
+          }
+        ],
+        "buildings": [],
+        "terrain_jobs": {
+          "count": 0,
+          "records": []
+        },
         "actor_movement": true,
         "plant_updates": true,
         "creature_ai": true,
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/one"
+      "private_output": "private/integration/shared-runtime-validation/e917099d34a84466be8285803ee33367/one"
     },
     {
       "name": "early-selection",
@@ -221,7 +285,7 @@
           13568
         ],
         "changed_world_frames": 0,
-        "world_sha256": "09cd61bf8b0364e35983af0da30c4e5e7287a8d91016506d7aa5693b23731393",
+        "world_sha256": "e07fcc00670cc655d482583f46b7b9296349a13697a26a23da2653dc2256e032",
         "rgb_sha256": "3a8851460584531e99e510d0efd72d658fcc993ce68573e01c64e5dc92a9b081",
         "queue": [
           29,
@@ -239,7 +303,6 @@
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
-        "reproduction_enabled": true,
         "pending_presentation_requests": 787,
         "active_effects": 1,
         "actor_states": [
@@ -261,8 +324,13 @@
             "state": 1,
             "ready": false,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           },
           {
             "slot": 1,
@@ -282,8 +350,13 @@
             "state": 1,
             "ready": false,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           }
         ],
         "creature_states": [
@@ -305,13 +378,36 @@
             "target_kind": 0
           }
         ],
+        "player_funds": [
+          {
+            "slot": 0,
+            "balance": 2000
+          },
+          {
+            "slot": 1,
+            "balance": 0
+          },
+          {
+            "slot": 2,
+            "balance": 0
+          },
+          {
+            "slot": 3,
+            "balance": 0
+          }
+        ],
+        "buildings": [],
+        "terrain_jobs": {
+          "count": 0,
+          "records": []
+        },
         "actor_movement": true,
         "plant_updates": true,
         "creature_ai": true,
         "other_families_frozen": true
       },
       "error": "actor is not active for this player",
-      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/early-selection"
+      "private_output": "private/integration/shared-runtime-validation/e917099d34a84466be8285803ee33367/early-selection"
     },
     {
       "name": "contact",
@@ -324,7 +420,7 @@
           13568
         ],
         "changed_world_frames": 189,
-        "world_sha256": "d6faffd0135a4343881de6382a1f0c9b4f027d12d10282b8a5946ae59ebb9d76",
+        "world_sha256": "f00718c7f7b964fe3501bc52aa22e2c41d8e9463e1fd93d65c49ec3fa48b8949",
         "rgb_sha256": "75b5c2cae0023cd8e0996e80c404bc8b9c1f9a2400479aba255fd5ee188efc97",
         "queue": [
           29,
@@ -341,7 +437,6 @@
         "selected_actor": 0,
         "issued_move_commands": 0,
         "plant_births": 0,
-        "reproduction_enabled": true,
         "pending_presentation_requests": 4209,
         "active_effects": 37,
         "actor_states": [
@@ -363,8 +458,13 @@
             "state": 1,
             "ready": true,
             "pending_move": true,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           },
           {
             "slot": 1,
@@ -384,8 +484,13 @@
             "state": 1,
             "ready": true,
             "pending_move": true,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           }
         ],
         "creature_states": [
@@ -407,13 +512,36 @@
             "target_kind": 0
           }
         ],
+        "player_funds": [
+          {
+            "slot": 0,
+            "balance": 2000
+          },
+          {
+            "slot": 1,
+            "balance": 0
+          },
+          {
+            "slot": 2,
+            "balance": 0
+          },
+          {
+            "slot": 3,
+            "balance": 0
+          }
+        ],
+        "buildings": [],
+        "terrain_jobs": {
+          "count": 0,
+          "records": []
+        },
         "actor_movement": true,
         "plant_updates": true,
         "creature_ai": true,
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/contact"
+      "private_output": "private/integration/shared-runtime-validation/e917099d34a84466be8285803ee33367/contact"
     },
     {
       "name": "command",
@@ -426,7 +554,7 @@
           13568
         ],
         "changed_world_frames": 189,
-        "world_sha256": "5d525dc52843f807c79f9c2e08babcd3d0d5f7526a610873ce930d2e44cc52c4",
+        "world_sha256": "8ebbf66c0e0c684e1ffca010fca2d39f777f686fad29d4ca22d987ccf6f31b88",
         "rgb_sha256": "75b5c2cae0023cd8e0996e80c404bc8b9c1f9a2400479aba255fd5ee188efc97",
         "queue": [
           29,
@@ -443,7 +571,6 @@
         "selected_actor": 0,
         "issued_move_commands": 1,
         "plant_births": 0,
-        "reproduction_enabled": true,
         "pending_presentation_requests": 4209,
         "active_effects": 37,
         "actor_states": [
@@ -465,8 +592,13 @@
             "state": 1,
             "ready": true,
             "pending_move": true,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           },
           {
             "slot": 1,
@@ -486,8 +618,13 @@
             "state": 1,
             "ready": true,
             "pending_move": true,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           }
         ],
         "creature_states": [
@@ -509,13 +646,36 @@
             "target_kind": 0
           }
         ],
+        "player_funds": [
+          {
+            "slot": 0,
+            "balance": 2000
+          },
+          {
+            "slot": 1,
+            "balance": 0
+          },
+          {
+            "slot": 2,
+            "balance": 0
+          },
+          {
+            "slot": 3,
+            "balance": 0
+          }
+        ],
+        "buildings": [],
+        "terrain_jobs": {
+          "count": 0,
+          "records": []
+        },
         "actor_movement": true,
         "plant_updates": true,
         "creature_ai": true,
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/command"
+      "private_output": "private/integration/shared-runtime-validation/e917099d34a84466be8285803ee33367/command"
     },
     {
       "name": "command-arrival",
@@ -528,7 +688,7 @@
           13568
         ],
         "changed_world_frames": 241,
-        "world_sha256": "3b7ed657841586e21f278218709dcba35dbb0e4e188adaf498a4f2fc37fa3773",
+        "world_sha256": "3fdd8057a309ab7a2d9ce81dc60af316884fe8139f3765eab1b993c19c0cd791",
         "rgb_sha256": "ebadf5f644e0bf5536193ac30aab7cbe3b3c7b053593a3c2da1642024eb4fb73",
         "queue": [
           29,
@@ -545,7 +705,6 @@
         "selected_actor": 0,
         "issued_move_commands": 1,
         "plant_births": 0,
-        "reproduction_enabled": true,
         "pending_presentation_requests": 5813,
         "active_effects": 1,
         "actor_states": [
@@ -567,8 +726,13 @@
             "state": 1,
             "ready": true,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 2
+            "frame": 2,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           },
           {
             "slot": 1,
@@ -588,8 +752,13 @@
             "state": 1,
             "ready": true,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 2
+            "frame": 2,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           }
         ],
         "creature_states": [
@@ -611,13 +780,36 @@
             "target_kind": 0
           }
         ],
+        "player_funds": [
+          {
+            "slot": 0,
+            "balance": 2000
+          },
+          {
+            "slot": 1,
+            "balance": 0
+          },
+          {
+            "slot": 2,
+            "balance": 0
+          },
+          {
+            "slot": 3,
+            "balance": 0
+          }
+        ],
+        "buildings": [],
+        "terrain_jobs": {
+          "count": 0,
+          "records": []
+        },
         "actor_movement": true,
         "plant_updates": true,
         "creature_ai": true,
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/command-arrival"
+      "private_output": "private/integration/shared-runtime-validation/e917099d34a84466be8285803ee33367/command-arrival"
     },
     {
       "name": "full",
@@ -630,7 +822,7 @@
           13568
         ],
         "changed_world_frames": 364,
-        "world_sha256": "b43d14a7b376b9b7b3dbc4df8cd9ee040650546f8500c3bb484241bb42128a06",
+        "world_sha256": "4c21b00c41c22345aa8ca8490885aa036de9d21870d611c324c73346d67f17ce",
         "rgb_sha256": "b57c86c88d9d4603446f349911698e79e2c97145228b5ade66d35b44954479e1",
         "queue": [
           29,
@@ -647,7 +839,6 @@
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
-        "reproduction_enabled": true,
         "pending_presentation_requests": 8554,
         "active_effects": 0,
         "actor_states": [
@@ -669,8 +860,13 @@
             "state": 1,
             "ready": true,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 4
+            "frame": 4,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           },
           {
             "slot": 1,
@@ -690,8 +886,13 @@
             "state": 1,
             "ready": true,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           }
         ],
         "creature_states": [
@@ -713,13 +914,36 @@
             "target_kind": 2
           }
         ],
+        "player_funds": [
+          {
+            "slot": 0,
+            "balance": 2000
+          },
+          {
+            "slot": 1,
+            "balance": 0
+          },
+          {
+            "slot": 2,
+            "balance": 0
+          },
+          {
+            "slot": 3,
+            "balance": 0
+          }
+        ],
+        "buildings": [],
+        "terrain_jobs": {
+          "count": 0,
+          "records": []
+        },
         "actor_movement": true,
         "plant_updates": true,
         "creature_ai": true,
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/full"
+      "private_output": "private/integration/shared-runtime-validation/e917099d34a84466be8285803ee33367/full"
     },
     {
       "name": "repeat",
@@ -732,7 +956,7 @@
           13568
         ],
         "changed_world_frames": 364,
-        "world_sha256": "b43d14a7b376b9b7b3dbc4df8cd9ee040650546f8500c3bb484241bb42128a06",
+        "world_sha256": "4c21b00c41c22345aa8ca8490885aa036de9d21870d611c324c73346d67f17ce",
         "rgb_sha256": "b57c86c88d9d4603446f349911698e79e2c97145228b5ade66d35b44954479e1",
         "queue": [
           29,
@@ -749,7 +973,6 @@
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
-        "reproduction_enabled": true,
         "pending_presentation_requests": 8554,
         "active_effects": 0,
         "actor_states": [
@@ -771,8 +994,13 @@
             "state": 1,
             "ready": true,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 4
+            "frame": 4,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           },
           {
             "slot": 1,
@@ -792,8 +1020,13 @@
             "state": 1,
             "ready": true,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           }
         ],
         "creature_states": [
@@ -815,13 +1048,36 @@
             "target_kind": 2
           }
         ],
+        "player_funds": [
+          {
+            "slot": 0,
+            "balance": 2000
+          },
+          {
+            "slot": 1,
+            "balance": 0
+          },
+          {
+            "slot": 2,
+            "balance": 0
+          },
+          {
+            "slot": 3,
+            "balance": 0
+          }
+        ],
+        "buildings": [],
+        "terrain_jobs": {
+          "count": 0,
+          "records": []
+        },
         "actor_movement": true,
         "plant_updates": true,
         "creature_ai": true,
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/repeat"
+      "private_output": "private/integration/shared-runtime-validation/e917099d34a84466be8285803ee33367/repeat"
     },
     {
       "name": "pan-return",
@@ -834,7 +1090,7 @@
           13568
         ],
         "changed_world_frames": 0,
-        "world_sha256": "09cd61bf8b0364e35983af0da30c4e5e7287a8d91016506d7aa5693b23731393",
+        "world_sha256": "e07fcc00670cc655d482583f46b7b9296349a13697a26a23da2653dc2256e032",
         "rgb_sha256": "3a8851460584531e99e510d0efd72d658fcc993ce68573e01c64e5dc92a9b081",
         "queue": [
           29,
@@ -852,7 +1108,6 @@
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
-        "reproduction_enabled": true,
         "pending_presentation_requests": 787,
         "active_effects": 1,
         "actor_states": [
@@ -874,8 +1129,13 @@
             "state": 1,
             "ready": false,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           },
           {
             "slot": 1,
@@ -895,8 +1155,13 @@
             "state": 1,
             "ready": false,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           }
         ],
         "creature_states": [
@@ -918,13 +1183,36 @@
             "target_kind": 0
           }
         ],
+        "player_funds": [
+          {
+            "slot": 0,
+            "balance": 2000
+          },
+          {
+            "slot": 1,
+            "balance": 0
+          },
+          {
+            "slot": 2,
+            "balance": 0
+          },
+          {
+            "slot": 3,
+            "balance": 0
+          }
+        ],
+        "buildings": [],
+        "terrain_jobs": {
+          "count": 0,
+          "records": []
+        },
         "actor_movement": true,
         "plant_updates": true,
         "creature_ai": true,
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/pan-return"
+      "private_output": "private/integration/shared-runtime-validation/e917099d34a84466be8285803ee33367/pan-return"
     },
     {
       "name": "seed-0",
@@ -937,7 +1225,7 @@
           13568
         ],
         "changed_world_frames": 292,
-        "world_sha256": "7a5121d6c71bf6513f83be737d7a36c1c6b67ddee0e9fee69c0d70300bf39c31",
+        "world_sha256": "089451a3a2b724afc6f64c9445c16607013ade18566b652ac2c17f2c852a03cf",
         "rgb_sha256": "2f710cf2d630f6928f76cde14e7c94538f3cbebb5a09842b3555330a324ecce5",
         "queue": [
           29,
@@ -954,7 +1242,6 @@
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
-        "reproduction_enabled": true,
         "pending_presentation_requests": 8558,
         "active_effects": 0,
         "actor_states": [
@@ -976,8 +1263,13 @@
             "state": 1,
             "ready": true,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 3
+            "frame": 3,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           },
           {
             "slot": 1,
@@ -997,8 +1289,13 @@
             "state": 1,
             "ready": true,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           }
         ],
         "creature_states": [
@@ -1020,13 +1317,36 @@
             "target_kind": 0
           }
         ],
+        "player_funds": [
+          {
+            "slot": 0,
+            "balance": 2000
+          },
+          {
+            "slot": 1,
+            "balance": 0
+          },
+          {
+            "slot": 2,
+            "balance": 0
+          },
+          {
+            "slot": 3,
+            "balance": 0
+          }
+        ],
+        "buildings": [],
+        "terrain_jobs": {
+          "count": 0,
+          "records": []
+        },
         "actor_movement": true,
         "plant_updates": true,
         "creature_ai": true,
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/seed-0"
+      "private_output": "private/integration/shared-runtime-validation/e917099d34a84466be8285803ee33367/seed-0"
     },
     {
       "name": "seed-65535",
@@ -1039,7 +1359,7 @@
           13568
         ],
         "changed_world_frames": 370,
-        "world_sha256": "2f5a3fa4470a4e5bb4763b5fa1a38070dd27174a2e62a0888435c0a2cf4147c2",
+        "world_sha256": "1460fb40b2e4491602dc0ed0c2b4f189ff36d7479ece01fef88cd0ecaf562dc2",
         "rgb_sha256": "d59c29c3115b201c2fea9c107fcd414a1b6f37e03a9bcc9ab1b66eb50e72f590",
         "queue": [
           29,
@@ -1056,7 +1376,6 @@
         "selected_actor": null,
         "issued_move_commands": 0,
         "plant_births": 0,
-        "reproduction_enabled": true,
         "pending_presentation_requests": 8555,
         "active_effects": 0,
         "actor_states": [
@@ -1078,8 +1397,13 @@
             "state": 1,
             "ready": true,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           },
           {
             "slot": 1,
@@ -1099,8 +1423,13 @@
             "state": 1,
             "ready": true,
             "pending_move": false,
+            "assignment_pending": false,
+            "building_selector": 0,
             "animation": 8,
-            "frame": 0
+            "frame": 0,
+            "action_byte_59": 0,
+            "construction_stage_word_88": 0,
+            "job_slot_byte_90": 0
           }
         ],
         "creature_states": [
@@ -1122,13 +1451,36 @@
             "target_kind": 2
           }
         ],
+        "player_funds": [
+          {
+            "slot": 0,
+            "balance": 2000
+          },
+          {
+            "slot": 1,
+            "balance": 0
+          },
+          {
+            "slot": 2,
+            "balance": 0
+          },
+          {
+            "slot": 3,
+            "balance": 0
+          }
+        ],
+        "buildings": [],
+        "terrain_jobs": {
+          "count": 0,
+          "records": []
+        },
         "actor_movement": true,
         "plant_updates": true,
         "creature_ai": true,
         "other_families_frozen": true
       },
       "error": null,
-      "private_output": "private/integration/shared-runtime-validation/9d54d2a1472f4a8cb992c8a7aa0f3f4b/seed-65535"
+      "private_output": "private/integration/shared-runtime-validation/e917099d34a84466be8285803ee33367/seed-65535"
     }
   ],
   "case_count": 12,
@@ -1214,7 +1566,7 @@
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/genewars-game.rs",
-      "sha256": "46ed8e73dd7494b7ab30fd14b93b911e953eda7565ea077e4d7f80ea5285b8ae"
+      "sha256": "6033e3c6ea574e05a2e1449fa706136487814d0e4bb3a39adc773724b8866937"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/genewars-menu.rs",
@@ -1230,15 +1582,15 @@
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/actor_scene.rs",
-      "sha256": "1bf318a36a355a8e793a0c6a837aeb1bdbb16c88d3b166e6e05ebf4e9cd1ccea"
+      "sha256": "1fe81b3a71e3973056d432bc81f73c0c9d34773a67f3048cdf2554a9bc68382d"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/building_scene.rs",
-      "sha256": "1481f7882a3336d11e4e910fbba3a2a46581d55b6186321cc300dba3c1168d1a"
+      "sha256": "f7d0e4c202e208693056c2f08059d9e625515e912a27ebb6975d5abfbd76246c"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/creature_scene.rs",
-      "sha256": "368e99c09d36219142a5239afdb960dd7db779e5dda18d2c5d32848c3c37e71a"
+      "sha256": "39d6498f5fa26cae30ac4f0b0d5708bdac8a63a95024d1514e0e47ba75c1ecfc"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/effect_scene.rs",
@@ -1250,7 +1602,7 @@
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/game_window.rs",
-      "sha256": "57d772723476b101464c9a068c0094fdfc8d55926bb654ba4e276a6e4314cd56"
+      "sha256": "ed51bfab2ed8579462bde2d7eb85950de264767bece8226e5cb36f3b42532056"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/menu_art.rs",
@@ -1262,15 +1614,15 @@
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs",
-      "sha256": "0fbd8da74d9882fc3951d3be06510d22982197e437dd04fcbc199d455044c850"
+      "sha256": "22d38ec989d86397f652d9308adccf96f69664169217f6fa91a510ff8db2b652"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs",
-      "sha256": "a16d1db40d89686d810a9c85cb9d0dedb8c0fcd91395eaf6ce6dfbe93fc1102b"
+      "sha256": "c5291dae4ce32f02b6fb328ca2dfe1e78f121092f68b2ac29ceaa934295b4121"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/shared_scene.rs",
-      "sha256": "13074874d184eb10d250c11fe43c3b14b23b42c08f260b765dc47506d99d2a1f"
+      "sha256": "0362f63b80665829764e04a811cb8f91d19b248f40c926432f96dcbfff03b70a"
     },
     {
       "path": "rust/crates/genewars-desktop/src/bin/support/status_text.rs",
@@ -1370,27 +1722,39 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
-      "sha256": "69a783cb0fa6b3e476be7a42c82ff423eb4c67629e32f0968aa75b0e282050c6"
+      "sha256": "11cc1f7dc49ffa0a441056761316559fdcc8adaab51b109176cf4dd6cc756866"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/bookkeeping_updates.rs",
       "sha256": "62794fb15814bfa317c521c342fd8b0db71b1675ad5049c38a075301895d2786"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/actor_world/building_scheduler.rs",
+      "sha256": "36b9c61ff25ab00fb05e123cc9430db0c40b8e0a294b64a04194d26a36c0e05e"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/actor_world/building_storage.rs",
-      "sha256": "adc81779ba2c6abb3818ff3078b0a88fcbfbdda07c87be25fe5918cf5e93bc4f"
+      "sha256": "615dad814dda423cb7c830f5760e2f02f10d1eeb34c980e514e8d326f084d64b"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/building_updates.rs",
-      "sha256": "29392dc27dd1af88411c4734fd7aef444889a466dd5d5a738dd7fd2ff79649d5"
+      "sha256": "d9c5bf5e0919e1927592129aa245c9a9f965d98d1991fb0f4656cd66f2b459e0"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/construction_scheduler.rs",
+      "sha256": "300f2254bfd2b61d9a0ff1ae9db4c65dcb63ba639cf0bb0b08d3fa17045b0672"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/creature_retirement.rs",
+      "sha256": "3e4ccf2a41de45cd10e5ad1f80a8f47b99e34b2d8915ce4285b18dad2d7dec99"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
-      "sha256": "29dc78224c2fa5639c4b5c2ffae61902374be19a7d5b65304c451efb275e0dcb"
+      "sha256": "71351bc1b763f95503889ff08cd8a01e9c4b1da400ff5090c9b68f59bc3d7b2a"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
-      "sha256": "77fe5905a9b0d881510db41fc2b1287c72a6050fec3a448b89d01c5a57d46db0"
+      "sha256": "02c8c4f990c229f03493db6f37e866b8631a1eb30f14394c04ecca885b086ed6"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family8_retirement.rs",
@@ -1402,7 +1766,15 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs",
-      "sha256": "827dbdb05ed3415c5038e0e619ab984b28d7b316c53f37377b3b8718bd721ef0"
+      "sha256": "d6ee58ea8249f01a9b07181e77d7ff833b487cd198583d5e7e72d1787a9c0d42"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/mission_funds.rs",
+      "sha256": "756c22d9cf2f0e4f9a640765ac0d6a61dcf269017e38379e8d811ebe2741afdb"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/mission_status.rs",
+      "sha256": "601731f8d826090943bddbeb72363ca286c17bb52912f83b310b97cb348faaf9"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs",
@@ -1418,7 +1790,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "89099632930a7ecb3b6c1200612754209d3baa911b7a42b230c09a1ce963fdab"
+      "sha256": "e497b9250dba150fae66f8de0c5f918550e9f3981666a9c40e2d90a21fe1dec8"
     },
     {
       "path": "rust/crates/genewars-runtime/src/blueprint.rs",
@@ -1426,7 +1798,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/bookkeeping.rs",
-      "sha256": "b1d2a1172c2368a98c3008eb9d14817a5837753e698cd7f71a76c6d4272c3b2a"
+      "sha256": "b217b81d6c2a97be85600697d8f2b41382425502016894dc802337cc19652ded"
     },
     {
       "path": "rust/crates/genewars-runtime/src/building.rs",
@@ -1446,7 +1818,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_obstacle.rs",
-      "sha256": "b915a8d4d63b5e3b6f5e7d867c3e8896275eda1813c0d0a548bbe8bc2e06a19a"
+      "sha256": "b740160c499e2c72c6f07a7e55a68d1783ce120b688551f879ad8a9322093020"
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_pool.rs",
@@ -1458,11 +1830,15 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/building_resources.rs",
-      "sha256": "1d53264d113d1cdf7f339b428f79c32c36f7bb02084db546fd0ab1fcbedc969b"
+      "sha256": "d27e568c29bec68f924322d79642f6241ef66facbdc0e95c69ffb106aabe8160"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/completed_building.rs",
+      "sha256": "195416a09a65b15b213b549144cb3be0eb52f37c6d9069261e85f3da5780c13a"
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_cancellation.rs",
-      "sha256": "233009cd7be67d22ea0f696b446f68071ae0d88866fc155316f476013ca7881e"
+      "sha256": "063c74a1afa50fef775382b08597fb48ec6c7ced687edf6457b1fea19d4f881c"
     },
     {
       "path": "rust/crates/genewars-runtime/src/construction_completion.rs",
@@ -1489,6 +1865,10 @@
       "sha256": "8c95d670b17c11c45542987de8c455ce11dd087362b4233f5946cd8362ff8ee2"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/construction_stage4.rs",
+      "sha256": "7a8c4fc413ee36cbbc280b5204587984104a3eefc85e933d63a36758d5be01a0"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/construction_terraform_completion.rs",
       "sha256": "031abef43f20a1e04a5b32ea72d00340068e25a7529908d16d72229929e7fecb"
     },
@@ -1505,16 +1885,20 @@
       "sha256": "3e339a034c14c3f7f4fc515418675eb357d844c473d9d5024797750cc3b0f6ae"
     },
     {
+      "path": "rust/crates/genewars-runtime/src/construction_work.rs",
+      "sha256": "747f8e1d31c6aebb803f24cb552b2832ce6246264d9d7339580754fcf0cfabb0"
+    },
+    {
       "path": "rust/crates/genewars-runtime/src/countdown_expiry.rs",
       "sha256": "fdc5b172dc4fbd41ccf52bc877a9b0d7db6999c7166aba74125e7c9097c59dfb"
     },
     {
       "path": "rust/crates/genewars-runtime/src/creature_world.rs",
-      "sha256": "f0f4d081c13d1a3aec1beaba2be55048c2cb0f3fae8e9b68744b9547d17e9d5b"
+      "sha256": "63a66b4a1772c35bd6a26f0062d8b0569146866c07403cd76b59ba2210a64033"
     },
     {
       "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
-      "sha256": "84da3b8ca4cf18dde829ace1cec213d37fd975c1bc6d54fa76a80c5175f2bdf5"
+      "sha256": "362d748101b67a6023545c405fe1e67b55a11f47beb6930e191d898e2a524ae2"
     },
     {
       "path": "rust/crates/genewars-runtime/src/family8_creation.rs",
@@ -1542,15 +1926,23 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
-      "sha256": "c39aa1d5764eb03239d7debd880e88d8f4465faddac05cc3a1e26394077a96e4"
+      "sha256": "5e0adf8e7bcd0f24aa48a6c35561417f3e1d34ac6feb3ba26d0e3ef8eacd020b"
     },
     {
       "path": "rust/crates/genewars-runtime/src/lib.rs",
-      "sha256": "584eeb7905afe54c16901248ea82e2541c8947fbf494442609f1ba81f197855b"
+      "sha256": "d79a6f18a3a3594013633b3656e96f61339a2cbb09a68642db9cacf441162494"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/mission_player_funds.rs",
+      "sha256": "e569e64c5180e22aff20b3e3c5b8bfa06372fffc1cafd5db4056210d17066516"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/mission_status.rs",
+      "sha256": "bbf80de06f576ef05c3ade9a3b85370a4b9a55b5744bc3370dba06f2392b438a"
     },
     {
       "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
-      "sha256": "cc063773f1a08c161bb34aa03751e75dd3c74ea50e78d4d63c0d6a6ad844e685"
+      "sha256": "07f196e2244445296e4274247dfb827969f261100416a0e6cc6c07ce87e04ed2"
     },
     {
       "path": "rust/crates/genewars-runtime/src/plant_spread.rs",
@@ -1638,7 +2030,7 @@
     },
     {
       "path": "research/integration/runtime-resource-catalog.tsv",
-      "sha256": "406953b3cbb85d958f0e417208630fe41f57749b46a5b1117f516dd9709cdcec"
+      "sha256": "70f1003763e64c16de1d77d009238d6e2b55e0840b115d0b3ae14e072548e6f9"
     },
     {
       "path": "scripts/validate_shared_runtime.py",

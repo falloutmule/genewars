@@ -75,7 +75,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
-      "sha256": "69a783cb0fa6b3e476be7a42c82ff423eb4c67629e32f0968aa75b0e282050c6"
+      "sha256": "11cc1f7dc49ffa0a441056761316559fdcc8adaab51b109176cf4dd6cc756866"
     },
     {
       "path": "scripts/validate_bturr_animation0.py",

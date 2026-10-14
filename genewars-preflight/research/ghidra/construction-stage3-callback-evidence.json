@@ -15,7 +15,7 @@
   },
   "implementation_pins": {
     "construction_payment": "ce6aa8da2d840279cdeea469a9a60b7dd637e784fd93a2dcbd9ad4917b38328d",
-    "construction_cancellation": "233009cd7be67d22ea0f696b446f68071ae0d88866fc155316f476013ca7881e",
+    "construction_cancellation": "063c74a1afa50fef775382b08597fb48ec6c7ced687edf6457b1fea19d4f881c",
     "actor_motion": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
     "actor_construction_tail": "422ea3e71110f4db1782f5880592cb856ac8d8b0c3ef37a2d82c000a62eeb8bb"
   },

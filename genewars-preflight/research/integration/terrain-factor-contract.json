@@ -1,6 +1,6 @@
 {
   "status": "passed-static-factor-plan-contract",
-  "checked_utc": "2026-10-13T21:40:23.318417+00:00",
+  "checked_utc": "2026-10-13T23:51:53.766996+00:00",
   "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
   "instruction_contracts": [
     {

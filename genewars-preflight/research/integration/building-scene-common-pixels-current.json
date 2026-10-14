@@ -1,10 +1,10 @@
 {
   "code_pins": {
-    "rust/crates/genewars-desktop/src/bin/support/building_scene.rs": "1481f7882a3336d11e4e910fbba3a2a46581d55b6186321cc300dba3c1168d1a",
+    "rust/crates/genewars-desktop/src/bin/support/building_scene.rs": "f7d0e4c202e208693056c2f08059d9e625515e912a27ebb6975d5abfbd76246c",
     "rust/crates/genewars-runtime/src/actor_render.rs": "9f1bb48ee2cee4b0bcbe3aa32cf83000b00cb3c3b4515750c5deba184804eda9",
-    "rust/crates/genewars-runtime/src/building_resources.rs": "1d53264d113d1cdf7f339b428f79c32c36f7bb02084db546fd0ab1fcbedc969b",
+    "rust/crates/genewars-runtime/src/building_resources.rs": "d27e568c29bec68f924322d79642f6241ef66facbdc0e95c69ffb106aabe8160",
     "scripts/desktop/building_scene_pixel_harness.rs": "d48657a81165e9e2e5e425c554b688fb72e76d1780a0f5ff586eae6215a9574a",
-    "scripts/desktop/validate_bturr_common_pixels.py": "35f015b64040095010e955cdd661eca801c2727eedb9b74057980ac5382f8bbb",
+    "scripts/desktop/validate_bturr_common_pixels.py": "7d457aa96c42196f3013b4aeffd0cd0fd694258e25870312819f1bba784a9b29",
     "scripts/desktop/validate_building_scene_common.py": "a27db931abb0bb079a9c05279d8771121368c61f99f4fae301f657d2cfca43d9"
   },
   "framebuffer": {

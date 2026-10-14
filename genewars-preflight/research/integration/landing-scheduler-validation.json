@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T21:40:20.911594+00:00",
+  "verified_at": "2026-10-13T23:51:51.427206+00:00",
   "sessions": [
     {
       "seed": "0",
@@ -80,15 +80,15 @@
   "implementation_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "b734e36e2da412a9c445c8585975e77055a60292b4ee18f454b3153e8f934aad"
+      "sha256": "e497b9250dba150fae66f8de0c5f918550e9f3981666a9c40e2d90a21fe1dec8"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs",
-      "sha256": "9513ecc802d333c046841a80f8f292ce0e3962233a7e16b870784baa6d92f266"
+      "sha256": "02c8c4f990c229f03493db6f37e866b8631a1eb30f14394c04ecca885b086ed6"
     },
     {
       "path": "rust/crates/genewars-runtime/src/creature_world.rs",
-      "sha256": "2ce6d5bbd8647ffa6d10f423b148461536a1785c2c46bef2f05c17410ef03a50"
+      "sha256": "63a66b4a1772c35bd6a26f0062d8b0569146866c07403cd76b59ba2210a64033"
     },
     {
       "path": "rust/crates/genewars-runtime/src/player_state.rs",
@@ -96,7 +96,7 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/effect_pool.rs",
-      "sha256": "9294edb98676341c42aaf7b50a20fffc4f3c484f6c872e6846e03e1765b0c91f"
+      "sha256": "362d748101b67a6023545c405fe1e67b55a11f47beb6930e191d898e2a524ae2"
     },
     {
       "path": "rust/crates/genewars-runtime/src/landing.rs",
@@ -104,15 +104,15 @@
     },
     {
       "path": "rust/crates/genewars-runtime/src/landing_effect_lifecycle.rs",
-      "sha256": "31674ff4136e00b7f5e0c468150486625a67983e137a5ad6233478966698f452"
+      "sha256": "5e0adf8e7bcd0f24aa48a6c35561417f3e1d34ac6feb3ba26d0e3ef8eacd020b"
     },
     {
       "path": "rust/crates/genewars-runtime/src/physics_tables.rs",
-      "sha256": "cc063773f1a08c161bb34aa03751e75dd3c74ea50e78d4d63c0d6a6ad844e685"
+      "sha256": "07f196e2244445296e4274247dfb827969f261100416a0e6cc6c07ce87e04ed2"
     },
     {
       "path": "scripts/landing_scheduler_probe.rs",
-      "sha256": "c516edbd42b48973da8f472d071159c836bf610a9a2001906563996a80614c4a"
+      "sha256": "7398e6a9c76d67f6a3f9727857fe31d5b9541ce364de1c71b4d24f6cf819aca8"
     },
     {
       "path": "scripts/validate_landing_scheduler.py",

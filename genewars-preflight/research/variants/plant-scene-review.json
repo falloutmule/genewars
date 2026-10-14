@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-plant-scene-review",
-  "utc": "2026-10-13T21:41:45.243141+00:00",
+  "utc": "2026-10-13T23:53:07.931222+00:00",
   "original_execution": false,
   "source_pins": [
     {
@@ -75,7 +75,7 @@
   "native_harness": {
     "path": "private/review/plant-scene/review.exe",
     "size": 5336332,
-    "sha256": "a97bc72dbea4c7a3c7dbb25edf56292012ee06d8982bcdaec97a75f9a2b78037"
+    "sha256": "f839d0f4dcfccbe8d40c71c45ee8203f1a66436708e36615e8f364dc20dcd132"
   },
   "limits": [
     "Explicit post-admission flags/order/coordinates only; no original first-scene state inferred",

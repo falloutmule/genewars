@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-source-mission-load-review",
-  "checked_utc": "2026-10-13T21:41:54.634994+00:00",
+  "checked_utc": "2026-10-13T23:53:16.173379+00:00",
   "original_or_gui_execution": false,
   "source": {
     "path": "private/reference-run/run-004/drive-c/GAME/LEVELS/CONQ001.DAT",
@@ -395,7 +395,7 @@
   "harness": {
     "path": "private/review/mission-load/review.exe",
     "size": 5108532,
-    "sha256": "fc1223506fd27dfdaa5ab1be8bf351b719a15578d680a23f05b3a234b8bcf8aa"
+    "sha256": "3a88a8a0bb3faf043edd316db7d1e94cc7d0d5d2d63706aab138249e6444db4d"
   },
   "review_sources": [
     {

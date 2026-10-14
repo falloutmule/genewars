@@ -2,7 +2,7 @@
   "cases": 48,
   "compared_bytes": 11019648,
   "literal_instruction_steps": 10584,
-  "source_sha256": "233009cd7be67d22ea0f696b446f68071ae0d88866fc155316f476013ca7881e",
+  "source_sha256": "063c74a1afa50fef775382b08597fb48ec6c7ced687edf6457b1fea19d4f881c",
   "listing_sha256": {
     "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
     "construction-command/instructions-00051e80.txt": "38a7ad744f800c438cf7b208ed596f919c38c4309a8e8d2cd68f679976202839",

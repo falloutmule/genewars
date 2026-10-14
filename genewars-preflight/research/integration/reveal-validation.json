@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "verified_at": "2026-10-13T21:47:21.549668+00:00",
+  "verified_at": "2026-10-14T00:02:08.383782+00:00",
   "source_pin": {
     "path": "private/integration/game-runtime/terrain/CONQ001.DAT",
     "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2"
@@ -34,7 +34,7 @@
   "implementation_pins": [
     {
       "path": "rust/crates/genewars-runtime/src/actor_world.rs",
-      "sha256": "b734e36e2da412a9c445c8585975e77055a60292b4ee18f454b3153e8f934aad"
+      "sha256": "e497b9250dba150fae66f8de0c5f918550e9f3981666a9c40e2d90a21fe1dec8"
     },
     {
       "path": "rust/crates/genewars-runtime/src/actor_world/reveal.rs",

@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "utc": "2026-10-13T22:06:03.527409+00:00",
+  "utc": "2026-10-13T23:49:31.447582+00:00",
   "cases": [
     {
       "case": "seed5428-tick1100",
@@ -346,7 +346,7 @@
     "rust/crates/genewars-runtime/src/world/plant_creation.rs": "8cc96258726ccf0f68359cf6d5650930430cd77922a454c2c360f1baef014f82",
     "rust/crates/genewars-runtime/src/plant_spread.rs": "9fc393869ff96f1e3cfa65c233fee22987f4d350bab6bb2c5518c2777f39a066",
     "rust/crates/genewars-runtime/src/actor_world/plant_updates.rs": "fe53dc13c552bc0b973d3f0fb75f1f06902d7fbeb547a6efd68022161adc69ac",
-    "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs": "77fe5905a9b0d881510db41fc2b1287c72a6050fec3a448b89d01c5a57d46db0",
+    "rust/crates/genewars-runtime/src/actor_world/effect_updates.rs": "02c8c4f990c229f03493db6f37e866b8631a1eb30f14394c04ecca885b086ed6",
     "scripts/plant_reproduction_probe.rs": "ff2bb261ec182c0a57ead6e094932fecc5ae5bf7d31b67756283e4bd12f1fa25",
     "scripts/validate_plant_reproduction.py": "c252a6e893e07a0f111c3a991539c548facab71998e7da148360cb7c88f528bf"
   },
@@ -434,7 +434,7 @@
     "private/ghidra/plant-startup/audio-shared-tail.txt": "79e756dff496d72dd8a16c951128103d452fdbb5dfef43b96831d5817796111d",
     "private/ghidra/entity-order/instructions-0001e760.txt": "13ebd9cffb5087d53f744df5de8cfaee4e4951697463ded7c5034044e012cc16"
   },
-  "private_run": "private/review/plant-reproduction/ea0c30fb698a41ccb8298b65145bb55b",
+  "private_run": "private/review/plant-reproduction/9846c8712ec948b58c8c962b17bf02b9",
   "original_execution": false,
   "scope": "Complete6D0B0 family scheduler, literal6CA90 callback, target/environment/factory, newborn pass and exact ordered queue requests. Three seeded plant-only trajectories with other families frozen; shared and packed implementations match per-step reports/RNG and normalized checkpoint backing. UI2C200 and renderer queue bodies remain pending requests; no full game tick claimed."
 }

@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-minimap-review",
-  "utc": "2026-10-13T21:39:02.998815+00:00",
+  "utc": "2026-10-13T23:49:54.059591+00:00",
   "cases": 532430,
   "outside_cases": 188207,
   "inside_cases": 344223,
@@ -15,7 +15,7 @@
   },
   "harness": {
     "path": "private/review/actor-environment-minimap/review.exe",
-    "sha256": "142a488ff6828ae4c47cfd44505d5e8d3d3f33835b9e63efb6609eb4ca915fe1"
+    "sha256": "850a05e0ac90911f46922c4e08c471df73d55d1581ff27e026956f9c5933e4c6"
   },
   "review_sources": [
     {

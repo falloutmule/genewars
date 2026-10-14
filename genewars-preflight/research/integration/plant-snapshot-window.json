@@ -1,9 +1,9 @@
 {
   "status": "passed",
-  "checked_utc": "2026-10-13T21:40:57.166302+00:00",
+  "checked_utc": "2026-10-13T23:52:22.820765+00:00",
   "private_receipt": {
-    "path": "private/integration/plant-snapshot-window/1bf0283661b44594acb9d6a396e546b5/receipt.json",
-    "sha256": "15cff45e76bc5f3e7f3267dca19e07c53b24d0e499da17c41a8f1958cb6ea026"
+    "path": "private/integration/plant-snapshot-window/94655161d3534d96a264611e3253ad71/receipt.json",
+    "sha256": "be340924fbd5e186f33eec06442da11775cb5afbd405644f3728a4e6d89123da"
   },
   "native_windows_launched": true,
   "case_count": 6,
@@ -98,7 +98,7 @@
     "genewars-terrain": {
       "path": "private/build/rust-target/debug/genewars-terrain.exe",
       "bytes": 19586780,
-      "sha256": "9a28fe7a9fac33491fca05687c39ce75162a9558322ce0e483ebd632a3a27da6"
+      "sha256": "a25e34b9e6911fc0fcf6654eb23e486e287f33c5b5b71d9dce4ad8ea6827dd70"
     }
   },
   "code_sources": [

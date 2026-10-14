@@ -1,6 +1,6 @@
 {
   "status": "passed-storage-invariants",
-  "utc": "2026-10-13T21:38:12.832654+00:00",
+  "utc": "2026-10-13T23:45:19.714497+00:00",
   "slots": 16,
   "loader_compared_bytes": 1632,
   "source_loader_pin": {
@@ -12,7 +12,7 @@
     "rust/crates/genewars-runtime/src/family8_pool.rs": "5499c31f564672a8c31f39ae10e5d0204c5e96cf16da630cd525113a93df86cc",
     "rust/crates/genewars-runtime/src/family8_creation.rs": "0f312593fb963669ec9a98e33abed62e09aa2a2f9cfef9f0799946aa4743a712"
   },
-  "private_run": "private/review/family8-pool/0c64591a6bb649079724a8ba1ecd2311",
+  "private_run": "private/review/family8-pool/d11e4ba2bb484c84a7910a98bd672cce",
   "result": "PASS family8 pool:16 gap-preserving loads and creations, stale/identity/pointer rejection, exact bindings",
   "scope": "Synthetic complete16-slot inactive loader/gap comparison and checked typed creation, stale before-image, pointer and identity mutation rejection. Loader mapping is source10090/6D490 structural evidence; this harness does not interpret those instructions. The separate family8-creation validator replays the complete numeric source factory. No owned-world adapter or scheduler integration.",
   "original_execution": false

@@ -1,6 +1,6 @@
 {
   "status": "passed-caller-requests-only",
-  "utc": "2026-10-13T21:32:21.122633+00:00",
+  "utc": "2026-10-13T23:39:20.899556+00:00",
   "cases": 80,
   "factory_requests": 80,
   "compared_bytes": 880,
@@ -86,7 +86,7 @@
     "private/ghidra/mission-array-refs/instructions-0005cc60.txt": "732f53cf3c69987464aaa7903bfa1fc99e0e826dad615b979269bf6c55e4d2cb",
     "private/ghidra/mission-array-refs/instructions-00013780.txt": "634efec82d190cdf793a444a423709cd2e962031a6b2e20ec05c8606bc3a36b4"
   },
-  "private_run": "private/review/countdown-expiry/8b577580faed46acb41d7602e8b271b0",
+  "private_run": "private/review/countdown-expiry/62d2aeea21a84878b912086b9fe20ee4",
   "original_execution": false,
   "scope": "Source13780 expiry caller and literal7B140 height sampling; ordered101D0 arguments match. Factory/audio/UI are request ports. No family8 creation, callback, world integration, or expiry support claimed."
 }

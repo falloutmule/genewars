@@ -1,11 +1,11 @@
 {
   "status": "passed",
-  "utc": "2026-10-13T21:42:43.076166+00:00",
+  "utc": "2026-10-13T23:54:06.908461+00:00",
   "cases": 403,
   "compared_bytes": 4433,
   "literal_instructions": 149837,
   "implementation_pins": {
-    "rust/crates/genewars-runtime/src/building_obstacle.rs": "b915a8d4d63b5e3b6f5e7d867c3e8896275eda1813c0d0a548bbe8bc2e06a19a",
+    "rust/crates/genewars-runtime/src/building_obstacle.rs": "b740160c499e2c72c6f07a7e55a68d1783ce120b688551f879ad8a9322093020",
     "scripts/validate_building_obstacle.py": "1a3502ad63972a6a9ed79f18057564b9ae733284497003e933f72c29533d9727"
   },
   "listing_pins": {
@@ -78,7 +78,7 @@
     "private/ghidra/mission-array-refs/instructions-0005cc60.txt": "732f53cf3c69987464aaa7903bfa1fc99e0e826dad615b979269bf6c55e4d2cb",
     "private/ghidra/landing-contact/instructions-0008b460.txt": "968ab9a9db051de1ca9c5cadada0ebffc08b34dd0681cf33f5db51482258f1dd"
   },
-  "private_run": "private/review/building-obstacle/f54a9d5509174f8fa45cc5fa5452b722",
+  "private_run": "private/review/building-obstacle/6dab524c921146318b6c78acf24eec81",
   "original_execution": false,
   "scope": "Mask0/negative-height74270 including literal74160/8B460. Exact returned-presence and ordered cell-query sequence: every selector, every ordered offset, extent boundaries, signed-word wrap, reserved empty cell, clear flag and first-candidate rejection. Native map-list traversal is the world adapter; positive-height animation bounds remain unsupported."
 }

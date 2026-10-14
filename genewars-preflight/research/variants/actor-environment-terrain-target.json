@@ -1,6 +1,6 @@
 {
   "status": "passed-independent-native-terrain-target-review",
-  "utc": "2026-10-13T21:39:06.667801+00:00",
+  "utc": "2026-10-13T23:49:57.794065+00:00",
   "cases": 4032,
   "resolved": 3502,
   "unresolved": 530,
@@ -44,7 +44,7 @@
   "output_sha256": "9e86f65bf6850d04cb355c96205d9f87b73638f527a14516a08785d67f3bbeef",
   "harness": {
     "path": "private/review/actor-environment-terrain-target/review.exe",
-    "sha256": "ecd0c869a9da75888457b6e6cded6d74b9a8443d03253b6737c0246100f0069f"
+    "sha256": "3f70252454a90b6f85be66d283cc5d13cdd538e317de2a50f9f531aaabdb4398"
   },
   "review_sources": [
     {
