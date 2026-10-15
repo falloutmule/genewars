@@ -20,6 +20,7 @@ class Source(m.Source):
   extra += [P/'private/ghidra/activation-rng-refs/instructions-0005cdb0.txt']
   extra += [P/'private/ghidra'/name for name in ['countdown-expiry/instructions-0006dd50.txt','countdown-expiry/instructions-00073a50.txt','mission-array-refs/instructions-00048790.txt','player-creation/instructions-0001f070.txt','mission-tail-init/instructions-00049e90.txt','terrain-map-refs/instructions-0007b240.txt']]
   extra += [P/'private/ghidra'/name for name in ['terrain-panel-refs/instructions-0005df50.txt', 'mission-array-refs/instructions-00081c60.txt', 'construction-command/instructions-0005b9f0.txt', 'owned-mule-collision-59280.txt', 'terrain-map-refs/instructions-00084b40.txt', 'camera-player-input/instructions-0008b800.txt', 'terrain-map-refs/instructions-000847d0.txt', 'terrain-map-refs/instructions-0007af00.txt', 'entity-plant/instructions-0001f240.txt', 'entity-plant/instructions-0001f280.txt', 'owned-mule-ai-6bfd0.txt', 'mission-array-refs/instructions-00043130.txt']]
+  extra += [P/'private/ghidra/panel-activation-refs/instructions-000724c0.txt', P/'private/ghidra/construction-command/instructions-0004080b.txt']
   self.files+=extra
   parse_files=[P/'private/review/creature-motion/listing-6c900-closed.txt' if p.name=='instructions-0006c900.txt' else p for p in extra]
   self.code.update(m.m.Model(parse_files,b'').code)

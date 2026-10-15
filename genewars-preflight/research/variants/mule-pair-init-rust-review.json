@@ -64,16 +64,51 @@
       "peer_stage": 128,
       "instructions": 343,
       "old_peer_unchanged": true
+    },
+    {
+      "actual_frame": 1279,
+      "peer_state": 7,
+      "peer_stage": null,
+      "current_target_already_retired": true,
+      "instructions": 348
+    },
+    {
+      "actual_frame": 1279,
+      "peer_state": 7,
+      "peer_stage": 0,
+      "current_target_already_retired": true,
+      "instructions": 348
+    },
+    {
+      "actual_frame": 1279,
+      "peer_state": 7,
+      "peer_stage": 3,
+      "current_target_already_retired": true,
+      "instructions": 348
+    },
+    {
+      "actual_frame": 1279,
+      "peer_state": 7,
+      "peer_stage": 128,
+      "current_target_already_retired": true,
+      "instructions": 348
+    },
+    {
+      "actual_frame": 1279,
+      "peer_state": 7,
+      "peer_stage": 255,
+      "current_target_already_retired": true,
+      "instructions": 348
     }
   ],
-  "record_and_release_bytes": 3012,
-  "plant_bytes": 301056,
-  "negative_cases": 10,
-  "private_run": "private\\review\\mule-pair-init\\68b86b48a60342de9d2dbe5c21657001",
+  "record_and_release_bytes": 4267,
+  "plant_bytes": 426496,
+  "negative_cases": 17,
+  "private_run": "private\\review\\mule-pair-init\\7e85895cc0534122a07bf98df05cc3b1",
   "pins": {
-    "rust\\crates\\genewars-runtime\\src\\mule_pair_init.rs": "8c1fe2e073a300725165e54c21643a272e05826381eac91c582f99eeb0636896",
-    "rust\\crates\\genewars-runtime\\src\\creature_world.rs": "a46aa2c2b613a4d55d358da29f16dd9176d046d48d3655eb06c196453ac155f1",
-    "scripts\\ghidra\\mule_pair_init_review.py": "001eb3960e9a7319e0929f812de0337372746a6a2b420b381d056e7a3b64b2df",
+    "rust\\crates\\genewars-runtime\\src\\mule_pair_init.rs": "5736669166eaa574c2a53888dda236ea0b5de1403dbfddf0a72f264f3a5d0718",
+    "rust\\crates\\genewars-runtime\\src\\creature_world.rs": "6a24b7c5641775517a20fb8c91588c9c6361d099d3ec4aae1a48ddd9bc2ce1b5",
+    "scripts\\ghidra\\mule_pair_init_review.py": "98dd5cd67c6905b8a07dcba57427f3498e393e20d078c77e3ee4c7a625dadb5b",
     "private\\review\\krell-pair-boundaries\\25c5283f90b7410c9354ca95be3c474a\\693ae\\creature-0.bin": "5f83a64351fb5287fc6c623559fa0522aa9ffb5ef05128d5e8c11c6bd54bc2cf",
     "private\\review\\krell-pair-boundaries\\25c5283f90b7410c9354ca95be3c474a\\693ae\\creature-2.bin": "7bb1bfd50ce4bb5515fc054d98bb8ed625cbc589871ea0af3e7d8a5f289e0455",
     "private\\review\\krell-pair-boundaries\\25c5283f90b7410c9354ca95be3c474a\\693ae\\plants.bin": "d13cdc9961e115c78415e04937bb915ab0c4440cddda02f4de0ee08f973ac9ef",
@@ -91,7 +126,17 @@
     "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\694d3\\creature-1.bin": "0d7fc4c460bcd5574bb5e1f29fedb3feca56605efc350b0a82664710da97e8f5",
     "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\694d3\\creature-2.bin": "2e3110abd14a253e4c86c36f32cc1b909b4e8db8effd45744c038782fdb62b40",
     "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\694d3\\plants.bin": "8551ca87181cd2e3f9f773809f3e38b4a6798c22f10b37f9ab37064546a3d3d1",
-    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\694d3\\rng.bin": "c230cbb4abbdee3e4ae8eebe65c6c6f21eaca40dd201fee764835124f3494bda"
+    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\694d3\\rng.bin": "c230cbb4abbdee3e4ae8eebe65c6c6f21eaca40dd201fee764835124f3494bda",
+    "private\\review\\krell-mule-callback\\89360c820df7463ea7ce43a8082915ef\\pair-boundaries\\693ae\\creature-0.bin": "04ee77da3bccc43846587f9fcb7b043880a972b87fde884ee7bfa221e5018fcf",
+    "private\\review\\krell-mule-callback\\89360c820df7463ea7ce43a8082915ef\\pair-boundaries\\693ae\\creature-1.bin": "c2901582296d653eedee8f40da67516d2c78527ce4c11a6a4a1bdbc1ea27b2a3",
+    "private\\review\\krell-mule-callback\\89360c820df7463ea7ce43a8082915ef\\pair-boundaries\\693ae\\creature-2.bin": "a7ab0fb73235b81e6c424b6f7cbbfa1bcce6a7d01c9618924e9a0ab1e58583bf",
+    "private\\review\\krell-mule-callback\\89360c820df7463ea7ce43a8082915ef\\pair-boundaries\\693ae\\plants.bin": "7fa2a9751ccd13d911fee6d22b0187fb549d505199905201f7680dbdbb166d66",
+    "private\\review\\krell-mule-callback\\89360c820df7463ea7ce43a8082915ef\\pair-boundaries\\693ae\\rng.bin": "4e902da72e8bbf02e52927efadc68ed3cad83b1e2752e0982cfcc451610e421d",
+    "private\\review\\krell-mule-callback\\89360c820df7463ea7ce43a8082915ef\\pair-boundaries\\694d3\\creature-0.bin": "6940f6ae6891d09032668ac8fb31202fe12608cb3d1f8b87c4a6af92d8e9d66c",
+    "private\\review\\krell-mule-callback\\89360c820df7463ea7ce43a8082915ef\\pair-boundaries\\694d3\\creature-1.bin": "e07c8ac726ec4c7b21c24d69ac82a6cda55fdbf9085a4ca79239f92f3d3f3582",
+    "private\\review\\krell-mule-callback\\89360c820df7463ea7ce43a8082915ef\\pair-boundaries\\694d3\\creature-2.bin": "a7ab0fb73235b81e6c424b6f7cbbfa1bcce6a7d01c9618924e9a0ab1e58583bf",
+    "private\\review\\krell-mule-callback\\89360c820df7463ea7ce43a8082915ef\\pair-boundaries\\694d3\\plants.bin": "f2a860c72bb84711817bffe3052dd1638e8bbcc49e791d127c34c85e608f07cf",
+    "private\\review\\krell-mule-callback\\89360c820df7463ea7ce43a8082915ef\\pair-boundaries\\694d3\\rng.bin": "4e902da72e8bbf02e52927efadc68ed3cad83b1e2752e0982cfcc451610e421d"
   },
   "source_pins": {
     "private\\ghidra\\player-creation\\instructions-0005ed20.txt": "ea29b165354042aaf33dc630322d89b577810f96c2ece1f8998799512e2feed0",
@@ -179,7 +224,28 @@
     "private\\ghidra\\krell-cell-entry\\instructions-00073f70.txt": "39d73c8ba1a4295079b7115b24a39c90ecbadb1df20fa840ed4d0441ee5e7d69",
     "private\\ghidra\\krell-pair-target": "429dfe781c0d492a7bbeedc6d8702b57d1b1c821220a32c3576db48fdbb2ee8e",
     "private\\ghidra\\countdown-expiry\\instructions-00013e60.txt": "c53006dcb695e17de2a4ffb232fa0223fc86b1a7ff0219a35caeaead047e4052",
-    "private\\ghidra\\construction-command\\instructions-0001ee50.txt": "c936d978ab504b821db0be8bbeddb1f31af7390e7c4b7a3ab33cdc5653e32c10"
+    "private\\ghidra\\construction-command\\instructions-0001ee50.txt": "c936d978ab504b821db0be8bbeddb1f31af7390e7c4b7a3ab33cdc5653e32c10",
+    "private\\ghidra\\activation-rng-refs\\instructions-0005cdb0.txt": "0a59feca0ea1bb3d5ad95661299b8b178472826fb0c1242015da334f06391d00",
+    "private\\ghidra\\countdown-expiry\\instructions-0006dd50.txt": "7c5177522b7e38137f0a7dd0e8d9bcdefeb12a0f65a3948933bbfe592e0c3385",
+    "private\\ghidra\\countdown-expiry\\instructions-00073a50.txt": "b4253afb76c7f89f22113b34f60a64ba8d8a38deae3702ee4136addd49640059",
+    "private\\ghidra\\mission-array-refs\\instructions-00048790.txt": "840113f32e4845215dc107850ae4cf6218cd5558af2f2dbd1aae632654da533d",
+    "private\\ghidra\\player-creation\\instructions-0001f070.txt": "b890bd05c1566c3755c4a62dad58a937ee98d0119013e6f6fe11ef59b84f79c3",
+    "private\\ghidra\\mission-tail-init\\instructions-00049e90.txt": "55e976eb9c620d3cd6996d5dfd810532c8ca5c0a93fcb4a34239744049f9e001",
+    "private\\ghidra\\terrain-map-refs\\instructions-0007b240.txt": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb",
+    "private\\ghidra\\terrain-panel-refs\\instructions-0005df50.txt": "2b078fb83837630cb53865ca0f2b57b7eca341b9c2c65d02b08ef69e7ae61a6e",
+    "private\\ghidra\\mission-array-refs\\instructions-00081c60.txt": "847008149f33255ef20120989782654a3167647a90afd2b1eccc7f7c922b5570",
+    "private\\ghidra\\construction-command\\instructions-0005b9f0.txt": "e9be8f4b97560a604a8f64f8f94f906213c2ee5fda1b92d411ac2d415597e994",
+    "private\\ghidra\\owned-mule-collision-59280.txt": "5b36880808df606617877501e648b3ec953e0eec3e11cbbd16959b778b1a216b",
+    "private\\ghidra\\terrain-map-refs\\instructions-00084b40.txt": "9424f5091c9fdb3baa1f4e27c53310c85cdbf87a51ce4fa0aa11b54dadb363a5",
+    "private\\ghidra\\camera-player-input\\instructions-0008b800.txt": "6ae63cd69b0f93d01d7a7850c7a2c9c7c56d11b5ff22db129edd1cc7e2819832",
+    "private\\ghidra\\terrain-map-refs\\instructions-000847d0.txt": "2d6e7ae99e773f3a6e7d17dcb9b27312cdb3a4c7e404e1a0265db71c7f17b194",
+    "private\\ghidra\\terrain-map-refs\\instructions-0007af00.txt": "33cd64e7635baedb406b5e42224a58db24e8c90752255891740d423cb413bf14",
+    "private\\ghidra\\entity-plant\\instructions-0001f240.txt": "b91628625841cfa04088d9babedbb03644231d8e019edd92ac86e8a806241e69",
+    "private\\ghidra\\entity-plant\\instructions-0001f280.txt": "dba12fb47f1658bff3d7fa8bfcee4cc648c065194e697f4a85f5958592291223",
+    "private\\ghidra\\owned-mule-ai-6bfd0.txt": "1e88418bcb62f5055f5b23336e09e8b77850dc55d73615b0d6a1b354d4a3ce4e",
+    "private\\ghidra\\mission-array-refs\\instructions-00043130.txt": "484b1ab2b55ec20dbb00b4361f21d30736dca0c366d45e00966c81b48404cdf9",
+    "private\\ghidra\\panel-activation-refs\\instructions-000724c0.txt": "588fd5fdf44fabe33a7e1f1df7c5cf5ab66edaf91f18cad6892015f252b47375",
+    "private\\ghidra\\construction-command\\instructions-0004080b.txt": "09382dbc074b4d0682c71c93d0091bf4e7ddf8b5fbd6c6a000c002ec36c6561e"
   },
-  "scope": "Pair slice693AE..694D3, both124byte records and fullplantarray; zeroRNG. Current-species speed appliedboth, peertraits deliberatelydifferent. Actual820 state8 peer kind1 reset is local; old peer record unchanged; peer stage has no local gate. Caller qualification/selection and laterstate3 lifecycle excluded."
+  "scope": "Pair slice693AE..694D3, both124byte records and fullplantarray; zeroRNG. Current-species speed appliedboth, peertraits deliberatelydifferent. Actual1279 retired-food caller pairs with feedingpeer7 and releases its plant; peer stage unrestricted. Actual820 state8 peer kind1 reset is local; old peer record unchanged; peer stage has no local gate. Caller qualification/selection and laterstate3 lifecycle excluded."
 }
