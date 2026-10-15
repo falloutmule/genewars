@@ -353,7 +353,9 @@ impl ActorWorld {
         let mut a=*before;a[0x49]&=0x9f;
         if a[0x4f]!=0||(a[0x52]!=0&&!associated_pair)||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
         if a[0x49]&3==3 {
-            let wait=crate::mule_waypoint_wait::plan_wait(&a,frame,physics,|goal|self.mule_cell_entry_predicate(&a,floor_cell(goal))).map_err(|_|CreatureError::UnsupportedMotionState)?;
+            let associated_goal=if a[0x52]!=0{let peer=self.entity(reference(&a,0x50))?;Some([word(peer,7),word(peer,9)])}else{None};
+            if let Some(goal)=associated_goal{final_target=goal;}
+            let wait=crate::mule_waypoint_wait::plan_wait_with_association(&a,frame,physics,associated_goal,|goal|self.mule_cell_entry_predicate(&a,floor_cell(goal))).map_err(|_|CreatureError::UnsupportedMotionState)?;
             return Ok((creature_world::plan_common_ground_steering(&wait.record_after,trig)?,final_target));
         }
         if a[0x5e]<24&&a[0x49]&0x10==0&&phase&31==0&&!self.common_move_point_accepted(own,current)? {
@@ -481,7 +483,7 @@ impl ActorWorld {
         let own=[record[15],record[16],1];
         let approach_plant=record[0x5e]==1&&record[0x57]==2&&self.entity(reference(record,0x55))?[6]==2;
         let approach_corpse=record[0x5e]==1&&record[0x57]==1&&record[0x52]==1&&reference(record,0x50)==reference(record,0x55)
-            &&matches!(self.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?[0x5e],24|25);
+            &&matches!(self.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?[0x5e],24..=27);
         if !matches!(record[0x5e],3|8)&&!approach_plant&&!approach_corpse{self.check_mule_cell_entry(own,cell)?;return Ok(false);}
         if word(record,0x49)as u16&0x0400!=0{return Err(CreatureError::UnsupportedCellEntry.into());}
         let mut raw=reference(self.map(),cell*14+6);let mut last=None;

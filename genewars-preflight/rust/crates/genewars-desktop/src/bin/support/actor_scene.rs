@@ -799,7 +799,8 @@ mod tests {
     fn mission_one_buildings_resolve_exact_resources_and_render_factory_records() {
         let root=bundle();let (resources,_,target)=Resources::load(&root).unwrap();
         let mission_bytes=fs::read(root.join("terrain/CONQ001.DAT")).unwrap();
-        assert!(resources.building_resource(0).is_err());
+        //Genepod selector0 is now bound to the original BGENE resource.
+        assert!(matches!(resources.building_resource(0).unwrap(),super::super::runtime_resources::BuildingResourceRef::Source(_)));
         assert!(matches!(resources.building_resource(1).unwrap(),super::super::runtime_resources::BuildingResourceRef::Bturr(_)));
         for selector in [3,6,11] {
             let mut shared=SharedMission::load(&root,&mission_bytes,5428).unwrap();

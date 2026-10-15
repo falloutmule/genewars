@@ -1,0 +1,46 @@
+{
+  "scope": "actual3627 captured callback;3626/3628 are explicitly synthetic timing contexts, other families frozen, not campaign acceptance",
+  "comparisons": [
+    {
+      "status": "passed",
+      "frame": 3627,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\cfb8a287c3ac46f2bf6a5db74afdd8e0"
+    },
+    {
+      "status": "passed",
+      "frame": 3626,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\4f04cbde44de481e8565d9a3e5b2a7cf"
+    },
+    {
+      "status": "passed",
+      "frame": 3628,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\2ed363fb5a684ae2b737ccafe9056148"
+    }
+  ],
+  "status": "passed",
+  "correction": "6FC73..6FC89 refreshes retained association goal before waiting predicate and heading. Typed association preserved; no forced null reference.",
+  "total_compared_bytes": 1282107,
+  "negative_check": "Synthetic inconsistent association rejects with all8buffers unchanged",
+  "runtime": {
+    "passed": 238,
+    "ignored": 1
+  },
+  "game_tests": {
+    "passed": 76,
+    "ignored": 1
+  },
+  "game_test_repair": "Prior fullgame run174 had one stale assertion expecting Genepod resource unavailable. Corrected to require Source binding; game suite175 passes.",
+  "campaign_missions": 1,
+  "source_review": {
+    "waiting": "6FC73..6FC89",
+    "dead_target_cell": "5B18C..5B209",
+    "render": "5E5C4 entries5/7->5E718;59470 same state5/7 branches",
+    "renderer_listing_sha256": "3eb7e965f3edfc676b298a79bc47958e5e558538e244c8a8ca78ddefeb75fd50"
+  }
+}

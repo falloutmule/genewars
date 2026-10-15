@@ -4,9 +4,17 @@ use crate::physics_tables::PhysicsTables;
 pub enum WaitError<E>{Record,Association,Goal(E)}
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct WaitPlan{pub record_after:[u8;124],pub saved_target_speed:i16}
-pub fn plan_wait<E>(before:&[u8;124],frame:u32,physics:&PhysicsTables,mut goal_predicate:impl FnMut([i16;2])->Result<bool,E>)->Result<WaitPlan,WaitError<E>>{
+pub fn plan_wait<E>(before:&[u8;124],frame:u32,physics:&PhysicsTables,goal_predicate:impl FnMut([i16;2])->Result<bool,E>)->Result<WaitPlan,WaitError<E>>{
+ plan_wait_with_association(before,frame,physics,None,goal_predicate)
+}
+///6FC73..6FC89 resolves association50 before goal-cell/heading evaluation.
+/// The caller validates the typed reference and supplies its current position.
+pub fn plan_wait_with_association<E>(before:&[u8;124],frame:u32,physics:&PhysicsTables,associated_goal:Option<[i16;2]>,mut goal_predicate:impl FnMut([i16;2])->Result<bool,E>)->Result<WaitPlan,WaitError<E>>{
  if before[6]!=1||before[0x49]&3!=3{return Err(WaitError::Record);}
- if before[0x52]!=0{return Err(WaitError::Association);}
+ if (before[0x52]!=0)!=associated_goal.is_some(){return Err(WaitError::Association);}
+ let mut resolved=*before;
+ if let Some(goal)=associated_goal{resolved[11..13].copy_from_slice(&goal[0].to_le_bytes());resolved[13..15].copy_from_slice(&goal[1].to_le_bytes());}
+ let before=&resolved;
  let word=|at|i16::from_le_bytes([before[at],before[at+1]]);
  let phase=frame.wrapping_add(i32::from(word(15))as u32);let goal=[word(11),word(13)];let mut a=*before;
  let mut flags=u16::from_le_bytes([a[0x49],a[0x4a]]);
