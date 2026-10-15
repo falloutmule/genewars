@@ -229,6 +229,7 @@ impl SharedMission {
             match callback {
                 AdmittedBuildingCallback::Incomplete{plan,..}=>self.pending_requests+=u64::from(plan.stop_audio_23)+u64::from(plan.stop_audio_2f),
                 AdmittedBuildingCallback::GenepodIdle{plan,..}=>self.pending_requests+=u64::from(plan.queue_requested),
+                AdmittedBuildingCallback::GenepodWork{plan,..}=>self.pending_requests+=u64::from(plan.queue_requested),
                 AdmittedBuildingCallback::Turret{plan,..}=>self.pending_requests+=u64::from(plan.audio.is_some()),
                 AdmittedBuildingCallback::Extractor{plan,..}=>self.pending_requests+=plan.audio.len()as u64,
                 AdmittedBuildingCallback::PowerProducer{receipt}=>self.pending_requests+=receipt.numeric.audio.len()as u64,

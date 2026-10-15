@@ -1,0 +1,497 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "power": 0,
+      "frame": 0,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 316
+    },
+    {
+      "power": 0,
+      "frame": 0,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 354
+    },
+    {
+      "power": 0,
+      "frame": 0,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 354
+    },
+    {
+      "power": 0,
+      "frame": 0,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 360
+    },
+    {
+      "power": 0,
+      "frame": 1,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 305
+    },
+    {
+      "power": 0,
+      "frame": 1,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 305
+    },
+    {
+      "power": 0,
+      "frame": 1,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 305
+    },
+    {
+      "power": 0,
+      "frame": 1,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 305
+    },
+    {
+      "power": 0,
+      "frame": 6,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 316
+    },
+    {
+      "power": 0,
+      "frame": 6,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 354
+    },
+    {
+      "power": 0,
+      "frame": 6,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 354
+    },
+    {
+      "power": 0,
+      "frame": 6,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 360
+    },
+    {
+      "power": 1,
+      "frame": 0,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 316
+    },
+    {
+      "power": 1,
+      "frame": 0,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 354
+    },
+    {
+      "power": 1,
+      "frame": 0,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 354
+    },
+    {
+      "power": 1,
+      "frame": 0,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 360
+    },
+    {
+      "power": 1,
+      "frame": 1,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 305
+    },
+    {
+      "power": 1,
+      "frame": 1,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 305
+    },
+    {
+      "power": 1,
+      "frame": 1,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 305
+    },
+    {
+      "power": 1,
+      "frame": 1,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 305
+    },
+    {
+      "power": 1,
+      "frame": 6,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 316
+    },
+    {
+      "power": 1,
+      "frame": 6,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 354
+    },
+    {
+      "power": 1,
+      "frame": 6,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 354
+    },
+    {
+      "power": 1,
+      "frame": 6,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 360
+    },
+    {
+      "power": 200,
+      "frame": 0,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 287
+    },
+    {
+      "power": 200,
+      "frame": 0,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 325
+    },
+    {
+      "power": 200,
+      "frame": 0,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 325
+    },
+    {
+      "power": 200,
+      "frame": 0,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 331
+    },
+    {
+      "power": 200,
+      "frame": 1,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 287
+    },
+    {
+      "power": 200,
+      "frame": 1,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 325
+    },
+    {
+      "power": 200,
+      "frame": 1,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 325
+    },
+    {
+      "power": 200,
+      "frame": 1,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 331
+    },
+    {
+      "power": 200,
+      "frame": 6,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 287
+    },
+    {
+      "power": 200,
+      "frame": 6,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 325
+    },
+    {
+      "power": 200,
+      "frame": 6,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 325
+    },
+    {
+      "power": 200,
+      "frame": 6,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 331
+    },
+    {
+      "power": 32767,
+      "frame": 0,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 289
+    },
+    {
+      "power": 32767,
+      "frame": 0,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": 32767,
+      "frame": 0,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": 32767,
+      "frame": 0,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 333
+    },
+    {
+      "power": 32767,
+      "frame": 1,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 289
+    },
+    {
+      "power": 32767,
+      "frame": 1,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": 32767,
+      "frame": 1,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": 32767,
+      "frame": 1,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 333
+    },
+    {
+      "power": 32767,
+      "frame": 6,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 289
+    },
+    {
+      "power": 32767,
+      "frame": 6,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": 32767,
+      "frame": 6,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": 32767,
+      "frame": 6,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 333
+    },
+    {
+      "power": -32768,
+      "frame": 0,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 289
+    },
+    {
+      "power": -32768,
+      "frame": 0,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": -32768,
+      "frame": 0,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": -32768,
+      "frame": 0,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 333
+    },
+    {
+      "power": -32768,
+      "frame": 1,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 289
+    },
+    {
+      "power": -32768,
+      "frame": 1,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": -32768,
+      "frame": 1,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": -32768,
+      "frame": 1,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 333
+    },
+    {
+      "power": -32768,
+      "frame": 6,
+      "funds": 0,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 289
+    },
+    {
+      "power": -32768,
+      "frame": 6,
+      "funds": 10,
+      "payer": 0,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": -32768,
+      "frame": 6,
+      "funds": 10,
+      "payer": 1,
+      "ai": 0,
+      "instructions": 327
+    },
+    {
+      "power": -32768,
+      "frame": 6,
+      "funds": 10,
+      "payer": 0,
+      "ai": 1,
+      "instructions": 333
+    }
+  ],
+  "compared_bytes": 437220,
+  "terminal_boundary_cases": 1,
+  "private_run": "private\\review\\genepod-work-callback\\45e3939681fa4a6091a338931cce373b",
+  "pins": {
+    "rust\\crates\\genewars-runtime\\src\\genepod_work_callback.rs": "1c791375d320937f1e8f5f26de3d0076d423db95d91f4e6019f47b925ef3a00a",
+    "rust\\crates\\genewars-runtime\\src\\genepod_idle.rs": "e18080364ae21df9d81f4daddd538d42a5989ddd193fa08f8dda499ce3f83178",
+    "rust\\crates\\genewars-runtime\\src\\genepod_positive_work.rs": "1cf025b223b593d2a1bf407c0912bb45e09c4fb490a96b005360b730d1026160",
+    "private\\ghidra\\building-update\\instructions-000451f0.txt": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+    "private\\integration\\game-runtime\\buildings\\BGENE.ANB": "a71f03d3cce3d36798cd7f8ad578d665e65883bfe9b541ba93d0ad9eff814cab",
+    "scripts\\ghidra\\genepod_work_callback_review.py": "bcf24ca6ddfbdd712f4bcbd64f77c7095518e1081218dfa23e59b8bf0f8950de"
+  },
+  "scope": "Full451F0 grade0positivework>1 callback, powerexpiry/wrapping/cap,framecadence,funds,distinctpayer,AI fundsfloor,BGENEanimation,all4players,0RNG. Renderqueue explicitport. Terminal noafterimage; no missionacceptance."
+}

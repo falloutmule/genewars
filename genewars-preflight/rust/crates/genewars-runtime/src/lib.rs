@@ -124,3 +124,6 @@ pub mod mule_pair_birth_tail;
 pub mod mule_retry_relocation;
 
 pub mod genepod_capture;
+
+pub mod genepod_work_callback;
+pub mod genepod_terminal;

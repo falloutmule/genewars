@@ -7,6 +7,7 @@ use crate::source_building_resources::SourceBuildingResourceDatabase;
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub enum AdmittedBuildingCallback {
     GenepodIdle{slot:u16,plan:crate::genepod_idle::GenepodIdlePlan},
+    GenepodWork{slot:u16,plan:crate::genepod_work_callback::GenepodWorkPlan},
     Incomplete{slot:u16,plan:crate::building_callback::IncompleteBuildingPlan},
     Turret{slot:u16,plan:crate::completed_building::TurretTrackingPlan},
     Extractor{slot:u16,plan:crate::extractor_production::ExtractorIdlePlan},
@@ -60,6 +61,13 @@ impl ActorWorld {
                     let plan=if selector==1{staged.step_incomplete_selector1_building(slot as u16,turret)?}
                     else{staged.step_incomplete_source_building(slot as u16,resources.iter().find(|r|r.selector()==selector).unwrap())?};
                     AdmittedBuildingCallback::Incomplete{slot:slot as u16,plan}
+                }else if selector==0 && i32::from_le_bytes(record[54..58].try_into().unwrap())>0 {
+                    let players=core::array::from_fn(|p|*staged.players[p].bytes());
+                    let plan=crate::genepod_work_callback::plan_completed_work(&record,&players,frame)
+                        .map_err(|_|ActorWorldError::BuildingCallback(crate::building_callback::BuildingCallbackError::UnsupportedBuilding))?;
+                    staged.buildings.as_mut().unwrap().replace_record_checked(slot,&record,&plan.building_after)?;
+                    for p in 0..4{staged.players[p].replace_bookkeeping_checked(&players[p],&plan.players_after[p])?;}
+                    AdmittedBuildingCallback::GenepodWork{slot:slot as u16,plan}
                 }else if selector==0 {
                     let player=*staged.players[usize::from(owner)].bytes();
                     let plan=crate::genepod_idle::plan_completed_idle(&record,&player)

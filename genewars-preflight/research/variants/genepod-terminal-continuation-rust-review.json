@@ -1,0 +1,203 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "mode": 0,
+      "grade": 0,
+      "seed": 1,
+      "effects": 0,
+      "draws": 3
+    },
+    {
+      "mode": 0,
+      "grade": 0,
+      "seed": 5428,
+      "effects": 0,
+      "draws": 3
+    },
+    {
+      "mode": 0,
+      "grade": 0,
+      "seed": 65535,
+      "effects": 0,
+      "draws": 3
+    },
+    {
+      "mode": 0,
+      "grade": 1,
+      "seed": 1,
+      "effects": 0,
+      "draws": 3
+    },
+    {
+      "mode": 0,
+      "grade": 1,
+      "seed": 5428,
+      "effects": 0,
+      "draws": 3
+    },
+    {
+      "mode": 0,
+      "grade": 1,
+      "seed": 65535,
+      "effects": 0,
+      "draws": 3
+    },
+    {
+      "mode": 0,
+      "grade": 2,
+      "seed": 1,
+      "effects": 0,
+      "draws": 3
+    },
+    {
+      "mode": 0,
+      "grade": 2,
+      "seed": 5428,
+      "effects": 0,
+      "draws": 3
+    },
+    {
+      "mode": 0,
+      "grade": 2,
+      "seed": 65535,
+      "effects": 0,
+      "draws": 3
+    },
+    {
+      "mode": 1,
+      "grade": 0,
+      "seed": 1,
+      "effects": 0,
+      "draws": 0
+    },
+    {
+      "mode": 1,
+      "grade": 0,
+      "seed": 5428,
+      "effects": 0,
+      "draws": 0
+    },
+    {
+      "mode": 1,
+      "grade": 0,
+      "seed": 65535,
+      "effects": 0,
+      "draws": 0
+    },
+    {
+      "mode": 1,
+      "grade": 1,
+      "seed": 1,
+      "effects": 0,
+      "draws": 0
+    },
+    {
+      "mode": 1,
+      "grade": 1,
+      "seed": 5428,
+      "effects": 0,
+      "draws": 0
+    },
+    {
+      "mode": 1,
+      "grade": 1,
+      "seed": 65535,
+      "effects": 0,
+      "draws": 0
+    },
+    {
+      "mode": 1,
+      "grade": 2,
+      "seed": 1,
+      "effects": 0,
+      "draws": 0
+    },
+    {
+      "mode": 1,
+      "grade": 2,
+      "seed": 5428,
+      "effects": 0,
+      "draws": 0
+    },
+    {
+      "mode": 1,
+      "grade": 2,
+      "seed": 65535,
+      "effects": 0,
+      "draws": 0
+    },
+    {
+      "mode": 2,
+      "grade": 0,
+      "seed": 1,
+      "effects": 8,
+      "draws": 27
+    },
+    {
+      "mode": 2,
+      "grade": 0,
+      "seed": 5428,
+      "effects": 5,
+      "draws": 18
+    },
+    {
+      "mode": 2,
+      "grade": 0,
+      "seed": 65535,
+      "effects": 7,
+      "draws": 24
+    },
+    {
+      "mode": 2,
+      "grade": 1,
+      "seed": 1,
+      "effects": 8,
+      "draws": 27
+    },
+    {
+      "mode": 2,
+      "grade": 1,
+      "seed": 5428,
+      "effects": 5,
+      "draws": 18
+    },
+    {
+      "mode": 2,
+      "grade": 1,
+      "seed": 65535,
+      "effects": 7,
+      "draws": 24
+    },
+    {
+      "mode": 2,
+      "grade": 2,
+      "seed": 1,
+      "effects": 8,
+      "draws": 27
+    },
+    {
+      "mode": 2,
+      "grade": 2,
+      "seed": 5428,
+      "effects": 5,
+      "draws": 18
+    },
+    {
+      "mode": 2,
+      "grade": 2,
+      "seed": 65535,
+      "effects": 7,
+      "draws": 24
+    }
+  ],
+  "compared_bytes": 197379,
+  "private_run": "private\\review\\genepod-terminal-continuation\\9e06acd33b974b819af50b75ae6539a9",
+  "pins": {
+    "rust\\crates\\genewars-runtime\\src\\genepod_terminal.rs": "eff769e858e7114065dc55522e2334f0febae7aea02f75b3c1c399c044169c70",
+    "rust\\crates\\genewars-runtime\\src\\genepod_positive_work.rs": "1cf025b223b593d2a1bf407c0912bb45e09c4fb490a96b005360b730d1026160",
+    "private\\ghidra\\building-update\\instructions-000451f0.txt": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+    "scripts\\ghidra\\genepod_terminal_continuation_review.py": "0eec4fb108eabb06fdc2281b8e09647227d0e01cc117a4eb4b9e0235eb182a45"
+  },
+  "scope": "456C8 success/null factory continuation +459E8 failure burst,67building4playersRNGandangle requests. Factory return supplied;48790 explicitzero-draw request port; realfactoryRNG must be passed between requests. Ejectionvelocity/world patch and audio consumption caller obligations; no gameplay acceptance."
+}

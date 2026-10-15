@@ -1,0 +1,359 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "grade": 0,
+      "quality": -1,
+      "seed": 0,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": -1,
+      "seed": 1,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": -1,
+      "seed": 5428,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": -1,
+      "seed": 65535,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 0,
+      "seed": 0,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 0,
+      "seed": 1,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 0,
+      "seed": 5428,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 0,
+      "seed": 65535,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 35,
+      "seed": 0,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 35,
+      "seed": 1,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 35,
+      "seed": 5428,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 35,
+      "seed": 65535,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 100,
+      "seed": 0,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 100,
+      "seed": 1,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 100,
+      "seed": 5428,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 100,
+      "seed": 65535,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 150,
+      "seed": 0,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 150,
+      "seed": 1,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 150,
+      "seed": 5428,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 150,
+      "seed": 65535,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": -1,
+      "seed": 0,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": -1,
+      "seed": 1,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": -1,
+      "seed": 5428,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": -1,
+      "seed": 65535,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 0,
+      "seed": 0,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 0,
+      "seed": 1,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 0,
+      "seed": 5428,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 0,
+      "seed": 65535,
+      "status": 2,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 35,
+      "seed": 0,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 35,
+      "seed": 1,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 35,
+      "seed": 5428,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 35,
+      "seed": 65535,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 100,
+      "seed": 0,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 100,
+      "seed": 1,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 100,
+      "seed": 5428,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 100,
+      "seed": 65535,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 150,
+      "seed": 0,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 150,
+      "seed": 1,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 150,
+      "seed": 5428,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 2,
+      "quality": 150,
+      "seed": 65535,
+      "status": 1,
+      "payer": 0,
+      "draws": 1
+    },
+    {
+      "grade": 0,
+      "quality": 35,
+      "seed": 5428,
+      "status": 0,
+      "payer": 0,
+      "draws": 0
+    },
+    {
+      "grade": 0,
+      "quality": 35,
+      "seed": 5428,
+      "status": 0,
+      "payer": 0,
+      "draws": 0
+    },
+    {
+      "grade": 0,
+      "quality": 35,
+      "seed": 5428,
+      "status": 1,
+      "payer": 1,
+      "draws": 1
+    }
+  ],
+  "compared_bytes": 313685,
+  "negative_cases": 6,
+  "private_run": "private\\review\\genepod-terminal\\666f6fed028e4dbc877c8e5d7a4fd8d8",
+  "pins": {
+    "rust\\crates\\genewars-runtime\\src\\genepod_terminal.rs": "eff769e858e7114065dc55522e2334f0febae7aea02f75b3c1c399c044169c70",
+    "rust\\crates\\genewars-runtime\\src\\genepod_positive_work.rs": "1cf025b223b593d2a1bf407c0912bb45e09c4fb490a96b005360b730d1026160",
+    "private\\ghidra\\building-update\\instructions-000451f0.txt": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+    "scripts\\ghidra\\genepod_terminal_review.py": "d8b5052e83e94c9d2b89b4dad46dd74d3facff4a6db7b07166d4c958f1f0f5c9"
+  },
+  "scope": "45470 terminalpayment plus455C2 quality decision to4568F/459E8; waiting and bothqualityoutcomes. Continuation is not commitready; factory/ejection/failureburst/research/common tail pending. No gameplay acceptance."
+}
