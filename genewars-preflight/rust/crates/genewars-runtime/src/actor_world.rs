@@ -1880,3 +1880,6 @@ mod mission_runtime;
 mod victory_entry;
 pub use victory_entry::{VictoryEntryTicket,VictoryPresentationStatus,OwnedVictoryEntryError};
 
+
+mod zone_marker_factory;
+pub use zone_marker_factory::{ZoneScoreMarkerReceipt,ZoneScoreMarkerFactoryError};

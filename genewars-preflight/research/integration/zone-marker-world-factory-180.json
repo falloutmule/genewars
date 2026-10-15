@@ -1,0 +1,159 @@
+{
+  "scope": "twoexplicitfactoryiterations, zerozonecredit, NOT campaignprogress",
+  "comparisons": [
+    {
+      "status": "passed",
+      "draws": 4,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-marker-captured\\8c1d5fb3fb834168adee6aa4c6614319",
+      "journals": [
+        {
+          "ring_slot": 1,
+          "journal": 246,
+          "pc": "0x6d72c"
+        },
+        {
+          "ring_slot": 2,
+          "journal": 246,
+          "pc": "0x6d7b3"
+        },
+        {
+          "ring_slot": 3,
+          "journal": 246,
+          "pc": "0x6d5c1"
+        },
+        {
+          "ring_slot": 4,
+          "journal": 553,
+          "pc": "0x49153"
+        }
+      ],
+      "rng_before": [
+        53477,
+        1,
+        43722
+      ],
+      "rng_after": [
+        53557,
+        5,
+        43726
+      ]
+    },
+    {
+      "status": "passed",
+      "draws": 4,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-marker-captured\\c9678fd8573946b7aca54b52d5107874",
+      "journals": [
+        {
+          "ring_slot": 5,
+          "journal": 246,
+          "pc": "0x6d72c"
+        },
+        {
+          "ring_slot": 6,
+          "journal": 246,
+          "pc": "0x6d7b3"
+        },
+        {
+          "ring_slot": 7,
+          "journal": 246,
+          "pc": "0x6d5c1"
+        },
+        {
+          "ring_slot": 8,
+          "journal": 553,
+          "pc": "0x49153"
+        }
+      ],
+      "rng_before": [
+        53557,
+        5,
+        43726
+      ],
+      "rng_after": [
+        63109,
+        9,
+        43730
+      ]
+    }
+  ],
+  "negative": "divisor0wholeworldrollback",
+  "status": "passed",
+  "count2_original_loop": {
+    "status": "passed",
+    "draws": 8,
+    "compared_bytes": 427369,
+    "mismatch_count": 0,
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-marker-captured\\0d51d9a235f54b9cb105c8dda77e30b4",
+    "journals": [
+      {
+        "ring_slot": 1,
+        "journal": 246,
+        "pc": "0x6d72c"
+      },
+      {
+        "ring_slot": 2,
+        "journal": 246,
+        "pc": "0x6d7b3"
+      },
+      {
+        "ring_slot": 3,
+        "journal": 246,
+        "pc": "0x6d5c1"
+      },
+      {
+        "ring_slot": 4,
+        "journal": 553,
+        "pc": "0x49153"
+      },
+      {
+        "ring_slot": 5,
+        "journal": 246,
+        "pc": "0x6d72c"
+      },
+      {
+        "ring_slot": 6,
+        "journal": 246,
+        "pc": "0x6d7b3"
+      },
+      {
+        "ring_slot": 7,
+        "journal": 246,
+        "pc": "0x6d5c1"
+      },
+      {
+        "ring_slot": 8,
+        "journal": 553,
+        "pc": "0x49153"
+      }
+    ],
+    "rng_before": [
+      53477,
+      1,
+      43722
+    ],
+    "rng_after": [
+      63109,
+      9,
+      43730
+    ]
+  },
+  "total_compared_bytes": 1282107,
+  "full_pool_negative": "200validiterations=800draws;201stcallMarker(FullPoolReplacement), entireworld/RNGunchanged versusprior",
+  "runtime": {
+    "passed": 244,
+    "ignored": 1
+  },
+  "game": {
+    "passed": 76,
+    "ignored": 1
+  },
+  "limits": [
+    "Nozone/playercreditchanged",
+    "Livezonecallback remainsguarded",
+    "Code3Ccallback/lifecycle/renderselector stillpending",
+    "Fullpoolreplacement intentionallyunsupported"
+  ],
+  "campaign_missions": 1
+}
