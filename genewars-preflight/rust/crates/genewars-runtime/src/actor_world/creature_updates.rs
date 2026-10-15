@@ -442,7 +442,9 @@ impl ActorWorld {
     fn check_mule_neutral_neighbors(&self,record:&CreatureRecord,own:[u8;3],point:[i16;2])->Result<(),ActorWorldError>{
         let cell=floor_cell(point);
         let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
+        //8D99A..8D9AA excludes samples beyond radius1024, retaining its boundary.
         for dy in -4..=4 {for dx in -4..=4 {
+            if dx*dx+dy*dy>16{continue;}
             let index=((cy+dy)&127)as usize*128+((cx+dx)&127)as usize;let mut raw=reference(self.map(),index*14+6);
             while raw[2]!=0 {let entity=self.entity(raw)?;let ignored_effect=if raw[2]==8{true}else if raw[2]==5{self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?.get(0x45)!=Some(&0x11)}else{false};if raw!=own&&!ignored_effect&&(raw[2]!=2||entity[24]!=4)&&!self.mule_friendly_candidate_is_no_action(record,raw)?{return Err(CreatureError::UnsupportedNeighborhood.into());}raw=reference(entity,3);}
         }}Ok(())

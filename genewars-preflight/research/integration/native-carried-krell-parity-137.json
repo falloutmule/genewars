@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "scope": "same frozen137 ordinary campaign carry and Krell construction, native port controls versus headless",
+  "native_observation": "private\\integration\\native-carried-krell-137\\observations\\__blocked.json",
+  "headless_report": "private/integration/continued-krell-137/report.json",
+  "checks": {
+    "steps": true,
+    "blocked": true,
+    "world_sha256": true,
+    "actor_dispatch_audit": true,
+    "buildings": true,
+    "outcome": true
+  },
+  "headless_step": 2051,
+  "native_step": 2051,
+  "headless_blocked": "Creatures(UnsupportedNeighborhood)",
+  "native_blocked": "Creatures(UnsupportedNeighborhood)",
+  "world_sha256": "7ef1574a92c8874ab8ca6a79161048bdbf8d9eff34d4505544c5f8631239c643",
+  "process_exit": 1,
+  "limitations": [
+    "Original hardware creature picking remains separate; this verifies current port construction controls",
+    "Not Krell completion; campaign count remains1/24"
+  ]
+}
