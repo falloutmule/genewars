@@ -46,6 +46,8 @@ pub use terrain_updates::{TerrainUpdateError, TerrainUpdateReceipt};
 mod building_storage;
 mod building_scheduler;
 mod admitted_buildings;
+mod genepod_commands;
+pub use genepod_commands::{GenepodInputError,GenepodInputReceipt};
 mod extractor_updates;
 pub use extractor_updates::ExtractorWorldReceipt;
 pub use admitted_buildings::{AdmittedBuildingCallback,AdmittedBuildingPass};

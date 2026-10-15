@@ -1,0 +1,11 @@
+{
+  "status": "passed-focused-integration",
+  "tests": 2,
+  "scope": "Fixture world, original capture down/release -> human producer -> opcode12; work75 start, immediate cancellation/no payment refund, canceled capture and invalid selection rollback. No production/native mission acceptance.",
+  "pins": {
+    "rust/crates/genewars-runtime/src/actor_world/genepod_commands.rs": "0a55c4881d3fd0a31cf085f03d78f2fd36537703e3bfb899eac6d598e132760d",
+    "rust/crates/genewars-runtime/src/genepod_capture.rs": "9e7bb4308242970d1341c4098dfba80eabbe7051e93361fed791b3b6e7432635",
+    "private/integration/krell-genepod-dispatch-tests-001.log": "7feeb50ea7d670c237d064079881f93a6a85dfdfd951a69ed9465d326f97b61c",
+    "private/integration/krell-genepod-adapter-check-001.log": "8883972e533077f85327d535aff846bb7c5535a5b315da2b3ac55a256d6bda5c"
+  }
+}
