@@ -107,3 +107,5 @@ pub mod mule_lost_food;
 pub mod mule_pair_init;
 
 pub mod mule_pair_rendezvous;
+
+pub mod genepod_human_producer;
