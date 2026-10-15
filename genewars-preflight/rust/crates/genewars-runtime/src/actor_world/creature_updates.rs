@@ -55,8 +55,8 @@ impl ActorWorld {
         if pool.binding(slot)?!=Some(binding){return Err(CreatureError::UnsupportedMotionState.into());}
         let before=*pool.record(slot)?;let own=[slot as u8,(slot>>8)as u8,1];
         if before[6]!=1||before[24]!=4||word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
-        let null_food_wait=before[0x5e]==1&&before[0x57]==0&&before[0x49]&3==3&&before[0x60]&0x42==0x40;
-        if matches!(before[0x5e],1|7)&&!null_food_wait {
+        let null_food_target=before[0x5e]==1&&before[0x57]==0&&before[0x60]&0x42==0x40;
+        if matches!(before[0x5e],1|7)&&!null_food_target {
             if before[0x57]==0{return Err(CreatureError::UnsupportedMotionState.into());}
             let target=self.entity(reference(&before,0x55))?;let id=word(&before,0x55);let flags=self.mule_plant_flags(id)?&9;
             //659A3 tests live health;659BF idempotently reserves on arrival.
@@ -81,15 +81,23 @@ impl ActorWorld {
         }
         let query_world=std::cell::RefCell::new(self.clone());let rng_state=std::cell::RefCell::new(rng);
         let links_moved=std::cell::Cell::new(false);
-        let mut pending_pair=None;let mut newborn_slots=Vec::new();
+        let mut pending_pair=None;let mut newborn_slots=Vec::new();let mut failed_action_dispatched=false;
         let mut reserve_plant=None;let mut release_plant=None;let mut fed_plant=None;let mut pending_audio=Vec::new();let mut pending_plant_retirements=Vec::new();
         let(plan,water_effect)=creature_world::plan_mule_after_admitted_prefix_with_cell_entry(&before,&prefix,working_target,self.map(),context,physics,trig,
             |record,normal,previous|query_world.borrow().mule_contact_speed(record,normal,previous).map_err(|_|CreatureError::MotionEnvironment),
             |point|query_world.borrow().move_obstacle_at(point).map_err(|_|CreatureError::MotionEnvironment),animations,|record|{
                 let mut world=query_world.borrow_mut();let mut rng=rng_state.borrow_mut();
-                if word(record,0x49)as u16&0x100!=0 {
-                    world.check_mule_cell_entry(own,floor_cell([word(record,7),word(record,9)])).map_err(|_|CreatureError::UnsupportedCellEntry)?;
-                    let choice=creature_world::plan_mule_retry_wait(record,*rng)?;*rng=choice.rng_after;return Ok(choice.after);
+                if word(record,0x49)as u16&0x100!=0&&!failed_action_dispatched {
+                    //5E0B0 retry precedes5EB30 cleanup and ordinary624B8 AI.
+                    //Flag100 survives untilthetail; do notdispatchretrytwice.
+                    failed_action_dispatched=true;
+                    let choice=creature_world::plan_mule_retry_wait(record,*rng)?;*rng=choice.rng_after;
+                    let cell=floor_cell([word(record,7),word(record,9)]);
+                    if world.mule_cell_entry_predicate(&choice.after,cell).map_err(|_|CreatureError::UnsupportedCellEntry)?{
+                        let relocation=crate::mule_retry_relocation::plan_relocation(&choice.after,*rng,trig).map_err(|_|CreatureError::UnsupportedCellEntry)?;
+                        *rng=relocation.rng_after;return Ok(relocation.record_after);
+                    }
+                    return Ok(choice.after);
                 }
                 if record[0x5e]==10{
                     //69EF2..69F84 positive-countdown wait. Missing/far peers
@@ -157,14 +165,16 @@ impl ActorWorld {
                     // The feeding query may choose a real same-species pair.
                     // Its winner is selected in source randomized cell order.
                     let pair_query=record[0x77]==255&&(record[0x79]as i8)>0;
-                    if !pair_query{world.check_mule_neutral_neighborhood(record,own,[word(record,7),word(record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;}
+                    if !pair_query{world.check_mule_neutral_neighbors(record,own,[word(record,7),word(record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;}
                     let l=world.layouts[1];let selector=world.backing[l.file_offset+id as usize*l.packed_stride+0x23]as i8;
                     if selector<0{return Err(CreatureError::UnsupportedMotionState);}
                     let params=world.plants.as_ref().ok_or(CreatureError::MotionEnvironment)?.parameters.slot(selector as usize).map_err(|_|CreatureError::MotionEnvironment)?;
                     let retired=health<=3;
                     if retired&&(params.retirement_delay_u8>=4||world.mule_plant_flags(id).map_err(|_|CreatureError::MotionEnvironment)?&0x88!=0){return Err(CreatureError::UnsupportedMotionState);}
                     let choice=if retired {creature_world::plan_mule_plant_feed_after_retirement(record,params.nutrition_u8,*rng)?}else{creature_world::plan_mule_plant_feed(record,params.nutrition_u8,*rng)?};*rng=choice.rng_after;fed_plant=Some(id);
-                    if pair_query{
+                    let pair_resources_ready=word(&choice.after,0x68)>(word(&choice.after,0x62)>>1);
+                    if pair_query&&!pair_resources_ready{world.check_mule_neutral_neighbors(&choice.after,own,[word(&choice.after,7),word(&choice.after,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;}
+                    if pair_query&&pair_resources_ready{
                         // This bounded branch excludes retirement/full feeding;
                         // those source fallbacks need their own continuation.
                         if retired||choice.after[0x5e]!=7{return Err(CreatureError::UnsupportedNeighborhood);}
@@ -178,6 +188,7 @@ impl ActorWorld {
                             pending_audio.push(0x12);return Ok(pair.current_after);
                         }
                     }
+                    if choice.after[0x5e]==8&&world.mule_cell_entry_predicate(&choice.after,floor_cell([word(&choice.after,7),word(&choice.after,9)])).map_err(|_|CreatureError::UnsupportedCellEntry)?{return Err(CreatureError::UnsupportedCellEntry);}
                     let full=record[0x61]&0x40!=0&&choice.after[0x61]&0x40==0;pending_audio.push(if full{0x1b}else{0x12});if retired{pending_plant_retirements.push(id as u16);}else if choice.after[0x5e]==8{release_plant=Some(id);}return Ok(choice.after);
                 }
                 if record[0x5e]==1 {
@@ -407,9 +418,6 @@ impl ActorWorld {
             raw=reference(self.entity(raw)?,3);
         }Ok(())
     }
-    fn check_mule_neutral_neighborhood(&self,record:&CreatureRecord,own:[u8;3],point:[i16;2])->Result<(),ActorWorldError> {
-        self.check_mule_cell_entry(own,floor_cell(point))?;self.check_mule_neutral_neighbors(record,own,point)
-    }
     fn check_mule_neutral_neighbors(&self,record:&CreatureRecord,own:[u8;3],point:[i16;2])->Result<(),ActorWorldError>{
         let cell=floor_cell(point);
         let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
@@ -422,7 +430,7 @@ impl ActorWorld {
     /// Friendly direction is unused only with the separately enforced absence
     /// of enemies (62949..52); full field77 can select a paired action.
     fn mule_friendly_candidate_is_no_action(&self,record:&CreatureRecord,raw:[u8;3])->Result<bool,ActorWorldError>{
-        if raw[2]!=1||record[0x18]!=4||record[0x7a]!=4||record[0x76]>90||(record[0x77]==255&&(record[0x79]as i8)>0){return Ok(false);}
+        if raw[2]!=1||record[0x18]!=4||record[0x7a]!=4||record[0x76]>90||(record[0x77]==255&&(record[0x79]as i8)>0&&word(record,0x68)>(word(record,0x62)>>1)){return Ok(false);}
         let other=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?;
         Ok(other[6]==1&&other[0x18]==4&&other[0x7a]==4&&other[0x5e]<24&&other[0x5e]!=15)
     }

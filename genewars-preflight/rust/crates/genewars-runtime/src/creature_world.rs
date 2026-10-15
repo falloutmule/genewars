@@ -374,10 +374,10 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     // The serialized idle Mule starts with action flags0; frame0 performs
     // ordinary physics before the first odd-frame choice establishes bit8.
     let neutral=before[0x5e]==8&&matches!(before[0x61],0|0x40|0x80)&&matches!(before[0x60],0|8|0x88);
-    let postbirth_idle=before[0x5e]==8&&before[0x61]==0x60&&matches!(before[0x60],0x0c|0x8c)&&before[0x52]==0&&before[0x57]==1&&motion_word(before,0x6c)>0;
+    let postbirth_idle=before[0x5e]==8&&before[0x61]==0x60&&matches!(before[0x60],0x0c|0x8c)&&before[0x52]==0&&before[0x57]==1&&motion_word(before,0x6c)>=0;
     let relocation=before[0x5e]==0&&before[0x61]==0x80&&before[0x60]==8&&before[0x57]==0;
-    let null_food_wait=before[0x57]==0&&before[0x49]&3==3&&before[0x60]&0x42==0x40;
-    let food_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&(before[0x57]==2||null_food_wait);
+    let null_food_target=before[0x57]==0&&before[0x60]&0x42==0x40;
+    let food_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&(before[0x57]==2||null_food_target);
     let paired_approach=before[0x5e]==3&&matches!(before[0x60],0|4|8|12|0x80|0x84|0x88|0x8c)&&before[0x57]==1&&((before[0x61]==0x40&&before[0x52]==1)||(before[0x61]==0x60&&before[0x52]==0));
     let paired_wait=before[0x5e]==10&&before[0x61]==0x60&&matches!(before[0x60],4|12|0x84|0x8c)&&before[0x57]==1&&before[0x52]==0&&motion_word(before,0x6c)>=0;
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
@@ -417,7 +417,11 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
         if reserve>0&&health<maximum&&(mule_callback_phase(before,context.frame_counter)%20)<=1 {
             motion_put(&mut a,0x6a,health.wrapping_add((maximum-health).min(2)));
             motion_put(&mut a,0x68,if reserve<3{0}else{reserve-3});
-        }else if reserve<=0&&mule_callback_phase(before,context.frame_counter)&31<=1{return Err(CreatureError::UnsupportedMotionState);}
+        }else if reserve<=0&&mule_callback_phase(before,context.frame_counter)&31<=1{
+            //5E193..5E1B3 scheduled starvation. Lethal5CDB0 remains separate.
+            if health<=1{return Err(CreatureError::UnsupportedMotionState);}
+            motion_put(&mut a,0x6a,health.wrapping_sub(1));
+        }
         // Type1 virtualB0=1EC10 tests49mask0100.5E0B0 resets the
         // failed action and chooses a one-draw wait before ordinary AI.
         if motion_word(&a,0x49)as u16&0x100!=0 {a=choice(&a)?;}
@@ -733,7 +737,7 @@ where F:FnMut([i16;2])->Result<bool,CreatureError> {
 /// reserve eligibility; this plan consumes only the two scan-order draws.
 pub fn plan_mule_plant_acquisition(before:&CreatureRecord,target_id:i16,target_position:[i16;2],rng_before:crate::blueprint::BlueprintRng)->Result<InitialMuleChoice,CreatureError> {
     //5CCA0 state8 reset clears this retained post-birth kind1 locally.
-    let retained_pair=before[0x57]==1&&before[0x61]==0x60&&before[0x60]==0x0c&&before[0x5d]==0;
+    let retained_pair=before[0x57]==1&&before[0x61]==0x60&&matches!(before[0x60],0x0c|0x8c)&&before[0x5d]==0;
     if rng_before.ring>=32||target_id<0||target_id>=512||before[6]!=1||before[0x18]!=4||before[0x5e]!=8||before[0x7a]!=4||before[0x76]>90||before[0x7b]!=255
        ||motion_word(before,0x6c)!=0||before[0x78]!=0||before[0x60]&2!=0||(before[0x55..0x58][2]!=0&&!retained_pair)
        ||(motion_word(before,0x68)>motion_word(before,0x62)>>1&&before[0x61]&0x40==0) {return Err(CreatureError::UnsupportedMotionState);}
