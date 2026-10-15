@@ -71,7 +71,9 @@ impl ActorWorld {
         border_table:&[u8;8192])->Result<Vec<TerrainUpdateReceipt>,TerrainUpdateError>{
         use crate::construction_terrain::*;
         if self.backing[0x2ff7]!=jobs.count(){return Err(TerrainUpdateError::CountMismatch);}
-        if self.backing[0x34b8]!=0{return Err(TerrainUpdateError::TerrainObjectRefreshRequired);}
+        //79220 reaches zone refresh only from an active job. With no jobs,
+        //its25 negative-counter slots leave the zone list unchanged.
+        if self.backing[0x34b8]!=0&&jobs.count()!=0{return Err(TerrainUpdateError::TerrainObjectRefreshRequired);}
         self.validate_links().map_err(TerrainUpdateError::World)?;
         let mut staged=self.clone();let mut pool=jobs.clone();let mut receipts=Vec::new();
         let terrain_error=|e:TerrainJobError|TerrainUpdateError::Maintenance(e.into());

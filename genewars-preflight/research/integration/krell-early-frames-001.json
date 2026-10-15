@@ -1,0 +1,23 @@
+{
+  "status": "blocked",
+  "classification": "unsupported_behavior",
+  "validation_status": "passed_expected_boundary",
+  "source_frame": 8,
+  "reason": "Creatures(UnsupportedCellEntry)",
+  "scope": "Synthetic source-projected carried Krell startup, renders frames0..7; firsttwoframes independent literalcallbackcomparison; NOT nativeinput ormissionacceptance",
+  "rollback": [
+    "world",
+    "UIanimations",
+    "frame"
+  ],
+  "first_fixture": "private/review/krell-mule-callbacks-004/frame-8-slot-1-before",
+  "original_missions_completable": 0,
+  "standard_campaign_total": 24,
+  "sha256": {
+    "private/integration/krell-idle-zone-integration-001.log": "ae4cc5416a6101d5cf100f7c6aef6bc466706fc910581cafc837ff8c32f36f57",
+    "private/integration/krell-early-frames-002.log": "25cb429b5d8f74d5ef70fd06e826ea27ef5fa4f6876d8deefeafe2aad8bbe254",
+    "rust/crates/genewars-runtime/src/actor_world/zone_updates.rs": "5e434b5b5d26f9a1659dd4ac03b5c9a804416e74cd2f472d88ba1feea4910213",
+    "rust/crates/genewars-runtime/src/actor_world/terrain_updates.rs": "6c8b2e760d605ce63714b9334afc5e5233d2bd65dbbae53a958e43cd63a760ec",
+    "rust/crates/genewars-desktop/src/bin/support/shared_scene.rs": "5a619178532892e0ed17fba4b8ef203a69368947ab2b8b6656cf42fd11bc3089"
+  }
+}

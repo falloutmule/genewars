@@ -194,6 +194,8 @@ impl SharedMission {
         if self.runtime_context.as_ref().is_some_and(|c|c.callback_gate()!=genewars_runtime::mission_context::CallbackGate::Ready){return Err("mission callback gate is not ready".into());}
         let context=self.world.mission_loading_physics();
         let frame=self.runtime_context.as_ref().map_or_else(||u32::try_from(self.frame_counter+1).map_err(|_|"source frame counter exceeds u32"),|c|Ok(c.frame()))?;
+        //1C760 runs7A280 before actor/building/creature callbacks.
+        self.world.step_admitted_zone_callbacks().map_err(|e|format!("zone pass: {e:?}"))?;
         // 58780 visits players and their current actor lists. 57A10 returns
         // immediately before the ready bit is set by the landing callback.
         let actors=self.world.step_actor_callbacks_with_construction(player_count,frame,context,&resources.physics,&self.trig,
@@ -223,6 +225,7 @@ impl SharedMission {
             use genewars_runtime::actor_world::AdmittedBuildingCallback;
             match callback {
                 AdmittedBuildingCallback::Incomplete{plan,..}=>self.pending_requests+=u64::from(plan.stop_audio_23)+u64::from(plan.stop_audio_2f),
+                AdmittedBuildingCallback::GenepodIdle{plan,..}=>self.pending_requests+=u64::from(plan.queue_requested),
                 AdmittedBuildingCallback::Turret{plan,..}=>self.pending_requests+=u64::from(plan.audio.is_some()),
                 AdmittedBuildingCallback::Extractor{plan,..}=>self.pending_requests+=plan.audio.len()as u64,
                 AdmittedBuildingCallback::PowerProducer{receipt}=>self.pending_requests+=receipt.numeric.audio.len()as u64,
@@ -375,7 +378,7 @@ impl SharedMission {
 
 #[cfg(test)] mod carried_startup_tests {
     use super::*;
-    #[test]fn krell_first_tick_current_boundary_is_atomic(){
+    #[test]fn krell_first_two_frames_render_and_current_boundary_is_atomic(){
         let root=Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../private/integration/game-runtime");
         let first=read_bound(&root.join("terrain/CONQ001.DAT")).unwrap();let initial=SharedMission::load_fresh_cd(&root,&first,[0xa5;36],17).unwrap();
         let mut carry=initial.world.plan_campaign_carry(&[0;600],0x7e,2,0,None).unwrap();carry.players[0][0x6e7]=1;
@@ -388,9 +391,25 @@ impl SharedMission {
             for(name,bytes)in [("backing",loaded.world.backing_bytes().to_vec()),("players",(0..4u8).flat_map(|p|loaded.world.player(p).unwrap().bytes().iter().copied()).collect()),("actors",loaded.world.actors().records().concat()),("creatures",loaded.world.creatures().unwrap().records().concat()),("effects",loaded.world.effects().unwrap().records().concat()),("family8",loaded.world.family8().unwrap().records().concat()),("buildings",loaded.world.buildings().unwrap().records().concat())]{std::fs::write(d.join(format!("{name}.bin")),bytes).unwrap();}
             let rng=loaded.world.rng();let mut bytes=rng.seed.to_le_bytes().to_vec();bytes.push(rng.ring);bytes.extend(rng.draw_count.to_le_bytes());std::fs::write(d.join("rng.bin"),bytes).unwrap();
         }
-        let error=loaded.step(&resources).unwrap_err();
-        assert_eq!(error,"Creatures(UnsupportedMotionState)");assert_eq!(loaded.world,before);assert_eq!(loaded.ui_animations,prior_ui);assert_eq!(loaded.frame_counter,0);
-        println!("{{\"status\":\"blocked\",\"classification\":\"unsupported_behavior\",\"source_frame\":0,\"reason\":\"{error}\",\"transaction_unchanged\":true}}");
+        for expected in 1..=2 {
+            loaded.step(&resources).unwrap();loaded.render(&resources,[256,24320]).unwrap();loaded.finish_outer_frame();
+            assert_eq!(loaded.frame_counter,expected);assert_eq!(loaded.outcome_json(),"{\"state\":\"running\"}");
+        }
+        assert_ne!(loaded.world,before);assert_ne!(loaded.ui_animations,prior_ui);
+        // Short integration diagnostic, not mission acceptance. Preserve any
+        // later boundary as typed unsupported with an atomic host rollback.
+        for _ in 2..256 {
+            let before=loaded.clone();
+            match loaded.step(&resources) {
+                Ok(_)=>{loaded.render(&resources,[256,24320]).unwrap();loaded.finish_outer_frame();},
+                Err(error)=>{
+                    assert_eq!(loaded.frame_counter,8);assert_eq!(error,"Creatures(UnsupportedCellEntry)");
+                    assert_eq!(loaded.world,before.world);assert_eq!(loaded.ui_animations,before.ui_animations);assert_eq!(loaded.frame_counter,before.frame_counter);
+                    println!("Krell integration blocked frame{}: {error}",loaded.frame_counter);return;
+                }
+            }
+        }
+        panic!("expected captured source frame8 cell-entry boundary; update only after focused repair");
     }
 
     /// Synthetic retained state exercises the real loader; this is not mission acceptance.

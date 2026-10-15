@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "scope": "Literal no-mutation admission gates only; active zones and jobs not admitted",
+  "cases": [
+    {
+      "entry": "0x7a280",
+      "countdown": 1,
+      "zones": 1,
+      "instructions": 21,
+      "memory_unchanged": true
+    },
+    {
+      "entry": "0x7a280",
+      "countdown": 1000,
+      "zones": 1,
+      "instructions": 21,
+      "memory_unchanged": true
+    },
+    {
+      "entry": "0x7a280",
+      "countdown": 65535,
+      "zones": 4,
+      "instructions": 21,
+      "memory_unchanged": true
+    },
+    {
+      "entry": "0x7a280",
+      "countdown": 0,
+      "zones": 0,
+      "instructions": 28,
+      "memory_unchanged": true
+    },
+    {
+      "entry": "0x79220",
+      "countdown": 1000,
+      "zones": 1,
+      "instructions": 20,
+      "memory_unchanged": true
+    },
+    {
+      "entry": "0x79220",
+      "countdown": 0,
+      "zones": 1,
+      "instructions": 20,
+      "memory_unchanged": true
+    }
+  ],
+  "literal_instructions": 131,
+  "sha256": {
+    "private/ghidra/mission-array-refs/instructions-0007a280.txt": "acbd6194b3d051e6f0f252221bac3df6f4e8bbbe9e80bfefbad4d7adb38ccc31",
+    "private/ghidra/construction-command/instructions-000791c0.txt": "da1a6046fa2a0a4153f54ff5f4cce68941a05aae834287ce856ee48a1867f9f2",
+    "private/ghidra/keyboard-event-refs/instructions-00075f60.txt": "c238f6c3e2331244305dc67d0f7fcbec6496ae8cbb165da62222da9a8ad1e0cb",
+    "research/variants/zone-wait-gates-review.py": "fc8e7eeab20600a24bd5725df5a26ad340d65c97b4fe49a90c5f30e5d0602828"
+  },
+  "original_execution": false
+}
