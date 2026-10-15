@@ -317,16 +317,17 @@ impl ActorWorld {
                 world.creatures.as_mut().unwrap().replace_record_checked(slot,&entered,&after)?;
                 links_moved.set(true);Ok(after)
             },|record|{
+                let mut after=*record;
                 if let Some(enemy)=hostile_enemy {
                     let phase=creature_world::mule_callback_phase(&before,context.frame_counter);
                     //65C60 runs on every odd callback, after physical motion.
                     //Only far pursuit with no abandonment draw is admitted.
                     if phase&1!=0 {
                         if phase&3==3&&32767-i32::from(word(record,0x6c))>256{return Err(CreatureError::UnsupportedMotionState);}
-                        if mule_pair_distance(record,&enemy)<=16384{return Err(CreatureError::UnsupportedMotionState);}
+                        if mule_pair_distance(record,&enemy)<=16384{after=crate::mule_hostile_contact::plan_false_contact(record,&enemy,physics).map_err(|_|CreatureError::UnsupportedMotionState)?;}
                     }
                 }
-                Ok(*record)
+                Ok(after)
             })?;
         let rng=rng_state.into_inner();let mut staged=query_world.into_inner();
         // The entry hook already applied source unlink/prepend and virtual88.

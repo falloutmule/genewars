@@ -13,8 +13,12 @@ class Source(c.Source):
   super().__init__(backing)
   # Exact trivial virtual10 getters reached when a zone marker shares the
   # target-query cell. Keep real predicate returns, never skip the candidate.
-  extra=[P/'private/ghidra/countdown-expiry/instructions-0001eac0.txt']
-  self.files+=extra;self.code.update(g.k.m.m.Model(extra,b'').code)
+  extra=[P/'private/ghidra/countdown-expiry/instructions-0001eac0.txt']+[P/'private/ghidra/mule-contact-191'/f'instructions-000{x}.txt'for x in('6eda0','5c840')]
+  self.files+=extra;added=g.k.m.m.Model(extra,b'').code
+  for pc,(op,args)in list(added.items()):
+   if op=='MOV'and '['in args[0]and not args[0].startswith(('byte ptr ','word ptr ','dword ptr '))and self.width(args[1])in(8,16):
+    added[pc]=(op,[('byte ptr 'if self.width(args[1])==8 else'word ptr ')+args[0],*args[1:]]);self.width_fixes.append(hex(pc))
+  self.code.update(added)
   order=sorted(self.code);self.next=dict(zip(order,order[1:]))
 PORTS=['83140 render enqueue returns0; numeric world retained','41910 audio engine deferred via RET10; source1E810 wrapper remains interpreted','2C200 UI cleanup deferred','5E068 portrait/module refresh deferred to5E0A3']
 def main():

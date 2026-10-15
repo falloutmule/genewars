@@ -8,6 +8,18 @@ import argparse,importlib.util,json,struct,uuid
 P=Path(__file__).resolve().parents[2]
 spec=importlib.util.spec_from_file_location('neutral_width_source',Path(__file__).with_name('zone-credit-captured-review.py'))
 c=importlib.util.module_from_spec(spec);spec.loader.exec_module(c);g=c.g
+class Source(c.Source):
+ def __init__(self,backing):
+  super().__init__(backing)
+  # Exact trivial virtual10 getters reached when a zone marker shares the
+  # target-query cell. Keep real predicate returns, never skip the candidate.
+  extra=[P/'private/ghidra/countdown-expiry/instructions-0001eac0.txt']+[P/'private/ghidra/mule-contact-191'/f'instructions-000{x}.txt'for x in('6eda0','5c840')]
+  self.files+=extra;added=g.k.m.m.Model(extra,b'').code
+  for pc,(op,args)in list(added.items()):
+   if op=='MOV'and '['in args[0]and not args[0].startswith(('byte ptr ','word ptr ','dword ptr '))and self.width(args[1])in(8,16):
+    added[pc]=(op,[('byte ptr 'if self.width(args[1])==8 else'word ptr ')+args[0],*args[1:]]);self.width_fixes.append(hex(pc))
+  self.code.update(added)
+  order=sorted(self.code);self.next=dict(zip(order,order[1:]))
 PORTS=['83140 render enqueue returns0; numeric world retained','41910 audio engine deferred via RET10; source1E810 wrapper remains interpreted','2C200 UI cleanup deferred','5E068 portrait/module refresh deferred to5E0A3']
 def main():
  ap=argparse.ArgumentParser(description=__doc__)
@@ -36,7 +48,7 @@ def main():
     if enemy[0x78]!=7 or enemy[0x61]!=0 or enemy[0x60]!=0xc8 or enemy[0x4f]!=0 or enemy[0x5d]!=0 or any(enemy[off:off+3]!=expected_ref for off in(0x50,0x55,0x58)):
      raise ValueError('unsupported reciprocal owned hostile target')
   state,seed,resources=g.prepare(buffers);g.k.put(state,0x11878c,1,1)
-  vm=c.Source(buffers['backing.bin'])
+  vm=Source(buffers['backing.bin'])
   run,_,trace=vm.run(entry=0x5ed20,counter=args.frame,seed=seed,state_before=state,registers={'EAX':0x1542be+args.slot*124},instruction_budget=500000)
   result=g.export(vm,buffers)
   for name,data in result.items():(out/name).write_bytes(data)

@@ -87,7 +87,7 @@ impl ActorWorld {
       let delta=[word(&linked,7),word(&linked,9)];let other=[word(&enemy,7),word(&enemy,9)];
       let z=(i32::from_le_bytes(enemy[39..43].try_into().unwrap()).wrapping_sub(i32::from_le_bytes(linked[39..43].try_into().unwrap())))>>3;
       let distance=(genewars_core::cd_candidate::distance_squared_wrapping_15(delta,other)as i32).wrapping_add(z.wrapping_mul(z));
-      if distance<=16384{return Err(CreatureError::UnsupportedMotionState);}
+      if distance<=16384{linked=crate::mule_hostile_contact::plan_false_contact(&linked,&enemy,physics).map_err(|_|CreatureError::UnsupportedMotionState)?;}
       //5D360 owned phase3 requires the species4 player genetics predicate.
       //Only its actual zero/no-action branch is reconstructed here.
       if phase&3==3&&(linked[0x61]&4!=0||world.player(0).map_err(|_|CreatureError::UnsupportedMotionState)?.bytes()[0x6cb]!=0){return Err(CreatureError::UnsupportedMotionState);}
