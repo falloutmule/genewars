@@ -587,7 +587,10 @@ pub fn select_landing_startup_seed(
   let rng=LandingRng{seed:1,ring:0,draw_count:0};let pool=[[0;81];200];
   let edge=plan_landing_effect6_factory(&pool,0,[0,0],0,0,1,[2048,2048,1],None,1024,rng,&[0;2048],&[0;2048]).unwrap();
   assert_eq!(word(&edge.factory.after_nonpointer,57),2048);
-  assert!(plan_landing_effect6_factory(&pool,0,[0,0],0,0,1,[2049,0,1],None,1024,rng,&[0;2048],&[0;2048]).is_err());
+  // Source1F070 sign-extends angles, then indexes angle+1536 below512,
+  // angle-512 otherwise. The prior2048 ceiling predates the smoke repair.
+  for angle in [2049u16,2559,(-1536i16)as u16]{assert!(plan_landing_effect6_factory(&pool,0,[0,0],0,0,1,[angle,0,1],None,1024,rng,&[0;2048],&[0;2048]).is_ok());}
+  for angle in [2560u16,(-1537i16)as u16]{assert!(plan_landing_effect6_factory(&pool,0,[0,0],0,0,1,[angle,0,1],None,1024,rng,&[0;2048],&[0;2048]).is_err());}
   let mut a=factory().after_nonpointer;a[69]=6;put_word(&mut a,45,i16::MIN);put_word(&mut a,47,i16::MIN);put_word(&mut a,49,-1);
   assert_eq!(plan_effect6_flight(&a,6272,40,1632,true,[3136;4],128,&[0;257]),Err(LandingError::UnsupportedPhysicsState));
   put_dword(&mut a,39,6272);assert_eq!(effect6_grounded_candidate(&a,6272,&[0;257],&[0;2048],&[0;2048]),Err(LandingError::UnsupportedPhysicsState));
