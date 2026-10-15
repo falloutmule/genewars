@@ -204,7 +204,11 @@ impl ActorWorld {
                     if raw[2]==0 {
                         let choice=crate::mule_lost_food::plan_lost_food(record,*rng).map_err(|_|CreatureError::UnsupportedMotionState)?;
                         let saved_cell=floor_cell([word(record,7),word(record,9)]);
-                        if world.mule_cell_entry_predicate(&choice.record_after,saved_cell).map_err(|_|CreatureError::UnsupportedCellEntry)?{return Err(CreatureError::UnsupportedCellEntry);}
+                        if world.mule_cell_entry_predicate(&choice.record_after,saved_cell).map_err(|_|CreatureError::UnsupportedCellEntry)?{
+                            //66120..66181 shares the exact radius256 relocation writes.
+                            let relocation=crate::mule_retry_relocation::plan_relocation(&choice.record_after,choice.rng_after,trig).map_err(|_|CreatureError::UnsupportedCellEntry)?;
+                            *rng=relocation.rng_after;return Ok(relocation.record_after);
+                        }
                         *rng=choice.rng_after;return Ok(choice.record_after);
                     }
                     if raw[2]!=2||world.mule_plant_flags(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?&8!=0||world.mule_plant_health(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?<=0{return Err(CreatureError::UnsupportedMotionState);}
@@ -266,8 +270,8 @@ impl ActorWorld {
     /// Opt-in immutable callback fixture for source comparison; absent in release.
     #[cfg(debug_assertions)]
     pub(super) fn capture_numeric_callback(&self,slot:usize,frame:u32,phase:&str){
-        let extra=std::env::var("GENEWARS_MULE_CALLBACK_FRAME").ok().and_then(|v|v.parse::<u32>().ok());
-        if !phase.starts_with("blocked-before")&&extra.map_or(frame>1,|requested|frame!=requested){return;} // Explicit frame or default first two.
+        let extra=std::env::var("GENEWARS_MULE_CALLBACK_FRAME").ok().map(|v|v.split(',').map(str::parse::<u32>).collect::<Result<Vec<_>,_>>().expect("explicit numeric callback frames"));
+        if !phase.starts_with("blocked-before")&&extra.as_ref().map_or(frame>1,|requested|!requested.contains(&frame)){return;} // Explicit frame or default first two.
         let Some(root)=std::env::var_os("GENEWARS_MULE_CALLBACK_FIXTURE") else{return;};
         let dir=std::path::PathBuf::from(root).join(format!("frame-{frame}-slot-{slot}-{phase}"));
         std::fs::create_dir(&dir).expect("new immutable Mule callback fixture");

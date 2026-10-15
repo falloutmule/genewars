@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "cases": 1,
+  "compared_bytes": 131,
+  "scope": "Actual1948 literal66120..66184 versus existing retryrelocation; caller proves66112 savedcell predicate true andneutral6BDD0false; ordinarytail excluded",
+  "production_sha256": "28d5520ec9efbc689889a67ee85ca9139fe969e09820a54b8ed5171246a235ec",
+  "boundary": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-pair-boundaries\\2f61b5dea32541d4bdd3ac628dc3d8b8"
+}
