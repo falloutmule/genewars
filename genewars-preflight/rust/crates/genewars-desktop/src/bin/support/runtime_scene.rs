@@ -8,6 +8,7 @@ use super::{menu_art,runtime_resources::{read_bound,Resources,Frame},status_text
 use super::shared_scene::SharedMission;
 #[path="building_menu.rs"] mod building_menu;
 #[path="campaign_scene.rs"] mod campaign_scene;
+#[path="owned_mule_control.rs"] mod owned_mule_control;
 
 #[derive(Clone,Copy,Debug,PartialEq,Eq)]
 pub enum Scene { Menu, Loading, Mission, Victory, Campaign, Options, Error, Quit }
@@ -62,6 +63,8 @@ pub struct GenepodSelection { pub slot:u16, pub state:u8, pub list:i8, pub contr
 
 pub struct Game {
     pub genepod:Option<GenepodSelection>,
+    mule_focus:Option<u16>, mule_press:bool,
+    mule_manager:[u8;0x59d], mule_packet:genewars_runtime::mule_human_producer::CommandPacket,
     root: PathBuf,
     pub building_menu_open:bool, building_menu_capture:Option<u8>, building_feedback:Option<String>, pub placement_selector:Option<u8>,
     pub scene: Scene, pub mission: Option<Mission>, pub victory:Option<VictoryDisplay>, pub campaign:Option<CampaignState>,
@@ -84,12 +87,13 @@ impl Game {
     pub fn open(root:&Path)->Result<Self,String> {
         let palette=Palette256::parse(&read_bound(&root.join("menu/titlescr.pal"))?,PaletteChannelMode::Rgb).map_err(|e|e.to_string())?;
         let (images,button,_,_)=menu_art::compose(&root.join("menu"),&palette)?;
-        Ok(Self { genepod:None,root:root.into(),building_menu_open:false,building_menu_capture:None,building_feedback:None,placement_selector:None, scene:Scene::Menu,mission:None,victory:None,campaign:None,images,button,
+        Ok(Self { genepod:None,mule_focus:None,mule_press:false,mule_manager:[0;0x59d],mule_packet:genewars_runtime::mule_human_producer::CommandPacket{words:[0;5],opcode:0},root:root.into(),building_menu_open:false,building_menu_capture:None,building_feedback:None,placement_selector:None, scene:Scene::Menu,mission:None,victory:None,campaign:None,images,button,
             controls:MenuCallback0State::default(),cursor:None,left:false,right:false,mask:0,
             automatic:false,start_running:false,error:None,landing_seed:None,reference_startup:false,campaign_system:0,carry_records:[0;600],trace:vec!["Menu".into()],ticks:Vec::new(),presented:0 })
     }
 
     fn transition(&mut self, scene:Scene) {
+        self.clear_mule_focus();self.mule_manager=[0;0x59d];self.mule_packet=genewars_runtime::mule_human_producer::CommandPacket{words:[0;5],opcode:0};
         self.building_menu_open=false;self.building_menu_capture=None;self.building_feedback=None;self.placement_selector=None;
         self.genepod=None;self.scene=scene; self.trace.push(format!("{scene:?}"));
         self.controls=MenuCallback0State::default();self.mask=0;self.left=false;self.right=false;
@@ -101,7 +105,7 @@ impl Game {
         match (x.checked_sub(140),y.checked_sub(top)) { (Some(x),Some(y))=>self.button.hit_test(x,y), _=>false }
     }
 
-    pub fn pointer(&mut self,cursor:Option<(i32,i32)>) {self.cursor=cursor;self.packet(false,false);}
+    pub fn pointer(&mut self,cursor:Option<(i32,i32)>) {if cursor.is_none(){self.mule_press=false;}self.cursor=cursor;self.packet(false,false);}
     pub fn left(&mut self,down:bool) {
         let changed=self.left!=down;self.left=down;if !changed{return;}
         if self.building_menu_open {
@@ -127,15 +131,15 @@ impl Game {
     }
     pub fn toggle_building_menu(&mut self){
         if self.scene==Scene::Mission&&self.mission.as_ref().is_some_and(|m|matches!(m.world,MissionState::Landing(_))){
-            self.building_menu_open=!self.building_menu_open;self.building_menu_capture=None;self.building_feedback=None;
+            self.clear_mule_focus();self.building_menu_open=!self.building_menu_open;self.building_menu_capture=None;self.building_feedback=None;
             self.automatic=false;self.trace.push(format!("ConstructionMenu:{}",self.building_menu_open));
         }
     }
-    pub fn right(&mut self,down:bool) {let pressed=down&&!self.right;self.right=down;self.packet(false,false);if pressed&&!self.building_menu_open&&self.scene==Scene::Mission {if let Some((x,y))=self.cursor {if let Some(selector)=self.placement_selector{if let Err(e)=self.place_selected_building_type(selector,[x,y]){self.error=Some(e);}}else{self.order([x,y]);}}}}
-    pub fn cancel_capture(&mut self) {self.building_menu_capture=None;self.cursor=None;self.left=false;self.right=false;self.packet(false,true);}
+    pub fn right(&mut self,down:bool) {if self.mule_focus.is_some(){if down{self.clear_mule_focus();}self.right=down;return;}let pressed=down&&!self.right;self.right=down;self.packet(false,false);if pressed&&!self.building_menu_open&&self.scene==Scene::Mission {if let Some((x,y))=self.cursor {if let Some(selector)=self.placement_selector{if let Err(e)=self.place_selected_building_type(selector,[x,y]){self.error=Some(e);}}else{self.order([x,y]);}}}}
+    pub fn cancel_capture(&mut self) {self.clear_mule_focus();self.building_menu_capture=None;self.cursor=None;self.left=false;self.right=false;self.packet(false,true);}
 
     fn packet(&mut self,press:bool,release:bool) {
-        if self.scene==Scene::Mission { if let Err(e)=self.genepod_packet(press,release){self.error=Some(e);} return; }
+        if self.scene==Scene::Mission { if self.mule_focus.is_some(){if let Err(e)=self.mule_port_packet(press,release){self.error=Some(e);}return;} if let Err(e)=self.genepod_packet(press,release){self.error=Some(e);} return; }
         if self.scene!=Scene::Menu {return;}
         let first=MenuControl::hit_order().into_iter().find(|&c|self.hit(c));
         let captured=self.controls.captured().is_some_and(|c|self.hit(c));
@@ -210,6 +214,9 @@ impl Game {
 
     pub fn tick(&mut self) {
         if self.scene!=Scene::Mission {return;}
+        // No pool generation token exists: expire port focus before any callbacks
+        // can retire and reuse a creature slot. Commands themselves remain active.
+        self.clear_mule_focus();
         let Some(m)=&mut self.mission else {return;};
         if m.blocked.is_some() {return;}
         if self.ticks.len()>=32768 {m.blocked=Some("Development trace limit (32768 steps) reached".into());return;}
@@ -242,6 +249,7 @@ impl Game {
     /// Development actor selection; original portrait/hit selection remains
     /// separate from the source ground-command dispatcher used below.
     pub fn select_actor(&mut self,slot:Option<usize>) {
+        self.clear_mule_focus();
         if self.scene!=Scene::Mission {return;}
         let Some(m)=&mut self.mission else{return;};
         let MissionState::Landing(current)=&m.world else{return;};
@@ -287,6 +295,7 @@ impl Game {
     }
     /// Port chooser geometry, original select-then-target construction semantics.
     pub fn choose_building_type(&mut self,selector:u8)->Result<(),String>{
+        self.clear_mule_focus();
         if self.scene!=Scene::Mission||!self.building_choices().contains(&selector){return Err("building is not available".into());}
         self.placement_selector=Some(selector);self.error=None;
         self.building_feedback=Some(format!("{} SELECTED - RIGHT CLICK GROUND TO BUILD",building_menu::label(selector)));
@@ -303,6 +312,7 @@ impl Game {
         self.trace.push(format!("ConstructionPlacement: {result}"));Ok(())
     }
     fn start_building_command(&mut self,selector:Option<u8>)->Result<(),String> {
+        self.clear_mule_focus();
         if self.scene!=Scene::Mission {return Err("build-start requires the mission scene".into());}
         let m=self.mission.as_mut().ok_or("mission scene lacks world")?;
         let MissionState::Landing(current)=&m.world else{return Err("build-start requires the architect development world".into());};
@@ -322,6 +332,7 @@ impl Game {
     }
 
     pub fn escape(&mut self) {
+        if self.mule_focus.is_some(){self.clear_mule_focus();return;}
         if self.genepod.take().is_some(){self.building_feedback=None;return;}
         if self.building_menu_open{self.building_menu_open=false;self.building_menu_capture=None;return;}
         if self.placement_selector.take().is_some(){self.building_feedback=None;return;}
@@ -413,8 +424,8 @@ impl Game {
                     }
                 }else{status};
                 let lines=if let MissionState::Landing(w)=&m.world {
-                    vec![format!("{} - STEP {} - ACTOR {}",match w.runtime_context.as_ref().map(|c|c.origin()){Some(genewars_runtime::mission_context::ContextOrigin::CarriedCdKrell)=>"KRELL - RECONSTRUCTION",Some(_)=>"EXCELAND - RECONSTRUCTION",None=>"LANDING STUDY"},m.ticks,w.selected.map(|s|s.to_string()).unwrap_or("NONE".into())),
-                        self.error.clone().or_else(||w.feedback.clone()).or_else(||self.building_feedback.clone()).unwrap_or(status),"TAB: SELECT / RIGHT CLICK: MOVE OR PLACE / C: CONSTRUCTION".into(),if w.runtime_context.is_some(){let p=w.world.player(0).map_err(|e|e.to_string())?.bytes();if p[0x6e7]==1 {format!("ZONE CREDIT: {}/1000 - RESOURCES: {}",i32::from_le_bytes(p[0xd..0x11].try_into().unwrap()),i32::from_le_bytes(p[0x4a3..0x4a7].try_into().unwrap()))}else{format!("PHOTON PROCESSORS: {}/3 - RESOURCES: {}",p[0x606],i32::from_le_bytes(p[0x4a3..0x4a7].try_into().unwrap()))}}else{"PORT CONTROLS; SOURCE OPCODE16 PLACEMENT / B: DEV BTURR".into()}]
+                    vec![format!("{} - STEP {} - FOCUS {}",match w.runtime_context.as_ref().map(|c|c.origin()){Some(genewars_runtime::mission_context::ContextOrigin::CarriedCdKrell)=>"KRELL - RECONSTRUCTION",Some(_)=>"EXCELAND - RECONSTRUCTION",None=>"LANDING STUDY"},m.ticks,self.mule_focus.map(|s|format!("MULE {s}")).or_else(||w.selected.map(|s|format!("ACTOR {s}"))).unwrap_or("NONE".into())),
+                        self.error.clone().or_else(||self.mule_focus.and(self.building_feedback.clone())).or_else(||w.feedback.clone()).or_else(||self.building_feedback.clone()).unwrap_or(status),"TAB: ACTOR / M: PORT MULE FOCUS / C: BUILD".into(),if w.runtime_context.is_some(){let p=w.world.player(0).map_err(|e|e.to_string())?.bytes();if p[0x6e7]==1 {format!("ZONE CREDIT: {}/1000 - RESOURCES: {}",i32::from_le_bytes(p[0xd..0x11].try_into().unwrap()),i32::from_le_bytes(p[0x4a3..0x4a7].try_into().unwrap()))}else{format!("PHOTON PROCESSORS: {}/3 - RESOURCES: {}",p[0x606],i32::from_le_bytes(p[0x4a3..0x4a7].try_into().unwrap()))}}else{"PORT CONTROLS; SOURCE OPCODE16 PLACEMENT / B: DEV BTURR".into()}]
                 }else{vec![format!("PLANTS {} - STEP {} - CURSOR {}",m.world.plant_count(),m.ticks,m.world.schedule_cursor()),status,"ARROWS: VIEW - OTHER ENTITY SYSTEMS SUSPENDED".into()]};
                 (&m.frame.image,lines)
             },

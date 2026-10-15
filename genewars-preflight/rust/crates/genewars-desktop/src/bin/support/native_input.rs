@@ -8,7 +8,7 @@ pub fn dispatch(game:&mut Game,input:Input) {
     match input {
         Input::Pointer(p)=>game.pointer(p),Input::Left(v)=>game.left(v),Input::Right(v)=>game.right(v),
         Input::Key(key)=>{if game.building_menu_open&&!matches!(key.as_str(),"c"|"escape"){return;}match key.as_str() {
-            "c"=>game.toggle_building_menu(),"escape"=>game.escape(),"enter"=>game.toggle_run(),
+            "m"=>game.focus_next_mule(),"c"=>game.toggle_building_menu(),"escape"=>game.escape(),"enter"=>game.toggle_run(),
             "space"=>if game.scene==Scene::Options{game.toggle_run()}else{game.tick()},
             "tab"=>game.select_actor(None),"left"=>game.pan(-256,0),"right"=>game.pan(256,0),
             "up"=>game.pan(0,-256),"down"=>game.pan(0,256),
@@ -62,7 +62,7 @@ impl Replay {
         Ok(Self{actions,output})
     }
 }
-fn valid_key(k:&str)->bool{["escape","enter","space","tab","left","right","up","down","b","c"].contains(&k)}
+fn valid_key(k:&str)->bool{["escape","enter","space","tab","left","right","up","down","b","c","m"].contains(&k)}
 #[cfg(test)]mod tests {
     use super::*;
     #[test]fn rejects_gameplay_shortcuts_and_overwrites(){

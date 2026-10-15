@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "scope": "Frozen183 ordinary Exceland carry, authentic third-attempt Mule birth, qualified port M focus and armed left-release order toward original Krell zone; native/headless equality at next unsupported callback",
+  "native_observation": "private\\integration\\native-carried-krell-183b\\observations\\__blocked.json",
+  "headless_report": "private/integration/continued-krell-183/report.json",
+  "checks": {
+    "steps": true,
+    "blocked": true,
+    "world_sha256": true,
+    "actor_dispatch_audit": true,
+    "buildings": true,
+    "outcome": true,
+    "creature_states": true,
+    "issued_move_commands": true
+  },
+  "mule_trace": [
+    "PortMuleFocus:1",
+    "PortMuleOrder:1:[658, 24211]"
+  ],
+  "headless_step": 4801,
+  "native_step": 4801,
+  "headless_blocked": "Creatures(TargetSearchRequired)",
+  "native_blocked": "Creatures(TargetSearchRequired)",
+  "world_sha256": "75618eaa1b9e8e6581b17b5b90133198077a79a9214a142d65dc51637fd92821",
+  "process_exit": 1,
+  "limitations": [
+    "Original mixed-family hardware picking remains unresolved",
+    "Native/headless order issuance verified; subsequent movement callback blocked at4801",
+    "Krell not complete; campaign1/24"
+  ],
+  "visual_check": "Root inspected krell-mule-ordered.bmp; port focus/ground order shown, original actor portrait selection remains separate",
+  "preserved_failed_driver": "private/integration/native-carried-krell-183: stopped early because driver omitted M/camera/ground inputs; not accepted"
+}

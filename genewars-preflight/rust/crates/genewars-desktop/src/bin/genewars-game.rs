@@ -39,6 +39,7 @@ fn replay(game:&mut Game,text:&str)->Result<(),String>{
             ["tick",_]=>{let count=n(1)?;if !(1..=4096).contains(&count){return Err("tick count must be 1..4096".into());}for _ in 0..count {game.tick();replay_gameplay_ready(game,line+1)?;}},
             ["pan",_,_]=>game.pan(i16::try_from(n(1)?).map_err(|_|"pan dx outside i16")?,i16::try_from(n(2)?).map_err(|_|"pan dy outside i16")?),
             ["escape"]=>game.escape(),["toggle"]=>game.toggle_run(),
+            ["key","m"]=>game.focus_next_mule(),
             ["select",_]=>game.select_actor(Some(usize::try_from(n(1)?).map_err(|_|"negative actor slot")?)),
             ["order",_,_]=>game.order([n(1)?,n(2)?]),
             // Native development affordance only: coordinates pass through

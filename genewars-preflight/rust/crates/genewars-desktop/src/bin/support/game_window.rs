@@ -78,7 +78,8 @@ impl ApplicationHandler for Host<'_> {
                     Key::Named(NamedKey::ArrowLeft)=>Some("left"),Key::Named(NamedKey::ArrowRight)=>Some("right"),
                     Key::Named(NamedKey::ArrowUp)=>Some("up"),Key::Named(NamedKey::ArrowDown)=>Some("down"),
                     Key::Character(ref c) if c.eq_ignore_ascii_case("b")=>Some("b"),
-                    Key::Character(ref c) if c.eq_ignore_ascii_case("c")=>Some("c"),_=>None
+                    Key::Character(ref c) if c.eq_ignore_ascii_case("c")=>Some("c"),
+                    Key::Character(ref c) if c.eq_ignore_ascii_case("m")=>Some("m"),_=>None
                 };
                 if let Some(key)=key {native_input::dispatch(self.game,Input::Key(key.into()));}
                 self.redraw();
