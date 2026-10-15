@@ -1,0 +1,1765 @@
+{
+  "status": "passed",
+  "reference_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "source_pins": {
+    "private/ghidra/building-update/instructions-000451f0.txt": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+    "private/ghidra/activation-rng-refs/instructions-0005a210.txt": "a4231db59c02f98437afd6d7ea71e84d071c425c5fa7ef0b6a48d9c49053cf60",
+    "private/ghidra/building-loader-refs/instructions-000814a0.txt": "e8b748ce7d92c8651f4b658033994c4626c6737805f7d8d972a9c9a7c338f8ec"
+  },
+  "scope": "Literal45470 work/payment through45D8E or455C2; literal455C2 decision through4568F/459E8. Explicit endpoints exclude factory, effects, animation and full callback.",
+  "work_cases": [
+    {
+      "flags": 1,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 1,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 1,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 1,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 1,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 1,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 1,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 1,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 1,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 1,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 1,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 1,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 1,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 5,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 5,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 5,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 5,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 5,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 5,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 5,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 5,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 2
+    },
+    {
+      "flags": 5,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 5,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": true,
+      "work_after": 1
+    },
+    {
+      "flags": 257,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 257,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 0,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 0,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 0,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 1,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 1,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 1,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 6,
+      "grade": 0,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 6,
+      "grade": 1,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        0,
+        0
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        0,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    },
+    {
+      "flags": 65,
+      "frame": 6,
+      "grade": 2,
+      "funds": [
+        3,
+        20
+      ],
+      "paid": false,
+      "work_after": 0
+    }
+  ],
+  "distinct_payer_case": "passed",
+  "decision_cases": [
+    {
+      "quality": 0,
+      "grade": 0,
+      "seed": 0,
+      "roll": 0,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 0,
+      "grade": 0,
+      "seed": 1,
+      "roll": 30,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 0,
+      "seed": 5428,
+      "roll": 14,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 0,
+      "seed": 10548,
+      "roll": 46,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 0,
+      "seed": 65535,
+      "roll": 25,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 0,
+      "seed": 12345,
+      "roll": 76,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 0,
+      "seed": 32768,
+      "roll": 28,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 0,
+      "seed": 321,
+      "roll": 58,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 2,
+      "seed": 0,
+      "roll": 0,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 0,
+      "grade": 2,
+      "seed": 1,
+      "roll": 30,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 2,
+      "seed": 5428,
+      "roll": 14,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 2,
+      "seed": 10548,
+      "roll": 46,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 2,
+      "seed": 65535,
+      "roll": 25,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 2,
+      "seed": 12345,
+      "roll": 76,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 2,
+      "seed": 32768,
+      "roll": 28,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 0,
+      "grade": 2,
+      "seed": 321,
+      "roll": 58,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 35,
+      "grade": 0,
+      "seed": 0,
+      "roll": 0,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 0,
+      "seed": 1,
+      "roll": 30,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 0,
+      "seed": 5428,
+      "roll": 14,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 0,
+      "seed": 10548,
+      "roll": 46,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 0,
+      "seed": 65535,
+      "roll": 25,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 0,
+      "seed": 12345,
+      "roll": 76,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 35,
+      "grade": 0,
+      "seed": 32768,
+      "roll": 28,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 0,
+      "seed": 321,
+      "roll": 58,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 2,
+      "seed": 0,
+      "roll": 0,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 2,
+      "seed": 1,
+      "roll": 30,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 2,
+      "seed": 5428,
+      "roll": 14,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 2,
+      "seed": 10548,
+      "roll": 46,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 2,
+      "seed": 65535,
+      "roll": 25,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 2,
+      "seed": 12345,
+      "roll": 76,
+      "factory_path_selected": false
+    },
+    {
+      "quality": 35,
+      "grade": 2,
+      "seed": 32768,
+      "roll": 28,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 35,
+      "grade": 2,
+      "seed": 321,
+      "roll": 58,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 0,
+      "seed": 0,
+      "roll": 0,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 0,
+      "seed": 1,
+      "roll": 30,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 0,
+      "seed": 5428,
+      "roll": 14,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 0,
+      "seed": 10548,
+      "roll": 46,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 0,
+      "seed": 65535,
+      "roll": 25,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 0,
+      "seed": 12345,
+      "roll": 76,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 0,
+      "seed": 32768,
+      "roll": 28,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 0,
+      "seed": 321,
+      "roll": 58,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 2,
+      "seed": 0,
+      "roll": 0,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 2,
+      "seed": 1,
+      "roll": 30,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 2,
+      "seed": 5428,
+      "roll": 14,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 2,
+      "seed": 10548,
+      "roll": 46,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 2,
+      "seed": 65535,
+      "roll": 25,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 2,
+      "seed": 12345,
+      "roll": 76,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 2,
+      "seed": 32768,
+      "roll": 28,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 50,
+      "grade": 2,
+      "seed": 321,
+      "roll": 58,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 0,
+      "seed": 0,
+      "roll": 0,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 0,
+      "seed": 1,
+      "roll": 30,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 0,
+      "seed": 5428,
+      "roll": 14,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 0,
+      "seed": 10548,
+      "roll": 46,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 0,
+      "seed": 65535,
+      "roll": 25,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 0,
+      "seed": 12345,
+      "roll": 76,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 0,
+      "seed": 32768,
+      "roll": 28,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 0,
+      "seed": 321,
+      "roll": 58,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 2,
+      "seed": 0,
+      "roll": 0,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 2,
+      "seed": 1,
+      "roll": 30,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 2,
+      "seed": 5428,
+      "roll": 14,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 2,
+      "seed": 10548,
+      "roll": 46,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 2,
+      "seed": 65535,
+      "roll": 25,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 2,
+      "seed": 12345,
+      "roll": 76,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 2,
+      "seed": 32768,
+      "roll": 28,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 100,
+      "grade": 2,
+      "seed": 321,
+      "roll": 58,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 0,
+      "seed": 0,
+      "roll": 0,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 0,
+      "seed": 1,
+      "roll": 30,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 0,
+      "seed": 5428,
+      "roll": 14,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 0,
+      "seed": 10548,
+      "roll": 46,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 0,
+      "seed": 65535,
+      "roll": 25,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 0,
+      "seed": 12345,
+      "roll": 76,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 0,
+      "seed": 32768,
+      "roll": 28,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 0,
+      "seed": 321,
+      "roll": 58,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 2,
+      "seed": 0,
+      "roll": 0,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 2,
+      "seed": 1,
+      "roll": 30,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 2,
+      "seed": 5428,
+      "roll": 14,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 2,
+      "seed": 10548,
+      "roll": 46,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 2,
+      "seed": 65535,
+      "roll": 25,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 2,
+      "seed": 12345,
+      "roll": 76,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 2,
+      "seed": 32768,
+      "roll": 28,
+      "factory_path_selected": true
+    },
+    {
+      "quality": 150,
+      "grade": 2,
+      "seed": 321,
+      "roll": 58,
+      "factory_path_selected": true
+    }
+  ],
+  "original_execution": false,
+  "native_acceptance": "not_run"
+}
