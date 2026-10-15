@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "cases": 1,
+  "compared_bytes": 131,
+  "scope": "Actual1279 literal688B8 to693AE currentrecord/RNG versus extracted production feeding prefix; nutrition8, retiredtrue; globalplant retirement/peer cleanup and linkbytes0..5 are explicit caller obligations",
+  "source_boundary": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-pair-boundaries\\349b2055a53f43a78a4768b9b4198a38",
+  "production_sha256": "d51ba8096ba9b1744f4f0a18c18e298901e46a8b06d0b22b3d031021b84abb3e",
+  "extracted_sha256": "6c83e5a6b3d56f60a92b48322273b507c4bef370ebadeb6f11ce41dd0cf10fa4"
+}

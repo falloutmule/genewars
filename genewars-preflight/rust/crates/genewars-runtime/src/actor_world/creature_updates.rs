@@ -81,7 +81,7 @@ impl ActorWorld {
         }
         let query_world=std::cell::RefCell::new(self.clone());let rng_state=std::cell::RefCell::new(rng);
         let links_moved=std::cell::Cell::new(false);
-        let mut pending_pair=None;let mut newborn_slots=Vec::new();let mut failed_action_dispatched=false;
+        let mut pending_pair=None;let mut newborn_slots=Vec::new();let mut failed_action_dispatched=false;let mut retired_during_feeding=false;
         let mut reserve_plant=None;let mut release_plant=None;let mut fed_plant=None;let mut pending_audio=Vec::new();let mut pending_plant_retirements=Vec::new();
         let(plan,water_effect)=creature_world::plan_mule_after_admitted_prefix_with_cell_entry(&before,&prefix,working_target,self.map(),context,physics,trig,
             |record,normal,previous|query_world.borrow().mule_contact_speed(record,normal,previous).map_err(|_|CreatureError::MotionEnvironment),
@@ -176,13 +176,15 @@ impl ActorWorld {
                     let params=world.plants.as_ref().ok_or(CreatureError::MotionEnvironment)?.parameters.slot(selector as usize).map_err(|_|CreatureError::MotionEnvironment)?;
                     let retired=health<=3;
                     if retired&&(params.retirement_delay_u8>=4||world.mule_plant_flags(id).map_err(|_|CreatureError::MotionEnvironment)?&0x88!=0){return Err(CreatureError::UnsupportedMotionState);}
-                    let choice=if retired {creature_world::plan_mule_plant_feed_after_retirement(record,params.nutrition_u8,*rng)?}else{creature_world::plan_mule_plant_feed(record,params.nutrition_u8,*rng)?};*rng=choice.rng_after;fed_plant=Some(id);
+                    let nutrition=params.nutrition_u8;let feeding_rng=*rng;
+                    if retired{world.retire_mule_food_plant(id as u16).map_err(|_|CreatureError::UnsupportedMotionState)?;retired_during_feeding=true;pending_plant_retirements.push(id as u16);}else{fed_plant=Some(id);}
+                    let mut choice=if pair_query {creature_world::plan_mule_feeding_query_prefix(record,nutrition,feeding_rng,retired)?}else if retired{creature_world::plan_mule_plant_feed_after_retirement(record,nutrition,feeding_rng)?}else{creature_world::plan_mule_plant_feed(record,nutrition,feeding_rng)?};*rng=choice.rng_after;
+                    if retired{choice.after[..6].copy_from_slice(&world.creatures.as_ref().unwrap().record(slot)?[..6]);}
                     let pair_resources_ready=word(&choice.after,0x68)>(word(&choice.after,0x62)>>1);
                     if pair_query&&!pair_resources_ready{world.check_mule_neutral_neighbors(&choice.after,own,[word(&choice.after,7),word(&choice.after,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;}
                     if pair_query&&pair_resources_ready{
-                        // This bounded branch excludes retirement/full feeding;
-                        // those source fallbacks need their own continuation.
-                        if retired||choice.after[0x5e]!=7{return Err(CreatureError::UnsupportedNeighborhood);}
+                        //69334 pair success precedes retirement/full fallback.
+                        if choice.after[0x5e]!=7{return Err(CreatureError::UnsupportedNeighborhood);}
                         let peer=world.mule_feeding_pair_candidate(&choice.after,choice.rng_before).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
                         if let Some(peer_id)=peer{
                             if world.creatures.as_ref().unwrap().binding(peer_id as usize)?!=Some(CreatureAnimationBinding::MuleSelector4){return Err(CreatureError::UnsupportedNeighborhood);}
@@ -193,8 +195,9 @@ impl ActorWorld {
                             pending_audio.push(0x12);return Ok(pair.current_after);
                         }
                     }
+                    if pair_query{choice=if retired{creature_world::plan_mule_plant_feed_after_retirement(record,nutrition,feeding_rng)?}else{creature_world::plan_mule_plant_feed(record,nutrition,feeding_rng)?};*rng=choice.rng_after;if retired{choice.after[..6].copy_from_slice(&world.creatures.as_ref().unwrap().record(slot)?[..6]);}}
                     if choice.after[0x5e]==8&&world.mule_cell_entry_predicate(&choice.after,floor_cell([word(&choice.after,7),word(&choice.after,9)])).map_err(|_|CreatureError::UnsupportedCellEntry)?{return Err(CreatureError::UnsupportedCellEntry);}
-                    let full=record[0x61]&0x40!=0&&choice.after[0x61]&0x40==0;pending_audio.push(if full{0x1b}else{0x12});if retired{pending_plant_retirements.push(id as u16);}else if choice.after[0x5e]==8{release_plant=Some(id);}return Ok(choice.after);
+                    let full=record[0x61]&0x40!=0&&choice.after[0x61]&0x40==0;pending_audio.push(if full{0x1b}else{0x12});if !retired&&choice.after[0x5e]==8{release_plant=Some(id);}return Ok(choice.after);
                 }
                 if record[0x5e]==1 {
                     let raw=reference(record,0x55);
@@ -239,7 +242,7 @@ impl ActorWorld {
         if let Some(id)=reserve_plant {let l=staged.layouts[1];let at=l.file_offset+id as usize*l.packed_stride+0x26;staged.backing[at]|=1;}
         if let Some(id)=release_plant {let l=staged.layouts[1];let at=l.file_offset+id as usize*l.packed_stride+0x26;staged.backing[at]&=0xfe;}
         if let Some(id)=fed_plant {let l=staged.layouts[1];let at=l.file_offset+id as usize*l.packed_stride+0x24;let old=word(&staged.backing,at);staged.backing[at..at+2].copy_from_slice(&old.wrapping_sub(3).to_le_bytes());}
-        for id in &pending_plant_retirements {staged.retire_mule_food_plant(*id)?;}
+        if !retired_during_feeding{for id in &pending_plant_retirements {staged.retire_mule_food_plant(*id)?;}}
         if let Some((peer_id,before,after,releases))=pending_pair{
             staged.creatures.as_mut().unwrap().replace_record_checked(peer_id as usize,&before,&after)?;
             for id in releases{let l=staged.layouts[1];staged.backing[l.file_offset+id as usize*l.packed_stride+0x26]&=0xfe;}
@@ -264,7 +267,7 @@ impl ActorWorld {
     #[cfg(debug_assertions)]
     pub(super) fn capture_numeric_callback(&self,slot:usize,frame:u32,phase:&str){
         let extra=std::env::var("GENEWARS_MULE_CALLBACK_FRAME").ok().and_then(|v|v.parse::<u32>().ok());
-        if phase!="blocked-before"&&extra.map_or(frame>1,|requested|frame!=requested){return;} // Explicit frame or default first two.
+        if !phase.starts_with("blocked-before")&&extra.map_or(frame>1,|requested|frame!=requested){return;} // Explicit frame or default first two.
         let Some(root)=std::env::var_os("GENEWARS_MULE_CALLBACK_FIXTURE") else{return;};
         let dir=std::path::PathBuf::from(root).join(format!("frame-{frame}-slot-{slot}-{phase}"));
         std::fs::create_dir(&dir).expect("new immutable Mule callback fixture");

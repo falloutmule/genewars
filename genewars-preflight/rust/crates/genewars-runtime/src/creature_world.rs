@@ -759,14 +759,18 @@ pub fn plan_mule_plant_acquisition(before:&CreatureRecord,target_id:i16,target_p
 /// caller decrements planthealth by3 and emits the source virtual44 audio
 /// request in the same transaction, after proving a no-action neighborhood.
 pub fn plan_mule_plant_feed(before:&CreatureRecord,nutrition:u8,rng_before:crate::blueprint::BlueprintRng)->Result<InitialMuleChoice,CreatureError> {
-    plan_mule_plant_feed_inner(before,nutrition,rng_before,false)
+    plan_mule_plant_feed_inner(before,nutrition,rng_before,false,false)
 }
 /// Feeding completion after the owned adapter proves immediate plant death
 /// and the no-action scorer/current-cell predicates. UI cleanup stays pending.
 pub fn plan_mule_plant_feed_after_retirement(before:&CreatureRecord,nutrition:u8,rng_before:crate::blueprint::BlueprintRng)->Result<InitialMuleChoice,CreatureError> {
-    plan_mule_plant_feed_inner(before,nutrition,rng_before,true)
+    plan_mule_plant_feed_inner(before,nutrition,rng_before,true,false)
 }
-fn plan_mule_plant_feed_inner(before:&CreatureRecord,nutrition:u8,rng_before:crate::blueprint::BlueprintRng,retired:bool)->Result<InitialMuleChoice,CreatureError> {
+/// Feeding/query prefix before69334 mate selection; caller owns retirement cleanup.
+pub fn plan_mule_feeding_query_prefix(before:&CreatureRecord,nutrition:u8,rng_before:crate::blueprint::BlueprintRng,retired:bool)->Result<InitialMuleChoice,CreatureError>{
+    plan_mule_plant_feed_inner(before,nutrition,rng_before,retired,true)
+}
+fn plan_mule_plant_feed_inner(before:&CreatureRecord,nutrition:u8,rng_before:crate::blueprint::BlueprintRng,retired:bool,defer_fallback:bool)->Result<InitialMuleChoice,CreatureError> {
     if rng_before.ring>=32||before[6]!=1||before[0x18]!=4||before[0x5e]!=7||before[0x7a]!=4||before[0x76]>90||before[0x61]!=0x40||before[0x60]!=8
        ||before[0x57]!=2||motion_word(before,0x6c)&15!=0{return Err(CreatureError::UnsupportedMotionState);}
     let gain=i16::from(nutrition)*2;let reserve=motion_word(before,0x68).wrapping_add(gain);let energy=if before[0x77]==255 {motion_word(before,0x66)}else{motion_word(before,0x66).wrapping_sub(gain*2)};
@@ -774,7 +778,8 @@ fn plan_mule_plant_feed_inner(before:&CreatureRecord,nutrition:u8,rng_before:cra
     let full=reserve>motion_word(before,0x62);
     let mut after=*before;motion_put(&mut after,0x68,if full{motion_word(before,0x62)}else{reserve});motion_put(&mut after,0x66,energy);if full{after[0x61]&=0xbf;}
     let mut rng=rng_before;let mut draws=Vec::new();draw(&mut rng,CreatureRngPurpose::NeighborhoodX,&mut draws);draw(&mut rng,CreatureRngPurpose::NeighborhoodY,&mut draws);
-    if retired||full {
+    if retired{after[0x57]=0;}
+    if (retired||full)&&!defer_fallback {
         //724C0 clears the selected target kind.5CC60 then resets the
         //state7 action and69500 consumes one idle-delay draw.
         after[0x57]=0;after[0x15]&=0xdf;after[0x33..0x37].fill(0);let flags=motion_word(&after,0x60)as u16&0xd71a;motion_put(&mut after,0x60,flags as i16);after[0x5d]=0;

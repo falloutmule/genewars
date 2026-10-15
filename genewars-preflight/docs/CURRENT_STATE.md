@@ -1,4 +1,4 @@
-# GeneWars authoritative checkpoint — 2026-10-15 America/Denver
+# GeneWars authoritative checkpoint â€” 2026-10-15 America/Denver
 
 **Original campaign missions completable: 1 / 24 corroborated standard missions.** Exceland passes automated ordinary commands and repeated native window input/hit-testing on frozen004. **Integration-tested initialization transitions: 1 (Exceland -> Krell).** Krell remains synthetic-carry integration, not accepted campaign gameplay.
 
@@ -14,7 +14,9 @@ Exceland acceptance:research/integration/mission-001-acceptance-004.json. Frozen
 
 Krell synthetic carry lands three specialists by256. Camera[1536,15360]. Ordinary Extractor11 screen[320,234] ->world[1663,15487] completes909 health280/flag1. Architect returns normally. Distributor3 screen[224,299] ->world[1919,16511] builds and reacheshealth63 by1279. Next proposed Genepod0 screen[448,226] ->world[1919,14719], source-classified dry/unblocked footprint; actual placement pending.
 
-**Latest completed probe059:** private/integration/krell-construction-command-059.log. Stops1279slot0 Creatures(UnsupportedNeighborhood), transaction unchanged. Exact per-Mule fixture private/review/krell-mule-callbacks-059/frame-1279-slot-0-blocked-before; wholemission snapshot mission-frame-1279-blocked-before. combat_review recovering this next. This is unsupported behavior, not a gameplay loss. Exit0/expected blocked is not mission success.
+**Latest completed probe062:** private/integration/krell-construction-command-062.log. Stops1456slot2 Family8Motion(UnsupportedRecord), transaction unchanged. Exact per-family fixture private/review/krell-mule-callbacks-062/frame-1456-slot-2-blocked-before-family8; wholemission snapshot preserved. Positive hover expired and original building-to-zone target search is now required. combat_review recovering zone/state2; this is unsupported behavior, not loss. Probe061 passed to sameboundary after1279repair. Probe060 exposed real stale-cell-link retirement regression587, preserved and fixed by merging currentownedlinks after cleanup. Numeric fixtures auto-capture first Mule AND family8 errors, avoiding future recapture runs.
+
+1279 retirement/pairing FULL comparison passed all427369B/20333instructions/2draws (research/variants/krell-mule-1279-native.json). Retirement cleanup precedesquery; successfulpair skips idlefallback/draw. Pureprefix131B also passes. Runtime Genepod work/payment now wired through sharedfullcallback60sourcecases/437220B; idle96cases179712B stillpass. Terminal stagedrequests70cases511064B, actualworldterminal integration inprogress. Runtimegenepod4tests andnativeGamefixture1test pass; nativewindow/authenticKrell acceptance pending.
 
 Earlier failed Distributor screen[400,370] picked Water1031; retained054. Legal placement source receipt research/campaign/krell-placement-review.*. Water source cancellation now supports exactmessage13/reason5 vsBlocked12/reason6;20literalcases4,591,520B plus guards pass; hostcompiled, actualWaterfullcallback comparison pending. No actor reset or forced terrain/resources used.
 
@@ -40,9 +42,9 @@ Positive nonterminalwork/payment pure99cases721413B; work1stilltypedterminalboun
 
 ## Ownership and exact resumption
 
-Root:sharedengine/Muleintegration/commits/acceptance. combat_review:source1279callback. campaign_contract:desktopruntime_scene/runtime_resources/genewars-game/building_pick/catalog nativeGenepodwiring. native_input:newpuregenepod_terminal andsourcevalidation. No competing edits to owned files. Agents preserve work and communicate concrete receipts.
+Root:sharedengine/Muleintegration/commits/acceptance. combat_review:1456zone-target pureplanner/motion. campaign_contract:ownedMulecommand sourcecontract. native_input:NEWactor_world/genepod_production.rs terminaladapter; effect20 failure remainsunsupported untilrecovered. No competing edits to owned files. Agents preserve work and communicate concrete receipts.
 
-1. Read1279source packet whenready; repair smallestaffectedbranch andcomparefullafterimage. Preserve001..059 captures. Next replay060 NEW absolute fixture directory; neverreuse.
+1. Integrate1456 zoneplanner withactualbackingzones, comparefullcallback. Preserve001..062 captures. Next replay063 NEW absolute fixture directory; neverreuse.
 2. OneheavyCargo/replay atatime. Use CARGO_BUILD_JOBS=2,CARGO_PROFILE_TEST_OPT_LEVEL=1,C:/Python314/python.exe -B scripts/cargo.py test -p genewars-desktop --bin genewars-game krell_first_256 --offline --locked -- --nocapture. Env GENEWARS_KRELL_CONSTRUCTION_PROBE=1,GENEWARS_MULE_CALLBACK_FRAME=<actual repairedframe>,GENEWARS_MULE_CALLBACK_FIXTURE=<NEW existingABSOLUTEdir>. FirstMuleerror auto-captured; wholemission failures captured;requestedframe includes perMule/perfamily8before/after.
 3. Source compare:python -B research/variants/krell-mule-callback-review.py --before <before> --expected <after> --frame N --slot S. Inspect JSONstatus, notexit0alone. Use scripts/ghidra/krell_family8_1227_review.py for exacthover proof.
 4. Integrate nativeGenepod assets/control andproduction; focusedchecks then shortintegratedrun. Count Krell onlyafter authenticcarry ordinarycommands AND actualnativeinput acceptance. Recheck affectedExceland at meaningfulintegrationcheckpoint. Immutablebroadverification onlyatmilestones/release.

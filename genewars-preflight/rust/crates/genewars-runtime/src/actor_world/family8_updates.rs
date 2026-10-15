@@ -106,6 +106,13 @@ impl ActorWorld {
     pub fn step_family8_motion(&mut self, slot:u16, frame:u32, water:i32,
         physics:&PhysicsTables, trig:&TrigTables, animation:&Family8Animation,
         directions:&Family8DirectionalAnimations) -> Result<Family8StepReceipt,ActorWorldError> {
+        let result=self.step_family8_motion_inner(slot,frame,water,physics,trig,animation,directions);
+        #[cfg(debug_assertions)] if result.is_err(){self.capture_numeric_callback(slot as usize,frame,"blocked-before-family8");}
+        result
+    }
+    fn step_family8_motion_inner(&mut self, slot:u16, frame:u32, water:i32,
+        physics:&PhysicsTables, trig:&TrigTables, animation:&Family8Animation,
+        directions:&Family8DirectionalAnimations) -> Result<Family8StepReceipt,ActorWorldError> {
         #[cfg(debug_assertions)] self.capture_numeric_callback(slot as usize,frame,"family8-before");
         if !self.validate_links()?.contains(&(8,slot as i16)) {return Err(ActorWorldError::MissingFamily8Link(slot));}
         self.validate_family8_count()?;
