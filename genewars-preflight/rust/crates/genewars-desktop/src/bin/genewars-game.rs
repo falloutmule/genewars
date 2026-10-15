@@ -15,6 +15,7 @@ use std::{env,fs,io::{Read,Write},path::{Path,PathBuf},process};
 #[path="support/native_input.rs"] mod native_input;
 #[path="support/genepod_panel.rs"] mod genepod_panel;
 #[path="support/building_pick.rs"] mod building_pick;
+#[path="support/mule_pick.rs"] mod mule_pick;
 use runtime_scene::Game;
 
 fn read(path:&Path)->Result<Vec<u8>,String>{runtime_resources::read_bound(path)}
