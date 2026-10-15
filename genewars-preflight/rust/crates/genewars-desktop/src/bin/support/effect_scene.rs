@@ -27,6 +27,7 @@ const CODE_15: u8 = 0x15;
 const CODE_16: u8 = 0x16;
 const CODE_2C: u8 = 0x2c;
 const CODE_21: u8 = 0x21;
+const CODE_3C: u8 = 0x3c;
 const SPECIAL_ANIMATION: usize = 66;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -174,6 +175,11 @@ fn draw_effect_records_inner(
         let ground_origin = *ground_origins.get(slot).ok_or(EffectSceneError::SlotOutOfRange(slot))?;
         if record[6] != EFFECT_ACTIVE { return Err(EffectSceneError::InactiveSlot(slot)); }
         let code = record[69];
+        //4A08B/4AEEC: code3C shares2F's4ABEC owner-recolor path.
+        let owner_recolor_branch = matches!(code, CODE_47 | CODE_3C);
+        if code == CODE_3C && record[24] > 4 {
+            return Err(EffectSceneError::InvalidBinding { slot, code, binding });
+        }
         //4AF01/4AD0B: association kind0 always takes the common draw wrapper.
         if code==0x20&&record[73]!=0{return Err(EffectSceneError::InvalidBinding{slot,code,binding});}
         let expected_binding = match code {
@@ -187,6 +193,7 @@ fn draw_effect_records_inner(
             CODE_2C => Some(EffectAnimationBinding::EffAnimation44),
             CODE_21 => Some(EffectAnimationBinding::EffAnimation33),
             0x20 => Some(EffectAnimationBinding::EffAnimation32),
+            CODE_3C => Some(EffectAnimationBinding::EffAnimation60),
             _ => None,
         };
         if expected_binding.is_none() || binding != expected_binding {
@@ -202,7 +209,7 @@ fn draw_effect_records_inner(
         let animation_frame = record[0x1b];
         let main = decode_bound_frame(resources.effects.bytes(), binding, usize::from(animation_frame))
             .map_err(EffectSceneError::Resource)?;
-        if code == CODE_47 {
+        if owner_recolor_branch {
             for (component, value) in main.components.iter().enumerate() {
                 if value.flags != 0 {
                     return Err(EffectSceneError::UnsupportedComponentFlags {
@@ -218,7 +225,7 @@ fn draw_effect_records_inner(
 
         let virtual_height = read_i32(record, 0x27).wrapping_sub(read_i32(record, 0x11));
         let dy = virtual_height >> 6;
-        let color_origin = if code == CODE_47 {
+        let color_origin = if owner_recolor_branch {
             // The code2F wrapper subtracts height from its signed-16 input in
             // a 32-bit register and does not narrow the resulting Y coordinate.
             [i32::from(ground_origin[0]), i32::from(ground_origin[1]).wrapping_sub(dy)]
@@ -226,12 +233,12 @@ fn draw_effect_records_inner(
             [i32::from(ground_origin[0]), i32::from((i32::from(ground_origin[1]).wrapping_sub(dy)) as i16)]
         };
         let raw_shade = record[0x17];
-        let effective_shade = if code == CODE_47 {
+        let effective_shade = if owner_recolor_branch {
             i32::from(raw_shade).wrapping_add(virtual_height >> 7)
         } else if raw_shade == 0 { 0 } else {
             i32::from(raw_shade).wrapping_add(virtual_height >> 7)
         };
-        let direct = if code == CODE_47 { effective_shade >= 30 }
+        let direct = if owner_recolor_branch { effective_shade >= 30 }
             else { record[0x15] & 0x02 != 0 || effective_shade >= 30 };
         let fade_row = if direct { None } else {
             if !(0..64).contains(&effective_shade) {
@@ -239,7 +246,7 @@ fn draw_effect_records_inner(
             }
             Some(effective_shade as u8)
         };
-        let parity_blend = code != CODE_47 && record[0x15] & 0x10 != 0
+        let parity_blend = !owner_recolor_branch && record[0x15] & 0x10 != 0
             && frame_counter.wrapping_add(record[0x0f]) & 1 != 0;
 
         let mut item = EffectDrawReceipt {
@@ -278,7 +285,7 @@ fn draw_effect_records_inner(
         }
 
         let base_global = if parity_blend { 0x04 } else { 0 };
-        let owner_recolor_bias = (code == CODE_47)
+        let owner_recolor_bias = owner_recolor_branch
             .then(|| record[0x18].wrapping_mul(16).wrapping_sub(64));
         let (written, clipped) = draw_components_color(
             &main, color_origin, base_global, fade_row, owner_recolor_bias, &fade, &gla,
@@ -642,6 +649,89 @@ mod tests {
         assert!(receipt.shadow_pixels_written > 0);
         assert!(receipt.color_pixels_written > 0);
         assert!(destination.iter().any(|&pixel| pixel != 23));
+    }
+
+
+    #[test]
+    fn actual_code3c_frames_recolor_neutral_owner_then_fade_without_shadow() {
+        let resources = staged_resources();
+        let fade = TerrainFadeTable::parse(resources.fade_bytes()).unwrap();
+        let bindings = [Some(EffectAnimationBinding::EffAnimation60)];
+        let mut recolored = 0usize;
+        for frame_index in 0..6 {
+            let frame = decode_frame(resources.effects.bytes(), 60, frame_index).unwrap();
+            assert_eq!(frame.frame_offset, 4088 + frame_index as u32 * 14);
+            assert_eq!(frame.components.len(), 1);
+            assert!(frame.components.iter().all(|component| component.flags == 0));
+            for owner in [0u8, 2, 4] {
+                // Literal4ABEC: raw0 still adds height;29 fades,30 is direct.
+                // Bits2/10 cannot select ordinary direct/parity modes here.
+                for (raw_shade, shade, direct) in [(0u8, 4u8, false), (25, 29, false), (26, 30, true)] {
+                    let mut record = active_effect(CODE_3C, frame_index as u8, raw_shade);
+                    record[24] = owner; record[0x15] = 0x12;
+                    record[0x27..0x2b].copy_from_slice(&512i32.to_le_bytes());
+                    let mut actual = vec![23u8; 512 * 480];
+                    let receipt = draw_effect_records_inner(&resources, &[record], &bindings, &[0],
+                        &[[210, 170]], 1, 0, &mut actual, [512, 480], 512).unwrap();
+                    // Independent foreground walk of actual decoded resource,
+                    // following96870/96990's recolor-before-fade order.
+                    let mut expected = vec![23u8; 512 * 480];
+                    let mut opaque = 0;
+                    for component in &frame.components {
+                        for y in 0..usize::from(component.sprite.height) {
+                            for x in 0..usize::from(component.sprite.width) {
+                                let at = y * usize::from(component.sprite.width) + x;
+                                if !component.sprite.opaque[at] { continue; }
+                                opaque += 1;
+                                let px = 210 + i32::from(component.local[0]) + x as i32;
+                                let py = 162 + i32::from(component.local[1]) + y as i32;
+                                let mut color = component.sprite.indices[at];
+                                if color & 0xf0 == 0xc0 {
+                                    color = owner.wrapping_mul(16).wrapping_add(0xc0).wrapping_add(color & 15);
+                                    recolored += 1;
+                                }
+                                if !direct { color = fade.map_palette_index(shade, color).unwrap(); }
+                                expected[py as usize * 512 + px as usize] = color;
+                            }
+                        }
+                    }
+                    assert_eq!(actual, expected, "EFF60 frame{frame_index} owner{owner} shade{raw_shade}");
+                    let item = &receipt.items[0];
+                    assert_eq!(item.effective_shade, i32::from(shade));
+                    assert_eq!(item.shadow_pixels_written, 0);
+                    assert_eq!(item.special_pixels_written, 0);
+                    assert_eq!(item.color_pixels_written, opaque);
+                }
+            }
+        }
+        assert!(recolored > 0, "actual EFF60 literals must exercise owner recolor");
+    }
+    #[test]
+    fn code3c_keeps_i32_vertical_origin_and_rejects_invalid_inputs_atomically() {
+        let resources = staged_resources();
+        let bindings = [Some(EffectAnimationBinding::EffAnimation60)];
+        let mut tall = active_effect(CODE_3C, 0, 0); tall[24] = 4;
+        tall[0x27..0x2b].copy_from_slice(&(1i32 << 22).to_le_bytes());
+        let unchanged = vec![23u8; 512 * 480];
+        let mut pixels = unchanged.clone();
+        let receipt = draw_effect_records_inner(&resources, &[tall], &bindings, &[0], &[[0, 0]],
+            0, 0, &mut pixels, [512, 480], 512).unwrap();
+        assert_eq!(receipt.items[0].color_origin[1], -65536);
+        assert!(receipt.items[0].color_pixels_clipped > 0);
+        assert_eq!(pixels, unchanged);
+        for case in 0..3 {
+            let mut record = active_effect(CODE_3C, 0, 0); record[24] = 4;
+            let mut actual_bindings = bindings;
+            match case {
+                0 => record[24] = 5,
+                1 => actual_bindings[0] = Some(EffectAnimationBinding::EffAnimation6),
+                _ => record[0x1b] = 6,
+            }
+            let mut actual = unchanged.clone();
+            assert!(draw_effect_records_inner(&resources, &[record], &actual_bindings, &[0], &[[210, 170]],
+                0, 0, &mut actual, [512, 480], 512).is_err());
+            assert_eq!(actual, unchanged);
+        }
     }
 
     #[test]

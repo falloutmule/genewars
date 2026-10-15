@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "scope": "bounded original4ABEC rendering of code3C/EFF60; no live zone credit or native marker claim",
+  "original": "same owner recolor branch as2F, no shadow/parity, rawshade0 still adds height, signed32Y, neutralowner4 wraps palettebias0",
+  "resource_tests": "all6 actual EFF60 frames, owners0/2/4, raw0/height512, shade29/30, flags15ignored, tallY clipping, invalidowner5/binding/frame6 atomicrollback",
+  "checks": {
+    "effect_scene_passed": 12,
+    "game_passed": 80,
+    "runtime_passed": 244,
+    "release_build": "passed"
+  },
+  "evidence": "private/integration/marker-render-182.log",
+  "contract": "research/formats/zone-marker-render-contract.md",
+  "campaign_missions": 1
+}
