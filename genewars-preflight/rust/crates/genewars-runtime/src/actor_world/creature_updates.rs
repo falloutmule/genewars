@@ -19,6 +19,13 @@ pub struct MuleCallbackReceipt {
 }
 impl core::ops::Deref for MuleCallbackReceipt {type Target=creature_world::CommonPhysicsPlan<124>;fn deref(&self)->&Self::Target{&self.motion}}
 
+///73770 physical-Mule distance, shared by pursuit braking and pair AI.
+fn mule_pair_distance(first:&CreatureRecord,second:&CreatureRecord)->i32{
+    let a=[word(first,7),word(first,9)];let b=[word(second,7),word(second,9)];
+    let z=i32::from_le_bytes(second[0x27..0x2b].try_into().unwrap()).wrapping_sub(i32::from_le_bytes(first[0x27..0x2b].try_into().unwrap()))>>3;
+    (genewars_core::cd_candidate::distance_squared_wrapping_15(a,b)as i32).wrapping_add(z.wrapping_mul(z))
+}
+
 impl ActorWorld {
     /// One subsequently admitted Mule callback. Its record, raw map links
     /// and neighbor references commit together. Timer0 rechoice threads the
@@ -85,9 +92,17 @@ impl ActorWorld {
                     if record[0x61]&0x20!=0{
                         //69BE2..69C2B: wait/mark this arrival only. Starting
                         //the next atomic center movement remains bounded out.
-                        if (word(record,0x60)as u16&word(peer,0x60)as u16&0x2004)!=0x2000{return Err(CreatureError::UnsupportedMotionState);}
+                        if (word(record,0x60)as u16&word(peer,0x60)as u16&0x2004)!=0x2000{
+                            if mule_pair_distance(record,peer)>16384{return Ok(*record);}
+                            return Err(CreatureError::UnsupportedMotionState); //Source nextstate10.
+                        }
                         let mut after=*record;if word(record,0x49)as u16&0x200!=0{after[0x60]|=4;}
-                        if (word(&after,0x60)as u16&word(peer,0x60)as u16&0x2004)==0x2004{return Err(CreatureError::UnsupportedMotionState);}
+                        if (word(&after,0x60)as u16&word(peer,0x60)as u16&0x2004)==0x2004{
+                            let cell=floor_cell([word(record,7),word(record,9)]);
+                            let pair=crate::mule_pair_center::plan_center(&after,peer,cell as u16).map_err(|_|CreatureError::UnsupportedMotionState)?;
+                            pending_pair=Some((word(&raw,0)as u16,*peer,pair.peer_after,Vec::new()));
+                            return Ok(pair.current_after);
+                        }
                         return Ok(after);
                     }
                     let point=[word(peer,7),word(peer,9)];let saved_cell=floor_cell([word(record,7),word(record,9)]);
@@ -318,9 +333,7 @@ impl ActorWorld {
             //5AD70 virtualB8 uses the associated Mule's physical xyz,
             //even when74A50 repaired the ordinary goal back to self.
             let peer=self.creatures.as_ref().ok_or(CreatureError::MotionEnvironment)?.record(word(record,0x50)as usize)?;
-            let other=[word(peer,7),word(peer,9)];
-            let z=i32::from_le_bytes(peer[0x27..0x2b].try_into().unwrap()).wrapping_sub(i32::from_le_bytes(record[0x27..0x2b].try_into().unwrap()))>>3;
-            (genewars_core::cd_candidate::distance_squared_wrapping_15(point,other)as i32).wrapping_add(z.wrapping_mul(z))
+            mule_pair_distance(record,peer)
         }else{creature_world::common_distance_squared(self.map(),point,target)?};
         Ok(creature_world::plan_common_contact_speed(CommonSpeedInput{speed:word(record,0x41),desired_speed:desired,
             width:word(record,0x2b)as u16,flags_4a:record[0x4a],free_flight:false,ground_height:i32::from_le_bytes(record[0x11..0x15].try_into().unwrap()),
