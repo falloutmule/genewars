@@ -306,7 +306,7 @@ impl ActorWorld {
         resource:&crate::actor_resources::ActorAnimationDatabase<B>,owner_selected:bool,actor_selected:bool)
         ->Result<ArchitectStage0Receipt,ConstructionWorldError>{
         let before=self.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
-        if before[0x55]!=1||before[0x58]!=0||before[0x57]&3!=1||before[0x7e]!=0||before[0x82]!=1||!matches!(before[0x83],1|3|6|11){
+        if before[0x55]!=1||before[0x58]!=0||before[0x57]&3!=1||before[0x7e]!=0||before[0x82]!=1||!matches!(before[0x83],0|1|3|6|11){
             return Err(ConstructionWorldError::PendingTaskRequired);
         }
         let mut staged=self.clone();let mut staged_jobs=jobs.clone();
@@ -512,7 +512,7 @@ impl ActorWorld {
         let blueprint=self.construction_blueprint(id)?;let player=self.player(before[24])?.bytes();
         let primary=i32::from_le_bytes(player[0x4a3..0x4a7].try_into().unwrap());
         let secondary=i32::from_le_bytes(player[0x4a7..0x4ab].try_into().unwrap());
-        let plan=crate::construction_cancellation::plan_insufficient_selector1_cancellation(self.map(),&before,&blueprint,primary,secondary,owner_selected,actor_selected)
+        let plan=crate::construction_cancellation::plan_insufficient_genepod_or_selector1_cancellation(self.map(),&before,&blueprint,primary,secondary,owner_selected,actor_selected)
             .map_err(ConstructionWorldError::Cancellation)?;
         let mut staged=self.clone();
         staged.actors.replace_record_checked(usize::from(id),&before,&plan.after).map_err(ActorWorldError::from)?;

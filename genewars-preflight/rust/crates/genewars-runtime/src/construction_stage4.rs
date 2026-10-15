@@ -6,7 +6,7 @@ pub struct BuildingEffectRequest{pub code:u8,pub owner:u8,pub selector:u8,pub po
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct ConstructionStage4Plan{pub after:[u8;200],pub request:Option<BuildingEffectRequest>}
 pub fn plan_architect_stage4(before:&[u8;200],count:u8,flags:u8)->Result<ConstructionStage4Plan,ConstructionStage4Error>{
-    if before[6]!=3||before[0x55]!=9||before[0x7e]!=0||before[0x82]!=1||!matches!(before[0x83],1|3|6|11)
+    if before[6]!=3||before[0x55]!=9||before[0x7e]!=0||before[0x82]!=1||!matches!(before[0x83],0|1|3|6|11)
         ||i16::from_le_bytes(before[0x88..0x8a].try_into().unwrap())!=4||before[0x59]!=14||before[0x19]!=14{return Err(ConstructionStage4Error::UnsupportedActor);}
     if count==0||flags&!1!=0||before[0x1b]>=count{return Err(ConstructionStage4Error::InvalidAnimation);}
     let complete=before[0x1a]==0&&if flags&1!=0{before[0x1b]==0}else{before[0x1e]==0&&before[0x1b]==count-1};

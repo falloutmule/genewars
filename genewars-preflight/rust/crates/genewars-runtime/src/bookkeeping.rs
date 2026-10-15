@@ -81,7 +81,7 @@ fn plan_selector1_player_inner(before:&[u8;PLAYER_RECORD_BYTES],records:&[[u8;67
         // Newborn scheduling still requires its separate callback contract.
         if r[6]==0 {continue}
         active+=1;
-        if r[6]!=4||r[24]!=before[1]||(!matches!(r[0x2d],1|3|6|11)||(!admitted&&r[0x2d]!=1))||r[0x2e]!=0||r[0x15]&1!=0
+        if r[6]!=4||r[24]!=before[1]||(!matches!(r[0x2d],0|1|3|6|11)||(!admitted&&r[0x2d]!=1))||r[0x2e]!=0||r[0x15]&1!=0
             ||word(r,0x31)&(if completed_allowed{0x840}else{0x841})!=0
             ||word(r,15)as usize!=usize::from(before[1])*64+slot {
             return Err(BookkeepingError::UnsupportedBuilding)

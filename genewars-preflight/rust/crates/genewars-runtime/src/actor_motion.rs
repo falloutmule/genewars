@@ -148,7 +148,7 @@ pub fn plan_actor_post_motion_prefix(before:&ActorMotionRecord,blueprint:&[u8;36
 /// That branch clears actor73 and never invokes the charge callback57860.
 pub fn plan_actor_post_motion_prefix_with_class3(before:&ActorMotionRecord,blueprint:&[u8;36],frame:u32,class_speeds:&[i16;4],atan:&[u16;257],class3_unpowered:bool)->Result<ActorPostMotionPrefix,ActorMotionError> {
     if before[6]!=3 || before[0x70]&1==0 { return Err(ActorMotionError::Inactive); }
-    let queued_architect=before[0x7e]==0&&before[0x82]==1&&matches!(before[0x83],1|3|6|11)&&blueprint[0x16]==0;
+    let queued_architect=before[0x7e]==0&&before[0x82]==1&&matches!(before[0x83],0|1|3|6|11)&&blueprint[0x16]==0;
     if !matches!(before[0x55],1|8) || before[0x58]&1!=0 || (before[0x57]&1!=0&&!queued_architect) || before[0x70]&0x40!=0 || blueprint[0x15]>3 || (blueprint[0x15]==3&&!class3_unpowered) || blueprint[0x16]>3 { return Err(ActorMotionError::UnsupportedState); }
     if before[0x55]==8 && (before[0x49]&0x60!=0 || before[0x58]==0) { return Err(ActorMotionError::UnsupportedState); }
     let mut a=*before;let mut b=*blueprint;
@@ -281,7 +281,7 @@ pub fn plan_actor_arrival_idle(before:&ActorMotionRecord,blueprint:&[u8;36],fram
 ///Periodic blueprint recovery remains the owning callback's responsibility.
 pub fn plan_actor_arrival_pending_architect(before:&ActorMotionRecord,blueprint:&[u8;36],mut rng:ActorCallbackRng)->Result<ActorIdlePlan,ActorMotionError>{
     if rng.ring>=32{return Err(ActorMotionError::InvalidRng);}
-    if before[6]!=3||before[0x55]!=8||before[0x49]&0x73!=0x20||before[0x58]!=2||before[0x57]&3!=1||before[0x70]&0x70!=0||before[0x71]&16!=0||before[0x7e]!=0||before[0x82]!=1||!matches!(before[0x83],1|3|6|11)||blueprint[0x16]!=0||blueprint[0x15]>=3{return Err(ActorMotionError::UnsupportedState);}
+    if before[6]!=3||before[0x55]!=8||before[0x49]&0x73!=0x20||before[0x58]!=2||before[0x57]&3!=1||before[0x70]&0x70!=0||before[0x71]&16!=0||before[0x7e]!=0||before[0x82]!=1||!matches!(before[0x83],0|1|3|6|11)||blueprint[0x16]!=0||blueprint[0x15]>=3{return Err(ActorMotionError::UnsupportedState);}
     let mut a=*before;let mut draws=Vec::new();
     //526C0 success withDL1 precedes the57D4F state reset.
     a[0x16]&=0x3f;a[0x54]=0;a[0x49]&=!16;a[0x58]&=!2;

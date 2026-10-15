@@ -10,7 +10,7 @@ pub fn plan_incomplete_selector1(before:&[u8;67],animation0_holds:&[u8])->Result
 /// Common451F0 incomplete path with source selector-specific audio stops.
 pub fn plan_incomplete_admitted(before:&[u8;67],animation0_holds:&[u8])->Result<IncompleteBuildingPlan,BuildingCallbackError>{
     let flags=u16::from_le_bytes(before[0x31..0x33].try_into().unwrap());
-    if before[6]!=4||before[0x18]>=4||!matches!(before[0x2d],1|3|6|11)||flags&0x841!=0 {
+    if before[6]!=4||before[0x18]>=4||!matches!(before[0x2d],0|1|3|6|11)||flags&0x841!=0 {
         return Err(BuildingCallbackError::UnsupportedBuilding);
     }
     let mut after=*before;

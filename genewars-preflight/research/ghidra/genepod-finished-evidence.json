@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "cases": 48,
+  "compared_bytes": 11019648,
+  "literal_instruction_steps": 8448,
+  "source_sha256": "68b480fe2721e19fcabf951cd0ce25b10a785ad00df98a69d9824e80bf59d68f",
+  "listing_sha256": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-00051e80.txt": "38a7ad744f800c438cf7b208ed596f919c38c4309a8e8d2cd68f679976202839",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "terrain-map-refs/instructions-000753f0.txt": "ea2554be981b0acae18e192ba9827ebdf4e4dea2d8e6fbee83f889ec15f390c5",
+    "validated/instructions-0008d580.txt": "08fc85698d73460faaef4a6dd81457eb199a60c9aacda9380239e5f3278034c3",
+    "validated/instructions-0008d5f0.txt": "c66a1e05095397611f83ecfa25aab5c3b1e42f72b165a2b86550b682cc33c23f"
+  },
+  "scope": "534D0 completed selector0 Genepod stage5 readiness ->message17/51E80; whole200B actor and229376B map, both58bit1states,1EE50 stop. Crucially stage5 keeps terrain reservation flags; reason7A preserved. Formatting/presentation explicit ports, owner unselected; no idle fabrication.",
+  "fixture_selector": 0,
+  "fixture_driver_sha256": "7880fe586a72d954f53a303f8add01558be0f584982f9268cef7aa5e37263265",
+  "reused_driver": "scripts/ghidra/validate_construction_finished.py",
+  "reused_driver_sha256": "b0c05a5f95f1eeeaa305053f5c51e715b91d563fd793017ef3e97b6a6c90fcb4",
+  "transformed_driver": "private/review/genepod-construction-drivers/5d7ba88e50f5440aa7d0ec52fa6c9b9a/driver.py",
+  "transformed_driver_sha256": "75973cafbfefc6b113fdb193ec2c3a5cf53c21491952d2fe15c0ed68cf6d219c",
+  "original_gameplay_acceptance": false
+}

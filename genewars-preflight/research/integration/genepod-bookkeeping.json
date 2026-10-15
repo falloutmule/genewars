@@ -1,0 +1,30 @@
+{
+  "status": "passed-post-callback-admitted-maintenance",
+  "utc": "2026-10-15T01:04:07.920765+00:00",
+  "cases": 256,
+  "player_records": 1024,
+  "compared_bytes": 6239232,
+  "literal_instructions": 497637,
+  "pins": {
+    "private/ghidra/mission-array-refs/instructions-00047f80.txt": "bae7d9800c80bce7b1419e5b7a2193b1f934b5080dd30285c7a2a15b50a2a4e4",
+    "private/ghidra/mission-array-refs/instructions-000437a0.txt": "7aa65558885556472096f9f32bc7e469dcc4f227385c258451ba4c105343156d"
+  },
+  "module_sha256": "7221cae292804157170ba3247fe8e777409e3a820adb60d7dd26723b609440bd",
+  "validator_sha256": "d0418bab9ba0eebcd97c03232d34035224de38300b1a915d18f796c161948cfe",
+  "boundaries": [
+    "451F0 virtual callback is a no-mutation return0 port; records are caller-supplied post-callback state",
+    "No target-search, RNG, attack or completed-building callback claim",
+    "Selector3/6 excluded from timer samples; selector11 allocation600 per encountered record, positive residual warnings and early exhaustion preserve later record allocations",
+    "Audio/UI services are explicit ports",
+    "Dense and sparse selector0 Genepod grade0 partitions including slots1/3/31/63; initial min1000/max-1000 sentinels and signed truncating mean preserved"
+  ],
+  "private_run": "private/review/admitted-building-history/a061a0923086475ab2d3667e3e927de6",
+  "original_execution": false,
+  "fixture_selector": 0,
+  "fixture_driver_sha256": "7880fe586a72d954f53a303f8add01558be0f584982f9268cef7aa5e37263265",
+  "reused_driver": "scripts/desktop/validate_admitted_building_player.py",
+  "reused_driver_sha256": "d0418bab9ba0eebcd97c03232d34035224de38300b1a915d18f796c161948cfe",
+  "transformed_driver": "private/review/genepod-construction-drivers/d10f4b91bba241ac92db93a7cecd86bb/driver.py",
+  "transformed_driver_sha256": "df826b05fd15d059d258a246694b80363edf4cb2827ce284fe63f65a0e048e2f",
+  "original_gameplay_acceptance": false
+}

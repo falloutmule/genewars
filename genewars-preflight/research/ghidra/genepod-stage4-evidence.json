@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "cases": 192,
+  "compared_bytes": 38784,
+  "literal_instructions": 12357,
+  "module_sha256": "b5c00d56c5afc2271011d795c96425544d296141e55880e49537c78ba05b70bc",
+  "source_pins": {
+    "private/ghidra/building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "private/ghidra/actor-motion/instructions-00051930.txt": "f9f2552e82a11b93d3ee858ce9073185ef0e5c74a9bba48775a019b5383730c3"
+  },
+  "scope": "534D0 stage4 selector0 Genepod animation14 completion flags0/1/count18/21/23/hold/counter gates, factoryNULL/nonNULL and441C0+1 ports asserted,wholeactor/orderedrequests,zeroRNG",
+  "fixture_selector": 0,
+  "fixture_driver_sha256": "7880fe586a72d954f53a303f8add01558be0f584982f9268cef7aa5e37263265",
+  "reused_driver": "scripts/ghidra/validate_construction_stage4.py",
+  "reused_driver_sha256": "879ecb83b97cfe6a064efd8a0ce2cdce6260d3ad2a6e6004c88629c23d4c682a",
+  "transformed_driver": "private/review/genepod-construction-drivers/2ac2645fabe14492906c39d88499c0a5/driver.py",
+  "transformed_driver_sha256": "b1d6562d0fe595ea52b3442cf213a3d274747786219ad8d4e4cd6d71f2c56d55",
+  "original_gameplay_acceptance": false
+}

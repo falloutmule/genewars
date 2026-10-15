@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "cases": 384,
+  "compared_bytes": 78720,
+  "literal_instructions": 42432,
+  "progress_requests": 64,
+  "source_pins": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1"
+  },
+  "module_sha256": "6d0bf1e00544afab882c01bf5ed6704b64fd0ec8a80eb26e02f3a3ad15f9426d",
+  "validator_sha256": "e36e2b052e382113411e59bb03cf9956dce6277b38ca272da2068ddfac4939d4",
+  "scope": "534D0 selector0 Genepod incomplete stage5 arrival initialization, exact inclusive yaw flip and audio4A, signed timer decrement and parity-gated shared LCG/audio; zero timer stops before progress/debit tail at53FAC. Movement/yaw/audio ports explicit; no construction completion claim.",
+  "fixture_selector": 0,
+  "fixture_driver_sha256": "7880fe586a72d954f53a303f8add01558be0f584982f9268cef7aa5e37263265",
+  "reused_driver": "scripts/ghidra/validate_construction_work.py",
+  "reused_driver_sha256": "e36e2b052e382113411e59bb03cf9956dce6277b38ca272da2068ddfac4939d4",
+  "transformed_driver": "private/review/genepod-construction-drivers/ee97f39b6096449eb2b719b25439d2c6/driver.py",
+  "transformed_driver_sha256": "920de487d1318acd3e3655dbcbb407eaa3f0488399c37c6676aa6f4a100f881c",
+  "original_gameplay_acceptance": false
+}

@@ -1,0 +1,22 @@
+{
+  "cases": 48,
+  "compared_bytes": 11019648,
+  "literal_instruction_steps": 24984,
+  "source_sha256": "68b480fe2721e19fcabf951cd0ce25b10a785ad00df98a69d9824e80bf59d68f",
+  "listing_sha256": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-00051e80.txt": "38a7ad744f800c438cf7b208ed596f919c38c4309a8e8d2cd68f679976202839",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "terrain-map-refs/instructions-000753f0.txt": "ea2554be981b0acae18e192ba9827ebdf4e4dea2d8e6fbee83f889ec15f390c5",
+    "validated/instructions-0008d580.txt": "08fc85698d73460faaef4a6dd81457eb199a60c9aacda9380239e5f3278034c3",
+    "validated/instructions-0008d5f0.txt": "c66a1e05095397611f83ecfa25aab5c3b1e42f72b165a2b86550b682cc33c23f"
+  },
+  "scope": "actual53A33 zero-funds selector0 stage3->51E80 category0 cancellation;whole200Bactor and229376Bmap;both58bit1states;1EE50stop;noidlefabrication;selectedpanelrefresh remainsrequest",
+  "fixture_selector": 0,
+  "fixture_driver_sha256": "7880fe586a72d954f53a303f8add01558be0f584982f9268cef7aa5e37263265",
+  "reused_driver": "scripts/ghidra/validate_construction_cancellation.py",
+  "reused_driver_sha256": "84a2d9636f8f522a07ca9688eafa2216ea89d7c44a5ebbd2f835d8c211db05f6",
+  "transformed_driver": "private/review/genepod-construction-drivers/6e69812e63e04f5db6290c575a3d7213/driver.py",
+  "transformed_driver_sha256": "2846b45042b78f4ac78b4c9e969a3b65bdb788a85bcae68fd749cd741ec43218",
+  "original_gameplay_acceptance": false
+}

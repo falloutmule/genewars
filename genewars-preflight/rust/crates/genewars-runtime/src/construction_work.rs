@@ -6,7 +6,7 @@ pub enum ConstructionWorkError{UnsupportedActor,InvalidBuilding,InvalidBlueprint
 pub struct ConstructionWorkPlan{pub after:[u8;200],pub seed_after:u16,pub draws:u8,pub audio_4a:bool,pub progress_required:bool}
 pub fn plan_incomplete_work(before:&[u8;200],blueprint:&[u8;36],building:&[u8;67],frame:u32,seed:u16,yaw:u16)->Result<ConstructionWorkPlan,ConstructionWorkError>{
     let word=|b:&[u8],p:usize|i16::from_le_bytes(b[p..p+2].try_into().unwrap());
-    let maximum=match before[0x83]{1=>120i16,3=>240,6=>80,11=>280,_=>return Err(ConstructionWorkError::UnsupportedActor)};
+    let maximum=match before[0x83]{0=>280i16,1=>120i16,3=>240,6=>80,11=>280,_=>return Err(ConstructionWorkError::UnsupportedActor)};
     if before[6]!=3||before[0x55]!=9||before[0x7e]!=0||before[0x82]!=1||word(before,0x88)!=5{return Err(ConstructionWorkError::UnsupportedActor);}
     if blueprint[0x16]!=0{return Err(ConstructionWorkError::InvalidBlueprint);}
     if building[6]!=4||building[24]!=before[24]||building[45]!=before[0x83]||building[46]!=0||building[47]!=0||word(building,49)!=0||!(0..maximum).contains(&word(building,43))||before[0x81]!=4||word(before,0x7f)!=word(building,15){return Err(ConstructionWorkError::InvalidBuilding);}
@@ -44,7 +44,7 @@ pub fn finish_work_progress(plan:&ConstructionWorkPlan,building_after:&[u8;67],c
     let word=|b:&[u8],p:usize|i16::from_le_bytes(b[p..p+2].try_into().unwrap());
     if !plan.progress_required{return Err(ConstructionWorkError::UnsupportedActor);}
     let before=&plan.after;
-    let maximum=match before[0x83]{1=>120i16,3=>240,6=>80,11=>280,_=>return Err(ConstructionWorkError::UnsupportedActor)};
+    let maximum=match before[0x83]{0=>280i16,1=>120i16,3=>240,6=>80,11=>280,_=>return Err(ConstructionWorkError::UnsupportedActor)};
     if building_after[6]!=4||building_after[24]!=before[24]||building_after[45]!=before[0x83]||word(building_after,15)!=word(before,0x7f)||word(building_after,49)!=i16::from(completed)||(if completed{word(building_after,43)!=maximum}else{!(1..maximum).contains(&word(building_after,43))}){return Err(ConstructionWorkError::InvalidBuilding);}
     let mut after=*before;after[0x70]&=0x7b;after[0x5a]=1;after[0x3f..0x41].copy_from_slice(&speed.to_le_bytes());after[0x70]|=16;
     if completed{

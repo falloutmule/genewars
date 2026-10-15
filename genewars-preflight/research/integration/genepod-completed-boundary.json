@@ -1,0 +1,8 @@
+{
+  "status": "passed-expected-boundary",
+  "private_run": "private/review/genepod-completed-boundary/7526992627994c20ad71e823cd79be0d",
+  "scope": "passed: completed Genepod callback is explicitly unsupported; entire world unchanged",
+  "harness_sha256": "bbe27a9aa9eb085b491bc42938683be93f5792729a529570275bbf29debe9075",
+  "runtime_library_sha256": "c5c56fa06fb0b498f74689faa8bdcecb54af59a0907de8388b9bc6fa20bc9ac7",
+  "original_gameplay_acceptance": false
+}

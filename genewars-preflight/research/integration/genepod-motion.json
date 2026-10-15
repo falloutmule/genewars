@@ -1,0 +1,281 @@
+{
+  "status": "passed",
+  "cases": 64,
+  "compared_bytes": 15552,
+  "scope": "Actual57A10 post6FB60 prefix through583D1; actual526C0 arrival through57E0F; excludes later507D0 composition, tested separately.",
+  "work": "private/review/queued-architect/0ef50e9467c44b1484ac4926a9fffb4c",
+  "details": [
+    {
+      "arrival": false,
+      "steps": 210
+    },
+    {
+      "arrival": false,
+      "steps": 166
+    },
+    {
+      "arrival": false,
+      "steps": 222
+    },
+    {
+      "arrival": false,
+      "steps": 174
+    },
+    {
+      "arrival": false,
+      "steps": 210
+    },
+    {
+      "arrival": false,
+      "steps": 175
+    },
+    {
+      "arrival": false,
+      "steps": 221
+    },
+    {
+      "arrival": false,
+      "steps": 174
+    },
+    {
+      "arrival": false,
+      "steps": 211
+    },
+    {
+      "arrival": false,
+      "steps": 166
+    },
+    {
+      "arrival": false,
+      "steps": 221
+    },
+    {
+      "arrival": false,
+      "steps": 175
+    },
+    {
+      "arrival": false,
+      "steps": 210
+    },
+    {
+      "arrival": false,
+      "steps": 166
+    },
+    {
+      "arrival": false,
+      "steps": 222
+    },
+    {
+      "arrival": false,
+      "steps": 174
+    },
+    {
+      "arrival": false,
+      "steps": 210
+    },
+    {
+      "arrival": false,
+      "steps": 175
+    },
+    {
+      "arrival": false,
+      "steps": 221
+    },
+    {
+      "arrival": false,
+      "steps": 174
+    },
+    {
+      "arrival": false,
+      "steps": 211
+    },
+    {
+      "arrival": false,
+      "steps": 166
+    },
+    {
+      "arrival": false,
+      "steps": 221
+    },
+    {
+      "arrival": false,
+      "steps": 175
+    },
+    {
+      "arrival": false,
+      "steps": 210
+    },
+    {
+      "arrival": false,
+      "steps": 166
+    },
+    {
+      "arrival": false,
+      "steps": 222
+    },
+    {
+      "arrival": false,
+      "steps": 174
+    },
+    {
+      "arrival": false,
+      "steps": 210
+    },
+    {
+      "arrival": false,
+      "steps": 175
+    },
+    {
+      "arrival": false,
+      "steps": 221
+    },
+    {
+      "arrival": false,
+      "steps": 174
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    },
+    {
+      "arrival": true,
+      "steps": 127
+    },
+    {
+      "arrival": true,
+      "steps": 126
+    }
+  ],
+  "pins": {
+    "private/ghidra/actor-motion/instructions-00057a10.txt": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a",
+    "private/ghidra/actor-motion/instructions-00051930.txt": "f9f2552e82a11b93d3ee858ce9073185ef0e5c74a9bba48775a019b5383730c3",
+    "private/ghidra/actor-motion/instructions-0001ee30.txt": "3590a299b0f529da8f941168d806f9a5a8edbcc2365e36192d863a006d34d539",
+    "private/ghidra/construction-command/instructions-000526c0.txt": "b9dc5712c83fa00f7e995584682638ee5d5f15014263eb0648c08de711739ab2",
+    "private/ghidra/construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "private/ghidra/activation-rng-refs/instructions-00052340.txt": "a8c4d8761c19c40b94af254de31f43f01d8070ebf40770e67b30f57e43c1befc",
+    "rust/crates/genewars-runtime/src/actor_motion.rs": "3eec61b309f71a4c415293c706338fe070617e456a0755ede609c32f5c9bfe4a"
+  },
+  "fixture_selector": 0,
+  "fixture_driver_sha256": "7880fe586a72d954f53a303f8add01558be0f584982f9268cef7aa5e37263265",
+  "reused_driver": "scripts/desktop/validate_queued_architect_motion.py",
+  "reused_driver_sha256": "666a9d366c0322f8ac1b4beb4167c866b256c55cd7b5ac82b91805402ca094df",
+  "transformed_driver": "private/review/genepod-construction-drivers/e3d827fded2b4d5a90c97d5e5d966c1e/driver.py",
+  "transformed_driver_sha256": "329abf0525a22aa71b858a4fe9d6d7abdea3b36ad86c09d70e79b99e73199d96",
+  "original_gameplay_acceptance": false
+}

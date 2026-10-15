@@ -10,11 +10,11 @@ pub fn plan_selector1_progress(pool:&[[u8;67];256],slot:u16,player:&[u8;1805],cr
  if pool.get(usize::from(slot)).ok_or(BuildingProgressError::InvalidBuilding)?[45]!=1{return Err(BuildingProgressError::InvalidBuilding);}
  plan_admitted_grade0_progress(pool,slot,player,creatures,creature_count,increment,loading)
 }
-/// Common completion path for independently reviewed selectors1,3,6 and11.
+/// Common completion path for independently reviewed selectors0,1,3,6 and11.
 /// Other selectors may have additional43F60 effects and remain unsupported.
 pub fn plan_admitted_grade0_progress(pool:&[[u8;67];256],slot:u16,player:&[u8;1805],creatures:&[[u8;124];300],creature_count:i16,increment:i16,loading:bool)->Result<BuildingProgressPlan,BuildingProgressError>{
  let before=*pool.get(usize::from(slot)).ok_or(BuildingProgressError::InvalidBuilding)?;
- let selector=before[45];let maximum=match selector{1=>120i16,3=>240i16,6=>80i16,11=>280i16,_=>return Err(BuildingProgressError::InvalidBuilding)};
+ let selector=before[45];let maximum=match selector{0=>280i16,1=>120i16,3=>240i16,6=>80i16,11=>280i16,_=>return Err(BuildingProgressError::InvalidBuilding)};
  let health=i16::from_le_bytes(before[0x2b..0x2d].try_into().unwrap());
  if before[6]!=4||before[24]>=4||before[46]!=0||before[47]!=0||u16::from_le_bytes(before[49..51].try_into().unwrap())!=0||!(0..maximum).contains(&health)||i16::from_le_bytes(before[15..17].try_into().unwrap())!=slot as i16||usize::from(before[24])!=usize::from(slot)/64{return Err(BuildingProgressError::InvalidBuilding);}
  let owner=usize::from(before[24]);if player[1]as usize!=owner||player[0x4a1]as usize!=owner{return Err(BuildingProgressError::InvalidPlayer);}
