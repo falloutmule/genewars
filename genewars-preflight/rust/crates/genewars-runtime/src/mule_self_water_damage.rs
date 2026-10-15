@@ -32,8 +32,11 @@ pub fn plan(before: &[u8; 124]) -> Result<Plan, Error> {
     {
         return Err(Error::Identity);
     }
-    if before[0x5e] != 8 || !matches!(before[0x60], 8 | 0x88)
-        || before[0x61] != 0 || before[0x78] != 0 || before[0x76] > 90
+    let idle = matches!(before[0x60], 8 | 0x88) && before[0x61] == 0 && before[0x78] == 0;
+    // Actual4858 retained human command:5CC60's D71A preserves high80
+    // and command78 while clearing low80; later AI reinstalls the same goal.
+    let commanded = matches!(before[0x60], 0x18 | 0x98) && before[0x61] == 0x80 && before[0x78] == 7;
+    if before[0x5e] != 8 || !(idle || commanded) || before[0x76] > 90
     {
         return Err(Error::State);
     }
@@ -75,6 +78,18 @@ mod tests {
         a[0x6a..0x6c].copy_from_slice(&39i16.to_le_bytes());
         a[0x6c..0x6e].copy_from_slice(&32738i16.to_le_bytes());
         a
+    }
+    #[test]
+    fn retained_human_goal_survives_nonlethal_self_water_reset() {
+        for low in [0x18,0x98] {
+            let mut before=fixture();before[0x60]=low;before[0x61]=0x80;before[0x78]=7;
+            before[0x6e..0x76].copy_from_slice(&[0x92,2,0x93,94,0x92,2,0x93,94]);
+            let p=plan(&before).unwrap();
+            assert_eq!(&p.after[0x60..0x62],&[0x18,0x80]);
+            assert_eq!(p.after[0x78],7);assert_eq!(p.after[0x5e],8);
+            assert_eq!(&p.after[0x6e..0x76],&before[0x6e..0x76]);
+            assert_eq!(word(&p.after,0x6a),38);assert_eq!(word(&p.after,0x6c),0);
+        }
     }
     #[test]
     fn defense_boundaries_reset_only_source_fields_without_self_retaliation() {

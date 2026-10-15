@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "scope": "actual4858 commanded owned Mule nonlethal water damage; otherfamilies frozen; notcampaignacceptance",
+  "source": {
+    "status": "passed",
+    "frame": 4858,
+    "slot": 1,
+    "draws": 2,
+    "compared_bytes": 427369,
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\300528dddc5842c3be59c77e00969c46"
+  },
+  "correction": "Admit exact state8/low18or98/high80/task7/nullrefs in existing bounded selfdamage planner. Original5CC60 maskD71A preserves high80/task78; normal explicit-target AI reinstalls low80 and the same requested goal. Health39\u219238; original water factory/damage/reveal/AI order unchanged.",
+  "guarded": "health<=5, lethal, attachment, foreign/neutral, and other commanded states remainunsupported",
+  "regression": {
+    "runtime_passed": 249,
+    "game_passed": 80,
+    "ignored_each": 1,
+    "release_build": "passed"
+  },
+  "independent_corrected_width_audit": "private/review/command-water-width-audit/9fe2947f5dc44cadb11d7e7a1318351a/result.json;427369B0mismatch2draws;actualparticipatingcount1 preserved",
+  "preserved_failed_experiment": "185 beforepatch callback correctlyblocked;185b is passingfreshafterimage; no overwrite offailedcapture"
+}
