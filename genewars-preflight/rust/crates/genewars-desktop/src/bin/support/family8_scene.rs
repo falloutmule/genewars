@@ -132,6 +132,20 @@ pub struct Family8DrawReceipt {
 /// Shade zero selects row zero; nonzero shade adds the arithmetic-shifted
 /// height (`height >> 7`). A direct route needs no fade row; a faded route is
 /// admitted only for a nonnegative row below 30. Errors leave the frame intact.
+pub fn draw_family8_selector2_state10(
+    resource:&EtherealAnimationDatabase,record:&[u8;102],origin:[i16;2],
+    fade:&TerrainFadeTable<'_>,gla:&MainGlaTable<'_>,destination:&mut[u8],
+    clip:[usize;2],pitch:usize,
+)->Result<Family8DrawReceipt,Family8SceneError>{
+    if record[6]!=8{return Err(Family8SceneError::WrongRecordKind(record[6]));}
+    if record[0x55]!=2{return Err(Family8SceneError::UnsupportedSelector(record[0x55]));}
+    if record[0x56]!=10{return Err(Family8SceneError::UnsupportedState(record[0x56]));}
+    let flags=u16::from_le_bytes([record[0x15],record[0x16]]);
+    if flags!=0x4020{return Err(Family8SceneError::UnsupportedEntityFlags(flags));}
+    if record[0x19]!=0||usize::from(record[0x1b])>=resource.frames.len(){return Err(Family8SceneError::UnsupportedAnimation{animation:record[0x19],frame:record[0x1b]});}
+    draw_family8_common(&resource.frames,record,8,origin,fade,gla,destination,clip,pitch)
+}
+
 pub fn draw_family8_selector0_state4(
     resource: &EtherealAnimationDatabase,
     record: &[u8; 102],

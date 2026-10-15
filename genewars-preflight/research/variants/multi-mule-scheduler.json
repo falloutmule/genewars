@@ -1,0 +1,16 @@
+{
+  "status": "passed-bounded-source-audit",
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "scan": "ascending live staged records; initial count loaded once; skip inactive/newborn without decrement",
+  "identity": "native record pointer / kind1 actual slot reference; preserve source record ID",
+  "newborns": "second pass driven by sum of primary callback AL; bounded implementation remains unsupported until proved",
+  "interaction_admission": "do not remove other-creature neighborhood/cell-event guards",
+  "execution_comparison": "not run",
+  "sha256": {
+    "private/ghidra/mission-array-refs/instructions-0006a540.txt": "d947fde62e1f4a044d4c74953d8c95a1b25b0e4144fd43f64a1d148f4b5cca1b",
+    "rust/crates/genewars-runtime/src/actor_world/family_scheduler.rs": "914a284a9229ad4d9a5acda78de69fb53102f383b5a6165b990789485bbaf681",
+    "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs": "71351bc1b763f95503889ff08cd8a01e9c4b1da400ff5090c9b68f59bc3d7b2a",
+    "rust/crates/genewars-runtime/src/actor_world/creature_retirement.rs": "3e4ccf2a41de45cd10e5ad1f80a8f47b99e34b2d8915ce4285b18dad2d7dec99",
+    "rust/crates/genewars-runtime/src/creature_world.rs": "527bee46b3cc5d747a8a0e2e6a2a6526b229530334ea8e48f5533d593620257c"
+  }
+}

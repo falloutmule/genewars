@@ -59,7 +59,6 @@ mod reveal;
 pub use reveal::RevealReceipt;
 pub use effect_updates::{LandingPhysicsContext, LandingStepReceipt, EffectStepReceipt, LandingEffectCallback, LandingEffectPassReceipt};
 
-const MISSION_HASH: &str = "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2";
 const MAP_START: usize = 0x355E;
 const MAP_BYTES: usize = 128 * 128 * 14;
 
@@ -316,8 +315,16 @@ impl ActorWorld {
         prior_bindings: [ActorHandleBindings; 20], players: [PlayerState; 4], rng: BlueprintRng,
     ) -> Result<Self, ActorWorldError> {
         let actual = crate::identity::sha256_hex(source.bytes());
-        if actual != MISSION_HASH { return Err(ActorWorldError::MissionHash(actual)); }
+        if crate::identity::CdCampaignMission::identify(source.bytes()).is_none() { return Err(ActorWorldError::MissionHash(actual)); }
         Self::from_parts(source, prior_native, prior_bindings, players, rng)
+    }
+
+    /// 71B70 preserves this exact old-world range across the next serialized load.
+    pub fn from_carried_cd_mission(source:&ConqMissionSource<'_>,prior_native:&[[u8;200];20],
+        players:[PlayerState;4],rng:BlueprintRng,world_priors:&[u8;150])->Result<Self,ActorWorldError>{
+        if crate::identity::CdCampaignMission::identify(source.bytes())!=Some(crate::identity::CdCampaignMission::Krell){return Err(ActorWorldError::MissionHash(crate::identity::sha256_hex(source.bytes())));}
+        let mut world=Self::from_parts(source,prior_native,[ActorHandleBindings::empty();20],players,rng)?;
+        world.backing[0x34ba..0x3550].copy_from_slice(world_priors);Ok(world)
     }
 
     fn from_parts(
@@ -1836,3 +1843,4 @@ mod mission_runtime;
 
 mod victory_entry;
 pub use victory_entry::{VictoryEntryTicket,VictoryPresentationStatus,OwnedVictoryEntryError};
+

@@ -1,0 +1,36 @@
+{
+  "status": "passed-bounded-source-audit",
+  "execution_comparison": "not run",
+  "zone": {
+    "position": [
+      256,
+      24320
+    ],
+    "radius": 1024,
+    "quota": 1024,
+    "visits": 81
+  },
+  "required_numeric": [
+    "base shade recomputation",
+    "radial shade and visibility",
+    "four-neighbor flags",
+    "linked entity shade refresh",
+    "selector2 family8 factory/map/count",
+    "existing72AD0 tails"
+  ],
+  "presentation": [
+    "847D0 viewport invalidation and cache",
+    "native visible zone marker"
+  ],
+  "source_sha256": {
+    "private/ghidra/camera-player-input/instructions-00072ad0.txt": "b3b313e20205eb57066681414db877493563bd8990149334125f06210936386b",
+    "private/ghidra/terrain-map-refs/instructions-00079d50.txt": "22e73f0d82be8d928e9e8fefd5cef67135777b27ca1bfddd29f287443da4d951",
+    "private/ghidra/terrain-map-refs/instructions-0007b140.txt": "aef70bf9859bc9c21d01f697528a266d30ef1961e47d9697f762f7c74be7a2f4",
+    "private/ghidra/terrain-map-refs/instructions-000101d0.txt": "da01866a9fbe8ef157b279bcd992e2a34d3c41ea728788269975d24fdb6145a0",
+    "private/ghidra/terrain-map-refs/instructions-0008c290.txt": "dcd3cda09865c093a5e1df220935f2a51a6b2c33bd35a62d5528e4eac08a952b",
+    "private/ghidra/terrain-map-refs/instructions-00084b40.txt": "9424f5091c9fdb3baa1f4e27c53310c85cdbf87a51ce4fa0aa11b54dadb363a5",
+    "private/ghidra/terrain-map-refs/instructions-000847d0.txt": "2d6e7ae99e773f3a6e7d17dcb9b27312cdb3a4c7e404e1a0265db71c7f17b194",
+    "private/ghidra/camera-player-input/instructions-0008b800.txt": "6ae63cd69b0f93d01d7a7850c7a2c9c7c56d11b5ff22db129edd1cc7e2819832",
+    "research/campaign/mission-002-contract.json": "8e291d122d263692002371f5f3d9c71b0e89a1479da24ee2071cf1075b713eca"
+  }
+}

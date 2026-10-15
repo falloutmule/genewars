@@ -26,10 +26,11 @@ pub enum MuleUiCleanupRequest {
 impl ActorWorld {
     pub(super) fn retire_mule_bones_after_callback(&mut self,before:&CreatureRecord,
         plan:&CommonPhysicsPlan<124>)->Result<MuleRetirementReceipt,ActorWorldError> {
+        let slot=word(before,15)as usize;let raw=[slot as u8,(slot>>8)as u8,1];
         let links=self.validate_links()?;
-        if !links.contains(&(1,0)){return Err(ActorWorldError::InvalidReference([0,0,1]));}
+        if !links.contains(&(1,slot as i16)){return Err(ActorWorldError::InvalidReference(raw));}
         let pool=self.creatures.as_ref().ok_or(ActorWorldError::UnsupportedCreatureSchedule)?;
-        if pool.record(0)?!=before{return Err(CreatureError::StaleRecord(0).into());}
+        if pool.record(slot)?!=before{return Err(CreatureError::StaleRecord(slot).into());}
         let declared=word(&self.backing,0x3550);
         let active=pool.records().iter().filter(|record|record[6]!=0).count();
         if declared<=0||declared as usize!=active{return Err(ActorWorldError::CreatureCountMismatch{declared,active});}
@@ -39,26 +40,26 @@ impl ActorWorld {
             return Err(CreatureError::UnsupportedMotionState.into());
         }
         let mut staged=self.clone();
-        staged.creatures.as_mut().unwrap().replace_record_checked(0,before,&plan.after)?;
-        staged.unlink_mule(plan.old_cell)?;
-        let dead=landing::LandingReference{index:0,kind:1};
+        staged.creatures.as_mut().unwrap().replace_record_checked(slot,before,&plan.after)?;
+        staged.unlink_mule_slot(slot,plan.old_cell)?;
+        let dead=landing::LandingReference{index:slot as i16,kind:1};
         let mut cleanup=Vec::new();
         for(kind,slot,record)in staged.effect_cleanup_records(){
             for patch in lifecycle::plan_reference_cleanup(kind,slot,&record,dead)?{
                 staged.apply_cleanup_byte(patch)?;cleanup.push(patch);
             }
         }
-        let current=*staged.creatures.as_ref().unwrap().record(0)?;
-        staged.creatures.as_mut().unwrap().retire_bones_checked(0,&current)?;
+        let current=*staged.creatures.as_ref().unwrap().record(slot)?;
+        staged.creatures.as_mut().unwrap().retire_bones_checked(slot,&current)?;
         let count_after=declared-1;staged.backing[0x3550..0x3552].copy_from_slice(&count_after.to_le_bytes());
-        let after=*staged.creatures.as_ref().unwrap().record(0)?;
+        let after=*staged.creatures.as_ref().unwrap().record(slot)?;
         staged.validate_links()?;
         let active=staged.creatures.as_ref().unwrap().records().iter().filter(|record|record[6]!=0).count();
         if count_after as usize!=active{return Err(ActorWorldError::CreatureCountMismatch{declared:count_after,active});}
         *self=staged;
         Ok(MuleRetirementReceipt{before:*before,after,cleanup,count_after,
             pending_ui_cleanup:[MuleUiCleanupRequest::Kind1List{root_global:0x1860be,id:word(before,15)},
-                MuleUiCleanupRequest::ModuleReference{root_global:0x185dfc,reference:[0,0,1]}],
+                MuleUiCleanupRequest::ModuleReference{root_global:0x185dfc,reference:raw}],
             pending_display_phase_1185a8:11})
     }
 }

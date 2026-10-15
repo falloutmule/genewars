@@ -1,0 +1,192 @@
+{
+  "status": "passed",
+  "scope": "Ordinary-command Exceland victory/campaign/Krell initialization and first render; no Krell tick or native transition acceptance yet",
+  "accepted_missions": 0,
+  "native_campaign_transitions": 0,
+  "private_probe": "private/integration/fresh-krell-entry-002",
+  "scene": "Mission",
+  "mission": {
+    "steps": 0,
+    "blocked": null,
+    "campaign_progress": 1,
+    "world_mode": "carried-cd-explicit-opaque-priors",
+    "runtime_context": "Some(MissionRuntimeContext { origin: CarriedCdKrell, participating_players: 1, runtime_flags: 62, runtime_mode: Some(0), countdown: 1000, frame: 0, rng: CdKrellSerialized { seed: 47117, draw_count: 33620, inherited_ring: 12 }, outcome: Running })",
+    "outcome": {
+      "state": "running"
+    },
+    "player_funds": [
+      {
+        "slot": 0,
+        "balance": 2000
+      },
+      {
+        "slot": 1,
+        "balance": 0
+      },
+      {
+        "slot": 2,
+        "balance": 0
+      },
+      {
+        "slot": 3,
+        "balance": 0
+      }
+    ],
+    "actor_states": [
+      {
+        "slot": 0,
+        "owner": 0,
+        "position": [
+          1536,
+          15360
+        ],
+        "destination": [
+          0,
+          0
+        ],
+        "pending_destination": [
+          0,
+          0
+        ],
+        "state": 1,
+        "ready": false,
+        "pending_move": false,
+        "assignment_pending": false,
+        "building_selector": 0,
+        "animation": 8,
+        "frame": 0,
+        "action_byte_59": 0,
+        "construction_stage_word_88": 0,
+        "job_slot_byte_90": 0
+      },
+      {
+        "slot": 1,
+        "owner": 0,
+        "position": [
+          1536,
+          15360
+        ],
+        "destination": [
+          0,
+          0
+        ],
+        "pending_destination": [
+          0,
+          0
+        ],
+        "state": 1,
+        "ready": false,
+        "pending_move": false,
+        "assignment_pending": false,
+        "building_selector": 0,
+        "animation": 8,
+        "frame": 0,
+        "action_byte_59": 0,
+        "construction_stage_word_88": 0,
+        "job_slot_byte_90": 0
+      },
+      {
+        "slot": 2,
+        "owner": 0,
+        "position": [
+          1536,
+          15360
+        ],
+        "destination": [
+          0,
+          0
+        ],
+        "pending_destination": [
+          0,
+          0
+        ],
+        "state": 1,
+        "ready": false,
+        "pending_move": false,
+        "assignment_pending": false,
+        "building_selector": 0,
+        "animation": 8,
+        "frame": 0,
+        "action_byte_59": 0,
+        "construction_stage_word_88": 0,
+        "job_slot_byte_90": 0
+      }
+    ],
+    "creature_states": [
+      {
+        "slot": 0,
+        "owner": 4,
+        "position": [
+          31744,
+          22528
+        ],
+        "destination": [
+          0,
+          0
+        ],
+        "state": 8,
+        "animation": 5,
+        "frame": 0,
+        "reserve": 88,
+        "target_kind": 0
+      },
+      {
+        "slot": 1,
+        "owner": 4,
+        "position": [
+          32000,
+          22528
+        ],
+        "destination": [
+          0,
+          0
+        ],
+        "state": 8,
+        "animation": 1,
+        "frame": 0,
+        "reserve": 88,
+        "target_kind": 0
+      },
+      {
+        "slot": 2,
+        "owner": 4,
+        "position": [
+          32000,
+          22784
+        ],
+        "destination": [
+          0,
+          0
+        ],
+        "state": 8,
+        "animation": 6,
+        "frame": 0,
+        "reserve": 88,
+        "target_kind": 0
+      },
+      {
+        "slot": 3,
+        "owner": 4,
+        "position": [
+          3072,
+          11776
+        ],
+        "destination": [
+          0,
+          0
+        ],
+        "state": 8,
+        "animation": 7,
+        "frame": 0,
+        "reserve": 76,
+        "target_kind": 0
+      }
+    ]
+  },
+  "pins": {
+    "genewars-game.exe": "dae82f71d3f6ee7461243b8ada0a7107c66503ae4002bc6adb7a87140530ee9f",
+    "replay.txt": "53c31c2890b6ad4dd9276630fe880a739a6eb1f3b3321a85f952e8662477dd7a",
+    "report.json": "05743d85b321d9724de90181a59894a465ec9905962e5d38f8173388c74ca08a",
+    "frame.bmp": "cb55424766602b22aead85ba0e7ce16e3fd364e0d7f0fe10d26f985e6dcdd46c"
+  }
+}

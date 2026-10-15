@@ -251,7 +251,7 @@ impl MissionWorld {
         parameter_bytes: &[u8],
     ) -> Result<Self, RuntimeError> {
         let source_hash = crate::identity::sha256_hex(source.bytes());
-        if source_hash != MISSION_SHA256 {
+        if crate::identity::CdCampaignMission::identify(source.bytes()).is_none() {
             return Err(RuntimeError::MissionHash { expected: MISSION_SHA256, actual: source_hash });
         }
         let parameters = PlantParameterTable::parse(parameter_bytes)?;

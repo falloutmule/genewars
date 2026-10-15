@@ -1,0 +1,370 @@
+{
+  "status": "passed",
+  "scope": "Literal scheduler with controlled virtual callbacks; not creatureAI proof",
+  "production_comparison": "not run",
+  "cases": [
+    {
+      "case": {
+        "name": "four_sparse_neutrals",
+        "count": 4,
+        "records": [
+          {
+            "slot": 0
+          },
+          {
+            "slot": 3
+          },
+          {
+            "slot": 9
+          },
+          {
+            "slot": 17
+          }
+        ],
+        "expected": [
+          0,
+          3,
+          9,
+          17
+        ]
+      },
+      "status": "passed",
+      "source": {
+        "primary_predicates": [
+          0,
+          3,
+          9,
+          17
+        ],
+        "callbacks": [
+          0,
+          3,
+          9,
+          17
+        ],
+        "player616": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "live_count_after": 4,
+        "ui_states": [
+          1592508,
+          1592516,
+          1592524,
+          1592532,
+          1592540,
+          1592548,
+          1592556,
+          1592564
+        ],
+        "instructions": 329,
+        "newborn_flags": {
+          "0": 0,
+          "3": 0,
+          "9": 0,
+          "17": 0
+        }
+      },
+      "bounded_production_expected": "passed"
+    },
+    {
+      "case": {
+        "name": "retirement_keeps_initial_count",
+        "count": 4,
+        "records": [
+          {
+            "slot": 0,
+            "retire": true
+          },
+          {
+            "slot": 3
+          },
+          {
+            "slot": 9
+          },
+          {
+            "slot": 17
+          }
+        ],
+        "expected": [
+          0,
+          3,
+          9,
+          17
+        ]
+      },
+      "status": "passed",
+      "source": {
+        "primary_predicates": [
+          0,
+          3,
+          9,
+          17
+        ],
+        "callbacks": [
+          0,
+          3,
+          9,
+          17
+        ],
+        "player616": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "live_count_after": 3,
+        "ui_states": [
+          1592508,
+          1592516,
+          1592524,
+          1592532,
+          1592540,
+          1592548,
+          1592556,
+          1592564
+        ],
+        "instructions": 329,
+        "newborn_flags": {
+          "3": 0,
+          "9": 0,
+          "17": 0
+        }
+      },
+      "bounded_production_expected": "passed"
+    },
+    {
+      "case": {
+        "name": "owned_counters_and_predicate",
+        "count": 4,
+        "players": 2,
+        "records": [
+          {
+            "slot": 0,
+            "owner": 0
+          },
+          {
+            "slot": 2,
+            "owner": 1
+          },
+          {
+            "slot": 4,
+            "owner": 1,
+            "predicate": 1
+          },
+          {
+            "slot": 5
+          }
+        ],
+        "expected": [
+          0,
+          2,
+          4,
+          5
+        ]
+      },
+      "status": "passed",
+      "source": {
+        "primary_predicates": [
+          0,
+          2,
+          4,
+          5
+        ],
+        "callbacks": [
+          0,
+          2,
+          4,
+          5
+        ],
+        "player616": [
+          1,
+          1,
+          102,
+          103
+        ],
+        "live_count_after": 4,
+        "ui_states": [
+          1592508,
+          1592516,
+          1592524,
+          1592532,
+          1592540,
+          1592548,
+          1592556,
+          1592564
+        ],
+        "instructions": 214,
+        "newborn_flags": {
+          "0": 0,
+          "2": 0,
+          "4": 0,
+          "5": 0
+        }
+      },
+      "bounded_production_expected": "blocked-rollback"
+    },
+    {
+      "case": {
+        "name": "preexisting_newborn_skipped",
+        "count": 3,
+        "records": [
+          {
+            "slot": 0
+          },
+          {
+            "slot": 1,
+            "newborn": 1
+          },
+          {
+            "slot": 4
+          }
+        ],
+        "expected": [
+          0,
+          4
+        ]
+      },
+      "status": "passed",
+      "source": {
+        "primary_predicates": [
+          0,
+          4
+        ],
+        "callbacks": [
+          0,
+          4
+        ],
+        "player616": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "live_count_after": 3,
+        "ui_states": [
+          1592508,
+          1592516,
+          1592524,
+          1592532,
+          1592540,
+          1592548,
+          1592556,
+          1592564
+        ],
+        "instructions": 2831,
+        "newborn_flags": {
+          "0": 0,
+          "1": 1,
+          "4": 0
+        }
+      },
+      "bounded_production_expected": "blocked-rollback"
+    },
+    {
+      "case": {
+        "name": "newborn_second_pass",
+        "count": 2,
+        "records": [
+          {
+            "slot": 0,
+            "return": 1,
+            "births": [
+              {
+                "slot": 1,
+                "newborn": 1
+              }
+            ]
+          },
+          {
+            "slot": 4
+          }
+        ],
+        "expected": [
+          0,
+          4,
+          1
+        ]
+      },
+      "status": "passed",
+      "source": {
+        "primary_predicates": [
+          0,
+          4
+        ],
+        "callbacks": [
+          0,
+          4,
+          1
+        ],
+        "player616": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "live_count_after": 3,
+        "ui_states": [
+          1592508,
+          1592516,
+          1592524,
+          1592532,
+          1592540,
+          1592548,
+          1592556,
+          1592564
+        ],
+        "instructions": 209,
+        "newborn_flags": {
+          "0": 0,
+          "1": 0,
+          "4": 0
+        }
+      },
+      "bounded_production_expected": "blocked-rollback"
+    },
+    {
+      "case": {
+        "name": "empty",
+        "count": 0,
+        "records": [],
+        "expected": []
+      },
+      "status": "passed",
+      "source": {
+        "primary_predicates": [],
+        "callbacks": [],
+        "player616": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "live_count_after": 0,
+        "ui_states": [
+          1592508,
+          1592516,
+          1592524,
+          1592532,
+          1592540,
+          1592548,
+          1592556,
+          1592564
+        ],
+        "instructions": 84,
+        "newborn_flags": {}
+      },
+      "bounded_production_expected": "passed"
+    }
+  ],
+  "source_sha256": "d947fde62e1f4a044d4c74953d8c95a1b25b0e4144fd43f64a1d148f4b5cca1b",
+  "harness_sha256": "d22b5c6b5ea01fc49f9667f54913b70c7d0795ecd4c48497aa73128e109f85b9",
+  "ports": [
+    "virtual68 predicate return",
+    "virtual64 controlled record/count mutations and AL return; preserves source callee-saved registers",
+    "7AC00 ordered request only"
+  ],
+  "original_execution": false
+}

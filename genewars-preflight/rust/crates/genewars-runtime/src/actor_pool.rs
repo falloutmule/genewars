@@ -265,7 +265,7 @@ fn validate_prepared(
         || plan.created_count as usize != prepared.initializations.len()
         || plan.player_count_after as i8 != prepared.player.actor_count()
         || expected_player.creation_mode() != 0 || expected_player.actor_count() != 0
-        || expected_player.progress() != 0
+        || (expected_player.progress() != 0 && !(expected_player.progress()==1&&expected_player.origin()==PlayerStateOrigin::RestoredForMission))
     {
         return Err(ActorPoolError::PreparedSelectionMismatch);
     }

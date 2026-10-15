@@ -33,9 +33,9 @@ impl MissionState {
     fn extra_report(&self)->String {
         match self {
             Self::Plants(_)=>"\"world_mode\":\"plants\"".into(),
-            Self::Landing(w)=>format!("\"world_mode\":{},\"runtime_context\":{},\"outcome\":{},\"campaign_progress\":{},\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"plant_births\":{},\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"player_funds\":{},\"buildings\":{},\"terrain_jobs\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
-                json_string(if w.runtime_context.is_some(){"fresh-cd-explicit-opaque-priors"}else{"landing-study"}),json_string(&format!("{:?}",w.runtime_context)),w.outcome_json(),w.world.player(0).unwrap().bytes()[0x6e7],w.seed,w.world.rng().draw_count,w.selected.map(|s|s.to_string()).unwrap_or("null".into()),w.command_count,w.plant_births,w.pending_requests,
-                w.world.effects().unwrap().records().iter().filter(|r|r[6]!=0).count(),w.actor_state_json(),w.creature_state_json(),w.player_funds_json(),w.building_state_json(),w.terrain_job_state_json()),
+            Self::Landing(w)=>format!("\"world_mode\":{},\"runtime_context\":{},\"outcome\":{},\"campaign_progress\":{},\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"plant_births\":{},\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"family8_states\":{},\"player_funds\":{},\"buildings\":{},\"terrain_jobs\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
+                json_string(match w.runtime_context.as_ref().map(|c|c.origin()){Some(genewars_runtime::mission_context::ContextOrigin::CarriedCdKrell)=>"carried-cd-explicit-opaque-priors",Some(_)=>"fresh-cd-explicit-opaque-priors",None=>"landing-study"}),json_string(&format!("{:?}",w.runtime_context)),w.outcome_json(),w.world.player(0).unwrap().bytes()[0x6e7],w.seed,w.world.rng().draw_count,w.selected.map(|s|s.to_string()).unwrap_or("null".into()),w.command_count,w.plant_births,w.pending_requests,
+                w.world.effects().unwrap().records().iter().filter(|r|r[6]!=0).count(),w.actor_state_json(),w.creature_state_json(),w.family8_state_json(),w.player_funds_json(),w.building_state_json(),w.terrain_job_state_json()),
         }
     }
 }
@@ -317,7 +317,17 @@ impl Game {
         self.transition(Scene::Campaign);Ok(())
     }
     pub fn toggle_run(&mut self) {
-        if self.scene==Scene::Campaign {self.error=Some("Krell initialization is not implemented".into());return;}
+        if self.scene==Scene::Campaign {
+            let loaded=(||{
+                let c=self.campaign.as_ref().ok_or("missing campaign continuation")?;
+                let (resources,source,target)=Resources::load_mission(&self.root,genewars_runtime::identity::CdCampaignMission::Krell)?;
+                let world=MissionState::Landing(SharedMission::load_carried_cd(&self.root,source.source_bytes(),&c.carry,&c.world_priors,c.rng_ring,c.mode)?);
+                let frame=world.render(&resources,target)?;
+                Ok::<_,String>(Mission{resources,world,target,frame,ticks:0,blocked:None,changed_frames:0})
+            })();
+            match loaded {Ok(m)=>{self.mission=Some(m);self.campaign=None;self.error=None;self.ticks.clear();self.transition(Scene::Mission);},Err(e)=>{self.error=Some(e);}}
+            return;
+        }
 
         if self.scene==Scene::Victory {
             if let Err(error)=self.enter_campaign_view(){self.error=Some(error);}return;
@@ -341,14 +351,14 @@ impl Game {
                 let status=m.blocked.as_deref().map(|e|format!("STOPPED: {e}")).unwrap_or_else(||format!("{} - SPACE: STEP / ENTER: RUN / ESC: MENU",if self.automatic{"RUNNING"}else{"PAUSED"}));
                 let status=if let MissionState::Landing(w)=&m.world {
                     match w.runtime_context.as_ref().filter(|_|m.blocked.is_none()).map(|c|c.outcome()) {
-                        Some(genewars_runtime::mission_outcome::MissionOutcome::Won{..})=>"MISSION WON - RESULT FLOW INTEGRATION PENDING".into(),
+                        Some(genewars_runtime::mission_outcome::MissionOutcome::Won{..})=>"MISSION WON - ENTER: RESULTS".into(),
                         Some(genewars_runtime::mission_outcome::MissionOutcome::Lost{..})=>"MISSION LOST - RESULT FLOW INTEGRATION PENDING".into(),
                         _=>status,
                     }
                 }else{status};
                 let lines=if let MissionState::Landing(w)=&m.world {
-                    vec![format!("{} - STEP {} - ACTOR {}",if w.runtime_context.is_some(){"EXCELAND - RECONSTRUCTION"}else{"LANDING STUDY"},m.ticks,w.selected.map(|s|s.to_string()).unwrap_or("NONE".into())),
-                        self.error.clone().or_else(||w.feedback.clone()).or_else(||self.building_feedback.clone()).unwrap_or(status),"TAB: SELECT / RIGHT CLICK: MOVE OR PLACE / C: CONSTRUCTION".into(),if w.runtime_context.is_some(){let p=w.world.player(0).map_err(|e|e.to_string())?.bytes();format!("PHOTON PROCESSORS: {}/3 - RESOURCES: {}",p[0x606],i32::from_le_bytes(p[0x4a3..0x4a7].try_into().unwrap()))}else{"PORT CONTROLS; SOURCE OPCODE16 PLACEMENT / B: DEV BTURR".into()}]
+                    vec![format!("{} - STEP {} - ACTOR {}",match w.runtime_context.as_ref().map(|c|c.origin()){Some(genewars_runtime::mission_context::ContextOrigin::CarriedCdKrell)=>"KRELL - RECONSTRUCTION",Some(_)=>"EXCELAND - RECONSTRUCTION",None=>"LANDING STUDY"},m.ticks,w.selected.map(|s|s.to_string()).unwrap_or("NONE".into())),
+                        self.error.clone().or_else(||w.feedback.clone()).or_else(||self.building_feedback.clone()).unwrap_or(status),"TAB: SELECT / RIGHT CLICK: MOVE OR PLACE / C: CONSTRUCTION".into(),if w.runtime_context.is_some(){let p=w.world.player(0).map_err(|e|e.to_string())?.bytes();if p[0x6e7]==1 {format!("ZONE CREDIT: {}/1000 - RESOURCES: {}",i32::from_le_bytes(p[0xd..0x11].try_into().unwrap()),i32::from_le_bytes(p[0x4a3..0x4a7].try_into().unwrap()))}else{format!("PHOTON PROCESSORS: {}/3 - RESOURCES: {}",p[0x606],i32::from_le_bytes(p[0x4a3..0x4a7].try_into().unwrap()))}}else{"PORT CONTROLS; SOURCE OPCODE16 PLACEMENT / B: DEV BTURR".into()}]
                 }else{vec![format!("PLANTS {} - STEP {} - CURSOR {}",m.world.plant_count(),m.ticks,m.world.schedule_cursor()),status,"ARROWS: VIEW - OTHER ENTITY SYSTEMS SUSPENDED".into()]};
                 (&m.frame.image,lines)
             },

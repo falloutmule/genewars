@@ -204,7 +204,7 @@ impl PlayerState {
 
     /// Compose 0x801C0 selection, 0x81310 allocation and the new-actor-only
     /// 0x80830 placement pass. This bounded path requires an empty five-slot
-    /// partition and fresh campaign counters; existing-actor placement and the
+    /// partition and fresh or restored Krell campaign counters; existing-actor placement and the
     /// special immediate-activation branch are outside this transaction.
     /// Caller must establish global0x11AC22==0. With that dword nonzero and
     /// tick0, the original may activate immediately instead of requesting a
@@ -213,7 +213,7 @@ impl PlayerState {
         &self, prior_actors: &[[u8; 200]; 5], mask: u8,
         origin: ActorOriginSample, final_target: [i16; 2],
     ) -> Result<PreparedPlayerActors, PlayerStateError> {
-        if self.creation_mode() != 0 || self.actor_count() != 0 || self.progress() != 0 {
+        if self.creation_mode() != 0 || self.actor_count() != 0 || (self.progress() != 0 && !(self.progress()==1&&self.origin==PlayerStateOrigin::RestoredForMission)) {
             return Err(PlayerStateError::FreshCreationStateRequired);
         }
         if let Some(slot) = prior_actors.iter().position(|record| record[6] != 0) {

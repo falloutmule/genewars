@@ -14,11 +14,13 @@ pub enum ContextOrigin {
     PartialCdConq001,
     /// First mission after fresh constructors and completed source bootstrap.
     FreshCdConq001,
+    CarriedCdKrell,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum RngProvenance {
     OriginalStartupUnknown,
+    CdKrellSerialized { seed:u16, draw_count:u32, inherited_ring:u8 },
     /// Serialized5428/count16855 followed by exactly64 blueprint draws.
     /// Ring position is diagnostic metadata, explicitly retained by caller.
     CdConq001SerializedThenBlueprints { seed:u16, draw_count:u32, diagnostic_ring:u8 },
@@ -133,6 +135,16 @@ impl MissionRuntimeContext {
             outcome:crate::mission_outcome::MissionOutcome::Running})
     }
 
+    /// CONQ002 runtime block, after7D090 and MAINPANL, using inherited mode/ring.
+    pub fn carried_cd_krell(rng:crate::blueprint::BlueprintRng,mode_after_campaign:u8)->Result<Self,&'static str>{
+        if rng.seed!=47117||rng.draw_count!=33620||rng.ring>=32{return Err("Krell requires exact serialized RNG and inherited valid ring");}
+        if mode_after_campaign!=0{return Err("Krell campaign resume mode is not admitted");}
+        Ok(Self{origin:ContextOrigin::CarriedCdKrell,participating_players:1,runtime_flags:0x3e,
+            runtime_mode:Some(mode_after_campaign),countdown:1000,frame:0,
+            rng:RngProvenance::CdKrellSerialized{seed:rng.seed,draw_count:rng.draw_count,inherited_ring:rng.ring},
+            outcome:crate::mission_outcome::MissionOutcome::Running})
+    }
+
     pub fn origin(&self) -> ContextOrigin { self.origin }
     pub fn participating_players(&self) -> u8 { self.participating_players }
     pub fn known_runtime_flags(&self) -> u8 { self.runtime_flags }
@@ -172,7 +184,7 @@ impl MissionRuntimeContext {
     }
     pub fn startup_blockers(&self) -> &'static [StartupBlocker] {
         match self.origin {
-            ContextOrigin::Development | ContextOrigin::FreshCdConq001 => &[],
+            ContextOrigin::Development | ContextOrigin::FreshCdConq001 | ContextOrigin::CarriedCdKrell => &[],
             ContextOrigin::PartialCdConq001 => &REFERENCE_BLOCKERS,
         }
     }

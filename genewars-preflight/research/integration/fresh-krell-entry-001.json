@@ -1,0 +1,14 @@
+{
+  "status": "blocked",
+  "classification": "unsupported_presentation",
+  "private_probe": "private/integration/fresh-krell-entry-001",
+  "scene": "Campaign",
+  "reason": "family8 slot 0: unsupported draw state (2, 10)",
+  "pins": {
+    "genewars-game.exe": "37a8c3cd89fc682206db4bfa20eea1a6f60a978f98466c67b06a450b244516c8",
+    "replay.txt": "53c31c2890b6ad4dd9276630fe880a739a6eb1f3b3321a85f952e8662477dd7a",
+    "report.json": "80a107da6db0f5ce40a0927f06271ba263ec727d6eab12c9cc45332db9e1ebeb",
+    "frame.bmp": "309c1e0911f6333d76774c253f55a6ae2b9cd7552485c4cc56163b512363ce16"
+  },
+  "repair": "family8 selector2 state10 renderer,44sourcepixelcases; integration pending"
+}

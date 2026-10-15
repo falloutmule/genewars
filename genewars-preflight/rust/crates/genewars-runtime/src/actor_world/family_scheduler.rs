@@ -1,6 +1,6 @@
 //! Bounded source 6A540, 14EC0 and 4F580 family scheduling.
 //!
-//! The sole neutral Mule callback is admitted. Owned creatures, newborns,
+//! Neutral Mule callbacks use ascending live slots and shared world/RNG. Owned creatures, newborns,
 //! and active kind6/7 entities require their own callback implementations.
 use super::*;
 use crate::creature_world::{CreatureAnimationBinding, MuleAnimations, MuleStepContext};
@@ -33,7 +33,7 @@ fn ui_animation_requests() -> [CreatureUiAnimationRequest; 8] {
 }
 
 impl ActorWorld {
-    /// Validate and perform the admitted neutral subset of source 6A540.
+    /// Validate and perform the admitted no-birth neutral subset of source 6A540.
     /// Numeric player counters, callback state, links and RNG commit together.
     /// UI animation requests retain source order and remain unconsumed.
     pub fn step_neutral_creature_callbacks(
@@ -41,10 +41,9 @@ impl ActorWorld {
         physics: &PhysicsTables, trig: &TrigTables, animations: &MuleAnimations,
     ) -> Result<CreaturePassReceipt, ActorWorldError> {
         self.neutral_creature_pass_with(player_count, |world, slot| {
-            if slot != 0 { return Err(ActorWorldError::UnsupportedCreatureSchedule); }
             // The callback must consume the current world even at frame1:
             // authentic startup has already executed frame0 and refreshed shade.
-            let receipt=world.step_mule_followup_with_water(context, physics, trig, animations)?;
+            let receipt=world.step_neutral_mule_slot_with_water(slot,context, physics, trig, animations)?;
             Ok((receipt.pending_audio,receipt.pending_plant_retirements,receipt.pending_portrait_refresh,receipt.retirement))
         })
     }
@@ -59,9 +58,8 @@ impl ActorWorld {
         if declared < 0 || declared as usize != active {
             return Err(ActorWorldError::CreatureCountMismatch { declared, active });
         }
-        if active > 1 { return Err(ActorWorldError::UnsupportedCreatureSchedule); }
         for (slot, record) in pool.records().iter().enumerate().filter(|(_, r)| r[6] != 0) {
-            if slot != 0 || record[6] != 1 || record[0x18] != 4 || record[0x15] & 1 != 0
+            if record[6] != 1 || record[0x18] != 4 || record[0x15] & 1 != 0
                 || pool.binding(slot)? != Some(if record[0x5e]>=26 {
                     CreatureAnimationBinding::BonesSelector4
                 }else{CreatureAnimationBinding::MuleSelector4}) {
@@ -80,15 +78,21 @@ impl ActorWorld {
         let mut pending_audio=Vec::new();
         let mut pending_plant_retirements=Vec::new();
         let mut pending_portrait_refreshes=Vec::new();let mut retirements=Vec::new();
-        if active == 1 {
-            // Virtual68 at 1EC50 is the pure state>=24 predicate. Owner4
-            // skips the player-counter increment for either result.
-            let (audio,plant_retirements,portrait,retirement)=callback(&mut staged, 0)?;
+        let mut remaining=declared as usize;
+        for slot in 0..300usize {
+            if remaining==0{break;}
+            let record=staged.creatures.as_ref().unwrap().record(slot)?;
+            if record[6]==0{continue;}
+            if record[0x15]&1!=0{return Err(ActorWorldError::UnsupportedCreatureSchedule);}
+            let (audio,plant_retirements,portrait,retirement)=callback(&mut staged,slot as u16)?;
             if let Some(receipt)=retirement{retirements.push(receipt);}
             pending_audio.extend(audio);pending_plant_retirements.extend(plant_retirements);
-            if portrait {pending_portrait_refreshes.push(0);}
-            slots.push(0);
+            if portrait{pending_portrait_refreshes.push(slot as u16);}
+            slots.push(slot as u16);remaining-=1;
         }
+        if remaining!=0||staged.creatures.as_ref().unwrap().records().iter().any(|r|r[6]!=0&&r[0x15]&1!=0){return Err(ActorWorldError::UnsupportedCreatureSchedule);}
+        let final_active=staged.creatures.as_ref().unwrap().records().iter().filter(|r|r[6]!=0).count();
+        if final_active+retirements.len()!=active {return Err(ActorWorldError::UnsupportedCreatureSchedule);}
         staged.validate_links()?;
         *self = staged;
         Ok(CreaturePassReceipt { primary_slots: slots, pending_ui_animations: ui_animation_requests(), pending_audio, pending_plant_retirements, pending_portrait_refreshes, retirements })
@@ -168,5 +172,51 @@ mod tests {
             Err(CreatureError::UnsupportedMotionState.into())
         });
         assert!(result.is_err());assert_eq!(world,before);
+    }
+}
+
+#[cfg(test)]
+mod multi_slot_tests {
+    use super::*;
+    const SLOTS: [u16;4] = [0,3,9,17];
+    fn fixture(bones: bool, owner: u8, newborn: bool) -> ActorWorld {
+        let mut bytes=vec![0;343_958];bytes[..4].copy_from_slice(&0x55336u32.to_le_bytes());bytes[337_054..337_058].copy_from_slice(&0x6beu32.to_le_bytes());
+        let players=core::array::from_fn(|id| {let mut r=*PlayerState::fresh_campaign(id as u8,[4096,4096],b"fixture\0").unwrap().bytes();r[0x616..0x61a].copy_from_slice(&(100+id as u32).to_le_bytes());PlayerState::from_record(&r).unwrap()});
+        let mut world=ActorWorld::from_parts(&ConqMissionSource::parse(&bytes).unwrap(),&[[0;200];20],[ActorHandleBindings::empty();20],players,BlueprintRng{seed:5428,ring:0,draw_count:0}).unwrap();
+        let mut packed=vec![0;300*116];
+        for slot in SLOTS {let i=slot as usize;let r=&mut packed[i*116..(i+1)*116];r[..2].copy_from_slice(&slot.to_le_bytes());r[6]=1;r[7..9].copy_from_slice(&(slot as i16*256).to_le_bytes());r[15..17].copy_from_slice(&slot.to_le_bytes());r[21]=u8::from(newborn);r[24]=owner;r[0x7a-8]=4;r[0x5e-8]=if bones{25}else{8};world.backing[MAP_START+i*14+6..MAP_START+i*14+9].copy_from_slice(&[slot as u8,(slot>>8)as u8,1]);}
+        world.creatures=Some(Box::new(CreaturePool::from_packed(&packed,&[[0;124];300]).unwrap()));if bones { for slot in SLOTS { let old=*world.creatures.as_ref().unwrap().record(slot as usize).unwrap();let mut new=old;new[0x5e]=27;world.creatures.as_mut().unwrap().replace_record_checked(slot as usize,&old,&new).unwrap(); } }world.backing[0x3550..0x3552].copy_from_slice(&4i16.to_le_bytes());world.validate_links().unwrap();world
+    }
+    #[test]
+    fn sparse_four_match_literal_scheduler_order_counters_and_ui() {
+        let mut w=fixture(false,4,false);let mut seen=Vec::new();
+        let r=w.neutral_creature_pass_with(4,|s,id|{seen.push(id);s.rng.draw_count+=1;Ok((vec![id as u8],vec![],true,None))}).unwrap();
+        assert_eq!(seen,SLOTS);assert_eq!(r.primary_slots,SLOTS);assert_eq!(r.pending_portrait_refreshes,SLOTS);assert_eq!(r.pending_audio,[0,3,9,17]);assert_eq!(w.rng.draw_count,4);
+        for p in &w.players {assert_eq!(&p.bytes()[0x616..0x61a],&[0;4]);}
+        assert_eq!(r.pending_ui_animations.map(|x|x.state_global),core::array::from_fn(|i|0x184cbc+i as u32*8));w.validate_links().unwrap();
+    }
+    #[test]
+    fn current_slot_retirement_does_not_shorten_initial_scan_count() {
+        let mut w=fixture(true,4,false);let r=w.neutral_creature_pass_with(4,|s,id|{
+            if id!=0{return Ok((vec![],vec![],false,None));}
+            let before=*s.creatures.as_ref().unwrap().record(0)?;
+            s.backing[MAP_START+8]=0;s.creatures.as_mut().unwrap().retire_bones_checked(0,&before)?;s.backing[0x3550..0x3552].copy_from_slice(&3i16.to_le_bytes());
+            let after=*s.creatures.as_ref().unwrap().record(0)?;
+            let receipt=MuleRetirementReceipt{before,after,cleanup:vec![],count_after:3,pending_ui_cleanup:[MuleUiCleanupRequest::Kind1List{root_global:0x1860be,id:0},MuleUiCleanupRequest::ModuleReference{root_global:0x185dfc,reference:[0,0,1]}],pending_display_phase_1185a8:11};
+            Ok((vec![],vec![],false,Some(receipt)))
+        }).unwrap();assert_eq!(r.primary_slots,SLOTS);assert_eq!(r.retirements.len(),1);assert_eq!(word(&w.backing,0x3550),3);w.validate_links().unwrap();
+    }
+    #[test]
+    fn late_error_restores_every_world_field() {
+        let mut w=fixture(false,4,false);let before=w.clone();let mut seen=Vec::new();
+        let r=w.neutral_creature_pass_with(4,|s,id|{seen.push(id);s.rng.seed=12;s.rng.draw_count+=1;s.backing[MAP_START+12]=99;if id==17{s.backing[MAP_START+8]=0;return Err(CreatureError::UnsupportedMotionState.into());}Ok((vec![],vec![],false,None))});assert!(r.is_err());assert_eq!(seen,SLOTS);assert_eq!(w,before);
+    }
+    #[test]
+    fn owned_and_initial_newborn_are_explicitly_blocked_without_callbacks() {
+        for (owner,newborn) in [(0,false),(4,true)] {let mut w=fixture(false,owner,newborn);let before=w.clone();assert!(matches!(w.neutral_creature_pass_with(4,|_,_|panic!("blocked admission invoked callback")),Err(ActorWorldError::UnsupportedCreatureSchedule)));assert_eq!(w,before);}
+    }
+    #[test]
+    fn callback_newborn_marker_rolls_back_whole_pass() {
+        let mut w=fixture(false,4,false);let before=w.clone();let r=w.neutral_creature_pass_with(4,|s,id|{if id==0{let old=*s.creatures.as_ref().unwrap().record(3)?;let mut new=old;new[0x15]|=1;s.creatures.as_mut().unwrap().replace_record_checked(3,&old,&new)?;}Ok((vec![],vec![],false,None))});assert!(matches!(r,Err(ActorWorldError::UnsupportedCreatureSchedule)));assert_eq!(w,before);
     }
 }

@@ -38,23 +38,37 @@ pub struct SharedMission {
 }
 impl SharedMission {
     pub fn load(root:&Path,mission_bytes:&[u8],seed:u16)->Result<Self,String> {
-        Self::load_internal(root,mission_bytes,seed,None)
+        Self::load_internal(root,mission_bytes,seed,None,None)
     }
     /// Recovered fresh CD pipeline; opaque source stack bytes remain explicit inputs.
     pub fn load_fresh_cd(root:&Path,mission_bytes:&[u8],scratch:[u8;36],diagnostic_ring:u8)->Result<Self,String>{
-        Self::load_internal(root,mission_bytes,5428,Some((scratch,diagnostic_ring)))
+        Self::load_internal(root,mission_bytes,5428,Some((scratch,diagnostic_ring)),None)
     }
-    fn load_internal(root:&Path,mission_bytes:&[u8],seed:u16,fresh:Option<([u8;36],u8)>)->Result<Self,String>{
+    /// Successor load consumes source-projected carry; no regenerated blueprints or seed override.
+    pub fn load_carried_cd(root:&Path,mission_bytes:&[u8],carry:&genewars_runtime::result_carry::CampaignCarryPlan,
+        world_priors:&[u8;150],ring:u8,mode:u8)->Result<Self,String>{
+        if carry.players[0][0x6e7]!=1||carry.players[0][0x15]==0{return Err("Krell requires first-mission progress and retained blueprints".into());}
+        Self::load_internal(root,mission_bytes,47117,None,Some((carry,world_priors,ring,mode)))
+    }
+    fn load_internal(root:&Path,mission_bytes:&[u8],seed:u16,fresh:Option<([u8;36],u8)>,
+        carried:Option<(&genewars_runtime::result_carry::CampaignCarryPlan,&[u8;150],u8,u8)>)->Result<Self,String>{
+        let reference=fresh.is_some()||carried.is_some();
         let source=ConqMissionSource::parse(mission_bytes).map_err(|e|e.to_string())?;
         let target=source.target_words(0).map_err(|e|e.to_string())?.map(|v|v as i16);
-        let players=if fresh.is_some(){
-            let retained=PlayerState::fresh_campaign(0,target,b"Player\0").map_err(|e|e.to_string())?;
+        let players=if reference{
+            let retained=if let Some((carry,_,_,_))=carried{PlayerState::from_record(&carry.players[0]).map_err(|e|e.to_string())?}else{PlayerState::fresh_campaign(0,target,b"Player\0").map_err(|e|e.to_string())?};
             let mut players=core::array::from_fn(|p|PlayerState::from_record(&mission_bytes[20+p*1805..20+(p+1)*1805]).unwrap());
             players[0]=PlayerState::restored_for_mission(&mission_bytes[20..1825],0,&retained).map_err(|e|e.to_string())?;players
         }else{core::array::from_fn(|p|PlayerState::fresh_campaign(p as u8,target,b"Native study\0").unwrap())};
         let actor_priors=zero_record_box::<20,200>();
-        let mut world=ActorWorld::from_mission(&source,&actor_priors,[ActorHandleBindings::empty();20],players,
-            BlueprintRng{seed,ring:fresh.map_or(0,|(_,ring)|ring),draw_count:if fresh.is_some(){16855}else{0}}).map_err(|e|e.to_string())?;
+        let mut world=if let Some((carry,world_priors,ring,_))=carried{
+            let globals=source.tail_globals();
+            let loaded_seed=u16::from_le_bytes(globals[26..28].try_into().unwrap());
+            let draws=u32::from_le_bytes(globals[18..22].try_into().unwrap());
+            if source.flags_byte()!=0x38||source.active_count_byte()!=1||loaded_seed!=47117||draws!=33620{return Err("Krell runtime block differs from admitted source".into());}
+            ActorWorld::from_carried_cd_mission(&source,&carry.actors,players,BlueprintRng{seed:loaded_seed,ring,draw_count:draws},world_priors)
+        }else{ActorWorld::from_mission(&source,&actor_priors,[ActorHandleBindings::empty();20],players,
+            BlueprintRng{seed,ring:fresh.map_or(0,|(_,ring)|ring),draw_count:if fresh.is_some(){16855}else{0}})}.map_err(|e|e.to_string())?;
         world.initialize_mission_player_funds(source.active_count_byte()).map_err(|e|e.to_string())?;
         let building_priors=zero_record_box::<256,67>();
         world.admit_buildings(&building_priors,[None;256]).map_err(|e|e.to_string())?;
@@ -72,10 +86,10 @@ impl SharedMission {
         let text=read_bound(&root.join("menu/text.dat"))?;
         let strings=TextStringTable::parse(&text).map_err(|e|e.to_string())?;
         let names=BlueprintNames::new(&strings.strings()[..128]).map_err(|e|e.to_string())?;
-        world.regenerate_player_blueprints(0,fresh.map_or([0;36],|(scratch,_)|scratch),&names,true).map_err(|e|e.to_string())?;
+        if carried.is_none(){world.regenerate_player_blueprints(0,fresh.map_or([0;36],|(scratch,_)|scratch),&names,true).map_err(|e|e.to_string())?;}
         let origin=ActorOriginSample{position:[0,0],height:interpolate_height(world.map(),0,0).map_err(|e|e.to_string())?,
             shade:interpolate_entity_shade(world.map(),0,0).map_err(|e|e.to_string())?};
-        world.prepare_fresh_player(0,if fresh.is_some(){mission_bytes[0x1ebd]}else{5},origin,target).map_err(|e|e.to_string())?;
+        world.prepare_fresh_player(0,if reference{mission_bytes[0x1ebd]}else{5},origin,target).map_err(|e|e.to_string())?;
         let factory=world.create_landing_core(0,0).map_err(|e|e.to_string())?;
         let mut pending_requests=0;
         for event in &factory.pending_events {
@@ -85,11 +99,16 @@ impl SharedMission {
                 pending_requests+=reveal.pending_presentation_vertices.len()as u64;
             } else {pending_requests+=1;}
         }
-        let runtime_context=if fresh.is_some(){
-            let context=genewars_runtime::mission_context::MissionRuntimeContext::fresh_cd_conq001(world.rng().clone()).map_err(str::to_owned)?;
+        let runtime_context=if reference{
+            let context=if let Some((_,_,_,mode))=carried{genewars_runtime::mission_context::MissionRuntimeContext::carried_cd_krell(world.rng(),mode)}else{genewars_runtime::mission_context::MissionRuntimeContext::fresh_cd_conq001(world.rng())}.map_err(str::to_owned)?;
             world.initialize_fresh_runtime_countdown(&context).map_err(str::to_owned)?;
             let visibility=world.initialize_mission_visibility(0).map_err(|e|format!("startup visibility: {e:?}"))?;
-            pending_requests+=visibility.reveal.pending_presentation_vertices.len()as u64;
+            pending_requests+=(visibility.reveal.pending_presentation_vertices.len()+visibility.zones.viewport_invalidations.len())as u64;
+            //7F950 has no numeric/RNG work when all four categories remain present.
+            let player=world.player(0).map_err(|e|e.to_string())?;
+            if !(0..4u8).all(|category|(0..32).any(|index|{let b=player.blueprint(index).unwrap();b[0]!=0&&b[0x16]==category})){
+                return Err("source7F950 missing-category backfill is not implemented".into());
+            }
             Some(context)
         }else{None};
         let plant_spread=SpreadDirections::from_mapped_bytes(&read_bound(&root.join("physics/plant-spread.bin"))?).map_err(|e|e.to_string())?;
@@ -208,7 +227,7 @@ impl SharedMission {
             }
         }
         let climate=i16::from_le_bytes(self.world.backing_bytes()[0x1c61..0x1c63].try_into().unwrap());
-        let creatures=self.world.step_neutral_creature_callbacks(4,
+        let creatures=self.world.step_neutral_creature_callbacks(player_count,
             MuleStepContext{frame_counter:frame,gravity:context.gravity,water_height:context.water_height,climate},
             &resources.physics,&self.trig,&resources.mule_animations).map_err(|e|e.to_string())?;
         self.pending_requests+=(creatures.pending_ui_animations.len()+creatures.pending_audio.len()+creatures.pending_plant_retirements.len()+creatures.pending_portrait_refreshes.len())as u64;
@@ -318,9 +337,14 @@ impl SharedMission {
     pub fn creature_state_json(&self)->String {
         let word=|r:&[u8],p:usize|i16::from_le_bytes([r[p],r[p+1]]);
         let entries=self.world.creatures().unwrap().records().iter().enumerate().filter(|(_,r)|r[6]!=0).map(|(slot,r)|
-            format!("{{\"slot\":{slot},\"owner\":{},\"position\":[{},{}],\"destination\":[{},{}],\"state\":{},\"animation\":{},\"frame\":{},\"reserve\":{},\"target_kind\":{}}}",
-                r[24],word(r,7),word(r,9),word(r,11),word(r,13),r[0x5e],r[0x19],r[0x1b],word(r,0x68),r[0x57]))
+            format!("{{\"slot\":{slot},\"owner\":{},\"species\":{},\"position\":[{},{}],\"destination\":[{},{}],\"state\":{},\"animation\":{},\"frame\":{},\"reserve\":{},\"target_kind\":{}}}",
+                r[24],r[0x7a],word(r,7),word(r,9),word(r,11),word(r,13),r[0x5e],r[0x19],r[0x1b],word(r,0x68),r[0x57]))
             .collect::<Vec<_>>().join(",");
+        format!("[{entries}]")
+    }
+    pub fn family8_state_json(&self)->String{
+        let entries=self.world.family8().unwrap().records().iter().enumerate().filter(|(_,r)|r[6]!=0).map(|(slot,r)|
+            format!("{{\"slot\":{slot},\"selector\":{},\"state\":{},\"owner\":{},\"flags\":{},\"animation\":{},\"frame\":{}}}",r[0x55],r[0x56],r[24],u16::from_le_bytes([r[0x15],r[0x16]]),r[0x19],r[0x1b])).collect::<Vec<_>>().join(",");
         format!("[{entries}]")
     }
     pub fn select_next(&mut self)->Result<(),String> {
@@ -340,5 +364,32 @@ impl SharedMission {
         let result=self.world.dispatch_ground_move_searched(0,input,&resources.physics,&self.trig).map_err(|e|e.to_string())?;
         if matches!(result,GroundMoveOutcome::Dispatched{..}) {self.command_count+=1;}
         Ok(format!("actor {slot} target {point:?}: {result:?}"))
+    }
+}
+
+#[cfg(test)] mod carried_startup_tests {
+    use super::*;
+    /// Synthetic retained state exercises the real loader; this is not mission acceptance.
+    #[test] fn krell_load_preserves_campaign_genetics_and_inherits_ring_without_regeneration(){
+        let root=Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../private/integration/game-runtime");
+        let first=read_bound(&root.join("terrain/CONQ001.DAT")).unwrap();
+        let initial=SharedMission::load_fresh_cd(&root,&first,[0xa5;36],17).unwrap();
+        let mut carry=initial.world.plan_campaign_carry(&[0;600],0x7e,2,0,None).unwrap();
+        carry.players[0][0x6e7]=1;
+        let priors=core::array::from_fn(|i|i as u8);
+        let second=read_bound(&root.join("terrain/CONQ002.DAT")).unwrap();
+        let loaded=SharedMission::load_carried_cd(&root,&second,&carry,&priors,17,0).unwrap();
+        assert_eq!(loaded.world.rng(),BlueprintRng{seed:47117,ring:17,draw_count:33620});
+        assert_eq!(&loaded.world.backing_bytes()[0x34ba..0x3550],&priors);
+        let p=loaded.world.player(0).unwrap().bytes();assert_eq!(p[0x6e7],1);
+        assert_eq!(i32::from_le_bytes(p[0x4a3..0x4a7].try_into().unwrap()),2000);
+        for (before,after) in carry.players[0][0x16..0x496].chunks_exact(36).zip(p[0x16..0x496].chunks_exact(36)){
+            assert_eq!(&before[..0x1c],&after[..0x1c],"retained names, skills and opaque priors");
+        }
+        let context=loaded.runtime_context.unwrap();
+        assert_eq!(context.origin(),genewars_runtime::mission_context::ContextOrigin::CarriedCdKrell);
+        assert_eq!(context.frame(),0);assert_eq!(context.countdown(),1000);assert_eq!(context.known_runtime_flags(),0x3e);
+        assert!(SharedMission::load_carried_cd(&root,&second,&carry,&priors,17,2).is_err());
+        assert!(SharedMission::load_carried_cd(&root,&first,&carry,&priors,17,0).is_err());
     }
 }

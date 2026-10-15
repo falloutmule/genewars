@@ -368,16 +368,19 @@ impl Resources {
             .ok_or_else(||format!("unadmitted building resource selector {selector}"))
     }
     pub fn load(root: &Path) -> Result<(Self, MissionWorld, [i16;2]), String> {
-        let plan = CampaignResourcePlan::new(0,0).map_err(|e| format!("{e:?}"))?;
-        if plan.mission != "levels/conq001.dat" || plan.header != "LEVELS/hdrco1.dat" {
+        Self::load_mission(root,genewars_runtime::identity::CdCampaignMission::Exceland)
+    }
+    pub fn load_mission(root:&Path,definition:genewars_runtime::identity::CdCampaignMission)->Result<(Self,MissionWorld,[i16;2]),String>{
+        let plan = CampaignResourcePlan::new(definition.progress()as i8,0).map_err(|e| format!("{e:?}"))?;
+        if plan.mission != format!("levels/conq{:03}.dat",definition.progress()+1) || plan.header != format!("LEVELS/hdrco{}.dat",definition.progress()+1) {
             return Err("initial campaign binding differs".into());
         }
-        let mission = read_bound(&root.join("terrain/CONQ001.DAT"))?;
+        let mission = read_bound(&root.join(definition.mission_role()))?;
         let source = ConqMissionSource::parse(&mission).map_err(|e| e.to_string())?;
         let target = source.target_words(0).map_err(|e| e.to_string())?.map(|v| v as i16);
         let parameters = read_bound(&root.join("plant-parameters.bin"))?;
         let world = MissionWorld::from_source(&source, &parameters).map_err(|e| e.to_string())?;
-        let header = read_bound(&root.join("HDRCO1.DAT"))?;
+        let header = read_bound(&root.join(definition.header_role()))?;
         let title = CampaignHeader::parse(&header).map_err(|e| e.to_string())?.title_bytes().to_vec();
         let atlas = read_bound(&root.join("terrain/B32A.DAT"))?;
         B32Atlas::parse(&atlas).map_err(|e| e.to_string())?;

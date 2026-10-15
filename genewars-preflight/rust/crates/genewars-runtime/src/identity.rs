@@ -59,3 +59,17 @@ mod tests {
         ] { assert_eq!(sha256_hex(&input), expected); }
     }
 }
+
+/// Behavioral references admitted separately; never infer a build from a filename.
+#[derive(Debug,Clone,Copy,PartialEq,Eq)]
+pub enum CdCampaignMission { Exceland, Krell }
+impl CdCampaignMission {
+    pub fn sha256(self)->&'static str {match self {
+        Self::Exceland=>"72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+        Self::Krell=>"4042c6df3b161132c12a424dace7b9fcbf253a197261f1cf76e0db4af41ea27a",
+    }}
+    pub fn identify(bytes:&[u8])->Option<Self>{let hash=sha256_hex(bytes);[Self::Exceland,Self::Krell].into_iter().find(|m|m.sha256()==hash)}
+    pub fn progress(self)->u8{match self{Self::Exceland=>0,Self::Krell=>1}}
+    pub fn mission_role(self)->&'static str{match self{Self::Exceland=>"terrain/CONQ001.DAT",Self::Krell=>"terrain/CONQ002.DAT"}}
+    pub fn header_role(self)->&'static str{match self{Self::Exceland=>"HDRCO1.DAT",Self::Krell=>"campaign/HDRCO2.DAT"}}
+}

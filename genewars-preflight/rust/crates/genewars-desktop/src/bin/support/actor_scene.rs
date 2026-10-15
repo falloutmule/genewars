@@ -411,6 +411,7 @@ fn render_actor_world_layers(
                 (1,0)=>super::family8_scene::draw_family8_selector1_state0,
                 (1,1)=>super::family8_scene::draw_family8_selector1_state1,
                 (1,3)=>super::family8_scene::draw_family8_selector1_state3,
+                (2,10)=>super::family8_scene::draw_family8_selector2_state10,
                 state=>return Err(format!("family8 slot {slot}: unsupported draw state {state:?}")),
             };
             family8_receipts.push(draw(&resources.ethereal,record,origin,&fade,&gla,&mut indexed.indices[128..],[512,480],640)
