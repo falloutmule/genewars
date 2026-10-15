@@ -6,6 +6,12 @@ use crate::physics_tables::PhysicsTables;
 pub struct OwnedMuleReceipt {pub motion:creature_world::CommonPhysicsPlan<124>,pub pending_reveal_vertices:Vec<[i16;2]>}
 impl ActorWorld {
  pub fn step_owned_mule_slot(&mut self,slot:u16,selected:u8,global_flags:u16,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations)->Result<OwnedMuleReceipt,ActorWorldError>{
+  #[cfg(debug_assertions)] self.capture_numeric_callback(usize::from(slot),context.frame_counter,"owned-before");
+  let result=self.step_owned_mule_slot_inner(slot,selected,global_flags,context,physics,trig,animations);
+  #[cfg(debug_assertions)] match &result {Ok(_)=>self.capture_numeric_callback(usize::from(slot),context.frame_counter,"owned-after"),Err(_)=>self.capture_numeric_callback(usize::from(slot),context.frame_counter,"blocked-before-owned")};
+  result
+ }
+ fn step_owned_mule_slot_inner(&mut self,slot:u16,selected:u8,global_flags:u16,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations)->Result<OwnedMuleReceipt,ActorWorldError>{
   self.validate_links()?;if selected>=4||global_flags&1!=0{return Err(CreatureError::UnsupportedNeighborhood.into());}
   let slot=usize::from(slot);let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;
   if pool.binding(slot)?!=Some(CreatureAnimationBinding::MuleSelector4){return Err(CreatureError::UnsupportedMotionState.into());}

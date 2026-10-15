@@ -101,6 +101,13 @@ pub struct ActorPool {
 }
 
 impl ActorPool {
+    /// Test-only callback replay; caller validates identities, bindings, links,
+    /// counts and exact captured-buffer roundtrip before invoking gameplay.
+    #[cfg(test)]
+    pub(crate) fn from_captured_records(records: [[u8; 200]; 20], bindings: [ActorHandleBindings; 20]) -> Self {
+        Self { records, bindings }
+    }
+
     /// Load the family-2 group from an already admitted mission source.
     /// `native_prior` supplies the two destination ranges the file does not
     /// serialize; `bindings` similarly supplies any pre-existing logical

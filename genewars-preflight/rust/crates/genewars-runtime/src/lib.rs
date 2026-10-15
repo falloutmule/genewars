@@ -11,6 +11,7 @@ pub mod world;
 pub mod identity;
 pub mod actor_command;
 pub mod actor_motion;
+pub mod airborne_building_collision;
 pub mod player_state;
 pub mod mission_player_funds;
 pub mod blueprint;

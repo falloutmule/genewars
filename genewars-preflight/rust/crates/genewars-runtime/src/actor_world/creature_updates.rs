@@ -262,6 +262,9 @@ impl ActorWorld {
                 _=>return Err(CreatureError::MotionEnvironment.into()),
             }
         }
+        //5D011..5D02E: lethal health death requests virtual44 sound1F.
+        //The numeric planner admits only the owner4 reason4/BL0 branch.
+        if before[0x5e]==8&&plan.after[0x5e]==24&&word(&plan.after,0x6a)==0 {pending_audio.push(0x1f);}
         staged.rng=rng;
         #[cfg(debug_assertions)] staged.capture_numeric_callback(slot,context.frame_counter,"after");
         staged.validate_links()?;let mut result=plan;result.after=*staged.creatures.as_ref().unwrap().record(slot)?;*self=staged;Ok(MuleCallbackReceipt{motion:result,retirement:None,newborn_slots,pending_audio,pending_plant_retirements,pending_portrait_refresh:before[0x5e]==8&&prefix[0x5e]==0})
@@ -444,7 +447,11 @@ impl ActorWorld {
     fn mule_friendly_candidate_is_no_action(&self,record:&CreatureRecord,raw:[u8;3])->Result<bool,ActorWorldError>{
         if raw[2]!=1||record[0x18]!=4||record[0x7a]!=4||record[0x76]>90||(record[0x77]==255&&(record[0x79]as i8)>0&&word(record,0x68)>(word(record,0x62)>>1)){return Ok(false);}
         let other=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?;
-        Ok(other[6]==1&&other[0x18]==4&&other[0x7a]==4&&other[0x5e]<24&&other[0x5e]!=15)
+        if other[6]!=1||other[0x18]!=4||other[0x7a]!=4{return Ok(false);}
+        //6BA8A..6BB57 still score friendly corpses as food. Their score and
+        //direction are unused only in this satiated, no-pair, no-enemy domain.
+        if other[0x5e]>=24{return Ok(record[0x61]&0x40==0&&word(record,0x68)>(word(record,0x62)>>1));}
+        Ok(other[0x5e]!=15)
     }
     fn retire_mule_food_plant(&mut self,id:u16)->Result<(),ActorWorldError> {
         let dead=[id as u8,(id>>8)as u8,2];let record=self.entity(dead)?.to_vec();if record[24]!=4{return Err(CreatureError::UnsupportedMotionState.into());}

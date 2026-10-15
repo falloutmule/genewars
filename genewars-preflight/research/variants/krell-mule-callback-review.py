@@ -17,10 +17,13 @@ class Source(m.Source):
   super().__init__();self.context={0x11a9bd:(2,int.from_bytes(backing[0x1c5d:0x1c5f],'little')),0x11a9c1:(2,int.from_bytes(backing[0x1c61:0x1c63],'little')),0x11a9c7:(4,int.from_bytes(backing[0x1c67:0x1c6b],'little'))}
   extra=[P/'private/ghidra'/directory/('instructions-000'+name+'.txt') for directory,names in [('initial-creature',['5d360','6c900','5c730','6d230','5df20']),('terrain-map-refs',['5b580','74a50','6c780','305f0']),('activation-rng-refs',['5c920']),('player-creation',['1e810']),('landing-contact',['417e0']),('entity-plant',['7af00']),('display-geometry',['979e8']),('plant-startup',['409f0'])] for name in names]
   extra += [P/'private/ghidra/krell-cell-entry/instructions-00073f70.txt', P/'private/ghidra/krell-pair-target', P/'private/ghidra/countdown-expiry/instructions-00013e60.txt', P/'private/ghidra/initial-creature/instructions-0003fbe0.txt', P/'private/ghidra/construction-command/instructions-0001ee50.txt']
+  extra += [P/'private/ghidra/activation-rng-refs/instructions-0005cdb0.txt']
+  extra += [P/'private/ghidra'/name for name in ['countdown-expiry/instructions-0006dd50.txt','countdown-expiry/instructions-00073a50.txt','mission-array-refs/instructions-00048790.txt','player-creation/instructions-0001f070.txt','mission-tail-init/instructions-00049e90.txt','terrain-map-refs/instructions-0007b240.txt']]
+  extra += [P/'private/ghidra'/name for name in ['terrain-panel-refs/instructions-0005df50.txt', 'mission-array-refs/instructions-00081c60.txt', 'construction-command/instructions-0005b9f0.txt', 'owned-mule-collision-59280.txt', 'terrain-map-refs/instructions-00084b40.txt', 'camera-player-input/instructions-0008b800.txt', 'terrain-map-refs/instructions-000847d0.txt', 'terrain-map-refs/instructions-0007af00.txt', 'entity-plant/instructions-0001f240.txt', 'entity-plant/instructions-0001f280.txt', 'owned-mule-ai-6bfd0.txt', 'mission-array-refs/instructions-00043130.txt']]
   self.files+=extra
   parse_files=[P/'private/review/creature-motion/listing-6c900-closed.txt' if p.name=='instructions-0006c900.txt' else p for p in extra]
   self.code.update(m.m.Model(parse_files,b'').code)
-  self.code[0x2c200]=('RET',[]);self.code[0x5e068]=('JMP',['0x0005e0a3']);order=sorted(self.code);self.next=dict(zip(order,order[1:]))
+  self.code[0x41910]=('RET',['0x10']);self.code[0x2c200]=('RET',[]);self.code[0x5e068]=('JMP',['0x0005e0a3']);order=sorted(self.code);self.next=dict(zip(order,order[1:]))
  def store(self,a,n,v):
   # Base harness initializes CONQ001 globals before executing; substitute the
   # captured Krell environmental globals at that initialization boundary only.
@@ -39,8 +42,36 @@ def main():
     if vt:struct.pack_into('<I',raw,35,vt)
     if name=='creatures.bin':struct.pack_into('<I',raw,31,0x400000+animations)
     state.update({base+slot*width+j:v for j,v in enumerate(raw)})
+  # Airborne obstacle queries read building animation component heights.
+  # Rebind only opaque native pointers to the actual source ANB tables.
+  building_resources={0:'BGENE.ANB',3:'BPOWE.ANB',11:'BMINE.ANB'};resource_pins={};building_tables={}
+  for i,(selector,filename)in enumerate(building_resources.items()):
+   path=P/'private/integration/game-runtime/buildings'/filename;data=bytearray(path.read_bytes());resource_pins[str(path.relative_to(P))]=sha(path)
+   count,table,components,frames,anims=struct.unpack_from('<H4I',data);address=0x600000+i*0x100000
+   for animation in range(count):
+    for offset in [0,4]:struct.pack_into('<I',data,anims+animation*10+offset,address+frames+struct.unpack_from('<I',data,anims+animation*10+offset)[0])
+   state.update({address+j:v for j,v in enumerate(data)});building_tables[selector]=address+anims
+  effect_path=P/'private/integration/game-runtime/effects/EFF.ANB';effect_data=bytearray(effect_path.read_bytes());resource_pins[str(effect_path.relative_to(P))]=sha(effect_path)
+  count,table,components,frames,anims=struct.unpack_from('<H4I',effect_data);effect_address=0xa00000
+  for animation in range(count):
+   for offset in [0,4]:struct.pack_into('<I',effect_data,anims+animation*10+offset,effect_address+frames+struct.unpack_from('<I',effect_data,anims+animation*10+offset)[0])
+  state.update({effect_address+j:v for j,v in enumerate(effect_data)});put(state,0x116818,4,effect_address+anims)
+  for slot in range(256):
+   record=buffers['buildings.bin'][slot*67:(slot+1)*67]
+   if record[6]!=0:
+    assert record[45]in building_tables,('unbound building selector',record[45])
+    put(state,0x1645ae+slot*67+31,4,building_tables[record[45]]);put(state,0x1645ae+slot*67+35,4,0x112120)
   state.update({0x118d74+i:v for i,v in enumerate(buffers['players.bin'])});seed,ring,draw=struct.unpack('<HBI',buffers['rng.bin']);put(state,0x11872c,1,ring);put(state,0x118782,4,draw);put(state,0x118770,1,b[0x52466]);put(state,0x185ec4,4,0)
-  model=Source(b);r,_,trace=model.run(counter=a.frame,seed=seed,state_before=state,registers={'EAX':0x1542be+a.slot*124},instruction_budget=500000)
+  model=Source(b)
+  class CaptureCode(dict):
+   def __getitem__(self,key):
+    if key==0x6dd50 and not(out/'collision-entry.json').exists():
+     for name,register,width in [('entry-mule.bin','EAX',124),('entry-obstacle.bin','EDX',67)]:
+      pointer=model.r[register];(out/name).write_bytes(bytes(model.load(pointer+i,1)for i in range(width)))
+     (out/'collision-entry.json').write_text(json.dumps({'source_function':'6DD50','frame':a.frame,'slot':a.slot,'mule':'entry-mule.bin','obstacle':'entry-obstacle.bin'})+'\n')
+    return super().__getitem__(key)
+  model.code=CaptureCode(model.code)
+  r,_,trace=model.run(counter=a.frame,seed=seed,state_before=state,registers={'EAX':0x1542be+a.slot*124},instruction_budget=500000)
   result={name:bytearray(data) for name,data in buffers.items()}
   # Native players overlay serialized backing. Preserve its stale serialized
   # mirror unless the literal callback actually changes a prefix byte.
@@ -57,7 +88,7 @@ def main():
   result['players.bin']=bytes(model.load(0x118d74+i,1)for i in range(7220));result['rng.bin']=struct.pack('<HBI',model.load(0x11878a,2),model.load(0x11872c,1),model.load(0x118782,4))
   for name,data in result.items():(out/name).write_bytes(data)
   (out/'trace.json').write_text(json.dumps([hex(x)for x in trace]))
-  report.update(status='source_prepared',literal_instructions=r['steps'],draws=r['draws'],queue_requests=r['queue_requests'],calls=r['calls'],source_pins={str(p.relative_to(P)):sha(p)for p in model.files},input_pins={str(p):sha(p)for p in a.before.glob('*.bin')})
+  report.update(status='source_prepared',resource_pins=resource_pins,literal_instructions=r['steps'],draws=r['draws'],queue_requests=r['queue_requests'],calls=r['calls'],source_pins={str(p.relative_to(P)):sha(p)for p in model.files},input_pins={str(p):sha(p)for p in a.before.glob('*.bin')})
   if a.expected:
    for name,data in result.items():
     actual=(a.expected/name).read_bytes();assert len(data)==len(actual),(name,'length');diff=next((i for i,(x,y)in enumerate(zip(data,actual))if x!=y),None);assert diff is None,(name,diff,data[diff],actual[diff])

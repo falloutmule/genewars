@@ -25,6 +25,13 @@ pub struct EffectPool {
 }
 
 impl EffectPool {
+    /// Test-only callback replay; caller validates identities, bindings, links,
+    /// counts and exact captured-buffer roundtrip before invoking gameplay.
+    #[cfg(test)]
+    pub(crate) fn from_captured_records(records: [LandingRecord; 200], bindings: [Option<EffectAnimationBinding>; 200]) -> Self {
+        Self { records, bindings }
+    }
+
     pub fn from_packed_inactive(
         packed: &[u8], prior: &[LandingRecord; FAMILY4_CAPACITY],
         bindings: [Option<EffectAnimationBinding>; FAMILY4_CAPACITY],

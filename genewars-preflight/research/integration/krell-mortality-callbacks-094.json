@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "scope": "Natural neutral Mule starvation, subsequent hungry corpse progression and satiated same-owner corpse no-action only; not campaign acceptance",
+  "callbacks": [
+    {
+      "status": "passed",
+      "frame": 2428,
+      "slot": 5,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\fa0dad4dd1e6490fafe09f6138a2f356",
+      "compared_bytes": 427369,
+      "draws": 0
+    },
+    {
+      "status": "passed",
+      "frame": 2429,
+      "slot": 0,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\1ebba6463c644ac98ef12b4862607e18",
+      "compared_bytes": 427369,
+      "draws": 5
+    },
+    {
+      "status": "passed",
+      "frame": 2440,
+      "slot": 5,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\f0d111789fbf4b5fb8cd28b668d51d11",
+      "compared_bytes": 427369,
+      "draws": 0
+    },
+    {
+      "status": "passed",
+      "frame": 2450,
+      "slot": 5,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\23ebe2980a4b45e094d8468b6e2a9d78",
+      "compared_bytes": 427369,
+      "draws": 0
+    }
+  ],
+  "runtime": "private/integration/krell-runtime-packets-093.log:211passed,1opt-in ignored",
+  "blocked_capture_regression": "private/review/owned-callback-replay-092/result.json:exact roundtrip,expected MotionEnvironment,wholeworld rollback,0.01s",
+  "collision_numeric": "research/variants/airborne-building-collision-review.json:122cases15860bytes0mismatches; not routed yet",
+  "active_blocker": "Krell2724slot7 airborne Genepod collision, private/review/krell-production-084/frame-2724-slot-7-blocked-before-owned"
+}
