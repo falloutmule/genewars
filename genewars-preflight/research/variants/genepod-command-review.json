@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "cases": 240,
+  "compared_bytes": 449520,
+  "literal_instructions": 16304,
+  "unsupported_admission_checks": 1200,
+  "first_difference": null,
+  "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\genepod-command\\5f0ee582a0004feeaab1b7f78af92820",
+  "scope": "814A0 handler numeric and explicit panel request only; upstream eligibility/UI producer unresolved; synthetic funds edge cases are source arithmetic evidence, not gameplay authorization",
+  "pins": {
+    "private\\ghidra\\building-loader-refs\\instructions-000814a0.txt": "e8b748ce7d92c8651f4b658033994c4626c6737805f7d8d972a9c9a7c338f8ec",
+    "research\\variants\\genepod-command-review.py": "61ab38dab68fce6f755758a70b257038626e259db55b55f104e02aa6c841cd28",
+    "research\\variants\\genepod-command-review.rs": "3f9b983e3d59ddc3ce807bc6c395d011aadf1e4e5bd439f4a94d50bc25e696ab",
+    "rust\\crates\\genewars-runtime\\src\\genepod_command.rs": "6959e7a531180d03677154e11fa85e3f516fbe02211daddcfe81333a0b8bf9d0"
+  }
+}

@@ -97,3 +97,5 @@ pub mod ui_animation;
 pub mod genepod_idle;
 
 pub mod mule_cell_entry;
+
+pub mod genepod_command;
