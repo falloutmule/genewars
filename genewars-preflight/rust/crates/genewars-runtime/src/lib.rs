@@ -101,3 +101,5 @@ pub mod mule_cell_entry;
 pub mod genepod_command;
 
 pub mod mule_waypoint_wait;
+
+pub mod mule_lost_food;

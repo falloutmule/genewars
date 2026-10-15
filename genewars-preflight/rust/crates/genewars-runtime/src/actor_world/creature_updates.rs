@@ -43,7 +43,9 @@ impl ActorWorld {
         if pool.binding(slot)?!=Some(binding){return Err(CreatureError::UnsupportedMotionState.into());}
         let before=*pool.record(slot)?;let own=[slot as u8,(slot>>8)as u8,1];
         if before[6]!=1||before[24]!=4||word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
-        if matches!(before[0x5e],1|7) {
+        let null_food_wait=before[0x5e]==1&&before[0x57]==0&&before[0x49]&3==3&&before[0x60]&0x42==0x40;
+        if matches!(before[0x5e],1|7)&&!null_food_wait {
+            if before[0x57]==0{return Err(CreatureError::UnsupportedMotionState.into());}
             let target=self.entity(reference(&before,0x55))?;let id=word(&before,0x55);let flags=self.mule_plant_flags(id)?&9;
             //659A3 tests live health;659BF idempotently reserves on arrival.
             //Another feeder's reservation is not source exclusivity.
@@ -79,7 +81,14 @@ impl ActorWorld {
                     let choice=if retired {creature_world::plan_mule_plant_feed_after_retirement(record,params.nutrition_u8,*rng)?}else{creature_world::plan_mule_plant_feed(record,params.nutrition_u8,*rng)?};*rng=choice.rng_after;fed_plant=Some(id);let full=record[0x61]&0x40!=0&&choice.after[0x61]&0x40==0;pending_audio.push(if full{0x1b}else{0x12});if retired{pending_plant_retirements.push(id as u16);}else if choice.after[0x5e]==8{release_plant=Some(id);}return Ok(choice.after);
                 }
                 if record[0x5e]==1 {
-                    let raw=reference(record,0x55);if raw[2]!=2||world.mule_plant_flags(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?&8!=0||world.mule_plant_health(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?<=0{return Err(CreatureError::UnsupportedMotionState);}
+                    let raw=reference(record,0x55);
+                    if raw[2]==0 {
+                        let choice=crate::mule_lost_food::plan_lost_food(record,*rng).map_err(|_|CreatureError::UnsupportedMotionState)?;
+                        let saved_cell=floor_cell([word(&before,7),word(&before,9)]);
+                        if world.mule_cell_entry_predicate(&choice.record_after,saved_cell).map_err(|_|CreatureError::UnsupportedCellEntry)?{return Err(CreatureError::UnsupportedCellEntry);}
+                        *rng=choice.rng_after;return Ok(choice.record_after);
+                    }
+                    if raw[2]!=2||world.mule_plant_flags(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?&8!=0||world.mule_plant_health(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?<=0{return Err(CreatureError::UnsupportedMotionState);}
                     let mut after=*record;after[0x3f..0x41].copy_from_slice(&creature_world::mule_requested_speed(record).to_le_bytes());after[0x5e]=7;after[0x6c..0x6e].copy_from_slice(&32767i16.to_le_bytes());after[0x72..0x76].copy_from_slice(&record[7..11]);after[0x60]|=8;after[0x60]&=0xbf;reserve_plant=Some(word(&raw,0));return Ok(after);
                 }
                 let mut record=*record;if record[0x5e]==0 {record[0x5e]=8;}

@@ -375,7 +375,8 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     // ordinary physics before the first odd-frame choice establishes bit8.
     let neutral=before[0x5e]==8&&matches!(before[0x61],0|0x40|0x80)&&matches!(before[0x60],0|8|0x88);
     let relocation=before[0x5e]==0&&before[0x61]==0x80&&before[0x60]==8&&before[0x57]==0;
-    let food_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&before[0x57]==2;
+    let null_food_wait=before[0x57]==0&&before[0x49]&3==3&&before[0x60]&0x42==0x40;
+    let food_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&(before[0x57]==2||null_food_wait);
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
     if before[6]!=1||before[0x18]!=4||!(neutral||relocation||food_approach||feeding_wait)||before[0x7a]!=4||before[0x76]>90
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
@@ -433,7 +434,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
         //65B4D's owner4/skill<=90 approach callback5D360 is a no-op.
         //Arrival requires the separately visible plant reservation/state7
         //mutation; do not silently continue the walking-only plan.
-        if a[0x5e]==1&&motion_word(&a,0x49)as u16&0x200!=0&&a[0x60]&0x80==0 {a=choice(&a)?;}
+        if a[0x5e]==1&&(a[0x57]==0||(motion_word(&a,0x49)as u16&0x200!=0&&a[0x60]&0x80==0)) {a=choice(&a)?;}
         a[0x4a]&=0xfc;refresh_mule_lifecycle(&mut a);
         let timer=motion_word(&a,0x6c);if timer>0 {motion_put(&mut a,0x6c,timer-1);}
     }
