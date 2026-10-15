@@ -23,6 +23,7 @@ fn effect_binding(code:u8)->EffectAnimationBinding {
         0x20=>EffectAnimationBinding::EffAnimation32,0x21=>EffectAnimationBinding::EffAnimation33,
         0x2c=>EffectAnimationBinding::EffAnimation44,0x2f=>EffectAnimationBinding::EffAnimation47,
         0x30=>EffectAnimationBinding::EffAnimation48,0x31=>EffectAnimationBinding::EffAnimation49,
+        0x3c=>EffectAnimationBinding::EffAnimation60,
         _=>panic!("unproved captured effect binding {code:02x}")}
 }
 #[test]

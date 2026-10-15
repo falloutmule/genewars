@@ -603,6 +603,7 @@ fn actor_world_snapshot_sha256(world: &ActorWorld) -> String {
                 Some(genewars_runtime::effect_pool::EffectAnimationBinding::EffAnimation44) => 8,
                 Some(genewars_runtime::effect_pool::EffectAnimationBinding::EffAnimation33) => 9,
                 Some(genewars_runtime::effect_pool::EffectAnimationBinding::EffAnimation32) => 10,
+                Some(genewars_runtime::effect_pool::EffectAnimationBinding::EffAnimation60) => 11,
             });
         }
     } else { bytes.push(0); }

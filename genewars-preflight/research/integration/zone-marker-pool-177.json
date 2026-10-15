@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "scope": "Exact code3C/EFF60 typed pool factory/retirement and exhaustive resource/audit maps; livezone scoring/lifecycle/renderselector remain guarded. NOT campaign progress.",
+  "source_receipts": [
+    "research/variants/zone-score-marker-review.json",
+    "research/variants/zone-score-marker-motion-review.json"
+  ],
+  "source_factory_cases": 24,
+  "source_factory_compared_bytes": 389448,
+  "admission": "Neutralowner4 permitted onlyforcode3C. Othercode/owner restrictions preserved.",
+  "tests": [
+    "source_score_marker_binds_and_retires_for_owned_and_neutral_mules",
+    "score_marker_mismatched_selector_owner_and_pool_admission_reject_atomically"
+  ],
+  "runtime": {
+    "passed": 241,
+    "ignored": 1
+  },
+  "game": {
+    "passed": 76,
+    "ignored": 1
+  },
+  "contribution": "Supplementaryagent owned effect_pool.rs;rootreviewed typedmaps, tests and integration. Current-content-onlyCRLF repair preservedallcode/tests afterworker textread normalizedendings.",
+  "remaining": [
+    "Livezone credit adapter",
+    "Interleavedmarker mapinsert/RNG",
+    "Code3Ccallback/lifecycle",
+    "Code3Crenderselector",
+    "Originalzoneexhaustion"
+  ]
+}
