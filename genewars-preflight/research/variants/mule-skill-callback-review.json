@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "skill": 25,
+      "slot": 0,
+      "frame": 0,
+      "literal_instructions": 1888,
+      "source": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\aa7de7a7823a47c5abce6139e78b51c3"
+    },
+    {
+      "skill": 25,
+      "slot": 0,
+      "frame": 1,
+      "literal_instructions": 2035,
+      "source": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\40fbe418d96241f0ade5682e9d5b4165"
+    },
+    {
+      "skill": 25,
+      "slot": 1,
+      "frame": 0,
+      "literal_instructions": 2034,
+      "source": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\12646f4025434f68a19e4164595e2b95"
+    },
+    {
+      "skill": 25,
+      "slot": 1,
+      "frame": 1,
+      "literal_instructions": 1631,
+      "source": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\5cfb968daa8546f4b3a7a92afd921c90"
+    },
+    {
+      "skill": 50,
+      "slot": 0,
+      "frame": 0,
+      "literal_instructions": 1888,
+      "source": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\d83eb2184a094e70aab9694672b7c8b2"
+    },
+    {
+      "skill": 50,
+      "slot": 0,
+      "frame": 1,
+      "literal_instructions": 2034,
+      "source": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\e2ad51c7d06c46aba53467c1268fe647"
+    },
+    {
+      "skill": 50,
+      "slot": 1,
+      "frame": 0,
+      "literal_instructions": 2033,
+      "source": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\dbf9afa6876942c5866b11046f72e842"
+    },
+    {
+      "skill": 50,
+      "slot": 1,
+      "frame": 1,
+      "literal_instructions": 1631,
+      "source": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\e6e1f958c9b9424787d0edf2e5820ffb"
+    }
+  ],
+  "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\mule-skill-callback\\0cf2243f2ce344ab8c5f5bfcef8a322e",
+  "runtime_rlib": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\debug\\deps\\libgenewars_runtime-1af7c2deb08192ad.rlib",
+  "runtime_rlib_sha256": "39ecfd9347580d0e1396ad6efc221b4b442b85ed8b598759bb3dbeaafd8e5663",
+  "scope": "synthetic timer20; full124-byte records; source RNG unchanged; numeric API contact0 and obstaclefalse ports",
+  "compared_bytes": 992,
+  "first_difference": null
+}

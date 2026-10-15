@@ -1,0 +1,203 @@
+{
+  "status": "passed",
+  "hunger_cases": 20,
+  "speed_cases": 12,
+  "literal_instructions": 4776,
+  "cases": [
+    {
+      "skill": 25,
+      "energy_after": 8930,
+      "hunger": 16,
+      "stage": 0,
+      "life": 8930,
+      "reserve": 1116,
+      "stage_divisor": 2604
+    },
+    {
+      "skill": 25,
+      "energy_after": 7815,
+      "hunger": 254,
+      "stage": 0,
+      "life": 8930,
+      "reserve": 1116,
+      "stage_divisor": 2604
+    },
+    {
+      "skill": 25,
+      "energy_after": 7814,
+      "hunger": 255,
+      "stage": 3,
+      "life": 8930,
+      "reserve": 1116,
+      "stage_divisor": 2604
+    },
+    {
+      "skill": 25,
+      "energy_after": 1117,
+      "hunger": 255,
+      "stage": 1,
+      "life": 8930,
+      "reserve": 1116,
+      "stage_divisor": 2604
+    },
+    {
+      "skill": 25,
+      "energy_after": 3,
+      "hunger": 255,
+      "stage": 1,
+      "life": 8930,
+      "reserve": 1116,
+      "stage_divisor": 2604
+    },
+    {
+      "skill": 30,
+      "energy_after": 9690,
+      "hunger": 16,
+      "stage": 0,
+      "life": 9690,
+      "reserve": 1211,
+      "stage_divisor": 2826
+    },
+    {
+      "skill": 30,
+      "energy_after": 8480,
+      "hunger": 254,
+      "stage": 0,
+      "life": 9690,
+      "reserve": 1211,
+      "stage_divisor": 2826
+    },
+    {
+      "skill": 30,
+      "energy_after": 8479,
+      "hunger": 255,
+      "stage": 3,
+      "life": 9690,
+      "reserve": 1211,
+      "stage_divisor": 2826
+    },
+    {
+      "skill": 30,
+      "energy_after": 1212,
+      "hunger": 255,
+      "stage": 1,
+      "life": 9690,
+      "reserve": 1211,
+      "stage_divisor": 2826
+    },
+    {
+      "skill": 30,
+      "energy_after": 3,
+      "hunger": 255,
+      "stage": 1,
+      "life": 9690,
+      "reserve": 1211,
+      "stage_divisor": 2826
+    },
+    {
+      "skill": 50,
+      "energy_after": 12350,
+      "hunger": 16,
+      "stage": 0,
+      "life": 12350,
+      "reserve": 1543,
+      "stage_divisor": 3602
+    },
+    {
+      "skill": 50,
+      "energy_after": 10808,
+      "hunger": 254,
+      "stage": 0,
+      "life": 12350,
+      "reserve": 1543,
+      "stage_divisor": 3602
+    },
+    {
+      "skill": 50,
+      "energy_after": 10807,
+      "hunger": 255,
+      "stage": 3,
+      "life": 12350,
+      "reserve": 1543,
+      "stage_divisor": 3602
+    },
+    {
+      "skill": 50,
+      "energy_after": 1544,
+      "hunger": 255,
+      "stage": 1,
+      "life": 12350,
+      "reserve": 1543,
+      "stage_divisor": 3602
+    },
+    {
+      "skill": 50,
+      "energy_after": 3,
+      "hunger": 255,
+      "stage": 1,
+      "life": 12350,
+      "reserve": 1543,
+      "stage_divisor": 3602
+    },
+    {
+      "skill": 90,
+      "energy_after": 17670,
+      "hunger": 16,
+      "stage": 0,
+      "life": 17670,
+      "reserve": 2208,
+      "stage_divisor": 5154
+    },
+    {
+      "skill": 90,
+      "energy_after": 15463,
+      "hunger": 254,
+      "stage": 0,
+      "life": 17670,
+      "reserve": 2208,
+      "stage_divisor": 5154
+    },
+    {
+      "skill": 90,
+      "energy_after": 15462,
+      "hunger": 255,
+      "stage": 3,
+      "life": 17670,
+      "reserve": 2208,
+      "stage_divisor": 5154
+    },
+    {
+      "skill": 90,
+      "energy_after": 2209,
+      "hunger": 255,
+      "stage": 1,
+      "life": 17670,
+      "reserve": 2208,
+      "stage_divisor": 5154
+    },
+    {
+      "skill": 90,
+      "energy_after": 3,
+      "hunger": 255,
+      "stage": 1,
+      "life": 17670,
+      "reserve": 2208,
+      "stage_divisor": 5154
+    }
+  ],
+  "sha256": {
+    "private\\review\\krell-first-tick-001\\creatures.bin": "71c8bb647b8d183c8501cc7bfdd903e4b31667d1c7a44fee88bd24d001b8737c",
+    "private\\ghidra\\player-creation\\instructions-0005ed20.txt": "ea29b165354042aaf33dc630322d89b577810f96c2ece1f8998799512e2feed0",
+    "private\\ghidra\\initial-creature\\instructions-0006b150.txt": "9395a017642140a42c59b83e6e47c4c77b71e3ee368b811dd02b54f1866156c1",
+    "private\\ghidra\\initial-creature\\instructions-0005a990.txt": "d063df1c8f85cd877b6e1ea913fa88dbc2a9301bc318d79af7d1a6e935867a97",
+    "private\\ghidra\\initial-creature\\instructions-00023820.txt": "dc2ca6ff81274248aafa161ec20efc0d7947fd06fcddc5fee70ce77b433c7ea1",
+    "private\\ghidra\\initial-creature\\instructions-0005d360.txt": "3ebb95c283154fd6df2da98ed89c11338375c5d256d5d0e09dff1185eb6c0d75",
+    "private\\ghidra\\validated\\memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
+    "research\\variants\\mule-skill-parameterization-review.py": "5062986da3ca353ba0c4e40d096c9c9cacc632038bc43e804288c0ad9f637123"
+  },
+  "scope": "Numericformulas versusliteral tail/speed; not fullcallbackorproductioncomparison",
+  "ports": [
+    "entry6A2BD callerstacklocal explicitlybound; stopbefore6A492",
+    "5A990 directentry; originalmappedselector4parameters"
+  ]
+}

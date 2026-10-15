@@ -36,6 +36,7 @@ impl ActorWorld {
         self.step_mule_followup_inner(usize::from(slot),context,physics,trig,animations,true)
     }
     fn step_mule_followup_inner(&mut self,slot:usize,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations,admit_water:bool)->Result<MuleCallbackReceipt,ActorWorldError> {
+        #[cfg(debug_assertions)] self.capture_mule_callback(slot,context.frame_counter,"before");
         self.validate_links()?;
         let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;
         let binding=if pool.record(slot)?[0x5e]>=26{CreatureAnimationBinding::BonesSelector4}else{CreatureAnimationBinding::MuleSelector4};
@@ -45,7 +46,7 @@ impl ActorWorld {
         if matches!(before[0x5e],1|7) {let target=self.entity(reference(&before,0x55))?;let expected=if before[0x5e]==7{1}else{0};if before[0x57]!=2||target[0x18]!=4||self.mule_plant_flags(word(&before,0x55))?&9!=expected {return Err(CreatureError::UnsupportedMotionState.into());}}
         let mut rng=self.rng;
         let (prefix,working_target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng)?;
-        if before[0x5e]==27&&context.frame_counter&1!=0&&word(&before,0x6c)&15==0&&(0..=1).contains(&word(&before,0x68)) {
+        if before[0x5e]==27&&creature_world::mule_callback_phase(&before,context.frame_counter)&1!=0&&word(&before,0x6c)&15==0&&(0..=1).contains(&word(&before,0x68)) {
             let plan=creature_world::plan_mule_bones_retirement_after_prefix(&before,&prefix,self.map(),context,physics,trig,animations)?;
             let mut staged=self.clone();let retirement=staged.retire_mule_bones_after_callback(&before,&plan.motion)?;
             staged.rng=rng;let mut motion=plan.motion;motion.after=retirement.after;*self=staged;
@@ -61,7 +62,7 @@ impl ActorWorld {
                 }
                 if record[0x5e]==7 {
                     let raw=reference(record,0x55);let id=word(&raw,0);let health=self.mule_plant_health(id).map_err(|_|CreatureError::MotionEnvironment)?;if raw[2]!=2||health<=0{return Err(CreatureError::UnsupportedMotionState);}
-                    self.check_mule_neutral_neighborhood(own,[word(record,7),word(record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+                    self.check_mule_neutral_neighborhood(record,own,[word(record,7),word(record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
                     let l=self.layouts[1];let selector=self.backing[l.file_offset+id as usize*l.packed_stride+0x23]as i8;
                     if selector<0{return Err(CreatureError::UnsupportedMotionState);}
                     let params=self.plants.as_ref().ok_or(CreatureError::MotionEnvironment)?.parameters.slot(selector as usize).map_err(|_|CreatureError::MotionEnvironment)?;
@@ -71,10 +72,10 @@ impl ActorWorld {
                 }
                 if record[0x5e]==1 {
                     let raw=reference(record,0x55);if raw[2]!=2||self.mule_plant_flags(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?&9!=0{return Err(CreatureError::UnsupportedMotionState);}
-                    let mut after=*record;after[0x3f..0x41].copy_from_slice(&577i16.to_le_bytes());after[0x5e]=7;after[0x6c..0x6e].copy_from_slice(&32767i16.to_le_bytes());after[0x72..0x76].copy_from_slice(&record[7..11]);after[0x60]|=8;after[0x60]&=0xbf;reserve_plant=Some(word(&raw,0));return Ok(after);
+                    let mut after=*record;after[0x3f..0x41].copy_from_slice(&creature_world::mule_requested_speed(record).to_le_bytes());after[0x5e]=7;after[0x6c..0x6e].copy_from_slice(&32767i16.to_le_bytes());after[0x72..0x76].copy_from_slice(&record[7..11]);after[0x60]|=8;after[0x60]&=0xbf;reserve_plant=Some(word(&raw,0));return Ok(after);
                 }
                 let mut record=*record;if record[0x5e]==0 {record[0x5e]=8;}
-                self.check_mule_neutral_neighborhood(own,[word(&record,7),word(&record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+                self.check_mule_neutral_neighborhood(&record,own,[word(&record,7),word(&record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
                 let target=self.mule_neutral_food_target(&record,rng).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
                 let choice=if let Some((id,point))=target {creature_world::plan_mule_plant_acquisition(&record,id,point,rng)?}else{creature_world::plan_neutral_mule_rechoice(&record,rng,trig,|point|self.mule_accepts(slot,point).map_err(|_|CreatureError::MotionEnvironment))?};
                 rng=choice.rng_after;Ok(choice.after)
@@ -103,14 +104,28 @@ impl ActorWorld {
                 _=>return Err(CreatureError::MotionEnvironment.into()),
             }
         }
-        staged.rng=rng;staged.validate_links()?;let mut result=plan;result.after=*staged.creatures.as_ref().unwrap().record(slot)?;*self=staged;Ok(MuleCallbackReceipt{motion:result,retirement:None,pending_audio,pending_plant_retirements,pending_portrait_refresh:before[0x5e]==8&&prefix[0x5e]==0})
+        staged.rng=rng;
+        #[cfg(debug_assertions)] staged.capture_mule_callback(slot,context.frame_counter,"after");
+        staged.validate_links()?;let mut result=plan;result.after=*staged.creatures.as_ref().unwrap().record(slot)?;*self=staged;Ok(MuleCallbackReceipt{motion:result,retirement:None,pending_audio,pending_plant_retirements,pending_portrait_refresh:before[0x5e]==8&&prefix[0x5e]==0})
     }
 
+    /// Opt-in immutable callback fixture for source comparison; absent in release.
+    #[cfg(debug_assertions)]
+    fn capture_mule_callback(&self,slot:usize,frame:u32,phase:&str){
+        let extra=std::env::var("GENEWARS_MULE_CALLBACK_FRAME").ok().and_then(|v|v.parse::<u32>().ok());
+        if frame>1&&extra!=Some(frame){return;} // First two plus one explicit failing frame.
+        let Some(root)=std::env::var_os("GENEWARS_MULE_CALLBACK_FIXTURE") else{return;};
+        let dir=std::path::PathBuf::from(root).join(format!("frame-{frame}-slot-{slot}-{phase}"));
+        std::fs::create_dir(&dir).expect("new immutable Mule callback fixture");
+        for(name,bytes)in [("backing",self.backing_bytes().to_vec()),("players",(0..4u8).flat_map(|p|self.player(p).unwrap().bytes().iter().copied()).collect()),("actors",self.actors().records().concat()),("creatures",self.creatures().unwrap().records().concat()),("effects",self.effects().unwrap().records().concat()),("family8",self.family8().unwrap().records().concat()),("buildings",self.buildings().unwrap().records().concat())]{std::fs::write(dir.join(format!("{name}.bin")),bytes).unwrap();}
+        let mut rng=self.rng.seed.to_le_bytes().to_vec();rng.push(self.rng.ring);rng.extend(self.rng.draw_count.to_le_bytes());std::fs::write(dir.join("rng.bin"),rng).unwrap();
+    }
     fn mule_route_prefix(&self,before:&CreatureRecord,frame:u32,physics:&PhysicsTables,trig:&TrigTables,rng:&mut BlueprintRng)->Result<(CreatureRecord,[i16;2]),ActorWorldError> {
+        let phase=creature_world::mule_callback_phase(before,frame);
         let own=[before[15],before[16],1];let current=[word(before,7),word(before,9)];let final_target=[word(before,11),word(before,13)];
         let mut a=*before;a[0x49]&=0x9f;
         if a[0x49]&3==3||a[0x4f]!=0||a[0x52]!=0||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
-        if a[0x5e]<24&&a[0x49]&0x10==0&&frame&31==0&&!self.common_move_point_accepted(own,current)? {
+        if a[0x5e]<24&&a[0x49]&0x10==0&&phase&31==0&&!self.common_move_point_accepted(own,current)? {
             if let Some(point)=creature_world::find_common_idle_relocation(current,|point|self.common_move_point_accepted(own,point).map_err(|_|CreatureError::MotionEnvironment))? {a=creature_world::plan_mule_idle_relocation(&a,point)?;a[0x49]&=0xfe;}
         }
         let mut working=if a[0x49]&3!=0 {[word(&a,0x45),word(&a,0x47)]}else{final_target};
@@ -150,7 +165,7 @@ impl ActorWorld {
                 a[0x45..0x47].copy_from_slice(&working[0].to_le_bytes());a[0x47..0x49].copy_from_slice(&working[1].to_le_bytes());a[0x49]&=0xf3;
             }
         }
-        if a[0x49]&0x10!=0&&(immediate_heading||frame&1!=0){
+        if a[0x49]&0x10!=0&&(immediate_heading||phase&1!=0){
             let dx=working[0].wrapping_sub(current[0]).wrapping_mul(2);let dy=working[1].wrapping_sub(current[1]).wrapping_mul(2);
             let angle=crate::actor_motion::angle(i32::from(dx),i32::from(dy),physics.angles());a[0x4b..0x4d].copy_from_slice(&angle.to_le_bytes());
         }
@@ -216,13 +231,21 @@ impl ActorWorld {
             raw=reference(self.entity(raw)?,3);
         }Ok(())
     }
-    fn check_mule_neutral_neighborhood(&self,own:[u8;3],point:[i16;2])->Result<(),ActorWorldError> {
+    fn check_mule_neutral_neighborhood(&self,record:&CreatureRecord,own:[u8;3],point:[i16;2])->Result<(),ActorWorldError> {
         let cell=floor_cell(point);self.check_mule_cell_entry(own,cell)?;
         let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
         for dy in -4..=4 {for dx in -4..=4 {
             let index=((cy+dy)&127)as usize*128+((cx+dx)&127)as usize;let mut raw=reference(self.map(),index*14+6);
-            while raw[2]!=0 {let entity=self.entity(raw)?;let ignored_effect=if raw[2]==5{self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?.get(0x45)!=Some(&0x11)}else{false};if raw!=own&&!ignored_effect&&(raw[2]!=2||entity[24]!=4){return Err(CreatureError::UnsupportedNeighborhood.into());}raw=reference(entity,3);}
+            while raw[2]!=0 {let entity=self.entity(raw)?;let ignored_effect=if raw[2]==5{self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?.get(0x45)!=Some(&0x11)}else{false};if raw!=own&&!ignored_effect&&(raw[2]!=2||entity[24]!=4)&&!self.mule_friendly_candidate_is_no_action(record,raw)?{return Err(CreatureError::UnsupportedNeighborhood.into());}raw=reference(entity,3);}
         }}Ok(())
+    }
+    ///6BA65/6BBAE: same-species live friend contributes no food candidate.
+    /// Friendly direction is unused only with the separately enforced absence
+    /// of enemies (62949..52); full hunger can enable cannibal AI and rejects.
+    fn mule_friendly_candidate_is_no_action(&self,record:&CreatureRecord,raw:[u8;3])->Result<bool,ActorWorldError>{
+        if raw[2]!=1||record[0x18]!=4||record[0x7a]!=4||record[0x76]>90||record[0x77]==255{return Ok(false);}
+        let other=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?;
+        Ok(other[6]==1&&other[0x18]==4&&other[0x7a]==4&&other[0x5e]<24&&other[0x5e]!=15)
     }
     fn retire_mule_food_plant(&mut self,id:u16)->Result<(),ActorWorldError> {
         let dead=[id as u8,(id>>8)as u8,2];let record=self.entity(dead)?.to_vec();if record[24]!=4{return Err(CreatureError::UnsupportedMotionState.into());}
@@ -266,7 +289,7 @@ impl ActorWorld {
             let value=1024-genewars_core::cd_candidate::integer_sqrt(d)as i32;let cell=floor_cell(sample);let mut raw=reference(self.map(),cell*14+6);
             while raw[2]!=0 {let entity=self.entity(raw)?;
                 if raw[2]==5 {if self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?.get(0x45)==Some(&0x11){return Err(CreatureError::UnsupportedNeighborhood.into());}raw=reference(entity,3);continue;}
-                if raw!=own {if raw[2]!=2||entity[0x18]!=4 {return Err(CreatureError::UnsupportedNeighborhood.into());}
+                if raw!=own {if self.mule_friendly_candidate_is_no_action(record,raw)?{raw=reference(entity,3);continue;}if raw[2]!=2||entity[0x18]!=4 {return Err(CreatureError::UnsupportedNeighborhood.into());}
                     if self.mule_plant_flags(word(&raw,0))?&9==0&&self.mule_plant_health(word(&raw,0))?>0&&value>score {score=value;best=Some((word(&raw,0),[word(entity,7),word(entity,9)]));}}
                 raw=reference(entity,3);
             }
