@@ -752,7 +752,7 @@ pub fn plan_mule_retry_wait(before:&CreatureRecord,rng_before:crate::blueprint::
     // active association.5CC60 clears that local target without touching peer.
     let retained_pair=before[0x5e]==8&&before[0x57]==1&&matches!(before[0x61],0x20|0x60)
         &&matches!(before[0x60],0x0c|0x8c)&&before[0x52]==0
-        &&(0..300).contains(&motion_word(before,0x55))&&motion_word(before,0x6c)==0;
+        &&(0..300).contains(&motion_word(before,0x55))&&motion_word(before,0x6c)>=0;
     let action=before[0x5e]==8&&before[0x57]==0||before[0x5e]==1&&before[0x57]==2||retained_pair;
     // Live plant approach requires the caller to clear/prove clear plant2E bit4.
     if rng_before.ring>=32||before[6]!=1||before[0x18]!=4||!action||before[0x7a]!=4
@@ -1081,14 +1081,15 @@ mod tests {
         motion_put(&mut before,0x49,0x150);before[0x60]=0x0c;before[0x61]=0x60;
         before[0x55..0x58].copy_from_slice(&[1,0,1]);before[0x52]=0;before[0x5d]=0;motion_put(&mut before,0x6c,0);
         let rng=crate::blueprint::BlueprintRng{seed:1,ring:31,draw_count:u32::MAX};
-        for low in [0x0c,0x8c] {
-            before[0x60]=low;let p=plan_mule_retry_wait(&before,rng).unwrap();
+        //5E0B0 retry precedes5CC60 timer reset; an in-flight timer is valid.
+        for (low,timer) in [(0x0c,0),(0x8c,1),(0x8c,32767)] {
+            before[0x60]=low;motion_put(&mut before,0x6c,timer);let p=plan_mule_retry_wait(&before,rng).unwrap();
             assert_eq!(&p.after[0x55..0x58],&[1,0,0]);assert_eq!(&p.after[0x60..0x62],&[8,0x40]);
             assert_eq!(p.draws.len(),1);assert_eq!(p.rng_after.draw_count,0);assert_eq!(p.rng_after.ring,0);
             assert_eq!(motion_word(&p.after,0x6c),10+i16::from((p.rng_after.seed>>8)as u8%20));
             assert_eq!(&p.after[7..15],&before[7..15]);
         }
-        for (offset,value) in [(0x57,3),(0x52,1),(0x61,0),(0x60,0x0e),(0x6c,1)] {
+        for (offset,value) in [(0x57,3),(0x52,1),(0x61,0),(0x60,0x0e),(0x6d,255)] {
             let mut bad=before;bad[offset]=value;assert!(plan_mule_retry_wait(&bad,rng).is_err());
         }
     }
