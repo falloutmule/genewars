@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "scope": "Actual4679null Bonesfeedingtarget callback, othercallbacks frozen, notcampaignacceptance",
+  "comparison": {
+    "status": "passed",
+    "frame": 4679,
+    "slot": 0,
+    "draws": 1,
+    "compared_bytes": 427369,
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\a29dcfedaeb34e1eb733c8414c6e9721"
+  },
+  "correction": "679CE/67A06 nulltarget uses5CCA0localreset, one10+rand%20delaydraw, state8/preservestaleindices/noaudio/notargetwrite. Actual5B100false proved;truecellremainsguarded. Existingstate1lostfoodcallsunchangedsharedreset.",
+  "negative": "Partialreferencecleanup association50kind1/55kind0rejectswithwholeworldrollback",
+  "runtime": {
+    "passed": 244,
+    "ignored": 1
+  },
+  "game": {
+    "passed": 76,
+    "ignored": 1
+  },
+  "campaign_missions": 1,
+  "native": "latest1774357;new180pending"
+}

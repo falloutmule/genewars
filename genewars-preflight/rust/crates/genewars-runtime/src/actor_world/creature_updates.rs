@@ -125,6 +125,11 @@ impl ActorWorld {
                     return Ok(choice.after);
                 }
                 if record[0x5e]==4 {
+                    if record[0x57]==0 {
+                        let lost=crate::mule_lost_food::plan_lost_bones(record,*rng).map_err(|_|CreatureError::UnsupportedMotionState)?;
+                        if world.mule_cell_entry_predicate(&lost.record_after,floor_cell([word(record,7),word(record,9)])).map_err(|_|CreatureError::UnsupportedCellEntry)?{return Err(CreatureError::UnsupportedCellEntry);}
+                        *rng=lost.rng_after;return Ok(lost.record_after);
+                    }
                     //679CE/67A22: nearby retained Bones, nonprocessing timer gate.
                     let bones=world.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?;
                     if !matches!(bones[0x5e],26|27)||creature_world::common_distance_squared(world.map(),[word(record,7),word(record,9)],[word(bones,7),word(bones,9)])?>4096{return Err(CreatureError::UnsupportedMotionState);}

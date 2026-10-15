@@ -391,9 +391,10 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     let paired_approach=before[0x5e]==3&&matches!(before[0x60],0|4|8|12|0x80|0x84|0x88|0x8c)&&before[0x57]==1&&((matches!(before[0x61],0|0x40)&&before[0x52]==1)||(matches!(before[0x61],0x20|0x60)&&before[0x52]==0));
     let paired_wait=before[0x5e]==10&&matches!(before[0x61],0x20|0x60)&&matches!(before[0x60],4|12|0x84|0x8c)&&before[0x57]==1&&before[0x52]==0&&motion_word(before,0x6c)>=0;
     let retained_food_idle=before[0x5e]==8&&before[0x60]==8&&before[0x61]==0x40&&before[0x57]==0&&before[0x52]==1&&before[0x50..0x52]==before[0x55..0x57];
+    let lost_bones_wait=before[0x5e]==4&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==0&&before[0x52]==0;
     let corpse_wait=matches!(before[0x5e],4|5)&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==1&&before[0x52]==1&&before[0x50..0x53]==before[0x55..0x58];
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
-    if before[6]!=1||before[0x18]!=4||!(neutral||postbirth_idle||relocation||food_approach||corpse_approach||corpse_wait||retained_food_idle||feeding_wait||paired_approach||paired_wait)||before[0x7a]!=4||before[0x76]>90
+    if before[6]!=1||before[0x18]!=4||!(neutral||postbirth_idle||relocation||food_approach||corpse_approach||corpse_wait||lost_bones_wait||retained_food_idle||feeding_wait||paired_approach||paired_wait)||before[0x7a]!=4||before[0x76]>90
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
        ||before[0x4f]!=0||(before[0x52]!=0&&!paired_approach&&!corpse_approach&&!corpse_wait&&!retained_food_idle)||motion_word(before,0x49)as u16&!0x337f!=0
        ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=if mule_callback_phase(before,context.frame_counter)&1==0{0}else{2}{return Err(CreatureError::UnsupportedMotionState);}
