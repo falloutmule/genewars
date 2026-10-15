@@ -1,0 +1,106 @@
+{
+  "status": "passed_bounded_observations",
+  "synthetic_probe_samples": [
+    {
+      "fixture": "krell-mule-callbacks-039/frame-785-slot-2-before",
+      "health": 187,
+      "work_timer": 43,
+      "initial_delay": 79,
+      "stage": 5,
+      "action": 15,
+      "flags70": 129,
+      "funds": [
+        1412,
+        0
+      ],
+      "skill": 31
+    },
+    {
+      "fixture": "krell-mule-callbacks-046/frame-787-slot-4-after",
+      "health": 187,
+      "work_timer": 41,
+      "initial_delay": 79,
+      "stage": 5,
+      "action": 15,
+      "flags70": 129,
+      "funds": [
+        1412,
+        0
+      ],
+      "skill": 31
+    },
+    {
+      "fixture": "krell-mule-callbacks-046/frame-820-slot-1-blocked-before",
+      "health": 187,
+      "work_timer": 8,
+      "initial_delay": 79,
+      "stage": 5,
+      "action": 15,
+      "flags70": 129,
+      "funds": [
+        1412,
+        0
+      ],
+      "skill": 31
+    }
+  ],
+  "finding": "No funds/power stall established: construction work timer advances, health changes at zero-timer progress pulses.",
+  "accepted_frozen004_entry": {
+    "funds": 2000,
+    "previous_win_funds": 510,
+    "buildings": [],
+    "construction_choices": [
+      11
+    ],
+    "raw_blueprint_skill": "not extracted from accepted carry by this probe"
+  },
+  "source_route": {
+    "genepod": 0,
+    "dependency_chain": [
+      11,
+      3,
+      0
+    ],
+    "photon_processor6_required": false,
+    "restored_player_ranges_half_open": [
+      [
+        0,
+        1185
+      ],
+      [
+        1562,
+        1783
+      ]
+    ],
+    "construction_counts_and_owned_bits_restored": false
+  },
+  "synthetic_skill31_budget": {
+    "initial": 2000,
+    "extractor": 588,
+    "distributor": 338,
+    "genepod": 538,
+    "remaining_before_income_and_mules": 536,
+    "mule_per_attempt_grade0": 75
+  },
+  "pins": {
+    "private/review/krell-mule-callbacks-039/frame-785-slot-2-before/actors.bin": "6e972be6af0f84d35b453418f87d599a1517e66f3ef240a123ee022d1648cc3a",
+    "private/review/krell-mule-callbacks-039/frame-785-slot-2-before/buildings.bin": "b40cb7cafffe233c790e0e65961ac66d150b5c8bed0b84f93c7b6adcb02c735c",
+    "private/review/krell-mule-callbacks-039/frame-785-slot-2-before/players.bin": "d2241cbc72819b82329f299ed0bb0f118a0397bcaaa156ae5b781549d9722092",
+    "private/review/krell-mule-callbacks-046/frame-787-slot-4-after/actors.bin": "a8a27317a512006c7725800d450c2e4967b1ed49b3bfb2a2b7a399926bd48024",
+    "private/review/krell-mule-callbacks-046/frame-787-slot-4-after/buildings.bin": "b40cb7cafffe233c790e0e65961ac66d150b5c8bed0b84f93c7b6adcb02c735c",
+    "private/review/krell-mule-callbacks-046/frame-787-slot-4-after/players.bin": "85d95f6cb2fc2e78146b5983d5467b06f77da1673696a24b918a8973f19d8964",
+    "private/review/krell-mule-callbacks-046/frame-820-slot-1-blocked-before/actors.bin": "9a5067217fb0621d04a249a419ded4e2e21135355b3fca7f29cdd178e2e64381",
+    "private/review/krell-mule-callbacks-046/frame-820-slot-1-blocked-before/buildings.bin": "b40cb7cafffe233c790e0e65961ac66d150b5c8bed0b84f93c7b6adcb02c735c",
+    "private/review/krell-mule-callbacks-046/frame-820-slot-1-blocked-before/players.bin": "b31d99b359a4acd9f89c09b72233fe5b1b4bcade52bd8d7b79eae05a9d45ef69",
+    "private/integration/fresh-krell-entry-004/report.json": "afecef39a3d960b43a8a53a06d71edc2882516ca82d32429c7681fd63a7d526c",
+    "private/integration/fresh-krell-entry-004/winning-report.json": "ecfc2116c8117b275865f6306b3c078015b1e875088062e43e56c5cb8a1e3cd1",
+    "private/ghidra/camera-player-input/instructions-00080590.txt": "c454d8a02dd88524f21c3bc7381dc977804aabe214a5f3cdf56b6744757d44d6",
+    "private/ghidra/campaign-level/instructions-0007d090.txt": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac",
+    "rust/crates/genewars-runtime/src/building_availability.rs": "bd445c702b16aa8834c63941236aee251f37d94f9731d3336c58bc3f019fb0c9",
+    "rust/crates/genewars-runtime/src/construction_work.rs": "1f30e9a2d600e578ee3160f7b857714b219e047eb965b45fb25d8f95594134db",
+    "rust/crates/genewars-runtime/src/construction_payment.rs": "ce6aa8da2d840279cdeea469a9a60b7dd637e784fd93a2dcbd9ad4917b38328d",
+    "rust/crates/genewars-core/src/construction.rs": "4866ff1f9bdd1bffbfb964bf03c495e5a1118d6bc24b0e3f8beea64ff780e5c0"
+  },
+  "original_execution": false,
+  "new_mission_acceptance": false
+}

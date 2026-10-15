@@ -1,0 +1,114 @@
+{
+  "status": "passed",
+  "capture_polls": 15,
+  "ready_cases": 120,
+  "negative_cases": 2,
+  "cases": [
+    {
+      "sequence": "inside",
+      "packet": 1,
+      "action": 8,
+      "event": 0
+    },
+    {
+      "sequence": "inside",
+      "packet": 4,
+      "action": 65535,
+      "event": 2
+    },
+    {
+      "sequence": "inside",
+      "packet": 2,
+      "action": 8,
+      "event": 8
+    },
+    {
+      "sequence": "outside_release",
+      "packet": 1,
+      "action": 8,
+      "event": 0
+    },
+    {
+      "sequence": "outside_release",
+      "packet": 2,
+      "action": 8,
+      "event": 32776
+    },
+    {
+      "sequence": "leave_return",
+      "packet": 1,
+      "action": 8,
+      "event": 0
+    },
+    {
+      "sequence": "leave_return",
+      "packet": 4,
+      "action": 8,
+      "event": 1
+    },
+    {
+      "sequence": "leave_return",
+      "packet": 4,
+      "action": 8,
+      "event": 2
+    },
+    {
+      "sequence": "leave_return",
+      "packet": 2,
+      "action": 8,
+      "event": 8
+    },
+    {
+      "sequence": "transparent_press",
+      "packet": 1,
+      "action": 65535,
+      "event": 0
+    },
+    {
+      "sequence": "idle_cancel",
+      "packet": 1,
+      "action": 8,
+      "event": 0
+    },
+    {
+      "sequence": "idle_cancel",
+      "packet": 0,
+      "action": 8,
+      "event": 1
+    },
+    {
+      "sequence": "idle_cancel",
+      "packet": 0,
+      "action": 8,
+      "event": 0
+    },
+    {
+      "sequence": "idle_cancel",
+      "packet": 2,
+      "action": 8,
+      "event": 32776
+    },
+    {
+      "sequence": "idle_cancel",
+      "packet": 0,
+      "action": 65535,
+      "event": 32776
+    }
+  ],
+  "private_run": "private\\review\\genepod-capture\\69ee4da141fc4caab41e62f406667128",
+  "pins": {
+    "rust\\crates\\genewars-runtime\\src\\genepod_capture.rs": "9e7bb4308242970d1341c4098dfba80eabbe7051e93361fed791b3b6e7432635",
+    "scripts\\ghidra\\genepod_capture_review.py": "0dcf66a4ebf4a43d1b253aadbbef95c3024e025018d16948bcd9c33b38e93d21",
+    "scripts\\ghidra\\genepod_capture_contract.py": "ffcc724ad3996f4177694bea18755030f655bf7d715426a51d8348e6842bf39f",
+    "private\\integration\\rnc-decoded\\83e7010ccc0631db4937ab96395d058f8931458124eb004a7fa91d1c01c3648e.bin": "1df1e8fb436cc7030c40b94438c5e530a1b8a21716fad4354e0c82c94ba27f52"
+  },
+  "source_pins": {
+    "private/ghidra/ui-input/instructions-000a87d0.txt": "1fe8f247f251c7b1a5a333b71d830d93ddca2feb1f6d557448894131510afd58",
+    "private/ghidra/ui-controls/instructions-000a86d0.txt": "a4336dd52bebdb8311a05dc25bc64063e99d93928aaa23e335012aaf19bea470",
+    "private/ghidra/sprite-scaled/instructions-00098b60.txt": "2775e1d25062d7c9140240a007024e944448df5387bba3379ba185ce2bcaed43",
+    "private/ghidra/plant-command/instructions-00021a10.txt": "94948e1aaecb41421702b5396379338a6fb3100fb6913aa321fd749fba508bb1",
+    "private/ghidra/building-cost-refs/instructions-00021e20.txt": "9480cde06d65eb7071b4b73d1dbe1a6e6278176a6165e8eb6fbd8c8085d0b535",
+    "private/ghidra/actor-panel-font-color/instructions-00022fd0.txt": "1a2511b5cc20c1b99378e23a850cc5dad5aa1b117f9be38d9268595d1cd12404"
+  },
+  "scope": "Isolated enabled9128 control literalA87D0/A86D0/98B60 polls with original sprite opacity; readiness21F0C..21FAA with explicit40810 request port. Caller owns managerorigin/hit traversal and actual producer. No native acceptance."
+}

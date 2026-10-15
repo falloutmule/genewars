@@ -1,0 +1,146 @@
+{
+  "status": "passed",
+  "scope": "Literal manager and opaque hit test for isolated bound control; panel readiness source inspection, not full UI/native acceptance",
+  "source_pins": {
+    "private/ghidra/ui-input/instructions-000a87d0.txt": "1fe8f247f251c7b1a5a333b71d830d93ddca2feb1f6d557448894131510afd58",
+    "private/ghidra/ui-controls/instructions-000a86d0.txt": "a4336dd52bebdb8311a05dc25bc64063e99d93928aaa23e335012aaf19bea470",
+    "private/ghidra/sprite-scaled/instructions-00098b60.txt": "2775e1d25062d7c9140240a007024e944448df5387bba3379ba185ce2bcaed43",
+    "private/ghidra/plant-command/instructions-00021a10.txt": "94948e1aaecb41421702b5396379338a6fb3100fb6913aa321fd749fba508bb1",
+    "private/ghidra/building-cost-refs/instructions-00021e20.txt": "9480cde06d65eb7071b4b73d1dbe1a6e6278176a6165e8eb6fbd8c8085d0b535",
+    "private/ghidra/actor-panel-font-color/instructions-00022fd0.txt": "1a2511b5cc20c1b99378e23a850cc5dad5aa1b117f9be38d9268595d1cd12404"
+  },
+  "cases": [
+    {
+      "name": "inside",
+      "steps": [
+        {
+          "point": [
+            40,
+            358
+          ],
+          "packet8": 1,
+          "action": 8,
+          "event": 0,
+          "capture": 1076668,
+          "draw": 1
+        },
+        {
+          "point": [
+            40,
+            358
+          ],
+          "packet8": 4,
+          "action": 65535,
+          "event": 2,
+          "capture": 1076668,
+          "draw": 1
+        },
+        {
+          "point": [
+            40,
+            358
+          ],
+          "packet8": 2,
+          "action": 8,
+          "event": 8,
+          "capture": 0,
+          "draw": 0
+        }
+      ]
+    },
+    {
+      "name": "outside_release",
+      "steps": [
+        {
+          "point": [
+            40,
+            358
+          ],
+          "packet8": 1,
+          "action": 8,
+          "event": 0,
+          "capture": 1076668,
+          "draw": 1
+        },
+        {
+          "point": [
+            60,
+            358
+          ],
+          "packet8": 2,
+          "action": 8,
+          "event": 32776,
+          "capture": 0,
+          "draw": 0
+        }
+      ]
+    },
+    {
+      "name": "leave_return",
+      "steps": [
+        {
+          "point": [
+            40,
+            358
+          ],
+          "packet8": 1,
+          "action": 8,
+          "event": 0,
+          "capture": 1076668,
+          "draw": 1
+        },
+        {
+          "point": [
+            60,
+            358
+          ],
+          "packet8": 4,
+          "action": 8,
+          "event": 1,
+          "capture": 1076668,
+          "draw": 0
+        },
+        {
+          "point": [
+            40,
+            358
+          ],
+          "packet8": 4,
+          "action": 8,
+          "event": 2,
+          "capture": 1076668,
+          "draw": 1
+        },
+        {
+          "point": [
+            40,
+            358
+          ],
+          "packet8": 2,
+          "action": 8,
+          "event": 8,
+          "capture": 0,
+          "draw": 0
+        }
+      ]
+    },
+    {
+      "name": "transparent_press",
+      "steps": [
+        {
+          "point": [
+            26,
+            344
+          ],
+          "packet8": 1,
+          "action": 65535,
+          "event": 0,
+          "capture": 0,
+          "draw": 0
+        }
+      ]
+    }
+  ],
+  "control": "0x106dbc",
+  "flags": "0x9128"
+}
