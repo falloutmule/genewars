@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "frame": 3552,
+  "slot": 1,
+  "draws": 0,
+  "compared_bytes": 427369,
+  "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\fa7f4a412b114448968f128ba9aed1ca",
+  "scope": "Authentic retained-carry Krell starvation with stale kind1 pair target; original5CC60 state8 cleanup is local. Not campaign acceptance.",
+  "mismatches": 0,
+  "audio": [
+    31
+  ],
+  "negative_cases": [
+    {
+      "case": "plant-target",
+      "passed": true,
+      "rollback": "entire ActorWorld equality asserted by captured callback harness",
+      "log": "private\\integration\\starvation-negative-plant-target-159b.log"
+    },
+    {
+      "case": "live-association",
+      "passed": true,
+      "rollback": "entire ActorWorld equality asserted by captured callback harness",
+      "log": "private\\integration\\starvation-negative-live-association-159b.log"
+    },
+    {
+      "case": "invalid-pair-id-low",
+      "passed": true,
+      "rollback": "entire ActorWorld equality asserted by captured callback harness",
+      "log": "private\\integration\\starvation-negative-invalid-pair-id-low-159b.log"
+    }
+  ],
+  "harness_configuration_failure": "Initial negative-case attempt supplied an empty optional audio string and failed parsing. Preserved log; corrected by omitting the optional variable. All three negative cases now pass with entire-world rollback.",
+  "runtime_passed": 232,
+  "runtime_ignored": 1
+}
