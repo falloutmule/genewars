@@ -25,5 +25,58 @@
     "release": "passed with genewars-runtime/callback-captures"
   },
   "capture_instrumentation": "family8 release captures enabled only by callback-captures feature; ignored diagnostic supports family8/pass",
-  "campaign_missions": 1
+  "campaign_missions": 1,
+  "authentic_campaign_callback": {
+    "frame": 4974,
+    "slot": 2,
+    "compared_bytes": 427369,
+    "mismatches": 0,
+    "draws": 3,
+    "instructions": 1897,
+    "evidence": "private/review/family8-captured/f9c4307b75704157b7a061133cb05846/result.json",
+    "inputs": "private/review/authentic-krell-186/frame-4974-slot-2-family8-before",
+    "after": "private/review/authentic-krell-186/frame-4974-slot-2-family8-after"
+  },
+  "ordinary_replay": {
+    "steps": 5401,
+    "blocked": null,
+    "world_sha256": "7eec5f16454799125b153653b4948a9fa24b2a2397a7281665d3d98f4702abfb",
+    "outcome": "running",
+    "evidence": "private/integration/continued-krell-186/report.json",
+    "campaign_missions": 1
+  },
+  "additional_authentic_callbacks": [
+    {
+      "frame": 5000,
+      "state": 1,
+      "cursor": 2,
+      "timer": 0,
+      "instructions": 1705,
+      "receipt": "ba023678e85b4b23afbd031b5e145b89"
+    },
+    {
+      "frame": 5300,
+      "state": 2,
+      "cursor": 1,
+      "timer": 0,
+      "instructions": 1740,
+      "receipt": "e3315a687e0644038b315f1a1df0dfdf"
+    },
+    {
+      "frame": 5400,
+      "state": 2,
+      "cursor": 1,
+      "timer": 731,
+      "instructions": 2030,
+      "receipt": "df8c0f1ebf03415c8c417b64ec8731c2"
+    }
+  ],
+  "additional_comparison_each": {
+    "bytes": 427369,
+    "mismatches": 0,
+    "draws": 3,
+    "target_reselection": false,
+    "receipt_parent": "private/review/family8-captured",
+    "limits": "does not cover cursor2 positive-timer hover"
+  }
 }

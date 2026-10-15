@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "scope": "same frozen186 ordinary campaign carry and Krell construction, native port controls versus headless",
+  "native_observation": "private\\integration\\native-carried-krell-186\\observations\\krell-frontier.json",
+  "headless_report": "private/integration/continued-krell-186/report.json",
+  "checks": {
+    "steps": true,
+    "blocked": true,
+    "world_sha256": true,
+    "actor_dispatch_audit": true,
+    "buildings": true,
+    "outcome": true,
+    "creature_states": true,
+    "issued_move_commands": true
+  },
+  "mule_trace": [
+    "PortMuleFocus:1",
+    "PortMuleOrder:1:[658, 24211]"
+  ],
+  "headless_step": 5401,
+  "native_step": 5401,
+  "headless_blocked": null,
+  "native_blocked": null,
+  "world_sha256": "7eec5f16454799125b153653b4948a9fa24b2a2397a7281665d3d98f4702abfb",
+  "process_exit": 0,
+  "limitations": [
+    "Original hardware creature picking remains separate; this verifies current port construction controls",
+    "Not Krell completion; campaign count remains1/24"
+  ],
+  "root_visual_inspection": "krell-frontier.bmp inspected; source zone credit0/1000, running5401"
+}
