@@ -400,9 +400,9 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
 /// Postphysics runs the owned reveal at its original pre-AI boundary.
 pub(crate) fn plan_mule_admitted_body_with_postphysics<F,O,C,E,P>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
     physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
-    contact:F,mut obstacle:O,animations:&MuleAnimations,choice:C,admit_water:bool,cell_entry:E,postphysics:P)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+    contact:F,mut obstacle:O,animations:&MuleAnimations,choice:C,admit_water:bool,cell_entry:E,mut postphysics:P)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
-    plan_mule_admitted_body_with_collision(before,prefix,working_target,map,context,physics,trig,contact,animations,choice,admit_water,cell_entry,postphysics,|record| {
+    plan_mule_admitted_body_with_collision(before,prefix,working_target,map,context,physics,trig,contact,animations,choice,admit_water,cell_entry,|record,_|postphysics(record),|record| {
         if obstacle(motion_point(record))? {return Err(CreatureError::MotionEnvironment);} Ok(*record)
     })
 }
@@ -410,12 +410,12 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
 pub(crate) fn plan_mule_admitted_body_with_collision<F,C,E,P,H>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
  physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
  contact:F,animations:&MuleAnimations,mut choice:C,admit_water:bool,cell_entry:E,mut postphysics:P,airborne:H)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
-where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,H:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
+where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord,Option<CommonWaterEffect>)->Result<CreatureRecord,CreatureError>,H:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
     let waiting=before[0x49]&3==3;
     if waiting&&motion_word(prefix,0x3f)!=0{return Err(CreatureError::UnsupportedMotionState);}
     let mut a=*prefix;
     let(plan,water_effect)=common_nonflight_physics_with_collision(&a,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,admit_water,true,cell_entry,airborne)?;
-    a=postphysics(&plan.after)?;
+    a=postphysics(&plan.after,water_effect)?;
     if waiting {
         //6FD58..6FD80 restores the pre-steering target speed and returns
         //from6FB60 before ordinary arrival/waypoint postphysics checks.
@@ -476,6 +476,9 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
             if motion_word(&a,0x6c)&mask==0{let reserve=motion_word(&a,0x68);motion_put(&mut a,0x68,if reserve<1{0}else{reserve-1});}
         }
         if mule_callback_phase(before,context.frame_counter)&15<=1&&context.climate.wrapping_add(motion_word(map,motion_cell(motion_point(&a))*14+9))<=25{return Err(CreatureError::MotionEnvironment);}
+        //5EB30 virtualAC is49bit200. Ordinary arrival clears the
+        //owned task10 independently of the subsequent active-speed cleanup.
+        if motion_word(&a,0x49)as u16&0x200!=0 {if a[0x5e]==0{a[0x60]&=0xdf;}a[0x60]&=0xef;}
         if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;if a[0x61]&0x80!=0&&a[0x6e..0x72]==a[11..15]{a[0x61]&=0x7f;}motion_put(&mut a,0x6c,0);}
         if a[0x5e]==0&&motion_word(&a,0x6c)==0 {a=choice(&a)?;}
         if before[0x5e]==7 {
@@ -491,7 +494,10 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
         a[0x4a]&=0xfc;refresh_mule_lifecycle(&mut a);
         let timer=motion_word(&a,0x6c);if timer>0 {motion_put(&mut a,0x6c,timer-1);}
     }
-    else if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;if a[0x61]&0x80!=0&&a[0x6e..0x72]==a[11..15]{a[0x61]&=0x7f;}motion_put(&mut a,0x6c,0);}
+    else {
+        if motion_word(&a,0x49)as u16&0x200!=0 {if a[0x5e]==0{a[0x60]&=0xdf;}a[0x60]&=0xef;}
+        if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;if a[0x61]&0x80!=0&&a[0x6e..0x72]==a[11..15]{a[0x61]&=0x7f;}motion_put(&mut a,0x6c,0);}
+    }
     let yaw=motion_word(&a,0x39);if !(0..=2048).contains(&yaw){return Err(CreatureError::UnsupportedMotionState);}
     if a[0x5e]==10 {
         //5EA66: paired countdown selects animation22 once, then retains it.

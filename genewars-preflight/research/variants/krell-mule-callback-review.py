@@ -30,7 +30,7 @@ class Source(m.Source):
   if getattr(self,'pc',None)==0x5ed20 and a in self.context:n,v=self.context[a]
   super().store(a,n,v)
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--before',type=Path,default=P/'private/review/krell-first-tick-001');ap.add_argument('--expected',type=Path);ap.add_argument('--frame',type=int,default=0);ap.add_argument('--slot',type=int,default=0);a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--before',type=Path,default=P/'private/review/krell-first-tick-001');ap.add_argument('--expected',type=Path);ap.add_argument('--frame',type=int,default=0);ap.add_argument('--slot',type=int,default=0);ap.add_argument('--command-target',nargs=2,type=int);a=ap.parse_args()
  out=P/'private/review/krell-mule-callback'/uuid.uuid4().hex;out.mkdir(parents=True)
  report={'status':'error','frame':a.frame,'slot':a.slot,'before':str(a.before),'output':str(out),'production_comparison':'not_run','ports':['83140 render enqueue returns0; numeric state retained','2C200 UI cleanup deferred','5E068 portrait/module refresh deferred'],'source_phase_addresses':['6FB9C..6FBAA','6FD3D..6FD47','70348..70352','5EE28..5EE32']}
  try:
@@ -71,7 +71,14 @@ def main():
      (out/'collision-entry.json').write_text(json.dumps({'source_function':'6DD50','frame':a.frame,'slot':a.slot,'mule':'entry-mule.bin','obstacle':'entry-obstacle.bin'})+'\n')
     return super().__getitem__(key)
   model.code=CaptureCode(model.code)
-  r,_,trace=model.run(counter=a.frame,seed=seed,state_before=state,registers={'EAX':0x1542be+a.slot*124},instruction_budget=500000)
+  entry=0x5ed20;registers={'EAX':0x1542be+a.slot*124}
+  if a.command_target is not None:
+   assert all(-32768<=v<=32767 for v in a.command_target)
+   for offset,value in [(0,a.slot),(2,a.command_target[0]),(4,a.command_target[1]),(6,0)]:put(state,0x440000+offset,2,value)
+   put(state,0x118740,4,0);entry=0x81c60;registers={'EAX':0x118d74,'EDX':0x440000}
+   report.update(source_phase_addresses=['81C60..81D27','5DF50','5CC60','5C920'],command_target=a.command_target)
+   report['ports'].append('41910 feedback audio deferred; numeric state retained')
+  r,_,trace=model.run(entry=entry,counter=a.frame,seed=seed,state_before=state,registers=registers,instruction_budget=500000)
   result={name:bytearray(data) for name,data in buffers.items()}
   # Native players overlay serialized backing. Preserve its stale serialized
   # mirror unless the literal callback actually changes a prefix byte.

@@ -64,7 +64,7 @@ impl ActorWorld {
                 Ok((r.pending_audio,r.pending_plant_retirements,r.pending_portrait_refresh,r.retirement,r.newborn_slots,Vec::new()))
             } else {
                 let r=world.step_owned_mule_slot(slot,selected_player,runtime_flags,context,physics,trig,animations)?;
-                Ok((Vec::new(),Vec::new(),false,None,Vec::new(),r.pending_reveal_vertices))
+                Ok((r.pending_audio,Vec::new(),false,None,Vec::new(),r.pending_reveal_vertices))
             }
         })
     }

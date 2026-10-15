@@ -3,7 +3,7 @@ use super::*;
 use crate::creature_world::{self,MuleStepContext,MuleAnimations,CreatureAnimationBinding};
 use crate::physics_tables::PhysicsTables;
 #[derive(Debug,Clone,PartialEq,Eq)]
-pub struct OwnedMuleReceipt {pub motion:creature_world::CommonPhysicsPlan<124>,pub pending_reveal_vertices:Vec<[i16;2]>}
+pub struct OwnedMuleReceipt {pub motion:creature_world::CommonPhysicsPlan<124>,pub pending_reveal_vertices:Vec<[i16;2]>,pub pending_audio:Vec<u8>}
 impl ActorWorld {
  pub fn step_owned_mule_slot(&mut self,slot:u16,selected:u8,global_flags:u16,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations)->Result<OwnedMuleReceipt,ActorWorldError>{
   #[cfg(debug_assertions)] self.capture_numeric_callback(usize::from(slot),context.frame_counter,"owned-before");
@@ -17,8 +17,8 @@ impl ActorWorld {
   if pool.binding(slot)?!=Some(CreatureAnimationBinding::MuleSelector4){return Err(CreatureError::UnsupportedMotionState.into());}
   let before=*pool.record(slot)?;if word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
   let mut rng=self.rng;let(prefix,target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng)?;
-  let stage=std::cell::RefCell::new(self.clone());let random=std::cell::RefCell::new(rng);let reveals=std::cell::RefCell::new(Vec::new());
-  let(plan,water)=crate::owned_mule_callback::plan_owned_after_prefix(&before,&prefix,target,self.map(),context,physics,trig,
+  let stage=std::cell::RefCell::new(self.clone());let random=std::cell::RefCell::new(rng);let reveals=std::cell::RefCell::new(Vec::new());let audio=std::cell::RefCell::new(Vec::new());
+  let(plan,_water)=crate::owned_mule_callback::plan_owned_after_prefix(&before,&prefix,target,self.map(),context,physics,trig,
    |r,n,p|stage.borrow().mule_contact_speed(r,n,p).map_err(|_|CreatureError::MotionEnvironment),
    |record| {
     let world=stage.borrow();let point=[word(record,7),word(record,9)];let height=i32::from_le_bytes(record[39..43].try_into().unwrap());
@@ -35,9 +35,13 @@ impl ActorWorld {
      return crate::owned_mule_ai::plan_explicit_target(&r,true,|p,_|world.mule_accepts(slot,p).map_err(|_|crate::owned_mule_ai::OwnedIdleError::QueryUnavailable)).map(|p|p.after).map_err(|_|CreatureError::UnsupportedMotionState);
     }
     let current=world.mule_cell_entry_predicate(&r,floor_cell([word(&r,7),word(&r,9)])).map_err(|_|CreatureError::UnsupportedCellEntry)?;
-    let ai=crate::owned_mule_ai::plan_idle_without_building_action(&r,*rng,crate::owned_mule_ai::OwnedIdleContext{neighborhood_eligible:true,current_cell_requires_escape:current},|mask,flags,p|world.owned_mule_nearest_building(r[24],mask,flags,p).map_err(|_|crate::owned_mule_ai::OwnedIdleError::QueryUnavailable)).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
-    *rng=ai.rng_after;
-    let choice=crate::owned_mule_common_choice::plan_choice(&ai.after,*rng,trig,crate::owned_mule_common_choice::ChoiceContext{common_choice_eligible:true,virtual_b0:word(&ai.after,0x49)as u16&0x100!=0,current_cell_requires_escape:current},|p,_|world.mule_accepts(slot,p).map_err(|_|crate::owned_mule_common_choice::ChoiceError::QueryUnavailable)).map_err(|_|CreatureError::TargetSearchRequired)?;
+    //63EA8..63EB1 skips the owned idle decision for retained command78.
+    //Arrival can clear61bit80 while command7 still reaches common fallback.
+    let after=if r[0x78]==0 {
+     let ai=crate::owned_mule_ai::plan_idle_without_building_action(&r,*rng,crate::owned_mule_ai::OwnedIdleContext{neighborhood_eligible:true,current_cell_requires_escape:current},|mask,flags,p|world.owned_mule_nearest_building(r[24],mask,flags,p).map_err(|_|crate::owned_mule_ai::OwnedIdleError::QueryUnavailable)).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+     *rng=ai.rng_after;ai.after
+    }else if r[0x78]==7 {r}else{return Err(CreatureError::UnsupportedMotionState);};
+    let choice=crate::owned_mule_common_choice::plan_choice(&after,*rng,trig,crate::owned_mule_common_choice::ChoiceContext{common_choice_eligible:true,virtual_b0:word(&after,0x49)as u16&0x100!=0,current_cell_requires_escape:current},|p,_|world.mule_accepts(slot,p).map_err(|_|crate::owned_mule_common_choice::ChoiceError::QueryUnavailable)).map_err(|_|CreatureError::TargetSearchRequired)?;
     *rng=choice.rng_after;Ok(choice.after)
    },
    |record,old,new|{
@@ -45,17 +49,30 @@ impl ActorWorld {
     let prior=*world.creatures.as_ref().unwrap().record(slot)?;let mut r=*record;r[..6].copy_from_slice(&prior[..6]);world.creatures.as_mut().unwrap().replace_record_checked(slot,&prior,&r)?;world.insert_mule_head(slot,new).map_err(|_|CreatureError::UnsupportedCellEntry)?;
     let linked=*world.creatures.as_ref().unwrap().record(slot)?;let after=world.plan_mule_cell_entry(slot,&linked,new,&mut random.borrow_mut(),trig)?;world.creatures.as_mut().unwrap().replace_record_checked(slot,&linked,&after)?;Ok(after)
    },
-   |record|{
+   |record,water|{
     let mut world=stage.borrow_mut();let prior=*world.creatures.as_ref().unwrap().record(slot)?;world.creatures.as_mut().unwrap().replace_record_checked(slot,&prior,record)?;
+    //6E8xx factories precede6E9AF owned reveal and subsequent AI. The
+    //factory can prepend an effect and change this creature's map links.
+    if let Some(request)=water {
+     world.rng=*random.borrow();
+     match request.code {
+      0x30=>if let Some((_,events))=world.create_water_splash(request.position,request.physical_height).map_err(|_|CreatureError::MotionEnvironment)? {
+       for event in events {if let crate::landing::LandingEvent::PlayAudio(index)=event{audio.borrow_mut().push(index.channel);}}
+      },
+      0x15=>{world.create_water_effect(0x15,0,request.position,request.physical_height,request.angles,trig).map_err(|_|CreatureError::MotionEnvironment)?;},
+      _=>return Err(CreatureError::MotionEnvironment),
+     }
+     *random.borrow_mut()=world.rng;
+    }
+    let linked=*world.creatures.as_ref().unwrap().record(slot)?;let record=&linked;
     let phase=context.frame_counter.wrapping_add(i32::from(word(record,15))as u32);
     let height=i32::from_le_bytes(record[39..43].try_into().unwrap());let ground=i32::from_le_bytes(record[17..21].try_into().unwrap());
     if record[0x16]&2!=0&&phase&3==3&&record[24]==selected&&(word(record,0x3d)>32||height>ground){let v=world.owned_mule_reveal([word(record,7),word(record,9)]).map_err(|_|CreatureError::MotionEnvironment)?;reveals.borrow_mut().extend(v);}
     Ok(*record)
    })?;
-  if water.is_some(){return Err(CreatureError::MotionEnvironment.into());}
   let mut world=stage.into_inner();if plan.physics_cell!=plan.new_cell{return Err(CreatureError::UnsupportedCellEntry.into());}
   let prior=*world.creatures.as_ref().unwrap().record(slot)?;world.creatures.as_mut().unwrap().replace_record_checked(slot,&prior,&plan.after)?;world.rng=random.into_inner();world.validate_links()?;*self=world;
-  Ok(OwnedMuleReceipt{motion:plan,pending_reveal_vertices:reveals.into_inner()})
+  Ok(OwnedMuleReceipt{motion:plan,pending_reveal_vertices:reveals.into_inner(),pending_audio:audio.into_inner()})
  }
  /// Source74270 mask0 query preserving candidate order and current-frame height.
  fn airborne_building_at(&self,point:[i16;2],height:i32)->Result<Option<[u8;67]>,ActorWorldError> {
@@ -83,13 +100,14 @@ impl ActorWorld {
  /// Bounded no-action neighborhood: full reserve, only own Genepods and
  /// neutral plants, same-owner specialists and Genepod/Extractor buildings.
  /// Source6BA47 kinds3/4 bypass food/pair scoring; building-action queries
- /// still run separately. Other candidates require the scorer.
+ /// still run separately. Same-owner water effects also take6BA47 kind>2.
+ /// Other candidates require the scorer.
  fn owned_mule_neighborhood_no_action(&self,r:&CreatureRecord)->Result<(),ActorWorldError>{
   if word(r,0x68)<=word(r,0x62)>>1||r[0x61]&0x40!=0{return Err(CreatureError::UnsupportedNeighborhood.into());}
   let own=[r[15],r[16],1];let point=[word(r,7),word(r,9)];let cell=floor_cell(point);let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
   //8D930 visits sample cells within radius1024, including its boundary.
   for dy in -4..=4{for dx in -4..=4{if dx*dx+dy*dy>16{continue;}let c=(((cy+dy)&127)*128+((cx+dx)&127))as usize;let mut raw=reference(self.map(),c*14+6);
-   while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{2 if e[24]==4=>{},3 if e[24]==r[24]=>{},4 if e[24]==r[24]&&matches!(self.buildings.as_ref().unwrap().record(word(&raw,0)as usize)?[0x2d],0|11)=>{},8=>{},_=>return Err(CreatureError::UnsupportedNeighborhood.into())}}raw=reference(e,3);}
+   while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{2 if e[24]==4=>{},3 if e[24]==r[24]=>{},4 if e[24]==r[24]&&matches!(self.buildings.as_ref().unwrap().record(word(&raw,0)as usize)?[0x2d],0|11)=>{},5 if e[24]==r[24]&&matches!(self.effects.as_ref().unwrap().record(word(&raw,0)as usize)?[69],0x15|0x30)=>{},8=>{},_=>return Err(CreatureError::UnsupportedNeighborhood.into())}}raw=reference(e,3);}
   }}Ok(())
  }
  fn owned_mule_reveal(&mut self,at:[i16;2])->Result<Vec<[i16;2]>,ActorWorldError>{

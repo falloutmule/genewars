@@ -1,0 +1,67 @@
+{
+  "status": "passed_captured_command_and_callbacks",
+  "scope": "Actual ordinarily produced Krell Mule snapshot, other families frozen for fast callback tests; no native control/zone/campaign acceptance",
+  "natural_landing_frame": 2759,
+  "command_target": [
+    2431,
+    14719
+  ],
+  "comparisons": [
+    {
+      "frame": 2760,
+      "slot": 7,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\78f70f5085514564be5979461eee81b7",
+      "compared_bytes": 427369,
+      "draws": 0,
+      "literal_instructions": 189
+    },
+    {
+      "frame": 2760,
+      "slot": 7,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\7f6866b756d54025b09459395007bd84",
+      "compared_bytes": 427369,
+      "draws": 2,
+      "literal_instructions": 10468
+    },
+    {
+      "frame": 2800,
+      "slot": 7,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\5232da5727714af7b7cd40be0448f7af",
+      "compared_bytes": 427369,
+      "draws": 0,
+      "literal_instructions": 20711
+    },
+    {
+      "frame": 2830,
+      "slot": 7,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\012b6fecc832442a890b3c15e8d27b8c",
+      "compared_bytes": 427369,
+      "draws": 5,
+      "literal_instructions": 12290
+    },
+    {
+      "frame": 2831,
+      "slot": 7,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\6040c05a1bd94b62a1a43225d0a67a17",
+      "compared_bytes": 427369,
+      "draws": 0,
+      "literal_instructions": 5110
+    }
+  ],
+  "splash_audio": "private/integration/owned-water-audio-117.log:pendingaudio59/0x3B",
+  "corrections": [
+    "Factory before owned reveal/AI with linkedrecord preserved and RNG synchronized",
+    "Source63EA8 retainedcommand7 bypasses idle decision afterarrival",
+    "Source5EB30 virtualAC clears ownedtask10; retainedcommand state admits nextcallback",
+    "Same-owner water effects pass kind5no-action under satiation guards"
+  ],
+  "regressions": [
+    "private/integration/krell-runtime-command-water-124.log:219passed1ignored",
+    "private/integration/krell-render-regression-124.log:18passed"
+  ],
+  "remaining": [
+    "SharedMission/native ownedselection/action5input bridge",
+    "Fullworld zonecredits/exhaustion with realmarker lifecycle",
+    "Authentic Krell acceptance"
+  ]
+}
