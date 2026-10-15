@@ -95,3 +95,5 @@ pub mod result_carry;
 pub mod ui_animation;
 
 pub mod genepod_idle;
+
+pub mod mule_cell_entry;

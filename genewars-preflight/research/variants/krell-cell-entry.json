@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "production_comparison": "passed",
+  "frame": 8,
+  "slot": 1,
+  "source_output": "private/review/krell-mule-callback/1f57ed6db7d44d71b7135c7e8af3275a",
+  "literal_instructions": 3201,
+  "draws": 1,
+  "accepted_queries": 1,
+  "waypoint": [
+    31782,
+    22375
+  ],
+  "flags49": 4113,
+  "source_pins": {
+    "private/ghidra/krell-cell-entry/instructions-00073f70.txt": "39d73c8ba1a4295079b7115b24a39c90ecbadb1df20fa840ed4d0441ee5e7d69",
+    "private/ghidra/initial-creature/instructions-0005b100.txt": "32f6824af152305c75e3639c1917ee35e5e80a2a801a90e768415e73ea51e02d",
+    "private/ghidra/initial-creature/instructions-0008b780.txt": "96da34b2865718f4a50247df2f77d0c78d441888edfd3af7b20d76dafc6d7028",
+    "private/ghidra/actor-activation/instructions-0006df30.txt": "8afe40345a8ecb636ff3af67dd76b4fa4104596032270b0cc61ab26b2affe8b1",
+    "private/ghidra/actor-activation/instructions-0001ee20.txt": "0aa43dc30a3d2399e5d659215c01ed920605684839f5762cfba24f4c3c4b9d1f"
+  },
+  "report": "research/variants/krell-cell-entry.md",
+  "production_receipt": "private\\review\\krell-mule-callback\\25946367f3184fe3a7715e1dc13c9b8a\\result.json",
+  "compared_bytes": 427369,
+  "virtual10": {
+    "pointer": "111FEC+10 -> 1EE20",
+    "predicate": "word49 & 0400 !=0"
+  },
+  "candidate_query": {
+    "source": "5B38A ->74D90 only",
+    "bounded_reuse": "mule_accepts with state8,53==1,4F==0; no extra74270"
+  }
+}

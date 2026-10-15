@@ -131,18 +131,25 @@ pub fn plan_common_nonflight_physics<const N:usize,F,O>(before:&[u8;N],map:&[u8]
     physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
     contact:F,obstacle:O)->Result<CommonPhysicsPlan<N>,CreatureError>
 where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError> {
-    Ok(common_nonflight_physics_water(before,map,frame,gravity,water,physics,trig,contact,obstacle,false,true)?.0)
+    Ok(common_nonflight_physics_water(before,map,frame,gravity,water,physics,trig,contact,obstacle,false,true,|record,_,_|Ok(*record))?.0)
 }
 ///Shared numeric physics with explicit source virtual90 and typed water factory request.
 ///Zero-height class0 damage remains an unsupported callback boundary.
 pub fn plan_common_nonflight_physics_with_water_tail<const N:usize,F,O>(before:&[u8;N],map:&[u8],frame:u32,gravity:i16,water:i32,
  physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,contact:F,obstacle:O,virtual90:bool)->Result<(CommonPhysicsPlan<N>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>{
- common_nonflight_physics_water(before,map,frame,gravity,water,physics,trig,contact,obstacle,true,virtual90)
+ common_nonflight_physics_water(before,map,frame,gravity,water,physics,trig,contact,obstacle,true,virtual90,|record,_,_|Ok(*record))
 }
-fn common_nonflight_physics_water<const N:usize,F,O>(before:&[u8;N],map:&[u8],frame:u32,gravity:i16,water:i32,
- physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,mut contact:F,mut obstacle:O,admit_water:bool,virtual90:bool)->Result<(CommonPhysicsPlan<N>,Option<CommonWaterEffect>),CreatureError>
-where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>{
+/// Source-ordered virtual88 hook after crossing a map cell, before airborne
+/// obstacle and water callbacks. Caller owns unlink/prepend and atomicity.
+pub fn plan_common_nonflight_physics_with_cell_entry<const N:usize,F,O,C>(before:&[u8;N],map:&[u8],frame:u32,gravity:i16,water:i32,
+ physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,contact:F,obstacle:O,admit_water:bool,cell_entry:C)->Result<(CommonPhysicsPlan<N>,Option<CommonWaterEffect>),CreatureError>
+where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&[u8;N],usize,usize)->Result<[u8;N],CreatureError>{
+ common_nonflight_physics_water(before,map,frame,gravity,water,physics,trig,contact,obstacle,admit_water,true,cell_entry)
+}
+fn common_nonflight_physics_water<const N:usize,F,O,C>(before:&[u8;N],map:&[u8],frame:u32,gravity:i16,water:i32,
+ physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,mut contact:F,mut obstacle:O,admit_water:bool,virtual90:bool,mut cell_entry:C)->Result<(CommonPhysicsPlan<N>,Option<CommonWaterEffect>),CreatureError>
+where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&[u8;N],usize,usize)->Result<[u8;N],CreatureError>{
     if N<0x55||map.len()!=229376||before[0x16]&9!=0||before[0x15]&0x20!=0||motion_word(before,0x49)as u16&0x400!=0
         ||(motion_word(before,0x3f)<0&&!(motion_word(before,0x3f)==-1&&N>=124&&before[6]==1&&before[0x5e]>=24&&before[0x15]&0x80!=0
             &&motion_dword(before,0x27)<=motion_dword(before,0x11)&&(0..3).all(|i|motion_word(before,0x33+2*i)==0))) {return Err(CreatureError::UnsupportedMotionState);}
@@ -189,6 +196,8 @@ where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->
         motion_put32(&mut a,0x27,candidate_height.max(0));motion_angles(&mut a,physics);
         if !(0..=0x4b00).contains(&motion_word(&a,0x3d)){return Err(CreatureError::UnsupportedMotionState);}
     }
+    let entered_cell=motion_cell(motion_point(&a));
+    if entered_cell!=old_cell&&a[0x16]&0x20==0 {a=cell_entry(&a,old_cell,entered_cell)?;}
     // Source only invokes74270 on the odd airborne path, and the water
     // callback every fourth frame. Query ordering remains observable.
     let parity=frame.wrapping_add(motion_word(&a,0x0f)as i32 as u32);
@@ -351,8 +360,14 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
 /// requested factories are returned at the physics stage for owned commit.
 pub fn plan_mule_after_admitted_prefix_with_water_policy<F,O,C>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
     physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
-    contact:F,obstacle:O,animations:&MuleAnimations,mut choice:C,admit_water:bool)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+    contact:F,obstacle:O,animations:&MuleAnimations,choice:C,admit_water:bool)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
+    plan_mule_after_admitted_prefix_with_cell_entry(before,prefix,working_target,map,context,physics,trig,contact,obstacle,animations,choice,admit_water,|record,_,_|Ok(*record))
+}
+pub fn plan_mule_after_admitted_prefix_with_cell_entry<F,O,C,E>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
+    physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
+    contact:F,obstacle:O,animations:&MuleAnimations,mut choice:C,admit_water:bool,cell_entry:E)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError> {
     if matches!(before[0x5e],24..=27)||(before[0x5e]==8&&motion_word(before,0x66)==1&&mule_callback_phase(before,context.frame_counter)&1!=0) {
         return plan_mule_mortality_after_prefix(before,prefix,map,context,physics,trig,contact,obstacle,animations,admit_water);
     }
@@ -367,7 +382,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
        ||before[0x4f]!=0||before[0x52]!=0||motion_word(before,0x49)as u16&!0x337f!=0||before[0x49]&3==3
        ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=if mule_callback_phase(before,context.frame_counter)&1==0{0}else{2}{return Err(CreatureError::UnsupportedMotionState);}
     let mut a=*prefix;
-    let(plan,water_effect)=if admit_water {plan_common_nonflight_physics_with_water_tail(&a,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,obstacle,true)?}else{(plan_common_nonflight_physics(&a,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,obstacle)?,None)};
+    let(plan,water_effect)=plan_common_nonflight_physics_with_cell_entry(&a,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,obstacle,admit_water,cell_entry)?;
     a=plan.after;
     if a[0x49]&3!=0 {
         if a[0x54]>20{return Err(CreatureError::UnsupportedMotionState);}

@@ -378,7 +378,7 @@ impl SharedMission {
 
 #[cfg(test)] mod carried_startup_tests {
     use super::*;
-    #[test]fn krell_first_two_frames_render_and_current_boundary_is_atomic(){
+    #[test]fn krell_first_256_frames_render_with_original_mule_cell_entry(){
         let root=Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../private/integration/game-runtime");
         let first=read_bound(&root.join("terrain/CONQ001.DAT")).unwrap();let initial=SharedMission::load_fresh_cd(&root,&first,[0xa5;36],17).unwrap();
         let mut carry=initial.world.plan_campaign_carry(&[0;600],0x7e,2,0,None).unwrap();carry.players[0][0x6e7]=1;
@@ -396,20 +396,13 @@ impl SharedMission {
             assert_eq!(loaded.frame_counter,expected);assert_eq!(loaded.outcome_json(),"{\"state\":\"running\"}");
         }
         assert_ne!(loaded.world,before);assert_ne!(loaded.ui_animations,prior_ui);
-        // Short integration diagnostic, not mission acceptance. Preserve any
-        // later boundary as typed unsupported with an atomic host rollback.
+        // Short integrated/rendered fixture check, not native mission acceptance.
         for _ in 2..256 {
-            let before=loaded.clone();
-            match loaded.step(&resources) {
-                Ok(_)=>{loaded.render(&resources,[256,24320]).unwrap();loaded.finish_outer_frame();},
-                Err(error)=>{
-                    assert_eq!(loaded.frame_counter,8);assert_eq!(error,"Creatures(UnsupportedCellEntry)");
-                    assert_eq!(loaded.world,before.world);assert_eq!(loaded.ui_animations,before.ui_animations);assert_eq!(loaded.frame_counter,before.frame_counter);
-                    println!("Krell integration blocked frame{}: {error}",loaded.frame_counter);return;
-                }
-            }
+            loaded.step(&resources).unwrap();loaded.render(&resources,[256,24320]).unwrap();loaded.finish_outer_frame();
         }
-        panic!("expected captured source frame8 cell-entry boundary; update only after focused repair");
+        assert_eq!(loaded.frame_counter,256);assert_eq!(loaded.outcome_json(),"{\"state\":\"running\"}");
+        println!("Krell integration passed256 rendered frames; not mission acceptance");
+        println!("Krell actors: {}",loaded.actor_state_json());
     }
 
     /// Synthetic retained state exercises the real loader; this is not mission acceptance.

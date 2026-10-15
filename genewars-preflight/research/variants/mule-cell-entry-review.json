@@ -1,0 +1,407 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "seed": 1,
+      "accepted_at": 0,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 884
+    },
+    {
+      "seed": 1,
+      "accepted_at": 0,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 889
+    },
+    {
+      "seed": 1,
+      "accepted_at": 1,
+      "goal_equal": false,
+      "queries": 1,
+      "instructions": 184
+    },
+    {
+      "seed": 1,
+      "accepted_at": 1,
+      "goal_equal": true,
+      "queries": 1,
+      "instructions": 189
+    },
+    {
+      "seed": 1,
+      "accepted_at": 2,
+      "goal_equal": false,
+      "queries": 2,
+      "instructions": 284
+    },
+    {
+      "seed": 1,
+      "accepted_at": 2,
+      "goal_equal": true,
+      "queries": 2,
+      "instructions": 289
+    },
+    {
+      "seed": 1,
+      "accepted_at": 3,
+      "goal_equal": false,
+      "queries": 3,
+      "instructions": 384
+    },
+    {
+      "seed": 1,
+      "accepted_at": 3,
+      "goal_equal": true,
+      "queries": 3,
+      "instructions": 389
+    },
+    {
+      "seed": 1,
+      "accepted_at": 4,
+      "goal_equal": false,
+      "queries": 4,
+      "instructions": 482
+    },
+    {
+      "seed": 1,
+      "accepted_at": 4,
+      "goal_equal": true,
+      "queries": 4,
+      "instructions": 487
+    },
+    {
+      "seed": 1,
+      "accepted_at": 5,
+      "goal_equal": false,
+      "queries": 5,
+      "instructions": 580
+    },
+    {
+      "seed": 1,
+      "accepted_at": 5,
+      "goal_equal": true,
+      "queries": 5,
+      "instructions": 585
+    },
+    {
+      "seed": 1,
+      "accepted_at": 6,
+      "goal_equal": false,
+      "queries": 6,
+      "instructions": 680
+    },
+    {
+      "seed": 1,
+      "accepted_at": 6,
+      "goal_equal": true,
+      "queries": 6,
+      "instructions": 685
+    },
+    {
+      "seed": 1,
+      "accepted_at": 7,
+      "goal_equal": false,
+      "queries": 7,
+      "instructions": 780
+    },
+    {
+      "seed": 1,
+      "accepted_at": 7,
+      "goal_equal": true,
+      "queries": 7,
+      "instructions": 785
+    },
+    {
+      "seed": 1,
+      "accepted_at": 8,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 880
+    },
+    {
+      "seed": 1,
+      "accepted_at": 8,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 885
+    },
+    {
+      "seed": 2,
+      "accepted_at": 0,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 884
+    },
+    {
+      "seed": 2,
+      "accepted_at": 0,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 889
+    },
+    {
+      "seed": 2,
+      "accepted_at": 1,
+      "goal_equal": false,
+      "queries": 1,
+      "instructions": 184
+    },
+    {
+      "seed": 2,
+      "accepted_at": 1,
+      "goal_equal": true,
+      "queries": 1,
+      "instructions": 189
+    },
+    {
+      "seed": 2,
+      "accepted_at": 2,
+      "goal_equal": false,
+      "queries": 2,
+      "instructions": 284
+    },
+    {
+      "seed": 2,
+      "accepted_at": 2,
+      "goal_equal": true,
+      "queries": 2,
+      "instructions": 289
+    },
+    {
+      "seed": 2,
+      "accepted_at": 3,
+      "goal_equal": false,
+      "queries": 3,
+      "instructions": 384
+    },
+    {
+      "seed": 2,
+      "accepted_at": 3,
+      "goal_equal": true,
+      "queries": 3,
+      "instructions": 389
+    },
+    {
+      "seed": 2,
+      "accepted_at": 4,
+      "goal_equal": false,
+      "queries": 4,
+      "instructions": 482
+    },
+    {
+      "seed": 2,
+      "accepted_at": 4,
+      "goal_equal": true,
+      "queries": 4,
+      "instructions": 487
+    },
+    {
+      "seed": 2,
+      "accepted_at": 5,
+      "goal_equal": false,
+      "queries": 5,
+      "instructions": 580
+    },
+    {
+      "seed": 2,
+      "accepted_at": 5,
+      "goal_equal": true,
+      "queries": 5,
+      "instructions": 585
+    },
+    {
+      "seed": 2,
+      "accepted_at": 6,
+      "goal_equal": false,
+      "queries": 6,
+      "instructions": 680
+    },
+    {
+      "seed": 2,
+      "accepted_at": 6,
+      "goal_equal": true,
+      "queries": 6,
+      "instructions": 685
+    },
+    {
+      "seed": 2,
+      "accepted_at": 7,
+      "goal_equal": false,
+      "queries": 7,
+      "instructions": 780
+    },
+    {
+      "seed": 2,
+      "accepted_at": 7,
+      "goal_equal": true,
+      "queries": 7,
+      "instructions": 785
+    },
+    {
+      "seed": 2,
+      "accepted_at": 8,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 880
+    },
+    {
+      "seed": 2,
+      "accepted_at": 8,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 885
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 0,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 885
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 0,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 890
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 1,
+      "goal_equal": false,
+      "queries": 1,
+      "instructions": 185
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 1,
+      "goal_equal": true,
+      "queries": 1,
+      "instructions": 190
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 2,
+      "goal_equal": false,
+      "queries": 2,
+      "instructions": 285
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 2,
+      "goal_equal": true,
+      "queries": 2,
+      "instructions": 290
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 3,
+      "goal_equal": false,
+      "queries": 3,
+      "instructions": 383
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 3,
+      "goal_equal": true,
+      "queries": 3,
+      "instructions": 388
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 4,
+      "goal_equal": false,
+      "queries": 4,
+      "instructions": 481
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 4,
+      "goal_equal": true,
+      "queries": 4,
+      "instructions": 486
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 5,
+      "goal_equal": false,
+      "queries": 5,
+      "instructions": 581
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 5,
+      "goal_equal": true,
+      "queries": 5,
+      "instructions": 586
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 6,
+      "goal_equal": false,
+      "queries": 6,
+      "instructions": 681
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 6,
+      "goal_equal": true,
+      "queries": 6,
+      "instructions": 686
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 7,
+      "goal_equal": false,
+      "queries": 7,
+      "instructions": 781
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 7,
+      "goal_equal": true,
+      "queries": 7,
+      "instructions": 786
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 8,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 881
+    },
+    {
+      "seed": 29645,
+      "accepted_at": 8,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 886
+    },
+    {
+      "actual_frame8_intermediate": true,
+      "record_sha256": "8ee9f16f08a7047bd5c9eb7d5c17450e75c65cdd8b4b929ead395b1f6c37227f",
+      "context_sha256": "5e89c259b521dfe6732d9303900ef6fd3c96d5116f9e5bcc143f4308d1ea3ee6",
+      "queries": 1,
+      "instructions": 185
+    }
+  ],
+  "compared_bytes": 8320,
+  "rust_sha256": "a96c3016048c16ea5b977faad07a528ae744d8f117db1a82ddde9e60ece993e4",
+  "script_sha256": "0ec5f4b82bf4cd01710be0912eaedb85e311f1a94a95babaebf46c0c9699d791",
+  "private_run": "private\\review\\mule-cell-entry\\6857883da2e946f1867aac59b64ef62d",
+  "source_pins": {
+    "private\\ghidra\\krell-cell-entry\\instructions-00073f70.txt": "39d73c8ba1a4295079b7115b24a39c90ecbadb1df20fa840ed4d0441ee5e7d69",
+    "private\\ghidra\\initial-creature\\instructions-0005b100.txt": "32f6824af152305c75e3639c1917ee35e5e80a2a801a90e768415e73ea51e02d",
+    "private\\ghidra\\validated\\memory-.object1.bin": "92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe",
+    "private\\ghidra\\validated\\memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+  },
+  "oracle_annotation": "Raw66A3 at5B2E5 proves word seed store; unsized listing normalized.",
+  "ports": [
+    "virtual10 false",
+    "virtual8C true",
+    "74D90 deterministic accept ordinal; original querypoints preserved"
+  ],
+  "scope": "54 synthetic callback fixtures and exact frame8 intermediate record, literal5B260/73F70. No world adapter/ordinary gameplay claim."
+}

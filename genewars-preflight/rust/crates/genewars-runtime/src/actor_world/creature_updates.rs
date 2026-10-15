@@ -52,42 +52,56 @@ impl ActorWorld {
             staged.rng=rng;let mut motion=plan.motion;motion.after=retirement.after;*self=staged;
             return Ok(MuleCallbackReceipt{motion,retirement:Some(retirement),pending_audio:Vec::new(),pending_plant_retirements:Vec::new(),pending_portrait_refresh:false});
         }
+        let query_world=std::cell::RefCell::new(self.clone());let rng_state=std::cell::RefCell::new(rng);
+        let links_moved=std::cell::Cell::new(false);
         let mut reserve_plant=None;let mut release_plant=None;let mut fed_plant=None;let mut pending_audio=Vec::new();let mut pending_plant_retirements=Vec::new();
-        let(plan,water_effect)=creature_world::plan_mule_after_admitted_prefix_with_water_policy(&before,&prefix,working_target,self.map(),context,physics,trig,
-            |record,normal,previous|self.mule_contact_speed(record,normal,previous).map_err(|_|CreatureError::MotionEnvironment),
-            |point|self.move_obstacle_at(point).map_err(|_|CreatureError::MotionEnvironment),animations,|record|{
+        let(plan,water_effect)=creature_world::plan_mule_after_admitted_prefix_with_cell_entry(&before,&prefix,working_target,self.map(),context,physics,trig,
+            |record,normal,previous|query_world.borrow().mule_contact_speed(record,normal,previous).map_err(|_|CreatureError::MotionEnvironment),
+            |point|query_world.borrow().move_obstacle_at(point).map_err(|_|CreatureError::MotionEnvironment),animations,|record|{
+                let world=query_world.borrow();let mut rng=rng_state.borrow_mut();
                 if word(record,0x49)as u16&0x100!=0 {
-                    self.check_mule_cell_entry(own,floor_cell([word(record,7),word(record,9)])).map_err(|_|CreatureError::UnsupportedCellEntry)?;
-                    let choice=creature_world::plan_mule_retry_wait(record,rng)?;rng=choice.rng_after;return Ok(choice.after);
+                    world.check_mule_cell_entry(own,floor_cell([word(record,7),word(record,9)])).map_err(|_|CreatureError::UnsupportedCellEntry)?;
+                    let choice=creature_world::plan_mule_retry_wait(record,*rng)?;*rng=choice.rng_after;return Ok(choice.after);
                 }
                 if record[0x5e]==7 {
-                    let raw=reference(record,0x55);let id=word(&raw,0);let health=self.mule_plant_health(id).map_err(|_|CreatureError::MotionEnvironment)?;if raw[2]!=2||health<=0{return Err(CreatureError::UnsupportedMotionState);}
-                    self.check_mule_neutral_neighborhood(record,own,[word(record,7),word(record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
-                    let l=self.layouts[1];let selector=self.backing[l.file_offset+id as usize*l.packed_stride+0x23]as i8;
+                    let raw=reference(record,0x55);let id=word(&raw,0);let health=world.mule_plant_health(id).map_err(|_|CreatureError::MotionEnvironment)?;if raw[2]!=2||health<=0{return Err(CreatureError::UnsupportedMotionState);}
+                    world.check_mule_neutral_neighborhood(record,own,[word(record,7),word(record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+                    let l=world.layouts[1];let selector=world.backing[l.file_offset+id as usize*l.packed_stride+0x23]as i8;
                     if selector<0{return Err(CreatureError::UnsupportedMotionState);}
-                    let params=self.plants.as_ref().ok_or(CreatureError::MotionEnvironment)?.parameters.slot(selector as usize).map_err(|_|CreatureError::MotionEnvironment)?;
+                    let params=world.plants.as_ref().ok_or(CreatureError::MotionEnvironment)?.parameters.slot(selector as usize).map_err(|_|CreatureError::MotionEnvironment)?;
                     let retired=health<=3;
-                    if retired&&(params.retirement_delay_u8>=4||self.mule_plant_flags(id).map_err(|_|CreatureError::MotionEnvironment)?&0x88!=0){return Err(CreatureError::UnsupportedMotionState);}
-                    let choice=if retired {creature_world::plan_mule_plant_feed_after_retirement(record,params.nutrition_u8,rng)?}else{creature_world::plan_mule_plant_feed(record,params.nutrition_u8,rng)?};rng=choice.rng_after;fed_plant=Some(id);let full=record[0x61]&0x40!=0&&choice.after[0x61]&0x40==0;pending_audio.push(if full{0x1b}else{0x12});if retired{pending_plant_retirements.push(id as u16);}else if choice.after[0x5e]==8{release_plant=Some(id);}return Ok(choice.after);
+                    if retired&&(params.retirement_delay_u8>=4||world.mule_plant_flags(id).map_err(|_|CreatureError::MotionEnvironment)?&0x88!=0){return Err(CreatureError::UnsupportedMotionState);}
+                    let choice=if retired {creature_world::plan_mule_plant_feed_after_retirement(record,params.nutrition_u8,*rng)?}else{creature_world::plan_mule_plant_feed(record,params.nutrition_u8,*rng)?};*rng=choice.rng_after;fed_plant=Some(id);let full=record[0x61]&0x40!=0&&choice.after[0x61]&0x40==0;pending_audio.push(if full{0x1b}else{0x12});if retired{pending_plant_retirements.push(id as u16);}else if choice.after[0x5e]==8{release_plant=Some(id);}return Ok(choice.after);
                 }
                 if record[0x5e]==1 {
-                    let raw=reference(record,0x55);if raw[2]!=2||self.mule_plant_flags(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?&9!=0{return Err(CreatureError::UnsupportedMotionState);}
+                    let raw=reference(record,0x55);if raw[2]!=2||world.mule_plant_flags(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?&9!=0{return Err(CreatureError::UnsupportedMotionState);}
                     let mut after=*record;after[0x3f..0x41].copy_from_slice(&creature_world::mule_requested_speed(record).to_le_bytes());after[0x5e]=7;after[0x6c..0x6e].copy_from_slice(&32767i16.to_le_bytes());after[0x72..0x76].copy_from_slice(&record[7..11]);after[0x60]|=8;after[0x60]&=0xbf;reserve_plant=Some(word(&raw,0));return Ok(after);
                 }
                 let mut record=*record;if record[0x5e]==0 {record[0x5e]=8;}
-                self.check_mule_neutral_neighborhood(&record,own,[word(&record,7),word(&record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
-                let target=self.mule_neutral_food_target(&record,rng).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
-                let choice=if let Some((id,point))=target {creature_world::plan_mule_plant_acquisition(&record,id,point,rng)?}else{creature_world::plan_neutral_mule_rechoice(&record,rng,trig,|point|self.mule_accepts(slot,point).map_err(|_|CreatureError::MotionEnvironment))?};
-                rng=choice.rng_after;Ok(choice.after)
-            },admit_water)?;
-        // 5B260's type1/state8 cell-entry predicate only remains false if
-        // this is the sole type1 and no code11 type5 occupies the new cell.
-        if plan.old_cell!=plan.physics_cell {self.check_mule_cell_entry(own,plan.physics_cell)?;}
-        if plan.physics_cell!=plan.new_cell {self.check_mule_cell_entry(own,plan.new_cell)?;}
-        let mut staged=self.clone();
-        if plan.old_cell!=plan.physics_cell {staged.unlink_mule_slot(slot,plan.old_cell)?;}
-        staged.creatures.as_mut().unwrap().replace_record_checked(slot,&before,&plan.after)?;
-        if plan.old_cell!=plan.physics_cell {staged.insert_mule_head(slot,plan.physics_cell)?;}
+                world.check_mule_neutral_neighborhood(&record,own,[word(&record,7),word(&record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+                let target=world.mule_neutral_food_target(&record,*rng).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+                let choice=if let Some((id,point))=target {creature_world::plan_mule_plant_acquisition(&record,id,point,*rng)?}else{creature_world::plan_neutral_mule_rechoice(&record,*rng,trig,|point|world.mule_accepts(slot,point).map_err(|_|CreatureError::MotionEnvironment))?};
+                *rng=choice.rng_after;Ok(choice.after)
+            },admit_water,|record,old_cell,new_cell|{
+                let mut world=query_world.borrow_mut();
+                world.unlink_mule_slot(slot,old_cell).map_err(|_|CreatureError::UnsupportedCellEntry)?;
+                let prior=*world.creatures.as_ref().unwrap().record(slot)?;
+                world.creatures.as_mut().unwrap().replace_record_checked(slot,&prior,record)?;
+                world.insert_mule_head(slot,new_cell).map_err(|_|CreatureError::UnsupportedCellEntry)?;
+                let entered=*world.creatures.as_ref().unwrap().record(slot)?;
+                let after=world.plan_mule_cell_entry(slot,&entered,new_cell,&mut rng_state.borrow_mut(),trig)?;
+                world.creatures.as_mut().unwrap().replace_record_checked(slot,&entered,&after)?;
+                links_moved.set(true);Ok(after)
+            })?;
+        let rng=rng_state.into_inner();let mut staged=query_world.into_inner();
+        // The entry hook already applied source unlink/prepend and virtual88.
+        // Mortality uses the legacy bounded planner and still rejects its
+        // unsupported cell callback; arrival's second cell remains guarded.
+        if plan.old_cell!=plan.physics_cell&&!links_moved.get() {self.check_mule_cell_entry(own,plan.physics_cell)?;staged.unlink_mule_slot(slot,plan.old_cell)?;}
+        if plan.physics_cell!=plan.new_cell {staged.check_mule_cell_entry(own,plan.new_cell)?;}
+        let prior=*staged.creatures.as_ref().unwrap().record(slot)?;
+        staged.creatures.as_mut().unwrap().replace_record_checked(slot,&prior,&plan.after)?;
+        if plan.old_cell!=plan.physics_cell&&!links_moved.get() {staged.insert_mule_head(slot,plan.physics_cell)?;}
         if plan.physics_cell!=plan.new_cell {staged.unlink_mule_slot(slot,plan.physics_cell)?;staged.insert_mule_head(slot,plan.new_cell)?;}
         if let Some(id)=reserve_plant {let l=staged.layouts[1];let at=l.file_offset+id as usize*l.packed_stride+0x26;staged.backing[at]|=1;}
         if let Some(id)=release_plant {let l=staged.layouts[1];let at=l.file_offset+id as usize*l.packed_stride+0x26;staged.backing[at]&=0xfe;}
@@ -224,6 +238,24 @@ impl ActorWorld {
             previous_height_low:previous,surface_term:normal[2],distance_squared:distance})?)
     }
 
+    fn plan_mule_cell_entry(&self,slot:usize,record:&CreatureRecord,cell:usize,rng:&mut BlueprintRng,trig:&TrigTables)->Result<CreatureRecord,CreatureError>{
+        let own=[slot as u8,(slot>>8)as u8,1];
+        //5B100 state8 asks8B780 for the last living kind1, after prepend.
+        //Other state-specific predicates and code11 effects remain bounded.
+        if record[0x5e]!=8 {self.check_mule_cell_entry(own,cell).map_err(|_|CreatureError::UnsupportedCellEntry)?;return Ok(*record);}
+        let mut raw=reference(self.map(),cell*14+6);let mut last=None;
+        while raw[2]!=0{
+            let entity=self.entity(raw).map_err(|_|CreatureError::UnsupportedCellEntry)?;
+            if raw[2]==1{let candidate=self.creatures.as_ref().unwrap().record(word(&raw,0)as usize)?;if candidate[0x5e]<24{last=Some(raw);}}
+            if raw[2]==5&&self.effects.as_ref().ok_or(CreatureError::UnsupportedCellEntry)?.record(word(&raw,0)as usize).map_err(|_|CreatureError::UnsupportedCellEntry)?[0x45]==0x11{return Err(CreatureError::UnsupportedCellEntry);}
+            raw=reference(entity,3);
+        }
+        if last==Some(own){return Ok(*record);}
+        if record[0x53]!=1||record[0x4f]!=0{return Err(CreatureError::UnsupportedCellEntry);}
+        let plan=crate::mule_cell_entry::plan_waypoint(record,cell as u16,*rng,trig,|point|self.mule_accepts(slot,point))
+            .map_err(|_|CreatureError::UnsupportedCellEntry)?;
+        *rng=plan.rng_after;Ok(plan.record_after)
+    }
     fn check_mule_cell_entry(&self,own:[u8;3],cell:usize)->Result<(),ActorWorldError> {
         let mut raw=reference(self.map(),cell*14+6);
         while raw[2]!=0 {if raw[2]==1&&raw!=own {return Err(CreatureError::UnsupportedCellEntry.into());}

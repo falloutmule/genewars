@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "scope": "256 rendered source-projected carried Krell fixture frames; three specialists landed/ready; not nativeinput or authenticmission acceptance",
+  "source_frames": 256,
+  "original_missions_completable": 0,
+  "standard_campaign_total": 24,
+  "normal_input_krell_acceptance": false,
+  "source_callback_proof": "research/variants/krell-cell-entry.json",
+  "source_callback_compared_bytes": 427369,
+  "source_callback_literal_instructions": 3201,
+  "first_two_frames_unchanged_buffers": 128,
+  "log": "private/integration/krell-first-256-001.log",
+  "sha256": {
+    "rust/crates/genewars-runtime/src/creature_world.rs": "4d06352326e05be74c841869ef2ce91fb776324c138b3b986a45b8207f2be94e",
+    "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs": "e86ff4201949a50d0c1f5e4d48d320064ed18cc5a354434b5176a32c9d1976d4",
+    "rust/crates/genewars-runtime/src/mule_cell_entry.rs": "a96c3016048c16ea5b977faad07a528ae744d8f117db1a82ddde9e60ece993e4",
+    "rust/crates/genewars-runtime/src/lib.rs": "808fa55ae8282d60ddeeab6b979c3bd18abe089fe8cb28af34480381e084c023",
+    "rust/crates/genewars-desktop/src/bin/support/shared_scene.rs": "9ef1a5c29707c49c2830a70de795443c5154a55687b1e105993aebe13c5059ef",
+    "private/integration/krell-first-256-001.log": "fdb45f0e016a356be9b9ade818ff3d5d3c212bc2678be990f85b1c10ef3d5a60"
+  }
+}
