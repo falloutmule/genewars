@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "scope": "Actual retained-carry4357state4 Bonesfeedingcallback; fullnumericworld compared, otherfamiliesfrozen; notcampaignacceptance",
+  "comparison": {
+    "status": "passed",
+    "frame": 4357,
+    "slot": 0,
+    "draws": 2,
+    "compared_bytes": 427369,
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\0f2b55627155486089bb67a7bedb412b"
+  },
+  "source_behavior": "67A41targetreserve-2;5C730(2,2)gain4;77FF preservesenergy;audio12;2querydraws.68445 skipsfood;684DB cannotmateatpostreserve<=half. Exactcircle accepts ONLYowner4/species4kind1,provingzeroenemies;reservedBones skipscoring.",
+  "atomic_negative_tests": [
+    "foreign-ownerneighbor",
+    "postnutritionreserveabovehalf",
+    "targetreserve1unsupported"
+  ],
+  "runtime": {
+    "passed": 244,
+    "ignored": 1
+  },
+  "game": {
+    "passed": 76,
+    "ignored": 1
+  },
+  "native": "frozen177 parity4357passed; currentfeedingcorrectionnativepending",
+  "contribution": "Supplementaryagentnewpuremule_bones_feeding.rs andsourcequeryreview;rootworldproof,field-onlytargetreservecommit,fullworldcomparison andintegration",
+  "campaign_missions": 1
+}

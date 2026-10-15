@@ -95,7 +95,7 @@ impl ActorWorld {
         let query_world=std::cell::RefCell::new(self.clone());let rng_state=std::cell::RefCell::new(rng);
         let links_moved=std::cell::Cell::new(false);
         let mut pending_pair=None;let mut newborn_slots=Vec::new();let mut failed_action_dispatched=false;let mut retired_during_feeding=false;
-        let mut reserve_corpse=None;let mut reserve_plant=None;let mut release_plant=None;let mut fed_plant=None;let mut pending_audio=Vec::new();let mut pending_plant_retirements=Vec::new();
+        let mut feed_bones=None;let mut reserve_corpse=None;let mut reserve_plant=None;let mut release_plant=None;let mut fed_plant=None;let mut pending_audio=Vec::new();let mut pending_plant_retirements=Vec::new();
         let(plan,water_effect)=creature_world::plan_mule_after_admitted_prefix_with_cell_entry(&before,&prefix,working_target,self.map(),context,physics,trig,
             |record,normal,previous|query_world.borrow().mule_contact_speed(record,normal,previous).map_err(|_|CreatureError::MotionEnvironment),
             |point|query_world.borrow().move_obstacle_at(point).map_err(|_|CreatureError::MotionEnvironment),animations,|record|{
@@ -127,9 +127,14 @@ impl ActorWorld {
                 if record[0x5e]==4 {
                     //679CE/67A22: nearby retained Bones, nonprocessing timer gate.
                     let bones=world.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?;
-                    if !matches!(bones[0x5e],26|27)||creature_world::common_distance_squared(world.map(),[word(record,7),word(record,9)],[word(bones,7),word(bones,9)])?>4096
-                        ||word(record,0x6c)&15==0{return Err(CreatureError::UnsupportedMotionState);}
-                    return Ok(*record);
+                    if !matches!(bones[0x5e],26|27)||creature_world::common_distance_squared(world.map(),[word(record,7),word(record,9)],[word(bones,7),word(bones,9)])?>4096{return Err(CreatureError::UnsupportedMotionState);}
+                    if word(record,0x6c)&15!=0{return Ok(*record);}
+                    let feed=crate::mule_bones_feeding::plan_feed(record,bones,*rng).map_err(|_|CreatureError::UnsupportedMotionState)?;
+                    //68445 skips food selection; low-half reserve prevents mating.
+                    //Prove zero enemies from the actual circle, including reserved Bones.
+                    world.check_mule_bones_feeding_no_action(&feed.current_after).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+                    feed_bones=Some((word(record,0x55)as u16,word(bones,0x68),word(&feed.target_after,0x68)));
+                    pending_audio.push(feed.pending_audio);*rng=feed.rng_after;return Ok(feed.current_after);
                 }
                 if record[0x5e]==5 {
                     let corpse=world.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?;
@@ -308,6 +313,11 @@ impl ActorWorld {
         staged.creatures.as_mut().unwrap().replace_record_checked(slot,&prior,&plan.after)?;
         if plan.old_cell!=plan.physics_cell&&!links_moved.get() {staged.insert_mule_head(slot,plan.physics_cell)?;}
         if plan.physics_cell!=plan.new_cell {staged.unlink_mule_slot(slot,plan.physics_cell)?;staged.insert_mule_head(slot,plan.new_cell)?;}
+        if let Some((id,expected,reserve))=feed_bones {
+            let prior=*staged.creatures.as_ref().unwrap().record(id as usize)?;
+            if word(&prior,0x68)!=expected{return Err(CreatureError::UnsupportedMotionState.into());}
+            let mut after=prior;after[0x68..0x6a].copy_from_slice(&reserve.to_le_bytes());staged.creatures.as_mut().unwrap().replace_record_checked(id as usize,&prior,&after)?;
+        }
         if let Some((id,expected,flags))=reserve_corpse {
             let prior=*staged.creatures.as_ref().unwrap().record(id as usize)?;
             if prior[0x60]!=expected{return Err(CreatureError::UnsupportedMotionState.into());}
@@ -524,6 +534,25 @@ impl ActorWorld {
             if dx*dx+dy*dy>16{continue;}
             let index=((cy+dy)&127)as usize*128+((cx+dx)&127)as usize;let mut raw=reference(self.map(),index*14+6);
             while raw[2]!=0 {let entity=self.entity(raw)?;let ignored_effect=if raw[2]==8{true}else if raw[2]==5{self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?.get(0x45)!=Some(&0x11)}else{false};if raw!=own&&!ignored_effect&&(raw[2]!=2||entity[24]!=4)&&!self.mule_friendly_candidate_is_no_action(record,raw)?{return Err(CreatureError::UnsupportedNeighborhood.into());}raw=reference(entity,3);}
+        }}Ok(())
+    }
+    ///679CE state4 query:68445 ignores food,684DB requires reserve>half for mating.
+    /// Only same-owner/species kind1 neighbors are admitted, proving no enemies;
+    /// reserved Bones skip6BAA6 scoring; other friend directions are unused.
+    fn check_mule_bones_feeding_no_action(&self,record:&CreatureRecord)->Result<(),ActorWorldError>{
+        if record[0x5e]!=4||record[24]!=4||record[0x7a]!=4||record[0x60]!=8||record[0x61]!=0x40
+            ||word(record,0x68)>(word(record,0x62)>>1){return Err(CreatureError::UnsupportedNeighborhood.into());}
+        let cell=floor_cell([word(record,7),word(record,9)]);let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
+        for dy in -4..=4{for dx in -4..=4{
+            if dx*dx+dy*dy>16{continue;}
+            let index=((cy+dy)&127)as usize*128+((cx+dx)&127)as usize;let mut raw=reference(self.map(),index*14+6);
+            while raw[2]!=0{
+                if raw[2]!=1{return Err(CreatureError::UnsupportedNeighborhood.into());}
+                let id=word(&raw,0)as usize;let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;let other=pool.record(id)?;
+                let binding=if other[0x5e]>=26{CreatureAnimationBinding::BonesSelector4}else{CreatureAnimationBinding::MuleSelector4};
+                if other[6]!=1||other[24]!=4||other[0x7a]!=4||other[0x5e]>27||pool.binding(id)?!=Some(binding){return Err(CreatureError::UnsupportedNeighborhood.into());}
+                raw=reference(other,3);
+            }
         }}Ok(())
     }
     ///6BA65/6BBAE: same-species live friend contributes no food candidate.
