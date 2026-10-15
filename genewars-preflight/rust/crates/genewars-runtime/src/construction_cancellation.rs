@@ -68,11 +68,22 @@ pub fn plan_finished_selector1_cancellation(map:&[u8],before:&[u8;200],blueprint
 
 ///507D0 category0 prefix sets55=9/81=0 before class1 rejection.
 ///51E80 preserves that state and consumes no RNG; stage0 releases the task footprint.
+#[derive(Debug,Clone,Copy,PartialEq,Eq)]
+pub enum SiteRejection { Blocked, Water }
+impl SiteRejection {
+ pub const fn message_index(self)->u8 {match self{Self::Blocked=>12,Self::Water=>13}}
+ pub const fn actor_reason(self)->u8 {match self{Self::Blocked=>6,Self::Water=>5}}
+}
 pub fn plan_blocked_site_cancellation(map:&[u8],before:&[u8;200],blueprint:&[u8;36],owner_selected:bool,actor_selected:bool)
+ ->Result<ConstructionCancellationPlan,ConstructionCancellationError>{
+ plan_rejected_site_cancellation(map,before,blueprint,owner_selected,actor_selected,SiteRejection::Blocked)
+}
+/// Source507D0 class1/2 feedback followed by the common51E80 cancellation.
+pub fn plan_rejected_site_cancellation(map:&[u8],before:&[u8;200],blueprint:&[u8;36],owner_selected:bool,actor_selected:bool,rejection:SiteRejection)
  ->Result<ConstructionCancellationPlan,ConstructionCancellationError>{
  if before[6]!=3||blueprint[0x16]!=0||before[0x55]!=1||before[0x7e]!=0||before[0x82]!=1||!matches!(before[0x83],0|1|3|6|11){return Err(ConstructionCancellationError::UnsupportedActor);}
  if map.len()!=229376{return Err(ConstructionCancellationError::InvalidMap);}
- let mut after=*before;let mut map_after=map.to_vec();after[0x70]&=!4;after[0x81]=0;after[0x55]=9;after[0x88..0x8a].fill(0);after[0x7a]=6;
+ let mut after=*before;let mut map_after=map.to_vec();after[0x70]&=!4;after[0x81]=0;after[0x55]=9;after[0x88..0x8a].fill(0);after[0x7a]=rejection.actor_reason();
  if before[0x58]&1!=0{
   after[0x4a]&=!8;
   let footprint=if matches!(before[0x83],1|6){1}else{3};

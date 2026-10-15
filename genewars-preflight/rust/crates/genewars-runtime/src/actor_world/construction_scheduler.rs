@@ -104,9 +104,10 @@ impl ActorWorld {
                         id as u16,frame,context,physics,trig,resource,idle)?)
                 })};
                 let callback=match attempt(&mut staged,&mut staged_jobs){
-                    Err(ConstructionWorldError::Setup(crate::construction_setup::ArchitectSetupError::UnsupportedSite(crate::construction_site::ConstructionSiteClass::Blocked)))=>{
+                    Err(ConstructionWorldError::Setup(crate::construction_setup::ArchitectSetupError::UnsupportedSite(class @ (crate::construction_site::ConstructionSiteClass::Blocked|crate::construction_site::ConstructionSiteClass::Water))))=>{
+                        let rejection=if class==crate::construction_site::ConstructionSiteClass::Water{crate::construction_cancellation::SiteRejection::Water}else{crate::construction_cancellation::SiteRejection::Blocked};
                         let idle=ActorIdleContext{runtime_mode,override_180d80,runtime_count_11c2bc:word(&staged.backing,0x355c)as u16,player_mode:staged.player(owner)?.bytes()[2]};
-                        ConstructionAwareActorCallback::Architect{id:id as u16,receipt:staged.step_blocked_site_callback(id as u16,frame,context,physics,trig,border,resource,idle,(owner==selected_owner,selected_actor==Some(id as u16)))?}
+                        ConstructionAwareActorCallback::Architect{id:id as u16,receipt:staged.step_rejected_site_callback(id as u16,frame,context,physics,trig,border,resource,idle,(owner==selected_owner,selected_actor==Some(id as u16)),rejection)?}
                     },other=>other?,
                 };
                 let branch=match &callback {

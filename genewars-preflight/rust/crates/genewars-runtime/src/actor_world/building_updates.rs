@@ -710,6 +710,12 @@ impl ActorWorld {
         context:LandingPhysicsContext,physics:&crate::physics_tables::PhysicsTables,trig:&TrigTables,
         border:&[u8;8192],resource:&crate::actor_resources::ActorAnimationDatabase<B>,
         _idle:crate::actor_motion::ActorIdleContext,selection:(bool,bool))->Result<ArchitectStage0Receipt,ConstructionWorldError>{
+        self.step_rejected_site_callback(id,frame,context,physics,trig,border,resource,_idle,selection,crate::construction_cancellation::SiteRejection::Blocked)
+    }
+    pub(super) fn step_rejected_site_callback<B:AsRef<[u8]>>(&mut self,id:u16,frame:u32,
+        context:LandingPhysicsContext,physics:&crate::physics_tables::PhysicsTables,trig:&TrigTables,
+        border:&[u8;8192],resource:&crate::actor_resources::ActorAnimationDatabase<B>,
+        _idle:crate::actor_motion::ActorIdleContext,selection:(bool,bool),rejection:crate::construction_cancellation::SiteRejection)->Result<ArchitectStage0Receipt,ConstructionWorldError>{
         let mut staged=self.clone();let before=*staged.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;
         let motion=staged.step_architect_motion(id,frame,context,physics,trig)?;
         let binding=staged.actors.bindings(usize::from(id)).map_err(ActorWorldError::from)?;
@@ -729,13 +735,13 @@ impl ActorWorld {
         }
         // Validate actual74E80 class before admitting ordinary rejection.
         match staged.begin_pending_architect_task(id,border){
-            Err(ConstructionWorldError::Setup(crate::construction_setup::ArchitectSetupError::UnsupportedSite(crate::construction_site::ConstructionSiteClass::Blocked)))=>{},
+            Err(ConstructionWorldError::Setup(crate::construction_setup::ArchitectSetupError::UnsupportedSite(class))) if matches!((class,rejection),(crate::construction_site::ConstructionSiteClass::Blocked,crate::construction_cancellation::SiteRejection::Blocked)|(crate::construction_site::ConstructionSiteClass::Water,crate::construction_cancellation::SiteRejection::Water))=>{},
             Err(e)=>return Err(e),Ok(_)=>return Err(ConstructionWorldError::PendingTaskRequired),
         }
         let current=*staged.actors.record(usize::from(id)).map_err(ActorWorldError::from)?;let mut prefix=current;
         prefix[0x57]&=!1;prefix[0x58]|=1;prefix[0x7a]=0;
         let blueprint=staged.construction_blueprint(id)?;
-        let cancellation=crate::construction_cancellation::plan_blocked_site_cancellation(staged.map(),&prefix,&blueprint,selection.0,selection.1).map_err(ConstructionWorldError::Cancellation)?;
+        let cancellation=crate::construction_cancellation::plan_rejected_site_cancellation(staged.map(),&prefix,&blueprint,selection.0,selection.1,rejection).map_err(ConstructionWorldError::Cancellation)?;
         staged.actors.replace_record_checked(usize::from(id),&current,&cancellation.after).map_err(ActorWorldError::from)?;
         staged.backing[MAP_START..MAP_START+MAP_BYTES].copy_from_slice(&cancellation.map_after);
         let binding=staged.actors.bindings(usize::from(id)).map_err(ActorWorldError::from)?;
@@ -752,7 +758,7 @@ impl ActorWorld {
             if let Some((slot,draw))=staged.create_unmarked_smoke(request.position,request.physical_height,request.angles,context,trig)?{created_effect=Some(slot);factory_draw=Some(draw);}footstep=Some(request);
         }}
         staged.validate_links()?;if staged.effects.is_some(){staged.validate_effect_count()?;}
-        let receipt=ArchitectStage0Receipt{motion,setup:None,rejected_site_message_index:Some(12),terraform:None,payment:None,cancellation:Some(cancellation),building_effect:None,progress:None,work:None,work_point:None,completion_message_index:None,terraform_wait:None,terraform_completion:None,selected_animation:animation,footstep,created_effect,factory_draw,queue_requested:tail.queue_requested};
+        let receipt=ArchitectStage0Receipt{motion,setup:None,rejected_site_message_index:Some(rejection.message_index()),terraform:None,payment:None,cancellation:Some(cancellation),building_effect:None,progress:None,work:None,work_point:None,completion_message_index:None,terraform_wait:None,terraform_completion:None,selected_animation:animation,footstep,created_effect,factory_draw,queue_requested:tail.queue_requested};
         *self=staged;Ok(receipt)
     }
 }

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "cases": 20,
+  "guard_cases": 3,
+  "blocked_backcompat_cases": 10,
+  "compared_bytes": 4591520,
+  "literal_instruction_steps": 6650,
+  "source_sha256": "942df34ca6924e8e5b21b7738a3dd5f7f5f4b58aa5ecf89a7fbcb93369368820",
+  "listing_sha256": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-00051e80.txt": "38a7ad744f800c438cf7b208ed596f919c38c4309a8e8d2cd68f679976202839",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "terrain-map-refs/instructions-000753f0.txt": "ea2554be981b0acae18e192ba9827ebdf4e4dea2d8e6fbee83f889ec15f390c5",
+    "validated/instructions-0008d580.txt": "08fc85698d73460faaef4a6dd81457eb199a60c9aacda9380239e5f3278034c3",
+    "validated/instructions-0008d5f0.txt": "c66a1e05095397611f83ecfa25aab5c3b1e42f72b165a2b86550b682cc33c23f"
+  },
+  "scope": "Literal51E80 cancellation after explicit507D0 setup-prefix andfeedbackreason;20syntheticBlocked/Watercases,5selectors,fullactor/map. Notfull507D0/57A10callback."
+}

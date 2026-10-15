@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "scope": "Static instruction and mapped jump-table binding checks only; not fullcallback/native acceptance.",
+  "reference": "QA BETA V5 verified CD",
+  "classes": [
+    {
+      "class": 1,
+      "name": "Blocked",
+      "dispatch": "50BD2",
+      "message_decimal": 12,
+      "actor7A": 6
+    },
+    {
+      "class": 2,
+      "name": "Water",
+      "dispatch": "50B4B",
+      "message_decimal": 13,
+      "actor7A": 5
+    }
+  ],
+  "shared_continuation": "51583 EDX1\u219251E80 cancellation thenexisting57A10tail",
+  "audio": "419E0 sameparametersECX1,priority2,volume127,range100; formattedmessagevaries",
+  "rng": "No RNG instructions in eitherfeedbackbranch; cancellationandcallbacktail independentlyretained",
+  "source_pins": {
+    "private\\ghidra\\building-loader-refs\\instructions-000507d0.txt": "301fe1652f9d5cb11c92b8d692330cdb3d1363d6e087dc911de360131f99b15e",
+    "private\\ghidra\\building-loader-refs\\instructions-00051e80.txt": "38a7ad744f800c438cf7b208ed596f919c38c4309a8e8d2cd68f679976202839",
+    "private\\ghidra\\validated\\memory-.object1.bin": "92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe"
+  },
+  "actual_water_callback": "not_run"
+}
