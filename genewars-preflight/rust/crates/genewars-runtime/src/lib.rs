@@ -118,6 +118,7 @@ pub mod mule_hostile_contact;
 pub mod mule_hostile_attack_entry;
 pub mod mule_nonlethal_hostile_damage;
 pub mod mule_owned_attack_reacquire;
+pub mod mule_flee_waypoint;
 
 pub mod mule_pair_rendezvous;
 

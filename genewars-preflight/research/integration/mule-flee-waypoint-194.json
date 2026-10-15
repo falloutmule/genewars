@@ -1,0 +1,11 @@
+{
+  "scope": "707A0 waypoint primitive; original function-entry equality and synthetic fallible acceptance-port cases, not campaign/native acceptance",
+  "proof": "private\\review\\mule-flee-waypoint-proof\\9b91a777101542ec8c57f31521de206e",
+  "cases": 8,
+  "case_bytes": 335,
+  "fixture_sha256": "a714c0271375f5454170fe35fcfde2bb39105eef646b789c5550bb8bdac116d8",
+  "rust_literal_test": "passed; all124recordbytes/RNG/candidateorder; fallible acceptance preserves input",
+  "real_world_acceptance": "Caller must supply actual74CC0 terrain-mask/plant-weight query",
+  "actual_campaign193": "Actual neutral5882 takes four-draw reacquisition, not frozen seven-draw flee; caller not integrated",
+  "limit": "No campaign progress claimed from this primitive"
+}
