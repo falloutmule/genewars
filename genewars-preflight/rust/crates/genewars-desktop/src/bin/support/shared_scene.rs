@@ -200,7 +200,10 @@ impl SharedMission {
         let ready_before: [bool;20]=std::array::from_fn(|slot|{let actor=&self.world.actors().records()[slot];actor[6]==3&&actor[0x70]&1!=0});
         let mut dispatch_observations=Vec::new();
         //1C760 runs7A280 before actor/building/creature callbacks.
-        self.world.step_admitted_zone_callbacks(frame).map_err(|e|format!("zone pass: {e:?}"))?;
+        if self.runtime_context.as_ref().is_some_and(|c|c.origin()==genewars_runtime::mission_context::ContextOrigin::CarriedCdKrell){
+            let zones=self.world.step_krell_zone_callbacks(frame,player_count,0,context,&self.trig).map_err(|e|format!("zone pass: {e:?}"))?;
+            self.pending_requests+=zones.iter().map(|r|r.pending_audio.len()as u64).sum::<u64>();
+        }else{self.world.step_admitted_zone_callbacks(frame).map_err(|e|format!("zone pass: {e:?}"))?;}
         // 58780 visits players and their current actor lists. 57A10 returns
         // immediately before the ready bit is set by the landing callback.
         let actors=self.world.step_actor_callbacks_with_construction_observed(player_count,frame,context,&resources.physics,&self.trig,

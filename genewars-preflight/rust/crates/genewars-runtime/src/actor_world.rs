@@ -45,7 +45,7 @@ mod plant_updates;
 mod family8_updates;
 mod building_updates;
 mod zone_updates;
-pub use zone_updates::ZoneUpdateError;
+pub use zone_updates::{ZoneUpdateError,KrellZoneScheduleError};
 mod terrain_updates;
 pub use terrain_updates::{TerrainUpdateError, TerrainUpdateReceipt};
 mod building_storage;

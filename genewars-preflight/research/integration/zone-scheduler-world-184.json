@@ -1,0 +1,86 @@
+{
+  "status": "passed",
+  "scope": "constructed full7A280 scheduler worlds; NOT campaign acceptance",
+  "cases": [
+    {
+      "case": "owned",
+      "status": "passed",
+      "draws": 15,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\2c6bcf35dfae404da5016f7d0a9fad2c",
+      "eligible": [
+        1
+      ]
+    },
+    {
+      "case": "neutral",
+      "status": "passed",
+      "draws": 12,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\2ab10c8be8424b28b496a770f1f668f7",
+      "eligible": [
+        0
+      ]
+    },
+    {
+      "case": "many",
+      "status": "passed",
+      "draws": 75,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\a77e7a3f38ad4ec2b0fda973f71e3c1c",
+      "eligible": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "case": "off-phase",
+      "status": "passed",
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\54bc35322be74a28814bafae57b9269d",
+      "eligible": [
+        1
+      ]
+    },
+    {
+      "case": "countdown",
+      "status": "passed",
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\eab467bad6c94f91a60e24b3be7ee08b",
+      "eligible": [
+        1
+      ]
+    },
+    {
+      "case": "already-exhausted",
+      "status": "passed",
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\ce9a11946a1b4683baa8f1937489eea3",
+      "eligible": [
+        1
+      ]
+    },
+    {
+      "case": "exhaustion-negative",
+      "status": "correctly_blocked",
+      "rollback": "completeworld/RNG unchanged"
+    }
+  ],
+  "compared_bytes": 2564214,
+  "evidence": "private/review/zone-schedule-world-184/result.json",
+  "live_integration": "CarriedCdKrell only, original preactor7A280 phase; source visitingNPCpresence/frame/countdowngates retained",
+  "limits": "Knowncode12/species4/owners0or4/singleparticipatingplayer0; postcredit exhaustion rejects entirepass, no synthesized activation or dropped continuation",
+  "regression": {
+    "runtime_passed": 248,
+    "game_passed": 80,
+    "ignored_each": 1,
+    "release_build": "passed"
+  }
+}
