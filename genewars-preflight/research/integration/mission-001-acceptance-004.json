@@ -1,0 +1,97 @@
+{
+  "status": "passed",
+  "milestone": "First authentic mission",
+  "reference": "GENEWARS QA BETA V5 CD; retail equivalence unestablished",
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "mission": {
+    "number": 1,
+    "title": "Exceland",
+    "world": "CONQ001.DAT"
+  },
+  "authentic_missions_completable": 1,
+  "corroborated_standard_total": 24,
+  "integration_tested_initialization_transitions": 1,
+  "build_commit": "7f55163",
+  "snapshot": "private\\integration\\fresh-krell-entry-004\\snapshot",
+  "paths": {
+    "headless": "ordinary commands",
+    "native": "window input dispatch, chooser hit-testing, intermediate rendered observations; repeated"
+  },
+  "ordinary_actions": [
+    "Engineer selects Extractor11; terrain work and payment complete",
+    "Distributor3 unlocks; placement and construction complete",
+    "Three Photon Processors6 complete, with source site rejection preserved",
+    "Source mission predicate returns Won; original static result/Enter flow advances campaign",
+    "Carried Krell initializes from actual preceding mission state"
+  ],
+  "steps": 4630,
+  "victory_world_sha256": "08361faabf25d73cbac25a0e58e37139f2b3a4081fd1e9de40ef2b050fd46116",
+  "trace_summary": {
+    "activations": 2,
+    "dispatches": 8882,
+    "actor_dispatch_counts": [
+      4441,
+      4441,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "blueprint_equality_mismatches": 0,
+    "unknown_dispatches": 0,
+    "dependent_56530_dispatches": 0,
+    "trace_complete": true
+  },
+  "dispatch_counts": {
+    "0x582d9": 431,
+    "0x52780": 6367,
+    "0x534d0": 2084
+  },
+  "native_headless_entire_trace_equal": true,
+  "native_repeat_equal": true,
+  "visual_inspection": {
+    "images": [
+      "distributor-armed",
+      "photon3-work700",
+      "victory-entry"
+    ],
+    "observed": "Selected construction placement instruction and resources visible; completed structures and3/3objective visible; original result feedback/statistics/Enter visible"
+  },
+  "pins": {
+    "private/integration/fresh-krell-entry-004/winning-report.json": "ecfc2116c8117b275865f6306b3c078015b1e875088062e43e56c5cb8a1e3cd1",
+    "private/integration/fresh-krell-entry-004/report.json": "afecef39a3d960b43a8a53a06d71edc2882516ca82d32429c7681fd63a7d526c",
+    "private/integration/fresh-krell-entry-004/winning-replay.txt": "9f4ab900673b9c4f47036987e471918f192de25921bef7c4ca1af85440c05de6",
+    "private/integration/fresh-krell-entry-004/replay.txt": "53c31c2890b6ad4dd9276630fe880a739a6eb1f3b3321a85f952e8662477dd7a",
+    "private/integration/fresh-krell-entry-004/snapshot-pins.json": "a68fcfffbce7740eb693a9b365bfb0c5682d4962f89c287fe8ab84dbc134d556",
+    "private/integration/fresh-krell-entry-004/genewars-game.exe": "dfa696515193cd95e4d2bfe76dbe88aa0c47fc7977e452f5d5d6f278ef84053b",
+    "research/integration/native-building-chain-fresh-krell-entry-004-passed.json": "54b6a422de0aed86042c217426c032ccbc644c452a9e30465c4da6e0cf58f919",
+    "research/variants/blueprint-priors-headless004-review.json": "feefaef5b4d62a0495bcd905b945470950e717ffd5dd15c1f6db972d7f283078",
+    "private/integration/native-building-chain/a1ba381f0f9844d68a00e55015ffc9d0/input.txt": "42da4ea71396d72d104d3a8ff4815b3f2de09446179890e9c60195d32fe75329",
+    "private/integration/native-building-chain/a1ba381f0f9844d68a00e55015ffc9d0/first/photon3-work700.json": "8077aa587bf961f7787ce8968630c5582862b3fbb86e1875639e22f1eb80483c",
+    "private/integration/native-building-chain/a1ba381f0f9844d68a00e55015ffc9d0/repeat/photon3-work700.json": "8077aa587bf961f7787ce8968630c5582862b3fbb86e1875639e22f1eb80483c",
+    "private/integration/native-building-chain/a1ba381f0f9844d68a00e55015ffc9d0/first/distributor-armed.bmp": "0d9447ca8f41e4a9aec808e3cbfdc0a6660e61752b3e65df08479e91cdbce26c",
+    "private/integration/native-building-chain/a1ba381f0f9844d68a00e55015ffc9d0/first/photon3-work700.bmp": "8506fbf90f11d8b98736287a865dfb49a0d3ac5a4463b00001ffbad6634ebe92",
+    "private/integration/native-building-chain/a1ba381f0f9844d68a00e55015ffc9d0/first/victory-entry.bmp": "1f9b64914950329dccab3efbabab062956ce051a9bdd0706df005f215d304d9d"
+  },
+  "limitations": [
+    "Historical blueprint18 prior remains unknown; exact accepted path stays within independently audited closure. No whole-program prior-independence or DOS-save identity claim.",
+    "Original movie/audio decoder unavailable follows source nonblocking result fallback; playback not claimed.",
+    "Native input mapping and chooser arrangement remain reconstruction presentation differences; sidebar presentation and complete audio/save systems are unfinished.",
+    "This is one mission and initialization transition, not complete campaign/product acceptance.",
+    "Raw native validator does not award strict campaign count; this combined independently qualified acceptance supersedes its count0 scope."
+  ]
+}

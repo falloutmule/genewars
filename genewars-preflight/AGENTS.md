@@ -1,5 +1,10 @@
 # GeneWars reconstruction
 
+## Governing campaign plan — 2026-10-14
+
+Read `docs/CURRENT_STATE.md` and `research/campaign/mission-001-contract.json` first. Final goal is the complete verified-CD Rust campaign. Accepted original missions:1/24 corroborated standard missions; initialization transitions1 (Exceland to Krell), qualified frozen004 acceptance. See docs/CURRENT_STATE.md and research/integration/mission-001-acceptance-004.json. Exceland requires Extractor11 then Distributor3 then three Photon Processors6; turret1 is not originally unlocked. Preserve shared systems and reference identity; unsupported/errors are never losses. Native input replay dispatches host events across rendered frames; final-state-only windows do not prove interactive acceptance. Current non-overlapping assignments supersede historical lanes below. Missing evidence blocks only affected behavior. No user-testing gate or routine approval request.
+
+
 Recovery entry point: `docs/CURRENT_STATE.md` (2026-10-14). Run `python -B scripts/recover_checkpoint.py --check-archive` for a read-only current evidence/hash summary. The earlier aggregate and source-edit hold have ended:270/271 passed, then the sole generated-report pin failure passed a separate896-case repair. No production Rust changed during recovery. Earlier active-agent/running-test statements below are dated history. Do not infer a current all-green full suite or promote private drafts without their remaining validation.
 
 The user requested execution of GENEWARS_CONTINUOUS_MULTIAGENT_CODEX_HANDOFF.md on 2026-10-12. Scope is faithful evidence-backed Rust reconstruction with isolated standalone Ghidra/LX-loader tooling. The latest direct user instruction enables full access, explicitly authorizes necessary reference-session reruns, and asks us to continue implementation/testing without repeated permission requests. Preserve fresh private staging, verified input hashes and bounded supervised execution for reference runs. This does not require running an installer or patcher; neither has run. No public uploads, global tool/MCP changes, or proprietary bytes in tracked files.

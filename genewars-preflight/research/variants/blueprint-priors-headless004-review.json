@@ -1,0 +1,242 @@
+{
+  "status": "passed_bounded_headless_trace_binding",
+  "mission_count_change": 0,
+  "native_acceptance": "not_reviewed",
+  "source_snapshot_files_verified": 517,
+  "events": 8882,
+  "activation_frames": [
+    188,
+    188
+  ],
+  "dispatch_counts": {
+    "0x582d9": 431,
+    "0x52780": 6367,
+    "0x534d0": 2084
+  },
+  "category2": {
+    "callbacks": 4441,
+    "actual_empty_scorer_discharges": 89,
+    "52780_gate_not_reached": 4303,
+    "animation_tail_only": 49
+  },
+  "setup_attempts": [
+    {
+      "frame": 284,
+      "actor": 0,
+      "before": {
+        "state": 8,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 0,
+        "task_kind": 1,
+        "selector": 11,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "after": {
+        "state": 9,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 0,
+        "task_kind": 1,
+        "selector": 11,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "branch": {
+        "kind": "architect",
+        "source_dispatch": 341200,
+        "setup_after_state": 9,
+        "rejected_site": false
+      }
+    },
+    {
+      "frame": 1369,
+      "actor": 0,
+      "before": {
+        "state": 8,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 0,
+        "task_kind": 1,
+        "selector": 3,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "after": {
+        "state": 9,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 0,
+        "task_kind": 1,
+        "selector": 3,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "branch": {
+        "kind": "architect",
+        "source_dispatch": 341200,
+        "setup_after_state": 9,
+        "rejected_site": false
+      }
+    },
+    {
+      "frame": 2523,
+      "actor": 0,
+      "before": {
+        "state": 8,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 0,
+        "task_kind": 1,
+        "selector": 6,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "after": {
+        "state": 9,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 255,
+        "task_kind": 0,
+        "selector": 6,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "branch": {
+        "kind": "architect",
+        "source_dispatch": 341200,
+        "setup_after_state": null,
+        "rejected_site": true
+      }
+    },
+    {
+      "frame": 2571,
+      "actor": 0,
+      "before": {
+        "state": 8,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 0,
+        "task_kind": 1,
+        "selector": 6,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "after": {
+        "state": 9,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 0,
+        "task_kind": 1,
+        "selector": 6,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "branch": {
+        "kind": "architect",
+        "source_dispatch": 341200,
+        "setup_after_state": 9,
+        "rejected_site": false
+      }
+    },
+    {
+      "frame": 3298,
+      "actor": 0,
+      "before": {
+        "state": 8,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 0,
+        "task_kind": 1,
+        "selector": 6,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "after": {
+        "state": 9,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 0,
+        "task_kind": 1,
+        "selector": 6,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "branch": {
+        "kind": "architect",
+        "source_dispatch": 341200,
+        "setup_after_state": 9,
+        "rejected_site": false
+      }
+    },
+    {
+      "frame": 4016,
+      "actor": 0,
+      "before": {
+        "state": 8,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 0,
+        "task_kind": 1,
+        "selector": 6,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "after": {
+        "state": 9,
+        "restore": 0,
+        "category": 0,
+        "style": 2,
+        "task": 0,
+        "task_kind": 1,
+        "selector": 6,
+        "blueprint18": 0,
+        "blueprint1b": 0
+      },
+      "branch": {
+        "kind": "architect",
+        "source_dispatch": 341200,
+        "setup_after_state": 9,
+        "rejected_site": false
+      }
+    }
+  ],
+  "limits": [
+    "Historical blueprint18 prior remains unknown; no retail or original DOS-save identity claim.",
+    "Observer samples activation and committed callback boundaries, not every memory write. Source closure excludes the unreviewed dependent dispatches; no whole-program read-set proof.",
+    "Snapshot observer resolves actual blueprint handle but does not serialize player/index identity in events. No perwrite handle journal.",
+    "Source-equivalent dispatch is a reviewed Rust receipt, not original x86 runtime tracing.",
+    "Style3 was absent (styles2/0); no new style3 charge-gate proof.",
+    "Native same-binary replay is separate and was not reviewed here."
+  ],
+  "pins": {
+    "genewars-game.exe": "dfa696515193cd95e4d2bfe76dbe88aa0c47fc7977e452f5d5d6f278ef84053b",
+    "snapshot-pins.json": "a68fcfffbce7740eb693a9b365bfb0c5682d4962f89c287fe8ab84dbc134d556",
+    "winning-report.json": "ecfc2116c8117b275865f6306b3c078015b1e875088062e43e56c5cb8a1e3cd1",
+    "winning-replay.txt": "9f4ab900673b9c4f47036987e471918f192de25921bef7c4ca1af85440c05de6"
+  },
+  "runtime_context": "Some(MissionRuntimeContext { origin: FreshCdConq001, participating_players: 1, runtime_flags: 126, runtime_mode: Some(0), countdown: 2908, frame: 4630, rng: CdConq001SerializedThenBlueprints { seed: 10548, draw_count: 16919, diagnostic_ring: 0 }, outcome: Won { player: 0 } })",
+  "native_first_trace_crosscheck": {
+    "path": "private\\integration\\native-building-chain\\a1ba381f0f9844d68a00e55015ffc9d0\\first\\photon3-work700.json",
+    "sha256": "8077aa587bf961f7787ce8968630c5582862b3fbb86e1875639e22f1eb80483c",
+    "entire_audit_equal": true,
+    "world_equal": true,
+    "outcome": {
+      "state": "won",
+      "player": 0
+    },
+    "scope": "Trace and finalworld crosscheck only; independent input validator/repeat acceptance remains Root-owned"
+  }
+}
