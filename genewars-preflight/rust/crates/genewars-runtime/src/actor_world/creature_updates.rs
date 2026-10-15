@@ -185,7 +185,7 @@ impl ActorWorld {
                     if pair_query&&pair_resources_ready{
                         //69334 pair success precedes retirement/full fallback.
                         if choice.after[0x5e]!=7{return Err(CreatureError::UnsupportedNeighborhood);}
-                        let peer=world.mule_feeding_pair_candidate(&choice.after,choice.rng_before).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+                        let peer=world.mule_neutral_pair_candidate(&choice.after,choice.rng_before).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
                         if let Some(peer_id)=peer{
                             if world.creatures.as_ref().unwrap().binding(peer_id as usize)?!=Some(CreatureAnimationBinding::MuleSelector4){return Err(CreatureError::UnsupportedNeighborhood);}
                             let other=*world.creatures.as_ref().unwrap().record(peer_id as usize)?;
@@ -215,6 +215,19 @@ impl ActorWorld {
                     let mut after=*record;after[0x3f..0x41].copy_from_slice(&creature_world::mule_requested_speed(record).to_le_bytes());after[0x5e]=7;after[0x6c..0x6e].copy_from_slice(&32767i16.to_le_bytes());after[0x72..0x76].copy_from_slice(&record[7..11]);after[0x60]|=8;after[0x60]&=0xbf;reserve_plant=Some(word(&raw,0));return Ok(after);
                 }
                 let mut record=*record;if record[0x5e]==0 {record[0x5e]=8;}
+                //62EA9..63045 idle mate action after the no-food-priority gates.
+                //Neutral5D700 returns true without querying a specialist.
+                if before[0x5e]==8&&record[0x5e]==8&&record[0x77]==255&&(record[0x79]as i8)>0
+                    &&record[0x61]&0x40==0&&word(&record,0x68)>(word(&record,0x62)>>1){
+                    if let Some(peer_id)=world.mule_neutral_pair_candidate(&record,*rng).map_err(|_|CreatureError::UnsupportedNeighborhood)?{
+                        let other=*world.creatures.as_ref().unwrap().record(peer_id as usize)?;
+                        if world.creatures.as_ref().unwrap().binding(peer_id as usize)?!=Some(CreatureAnimationBinding::MuleSelector4){return Err(CreatureError::UnsupportedNeighborhood);}
+                        let pair=crate::mule_idle_pair_init::plan_pair_init(&record,&other).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+                        for _ in 0..2{rng.seed=rng.seed.wrapping_mul(0xe62d);rng.ring=(rng.ring+1)&31;rng.draw_count=rng.draw_count.wrapping_add(1);}
+                        pending_pair=Some((peer_id,other,pair.peer_after,Vec::new()));
+                        return Ok(pair.current_after);
+                    }
+                }
                 world.check_mule_neutral_neighbors(&record,own,[word(&record,7),word(&record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
                 let target=world.mule_neutral_food_target(&record,*rng).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
                 let choice=if let Some((id,point))=target {creature_world::plan_mule_plant_acquisition(&record,id,point,*rng)?}else{
@@ -511,10 +524,10 @@ impl ActorWorld {
             }
         }}Ok(best)
     }
-    ///6B700/69334: bounded neutral same-Mule feeding query and pair winner.
+    ///6B700/69334/62EA9: bounded neutral same-Mule query and pair winner.
     /// The supplied RNG is BEFORE the two query-initialization draws.
-    fn mule_feeding_pair_candidate(&self,record:&CreatureRecord,rng:BlueprintRng)->Result<Option<u16>,ActorWorldError>{
-        if record[0x18]!=4||record[0x7a]!=4||record[0x5e]!=7||record[0x77]!=255||(record[0x79]as i8)<=0{return Err(CreatureError::UnsupportedNeighborhood.into());}
+    fn mule_neutral_pair_candidate(&self,record:&CreatureRecord,rng:BlueprintRng)->Result<Option<u16>,ActorWorldError>{
+        if record[0x18]!=4||record[0x7a]!=4||!matches!(record[0x5e],7|8)||record[0x77]!=255||(record[0x79]as i8)<=0{return Err(CreatureError::UnsupportedNeighborhood.into());}
         let own=[record[15],record[16],1];let point=[word(record,7),word(record,9)];
         let first=rng.seed.wrapping_mul(0xe62d);let second=first.wrapping_mul(0xe62d);
         let sx=if(first>>8)&1==0{256i16}else{-256};let sy=if(second>>8)&1==0{256i16}else{-256};
