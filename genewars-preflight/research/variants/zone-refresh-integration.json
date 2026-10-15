@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "test": "occupied_marker_zone_refresh_source_fixture",
+  "assertions": [
+    "real source initialization creates marker",
+    "refresh retains selector2/state12 and RNG",
+    "late unsupported zone rolls back complete world",
+    "legitimate2x2 job targetheights equalcurrentmap retires",
+    "postretirement zone refresh retains marker",
+    "latezone rejects and rolls back complete world and TerrainJobPool"
+  ],
+  "fixture_scope": "Internal source fixtures, not ordinary gameplay or mission acceptance",
+  "production_pins": {
+    "rust\\crates\\genewars-runtime\\src\\actor_world\\bootstrap_updates.rs": "6dd73b565288a8dcb88617676651a4828b0d10865f049ed052961c95d4a9c664",
+    "rust\\crates\\genewars-runtime\\src\\actor_world\\terrain_updates.rs": "e96641e33a529df2acb836aacfcf6506e9a965d1a481d7567a23b7bbe29a5b77"
+  },
+  "historical_note": "zone-refresh-001 had debugfixture beforeimage overwritten by later rollback probe; corrected fixture emission uses002/004. Initialcompile borrow error fixed before passingtest."
+}

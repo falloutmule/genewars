@@ -73,7 +73,6 @@ impl ActorWorld {
         if self.backing[0x2ff7]!=jobs.count(){return Err(TerrainUpdateError::CountMismatch);}
         //79220 reaches zone refresh only from an active job. With no jobs,
         //its25 negative-counter slots leave the zone list unchanged.
-        if self.backing[0x34b8]!=0&&jobs.count()!=0{return Err(TerrainUpdateError::TerrainObjectRefreshRequired);}
         self.validate_links().map_err(TerrainUpdateError::World)?;
         let mut staged=self.clone();let mut pool=jobs.clone();let mut receipts=Vec::new();
         let terrain_error=|e:TerrainJobError|TerrainUpdateError::Maintenance(e.into());
@@ -127,6 +126,15 @@ impl ActorWorld {
             let count_before=pool.count();pool.apply_step(slot,&before,&plan.after,plan.retirement_required).map_err(TerrainUpdateError::Pool)?;
             staged.backing[0x2ff7]=pool.count();
             receipts.push(TerrainUpdateReceipt{slot,before,after:pool.records()[usize::from(slot)],retired:plan.retirement_required,count_before,count_after:pool.count(),terrain_objects_refresh_required:false,viewport_invalidations:invalidations});
+        }
+        if receipts.iter().any(|receipt|receipt.retired){
+            let zones=staged.refresh_terrain_zones().map_err(|error|match error{
+                BootstrapWorldError::World(world)=>TerrainUpdateError::World(world),
+                _=>TerrainUpdateError::TerrainObjectRefreshRequired,
+            })?;
+            if let Some(last)=receipts.iter_mut().rev().find(|receipt|receipt.retired){
+                last.viewport_invalidations.extend(zones.viewport_invalidations.into_iter().map(|point|floor_cell(point)as u16));
+            }
         }
         staged.validate_links().map_err(TerrainUpdateError::World)?;
         *self=staged;*jobs=pool;Ok(receipts)

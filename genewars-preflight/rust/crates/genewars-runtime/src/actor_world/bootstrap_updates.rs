@@ -44,10 +44,17 @@ impl ActorWorld{
  ///79D50 and ordinary72AD0 zone markers. Each zone sees the staged live map.
  ///This bounded domain admits four zone indices and radius512..4096 only.
  pub fn initialize_terrain_zones(&mut self)->Result<ZoneBootstrapReceipt,BootstrapWorldError>{
+  self.update_terrain_zones(true)
+ }
+ /// Source79273 post-retirement79D50 refresh. Never creates markers.
+ pub fn refresh_terrain_zones(&mut self)->Result<ZoneBootstrapReceipt,BootstrapWorldError>{
+  self.update_terrain_zones(false)
+ }
+ fn update_terrain_zones(&mut self,create_markers:bool)->Result<ZoneBootstrapReceipt,BootstrapWorldError>{
   let count=self.backing[0x34b8]as usize;
   if count>4{return Err(BootstrapWorldError::TerrainObjectInitializationRequired);}
   self.validate_links()?;let mut staged=self.clone();let mut receipt=ZoneBootstrapReceipt::default();
-  #[cfg(debug_assertions)]staged.emit_zone_fixture("before");
+  #[cfg(debug_assertions)]if create_markers{staged.emit_zone_fixture("before");}
   let water=word(&staged.backing,0x1c63);
   let environment=crate::construction_maintenance::TerrainEnvironment{climate_center:[word(&staged.backing,0x1ea2),word(&staged.backing,0x1ea4)],raw_water_height:water,climate:word(&staged.backing,0x1c61),light:[181,0,-181]};
   for index in 0..count{
@@ -76,10 +83,10 @@ impl ActorWorld{
     }
     staged.refresh_terrain_vertex(point,true)?;receipt.viewport_invalidations.push(point);receipt.cell_visits+=1;
    }}
-   if let Some(marker)=staged.create_family8(2,index as u8,center,center_height.wrapping_add(32000))?{receipt.marker_slots.push(marker.slot);}
+   if create_markers{if let Some(marker)=staged.create_family8(2,index as u8,center,center_height.wrapping_add(32000))?{receipt.marker_slots.push(marker.slot);}}
   }
   staged.validate_links()?;
-  #[cfg(debug_assertions)]staged.emit_zone_fixture("after");
+  #[cfg(debug_assertions)]if create_markers{staged.emit_zone_fixture("after");}
   *self=staged;Ok(receipt)
  }
  #[cfg(debug_assertions)]fn emit_zone_fixture(&self,label:&str){
@@ -94,7 +101,7 @@ impl ActorWorld{
  use super::*;
  #[test]fn late_unsupported_zone_rolls_back_map_entities_marker_and_rng(){
   let path=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../private/integration/game-runtime/terrain/CONQ002.DAT");
-  let bytes=std::fs::read(path).unwrap();let source=ConqMissionSource::parse(&bytes).unwrap();
+  let bytes=std::fs::read(&path).unwrap();let source=ConqMissionSource::parse(&bytes).unwrap();
   let players=core::array::from_fn(|i|PlayerState::from_record(&bytes[20+i*1805..20+(i+1)*1805]).unwrap());
   assert_eq!(crate::identity::sha256_hex(&bytes),"4042c6df3b161132c12a424dace7b9fcbf253a197261f1cf76e0db4af41ea27a");
   let mut w=ActorWorld::from_parts(&source,&[[0;200];20],[ActorHandleBindings::empty();20],players,BlueprintRng{seed:47117,ring:17,draw_count:33620}).unwrap();
@@ -102,5 +109,37 @@ impl ActorWorld{
   let zone=w.backing[0x2ff8..0x2ff8+19].to_vec();w.backing[0x2ff8+19..0x2ff8+38].copy_from_slice(&zone);w.backing[0x34b8]=2;
   w.backing[0x2ff8+19+6..0x2ff8+19+10].copy_from_slice(&1i32.to_le_bytes());
   let before=w.clone();assert_eq!(w.initialize_terrain_zones().unwrap_err(),BootstrapWorldError::TerrainObjectInitializationRequired);assert_eq!(w,before);
+ }
+
+ #[test]fn occupied_marker_zone_refresh_source_fixture(){
+  let path=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../private/integration/game-runtime/terrain/CONQ002.DAT");
+  let bytes=std::fs::read(&path).unwrap();let source=ConqMissionSource::parse(&bytes).unwrap();
+  let players=core::array::from_fn(|i|PlayerState::from_record(&bytes[20+i*1805..20+(i+1)*1805]).unwrap());
+  assert_eq!(crate::identity::sha256_hex(&bytes),"4042c6df3b161132c12a424dace7b9fcbf253a197261f1cf76e0db4af41ea27a");
+  let mut w=ActorWorld::from_parts(&source,&[[0;200];20],[ActorHandleBindings::empty();20],players,BlueprintRng{seed:47117,ring:17,draw_count:33620}).unwrap();
+  w.admit_creatures(&[[0;124];300]).unwrap();w.admit_buildings(&[[0;67];256],[None;256]).unwrap();w.admit_effects(&[[0;81];200],[None;200]).unwrap();w.admit_family8(&[[0;102];16],[None;16]).unwrap();
+
+  w.initialize_terrain_zones().unwrap();
+  let before=*w.family8.as_ref().unwrap().record(0).unwrap();let mut marker=before;marker[0x56]=12;
+  w.family8.as_mut().unwrap().replace_record_checked(0,&before,&marker).unwrap();
+  w.emit_zone_fixture("before");let saved=w.clone();let receipt=w.refresh_terrain_zones().unwrap();w.emit_zone_fixture("after");
+  assert!(receipt.marker_slots.is_empty());assert!(receipt.cell_visits>0);assert_eq!(w.rng,saved.rng);
+  assert_eq!(w.family8.as_ref().unwrap().record(0).unwrap()[0x56],12);
+  let mut records=[[0u8;176];25];for record in &mut records{record[12..14].copy_from_slice(&(-1i16).to_le_bytes());}
+  let job=&mut records[0];for(at,value)in[(0,19712i16),(2,12800),(4,19968),(6,13056),(10,1),(12,1)]{job[at..at+2].copy_from_slice(&value.to_le_bytes());}job[8]=2;job[9]=2;
+  for row in 0..2{for col in 0..2{let cell=(50+row)*128+77+col;job[14+row*18+col*2..16+row*18+col*2].copy_from_slice(&w.map()[cell*14+2..cell*14+4]);}}
+  let mut jobs=crate::terrain_job_pool::TerrainJobPool::admit(records,1).unwrap();w.backing[0x2ff7]=1;
+  let environment=crate::construction_maintenance::TerrainEnvironment{climate_center:[word(&w.backing,0x1ea2),word(&w.backing,0x1ea4)],raw_water_height:word(&w.backing,0x1c63),climate:word(&w.backing,0x1c61),light:[181,0,-181]};
+  let patterns=std::fs::read(path.parent().unwrap().parent().unwrap().join("construction/terrain-patterns.bin")).unwrap();let table=crate::terrain_border_table::build(&patterns).unwrap();
+  let valid=w.clone();let valid_jobs=jobs.clone();
+  let zone=w.backing[0x2ff8..0x2ff8+19].to_vec();w.backing[0x2ff8+19..0x2ff8+38].copy_from_slice(&zone);w.backing[0x34b8]=2;
+  w.backing[0x2ff8+19+6..0x2ff8+19+10].copy_from_slice(&1i32.to_le_bytes());
+  let before=w.clone();assert_eq!(w.refresh_terrain_zones().unwrap_err(),BootstrapWorldError::TerrainObjectInitializationRequired);assert_eq!(w,before);
+  let before_jobs=jobs.clone();assert!(w.step_terrain_jobs(&mut jobs,environment,&table).is_err());assert_eq!(w,before);assert_eq!(jobs,before_jobs);
+  w=valid;jobs=valid_jobs;w.emit_zone_fixture("job-before");
+  if let Some(root)=std::env::var_os("GENEWARS_ZONE_FIXTURE"){std::fs::write(std::path::PathBuf::from(root).join("job-before/jobs.bin"),jobs.records().concat()).unwrap();}
+  let result=w.step_terrain_jobs(&mut jobs,environment,&table).unwrap();assert!(result[0].retired);assert_eq!(jobs.count(),0);assert_eq!(w.family8.as_ref().unwrap().record(0).unwrap()[0x56],12);
+  w.emit_zone_fixture("job-after");if let Some(root)=std::env::var_os("GENEWARS_ZONE_FIXTURE"){std::fs::write(std::path::PathBuf::from(root).join("job-after/jobs.bin"),jobs.records().concat()).unwrap();}
+
  }
 }
