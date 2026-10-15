@@ -86,6 +86,16 @@ impl ActorWorld {
                     world.check_mule_cell_entry(own,floor_cell([word(record,7),word(record,9)])).map_err(|_|CreatureError::UnsupportedCellEntry)?;
                     let choice=creature_world::plan_mule_retry_wait(record,*rng)?;*rng=choice.rng_after;return Ok(choice.after);
                 }
+                if record[0x5e]==10{
+                    //69EF2..69F84 positive-countdown wait. Missing/far peers
+                    //require the separate source reset branch69F91.
+                    let raw=reference(record,0x55);
+                    if raw[2]!=1{return Err(CreatureError::UnsupportedMotionState);}
+                    let peer=world.creatures.as_ref().unwrap().record(word(&raw,0)as usize).map_err(|_|CreatureError::UnsupportedMotionState)?;
+                    if peer[6]!=1||peer[0x5e]!=10||peer[0x7a]!=4||reference(peer,0x55)!=own{return Err(CreatureError::UnsupportedMotionState);}
+                    if creature_world::mule_callback_phase(record,context.frame_counter)&3==3&&mule_pair_distance(record,peer)>16384{return Err(CreatureError::UnsupportedMotionState);}
+                    return Ok(*record);
+                }
                 if record[0x5e]==3{
                     let raw=reference(record,0x55);
                     let peer=world.creatures.as_ref().unwrap().record(word(&raw,0)as usize)?;
@@ -94,7 +104,9 @@ impl ActorWorld {
                         //the next atomic center movement remains bounded out.
                         if (word(record,0x60)as u16&word(peer,0x60)as u16&0x2004)!=0x2000{
                             if mule_pair_distance(record,peer)>16384{return Ok(*record);}
-                            return Err(CreatureError::UnsupportedMotionState); //Source nextstate10.
+                            let pair=crate::mule_pair_stop::plan_stop(record,peer).map_err(|_|CreatureError::UnsupportedMotionState)?;
+                            pending_pair=Some((word(&raw,0)as u16,*peer,pair.peer_after,Vec::new()));
+                            return Ok(pair.current_after);
                         }
                         let mut after=*record;if word(record,0x49)as u16&0x200!=0{after[0x60]|=4;}
                         if (word(&after,0x60)as u16&word(peer,0x60)as u16&0x2004)==0x2004{

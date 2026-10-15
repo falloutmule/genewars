@@ -111,3 +111,5 @@ pub mod mule_pair_rendezvous;
 pub mod genepod_human_producer;
 
 pub mod mule_pair_center;
+
+pub mod mule_pair_stop;

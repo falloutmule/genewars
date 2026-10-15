@@ -197,6 +197,8 @@ pub fn draw_supported_mule_record(
         1 | 3 => animation <= 7,
         7 => animation == 19 && frame_index <= 3,
         8 => animation <= 7,
+        //5EA66 selects22;59470 uses the established high-animation wrapper.
+        10 => animation <= 7 || animation == 22,
         // Literal mortality continuations pin state 24 to animation 17 and
         // state 25 to corpse animation 18. The ANB remains the authority for
         // their frame extents (7 and 3 frames respectively).
@@ -1080,4 +1082,36 @@ mod tests {
             }
         }
     }
+}
+
+#[cfg(test)]
+mod pair_stop_render_tests {
+ use super::*;
+ use crate::runtime_resources::Resources;
+ #[test]
+ fn actual_pair_stop_renders_peer_direction_and_current_animation22_with_source_flip() {
+  let repository=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+  let(resources,_,_)=Resources::load(&repository.join("private/integration/game-runtime")).unwrap();
+  let bytes=std::fs::read(repository.join("private/review/krell-mule-callback/5c2e6dc1b906478fb0681aea922061d0/creatures.bin")).unwrap();
+  assert_eq!(genewars_runtime::identity::sha256_hex(&bytes),"9ec31b51523675e6baa9e560703fc200ae08290dc98a6b6879667b6055bffaed");
+  for(slot,animation,frame)in[(0,6,2),(2,22,1)]{
+   let mut r:[u8;124]=bytes[slot*124..(slot+1)*124].try_into().unwrap();assert_eq!((r[94],r[25],r[27]),(10,animation,frame));
+   let height=i32::from_le_bytes(r[39..43].try_into().unwrap())-i32::from_le_bytes(r[17..21].try_into().unwrap());
+   let draw=|record:&[u8;124],inherited,pixels:&mut Vec<u8>|draw_supported_mule_record(&resources.mule,record,[48,40],height,0,inherited,false,0,0,&resources.fade,&resources.gla,[96,80],96,pixels);
+   let mut pixels=vec![0x55;96*80];let receipt=draw(&r,0,&mut pixels).unwrap();
+   assert!(receipt.components.iter().map(|c|c.pixels_written).sum::<usize>()>0);
+   assert!(receipt.shadows.iter().map(|c|c.pixels_written).sum::<usize>()>0);
+   if slot==0{
+    //Peer's earlier callback cannot advance its animation after the later pair write.
+    let mut directional=r;directional[94]=3;let mut expected=vec![0x55;96*80];draw(&directional,0,&mut expected).unwrap();assert_eq!(pixels,expected);
+   }else{
+    //59470: highanimation yawsector6 overrides wrapper toXflip; sector1 preservesit.
+    let mut explicit_flip=vec![0x55;96*80];draw(&r,1,&mut explicit_flip).unwrap();
+    r[57..59].copy_from_slice(&768i16.to_le_bytes());let mut source_flip=vec![0x55;96*80];draw(&r,0,&mut source_flip).unwrap();assert_eq!(source_flip,explicit_flip);
+    assert_ne!(source_flip,pixels,"actualanimation22 fixture must discriminate wrapperflip");
+   }
+   let saved=pixels.clone();r[25]=23;assert_eq!(draw(&r,0,&mut pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pixels,saved);
+   r[25]=22;r[27]=255;assert_eq!(draw(&r,0,&mut pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pixels,saved);
+  }
+ }
 }
