@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "kind": "synthetic-null",
+      "seed": 0,
+      "prior_fill": 0
+    },
+    {
+      "kind": "synthetic-null",
+      "seed": 0,
+      "prior_fill": 165
+    },
+    {
+      "kind": "synthetic-null",
+      "seed": 5428,
+      "prior_fill": 0
+    },
+    {
+      "kind": "synthetic-null",
+      "seed": 5428,
+      "prior_fill": 165
+    },
+    {
+      "kind": "synthetic-null",
+      "seed": 10548,
+      "prior_fill": 0
+    },
+    {
+      "kind": "synthetic-null",
+      "seed": 10548,
+      "prior_fill": 165
+    },
+    {
+      "kind": "synthetic-null",
+      "seed": 65535,
+      "prior_fill": 0
+    },
+    {
+      "kind": "synthetic-null",
+      "seed": 65535,
+      "prior_fill": 165
+    },
+    {
+      "kind": "actual785-parent2",
+      "slot": 4
+    }
+  ],
+  "bytes_compared": 1179,
+  "source_pins": {
+    "private/ghidra/activation-rng-refs/instructions-0005a210.txt": "a4231db59c02f98437afd6d7ea71e84d071c425c5fa7ef0b6a48d9c49053cf60",
+    "private/ghidra/genepod-mule-initializer.txt": "22a5a173bc2b3167f6d4ead3e6d621f37f98fa32ef8d22fea3d5fc16b607f942",
+    "private/ghidra/construction-command/instructions-0001ee50.txt": "c936d978ab504b821db0be8bbeddb1f31af7390e7c4b7a3ab33cdc5653e32c10",
+    "private/ghidra/bones-frame/instructions-0005a1c0.txt": "02f55f81e196715d686d5427c1475d280f0e4fbf13499355dd7974c629d989b9",
+    "private/ghidra/player-creation/instructions-0001f480.txt": "77d8ec6d64004960b0bb970a66612c76b1ffe3cfcfd4b949f8174e5662441744",
+    "private/ghidra/terrain-map-refs/instructions-0007b240.txt": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb",
+    "rust/crates/genewars-runtime/src/mule_factory.rs": "04faedde2770f4c90ff117450639bce537a6c277a18864a314c78a7dcaa875c7"
+  },
+  "actual_input_pin": "7b71c4607d55b26c3ad3b8a807693929a9e3c91ead6a61ca3ac1a7fdc4d5cc87",
+  "private_run": "private/review/mule-factory-review/3a0476c1568248e397e6a66078414e02",
+  "scope": "Full124-byte record plus7-byte RNG, literal stop before8AC60, normalize only pointergap31..39. Syntheticnull35 prior0/A5 andactual785parent50. Map/count/caller outside comparison.",
+  "original_execution": false
+}

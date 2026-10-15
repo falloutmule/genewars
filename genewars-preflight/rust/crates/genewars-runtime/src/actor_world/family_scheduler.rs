@@ -22,6 +22,7 @@ pub struct CreaturePassReceipt {
     pub pending_plant_retirements: Vec<u16>,
     pub pending_portrait_refreshes: Vec<u16>,
     pub retirements: Vec<MuleRetirementReceipt>,
+    pub newborn_slots: Vec<u16>,
 }
 
 fn ui_animation_requests() -> [CreatureUiAnimationRequest; 8] {
@@ -44,13 +45,13 @@ impl ActorWorld {
             // The callback must consume the current world even at frame1:
             // authentic startup has already executed frame0 and refreshed shade.
             let receipt=world.step_neutral_mule_slot_with_water(slot,context, physics, trig, animations)?;
-            Ok((receipt.pending_audio,receipt.pending_plant_retirements,receipt.pending_portrait_refresh,receipt.retirement))
+            Ok((receipt.pending_audio,receipt.pending_plant_retirements,receipt.pending_portrait_refresh,receipt.retirement,receipt.newborn_slots))
         })
     }
 
     fn neutral_creature_pass_with<F>(&mut self, player_count: u8, mut callback: F)
         -> Result<CreaturePassReceipt, ActorWorldError>
-    where F: FnMut(&mut Self, u16) -> Result<(Vec<u8>,Vec<u16>,bool,Option<MuleRetirementReceipt>), ActorWorldError> {
+    where F: FnMut(&mut Self, u16) -> Result<(Vec<u8>,Vec<u16>,bool,Option<MuleRetirementReceipt>,Vec<u16>), ActorWorldError> {
         if player_count > 4 { return Err(ActorWorldError::InvalidPlayer(player_count)); }
         let pool = self.creatures.as_ref().ok_or(ActorWorldError::UnsupportedCreatureSchedule)?;
         let declared = word(&self.backing, 0x3550);
@@ -66,6 +67,7 @@ impl ActorWorld {
                 return Err(ActorWorldError::UnsupportedCreatureSchedule);
             }
         }
+        let initial_live:HashSet<u16>=pool.records().iter().enumerate().filter_map(|(i,r)|(r[6]!=0).then_some(i as u16)).collect();
         let mut staged = self.clone();
         // 6A554..6A56B resets +616 for the current source player count.
         for player in 0..usize::from(player_count) {
@@ -77,14 +79,15 @@ impl ActorWorld {
         let mut slots = Vec::new();
         let mut pending_audio=Vec::new();
         let mut pending_plant_retirements=Vec::new();
-        let mut pending_portrait_refreshes=Vec::new();let mut retirements=Vec::new();
+        let mut pending_portrait_refreshes=Vec::new();let mut retirements=Vec::new();let mut newborn_slots=Vec::new();
         let mut remaining=declared as usize;
         for slot in 0..300usize {
             if remaining==0{break;}
             let record=staged.creatures.as_ref().unwrap().record(slot)?;
             if record[6]==0{continue;}
             if record[0x15]&1!=0{return Err(ActorWorldError::UnsupportedCreatureSchedule);}
-            let (audio,plant_retirements,portrait,retirement)=callback(&mut staged,slot as u16)?;
+            let (audio,plant_retirements,portrait,retirement,newborns)=callback(&mut staged,slot as u16)?;
+            newborn_slots.extend(newborns);
             if let Some(receipt)=retirement{retirements.push(receipt);}
             pending_audio.extend(audio);pending_plant_retirements.extend(plant_retirements);
             if portrait{pending_portrait_refreshes.push(slot as u16);}
@@ -92,10 +95,12 @@ impl ActorWorld {
         }
         if remaining!=0||staged.creatures.as_ref().unwrap().records().iter().any(|r|r[6]!=0&&r[0x15]&1!=0){return Err(ActorWorldError::UnsupportedCreatureSchedule);}
         let final_active=staged.creatures.as_ref().unwrap().records().iter().filter(|r|r[6]!=0).count();
-        if final_active+retirements.len()!=active {return Err(ActorWorldError::UnsupportedCreatureSchedule);}
+        if final_active+retirements.len()!=active+newborn_slots.len()||word(&staged.backing,0x3550)as usize!=final_active {return Err(ActorWorldError::UnsupportedCreatureSchedule);}
+        let mut reported=HashSet::new();
+        for id in &newborn_slots{if initial_live.contains(id)||!reported.insert(*id)||staged.creatures.as_ref().unwrap().record(usize::from(*id))?[6]!=1{return Err(ActorWorldError::UnsupportedCreatureSchedule);}}
         staged.validate_links()?;
         *self = staged;
-        Ok(CreaturePassReceipt { primary_slots: slots, pending_ui_animations: ui_animation_requests(), pending_audio, pending_plant_retirements, pending_portrait_refreshes, retirements })
+        Ok(CreaturePassReceipt { primary_slots: slots, pending_ui_animations: ui_animation_requests(), pending_audio, pending_plant_retirements, pending_portrait_refreshes, retirements, newborn_slots })
     }
 
     /// Source14EC0 scans all 32 kind7 records. Source4F580 with count zero
@@ -149,7 +154,7 @@ mod tests {
     #[test]
     fn inconsistent_counts_and_hidden_empty_family_members_reject_without_changes() {
         let mut world=fixture();world.backing[0x3550..0x3552].copy_from_slice(&1i16.to_le_bytes());let before=world.clone();
-        assert!(matches!(world.neutral_creature_pass_with(4,|_,_|Ok((Vec::new(),Vec::new(),false,None))),Err(ActorWorldError::CreatureCountMismatch{..})));
+        assert!(matches!(world.neutral_creature_pass_with(4,|_,_|Ok((Vec::new(),Vec::new(),false,None,vec![]))),Err(ActorWorldError::CreatureCountMismatch{..})));
         assert_eq!(world,before);
         for kind in [6u8,7] {
             let mut world=fixture();assert!(world.step_empty_families_7_and_6().is_ok());
@@ -190,7 +195,7 @@ mod multi_slot_tests {
     #[test]
     fn sparse_four_match_literal_scheduler_order_counters_and_ui() {
         let mut w=fixture(false,4,false);let mut seen=Vec::new();
-        let r=w.neutral_creature_pass_with(4,|s,id|{seen.push(id);s.rng.draw_count+=1;Ok((vec![id as u8],vec![],true,None))}).unwrap();
+        let r=w.neutral_creature_pass_with(4,|s,id|{seen.push(id);s.rng.draw_count+=1;Ok((vec![id as u8],vec![],true,None,vec![]))}).unwrap();
         assert_eq!(seen,SLOTS);assert_eq!(r.primary_slots,SLOTS);assert_eq!(r.pending_portrait_refreshes,SLOTS);assert_eq!(r.pending_audio,[0,3,9,17]);assert_eq!(w.rng.draw_count,4);
         for p in &w.players {assert_eq!(&p.bytes()[0x616..0x61a],&[0;4]);}
         assert_eq!(r.pending_ui_animations.map(|x|x.state_global),core::array::from_fn(|i|0x184cbc+i as u32*8));w.validate_links().unwrap();
@@ -198,18 +203,18 @@ mod multi_slot_tests {
     #[test]
     fn current_slot_retirement_does_not_shorten_initial_scan_count() {
         let mut w=fixture(true,4,false);let r=w.neutral_creature_pass_with(4,|s,id|{
-            if id!=0{return Ok((vec![],vec![],false,None));}
+            if id!=0{return Ok((vec![],vec![],false,None,vec![]));}
             let before=*s.creatures.as_ref().unwrap().record(0)?;
             s.backing[MAP_START+8]=0;s.creatures.as_mut().unwrap().retire_bones_checked(0,&before)?;s.backing[0x3550..0x3552].copy_from_slice(&3i16.to_le_bytes());
             let after=*s.creatures.as_ref().unwrap().record(0)?;
             let receipt=MuleRetirementReceipt{before,after,cleanup:vec![],count_after:3,pending_ui_cleanup:[MuleUiCleanupRequest::Kind1List{root_global:0x1860be,id:0},MuleUiCleanupRequest::ModuleReference{root_global:0x185dfc,reference:[0,0,1]}],pending_display_phase_1185a8:11};
-            Ok((vec![],vec![],false,Some(receipt)))
+            Ok((vec![],vec![],false,Some(receipt),vec![]))
         }).unwrap();assert_eq!(r.primary_slots,SLOTS);assert_eq!(r.retirements.len(),1);assert_eq!(word(&w.backing,0x3550),3);w.validate_links().unwrap();
     }
     #[test]
     fn late_error_restores_every_world_field() {
         let mut w=fixture(false,4,false);let before=w.clone();let mut seen=Vec::new();
-        let r=w.neutral_creature_pass_with(4,|s,id|{seen.push(id);s.rng.seed=12;s.rng.draw_count+=1;s.backing[MAP_START+12]=99;if id==17{s.backing[MAP_START+8]=0;return Err(CreatureError::UnsupportedMotionState.into());}Ok((vec![],vec![],false,None))});assert!(r.is_err());assert_eq!(seen,SLOTS);assert_eq!(w,before);
+        let r=w.neutral_creature_pass_with(4,|s,id|{seen.push(id);s.rng.seed=12;s.rng.draw_count+=1;s.backing[MAP_START+12]=99;if id==17{s.backing[MAP_START+8]=0;return Err(CreatureError::UnsupportedMotionState.into());}Ok((vec![],vec![],false,None,vec![]))});assert!(r.is_err());assert_eq!(seen,SLOTS);assert_eq!(w,before);
     }
     #[test]
     fn owned_and_initial_newborn_are_explicitly_blocked_without_callbacks() {
@@ -217,6 +222,26 @@ mod multi_slot_tests {
     }
     #[test]
     fn callback_newborn_marker_rolls_back_whole_pass() {
-        let mut w=fixture(false,4,false);let before=w.clone();let r=w.neutral_creature_pass_with(4,|s,id|{if id==0{let old=*s.creatures.as_ref().unwrap().record(3)?;let mut new=old;new[0x15]|=1;s.creatures.as_mut().unwrap().replace_record_checked(3,&old,&new)?;}Ok((vec![],vec![],false,None))});assert!(matches!(r,Err(ActorWorldError::UnsupportedCreatureSchedule)));assert_eq!(w,before);
+        let mut w=fixture(false,4,false);let before=w.clone();let r=w.neutral_creature_pass_with(4,|s,id|{if id==0{let old=*s.creatures.as_ref().unwrap().record(3)?;let mut new=old;new[0x15]|=1;s.creatures.as_mut().unwrap().replace_record_checked(3,&old,&new)?;}Ok((vec![],vec![],false,None,vec![]))});assert!(matches!(r,Err(ActorWorldError::UnsupportedCreatureSchedule)));assert_eq!(w,before);
+    }
+    #[test]
+    fn reported_unmarked_birth_behind_scan_waits_until_next_pass() {
+        let mut w=fixture(false,4,false);let trig=TrigTables::generate_pinned().unwrap();let mut seen=Vec::new();
+        let receipt=w.neutral_creature_pass_with(4,|s,id|{
+            seen.push(id);let newborns=if id==17 {let born=s.create_mule(4,[8000,1000],50,None,&trig)?.unwrap();assert_eq!(born.slot,1);vec![born.slot]}else{vec![]};
+            Ok((vec![],vec![],false,None,newborns))
+        }).unwrap();
+        assert_eq!(seen,SLOTS);assert_eq!(receipt.primary_slots,SLOTS);assert_eq!(receipt.newborn_slots,[1]);assert_eq!(word(&w.backing,0x3550),5);
+        let newborn=w.creatures.as_ref().unwrap().record(1).unwrap();assert_eq!(newborn[6],1);assert_eq!(newborn[0x15]&1,0);w.validate_links().unwrap();
+        let next=w.neutral_creature_pass_with(4,|_,_|Ok((vec![],vec![],false,None,vec![]))).unwrap();assert_eq!(next.primary_slots,[0,1,3,9,17]);
+    }
+    #[test]
+    fn unreported_birth_rolls_back_pool_map_rng_and_count() {
+        let mut w=fixture(false,4,false);let before=w.clone();let trig=TrigTables::generate_pinned().unwrap();let mut seen=Vec::new();
+        let result=w.neutral_creature_pass_with(4,|s,id|{
+            seen.push(id);if id==17 {assert_eq!(s.create_mule(4,[8000,1000],50,None,&trig)?.unwrap().slot,1);}
+            Ok((vec![],vec![],false,None,vec![]))
+        });
+        assert!(matches!(result,Err(ActorWorldError::UnsupportedCreatureSchedule)));assert_eq!(seen,SLOTS);assert_eq!(w,before);
     }
 }

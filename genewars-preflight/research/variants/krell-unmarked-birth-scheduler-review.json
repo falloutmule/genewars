@@ -1,0 +1,74 @@
+{
+  "status": "passed",
+  "scope": "Literal6A540 scheduler with controlled callbacks matching actual785 allocation shape; not full world/scheduler native acceptance.",
+  "case": {
+    "name": "actual785_unmarked_birth_shape",
+    "count": 4,
+    "records": [
+      {
+        "slot": 0
+      },
+      {
+        "slot": 1
+      },
+      {
+        "slot": 2,
+        "return": 0,
+        "births": [
+          {
+            "slot": 4,
+            "newborn": 128
+          }
+        ]
+      },
+      {
+        "slot": 3
+      }
+    ]
+  },
+  "source": {
+    "primary_predicates": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "callbacks": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "player616": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "live_count_after": 5,
+    "ui_states": [
+      1592508,
+      1592516,
+      1592524,
+      1592532,
+      1592540,
+      1592548,
+      1592556,
+      1592564
+    ],
+    "instructions": 203,
+    "newborn_flags": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 128
+    }
+  },
+  "source_sha256": "d947fde62e1f4a044d4c74953d8c95a1b25b0e4144fd43f64a1d148f4b5cca1b",
+  "harness_sha256": "d61dc9cf4960c898bc31946a561ebea3f64c3f8385b931b976400f45b8543e33",
+  "actual_factory_marker": 128,
+  "actual_parent_return": 0,
+  "evidence": "5EF16 initializes local146 zero;6A52C returnsit, nointerveningbirthwrite. Factoryafter slot4+15=80.",
+  "previous_generic_rule": "The newborn-marked secondpass applies only callbackAL>0 andmarkerbit1; it does not apply to this unmarked neutralbirth."
+}

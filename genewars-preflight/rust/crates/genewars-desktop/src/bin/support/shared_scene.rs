@@ -443,9 +443,9 @@ impl SharedMission {
                     let before=loaded.clone();
                     if let Err(error)=loaded.step(&resources){
                         println!("Krell observed boundary frame{}: {error}",loaded.frame_counter);
-                        assert_eq!(loaded.frame_counter,784);assert_eq!(error,"Creatures(UnsupportedMotionState)");assert_eq!(loaded.world,before.world);assert_eq!(loaded.ui_animations,before.ui_animations);assert_eq!(loaded.actor_dispatch_audit_json(),before.actor_dispatch_audit_json());
+                        assert_eq!(loaded.frame_counter,820);assert_eq!(error,"Creatures(UnsupportedNeighborhood)");assert_eq!(loaded.world,before.world);assert_eq!(loaded.ui_animations,before.ui_animations);assert_eq!(loaded.actor_dispatch_audit_json(),before.actor_dispatch_audit_json());
                         println!("Krell construction blocked frame{}: {error}; buildings{}; actors{}",loaded.frame_counter,loaded.building_state_json(),loaded.actor_state_json());
-                        println!("{{\"status\":\"blocked\",\"classification\":\"unsupported_behavior\",\"source_frame\":784,\"transaction_unchanged\":true}}");return;
+                        println!("{{\"status\":\"blocked\",\"classification\":\"unsupported_behavior\",\"source_frame\":820,\"transaction_unchanged\":true}}");return;
                     }
                     loaded.render(&resources,[1536,15360]).unwrap();loaded.finish_outer_frame();
                     completed=loaded.world.buildings().unwrap().records().iter().any(|r|r[6]==4&&r[45]==selector&&u16::from_le_bytes([r[49],r[50]])&1!=0);

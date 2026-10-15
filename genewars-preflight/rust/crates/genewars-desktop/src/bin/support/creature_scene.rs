@@ -196,7 +196,7 @@ pub fn draw_supported_mule_record(
         // shares the animation<16/state<26 branch with ordinary approach.
         1 | 3 => animation <= 7,
         7 => animation == 19 && frame_index <= 3,
-        8 => animation <= 7,
+        8 => animation <= 7 || animation == 22,
         //5EA66 selects22;59470 uses the established high-animation wrapper.
         10 => animation <= 7 || animation == 22,
         // Literal mortality continuations pin state 24 to animation 17 and
@@ -1113,5 +1113,19 @@ mod pair_stop_render_tests {
    let saved=pixels.clone();r[25]=23;assert_eq!(draw(&r,0,&mut pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pixels,saved);
    r[25]=22;r[27]=255;assert_eq!(draw(&r,0,&mut pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pixels,saved);
   }
+ }
+ #[test]
+ fn actual_birth_peer_state8_retains_animation22_wrapper_until_own_callback() {
+  let repository=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+  let(resources,_,_)=Resources::load(&repository.join("private/integration/game-runtime")).unwrap();
+  let bytes=std::fs::read(repository.join("private/review/krell-mule-callback/f101bdcfa78248ee816e95af1df4e9ca/creatures.bin")).unwrap();
+  assert_eq!(genewars_runtime::identity::sha256_hex(&bytes),"d503a8c655604e65eff38ec2704c85c13120b35b261b76ee5d312dfe3a298312");
+  let peer:[u8;124]=bytes[..124].try_into().unwrap();assert_eq!((peer[94],peer[25],peer[27]),(8,22,0));
+  let height=i32::from_le_bytes(peer[39..43].try_into().unwrap())-i32::from_le_bytes(peer[17..21].try_into().unwrap());
+  let draw=|record:&[u8;124],pixels:&mut Vec<u8>|draw_supported_mule_record(&resources.mule,record,[48,40],height,0,0,false,0,0,&resources.fade,&resources.gla,[96,80],96,pixels);
+  let mut actual=vec![0x55;96*80];let receipt=draw(&peer,&mut actual).unwrap();
+  assert!(receipt.components.iter().map(|c|c.pixels_written).sum::<usize>()>0);assert!(receipt.shadows.iter().map(|c|c.pixels_written).sum::<usize>()>0);
+  let mut stopped=peer;stopped[94]=10;let mut expected=vec![0x55;96*80];draw(&stopped,&mut expected).unwrap();assert_eq!(actual,expected);
+  let mut invalid=peer;invalid[25]=23;let saved=actual.clone();assert_eq!(draw(&invalid,&mut actual),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(actual,saved);
  }
 }

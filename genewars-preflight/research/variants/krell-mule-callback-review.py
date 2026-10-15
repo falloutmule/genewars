@@ -16,7 +16,7 @@ class Source(m.Source):
  def __init__(self,backing):
   super().__init__();self.context={0x11a9bd:(2,int.from_bytes(backing[0x1c5d:0x1c5f],'little')),0x11a9c1:(2,int.from_bytes(backing[0x1c61:0x1c63],'little')),0x11a9c7:(4,int.from_bytes(backing[0x1c67:0x1c6b],'little'))}
   extra=[P/'private/ghidra'/directory/('instructions-000'+name+'.txt') for directory,names in [('initial-creature',['5d360','6c900','5c730','6d230','5df20']),('terrain-map-refs',['5b580','74a50','6c780','305f0']),('activation-rng-refs',['5c920']),('player-creation',['1e810']),('landing-contact',['417e0']),('entity-plant',['7af00']),('display-geometry',['979e8']),('plant-startup',['409f0'])] for name in names]
-  extra += [P/'private/ghidra/krell-cell-entry/instructions-00073f70.txt']
+  extra += [P/'private/ghidra/krell-cell-entry/instructions-00073f70.txt', P/'private/ghidra/krell-pair-target', P/'private/ghidra/countdown-expiry/instructions-00013e60.txt', P/'private/ghidra/initial-creature/instructions-0003fbe0.txt', P/'private/ghidra/construction-command/instructions-0001ee50.txt']
   self.files+=extra
   parse_files=[P/'private/review/creature-motion/listing-6c900-closed.txt' if p.name=='instructions-0006c900.txt' else p for p in extra]
   self.code.update(m.m.Model(parse_files,b'').code)

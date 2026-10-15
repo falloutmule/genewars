@@ -27,6 +27,7 @@ use std::collections::HashSet;
 mod effect_updates;
 mod creature_updates;
 mod creature_retirement;
+mod creature_factory;
 pub use creature_retirement::{MuleRetirementReceipt,MuleUiCleanupRequest};
 mod actor_updates;
 mod campaign_carry;

@@ -374,13 +374,14 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     // The serialized idle Mule starts with action flags0; frame0 performs
     // ordinary physics before the first odd-frame choice establishes bit8.
     let neutral=before[0x5e]==8&&matches!(before[0x61],0|0x40|0x80)&&matches!(before[0x60],0|8|0x88);
+    let postbirth_idle=before[0x5e]==8&&before[0x61]==0x60&&matches!(before[0x60],0x0c|0x8c)&&before[0x52]==0&&before[0x57]==1&&motion_word(before,0x6c)>0;
     let relocation=before[0x5e]==0&&before[0x61]==0x80&&before[0x60]==8&&before[0x57]==0;
     let null_food_wait=before[0x57]==0&&before[0x49]&3==3&&before[0x60]&0x42==0x40;
     let food_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&(before[0x57]==2||null_food_wait);
     let paired_approach=before[0x5e]==3&&matches!(before[0x60],0|4|8|12|0x80|0x84|0x88|0x8c)&&before[0x57]==1&&((before[0x61]==0x40&&before[0x52]==1)||(before[0x61]==0x60&&before[0x52]==0));
-    let paired_wait=before[0x5e]==10&&before[0x61]==0x60&&matches!(before[0x60],4|12|0x84|0x8c)&&before[0x57]==1&&before[0x52]==0&&motion_word(before,0x6c)>0;
+    let paired_wait=before[0x5e]==10&&before[0x61]==0x60&&matches!(before[0x60],4|12|0x84|0x8c)&&before[0x57]==1&&before[0x52]==0&&motion_word(before,0x6c)>=0;
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
-    if before[6]!=1||before[0x18]!=4||!(neutral||relocation||food_approach||feeding_wait||paired_approach||paired_wait)||before[0x7a]!=4||before[0x76]>90
+    if before[6]!=1||before[0x18]!=4||!(neutral||postbirth_idle||relocation||food_approach||feeding_wait||paired_approach||paired_wait)||before[0x7a]!=4||before[0x76]>90
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
        ||before[0x4f]!=0||(before[0x52]!=0&&!paired_approach)||motion_word(before,0x49)as u16&!0x337f!=0
        ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=if mule_callback_phase(before,context.frame_counter)&1==0{0}else{2}{return Err(CreatureError::UnsupportedMotionState);}
@@ -695,7 +696,11 @@ pub fn plan_mule_retry_wait(before:&CreatureRecord,rng_before:crate::blueprint::
 /// Owner4 living/neutral-neighborhood rechoice at timer0, after the common
 /// movement and5E0B0 prefix. Caller establishes the neighborhood scorer's
 /// no-action gates and false current-cell predicate before invoking this.
-pub fn plan_neutral_mule_rechoice<F>(before:&CreatureRecord,rng_before:crate::blueprint::BlueprintRng,tables:&crate::actor_activation::TrigTables,mut accept:F)->Result<InitialMuleChoice,CreatureError>
+pub fn plan_neutral_mule_rechoice<F>(before:&CreatureRecord,rng_before:crate::blueprint::BlueprintRng,tables:&crate::actor_activation::TrigTables,accept:F)->Result<InitialMuleChoice,CreatureError>
+where F:FnMut([i16;2])->Result<bool,CreatureError>{plan_neutral_mule_rechoice_with_cell_predicate(before,rng_before,tables,false,accept)}
+///64E38: original5B100 true forces wander and skips the idle-delay draw.
+/// Caller must supply the current postphysics-cell predicate, not a seed override.
+pub fn plan_neutral_mule_rechoice_with_cell_predicate<F>(before:&CreatureRecord,rng_before:crate::blueprint::BlueprintRng,tables:&crate::actor_activation::TrigTables,forced_wander:bool,mut accept:F)->Result<InitialMuleChoice,CreatureError>
 where F:FnMut([i16;2])->Result<bool,CreatureError> {
     if rng_before.ring>=32||before[6]!=1||before[0x18]!=4||before[0x5e]!=8||before[0x7a]!=4||before[0x76]>90||before[0x7b]!=255
         ||motion_word(before,0x6a)<=0||motion_word(before,0x6c)!=0 {return Err(CreatureError::UnsupportedMotionState);}
@@ -704,7 +709,7 @@ where F:FnMut([i16;2])->Result<bool,CreatureError> {
     if after[0x60]&8==0 {after[0x72..0x76].copy_from_slice(&before[7..11]);after[0x60]|=8;}
     let mut chosen_target=None;
     let explicit_relocation=after[0x61]&0x80!=0;
-    let delay=if explicit_relocation {false}else{draw(&mut rng,CreatureRngPurpose::IdleDelay,&mut draws)%10<4};
+    let delay=if explicit_relocation||forced_wander {false}else{draw(&mut rng,CreatureRngPurpose::IdleDelay,&mut draws)%10<4};
     if delay {motion_put(&mut after,0x6c,20);}else {
         if explicit_relocation {let point=[motion_word(&after,0x6e),motion_word(&after,0x70)];let accepted=accept(point)?;sampled_points.push((point,accepted));if !accepted{return Err(CreatureError::TargetSearchRequired);}chosen_target=Some(point);}
         else {
@@ -727,8 +732,10 @@ where F:FnMut([i16;2])->Result<bool,CreatureError> {
 /// owned caller supplies the scorer-selected active plant and establishes
 /// reserve eligibility; this plan consumes only the two scan-order draws.
 pub fn plan_mule_plant_acquisition(before:&CreatureRecord,target_id:i16,target_position:[i16;2],rng_before:crate::blueprint::BlueprintRng)->Result<InitialMuleChoice,CreatureError> {
+    //5CCA0 state8 reset clears this retained post-birth kind1 locally.
+    let retained_pair=before[0x57]==1&&before[0x61]==0x60&&before[0x60]==0x0c&&before[0x5d]==0;
     if rng_before.ring>=32||target_id<0||target_id>=512||before[6]!=1||before[0x18]!=4||before[0x5e]!=8||before[0x7a]!=4||before[0x76]>90||before[0x7b]!=255
-       ||motion_word(before,0x6c)!=0||before[0x78]!=0||before[0x60]&2!=0||before[0x55..0x58][2]!=0
+       ||motion_word(before,0x6c)!=0||before[0x78]!=0||before[0x60]&2!=0||(before[0x55..0x58][2]!=0&&!retained_pair)
        ||(motion_word(before,0x68)>motion_word(before,0x62)>>1&&before[0x61]&0x40==0) {return Err(CreatureError::UnsupportedMotionState);}
     let mut a=*before;let mut rng=rng_before;let mut draws=Vec::new();
     draw(&mut rng,CreatureRngPurpose::NeighborhoodX,&mut draws);draw(&mut rng,CreatureRngPurpose::NeighborhoodY,&mut draws);
@@ -884,6 +891,14 @@ impl CreaturePool {
         }
         self.records[slot]=*after;
         Ok(())
+    }
+    ///5A210 inactive-slot commit. The world owns source counts, map insertion
+    ///and RNG; native pointers remain logical resource/class handles.
+    pub(crate) fn apply_mule_factory_checked(&mut self,slot:usize,before:&CreatureRecord,after:&CreatureRecord)->Result<(),CreatureError>{
+        if self.record(slot)?!=before{return Err(CreatureError::StaleRecord(slot));}
+        if before[6]!=0||after[6]!=1||motion_word(after,15)as usize!=slot||after[24]>4||after[0x7a]!=4||after[0x5e]!=8{return Err(CreatureError::InvalidIdentity(slot));}
+        if before[31..39]!=after[31..39]{return Err(CreatureError::PointerBytesChanged(slot));}
+        self.records[slot]=*after;self.bindings[slot]=Some(CreatureAnimationBinding::MuleSelector4);Ok(())
     }
     pub(crate) fn retire_bones_checked(&mut self,slot:usize,before:&CreatureRecord)->Result<(),CreatureError>{
         if self.record(slot)?!=before{return Err(CreatureError::StaleRecord(slot));}

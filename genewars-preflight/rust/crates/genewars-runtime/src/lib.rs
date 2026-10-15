@@ -115,3 +115,8 @@ pub mod mule_pair_center;
 pub mod mule_pair_stop;
 
 pub mod genepod_positive_work;
+
+pub mod mule_factory;
+pub mod mule_pair_birth;
+
+pub mod mule_pair_birth_tail;
