@@ -456,12 +456,26 @@ pub fn plan_landing_phase1_quiet_grounded(
  Ok(LandingAirbornePlan{before:*before,after})
 }
 
-/// Grounded stationary phase1 physics before the selector-specific timer.
+/// Stationary grounded or bounded free-flight phase1 physics before its timer.
 /// This uses the same gates as the quiet interval but leaves timer untouched.
 pub fn plan_landing_phase1_rest_physics(before:&LandingRecord,ground:i32,shade:u8,water_height:i32)->Result<LandingAirbornePlan,LandingError>{
- let mut probe=*before;put_word(&mut probe,74,51);
- let mut plan=plan_landing_phase1_quiet_grounded(&probe,ground,shade,water_height)?;
- plan.before=*before;put_word(&mut plan.after,74,word(before,74));Ok(plan)
+ if dword(before,39)==ground {
+  let mut probe=*before;put_word(&mut probe,74,51);
+  let mut plan=plan_landing_phase1_quiet_grounded(&probe,ground,shade,water_height)?;
+  plan.before=*before;put_word(&mut plan.after,74,word(before,74));return Ok(plan);
+ }
+ //6DFCF integrates zero acceleration under free-flight20.6E538 retains
+ //positive candidate height above ground;3F=-1 skips obstacle-height work.
+ ground_ok(ground)?;
+ if before[6]!=5||before[69]!=0x31||before[70]!=1||before[24]>=4
+  ||before[73]!=0||before[76]!=0||before[21]&!0x21!=0||before[21]&0x20==0||before[22]!=0
+  ||before[45..57]!=[0;12]||before[67..69]!=[0;2]||word(before,63)!=-1
+  ||dword(before,17)!=ground||dword(before,39)<=ground||!(1..=65534).contains(&dword(before,39))
+  ||word(before,7)<0||word(before,9)<0{return Err(LandingError::UnsupportedPhysicsState);}
+ validate_landing_animation_identity(before)?;
+ if !(0..=65534).contains(&water_height)||ground<=water_height+320{return Err(LandingError::EnvironmentalCallbackRequired);}
+ let mut after=*before;after[23]=shade;put_word(&mut after,59,512);put_word(&mut after,61,0);
+ Ok(LandingAirbornePlan{before:*before,after})
 }
 /// Phase1 selector after actual physics+EFF49 animation identity. Timer49
 /// chooses one UI message and all remaining positive timers create code6.

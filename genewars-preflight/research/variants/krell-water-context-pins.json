@@ -1,0 +1,14 @@
+[
+  {
+    "path": "private/ghidra/krell-water-context/reference-graph.json",
+    "sha256": "845d0343f161f9eb5b650af01f0310e7e0ed8da4af1592323ab32e2ca33859ba"
+  },
+  {
+    "path": "private/ghidra/krell-water-context/instructions-0006df30.txt",
+    "sha256": "8afe40345a8ecb636ff3af67dd76b4fa4104596032270b0cc61ab26b2affe8b1"
+  },
+  {
+    "path": "private/ghidra/mission-target/instructions-000884d0.txt",
+    "sha256": "8aa978e0005bc3cb47e85f70f7a05c17f62ac92aa903394056f3e571cc0522ab"
+  }
+]

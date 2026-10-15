@@ -65,6 +65,17 @@ impl ActorWorld {
             let record=staged.effects.as_ref().unwrap().record(usize::from(slot))?;
             if record[6]==0||record[21]&1!=0 { continue; }
             let callback=staged.landing_effect_callback(slot,context,physics,trig,&receipt.ui_after)?;
+            #[cfg(debug_assertions)] if slot==0{
+                if let Some(path)=std::env::var_os("GENEWARS_EFFECT_PASS_FIXTURE"){
+                    let root=std::path::PathBuf::from(path);let dir=root.join("slot-0-after");
+                    if root.is_dir()&&!dir.exists(){
+                        std::fs::create_dir(&dir).expect("fresh immutable effect callback fixture");
+                        for(name,bytes)in [("backing",staged.backing_bytes().to_vec()),("players",(0..4u8).flat_map(|p|staged.player(p).unwrap().bytes().iter().copied()).collect()),("actors",staged.actors().records().concat()),("creatures",staged.creatures().unwrap().records().concat()),("effects",staged.effects().unwrap().records().concat()),("family8",staged.family8().unwrap().records().concat()),("buildings",staged.buildings().unwrap().records().concat())]{std::fs::write(dir.join(format!("{name}.bin")),bytes).unwrap();}
+                        let mut rng=staged.rng.seed.to_le_bytes().to_vec();rng.push(staged.rng.ring);rng.extend(staged.rng.draw_count.to_le_bytes());std::fs::write(dir.join("rng.bin"),rng).unwrap();
+                    }
+                }
+            }
+
             match &callback {
                 LandingEffectCallback::Landing(e)=>{
                     created+=u32::from(e.created_effect.is_some());
@@ -369,12 +380,12 @@ impl ActorWorld {
         Ok(())
     }
 
-    /// The proved71B70 load-time numeric values: gravity remains signed1C5D;
-    /// water is twice signed1C63, replacing raw serialized1C67. These values
-    /// describe the load transition; they are not inferred from raw1C67.
+    /// Numeric physics globals read by6DF30: signed gravity1C5D and water1C67.
+    /// Terrain renderwater1C63 is a separate global; no derived replacement.
     pub fn mission_loading_physics(&self)->LandingPhysicsContext {
         LandingPhysicsContext {
-            water_height:2*i32::from(word(&self.backing,0x1C63)),
+            //6DF30 reads numeric11A9C7, distinct from terrain renderwater11A9C3.
+            water_height:i32::from_le_bytes(self.backing[0x1c67..0x1c6b].try_into().unwrap()),
             gravity:word(&self.backing,0x1C5D),
         }
     }
@@ -631,6 +642,11 @@ mod construction_effect_tests {
   let plan=crate::building_effect::plan_building_effect_numeric(&before,0,[4096,4096],1000,0,1000,0,0,None).unwrap();
   world.effects.as_mut().unwrap().commit_building_factory(&plan).unwrap();world.insert_effect_head(0).unwrap();
   world.backing[0x3554..0x3556].copy_from_slice(&1i16.to_le_bytes());world
+ }
+ #[test]
+ fn numeric_water_global_is_distinct_from_terrain_render_water(){
+  let mut world=world_with_effect();world.backing[0x1c63..0x1c65].copy_from_slice(&816i16.to_le_bytes());world.backing[0x1c67..0x1c6b].copy_from_slice(&2000i32.to_le_bytes());
+  assert_eq!(world.mission_loading_physics().water_height,2000);assert_ne!(world.mission_loading_physics().water_height,2*i32::from(word(&world.backing,0x1c63)));
  }
  #[test]
  fn construction_effect_pass_retires_and_late_cleanup_failure_rolls_back(){
