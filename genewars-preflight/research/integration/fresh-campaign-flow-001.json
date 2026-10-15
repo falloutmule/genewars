@@ -1,0 +1,14 @@
+{
+  "status": "blocked",
+  "scope": "First normal-input attempt at post-victory campaign continuation",
+  "scene": "Victory",
+  "reason": "campaign carry: ActorLink",
+  "private_probe": "private/integration/fresh-campaign-flow-001",
+  "pins": {
+    "genewars-game.exe": "e6c0606f0089bad1180ab90279ca32cee5e2f4ebdfd7b4c2af065eeed61b28b3",
+    "replay.txt": "2cf7582799e6669520c6ea5133d03e1bd703ee0f1c2a3ee01052f351004ef53f",
+    "report.json": "f319d2738ba310f5c1e3eb59ae7085fdaca5326cdaed1cba8a8a35c2866fe81a",
+    "frame.bmp": "b9aec0d615312ddea421f8e16bd18af1e21f32e543fd140ec71143fa6c2c5393"
+  },
+  "superseding_repair": "ActorWorld shared registry campaign carry, independently proved on mixed cell links"
+}

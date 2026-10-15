@@ -29,6 +29,8 @@ mod creature_updates;
 mod creature_retirement;
 pub use creature_retirement::{MuleRetirementReceipt,MuleUiCleanupRequest};
 mod actor_updates;
+mod campaign_carry;
+pub use campaign_carry::OwnedCampaignCarryError;
 mod bookkeeping_updates;
 mod mission_funds;
 mod mission_status;

@@ -1,0 +1,628 @@
+{
+  "status": "passed",
+  "private_run": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a",
+  "tests": "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 180 filtered out; finished in 0.04s",
+  "cases": [
+    {
+      "case": 0,
+      "instructions": 3721,
+      "compared_bytes": 283444,
+      "actor_unlinks": 2
+    },
+    {
+      "case": 1,
+      "instructions": 3790,
+      "compared_bytes": 283444,
+      "actor_unlinks": 2
+    },
+    {
+      "case": 2,
+      "instructions": 3803,
+      "compared_bytes": 283444,
+      "actor_unlinks": 2
+    },
+    {
+      "case": 3,
+      "instructions": 3816,
+      "compared_bytes": 283444,
+      "actor_unlinks": 2
+    },
+    {
+      "case": 4,
+      "instructions": 3748,
+      "compared_bytes": 283444,
+      "actor_unlinks": 2
+    },
+    {
+      "case": 5,
+      "instructions": 3788,
+      "compared_bytes": 283444,
+      "actor_unlinks": 2
+    }
+  ],
+  "source_pins": [
+    {
+      "path": "private/ghidra/player-creation/instructions-0005ed20.txt",
+      "sha256": "ea29b165354042aaf33dc630322d89b577810f96c2ece1f8998799512e2feed0"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0006fb60.txt",
+      "sha256": "b373e98528fde4ef720bf0b529edbca889efb97bec713ac4d7fe184c868fb736"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0005eb30.txt",
+      "sha256": "2cf7510ee5298d221c299b11244f72adf6ce5831c7aedcb39d3e91e6cacb53ec"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0005e640.txt",
+      "sha256": "cbcd47d0c677749cbcf9adb928ef968ec6f8c0d4a399e2956dd39c13f2626239"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-0001ec50.txt",
+      "sha256": "ed1420b97321186a1b7c3146ab315649a872bab54a0fc63686a6aad4e4f677ce"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f980.txt",
+      "sha256": "29a29a39c3cfee69d78fc3bb6ff818953299d0ba57f25500d2015c720e593f3d"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006b150.txt",
+      "sha256": "9395a017642140a42c59b83e6e47c4c77b71e3ee368b811dd02b54f1866156c1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00023800.txt",
+      "sha256": "4227dd9dbd21613fa4e396d702bc66347bfcc4b5085f1d2cdb7b77267bf7bcc5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00023820.txt",
+      "sha256": "dc2ca6ff81274248aafa161ec20efc0d7947fd06fcddc5fee70ce77b433c7ea1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001ec10.txt",
+      "sha256": "4987af3cf6109166c9577008df7d94e772076ce575f10a8601f8a1383b942dbb"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001ec20.txt",
+      "sha256": "60779ead189d0df91af75d7de30ee0726857f9658f0a51c0fbe238dd1cf323ec"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f060.txt",
+      "sha256": "0554747598bbe72a344acf4e107f79f9e398a8db0f91ea27208f3bd3486a92d7"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005b400.txt",
+      "sha256": "80c66399500e97ca59bbe76c29dc12f531c9780fdad313ef1a462e40586a741a"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f8f0.txt",
+      "sha256": "79e1953c322d12fdfe9161c53d960cd98af86ad0fefe5d74adf2f3f68259ac7c"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b340.txt",
+      "sha256": "9c96acdce1336ae5bf34b745b501da187f77dcfb618a1194fee5537a3ad77c0b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005ad70.txt",
+      "sha256": "2ca44bf24af651de458c9ee2303cdc272a4ed9d29f4797c6eaa7d6fc74d54c8b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006db00.txt",
+      "sha256": "42e576bafeec8c50c4ab8151c5573f071ac350a4941b263e9ed7d94f25ee12a2"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005a110.txt",
+      "sha256": "5121591cbf165c63dc16fb3de9fb95a8b7772b96162f72a44191d8a8b97d8910"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0006df30.txt",
+      "sha256": "8afe40345a8ecb636ff3af67dd76b4fa4104596032270b0cc61ab26b2affe8b1"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0007b380.txt",
+      "sha256": "a636e0647b1a66cf9eb422bfc86e03f8b2e450a42290ed9ad70c08c3f4792f7d"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f260.txt",
+      "sha256": "0f0c7ee7a26b87418a794e92c763f2dffb749d896335288aa052cfa40aba9ff2"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001ee20.txt",
+      "sha256": "0aa43dc30a3d2399e5d659215c01ed920605684839f5762cfba24f4c3c4b9d1f"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f220.txt",
+      "sha256": "0eda1dc90e070c6c7fc3cfbae1e8e50bb0ebe50c658ae0a199af4f43b3bbbcac"
+    },
+    {
+      "path": "private/ghidra/landing-contact/instructions-000733a0.txt",
+      "sha256": "fca831c451b1c09a39d93188d8cf9428b04ae5b25d8f87f09ecceb87c5f3f736"
+    },
+    {
+      "path": "private/ghidra/landing-contact/instructions-0007ac00.txt",
+      "sha256": "cc002c636ec832486e06fe90af6cfc68a0489d6acae6efcf83d5a5ce735706e1"
+    },
+    {
+      "path": "private/ghidra/primitives/instructions-0007a6c0.txt",
+      "sha256": "038389547efce23a858a88bdc1e89ed6b5e1ec1799704c22fd3fc1b30175d509"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-0005e0b0.txt",
+      "sha256": "89174afadbb823011cf4781900d1894bbb0fceda13d58a7041ea8af8981606ba"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008b520.txt",
+      "sha256": "37342106bfbee451f816f38ffbd92903d81b06fd534da2f6031e26c1be840e49"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0006d390.txt",
+      "sha256": "7f1c49974e62a52382eed53b9dcfa8dcc53b0727c9fdd2a626d57009a8376548"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-000736f0.txt",
+      "sha256": "bc949e97b253e9a9b6c59ca1e14386d72af6a47f73d770d9f4f48b0e98b0d57e"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0007b140.txt",
+      "sha256": "aef70bf9859bc9c21d01f697528a266d30ef1961e47d9697f762f7c74be7a2f4"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001ee10.txt",
+      "sha256": "67284531f9de18e252b503ec89522e7be59fad0a1128732c24c53705f64e1e72"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-00074270.txt",
+      "sha256": "0e6512bf106d649968285420fc325a0cf12afabecaa582ed4b6cc9a486b59a30"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-0008b130.txt",
+      "sha256": "f2505f556f5a3a4f012cd375b6a43cc8029c3f03b5f1c37efe65b8a6cec2d52f"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-00074d90.txt",
+      "sha256": "69e9654b5a4844452ca3995de8814c049a820e745251b4c8e88c402fe46280af"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-00074160.txt",
+      "sha256": "abcc56f1c17963a69d68c85bc4c251b28929235b518cf4b696c18abfcb458c3b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-000401a0.txt",
+      "sha256": "ccc926f2fb858bd725f562c10631e074824b98f5cc5a8771713a5a47918ee612"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008d930.txt",
+      "sha256": "0b85f4c6b25abca474b29c71972d4201a823ad2bdd80367efd02bd7741f4139e"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006b700.txt",
+      "sha256": "763d2e72feee4f9ee6129a3918d74e0671c2ad6e9e2c157e5b2e54eb8c5780fe"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00073970.txt",
+      "sha256": "ab614b5e9d2dd1ee9c1c49247f21ac39540946feade19a4e9c7cde767ae2c461"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b7d0.txt",
+      "sha256": "423a0606ea12770fa2b85abbd7a5803944cb825a05a2aedf5957017dfc3e0750"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005b100.txt",
+      "sha256": "32f6824af152305c75e3639c1917ee35e5e80a2a801a90e768415e73ea51e02d"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0008b780.txt",
+      "sha256": "96da34b2865718f4a50247df2f77d0c78d441888edfd3af7b20d76dafc6d7028"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-0008d7b0.txt",
+      "sha256": "dfbad38e9039f97aa243cddc0149971c5f01860e7163ee667d99a71757852b30"
+    },
+    {
+      "path": "private/ghidra/primitives/instructions-00073690.txt",
+      "sha256": "a61c7b67cebcd05dbb96053d1fbe7745c703b75be5af996bb0227e4c9691cace"
+    },
+    {
+      "path": "private/ghidra/command-resolver/instructions-000ae028.txt",
+      "sha256": "526b3f9cdc9b43ed6b330383417fad4b6c8acb41a917acf5571e4f01f0a6585b"
+    },
+    {
+      "path": "private/ghidra/plant-startup/instructions-0001ebd0.txt",
+      "sha256": "9f0e86fefaa3c2fc11a9cf4f29e8d3ce4a0724b82b959d21b404b3ea9fd64588"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0005d700.txt",
+      "sha256": "46db7123380194986cc4598e5cb9cc8f44f2b8f48cb4b9f79a4ac41327a4cf33"
+    },
+    {
+      "path": "private/ghidra/activation-rng-refs/instructions-00073c20.txt",
+      "sha256": "b1192da02ccb17b0c4e9117aa0432c6bd47d8a4ee542bea4936bdd60498ad65e"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-00074cc0.txt",
+      "sha256": "701ba3601cd73db82d86a57d1502d53d6ad2a8d5910833c28f6e89784bcf542b"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00013e50.txt",
+      "sha256": "2c85f008ec84237004f0eb0e03048a44da01dbdd0c70666a67704bfb44cbeda5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00013e70.txt",
+      "sha256": "48f6ca2435f3ae64caee93657f3fb4952a319d8978ad448b8a7011e497f6f2fc"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0005a990.txt",
+      "sha256": "d063df1c8f85cd877b6e1ea913fa88dbc2a9301bc318d79af7d1a6e935867a97"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0003fbe0.txt",
+      "sha256": "a537c544a5cd516bdf2359670ea4b102d06880440f55037a947d2ceff90c4821"
+    },
+    {
+      "path": "private/ghidra/player-creation/instructions-00013eb0.txt",
+      "sha256": "f39a85cec1eeaf8c6471d4ca65ab9fd26f3f093cafec3efae15cbe694d2c656c"
+    },
+    {
+      "path": "private/ghidra/actor-activation/instructions-0001f410.txt",
+      "sha256": "35c557c5e1042c57cbf5a4f2b90afadb232326d2477a2a6b03d41b367433294a"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-000743c0.txt",
+      "sha256": "085e0737b57e9f7d27248169f23cf35199a03594e4c8547f514ed053e890695c"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008acc0.txt",
+      "sha256": "9e7e750030468985e9d1ed7ae836f8b8ee7606b4b0b51f1fc02345750f8ccb1e"
+    },
+    {
+      "path": "private/ghidra/terrain-map-refs/instructions-0008ac60.txt",
+      "sha256": "6fd0ff082558f7bc94da0a908710fab78b8d477369a106e15f37f4922ee557fa"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006f0c0.txt",
+      "sha256": "37cd520262802d6b6a3e21c88b131522f31a9e129b6d4aa1afa152ce11e7e9e1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0006ede0.txt",
+      "sha256": "acc710c7461bee41e527cdded6de067d1577811222b2abdfa3b00f71f2e654d5"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f010.txt",
+      "sha256": "9529f80432601ec84b37f26f2263c0bbc9d333b66e5e49efc430dca4ba822aac"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-00073770.txt",
+      "sha256": "0fb14f7905a336e918e7651cba16d789204f380f1e194609c350f8bb0c93e47c"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f270.txt",
+      "sha256": "bd463c1d8715675e7418abb8df161d8cbc6fa47e705022eaf22d6772aea80bc1"
+    },
+    {
+      "path": "private/ghidra/initial-creature/instructions-0001f450.txt",
+      "sha256": "cb7c70b22b60097ee15f37a91809e072f340b4d1eaf2e3819fea4c3fb8109a0f"
+    },
+    {
+      "path": "private/ghidra/actor-motion/instructions-0006e9e0.txt",
+      "sha256": "9e0d0cd2b98c380f36514b9ff8c7b28a538dedb3516aa1192e5fa38828c9f12e"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-0005cc60.txt",
+      "sha256": "732f53cf3c69987464aaa7903bfa1fc99e0e826dad615b979269bf6c55e4d2cb"
+    },
+    {
+      "path": "private/ghidra/terrain-render-refs/instructions-00072e50.txt",
+      "sha256": "631f423d886ce3ef484142753331e68730832741b3b0b7c9ccec2ee9db294620"
+    },
+    {
+      "path": "private/ghidra/mission-bootstrap-mode/instructions-00080e90.txt",
+      "sha256": "d3a0b65530b7abbf9701a55b0bbad40b82cdf5c20f6ef21352f80cb5204a60c7"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00080d40.txt",
+      "sha256": "73927fe8eb7334e0698b4e433df87cf8a7377c0db24b70327143b3f68bca7b09"
+    },
+    {
+      "path": "private/ghidra/mission-array-refs/instructions-00080360.txt",
+      "sha256": "cb9a9ede2e85c2da7b382f62f47b3bf398909a6036d6ff9c306536981a5f6733"
+    },
+    {
+      "path": "private/ghidra/mission-result-refs/building-reset.txt",
+      "sha256": "8f9ce7cfce469a1013a59ac8435242000c18df6ad3935524defacbbaf421c85c"
+    },
+    {
+      "path": "private/ghidra/mission-result-refs/carry-range.txt",
+      "sha256": "ced869e6a5fb051eb68934499b0aaa4ad9aef9c5bbbf1307ed6c937f6d5580de"
+    },
+    {
+      "path": "research/variants/initial-creature-source.py",
+      "sha256": "737182101e8e541b8f4edba8f4b8b731f6ce3fe0f0967396b9e9d96ef27387a2"
+    },
+    {
+      "path": "research/variants/result-carry-review.py",
+      "sha256": "d64a93178ec1b72a73bc2a5b89cdea07e43133a6618c4578878d3061093f8135"
+    },
+    {
+      "path": "research/variants/owned-campaign-carry-review.py",
+      "sha256": "62d1cc4f4e946fbad0aa94073938640e0766e2fa676d67fa48e55f154f36c894"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/campaign_carry.rs",
+      "sha256": "f34ea4c0082c95d0329c170bb4e120e00225a1daf23126dd0f7568dccdbc7535"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs",
+      "sha256": "63293557df9ee3f6ab3b831dd8946555bc50c39cdfd2b4d3e54e5e38edbb6169"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/actor_world.rs",
+      "sha256": "a6e56475b3f3bdb7c1fe1235febc008587e4b9de3cda34988a7a22d771891764"
+    },
+    {
+      "path": "rust/crates/genewars-runtime/src/result_carry.rs",
+      "sha256": "79cc7806ff09fb03d45f0c1ae28d944dd065926327cbb5a2f8ef0aae8429d49e"
+    },
+    {
+      "path": "private/ghidra/validated/memory-.object1.bin",
+      "sha256": "92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe"
+    },
+    {
+      "path": "private/ghidra/validated/memory-.object3.bin",
+      "sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+    },
+    {
+      "path": "research/variants/actor-environment-terrain-target.py",
+      "sha256": "b1bd37810e18f3797ffcfb88dd42da33b5a7e179852c6230ff9ec9f101209a2d"
+    }
+  ],
+  "fixture_pins": [
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/0/actors.bin",
+      "sha256": "981ecaef27aa198acd512b51cc65cdfa6484512430e2938997eeb1389d2968d4"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/0/actual.bin",
+      "sha256": "048a1034a6e9a0df383e75fe7b2edcfe4d4e7ba8029b48f4d83049f3e65d5db3"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/0/backing-after.bin",
+      "sha256": "ce6c3640f9e9ca78d65ba74af15e56bdbaec85431bb3bb3849e361f6a9ac04ab"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/0/backing.bin",
+      "sha256": "113438451dc1b6f8a400658b9f7ccbd26b962c9533a95f5768610e9bd7a5a268"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/0/bindings.bin",
+      "sha256": "20942014b6ba6cbc2b85ef6ae98b5f8417814596a32bdf10fdbe83542adb2c03"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/0/building-after.bin",
+      "sha256": "914356ce551994d6d90bebfab6b4f3c91f539d7a9e668cd2e721a9e69e319a60"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/0/buildings.bin",
+      "sha256": "4af48a9488082fa9c3c2c5708e95790850249acdc6655c74c9fc1dfecb1c068b"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/0/expected.bin",
+      "sha256": "048a1034a6e9a0df383e75fe7b2edcfe4d4e7ba8029b48f4d83049f3e65d5db3"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/0/map.bin",
+      "sha256": "e4d2d71f9f656fb74fe28ffa26db7d78a07554aa98aad3ba4d4355433ceb274f"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/0/players.bin",
+      "sha256": "b2e1b08830fcf1ae17f6bc65313261001ca39532ef8196d66c6fe1c1b500f0c3"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/1/actors.bin",
+      "sha256": "afdd82b2d6c68df11e0593a9ff358eebfbd7445c3532158924175ae2c1a7f06f"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/1/actual.bin",
+      "sha256": "81099e09b4d3a9e15caadf576ebd324c8c0a0d3827b64054ba9da9cf422da0c2"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/1/backing-after.bin",
+      "sha256": "ce6c3640f9e9ca78d65ba74af15e56bdbaec85431bb3bb3849e361f6a9ac04ab"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/1/backing.bin",
+      "sha256": "a484a4414cd7bf7e9dc0bf6a75c6aaaa33cd4a023af0e093e3556b49009baa3b"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/1/bindings.bin",
+      "sha256": "20942014b6ba6cbc2b85ef6ae98b5f8417814596a32bdf10fdbe83542adb2c03"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/1/building-after.bin",
+      "sha256": "914356ce551994d6d90bebfab6b4f3c91f539d7a9e668cd2e721a9e69e319a60"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/1/buildings.bin",
+      "sha256": "12c1561779c031997355bd8201ab533fa108b4a4c62289007b82b15b11c02a7f"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/1/expected.bin",
+      "sha256": "81099e09b4d3a9e15caadf576ebd324c8c0a0d3827b64054ba9da9cf422da0c2"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/1/map.bin",
+      "sha256": "3944b77d1a0da6b5b76ee3f8a695f253ca0cd751ab13618cd376077bd72ca8a9"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/1/players.bin",
+      "sha256": "b2e1b08830fcf1ae17f6bc65313261001ca39532ef8196d66c6fe1c1b500f0c3"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/2/actors.bin",
+      "sha256": "744ceb6d510ad54da1ffdb550bb813866387e19a7945f68148c1d2d630e3dccc"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/2/actual.bin",
+      "sha256": "83ac9d82d2a44f672468f74c5165fd80d2ec570a768b23b2cdc80452eed904e7"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/2/backing-after.bin",
+      "sha256": "9d4bf471fa0bf13b355aeb938c8eb9f62589544c76fc1d58a983fc1a27314d40"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/2/backing.bin",
+      "sha256": "812d4bff0fcd6fb6cb8ddc044f08d9037c2d29255fde8c6a072158e40345568a"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/2/bindings.bin",
+      "sha256": "20942014b6ba6cbc2b85ef6ae98b5f8417814596a32bdf10fdbe83542adb2c03"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/2/building-after.bin",
+      "sha256": "6120842ef3f223aeec29a42e7e3e2ad6a0639bc046d43b0dc4f3c47fedbb16dc"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/2/buildings.bin",
+      "sha256": "ed113b6583fd0b204d2b2ef4a075586c64d613d9b02edbcec8097eca9ec278f6"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/2/expected.bin",
+      "sha256": "83ac9d82d2a44f672468f74c5165fd80d2ec570a768b23b2cdc80452eed904e7"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/2/map.bin",
+      "sha256": "91427cfe51853233cd525df97e00c06d4cd8c7cd8924311983df2802ed7f76d2"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/2/players.bin",
+      "sha256": "b2e1b08830fcf1ae17f6bc65313261001ca39532ef8196d66c6fe1c1b500f0c3"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/3/actors.bin",
+      "sha256": "64f71cfcc10417217f89498d9551ac7f6dacdf62b949acb0f75ba6a975072524"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/3/actual.bin",
+      "sha256": "ed8754b35b49822e73a51ea8d5f5cb8e6ce6806a177b6b48fcb925ad59426010"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/3/backing-after.bin",
+      "sha256": "ce6c3640f9e9ca78d65ba74af15e56bdbaec85431bb3bb3849e361f6a9ac04ab"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/3/backing.bin",
+      "sha256": "fb92d1d4f36110da3f31ba080d3ccf22c22b20ffabe7f2e6b087ec34036010e1"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/3/bindings.bin",
+      "sha256": "20942014b6ba6cbc2b85ef6ae98b5f8417814596a32bdf10fdbe83542adb2c03"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/3/building-after.bin",
+      "sha256": "914356ce551994d6d90bebfab6b4f3c91f539d7a9e668cd2e721a9e69e319a60"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/3/buildings.bin",
+      "sha256": "914356ce551994d6d90bebfab6b4f3c91f539d7a9e668cd2e721a9e69e319a60"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/3/expected.bin",
+      "sha256": "ed8754b35b49822e73a51ea8d5f5cb8e6ce6806a177b6b48fcb925ad59426010"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/3/map.bin",
+      "sha256": "3944b77d1a0da6b5b76ee3f8a695f253ca0cd751ab13618cd376077bd72ca8a9"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/3/players.bin",
+      "sha256": "b2e1b08830fcf1ae17f6bc65313261001ca39532ef8196d66c6fe1c1b500f0c3"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/4/actors.bin",
+      "sha256": "543496f2e8f43a1ae7545d61af697327a7e18fcdcb7924309ef855c355f56696"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/4/actual.bin",
+      "sha256": "645f6e5f8452b630f5deaa3a14745f5584bad96d581a967ed48d376c5215523d"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/4/backing-after.bin",
+      "sha256": "ce6c3640f9e9ca78d65ba74af15e56bdbaec85431bb3bb3849e361f6a9ac04ab"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/4/backing.bin",
+      "sha256": "cf82e33f4ffb01a37f6a7eb05f32e50d21b2ea964ba72ddd04753fba37ec8e2b"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/4/bindings.bin",
+      "sha256": "20942014b6ba6cbc2b85ef6ae98b5f8417814596a32bdf10fdbe83542adb2c03"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/4/building-after.bin",
+      "sha256": "914356ce551994d6d90bebfab6b4f3c91f539d7a9e668cd2e721a9e69e319a60"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/4/buildings.bin",
+      "sha256": "9e19fc5c608523757ff11a046fd42f4d775b137d97ff2d30fe734eef07ef561b"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/4/expected.bin",
+      "sha256": "645f6e5f8452b630f5deaa3a14745f5584bad96d581a967ed48d376c5215523d"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/4/map.bin",
+      "sha256": "e4d2d71f9f656fb74fe28ffa26db7d78a07554aa98aad3ba4d4355433ceb274f"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/4/players.bin",
+      "sha256": "b2e1b08830fcf1ae17f6bc65313261001ca39532ef8196d66c6fe1c1b500f0c3"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/5/actors.bin",
+      "sha256": "901bf8386adc4374d0648cc9680b6b79d144d89d0fac7bcc2bd980411595abe7"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/5/actual.bin",
+      "sha256": "78d475c0eec34ec832d3d67e6bcffe1ac0927b8ec93ce33fe0579e40b25cd119"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/5/backing-after.bin",
+      "sha256": "9d4bf471fa0bf13b355aeb938c8eb9f62589544c76fc1d58a983fc1a27314d40"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/5/backing.bin",
+      "sha256": "2c92eebf498a6e19548cf683afa184bc54721cada7752e8cb2d8d632e29db76c"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/5/bindings.bin",
+      "sha256": "20942014b6ba6cbc2b85ef6ae98b5f8417814596a32bdf10fdbe83542adb2c03"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/5/building-after.bin",
+      "sha256": "6120842ef3f223aeec29a42e7e3e2ad6a0639bc046d43b0dc4f3c47fedbb16dc"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/5/buildings.bin",
+      "sha256": "df5c1ac5861418c8091716fe2b27740d076015981f8d35a9dadd620306559ac5"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/5/expected.bin",
+      "sha256": "78d475c0eec34ec832d3d67e6bcffe1ac0927b8ec93ce33fe0579e40b25cd119"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/5/map.bin",
+      "sha256": "90969f5e9cb3f1fc8df167dcfead9f453f1f20c80ea6c0bb637d3044edf4402e"
+    },
+    {
+      "path": "private/review/owned-campaign-carry/fe1631b94c584e95803f65a19910b26a/5/players.bin",
+      "sha256": "b2e1b08830fcf1ae17f6bc65313261001ca39532ef8196d66c6fe1c1b500f0c3"
+    }
+  ],
+  "scope": "Six synthetic shared-cell permutations: two ready actors, one native building, one packed plant. Literal72E50/80E90/80D40/80360/42B50/8ACC0 full carry plus nonactor neighbour afterimages; blueprint pointers normalized. Original world unchanged, malformed/stale links and invalid lists reject atomically. Existing memset/memmove and selection25150 service ports retained.",
+  "limits": [
+    "Adapter fixtures are not a captured winning mission and do not establish campaign acceptance",
+    "Returned map belongs to discarded old arena; do not resume it",
+    "Source pathological/corrupt-link repair branches are not admitted; malformed native links reject",
+    "No nextworld initialization or presentation service completion claimed"
+  ],
+  "original_execution": false,
+  "gui_execution": false
+}

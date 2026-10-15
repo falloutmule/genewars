@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "scope": "Normal-input Exceland victory through Campaign view; successor not initialized by this replay",
+  "accepted_missions": 0,
+  "mission_to_mission_transitions": 0,
+  "private_probe": "private/integration/fresh-campaign-flow-002",
+  "scene": "Campaign",
+  "campaign": {
+    "progress": 1,
+    "next_mission": "Krell",
+    "carry_projected": true,
+    "next_mission_initialized": false,
+    "retired_actors": [
+      0,
+      1
+    ],
+    "players_sha256": "2f975c9e6a9d11eb923c79e6f1069bc01a53d76514cdd30e789d1459ec251d87",
+    "preserved_world_sha256": "1d83518b897b14e2943990eff655838246cc0207a7c95a5f3dfccc2e395f8bbf",
+    "rng_ring": 12,
+    "mode_after_exit": 0,
+    "frame_after_view_resume": 4630
+  },
+  "pins": {
+    "genewars-game.exe": "6bbfc42717c770df8dac7d63937a42d7ab373e47c504ae47b70297f298ed0c09",
+    "replay.txt": "2cf7582799e6669520c6ea5133d03e1bd703ee0f1c2a3ee01052f351004ef53f",
+    "report.json": "2cf1d76ca8b8c50a14006f50a01ffd439792e80669e80d09289e2e243483c657",
+    "frame.bmp": "35c204fd814c31981e2108944b1755b095b49543f599d912783f25b3511c826b"
+  },
+  "limitations": [
+    "Opaque blueprint prior18 remains unestablished",
+    "Native verification recorded separately",
+    "Campaign planet selection/system presentation pending",
+    "No original media playback"
+  ]
+}

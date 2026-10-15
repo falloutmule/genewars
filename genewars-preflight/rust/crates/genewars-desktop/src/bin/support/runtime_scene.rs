@@ -306,9 +306,7 @@ impl Game {
         let progress=w.world.player(0).map_err(|e|e.to_string())?.bytes()[0x6e7];
         let request=genewars_runtime::result_transition::advance_victory(1,context.known_runtime_flags(),progress).map_err(|e|format!("{e:?}"))?;
         if request!=Some(genewars_runtime::result_transition::ResultViewRequest::Campaign186F19){return Err("no original campaign request".into());}
-        let players=core::array::from_fn(|id|*w.world.player(id as u8).unwrap().bytes());
-        let bindings=core::array::from_fn(|id|w.world.actors().bindings(id).unwrap().blueprint.map(|b|(b.player_id,b.blueprint_index)));
-        let carry=genewars_runtime::result_carry::plan_campaign_carry(&players,w.world.actors().records(),&bindings,w.world.map(),&self.carry_records,context.known_runtime_flags(),context.runtime_mode().ok_or("unknown result mode")?,0,w.selected.map(|s|s as u8)).map_err(|e|format!("campaign carry: {e:?}"))?;
+        let carry=w.world.plan_campaign_carry(&self.carry_records,context.known_runtime_flags(),context.runtime_mode().ok_or("unknown result mode")?,0,w.selected.map(|s|s as u8)).map_err(|e|format!("campaign carry: {e:?}"))?;
         let resources=genewars_core::cd_candidate::CampaignResourcePlan::new(carry.players[0][0x6e7]as i8,self.campaign_system).map_err(|e|format!("{e:?}"))?;
         let display=campaign_scene::CampaignDisplay::load(&self.root,resources)?;
         let saved_frame=self.victory.as_ref().ok_or("campaign continuation lacks victory entry")?.entry.saved_frame;

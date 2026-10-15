@@ -280,7 +280,7 @@ impl ActorWorld {
         }}Ok(true)
     }
 
-    fn unlink_actor_for_motion(&mut self,id:u16)->Result<(),ActorWorldError> {
+    pub(super) fn unlink_actor_for_motion(&mut self,id:u16)->Result<(),ActorWorldError> {
         let raw=[id as u8,(id>>8)as u8,3];let r=self.entity(raw)?;let previous=reference(r,0);let next=reference(r,3);let cell=floor_cell([word(r,7),word(r,9)]);
         if previous[2]==0 {
             if word(&previous,0)as usize!=cell||reference(self.map(),cell*14+6)!=raw{return Err(ActorWorldError::StaleLink)}
