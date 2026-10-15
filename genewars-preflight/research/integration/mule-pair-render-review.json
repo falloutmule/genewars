@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "test": "paired_mule_source_frames_match_directional_rendering_and_reject_other_animations",
+  "tests_passed": 1,
+  "filtered": 69,
+  "source_records": [
+    {
+      "slot": 0,
+      "state": 3,
+      "animation": 2,
+      "frame": 4
+    },
+    {
+      "slot": 2,
+      "state": 3,
+      "animation": 4,
+      "frame": 0
+    }
+  ],
+  "compared_pixels": 15360,
+  "scope": "Source59470 branch equivalence to existing state1 draw using actual651 records; packed4 fullbuffer and rejectionatomicity. No new independent raster oracle/nativewindow claim.",
+  "pins": {
+    "rust/crates/genewars-desktop/src/bin/support/creature_scene.rs": "6c7f3ef25dddb2e01dd2feb1cf6c99bb89660741b02bccd41ce8f7e2bdf7ecfe",
+    "private/ghidra/terrain-viewport/instructions-00059470.txt": "3eb7e965f3edfc676b298a79bc47958e5e558538e244c8a8ca78ddefeb75fd50",
+    "private/review/krell-mule-callback/17804c3e759c449d8e854bb84dc8680c/creatures.bin": "222df291bc6afd9fd1f9ab349aabc04d8bd3d71e9ad5943186253b5f22a98fe0"
+  }
+}

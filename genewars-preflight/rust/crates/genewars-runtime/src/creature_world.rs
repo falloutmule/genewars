@@ -377,10 +377,11 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     let relocation=before[0x5e]==0&&before[0x61]==0x80&&before[0x60]==8&&before[0x57]==0;
     let null_food_wait=before[0x57]==0&&before[0x49]&3==3&&before[0x60]&0x42==0x40;
     let food_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&(before[0x57]==2||null_food_wait);
+    let paired_approach=before[0x5e]==3&&before[0x61]==0x40&&matches!(before[0x60],0|8|0x80|0x88)&&before[0x57]==1&&before[0x52]==1;
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
-    if before[6]!=1||before[0x18]!=4||!(neutral||relocation||food_approach||feeding_wait)||before[0x7a]!=4||before[0x76]>90
+    if before[6]!=1||before[0x18]!=4||!(neutral||relocation||food_approach||feeding_wait||paired_approach)||before[0x7a]!=4||before[0x76]>90
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
-       ||before[0x4f]!=0||before[0x52]!=0||motion_word(before,0x49)as u16&!0x337f!=0
+       ||before[0x4f]!=0||(before[0x52]!=0&&!paired_approach)||motion_word(before,0x49)as u16&!0x337f!=0
        ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=if mule_callback_phase(before,context.frame_counter)&1==0{0}else{2}{return Err(CreatureError::UnsupportedMotionState);}
     let waiting=before[0x49]&3==3;
     if waiting&&motion_word(prefix,0x3f)!=0{return Err(CreatureError::UnsupportedMotionState);}
@@ -435,6 +436,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
         //Arrival requires the separately visible plant reservation/state7
         //mutation; do not silently continue the walking-only plan.
         if a[0x5e]==1&&(a[0x57]==0||(motion_word(&a,0x49)as u16&0x200!=0&&a[0x60]&0x80==0)) {a=choice(&a)?;}
+        if before[0x5e]==3{a=choice(&a)?;}
         a[0x4a]&=0xfc;refresh_mule_lifecycle(&mut a);
         let timer=motion_word(&a,0x6c);if timer>0 {motion_put(&mut a,0x6c,timer-1);}
     }

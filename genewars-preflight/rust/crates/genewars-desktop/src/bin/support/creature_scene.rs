@@ -192,7 +192,9 @@ pub fn draw_supported_mule_record(
         0 => animation <= 7,
         // State 1's source-proved directional selector chooses animation 0..7;
         // the ANB then bounds the current frame for each chosen direction.
-        1 => animation <= 7,
+        // Source651 pair initialization selects directional frames;59470
+        // shares the animation<16/state<26 branch with ordinary approach.
+        1 | 3 => animation <= 7,
         7 => animation == 19 && frame_index <= 3,
         8 => animation <= 7,
         // Literal mortality continuations pin state 24 to animation 17 and
@@ -770,6 +772,24 @@ mod tests {
             assert_eq!(receipt.frame_index, usize::from(expected_frame));
             assert!(receipt.components.iter().map(|component| component.pixels_written).sum::<usize>() > 0);
             assert!(receipt.shadows.iter().map(|component| component.pixels_written).sum::<usize>() > 0);
+        }
+    }
+
+    #[test]
+    fn paired_mule_source_frames_match_directional_rendering_and_reject_other_animations() {
+        let repository=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+        let(resources,_,_)=Resources::load(&repository.join("private/integration/game-runtime")).unwrap();
+        let bytes=std::fs::read(repository.join("private/review/krell-mule-callback/17804c3e759c449d8e854bb84dc8680c/creatures.bin")).unwrap();
+        assert_eq!(genewars_runtime::identity::sha256_hex(&bytes),"222df291bc6afd9fd1f9ab349aabc04d8bd3d71e9ad5943186253b5f22a98fe0");
+        for slot in [0,2]{
+            let mut record:[u8;124]=bytes[slot*124..(slot+1)*124].try_into().unwrap();assert_eq!(record[0x5e],3);assert!(record[0x19]<=7);
+            let height=i32::from_le_bytes(record[39..43].try_into().unwrap())-i32::from_le_bytes(record[17..21].try_into().unwrap());
+            let draw=|r:&[u8;124],pixels:&mut Vec<u8>|draw_supported_mule_record(&resources.mule,r,[48,40],height,0,0,false,0,0,&resources.fade,&resources.gla,[96,80],96,pixels);
+            let mut pair_pixels=vec![0x55;96*80];let receipt=draw(&record,&mut pair_pixels).unwrap();assert!(receipt.components.iter().map(|c|c.pixels_written).sum::<usize>()>0);
+            record[0x5e]=1;let mut approach_pixels=vec![0x55;96*80];draw(&record,&mut approach_pixels).unwrap();assert_eq!(pair_pixels,approach_pixels);
+            record[0x5e]=3;record[0x19]=8;let saved=pair_pixels.clone();assert_eq!(draw(&record,&mut pair_pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pair_pixels,saved);
+            record[0x19]=0;record[0x1b]=255;assert_eq!(draw(&record,&mut pair_pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pair_pixels,saved);
+            record[0x5e]=2;record[0x1b]=0;assert_eq!(draw(&record,&mut pair_pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pair_pixels,saved);
         }
     }
 
