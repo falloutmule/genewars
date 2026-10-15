@@ -93,3 +93,5 @@ pub mod actor_construction_placement;
 pub mod result_carry;
 
 pub mod ui_animation;
+
+pub mod genepod_idle;

@@ -1,0 +1,50 @@
+{
+  "status": "partial-source-backed-contract",
+  "reference": "verified CD GENEWARS QA BETA V5",
+  "source_pins": {
+    "private/ghidra/building-update/instructions-000451f0.txt": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+    "private/ghidra/building-loader-refs/instructions-000814a0.txt": "e8b748ce7d92c8651f4b658033994c4626c6737805f7d8d972a9c9a7c338f8ec",
+    "private/ghidra/building-loader-refs/instructions-0001c120.txt": "fd6d61b6f562770b3e34fe65b6fa6ecb9c700ae7aaaa3876f3826e3285670255",
+    "private/ghidra/activation-rng-refs/instructions-00036920.txt": "41a3d289a19a9bf664f1dc23806f3aa2089ef31c9c22c558d6f6fc4620095ebe",
+    "private/ghidra/validated/memory-.object1.bin": "92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe",
+    "private/ghidra/validated/memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+  },
+  "idle": {
+    "literal_full_world_cases": 8,
+    "world_bytes_per_case": 409793,
+    "source_created_completed_fixture": true,
+    "actual_Krell_gameplay_capture": false,
+    "power_base": 0,
+    "first_callback_changes": {
+      "building_0x19": [
+        0,
+        1
+      ]
+    },
+    "rng_draws": 0,
+    "engine_implementation_compared": false
+  },
+  "request": {
+    "opcode": 12,
+    "handler": "814A0",
+    "payload": {
+      "0": "signed i16 species",
+      "2": "signed i16 building slot",
+      "4": "i16 start nonzero / cancel zero",
+      "10": "u8 opcode12"
+    },
+    "Mule_species": 4,
+    "Mule_base_cost": 75,
+    "grade0_initial_debit": 0,
+    "grade0_work_ticks": 75,
+    "grade0_cost_per_eligible_tick": 1,
+    "UI_hit_target": "unresolved: numeric handler and AI caller corroborated; player UI producer not yet traced"
+  },
+  "blockers": [
+    "Literal production request comparison pending",
+    "Literal productive/factory/failure callback comparison pending",
+    "Human UI producer and source eligibility validation pending",
+    "Captured actual first Krell Genepod callback pending"
+  ],
+  "next_minimal_implementation": "Admit bounded completed idle selector0 with shared animation/power bookkeeping, preserve typed unsupported for positive production countdown; compare whole source outputs before admission."
+}

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "test": "actor_world::admitted_buildings::genepod_idle_tests::genepod_idle_then_late_production_rolls_back_entire_pass",
+  "tests_passed": 1,
+  "tests_filtered": 190,
+  "scope": "Real source building creation/progress then idle pass; fixture-only positive production in later slot rejects whole pass with complete ActorWorld equality. No gameplay acceptance.",
+  "source_pins": {
+    "rust/crates/genewars-runtime/src/genepod_idle.rs": "af972effb3620caa0acc77bb6956e423723456dbbc24ff4265d0069a5210eb97",
+    "rust/crates/genewars-runtime/src/actor_world/admitted_buildings.rs": "ffb023cec612189c79bd3ca7a183800fcd3e2f0a235971dcb0d2a8953254ffef",
+    "rust/crates/genewars-runtime/src/lib.rs": "0eab05c2b808dfed47d90059b5e94082fecf14f8924b197522331b4edbf336b7"
+  },
+  "commands": [
+    "CARGO_BUILD_JOBS=2 python scripts/cargo.py build -p genewars-runtime --offline --locked",
+    "CARGO_BUILD_JOBS=2 python scripts/cargo.py test -p genewars-runtime --offline --locked genepod_idle_then_late_production_rolls_back_entire_pass"
+  ],
+  "harness_note": "First invocation used --exact with shortname and ran0 tests; corrected filtered invocation ran1 test and passed."
+}

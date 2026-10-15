@@ -1,0 +1,155 @@
+{
+  "status": "passed-literal-source-idle-world-comparison",
+  "rust_sha256": "af972effb3620caa0acc77bb6956e423723456dbbc24ff4265d0069a5210eb97",
+  "cases": [
+    {
+      "name": "owner0-fill0",
+      "fixture": "private\\review\\genepod-construction-world\\5ca34ed40b0e438ebeee88697e97addb\\selector0-owner0-loadingfalse-step3\\after.bin",
+      "fixture_sha256": "09c9cdbb02a3df81ab1c73ea65eb46d016ace11a1d34945dcd64481eecb3546c",
+      "after_sha256": "9bfe0dbff07f0046a5b0081fc0da5909894bef41a3f226f520329ac6011e8d6f",
+      "whole_world_bytes": 409793,
+      "literal_instructions": 286,
+      "building_changes": [
+        {
+          "offset": "0x19",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "player_changes": [],
+      "rng_unchanged": true
+    },
+    {
+      "name": "owner0-fill255",
+      "fixture": "private\\review\\genepod-construction-world\\5ca34ed40b0e438ebeee88697e97addb\\selector0-owner0-loadingfalse-step3\\after.bin",
+      "fixture_sha256": "09c9cdbb02a3df81ab1c73ea65eb46d016ace11a1d34945dcd64481eecb3546c",
+      "after_sha256": "9bfe0dbff07f0046a5b0081fc0da5909894bef41a3f226f520329ac6011e8d6f",
+      "whole_world_bytes": 409793,
+      "literal_instructions": 286,
+      "building_changes": [
+        {
+          "offset": "0x19",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "player_changes": [],
+      "rng_unchanged": true
+    },
+    {
+      "name": "owner1-fill0",
+      "fixture": "private\\review\\genepod-construction-world\\5ca34ed40b0e438ebeee88697e97addb\\selector0-owner1-loadingfalse-step3\\after.bin",
+      "fixture_sha256": "3d17bafc3f0ed4a0541b5a47e79d87abd31a541d5702cca10e35d651c6e53116",
+      "after_sha256": "864bac334e88838113fcabf9c440749b904ada3d0ea2013331c5aa63a3bbe409",
+      "whole_world_bytes": 409793,
+      "literal_instructions": 286,
+      "building_changes": [
+        {
+          "offset": "0x19",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "player_changes": [],
+      "rng_unchanged": true
+    },
+    {
+      "name": "owner1-fill255",
+      "fixture": "private\\review\\genepod-construction-world\\5ca34ed40b0e438ebeee88697e97addb\\selector0-owner1-loadingfalse-step3\\after.bin",
+      "fixture_sha256": "3d17bafc3f0ed4a0541b5a47e79d87abd31a541d5702cca10e35d651c6e53116",
+      "after_sha256": "864bac334e88838113fcabf9c440749b904ada3d0ea2013331c5aa63a3bbe409",
+      "whole_world_bytes": 409793,
+      "literal_instructions": 286,
+      "building_changes": [
+        {
+          "offset": "0x19",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "player_changes": [],
+      "rng_unchanged": true
+    },
+    {
+      "name": "owner2-fill0",
+      "fixture": "private\\review\\genepod-construction-world\\5ca34ed40b0e438ebeee88697e97addb\\selector0-owner2-loadingfalse-step3\\after.bin",
+      "fixture_sha256": "732c32b6ff4dae3355b199576a6ad6ae9c6af9c8b11bfd50509d9299831a80fc",
+      "after_sha256": "2c17a4b2845c3c23b7206785d9c273a9047f38cd0e7af5ecc2fb4152797330d7",
+      "whole_world_bytes": 409793,
+      "literal_instructions": 286,
+      "building_changes": [
+        {
+          "offset": "0x19",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "player_changes": [],
+      "rng_unchanged": true
+    },
+    {
+      "name": "owner2-fill255",
+      "fixture": "private\\review\\genepod-construction-world\\5ca34ed40b0e438ebeee88697e97addb\\selector0-owner2-loadingfalse-step3\\after.bin",
+      "fixture_sha256": "732c32b6ff4dae3355b199576a6ad6ae9c6af9c8b11bfd50509d9299831a80fc",
+      "after_sha256": "2c17a4b2845c3c23b7206785d9c273a9047f38cd0e7af5ecc2fb4152797330d7",
+      "whole_world_bytes": 409793,
+      "literal_instructions": 286,
+      "building_changes": [
+        {
+          "offset": "0x19",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "player_changes": [],
+      "rng_unchanged": true
+    },
+    {
+      "name": "owner3-fill0",
+      "fixture": "private\\review\\genepod-construction-world\\5ca34ed40b0e438ebeee88697e97addb\\selector0-owner3-loadingfalse-step3\\after.bin",
+      "fixture_sha256": "423a687b20668b739b409aa8074959d370df570e358b39e23cbbd0cba2ccb05d",
+      "after_sha256": "272aa2ea89848c27d0f524af38f9c8399c53b18991197df888235e6457444589",
+      "whole_world_bytes": 409793,
+      "literal_instructions": 286,
+      "building_changes": [
+        {
+          "offset": "0x19",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "player_changes": [],
+      "rng_unchanged": true
+    },
+    {
+      "name": "owner3-fill255",
+      "fixture": "private\\review\\genepod-construction-world\\5ca34ed40b0e438ebeee88697e97addb\\selector0-owner3-loadingfalse-step3\\after.bin",
+      "fixture_sha256": "423a687b20668b739b409aa8074959d370df570e358b39e23cbbd0cba2ccb05d",
+      "after_sha256": "272aa2ea89848c27d0f524af38f9c8399c53b18991197df888235e6457444589",
+      "whole_world_bytes": 409793,
+      "literal_instructions": 286,
+      "building_changes": [
+        {
+          "offset": "0x19",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "player_changes": [],
+      "rng_unchanged": true
+    }
+  ],
+  "private_run": "private\\review\\genepod-idle-source\\0586f7b594f54354a90ff24313b604e4",
+  "listing_sha256": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+  "resource_sha256": "a71f03d3cce3d36798cd7f8ad578d665e65883bfe9b541ba93d0ad9eff814cab",
+  "script_sha256": "5afdadfd005be73774b8327c6e495f6a1166d4ad34eb8c967371f88640674245",
+  "ports": [
+    "83140 render queue request only"
+  ],
+  "limitations": [
+    "Pure callback afterimages composed into wholeworld; scheduler checked separately",
+    "Construction fixtures, not actual Krell gameplay capture",
+    "No production request/factory branch executed"
+  ],
+  "power_base": 0
+}

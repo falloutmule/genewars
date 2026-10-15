@@ -6,6 +6,7 @@ use crate::source_building_resources::SourceBuildingResourceDatabase;
 
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub enum AdmittedBuildingCallback {
+    GenepodIdle{slot:u16,plan:crate::genepod_idle::GenepodIdlePlan},
     Incomplete{slot:u16,plan:crate::building_callback::IncompleteBuildingPlan},
     Turret{slot:u16,plan:crate::completed_building::TurretTrackingPlan},
     Extractor{slot:u16,plan:crate::extractor_production::ExtractorIdlePlan},
@@ -59,6 +60,13 @@ impl ActorWorld {
                     let plan=if selector==1{staged.step_incomplete_selector1_building(slot as u16,turret)?}
                     else{staged.step_incomplete_source_building(slot as u16,resources.iter().find(|r|r.selector()==selector).unwrap())?};
                     AdmittedBuildingCallback::Incomplete{slot:slot as u16,plan}
+                }else if selector==0 {
+                    let player=*staged.players[usize::from(owner)].bytes();
+                    let plan=crate::genepod_idle::plan_completed_idle(&record,&player)
+                        .map_err(|_|ActorWorldError::BuildingCallback(crate::building_callback::BuildingCallbackError::UnsupportedBuilding))?;
+                    staged.buildings.as_mut().unwrap().replace_record_checked(slot,&record,&plan.building_after)?;
+                    staged.players[usize::from(owner)].replace_bookkeeping_checked(&player,&plan.player_after)?;
+                    AdmittedBuildingCallback::GenepodIdle{slot:slot as u16,plan}
                 }else if selector==1 {
                     AdmittedBuildingCallback::Turret{slot:slot as u16,plan:staged.step_tracking_completed_selector1_building(slot as u16,turret,frame,physics)?}
                 }else if matches!(selector,3|6) && production.is_some(){
@@ -93,4 +101,39 @@ impl ActorWorld {
         staged.validate_links()?;staged.validate_building_counts()?;*self=staged;
         Ok(AdmittedBuildingPass{callbacks,notices})
     }
+}
+
+#[cfg(test)]
+mod genepod_idle_tests {
+ use super::*;
+ use crate::{actor_pool::ActorHandleBindings,blueprint::BlueprintRng,player_state::PlayerState,source_building_resources::SourceBuildingBinding,physics_tables::PhysicsTables};
+ use genewars_assets::ConqMissionSource;
+ #[test]
+ fn genepod_idle_then_late_production_rolls_back_entire_pass(){
+ let root=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+ let load=|s:&str|std::fs::read(root.join(s)).unwrap();
+ let raw=load("private/integration/game-runtime/terrain/CONQ001.DAT");let mission=ConqMissionSource::parse(&raw).unwrap();
+ let players=core::array::from_fn(|p|PlayerState::fresh_campaign(p as u8,[20736,13568],b"fixture\0").unwrap());
+ let mut world=ActorWorld::from_mission(&mission,&[[0;200];20],[ActorHandleBindings::empty();20],players,BlueprintRng{seed:5428,ring:31,draw_count:0}).unwrap();
+ world.admit_creatures(&[[0;124];300]).unwrap();world.admit_buildings(&[[0;67];256],[None;256]).unwrap();
+ let slot=world.create_building(0,0,[19839,12927]).unwrap().unwrap().slot;
+ let resource=SourceBuildingResourceDatabase::load(SourceBuildingBinding::CdBgeneSelector0,load("private/integration/game-runtime/buildings/BGENE.ANB")).unwrap();
+ let turret=BuildingResourceDatabase::load_selector1_bturr(load("private/reference-run/run-006/drive-c/GAME/DATA/BUILDING/BTURR.ANB")).unwrap();
+ let physics=PhysicsTables::from_mapped_bytes(&load("private/integration/game-runtime/physics/angle.bin"),&load("private/integration/game-runtime/physics/bounce.bin")).unwrap();
+ assert!(world.progress_admitted_grade0_building(slot,280,false).unwrap().completed);
+
+ let first_before=world.clone();
+ let pass=world.step_admitted_building_callbacks(1,0,&turret,&[resource.clone()],1,&physics,|_|false).unwrap();
+ assert!(matches!(pass.callbacks[0],AdmittedBuildingCallback::GenepodIdle{..}));
+ assert_eq!(world.buildings().unwrap().record(slot as usize).unwrap()[25],1);
+ assert_eq!(world.rng(),first_before.rng());
+ let second=world.create_building(0,0,[21000,14000]).unwrap().unwrap().slot;
+ world.progress_admitted_grade0_building(second,280,false).unwrap();
+ let before=*world.buildings().unwrap().record(second as usize).unwrap();let mut active=before;active[54..58].copy_from_slice(&75i32.to_le_bytes());
+ world.buildings.as_mut().unwrap().replace_record_checked(second as usize,&before,&active).unwrap();
+ let snapshot=world.clone();
+ let error=world.step_admitted_building_callbacks(1,0,&turret,&[resource],2,&physics,|_|false).unwrap_err();
+ assert!(matches!(error,ActorWorldError::BuildingCallback(crate::building_callback::BuildingCallbackError::UnsupportedBuilding)));
+ assert_eq!(world,snapshot);
+ }
 }

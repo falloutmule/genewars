@@ -1,0 +1,17 @@
+{
+  "status": "passed-bounded-genepod-idle-callback",
+  "cases": 96,
+  "compared_bytes": 179712,
+  "literal_instructions": 27958,
+  "rust_sha256": "af972effb3620caa0acc77bb6956e423723456dbbc24ff4265d0069a5210eb97",
+  "listing_sha256": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+  "resource_sha256": "a71f03d3cce3d36798cd7f8ad578d665e65883bfe9b541ba93d0ad9eff814cab",
+  "ports": [
+    "render queue; audio replacements unreachable in admitted idle branch"
+  ],
+  "exclusions": [
+    "positive production countdown",
+    "disabled/destruction/repair states",
+    "whole-world scheduler"
+  ]
+}
