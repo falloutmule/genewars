@@ -146,6 +146,150 @@
       "instructions": 885
     },
     {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 0,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 884
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 0,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 889
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 1,
+      "goal_equal": false,
+      "queries": 1,
+      "instructions": 184
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 1,
+      "goal_equal": true,
+      "queries": 1,
+      "instructions": 189
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 2,
+      "goal_equal": false,
+      "queries": 2,
+      "instructions": 284
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 2,
+      "goal_equal": true,
+      "queries": 2,
+      "instructions": 289
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 3,
+      "goal_equal": false,
+      "queries": 3,
+      "instructions": 384
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 3,
+      "goal_equal": true,
+      "queries": 3,
+      "instructions": 389
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 4,
+      "goal_equal": false,
+      "queries": 4,
+      "instructions": 482
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 4,
+      "goal_equal": true,
+      "queries": 4,
+      "instructions": 487
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 5,
+      "goal_equal": false,
+      "queries": 5,
+      "instructions": 580
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 5,
+      "goal_equal": true,
+      "queries": 5,
+      "instructions": 585
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 6,
+      "goal_equal": false,
+      "queries": 6,
+      "instructions": 680
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 6,
+      "goal_equal": true,
+      "queries": 6,
+      "instructions": 685
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 7,
+      "goal_equal": false,
+      "queries": 7,
+      "instructions": 780
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 7,
+      "goal_equal": true,
+      "queries": 7,
+      "instructions": 785
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 8,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 880
+    },
+    {
+      "state": 3,
+      "seed": 1,
+      "accepted_at": 8,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 885
+    },
+    {
       "state": 8,
       "seed": 1,
       "accepted_at": 0,
@@ -427,6 +571,150 @@
     },
     {
       "state": 1,
+      "seed": 2,
+      "accepted_at": 8,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 885
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 0,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 884
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 0,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 889
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 1,
+      "goal_equal": false,
+      "queries": 1,
+      "instructions": 184
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 1,
+      "goal_equal": true,
+      "queries": 1,
+      "instructions": 189
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 2,
+      "goal_equal": false,
+      "queries": 2,
+      "instructions": 284
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 2,
+      "goal_equal": true,
+      "queries": 2,
+      "instructions": 289
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 3,
+      "goal_equal": false,
+      "queries": 3,
+      "instructions": 384
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 3,
+      "goal_equal": true,
+      "queries": 3,
+      "instructions": 389
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 4,
+      "goal_equal": false,
+      "queries": 4,
+      "instructions": 482
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 4,
+      "goal_equal": true,
+      "queries": 4,
+      "instructions": 487
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 5,
+      "goal_equal": false,
+      "queries": 5,
+      "instructions": 580
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 5,
+      "goal_equal": true,
+      "queries": 5,
+      "instructions": 585
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 6,
+      "goal_equal": false,
+      "queries": 6,
+      "instructions": 680
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 6,
+      "goal_equal": true,
+      "queries": 6,
+      "instructions": 685
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 7,
+      "goal_equal": false,
+      "queries": 7,
+      "instructions": 780
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 7,
+      "goal_equal": true,
+      "queries": 7,
+      "instructions": 785
+    },
+    {
+      "state": 3,
+      "seed": 2,
+      "accepted_at": 8,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 880
+    },
+    {
+      "state": 3,
       "seed": 2,
       "accepted_at": 8,
       "goal_equal": true,
@@ -715,6 +1003,150 @@
     },
     {
       "state": 1,
+      "seed": 29645,
+      "accepted_at": 8,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 886
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 0,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 885
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 0,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 890
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 1,
+      "goal_equal": false,
+      "queries": 1,
+      "instructions": 185
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 1,
+      "goal_equal": true,
+      "queries": 1,
+      "instructions": 190
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 2,
+      "goal_equal": false,
+      "queries": 2,
+      "instructions": 285
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 2,
+      "goal_equal": true,
+      "queries": 2,
+      "instructions": 290
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 3,
+      "goal_equal": false,
+      "queries": 3,
+      "instructions": 383
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 3,
+      "goal_equal": true,
+      "queries": 3,
+      "instructions": 388
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 4,
+      "goal_equal": false,
+      "queries": 4,
+      "instructions": 481
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 4,
+      "goal_equal": true,
+      "queries": 4,
+      "instructions": 486
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 5,
+      "goal_equal": false,
+      "queries": 5,
+      "instructions": 581
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 5,
+      "goal_equal": true,
+      "queries": 5,
+      "instructions": 586
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 6,
+      "goal_equal": false,
+      "queries": 6,
+      "instructions": 681
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 6,
+      "goal_equal": true,
+      "queries": 6,
+      "instructions": 686
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 7,
+      "goal_equal": false,
+      "queries": 7,
+      "instructions": 781
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 7,
+      "goal_equal": true,
+      "queries": 7,
+      "instructions": 786
+    },
+    {
+      "state": 3,
+      "seed": 29645,
+      "accepted_at": 8,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 881
+    },
+    {
+      "state": 3,
       "seed": 29645,
       "accepted_at": 8,
       "goal_equal": true,
@@ -878,12 +1310,18 @@
       "context_sha256": "6f27d1262f618029325afefcb737f8510abfd88d39fc2359789a11e38556f454",
       "queries": 1,
       "instructions": 189
+    },
+    {
+      "actual_intermediate_frame": 675,
+      "record_sha256": "b0267b64cbeae0ced5d6d55b855e5d3a83e4a719ea03852e1c97776d2cf99643",
+      "context_sha256": "fca4745467aeb4794efa15ad0fec0ab7f88559a7767bba5e0d3c3cdacbeb397f",
+      "queries": 1,
+      "instructions": 188
     }
   ],
   "rejected_states": [
     0,
     2,
-    3,
     4,
     5,
     6,
@@ -892,10 +1330,10 @@
     10,
     255
   ],
-  "compared_bytes": 16640,
-  "rust_sha256": "8eef7b0b3e59d4faf653eeb687c539a1cf5f6a231fc00b1e6221a1504f546622",
-  "script_sha256": "cc1188ad9837d5ef52b72d35e7cb66342cbd6a1bcfef88c65219bcad26506d15",
-  "private_run": "private\\review\\mule-cell-entry\\f757e9a4f6444026a3c98c6940b38203",
+  "compared_bytes": 24960,
+  "rust_sha256": "dd8915cf32189ae3720b0d02ae8b6c3f8bff54cc301cf84c3fd91225c2055411",
+  "script_sha256": "0dc94143c4458be58a0145766e14d705a1196bf55281541b9576782211523ae1",
+  "private_run": "private\\review\\mule-cell-entry\\80fcd1e625204b38b2c282f9660aac36",
   "source_pins": {
     "private\\ghidra\\krell-cell-entry\\instructions-00073f70.txt": "39d73c8ba1a4295079b7115b24a39c90ecbadb1df20fa840ed4d0441ee5e7d69",
     "private\\ghidra\\initial-creature\\instructions-0005b100.txt": "32f6824af152305c75e3639c1917ee35e5e80a2a801a90e768415e73ea51e02d",
@@ -908,5 +1346,5 @@
     "virtual8C true",
     "74D90 deterministic accept ordinal; original querypoints preserved"
   ],
-  "scope": "108 synthetic state1/8 callback fixtures and exact frame8/498 intermediate records, literal5B260/73F70. No world adapter/ordinary gameplay claim."
+  "scope": "162 synthetic state1/3/8 callback fixtures and exact frame8/498/675 intermediate records, literal5B260/73F70. No world adapter/ordinary gameplay claim."
 }

@@ -23,7 +23,7 @@ target=P/'private/build/rust-target/debug';exe=work/'probe.exe'
 subprocess.run([str(P/'private/tools/rust/cargo/bin/rustc.exe'),'--edition=2021',str(h),'--extern',f'genewars_runtime={target}/libgenewars_runtime.rlib','-L',f'dependency={target}/deps','-o',str(exe)],env=environment(),check=True)
 base=(P/'private/review/krell-mule-callbacks-004/frame-8-slot-1-before/creatures.bin').read_bytes()[124:248]
 inputs=bytearray();expected=bytearray();cases=[]
-for seed,creature_state in [(seed,state)for seed in [1,2,29645]for state in [1,8]]:
+for seed,creature_state in [(seed,state)for seed in [1,2,29645]for state in [1,3,8]]:
  for accept_at in range(9):
   for goal_equal in [False,True]:
    b=bytearray(base);struct.pack_into('<hh',b,7,31988,22528);b[0x5e]=creature_state
@@ -34,21 +34,25 @@ for seed,creature_state in [(seed,state)for seed in [1,2,29645]for state in [1,8
    a=bytes(x.load(0x1542be+i,1)for i in range(124));rng=struct.pack('<HBI',x.load(0x11878a,2),x.load(0x11872c,1),x.load(0x118782,4))
    inputs+=b+struct.pack('<HHBI',cell,seed,1,33668)+bytes([accept_at]);expected+=a+rng+bytes([len(x.points)])+b''.join(struct.pack('<hh',*pt)for pt in x.points)
    cases.append(dict(state=creature_state,seed=seed,accepted_at=accept_at,goal_equal=goal_equal,queries=len(x.points),instructions=report['steps']))
-for entry_frame in [8,498]:
+for entry_frame in [8,498,675]:
  # Exact intermediate record captured at5B271 during full frame8 literal callback.
- actual_entry=P/('private/review/mule-cell-entry-actual' if entry_frame==8 else 'private/review/mule-cell-entry-actual-498');b=(actual_entry/'record.bin').read_bytes();context=(actual_entry/'context.bin').read_bytes();cell,seed,ring,draws=struct.unpack('<HHBI',context)
+ if entry_frame==675:
+  actual_entry=P/'private/review/krell-rendezvous-boundaries/6582ce34187d4230a4135633e70ae64a/5b260';b=(actual_entry/'creature-2.bin').read_bytes();registers=json.loads((actual_entry/'registers.json').read_text());cell=(registers['EDX']-0x11c2be)//14;context=struct.pack('<H',cell)+(actual_entry/'rng.bin').read_bytes()
+ else:
+  actual_entry=P/('private/review/mule-cell-entry-actual' if entry_frame==8 else 'private/review/mule-cell-entry-actual-498');b=(actual_entry/'record.bin').read_bytes();context=(actual_entry/'context.bin').read_bytes()
+ cell,seed,ring,draws=struct.unpack('<HHBI',context)
  state={0x1542be+i:v for i,v in enumerate(b)};state[0x11872c]=ring;state.update({0x118782+i:v for i,v in enumerate(struct.pack('<I',draws))});x.points=[];x.accept_at=1
  report,_,_=x.run(seed=seed,state_before=state,entry=0x5b260,registers={'EAX':0x1542be,'EDX':0x11c2be+cell*14})
  a=bytes(x.load(0x1542be+i,1)for i in range(124));rng=struct.pack('<HBI',x.load(0x11878a,2),x.load(0x11872c,1),x.load(0x118782,4))
- assert x.points==([(31782,22375)] if entry_frame==8 else [(31155,21850)])
+ if entry_frame!=675:assert x.points==([(31782,22375)] if entry_frame==8 else [(31155,21850)])
  inputs+=b+context+bytes([1]);expected+=a+rng+bytes([1])+struct.pack('<hh',*x.points[0])
  cases.append(dict(actual_intermediate_frame=entry_frame,record_sha256=hashlib.sha256(b).hexdigest(),context_sha256=hashlib.sha256(context).hexdigest(),queries=1,instructions=report['steps']))
 actual=subprocess.run([str(exe)],input=inputs,capture_output=True,check=True).stdout
 assert actual==expected,[(i,a,b)for i,(a,b)in enumerate(zip(actual,expected))if a!=b][:16]
-rejected=bytearray();negative_states=[0,2,3,4,5,6,7,9,10,255]
+rejected=bytearray();negative_states=[0,2,4,5,6,7,9,10,255]
 for invalid_state in negative_states:
  bad=bytearray(b);bad[0x5e]=invalid_state;rejected+=bad+context+bytes([1])
 assert subprocess.run([str(exe),'--reject'],input=rejected,capture_output=True,check=True).stdout==bytes([1])*len(negative_states)
 (work/'inputs.bin').write_bytes(inputs);(work/'expected.bin').write_bytes(expected)
-receipt=dict(status='passed',cases=cases,rejected_states=negative_states,compared_bytes=len(actual),rust_sha256=hashlib.sha256(rust.read_bytes()).hexdigest(),script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),private_run=str(work.relative_to(P)),source_pins={str(p.relative_to(P)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [extra,P/'private/ghidra/initial-creature/instructions-0005b100.txt',P/'private/ghidra/validated/memory-.object1.bin',P/'private/ghidra/validated/memory-.object3.bin']},oracle_annotation='Raw66A3 at5B2E5 proves word seed store; unsized listing normalized.',ports=['virtual10 false','virtual8C true','74D90 deterministic accept ordinal; original querypoints preserved'],scope='108 synthetic state1/8 callback fixtures and exact frame8/498 intermediate records, literal5B260/73F70. No world adapter/ordinary gameplay claim.')
+receipt=dict(status='passed',cases=cases,rejected_states=negative_states,compared_bytes=len(actual),rust_sha256=hashlib.sha256(rust.read_bytes()).hexdigest(),script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),private_run=str(work.relative_to(P)),source_pins={str(p.relative_to(P)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [extra,P/'private/ghidra/initial-creature/instructions-0005b100.txt',P/'private/ghidra/validated/memory-.object1.bin',P/'private/ghidra/validated/memory-.object3.bin']},oracle_annotation='Raw66A3 at5B2E5 proves word seed store; unsized listing normalized.',ports=['virtual10 false','virtual8C true','74D90 deterministic accept ordinal; original querypoints preserved'],scope='162 synthetic state1/3/8 callback fixtures and exact frame8/498/675 intermediate records, literal5B260/73F70. No world adapter/ordinary gameplay claim.')
 (P/'research/variants/mule-cell-entry-review.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(dict(status=receipt['status'],cases=len(cases),compared_bytes=len(actual))))

@@ -105,3 +105,5 @@ pub mod mule_waypoint_wait;
 pub mod mule_lost_food;
 
 pub mod mule_pair_init;
+
+pub mod mule_pair_rendezvous;

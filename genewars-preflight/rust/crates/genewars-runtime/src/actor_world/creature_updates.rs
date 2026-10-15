@@ -81,7 +81,13 @@ impl ActorWorld {
                     if record[0x61]&0x20!=0{return Err(CreatureError::UnsupportedMotionState);}
                     let peer=world.entity(reference(record,0x55)).map_err(|_|CreatureError::UnsupportedMotionState)?;
                     let point=[word(peer,7),word(peer,9)];let saved_cell=floor_cell([word(record,7),word(record,9)]);
-                    if floor_cell(point)==saved_cell{return Err(CreatureError::UnsupportedMotionState);}
+                    if floor_cell(point)==saved_cell{
+                        let raw=reference(record,0x55);let id=word(&raw,0)as u16;
+                        let other=*world.creatures.as_ref().unwrap().record(id as usize)?;
+                        let pair=crate::mule_pair_rendezvous::plan_rendezvous(record,&other,saved_cell as u16).map_err(|_|CreatureError::UnsupportedMotionState)?;
+                        pending_pair=Some((id,other,pair.peer_after,Vec::new()));
+                        return Ok(pair.current_after);
+                    }
                     let mut after=*record;
                     if creature_world::mule_callback_phase(&before,context.frame_counter)&3==3{after[11..13].copy_from_slice(&point[0].to_le_bytes());after[13..15].copy_from_slice(&point[1].to_le_bytes());after[0x49]|=4;}
                     return Ok(after);
@@ -322,7 +328,7 @@ impl ActorWorld {
     fn mule_cell_entry_predicate(&self,record:&CreatureRecord,cell:usize)->Result<bool,ActorWorldError>{
         let own=[record[15],record[16],1];
         let approach_plant=record[0x5e]==1&&record[0x57]==2&&self.entity(reference(record,0x55))?[6]==2;
-        if record[0x5e]!=8&&!approach_plant{self.check_mule_cell_entry(own,cell)?;return Ok(false);}
+        if !matches!(record[0x5e],3|8)&&!approach_plant{self.check_mule_cell_entry(own,cell)?;return Ok(false);}
         if word(record,0x49)as u16&0x0400!=0{return Err(CreatureError::UnsupportedCellEntry.into());}
         let mut raw=reference(self.map(),cell*14+6);let mut last=None;
         while raw[2]!=0{
