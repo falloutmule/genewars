@@ -212,7 +212,18 @@ pub fn draw_supported_mule_record(
     //above half food reserve. Below that threshold the ordinary body is exact.
     let no_lifecycle_icon = record[0x79] as i8 <= 0
         || i16::from_le_bytes([record[0x68],record[0x69]]) <= (i16::from_le_bytes([record[0x62],record[0x63]]) >> 1);
-    let owned_ordinary = matches!(record[0x5e],0|8) && no_lifecycle_icon
+    //59470 does not branch on task7 or these references in its body pass.
+    //The world owns reciprocal live-target binding; this record-only renderer
+    //admits only the exact retained task7 pursuit shape, never combat states.
+    let target = i16::from_le_bytes([record[0x55],record[0x56]]);
+    let owned_hostile = record[0x5e]==1 && record[0x78]==7
+        && record[0x61]==0 && matches!(record[0x60],0x48|0xc8)
+        && record[0x76]<=90 && record[0x4f]==0 && record[0x5d]==0
+        && record[0x52]==1 && record[0x57]==1 && record[0x5a]==1
+        && record[0x50..0x53]==record[0x55..0x58]
+        && record[0x58..0x5b]==record[0x55..0x58]
+        && (0..300).contains(&target) && target!=i16::from_le_bytes([record[15],record[16]]);
+    let owned_ordinary = (matches!(record[0x5e],0|8) || owned_hostile) && no_lifecycle_icon
         && (record[0x7b]==0 || record[0x7b]>191) && !(record[0x5e]==0 && record[0x60]&0x20!=0);
     if record[6] != 1 || record[0x18] > 4 || record[0x7a] != 4 || !admitted_pair || (owned && !owned_ordinary) {
         return Err(CreatureDrawError::UnsupportedRecordState);
@@ -1173,9 +1184,12 @@ mod pair_stop_render_tests {
   let(resources,_,_)=crate::runtime_resources::Resources::load(&p.join("private/integration/game-runtime")).unwrap();
   let raw=std::fs::read(p.join("private/review/krell-production-100/frame-2724-slot-7-owned-after/creatures.bin")).unwrap();
   let captured:[u8;124]=raw[7*124..8*124].try_into().unwrap();assert_eq!((captured[24],captured[94],captured[25]),(0,8,3));
+  let hostile_pool=std::fs::read(p.join("private/review/owned-mule-captured-width/42967be6fee844c78bec6cd127c7158f/creatures.bin")).unwrap();
+  let hostile:[u8;124]=hostile_pool[124..248].try_into().unwrap();
+  assert_eq!((hostile[94],hostile[0x78],hostile[0x60],hostile[0x61]),(1,7,0xc8,0));
   let mut lines=Vec::new();let mut owner_images=Vec::new();
-  for owner in 0..4 {for variant in 0..5 {
-   let mut r=captured;r[24]=owner;let mut height=4312;let mut inherited=0;
+  for owner in 0..4 {for variant in 0..6 {
+   let mut r=if variant==5{hostile}else{captured};r[24]=owner;let mut height=if variant==5{0}else{4312};let mut inherited=0;
    match variant {1=>{height=0;r[23]=5;},2=>{height=0;r[23]=5;r[21]|=2;inherited=1;},3=>{height=0;r[118]=100;r[119]=255;inherited=2;},4=>{r[121]=3;r[0x62..0x64].copy_from_slice(&127i16.to_le_bytes());r[0x68..0x6a].copy_from_slice(&16i16.to_le_bytes());},_=>{}}
    let mut pixels=vec![0xa5;68*128+4];let receipt=draw_supported_mule_record(&resources.mule,&r,[24,90],height,0,inherited,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut pixels).unwrap();
    assert!(receipt.components.iter().map(|p|p.pixels_written).sum::<usize>()>0);if variant==0{owner_images.push(pixels.clone());}
@@ -1184,6 +1198,11 @@ mod pair_stop_render_tests {
   }}
   for pair in owner_images.windows(2){assert_ne!(pair[0],pair[1]);}
   if let Some(output)=std::env::var_os("GENEWARS_OWNED_RENDER_OUTPUT"){assert!(!std::path::Path::new(&output).exists());std::fs::write(output,lines.join("\n")+"\n").unwrap();}
+  //Unsupported task/reference/flag shapes must reject before destination writes.
+  for(offset,value)in[(0x78,0),(0x52,0),(0x57,0),(0x5a,0),(0x61,0x40),(0x60,8)]{
+   let mut bad=hostile;bad[offset]=value;let mut out=vec![0x55;68*128];let saved=out.clone();
+   assert_eq!(draw_supported_mule_record(&resources.mule,&bad,[24,90],0,0,0,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut out),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(out,saved);
+  }
   let mut icon_required=captured;icon_required[121]=3;
   icon_required[0x62..0x64].copy_from_slice(&127i16.to_le_bytes());icon_required[0x68..0x6a].copy_from_slice(&64i16.to_le_bytes());
   let mut out=vec![0x55;68*128];let prior=out.clone();

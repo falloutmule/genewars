@@ -29,8 +29,16 @@ def main():
   if not 0<=args.slot<300:raise ValueError('invalid creature slot')
   if not 0<=args.frame<=0xffffffff:raise ValueError('invalid source frame')
   record=buffers['creatures.bin'][args.slot*124:(args.slot+1)*124]
-  if record[6]!=1 or record[24]!=0 or record[122]!=4 or record[94]not in(0,8)or struct.unpack_from('<h',record,15)[0]!=args.slot:
-   raise ValueError('requires actual singleplayer owner0 live typed Mule state0/8 with matching identity')
+  if record[6]!=1 or record[24]!=0 or record[122]!=4 or record[94]not in(0,1,8)or struct.unpack_from('<h',record,15)[0]!=args.slot:
+   raise ValueError('requires actual singleplayer owner0 live typed Mule state0/8 or exact hostile state1 with matching identity')
+  if record[94]==1:
+   target=struct.unpack_from('<h',record,0x55)[0]
+   if not 0<=target<300 or target==args.slot:raise ValueError('invalid owned hostile target identity')
+   enemy=buffers['creatures.bin'][target*124:(target+1)*124]
+   if record[0x60] not in(0x48,0xc8)or record[0x61]!=0 or record[0x78]!=7 or record[0x4f]!=0 or record[0x5d]!=0 or record[0x52]!=1 or record[0x57]!=1 or record[0x5a]!=1 or record[0x50:0x53]!=record[0x55:0x58]or record[0x58:0x5b]!=record[0x55:0x58]:
+    raise ValueError('unsupported owned hostile pursuit caller')
+   if enemy[6]!=1 or enemy[24]!=4 or enemy[122]!=4 or enemy[94]!=1 or struct.unpack_from('<h',enemy,15)[0]!=target or struct.unpack_from('<H',enemy,0x49)[0]&0x400:
+    raise ValueError('requires exact live neutralMule state1 hostile target')
   state,seed,resources=g.prepare(buffers);g.k.put(state,0x11878c,1,1)
   vm=Source(buffers['backing.bin'])
   run,_,trace=vm.run(entry=0x5ed20,counter=args.frame,seed=seed,state_before=state,registers={'EAX':0x1542be+args.slot*124},instruction_budget=500000)

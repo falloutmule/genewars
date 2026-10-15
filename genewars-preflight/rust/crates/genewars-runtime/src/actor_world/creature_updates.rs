@@ -542,7 +542,9 @@ impl ActorWorld {
             ||r[0x78]!=0||r[0x76]>90||r[0x4f]!=0||r[0x5d]!=0||r[0x57]!=1||r[0x52]!=1
             ||reference(r,0x50)!=reference(r,0x55)||word(r,0x49)as u16&0x100!=0{return Ok(None);}
         let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;let id=word(r,0x55)as usize;let target=*pool.record(id)?;
-        if target[6]==1&&target[24]==0&&target[0x7a]==4&&target[0x5e]==8&&word(&target,0x6a)>0
+        if target[6]==1&&target[24]==0&&target[0x7a]==4&&(target[0x5e]==8||(target[0x5e]==1&&target[0x78]==7&&target[0x61]==0&&target[0x60]==0xc8
+            &&target[0x4f]==0&&target[0x5d]==0&&reference(&target,0x50)==[r[15],r[16],1]
+            &&reference(&target,0x55)==[r[15],r[16],1]&&reference(&target,0x58)==[r[15],r[16],1]))&&word(&target,0x6a)>0
             &&word(&target,0x49)as u16&0x400==0&&pool.binding(id)?==Some(CreatureAnimationBinding::MuleSelector4){Ok(Some(target))}else{Ok(None)}
     }
     pub(super) fn mule_cell_entry_predicate(&self,record:&CreatureRecord,cell:usize)->Result<bool,ActorWorldError>{
@@ -550,7 +552,7 @@ impl ActorWorld {
         let approach_plant=record[0x5e]==1&&record[0x57]==2&&self.entity(reference(record,0x55))?[6]==2;
         let approach_corpse=record[0x5e]==1&&record[0x57]==1&&record[0x52]==1&&reference(record,0x50)==reference(record,0x55)
             &&matches!(self.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?[0x5e],24..=27);
-        if !matches!(record[0x5e],3|8)&&!approach_plant&&!approach_corpse&&self.mule_live_hostile_target(record)?.is_none(){self.check_mule_cell_entry(own,cell)?;return Ok(false);}
+        if !matches!(record[0x5e],3|8)&&!approach_plant&&!approach_corpse&&self.mule_live_hostile_target(record)?.is_none()&&self.owned_mule_live_hostile_target(record)?.is_none(){self.check_mule_cell_entry(own,cell)?;return Ok(false);}
         if word(record,0x49)as u16&0x0400!=0{return Err(CreatureError::UnsupportedCellEntry.into());}
         let mut raw=reference(self.map(),cell*14+6);let mut last=None;
         while raw[2]!=0{

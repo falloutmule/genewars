@@ -16,6 +16,8 @@ impl ActorWorld {
   let slot=usize::from(slot);let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;
   if pool.binding(slot)?!=Some(CreatureAnimationBinding::MuleSelector4){return Err(CreatureError::UnsupportedMotionState.into());}
   let before=*pool.record(slot)?;if word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
+  let hostile_enemy=self.owned_mule_live_hostile_target(&before)?;
+  if before[0x5e]==1&&hostile_enemy.is_none(){return Err(CreatureError::UnsupportedMotionState.into());}
   let mut rng=self.rng;let(prefix,target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng)?;
   let stage=std::cell::RefCell::new(self.clone());let random=std::cell::RefCell::new(rng);let reveals=std::cell::RefCell::new(Vec::new());let audio=std::cell::RefCell::new(Vec::new());
   let(plan,_water)=crate::owned_mule_callback::plan_owned_after_prefix(&before,&prefix,target,self.map(),context,physics,trig,
@@ -28,7 +30,12 @@ impl ActorWorld {
     }
    },animations,
    |record|{
+    if hostile_enemy.is_some()&&record[0x5e]==1{return Ok(*record);}
     let world=stage.borrow();let mut r=*record;if r[0x5e]==0{r[0x5e]=8;}
+    if let Some(enemy)=world.owned_mule_single_hostile(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)? {
+     let hostile=crate::mule_owned_hostile_acquisition::plan_acquisition(&r,&enemy,*random.borrow()).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+     *random.borrow_mut()=hostile.rng_after;return Ok(hostile.after);
+    }
     world.owned_mule_neighborhood_no_action(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
     let mut rng=random.borrow_mut();for _ in 0..2{rng.seed=rng.seed.wrapping_mul(0xe62d);rng.ring=(rng.ring+1)&31;rng.draw_count=rng.draw_count.wrapping_add(1);}
     if r[0x61]&0x80!=0{
@@ -73,6 +80,19 @@ impl ActorWorld {
       world.creatures.as_mut().unwrap().replace_record_checked(slot,&linked,&damage.after)?;linked=damage.after;
      }
     }
+    if let Some(enemy)=hostile_enemy {
+     let phase=creature_world::mule_callback_phase(&before,context.frame_counter);
+     if phase&1!=0 {
+      if phase&3==3&&32767-i32::from(word(&linked,0x6c))>256{return Err(CreatureError::UnsupportedMotionState);}
+      let delta=[word(&linked,7),word(&linked,9)];let other=[word(&enemy,7),word(&enemy,9)];
+      let z=(i32::from_le_bytes(enemy[39..43].try_into().unwrap()).wrapping_sub(i32::from_le_bytes(linked[39..43].try_into().unwrap())))>>3;
+      let distance=(genewars_core::cd_candidate::distance_squared_wrapping_15(delta,other)as i32).wrapping_add(z.wrapping_mul(z));
+      if distance<=16384{return Err(CreatureError::UnsupportedMotionState);}
+      //5D360 owned phase3 requires the species4 player genetics predicate.
+      //Only its actual zero/no-action branch is reconstructed here.
+      if phase&3==3&&(linked[0x61]&4!=0||world.player(0).map_err(|_|CreatureError::UnsupportedMotionState)?.bytes()[0x6cb]!=0){return Err(CreatureError::UnsupportedMotionState);}
+     }
+    }
     let record=&linked;
     let phase=context.frame_counter.wrapping_add(i32::from(word(record,15))as u32);
     let height=i32::from_le_bytes(record[39..43].try_into().unwrap());let ground=i32::from_le_bytes(record[17..21].try_into().unwrap());
@@ -106,12 +126,45 @@ impl ActorWorld {
    let d=creature_world::common_distance_squared(self.map(),at,[word(b,7),word(b,9)])?;if d<distance{distance=d;result=Some(slot as u16);}
   }Ok(result)
  }
+ /// Completed owned order's sole hostile query, before disposition draws.
+ ///6B7C6/6B7EA require player0's neutral-alliance bit clear. Only a reciprocal
+ ///live neutral Mule pursuit and source-skipped kind8/non11 effects are admitted;
+ ///this proves no friendly count, no food candidates and no extra query RNG.
+ fn owned_mule_single_hostile(&self,r:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
+  if r[24]!=0||r[0x5e]!=8||r[0x60]!=8||r[0x61]!=0||r[0x78]!=7{return Ok(None);}
+  let own=[r[15],r[16],1];let cell=floor_cell([word(r,7),word(r,9)]);let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
+  let mut hostile=None;let mut unsupported=false;
+  for dy in -4..=4{for dx in -4..=4{if dx*dx+dy*dy>16{continue;}let c=(((cy+dy)&127)*128+((cx+dx)&127))as usize;let mut raw=reference(self.map(),c*14+6);
+   while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{
+    1=>{let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;let other=*pool.record(word(&raw,0)as usize)?;
+     if other[24]==4&&other[0x7a]==4&&other[0x5e]==1&&pool.binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::MuleSelector4){
+      if hostile.is_some(){return Err(CreatureError::UnsupportedNeighborhood.into());}hostile=Some(other);
+     }else{unsupported=true;}
+    },
+    5=>{let pool=self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;if pool.record(word(&raw,0)as usize)?[69]==0x11||pool.binding(word(&raw,0)as usize)?.is_none(){unsupported=true;}},
+    8=>{},_=>unsupported=true,
+   }}raw=reference(e,3);}
+  }}
+  if hostile.is_some()&&(unsupported||self.player(0)?.bytes()[0x6e5]&16!=0){return Err(CreatureError::UnsupportedNeighborhood.into());}
+  Ok(hostile)
+ }
+ /// Typed reciprocal owned task7 pursuit, separate from plant/corpse food.
+ pub(super) fn owned_mule_live_hostile_target(&self,r:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
+  if r[6]!=1||r[24]!=0||r[0x7a]!=4||r[0x5e]!=1||r[0x61]!=0||!matches!(r[0x60],0x48|0xc8)||r[0x78]!=7
+   ||r[0x76]>90||r[0x4f]!=0||r[0x5d]!=0||r[0x52]!=1||r[0x57]!=1||r[0x5a]!=1||word(r,0x49)as u16&0x100!=0
+   ||reference(r,0x50)!=reference(r,0x55)||reference(r,0x58)!=reference(r,0x55){return Ok(None);}
+  let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;let id=word(r,0x55)as usize;let target=*pool.record(id)?;
+  if target[6]==1&&target[24]==4&&target[0x7a]==4&&target[0x5e]==1&&target[0x61]==0x40&&matches!(target[0x60],0x48|0xc8)
+   &&target[0x78]==0&&word(&target,0x6a)>0&&word(&target,0x49)as u16&0x400==0
+   &&reference(&target,0x50)==[r[15],r[16],1]&&reference(&target,0x55)==[r[15],r[16],1]
+   &&pool.binding(id)?==Some(CreatureAnimationBinding::MuleSelector4){Ok(Some(target))}else{Ok(None)}
+ }
  /// Bounded no-action neighborhood: full reserve, only own Genepods and
  /// neutral plants, same-owner specialists and Genepod/Extractor buildings.
  /// Source6BA47 kinds3/4 bypass food/pair scoring; building-action queries
  /// still run separately. Same-owner water effects also take6BA47 kind>2.
  ///6BD3D->6B72A skips code1A (all effects except11) before classification;
- /// this adapter additionally proves same-owner/EFF26. Other candidates require the scorer.
+ /// known effects except11 skip independently of ownership; other candidates require the scorer.
  fn owned_mule_neighborhood_no_action(&self,r:&CreatureRecord)->Result<(),ActorWorldError>{
   let food_guard=word(r,0x68)<=word(r,0x62)>>1||r[0x61]&0x40!=0;
   // Completed task7 skips owned idle AI. A hungry query is a proved no-op
@@ -121,7 +174,7 @@ impl ActorWorld {
   let own=[r[15],r[16],1];let point=[word(r,7),word(r,9)];let cell=floor_cell(point);let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
   //8D930 visits sample cells within radius1024, including its boundary.
   for dy in -4..=4{for dx in -4..=4{if dx*dx+dy*dy>16{continue;}let c=(((cy+dy)&127)*128+((cx+dx)&127))as usize;let mut raw=reference(self.map(),c*14+6);
-   while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{2 if !food_guard&&e[24]==4=>{},3 if !food_guard&&e[24]==r[24]=>{},4 if !food_guard&&e[24]==r[24]&&matches!(self.buildings.as_ref().unwrap().record(word(&raw,0)as usize)?[0x2d],0|11)=>{},5 if e[24]==r[24]&&(matches!(self.effects.as_ref().unwrap().record(word(&raw,0)as usize)?[69],0x15|0x30)||(e[69]==0x1a&&self.effects.as_ref().unwrap().binding(word(&raw,0)as usize)?==Some(EffectAnimationBinding::EffAnimation26)))=>{},8=>{},_=>return Err(CreatureError::UnsupportedNeighborhood.into())}}raw=reference(e,3);}
+   while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{2 if !food_guard&&e[24]==4=>{},3 if !food_guard&&e[24]==r[24]=>{},4 if !food_guard&&e[24]==r[24]&&matches!(self.buildings.as_ref().unwrap().record(word(&raw,0)as usize)?[0x2d],0|11)=>{},5 if self.effects.as_ref().unwrap().record(word(&raw,0)as usize)?[69]!=0x11&&self.effects.as_ref().unwrap().binding(word(&raw,0)as usize)?.is_some()=>{},8=>{},_=>return Err(CreatureError::UnsupportedNeighborhood.into())}}raw=reference(e,3);}
   }}Ok(())
  }
  fn owned_mule_reveal(&mut self,at:[i16;2])->Result<Vec<[i16;2]>,ActorWorldError>{

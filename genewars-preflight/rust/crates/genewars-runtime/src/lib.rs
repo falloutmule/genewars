@@ -113,6 +113,7 @@ pub mod mule_lost_food;
 pub mod mule_pair_init;
 pub mod mule_idle_pair_init;
 pub mod mule_hostile_acquisition;
+pub mod mule_owned_hostile_acquisition;
 
 pub mod mule_pair_rendezvous;
 

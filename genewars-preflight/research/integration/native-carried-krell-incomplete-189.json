@@ -1,0 +1,10 @@
+{
+  "status": "incomplete",
+  "reason": "native input replay interrupted at600-second window bound",
+  "latest_observation": "private/integration/native-carried-krell-189/observations/krell-extractor-assigned.json",
+  "krell_step": 256,
+  "presented_frames": 5016,
+  "last_accepted_native": 188,
+  "acceptance_claim": false,
+  "cause": "unresolved; no crash claim"
+}

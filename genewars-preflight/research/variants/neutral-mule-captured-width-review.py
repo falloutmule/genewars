@@ -29,8 +29,12 @@ def main():
    enemy=buffers['creatures.bin'][target*124:(target+1)*124]
    if record[0x60] not in(0x48,0xc8)or record[0x61]!=0x40 or record[0x78]!=0 or record[0x76]>90 or record[0x4f]!=0 or record[0x5d]!=0 or record[0x52]!=1 or record[0x57]!=1 or record[0x50:0x53]!=record[0x55:0x58]:
     raise ValueError('unsupported hostile pursuit caller')
-   if enemy[6]!=1 or enemy[24]!=0 or enemy[122]!=4 or enemy[94]!=8 or struct.unpack_from('<h',enemy,15)[0]!=target or struct.unpack_from('<H',enemy,0x49)[0]&0x400:
-    raise ValueError('requires exact live owned Mule state8 hostile target')
+   if enemy[6]!=1 or enemy[24]!=0 or enemy[122]!=4 or enemy[94] not in(1,8) or struct.unpack_from('<h',enemy,15)[0]!=target or struct.unpack_from('<H',enemy,0x49)[0]&0x400:
+    raise ValueError('requires exact live owned Mule state8/reciprocalstate1 hostile target')
+   if enemy[94]==1:
+    expected_ref=struct.pack('<hB',args.slot,1)
+    if enemy[0x78]!=7 or enemy[0x61]!=0 or enemy[0x60]!=0xc8 or enemy[0x4f]!=0 or enemy[0x5d]!=0 or any(enemy[off:off+3]!=expected_ref for off in(0x50,0x55,0x58)):
+     raise ValueError('unsupported reciprocal owned hostile target')
   state,seed,resources=g.prepare(buffers);g.k.put(state,0x11878c,1,1)
   vm=c.Source(buffers['backing.bin'])
   run,_,trace=vm.run(entry=0x5ed20,counter=args.frame,seed=seed,state_before=state,registers={'EAX':0x1542be+args.slot*124},instruction_budget=500000)
