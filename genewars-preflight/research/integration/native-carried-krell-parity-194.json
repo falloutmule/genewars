@@ -1,0 +1,94 @@
+{
+  "status": "passed",
+  "scope": "same frozen194 ordinary campaign carry and Krell construction, native port controls versus headless",
+  "native_observation": "private\\integration\\native-carried-krell-194\\observations\\__blocked.json",
+  "headless_report": "private/integration/continued-krell-194/report.json",
+  "checks": {
+    "steps": true,
+    "blocked": true,
+    "world_sha256": true,
+    "actor_dispatch_audit": true,
+    "buildings": true,
+    "outcome": true,
+    "creature_states": true,
+    "issued_move_commands": true
+  },
+  "mule_trace": [
+    "PortMuleFocus:1",
+    "PortMuleOrder:1:[658, 24211]"
+  ],
+  "headless_step": 5892,
+  "native_step": 5892,
+  "headless_blocked": "Creatures(UnsupportedMotionState)",
+  "native_blocked": "Creatures(UnsupportedMotionState)",
+  "world_sha256": "ef773e897cd91c7b8b7c2a884c082c8d9900f24edc37e0d5004f90cca309fba7",
+  "process_exit": 1,
+  "limitations": [
+    "Original hardware creature picking remains separate; this verifies current port construction controls",
+    "Not Krell completion; campaign count remains1/24"
+  ],
+  "verified_revision": "ff1df5d (frozen194 executable)",
+  "framebuffer_equal": true,
+  "framebuffer_sha256": "8ff58a86038020c9ea903e6d8a18e7c3acddb98da19174f2d8a47fd7f5814284",
+  "visual_review": "Root inspected native framebuffer; Krell scene rendered",
+  "process_exit_interpretation": "Exit1 is the saved explicit UnsupportedMotionState frontier, not a crash",
+  "campaign_missions": 1,
+  "score": 54,
+  "required_score": 1000,
+  "actual_source_callbacks": [
+    {
+      "output": "private\\review\\neutral-mule-captured-width\\a10f84aa081b4b9ea5d1a797570b253e",
+      "frame": 5882,
+      "slot": 5,
+      "draws": 4,
+      "instructions": 11583,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    },
+    {
+      "output": "private\\review\\owned-mule-captured-width\\14d7528b8e6f402bbc62dcb97c5f4ada",
+      "frame": 5883,
+      "slot": 1,
+      "draws": 0,
+      "instructions": 1607,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    },
+    {
+      "output": "private\\review\\neutral-mule-captured-width\\3843d10b0ba2469a85e372bb1b8ff555",
+      "frame": 5883,
+      "slot": 5,
+      "draws": 0,
+      "instructions": 3550,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    }
+  ]
+}
