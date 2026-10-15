@@ -6,9 +6,9 @@ use crate::physics_tables::PhysicsTables;
 pub struct OwnedMuleReceipt {pub motion:creature_world::CommonPhysicsPlan<124>,pub pending_reveal_vertices:Vec<[i16;2]>,pub pending_audio:Vec<u8>}
 impl ActorWorld {
  pub fn step_owned_mule_slot(&mut self,slot:u16,selected:u8,global_flags:u16,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations)->Result<OwnedMuleReceipt,ActorWorldError>{
-  #[cfg(debug_assertions)] self.capture_numeric_callback(usize::from(slot),context.frame_counter,"owned-before");
+  #[cfg(any(debug_assertions, feature = "callback-captures"))] self.capture_numeric_callback(usize::from(slot),context.frame_counter,"owned-before");
   let result=self.step_owned_mule_slot_inner(slot,selected,global_flags,context,physics,trig,animations);
-  #[cfg(debug_assertions)] match &result {Ok(_)=>self.capture_numeric_callback(usize::from(slot),context.frame_counter,"owned-after"),Err(_)=>self.capture_numeric_callback(usize::from(slot),context.frame_counter,"blocked-before-owned")};
+  #[cfg(any(debug_assertions, feature = "callback-captures"))] match &result {Ok(_)=>self.capture_numeric_callback(usize::from(slot),context.frame_counter,"owned-after"),Err(_)=>self.capture_numeric_callback(usize::from(slot),context.frame_counter,"blocked-before-owned")};
   result
  }
  fn step_owned_mule_slot_inner(&mut self,slot:u16,selected:u8,global_flags:u16,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations)->Result<OwnedMuleReceipt,ActorWorldError>{
@@ -135,7 +135,9 @@ impl ActorWorld {
   let export=|w:&ActorWorld,n:u32|{if let Some(root)=std::env::var_os("GENEWARS_OWNED_MULE_CAPTURE"){let d=std::path::PathBuf::from(root).join(format!("frame-{n}"));std::fs::create_dir_all(&d).unwrap();for(name,data)in[("backing",w.backing.clone()),("map",w.map().to_vec()),("creatures",w.creatures.as_ref().unwrap().records().concat()),("buildings",w.buildings.as_ref().unwrap().records().concat()),("players",w.players.iter().flat_map(|p|p.bytes().iter().copied()).collect())]{std::fs::write(d.join(format!("{name}.bin")),data).unwrap();}let mut r=w.rng.seed.to_le_bytes().to_vec();r.push(w.rng.ring);r.extend(w.rng.draw_count.to_le_bytes());std::fs::write(d.join("rng.bin"),r).unwrap();}};
   export(&w,0);
   for frame in 1..=18{
-   if frame==18{let r=w.creatures.as_ref().unwrap().record(1).unwrap();let target=[word(r,7)+256,word(r,9)];w.dispatch_owned_mule_move(1,target,crate::mule_owned_command::CommandContext{caller_owner:0,virtual_dead:false,caller_is_selected:true,selected_panel_refresh:false}).unwrap();}
+   if frame==18{let r=w.creatures.as_ref().unwrap().record(1).unwrap();let target=[word(r,7)+256,word(r,9)];let manager=[0;0x59d];let packet=crate::mule_human_producer::CommandPacket{words:[0;5],opcode:0};let mut input=crate::mule_human_producer::ProducerInput{selected_player_index:0,selected_player_owner:0,suppression_flags:0,pause_flags:2,hover_consumed_cl:0,projected_point:target};
+    let saved=w.clone();let ignored=w.dispatch_owned_mule_action5(Some(1),packet,&manager,input,false).unwrap();assert!(ignored.command.is_none());assert_eq!(w,saved);assert_eq!(ignored.producer.manager_after,manager);
+    input.pause_flags=0;let receipt=w.dispatch_owned_mule_action5(Some(1),packet,&manager,input,false).unwrap();assert_eq!(receipt.producer.packet_after.opcode,0x11);assert!(receipt.command.is_some());}
    let before=w.clone();let result=w.step_owned_mule_slot(1,0,0,MuleStepContext{frame_counter:frame,gravity:1024,water_height:i32::from(i16::from_le_bytes([raw[0x1c61],raw[0x1c62]])),climate:1632},&physics,&trig,&animations);
    if result.is_err(){assert_eq!(w,before);panic!("frame{frame}: {result:?}");}export(&w,frame);
   }

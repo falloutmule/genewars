@@ -29,6 +29,8 @@ mod creature_updates;
 mod creature_retirement;
 mod creature_factory;
 mod owned_mule_updates;
+mod owned_mule_human_input;
+pub use owned_mule_human_input::{OwnedMuleInputError,OwnedMuleInputReceipt};
 #[cfg(test)] mod captured_mule_tests;
 pub use owned_mule_updates::OwnedMuleReceipt;
 pub use creature_retirement::{MuleRetirementReceipt,MuleUiCleanupRequest};
