@@ -195,7 +195,7 @@ impl SharedMission {
         let context=self.world.mission_loading_physics();
         let frame=self.runtime_context.as_ref().map_or_else(||u32::try_from(self.frame_counter+1).map_err(|_|"source frame counter exceeds u32"),|c|Ok(c.frame()))?;
         //1C760 runs7A280 before actor/building/creature callbacks.
-        self.world.step_admitted_zone_callbacks().map_err(|e|format!("zone pass: {e:?}"))?;
+        self.world.step_admitted_zone_callbacks(frame).map_err(|e|format!("zone pass: {e:?}"))?;
         // 58780 visits players and their current actor lists. 57A10 returns
         // immediately before the ready bit is set by the landing callback.
         let actors=self.world.step_actor_callbacks_with_construction(player_count,frame,context,&resources.physics,&self.trig,
@@ -250,6 +250,15 @@ impl SharedMission {
             *state=genewars_runtime::ui_animation::step(*state,descriptor).map_err(|e|format!("countdown UI animation: {e:?}"))?.after;
         }
         self.world.step_empty_families_7_and_6().map_err(|e|e.to_string())?;
+        #[cfg(debug_assertions)]
+        if std::env::var("GENEWARS_EFFECT_PASS_FRAME").ok().and_then(|v|v.parse::<u32>().ok())==Some(frame){
+            if let Some(path)=std::env::var_os("GENEWARS_EFFECT_PASS_FIXTURE"){
+                let dir=std::path::PathBuf::from(path);std::fs::create_dir(&dir).expect("fresh immutable pre-effect fixture");
+                for(name,bytes)in [("backing",self.world.backing_bytes().to_vec()),("players",(0..4u8).flat_map(|p|self.world.player(p).unwrap().bytes().iter().copied()).collect()),("actors",self.world.actors().records().concat()),("creatures",self.world.creatures().unwrap().records().concat()),("effects",self.world.effects().unwrap().records().concat()),("family8",self.world.family8().unwrap().records().concat()),("buildings",self.world.buildings().unwrap().records().concat())]{std::fs::write(dir.join(format!("{name}.bin")),bytes).unwrap();}
+                let rng=self.world.rng();let mut bytes=rng.seed.to_le_bytes().to_vec();bytes.push(rng.ring);bytes.extend(rng.draw_count.to_le_bytes());std::fs::write(dir.join("rng.bin"),bytes).unwrap();
+                std::fs::write(dir.join("context.txt"),format!("source frame{frame}; {context:?}; UI{:?}",self.ui)).unwrap();
+            }
+        }
         let result=self.world.step_landing_effect_callbacks(context,&resources.physics,&self.trig,&self.ui).map_err(|e|e.to_string())?;
         self.ui=result.ui_after;
         //1C120 runs79220 after effects. Initial light is the pinned mapped
@@ -403,6 +412,32 @@ impl SharedMission {
         assert_eq!(loaded.frame_counter,256);assert_eq!(loaded.outcome_json(),"{\"state\":\"running\"}");
         println!("Krell integration passed256 rendered frames; not mission acceptance");
         println!("Krell actors: {}",loaded.actor_state_json());
+        if let Some(path)=std::env::var_os("GENEWARS_KRELL_AFTER_LANDING_FIXTURE"){
+            let d=std::path::PathBuf::from(path);std::fs::create_dir(&d).expect("new immutable after-landing fixture");
+            for(name,bytes)in [("backing",loaded.world.backing_bytes().to_vec()),("players",(0..4u8).flat_map(|p|loaded.world.player(p).unwrap().bytes().iter().copied()).collect()),("actors",loaded.world.actors().records().concat()),("creatures",loaded.world.creatures().unwrap().records().concat()),("effects",loaded.world.effects().unwrap().records().concat()),("family8",loaded.world.family8().unwrap().records().concat()),("buildings",loaded.world.buildings().unwrap().records().concat())]{std::fs::write(d.join(format!("{name}.bin")),bytes).unwrap();}
+            let rng=loaded.world.rng();let mut bytes=rng.seed.to_le_bytes().to_vec();bytes.push(rng.ring);bytes.extend(rng.draw_count.to_le_bytes());std::fs::write(d.join("rng.bin"),bytes).unwrap();
+        }
+        if std::env::var_os("GENEWARS_KRELL_CONSTRUCTION_PROBE").is_some(){
+            loaded.select(0).unwrap();
+            for (selector,screen) in [(11,[320,234]),(3,[400,370]),(0,[430,350])]{
+                let event=loaded.place_selected_building(&resources,[1536,15360],screen,selector).unwrap();println!("Krell normal placement{selector}: {event}");
+                let mut completed=false;
+                for _ in 0..1800 {
+                    let before=loaded.clone();
+                    if let Err(error)=loaded.step(&resources){
+                        println!("Krell observed boundary frame{}: {error}",loaded.frame_counter);
+                        assert_eq!(loaded.frame_counter,294);assert_eq!(error,"Landing(UnsupportedPhysicsState)");assert_eq!(loaded.world,before.world);assert_eq!(loaded.ui_animations,before.ui_animations);
+                        println!("Krell construction blocked frame{}: {error}; buildings{}; actors{}",loaded.frame_counter,loaded.building_state_json(),loaded.actor_state_json());
+                        println!("{{\"status\":\"blocked\",\"classification\":\"unsupported_behavior\",\"source_frame\":294,\"transaction_unchanged\":true}}");return;
+                    }
+                    loaded.render(&resources,[1536,15360]).unwrap();loaded.finish_outer_frame();
+                    completed=loaded.world.buildings().unwrap().records().iter().any(|r|r[6]==4&&r[45]==selector&&u16::from_le_bytes([r[49],r[50]])&1!=0);
+                    if completed{println!("Krell completed{selector} frame{}; {}",loaded.frame_counter,loaded.building_state_json());break;}
+                }
+                assert!(completed,"ordinary Krell construction did not complete within bounded diagnostic");
+            }
+        }
+
     }
 
     /// Synthetic retained state exercises the real loader; this is not mission acceptance.

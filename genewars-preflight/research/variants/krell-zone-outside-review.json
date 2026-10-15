@@ -1,0 +1,79 @@
+{
+  "status": "passed_source_unchanged",
+  "native_method_tests": "not_run",
+  "compared_bytes": 1282107,
+  "cases": [
+    {
+      "status": "passed",
+      "frame": 256,
+      "slot": 0,
+      "before": "private\\review\\krell-after-landing-001",
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\1b4f0b3b9a3542b69653d638ae9a8bdb",
+      "ports": [],
+      "source_phase_addresses": [
+        "7A290..7A298",
+        "7A2C2..7A2D9",
+        "793CF..793D6"
+      ],
+      "literal_instructions": 21,
+      "draws": 0,
+      "queue_requests": 0,
+      "calls": [],
+      "compared_bytes": 427369,
+      "scope": "Literal7A280 compared to unchanged captured input; native method comparison not run by this script",
+      "source_unchanged_comparison": "passed",
+      "production_comparison": "not_run",
+      "fixture_kind": "actual after256 countdown path"
+    },
+    {
+      "status": "passed",
+      "frame": 1000,
+      "slot": 0,
+      "before": "private\\review\\krell-zone-outside-synthetic-001",
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\3827be3171e54b7191f7561725bc7b1c",
+      "ports": [],
+      "source_phase_addresses": [
+        "7A290..7A298",
+        "7A2C2..7A2D9",
+        "793CF..793D6"
+      ],
+      "literal_instructions": 77,
+      "draws": 0,
+      "queue_requests": 0,
+      "calls": [
+        "0x793c0"
+      ],
+      "compared_bytes": 427369,
+      "scope": "Literal7A280 compared to unchanged captured input; native method comparison not run by this script",
+      "source_unchanged_comparison": "passed",
+      "production_comparison": "not_run",
+      "fixture_kind": "synthetic countdown0/occupancy1; unchanged startup positions"
+    },
+    {
+      "status": "passed",
+      "frame": 1024,
+      "slot": 0,
+      "before": "private\\review\\krell-zone-outside-synthetic-001",
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\bf5a364cd5364999a5b955290b38dc83",
+      "ports": [],
+      "source_phase_addresses": [
+        "7A290..7A298",
+        "7A2C2..7A2D9",
+        "793CF..793D6"
+      ],
+      "literal_instructions": 331,
+      "draws": 0,
+      "queue_requests": 0,
+      "calls": [
+        "0x1ec50",
+        "0x793c0"
+      ],
+      "compared_bytes": 427369,
+      "scope": "Literal7A280 compared to unchanged captured input; native method comparison not run by this script",
+      "source_unchanged_comparison": "passed",
+      "production_comparison": "not_run",
+      "fixture_kind": "synthetic countdown0/occupancy1 fullscan; unchanged startup positions"
+    }
+  ],
+  "script_sha256": "b233c6252bf595f7ba9bd37fce2ce983796bff2970d124730ee750fe1fe6f269"
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "path": "private/ghidra/mission-array-refs/instructions-0007a280.txt",
+    "sha256": "acbd6194b3d051e6f0f252221bac3df6f4e8bbbe9e80bfefbad4d7adb38ccc31"
+  },
+  {
+    "path": "private/ghidra/mission-array-refs/instructions-000793c0.txt",
+    "sha256": "582931be2b990b0a0b51ebd619dbd868a75a9c253fd5ab38af74ce50a5a4a380"
+  },
+  {
+    "path": "private/ghidra/countdown-expiry/instructions-00013108.txt",
+    "sha256": "e36d3484bbf178d95a940640d5c47087ef298aa65079a5bae22cf937dabad9e2"
+  },
+  {
+    "path": "private/ghidra/countdown-expiry/instructions-000114b0.txt",
+    "sha256": "b7b6789864e90543ef45c8435d14cf48448f23d12cdd2ef638aa38d24bf83a0b"
+  }
+]

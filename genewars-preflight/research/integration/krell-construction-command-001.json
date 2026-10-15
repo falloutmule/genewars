@@ -1,0 +1,27 @@
+{
+  "status": "blocked",
+  "classification": "unsupported_behavior",
+  "validation_status": "passed_expected_boundary",
+  "source_frame": 294,
+  "reason": "Landing(UnsupportedPhysicsState)",
+  "scope": "Source-projected carried Krell fixture, ordinary placement11 atframe256, architect arrived and began terrainpreparation. Notnativeinput ormissionacceptance.",
+  "log": "private/integration/krell-construction-command-006.log",
+  "fixture": "private/review/krell-pre-effects-294-001",
+  "rollback": [
+    "world",
+    "UIanimations",
+    "frame"
+  ],
+  "source_marker_repair": "research/variants/krell-marker-neighborhood.json",
+  "source_marker_compared_bytes": 427369,
+  "zone_native_tests_passed": 3,
+  "zone_source_unchanged_bytes": 1282107,
+  "original_missions_completable": 0,
+  "standard_campaign_total": 24,
+  "pins": {
+    "private/integration/krell-construction-command-006.log": "1369d11a0a88b79c65a4597c3cbca3fed91767a37a7d7569435b9fb7e55c647b",
+    "rust/crates/genewars-desktop/src/bin/support/shared_scene.rs": "8cc7a1ad16f77c061b0a7c9ba71271faba44b6fdc26fc519489ac312d55c747c",
+    "rust/crates/genewars-runtime/src/actor_world/zone_updates.rs": "b00d2357b8fd459e49250b565fb453a52f6683a988fee6b73623975d08333156",
+    "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs": "32c19c9b979c69d4cb3145401d4a690ce94e9868cca9b796eb07e463d8733591"
+  }
+}

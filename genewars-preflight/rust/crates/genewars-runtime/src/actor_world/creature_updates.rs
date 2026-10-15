@@ -268,7 +268,7 @@ impl ActorWorld {
         let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
         for dy in -4..=4 {for dx in -4..=4 {
             let index=((cy+dy)&127)as usize*128+((cx+dx)&127)as usize;let mut raw=reference(self.map(),index*14+6);
-            while raw[2]!=0 {let entity=self.entity(raw)?;let ignored_effect=if raw[2]==5{self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?.get(0x45)!=Some(&0x11)}else{false};if raw!=own&&!ignored_effect&&(raw[2]!=2||entity[24]!=4)&&!self.mule_friendly_candidate_is_no_action(record,raw)?{return Err(CreatureError::UnsupportedNeighborhood.into());}raw=reference(entity,3);}
+            while raw[2]!=0 {let entity=self.entity(raw)?;let ignored_effect=if raw[2]==8{true}else if raw[2]==5{self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?.get(0x45)!=Some(&0x11)}else{false};if raw!=own&&!ignored_effect&&(raw[2]!=2||entity[24]!=4)&&!self.mule_friendly_candidate_is_no_action(record,raw)?{return Err(CreatureError::UnsupportedNeighborhood.into());}raw=reference(entity,3);}
         }}Ok(())
     }
     ///6BA65/6BBAE: same-species live friend contributes no food candidate.
@@ -320,6 +320,8 @@ impl ActorWorld {
             if d>1024*1024 {continue;}
             let value=1024-genewars_core::cd_candidate::integer_sqrt(d)as i32;let cell=floor_cell(sample);let mut raw=reference(self.map(),cell*14+6);
             while raw[2]!=0 {let entity=self.entity(raw)?;
+                //6BD4F..58 skips kind8 before scoring, regardless of owner.
+                if raw[2]==8{raw=reference(entity,3);continue;}
                 if raw[2]==5 {if self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?.get(0x45)==Some(&0x11){return Err(CreatureError::UnsupportedNeighborhood.into());}raw=reference(entity,3);continue;}
                 if raw!=own {if self.mule_friendly_candidate_is_no_action(record,raw)?{raw=reference(entity,3);continue;}if raw[2]!=2||entity[0x18]!=4 {return Err(CreatureError::UnsupportedNeighborhood.into());}
                     if self.mule_plant_flags(word(&raw,0))?&9==0&&self.mule_plant_health(word(&raw,0))?>0&&value>score {score=value;best=Some((word(&raw,0),[word(entity,7),word(entity,9)]));}}
