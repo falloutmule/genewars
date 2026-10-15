@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "scope": "durable owned5ED20 full8world captured source comparator; no new campaign acceptance",
+  "tool": "research/variants/owned-mule-captured-width-review.py",
+  "width_fix": "Infer untyped absolute MOV memory destination width from byte/word source register; preserve actual participating count1 through real factories. Canonical historical interpreters unchanged.",
+  "comparisons": [
+    {
+      "frame": 4802,
+      "slot": 1,
+      "compared_bytes": 427369,
+      "mismatches": 0,
+      "draws": 2,
+      "instructions": 28963,
+      "evidence": "private/review/owned-mule-captured-width/0f0f5052919447bd9f2a84ad5fca738c/result.json"
+    },
+    {
+      "frame": 4858,
+      "slot": 1,
+      "compared_bytes": 427369,
+      "mismatches": 0,
+      "draws": 2,
+      "instructions": 29359,
+      "evidence": "private/review/owned-mule-captured-width/f13d4b469d1144fda67b3675890ab45a/result.json"
+    }
+  ],
+  "participating_after": 1,
+  "limits": "singleplayer owned Mule state0/8; explicit render/audio/UI/portrait host ports, input-only opaque pointer normalization; no historical acceptance rewrite"
+}
