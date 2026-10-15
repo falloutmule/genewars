@@ -33,7 +33,7 @@ pub fn plan_false_contact(current:&CreatureRecord,target:&CreatureRecord,physics
   ||current[0x52]!=1||current[0x57]!=1||word(current,0x50)!=target_id||word(current,0x55)!=target_id
   ||word(current,0x6a)<=0||!(0..2048).contains(&word(current,0x39))
  {return Err(Error::Current);}
- if target[6]!=1||target[122]!=4||!matches!(target[94],1|8|21)
+ if target[6]!=1||target[122]!=4||!matches!(target[94],1|8|20|21)
   ||target[24]!=(if neutral{0}else{4})||word(target,0x6a)<=0
   ||word(target,0x49)as u16&0x400!=0{return Err(Error::Target);}
  let xy=genewars_core::cd_candidate::distance_squared_wrapping_15(

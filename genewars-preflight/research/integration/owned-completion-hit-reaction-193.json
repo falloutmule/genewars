@@ -1,0 +1,149 @@
+{
+  "scope": "Original captured callback comparison; frozen other families, not campaign or native acceptance",
+  "callbacks": [
+    {
+      "output": "private\\review\\owned-mule-captured-width\\d4d96051649b4039a4ee177c47ba55c8",
+      "frame": 5876,
+      "slot": 1,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "draws": 8
+    },
+    {
+      "output": "private\\review\\neutral-mule-captured-width\\76cee2d630c74cccb1ea14edb0ae4ba3",
+      "frame": 5876,
+      "slot": 5,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "draws": 0
+    },
+    {
+      "output": "private\\review\\neutral-mule-captured-width\\39cc3a64b2834928810857001fcc2038",
+      "frame": 5877,
+      "slot": 5,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "draws": 0
+    },
+    {
+      "output": "private\\review\\neutral-mule-captured-width\\a2d07f6869a744f39bfc67da621a8b82",
+      "frame": 5878,
+      "slot": 5,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "draws": 0
+    },
+    {
+      "output": "private\\review\\neutral-mule-captured-width\\1f5f78ae45794ea9a6168ff8f8bb8706",
+      "frame": 5879,
+      "slot": 5,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "draws": 0
+    },
+    {
+      "output": "private\\review\\neutral-mule-captured-width\\f7789befee684f5c852593cd63646c2a",
+      "frame": 5880,
+      "slot": 5,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "draws": 0
+    },
+    {
+      "output": "private\\review\\neutral-mule-captured-width\\392e2de2cbd84aaea23672c6c04f36fd",
+      "frame": 5881,
+      "slot": 5,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "draws": 0
+    }
+  ],
+  "literal_cases": {
+    "nonlethal_damage": 10,
+    "owned_reacquisition": 4,
+    "opt_in_tests": "passed"
+  },
+  "atomic_failure_cases": [
+    "operator boost",
+    "alliance",
+    "blood reaction",
+    "lethal damage",
+    "alternate BA4 branch"
+  ],
+  "checks": {
+    "runtime": "260 passed, 5 ignored; two new literal suites separately passed",
+    "desktop_game": "80 passed, 1 ignored",
+    "other_desktop": "11/10/6 passed",
+    "release": "capture-enabled build passed",
+    "neutral_pixels": "164 cases, 535952 bytes, zero mismatches"
+  },
+  "limitations": [
+    "No category3 operator boost",
+    "Blood/lethal and alternate query branches guarded",
+    "Neutral state20 animation completion remains unsupported",
+    "Krell remains incomplete; latest ordinary/native acceptance is 192/frame5876"
+  ]
+}

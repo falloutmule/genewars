@@ -154,7 +154,7 @@ impl ActorWorld {
                     *rng=abandoned.rng_after;return Ok(abandoned.current_after);
                 }
                 if let Some(enemy)=hostile_enemy {
-                    if record[0x5e]==21{let mut after=*record;if creature_world::mule_callback_phase(record,context.frame_counter)&3==3{
+                    if record[0x5e]==21{if word(record,0x6c)<=0{return Err(CreatureError::UnsupportedMotionState);}let mut after=*record;if creature_world::mule_callback_phase(record,context.frame_counter)&3==3{
                         let dx=word(&enemy,7).wrapping_mul(2).wrapping_sub(word(record,7).wrapping_mul(2));let dy=word(&enemy,9).wrapping_mul(2).wrapping_sub(word(record,9).wrapping_mul(2));
                         after[0x4b..0x4d].copy_from_slice(&crate::actor_motion::angle(i32::from(dx),i32::from(dy),physics.angles()).to_le_bytes());
                     }return Ok(after);}
@@ -412,7 +412,7 @@ impl ActorWorld {
         let own=[before[15],before[16],1];let current=[word(before,7),word(before,9)];
         let retained_food_association=before[24]==4&&before[0x5e]==8&&before[0x60]==8&&before[0x61]==0x40
             &&before[0x57]==0&&before[0x52]==1&&word(before,0x50)==word(before,0x55);
-        let associated_pair=matches!(before[0x5e],1|3|4|5|21)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55)||retained_food_association;
+        let associated_pair=matches!(before[0x5e],1|3|4|5|20|21)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55)||retained_food_association;
         let mut final_target=[word(before,11),word(before,13)];
         let mut a=*before;a[0x49]&=0x9f;
         if a[0x4f]!=0||(a[0x52]!=0&&!associated_pair)||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
@@ -553,11 +553,11 @@ impl ActorWorld {
     /// Bounded5B100 predicate shared by cell entry and waypoint waiting.
     /// Typed live hostile pursuit. Corpse feeding keeps its independent guard.
     fn mule_live_hostile_target(&self,r:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
-        if r[6]!=1||r[24]!=4||r[0x7a]!=4||!matches!(r[0x5e],1|21)||r[0x61]!=0x40||!(if r[0x5e]==1{matches!(r[0x60],0x48|0xc8)}else{matches!(r[0x60],8|0x88)})
+        if r[6]!=1||r[24]!=4||r[0x7a]!=4||!matches!(r[0x5e],1|20|21)||r[0x61]!=0x40||!(if r[0x5e]==1{matches!(r[0x60],0x48|0xc8)}else{matches!(r[0x60],8|0x88)})
             ||r[0x78]!=0||r[0x76]>90||r[0x4f]!=0||r[0x5d]!=0||r[0x57]!=1||r[0x52]!=1
             ||reference(r,0x50)!=reference(r,0x55)||word(r,0x49)as u16&0x100!=0{return Ok(None);}
         let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;let id=word(r,0x55)as usize;let target=*pool.record(id)?;
-        if target[6]==1&&target[24]==0&&target[0x7a]==4&&(target[0x5e]==8||(matches!(target[0x5e],1|21)&&target[0x78]==7&&target[0x61]==0&&(if target[0x5e]==1{matches!(target[0x60],0x48|0xc8)}else{matches!(target[0x60],8|0x88)})
+        if target[6]==1&&target[24]==0&&target[0x7a]==4&&(target[0x5e]==8||(matches!(target[0x5e],1|20|21)&&target[0x78]==7&&target[0x61]==0&&(if target[0x5e]==1{matches!(target[0x60],0x48|0xc8)}else{matches!(target[0x60],8|0x88)})
             &&target[0x4f]==0&&target[0x5d]==0&&reference(&target,0x50)==[r[15],r[16],1]
             &&reference(&target,0x55)==[r[15],r[16],1]&&reference(&target,0x58)==[r[15],r[16],1]))&&word(&target,0x6a)>0
             &&word(&target,0x49)as u16&0x400==0&&pool.binding(id)?==Some(CreatureAnimationBinding::MuleSelector4){Ok(Some(target))}else{Ok(None)}

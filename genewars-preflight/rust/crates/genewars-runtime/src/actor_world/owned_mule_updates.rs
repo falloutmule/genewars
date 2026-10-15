@@ -31,7 +31,7 @@ impl ActorWorld {
    },animations,
    |record|{
     if let Some(enemy)=hostile_enemy {
-     if record[0x5e]==21{let mut after=*record;if creature_world::mule_callback_phase(record,context.frame_counter)&3==3{
+     if record[0x5e]==21{if word(record,0x6c)<=0{return stage.borrow_mut().owned_mule_completed_attack(record,&enemy,&mut random.borrow_mut(),physics,&mut audio.borrow_mut());}let mut after=*record;if creature_world::mule_callback_phase(record,context.frame_counter)&3==3{
       let dx=word(&enemy,7).wrapping_mul(2).wrapping_sub(word(record,7).wrapping_mul(2));let dy=word(&enemy,9).wrapping_mul(2).wrapping_sub(word(record,9).wrapping_mul(2));
       after[0x4b..0x4d].copy_from_slice(&crate::actor_motion::angle(i32::from(dx),i32::from(dy),physics.angles()).to_le_bytes());
      }return Ok(after);}
@@ -119,6 +119,42 @@ impl ActorWorld {
   let prior=*world.creatures.as_ref().unwrap().record(slot)?;world.creatures.as_mut().unwrap().replace_record_checked(slot,&prior,&plan.after)?;world.rng=random.into_inner();world.validate_links()?;*self=world;
   Ok(OwnedMuleReceipt{motion:plan,pending_reveal_vertices:reveals.into_inner(),pending_audio:audio.into_inner()})
  }
+ /// Source5D700 returns false when every actual roster blueprint category
+ ///differs from3. Actor C0 is an opaque port pointer; selector74 identifies the
+ ///same player blueprint as original4FF2C. Operator support stays explicit.
+ fn owned_attack_no_operator(&self)->Result<(),CreatureError>{
+  let player=self.player(0).map_err(|_|CreatureError::UnsupportedNeighborhood)?;let p=player.bytes();let count=usize::from(p[3]);
+  if count>5{return Err(CreatureError::UnsupportedNeighborhood);}let mut seen=HashSet::new();
+  for &id in &p[4..4+count]{let slot=usize::from(id);if slot>=5||!seen.insert(slot){return Err(CreatureError::UnsupportedNeighborhood);}
+   let actor=self.actors.record(slot).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+   if actor[6]!=3||actor[24]!=0||word(actor,15)!=slot as i16||actor[0xc0..0xc4]!=[0;4]{return Err(CreatureError::UnsupportedNeighborhood);}
+   let blueprint=player.blueprint(usize::from(actor[0x74])).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+   if blueprint[0x16]==3{return Err(CreatureError::UnsupportedNeighborhood);}
+  }Ok(())
+ }
+ ///60332 actual owned21 completion, one nonlethal hit and immediate reattack.
+ ///Every stage is in the existing cloned transaction; late rejection restores
+ ///the target, player/backing/map, all RNG and pending presentation requests.
+ fn owned_mule_completed_attack(&mut self,record:&CreatureRecord,enemy:&CreatureRecord,rng:&mut BlueprintRng,physics:&PhysicsTables,audio:&mut Vec<u8>)->Result<CreatureRecord,CreatureError>{
+  if record[24]!=0||record[0x5e]!=21||record[0x61]!=0||record[0x60]!=0x88||record[0x78]!=7||word(record,0x6c)!=0||word(record,0x68)<=0||record[0x76]>90{return Err(CreatureError::UnsupportedMotionState);}
+  self.owned_attack_no_operator()?;
+  let xy=genewars_core::cd_candidate::distance_squared_wrapping_15([word(record,7),word(record,9)],[word(enemy,7),word(enemy,9)])as i32;
+  let z=(i32::from_le_bytes(enemy[39..43].try_into().unwrap()).wrapping_sub(i32::from_le_bytes(record[39..43].try_into().unwrap())))>>3;
+  if xy.wrapping_add(z.wrapping_mul(z))>16384{return Err(CreatureError::UnsupportedMotionState);}
+  let mut after=*record;let trait_value=10*(50+50*i32::from(record[0x76])/100)/100;
+  let cost=(trait_value>>2).min(i32::from(word(record,0x68)));after[0x68..0x6a].copy_from_slice(&(word(record,0x68)-cost as i16).to_le_bytes());
+  let draw=|r:&mut BlueprintRng|{r.seed=r.seed.wrapping_mul(0xe62d);r.ring=r.ring.wrapping_add(1)&31;r.draw_count=r.draw_count.wrapping_add(1);(r.seed>>8)as u8};
+  if rng.ring>=32{return Err(CreatureError::UnsupportedMotionState);}let incoming=((trait_value>>1).max(cost*2)+i32::from(draw(rng)%10))as i16; //B66
+  let target_id=word(enemy,15)as usize;let prior=*self.creatures.as_ref().unwrap().record(target_id)?;if prior!=*enemy{return Err(CreatureError::UnsupportedMotionState);}
+  let damage=crate::mule_nonlethal_hostile_damage::plan(&prior,&after,incoming,*rng).map_err(|_|CreatureError::UnsupportedMotionState)?;
+  self.creatures.as_mut().unwrap().replace_record_checked(target_id,&prior,&damage.target_after)?;*rng=damage.rng_after;audio.push(damage.pending_audio);
+  if draw(rng)%100>90{return Err(CreatureError::UnsupportedNeighborhood);} //BA4; alternate branch unported.
+  let sole=self.owned_mule_single_hostile(&after).map_err(|_|CreatureError::UnsupportedNeighborhood)?.ok_or(CreatureError::UnsupportedNeighborhood)?;
+  if word(&sole,15)!=target_id as i16||self.mule_cell_entry_predicate(&after,floor_cell([word(&after,7),word(&after,9)])).map_err(|_|CreatureError::UnsupportedNeighborhood)?{return Err(CreatureError::UnsupportedNeighborhood);}
+  let query=crate::mule_owned_attack_reacquire::plan_reacquire(&after,&sole,*rng).map_err(|_|CreatureError::UnsupportedNeighborhood)?;*rng=query.rng_after;
+  let entry=crate::mule_hostile_attack_entry::plan_entry(&query.after,&sole,*rng,physics).map_err(|_|CreatureError::UnsupportedMotionState)?;*rng=entry.rng_after;if let Some(channel)=entry.pending_audio{audio.push(channel);}
+  after=entry.after;after[0x60]&=0xbf;Ok(after)
+ }
  /// Source74270 mask0 query preserving candidate order and current-frame height.
  fn airborne_building_at(&self,point:[i16;2],height:i32)->Result<Option<[u8;67]>,ActorWorldError> {
   crate::building_obstacle::building_at_height(self.map(),point,height,0,|cell| {
@@ -147,13 +183,14 @@ impl ActorWorld {
  ///live neutral Mule pursuit and source-skipped kind8/non11 effects are admitted;
  ///this proves no friendly count, no food candidates and no extra query RNG.
  fn owned_mule_single_hostile(&self,r:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
-  if r[24]!=0||r[0x5e]!=8||r[0x60]!=8||r[0x61]!=0||r[0x78]!=7{return Ok(None);}
+  let attack_query=r[0x5e]==21&&r[0x60]==0x88&&word(r,0x6c)==0;
+  if r[24]!=0||!(r[0x5e]==8&&r[0x60]==8||attack_query)||r[0x61]!=0||r[0x78]!=7{return Ok(None);}
   let own=[r[15],r[16],1];let cell=floor_cell([word(r,7),word(r,9)]);let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
   let mut hostile=None;let mut unsupported=false;
   for dy in -4..=4{for dx in -4..=4{if dx*dx+dy*dy>16{continue;}let c=(((cy+dy)&127)*128+((cx+dx)&127))as usize;let mut raw=reference(self.map(),c*14+6);
    while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{
     1=>{let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;let other=*pool.record(word(&raw,0)as usize)?;
-     if other[24]==4&&other[0x7a]==4&&other[0x5e]==1&&pool.binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::MuleSelector4){
+     if other[24]==4&&other[0x7a]==4&&(other[0x5e]==1||attack_query&&other[0x5e]==20)&&pool.binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::MuleSelector4){
       if hostile.is_some(){return Err(CreatureError::UnsupportedNeighborhood.into());}hostile=Some(other);
      }else{unsupported=true;}
     },
@@ -170,7 +207,7 @@ impl ActorWorld {
    ||r[0x76]>90||r[0x4f]!=0||r[0x5d]!=0||r[0x52]!=1||r[0x57]!=1||r[0x5a]!=1||word(r,0x49)as u16&0x100!=0
    ||reference(r,0x50)!=reference(r,0x55)||reference(r,0x58)!=reference(r,0x55){return Ok(None);}
   let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;let id=word(r,0x55)as usize;let target=*pool.record(id)?;
-  if target[6]==1&&target[24]==4&&target[0x7a]==4&&matches!(target[0x5e],1|21)&&target[0x61]==0x40&&(if target[0x5e]==1{matches!(target[0x60],0x48|0xc8)}else{matches!(target[0x60],8|0x88)})
+  if target[6]==1&&target[24]==4&&target[0x7a]==4&&matches!(target[0x5e],1|20|21)&&target[0x61]==0x40&&(if target[0x5e]==1{matches!(target[0x60],0x48|0xc8)}else{matches!(target[0x60],8|0x88)})
    &&target[0x78]==0&&word(&target,0x6a)>0&&word(&target,0x49)as u16&0x400==0
    &&reference(&target,0x50)==[r[15],r[16],1]&&reference(&target,0x55)==[r[15],r[16],1]
    &&pool.binding(id)?==Some(CreatureAnimationBinding::MuleSelector4){Ok(Some(target))}else{Ok(None)}

@@ -7,6 +7,7 @@ scratch; the public receipt contains hashes and comparison counts only.
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import os
@@ -208,22 +209,32 @@ def draw_color(dst, width, height, pitch, sprite, origin, factor, flags, clip_bi
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--input", type=Path, help="existing private Rust JSONL; skips Cargo")
+    parser.add_argument("--receipt", type=Path, default=None,
+                        help="fresh receipt path; omitted updates the standard receipt")
+    args = parser.parse_args()
+    if args.receipt is not None and args.receipt.exists():
+        raise FileExistsError(f"receipt exists; choose a fresh --receipt path: {args.receipt}")
     anb, fade, gla = read_inputs()
-    scratch = ROOT / "private" / "review" / f"mule-pixel-oracle-{uuid.uuid4().hex}"
-    scratch.mkdir(parents=True, exist_ok=False)
-    rust_output = scratch / "rust.jsonl"
-    env = os.environ.copy()
-    env["GENEWARS_MULE_ORACLE_OUT"] = str(rust_output)
-    command = [sys.executable, str(ROOT / "scripts" / "cargo.py"), "test",
-               "--offline", "--locked",
-               "-p", "genewars-desktop", "--bin", "genewars-game",
-               "creature_scene::tests::export_source_mule_pixel_oracle_cases_when_requested"]
-    run = subprocess.run(command, cwd=ROOT, env=env, capture_output=True, text=True, timeout=300)
-    if run.returncode:
-        raise RuntimeError(f"Rust fixture render failed: {run.stdout[-4000:]}\n{run.stderr[-4000:]}")
+    if args.input is None:
+        scratch = ROOT / "private" / "review" / f"mule-pixel-oracle-{uuid.uuid4().hex}"
+        scratch.mkdir(parents=True, exist_ok=False)
+        rust_output = scratch / "rust.jsonl"
+        env = os.environ.copy()
+        env["GENEWARS_MULE_ORACLE_OUT"] = str(rust_output)
+        command = [sys.executable, str(ROOT / "scripts" / "cargo.py"), "test",
+                   "--offline", "--locked",
+                   "-p", "genewars-desktop", "--bin", "genewars-game",
+                   "creature_scene::tests::export_source_mule_pixel_oracle_cases_when_requested"]
+        run = subprocess.run(command, cwd=ROOT, env=env, capture_output=True, text=True, timeout=300)
+        if run.returncode:
+            raise RuntimeError(f"Rust fixture render failed: {run.stdout[-4000:]}\n{run.stderr[-4000:]}")
+    else:
+        rust_output = args.input
     actual_lines = rust_output.read_text(encoding="utf-8").splitlines()
-    if len(actual_lines) != 163:
-        raise AssertionError(f"expected 163 Rust oracle cases, got {len(actual_lines)}")
+    if len(actual_lines) != 164:
+        raise AssertionError(f"expected 164 Rust oracle cases, got {len(actual_lines)}")
     compared = 0
     pixels = 0
     for line in actual_lines:
@@ -279,8 +290,9 @@ def main():
         "comparison": "all Rust framebuffer bytes equal the independently parsed ANB/RLE/scale/flip/fade/GLA model",
         "shade_contract": "raw zero selects row 0; nonzero adds arithmetic virtual_height >> 7 and caps at 31; negative rows and unresolved parity-special dispatch reject atomically",
     }
-    out = ROOT / "research" / "integration" / "mule-pixel-oracle.json"
-    out.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+    out = args.receipt
+    with out.open("x", encoding="utf-8") as file:
+        file.write(json.dumps(receipt, indent=2) + "\n")
     print(json.dumps(receipt, indent=2))
 
 

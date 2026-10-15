@@ -202,6 +202,8 @@ pub fn draw_supported_mule_record(
         10 => animation <= 7 || animation == 22,
         //5E749 selects attack directions8..15;59470 uses its ordinary body.
         21 => (8..=15).contains(&animation),
+        //5E614->5E817 selects16 for neutral hit reaction; owned20 excluded.
+        20 => record[0x18] == 4 && animation == 16,
         // Literal mortality continuations pin state 24 to animation 17 and
         // state 25 to corpse animation 18. The ANB remains the authority for
         // their frame extents (7 and 3 frames respectively).
@@ -1095,6 +1097,29 @@ mod tests {
             let effective=if record[0x17]==0 {0} else {(i32::from(record[0x17])+(virtual_height>>7)).min(31)};
             let yaw=i16::from_le_bytes([record[0x39],record[0x3a]]);
             writeln!(file,"{{\"source_domain\":\"state7-frame-metadata\",\"state\":7,\"animation\":19,\"frame\":{frame_index},\"scale_a\":{},\"scale_b\":{},\"virtual_height\":{virtual_height},\"raw_shade\":{},\"effective_shade\":{},\"shadow_mode\":0,\"inherited\":0,\"clip_bit\":0,\"origin\":[24,18],\"yaw\":{yaw},\"shadow_color\":7,\"fg_written\":{fg_written},\"fg_clipped\":{fg_clipped},\"sh_written\":{sh_written},\"sh_clipped\":{sh_clipped},\"pixels\":\"{hex}\"}}",record[0x76],record[0x77],record[0x17],effective).unwrap();
+        }
+        //Same-frame neutral hit reaction after actual5876 damage. Other
+        //families were frozen in this source follow-up; no native claim.
+        {
+            let repository=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+            let bytes=std::fs::read(repository.join("private/review/neutral-hit-reaction-193/0e9f48028d9c4d95b20da0eb8c68991e/frame-5876/creatures.bin")).unwrap();
+            let record:[u8;124]=bytes[5*124..6*124].try_into().unwrap();
+            assert_eq!(genewars_runtime::identity::sha256_hex(&record),"7459f0687ed74d3ea84241dfb03ad762dc5ccf7e29c6b67b5fe2b8bb3832c599");
+            assert_eq!((record[24],record[94],record[25],record[27]),(4,20,16,1));
+            let virtual_height=i32::from_le_bytes(record[39..43].try_into().unwrap())-i32::from_le_bytes(record[17..21].try_into().unwrap());
+            let mut pixels=vec![0xa5;68*48+4];
+            let receipt=draw_supported_mule_record(&resources.mule,&record,[24,18],virtual_height,0,0,false,0,0,&resources.fade,&resources.gla,[64,48],68,&mut pixels).unwrap();
+            assert!(receipt.components.iter().map(|x|x.pixels_written).sum::<usize>()>0);
+            let hex=pixels.iter().map(|v|format!("{v:02x}")).collect::<String>();
+            let fg_written=receipt.components.iter().map(|x|x.pixels_written).sum::<usize>();
+            let fg_clipped=receipt.components.iter().map(|x|x.pixels_clipped).sum::<usize>();
+            let sh_written=receipt.shadows.iter().map(|x|x.pixels_written).sum::<usize>();
+            let sh_clipped=receipt.shadows.iter().map(|x|x.pixels_clipped).sum::<usize>();
+            writeln!(file,"{{\"source_domain\":\"neutral-state20-hit-reaction\",\"state\":20,\"animation\":16,\"frame\":1,\"scale_a\":{},\"scale_b\":{},\"virtual_height\":{virtual_height},\"raw_shade\":{},\"effective_shade\":{},\"shadow_mode\":0,\"inherited\":0,\"clip_bit\":0,\"origin\":[24,18],\"yaw\":{},\"shadow_color\":0,\"fg_written\":{fg_written},\"fg_clipped\":{fg_clipped},\"sh_written\":{sh_written},\"sh_clipped\":{sh_clipped},\"pixels\":\"{hex}\"}}",record[118],record[119],record[23],receipt.effective_shade,i16::from_le_bytes([record[57],record[58]])).unwrap();
+            for(offset,value)in[(25,23),(25,15),(27,255),(24,0)]{
+                let mut bad=record;bad[offset]=value;let saved=pixels.clone();
+                assert_eq!(draw_supported_mule_record(&resources.mule,&bad,[24,18],virtual_height,0,0,false,0,0,&resources.fade,&resources.gla,[64,48],68,&mut pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pixels,saved);
+            }
         }
         // Mortality inputs are literal, source-traced 124-byte records. The
         // frame substitutions below check every frame admitted by each ANB
