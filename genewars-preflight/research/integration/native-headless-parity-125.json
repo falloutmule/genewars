@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "scope": "frozen125 headless Exceland winner versus two native replays, world and actor dispatch audit equality",
+  "binary_sha256": "474a60a623d5db50ccde77dae8d226323ebfb285e937b05022d2a6dfb6b5e134",
+  "native_receipt": "research/integration/native-building-chain-continued-krell-125-passed.json",
+  "world_sha256": "ebdc252d94215d920a43bed88c9715472aabfdb6866a84433edd7ef35421b805",
+  "steps": 4630,
+  "comparisons": [
+    "first/photon3-work700",
+    "first/photon3-next-choices",
+    "repeat/photon3-work700",
+    "repeat/photon3-next-choices"
+  ],
+  "campaign_count": 1,
+  "limitations": [
+    "Krell entry only; Krell objectives and completion unverified",
+    "Existing native harness receipt retains historical zero-acceptance wording; authoritative campaign checkpoint remains 1/24"
+  ]
+}

@@ -88,25 +88,28 @@ fn captured_mule_callback() {
     }
     let steps=std::env::var("GENEWARS_CAPTURED_MULE_STEPS").ok().map(|v|v.parse::<u32>().unwrap()).unwrap_or(1);assert!((1..=512).contains(&steps));
     let before=world.clone();let mut final_frame=frame;let mut grounded=false;let mut pending_audio=Vec::new();
-    let mut result=Err(ActorWorldError::Creatures(CreatureError::UnsupportedMotionState));
+    let mut result:Result<Vec<u8>,ActorWorldError>=Err(ActorWorldError::Creatures(CreatureError::UnsupportedMotionState));
     for offset in 0..steps {
         final_frame=frame+offset;let prior=world.clone();
-        result=world.step_owned_mule_slot(slot,0,0x3e,MuleStepContext{frame_counter:final_frame,gravity:physics_context.gravity,water_height:physics_context.water_height,climate},&physics,&trig,&animations);
+        let context=MuleStepContext{frame_counter:final_frame,gravity:physics_context.gravity,water_height:physics_context.water_height,climate};
+        result=if world.creatures.as_ref().unwrap().record(usize::from(slot)).unwrap()[24]==4 {
+            world.step_neutral_mule_slot_with_water(slot,context,&physics,&trig,&animations).map(|r|r.pending_audio)
+        }else{world.step_owned_mule_slot(slot,0,0x3e,context,&physics,&trig,&animations).map(|r|r.pending_audio)};
         if result.is_err(){assert_eq!(world,prior,"failed callback must rollback every world field");break;}
-        pending_audio.extend_from_slice(&result.as_ref().unwrap().pending_audio);
+        pending_audio.extend_from_slice(result.as_ref().unwrap());
         let record=world.creatures.as_ref().unwrap().record(usize::from(slot)).unwrap();
         grounded=i32::from_le_bytes(record[39..43].try_into().unwrap())<=i32::from_le_bytes(record[17..21].try_into().unwrap());
         if grounded&&std::env::var_os("GENEWARS_CAPTURED_MULE_STOP_GROUNDED").is_some(){break;}
     }
     let (status,error)=match &result {Ok(_)=>("passed",String::new()),Err(e)=>("blocked",format!("{e:?}"))};
-    println!("captured owned sequence: final_frame={final_frame}, grounded={grounded}, callbacks={}",final_frame-frame+1);
+    println!("captured Mule sequence: final_frame={final_frame}, grounded={grounded}, callbacks={}",final_frame-frame+1);
     if let Ok(expected_audio)=std::env::var("GENEWARS_CAPTURED_MULE_EXPECT_AUDIO") {
         let expected=expected_audio.split(',').map(str::parse::<u8>).collect::<Result<Vec<_>,_>>().unwrap();assert_eq!(pending_audio,expected);
     }
     println!("captured pending audio: {pending_audio:?}");
     world.validate_links().unwrap();
     for(name,bytes)in buffers(&world){std::fs::write(output.join(format!("{name}.bin")),bytes).unwrap();}
-    let report=format!("{{\"status\":\"{status}\",\"frame\":{final_frame},\"slot\":{slot},\"input_roundtrip\":true,\"error\":{error:?},\"rng_draws\":{},\"scope\":\"captured owned callbacks with other families frozen; not campaign acceptance\"}}\n",world.rng.draw_count.wrapping_sub(before.rng.draw_count));
+    let report=format!("{{\"status\":\"{status}\",\"frame\":{final_frame},\"slot\":{slot},\"input_roundtrip\":true,\"error\":{error:?},\"rng_draws\":{},\"scope\":\"captured Mule callbacks with other families frozen; not campaign acceptance\"}}\n",world.rng.draw_count.wrapping_sub(before.rng.draw_count));
     std::fs::write(output.join("result.json"),&report).unwrap();println!("{report}");
     let expected=std::env::var("GENEWARS_CAPTURED_MULE_EXPECT").unwrap_or_else(|_|"passed".into());
     match expected.as_str(){"passed"=>assert!(result.is_ok(),"captured callback blocked: {error}"),"blocked"=>assert!(result.is_err(),"expected unresolved boundary passed; update acceptance expectation"),_=>panic!("expected result must be passed or blocked")};

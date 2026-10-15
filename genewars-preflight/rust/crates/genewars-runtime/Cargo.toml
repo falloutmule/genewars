@@ -8,3 +8,7 @@ description = "Owned mission state and bounded source-backed GeneWars updates"
 [dependencies]
 genewars-assets = { path = "../genewars-assets" }
 genewars-core = { path = "../genewars-core" }
+
+[features]
+# Opt-in immutable numeric callback evidence in optimized diagnostic builds.
+callback-captures = []

@@ -44,11 +44,11 @@ impl ActorWorld {
     pub fn step_neutral_mule_slot_with_water(&mut self,slot:u16,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations)->Result<MuleCallbackReceipt,ActorWorldError>{
         let result=self.step_mule_followup_inner(usize::from(slot),context,physics,trig,animations,true);
         // Capture the exact first unsupported callback without another full replay.
-        #[cfg(debug_assertions)] if result.is_err(){self.capture_numeric_callback(usize::from(slot),context.frame_counter,"blocked-before");}
+        #[cfg(any(debug_assertions, feature = "callback-captures"))] if result.is_err(){self.capture_numeric_callback(usize::from(slot),context.frame_counter,"blocked-before");}
         result
     }
     fn step_mule_followup_inner(&mut self,slot:usize,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations,admit_water:bool)->Result<MuleCallbackReceipt,ActorWorldError> {
-        #[cfg(debug_assertions)] self.capture_numeric_callback(slot,context.frame_counter,"before");
+        #[cfg(any(debug_assertions, feature = "callback-captures"))] self.capture_numeric_callback(slot,context.frame_counter,"before");
         self.validate_links()?;
         let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;
         let binding=if pool.record(slot)?[0x5e]>=26{CreatureAnimationBinding::BonesSelector4}else{CreatureAnimationBinding::MuleSelector4};
@@ -266,13 +266,19 @@ impl ActorWorld {
         //The numeric planner admits only the owner4 reason4/BL0 branch.
         if before[0x5e]==8&&plan.after[0x5e]==24&&word(&plan.after,0x6a)==0 {pending_audio.push(0x1f);}
         staged.rng=rng;
-        #[cfg(debug_assertions)] staged.capture_numeric_callback(slot,context.frame_counter,"after");
+        #[cfg(any(debug_assertions, feature = "callback-captures"))] staged.capture_numeric_callback(slot,context.frame_counter,"after");
         staged.validate_links()?;let mut result=plan;result.after=*staged.creatures.as_ref().unwrap().record(slot)?;*self=staged;Ok(MuleCallbackReceipt{motion:result,retirement:None,newborn_slots,pending_audio,pending_plant_retirements,pending_portrait_refresh:before[0x5e]==8&&prefix[0x5e]==0})
     }
 
     /// Opt-in immutable callback fixture for source comparison; absent in release.
-    #[cfg(debug_assertions)]
+    #[cfg(any(debug_assertions, feature = "callback-captures"))]
     pub(super) fn capture_numeric_callback(&self,slot:usize,frame:u32,phase:&str){
+        // A campaign replay resets frame numbers between missions. Filter
+        // by the actual retained player progress to avoid cross-mission paths.
+        if let Ok(value)=std::env::var("GENEWARS_MULE_CALLBACK_CAMPAIGN_PROGRESS") {
+            let progress=value.parse::<u8>().expect("explicit capture campaign progress");
+            if self.players[0].bytes()[0x6e7]!=progress{return;}
+        }
         let extra=std::env::var("GENEWARS_MULE_CALLBACK_FRAME").ok().map(|v|v.split(',').map(str::parse::<u32>).collect::<Result<Vec<_>,_>>().expect("explicit numeric callback frames"));
         if !phase.starts_with("blocked-before")&&extra.as_ref().map_or(frame>1,|requested|!requested.contains(&frame)){return;} // Explicit frame or default first two.
         let Some(root)=std::env::var_os("GENEWARS_MULE_CALLBACK_FIXTURE") else{return;};
