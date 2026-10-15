@@ -1,0 +1,96 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "fill": 0,
+      "angles": [
+        0,
+        0,
+        8192
+      ],
+      "instructions": 478,
+      "draws": 0
+    },
+    {
+      "fill": 0,
+      "angles": [
+        2040,
+        298,
+        16320
+      ],
+      "instructions": 482,
+      "draws": 0
+    },
+    {
+      "fill": 0,
+      "angles": [
+        256,
+        100,
+        10048
+      ],
+      "instructions": 478,
+      "draws": 0
+    },
+    {
+      "fill": 0,
+      "angles": [
+        1024,
+        0,
+        8192
+      ],
+      "instructions": 482,
+      "draws": 0
+    },
+    {
+      "fill": 165,
+      "angles": [
+        0,
+        0,
+        8192
+      ],
+      "instructions": 478,
+      "draws": 0
+    },
+    {
+      "fill": 165,
+      "angles": [
+        2040,
+        298,
+        16320
+      ],
+      "instructions": 482,
+      "draws": 0
+    },
+    {
+      "fill": 165,
+      "angles": [
+        256,
+        100,
+        10048
+      ],
+      "instructions": 478,
+      "draws": 0
+    },
+    {
+      "fill": 165,
+      "angles": [
+        1024,
+        0,
+        8192
+      ],
+      "instructions": 482,
+      "draws": 0
+    }
+  ],
+  "compared_bytes": 648,
+  "private_run": "private\\review\\effect20-literal\\2c39ce7533d844d299384c4dc787d5a5",
+  "pins": {
+    "private\\ghidra\\activation-rng-refs\\instructions-00048790.txt": "840113f32e4845215dc107850ae4cf6218cd5558af2f2dbd1aae632654da533d",
+    "private\\ghidra\\player-creation\\instructions-0001f070.txt": "b890bd05c1566c3755c4a62dad58a937ee98d0119013e6f6fe11ef59b84f79c3",
+    "private\\ghidra\\mission-tail-init\\instructions-00049e90.txt": "55e976eb9c620d3cd6996d5dfd810532c8ca5c0a93fcb4a34239744049f9e001",
+    "private\\ghidra\\terrain-map-refs\\instructions-0007b240.txt": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb",
+    "rust\\crates\\genewars-runtime\\src\\effect20_factory.rs": "73f8b528de27cd44d861113fa1e3a5c222a401fcde7b638b51c1b6a9afcf6c51",
+    "scripts\\ghidra\\effect20_literal_review.py": "cabe69bb97ee49ab40d441037aea4fee1d2878ab85f9a266ef89492f60b6f450"
+  },
+  "scope": "Full literal48790 including1F070,49E90,terrain sampling and8AC60; native pure factory81bytes with pointer31:39 normalized. Explicit sampledground/shade inputs; empty map link/count asserted on source; no native world commit/lifecycle/fullpool proof. No RNG or audio ports."
+}

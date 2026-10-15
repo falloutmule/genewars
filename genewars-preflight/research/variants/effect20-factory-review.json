@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "cases": 128,
+  "compared_bytes": 10368,
+  "private_run": "private\\review\\effect20-factory\\156543d059fe4afbb73cbeabd3045f49",
+  "pins": {
+    "rust\\crates\\genewars-runtime\\src\\effect20_factory.rs": "73f8b528de27cd44d861113fa1e3a5c222a401fcde7b638b51c1b6a9afcf6c51",
+    "scripts\\ghidra\\effect20_factory_review.py": "6e0912e5e4b92ce8a825f7b3e22c2056f6a738625e6d30de1203b40b3078e0cf",
+    "private\\ghidra\\activation-rng-refs\\instructions-00048790.txt": "840113f32e4845215dc107850ae4cf6218cd5558af2f2dbd1aae632654da533d",
+    "scripts\\ghidra\\validate_landing_bridge.py": "10dc9ff5f7077d4bc401fd7394f687b6710f9760ad11304135600bbc4709633f"
+  },
+  "scope": "Source-transcribed common constructor/48790 velocity and selector20 null-associated branch,128 prior-byte/angle variations. Not a literal execution comparison or full-world factory/lifecycle proof. Full pool replacement unsupported; no gameplay acceptance."
+}

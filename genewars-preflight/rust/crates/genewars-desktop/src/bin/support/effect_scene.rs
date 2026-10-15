@@ -174,6 +174,8 @@ fn draw_effect_records_inner(
         let ground_origin = *ground_origins.get(slot).ok_or(EffectSceneError::SlotOutOfRange(slot))?;
         if record[6] != EFFECT_ACTIVE { return Err(EffectSceneError::InactiveSlot(slot)); }
         let code = record[69];
+        //4AF01/4AD0B: association kind0 always takes the common draw wrapper.
+        if code==0x20&&record[73]!=0{return Err(EffectSceneError::InvalidBinding{slot,code,binding});}
         let expected_binding = match code {
             CODE_31 => Some(EffectAnimationBinding::EffAnimation49),
             CODE_6 => Some(EffectAnimationBinding::EffAnimation6),
@@ -184,6 +186,7 @@ fn draw_effect_records_inner(
             CODE_16 => Some(EffectAnimationBinding::EffAnimation22),
             CODE_2C => Some(EffectAnimationBinding::EffAnimation44),
             CODE_21 => Some(EffectAnimationBinding::EffAnimation33),
+            0x20 => Some(EffectAnimationBinding::EffAnimation32),
             _ => None,
         };
         if expected_binding.is_none() || binding != expected_binding {
@@ -258,7 +261,7 @@ fn draw_effect_records_inner(
             item.special_pixels_written = written;
             item.special_pixels_clipped = clipped;
         } else if code == CODE_6 || code == CODE_0X30 || code == CODE_26
-            || code == CODE_15 || code == CODE_16 || code == CODE_2C || code == CODE_21 {
+            || code == CODE_15 || code == CODE_16 || code == CODE_2C || code == CODE_21 || code == 0x20 {
             // These ordinary wrappers request the mode-0 component-shadow
             // pass before indexed8 color. Their EFF animation ranges differ.
             for component in &main.components {
@@ -315,6 +318,7 @@ fn decode_bound_frame(
         EffectAnimationBinding::EffAnimation22 => 22,
         EffectAnimationBinding::EffAnimation44 => 44,
             EffectAnimationBinding::EffAnimation33 => 33,
+            EffectAnimationBinding::EffAnimation32 => 32,
     };
     decode_frame(anb, animation, relative_frame)
 }
@@ -770,6 +774,7 @@ mod tests {
             (CODE_16,EffectAnimationBinding::EffAnimation22,22),
             (CODE_2C,EffectAnimationBinding::EffAnimation44,44),
             (CODE_21,EffectAnimationBinding::EffAnimation33,33),
+            (0x20,EffectAnimationBinding::EffAnimation32,32),
         ] {
             let animation=AnbSections::parse(resources.effects.bytes()).unwrap().ui_metadata().unwrap().animation(index).unwrap();
             let count=((animation.last_frame_offset-animation.first_frame_offset)/14+1) as usize;
@@ -789,13 +794,15 @@ mod tests {
                 assert_eq!(item.binding,binding);
                 assert_eq!(item.effective_shade,9);
                 assert_eq!(item.special_pixels_written,0);
-                assert!(item.shadow_pixels_written>0);
+                // Compare original shadow samples explicitly for all bound frames.
                 let mut expected=vec![23u8;512*480];
+                let mut expected_shadow=0;
                 for component in &frame.components {
                     let draw_shadow=if component.flags&1!=0{draw_hflipped_component_shadow}else{draw_normal_component_shadow};
-                    draw_shadow(&component.sprite,&gla,ground,component.local,0,
-                        [512,480],512,&mut expected).unwrap();
+                    expected_shadow+=draw_shadow(&component.sprite,&gla,ground,component.local,0,
+                        [512,480],512,&mut expected).unwrap().pixels_written;
                 }
+                assert_eq!(item.shadow_pixels_written,expected_shadow,"code{code} frame{frame_index} shadow");
                 for component in &frame.components {
                     for y in 0..usize::from(component.sprite.height) {
                         for x in 0..usize::from(component.sprite.width) {

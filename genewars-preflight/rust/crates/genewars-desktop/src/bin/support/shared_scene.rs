@@ -230,6 +230,7 @@ impl SharedMission {
                 AdmittedBuildingCallback::Incomplete{plan,..}=>self.pending_requests+=u64::from(plan.stop_audio_23)+u64::from(plan.stop_audio_2f),
                 AdmittedBuildingCallback::GenepodIdle{plan,..}=>self.pending_requests+=u64::from(plan.queue_requested),
                 AdmittedBuildingCallback::GenepodWork{plan,..}=>self.pending_requests+=u64::from(plan.queue_requested),
+                AdmittedBuildingCallback::GenepodTerminal{receipt}=>self.pending_requests+=u64::from(receipt.queue_requested)+u64::from(receipt.sound_requested.is_some())+u64::from(receipt.randomized_sound_requested.is_some()),
                 AdmittedBuildingCallback::Turret{plan,..}=>self.pending_requests+=u64::from(plan.audio.is_some()),
                 AdmittedBuildingCallback::Extractor{plan,..}=>self.pending_requests+=plan.audio.len()as u64,
                 AdmittedBuildingCallback::PowerProducer{receipt}=>self.pending_requests+=receipt.numeric.audio.len()as u64,
@@ -303,7 +304,7 @@ impl SharedMission {
                     self.pending_requests+=e.pending_events.len()as u64;
                     if let Some(r)=&e.retirement {self.pending_requests+=r.pending_ui_events.len()as u64;}
                 },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)|LandingEffectCallback::Power(e)=>{
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)|LandingEffectCallback::Power(e)|LandingEffectCallback::GenepodFailure(e)=>{
                     created+=usize::from(e.created_effect.is_some());retired+=usize::from(e.retired);self.pending_requests+=e.pending_ui_events.len()as u64;
                 },
             }

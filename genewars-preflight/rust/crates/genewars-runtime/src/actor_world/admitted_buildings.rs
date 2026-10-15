@@ -8,6 +8,7 @@ use crate::source_building_resources::SourceBuildingResourceDatabase;
 pub enum AdmittedBuildingCallback {
     GenepodIdle{slot:u16,plan:crate::genepod_idle::GenepodIdlePlan},
     GenepodWork{slot:u16,plan:crate::genepod_work_callback::GenepodWorkPlan},
+    GenepodTerminal{receipt:GenepodProductionReceipt},
     Incomplete{slot:u16,plan:crate::building_callback::IncompleteBuildingPlan},
     Turret{slot:u16,plan:crate::completed_building::TurretTrackingPlan},
     Extractor{slot:u16,plan:crate::extractor_production::ExtractorIdlePlan},
@@ -61,6 +62,13 @@ impl ActorWorld {
                     let plan=if selector==1{staged.step_incomplete_selector1_building(slot as u16,turret)?}
                     else{staged.step_incomplete_source_building(slot as u16,resources.iter().find(|r|r.selector()==selector).unwrap())?};
                     AdmittedBuildingCallback::Incomplete{slot:slot as u16,plan}
+                }else if selector==0 && i32::from_le_bytes(record[54..58].try_into().unwrap())==1 && production.is_some(){
+                    let (_,trig,_)=production.unwrap();
+                    let receipt=staged.step_genepod_terminal(slot as u16,frame,trig).map_err(|e|match e{
+                        GenepodProductionError::World(e)=>e,
+                        _=>ActorWorldError::UnsupportedGenepodProduction("terminal planner admission"),
+                    })?;
+                    AdmittedBuildingCallback::GenepodTerminal{receipt}
                 }else if selector==0 && i32::from_le_bytes(record[54..58].try_into().unwrap())>0 {
                     let players=core::array::from_fn(|p|*staged.players[p].bytes());
                     let plan=crate::genepod_work_callback::plan_completed_work(&record,&players,frame)

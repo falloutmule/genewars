@@ -1,0 +1,495 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "frame": 0,
+      "counter": 0,
+      "timer": -1,
+      "instructions": 158
+    },
+    {
+      "frame": 0,
+      "counter": 0,
+      "timer": 0,
+      "instructions": 160
+    },
+    {
+      "frame": 0,
+      "counter": 0,
+      "timer": 1,
+      "instructions": 142
+    },
+    {
+      "frame": 0,
+      "counter": 0,
+      "timer": 2,
+      "instructions": 142
+    },
+    {
+      "frame": 0,
+      "counter": 1,
+      "timer": -1,
+      "instructions": 159
+    },
+    {
+      "frame": 0,
+      "counter": 1,
+      "timer": 0,
+      "instructions": 161
+    },
+    {
+      "frame": 0,
+      "counter": 1,
+      "timer": 1,
+      "instructions": 143
+    },
+    {
+      "frame": 0,
+      "counter": 1,
+      "timer": 2,
+      "instructions": 143
+    },
+    {
+      "frame": 0,
+      "counter": 127,
+      "timer": -1,
+      "instructions": 159
+    },
+    {
+      "frame": 0,
+      "counter": 127,
+      "timer": 0,
+      "instructions": 161
+    },
+    {
+      "frame": 0,
+      "counter": 127,
+      "timer": 1,
+      "instructions": 143
+    },
+    {
+      "frame": 0,
+      "counter": 127,
+      "timer": 2,
+      "instructions": 143
+    },
+    {
+      "frame": 0,
+      "counter": 128,
+      "timer": -1,
+      "instructions": 158
+    },
+    {
+      "frame": 0,
+      "counter": 128,
+      "timer": 0,
+      "instructions": 160
+    },
+    {
+      "frame": 0,
+      "counter": 128,
+      "timer": 1,
+      "instructions": 142
+    },
+    {
+      "frame": 0,
+      "counter": 128,
+      "timer": 2,
+      "instructions": 142
+    },
+    {
+      "frame": 0,
+      "counter": 255,
+      "timer": -1,
+      "instructions": 158
+    },
+    {
+      "frame": 0,
+      "counter": 255,
+      "timer": 0,
+      "instructions": 160
+    },
+    {
+      "frame": 0,
+      "counter": 255,
+      "timer": 1,
+      "instructions": 142
+    },
+    {
+      "frame": 0,
+      "counter": 255,
+      "timer": 2,
+      "instructions": 142
+    },
+    {
+      "frame": 8,
+      "counter": 0,
+      "timer": -1,
+      "instructions": 172
+    },
+    {
+      "frame": 8,
+      "counter": 0,
+      "timer": 0,
+      "instructions": 174
+    },
+    {
+      "frame": 8,
+      "counter": 0,
+      "timer": 1,
+      "instructions": 142
+    },
+    {
+      "frame": 8,
+      "counter": 0,
+      "timer": 2,
+      "instructions": 142
+    },
+    {
+      "frame": 8,
+      "counter": 1,
+      "timer": -1,
+      "instructions": 173
+    },
+    {
+      "frame": 8,
+      "counter": 1,
+      "timer": 0,
+      "instructions": 175
+    },
+    {
+      "frame": 8,
+      "counter": 1,
+      "timer": 1,
+      "instructions": 143
+    },
+    {
+      "frame": 8,
+      "counter": 1,
+      "timer": 2,
+      "instructions": 143
+    },
+    {
+      "frame": 8,
+      "counter": 127,
+      "timer": -1,
+      "instructions": 173
+    },
+    {
+      "frame": 8,
+      "counter": 127,
+      "timer": 0,
+      "instructions": 175
+    },
+    {
+      "frame": 8,
+      "counter": 127,
+      "timer": 1,
+      "instructions": 143
+    },
+    {
+      "frame": 8,
+      "counter": 127,
+      "timer": 2,
+      "instructions": 143
+    },
+    {
+      "frame": 8,
+      "counter": 128,
+      "timer": -1,
+      "instructions": 172
+    },
+    {
+      "frame": 8,
+      "counter": 128,
+      "timer": 0,
+      "instructions": 174
+    },
+    {
+      "frame": 8,
+      "counter": 128,
+      "timer": 1,
+      "instructions": 142
+    },
+    {
+      "frame": 8,
+      "counter": 128,
+      "timer": 2,
+      "instructions": 142
+    },
+    {
+      "frame": 8,
+      "counter": 255,
+      "timer": -1,
+      "instructions": 172
+    },
+    {
+      "frame": 8,
+      "counter": 255,
+      "timer": 0,
+      "instructions": 174
+    },
+    {
+      "frame": 8,
+      "counter": 255,
+      "timer": 1,
+      "instructions": 142
+    },
+    {
+      "frame": 8,
+      "counter": 255,
+      "timer": 2,
+      "instructions": 142
+    },
+    {
+      "frame": 9,
+      "counter": 0,
+      "timer": -1,
+      "instructions": 159
+    },
+    {
+      "frame": 9,
+      "counter": 0,
+      "timer": 0,
+      "instructions": 161
+    },
+    {
+      "frame": 9,
+      "counter": 0,
+      "timer": 1,
+      "instructions": 143
+    },
+    {
+      "frame": 9,
+      "counter": 0,
+      "timer": 2,
+      "instructions": 143
+    },
+    {
+      "frame": 9,
+      "counter": 1,
+      "timer": -1,
+      "instructions": 160
+    },
+    {
+      "frame": 9,
+      "counter": 1,
+      "timer": 0,
+      "instructions": 162
+    },
+    {
+      "frame": 9,
+      "counter": 1,
+      "timer": 1,
+      "instructions": 144
+    },
+    {
+      "frame": 9,
+      "counter": 1,
+      "timer": 2,
+      "instructions": 144
+    },
+    {
+      "frame": 9,
+      "counter": 127,
+      "timer": -1,
+      "instructions": 160
+    },
+    {
+      "frame": 9,
+      "counter": 127,
+      "timer": 0,
+      "instructions": 162
+    },
+    {
+      "frame": 9,
+      "counter": 127,
+      "timer": 1,
+      "instructions": 144
+    },
+    {
+      "frame": 9,
+      "counter": 127,
+      "timer": 2,
+      "instructions": 144
+    },
+    {
+      "frame": 9,
+      "counter": 128,
+      "timer": -1,
+      "instructions": 159
+    },
+    {
+      "frame": 9,
+      "counter": 128,
+      "timer": 0,
+      "instructions": 161
+    },
+    {
+      "frame": 9,
+      "counter": 128,
+      "timer": 1,
+      "instructions": 143
+    },
+    {
+      "frame": 9,
+      "counter": 128,
+      "timer": 2,
+      "instructions": 143
+    },
+    {
+      "frame": 9,
+      "counter": 255,
+      "timer": -1,
+      "instructions": 159
+    },
+    {
+      "frame": 9,
+      "counter": 255,
+      "timer": 0,
+      "instructions": 161
+    },
+    {
+      "frame": 9,
+      "counter": 255,
+      "timer": 1,
+      "instructions": 143
+    },
+    {
+      "frame": 9,
+      "counter": 255,
+      "timer": 2,
+      "instructions": 143
+    },
+    {
+      "frame": 255,
+      "counter": 0,
+      "timer": -1,
+      "instructions": 159
+    },
+    {
+      "frame": 255,
+      "counter": 0,
+      "timer": 0,
+      "instructions": 161
+    },
+    {
+      "frame": 255,
+      "counter": 0,
+      "timer": 1,
+      "instructions": 143
+    },
+    {
+      "frame": 255,
+      "counter": 0,
+      "timer": 2,
+      "instructions": 143
+    },
+    {
+      "frame": 255,
+      "counter": 1,
+      "timer": -1,
+      "instructions": 160
+    },
+    {
+      "frame": 255,
+      "counter": 1,
+      "timer": 0,
+      "instructions": 162
+    },
+    {
+      "frame": 255,
+      "counter": 1,
+      "timer": 1,
+      "instructions": 144
+    },
+    {
+      "frame": 255,
+      "counter": 1,
+      "timer": 2,
+      "instructions": 144
+    },
+    {
+      "frame": 255,
+      "counter": 127,
+      "timer": -1,
+      "instructions": 160
+    },
+    {
+      "frame": 255,
+      "counter": 127,
+      "timer": 0,
+      "instructions": 162
+    },
+    {
+      "frame": 255,
+      "counter": 127,
+      "timer": 1,
+      "instructions": 144
+    },
+    {
+      "frame": 255,
+      "counter": 127,
+      "timer": 2,
+      "instructions": 144
+    },
+    {
+      "frame": 255,
+      "counter": 128,
+      "timer": -1,
+      "instructions": 159
+    },
+    {
+      "frame": 255,
+      "counter": 128,
+      "timer": 0,
+      "instructions": 161
+    },
+    {
+      "frame": 255,
+      "counter": 128,
+      "timer": 1,
+      "instructions": 143
+    },
+    {
+      "frame": 255,
+      "counter": 128,
+      "timer": 2,
+      "instructions": 143
+    },
+    {
+      "frame": 255,
+      "counter": 255,
+      "timer": -1,
+      "instructions": 159
+    },
+    {
+      "frame": 255,
+      "counter": 255,
+      "timer": 0,
+      "instructions": 161
+    },
+    {
+      "frame": 255,
+      "counter": 255,
+      "timer": 1,
+      "instructions": 143
+    },
+    {
+      "frame": 255,
+      "counter": 255,
+      "timer": 2,
+      "instructions": 143
+    }
+  ],
+  "compared_bytes": 6560,
+  "private_run": "private\\review\\effect20-animation\\d951a9cf99ce4de59cad628d66e9d6ff",
+  "pins": {
+    "private\\ghidra\\plant-command\\instructions-0004b630.txt": "1686608a6f95caf95f2f963ac824df9f02ecc2ed5d7a6d928fa85638b845ef76",
+    "private\\ghidra\\mission-array-refs\\instructions-0004b3b0.txt": "70d7c3c297a8693f4b7367eab89f440b850efac1e673f52addeeff45597591da",
+    "rust\\crates\\genewars-runtime\\src\\effect20_factory.rs": "73f8b528de27cd44d861113fa1e3a5c222a401fcde7b638b51c1b6a9afcf6c51",
+    "scripts\\ghidra\\effect20_animation_review.py": "1150e3922b8f28411e02fbe564147b1a580301b8f7cdb749ec93cc12b496ad59",
+    "private\\integration\\rnc-decoded\\74c282b4aff35204da78399a3f2674cabda56b0a76dc9a9974635ae5ad878b8d.bin": "f45f1201e50ce67199f1e1e8448d250f221cad71f1328ee44b7bacf9ee62c253"
+  },
+  "scope": "Full4B630 control/7AC00 EFF32 animation after explicit6DF30 no-op physics port;49D30 retirement requested but not executed. Byte31:39 normalized. No worldphysics/lifecycle admission or gameplay acceptance."
+}

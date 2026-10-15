@@ -47,6 +47,9 @@ mod building_storage;
 mod building_scheduler;
 mod admitted_buildings;
 mod genepod_commands;
+mod genepod_production;
+mod effect20_updates;
+pub use genepod_production::{GenepodProductionError,GenepodProductionReceipt};
 pub use genepod_commands::{GenepodInputError,GenepodInputReceipt};
 mod extractor_updates;
 pub use extractor_updates::ExtractorWorldReceipt;
@@ -70,6 +73,7 @@ const MAP_BYTES: usize = 128 * 128 * 14;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ActorWorldError {
+    UnsupportedGenepodProduction(&'static str),
     MissionHash(String), InvalidPlayer(u8), PlayerIdentity { slot: usize, actual: u8 },
     MissionFunds(crate::mission_player_funds::MissionFundsError),
     MissionStatus(crate::mission_status::MissionStatusError),

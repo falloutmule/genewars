@@ -5,7 +5,7 @@
 use crate::landing::{LandingFactoryPlan, LandingRecord, FAMILY4_CAPACITY};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum EffectAnimationBinding { EffAnimation49, EffAnimation6, EffAnimation47, EffAnimation48, EffAnimation26, EffAnimation21, EffAnimation22, EffAnimation44, EffAnimation33 }
+pub enum EffectAnimationBinding { EffAnimation49, EffAnimation6, EffAnimation47, EffAnimation48, EffAnimation26, EffAnimation21, EffAnimation22, EffAnimation44, EffAnimation33, EffAnimation32 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum EffectPoolError {
@@ -73,6 +73,7 @@ impl EffectPool {
             (0x16,22) => EffectAnimationBinding::EffAnimation22,
             (0x2c,44) => EffectAnimationBinding::EffAnimation44,
             (0x21,33) => EffectAnimationBinding::EffAnimation33,
+            (0x20,32) => EffectAnimationBinding::EffAnimation32,
             _ => return Err(EffectPoolError::InvalidFactoryPlan),
         };
         if self.records.iter().position(|r| r[6] == 0) != Some(slot)
@@ -99,7 +100,7 @@ impl EffectPool {
     }
     pub(crate) fn retire_checked(&mut self,slot:usize,before:&LandingRecord,after:&LandingRecord)->Result<(),EffectPoolError> {
         if self.record(slot)?!=before { return Err(EffectPoolError::StaleRecord(slot)); }
-        let expected_binding=match before[69] {0x21=>EffectAnimationBinding::EffAnimation33,0x2c=>EffectAnimationBinding::EffAnimation44,0x15=>EffectAnimationBinding::EffAnimation21,0x16=>EffectAnimationBinding::EffAnimation22,0x1A=>EffectAnimationBinding::EffAnimation26,6=>EffectAnimationBinding::EffAnimation6,0x2F=>EffectAnimationBinding::EffAnimation47,0x30=>EffectAnimationBinding::EffAnimation48,0x31=>EffectAnimationBinding::EffAnimation49,_=>return Err(EffectPoolError::InvalidRetirement) };
+        let expected_binding=match before[69] {0x20=>EffectAnimationBinding::EffAnimation32,0x21=>EffectAnimationBinding::EffAnimation33,0x2c=>EffectAnimationBinding::EffAnimation44,0x15=>EffectAnimationBinding::EffAnimation21,0x16=>EffectAnimationBinding::EffAnimation22,0x1A=>EffectAnimationBinding::EffAnimation26,6=>EffectAnimationBinding::EffAnimation6,0x2F=>EffectAnimationBinding::EffAnimation47,0x30=>EffectAnimationBinding::EffAnimation48,0x31=>EffectAnimationBinding::EffAnimation49,_=>return Err(EffectPoolError::InvalidRetirement) };
         if before[6]!=5||self.binding(slot)?!=Some(expected_binding) { return Err(EffectPoolError::InvalidRetirement); }
         let mut expected=*before;expected[6]=0;
         if expected[73]==5&&word(&expected,71)==slot as i16 { expected[73]=0; }
