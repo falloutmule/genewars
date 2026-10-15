@@ -1,0 +1,434 @@
+{
+  "status": "corroborated-standard-mode0-campaign-sequence",
+  "reference_build": "GENEWARS QA BETA V5",
+  "recovered_standard_total": 24,
+  "accepted_completable_missions": 0,
+  "accepted_transitions": 0,
+  "basis": [
+    "Fresh campaign progress0; mission/header selection uses progress+1",
+    "Victory view increments progress once;7DE00 tests progress24 and routes to ending",
+    "All24 corresponding CD mission/header pairs are present and match inventory hashes"
+  ],
+  "limits": [
+    "No campaign traversal or later mission objective acceptance",
+    "HDRCO25,CONQ030/HDRCO30,CONQ040/HDRCO40 are extra resources, not silently added to this standard sequence",
+    "Retail equivalence remains unestablished"
+  ],
+  "missions": [
+    {
+      "progress_before": 0,
+      "mission_number": 1,
+      "name": "Exceland",
+      "resources": {
+        "CONQ001.DAT": {
+          "entry_id": "root/2/disc/152",
+          "sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+          "size": 343958
+        },
+        "HDRCO1.DAT": {
+          "entry_id": "root/2/disc/190",
+          "sha256": "5e1f382ea68f57f1cec03a3f7de2c4903ca127519481da98232a7f1c3a46aa11",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 1,
+      "mission_number": 2,
+      "name": "Krell",
+      "resources": {
+        "CONQ002.DAT": {
+          "entry_id": "root/2/disc/153",
+          "sha256": "4042c6df3b161132c12a424dace7b9fcbf253a197261f1cf76e0db4af41ea27a",
+          "size": 343958
+        },
+        "HDRCO2.DAT": {
+          "entry_id": "root/2/disc/201",
+          "sha256": "5a42310026365e8c36ddce8ecba48fe099c42accc6c878933d2360c1ebb6e80c",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 2,
+      "mission_number": 3,
+      "name": "Madami",
+      "resources": {
+        "CONQ003.DAT": {
+          "entry_id": "root/2/disc/154",
+          "sha256": "f4ab595f5f66402f13a11789af75aff873145f6092d06f3f5ff642b74c10d277",
+          "size": 343958
+        },
+        "HDRCO3.DAT": {
+          "entry_id": "root/2/disc/208",
+          "sha256": "ac0e268924e29ed4fbd42a064e30b10c779c8850bc6a9aed31c69061156359b8",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 3,
+      "mission_number": 4,
+      "name": "Roach",
+      "resources": {
+        "CONQ004.DAT": {
+          "entry_id": "root/2/disc/155",
+          "sha256": "097f862d765273ebd2171d7c38e3f24a0a43d761bfdcc23aa8058b96ca1ae5e7",
+          "size": 343958
+        },
+        "HDRCO4.DAT": {
+          "entry_id": "root/2/disc/210",
+          "sha256": "66b5737201827b7a3dcf1419a9082b93056071d02c24375d0601d124d44f3eca",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 4,
+      "mission_number": 5,
+      "name": "Brown",
+      "resources": {
+        "CONQ005.DAT": {
+          "entry_id": "root/2/disc/156",
+          "sha256": "b48be531d51c6e30f74afa0b3043e9002ddfcf0694078c5fb9baf8cb07ea932c",
+          "size": 343958
+        },
+        "HDRCO5.DAT": {
+          "entry_id": "root/2/disc/212",
+          "sha256": "bf77687931e3b7a4c02320e9499c98ef787432d681a5bc063bc51e00466edeb7",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 5,
+      "mission_number": 6,
+      "name": "Lunacon",
+      "resources": {
+        "CONQ006.DAT": {
+          "entry_id": "root/2/disc/157",
+          "sha256": "bd5eec1140264ed4751ba517efdb19e3ae991407262b4c9319e03b2a37c6f06f",
+          "size": 343958
+        },
+        "HDRCO6.DAT": {
+          "entry_id": "root/2/disc/213",
+          "sha256": "2079f74466eeaf07105523a0a83d46d77f6509ed941dcc984fa858a0f9ca6406",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 6,
+      "mission_number": 7,
+      "name": "Oid",
+      "resources": {
+        "CONQ007.DAT": {
+          "entry_id": "root/2/disc/158",
+          "sha256": "91403ebc351812186f81c3d2e6545d996b91447ca3f1478d41c52b8834ee4372",
+          "size": 343958
+        },
+        "HDRCO7.DAT": {
+          "entry_id": "root/2/disc/214",
+          "sha256": "b988cc2c2b74c37a1d0cb3bed42ec4efbd193737d8c242c37425be630b3a8b3c",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 7,
+      "mission_number": 8,
+      "name": "Fushon",
+      "resources": {
+        "CONQ008.DAT": {
+          "entry_id": "root/2/disc/159",
+          "sha256": "60b7a657dfc6b691748cf530e4aec284ac03df25ca52383c661a79f134de11a8",
+          "size": 343958
+        },
+        "HDRCO8.DAT": {
+          "entry_id": "root/2/disc/215",
+          "sha256": "47b825b56e2734d371b9d449baaa89ec2affda9794d53c27ee22ffdc75b6f422",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 8,
+      "mission_number": 9,
+      "name": "Vergon",
+      "resources": {
+        "CONQ009.DAT": {
+          "entry_id": "root/2/disc/160",
+          "sha256": "026448ac710e1cf423a22796cdc0b33cd29035900a0f23fa6d852b5142fc3c49",
+          "size": 343958
+        },
+        "HDRCO9.DAT": {
+          "entry_id": "root/2/disc/216",
+          "sha256": "5e5ac423fa15afa9aa6d796ef48279bc7d5df6f08c8378ff6f2459bc915ed78c",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 9,
+      "mission_number": 10,
+      "name": "Pylon",
+      "resources": {
+        "CONQ010.DAT": {
+          "entry_id": "root/2/disc/161",
+          "sha256": "b828cd287e04a330d413f17e6a29bc638056b9fc90fb5c9113fc6355c87115b6",
+          "size": 343958
+        },
+        "HDRCO10.DAT": {
+          "entry_id": "root/2/disc/191",
+          "sha256": "2de4e1b0d3c2d95067b0e5e79632e8c53ddea2fe7a4e96d8db814d134d8ea83c",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 10,
+      "mission_number": 11,
+      "name": "Zed",
+      "resources": {
+        "CONQ011.DAT": {
+          "entry_id": "root/2/disc/162",
+          "sha256": "4bb99e82435bcd794349be27546571e08c4c2980403b199513ebfeb29cf01286",
+          "size": 343958
+        },
+        "HDRCO11.DAT": {
+          "entry_id": "root/2/disc/192",
+          "sha256": "c66b000e595a4b2a311d0b20f9f97d3d6022339d18f3d7e8f90423ffadb47de7",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 11,
+      "mission_number": 12,
+      "name": "Thyroid",
+      "resources": {
+        "CONQ012.DAT": {
+          "entry_id": "root/2/disc/163",
+          "sha256": "dd2eb17f01eb4687cee6aad1242797bf515357bc411a616695d686a8253c010d",
+          "size": 343958
+        },
+        "HDRCO12.DAT": {
+          "entry_id": "root/2/disc/193",
+          "sha256": "4a6ac4fd7a1072cd97fb5167232d0ce98370842a61127f33dbdd86e0b56fe138",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 12,
+      "mission_number": 13,
+      "name": "Jenner",
+      "resources": {
+        "CONQ013.DAT": {
+          "entry_id": "root/2/disc/164",
+          "sha256": "01bf2f46b5c3d9ec731c27a07d57f067a6cd03314b9622a4ea9c8e102145e75e",
+          "size": 343958
+        },
+        "HDRCO13.DAT": {
+          "entry_id": "root/2/disc/194",
+          "sha256": "51013c5d509575ac6207a5e554bc23732c148acfc08bb099e65e3d3ae36eb3df",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 13,
+      "mission_number": 14,
+      "name": "Petri",
+      "resources": {
+        "CONQ014.DAT": {
+          "entry_id": "root/2/disc/165",
+          "sha256": "7be8b5117e094f3cd9b7f93b0d771abf419f04a4bde328eebd28b26c43202e76",
+          "size": 343958
+        },
+        "HDRCO14.DAT": {
+          "entry_id": "root/2/disc/195",
+          "sha256": "432bf92ce00cdd0f80bda82e082a3d634264e5679bc86e9aca5da6a2309b96e0",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 14,
+      "mission_number": 15,
+      "name": "Mirkon",
+      "resources": {
+        "CONQ015.DAT": {
+          "entry_id": "root/2/disc/166",
+          "sha256": "4e5019095ab6f53b993305a220db4c03262c98734262c00f0696943d08d47ecd",
+          "size": 343958
+        },
+        "HDRCO15.DAT": {
+          "entry_id": "root/2/disc/196",
+          "sha256": "63665d97cb59efb9dcf1ac3c61524756e59611f2bb3331d200582b5865d8e8ea",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 15,
+      "mission_number": 16,
+      "name": "Kruush",
+      "resources": {
+        "CONQ016.DAT": {
+          "entry_id": "root/2/disc/167",
+          "sha256": "d38f56d6e3042fd339c7851f226c37da0d0db57c9f10fd835e5b84bef2f8cfc1",
+          "size": 343958
+        },
+        "HDRCO16.DAT": {
+          "entry_id": "root/2/disc/197",
+          "sha256": "da1011997fd88088f64f9b7add362f042663b2d2a24fb318002a8393467552da",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 16,
+      "mission_number": 17,
+      "name": "Ape",
+      "resources": {
+        "CONQ017.DAT": {
+          "entry_id": "root/2/disc/168",
+          "sha256": "d51fea127cd4095a21678cea122fc3b7facaa91adcd7c621b8d8bef4e8e02fdb",
+          "size": 343958
+        },
+        "HDRCO17.DAT": {
+          "entry_id": "root/2/disc/198",
+          "sha256": "7caebf42513cadeb7c8aa7f06ba964a263e57fdd4a162bf93e244401a964cd87",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 17,
+      "mission_number": 18,
+      "name": "Forte",
+      "resources": {
+        "CONQ018.DAT": {
+          "entry_id": "root/2/disc/169",
+          "sha256": "ac4f3a0ebce0234dfa461aaae1b52944df21c0a1f2eba659a4a97675d545987f",
+          "size": 343958
+        },
+        "HDRCO18.DAT": {
+          "entry_id": "root/2/disc/199",
+          "sha256": "9d0002ba7f8aa33fb82de01433802d8f8da85f83e7008056d892cbd6930cfc8a",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 18,
+      "mission_number": 19,
+      "name": "Huth",
+      "resources": {
+        "CONQ019.DAT": {
+          "entry_id": "root/2/disc/170",
+          "sha256": "f6b2477e6619d2b537e1138e3dbf3ae8a0eaf7d47b3f51b1b9ed5f276c68b6a9",
+          "size": 343958
+        },
+        "HDRCO19.DAT": {
+          "entry_id": "root/2/disc/200",
+          "sha256": "c96e25bcadd0da8ebf2128fed4ff0cd0df94c640d7e48d02f45b651cef0c54ef",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 19,
+      "mission_number": 20,
+      "name": "Voss",
+      "resources": {
+        "CONQ020.DAT": {
+          "entry_id": "root/2/disc/171",
+          "sha256": "0be8ff033d7eeb7cb65132971576344e0d7f69ec2551a36457f531ce3451a8c0",
+          "size": 343958
+        },
+        "HDRCO20.DAT": {
+          "entry_id": "root/2/disc/202",
+          "sha256": "22394348c7c56c879d5d50e2ba6b8b22530a679a0acd7e98d9224ae077842a97",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 20,
+      "mission_number": 21,
+      "name": "Shnorden",
+      "resources": {
+        "CONQ021.DAT": {
+          "entry_id": "root/2/disc/172",
+          "sha256": "bb4ad953c894aeaa6ac87c901a53fe63477d45d37f85e91a816c028461647fca",
+          "size": 343958
+        },
+        "HDRCO21.DAT": {
+          "entry_id": "root/2/disc/203",
+          "sha256": "39fdbf21c50bb0cda98ca881403dc8e5cc7e2d7de4280ad32f0ef853ac0bf79c",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 21,
+      "mission_number": 22,
+      "name": "Natismad",
+      "resources": {
+        "CONQ022.DAT": {
+          "entry_id": "root/2/disc/173",
+          "sha256": "0cc59566f78d1b72b793e77e307bd70b2076737363114e804e7c4290cb240814",
+          "size": 343958
+        },
+        "HDRCO22.DAT": {
+          "entry_id": "root/2/disc/204",
+          "sha256": "e4c7e6271540ef069aaf997007191f3a315f57f80e50a06d4618cd3da5607362",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 22,
+      "mission_number": 23,
+      "name": "Kaminski",
+      "resources": {
+        "CONQ023.DAT": {
+          "entry_id": "root/2/disc/174",
+          "sha256": "b29ac020da243e9f6e99f9136812ca7d0d13dd69d9f225c445acb2545c0c0b42",
+          "size": 343958
+        },
+        "HDRCO23.DAT": {
+          "entry_id": "root/2/disc/205",
+          "sha256": "0dcf693e7e6240d0eeb830d4730a501043bb9eecd8c2fc5e10c88a27ea809e99",
+          "size": 699
+        }
+      }
+    },
+    {
+      "progress_before": 23,
+      "mission_number": 24,
+      "name": "Biosphere",
+      "resources": {
+        "CONQ024.DAT": {
+          "entry_id": "root/2/disc/175",
+          "sha256": "65366e1ac92aebdb2de715fd42e4ec9ba3a3ed18a2e57f005339e295c98efd7f",
+          "size": 343958
+        },
+        "HDRCO24.DAT": {
+          "entry_id": "root/2/disc/206",
+          "sha256": "2324373d5e84700c1fd3b5becb954787712dd58f27c7a67e7be982b043b92bbe",
+          "size": 699
+        }
+      }
+    }
+  ],
+  "pins": {
+    "research/game-files-manifest.json": "6139f4083031cee88bc04849f1959ae1e43aff41eef7c87cb4a62bc8b86e9e6a",
+    "research/campaign/mission-001-contract.json": "a4f1b273bc4e5d95c06f7fffd686b06020457fe81c5f9a02ef4a118b5b6a2cb8",
+    "research/variants/result-transition-review.json": "492e91263a9b21000ec002fece06d0ad861392703b25c6f67ef50a89e897b75b",
+    "private/ghidra/mission-result-refs/result-view-range.txt": "95362779881a8261abae65a13e155405221402ab4adec1661542fd2e751de30a",
+    "private/ghidra/campaign-mission-refs/instructions-00015b90.txt": "d2e639da791ba69c9967189b128a3d39d03818f43b870d252e880e87dc354484"
+  }
+}

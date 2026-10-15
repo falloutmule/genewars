@@ -365,8 +365,32 @@
       "sha256": "73d5433364795a4d2fabdab1489e130120483f30e3d07e13c5a75aab55b3102b",
       "size": 1170,
       "provenance": "root/2/disc/84"
+    },
+    {
+      "path": "campaign/LEVSCR01.DAT",
+      "sha256": "761701f542363a867b8330b9a63f54f8659e6195b96f26824bf301b967a2f8c3",
+      "size": 307200,
+      "provenance": "root/2/disc/93"
+    },
+    {
+      "path": "campaign/LEVSCR01.PAL",
+      "sha256": "9d08b13c6d0864a48a3a6c37dc9c5766b7443e65549328763d17e264e69cfbf2",
+      "size": 768,
+      "provenance": "root/2/disc/94"
+    },
+    {
+      "path": "terrain/CONQ002.DAT",
+      "sha256": "4042c6df3b161132c12a424dace7b9fcbf253a197261f1cf76e0db4af41ea27a",
+      "size": 343958,
+      "provenance": "root/2/disc/153"
+    },
+    {
+      "path": "campaign/HDRCO2.DAT",
+      "sha256": "5a42310026365e8c36ddce8ecba48fe099c42accc6c878933d2360c1ebb6e80c",
+      "size": 699,
+      "provenance": "root/2/disc/201"
     }
   ],
   "original_execution": false,
-  "catalog_sha256": "6123d05fc653f5a490bf6d0c572877d3b92d655a97ad43108dfd88aac48a1cb3"
+  "catalog_sha256": "8119192d103fcb05b4919dc7a9091eb8ec91b8cbf6b310e2cdc3c2015f957578"
 }

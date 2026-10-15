@@ -60,3 +60,7 @@ results/WINSCR.DAT	2dee4b93857b9de395b89919b66baa7e3086f00c0de072f62f8bca3824c12
 results/WINSCR.PAL	78105d9cf6835259782ee5559a8ec455f8668d4e40d2ae6215f05fc59bc30af9	768	private/integration/result-inputs/WINSCR.PAL	root/2/disc/146
 results/FONT7.DAT	60dbffae53efe67f5ce634c71c0e97b91a2d4514d8eaf7796d947fc106ad6e0e	14994	private/integration/result-inputs/FONT7.DAT	root/2/disc/83
 results/FONT7.TAB	73d5433364795a4d2fabdab1489e130120483f30e3d07e13c5a75aab55b3102b	1170	private/integration/result-inputs/FONT7.TAB	root/2/disc/84
+campaign/LEVSCR01.DAT	761701f542363a867b8330b9a63f54f8659e6195b96f26824bf301b967a2f8c3	307200	private/integration/campaign-inputs/LEVSCR01.DAT	root/2/disc/93
+campaign/LEVSCR01.PAL	9d08b13c6d0864a48a3a6c37dc9c5766b7443e65549328763d17e264e69cfbf2	768	private/integration/campaign-inputs/LEVSCR01.PAL	root/2/disc/94
+terrain/CONQ002.DAT	4042c6df3b161132c12a424dace7b9fcbf253a197261f1cf76e0db4af41ea27a	343958	private/integration/campaign-inputs/CONQ002.DAT	root/2/disc/153
+campaign/HDRCO2.DAT	5a42310026365e8c36ddce8ecba48fe099c42accc6c878933d2360c1ebb6e80c	699	private/integration/campaign-inputs/HDRCO2.DAT	root/2/disc/201
