@@ -19,6 +19,8 @@ def stage():
     stage_results()
     from campaign_view_inputs import stage as stage_campaign
     stage_campaign()
+    from zone_ui_inputs import stage as stage_zone_ui
+    stage_zone_ui()
     private = (ROOT / 'private').resolve()
     destination = private / 'integration/game-runtime'
     # These raw ANBs were not part of the earlier decoder corpus. Reproduce

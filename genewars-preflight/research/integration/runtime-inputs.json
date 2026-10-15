@@ -395,8 +395,20 @@
       "sha256": "a71f03d3cce3d36798cd7f8ad578d665e65883bfe9b541ba93d0ad9eff814cab",
       "size": 62062,
       "provenance": "root/2/disc/301"
+    },
+    {
+      "path": "ui/PLGBL.ANB",
+      "sha256": "a39cc8ac8c987de5c4865ec77a4459221f276286f254653e4a3f3231424f6444",
+      "size": 40414,
+      "provenance": "root/2/disc/124"
+    },
+    {
+      "path": "ui/zone-colors.bin",
+      "sha256": "a7735d28ff0f0a4c3c5b5a78eb7f5c23cd8bf52f0d8ec33b84baea1c1a6651e8",
+      "size": 7,
+      "provenance": "CD-GW.EXE mapped object3+0x2e38"
     }
   ],
   "original_execution": false,
-  "catalog_sha256": "4eba76afedd1690e33f548e21cb9a545e094b69e234920bdb92a62a9202ef0f9"
+  "catalog_sha256": "23398cfd0e885159ca39dad5afe531a0576dc24ce0b09705a0d81a0d5df4f73c"
 }

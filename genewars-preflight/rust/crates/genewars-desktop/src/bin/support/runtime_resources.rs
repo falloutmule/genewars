@@ -61,6 +61,9 @@ pub struct Resources {
     pub ethereal: crate::family8_scene::EtherealAnimationDatabase,
     pub family8_animation: genewars_runtime::family8_motion::Family8Animation,
     pub family8_directions: genewars_runtime::family8_motion::Family8DirectionalAnimations,
+    pub countdown_animations:[genewars_runtime::ui_animation::AnimationDescriptor;8],
+    pub zone_decoration:crate::family8_scene::ZoneDecorationDatabase,
+    pub zone_colors:[u8;7],pub zone_white_index:u8,
 }
 
 pub struct CreatureAnimationDatabase { bytes: Vec<u8>, sprite_records: usize, animations: usize }
@@ -425,7 +428,14 @@ impl Resources {
         let ethereal = crate::family8_scene::EtherealAnimationDatabase::from_bytes(&ethereal_bytes).map_err(|e| e.to_string())?;
         let family8_animation = genewars_runtime::family8_motion::Family8Animation::from_ethereal_anb(&ethereal_bytes).map_err(|e| format!("{e:?}"))?;
         let family8_directions = genewars_runtime::family8_motion::Family8DirectionalAnimations::from_ethereal_anb(&ethereal_bytes).map_err(|e|format!("{e:?}"))?;
-        Ok((Self { _header: header, title, atlas, fade, gla, panel, font0_dat, font0_tab, text, palette, plants, actors, effects, bturr_selector1, source_buildings, physics, construction_border, mule, bones, mule_animations, ethereal, family8_animation, family8_directions }, world, target))
+        let plgbl=read_bound(&root.join("ui/PLGBL.ANB"))?;
+        let countdown_animations=genewars_runtime::ui_animation::COUNTDOWN_DESCRIPTOR_OFFSETS.into_iter().map(|offset|genewars_runtime::ui_animation::AnimationDescriptor::from_anb(&plgbl,offset).map_err(|e|format!("countdown UI metadata: {e:?}"))).collect::<Result<Vec<_>,_>>()?.try_into().map_err(|_|"eight countdown UI descriptors required")?;
+        let zone_decoration=crate::family8_scene::ZoneDecorationDatabase::from_bytes(&plgbl).map_err(|e|e.to_string())?;
+        let zone_colors=read_bound(&root.join("ui/zone-colors.bin"))?.try_into().map_err(|_|"seven zone colors required")?;
+        let zone_white_index=palette.entries().iter().enumerate().min_by_key(|(index,rgb)|{
+            let distance=rgb.iter().map(|&v|{let d=i32::from(v)-63;d*d}).sum::<i32>();(distance,*index)
+        }).ok_or("empty active palette")?.0 as u8;
+        Ok((Self { _header: header, title, atlas, fade, gla, panel, font0_dat, font0_tab, text, palette, plants, actors, effects, bturr_selector1, source_buildings, physics, construction_border, mule, bones, mule_animations, ethereal, family8_animation, family8_directions, countdown_animations,zone_decoration,zone_colors,zone_white_index }, world, target))
     }
 
     pub fn render(&self, world: &MissionWorld, target: [i16;2]) -> Result<Frame,String> {

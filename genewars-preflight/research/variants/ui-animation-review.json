@@ -1,0 +1,181 @@
+{
+  "status": "passed",
+  "cases": 5299,
+  "compared_bytes": 31794,
+  "literal_instructions": 246821,
+  "private_run": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\ui-animation\\d54d5174d3c44f7ead85a154352f6508",
+  "mapped_priors": {
+    "0x184d04": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "0x184d0c": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "0x184d11": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "0x184d16": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "0x184d1b": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "0x184d20": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "0x184d25": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "0x184d2a": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "initialized_state": [
+    0,
+    0,
+    1,
+    1,
+    0
+  ],
+  "initialization": "10010 writes2/3=1 only; preserveotherpriors onlatercalls",
+  "descriptors": [
+    {
+      "offset": 350,
+      "holds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 0
+    },
+    {
+      "offset": 280,
+      "holds": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 0
+    },
+    {
+      "offset": 290,
+      "holds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 0
+    },
+    {
+      "offset": 300,
+      "holds": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 0
+    },
+    {
+      "offset": 310,
+      "holds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 0
+    },
+    {
+      "offset": 320,
+      "holds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 0
+    },
+    {
+      "offset": 330,
+      "holds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 0
+    },
+    {
+      "offset": 340,
+      "holds": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 0
+    }
+  ],
+  "sha256": {
+    "private\\ghidra\\landing-contact\\instructions-0007ac00.txt": "cc002c636ec832486e06fe90af6cfc68a0489d6acae6efcf83d5a5ce735706e1",
+    "private\\ghidra\\validated\\memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
+    "private\\ghidra\\mission-array-refs\\instructions-00010010.txt": "8fa47f9e9ffb88a370df41d959e820d2437fd6b9bac70605ad645fc36c2594f6",
+    "private\\review\\PLGBL-decoded.bin": "a39cc8ac8c987de5c4865ec77a4459221f276286f254653e4a3f3231424f6444",
+    "rust\\crates\\genewars-runtime\\src\\ui_animation.rs": "c0281d7aee8be1cea8cbffad66f672460f38f51de1d095bd9be4e9e9bb6a9e6d",
+    "research\\variants\\ui-animation-review.py": "17c5e452ee3c0b2faf6f484e395684f8842bbb34fd428c3119ebbf75c5505296",
+    "research\\variants\\ui-animation-review.rs": "13c24762dfb8d94b5fc3eb2bf87356c3f54ba792680e30d829461ed332ad56e8"
+  },
+  "limits": [
+    "nonemptycontiguousframearray; singleframepingpong explicitlyunsupported",
+    "numericstateonly; hostresourceidentity/renderingseparate",
+    "10010 startup initial state; no claimitresetseverymission"
+  ]
+}

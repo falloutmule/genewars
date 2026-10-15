@@ -35,6 +35,7 @@ pub struct SharedMission {
     pub runtime_context:Option<genewars_runtime::mission_context::MissionRuntimeContext>,
     awaiting_presentation:bool,
     pub feedback:Option<String>,
+    pub ui_animations:[[u8;5];8],
 }
 impl SharedMission {
     pub fn load(root:&Path,mission_bytes:&[u8],seed:u16)->Result<Self,String> {
@@ -46,9 +47,10 @@ impl SharedMission {
     }
     /// Successor load consumes source-projected carry; no regenerated blueprints or seed override.
     pub fn load_carried_cd(root:&Path,mission_bytes:&[u8],carry:&genewars_runtime::result_carry::CampaignCarryPlan,
-        world_priors:&[u8;150],ring:u8,mode:u8)->Result<Self,String>{
+        world_priors:&[u8;150],ring:u8,mode:u8,ui_animations:[[u8;5];8])->Result<Self,String>{
         if carry.players[0][0x6e7]!=1||carry.players[0][0x15]==0{return Err("Krell requires first-mission progress and retained blueprints".into());}
-        Self::load_internal(root,mission_bytes,47117,None,Some((carry,world_priors,ring,mode)))
+        let mut mission=Self::load_internal(root,mission_bytes,47117,None,Some((carry,world_priors,ring,mode)))?;
+        mission.ui_animations=ui_animations;Ok(mission)
     }
     fn load_internal(root:&Path,mission_bytes:&[u8],seed:u16,fresh:Option<([u8;36],u8)>,
         carried:Option<(&genewars_runtime::result_carry::CampaignCarryPlan,&[u8;150],u8,u8)>)->Result<Self,String>{
@@ -113,7 +115,7 @@ impl SharedMission {
         }else{None};
         let plant_spread=SpreadDirections::from_mapped_bytes(&read_bound(&root.join("physics/plant-spread.bin"))?).map_err(|e|e.to_string())?;
         Ok(Self{world,trig:TrigTables::generate_pinned().map_err(|e|e.to_string())?,plant_spread,ui:RetirementUiState::native_empty(),
-            terrain_jobs,frame_counter:0,selected:None,command_count:0,pending_requests,plant_births:0,seed,runtime_context,awaiting_presentation:false,feedback:None})
+            terrain_jobs,frame_counter:0,selected:None,command_count:0,pending_requests,plant_births:0,seed,runtime_context,awaiting_presentation:false,feedback:None,ui_animations:[genewars_runtime::ui_animation::FRESH_SOURCE_STATE;8]})
     }
     /// Typed terminal state; an engine block remains a separate host field.
     pub fn outcome_json(&self)->String {
@@ -138,18 +140,19 @@ impl SharedMission {
             .filter_map(|(slot,r)|(r[6]!=0).then_some(slot)).collect::<Vec<_>>();
         let creatures=self.world.creatures().map(|pool|pool.records().iter().enumerate()
             .filter_map(|(slot,r)|(r[6]==1).then_some(slot)).collect::<Vec<_>>()).unwrap_or_default();
-        let mut frame=actor_scene::render_actor_world_with_selected_portrait(resources,&self.world,target,0,self.runtime_context.as_ref().map_or(self.frame_counter as u8,|c|c.frame()as u8),&actors,&creatures,
-            actor_scene::MuleSceneGlobals{global_shadow_mode:0,inherited_wrapper_flags:0,clip_flag_bit0:false},&effects,self.selected)?.frame;
+        let mut frame=actor_scene::render_actor_world_with_selected_portrait_and_zone_ui(resources,&self.world,target,0,self.runtime_context.as_ref().map_or(self.frame_counter as u8,|c|c.frame()as u8),&actors,&creatures,
+            actor_scene::MuleSceneGlobals{global_shadow_mode:0,inherited_wrapper_flags:0,clip_flag_bit0:false},&effects,self.selected,self.ui_animations.map(|state|state[1]))?.frame;
         if let Some(slot)=self.selected {
             actor_scene::draw_selected_actor_text(resources,&self.world,slot,&mut frame.image)?;
             frame.rgb_sha256=genewars_runtime::identity::sha256_hex(frame.image.rgb_bytes());
         }
         // The job overlay is authoritative and is not mirrored into backing.
         // Include it in replay identity; this remains a diagnostic, not a save.
-        let mut identity=b"GeneWars SharedMission jobs v1\0".to_vec();
+        let mut identity=b"GeneWars SharedMission jobs and countdown UI v2\0".to_vec();
         identity.extend_from_slice(frame.world_sha256.as_bytes());
         identity.push(self.terrain_jobs.count());
         for record in self.terrain_jobs.records(){identity.extend_from_slice(record);}
+        identity.extend(self.ui_animations.concat());
         frame.world_sha256=genewars_runtime::identity::sha256_hex(&identity);
         Ok(frame)
     }
@@ -240,6 +243,9 @@ impl SharedMission {
             &resources.physics,&self.trig,&resources.family8_animation,&resources.family8_directions).map_err(|e|e.to_string())?;
         self.pending_requests+=(countdown.pending_prefix.len()+countdown.pending_ui_animations.len())as u64;
         self.pending_requests+=countdown.callbacks.iter().map(|c|u64::from(c.plan.pending_audio.is_some())+u64::from(c.plan.pending_ui_message)+c.retirement.as_ref().map_or(0,|r|r.stop_audio.len()as u64+u64::from(r.fade_audio.is_some()))+u64::from(c.parent_response.as_ref().is_some_and(|p|p.state7_message_variant.is_some()))).sum::<u64>();
+        for (state,descriptor) in self.ui_animations.iter_mut().zip(&resources.countdown_animations){
+            *state=genewars_runtime::ui_animation::step(*state,descriptor).map_err(|e|format!("countdown UI animation: {e:?}"))?.after;
+        }
         self.world.step_empty_families_7_and_6().map_err(|e|e.to_string())?;
         let result=self.world.step_landing_effect_callbacks(context,&resources.physics,&self.trig,&self.ui).map_err(|e|e.to_string())?;
         self.ui=result.ui_after;
@@ -369,6 +375,24 @@ impl SharedMission {
 
 #[cfg(test)] mod carried_startup_tests {
     use super::*;
+    #[test]fn krell_first_tick_current_boundary_is_atomic(){
+        let root=Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../private/integration/game-runtime");
+        let first=read_bound(&root.join("terrain/CONQ001.DAT")).unwrap();let initial=SharedMission::load_fresh_cd(&root,&first,[0xa5;36],17).unwrap();
+        let mut carry=initial.world.plan_campaign_carry(&[0;600],0x7e,2,0,None).unwrap();carry.players[0][0x6e7]=1;
+        let second=read_bound(&root.join("terrain/CONQ002.DAT")).unwrap();
+        let mut loaded=SharedMission::load_carried_cd(&root,&second,&carry,&[0;150],17,0,initial.ui_animations).unwrap();
+        let (resources,_,_)=Resources::load_mission(&root,genewars_runtime::identity::CdCampaignMission::Krell).unwrap();
+        let before=loaded.world.clone();let prior_ui=loaded.ui_animations;
+        if let Some(path)=std::env::var_os("GENEWARS_KRELL_TICK_FIXTURE"){
+            let d=std::path::PathBuf::from(path);std::fs::create_dir(&d).expect("fresh immutable first-tick fixture");
+            for(name,bytes)in [("backing",loaded.world.backing_bytes().to_vec()),("players",(0..4u8).flat_map(|p|loaded.world.player(p).unwrap().bytes().iter().copied()).collect()),("actors",loaded.world.actors().records().concat()),("creatures",loaded.world.creatures().unwrap().records().concat()),("effects",loaded.world.effects().unwrap().records().concat()),("family8",loaded.world.family8().unwrap().records().concat()),("buildings",loaded.world.buildings().unwrap().records().concat())]{std::fs::write(d.join(format!("{name}.bin")),bytes).unwrap();}
+            let rng=loaded.world.rng();let mut bytes=rng.seed.to_le_bytes().to_vec();bytes.push(rng.ring);bytes.extend(rng.draw_count.to_le_bytes());std::fs::write(d.join("rng.bin"),bytes).unwrap();
+        }
+        let error=loaded.step(&resources).unwrap_err();
+        assert_eq!(error,"Creatures(UnsupportedMotionState)");assert_eq!(loaded.world,before);assert_eq!(loaded.ui_animations,prior_ui);assert_eq!(loaded.frame_counter,0);
+        println!("{{\"status\":\"blocked\",\"classification\":\"unsupported_behavior\",\"source_frame\":0,\"reason\":\"{error}\",\"transaction_unchanged\":true}}");
+    }
+
     /// Synthetic retained state exercises the real loader; this is not mission acceptance.
     #[test] fn krell_load_preserves_campaign_genetics_and_inherits_ring_without_regeneration(){
         let root=Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../private/integration/game-runtime");
@@ -378,7 +402,7 @@ impl SharedMission {
         carry.players[0][0x6e7]=1;
         let priors=core::array::from_fn(|i|i as u8);
         let second=read_bound(&root.join("terrain/CONQ002.DAT")).unwrap();
-        let loaded=SharedMission::load_carried_cd(&root,&second,&carry,&priors,17,0).unwrap();
+        let loaded=SharedMission::load_carried_cd(&root,&second,&carry,&priors,17,0,initial.ui_animations).unwrap();
         assert_eq!(loaded.world.rng(),BlueprintRng{seed:47117,ring:17,draw_count:33620});
         assert_eq!(&loaded.world.backing_bytes()[0x34ba..0x3550],&priors);
         let p=loaded.world.player(0).unwrap().bytes();assert_eq!(p[0x6e7],1);
@@ -386,10 +410,11 @@ impl SharedMission {
         for (before,after) in carry.players[0][0x16..0x496].chunks_exact(36).zip(p[0x16..0x496].chunks_exact(36)){
             assert_eq!(&before[..0x1c],&after[..0x1c],"retained names, skills and opaque priors");
         }
-        let context=loaded.runtime_context.unwrap();
+        assert_eq!(loaded.ui_animations,initial.ui_animations);
+        let context=loaded.runtime_context.as_ref().unwrap();
         assert_eq!(context.origin(),genewars_runtime::mission_context::ContextOrigin::CarriedCdKrell);
         assert_eq!(context.frame(),0);assert_eq!(context.countdown(),1000);assert_eq!(context.known_runtime_flags(),0x3e);
-        assert!(SharedMission::load_carried_cd(&root,&second,&carry,&priors,17,2).is_err());
-        assert!(SharedMission::load_carried_cd(&root,&first,&carry,&priors,17,0).is_err());
+        assert!(SharedMission::load_carried_cd(&root,&second,&carry,&priors,17,2,initial.ui_animations).is_err());
+        assert!(SharedMission::load_carried_cd(&root,&first,&carry,&priors,17,0,initial.ui_animations).is_err());
     }
 }

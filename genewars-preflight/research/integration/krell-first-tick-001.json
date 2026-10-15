@@ -1,0 +1,27 @@
+{
+  "status": "blocked",
+  "classification": "unsupported_behavior",
+  "source_frame": 0,
+  "reason": "Creatures(UnsupportedMotionState)",
+  "fixture": "private/review/krell-first-tick-001",
+  "scope": "Current Krell loader fixture with synthetic source-projected carry; exact world and UI rollback expected",
+  "observed_skill_bytes": [
+    50,
+    50,
+    50,
+    25
+  ],
+  "current_admission": "selector4 neutral callback hardcodes skill30 numeric limits",
+  "pins": {
+    "actors.bin": "d4e07022ab8b8773185df97f991fdf3b1687218ed05c0e39ac77a98c97cff324",
+    "backing.bin": "6f148dcb90dff7629d71514820b5b67f781bd3d967540733008583934fb8a2aa",
+    "buildings.bin": "1cfcaae5807a67b99ff3a8c3067ed334195672d1f9419c3810b6d24d729a3e17",
+    "creatures.bin": "71c8bb647b8d183c8501cc7bfdd903e4b31667d1c7a44fee88bd24d001b8737c",
+    "effects.bin": "501c889cb6ce685732f67805bafebd4f9dea0d0318fc27c5dbe7d8e0c143dc3a",
+    "family8.bin": "1a6e15d9e18a458ccae293fc4760fc2e147bc8b6092ca5b3c596a7473f738cf3",
+    "players.bin": "4f1ab63ac5d49193e491d2d8352d73eeccab303091a498daa5b5fd5ac139686d",
+    "rng.bin": "6dbdd1d755de6d4806b70dbe976fe81438bf5181019e95423445e2fe199aec3c"
+  },
+  "not_accepted_mission": true,
+  "next": "Recover/source-compare 6B150 skill parameterization, then next genuine callback boundary"
+}

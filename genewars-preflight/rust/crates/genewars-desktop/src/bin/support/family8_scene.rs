@@ -15,6 +15,132 @@ use genewars_runtime::identity::sha256_hex;
 pub const ETHEREAL_DECODED_BYTES: usize = 91_123;
 pub const ETHEREAL_SHA256: &str = "318dcb26efa6968c34357e67c05b6514efe7d7a8b4052a4e811a851a2ba01bc4";
 
+/// Exact original PLGBL animations28..35, relocated by98A60 (half offsets).
+pub struct ZoneDecorationDatabase { animations: Vec<Vec<Family8Frame>> }
+impl ZoneDecorationDatabase {
+    pub fn from_bytes(bytes: &[u8]) -> Result<Self, Family8SceneError> {
+        if bytes.len()!=40414 || sha256_hex(bytes)!="a39cc8ac8c987de5c4865ec77a4459221f276286f254653e4a3f3231424f6444" {
+            return Err(Family8SceneError::ResourceIdentityMismatch);
+        }
+        let mut animations=Vec::new();
+        for (index,count) in [8,4,8,4,4,4,8,4].into_iter().enumerate() {
+            let mut frames=Vec::new();
+            for frame in 0..count {
+                let value=parse_family8_frame(bytes,28+index as u8,frame)?;
+                frames.push(value);
+            }
+            animations.push(frames);
+        }
+        Ok(Self{animations})
+    }
+}
+
+/// All values are caller-owned live source state; rendering never advances them.
+pub struct ZoneDecorationContext<'a> {
+    pub zone_index: u8,
+    pub zone: &'a [u8;19],
+    /// 184D05 first, then184D0D+5*i for zone types7..13.
+    pub ui_frames: [u8;8],
+    pub type_colors: [u8;7],
+    pub white_index: u8,
+    pub source_frame: u32,
+}
+
+/// Selector2 arrival/active marker: shadow,108E0 decoration, main image.
+/// The entire output is staged, including all context/frame guards.
+pub fn draw_family8_selector2_arrival(
+    resource: &EtherealAnimationDatabase, decoration: &ZoneDecorationDatabase,
+    context: &ZoneDecorationContext<'_>, record: &[u8;102], origin: [i16;2],
+    fade: &TerrainFadeTable<'_>, gla: &MainGlaTable<'_>, destination: &mut [u8],
+    clip: [usize;2], pitch: usize,
+) -> Result<Family8DrawReceipt,Family8SceneError> {
+    let required=clip[1].checked_sub(1).and_then(|n|n.checked_mul(pitch)).and_then(|n|n.checked_add(clip[0]));
+    if !(1..=640).contains(&clip[0]) || !(1..=480).contains(&clip[1]) || pitch<clip[0]
+        || required.is_none_or(|n|destination.len()<n) {
+        return Err(Family8SceneError::Draw("invalid bounded zone destination".into()));
+    }
+    if record[6]!=8 {return Err(Family8SceneError::WrongRecordKind(record[6]));}
+    if record[0x55]!=2 {return Err(Family8SceneError::UnsupportedSelector(record[0x55]));}
+    if ![11,12].contains(&record[0x56]) {return Err(Family8SceneError::UnsupportedState(record[0x56]));}
+    let flags=u16::from_le_bytes(record[0x15..0x17].try_into().unwrap());
+    if ![0x0020,0x4020].contains(&(flags & !0x10)) {return Err(Family8SceneError::UnsupportedEntityFlags(flags));}
+    if record[0x19]!=0 {return Err(Family8SceneError::UnsupportedAnimation{animation:record[0x19],frame:record[0x1b]});}
+    draw_family8_common_decorated(&resource.frames,record,8,origin,fade,gla,destination,clip,pitch,Some((decoration,context)))
+}
+
+fn draw_zone_decoration(
+    database: &ZoneDecorationDatabase, context: &ZoneDecorationContext<'_>, record: &[u8;102],
+    origin: [i16;2], height: i32, fade: &TerrainFadeTable<'_>, gla: &MainGlaTable<'_>,
+    destination: &mut [u8], clip: [usize;2], pitch: usize,
+) -> Result<(),Family8SceneError> {
+    use genewars_render::terrain_modes::{TerrainGeometryVertex,prepare_mode0_15_triangle,draw_mode15_triangle};
+    let error=|message:&str|Family8SceneError::Draw(message.into());
+    if record[0x58]!=context.zone_index || !(7..=13).contains(&context.zone[4]) {return Err(error("invalid live marker zone binding"));}
+    let ty=usize::from(context.zone[4]-7);
+    // Check all eight frames: the caller supplied a complete live state vector.
+    if context.ui_frames[0]>=4 || context.ui_frames[1..].iter().enumerate().any(|(i,f)|usize::from(*f)>=database.animations[i].len()) {
+        return Err(error("invalid live zone UI frame"));
+    }
+    if !(1..=640).contains(&clip[0]) || !(1..=480).contains(&clip[1]) || pitch<clip[0]
+        || destination.len()<(clip[1]-1)*pitch+clip[0] {return Err(error("invalid zone framebuffer"));}
+    let timer=i16::from_le_bytes(record[0x64..0x66].try_into().unwrap()) as i32;
+    if record[0x56]==11 && !(0..=20).contains(&timer) {return Err(error("unadmitted marker arrival timer"));}
+    let displacement=if record[0x56]==11 {(((20-timer)*256/20).wrapping_mul(height))>>8}else{0};
+    let x=i32::from(origin[0]);let y=i32::from(origin[1]);
+    let bottom=y.checked_sub(displacement).ok_or_else(||error("zone coordinate overflow"))?;
+    let top=y.checked_sub(height).ok_or_else(||error("zone coordinate overflow"))?;
+    let mut vertices=[[-30,0],[-24,9],[-15,12],[15,12],[24,9],[30,0],[0,15],[-24,0],[-15,9],[0,9],[15,9],[24,0]];
+    // Radius30/15 is the exact10EA0 call.97910 floor square roots are12 and9.
+    for v in &mut vertices {v[0]+=x;v[1]+=bottom;}
+    let colors=[fade.map_palette_index(28,context.white_index).map_err(|e|error(&e.to_string()))?,
+        fade.map_palette_index(30,context.white_index).map_err(|e|error(&e.to_string()))?,context.white_index];
+    let triangles=[([0,7,1],0),([11,5,4],0),([1,8,2],1),([10,4,3],1),([2,9,6],2),([9,3,6],2)];
+    let mut prepared=Vec::new();
+    for (indices,color) in triangles {
+        let triangle=prepare_mode0_15_triangle(indices.map(|i|TerrainGeometryVertex{x:vertices[i][0],y:vertices[i][1]}),clip[1] as i32)
+            .map_err(|e|error(&e.to_string()))?;
+        prepared.push((triangle,colors[color]));
+    }
+    let blink=record[0x15]&0x10!=0 && (context.source_frame.wrapping_add(u32::from(record[0x0f]))&1)!=0;
+    draw_zone_icon(&database.animations[ty][usize::from(context.ui_frames[ty+1])],origin,
+        Some(context.type_colors[ty]),blink,gla,destination,clip,pitch);
+    let count=i32::from_le_bytes(context.zone[14..18].try_into().unwrap())/1024+1;
+    // This source count is naturally bounded by signed progress; don't silently cap.
+    for i in 0..count {
+        draw_zone_icon(&database.animations[7][usize::from(context.ui_frames[0])],
+            [(x-count*7+7+i*14) as i16,origin[1].wrapping_sub(10)],None,blink,gla,destination,clip,pitch);
+    }
+    for (left,right,end,color) in [(0,1,0,0),(4,5,5,0),(1,2,1,1),(3,4,4,1),(2,3,2,2)] {
+        for py in top.max(0)..vertices[end][1].min(clip[1] as i32) {
+            for px in vertices[left][0].max(0)..vertices[right][0].min(clip[0] as i32) {
+                let at=py as usize*pitch+px as usize;destination[at]=gla.map_destination(destination[at],colors[color]);
+            }
+        }
+    }
+    for (triangle,color) in prepared {if let Some(triangle)=triangle {
+        draw_mode15_triangle(&triangle,gla,clip[0] as i32,destination,pitch,color).map_err(|e|error(&e.to_string()))?;
+    }}
+    //7A710 dirtiness is consumed by the caller's full-frame redraw, not gameplay.
+    Ok(())
+}
+
+fn draw_zone_icon(frame: &Family8Frame,origin:[i16;2],recolor:Option<u8>,blink:bool,
+    gla:&MainGlaTable<'_>,destination:&mut[u8],clip:[usize;2],pitch:usize) {
+    let w=usize::from(frame.sprite.width);let h=usize::from(frame.sprite.height);
+    let left=if recolor.is_some(){i32::from(origin[0])+i32::from(frame.local[0])}else{i32::from(origin[0].wrapping_add(frame.local[0]))};
+    let top=if recolor.is_some(){i32::from(origin[1])+i32::from(frame.local[1])}else{i32::from(origin[1].wrapping_add(frame.local[1]))};
+    for y in 0..h {for x in 0..w {
+        let source=y*w+if frame.component_flags&1!=0{w-1-x}else{x};
+        if !frame.sprite.opaque[source]{continue;}
+        let px=left+x as i32;let py=top+y as i32;
+        if px<0||py<0||px>=clip[0]as i32||py>=clip[1]as i32{continue;}
+        let mut value=frame.sprite.indices[source];
+        if let Some(base)=recolor {if value>>4==12 {value=base.wrapping_add(value&15);}}
+        let at=py as usize*pitch+px as usize;
+        destination[at]=if !blink{value}else if recolor.is_some(){gla.map_destination(destination[at],value)}else{gla.map_destination(value,destination[at])};
+    }}
+}
+
 const STATE4_FRAMES: [(i16, i16, u8, u8, i16, i16); 11] = [
     (116, 102, 116, 102, -60, -72), (117, 102, 117, 102, -60, -72),
     (117, 103, 117, 103, -60, -73), (118, 102, 118, 102, -59, -72),
@@ -132,20 +258,6 @@ pub struct Family8DrawReceipt {
 /// Shade zero selects row zero; nonzero shade adds the arithmetic-shifted
 /// height (`height >> 7`). A direct route needs no fade row; a faded route is
 /// admitted only for a nonnegative row below 30. Errors leave the frame intact.
-pub fn draw_family8_selector2_state10(
-    resource:&EtherealAnimationDatabase,record:&[u8;102],origin:[i16;2],
-    fade:&TerrainFadeTable<'_>,gla:&MainGlaTable<'_>,destination:&mut[u8],
-    clip:[usize;2],pitch:usize,
-)->Result<Family8DrawReceipt,Family8SceneError>{
-    if record[6]!=8{return Err(Family8SceneError::WrongRecordKind(record[6]));}
-    if record[0x55]!=2{return Err(Family8SceneError::UnsupportedSelector(record[0x55]));}
-    if record[0x56]!=10{return Err(Family8SceneError::UnsupportedState(record[0x56]));}
-    let flags=u16::from_le_bytes([record[0x15],record[0x16]]);
-    if flags!=0x4020{return Err(Family8SceneError::UnsupportedEntityFlags(flags));}
-    if record[0x19]!=0||usize::from(record[0x1b])>=resource.frames.len(){return Err(Family8SceneError::UnsupportedAnimation{animation:record[0x19],frame:record[0x1b]});}
-    draw_family8_common(&resource.frames,record,8,origin,fade,gla,destination,clip,pitch)
-}
-
 pub fn draw_family8_selector0_state4(
     resource: &EtherealAnimationDatabase,
     record: &[u8; 102],
@@ -162,6 +274,24 @@ pub fn draw_family8_selector0_state4(
     let flags = u16::from_le_bytes([record[0x15], record[0x16]]);
     if flags != 0x4020 { return Err(Family8SceneError::UnsupportedEntityFlags(flags)); }
     draw_family8_common(&resource.frames, record, 8, origin, fade, gla, destination, clip, pitch)
+}
+
+/// Objective-zone factory marker:10F1E bypasses blinking for selector2;
+/// 1115A..11160 sends state10 directly to11206, bypassing108E0 decoration.
+/// Its Offset80 binding selects global animation8. Later decorated marker
+/// states11/12 require the separate explicit-context arrival API;13 rejects.
+pub fn draw_family8_selector2_state10(
+    resource:&EtherealAnimationDatabase,record:&[u8;102],origin:[i16;2],
+    fade:&TerrainFadeTable<'_>,gla:&MainGlaTable<'_>,destination:&mut[u8],
+    clip:[usize;2],pitch:usize,
+)->Result<Family8DrawReceipt,Family8SceneError>{
+    if record[6]!=8{return Err(Family8SceneError::WrongRecordKind(record[6]));}
+    if record[0x55]!=2{return Err(Family8SceneError::UnsupportedSelector(record[0x55]));}
+    if record[0x56]!=10{return Err(Family8SceneError::UnsupportedState(record[0x56]));}
+    let flags=u16::from_le_bytes([record[0x15],record[0x16]]);
+    if flags!=0x4020{return Err(Family8SceneError::UnsupportedEntityFlags(flags));}
+    if record[0x19]!=0||usize::from(record[0x1b])>=resource.frames.len(){return Err(Family8SceneError::UnsupportedAnimation{animation:record[0x19],frame:record[0x1b]});}
+    draw_family8_common(&resource.frames,record,8,origin,fade,gla,destination,clip,pitch)
 }
 
 /// Draw the ordinary selector-0/state-5 arrival record. Its arrival callback
@@ -341,8 +471,23 @@ fn draw_family8_common(
     clip: [usize; 2],
     pitch: usize,
 ) -> Result<Family8DrawReceipt, Family8SceneError> {
+    draw_family8_common_decorated(frames,record,global_animation,origin,fade,gla,destination,clip,pitch,None)
+}
+
+fn draw_family8_common_decorated(
+    frames: &[Family8Frame],
+    record: &[u8; 102],
+    global_animation: u8,
+    origin: [i16; 2],
+    fade: &TerrainFadeTable<'_>,
+    gla: &MainGlaTable<'_>,
+    destination: &mut [u8],
+    clip: [usize; 2],
+    pitch: usize,
+    decoration: Option<(&ZoneDecorationDatabase, &ZoneDecorationContext<'_>)>,
+) -> Result<Family8DrawReceipt, Family8SceneError> {
     let entity_flags = u16::from_le_bytes([record[0x15], record[0x16]]);
-    if record[0x15] & 0x10 != 0 { return Err(Family8SceneError::UnsupportedEntityFlags(entity_flags)); }
+    if record[0x15] & 0x10 != 0 && decoration.is_none() { return Err(Family8SceneError::UnsupportedEntityFlags(entity_flags)); }
     let animation = record[0x19];
     let frame = record[0x1b];
     if usize::from(frame) >= frames.len() {
@@ -368,6 +513,8 @@ fn draw_family8_common(
     // call applies the virtual-height displacement. Stage both passes so an
     // invalid foreground input cannot leave a shadow behind.
     let mut staged = destination.to_vec();
+    // Triangle primitive needs complete pitched rows; retain caller-visible extent.
+    if decoration.is_some() { staged.resize(staged.len().max(pitch.saturating_mul(clip[1])),0); }
     let mut shadow_pixels = 0usize;
     let mut shadow_clipped = 0usize;
     for component in std::iter::once(cached) {
@@ -381,8 +528,11 @@ fn draw_family8_common(
         shadow_clipped = shadow_clipped.checked_add(shadow.clipped_opaque_samples)
             .ok_or_else(|| Family8SceneError::Draw("shadow count overflow".into()))?;
     }
+    if let Some((database, context)) = decoration {
+        draw_zone_decoration(database, context, record, origin, height_delta, fade, gla, &mut staged, clip, pitch)?;
+    }
     let color = draw_family8_color(cached, origin, color_y, direct, shade, fade, &mut staged, clip, pitch)?;
-    destination.copy_from_slice(&staged);
+    destination.copy_from_slice(&staged[..destination.len()]);
     Ok(receipt(record, animation, frame, global_animation, origin, virtual_height, color_y,
         effective, if direct { PlantColorRoute::Direct } else { PlantColorRoute::Fade { shade } }, shadow_pixels, shadow_clipped,
         color.0, color.1))

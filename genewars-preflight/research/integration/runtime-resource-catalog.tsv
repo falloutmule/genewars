@@ -65,3 +65,5 @@ campaign/LEVSCR01.PAL	9d08b13c6d0864a48a3a6c37dc9c5766b7443e65549328763d17e264e6
 terrain/CONQ002.DAT	4042c6df3b161132c12a424dace7b9fcbf253a197261f1cf76e0db4af41ea27a	343958	private/integration/campaign-inputs/CONQ002.DAT	root/2/disc/153
 campaign/HDRCO2.DAT	5a42310026365e8c36ddce8ecba48fe099c42accc6c878933d2360c1ebb6e80c	699	private/integration/campaign-inputs/HDRCO2.DAT	root/2/disc/201
 buildings/BGENE.ANB	a71f03d3cce3d36798cd7f8ad578d665e65883bfe9b541ba93d0ad9eff814cab	62062	private/reference-run/run-006/drive-c/GAME/DATA/BUILDING/BGENE.ANB	root/2/disc/301
+ui/PLGBL.ANB	a39cc8ac8c987de5c4865ec77a4459221f276286f254653e4a3f3231424f6444	40414	private/integration/zone-ui-inputs/PLGBL.ANB	root/2/disc/124
+ui/zone-colors.bin	a7735d28ff0f0a4c3c5b5a78eb7f5c23cd8bf52f0d8ec33b84baea1c1a6651e8	7	private/integration/zone-ui-inputs/zone-colors.bin	CD-GW.EXE mapped object3+0x2e38

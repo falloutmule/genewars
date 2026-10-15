@@ -1,0 +1,23 @@
+{
+  "status": "passed-bounded-source-audit",
+  "execution_comparison": "not run",
+  "callback": "118E0",
+  "state_dispatch": {
+    "10": "134D8",
+    "11": "1355C",
+    "12": "1357A",
+    "13": "13593",
+    "14": "136C6"
+  },
+  "arrival": "49&20 !=0",
+  "state11_transition": "wrapping16(timer64+1) signed equals20",
+  "rng_quota_child_retirement_states10_11": "none in these branches; common movement retains its original obligations",
+  "source_sha256": {
+    "private/ghidra/countdown-expiry/instructions-000118e0.txt": "f9c62f70c20cbe05e7356ce36fafc7ad572b630129d5c2a0c79e235b210faa6c",
+    "private/ghidra/construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "private/ghidra/countdown-expiry/instructions-0001ea90.txt": "2d4bc2ddfbcaf74cb5a21fec11555addd2cf4fafad0981cffb1753f84eead059",
+    "private/ghidra/validated/memory-.object1.bin": "92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe",
+    "private/ghidra/validated/memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
+    "private/review/krell-zone-bootstrap-001/after/family8.bin": "1a6e15d9e18a458ccae293fc4760fc2e147bc8b6092ca5b3c596a7473f738cf3"
+  }
+}

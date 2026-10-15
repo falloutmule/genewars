@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "private_run": "private/integration/family8-zone-pixels/540b62f1b4dc4d4996df2ef6acd3cbbc",
+  "private_run": "private/integration/family8-zone-pixels/95ae8defa4c6429fbff8851cd05d4520",
   "cases": 44,
   "compared_bytes": 13685408,
   "atomic_rejections": 9,
@@ -11,12 +11,12 @@
     "private/integration/game-runtime/terrain/FADE.DAT": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
     "private/integration/game-runtime/terrain/MAIN.GLA": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3",
     "scripts/desktop/family8_zone_pixel_harness.rs": "ec502db630178a2b3d942c6cb00543546599b28a903b42dc92fbc8137b78fbd5",
-    "rust/crates/genewars-desktop/src/bin/support/family8_scene.rs": "bfa2f58763cd5799469924e58b3f384cc44df33777a491a2857112807c6ad17c",
-    "scripts/desktop/validate_family8_zone_pixels.py": "e73e938a9611324cc05402cbecec3e122ee280e9bd0487ce3a85a1cd70299ae8",
+    "rust/crates/genewars-desktop/src/bin/support/family8_scene.rs": "a43e62a9bddd97bf10ae14fe2421ff128242e95851ec04f09e236e46f9e669c8",
+    "scripts/desktop/validate_family8_zone_pixels.py": "54f8c41418280d6cd6f69b31b94440f3fabd75780147e71ea21e4db0f0789ebf",
     "scripts/desktop/validate_family8_state4_pixels.py": "d7dce55c574c4f5108ea49fe449f47c9c0751508c815a44bf45bc27f8aea84c6"
   },
   "compiled_dependencies": {
-    "private/build/rust-target/release/deps/libgenewars_runtime-182d8be1f7b234ef.rlib": "1152e21f70f348526d35c9feff3aedc8dac1b54266e5af61eda610d08c9f7394",
+    "private/build/rust-target/release/deps/libgenewars_runtime-182d8be1f7b234ef.rlib": "1661727c41a772831a9eaaa579a985276d7c9f2ea6bd1844de7021520905d412",
     "private/build/rust-target/release/deps/libgenewars_render-67846fc16d7cc38a.rlib": "4800a259950ddc65d07a5e7316328002a97af12a443497277a3ea9ba4942d60c",
     "private/build/rust-target/release/deps/libgenewars_assets-6538fc4c11eef5cf.rlib": "7bc0cbb2ecc53bb1dda456e9b46519ce9371421bca96e7953bfdf609dbf454a0"
   },
@@ -464,7 +464,7 @@
   ],
   "scope": "Captured marker0 selector2/state10/flags4020 at explicit diagnostic origins; actual frame0 and metadata-only variants frames1..10.10EA0 skips decoration and takes common shadow/color route with Offset80/global animation8.",
   "limitations": [
-    "States11..13 require108E0 decoration and still reject",
+    "This state10-only API rejects11..13; states11/12 are verified separately with explicit108E0 context",
     "Projected origin is explicit diagnostic input, not native camera acceptance",
     "Factory height32000 puts foreground500 pixels above ground; preserve source height",
     "No timing, marker callback, campaign or mission acceptance claim"

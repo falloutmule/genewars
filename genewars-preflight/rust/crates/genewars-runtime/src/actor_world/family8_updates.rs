@@ -114,6 +114,10 @@ impl ActorWorld {
         if pool.binding(usize::from(slot))? != Some(expected) {return Err(ActorWorldError::Family8Binding(slot));}
         let mut retirement_parent=None;let mut parent_response=None;let mut parent_retirement=false;
         let (plan,particle,target_required):(Family8StepPlan,_,_)=match (before[0x55],before[0x56]) {
+            (2,10|11|12)=>{
+                if before[0x49]&0x10==0&&frame.wrapping_add(u32::from(slot))&31==0{let _=self.family8_current_point_accepted(slot,&before)?;}
+                (family8_motion::plan_zone_marker_wait(&before,self.map(),frame,water,physics,trig,animation,self.rng)?.into(),None,false)
+            },
             (0,4)=>(family8_motion::plan_selector0_state4(&before,self.map(),frame,water,physics,trig,animation,self.rng)?.into(),None,false),
             (0,5)=>{
                 let accepted=if frame.wrapping_add(u32::from(slot))&31==0 {

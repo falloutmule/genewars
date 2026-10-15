@@ -623,3 +623,29 @@ pub fn plan_selector0_state9_departure(before:&Family8Record,map:&[u8],frame:u32
     };
     Ok(Family8ParentDeparturePlan{old_cell:cell(point(before)),new_cell:cell(point(&a)),after:a,rng_after:rng,pending_audio,queue_requested:!retirement_requested,retirement_requested})
 }
+
+/// Selector2 zone-marker descent, exact20-tick activation, and external-event wait.
+/// Later departure/retirement remains a separate supported-state boundary.
+pub fn plan_zone_marker_wait(before:&Family8Record,map:&[u8],frame:u32,water:i32,
+    physics:&PhysicsTables,trig:&TrigTables,animation:&Family8Animation,rng:BlueprintRng)
+    ->Result<Family8MotionPlan,Family8MotionError>{
+    if map.len()!=229376{return Err(Family8MotionError::MapLength);}
+    if rng.ring>=32{return Err(Family8MotionError::InvalidRng);}
+    if before[6]!=8||!(0..16).contains(&w(before,15))||before[0x18]!=4||before[0x55]!=2||!matches!(before[0x56],10|11|12)
+        ||before[0x19]!=0||before[0x15]!=0x20||before[0x16]&!0x40!=0
+        ||w(before,0x49)as u16&0x1413!=before[0x49]as u16&0x10
+        ||before[0x4f]!=0||before[0x52]!=0||w(before,0x3f)<0||w(before,0x41)<0 {
+        return Err(Family8MotionError::UnsupportedRecord);
+    }
+    let mut a=*before;return_prefix(&mut a,map,frame,water,physics,trig)?;
+    match before[0x56]{
+        10=>if a[0x49]&0x20!=0{a[0x56]=11;pw(&mut a,0x64,0);},
+        11=>{let timer=w(&a,0x64).wrapping_add(1);pw(&mut a,0x64,timer);if timer==20{a[0x56]=12;a[0x57]=0;}},
+        12=>if a[0x57]!=0{a[0x56]=13;pw(&mut a,0x64,0);},
+        _=>unreachable!(),
+    }
+    let speed=w(&a,0x3d);
+    let pending_audio=if speed>0{Family8AudioRequest::Moving{index:0x38,mode:2,priority:255,volume:127,initial_parameter:100,adjusted_parameter:(100+20*i32::from(speed)/1920)as i16}}else{Family8AudioRequest::StopIfPlaying{index:0x38,mode:4}};
+    animate(&mut a,animation)?;
+    Ok(Family8MotionPlan{new_cell:cell(point(&a)),after:a,rng_after:rng,old_cell:cell(point(before)),child:None,pending_audio,pending_ui_message:false,queue_requested:true})
+}

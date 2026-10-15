@@ -1,0 +1,6 @@
+#[path="../../rust/crates/genewars-runtime/src/ui_animation.rs"] mod ui_animation;
+use ui_animation::*;use std::{fs,path::PathBuf};
+fn main(){let p=PathBuf::from(std::env::args().nth(1).unwrap());let input=fs::read(p.join("input.bin")).unwrap();assert_eq!(input.len()%262,0);let mut out=Vec::new();for r in input.chunks_exact(262){let state=r[2..7].try_into().unwrap();let descriptor=AnimationDescriptor{frame_holds:r[7..7+r[0]as usize].to_vec(),flags:r[1]};let got=step(state,&descriptor).unwrap();out.extend_from_slice(&got.after);out.push(got.frame);}fs::write(p.join("actual.bin"),out).unwrap();
+ let anb=fs::read(p.join("plgbl.anb")).unwrap();for offset in COUNTDOWN_DESCRIPTOR_OFFSETS{let d=AnimationDescriptor::from_anb(&anb,offset).unwrap();assert!(!d.frame_holds.is_empty());}
+ assert_eq!(initialize_source_state([3,4,255,7,9]),[3,4,1,1,9]);assert_eq!(initialize_source_state([0;5]),FRESH_SOURCE_STATE);assert_eq!(COUNTDOWN_STATE_ADDRESSES[7],0x184d2a);
+ assert!(step([0;5],&AnimationDescriptor{frame_holds:vec![],flags:0}).is_err());assert!(step([0;5],&AnimationDescriptor{frame_holds:vec![0],flags:1}).is_err());assert!(AnimationDescriptor::from_anb(&anb[..17],0).is_err());assert!(AnimationDescriptor::from_anb(&anb,1).is_err());}

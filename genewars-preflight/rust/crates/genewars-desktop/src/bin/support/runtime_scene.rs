@@ -54,6 +54,7 @@ pub struct VictoryDisplay {
 pub struct CampaignState {
     pub carry:genewars_runtime::result_carry::CampaignCarryPlan,
     pub world_priors:[u8;150],pub rng_ring:u8,pub mode:u8,pub frame:u32,
+    pub ui_animations:[[u8;5];8],
     pub display:campaign_scene::CampaignDisplay,
 }
 
@@ -311,7 +312,7 @@ impl Game {
         let display=campaign_scene::CampaignDisplay::load(&self.root,resources)?;
         let saved_frame=self.victory.as_ref().ok_or("campaign continuation lacks victory entry")?.entry.saved_frame;
         let resume=genewars_runtime::result_transition::resume_after_view_entry(context.runtime_mode().unwrap()&!1,0,carry.frame_after,saved_frame);
-        let state=CampaignState{carry,world_priors:w.world.backing_bytes()[0x34ba..0x3550].try_into().unwrap(),rng_ring:w.world.rng().ring,mode:resume.mode_after,frame:resume.frame_after,display};
+        let state=CampaignState{carry,world_priors:w.world.backing_bytes()[0x34ba..0x3550].try_into().unwrap(),rng_ring:w.world.rng().ring,mode:resume.mode_after,frame:resume.frame_after,ui_animations:w.ui_animations,display};
         self.campaign_system=state.display.resources.effective_system;self.carry_records=state.carry.records_184d7c;
         self.campaign=Some(state);self.victory=None;self.mission=None;self.automatic=false;self.error=None;
         self.transition(Scene::Campaign);Ok(())
@@ -321,7 +322,7 @@ impl Game {
             let loaded=(||{
                 let c=self.campaign.as_ref().ok_or("missing campaign continuation")?;
                 let (resources,source,target)=Resources::load_mission(&self.root,genewars_runtime::identity::CdCampaignMission::Krell)?;
-                let world=MissionState::Landing(SharedMission::load_carried_cd(&self.root,source.source_bytes(),&c.carry,&c.world_priors,c.rng_ring,c.mode)?);
+                let world=MissionState::Landing(SharedMission::load_carried_cd(&self.root,source.source_bytes(),&c.carry,&c.world_priors,c.rng_ring,c.mode,c.ui_animations)?);
                 let frame=world.render(&resources,target)?;
                 Ok::<_,String>(Mission{resources,world,target,frame,ticks:0,blocked:None,changed_frames:0})
             })();

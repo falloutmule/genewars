@@ -124,7 +124,7 @@ pub fn render_actor_world(
     frame_counter: u8,
     actor_order: &[usize],
 ) -> Result<ActorSceneFrame, String> {
-    render_actor_world_layers(resources, world, target, selected_player, frame_counter, actor_order, None, None, None, None)
+    render_actor_world_layers(resources, world, target, selected_player, frame_counter, actor_order, None, None, None, None, None)
 }
 
 /// Render the caller-selected family-2 order, followed by the caller-selected
@@ -140,7 +140,7 @@ pub fn render_actor_world_with_effects(
     effect_order: &[usize],
 ) -> Result<ActorSceneFrame, String> {
     render_actor_world_layers(resources, world, target, selected_player, frame_counter,
-        actor_order, None, None, Some(effect_order), None)
+        actor_order, None, None, Some(effect_order), None, None)
 }
 
 /// Render the caller-selected family-2 actor order, then the selected MULE
@@ -157,7 +157,7 @@ pub fn render_actor_world_with_creatures(
     mule_globals: MuleSceneGlobals,
 ) -> Result<ActorSceneFrame, String> {
     render_actor_world_layers(resources, world, target, selected_player, frame_counter,
-        actor_order, Some(creature_order), Some(mule_globals), None, None)
+        actor_order, Some(creature_order), Some(mule_globals), None, None, None)
 }
 
 /// As above, with a caller-selected family-4 order after the MULE order. This
@@ -175,7 +175,7 @@ pub fn render_actor_world_with_creatures_and_effects(
     effect_order: &[usize],
 ) -> Result<ActorSceneFrame, String> {
     render_actor_world_layers(resources, world, target, selected_player, frame_counter,
-        actor_order, Some(creature_order), Some(mule_globals), Some(effect_order), None)
+        actor_order, Some(creature_order), Some(mule_globals), Some(effect_order), None, None)
 }
 
 /// As above, with an explicitly selected type-3 actor drawn through the
@@ -194,7 +194,18 @@ pub fn render_actor_world_with_selected_portrait(
     selected_actor_slot: Option<usize>,
 ) -> Result<ActorSceneFrame, String> {
     render_actor_world_layers(resources, world, target, selected_player, frame_counter,
-        actor_order, Some(creature_order), Some(mule_globals), Some(effect_order), selected_actor_slot)
+        actor_order, Some(creature_order), Some(mule_globals), Some(effect_order), selected_actor_slot, None)
+}
+
+/// Same live gameplay rendering with explicit source-ordered objective UI frames.
+pub fn render_actor_world_with_selected_portrait_and_zone_ui(
+    resources: &Resources, world: &ActorWorld, target: [i16;2], selected_player:u8,
+    frame_counter:u8, actor_order:&[usize], creature_order:&[usize],
+    mule_globals:MuleSceneGlobals, effect_order:&[usize], selected_actor_slot:Option<usize>,
+    zone_ui_frames:[u8;8],
+) -> Result<ActorSceneFrame,String> {
+    render_actor_world_layers(resources,world,target,selected_player,frame_counter,
+        actor_order,Some(creature_order),Some(mule_globals),Some(effect_order),selected_actor_slot,Some(zone_ui_frames))
 }
 
 fn render_actor_world_layers(
@@ -208,6 +219,7 @@ fn render_actor_world_layers(
     mule_globals: Option<MuleSceneGlobals>,
     effect_order: Option<&[usize]>,
     selected_actor_slot: Option<usize>,
+    zone_ui_frames: Option<[u8;8]>,
 ) -> Result<ActorSceneFrame, String> {
     if selected_player >= 4 { return Err("selected player must be in 0..4".into()); }
     if actor_order.len() > 20 { return Err("actor draw order exceeds the twenty-slot pool".into()); }
@@ -403,6 +415,19 @@ fn render_actor_world_layers(
             let projected = entity_view_position(world.map(), position, camera, 128).map_err(|e| e.to_string())?;
             let origin = [i16::try_from(projected[0]).map_err(|_| "family8 projected X exceeds signed word")?,
                 i16::try_from(projected[1]).map_err(|_| "family8 projected Y exceeds signed word")?];
+            if record[0x55]==2 && [11,12].contains(&record[0x56]) {
+                let frames=zone_ui_frames.ok_or_else(||format!("family8 slot {slot}: live zone UI frames unavailable"))?;
+                let zone_index=record[0x58];
+                let offset=0x2ff8+usize::from(zone_index)*19;
+                let zone: &[u8;19]=world.backing_bytes().get(offset..offset+19)
+                    .ok_or_else(||format!("family8 slot {slot}: invalid live zone index"))?.try_into().map_err(|_|"zone extent")?;
+                let context=super::family8_scene::ZoneDecorationContext{zone_index,zone,ui_frames:frames,
+                    type_colors:resources.zone_colors,white_index:resources.zone_white_index,source_frame:u32::from(frame_counter)};
+                family8_receipts.push(super::family8_scene::draw_family8_selector2_arrival(&resources.ethereal,
+                    &resources.zone_decoration,&context,record,origin,&fade,&gla,&mut indexed.indices[128..],[512,480],640)
+                    .map_err(|e|format!("family8 slot {slot}: {e}"))?);
+                continue;
+            }
             let draw=match (record[0x55],record[0x56]) {
                 (0,4)=>super::family8_scene::draw_family8_selector0_state4,
                 (0,5)=>super::family8_scene::draw_family8_selector0_state5,
