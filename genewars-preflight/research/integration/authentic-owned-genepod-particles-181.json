@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "scope": "actual first owned Mule callback at4800; other families frozen; not campaign acceptance",
+  "source": {
+    "status": "passed",
+    "frame": 4800,
+    "slot": 1,
+    "draws": 6,
+    "compared_bytes": 427369,
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\9e7559d161c345eba112a7326ea57efa"
+  },
+  "correction": "6B72A ignores same-owner non11 particles; admit only exact code1A/EFF26 neighbors observed at authentic Genepod success. Distributor guard unchanged.",
+  "negative_checks": [
+    "hungry Mule rejects with full world rollback",
+    "foreign-owner particle rejects with full world rollback"
+  ],
+  "regression": {
+    "runtime_passed": 244,
+    "game_passed": 76,
+    "ignored_each": 1,
+    "release_build": "passed"
+  },
+  "campaign_missions": 1,
+  "native": "pending181"
+}
