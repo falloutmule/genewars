@@ -334,12 +334,12 @@ pub fn plan_selector1_building_target(before:&Family8Record,map:&[u8],player_tar
     Ok(Some(Family8TargetPlan{after:a,rng_after,target,target_height}))
 }
 
-/// Selector1/state1's initial travel and first arrival (timer64==0).
+/// Selector1/state1's building travel and arrival (timer64==0).
 /// The subsequent positive-timer hover/retarget helper11720 is separate.
 pub fn plan_selector1_state1_travel(before:&Family8Record,map:&[u8],frame:u32,water:i32,
     physics:&PhysicsTables,trig:&TrigTables,animations:&Family8DirectionalAnimations,rng:BlueprintRng)
     ->Result<Family8OnwardPlan,Family8MotionError>{
-    if before[0x56]!=1||before[0x57]!=1{return Err(Family8MotionError::UnsupportedRecord);}
+    if before[0x56]!=1||!(1..=64).contains(&before[0x57]){return Err(Family8MotionError::UnsupportedRecord);}
     plan_selector1_travel(before,map,frame,water,physics,trig,animations,rng,|_,_,rng|Ok(rng))
 }
 /// Source state2 travel shares common motion; arrival increments selected zone18.
@@ -441,7 +441,7 @@ pub fn plan_selector1_state1_hover_with_zones_and_particle<F>(before:&Family8Rec
     physics:&PhysicsTables,trig:&TrigTables,animations:&Family8DirectionalAnimations,rng:BlueprintRng,
     owner_buildings:&[u8],zones:&[u8],current_point_accepted:bool,mut particle_factory:F)->Result<Family8ZoneOnwardPlan,Family8MotionError>
 where F:FnMut(&Family8Record,Family8ParticleRequest,BlueprintRng)->Result<BlueprintRng,Family8MotionError>{
-    if before[0x56]!=1||before[0x57]!=1{return Err(Family8MotionError::UnsupportedRecord);}
+    if before[0x56]!=1||!(1..=64).contains(&before[0x57]){return Err(Family8MotionError::UnsupportedRecord);}
     plan_selector1_hover_with_zones_and_particle(before,map,frame,water,physics,trig,animations,rng,owner_buildings,zones,current_point_accepted,particle_factory)
 }
 pub fn plan_selector1_state2_hover_with_particle<F>(before:&Family8Record,map:&[u8],frame:u32,water:i32,

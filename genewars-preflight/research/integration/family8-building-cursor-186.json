@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "scope": "frame4974 slot2 input reproduced with other families frozen; not campaign acceptance",
+  "correction": "State1 building-travel/hover wrappers now share existing conservative cursor1..64 admission. Existing typed target, ownership, flags, speed and timer guards remain. Original114B0 advances across eligible completed buildings, not only first target. No universal cursor-history closure claimed.",
+  "source_comparison": {
+    "compared_bytes": 427369,
+    "mismatches": 0,
+    "draws": 3,
+    "instructions": 2473,
+    "evidence": "private/review/family8-captured/8b29cb03572a45e7a9c0bc8a791b987d/result.json",
+    "rust_after": "private/review/family8-slot2-after-186c",
+    "ports": "audio and renderer deferred explicitly; child creation rejected; real particle factory interpreted"
+  },
+  "negative_checks": {
+    "cursors": [
+      0,
+      65
+    ],
+    "whole_world_and_rng_rollback": true
+  },
+  "regression": {
+    "runtime": 249,
+    "desktop_game": 80,
+    "ignored_each": 1,
+    "release": "passed with genewars-runtime/callback-captures"
+  },
+  "capture_instrumentation": "family8 release captures enabled only by callback-captures feature; ignored diagnostic supports family8/pass",
+  "campaign_missions": 1
+}
