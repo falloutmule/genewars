@@ -1,52 +1,48 @@
-# GeneWars authoritative checkpoint â€” 2026-10-15 America/Denver
+# GeneWars authoritative checkpoint — 2026-10-15 America/Denver
 
-**Original campaign missions completable: 1 / 24 corroborated standard missions.** Exceland passes automated ordinary commands and repeated native window input/hit-testing on frozen004. **Integration-tested initialization transitions: 1 (Exceland -> Krell).** Krell remains synthetic-carry integration, not accepted campaign gameplay.
+Authentic campaign missions accepted: **1 / 24**. Exceland and its ordinary transition to Krell are verified. Krell is not complete. Current authorization is continuous implementation; the previous stop instruction and old agent ownership lists are superseded.
 
-## Reference and preserved baseline
+## Verified integration
 
-QA BETA V5 CD reference. Retail equivalence unresolved. GW.EXE SHA256 4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba. Archive last verified8153f36276f46acfb356f3199c7c2e89c9fa936b2afdf1b37039f143e2657906.
+Branch `codex/genewars-reconstruction`; latest verified commit `43ca3e1`. This run preserved scoped commits `2f464c6` (Extractor source equality), `54b4d2c` (Genepod terminal/effect20), `999bf6d` (owned/neutral shared scheduler), `530b8ed` (Architect return and ordinary Genepod control), and `43ca3e1` (natural mortality, captured callback replay, pure collision packet). Historical unrelated working-tree changes remain preserved; inspect Git status before staging anything.
 
-Branch codex/genewars-reconstruction. Recent commits:27c8910 Mule retry/feeding/walking;7d82a79 Water cancellation;c29a4e8 ethereal positive hover;226b5c1 Genepod shared dispatch. Inspect gitlog for newer commits. Do not bulk-stage/discard historical research or unrelated workspace work.
+Synthetic-carry diagnostic construction completes Extractor909, Distributor1505 and Genepod2275. Decoded original Genepod control down/release starts ordinary production2276. No funds, work, quality or victory injection. Architect return2328 is fixed and source-compared (96cases/22,039,296bytes). Natural starvation2428, satiated corpse-neighbor2429 and corpse callbacks2440/2450 each compare all427,369worldbytes exactly. Receipt `research/integration/krell-mortality-callbacks-094.json`.
 
-Exceland acceptance:research/integration/mission-001-acceptance-004.json. Frozen private/integration/fresh-krell-entry-004:517files/70resources,snapshot7f55163,executable dfa696515193cd95e4d2bfe76dbe88aa0c47fc7977e452f5d5d6f278ef84053b. Winning4630steps/2activations/8882callbacks,wholeworld equality/no unknown/no56530. Repeated native private/integration/native-building-chain/a1ba381f0f9844d68a00e55015ffc9d0 first/repeat matches full audit/world/results/Enter/Krellstep0. Blueprint-prior proof research/variants/blueprint-priors-headless004-review.*. Historical opaque priors unresolved outside this path. Missing movies/audio use original nonblocking fallback; no playback or DOS-save compatibility claim.
+Runtime regression `private/integration/krell-runtime-packets-093.log`:211 passed,1 explicit captured-replay test ignored by default. Its separately invoked expected-blocked regression passes exact8buffer roundtrip and whole-world rollback at2724 in0.01s. Numeric airborne collision6DD50/73A50 passes122cases/15,860bytes including exact source entry; it is not yet wired into live physics.
 
-## Current player-visible frontier
+## Active boundary and next command
 
-Krell synthetic carry lands three specialists by256. Camera[1536,15360]. Ordinary Extractor11 screen[320,234] ->world[1663,15487] completes909 health280/flag1. Architect returns normally. Distributor3 screen[224,299] ->world[1919,16511] builds and reacheshealth63 by1279. Next proposed Genepod0 screen[448,226] ->world[1919,14719], source-classified dry/unblocked footprint; actual placement pending.
+Ordinary production reaches work1 and terminal creation atframe2724, new owned Mule slot7. Its first callback rejects an unimplemented airborne Genepod collision and the whole mission frame rolls back. Immutable capture: `private/review/krell-production-084/frame-2724-slot-7-blocked-before-owned`. Original full callback is prepared at `private/review/krell-mule-callback/caf7179999cb4f03afa02464671f804d`:30,383instructions/6RNGdraws. Source74270 tests current building animation25/frame27 signed raw height;6DD50 applies impulse before water/reveal/AI. Do not substitute the negative-height movement query or bypass collision.
 
-**Latest completed probe062:** private/integration/krell-construction-command-062.log. Stops1456slot2 Family8Motion(UnsupportedRecord), transaction unchanged. Exact per-family fixture private/review/krell-mule-callbacks-062/frame-1456-slot-2-blocked-before-family8; wholemission snapshot preserved. Positive hover expired and original building-to-zone target search is now required. combat_review recovering zone/state2; this is unsupported behavior, not loss. Probe061 passed to sameboundary after1279repair. Probe060 exposed real stale-cell-link retirement regression587, preserved and fixed by merging currentownedlinks after cleanup. Numeric fixtures auto-capture first Mule AND family8 errors, avoiding future recapture runs.
+Next implementation: typed74270 current-frame building-height query, then6DD50 at its original physics boundary, then compare all8worldbuffers using the snapshot harness. Resource animation gaps, water damage and replacement limits must remain explicit errors until proved. Exact fast reproduction (fresh output path required):
 
-1279 retirement/pairing FULL comparison passed all427369B/20333instructions/2draws (research/variants/krell-mule-1279-native.json). Retirement cleanup precedesquery; successfulpair skips idlefallback/draw. Pureprefix131B also passes. Runtime Genepod work/payment now wired through sharedfullcallback60sourcecases/437220B; idle96cases179712B stillpass. Terminal stagedrequests70cases511064B, actualworldterminal integration inprogress. Runtimegenepod4tests andnativeGamefixture1test pass; nativewindow/authenticKrell acceptance pending.
+```powershell
+$env:CARGO_BUILD_JOBS='2'
+$env:CARGO_PROFILE_TEST_OPT_LEVEL='1'
+$env:GENEWARS_CAPTURED_MULE_INPUT=(Resolve-Path private/review/krell-production-084/frame-2724-slot-7-blocked-before-owned).Path
+$env:GENEWARS_CAPTURED_MULE_OUTPUT=Join-Path (Get-Location) private/review/owned-callback-replay-NEXT
+$env:GENEWARS_CAPTURED_MULE_FRAME='2724'
+$env:GENEWARS_CAPTURED_MULE_SLOT='7'
+$env:GENEWARS_CAPTURED_MULE_EXPECT='blocked'
+C:/Python314/python.exe -B scripts/cargo.py test -p genewars-runtime captured_mule_callback --offline --locked -- --ignored --nocapture
+```
 
-Earlier failed Distributor screen[400,370] picked Water1031; retained054. Legal placement source receipt research/campaign/krell-placement-review.*. Water source cancellation now supports exactmessage13/reason5 vsBlocked12/reason6;20literalcases4,591,520B plus guards pass; hostcompiled, actualWaterfullcallback comparison pending. No actor reset or forced terrain/resources used.
+Switch EXPECT to passed only when integrating the correction, and compare its export with the literal source. Then continue the ordinary production probe; finally use authentic preceding-mission carry and native input to complete original Krell objectives/zone credit/transition. Synthetic construction evidence cannot count as2/24.
 
-## Verified continuation evidence
+## Headless and native evidence
 
-Full numeric source callbacks compare all8worldbuffers427369B. Ports UI cleanup/render enqueue/audio playback remain explicit.
+Frozen `private/integration/continued-krell-082/genewars-game.exe` replays ordinary Exceland victory atstep4630 without error. Two native runs pass and agree. Native photon3-work700/next-choices world and dispatch audit equal the same build's headless winner exactly, worldSHA ebdc252d94215d920a43bed88c9715472aabfdb6866a84433edd7ef35421b805. Actual retained-carry Krell entry is verified atstep0:3prepared specialists,4neutral Mules,2000funds,target1536/15360. Receipt `research/integration/native-building-chain-continued-krell-082-passed.json`. This frozen executable predates the corpse-neighbor/collision packet; no latest-build native Krell acceptance claim. Its world differs historical frozen004; no unchanged historical hash claim.
 
--651/652/660 pursuit/contact;675rendezvous/676wait;709center;721stop/countdown/722wait.
--784evenzero;785realbirth4297instructions/14draws, realfactory/map/counts/inheritance;786parent/newborn;787food/forcedwander;820repeatpair;829retryrelocation.
--960initialpostbirthzero;961nonlethalstarvation;975reserve-gatedfood;1005fullfeeding;1017walkingnullfood2364instructions/1draw. Receipts research/variants/krell-*-native.json. Lethal starvation remains unsupported.
--1227ethereal positivehover1339instructions/0draws, timer230->229 withsitecount1:research/variants/krell-family8-1227-review.json. Required no-next-building site search still unsupported.
--1274liveplant retry2458instructions/1draw:research/variants/krell-mule-1274-native.json. Pure8cases1048B. Caller proves plant2E bit04 alreadyclear; generic release and other action variants remain unsupported.
+## GLM through existing9router
 
-Focused runtime tests passed:family_scheduler10;pair_stop_render2;Genepod command adapter2;latestretry2 (private/integration/krell-retry-regression-001.log). No latest comprehensive aggregate claim. Earlier aggregate270/271 with solemetadata repair is historical, not current acceptance.
+Isolated `~/.codex/genewars-glm53.config.toml` uses Responses atlocalhost20128 and exactmodel `openrouter/z-ai/glm-5.3`. Saved gateway authentication helper supplies key internally. Desktop defaults and existing Luna/Sol routing unchanged. Existing9router0.5.69 is running hidden. Full streaming read-only tool-call/resume cycle passed; one bounded Extractor metadata coding task was reviewed/integrated by root. See `docs/GLM_ROUTE.md` and `research/integration/glm53-gateway-evaluation-001.json`.
 
-## Ahead integration
+Four CLI requests:65,133input/663outputtokens; gateway estimated$0.045453. OpenRouter key-wide billing delta after these$0.01991058; after an additional tiny upstream-ID probe$0.019988565. CLI counters incorrectlyzero. Exact cost per verified change and root reviewtoken savings unavailable. Gateway/model reply supports requested route; generation-ID lookup404, so independent generation-record lookup unverified. Key has no configured cap; no billing/funds settings changed. Account privacy controls unavailable through key API and unchanged. No proprietary game bytes sent to GLM.
 
-Genepod0 requires available11->3->0 chain; Photon6 unnecessary. Research71680/list[4] alreadyqualifies Mule. Shared dispatch_genepod_mule_input uses original humanproducer and opcode12 atomically. Capture down/release startswork75; cancellationrefund/canceledcapture/invalidselection rollback tested. No production or nativeacceptance yet.
+## Resource/crash and ownership
 
-Pure genepod_capture exported; exactbutton sprite1 29x29/665opaque, originmanager+[26,344]. New desktop genepod_panel face/capture component and building_pick alpha component source-tested(672pickcases). campaign_contract owns native wiring; no rectangle/nearestcenter substitute. Exactdecoded GENEPANL.ANB hash1df1e8fb436cc7030c40b94438c5e530a1b8a21716fad4354e0c82c94ba27f52 separatefromterrainGENEPANL.DAT.
+One heavyweight job at a time, Rust2jobs. Windows records unexpected shutdowns Oct2/3,Sep21/22,Sep15/16; latestEvent41 hasBugcheckCode0, no requestedEvent1001 or minidump found. Crashcause unresolved. Workspace `windows-crash-evidence.json` preserves inspection.
 
-Positive nonterminalwork/payment pure99cases721413B; work1stilltypedterminalboundary. native_input owns pureterminal payment/quality/orderedworldcontinuations. Qualitysuccess AND authenticfailure required; no favorableseed selection. Sharedfactory realbirth proven; nullparent Genepod factory pure proven. OwnedMule commands/zone credit/originaloutcome/nativeacceptance stillrequired. Zone[256,24320]/radius1024/selector12/quota1024, contributions16+8/64frames neutralquarter, victoryscore1000 withsourcefallback; notfullyintegrated.
+Root owns Rust integration, gameplay/native verification, Git and checkpoint. One supplementary agent `/root/owned_scheduler_review` contributed bounded source review, scheduler/mortality/captured-replay helpers and pure collision work; no inferred paid-model route. Luna/Sol availability/configuration preserved, no automatic OpenRouter subagent claim. Current agent assignment: typed building query/validator; root livephysics/resource wiring.
 
-## Ownership and exact resumption
-
-Root:sharedengine/Muleintegration/commits/acceptance. combat_review:1456zone-target pureplanner/motion. campaign_contract:ownedMulecommand sourcecontract. native_input:NEWactor_world/genepod_production.rs terminaladapter; effect20 failure remainsunsupported untilrecovered. No competing edits to owned files. Agents preserve work and communicate concrete receipts.
-
-1. Integrate1456 zoneplanner withactualbackingzones, comparefullcallback. Preserve001..062 captures. Next replay063 NEW absolute fixture directory; neverreuse.
-2. OneheavyCargo/replay atatime. Use CARGO_BUILD_JOBS=2,CARGO_PROFILE_TEST_OPT_LEVEL=1,C:/Python314/python.exe -B scripts/cargo.py test -p genewars-desktop --bin genewars-game krell_first_256 --offline --locked -- --nocapture. Env GENEWARS_KRELL_CONSTRUCTION_PROBE=1,GENEWARS_MULE_CALLBACK_FRAME=<actual repairedframe>,GENEWARS_MULE_CALLBACK_FIXTURE=<NEW existingABSOLUTEdir>. FirstMuleerror auto-captured; wholemission failures captured;requestedframe includes perMule/perfamily8before/after.
-3. Source compare:python -B research/variants/krell-mule-callback-review.py --before <before> --expected <after> --frame N --slot S. Inspect JSONstatus, notexit0alone. Use scripts/ghidra/krell_family8_1227_review.py for exacthover proof.
-4. Integrate nativeGenepod assets/control andproduction; focusedchecks then shortintegratedrun. Count Krell onlyafter authenticcarry ordinarycommands AND actualnativeinput acceptance. Recheck affectedExceland at meaningfulintegrationcheckpoint. Immutablebroadverification onlyatmilestones/release.
-
-Fullremainingcampaign:Krell acceptance, earliestcombatmission, latercampaign, requiredcombat/AI/genetics/saves/audio/presentation/fullreleasecampaigntraversal/SFHSfeasibility. Alternative65535step14111 secondaryunlessauthenticrouteaffected. No originalexecution/install/MCPchanges/upload thiscontinuation. ExplicitUTF8docs, preserveexistingCRLF/LF; no backgroundwork implied afterturn ends.
+QA BETA V5 CD reference; retail equivalence unresolved. GW.EXE SHA2564bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba. Proprietary captures/resources remain private. Preserve all uncommitted historical experiments and private evidence. Original full-product campaign/economy/genetics/combat/AI/saves/presentation goal unchanged.
