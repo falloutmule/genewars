@@ -32,6 +32,7 @@ pub mod terrain_target;
 pub mod physics_tables;
 pub mod landing_effect_lifecycle;
 pub mod creature_world;
+pub mod creature_pick;
 pub mod bookkeeping;
 pub mod target_resolver;
 pub mod plant_spread;

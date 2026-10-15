@@ -46,3 +46,62 @@ The actual picked entity is produced by83140 and published by83930, not by neare
 - `private/ghidra/display-geometry/instructions-00024770.txt` SHA256 `dd59f4f3b8fc7a3cffbd69473a05c96feb80954bec0752792d5c1c673ae9bbcb`
 - `private/ghidra/validated/memory-.object1.bin` SHA256 `92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe`
 - `private/ghidra/validated/memory-.object3.bin` SHA256 `aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87`
+
+
+## Bounded owned-Mule picking integration findings
+
+Mapped Mule vtable111FEC+20 is5A140, available in private/ghidra/initial-creature/instructions-0005a110.txt. Frame virtual1C is1E840 (entity-plant listing). Unlike building1F3C0/98C40,5A140 calls **scaled rectangle** hit95300. It calculates clamp((unsignedbyte76*unsignedbyte77)/100,150,256), always subtracts relative physical height (virtual4=1F260)>>6 from the supplied groundY, sign-extends input coordinates, obtains the source-clamped animation19/frame1B through1E840, and accepts95300's component result other than-1. Rendering59470's shadow-mode and scale fast paths are not interchangeable with hit5A140:76=100/77=255 produces hitfactor255, while the current render fast path chooses256. Do not infer hit coordinates from a rendered bounding rectangle or substitute building_pick::hit_animation.
+
+Existing host surfaces:
+
+- runtime_resources::CreatureAnimationDatabase::decode_frame_packed4 provides selected frame metadata and components with local positions, flags, sprite pixels and explicit opacity. It currently rejects an out-of-range frame; picking must first apply1E840's clamp to the actual animation extent.
+- creature_scene::draw_supported_mule_record admits the bounded owned state0/8 visual domain. Its successful render proves resource availability, not pick admission. actor_scene already uses entity_view_position(camera,128) into a512-wide slice beginning at framebuffer offset128; picking must consistently use absolute screen coordinates including that margin.
+- runtime_scene::Game::packet routes mission events only to genepod_packet. Game has GenepodSelection, but no selected-creature/world-control5 capture state. SharedMission.selected is an actor slot; it cannot be reused as a Mule index.
+- ActorWorld::dispatch_owned_mule_action5 already composes the proved producer and owned command transaction. It accepts resolved selected slot, typed packet, manager[59D], ProducerInput and explicit selected-panel-refresh predicate. A host adapter should stage world, selection, manager/packet and rendered frame together, and commit only after success.
+
+The faithful bounded route is source-control5 left capture/release, exact current Mule scaled-component rectangle hit, selection release consumed asCL1 through278D0/24770, then a later ground release reaching action5 with actual projected16E0B4/B6. Picking must respect visibility17, viewport family mask/flag1C, original83140 eligibility and modifier exclusions, ground projectedY priority, and83930 publication. A no-overlap route must account for every competing family, not merely other Mules/buildings. Current actor_scene explicitly uses caller-supplied family order; it does not establish original mixed queue order. Existing Genepod selection opens on press and excludes only overlapping buildings, so it is not proof of this original creature selection path. Selected creature panel presentation/refresh and original control-state priors remain separate obligations.
+
+### Missing scaled hit and local export command
+
+Bounded inventory found no standalone95300 saved listing. actor-draw/instructions-00095390.txt begins at95390 and is a different function. The existing local exporter scripts are scripts/ghidra/ExportExistingRange.java (read-only listing; no disassembly) and ExportRange.java (disassembles a known start only if needed). Existing project and program are private/ghidra/projects/GW_CD_Candidate and /GW-CD-candidate.exe, as confirmed by mule-render-export.log. The pinned Java21/Ghidra12.0.1 and existing MemoryPreferencesFactory classes are already installed locally.
+
+The following bounded command is prepared for later use, **not executed in this analysis**. It uses the Java entry/classpath established by support/launch.bat, explicit process-local memory/preferences isolation, project read-only/no-analysis mode, and a new output path. It does not download, import, analyze the whole game or save the project. Run from repository root when no other heavyweight job is active:
+
+```powershell
+$taskRepo = (Get-Location).Path
+$taskJava = Join-Path $taskRepo 'private/tools/jdk/jdk-21.0.12.1+1/bin/java.exe'
+$taskGhidra = Join-Path $taskRepo 'private/tools/ghidra/ghidra_12.0.1_PUBLIC'
+$taskClassPath = (Join-Path $taskRepo 'private/ghidra/launcher-classes') + ';' + (Join-Path $taskGhidra 'Ghidra/Framework/Utility/lib/Utility.jar')
+& $taskJava '-Xmx768M' '-XX:ParallelGCThreads=2' '-XX:CICompilerCount=2' `
+  "-Duser.home=$taskRepo/private/ghidra/user-home" `
+  "-Dapplication.settingsdir=$taskRepo/private/ghidra/settings" `
+  '-Djava.util.prefs.PreferencesFactory=MemoryPreferencesFactory' `
+  '-Djava.system.class.loader=ghidra.GhidraClassLoader' '-cp' $taskClassPath `
+  ghidra.Ghidra ghidra.app.util.headless.AnalyzeHeadless `
+  "$taskRepo/private/ghidra/projects" 'GW_CD_Candidate' `
+  '-process' 'GW-CD-candidate.exe' '-readOnly' '-noanalysis' `
+  '-scriptPath' "$taskRepo/scripts/ghidra" `
+  '-postScript' 'ExportExistingRange.java' `
+  "$taskRepo/private/ghidra/mule-picking/instructions-00095300.txt" '00095300' '0009538f'
+```
+
+If the read-only existing listing is empty, that is not a successful export.95300 is an exact call target established by5A140, so the same `-readOnly -noanalysis` invocation may use ExportRange.java at that known start to disassemble transiently without saving project changes. Inspect the result/callees before extending the helper graph; neither a successful command nor a guessed generic scaler proves the hit routine. This command has not been launch-tested here, and actual Ghidra startup/project locking remains an execution-time check.
+
+Additional bounded source/export pins:
+- `private/ghidra/initial-creature/instructions-0005a110.txt` SHA256 `5121591cbf165c63dc16fb3de9fb95a8b7772b96162f72a44191d8a8b97d8910`
+- `private/ghidra/entity-plant/instructions-0001e840.txt` SHA256 `339ecbf75d0b4fccaed84e606ad9be40a7fe63c271b33f9a6b1b47493ceff54f`
+- `private/ghidra/actor-activation/instructions-0001f260.txt` SHA256 `0f0c7ee7a26b87418a794e92c763f2dffb749d896335288aa052cfa40aba9ff2`
+- `private/ghidra/actor-draw/instructions-00095390.txt` SHA256 `8ae130718f8bb1c699ccfc7e44a6a83fc9f41c10770fb5b9b4050efc96bfcfa5`
+- `scripts/ghidra/ExportExistingRange.java` SHA256 `0d61409c46955ed2df76ad96cf189893a1895c58a1afe1737561bc393fb15659`
+- `scripts/ghidra/ExportRange.java` SHA256 `bffea11b1c8354ca61c65dc21f76cb5cc82fbdac4ccc3f7b89e57d7df33cce3d`
+- `scripts/ghidra/MemoryPreferencesFactory.java` SHA256 `5b1b81db827f84d6b55037763fe4f79ed00b816f827eb701ab1e4f9ef9e0f84b`
+- `private/tools/ghidra/ghidra_12.0.1_PUBLIC/support/launch.bat` SHA256 `4ce74f930f8ef9e37e3f05375f2cda45831139bb5819cae4e734ea676506af60`
+
+
+### Correction after read-only export148
+
+Root successfully exported95300 and its callee952A0 to private/ghidra/mule-picking-148. The earlier opaque-hit description was incorrect:952A0 reads the component sprite pointer, sprite byte4 width/byte5 height and component flags8 bits1/2, but never reads pixels or an opacity mask. A transparent pixel inside the scaled rectangle is a hit.95300 visits components in reverse order and returns the last matching component index, or-1. Signed component offsets multiply by factor and truncate toward zero on division by256; unsigned dimensions multiply and shift right8. Horizontal/vertical flips transform the local coordinate using extent-coordinate-1 before the same half-open bounds check. Null sprite pointers reject that component. Empty frames are not safe source inputs (the source decrements byte component count before the first read).
+
+The new pure creature_pick helper proves these numeric boundaries and5A140 with explicitly supplied virtual-relative-height and already-resolved frame components. It does not establish resource1E840 resolution, world visibility/mixed queue ordering, mouse selection or native acceptance. Sprite decoding remains useful to obtain dimensions, but opacity must not participate in selection. The earlier command remains a historical prepared command; actual bounded exports now exist at the following pinned paths:
+- `private/ghidra/mule-picking-148/instructions-00095300.txt` SHA256 `734798af301743f2e484cfd2ed60873c899917047702de7f30c54d480be9ccc3`
+- `private/ghidra/mule-picking-148/instructions-000952a0.txt` SHA256 `96d01e06dc49edfd09ca4d3828afc89dbe31260688f3734eb837c8465c4930de`
