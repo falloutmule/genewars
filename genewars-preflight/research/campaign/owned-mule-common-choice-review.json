@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "cases": 1,
+  "compared_bytes": 131,
+  "rng_draws": 3,
+  "negative_guards": 7,
+  "private_run": "private/review/owned-mule-common-choice/706fb2b0f11a4a4299546d9ee2516c73",
+  "source_fixture": "private/review/owned-mule-terminal-callbacks/5465950b843b424dbb888012b20a83a7",
+  "scope": "Literal64CD7..5EF46 actual owned frame2 fallback, real first target predicate. Timer32767 before existing lifecycle tail decrements; not full callback/native acceptance.",
+  "pins": {
+    "scripts/ghidra/owned_mule_common_choice_review.py": "317763b37c997d2c2e2affdf6900677725b64030dd618b877c94f5e713b87a9c",
+    "rust/crates/genewars-runtime/src/owned_mule_common_choice.rs": "f0e435a92e557b4b468dfaa47bcb35cc31fdc8fff81f9725093d0a454633cf47",
+    "private/review/owned-mule-terminal-callbacks/5465950b843b424dbb888012b20a83a7/2-at-64cd7.pickle": "b5202b93cd9bfebde84bed4aca66a9c4c8ebe5e023457262e55ae85fd0eb41c8",
+    "private/ghidra/validated/memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+  }
+}

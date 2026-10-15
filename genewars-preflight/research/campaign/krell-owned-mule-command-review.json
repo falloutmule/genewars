@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "cases": 2,
+  "compared_bytes": 248,
+  "negative_guards": 8,
+  "ineligible_unchanged_cases": 6,
+  "module_sha256": "ea17468c77ce2c44f28436895113c5d5aed32c3191fa86b2898b7454a13bd1b6",
+  "validator_sha256": "9ff825cd207ed15c8b6bff06180e7b8e6200dc959e12f62b097b531857ea68b4",
+  "source_probe_receipt_sha256": "8507a3a5221afcc7fb2577d28fa836f7ff4c8f01abd13e5a8d66f1bd355da802",
+  "private_run": "private/review/krell-owned-mule-command-review/d693a192538a4af09bfbbf50c8bc5d0e",
+  "scope": "Exact owner0 sourcefactory and its firstfullcallback record, literal81C60 cleanup versus pureRust. Syntheticflat; noGenepod caller ejection, liveownedcallback port, or nativeacceptance."
+}

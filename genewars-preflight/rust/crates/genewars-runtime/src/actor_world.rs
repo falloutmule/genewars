@@ -28,6 +28,8 @@ mod effect_updates;
 mod creature_updates;
 mod creature_retirement;
 mod creature_factory;
+mod owned_mule_updates;
+pub use owned_mule_updates::OwnedMuleReceipt;
 pub use creature_retirement::{MuleRetirementReceipt,MuleUiCleanupRequest};
 mod actor_updates;
 mod campaign_carry;
@@ -1030,8 +1032,14 @@ mod tests {
         assert_eq!(receipt.callbacks.iter().map(|c|c.slot).collect::<Vec<_>>(),vec![0,1,2,3]);
         assert_eq!(word(&world.backing,0x355c),0);
         for record in world.family8().unwrap().records().iter().take(4){assert_eq!(record[0x1b],1);}
-        world.create_family8(2,0,[4000,4000],25000).unwrap();let before=world.clone();
-        assert!(matches!(world.step_family8_callbacks(0,4,0,6002,0,&physics,&trig,&animation,&directions),Err(ActorWorldError::Family8Motion(_))));
+        let late=world.create_family8(2,0,[4000,4000],25000).unwrap().unwrap().slot;
+        // Selector2 state10 is now admitted. Keep this a late unsupported-state
+        // rollback test rather than depending on an obsolete feature boundary.
+        let prior=*world.family8.as_ref().unwrap().record(usize::from(late)).unwrap();
+        let mut unsupported=prior;unsupported[0x56]=0xff;
+        world.family8.as_mut().unwrap().replace_record_checked(usize::from(late),&prior,&unsupported).unwrap();
+        let before=world.clone();
+        let result=world.step_family8_callbacks(0,4,0,6002,0,&physics,&trig,&animation,&directions);assert!(matches!(result,Err(ActorWorldError::Family8Motion(_))),"unexpected callback result: {result:?}");
         assert_eq!(world,before);
     }
 

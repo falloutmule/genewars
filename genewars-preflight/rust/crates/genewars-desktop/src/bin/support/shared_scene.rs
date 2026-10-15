@@ -238,10 +238,10 @@ impl SharedMission {
             }
         }
         let climate=i16::from_le_bytes(self.world.backing_bytes()[0x1c61..0x1c63].try_into().unwrap());
-        let creatures=self.world.step_neutral_creature_callbacks(player_count,
+        let creatures=self.world.step_creature_callbacks(player_count,0,u16::from(runtime_flags),
             MuleStepContext{frame_counter:frame,gravity:context.gravity,water_height:context.water_height,climate},
             &resources.physics,&self.trig,&resources.mule_animations).map_err(|e|e.to_string())?;
-        self.pending_requests+=(creatures.pending_ui_animations.len()+creatures.pending_audio.len()+creatures.pending_plant_retirements.len()+creatures.pending_portrait_refreshes.len())as u64;
+        self.pending_requests+=(creatures.pending_ui_animations.len()+creatures.pending_audio.len()+creatures.pending_plant_retirements.len()+creatures.pending_portrait_refreshes.len()+creatures.pending_reveal_vertices.len())as u64;
         self.pending_requests+=creatures.retirements.iter().map(|r|1+r.pending_ui_cleanup.len()as u64).sum::<u64>();
         let plants=self.world.tick_plants_with_reproduction(&self.plant_spread).map_err(|e|e.to_string())?;
         self.plant_births+=plants.events.iter().filter(|event|matches!(event,genewars_runtime::TickEvent::Created{..})).count()as u64;

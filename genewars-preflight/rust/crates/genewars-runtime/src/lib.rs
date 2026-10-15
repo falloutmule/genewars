@@ -131,4 +131,10 @@ pub mod genepod_terminal;
 pub mod family8_zone_target;
 
 pub mod effect20_factory;
+
 pub mod effect20_motion;
+
+pub mod owned_mule_ai;
+pub mod owned_mule_common_choice;
+pub mod owned_mule_callback;
+pub mod mule_owned_command;

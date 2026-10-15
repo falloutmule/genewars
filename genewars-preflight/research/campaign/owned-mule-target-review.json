@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "cases": 1,
+  "compared_bytes": 124,
+  "negative_guards": 7,
+  "rng_draws": 0,
+  "private_run": "private/review/owned-mule-target/3339a528792c4bc3a395aba653db2dc7",
+  "source_fixture": "private/review/owned-mule-terminal-callbacks/864fda19ca5c4ec98599e1467314d6c7",
+  "scope": "Literal64CEF..64DEF from full callback18, actual terminal/ejection fixture, original terrain predicate true. This is target selection, not full callback/arrival/native acceptance.",
+  "pins": {
+    "scripts/ghidra/owned_mule_target_review.py": "507cf9c8cbc7470a121de39096efb4db935b4b60ad4d8acd8c95d9cfa48803a5",
+    "rust/crates/genewars-runtime/src/owned_mule_ai.rs": "4d0ddae51de027efc21ec0409503a7a383ba68e30e703a85abb5b3d1082265d6",
+    "private/review/owned-mule-terminal-callbacks/864fda19ca5c4ec98599e1467314d6c7/18-at-64cef.pickle": "65e150d47f75def799030147fdf52289fc2808d35728ef55c62fef3ac8528198",
+    "private/review/owned-mule-terminal-callbacks/864fda19ca5c4ec98599e1467314d6c7/18-at-64def.pickle": "b05f5221d1d969b1d0679bfc54ac3289d50d4be00580040b4041c7439af8e4f6"
+  }
+}

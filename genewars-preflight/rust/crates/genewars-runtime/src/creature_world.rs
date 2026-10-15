@@ -385,11 +385,19 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
        ||before[0x4f]!=0||(before[0x52]!=0&&!paired_approach)||motion_word(before,0x49)as u16&!0x337f!=0
        ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=if mule_callback_phase(before,context.frame_counter)&1==0{0}else{2}{return Err(CreatureError::UnsupportedMotionState);}
+    plan_mule_admitted_body_with_postphysics(before,prefix,working_target,map,context,physics,trig,contact,obstacle,animations,choice,admit_water,cell_entry,|record|Ok(*record))
+}
+/// Shared source body; caller MUST prove its owner/action domain independently.
+/// Postphysics runs the owned reveal at its original pre-AI boundary.
+pub(crate) fn plan_mule_admitted_body_with_postphysics<F,O,C,E,P>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
+    physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
+    contact:F,obstacle:O,animations:&MuleAnimations,mut choice:C,admit_water:bool,cell_entry:E,mut postphysics:P)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
     let waiting=before[0x49]&3==3;
     if waiting&&motion_word(prefix,0x3f)!=0{return Err(CreatureError::UnsupportedMotionState);}
     let mut a=*prefix;
     let(plan,water_effect)=plan_common_nonflight_physics_with_cell_entry(&a,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,obstacle,admit_water,cell_entry)?;
-    a=plan.after;
+    a=postphysics(&plan.after)?;
     if waiting {
         //6FD58..6FD80 restores the pre-steering target speed and returns
         //from6FB60 before ordinary arrival/waypoint postphysics checks.

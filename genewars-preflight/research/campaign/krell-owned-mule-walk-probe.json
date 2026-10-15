@@ -1,0 +1,1943 @@
+{
+  "status": "blocked",
+  "stop_reason": "callback_cap_without_movement",
+  "scope": "Syntheticflat exactnullparentfactory owner0 +opcode11; caller ejection omitted, noRust/native acceptance. Stops at firstmove ornewbranch,64callbackcap.",
+  "private_run": "private/review/krell-owned-mule-walk/2341ef2fdde94364b5190375f7f7fb55",
+  "fixture_limitations": [
+    "Synthetic flat height100 map retains terrain class byte5=0; walkable classification not established.",
+    "Genepod caller ejection overwrite omitted.",
+    "Presentation ports inherited from command source probe; no native gameplay acceptance."
+  ],
+  "first_move": null,
+  "blocked": null,
+  "callbacks": [
+    {
+      "frame": 2,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        13716,
+        10,
+        25
+      ],
+      "rng_after": [
+        13716,
+        10,
+        25
+      ],
+      "instructions": 1741,
+      "record_sha256": "fee2306b071db5ca119e3fda5660eb4503fb8849e070dccb9322c04fb41e54ca",
+      "boundary": "frame-2"
+    },
+    {
+      "frame": 3,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        13716,
+        10,
+        25
+      ],
+      "rng_after": [
+        43684,
+        13,
+        28
+      ],
+      "instructions": 10105,
+      "record_sha256": "b487c97462caabdd78c2d0687ebdf7113b016505a7ff8e084e9e18c24e2480bf",
+      "boundary": "frame-3"
+    },
+    {
+      "frame": 4,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        43684,
+        13,
+        28
+      ],
+      "rng_after": [
+        43684,
+        13,
+        28
+      ],
+      "instructions": 1633,
+      "record_sha256": "8df56573ef1866065107a0ea46a8cf206589b3faa7f434f400344af75ad56a4b",
+      "boundary": "frame-4"
+    },
+    {
+      "frame": 5,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        43684,
+        13,
+        28
+      ],
+      "rng_after": [
+        43684,
+        13,
+        28
+      ],
+      "instructions": 2005,
+      "record_sha256": "5a8f40bedc2cd8133af8cf240045ef28674d97412b5ba70db2a9a2ae3ce58ef1",
+      "boundary": "frame-5"
+    },
+    {
+      "frame": 6,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        43684,
+        13,
+        28
+      ],
+      "rng_after": [
+        43684,
+        13,
+        28
+      ],
+      "instructions": 1633,
+      "record_sha256": "5a8f40bedc2cd8133af8cf240045ef28674d97412b5ba70db2a9a2ae3ce58ef1",
+      "boundary": "frame-6"
+    },
+    {
+      "frame": 7,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        43684,
+        13,
+        28
+      ],
+      "rng_after": [
+        756,
+        16,
+        31
+      ],
+      "instructions": 10104,
+      "record_sha256": "1f170d2712bac0d1bcbf44c0f93b73b85bf6392c0e683d7fea64928b7a090508",
+      "boundary": "frame-7"
+    },
+    {
+      "frame": 8,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        756,
+        16,
+        31
+      ],
+      "rng_after": [
+        756,
+        16,
+        31
+      ],
+      "instructions": 1633,
+      "record_sha256": "4536a58250d26fbdbebe5e65c6d76c4b9a7bcf79858f706c7ae6cbd7ab9d1113",
+      "boundary": "frame-8"
+    },
+    {
+      "frame": 9,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        756,
+        16,
+        31
+      ],
+      "rng_after": [
+        756,
+        16,
+        31
+      ],
+      "instructions": 2005,
+      "record_sha256": "4220a91fdec693341d0c3c43d69b52aa72f036ad654c4f74102af53014de38f4",
+      "boundary": "frame-9"
+    },
+    {
+      "frame": 10,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        756,
+        16,
+        31
+      ],
+      "rng_after": [
+        756,
+        16,
+        31
+      ],
+      "instructions": 1633,
+      "record_sha256": "4220a91fdec693341d0c3c43d69b52aa72f036ad654c4f74102af53014de38f4",
+      "boundary": "frame-10"
+    },
+    {
+      "frame": 11,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        756,
+        16,
+        31
+      ],
+      "rng_after": [
+        6020,
+        19,
+        34
+      ],
+      "instructions": 10103,
+      "record_sha256": "bc4111fe7f9b4bc29e6661f1cf8dd1aa3e3bc9c3355fa0a6902af1e27e8eaafd",
+      "boundary": "frame-11"
+    },
+    {
+      "frame": 12,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        6020,
+        19,
+        34
+      ],
+      "rng_after": [
+        6020,
+        19,
+        34
+      ],
+      "instructions": 1633,
+      "record_sha256": "ad2ff857c0cf6ebe71ef14f2405676da2d8a2744a276b76cbcb4378691da9b16",
+      "boundary": "frame-12"
+    },
+    {
+      "frame": 13,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        6020,
+        19,
+        34
+      ],
+      "rng_after": [
+        6020,
+        19,
+        34
+      ],
+      "instructions": 2005,
+      "record_sha256": "81453eff0a55312b1bb5e5f81e210fddc0ea0c13f5b7f220a24a51eeb816ee21",
+      "boundary": "frame-13"
+    },
+    {
+      "frame": 14,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        6020,
+        19,
+        34
+      ],
+      "rng_after": [
+        6020,
+        19,
+        34
+      ],
+      "instructions": 1633,
+      "record_sha256": "81453eff0a55312b1bb5e5f81e210fddc0ea0c13f5b7f220a24a51eeb816ee21",
+      "boundary": "frame-14"
+    },
+    {
+      "frame": 15,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 22,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        6020,
+        19,
+        34
+      ],
+      "rng_after": [
+        18884,
+        23,
+        70
+      ],
+      "instructions": 18428,
+      "record_sha256": "3adbe79f43ec55935750aa71fd83c1b8c6e6973a2dc629b1f4ca2bec8f64b8f2",
+      "boundary": "frame-15"
+    },
+    {
+      "frame": 16,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 22,
+      "timer_after": 22,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        18884,
+        23,
+        70
+      ],
+      "rng_after": [
+        18884,
+        23,
+        70
+      ],
+      "instructions": 1633,
+      "record_sha256": "35298f4b16bf768ffd8a4314b0df40daebebc77df60bf61b82775935d46e7b41",
+      "boundary": "frame-16"
+    },
+    {
+      "frame": 17,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 22,
+      "timer_after": 21,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        18884,
+        23,
+        70
+      ],
+      "rng_after": [
+        18884,
+        23,
+        70
+      ],
+      "instructions": 2047,
+      "record_sha256": "32e5567b2e4f300ec9d6b16b877755bccfcee3fd0a8ebfeb2071f24c0371141d",
+      "boundary": "frame-17"
+    },
+    {
+      "frame": 18,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 21,
+      "timer_after": 21,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        18884,
+        23,
+        70
+      ],
+      "rng_after": [
+        18884,
+        23,
+        70
+      ],
+      "instructions": 1633,
+      "record_sha256": "32e5567b2e4f300ec9d6b16b877755bccfcee3fd0a8ebfeb2071f24c0371141d",
+      "boundary": "frame-18"
+    },
+    {
+      "frame": 19,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 21,
+      "timer_after": 13,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        18884,
+        23,
+        70
+      ],
+      "rng_after": [
+        16388,
+        27,
+        106
+      ],
+      "instructions": 15644,
+      "record_sha256": "a27a8e515dab765b901d13b6f5e6dac6d9edce3c1cc2891533fd9fa201a00ca2",
+      "boundary": "frame-19"
+    },
+    {
+      "frame": 20,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 13,
+      "timer_after": 13,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        16388,
+        27,
+        106
+      ],
+      "rng_after": [
+        16388,
+        27,
+        106
+      ],
+      "instructions": 1633,
+      "record_sha256": "15973eccdc236be123a661da6a8c4340f84e753aaf59143c04a78f46aacf338b",
+      "boundary": "frame-20"
+    },
+    {
+      "frame": 21,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 13,
+      "timer_after": 12,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        16388,
+        27,
+        106
+      ],
+      "rng_after": [
+        16388,
+        27,
+        106
+      ],
+      "instructions": 2021,
+      "record_sha256": "d008092aaa7008c678877e090b7509806cc16456d977594a3fc32fd6e820558f",
+      "boundary": "frame-21"
+    },
+    {
+      "frame": 22,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 12,
+      "timer_after": 12,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        16388,
+        27,
+        106
+      ],
+      "rng_after": [
+        16388,
+        27,
+        106
+      ],
+      "instructions": 1633,
+      "record_sha256": "d008092aaa7008c678877e090b7509806cc16456d977594a3fc32fd6e820558f",
+      "boundary": "frame-22"
+    },
+    {
+      "frame": 23,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 12,
+      "timer_after": 27,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        16388,
+        27,
+        106
+      ],
+      "rng_after": [
+        14916,
+        31,
+        142
+      ],
+      "instructions": 15599,
+      "record_sha256": "328c9a0e2e2440fd82193d6fedeb48d8989101717e5a34965f12144394167fe6",
+      "boundary": "frame-23"
+    },
+    {
+      "frame": 24,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 27,
+      "timer_after": 27,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        14916,
+        31,
+        142
+      ],
+      "rng_after": [
+        14916,
+        31,
+        142
+      ],
+      "instructions": 1633,
+      "record_sha256": "f4e5836e010de2ff62dafc11170301f297b91bbd869cd0891089e34c3c3fd7d4",
+      "boundary": "frame-24"
+    },
+    {
+      "frame": 25,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 27,
+      "timer_after": 26,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        14916,
+        31,
+        142
+      ],
+      "rng_after": [
+        14916,
+        31,
+        142
+      ],
+      "instructions": 2005,
+      "record_sha256": "b15e1f3b15c8ea5de0f465830f180e8437f0bc4ea6d61d08fe6b5a9efed902fe",
+      "boundary": "frame-25"
+    },
+    {
+      "frame": 26,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 26,
+      "timer_after": 26,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        14916,
+        31,
+        142
+      ],
+      "rng_after": [
+        14916,
+        31,
+        142
+      ],
+      "instructions": 1633,
+      "record_sha256": "b15e1f3b15c8ea5de0f465830f180e8437f0bc4ea6d61d08fe6b5a9efed902fe",
+      "boundary": "frame-26"
+    },
+    {
+      "frame": 27,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 26,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        14916,
+        31,
+        142
+      ],
+      "rng_after": [
+        38676,
+        2,
+        145
+      ],
+      "instructions": 10105,
+      "record_sha256": "94fb7a52478170ead37c969f96ac5dc2964fafb81eb4831ebd7efa83b9de17ab",
+      "boundary": "frame-27"
+    },
+    {
+      "frame": 28,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        38676,
+        2,
+        145
+      ],
+      "rng_after": [
+        38676,
+        2,
+        145
+      ],
+      "instructions": 1633,
+      "record_sha256": "a5fa991b54514117711107b920f04a78921c99b787b156cd2d28bc7819655f4e",
+      "boundary": "frame-28"
+    },
+    {
+      "frame": 29,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        38676,
+        2,
+        145
+      ],
+      "rng_after": [
+        38676,
+        2,
+        145
+      ],
+      "instructions": 2005,
+      "record_sha256": "0135cf1bfd0e6074561f00c929ee62a3fd7580ebd1b3468a35710fa7dc51daab",
+      "boundary": "frame-29"
+    },
+    {
+      "frame": 30,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        38676,
+        2,
+        145
+      ],
+      "rng_after": [
+        38676,
+        2,
+        145
+      ],
+      "instructions": 1633,
+      "record_sha256": "0135cf1bfd0e6074561f00c929ee62a3fd7580ebd1b3468a35710fa7dc51daab",
+      "boundary": "frame-30"
+    },
+    {
+      "frame": 31,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        38676,
+        2,
+        145
+      ],
+      "rng_after": [
+        31268,
+        5,
+        148
+      ],
+      "instructions": 10104,
+      "record_sha256": "f5a2bf1bfa57fc4730f5017f04aec06803b2f4392b34b5e51b1cec8e073f7911",
+      "boundary": "frame-31"
+    },
+    {
+      "frame": 32,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        31268,
+        5,
+        148
+      ],
+      "rng_after": [
+        31268,
+        5,
+        148
+      ],
+      "instructions": 65349,
+      "record_sha256": "db3cd05b14c8efd4fa50cd962a867cdb09abbf5d0d830e332d05a97e90e0a4b5",
+      "boundary": "frame-32"
+    },
+    {
+      "frame": 33,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        31268,
+        5,
+        148
+      ],
+      "rng_after": [
+        31268,
+        5,
+        148
+      ],
+      "instructions": 2047,
+      "record_sha256": "06f0fb6044c30cb8fe4c02252efac7c9e5f584c966f0a6a4c49f2833f95e2b2d",
+      "boundary": "frame-33"
+    },
+    {
+      "frame": 34,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        31268,
+        5,
+        148
+      ],
+      "rng_after": [
+        31268,
+        5,
+        148
+      ],
+      "instructions": 1633,
+      "record_sha256": "06f0fb6044c30cb8fe4c02252efac7c9e5f584c966f0a6a4c49f2833f95e2b2d",
+      "boundary": "frame-34"
+    },
+    {
+      "frame": 35,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        31268,
+        5,
+        148
+      ],
+      "rng_after": [
+        58980,
+        9,
+        184
+      ],
+      "instructions": 15626,
+      "record_sha256": "0240318bc19aafc8c15b856979ab6a4f874ed3e2859127b69e1b7b184ea2ffec",
+      "boundary": "frame-35"
+    },
+    {
+      "frame": 36,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        58980,
+        9,
+        184
+      ],
+      "rng_after": [
+        58980,
+        9,
+        184
+      ],
+      "instructions": 1633,
+      "record_sha256": "f05282280b2e8a5693af977d77d38eb4d6f99abe0ebfc68bc79c1efc25460f6a",
+      "boundary": "frame-36"
+    },
+    {
+      "frame": 37,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        58980,
+        9,
+        184
+      ],
+      "rng_after": [
+        58980,
+        9,
+        184
+      ],
+      "instructions": 2005,
+      "record_sha256": "e644daa55a375ddcf4aae86ebde8f940b52abf470f15eaff5881dcfea397beaa",
+      "boundary": "frame-37"
+    },
+    {
+      "frame": 38,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        58980,
+        9,
+        184
+      ],
+      "rng_after": [
+        58980,
+        9,
+        184
+      ],
+      "instructions": 1633,
+      "record_sha256": "e644daa55a375ddcf4aae86ebde8f940b52abf470f15eaff5881dcfea397beaa",
+      "boundary": "frame-38"
+    },
+    {
+      "frame": 39,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        58980,
+        9,
+        184
+      ],
+      "rng_after": [
+        61876,
+        12,
+        187
+      ],
+      "instructions": 10105,
+      "record_sha256": "e5ab43cccd6f4c8e1530496c89700824059f5950265fd2dfc230be2da6369a30",
+      "boundary": "frame-39"
+    },
+    {
+      "frame": 40,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        61876,
+        12,
+        187
+      ],
+      "rng_after": [
+        61876,
+        12,
+        187
+      ],
+      "instructions": 1633,
+      "record_sha256": "918ddf15e35787c7433a8e2420508a6520ad9343d2f54d33bc7e1a262320b88b",
+      "boundary": "frame-40"
+    },
+    {
+      "frame": 41,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        61876,
+        12,
+        187
+      ],
+      "rng_after": [
+        61876,
+        12,
+        187
+      ],
+      "instructions": 2021,
+      "record_sha256": "227a5946b3598466c42b80561b03c97c616afbb5b00d82c976ead30c4a9b5f9e",
+      "boundary": "frame-41"
+    },
+    {
+      "frame": 42,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        61876,
+        12,
+        187
+      ],
+      "rng_after": [
+        61876,
+        12,
+        187
+      ],
+      "instructions": 1633,
+      "record_sha256": "227a5946b3598466c42b80561b03c97c616afbb5b00d82c976ead30c4a9b5f9e",
+      "boundary": "frame-42"
+    },
+    {
+      "frame": 43,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 15,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        61876,
+        12,
+        187
+      ],
+      "rng_after": [
+        32500,
+        16,
+        223
+      ],
+      "instructions": 15609,
+      "record_sha256": "c28292f4847a1216a3e56d4c384fe75b9bb379567f62bd90fd8db72742c45430",
+      "boundary": "frame-43"
+    },
+    {
+      "frame": 44,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 15,
+      "timer_after": 15,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        32500,
+        16,
+        223
+      ],
+      "rng_after": [
+        32500,
+        16,
+        223
+      ],
+      "instructions": 1633,
+      "record_sha256": "5c5c658e8d541ad67883ff27cbf810b00efe732ae759cd6caa486f39f61f02d4",
+      "boundary": "frame-44"
+    },
+    {
+      "frame": 45,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 15,
+      "timer_after": 14,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        32500,
+        16,
+        223
+      ],
+      "rng_after": [
+        32500,
+        16,
+        223
+      ],
+      "instructions": 2005,
+      "record_sha256": "87360198a80c1835cd5d00ee55f083664498a9a74d374c379a64388b7cac3a8e",
+      "boundary": "frame-45"
+    },
+    {
+      "frame": 46,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 14,
+      "timer_after": 14,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        32500,
+        16,
+        223
+      ],
+      "rng_after": [
+        32500,
+        16,
+        223
+      ],
+      "instructions": 1633,
+      "record_sha256": "87360198a80c1835cd5d00ee55f083664498a9a74d374c379a64388b7cac3a8e",
+      "boundary": "frame-46"
+    },
+    {
+      "frame": 47,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 14,
+      "timer_after": 9,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        32500,
+        16,
+        223
+      ],
+      "rng_after": [
+        52,
+        20,
+        259
+      ],
+      "instructions": 15625,
+      "record_sha256": "e9ecf3308604c067026682cf6badf3ade11072c464391db26824465dc510f541",
+      "boundary": "frame-47"
+    },
+    {
+      "frame": 48,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 9,
+      "timer_after": 9,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        52,
+        20,
+        259
+      ],
+      "rng_after": [
+        52,
+        20,
+        259
+      ],
+      "instructions": 1633,
+      "record_sha256": "e3526d1cb5b5f201d1cdb7028130a0ede1dfc5e58b594e5fffe18dc767bd6505",
+      "boundary": "frame-48"
+    },
+    {
+      "frame": 49,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 9,
+      "timer_after": 8,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        52,
+        20,
+        259
+      ],
+      "rng_after": [
+        52,
+        20,
+        259
+      ],
+      "instructions": 2047,
+      "record_sha256": "1f6a7b36eec6b9399527544353f7057873f8d9d30916d8dadb68fb7115ac738d",
+      "boundary": "frame-49"
+    },
+    {
+      "frame": 50,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 8,
+      "timer_after": 8,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        52,
+        20,
+        259
+      ],
+      "rng_after": [
+        52,
+        20,
+        259
+      ],
+      "instructions": 1633,
+      "record_sha256": "1f6a7b36eec6b9399527544353f7057873f8d9d30916d8dadb68fb7115ac738d",
+      "boundary": "frame-50"
+    },
+    {
+      "frame": 51,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 8,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        52,
+        20,
+        259
+      ],
+      "rng_after": [
+        46532,
+        23,
+        262
+      ],
+      "instructions": 10105,
+      "record_sha256": "51f67f10f55bd4e1ee53b02eda21bdb931e3442802175125e681cdd924a85a97",
+      "boundary": "frame-51"
+    },
+    {
+      "frame": 52,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        46532,
+        23,
+        262
+      ],
+      "rng_after": [
+        46532,
+        23,
+        262
+      ],
+      "instructions": 1633,
+      "record_sha256": "09ebbdf528f0a55e9357fbb67c5cc7165535c71de3314250f42a6dc26aa0643d",
+      "boundary": "frame-52"
+    },
+    {
+      "frame": 53,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        46532,
+        23,
+        262
+      ],
+      "rng_after": [
+        46532,
+        23,
+        262
+      ],
+      "instructions": 2005,
+      "record_sha256": "7d49d35f4688be885257997bee4c2b1c18abebe9585f49ec0df7d0adf16518b1",
+      "boundary": "frame-53"
+    },
+    {
+      "frame": 54,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        46532,
+        23,
+        262
+      ],
+      "rng_after": [
+        46532,
+        23,
+        262
+      ],
+      "instructions": 1633,
+      "record_sha256": "7d49d35f4688be885257997bee4c2b1c18abebe9585f49ec0df7d0adf16518b1",
+      "boundary": "frame-54"
+    },
+    {
+      "frame": 55,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        46532,
+        23,
+        262
+      ],
+      "rng_after": [
+        18580,
+        26,
+        265
+      ],
+      "instructions": 10105,
+      "record_sha256": "b102f8380ef37b82bcb4f2f87d0dad159e99c2cda645771dbbc10c0fac07602e",
+      "boundary": "frame-55"
+    },
+    {
+      "frame": 56,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        18580,
+        26,
+        265
+      ],
+      "rng_after": [
+        18580,
+        26,
+        265
+      ],
+      "instructions": 1633,
+      "record_sha256": "25c15eda0aa18a2ea5c6dbe28ac8084d1c21d3d989871179ff734ff714bf1999",
+      "boundary": "frame-56"
+    },
+    {
+      "frame": 57,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        18580,
+        26,
+        265
+      ],
+      "rng_after": [
+        18580,
+        26,
+        265
+      ],
+      "instructions": 2005,
+      "record_sha256": "0fcc4bbd7fbedb75ddbbe908b68454476a201bbd83c242970b7a0f9321189cbf",
+      "boundary": "frame-57"
+    },
+    {
+      "frame": 58,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        18580,
+        26,
+        265
+      ],
+      "rng_after": [
+        18580,
+        26,
+        265
+      ],
+      "instructions": 1633,
+      "record_sha256": "0fcc4bbd7fbedb75ddbbe908b68454476a201bbd83c242970b7a0f9321189cbf",
+      "boundary": "frame-58"
+    },
+    {
+      "frame": 59,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 18,
+      "timer_after": 12,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        18580,
+        26,
+        265
+      ],
+      "rng_after": [
+        62420,
+        30,
+        301
+      ],
+      "instructions": 15598,
+      "record_sha256": "a25c9739046e7c89b501b026be9e4e291788e9e3b55a91b66f33e2933ae4d8ef",
+      "boundary": "frame-59"
+    },
+    {
+      "frame": 60,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 12,
+      "timer_after": 12,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        62420,
+        30,
+        301
+      ],
+      "rng_after": [
+        62420,
+        30,
+        301
+      ],
+      "instructions": 1633,
+      "record_sha256": "2459b52ae9b8c602fa5358e5a178d4ede2362ab7a075023e6fbb22edd0179164",
+      "boundary": "frame-60"
+    },
+    {
+      "frame": 61,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 12,
+      "timer_after": 11,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        62420,
+        30,
+        301
+      ],
+      "rng_after": [
+        62420,
+        30,
+        301
+      ],
+      "instructions": 2021,
+      "record_sha256": "537d2fcceaa8b0a29c487b19f16c150236cd1e3a9bbc0f4196c1456c91fd985e",
+      "boundary": "frame-61"
+    },
+    {
+      "frame": 62,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 11,
+      "timer_after": 11,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        62420,
+        30,
+        301
+      ],
+      "rng_after": [
+        62420,
+        30,
+        301
+      ],
+      "instructions": 1633,
+      "record_sha256": "537d2fcceaa8b0a29c487b19f16c150236cd1e3a9bbc0f4196c1456c91fd985e",
+      "boundary": "frame-62"
+    },
+    {
+      "frame": 63,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 11,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        62420,
+        30,
+        301
+      ],
+      "rng_after": [
+        64996,
+        1,
+        304
+      ],
+      "instructions": 10104,
+      "record_sha256": "e81cbc0f7c278fc552ebb4e20ba536d3d9ae77df46c79265f1b6e7a35f06c13e",
+      "boundary": "frame-63"
+    },
+    {
+      "frame": 64,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 19,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        64996,
+        1,
+        304
+      ],
+      "rng_after": [
+        64996,
+        1,
+        304
+      ],
+      "instructions": 65349,
+      "record_sha256": "bb68b3f3816e17ebbd3ff9464bea2a3944bb2465109b9e3cea24e3c8921fd447",
+      "boundary": "frame-64"
+    },
+    {
+      "frame": 65,
+      "state_before": 8,
+      "state_after": 8,
+      "timer_before": 19,
+      "timer_after": 18,
+      "position": [
+        1024,
+        1024
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "flags60word": 32792,
+      "command78": 7,
+      "rng_before": [
+        64996,
+        1,
+        304
+      ],
+      "rng_after": [
+        64996,
+        1,
+        304
+      ],
+      "instructions": 2047,
+      "record_sha256": "b618d9198ec6a9fd637aa2a226fc8f5d3569cbc20f3e49b95015db42fe74eb00",
+      "boundary": "frame-65"
+    }
+  ],
+  "validator_sha256": "ba2ef5c0d0abff894b378fca0fa663357c28365bfd82468b0af6da70e08aef40",
+  "extra_source_sha256": {
+    "private/ghidra/construction-command/instructions-0005b9f0.txt": "e9be8f4b97560a604a8f64f8f94f906213c2ee5fda1b92d411ac2d415597e994",
+    "private/ghidra/terrain-map-refs/instructions-00074a50.txt": "c44b051dc39fd5998975fecccd10798615d09cba01a10c6e909646373358861a",
+    "private/ghidra/terrain-map-refs/instructions-000305f0.txt": "9e85edb137efe6c9abfb07e5173b42b3542ebd7c1e339d35613b245d7650db98",
+    "private/ghidra/initial-creature/instructions-0006d230.txt": "3d824f3569182e3b8bc1037c4b74d9adbfcb9bd7f92444e8f562acc9c7ddbf3d"
+  },
+  "source_probe_receipt_sha256": "f112859b559e80e30dd4be9f025875f21a363505faeb6d5ba7a2dbb6f0fc093a"
+}

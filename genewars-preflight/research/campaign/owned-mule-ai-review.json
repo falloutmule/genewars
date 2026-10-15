@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "cases": 6,
+  "compared_bytes": 786,
+  "negative_cases": 18,
+  "private_run": "private/review/owned-mule-ai/01bb722773744015b01879702a5ae03d",
+  "source_fixture": "private/review/owned-mule-terminal-callbacks/86c5942d8b024541a1368ce4db471122",
+  "scope": "Literal63ECC..64CD7 no-building owned idle branch only, actual frame2 checkpoint plus RNG variants. Full callback/common fallback and movement not implemented.",
+  "pins": {
+    "scripts/ghidra/owned_mule_ai_review.py": "cc332a1564423aded6cae5989a714e3f5e501edc0bd7d92e7245c82b4d815dd6",
+    "rust/crates/genewars-runtime/src/owned_mule_ai.rs": "4d0ddae51de027efc21ec0409503a7a383ba68e30e703a85abb5b3d1082265d6",
+    "scripts/ghidra/krell_owned_mule_terminal_callbacks.py": "2596db063cb94f97c346c143de4676593f37e55213054c33958e0f854a44cd7b",
+    "private/review/owned-mule-terminal-callbacks/86c5942d8b024541a1368ce4db471122/2-at-63ecc.pickle": "7c7a9a692ed99619474d9dd30ae2952ad27a2c42d93b50e2831758fd4f3276c2"
+  }
+}

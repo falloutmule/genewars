@@ -278,7 +278,7 @@ impl ActorWorld {
         for(name,bytes)in [("backing",self.backing_bytes().to_vec()),("players",(0..4u8).flat_map(|p|self.player(p).unwrap().bytes().iter().copied()).collect()),("actors",self.actors().records().concat()),("creatures",self.creatures().unwrap().records().concat()),("effects",self.effects().unwrap().records().concat()),("family8",self.family8().unwrap().records().concat()),("buildings",self.buildings().unwrap().records().concat())]{std::fs::write(dir.join(format!("{name}.bin")),bytes).unwrap();}
         let mut rng=self.rng.seed.to_le_bytes().to_vec();rng.push(self.rng.ring);rng.extend(self.rng.draw_count.to_le_bytes());std::fs::write(dir.join("rng.bin"),rng).unwrap();
     }
-    fn mule_route_prefix(&self,before:&CreatureRecord,frame:u32,physics:&PhysicsTables,trig:&TrigTables,rng:&mut BlueprintRng)->Result<(CreatureRecord,[i16;2]),ActorWorldError> {
+    pub(super) fn mule_route_prefix(&self,before:&CreatureRecord,frame:u32,physics:&PhysicsTables,trig:&TrigTables,rng:&mut BlueprintRng)->Result<(CreatureRecord,[i16;2]),ActorWorldError> {
         let phase=creature_world::mule_callback_phase(before,frame);
         let own=[before[15],before[16],1];let current=[word(before,7),word(before,9)];
         let associated_pair=before[0x5e]==3&&before[0x52]==1&&reference(before,0x50)==reference(before,0x55);
@@ -374,7 +374,7 @@ impl ActorWorld {
         Ok(ray.clear)
     }
 
-    fn mule_contact_speed(&self,record:&CreatureRecord,normal:[i32;3],previous:i16)->Result<i16,ActorWorldError> {
+    pub(super) fn mule_contact_speed(&self,record:&CreatureRecord,normal:[i32;3],previous:i16)->Result<i16,ActorWorldError> {
         let point=[word(record,7),word(record,9)];let cell=floor_cell(point);let mut raw=reference(self.map(),cell*14+6);
         //8B340 returns the first type2; its virtual68 is1F410(false).
         let mut nearby_plant=None;
@@ -401,7 +401,7 @@ impl ActorWorld {
             previous_height_low:previous,surface_term:normal[2],distance_squared:distance})?)
     }
 
-    fn plan_mule_cell_entry(&self,slot:usize,record:&CreatureRecord,cell:usize,rng:&mut BlueprintRng,trig:&TrigTables)->Result<CreatureRecord,CreatureError>{
+    pub(super) fn plan_mule_cell_entry(&self,slot:usize,record:&CreatureRecord,cell:usize,rng:&mut BlueprintRng,trig:&TrigTables)->Result<CreatureRecord,CreatureError>{
         if !self.mule_cell_entry_predicate(record,cell).map_err(|_|CreatureError::UnsupportedCellEntry)?{return Ok(*record);}
         if record[0x53]!=1||record[0x4f]!=0{return Err(CreatureError::UnsupportedCellEntry);}
         let plan=crate::mule_cell_entry::plan_waypoint(record,cell as u16,*rng,trig,|point|self.mule_accepts(slot,point))
@@ -409,7 +409,7 @@ impl ActorWorld {
         *rng=plan.rng_after;Ok(plan.record_after)
     }
     /// Bounded5B100 predicate shared by cell entry and waypoint waiting.
-    fn mule_cell_entry_predicate(&self,record:&CreatureRecord,cell:usize)->Result<bool,ActorWorldError>{
+    pub(super) fn mule_cell_entry_predicate(&self,record:&CreatureRecord,cell:usize)->Result<bool,ActorWorldError>{
         let own=[record[15],record[16],1];
         let approach_plant=record[0x5e]==1&&record[0x57]==2&&self.entity(reference(record,0x55))?[6]==2;
         if !matches!(record[0x5e],3|8)&&!approach_plant{self.check_mule_cell_entry(own,cell)?;return Ok(false);}
@@ -423,7 +423,7 @@ impl ActorWorld {
         }
         Ok(last!=Some(own))
     }
-    fn check_mule_cell_entry(&self,own:[u8;3],cell:usize)->Result<(),ActorWorldError> {
+    pub(super) fn check_mule_cell_entry(&self,own:[u8;3],cell:usize)->Result<(),ActorWorldError> {
         let mut raw=reference(self.map(),cell*14+6);
         while raw[2]!=0 {if raw[2]==1&&raw!=own {return Err(CreatureError::UnsupportedCellEntry.into());}
             if raw[2]==5 {let pool=self.effects.as_ref().ok_or(CreatureError::UnsupportedCellEntry)?;if pool.record(word(&raw,0)as usize)?.get(0x45)==Some(&0x11){return Err(CreatureError::UnsupportedCellEntry.into());}}
@@ -583,7 +583,7 @@ impl ActorWorld {
     /// 74CC0 type1 selector4 (kind-table value4, not the special value3).
     /// Avoided terrain short-circuits; 8B130 then counts only plant weights.
     fn initial_mule_accepts(&self,point:[i16;2])->Result<bool,ActorWorldError>{self.mule_accepts(0,point)}
-    fn mule_accepts(&self,slot:usize,point:[i16;2])->Result<bool,ActorWorldError> {
+    pub(super) fn mule_accepts(&self,slot:usize,point:[i16;2])->Result<bool,ActorWorldError> {
         let class=self.terrain_class_at(point)?;
         if 1u8 & (1u8<<class)!=0 {return Ok(false);}
         let cell=floor_cell(point);
@@ -600,7 +600,8 @@ impl ActorWorld {
             let entity=self.entity(raw)?;
             if reference(entity,0)!=previous {return Err(ActorWorldError::BrokenPrevious(raw));}
             if raw!=[slot as u8,(slot>>8)as u8,1] {match raw[2] {
-                1|3|5|8=>(),
+                //Building112120+10=1F410(false);74D90 obstaclequery ran first.
+                1|3|4|5|8=>(),
                 2=> {let layout=self.layouts[1];let at=layout.file_offset+word(&raw,0)as usize*layout.packed_stride;
                     if self.backing[at+0x26]&8==0 {weight+=10;}
                 },

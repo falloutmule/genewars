@@ -1,0 +1,17 @@
+"""At most64 literal callbacks after owned command; syntheticflat/noejection."""
+from pathlib import Path
+import importlib.util,contextlib,io,json,pickle,hashlib,struct,uuid
+P=Path(__file__).resolve().parents[2];sp=importlib.util.spec_from_file_location('command',Path(__file__).with_name('krell_owned_mule_command_probe.py'));q=importlib.util.module_from_spec(sp)
+with contextlib.redirect_stdout(io.StringIO()):sp.loader.exec_module(q)
+vm=q.vm;extras=[P/'private/ghidra/construction-command/instructions-0005b9f0.txt',P/'private/ghidra/terrain-map-refs/instructions-00074a50.txt',P/'private/ghidra/terrain-map-refs/instructions-000305f0.txt',P/'private/ghidra/initial-creature/instructions-0006d230.txt'];vm.code.update(q.m.m.Model(extras,b'').code);order=sorted(vm.code);vm.next=dict(zip(order,order[1:]));w=P/'private/review/krell-owned-mule-walk'/uuid.uuid4().hex;w.mkdir(parents=True);rows=[];state=vm.saved_state.copy();firstmove=None;reason=None
+for frame in range(2,66):
+ before=q.record();before_rng=q.rng();beforemem=state.copy()
+ try:r,_,trace=vm.run(entry=0x5ed20,counter=frame,state_before=state,seed=before_rng[0],registers={'EAX':0x1542be})
+ except Exception as e:
+  reason={'frame':frame,'error':repr(e),'pc':hex(vm.pc)};(w/'blocked-before.pickle').write_bytes(pickle.dumps(beforemem));(w/'blocked-after.pickle').write_bytes(pickle.dumps(vm.mem));break
+ after=q.record();state=vm.saved_state.copy();word=lambda o:int.from_bytes(after[o:o+2],'little',signed=True)
+ row={'frame':frame,'state_before':before[0x5e],'state_after':after[0x5e],'timer_before':int.from_bytes(before[0x6c:0x6e],'little',signed=True),'timer_after':word(0x6c),'position':[word(7),word(9)],'destination':[word(11),word(13)],'flags60word':int.from_bytes(after[0x60:0x62],'little'),'command78':after[0x78],'rng_before':before_rng,'rng_after':q.rng(),'instructions':r['steps'],'record_sha256':hashlib.sha256(after).hexdigest()};rows.append(row)
+ if True: # preserve exact full memory and trace for every completed callback
+  name=f'frame-{frame}';(w/(name+'-before.pickle')).write_bytes(pickle.dumps(beforemem));(w/(name+'-after.pickle')).write_bytes(pickle.dumps(state));(w/(name+'-trace.json')).write_text(json.dumps([hex(x)for x in trace]));row['boundary']=name
+ if before[7:11]!=after[7:11]:firstmove=frame;break
+r={'status':'passed' if firstmove is not None else 'blocked','stop_reason':'first_position_change' if firstmove is not None else ('source_boundary' if reason else 'callback_cap_without_movement'),'scope':'Syntheticflat exactnullparentfactory owner0 +opcode11; caller ejection omitted, noRust/native acceptance. Stops at firstmove ornewbranch,64callbackcap.','private_run':w.relative_to(P).as_posix(),'fixture_limitations':['Synthetic flat height100 map retains terrain class byte5=0; walkable classification not established.','Genepod caller ejection overwrite omitted.','Presentation ports inherited from command source probe; no native gameplay acceptance.'],'first_move':firstmove,'blocked':reason,'callbacks':rows,'validator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'extra_source_sha256':{x.relative_to(P).as_posix():hashlib.sha256(x.read_bytes()).hexdigest() for x in extras},'source_probe_receipt_sha256':hashlib.sha256((P/'research/campaign/krell-owned-mule-command-probe.json').read_bytes()).hexdigest()};(P/'research/campaign/krell-owned-mule-walk-probe.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

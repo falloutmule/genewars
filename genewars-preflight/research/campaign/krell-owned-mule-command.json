@@ -1,0 +1,35 @@
+{
+  "status": "source_inspected_partial",
+  "opcode": 17,
+  "packet_words": [
+    "creature_slot",
+    "projected_x",
+    "projected_y",
+    0
+  ],
+  "handler": "81C60",
+  "installer": "5DF50",
+  "source_pins": {
+    "private/ghidra/entity-order/instructions-00030100.txt": "174fa08085b159b3277ccbc2108913459f5d5f59d4b222d81ac3a9aa067f6c15",
+    "private/ghidra/entity-order/decompile-00030100.c": "377c1ca5665fe278aa14be2495568ebeb0e98bae56426759d0c3c9ae74edee97",
+    "private/ghidra/display-geometry/instructions-000278d0.txt": "a9fa5f62eedc266105284536037cb64a831a234e000ab617840f4bb8839fb29a",
+    "private/ghidra/mission-array-refs/instructions-00081c60.txt": "847008149f33255ef20120989782654a3167647a90afd2b1eccc7f7c922b5570",
+    "private/ghidra/terrain-panel-refs/instructions-0005df50.txt": "2b078fb83837630cb53865ca0f2b57b7eca341b9c2c65d02b08ef69e7ae61a6e",
+    "private/ghidra/mission-array-refs/instructions-0005cc60.txt": "732f53cf3c69987464aaa7903bfa1fc99e0e826dad615b979269bf6c55e4d2cb",
+    "rust/crates/genewars-runtime/src/creature_world.rs": "d51ba8096ba9b1744f4f0a18c18e298901e46a8b06d0b22b3d031021b84abb3e"
+  },
+  "owned_fields": {
+    "78": 7,
+    "60_or": 24,
+    "61_or": 128,
+    "61_and": 191
+  },
+  "remaining": [
+    "bind original action5 mouse edge (right click not established)",
+    "compose5C920 cleanup",
+    "owned livecallback after command",
+    "ejection arrival and zonecredit",
+    "native selection and move acceptance"
+  ],
+  "no_original_execution": true
+}
