@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "cases": 4,
+  "compared_bytes": 7220,
+  "literal_instructions": 555,
+  "scope": "43620 actual2124 owner0pool/player with originalshutdown0301/0305 plus syntheticexcluded0040/0800 variants",
+  "source_sha256": "569a64c285707bb56fa9c44d37909941093274b12ea271a56eb41b9a93d3e57b",
+  "production_sha256": "51ab5ed24617fc3a4d7708c2a439240fac5a59b9b4327d5df3be2350acce25d1"
+}

@@ -1,0 +1,38 @@
+{
+  "status": "source_contract_recovered",
+  "frame": 2124,
+  "scope": "Required empty Extractor shutdown and subsequentdisabled callbacks; not fullproductionproof",
+  "actual_extractors": [
+    {
+      "slot": 0,
+      "flags": "0x5",
+      "frame": 7,
+      "timer": 153,
+      "owner": 0
+    }
+  ],
+  "source_pins": {
+    "private/ghidra/building-update/instructions-000451f0.txt": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+    "private/ghidra/plant-command-refs/instructions-00044e50.txt": "b3251ee22250abeb0c7162f371897e98a0f049c3e7ff1aad66e3dcbf6ff85e88",
+    "private/ghidra/resource-helpers/instructions-00043620.txt": "569a64c285707bb56fa9c44d37909941093274b12ea271a56eb41b9a93d3e57b"
+  },
+  "empty_branch": [
+    "4704E..4705F building32 OR03",
+    "47062 calls44E50;43620recomputes player5E6capacity and6E1maxHQgrade fromliveownerbuildingpool",
+    "44E7C onlyifmodule116974==1863A2:audio4E mode2 priority0 volume127 pitch115-15*descriptor104DE0[selector]; ifselected118740==building,185EC3 AND FD",
+    "47067..47078 unconditional audio4E mode2 priority0 volume127 parameter100",
+    "4707B resumesordinary frame7/frame10audio then47D63tail"
+  ],
+  "subsequent": [
+    "453D8 timer decrements sourceamount",
+    "4542E flag0100 suppresses power-empty player5EA reset",
+    "46C29 flag0100 clearslowflag4 via46C35 and bypasses cycle/contact/harvest",
+    "animationfinish and47D63ordinarytail remain active"
+  ],
+  "implementation_requirements": [
+    "do not removeunsupportederrorwithout43620 andpresentationrequests",
+    "explicitmodule/selectedbuildingcontext for44E50 UI gate",
+    "worldtransaction mustcommitshutdown/playerrecompute/audioUIrequests atomically",
+    "nextcallback exact0301/0305 domain required"
+  ]
+}

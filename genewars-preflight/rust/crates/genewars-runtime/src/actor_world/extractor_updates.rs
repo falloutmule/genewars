@@ -7,6 +7,7 @@ use crate::extractor_production::{ExtractorCompletedPlan,ExtractorCallbackError}
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct ExtractorWorldReceipt {
     pub slot:u16,
+    pub empty_notice:Option<crate::extractor_production::ExtractorNotice>,
     pub plan:ExtractorCompletedPlan,
     pub created_effect:Option<u16>,
     pub factory_draw:Option<landing::LandingDraw>,
@@ -21,6 +22,14 @@ impl ActorWorld {
     pub fn step_completed_extractor(&mut self,slot:u16,resource:&SourceBuildingResourceDatabase,
         frame:u32,work_audio_active:bool,context:LandingPhysicsContext,trig:&TrigTables,
         terrain_table:&[u8;8192])->Result<ExtractorWorldReceipt,ActorWorldError> {
+        #[cfg(debug_assertions)] self.capture_numeric_callback(slot as usize,frame,"extractor-before");
+        let result=self.step_completed_extractor_with_notice_context(slot,resource,frame,work_audio_active,context,trig,terrain_table,crate::extractor_production::ExtractorNoticeContext::NATIVE_WITHOUT_LEGACY_PANEL);
+        #[cfg(debug_assertions)] if result.is_ok(){self.capture_numeric_callback(slot as usize,frame,"extractor-after");}else{self.capture_numeric_callback(slot as usize,frame,"blocked-before-extractor");}
+        result
+    }
+    pub fn step_completed_extractor_with_notice_context(&mut self,slot:u16,resource:&SourceBuildingResourceDatabase,
+        frame:u32,work_audio_active:bool,context:LandingPhysicsContext,trig:&TrigTables,
+        terrain_table:&[u8;8192],notice_context:crate::extractor_production::ExtractorNoticeContext)->Result<ExtractorWorldReceipt,ActorWorldError>{
         self.validate_links()?;self.validate_building_counts()?;
         let pool=self.buildings.as_ref().ok_or(ActorWorldError::BuildingsNotAdmitted)?;
         if resource.selector()!=11||pool.binding(usize::from(slot))?!=Some(BuildingAnimationBinding{selector:11}){
@@ -28,7 +37,7 @@ impl ActorWorld {
         }
         let before=*pool.record(usize::from(slot))?;let owner=before[24];
         let player=*self.player(owner)?.bytes();
-        let plan=crate::extractor_production::plan_completed_with_requests(&before,&player,work_audio_active,
+        let mut plan=crate::extractor_production::plan_completed_with_requests(&before,&player,work_audio_active,
             self.map(),frame,self.rng.seed,self.rng.ring,self.rng.draw_count).map_err(ActorWorldError::ExtractorCallback)?;
         let mut staged=self.clone();let old_rng=self.rng;let mut created_effect=None;let mut factory_draw=None;let mut terrain_invalidations=Vec::new();
         if let Some(contact)=plan.contact{
@@ -76,10 +85,15 @@ impl ActorWorld {
         // Inserting smoke may change this building's intrusive-list links.
         after[..6].copy_from_slice(&current[..6]);
         staged.buildings.as_mut().unwrap().replace_record_checked(usize::from(slot),&current,&after)?;
+        let empty_notice=if plan.harvest.as_ref().is_some_and(|h|h.empty_resource_notice){
+            let mut records=[[0u8;67];256];for (i,r)in records.iter_mut().enumerate(){*r=*staged.buildings.as_ref().unwrap().record(i)?;}
+            plan.state.player_after=crate::building_progress::recompute_player_capacity(&records,&plan.state.player_after).map_err(|_|ActorWorldError::ExtractorCallback(ExtractorCallbackError::Player))?;
+            Some(crate::extractor_production::ExtractorNotice::from_context(notice_context))
+        }else{None};
         staged.players[usize::from(owner)].replace_bookkeeping_checked(&player,&plan.state.player_after)?;
         staged.validate_links()?;staged.validate_building_counts()?;
         if staged.effects.is_some(){staged.validate_effect_count()?;}
-        let receipt=ExtractorWorldReceipt{slot,plan,created_effect,factory_draw,terrain_invalidations,rng_before:old_rng,rng_after:staged.rng};
+        let receipt=ExtractorWorldReceipt{slot,empty_notice,plan,created_effect,factory_draw,terrain_invalidations,rng_before:old_rng,rng_after:staged.rng};
         *self=staged;Ok(receipt)
     }
 }

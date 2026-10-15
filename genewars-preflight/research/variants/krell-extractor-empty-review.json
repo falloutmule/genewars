@@ -1,0 +1,27 @@
+{
+  "status": "passed-empty-disabled-extractor-with-ports",
+  "cases": 64,
+  "compared_bytes": 1168960,
+  "literal_instructions": 37762,
+  "rust_sha256": "85a07f9e681cf6ebd795ae6eb4946379b42b0a4cf7c841519eb8dcc3bf56e516",
+  "listing_sha256": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+  "resource_sha256": "218b117a4b0f84c6e5a362e5afdc46d29fb1525930c6131e2ffff3bcfcda2142",
+  "ports": [
+    "44E50 capacity/UI context externalport (separate capacity proof required)",
+    "audio service queryfalse",
+    "audio request arguments throughvirtualcall port (orderedrequestIDs compared)",
+    "render queue",
+    "height sample",
+    "effect6 factory",
+    "empty enemy and own kind1 queries",
+    "terrain depletion8CBA0",
+    "map dirty84E10"
+  ],
+  "exclusions": [
+    "occupied contact cell",
+    "terrain depletion mutations",
+    "effect6 allocation mutations",
+    "destruction/repair states",
+    "whole-world scheduler"
+  ]
+}

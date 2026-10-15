@@ -8,7 +8,7 @@ pub enum ExtractorHarvestError { MapLength(usize), Building, Player }
 #[derive(Debug,Clone,Copy,PartialEq,Eq)]
 pub enum ExtractorCallbackError { Building, Player, HarvestContactRequired, InvalidMap, EmptyResourceNoticeRequired }
 #[derive(Debug,Clone,Copy,PartialEq,Eq)]
-pub enum ExtractorAudio { StopWork2f, Finish30, StartWork2f, Harvest32 }
+pub enum ExtractorAudio { StopWork2f, Finish30, StartWork2f, Harvest32, Empty4e }
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct ExtractorIdlePlan {
     pub building_after:[u8;67],pub player_after:[u8;1805],
@@ -20,21 +20,22 @@ pub struct ExtractorIdlePlan {
 /// Exact BMINE animation1:20 frames, hold1 only at frame12, flags0.
 pub fn plan_completed_idle(before:&[u8;67],player:&[u8;1805],work_audio_active:bool)->Result<ExtractorIdlePlan,ExtractorCallbackError>{
     let flags=u16::from_le_bytes(before[49..51].try_into().unwrap());
-    if before[6]!=4||before[24]>=4||before[45]!=11||before[46]!=0||flags&!4!=1{return Err(ExtractorCallbackError::Building);}
+    if before[6]!=4||before[24]>=4||before[45]!=11||before[46]!=0||!matches!(flags&!4,1|0x301){return Err(ExtractorCallbackError::Building);}
     if player[1]!=before[24]||player[0x4a1]!=before[24]{return Err(ExtractorCallbackError::Player);}
     let mut a=*before;let mut p=*player;let mut audio=Vec::new();
     let word=|r:&[u8],at|i16::from_le_bytes([r[at],r[at+1]]);
     let mut timer=word(before,61).wrapping_sub(1+i16::from(before[63]));
-    if timer<=0{timer=0;a[49]&=!4;if word(&p,0x5ea)==0{p[0x5ea..0x5ec].copy_from_slice(&1000i16.to_le_bytes());}}
+    if timer<=0{timer=0;if flags&0x100==0{a[49]&=!4;if word(&p,0x5ea)==0{p[0x5ea..0x5ec].copy_from_slice(&1000i16.to_le_bytes());}}}
     if a[27]!=0{a[28]=1;a[21]|=4;}else{a[28]=0;if work_audio_active{audio.extend([ExtractorAudio::StopWork2f,ExtractorAudio::Finish30]);}}
     if a[27]==17{a[27]=0;a[28]=0;a[21]|=4;}
-    if timer!=0{
+    if timer!=0&&flags&0x100==0{
         let cycle=a[51];a[51]=cycle.wrapping_add(1);
         if cycle>=240{a[51]=0;let funds=u32::from_le_bytes(p[0x4a7..0x4ab].try_into().unwrap());let cap=u32::from_le_bytes(p[0x5e6..0x5ea].try_into().unwrap());if funds<cap{a[27]=1;a[29]=5;audio.push(ExtractorAudio::StartWork2f);}}
         if (7..11).contains(&a[27]){return Err(ExtractorCallbackError::HarvestContactRequired);}
     }else{a[49]&=!4;}
     timer=timer.min(200);a[61..63].copy_from_slice(&timer.to_le_bytes());
     if a[63]!=0{a[63]-=1;}
+    if a[50]&1!=0{if timer>0{timer-=1;a[61..63].copy_from_slice(&timer.to_le_bytes());}audio.push(ExtractorAudio::StopWork2f);}
     if before[25]!=a[25]||a[28]!=0||(before[49]^a[49])&4!=0||a[48]!=0{a[21]|=4;}
     if a[48]!=0{a[48]-=1;}
     a[25]=1;
@@ -126,7 +127,7 @@ pub fn plan_contact_pass(building:&[u8;67],frame_counter:u32,seed:u16,ring:u8,dr
 
 /// Proposed completed callback afterimages; commit only after every ordered
 /// contact, terrain and presentation request has been successfully resolved.
-/// Empty-resource shutdown is explicit unsupported behavior, never a loss.
+/// Empty-resource shutdown requests43620 bookkeeping and44E50 presentation.
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct ExtractorCompletedPlan {
     pub state:ExtractorIdlePlan,
@@ -137,21 +138,21 @@ pub fn plan_completed_with_requests(before:&[u8;67],player:&[u8;1805],work_audio
     if map.len()!=128*128*14||ring>=32{return Err(ExtractorCallbackError::InvalidMap);}
     let mut contact=None;let mut harvest=None;
     let flags=u16::from_le_bytes(before[49..51].try_into().unwrap());
-    if before[6]!=4||before[24]>=4||before[45]!=11||before[46]!=0||flags&!4!=1{return Err(ExtractorCallbackError::Building);}
+    if before[6]!=4||before[24]>=4||before[45]!=11||before[46]!=0||!matches!(flags&!4,1|0x301){return Err(ExtractorCallbackError::Building);}
     if player[1]!=before[24]||player[0x4a1]!=before[24]{return Err(ExtractorCallbackError::Player);}
     let mut a=*before;let mut p=*player;let mut audio=Vec::new();
     let word=|r:&[u8],at|i16::from_le_bytes([r[at],r[at+1]]);
     let mut timer=word(before,61).wrapping_sub(1+i16::from(before[63]));
-    if timer<=0{timer=0;a[49]&=!4;if word(&p,0x5ea)==0{p[0x5ea..0x5ec].copy_from_slice(&1000i16.to_le_bytes());}}
+    if timer<=0{timer=0;if flags&0x100==0{a[49]&=!4;if word(&p,0x5ea)==0{p[0x5ea..0x5ec].copy_from_slice(&1000i16.to_le_bytes());}}}
     if a[27]!=0{a[28]=1;a[21]|=4;}else{a[28]=0;if work_audio_active{audio.extend([ExtractorAudio::StopWork2f,ExtractorAudio::Finish30]);}}
     if a[27]==17{a[27]=0;a[28]=0;a[21]|=4;}
-    if timer!=0{
+    if timer!=0&&flags&0x100==0{
         let cycle=a[51];a[51]=cycle.wrapping_add(1);
         if cycle>=240{a[51]=0;let funds=u32::from_le_bytes(p[0x4a7..0x4ab].try_into().unwrap());let cap=u32::from_le_bytes(p[0x5e6..0x5ea].try_into().unwrap());if funds<cap{a[27]=1;a[29]=5;audio.push(ExtractorAudio::StartWork2f);}}
         if (7..11).contains(&a[27]){
             contact=Some(plan_contact_pass(&a,frame,seed,ring,draws).map_err(|_|ExtractorCallbackError::Building)?);
             let h=plan_harvest_slice(&a,&p,map).map_err(|_|ExtractorCallbackError::Building)?;
-            if h.empty_resource_notice{return Err(ExtractorCallbackError::EmptyResourceNoticeRequired);}
+            if h.empty_resource_notice{audio.push(ExtractorAudio::Empty4e);}
             a=h.building_after;p=h.player_after;harvest=Some(h);
         }
         if a[27]==7{audio.extend([ExtractorAudio::StopWork2f,ExtractorAudio::Harvest32]);}
@@ -159,6 +160,7 @@ pub fn plan_completed_with_requests(before:&[u8;67],player:&[u8;1805],work_audio
     }else{a[49]&=!4;}
     timer=timer.min(200);a[61..63].copy_from_slice(&timer.to_le_bytes());
     if a[63]!=0{a[63]-=1;}
+    if a[50]&1!=0{if timer>0{timer-=1;a[61..63].copy_from_slice(&timer.to_le_bytes());}audio.push(ExtractorAudio::StopWork2f);}
     if before[25]!=a[25]||a[28]!=0||(before[49]^a[49])&4!=0||a[48]!=0{a[21]|=4;}
     if a[48]!=0{a[48]-=1;}
     a[25]=1;
@@ -172,3 +174,10 @@ pub fn plan_completed_with_requests(before:&[u8;67],player:&[u8;1805],work_audio
     }
     Ok(ExtractorCompletedPlan{state:ExtractorIdlePlan{building_after:a,player_after:p,audio,queue_requested:true},contact,harvest})
 }
+
+#[derive(Debug,Clone,Copy,PartialEq,Eq)]
+pub struct ExtractorNoticeContext {pub legacy_panel_active:bool,pub building_selected:bool}
+impl ExtractorNoticeContext {pub const NATIVE_WITHOUT_LEGACY_PANEL:Self=Self{legacy_panel_active:false,building_selected:false};}
+#[derive(Debug,Clone,Copy,PartialEq,Eq)]
+pub struct ExtractorNotice {pub legacy_audio_parameter:Option<i16>,pub clear_panel_bit2:bool}
+impl ExtractorNotice {pub fn from_context(context:ExtractorNoticeContext)->Self{Self{legacy_audio_parameter:context.legacy_panel_active.then_some(70),clear_panel_bit2:context.legacy_panel_active&&context.building_selected}}}
