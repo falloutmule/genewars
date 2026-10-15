@@ -306,7 +306,7 @@ impl SharedMission {
                     self.pending_requests+=e.pending_events.len()as u64;
                     if let Some(r)=&e.retirement {self.pending_requests+=r.pending_ui_events.len()as u64;}
                 },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)|LandingEffectCallback::Power(e)|LandingEffectCallback::GenepodFailure(e)=>{
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)|LandingEffectCallback::Power(e)|LandingEffectCallback::GenepodFailure(e)|LandingEffectCallback::ZoneMarker(e)=>{
                     created+=usize::from(e.created_effect.is_some());retired+=usize::from(e.retired);self.pending_requests+=e.pending_ui_events.len()as u64;
                 },
             }

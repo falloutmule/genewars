@@ -1,0 +1,98 @@
+{
+  "status": "passed",
+  "scope": "explicitly synthetic single-Mule credit world transaction; NOT campaign acceptance",
+  "cases": [
+    {
+      "case": "owned",
+      "status": "passed",
+      "draws": 15,
+      "compared_bytes": 427369,
+      "journals": [
+        246,
+        246,
+        246,
+        553,
+        246,
+        246,
+        246,
+        553,
+        246,
+        246,
+        246,
+        553,
+        3314,
+        3315,
+        553
+      ],
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\af838b3888cd47128d46af4551bed031"
+    },
+    {
+      "case": "owned-cap",
+      "status": "passed",
+      "draws": 15,
+      "compared_bytes": 427369,
+      "journals": [
+        246,
+        246,
+        246,
+        553,
+        246,
+        246,
+        246,
+        553,
+        246,
+        246,
+        246,
+        553,
+        3314,
+        3315,
+        553
+      ],
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\7ba1a6b47cf34b0881fded0d42c2fffb"
+    },
+    {
+      "case": "owned-last",
+      "status": "passed",
+      "draws": 4,
+      "compared_bytes": 427369,
+      "journals": [
+        246,
+        246,
+        246,
+        553
+      ],
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\f78e2c90ed824dc281c52c768d490244"
+    },
+    {
+      "case": "neutral",
+      "status": "passed",
+      "draws": 12,
+      "compared_bytes": 427369,
+      "journals": [
+        246,
+        246,
+        246,
+        553,
+        246,
+        246,
+        246,
+        553,
+        3314,
+        3315,
+        3317,
+        553
+      ],
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\7936c43809ed42978a249d308e8c7d58"
+    }
+  ],
+  "compared_bytes": 1709476,
+  "limit_source": "actual mission word1C7C, mapped11A9DC; captures5000 =>approvalcap10000, separateKrellscore1000",
+  "negative": "199 valid markers: first new marker fits, latermarker FullPoolReplacement rejects; complete world/score/RNG rollback",
+  "oracle_width": "newcomparator infers narrow MOV absolute store width from AX/AL; preserves participating count11878C=1 across real factories; old uncorrected preparation logs are NOT accepted",
+  "regression": {
+    "runtime_passed": 246,
+    "game_passed": 80,
+    "release_build": "passed"
+  },
+  "live_scheduler": "stillguarded; no NPC activation, quota exhaustion or campaign acceptance claimed"
+}

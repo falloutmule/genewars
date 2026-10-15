@@ -1885,3 +1885,6 @@ mod zone_marker_factory;
 pub use zone_marker_factory::{ZoneScoreMarkerReceipt,ZoneScoreMarkerFactoryError};
 
 mod zone_marker_updates;
+
+mod zone_credit_updates;
+pub use zone_credit_updates::{ZoneCreditReceipt,ZoneCreditError,ZoneCreditAudio,ZoneCreditParticle};

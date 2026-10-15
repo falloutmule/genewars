@@ -37,7 +37,7 @@ pub struct EffectStepReceipt {
 }
 
 #[derive(Debug,Clone,PartialEq,Eq)]
-pub enum LandingEffectCallback { Landing(LandingStepReceipt), Smoke(EffectStepReceipt), DepartureParticle(EffectStepReceipt), WaterSplash(EffectStepReceipt), EtherealParticle(EffectStepReceipt), Construction(EffectStepReceipt), Power(EffectStepReceipt), GenepodFailure(EffectStepReceipt) }
+pub enum LandingEffectCallback { Landing(LandingStepReceipt), Smoke(EffectStepReceipt), DepartureParticle(EffectStepReceipt), WaterSplash(EffectStepReceipt), EtherealParticle(EffectStepReceipt), Construction(EffectStepReceipt), Power(EffectStepReceipt), GenepodFailure(EffectStepReceipt), ZoneMarker(EffectStepReceipt) }
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct LandingEffectPassReceipt {
     pub primary:Vec<LandingEffectCallback>,
@@ -81,7 +81,7 @@ impl ActorWorld {
                     created+=u32::from(e.created_effect.is_some());
                     if let Some(r)=&e.retirement { receipt.ui_after=r.ui_after.clone(); }
                 },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)|LandingEffectCallback::Power(e)|LandingEffectCallback::GenepodFailure(e)=>{created+=u32::from(e.created_effect.is_some());receipt.ui_after=e.ui_after.clone();},
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)|LandingEffectCallback::Power(e)|LandingEffectCallback::GenepodFailure(e)|LandingEffectCallback::ZoneMarker(e)=>{created+=u32::from(e.created_effect.is_some());receipt.ui_after=e.ui_after.clone();},
             }
             receipt.primary.push(callback);
         }
@@ -92,7 +92,7 @@ impl ActorWorld {
             let callback=staged.landing_effect_callback(slot,context,physics,trig,&receipt.ui_after)?;
             match &callback {
                 LandingEffectCallback::Landing(e)=>if let Some(r)=&e.retirement { receipt.ui_after=r.ui_after.clone(); },
-                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)|LandingEffectCallback::Power(e)|LandingEffectCallback::GenepodFailure(e)=>receipt.ui_after=e.ui_after.clone(),
+                LandingEffectCallback::Smoke(e)|LandingEffectCallback::DepartureParticle(e)|LandingEffectCallback::WaterSplash(e)|LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::Construction(e)|LandingEffectCallback::Power(e)|LandingEffectCallback::GenepodFailure(e)|LandingEffectCallback::ZoneMarker(e)=>receipt.ui_after=e.ui_after.clone(),
             }
             receipt.newborn.push(callback);
         }
@@ -114,6 +114,7 @@ impl ActorWorld {
                     _=>Err(LandingError::UnsupportedPhase(phase).into()),
                 }.map(LandingEffectCallback::Landing)
             },
+            0x3c=>self.step_zone_score_marker(slot,context,physics,trig,ui).map(LandingEffectCallback::ZoneMarker),
             0x20=>self.step_genepod_failure_effect(slot,context,physics,ui).map(LandingEffectCallback::GenepodFailure),
             0x21=>self.step_power_transfer33(slot,context,physics,ui).map(|r|LandingEffectCallback::Power(r.effect)),
             6=>self.step_effect6(slot,context,physics,trig,ui).map(LandingEffectCallback::Smoke),

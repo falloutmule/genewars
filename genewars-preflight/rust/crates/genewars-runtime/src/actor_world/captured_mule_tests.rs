@@ -88,7 +88,7 @@ fn captured_mule_callback() {
         assert_eq!(receipt.outcome,crate::mule_owned_command::CommandOutcome::Installed);export("command-after",&world);
     }
     let steps=std::env::var("GENEWARS_CAPTURED_MULE_STEPS").ok().map(|v|v.parse::<u32>().unwrap()).unwrap_or(1);assert!((1..=512).contains(&steps));
-    let kind=std::env::var("GENEWARS_CAPTURED_CALLBACK_KIND").unwrap_or_else(|_|"mule".into());assert!(matches!(kind.as_str(),"mule"|"genepod"|"effect20"|"zone-marker"|"zone-marker-callback"));
+    let kind=std::env::var("GENEWARS_CAPTURED_CALLBACK_KIND").unwrap_or_else(|_|"mule".into());assert!(matches!(kind.as_str(),"mule"|"genepod"|"effect20"|"zone-marker"|"zone-marker-callback"|"zone-marker-pass"|"zone-credit-one"));
     let before=world.clone();let mut final_frame=frame;let mut grounded=false;let mut pending_audio=Vec::new();
     let mut result:Result<Vec<u8>,ActorWorldError>=Err(ActorWorldError::Creatures(CreatureError::UnsupportedMotionState));
     for offset in 0..steps {
@@ -102,6 +102,15 @@ fn captured_mule_callback() {
             world.create_zone_score_marker(slot,10,divisor,-1,physics_context.gravity,&trig).map(|r|{
                 assert_eq!(r.draws.map(|d|d.journal_code),[0xf6,0xf6,0xf6,0x229]);Vec::new()
             }).map_err(|e|{println!("captured marker factory error: {e:?}");match e{ZoneScoreMarkerFactoryError::World(e)=>e,_=>ActorWorldError::UnsupportedEffectEvent}})
+        }else if kind=="zone-credit-one" {
+            world.credit_one_krell_mule(0,slot,final_frame,1,0,physics_context,&trig).map(|r|{
+                println!("captured zone credit {:?}; markers {:?}; particles {:?}",r.credits,r.markers.iter().map(|m|m.effect_slot).collect::<Vec<_>>(),r.particles.iter().map(|p|p.created_effect).collect::<Vec<_>>());
+                r.pending_audio.iter().map(|a|a.code).collect()
+            }).map_err(|e|{println!("captured zone credit error: {e:?}");match e{ZoneCreditError::World(e)=>e,_=>ActorWorldError::UnsupportedEffectEvent}})
+        }else if kind=="zone-marker-pass" {
+            world.step_landing_effect_callbacks(physics_context,&physics,&trig,&crate::landing_effect_lifecycle::RetirementUiState::native_empty()).map(|r|{
+                assert!(r.newborn.is_empty());assert!(r.primary.iter().all(|c|matches!(c,LandingEffectCallback::ZoneMarker(_))));Vec::new()
+            })
         }else if kind=="zone-marker-callback" {
             world.step_zone_score_marker(slot,LandingPhysicsContext{gravity:physics_context.gravity,water_height:physics_context.water_height},&physics,&trig,&crate::landing_effect_lifecycle::RetirementUiState::native_empty()).map(|_|Vec::new())
         }else if kind=="effect20" {
@@ -111,7 +120,7 @@ fn captured_mule_callback() {
         }else{world.step_owned_mule_slot(slot,0,0x3e,context,&physics,&trig,&animations).map(|r|r.pending_audio)};
         if result.is_err(){assert_eq!(world,prior,"failed callback must rollback every world field");break;}
         pending_audio.extend_from_slice(result.as_ref().unwrap());
-        grounded=if matches!(kind.as_str(),"genepod"|"zone-marker") {true}else if matches!(kind.as_str(),"effect20"|"zone-marker-callback") {let record=world.effects.as_ref().unwrap().record(usize::from(slot)).unwrap();i32::from_le_bytes(record[39..43].try_into().unwrap())<=i32::from_le_bytes(record[17..21].try_into().unwrap())}else{
+        grounded=if matches!(kind.as_str(),"genepod"|"zone-marker"|"zone-marker-pass"|"zone-credit-one") {true}else if matches!(kind.as_str(),"effect20"|"zone-marker-callback") {let record=world.effects.as_ref().unwrap().record(usize::from(slot)).unwrap();i32::from_le_bytes(record[39..43].try_into().unwrap())<=i32::from_le_bytes(record[17..21].try_into().unwrap())}else{
             let record=world.creatures.as_ref().unwrap().record(usize::from(slot)).unwrap();i32::from_le_bytes(record[39..43].try_into().unwrap())<=i32::from_le_bytes(record[17..21].try_into().unwrap())};
         if grounded&&std::env::var_os("GENEWARS_CAPTURED_MULE_STOP_GROUNDED").is_some(){break;}
     }
