@@ -19,6 +19,7 @@ pub struct GenepodProductionReceipt {
 impl ActorWorld {
  pub fn step_genepod_terminal(&mut self,slot:u16,frame:u32,trig:&TrigTables)
   ->Result<GenepodProductionReceipt,GenepodProductionError>{
+  #[cfg(any(debug_assertions, feature = "callback-captures"))] self.capture_numeric_callback(slot as usize,frame,"genepod-terminal-before");
   use GenepodProductionError as E;
   self.validate_links()?;self.validate_building_counts()?;
   let pool=self.buildings.as_ref().ok_or(E::Building)?;

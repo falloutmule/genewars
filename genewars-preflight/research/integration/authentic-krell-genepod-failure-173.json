@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "scope": "Actual retained-carry failed Genepod quality attempt plus isolated emitted effect20 callbacks. Frame3600 transaction emits4particles and noMule; complete campaign pass/native failure playback pending.",
+  "comparisons": [
+    {
+      "scope": "actual3600 failed-quality terminal",
+      "frame": 3600,
+      "slot": 2,
+      "draws": 16,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\genepod-captured\\9852714b10314f0e86a0e250b1ca57cb",
+      "mismatches": 0
+    },
+    {
+      "scope": "emitted slot0 even-phase callback",
+      "frame": 3600,
+      "slot": 0,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\genepod-captured\\b8cf358237c04da4baedfe92b3464d9b",
+      "mismatches": 0
+    },
+    {
+      "scope": "emitted slot1 collision callback",
+      "frame": 3600,
+      "slot": 1,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\genepod-captured\\8839bb78f8814b389e21a4d016a100df",
+      "mismatches": 0
+    },
+    {
+      "scope": "emitted slot2 callback",
+      "frame": 3600,
+      "slot": 2,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\genepod-captured\\b12874b6675d45c1a71e862e8f79c4e3",
+      "mismatches": 0
+    },
+    {
+      "scope": "emitted slot3 callback",
+      "frame": 3600,
+      "slot": 3,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\genepod-captured\\6cc4f42085ea4d20ace494200fd33e4e",
+      "mismatches": 0
+    }
+  ],
+  "total_compared_bytes": 2136845,
+  "quality_outcome": {
+    "failed": true,
+    "effect20_count": 4,
+    "owned_mules_created": 0,
+    "terminal_rng_draws": 16,
+    "fixed_audio_request": 8
+  },
+  "collision_correction": "Exact effect20 virtual8 tablebyte0 makes4AF40 no numeric action even when74270 finds a building. Caller proves collision no-op instead of claiming no obstacle. Water crossing stays explicitly unsupported.",
+  "negative_checks": [
+    "Original slot1 guard failure asserts entire-world rollback",
+    "effect20 collision_noop_does_not_admit_water_crossing"
+  ],
+  "runtime": {
+    "passed": 237,
+    "ignored": 1
+  },
+  "capture_note": "168 accidentally targeted3601 and remainedempty.169 uses same frozenbinary with correctsourceframe3600; both preserved.",
+  "campaign_missions": 1
+}

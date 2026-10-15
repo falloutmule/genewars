@@ -68,6 +68,7 @@ impl ActorWorld {
                         GenepodProductionError::World(e)=>e,
                         _=>ActorWorldError::UnsupportedGenepodProduction("terminal planner admission"),
                     })?;
+                    #[cfg(any(debug_assertions, feature = "callback-captures"))] staged.capture_numeric_callback(slot,frame,"genepod-terminal-after");
                     AdmittedBuildingCallback::GenepodTerminal{receipt}
                 }else if selector==0 && i32::from_le_bytes(record[54..58].try_into().unwrap())>0 {
                     let players=core::array::from_fn(|p|*staged.players[p].bytes());

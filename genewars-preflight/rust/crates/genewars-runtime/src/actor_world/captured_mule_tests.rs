@@ -87,18 +87,24 @@ fn captured_mule_callback() {
         assert_eq!(receipt.outcome,crate::mule_owned_command::CommandOutcome::Installed);export("command-after",&world);
     }
     let steps=std::env::var("GENEWARS_CAPTURED_MULE_STEPS").ok().map(|v|v.parse::<u32>().unwrap()).unwrap_or(1);assert!((1..=512).contains(&steps));
+    let kind=std::env::var("GENEWARS_CAPTURED_CALLBACK_KIND").unwrap_or_else(|_|"mule".into());assert!(matches!(kind.as_str(),"mule"|"genepod"|"effect20"));
     let before=world.clone();let mut final_frame=frame;let mut grounded=false;let mut pending_audio=Vec::new();
     let mut result:Result<Vec<u8>,ActorWorldError>=Err(ActorWorldError::Creatures(CreatureError::UnsupportedMotionState));
     for offset in 0..steps {
         final_frame=frame+offset;let prior=world.clone();
         let context=MuleStepContext{frame_counter:final_frame,gravity:physics_context.gravity,water_height:physics_context.water_height,climate};
-        result=if world.creatures.as_ref().unwrap().record(usize::from(slot)).unwrap()[24]==4 {
+        result=if kind=="genepod" {
+            world.step_genepod_terminal(slot,final_frame,&trig).map(|r|r.sound_requested.into_iter().collect()).map_err(|e|match e{
+                GenepodProductionError::World(e)=>e,_=>ActorWorldError::UnsupportedGenepodProduction("captured terminal planner admission")})
+        }else if kind=="effect20" {
+            world.step_genepod_failure_effect(slot,LandingPhysicsContext{gravity:physics_context.gravity,water_height:physics_context.water_height},&physics,&crate::landing_effect_lifecycle::RetirementUiState::native_empty()).map(|_|Vec::new())
+        }else if world.creatures.as_ref().unwrap().record(usize::from(slot)).unwrap()[24]==4 {
             world.step_neutral_mule_slot_with_water(slot,context,&physics,&trig,&animations).map(|r|r.pending_audio)
         }else{world.step_owned_mule_slot(slot,0,0x3e,context,&physics,&trig,&animations).map(|r|r.pending_audio)};
         if result.is_err(){assert_eq!(world,prior,"failed callback must rollback every world field");break;}
         pending_audio.extend_from_slice(result.as_ref().unwrap());
-        let record=world.creatures.as_ref().unwrap().record(usize::from(slot)).unwrap();
-        grounded=i32::from_le_bytes(record[39..43].try_into().unwrap())<=i32::from_le_bytes(record[17..21].try_into().unwrap());
+        grounded=if kind=="genepod" {true}else if kind=="effect20" {let record=world.effects.as_ref().unwrap().record(usize::from(slot)).unwrap();i32::from_le_bytes(record[39..43].try_into().unwrap())<=i32::from_le_bytes(record[17..21].try_into().unwrap())}else{
+            let record=world.creatures.as_ref().unwrap().record(usize::from(slot)).unwrap();i32::from_le_bytes(record[39..43].try_into().unwrap())<=i32::from_le_bytes(record[17..21].try_into().unwrap())};
         if grounded&&std::env::var_os("GENEWARS_CAPTURED_MULE_STOP_GROUNDED").is_some(){break;}
     }
     let (status,error)=match &result {Ok(_)=>("passed",String::new()),Err(e)=>("blocked",format!("{e:?}"))};
@@ -109,7 +115,7 @@ fn captured_mule_callback() {
     println!("captured pending audio: {pending_audio:?}");
     world.validate_links().unwrap();
     for(name,bytes)in buffers(&world){std::fs::write(output.join(format!("{name}.bin")),bytes).unwrap();}
-    let report=format!("{{\"status\":\"{status}\",\"frame\":{final_frame},\"slot\":{slot},\"input_roundtrip\":true,\"error\":{error:?},\"rng_draws\":{},\"scope\":\"captured Mule callbacks with other families frozen; not campaign acceptance\"}}\n",world.rng.draw_count.wrapping_sub(before.rng.draw_count));
+    let report=format!("{{\"status\":\"{status}\",\"frame\":{final_frame},\"slot\":{slot},\"input_roundtrip\":true,\"error\":{error:?},\"rng_draws\":{},\"scope\":\"captured {kind} callbacks with other families frozen; not campaign acceptance\"}}\n",world.rng.draw_count.wrapping_sub(before.rng.draw_count));
     std::fs::write(output.join("result.json"),&report).unwrap();println!("{report}");
     let expected=std::env::var("GENEWARS_CAPTURED_MULE_EXPECT").unwrap_or_else(|_|"passed".into());
     match expected.as_str(){"passed"=>assert!(result.is_ok(),"captured callback blocked: {error}"),"blocked"=>assert!(result.is_err(),"expected unresolved boundary passed; update acceptance expectation"),_=>panic!("expected result must be passed or blocked")};

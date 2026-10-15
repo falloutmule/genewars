@@ -28,8 +28,10 @@ impl ActorWorld{
   if pool.binding(slot as usize)?!=Some(EffectAnimationBinding::EffAnimation32){return Err(ActorWorldError::EffectBinding(slot));}
   let before=*pool.record(slot as usize)?;let at=crate::effect20_motion::candidate(&before)?;
   let(ground,shade)=self.effect_ground_sample(at)?;
+  //4AF40/4AF74: exact code20 virtual8 table byte0 disables collision impulse.
+  //74270 can find a building, but this callback changes no numeric state.
   let plan=crate::effect20_motion::plan_airborne(&before,ground,shade,context.water_height,context.gravity,
-   !self.move_obstacle_at(at)?,physics.angles())?;
+   true,physics.angles())?;
   let changed_cell=floor_cell([word(&before,7),word(&before,9)])!=floor_cell([word(&plan.after,7),word(&plan.after,9)]);
   let mut staged=self.clone();if changed_cell{staged.unlink_effect(slot)?;}
   staged.effects.as_mut().unwrap().replace_record_checked(slot as usize,&before,&plan.after)?;
