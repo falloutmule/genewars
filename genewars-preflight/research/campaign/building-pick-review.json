@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "cases": 672,
+  "scope": "Literal98C40/98B60 versus exact Rust module using fixture stand-in resource types; 2 overlapping components,4 flips,frame0/1/255 clamp,transparent pixels and opaque palette0. Queue/publication/native not tested.",
+  "module_sha256": "58548b2b63b37fd37d94e76d5e8c4d4f494550be431fc1d454c9742c740e65a7",
+  "source_pins": {
+    "private/ghidra/ui-frame/instructions-00098c40.txt": "b0b7188387e745e3fee9ea2c49a65b1bf1a2994300468fb6ca85da5771c2249b",
+    "private/ghidra/sprite-scaled/instructions-00098b60.txt": "2775e1d25062d7c9140240a007024e944448df5387bba3379ba185ce2bcaed43"
+  },
+  "output_sha256": "600abab9e36de4f99e856148ca9cd855aeea5da15f497ae0deae998b237aec21",
+  "private_run": "private/review/building-pick/1a532fc39986487fb219e07867803cbf"
+}

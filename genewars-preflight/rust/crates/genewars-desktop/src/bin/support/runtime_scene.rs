@@ -58,7 +58,10 @@ pub struct CampaignState {
     pub display:campaign_scene::CampaignDisplay,
 }
 
+pub struct GenepodSelection { pub slot:u16, pub state:u8, pub list:i8, pub control:super::genepod_panel::GenepodControl, pub input:super::genepod_panel::PanelInput }
+
 pub struct Game {
+    pub genepod:Option<GenepodSelection>,
     root: PathBuf,
     pub building_menu_open:bool, building_menu_capture:Option<u8>, building_feedback:Option<String>, pub placement_selector:Option<u8>,
     pub scene: Scene, pub mission: Option<Mission>, pub victory:Option<VictoryDisplay>, pub campaign:Option<CampaignState>,
@@ -81,14 +84,14 @@ impl Game {
     pub fn open(root:&Path)->Result<Self,String> {
         let palette=Palette256::parse(&read_bound(&root.join("menu/titlescr.pal"))?,PaletteChannelMode::Rgb).map_err(|e|e.to_string())?;
         let (images,button,_,_)=menu_art::compose(&root.join("menu"),&palette)?;
-        Ok(Self { root:root.into(),building_menu_open:false,building_menu_capture:None,building_feedback:None,placement_selector:None, scene:Scene::Menu,mission:None,victory:None,campaign:None,images,button,
+        Ok(Self { genepod:None,root:root.into(),building_menu_open:false,building_menu_capture:None,building_feedback:None,placement_selector:None, scene:Scene::Menu,mission:None,victory:None,campaign:None,images,button,
             controls:MenuCallback0State::default(),cursor:None,left:false,right:false,mask:0,
             automatic:false,start_running:false,error:None,landing_seed:None,reference_startup:false,campaign_system:0,carry_records:[0;600],trace:vec!["Menu".into()],ticks:Vec::new(),presented:0 })
     }
 
     fn transition(&mut self, scene:Scene) {
         self.building_menu_open=false;self.building_menu_capture=None;self.building_feedback=None;self.placement_selector=None;
-        self.scene=scene; self.trace.push(format!("{scene:?}"));
+        self.genepod=None;self.scene=scene; self.trace.push(format!("{scene:?}"));
         self.controls=MenuCallback0State::default();self.mask=0;self.left=false;self.right=false;
     }
 
@@ -132,6 +135,7 @@ impl Game {
     pub fn cancel_capture(&mut self) {self.building_menu_capture=None;self.cursor=None;self.left=false;self.right=false;self.packet(false,true);}
 
     fn packet(&mut self,press:bool,release:bool) {
+        if self.scene==Scene::Mission { if let Err(e)=self.genepod_packet(press,release){self.error=Some(e);} return; }
         if self.scene!=Scene::Menu {return;}
         let first=MenuControl::hit_order().into_iter().find(|&c|self.hit(c));
         let captured=self.controls.captured().is_some_and(|c|self.hit(c));
@@ -140,6 +144,56 @@ impl Game {
         if result.event_id>=0 && self.mask&8!=0 {
             match result.event_id {0=>self.transition(Scene::Loading),3=>self.transition(Scene::Options),2=>self.transition(Scene::Quit),_=>{}}
         }
+    }
+
+
+    fn genepod_packet(&mut self,press:bool,release:bool)->Result<(),String>{
+        let pointer=self.cursor.map(|(x,y)|[x,y]);
+        if press && pointer.is_some_and(|p|p[0]>=128) && !self.building_menu_open {
+            self.open_clicked_genepod(pointer.unwrap())?;
+        }
+        let Some(mut panel)=self.genepod.take() else{return Ok(());};
+        let result=(||{
+            let m=self.mission.as_mut().ok_or("missing mission")?;
+            let MissionState::Landing(w)=&mut m.world else{return Ok(());};
+            let building=*w.world.buildings().ok_or("building pool unavailable")?.record(usize::from(panel.slot)).map_err(|e|format!("{e:?}"))?;
+            if building[24]!=0||u16::from_le_bytes([building[49],building[50]])&0x41!=1 {return Ok(());}
+            panel.state=super::genepod_panel::PanelInput::ready(panel.state,&building).panel_state_after;
+            let feedback=panel.input.poll(&panel.control,[0,0],pointer,if press{1}else if release{2}else if self.left{4}else{0})?;
+            if feedback.action==8 {
+                let mut proposed=w.clone();
+                let receipt=proposed.world.dispatch_genepod_mule_input(panel.slot,genewars_runtime::genepod_human_producer::ProducerInput{
+                    selected_player_index:0,panel_state:panel.state,species_list_index:panel.list,mouse_flags:feedback.event,captured_opaque_hit:true,
+                },true).map_err(|e|format!("{e:?}"))?;
+                let frame=proposed.render(&m.resources,m.target)?;
+                panel.state=receipt.producer.panel_state_after;
+                self.trace.push(format!("GenepodInput:slot={} action={} event={} outcome={:?}",panel.slot,feedback.action,feedback.event,receipt.producer.outcome));
+                self.building_feedback=Some(format!("GENEPOD: {:?}",receipt.producer.outcome));
+                *w=proposed;m.frame=frame;
+            }
+            Ok(())
+        })();self.genepod=Some(panel);result
+    }
+    fn open_clicked_genepod(&mut self,mouse:[i32;2])->Result<(),String>{
+        let Some(m)=&self.mission else{return Ok(());};let MissionState::Landing(w)=&m.world else{return Ok(());};
+        let camera=genewars_core::cd_candidate::camera_cells_for_target(w.world.map(),m.target[0],m.target[1]).map_err(|e|e.to_string())?;
+        let mut hits=Vec::new();
+        for(slot,r)in w.world.buildings().ok_or("building pool unavailable")?.records().iter().enumerate(){
+            if r[6]!=4||r[23]==0{continue;}
+            let position=[i16::from_le_bytes([r[7],r[8]]),i16::from_le_bytes([r[9],r[10]])];
+            let origin=genewars_core::cd_candidate::entity_view_position(w.world.map(),position,camera,0).map_err(|e|e.to_string())?;
+            let frames=match m.resources.building_resource(r[45])?{
+                super::runtime_resources::BuildingResourceRef::Source(db)=>db.animation(usize::from(r[25])).map_err(|e|e.to_string())?,
+                super::runtime_resources::BuildingResourceRef::Bturr(_)=>continue,
+            };
+            if super::building_pick::hit_animation(frames,r[27],origin,mouse).map_err(|e|format!("{e:?}"))?.is_some(){hits.push((slot,*r));}
+        }
+        if hits.len()>1{return Err("Overlapping building selection requires original mixed queue order".into());}
+        let Some((slot,r))=hits.pop()else{return Ok(());};
+        if r[45]!=0||r[24]!=0{return Ok(());}
+        let control=super::genepod_panel::GenepodControl::parse(&read_bound(&self.root.join("ui/GENEPANL.ANB"))?)?;
+        self.genepod=Some(GenepodSelection{slot:slot as u16,state:0,list:r[60]as i8,control,input:Default::default()});
+        self.building_feedback=Some("GENEPOD SELECTED - CLICK MULE CONTROL".into());self.trace.push(format!("SelectedGenepod:{slot}"));Ok(())
     }
 
     /// Invoked after a loading redraw, and by the identical headless driver.
@@ -268,6 +322,7 @@ impl Game {
     }
 
     pub fn escape(&mut self) {
+        if self.genepod.take().is_some(){self.building_feedback=None;return;}
         if self.building_menu_open{self.building_menu_open=false;self.building_menu_capture=None;return;}
         if self.placement_selector.take().is_some(){self.building_feedback=None;return;}
         match self.scene {Scene::Menu=>self.transition(Scene::Quit),Scene::Quit=>{},_=>{self.automatic=false;self.mission=None;self.victory=None;self.campaign=None;self.error=None;self.transition(Scene::Menu);}}
@@ -380,7 +435,13 @@ impl Game {
             let funds=i32::from_le_bytes(player.bytes()[0x4a3..0x4a7].try_into().unwrap());
             return status_text::overlay(base,&building_menu::lines(&self.building_choices(),funds,w.selected,self.building_feedback.as_deref()));
         }
-        if matches!(self.scene,Scene::Mission|Scene::Victory) {status_text::mission_overlay(base,&lines)}else{status_text::overlay(base,&lines)}
+        let mut composed=if matches!(self.scene,Scene::Mission|Scene::Victory) {status_text::mission_overlay(base,&lines)}else{status_text::overlay(base,&lines)}?;
+        if self.scene==Scene::Mission {if let (Some(panel),Some(m))=(&self.genepod,&self.mission){
+            let mut indices=vec![0u8;640*480];panel.control.draw_face([0,0],[640,480],640,&mut indices)?;
+            let mut rgb=composed.rgb_bytes().to_vec();let palette=m.resources.palette_entries();
+            for y in 344..373{for x in 26..55{if panel.control.hit([0,0],Some([x,y])){let i=y as usize*640+x as usize;rgb[i*3..i*3+3].copy_from_slice(&palette[usize::from(indices[i])].map(|v|(u16::from(v)*255/63)as u8));}}}
+            composed=RgbImage::from_rgb24(640,480,rgb).map_err(|e|e.to_string())?;
+        }}Ok(composed)
     }
 
     pub fn report(&self)->String {
@@ -389,5 +450,48 @@ impl Game {
         let campaign=self.campaign.as_ref().map(|c|format!("{{\"progress\":{},\"next_mission\":{},\"carry_projected\":true,\"next_mission_initialized\":false,\"retired_actors\":{:?},\"players_sha256\":{},\"preserved_world_sha256\":{},\"rng_ring\":{},\"mode_after_exit\":{},\"frame_after_view_resume\":{}}}",c.carry.players[0][0x6e7],json_string(&c.display.name),c.carry.retired_actors,json_string(&genewars_runtime::identity::sha256_hex(&c.carry.players.concat())),json_string(&genewars_runtime::identity::sha256_hex(&c.world_priors)),c.rng_ring,c.mode,c.frame)).unwrap_or("null".into());
         let result_view=self.victory.as_ref().map(|v|format!("{{\"stage\":{},\"saved_frame\":{},\"feedback_text_index\":{},\"statistics\":{:?},\"movie\":\"unavailable_decoder\",\"audio\":\"unavailable_mixer\",\"campaign_transition_accepted\":false}}",v.entry.stage_after,v.entry.saved_frame,v.receipt.feedback_text_index,v.receipt.statistic_values)).unwrap_or("null".into());
         format!("{{\"scene\":{},\"scene_history\":[{}],\"result_view\":{},\"campaign\":{},\"mission\":{},\"ticks\":[{}],\"presented_frames\":{},\"error\":{},\"construction_menu_open\":{},\"construction_choices\":{:?},\"scene_dispatch\":true,\"gameplay\":false,\"full_world_tick\":false,\"original_startup_sequence\":false,\"timer_policy\":\"port-owned 10 Hz when enabled\",\"render_policy\":\"full redraw; source-player0 view; radius4096 view-only factor; GENEPANL development backing\"}}\n",json_string(&format!("{:?}",self.scene)),trace,result_view,campaign,mission,self.ticks.join(","),self.presented,self.error.as_ref().map(|s|json_string(s)).unwrap_or("null".into()),self.building_menu_open,self.building_choices())
+    }
+}
+
+
+#[cfg(test)] mod genepod_native_fixture_tests {
+    use super::*;
+    #[test]
+    fn original_alpha_and_game_dispatch_drive_capture_without_forced_activation() {
+        // Synthetic completed building fixture, explicitly NOT campaign acceptance.
+        let root=Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../private/integration/game-runtime");
+        let mut game=Game::open(&root).unwrap();game.reference_startup=true;game.scene=Scene::Loading;game.finish_loading();
+        assert_eq!(game.scene,Scene::Mission,"{:?}",game.error);
+        let (slot,click)={
+            let m=game.mission.as_mut().unwrap();let MissionState::Landing(w)=&mut m.world else{panic!()};
+            let slot=w.world.create_building(0,0,[19839,12927]).unwrap().unwrap().slot;
+            w.world.progress_admitted_grade0_building(slot,280,false).unwrap();
+            m.target=[19839,12927];m.frame=w.render(&m.resources,m.target).unwrap();
+            let r=w.world.buildings().unwrap().record(slot as usize).unwrap();
+            let camera=genewars_core::cd_candidate::camera_cells_for_target(w.world.map(),m.target[0],m.target[1]).unwrap();
+            let origin=genewars_core::cd_candidate::entity_view_position(w.world.map(),[19839,12927],camera,0).unwrap();
+            let super::super::runtime_resources::BuildingResourceRef::Source(db)=m.resources.building_resource(0).unwrap()else{panic!()};
+            let frames=db.animation(r[25]as usize).unwrap();
+            let click=(0..480).flat_map(|y|(128..640).map(move|x|[x,y])).find(|&q|super::super::building_pick::hit_animation(frames,r[27],origin,q).unwrap().is_some()).unwrap();
+            (slot,click)
+        };
+        game.pointer(Some((click[0],click[1])));game.left(true);game.left(false);
+        assert_eq!(game.genepod.as_ref().map(|p|p.slot),Some(slot),"{:?}",game.error);
+        game.image().unwrap();
+        let before=game.mission.as_ref().unwrap().world.clone();
+        game.pointer(Some((26,344)));game.left(true);game.left(false);
+        assert!(!game.genepod.as_ref().unwrap().input.capture.captured);
+        assert_eq!(game.mission.as_ref().unwrap().world.extra_report(),before.extra_report());
+        game.pointer(Some((40,358)));game.left(true);
+        assert!(game.genepod.as_ref().unwrap().input.capture.captured);
+        assert_eq!(game.genepod.as_ref().unwrap().state,2);
+        game.pointer(Some((60,358)));game.left(false);
+        assert!(game.trace.last().unwrap().contains("event=32776"));
+        assert!(!game.genepod.as_ref().unwrap().input.capture.captured);
+        game.pointer(Some((40,358)));game.left(true);game.left(false);
+        assert!(game.trace.last().unwrap().contains("event=8"),"{:?}",game.trace.last());
+        assert!(game.building_feedback.as_ref().unwrap().starts_with("GENEPOD:"));
+        assert!(game.error.is_none(),"{:?}",game.error);
+        game.image().unwrap();
     }
 }

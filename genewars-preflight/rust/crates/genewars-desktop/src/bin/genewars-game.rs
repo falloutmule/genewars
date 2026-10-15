@@ -13,6 +13,8 @@ use std::{env,fs,io::{Read,Write},path::{Path,PathBuf},process};
 #[path="support/result_scene.rs"] mod result_scene;
 #[path="support/game_window.rs"] mod game_window;
 #[path="support/native_input.rs"] mod native_input;
+#[path="support/genepod_panel.rs"] mod genepod_panel;
+#[path="support/building_pick.rs"] mod building_pick;
 use runtime_scene::Game;
 
 fn read(path:&Path)->Result<Vec<u8>,String>{runtime_resources::read_bound(path)}

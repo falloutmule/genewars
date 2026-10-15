@@ -1,0 +1,17 @@
+{
+  "status": "passed-focused-game-input-fixture",
+  "tests": 1,
+  "scope": "Synthetic completed Genepod: real opaque world alpha pick and Game pointer/down/up dispatch; transparent miss, capture, outside cancel, inside release, shared producer/command, visible face/feedback. Not native window or authentic mission acceptance.",
+  "limits": [
+    "Mixed-family overlap priority unverified; selected test click bounded to fixture",
+    "Original pressed/disabled visuals and complete panel omitted",
+    "Production terminal/effect20 and owned Mule control pending"
+  ],
+  "pins": {
+    "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs": "278911f02f3ebbefdfbef8a0d01ee20279805ea57111c1f45f511954008b6324",
+    "rust/crates/genewars-desktop/src/bin/support/genepod_panel.rs": "cc69326501278f4dd97a5f56b4e3c2afc4cdf959124e5c68d4bd78155caff7a1",
+    "rust/crates/genewars-desktop/src/bin/support/building_pick.rs": "58548b2b63b37fd37d94e76d5e8c4d4f494550be431fc1d454c9742c740e65a7",
+    "research/integration/runtime-resource-catalog.tsv": "3a33ebe4403f413fdd45bbb829d2e8a4ae1f8840e0580cf4a27db0d1993dcc43",
+    "private/integration/krell-native-genepod-input-tests-002.log": "f3ebfbee253b50623b046012fadcbbf0a2a0a410f0c3c6b4f5ed13d4550f14a0"
+  }
+}

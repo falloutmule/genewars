@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "private_run": "private\\review\\genepod-panel\\3c07800196e74484b146435d0ac774c2",
+  "scope": "Standalone exactasset parse, translated opaquehit, capturedrelease,invalidpacketrollback,665pixelcontrolface,pitchpadding,invalidtargetrollback,hashrejection. Imports adapted only in private harness because Root has not registered capture. No nativeacceptance or pressedvariantclaim.",
+  "pins": {
+    "rust\\crates\\genewars-desktop\\src\\bin\\support\\genepod_panel.rs": "cc69326501278f4dd97a5f56b4e3c2afc4cdf959124e5c68d4bd78155caff7a1",
+    "private\\integration\\rnc-decoded\\83e7010ccc0631db4937ab96395d058f8931458124eb004a7fa91d1c01c3648e.bin": "1df1e8fb436cc7030c40b94438c5e530a1b8a21716fad4354e0c82c94ba27f52",
+    "rust\\crates\\genewars-runtime\\src\\genepod_capture.rs": "9e7bb4308242970d1341c4098dfba80eabbe7051e93361fed791b3b6e7432635"
+  }
+}

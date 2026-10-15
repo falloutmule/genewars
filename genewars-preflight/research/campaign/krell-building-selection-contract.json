@@ -1,0 +1,31 @@
+{
+  "status": "source_inspected",
+  "scope": "Minimal owned selector0 world selection contract; no literal full-picker comparison/native acceptance",
+  "reference_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "source_pins": {
+    "private/ghidra/display-geometry/instructions-00083140.txt": "9d18112e4f02934ede585142dda83c1ea16af0b4f4bbd51acd09226c08f28c52",
+    "private/ghidra/display-geometry/instructions-00083930.txt": "0597f7ba5a896b525f2a0a7c51a3cbc97be051fedc77fd4dce37eada02739439",
+    "private/ghidra/genepod-building-hit.txt": "b6f8d2db049a7ce5210b9ecf6120e17fe3a26dbb0b5a46698327ad1611ca59aa",
+    "private/ghidra/entity-plant/instructions-0001e840.txt": "339ecbf75d0b4fccaed84e606ad9be40a7fe63c271b33f9a6b1b47493ceff54f",
+    "private/ghidra/ui-frame/instructions-00098c40.txt": "b0b7188387e745e3fee9ea2c49a65b1bf1a2994300468fb6ca85da5771c2249b",
+    "private/ghidra/sprite-scaled/instructions-00098b60.txt": "2775e1d25062d7c9140240a007024e944448df5387bba3379ba185ce2bcaed43",
+    "private/ghidra/entity-order/instructions-00030100.txt": "174fa08085b159b3277ccbc2108913459f5d5f59d4b222d81ac3a9aa067f6c15",
+    "private/ghidra/entity-order/decompile-00030100.c": "377c1ca5665fe278aa14be2495568ebeb0e98bae56426759d0c3c9ae74edee97",
+    "private/ghidra/validated/memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+  },
+  "hit_chain": [
+    "83140",
+    "112120+20 -> 1F3C0",
+    "112120+1C -> 1E840",
+    "98C40",
+    "98B60"
+  ],
+  "priority": "maximum ground projectedY; equal later eligible queue entry replaces",
+  "publication": "83930:viewport37 -> viewport18=16E0C0",
+  "owned_selector0_panel": "MAINPANL kind4 ->21A10 root+E2",
+  "remaining": [
+    "upstream118770 event binding",
+    "mixed-family queue order integration",
+    "native no-overlap building click acceptance"
+  ]
+}

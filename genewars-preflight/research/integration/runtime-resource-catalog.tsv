@@ -67,3 +67,4 @@ campaign/HDRCO2.DAT	5a42310026365e8c36ddce8ecba48fe099c42accc6c878933d2360c1ebb6
 buildings/BGENE.ANB	a71f03d3cce3d36798cd7f8ad578d665e65883bfe9b541ba93d0ad9eff814cab	62062	private/reference-run/run-006/drive-c/GAME/DATA/BUILDING/BGENE.ANB	root/2/disc/301
 ui/PLGBL.ANB	a39cc8ac8c987de5c4865ec77a4459221f276286f254653e4a3f3231424f6444	40414	private/integration/zone-ui-inputs/PLGBL.ANB	root/2/disc/124
 ui/zone-colors.bin	a7735d28ff0f0a4c3c5b5a78eb7f5c23cd8bf52f0d8ec33b84baea1c1a6651e8	7	private/integration/zone-ui-inputs/zone-colors.bin	CD-GW.EXE mapped object3+0x2e38
+ui/GENEPANL.ANB	1df1e8fb436cc7030c40b94438c5e530a1b8a21716fad4354e0c82c94ba27f52	3960	private/integration/rnc-decoded/83e7010ccc0631db4937ab96395d058f8931458124eb004a7fa91d1c01c3648e.bin	root/2/disc/85 decoded RNC
