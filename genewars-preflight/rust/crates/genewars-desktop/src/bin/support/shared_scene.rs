@@ -471,6 +471,37 @@ impl SharedMission {
                 }
                 assert!(completed,"ordinary Krell construction did not complete within bounded diagnostic");
             }
+            if std::env::var_os("GENEWARS_KRELL_PRODUCTION_PROBE").is_some(){
+                let slot=loaded.world.buildings().unwrap().records().iter().position(|r|r[6]==4&&r[45]==0&&r[24]==0).unwrap()as u16;
+                let control=crate::genepod_panel::GenepodControl::parse(&read_bound(&root.join("ui/GENEPANL.ANB")).unwrap()).unwrap();
+                let pointer=(344..373).flat_map(|y|(26..55).map(move|x|[x,y])).find(|&p|control.hit([0,0],Some(p))).unwrap();
+                let mut input=crate::genepod_panel::PanelInput::default();let mut panel_state=0;
+                for packet in [1,2]{
+                    let building=*loaded.world.buildings().unwrap().record(usize::from(slot)).unwrap();
+                    panel_state=crate::genepod_panel::PanelInput::ready(panel_state,&building).panel_state_after;
+                    let feedback=input.poll(&control,[0,0],Some(pointer),packet).unwrap();
+                    if feedback.action==8{
+                        let receipt=loaded.world.dispatch_genepod_mule_input(slot,genewars_runtime::genepod_human_producer::ProducerInput{
+                            selected_player_index:0,panel_state,species_list_index:building[60]as i8,mouse_flags:feedback.event,captured_opaque_hit:control.hit([0,0],Some(pointer)),
+                        },true).unwrap();
+                        panel_state=receipt.producer.panel_state_after;
+                        println!("Krell ordinary Genepod input frame{} packet{packet}: {:?}",loaded.frame_counter,receipt.producer.outcome);
+                    }
+                    if !advance(&mut loaded){return;}
+                }
+                let work=i32::from_le_bytes(loaded.world.buildings().unwrap().record(usize::from(slot)).unwrap()[54..58].try_into().unwrap());
+                assert!(work>0,"ordinary captured control must start production without state injection");
+                for _ in 0..2048{
+                    if !advance(&mut loaded){return;}
+                    let owned=loaded.world.creatures().unwrap().records().iter().filter(|r|r[6]==1&&r[24]==0).count();
+                    if owned>0{println!("Krell ordinary production yielded{owned} owned Mule frame{}; not mission acceptance",loaded.frame_counter);return;}
+                    let building=loaded.world.buildings().unwrap().record(usize::from(slot)).unwrap();
+                    if i32::from_le_bytes(building[54..58].try_into().unwrap())<=0&&building[27]==0{
+                        println!("Krell ordinary production ended without owned Mule frame{}; preserve authentic quality outcome",loaded.frame_counter);return;
+                    }
+                }
+                panic!("ordinary production exceeded bounded diagnostic");
+            }
         }
 
     }

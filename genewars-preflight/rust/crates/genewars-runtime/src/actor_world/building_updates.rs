@@ -418,7 +418,7 @@ impl ActorWorld {
             if current[0x81]!=4{return Err(ConstructionWorldError::Work(crate::construction_work::ConstructionWorkError::InvalidBuilding));}
             let slot=u16::try_from(word(&current,0x7f)).map_err(|_|ConstructionWorldError::Work(crate::construction_work::ConstructionWorkError::InvalidBuilding))?;
             let building=*staged.buildings.as_ref().ok_or(ActorWorldError::BuildingsNotAdmitted)?.record(usize::from(slot)).map_err(ActorWorldError::from)?;
-            if current[0x49]&32!=0&&word(&building,0x31)&1!=0&&word(&building,0x2b)==match building[45]{1=>120,3=>240,6=>80,11=>280,_=>-1}{
+            if current[0x49]&32!=0&&word(&building,0x31)&1!=0&&word(&building,0x2b)==match building[45]{0=>280,1=>120,3=>240,6=>80,11=>280,_=>-1}{
                 let plan=staged.cancel_finished_architect(id,selection.0,selection.1)?;
                 cancellation=Some(plan);completion_message_index=Some(17);
             }else if current[0x49]&32==0&&current[0x70]&0x80==0{

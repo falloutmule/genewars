@@ -1,0 +1,34 @@
+{
+  "status": "passed_bounded_integration_then_unsupported_boundary",
+  "scope": "Synthetic-carry Krell construction and ordinary captured Genepod input; not native/campaign acceptance",
+  "construction_completed": {
+    "extractor": 909,
+    "distributor": 1505,
+    "genepod": 2275
+  },
+  "production_start_frame": 2276,
+  "input": "Decoded GENEPANL sprite1 opaque hit, actual down/release capture events, shared human producer/opcode12; no funds/work/quality injection",
+  "fixed_boundary": {
+    "frame": 2328,
+    "cause": "Completed-building dispatch omitted Genepod selector0 although generic cancellation already supports source maximum280",
+    "source": "534D0 53D1F..53D47 reads104D1E+selector*6+grade*2;53E33 invokes51E80",
+    "comparison": "research/ghidra/construction-finished-callback-evidence.json",
+    "cases": 96,
+    "compared_bytes": 22039296,
+    "ports": [
+      "common motion",
+      "formatting/audio/UI"
+    ]
+  },
+  "observed_later_boundary": {
+    "frame": 2429,
+    "reason": "Creatures(UnsupportedNeighborhood)",
+    "private_capture": "private/review/krell-production-081/frame-2429-slot-0-blocked-before",
+    "note": "Probe081 includes independently source-compared starvation fix, pending separate commit."
+  },
+  "logs": [
+    "private/integration/krell-production-076.log",
+    "private/integration/krell-production-077.log",
+    "private/integration/krell-production-081.log"
+  ]
+}

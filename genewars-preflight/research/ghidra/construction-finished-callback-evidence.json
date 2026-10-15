@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "cases": 96,
+  "selectors": [
+    0,
+    1
+  ],
+  "compared_bytes": 22039296,
+  "literal_instruction_steps": 37748,
+  "source_sha256": "942df34ca6924e8e5b21b7738a3dd5f7f5f4b58aa5ecf89a7fbcb93369368820",
+  "listing_sha256": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-00051e80.txt": "38a7ad744f800c438cf7b208ed596f919c38c4309a8e8d2cd68f679976202839",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "terrain-map-refs/instructions-000753f0.txt": "ea2554be981b0acae18e192ba9827ebdf4e4dea2d8e6fbee83f889ec15f390c5",
+    "validated/instructions-0008d580.txt": "08fc85698d73460faaef4a6dd81457eb199a60c9aacda9380239e5f3278034c3",
+    "validated/instructions-0008d5f0.txt": "c66a1e05095397611f83ecfa25aab5c3b1e42f72b165a2b86550b682cc33c23f"
+  },
+  "whole_callback_pin": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a",
+  "implementation_pins": {
+    "actor_motion": "3eec61b309f71a4c415293c706338fe070617e456a0755ede609c32f5c9bfe4a",
+    "actor_construction_tail": "422ea3e71110f4db1782f5880592cb856ac8d8b0c3ef37a2d82c000a62eeb8bb"
+  },
+  "scope": "Whole57A10 after commonmotion port:534D0 completed selectors0/1 stage5 readiness ->message17/51E80; whole200B actor and229376B map, live58bit1 set,1EE50 stop. Crucially stage5 keeps terrain reservation flags; reason7A preserved. Formatting/presentation explicit ports, owner unselected; no idle fabrication."
+}
