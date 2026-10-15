@@ -387,8 +387,14 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
 }
 pub fn plan_mule_after_admitted_prefix_with_cell_entry<F,O,C,E>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
     physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
-    contact:F,obstacle:O,animations:&MuleAnimations,mut choice:C,admit_water:bool,cell_entry:E)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+    contact:F,obstacle:O,animations:&MuleAnimations,choice:C,admit_water:bool,cell_entry:E)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError> {
+    plan_mule_after_admitted_prefix_with_cell_entry_and_postphysics(before,prefix,working_target,map,context,physics,trig,contact,obstacle,animations,choice,admit_water,cell_entry,|record|Ok(*record))
+}
+pub fn plan_mule_after_admitted_prefix_with_cell_entry_and_postphysics<F,O,C,E,P>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
+    physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
+    contact:F,obstacle:O,animations:&MuleAnimations,choice:C,admit_water:bool,cell_entry:E,postphysics:P)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
     if matches!(before[0x5e],24..=27)||(before[0x5e]==8&&motion_word(before,0x66)==1&&mule_callback_phase(before,context.frame_counter)&1!=0) {
         return plan_mule_mortality_after_prefix(before,prefix,map,context,physics,trig,contact,obstacle,animations,admit_water);
     }
@@ -410,7 +416,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
        ||before[0x4f]!=0||(before[0x52]!=0&&!paired_approach&&!corpse_approach&&!corpse_wait&&!retained_food_idle)||motion_word(before,0x49)as u16&!0x337f!=0
        ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=if mule_callback_phase(before,context.frame_counter)&1==0{0}else{2}{return Err(CreatureError::UnsupportedMotionState);}
-    plan_mule_admitted_body_with_postphysics(before,prefix,working_target,map,context,physics,trig,contact,obstacle,animations,choice,admit_water,cell_entry,|record|Ok(*record))
+    plan_mule_admitted_body_with_postphysics(before,prefix,working_target,map,context,physics,trig,contact,obstacle,animations,choice,admit_water,cell_entry,postphysics)
 }
 /// Shared source body; caller MUST prove its owner/action domain independently.
 /// Postphysics runs the owned reveal at its original pre-AI boundary.

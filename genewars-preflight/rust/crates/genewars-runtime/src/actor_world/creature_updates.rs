@@ -56,8 +56,9 @@ impl ActorWorld {
         let before=*pool.record(slot)?;let own=[slot as u8,(slot>>8)as u8,1];
         if before[6]!=1||before[24]!=4||word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
         let null_food_target=before[0x5e]==1&&before[0x57]==0&&before[0x60]&0x42==0x40;
+        let hostile_enemy=self.mule_live_hostile_target(&before)?;
         let corpse_approach=matches!(before[0x5e],1|4|5)&&before[0x57]==1&&before[0x52]==1&&reference(&before,0x50)==reference(&before,0x55);
-        if corpse_approach {
+        if corpse_approach&&hostile_enemy.is_none() {
             let id=word(&before,0x55)as usize;let corpse=pool.record(id)?;
             let binding=if corpse[0x5e]>=26{CreatureAnimationBinding::BonesSelector4}else{CreatureAnimationBinding::MuleSelector4};
             if pool.binding(id)?!=Some(binding)||corpse[24]!=4||corpse[0x7a]!=4||!matches!(corpse[0x5e],24..=27){return Err(CreatureError::UnsupportedMotionState.into());}
@@ -96,7 +97,7 @@ impl ActorWorld {
         let links_moved=std::cell::Cell::new(false);
         let mut pending_pair=None;let mut newborn_slots=Vec::new();let mut failed_action_dispatched=false;let mut retired_during_feeding=false;
         let mut feed_bones=None;let mut reserve_corpse=None;let mut reserve_plant=None;let mut release_plant=None;let mut fed_plant=None;let mut pending_audio=Vec::new();let mut pending_plant_retirements=Vec::new();
-        let(plan,water_effect)=creature_world::plan_mule_after_admitted_prefix_with_cell_entry(&before,&prefix,working_target,self.map(),context,physics,trig,
+        let(plan,water_effect)=creature_world::plan_mule_after_admitted_prefix_with_cell_entry_and_postphysics(&before,&prefix,working_target,self.map(),context,physics,trig,
             |record,normal,previous|query_world.borrow().mule_contact_speed(record,normal,previous).map_err(|_|CreatureError::MotionEnvironment),
             |point|query_world.borrow().move_obstacle_at(point).map_err(|_|CreatureError::MotionEnvironment),animations,|record|{
                 let mut world=query_world.borrow_mut();let mut rng=rng_state.borrow_mut();
@@ -152,6 +153,7 @@ impl ActorWorld {
                     reserve_corpse=Some((word(record,0x55)as u16,corpse[0x60],abandoned.target_after[0x60]));
                     *rng=abandoned.rng_after;return Ok(abandoned.current_after);
                 }
+                if hostile_enemy.is_some()&&record[0x5e]==1{return Ok(*record);}
                 if record[0x5e]==1&&record[0x57]==1 {
                     let id=word(record,0x55)as u16;let corpse=world.creatures.as_ref().unwrap().record(id as usize)?;
                     let arrival=crate::mule_corpse_arrival::plan_arrival(record,corpse).map_err(|_|CreatureError::UnsupportedMotionState)?;
@@ -271,6 +273,13 @@ impl ActorWorld {
                     let mut after=*record;after[0x3f..0x41].copy_from_slice(&creature_world::mule_requested_speed(record).to_le_bytes());after[0x5e]=7;after[0x6c..0x6e].copy_from_slice(&32767i16.to_le_bytes());after[0x72..0x76].copy_from_slice(&record[7..11]);after[0x60]|=8;after[0x60]&=0xbf;reserve_plant=Some(word(&raw,0));return Ok(after);
                 }
                 let mut record=*record;if record[0x5e]==0 {record[0x5e]=8;}
+                //62949..62E11: a real hostile query preempts food/mating.
+                //Only the sole live owned-Mule candidate and direct acquisition
+                //disposition are proved here. All alternate outcomes still reject.
+                if let Some(enemy)=world.mule_single_owned_hostile(&record).map_err(|_|CreatureError::UnsupportedNeighborhood)? {
+                    let hostile=crate::mule_hostile_acquisition::plan_acquisition(&record,&enemy,*rng).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+                    *rng=hostile.rng_after;return Ok(hostile.after);
+                }
                 //62EA9..63045 idle mate action after the no-food-priority gates.
                 //Neutral5D700 returns true without querying a specialist.
                 if before[0x5e]==8&&record[0x5e]==8&&record[0x77]==255&&(record[0x79]as i8)>0
@@ -307,6 +316,17 @@ impl ActorWorld {
                 let after=world.plan_mule_cell_entry(slot,&entered,new_cell,&mut rng_state.borrow_mut(),trig)?;
                 world.creatures.as_mut().unwrap().replace_record_checked(slot,&entered,&after)?;
                 links_moved.set(true);Ok(after)
+            },|record|{
+                if let Some(enemy)=hostile_enemy {
+                    let phase=creature_world::mule_callback_phase(&before,context.frame_counter);
+                    //65C60 runs on every odd callback, after physical motion.
+                    //Only far pursuit with no abandonment draw is admitted.
+                    if phase&1!=0 {
+                        if phase&3==3&&32767-i32::from(word(record,0x6c))>256{return Err(CreatureError::UnsupportedMotionState);}
+                        if mule_pair_distance(record,&enemy)<=16384{return Err(CreatureError::UnsupportedMotionState);}
+                    }
+                }
+                Ok(*record)
             })?;
         let rng=rng_state.into_inner();let mut staged=query_world.into_inner();
         // The entry hook already applied source unlink/prepend and virtual88.
@@ -516,12 +536,21 @@ impl ActorWorld {
         *rng=plan.rng_after;Ok(plan.record_after)
     }
     /// Bounded5B100 predicate shared by cell entry and waypoint waiting.
+    /// Typed live hostile pursuit. Corpse feeding keeps its independent guard.
+    fn mule_live_hostile_target(&self,r:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
+        if r[6]!=1||r[24]!=4||r[0x7a]!=4||r[0x5e]!=1||r[0x61]!=0x40||!matches!(r[0x60],0x48|0xc8)
+            ||r[0x78]!=0||r[0x76]>90||r[0x4f]!=0||r[0x5d]!=0||r[0x57]!=1||r[0x52]!=1
+            ||reference(r,0x50)!=reference(r,0x55)||word(r,0x49)as u16&0x100!=0{return Ok(None);}
+        let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;let id=word(r,0x55)as usize;let target=*pool.record(id)?;
+        if target[6]==1&&target[24]==0&&target[0x7a]==4&&target[0x5e]==8&&word(&target,0x6a)>0
+            &&word(&target,0x49)as u16&0x400==0&&pool.binding(id)?==Some(CreatureAnimationBinding::MuleSelector4){Ok(Some(target))}else{Ok(None)}
+    }
     pub(super) fn mule_cell_entry_predicate(&self,record:&CreatureRecord,cell:usize)->Result<bool,ActorWorldError>{
         let own=[record[15],record[16],1];
         let approach_plant=record[0x5e]==1&&record[0x57]==2&&self.entity(reference(record,0x55))?[6]==2;
         let approach_corpse=record[0x5e]==1&&record[0x57]==1&&record[0x52]==1&&reference(record,0x50)==reference(record,0x55)
             &&matches!(self.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?[0x5e],24..=27);
-        if !matches!(record[0x5e],3|8)&&!approach_plant&&!approach_corpse{self.check_mule_cell_entry(own,cell)?;return Ok(false);}
+        if !matches!(record[0x5e],3|8)&&!approach_plant&&!approach_corpse&&self.mule_live_hostile_target(record)?.is_none(){self.check_mule_cell_entry(own,cell)?;return Ok(false);}
         if word(record,0x49)as u16&0x0400!=0{return Err(CreatureError::UnsupportedCellEntry.into());}
         let mut raw=reference(self.map(),cell*14+6);let mut last=None;
         while raw[2]!=0{
@@ -538,6 +567,35 @@ impl ActorWorld {
             if raw[2]==5 {let pool=self.effects.as_ref().ok_or(CreatureError::UnsupportedCellEntry)?;if pool.record(word(&raw,0)as usize)?.get(0x45)==Some(&0x11){return Err(CreatureError::UnsupportedCellEntry.into());}}
             raw=reference(self.entity(raw)?,3);
         }Ok(())
+    }
+    ///6B7C6..6BA40: neutral owner4 regards owner0 as hostile, independent
+    ///of alliances. One live kind1 Mule(state8) publishes both enemy scores;
+    ///its count/pointer do not depend on score ties. Known neutral friends,
+    ///plants and skipped effects consume no extra query RNG. Query direction
+    ///and food/mate outputs are unused by the admitted direct629C0 branch.
+    fn mule_single_owned_hostile(&self,record:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
+        let own=[record[15],record[16],1];let cell=floor_cell([word(record,7),word(record,9)]);
+        let(cx,cy)=((cell%128)as i32,(cell/128)as i32);let mut enemy=None;let mut unsupported=false;
+        for dy in -4..=4{for dx in -4..=4{if dx*dx+dy*dy>16{continue;}
+            let index=((cy+dy)&127)as usize*128+((cx+dx)&127)as usize;let mut raw=reference(self.map(),index*14+6);
+            while raw[2]!=0{let entity=self.entity(raw)?;
+                if raw!=own{match raw[2]{
+                    1=>{let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;let other=*pool.record(word(&raw,0)as usize)?;
+                        let binding=if other[0x5e]>=26{CreatureAnimationBinding::BonesSelector4}else{CreatureAnimationBinding::MuleSelector4};
+                        if other[6]!=1||other[0x7a]!=4||pool.binding(word(&raw,0)as usize)?!=Some(binding){unsupported=true;}
+                        else if other[24]==4 {if !matches!(other[0x5e],0|1|3|4|5|7|8|10|15|24..=27){unsupported=true;}}
+                        else if other[24]==0&&other[0x5e]==8&&binding==CreatureAnimationBinding::MuleSelector4 {
+                            if enemy.is_some(){return Err(CreatureError::UnsupportedNeighborhood.into());}enemy=Some(other);
+                        }else{unsupported=true;}
+                    },
+                    2=>if entity[24]!=4{unsupported=true;},
+                    5=>{let effect=self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?;if effect[0x45]==0x11{unsupported=true;}},
+                    8=>{},_=>unsupported=true,
+                }}raw=reference(entity,3);
+            }
+        }}
+        if enemy.is_some()&&unsupported{return Err(CreatureError::UnsupportedNeighborhood.into());}
+        Ok(enemy)
     }
     fn check_mule_neutral_neighbors(&self,record:&CreatureRecord,own:[u8;3],point:[i16;2])->Result<(),ActorWorldError>{
         let cell=floor_cell(point);

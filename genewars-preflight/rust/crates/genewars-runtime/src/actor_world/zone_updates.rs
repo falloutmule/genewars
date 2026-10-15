@@ -97,6 +97,24 @@ impl ActorWorld {
         context: LandingPhysicsContext,
         trig: &TrigTables,
     ) -> Result<Vec<super::zone_credit_updates::ZoneCreditReceipt>, KrellZoneScheduleError> {
+        #[cfg(any(debug_assertions, feature = "callback-captures"))]
+        if frame&63==0{self.capture_numeric_callback(0,frame,"zone-schedule-before");}
+        let result=self.step_krell_zone_callbacks_inner(frame,players,selected,context,trig);
+        #[cfg(any(debug_assertions, feature = "callback-captures"))]
+        match &result {
+            Ok(_)=>if frame&63==0{self.capture_numeric_callback(0,frame,"zone-schedule-after");},
+            Err(_)=>self.capture_numeric_callback(0,frame,"blocked-before-zone-schedule"),
+        }
+        result
+    }
+    fn step_krell_zone_callbacks_inner(
+        &mut self,
+        frame: u32,
+        players: u8,
+        selected: u8,
+        context: LandingPhysicsContext,
+        trig: &TrigTables,
+    ) -> Result<Vec<super::zone_credit_updates::ZoneCreditReceipt>, KrellZoneScheduleError> {
         use crate::creature_world::CreatureAnimationBinding;
         use KrellZoneScheduleError as Error;
         //7A298 and7A2BC return before any callback/context admission.

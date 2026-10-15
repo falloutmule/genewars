@@ -1,0 +1,55 @@
+{
+  "status": "passed",
+  "scope": "actual188 neutral5596 hostile acquisition plus frozen-other-family5597/5598 pursuit callbacks; not new campaign acceptance",
+  "source_comparisons": [
+    {
+      "frame": 5596,
+      "draws": 3,
+      "instructions": 11024,
+      "bytes": 427369,
+      "mismatches": 0,
+      "receipt": "43b9ca05a058411386d1a4b431b3507c"
+    },
+    {
+      "frame": 5597,
+      "draws": 0,
+      "instructions": 6577,
+      "bytes": 427369,
+      "mismatches": 0,
+      "receipt": "6a730ab4355441e8b556177b82e3b8ef"
+    },
+    {
+      "frame": 5598,
+      "draws": 0,
+      "instructions": 7291,
+      "bytes": 427369,
+      "mismatches": 0,
+      "receipt": "cbf845910be745fca151422eee44af65"
+    }
+  ],
+  "receipt_parent": "private/review/neutral-mule-captured-width",
+  "correction": "NeutralMule5 sees sole liveownedMule1 as hostile. Source626EA querytwo draws precede629C0 disposition draw197%100=97>pinnedMule90; direct62E11/5B580 stores kind1 pursuit references, preserves prior goal and installs612speed/timer32767. Associated source6FB60 then refreshes target. Far65C60 walking uses5D360 no-op for neutral skill<=90. Postphysics guards run on every odd callback.",
+  "limits": [
+    "one typed liveowner0Mule state8 enemy; known no-extra-RNG surrounding candidates",
+    "alternate disposition/flee branches remain UnsupportedDisposition",
+    "physicaldistance<=16384 enters unported combat and rejects",
+    "phase3 pursuit elapsed>256 enters unported timed abandonment and rejects",
+    "lost/dead/other-state targets remain unsupported; corpse food guards are independent"
+  ],
+  "negative_checks": {
+    "disposition": "189 fullworld/RNG rollback",
+    "multiple_hostiles": "189b fullworld/RNG rollback",
+    "combat_range": "189b fullworld/RNG rollback",
+    "expired_pursuit": "189b fullworld/RNG rollback",
+    "failed_initial_multiple_fixture": "189 placed second candidate outsidequerycircle; preserved/notaccepted; corrected189b relocates caller with consistentmaplinks"
+  },
+  "regression": {
+    "runtime": 251,
+    "desktop_game": 80,
+    "ignored_each": 1,
+    "release": "passed",
+    "zone_capture_wrapper_tests": 2
+  },
+  "capture_instrumentation": "feature-gated real7A280 pre/postworld snapshots onselectedframe&63==0; failedzonepasscaptured automatically",
+  "campaign_missions": 1
+}
