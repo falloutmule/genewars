@@ -113,11 +113,15 @@ impl ActorWorld {
  ///6BD3D->6B72A skips code1A (all effects except11) before classification;
  /// this adapter additionally proves same-owner/EFF26. Other candidates require the scorer.
  fn owned_mule_neighborhood_no_action(&self,r:&CreatureRecord)->Result<(),ActorWorldError>{
-  if word(r,0x68)<=word(r,0x62)>>1||r[0x61]&0x40!=0{return Err(CreatureError::UnsupportedNeighborhood.into());}
+  let food_guard=word(r,0x68)<=word(r,0x62)>>1||r[0x61]&0x40!=0;
+  // Completed task7 skips owned idle AI. A hungry query is a proved no-op
+  //only when every other candidate follows6BD3D/6B72A's skip branches.
+  let completed_command=r[0x5e]==8&&r[0x61]==0&&matches!(r[0x60],8|0x88)&&r[0x78]==7;
+  if food_guard&&!completed_command{return Err(CreatureError::UnsupportedNeighborhood.into());}
   let own=[r[15],r[16],1];let point=[word(r,7),word(r,9)];let cell=floor_cell(point);let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
   //8D930 visits sample cells within radius1024, including its boundary.
   for dy in -4..=4{for dx in -4..=4{if dx*dx+dy*dy>16{continue;}let c=(((cy+dy)&127)*128+((cx+dx)&127))as usize;let mut raw=reference(self.map(),c*14+6);
-   while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{2 if e[24]==4=>{},3 if e[24]==r[24]=>{},4 if e[24]==r[24]&&matches!(self.buildings.as_ref().unwrap().record(word(&raw,0)as usize)?[0x2d],0|11)=>{},5 if e[24]==r[24]&&(matches!(self.effects.as_ref().unwrap().record(word(&raw,0)as usize)?[69],0x15|0x30)||(e[69]==0x1a&&self.effects.as_ref().unwrap().binding(word(&raw,0)as usize)?==Some(EffectAnimationBinding::EffAnimation26)))=>{},8=>{},_=>return Err(CreatureError::UnsupportedNeighborhood.into())}}raw=reference(e,3);}
+   while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{2 if !food_guard&&e[24]==4=>{},3 if !food_guard&&e[24]==r[24]=>{},4 if !food_guard&&e[24]==r[24]&&matches!(self.buildings.as_ref().unwrap().record(word(&raw,0)as usize)?[0x2d],0|11)=>{},5 if e[24]==r[24]&&(matches!(self.effects.as_ref().unwrap().record(word(&raw,0)as usize)?[69],0x15|0x30)||(e[69]==0x1a&&self.effects.as_ref().unwrap().binding(word(&raw,0)as usize)?==Some(EffectAnimationBinding::EffAnimation26)))=>{},8=>{},_=>return Err(CreatureError::UnsupportedNeighborhood.into())}}raw=reference(e,3);}
   }}Ok(())
  }
  fn owned_mule_reveal(&mut self,at:[i16;2])->Result<Vec<[i16;2]>,ActorWorldError>{

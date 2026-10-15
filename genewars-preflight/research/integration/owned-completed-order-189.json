@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "scope": "completedownedorder5792 with allotherfamiliesfrozen; NOT genuinecampaign5792",
+  "compared_bytes": 427369,
+  "mismatches": 0,
+  "draws": 5,
+  "instructions": 11658,
+  "source_evidence": "private/review/owned-mule-captured-width/d316846b28d345a995f692a241454a21/result.json",
+  "input": "private/review/owned-lookahead-captures-189/frame-5792-slot-1-blocked-before-owned",
+  "rust_after": "private/review/owned-completed-order-after-189c",
+  "behavior": "Completedlow08/high00/task7 remains idle state8 and skipsownedidleAI; sourcecommonfallback chooses447/24104, low88/high00/task7, speed591,timer32766.",
+  "guard": "Waive reserve rejection ONLYforcompletedtask7 andsource-skipped neighborhoodtypes; actionableplants,actors,buildings,foreignparticles andcreatures remain rejected whenhungry. Existing ordinaryhungry andforeignparticle negatives roll back wholeworld/RNG.",
+  "source_binding": "Exact1EAD0 getter fromsavedcountdown-expiry1EAC0listing; no fabricated predicate return/canonical rewrite",
+  "regression": {
+    "runtime": 251,
+    "desktop_game": 80,
+    "ignored_each": 1,
+    "release": "passed"
+  },
+  "campaign_missions": 1
+}

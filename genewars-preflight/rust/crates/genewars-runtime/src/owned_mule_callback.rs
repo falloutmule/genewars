@@ -10,7 +10,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut(&C
  C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord,Option<CommonWaterEffect>)->Result<CreatureRecord,CreatureError>{
  let w=|o|i16::from_le_bytes([before[o],before[o+1]]);
  let idle=before[0x5e]==8&&before[0x61]==0&&matches!(before[0x60],0|8|0x88)
-  && (before[0x78]==0 || (before[0x78]==7&&before[0x60]==0x88));
+  && (before[0x78]==0 || (before[0x78]==7&&matches!(before[0x60],8|0x88)));
  let command=matches!(before[0x5e],0|8)&&before[0x61]==0x80&&matches!(before[0x60],0x18|0x98)&&before[0x78]==7;
  if before[6]!=1||before[24]>=4||before[0x7a]!=4||!(idle||command)||before[0x76]>90||before[0x7b]!=255
   ||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)||before[0x4f]!=0||before[0x52]!=0||before[0x57]!=0

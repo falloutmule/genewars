@@ -8,6 +8,14 @@ import argparse,importlib.util,json,struct,uuid
 P=Path(__file__).resolve().parents[2]
 spec=importlib.util.spec_from_file_location('owned_width_source',Path(__file__).with_name('zone-credit-captured-review.py'))
 c=importlib.util.module_from_spec(spec);spec.loader.exec_module(c);g=c.g
+class Source(c.Source):
+ def __init__(self,backing):
+  super().__init__(backing)
+  # Exact trivial virtual10 getters reached when a zone marker shares the
+  # target-query cell. Keep real predicate returns, never skip the candidate.
+  extra=[P/'private/ghidra/countdown-expiry/instructions-0001eac0.txt']
+  self.files+=extra;self.code.update(g.k.m.m.Model(extra,b'').code)
+  order=sorted(self.code);self.next=dict(zip(order,order[1:]))
 PORTS=['83140 render enqueue returns0; numeric world retained','41910 audio engine deferred via RET10; source1E810 wrapper remains interpreted','2C200 UI cleanup deferred','5E068 portrait/module refresh deferred to5E0A3']
 def main():
  ap=argparse.ArgumentParser(description=__doc__)
@@ -24,7 +32,7 @@ def main():
   if record[6]!=1 or record[24]!=0 or record[122]!=4 or record[94]not in(0,8)or struct.unpack_from('<h',record,15)[0]!=args.slot:
    raise ValueError('requires actual singleplayer owner0 live typed Mule state0/8 with matching identity')
   state,seed,resources=g.prepare(buffers);g.k.put(state,0x11878c,1,1)
-  vm=c.Source(buffers['backing.bin'])
+  vm=Source(buffers['backing.bin'])
   run,_,trace=vm.run(entry=0x5ed20,counter=args.frame,seed=seed,state_before=state,registers={'EAX':0x1542be+args.slot*124},instruction_budget=500000)
   result=g.export(vm,buffers)
   for name,data in result.items():(out/name).write_bytes(data)
