@@ -23,7 +23,7 @@ def stage():
     destination = private / 'integration/game-runtime'
     # These raw ANBs were not part of the earlier decoder corpus. Reproduce
     # missing private copies through the manifest-bound disc reader.
-    new_buildings = {'buildings/BSOLA.ANB', 'buildings/BMINE.ANB', 'buildings/BPOWE.ANB'}
+    new_buildings = {'buildings/BSOLA.ANB', 'buildings/BMINE.ANB', 'buildings/BPOWE.ANB', 'buildings/BGENE.ANB'}
     missing = []
     for line in CATALOG.read_text(encoding='utf-8').splitlines():
         fields = line.split('\t')

@@ -389,8 +389,14 @@
       "sha256": "5a42310026365e8c36ddce8ecba48fe099c42accc6c878933d2360c1ebb6e80c",
       "size": 699,
       "provenance": "root/2/disc/201"
+    },
+    {
+      "path": "buildings/BGENE.ANB",
+      "sha256": "a71f03d3cce3d36798cd7f8ad578d665e65883bfe9b541ba93d0ad9eff814cab",
+      "size": 62062,
+      "provenance": "root/2/disc/301"
     }
   ],
   "original_execution": false,
-  "catalog_sha256": "8119192d103fcb05b4919dc7a9091eb8ec91b8cbf6b310e2cdc3c2015f957578"
+  "catalog_sha256": "4eba76afedd1690e33f548e21cb9a545e094b69e234920bdb92a62a9202ef0f9"
 }

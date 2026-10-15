@@ -403,7 +403,7 @@ impl Resources {
         let bturr_bytes = read_bound(&root.join("buildings/BTURR.ANB"))?;
         let bturr_selector1 = BuildingResourceDatabase::load_selector1_bturr(bturr_bytes)
             .map_err(|e| format!("CD BTURR selector-1 database: {e}"))?;
-        let source_buildings=[("BSOLA",SourceBuildingBinding::CdBsolaSelector6),("BMINE",SourceBuildingBinding::CdBmineSelector11),("BPOWE",SourceBuildingBinding::CdBpoweSelector3)]
+        let source_buildings=[("BGENE",SourceBuildingBinding::CdBgeneSelector0),("BSOLA",SourceBuildingBinding::CdBsolaSelector6),("BMINE",SourceBuildingBinding::CdBmineSelector11),("BPOWE",SourceBuildingBinding::CdBpoweSelector3)]
             .into_iter().map(|(name,binding)|SourceBuildingResourceDatabase::load(binding,read_bound(&root.join(format!("buildings/{name}.ANB")))?)
                 .map_err(|e|format!("CD {name} database: {e}"))).collect::<Result<Vec<_>,String>>()?;
         let angle = read_bound(&root.join("physics/angle.bin"))?;

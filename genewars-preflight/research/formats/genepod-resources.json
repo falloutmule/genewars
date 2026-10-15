@@ -1,0 +1,245 @@
+{
+  "status": "passed",
+  "selector": 0,
+  "resource": "BGENE.ANB",
+  "entry_id": "root/2/disc/301",
+  "bytes": 62062,
+  "sha256": "a71f03d3cce3d36798cd7f8ad578d665e65883bfe9b541ba93d0ad9eff814cab",
+  "mapped_descriptor": "0x10393c",
+  "destination": "0x116824",
+  "relocated_selector_table": "0x11685c",
+  "section_offsets": [
+    61038,
+    61128,
+    61648,
+    62012
+  ],
+  "sprite_records": 15,
+  "components": 52,
+  "frames": 26,
+  "animations": [
+    {
+      "index": 0,
+      "first_frame_offset": 0,
+      "last_frame_offset": 28,
+      "count": 3,
+      "holds": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "index": 1,
+      "first_frame_offset": 42,
+      "last_frame_offset": 84,
+      "count": 4,
+      "holds": [
+        0,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "index": 2,
+      "first_frame_offset": 98,
+      "last_frame_offset": 140,
+      "count": 4,
+      "holds": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "index": 3,
+      "first_frame_offset": 154,
+      "last_frame_offset": 308,
+      "count": 12,
+      "holds": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "index": 4,
+      "first_frame_offset": 322,
+      "last_frame_offset": 350,
+      "count": 3,
+      "holds": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "admitted_animations": [
+    0,
+    1
+  ],
+  "grade": 0,
+  "metadata_comparison_bytes": 117413,
+  "metadata_oracle_sha256": "2d00cf1abdd1c30f1aca3e113a65f4997f9691f767f548fbc8a95ccd555c2e62",
+  "framebuffer_oracle": [
+    {
+      "animation": 0,
+      "frame": 0,
+      "origin": [
+        320,
+        240
+      ],
+      "sha256": "08fa8f71949a53fcc2665e3d76e74c85607b270ed1ef02a53ff97e54cf60b0d6"
+    },
+    {
+      "animation": 0,
+      "frame": 0,
+      "origin": [
+        1,
+        1
+      ],
+      "sha256": "0908845b344d38af9c028da456d96abc81df1c5cc2fcef03e3eb926f4cbd3aca"
+    },
+    {
+      "animation": 0,
+      "frame": 1,
+      "origin": [
+        320,
+        240
+      ],
+      "sha256": "20d2e7f8bf0fc1c3c1adea834de8659618b32fcb6df42bc29e6dd588a6d93423"
+    },
+    {
+      "animation": 0,
+      "frame": 1,
+      "origin": [
+        1,
+        1
+      ],
+      "sha256": "b4162c7149bf9308469f1fec4dd920f0eb1ed8017ae8c3b9ea9431efda023dfc"
+    },
+    {
+      "animation": 0,
+      "frame": 2,
+      "origin": [
+        320,
+        240
+      ],
+      "sha256": "55aba74961b1cc8f881ab9b17fd2e66db0b7e1929b6df881fe92f9ec4453eb99"
+    },
+    {
+      "animation": 0,
+      "frame": 2,
+      "origin": [
+        1,
+        1
+      ],
+      "sha256": "e3cbd15f1d5321ace6d1cac1b3bf5ca7fb5dfaffd23059c1bacb31afcf9bb768"
+    },
+    {
+      "animation": 1,
+      "frame": 0,
+      "origin": [
+        320,
+        240
+      ],
+      "sha256": "5b79d35c681e8ec6bf153ddcc80a54e5304f83961914c73e61212198284c38a0"
+    },
+    {
+      "animation": 1,
+      "frame": 0,
+      "origin": [
+        1,
+        1
+      ],
+      "sha256": "2efeb3d0b3bab06dd786b9b2b3bb1544394ab455c7a079642d21fd9289047765"
+    },
+    {
+      "animation": 1,
+      "frame": 1,
+      "origin": [
+        320,
+        240
+      ],
+      "sha256": "3a83cc17e02d4739ef224586e86e0c77c649d1710d6f4902ddff2e46b65dd322"
+    },
+    {
+      "animation": 1,
+      "frame": 1,
+      "origin": [
+        1,
+        1
+      ],
+      "sha256": "2efeb3d0b3bab06dd786b9b2b3bb1544394ab455c7a079642d21fd9289047765"
+    },
+    {
+      "animation": 1,
+      "frame": 2,
+      "origin": [
+        320,
+        240
+      ],
+      "sha256": "9b30a527e47080f9df7073e96582f663298463e0f598ea3784418381874f11c4"
+    },
+    {
+      "animation": 1,
+      "frame": 2,
+      "origin": [
+        1,
+        1
+      ],
+      "sha256": "2efeb3d0b3bab06dd786b9b2b3bb1544394ab455c7a079642d21fd9289047765"
+    },
+    {
+      "animation": 1,
+      "frame": 3,
+      "origin": [
+        320,
+        240
+      ],
+      "sha256": "3a83cc17e02d4739ef224586e86e0c77c649d1710d6f4902ddff2e46b65dd322"
+    },
+    {
+      "animation": 1,
+      "frame": 3,
+      "origin": [
+        1,
+        1
+      ],
+      "sha256": "2efeb3d0b3bab06dd786b9b2b3bb1544394ab455c7a079642d21fd9289047765"
+    }
+  ],
+  "framebuffer_bytes_per_case": 311032,
+  "rust_tests": "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 180 filtered out; finished in 0.26s",
+  "private_run": "private/integration/genepod-resources/083ed8cbd7fc4538b865389c24c3043a",
+  "pins": {
+    "private/reference-run/run-006/drive-c/GAME/DATA/BUILDING/BGENE.ANB": "a71f03d3cce3d36798cd7f8ad578d665e65883bfe9b541ba93d0ad9eff814cab",
+    "private/ghidra/validated/memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
+    "private/ghidra/building-loader-refs/instructions-000451f0.txt": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+    "research/ghidra/building-loader-contract.json": "92f14f841693d74aaf36c0de2bbf11195907bafb29849b8fbcdce1421d4fa633",
+    "rust/crates/genewars-runtime/src/source_building_resources.rs": "a253a7cd7af7797c4fb774ae95f13d8f1d28a789d00c5514e1bdb49e5dae84e2",
+    "scripts/desktop/genepod_resource_evidence.py": "6f06b0c0bb59c58bedbeadbc6cea84fddd2616c4d9afffac07eb11b4c5681d84",
+    "scripts/desktop/validate_source_building_pixels.py": "81ac457f9752778ace97ae0ebb45d827f17f718af8a53946bf75bacf319a83b8",
+    "scripts/desktop/validate_bturr_common_pixels.py": "c0269b1ce31f7b7d62647ceb0fb123baf6881f14f11e442e576e2dda25deb34b",
+    "scripts/desktop/validate_bturr_status_overlay_pixels.py": "684bc177181875d7d5ec796763e08c081cdf5d4f2a7adb0de6b3a47ad88a9372"
+  },
+  "catalog_row": "buildings/BGENE.ANB\ta71f03d3cce3d36798cd7f8ad578d665e65883bfe9b541ba93d0ad9eff814cab\t62062\tprivate/reference-run/run-006/drive-c/GAME/DATA/BUILDING/BGENE.ANB\troot/2/disc/301",
+  "limits": [
+    "Exact resource and common main-image admission only; no Genepod production callback or campaign acceptance",
+    "Incomplete animation0 has3 construction-grade frames; normal completed grade0 selects animation1 through47F08..13",
+    "Animations2/3 upgraded grades and animation4 special flag40 state remain unadmitted",
+    "No shadow, overlay, production animation sequencing or sound claim"
+  ],
+  "original_execution": false
+}
