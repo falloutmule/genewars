@@ -106,6 +106,7 @@ impl ActorWorld {
     pub fn step_family8_motion(&mut self, slot:u16, frame:u32, water:i32,
         physics:&PhysicsTables, trig:&TrigTables, animation:&Family8Animation,
         directions:&Family8DirectionalAnimations) -> Result<Family8StepReceipt,ActorWorldError> {
+        #[cfg(debug_assertions)] self.capture_numeric_callback(slot as usize,frame,"family8-before");
         if !self.validate_links()?.contains(&(8,slot as i16)) {return Err(ActorWorldError::MissingFamily8Link(slot));}
         self.validate_family8_count()?;
         let pool=self.family8.as_ref().unwrap();
@@ -208,6 +209,7 @@ impl ActorWorld {
         }else{None};
         let rng_after=staged.rng;
         staged.validate_links()?;staged.validate_family8_count()?;*self=staged;
+        #[cfg(debug_assertions)] self.capture_numeric_callback(slot as usize,frame,"family8-after");
         Ok(Family8StepReceipt{slot,plan,child_created,particle_created,target_selection,retirement,parent_notified:retirement_parent,parent_response,rng_after})
     }
 

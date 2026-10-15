@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "scope": "Saved world observation; no new gameplay acceptance or literal fullcallback comparison",
+  "fixture": "private/review/krell-mule-callbacks-052/frame-1005-slot-2-blocked-before",
+  "sha256": {
+    "actors.bin": "eee090efa566810f6acca554dda145e8cb381f3c858115a20cf8f3bd4030f0ef",
+    "buildings.bin": "016249e14085e484ed9ac63a24598e85c2d17c0b040c35591f35b5cc11dcba02",
+    "players.bin": "309f945eec06b90e0eb30f98b1cf698464dcf3bf4adba8eb31f366f46d0a419e",
+    "rng.bin": "f43685276f16d696eb2c30ede385ba12592ca332b4b09169c8269703828467e4"
+  },
+  "actor0": {
+    "state55": 8,
+    "task82": 1,
+    "selector83": 3,
+    "flags57": 1,
+    "flags58": 2,
+    "position": [
+      2638,
+      15952
+    ],
+    "destination": [
+      2943,
+      15999
+    ],
+    "associated_kind4F": 0,
+    "flags49": 656,
+    "retained_work_stage88": 5
+  },
+  "buildings": [
+    {
+      "slot": 0,
+      "selector": 11,
+      "health": 280,
+      "flags": 1
+    }
+  ],
+  "conclusion": "The captured actor already carries Distributor selector3 and is moving toward a new destination. It is not still waiting on the old Extractor return. No reset or extra return investigation is justified by this fixture."
+}

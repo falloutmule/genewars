@@ -690,8 +690,10 @@ fn draw(rng:&mut crate::blueprint::BlueprintRng,purpose:CreatureRngPurpose,trace
 /// predicate. The admitted idle Mule has no selected/live action to release.
 /// Call after the source energy/regeneration prefix, before ordinary AI.
 pub fn plan_mule_retry_wait(before:&CreatureRecord,rng_before:crate::blueprint::BlueprintRng)->Result<InitialMuleChoice,CreatureError> {
-    if rng_before.ring>=32||before[6]!=1||before[0x18]!=4||before[0x5e]!=8||before[0x7a]!=4
-       ||motion_word(before,0x49)as u16&0x100==0||before[0x60]&2!=0||before[0x57]!=0||before[0x5d]!=0 {return Err(CreatureError::UnsupportedMotionState);}
+    let action=before[0x5e]==8&&before[0x57]==0||before[0x5e]==1&&before[0x57]==2;
+    // Live plant approach requires the caller to clear/prove clear plant2E bit4.
+    if rng_before.ring>=32||before[6]!=1||before[0x18]!=4||!action||before[0x7a]!=4
+       ||motion_word(before,0x49)as u16&0x100==0||before[0x60]&2!=0||before[0x5d]!=0 {return Err(CreatureError::UnsupportedMotionState);}
     let mut after=*before;let mut rng=rng_before;let mut draws=Vec::new();
     after[0x15]&=0xdf;after[0x33..0x37].fill(0);let flags=motion_word(&after,0x60)as u16&0xd71a;motion_put(&mut after,0x60,flags as i16);after[0x5d]=0;after[0x57]=0;
     let delay=i16::from(draw(&mut rng,CreatureRngPurpose::RetryDelay,&mut draws)%20)+10;after[0x5e]=8;motion_put(&mut after,0x6c,delay);

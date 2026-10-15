@@ -436,18 +436,34 @@ impl SharedMission {
         }
         if std::env::var_os("GENEWARS_KRELL_CONSTRUCTION_PROBE").is_some(){
             loaded.select(0).unwrap();
-            for (selector,screen) in [(11,[320,234]),(3,[400,370]),(0,[430,350])]{
+            let advance=|loaded:&mut SharedMission|->bool{
+                let before=loaded.clone();
+                if let Err(error)=loaded.step(&resources){
+                    if let Some(root)=std::env::var_os("GENEWARS_MULE_CALLBACK_FIXTURE"){
+                        let d=std::path::PathBuf::from(root).join(format!("mission-frame-{}-blocked-before",loaded.frame_counter));std::fs::create_dir(&d).expect("immutable mission failure fixture");
+                        for(name,bytes)in [("backing",before.world.backing_bytes().to_vec()),("players",(0..4u8).flat_map(|p|before.world.player(p).unwrap().bytes().iter().copied()).collect()),("actors",before.world.actors().records().concat()),("creatures",before.world.creatures().unwrap().records().concat()),("effects",before.world.effects().unwrap().records().concat()),("family8",before.world.family8().unwrap().records().concat()),("buildings",before.world.buildings().unwrap().records().concat())]{std::fs::write(d.join(format!("{name}.bin")),bytes).unwrap();}
+                        let rng=before.world.rng();let mut bytes=rng.seed.to_le_bytes().to_vec();bytes.push(rng.ring);bytes.extend(rng.draw_count.to_le_bytes());std::fs::write(d.join("rng.bin"),bytes).unwrap();
+                        std::fs::write(d.join("boundary.json"),format!("{{\"frame\":{},\"error\":{},\"scope\":\"before entire mission callback, not per-family\"}}",loaded.frame_counter,crate::runtime_scene::json_string(&error))).unwrap();
+                    }
+                    println!("Krell observed boundary frame{}: {error}",loaded.frame_counter);
+                    assert!(error.contains("Unsupported"),"unexpected probe error: {error}");assert_eq!(loaded.world,before.world);assert_eq!(loaded.ui_animations,before.ui_animations);assert_eq!(loaded.actor_dispatch_audit_json(),before.actor_dispatch_audit_json());
+                    println!("Krell construction blocked frame{}: {error}; buildings{}; actors{}",loaded.frame_counter,loaded.building_state_json(),loaded.actor_state_json());
+                    println!("{{\"status\":\"blocked\",\"classification\":\"unsupported_behavior\",\"source_frame\":{},\"transaction_unchanged\":true}}",loaded.frame_counter);return false;
+                }
+                loaded.render(&resources,[1536,15360]).unwrap();loaded.finish_outer_frame();true
+            };
+            for (selector,screen) in [(11,[320,234]),(3,[224,299]),(0,[448,226])]{
+                // A completed building does not end the Architect's return animation.
+                // Wait for the normal idle/new-task opcode5 admission; never edit it.
+                for _ in 0..512{
+                    let actor=loaded.world.actors().record(0).unwrap();
+                    if actor[0x55]==1&&actor[0x82]==0{break;}
+                    if !advance(&mut loaded){return;}
+                }
                 let event=loaded.place_selected_building(&resources,[1536,15360],screen,selector).unwrap();println!("Krell normal placement{selector}: {event}");
                 let mut completed=false;
                 for _ in 0..1800 {
-                    let before=loaded.clone();
-                    if let Err(error)=loaded.step(&resources){
-                        println!("Krell observed boundary frame{}: {error}",loaded.frame_counter);
-                        assert_eq!(loaded.frame_counter,829);assert_eq!(error,"Creatures(UnsupportedCellEntry)");assert_eq!(loaded.world,before.world);assert_eq!(loaded.ui_animations,before.ui_animations);assert_eq!(loaded.actor_dispatch_audit_json(),before.actor_dispatch_audit_json());
-                        println!("Krell construction blocked frame{}: {error}; buildings{}; actors{}",loaded.frame_counter,loaded.building_state_json(),loaded.actor_state_json());
-                        println!("{{\"status\":\"blocked\",\"classification\":\"unsupported_behavior\",\"source_frame\":829,\"transaction_unchanged\":true}}");return;
-                    }
-                    loaded.render(&resources,[1536,15360]).unwrap();loaded.finish_outer_frame();
+                    if !advance(&mut loaded){return;}
                     completed=loaded.world.buildings().unwrap().records().iter().any(|r|r[6]==4&&r[45]==selector&&u16::from_le_bytes([r[49],r[50]])&1!=0);
                     if completed{println!("Krell completed{selector} frame{}; {}",loaded.frame_counter,loaded.building_state_json());break;}
                 }

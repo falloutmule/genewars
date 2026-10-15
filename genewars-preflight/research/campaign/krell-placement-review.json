@@ -1,0 +1,514 @@
+{
+  "status": "observed_candidates",
+  "scope": "Read-only Python translation of existing footprint3 and forward/inverse projection rules; all interior heads empty. No Rust replay/native acceptance.",
+  "fixture": "private/review/krell-mule-callbacks-054/frame-1017-slot-5-after",
+  "backing_sha256": "2c0c2e47ec98e51777575848383dc149f27fd74724a423dddac63d5ba0e6a5b8",
+  "camera_target": [
+    1536,
+    15360
+  ],
+  "camera_cells": [
+    248,
+    56
+  ],
+  "rejected_distributor": {
+    "world": [
+      2943,
+      15999
+    ],
+    "classification": [
+      [
+        "water"
+      ],
+      [
+        [
+          11,
+          62,
+          3
+        ]
+      ]
+    ]
+  },
+  "candidates": [
+    {
+      "cell": [
+        7,
+        63
+      ],
+      "world": [
+        1919,
+        16255
+      ],
+      "screen_estimate": [
+        256,
+        284
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1912,
+        16249
+      ],
+      "inverse_snapped": [
+        1919,
+        16255
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        6,
+        63
+      ],
+      "world": [
+        1663,
+        16255
+      ],
+      "screen_estimate": [
+        224,
+        254
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1658,
+        16251
+      ],
+      "inverse_snapped": [
+        1663,
+        16255
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        8,
+        63
+      ],
+      "world": [
+        2175,
+        16255
+      ],
+      "screen_estimate": [
+        288,
+        304
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        2169,
+        16250
+      ],
+      "inverse_snapped": [
+        2175,
+        16255
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        5,
+        63
+      ],
+      "world": [
+        1407,
+        16255
+      ],
+      "screen_estimate": [
+        192,
+        223
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1401,
+        16250
+      ],
+      "inverse_snapped": [
+        1407,
+        16255
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        9,
+        63
+      ],
+      "world": [
+        2431,
+        16255
+      ],
+      "screen_estimate": [
+        320,
+        328
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        2431,
+        16256
+      ],
+      "inverse_snapped": [
+        2431,
+        16255
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        7,
+        64
+      ],
+      "world": [
+        1919,
+        16511
+      ],
+      "screen_estimate": [
+        224,
+        299
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1914,
+        16507
+      ],
+      "inverse_snapped": [
+        1919,
+        16511
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        6,
+        64
+      ],
+      "world": [
+        1663,
+        16511
+      ],
+      "screen_estimate": [
+        192,
+        265
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1658,
+        16507
+      ],
+      "inverse_snapped": [
+        1663,
+        16511
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        8,
+        64
+      ],
+      "world": [
+        2175,
+        16511
+      ],
+      "screen_estimate": [
+        256,
+        321
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        2169,
+        16506
+      ],
+      "inverse_snapped": [
+        2175,
+        16511
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        4,
+        63
+      ],
+      "world": [
+        1151,
+        16255
+      ],
+      "screen_estimate": [
+        160,
+        187
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1145,
+        16250
+      ],
+      "inverse_snapped": [
+        1151,
+        16255
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        5,
+        64
+      ],
+      "world": [
+        1407,
+        16511
+      ],
+      "screen_estimate": [
+        160,
+        232
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1402,
+        16507
+      ],
+      "inverse_snapped": [
+        1407,
+        16511
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        9,
+        64
+      ],
+      "world": [
+        2431,
+        16511
+      ],
+      "screen_estimate": [
+        288,
+        347
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        2426,
+        16507
+      ],
+      "inverse_snapped": [
+        2431,
+        16511
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        7,
+        57
+      ],
+      "world": [
+        1919,
+        14719
+      ],
+      "screen_estimate": [
+        448,
+        226
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1913,
+        14714
+      ],
+      "inverse_snapped": [
+        1919,
+        14719
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        3,
+        61
+      ],
+      "world": [
+        895,
+        15743
+      ],
+      "screen_estimate": [
+        192,
+        141
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        890,
+        15739
+      ],
+      "inverse_snapped": [
+        895,
+        15743
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        7,
+        65
+      ],
+      "world": [
+        1919,
+        16767
+      ],
+      "screen_estimate": [
+        192,
+        314
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1915,
+        16764
+      ],
+      "inverse_snapped": [
+        1919,
+        16767
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        6,
+        57
+      ],
+      "world": [
+        1663,
+        14719
+      ],
+      "screen_estimate": [
+        416,
+        194
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1657,
+        14714
+      ],
+      "inverse_snapped": [
+        1663,
+        14719
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        3,
+        60
+      ],
+      "world": [
+        895,
+        15487
+      ],
+      "screen_estimate": [
+        224,
+        134
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        888,
+        15481
+      ],
+      "inverse_snapped": [
+        895,
+        15487
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        3,
+        62
+      ],
+      "world": [
+        895,
+        15999
+      ],
+      "screen_estimate": [
+        160,
+        147
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        889,
+        15994
+      ],
+      "inverse_snapped": [
+        895,
+        15999
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        6,
+        65
+      ],
+      "world": [
+        1663,
+        16767
+      ],
+      "screen_estimate": [
+        160,
+        281
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1658,
+        16763
+      ],
+      "inverse_snapped": [
+        1663,
+        16767
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        8,
+        65
+      ],
+      "world": [
+        2175,
+        16767
+      ],
+      "screen_estimate": [
+        224,
+        342
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        2169,
+        16762
+      ],
+      "inverse_snapped": [
+        2175,
+        16767
+      ],
+      "same_cell_after_inverse": true
+    },
+    {
+      "cell": [
+        4,
+        64
+      ],
+      "world": [
+        1151,
+        16511
+      ],
+      "screen_estimate": [
+        128,
+        196
+      ],
+      "empty_interior_heads": true,
+      "inverse_point": [
+        1147,
+        16508
+      ],
+      "inverse_snapped": [
+        1151,
+        16511
+      ],
+      "same_cell_after_inverse": true
+    }
+  ]
+}

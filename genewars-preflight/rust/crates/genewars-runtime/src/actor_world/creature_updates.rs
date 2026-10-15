@@ -44,11 +44,11 @@ impl ActorWorld {
     pub fn step_neutral_mule_slot_with_water(&mut self,slot:u16,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations)->Result<MuleCallbackReceipt,ActorWorldError>{
         let result=self.step_mule_followup_inner(usize::from(slot),context,physics,trig,animations,true);
         // Capture the exact first unsupported callback without another full replay.
-        #[cfg(debug_assertions)] if result.is_err(){self.capture_mule_callback(usize::from(slot),context.frame_counter,"blocked-before");}
+        #[cfg(debug_assertions)] if result.is_err(){self.capture_numeric_callback(usize::from(slot),context.frame_counter,"blocked-before");}
         result
     }
     fn step_mule_followup_inner(&mut self,slot:usize,context:MuleStepContext,physics:&PhysicsTables,trig:&TrigTables,animations:&MuleAnimations,admit_water:bool)->Result<MuleCallbackReceipt,ActorWorldError> {
-        #[cfg(debug_assertions)] self.capture_mule_callback(slot,context.frame_counter,"before");
+        #[cfg(debug_assertions)] self.capture_numeric_callback(slot,context.frame_counter,"before");
         self.validate_links()?;
         let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;
         let binding=if pool.record(slot)?[0x5e]>=26{CreatureAnimationBinding::BonesSelector4}else{CreatureAnimationBinding::MuleSelector4};
@@ -91,6 +91,11 @@ impl ActorWorld {
                     //5E0B0 retry precedes5EB30 cleanup and ordinary624B8 AI.
                     //Flag100 survives untilthetail; do notdispatchretrytwice.
                     failed_action_dispatched=true;
+                    if record[0x5e]==1{
+                        //5CD1A releases plant2E bit4, distinct from reservationbit1.
+                        //Bounded no-op release; nonclear/live-kind variants remain explicit.
+                        if record[0x57]!=2||world.mule_plant_flags(word(record,0x55)).map_err(|_|CreatureError::UnsupportedMotionState)?&4!=0{return Err(CreatureError::UnsupportedMotionState);}
+                    }
                     let choice=creature_world::plan_mule_retry_wait(record,*rng)?;*rng=choice.rng_after;
                     let cell=floor_cell([word(record,7),word(record,9)]);
                     if world.mule_cell_entry_predicate(&choice.after,cell).map_err(|_|CreatureError::UnsupportedCellEntry)?{
@@ -251,13 +256,13 @@ impl ActorWorld {
             }
         }
         staged.rng=rng;
-        #[cfg(debug_assertions)] staged.capture_mule_callback(slot,context.frame_counter,"after");
+        #[cfg(debug_assertions)] staged.capture_numeric_callback(slot,context.frame_counter,"after");
         staged.validate_links()?;let mut result=plan;result.after=*staged.creatures.as_ref().unwrap().record(slot)?;*self=staged;Ok(MuleCallbackReceipt{motion:result,retirement:None,newborn_slots,pending_audio,pending_plant_retirements,pending_portrait_refresh:before[0x5e]==8&&prefix[0x5e]==0})
     }
 
     /// Opt-in immutable callback fixture for source comparison; absent in release.
     #[cfg(debug_assertions)]
-    fn capture_mule_callback(&self,slot:usize,frame:u32,phase:&str){
+    pub(super) fn capture_numeric_callback(&self,slot:usize,frame:u32,phase:&str){
         let extra=std::env::var("GENEWARS_MULE_CALLBACK_FRAME").ok().and_then(|v|v.parse::<u32>().ok());
         if phase!="blocked-before"&&extra.map_or(frame>1,|requested|frame!=requested){return;} // Explicit frame or default first two.
         let Some(root)=std::env::var_os("GENEWARS_MULE_CALLBACK_FIXTURE") else{return;};

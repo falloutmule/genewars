@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "state": 1,
+      "seed": 0,
+      "instructions": 116
+    },
+    {
+      "state": 1,
+      "seed": 5428,
+      "instructions": 116
+    },
+    {
+      "state": 1,
+      "seed": 30553,
+      "instructions": 116
+    },
+    {
+      "state": 1,
+      "seed": 65535,
+      "instructions": 116
+    },
+    {
+      "state": 8,
+      "seed": 0,
+      "instructions": 103
+    },
+    {
+      "state": 8,
+      "seed": 5428,
+      "instructions": 103
+    },
+    {
+      "state": 8,
+      "seed": 30553,
+      "instructions": 103
+    },
+    {
+      "state": 8,
+      "seed": 65535,
+      "instructions": 103
+    }
+  ],
+  "compared_bytes": 1048,
+  "scope": "Extracted exact productionpurefunction versusliteral5E1D8..5E3B1;5B100false explicitcallerport;plantbit04explicitlyclear;syntheticidle/plantvariations,notfullcallback",
+  "production_sha256": "815e84afff1eb5a78738475dd923e9761846704b11fc86fdb20bcaebfdb7ae68",
+  "extracted_sha256": "c5fd0d02ce73485c6e8d6917ee8baa6a68d044ef37620ab4846d219425edae1b"
+}
