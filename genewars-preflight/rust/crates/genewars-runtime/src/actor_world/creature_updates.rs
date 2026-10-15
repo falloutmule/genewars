@@ -224,8 +224,14 @@ impl ActorWorld {
                         if world.creatures.as_ref().unwrap().binding(peer_id as usize)?!=Some(CreatureAnimationBinding::MuleSelector4){return Err(CreatureError::UnsupportedNeighborhood);}
                         let pair=crate::mule_idle_pair_init::plan_pair_init(&record,&other).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
                         for _ in 0..2{rng.seed=rng.seed.wrapping_mul(0xe62d);rng.ring=(rng.ring+1)&31;rng.draw_count=rng.draw_count.wrapping_add(1);}
+                        //63045 falls through5EF46 into the newly selected state3.
+                        //Different cells only: the same-cell rendezvous is a separate transaction.
+                        let point=[word(&other,7),word(&other,9)];
+                        if floor_cell(point)==floor_cell([word(&record,7),word(&record,9)]){return Err(CreatureError::UnsupportedMotionState);}
+                        let mut after=pair.current_after;
+                        if creature_world::mule_callback_phase(&before,context.frame_counter)&3==3{after[11..13].copy_from_slice(&point[0].to_le_bytes());after[13..15].copy_from_slice(&point[1].to_le_bytes());after[0x49]|=4;}
                         pending_pair=Some((peer_id,other,pair.peer_after,Vec::new()));
-                        return Ok(pair.current_after);
+                        return Ok(after);
                     }
                 }
                 world.check_mule_neutral_neighbors(&record,own,[word(&record,7),word(&record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
@@ -466,9 +472,14 @@ impl ActorWorld {
     /// Friendly direction is unused only with the separately enforced absence
     /// of enemies (62949..52); full field77 can select a paired action.
     fn mule_friendly_candidate_is_no_action(&self,record:&CreatureRecord,raw:[u8;3])->Result<bool,ActorWorldError>{
-        if raw[2]!=1||record[0x18]!=4||record[0x7a]!=4||record[0x76]>90||(record[0x77]==255&&(record[0x79]as i8)>0&&word(record,0x68)>(word(record,0x62)>>1)){return Ok(false);}
+        if raw[2]!=1||record[0x18]!=4||record[0x7a]!=4||record[0x76]>90{return Ok(false);}
         let other=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?;
         if other[6]!=1||other[0x18]!=4||other[0x7a]!=4{return Ok(false);}
+        //6BA96..6BAF3 Bones update direction only, bypassing food publication.
+        //The surrounding no-pair/no-enemy domain does not consume that direction.
+        if matches!(other[0x5e],26|27){return Ok(other[0x60]&1==0
+            &&self.creatures.as_ref().unwrap().binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::BonesSelector4));}
+        if record[0x77]==255&&(record[0x79]as i8)>0&&word(record,0x68)>(word(record,0x62)>>1){return Ok(false);}
         //6BA8A..6BB57 still score friendly corpses as food. Their score and
         //direction are unused only in this satiated, no-pair, no-enemy domain.
         if other[0x5e]>=24{return Ok(record[0x61]&0x40==0&&word(record,0x68)>(word(record,0x62)>>1));}
@@ -539,7 +550,11 @@ impl ActorWorld {
             while raw[2]!=0{let entity=self.entity(raw)?;
                 if raw!=own{match raw[2]{
                     1=>{let other=self.creatures.as_ref().unwrap().record(word(&raw,0)as usize)?;
-                        if other[0x18]!=4||other[0x7a]!=4||other[0x5e]>=24{return Err(CreatureError::UnsupportedNeighborhood.into());}
+                        if other[0x18]!=4||other[0x7a]!=4{return Err(CreatureError::UnsupportedNeighborhood.into());}
+                        //6BAF3 skips both best-mate and best-food publication.
+                        if matches!(other[0x5e],26|27)&&other[0x60]&1==0
+                            &&self.creatures.as_ref().unwrap().binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::BonesSelector4){raw=reference(entity,3);continue;}
+                        if other[0x5e]>=24{return Err(CreatureError::UnsupportedNeighborhood.into());}
                         if !matches!(other[0x5e],3|10|15)&&other[0x77]==255&&word(other,0x49)as u16&0x400==0{
                             let value=i32::from(word(other,0x68))+weight;if value>score{score=value;best=Some(word(&raw,0)as u16);}
                         }

@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "campaign_missions": 1,
+  "correction": "Valid neutral Bones26/27 do not publish food or mate candidates. Idle mating executes the different-cell state3 pursuit tail in the same callback. Same-cell initialization remains explicitly unsupported.",
+  "proof": [
+    {
+      "scope": "authentic Krell frame2984 Mule7",
+      "frame": 2984,
+      "slot": 7,
+      "draws": 5,
+      "compared_bytes": 427369,
+      "mismatches": 0,
+      "original_output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\37431447baf64e2791cbb8c7d57f6d6c",
+      "log_sha256": "b108cde1b6add595cba57c7d9ea89e8066562287f2d7934c83294cc1b612e038"
+    },
+    {
+      "scope": "synthetic timer-only frame2985 Mule2, not campaign progress",
+      "frame": 2985,
+      "slot": 2,
+      "draws": 2,
+      "compared_bytes": 427369,
+      "mismatches": 0,
+      "original_output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\738c1f1214eb432ba9cfbca4e7eed208",
+      "log_sha256": "7408db0022a42da3448170dae133be12a63793b2b17a6951818bf960ca8a6a43"
+    }
+  ],
+  "runtime_tests": {
+    "passed": 232,
+    "ignored": 1,
+    "log": "private/integration/runtime-157.log"
+  },
+  "native_acceptance": "latest parity remains frozen137; new gameplay changes pending native replay",
+  "no_injection": true
+}
