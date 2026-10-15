@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "scope": "Isolated source67780 low-nutrition cleanup with false5B100, preserving live association50 while nulling target55kind. Other families frozen; not campaign progress. True-cell relocation, consumption and Bones cleanup remain explicit unsupported.",
+  "comparisons": [
+    {
+      "scope": "isolated3645 low-nutrition cleanup",
+      "frame": 3645,
+      "slot": 8,
+      "draws": 1,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\959426e0155d485f90365b7f54222603",
+      "mismatches": 0
+    },
+    {
+      "scope": "isolated3646 retained-association idle",
+      "frame": 3646,
+      "slot": 8,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\ba026c5ab0774517a6627290710c0377",
+      "mismatches": 0
+    },
+    {
+      "scope": "isolated3647 retained-association idle",
+      "frame": 3647,
+      "slot": 8,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\22d00693001c45c2848b35332bf364cf",
+      "mismatches": 0
+    }
+  ],
+  "total_compared_bytes": 1282107,
+  "runtime": {
+    "passed": 236,
+    "ignored": 1
+  },
+  "supplementary_agent": "owned_scheduler_review implemented pure abandon module; root reviewed and integrated/world-compared",
+  "campaign_missions": 1
+}
