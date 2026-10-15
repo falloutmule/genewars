@@ -30,13 +30,31 @@ for skill in [None,0,50,100]:
   assert planned==pp;assert r['draws']==0;assert struct.pack('<HBI',model.load(0x11878a,2),model.load(0x11872c,1),model.load(0x118782,4))==rng
   if skill is None and not null:assert aa==(after/'creature-2.bin').read_bytes()and bb==(after/'creature-0.bin').read_bytes()and pp==(after/'plants.bin').read_bytes()
   inputs+=a+b;expected+=aa+bb+bytes([len(ids)])+b''.join(struct.pack('<H',id)for id in ids);plant_bytes+=len(pp);cases.append(dict(skill=skill,null_targets=null,instructions=r['steps']))
+# Actual820 re-pair: state8 peer with negative stage and an old kind1 target.
+second=P/'private/review/krell-pair-boundaries/814d797157fe4f94944898b3d90bf07f';second_before=second/'693ae';second_after=second/'694d3'
+for stage in [None,0,3,128]:
+ a=bytearray((second_before/'creature-1.bin').read_bytes());b=bytearray((second_before/'creature-0.bin').read_bytes());oldpeer=(second_before/'creature-2.bin').read_bytes();pp0=(second_before/'plants.bin').read_bytes();rr0=(second_before/'rng.bin').read_bytes()
+ if stage is not None:b[0x79]=stage
+ state={0x1542be+124+i:v for i,v in enumerate(a)};state.update({0x1542be+i:v for i,v in enumerate(b)});state.update({0x1542be+248+i:v for i,v in enumerate(oldpeer)});state.update({0x15d40e+i:v for i,v in enumerate(pp0)})
+ ebp=0x2fff00;state.update({ebp-0xf72+i:v for i,v in enumerate(struct.pack('<I',0x1542be))});seed,ring,draws=struct.unpack('<HBI',rr0);state[0x11872c]=ring;state.update({0x118782+i:v for i,v in enumerate(struct.pack('<I',draws))})
+ model=m.Source(backing);model.code[0x694d3]=('RET',[])
+ r,_,trace=model.run(seed=seed,state_before=state,entry=0x693ae,registers={'ESI':0x1542be+124,'EBP':ebp},instruction_budget=10000)
+ aa=bytes(model.load(0x1542be+124+i,1)for i in range(124));bb=bytes(model.load(0x1542be+i,1)for i in range(124));pp=bytes(model.load(0x15d40e+i,1)for i in range(len(pp0)))
+ assert bytes(model.load(0x1542be+248+i,1)for i in range(124))==oldpeer
+ ids=[struct.unpack_from('<H',a,0x55)[0]]if a[0x57]==2 else[];planned=bytearray(pp0)
+ for id in ids:planned[id*49+46]&=0xfe
+ assert pp==planned;assert r['draws']==0;assert struct.pack('<HBI',model.load(0x11878a,2),model.load(0x11872c,1),model.load(0x118782,4))==rr0
+ if stage is None:assert aa==(second_after/'creature-1.bin').read_bytes()and bb==(second_after/'creature-0.bin').read_bytes()and pp==(second_after/'plants.bin').read_bytes()
+ inputs+=a+b;expected+=aa+bb+bytes([len(ids)])+b''.join(struct.pack('<H',id)for id in ids);plant_bytes+=len(pp);cases.append(dict(actual_frame=820,peer_stage=stage,instructions=r['steps'],old_peer_unchanged=True))
 actual=subprocess.run([str(exe)],input=inputs,capture_output=True,check=True).stdout
 assert actual==expected,[(i,a,b)for i,(a,b)in enumerate(zip(actual,expected))if a!=b][:20]
 negative=bytearray()
 for off,value in [(6,3),(24,0),(94,3),(96,2),(122,5),(87,1)]:
  a=bytearray(current);a[off]=value;negative+=a+peer
 bad=bytearray(current);bad[15:17]=peer[15:17];negative+=bad+peer
-assert subprocess.run([str(exe),'reject'],input=negative,capture_output=True,check=True).stdout==bytes([1])*7
+for state,kind in [(1,1),(8,3),(3,1)]:
+ b=bytearray(peer);b[94]=state;b[87]=kind;negative+=current+b
+assert subprocess.run([str(exe),'reject'],input=negative,capture_output=True,check=True).stdout==bytes([1])*10
 (work/'inputs.bin').write_bytes(inputs);(work/'expected.bin').write_bytes(expected)
-r=dict(status='passed',cases=cases,record_and_release_bytes=len(actual),plant_bytes=plant_bytes,negative_cases=7,private_run=str(work.relative_to(P)),pins={str(p.relative_to(P)):hashlib.sha256(p.read_bytes()).hexdigest()for p in [rust,world,Path(__file__),*before.glob('*.bin'),*after.glob('*.bin')]},source_pins={str(p.relative_to(P)):hashlib.sha256(p.read_bytes()).hexdigest()for p in model.files},scope='Pair slice693AE..694D3, both124byte records and fullplantarray; zeroRNG. Current-species speed appliedboth, peertraits deliberatelydifferent. Caller qualification/selection and laterstate3 lifecycle excluded.')
+r=dict(status='passed',cases=cases,record_and_release_bytes=len(actual),plant_bytes=plant_bytes,negative_cases=10,private_run=str(work.relative_to(P)),pins={str(p.relative_to(P)):hashlib.sha256(p.read_bytes()).hexdigest()for p in [rust,world,Path(__file__),*before.glob('*.bin'),*after.glob('*.bin'),*second_before.glob('*.bin'),*second_after.glob('*.bin')]},source_pins={str(p.relative_to(P)):hashlib.sha256(p.read_bytes()).hexdigest()for p in model.files},scope='Pair slice693AE..694D3, both124byte records and fullplantarray; zeroRNG. Current-species speed appliedboth, peertraits deliberatelydifferent. Actual820 state8 peer kind1 reset is local; old peer record unchanged; peer stage has no local gate. Caller qualification/selection and laterstate3 lifecycle excluded.')
 (P/'research/variants/mule-pair-init-rust-review.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(dict(status='passed',cases=len(cases),record_bytes=len(actual),plant_bytes=plant_bytes)))

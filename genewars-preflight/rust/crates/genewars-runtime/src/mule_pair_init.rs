@@ -1,4 +1,6 @@
 //!693AE..694D3 pair initialization only: caller proves eligibility and source-selected peer.
+//! Peer state8 may retain an old kind1 target:5CCA0 clears it locally only.
+//! Initiator eligibility/stage and peer scoring remain caller responsibilities.
 //! No RNG is consumed here. Caller validates/releases returned plant reservations
 //! (plant2E bit0) and commits BOTH records atomically. Neutral no60bit2 makes
 //!5C920 selection cleanup a no-op. Lifecycle/timer tail is deliberately separate.
@@ -7,10 +9,10 @@
 pub fn plan_pair_init(current:&[u8;124],peer:&[u8;124])->Result<PairInitPlan,PairInitError>{
  let id=|r:&[u8;124]|i16::from_le_bytes([r[15],r[16]]);
  if !(0..300).contains(&id(current))||!(0..300).contains(&id(peer))||id(current)==id(peer){return Err(PairInitError::Identity);}
- if current[0x5e]!=7||peer[0x5e]!=1{return Err(PairInitError::Record);}
+ if current[0x5e]!=7||!matches!(peer[0x5e],1|8){return Err(PairInitError::Record);}
  let mut releases=Vec::new();
- for r in [current,peer]{
-  if r[6]!=1||r[24]!=4||r[0x7a]!=4||r[0x60]&2!=0||!matches!(r[0x57],0|2){return Err(PairInitError::Record);}
+ for (index,r) in [current,peer].into_iter().enumerate(){
+  if r[6]!=1||r[24]!=4||r[0x7a]!=4||r[0x60]&2!=0||!(matches!(r[0x57],0|2)||(index==1&&r[0x5e]==8&&r[0x57]==1)){return Err(PairInitError::Record);}
   if r[0x57]==2{let plant=i16::from_le_bytes([r[0x55],r[0x56]]);if !(0..512).contains(&plant){return Err(PairInitError::Plant);}releases.push(plant as u16);}
  }
  let speed=crate::creature_world::mule_requested_speed(current);

@@ -12,7 +12,7 @@ Exceland acceptance research/integration/mission-001-acceptance-004.json. Frozen
 
 Krell synthetic source-projected carry:3 specialists ready by256. Ordinary Extractor11 placement camera[1536,15360]/screen[320,234] projects[1718,15543], placement[1663,15487]. Architect reaches constructionstage5. Extractor progress187/280 atframe785; incomplete. Planned ordinary continuation Distributor3 thenGenepod0, production/ownedMule commands/zone credit/original outcome. Site rejection remains legitimate; no forced placement/resources/objectives.
 
-**Current blocker: frame820, slot1, Creatures(UnsupportedNeighborhood).** Actual fixture private/review/krell-mule-callbacks-046/frame-820-slot-1-blocked-before; log private/integration/krell-construction-command-046.log. Probe046 passes787 then intentionally fails staleexpectedframe787 on reaching820. Newbornforcedwander787 now source-matches427369B/12189instructions/6draws. Extractor stillincomplete; do notcountKrellaccepted. Rootupdatedexpected820/Neighborhood; nextboundedprobeafterfix mustassertworld/UI/frame/auditrollbackifstillblocked.
+**Current blocker: frame829, slot4 (newborn), Creatures(UnsupportedCellEntry).** Exact fixture private/review/krell-mule-callbacks-047/frame-829-slot-4-blocked-before; log private/integration/krell-construction-command-047.log. Probe047 passes820 then exposes829, fails staleexpected820. Sourceclassificationpending. Partial829world hasExtractorhealth249/280, architectstage5/worktimer79; committedpreviousframe includesprogresspulse. Syntheticcarrystillnotmissionacceptance. Nextsourcecombat_review829cellentry.
 
 ## Verified continuation packets
 
@@ -51,3 +51,9 @@ Nextsourceowner combat_review actual787newbornfixture045. Rootcurrenttestexpecte
 ## Current820 frontier
 
 787child actualsourceforced5B100wander passes; noidle-delaydraw consumed. Useplan_neutral_mule_rechoice_with_cell_predicate withactualpostphysicscellpredicate. Oldwrapperpreservesfalsecase; foodqueryandnofooddefault bothvalidateenemy/types. Nextsourcecombat_review820slot1feedingfixture046, notold787fixture. sourcekrell-newborn-forced-wander-native.json. Lastfocusedtestresults10runtimefamily_scheduler+2desktoprenderpassed, full785/786/787callbackscompared. Purebirth/factory/tail+worldintegrationverified andreadyforcommit; inspectlatestgitlog. No newaggregateclaim.
+
+## Repeat-pair integration and construction route
+
+Committedbirthbaselinec83b904;820newpairfullcallbackmatches427369B/12054instructions/2draws,krell-pair-repeat-native.json. Pair-initpureextension12cases/3012recordbytes/301056plantbytes/10guards passes: initiatingstate7positive-stage canselectidlepeerstate8negative-stage/retainedkind1. Generic5CCA0 localresetleavesoldpeerunchanged; no peerpositive-stage requirement. Expectednexttest829/UnsupportedCellEntry.
+
+Route sourcecheck:7D090 Krellfunds2000;80590 carries0..4A1 and61A..6F7, excludesfunds/counts/ownedbits. Acceptedfrozen004Krellstep0hasfunds2000, nobuildings, choices[11].11->3->0 neededbyactualhumanmenu;Photon6notrequired, unpoweredGenepodprogressesevery6frames. SyntheticEngineer31 costs588+338+538, leaves536beforeincome/production; don'tequatewithactualacceptedEngineeruntilrawcarrymatched. Health187pausewasexpectedworktimer43->8, notfunding/powerstall. Sourceworktimerpulse at828raiseshealth249andresets79.

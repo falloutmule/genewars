@@ -40,16 +40,40 @@
       "skill": 100,
       "null_targets": true,
       "instructions": 343
+    },
+    {
+      "actual_frame": 820,
+      "peer_stage": null,
+      "instructions": 343,
+      "old_peer_unchanged": true
+    },
+    {
+      "actual_frame": 820,
+      "peer_stage": 0,
+      "instructions": 343,
+      "old_peer_unchanged": true
+    },
+    {
+      "actual_frame": 820,
+      "peer_stage": 3,
+      "instructions": 343,
+      "old_peer_unchanged": true
+    },
+    {
+      "actual_frame": 820,
+      "peer_stage": 128,
+      "instructions": 343,
+      "old_peer_unchanged": true
     }
   ],
-  "record_and_release_bytes": 2008,
-  "plant_bytes": 200704,
-  "negative_cases": 7,
-  "private_run": "private\\review\\mule-pair-init\\5c518001c6fa49a1841822c47d7d193f",
+  "record_and_release_bytes": 3012,
+  "plant_bytes": 301056,
+  "negative_cases": 10,
+  "private_run": "private\\review\\mule-pair-init\\68b86b48a60342de9d2dbe5c21657001",
   "pins": {
-    "rust\\crates\\genewars-runtime\\src\\mule_pair_init.rs": "5fc0fa842d62e71a7dd5976cf0d2a9ab5c6b05c2fc2ff900ed867cace668271f",
-    "rust\\crates\\genewars-runtime\\src\\creature_world.rs": "8e2bfbeaa16cb8664d976044db44d0c4e458c5944187c3f3efc8905c85b9d683",
-    "scripts\\ghidra\\mule_pair_init_review.py": "2ad087b83300611a83e820188eb581329173e0be26906d02bb2fc5bed4026fcc",
+    "rust\\crates\\genewars-runtime\\src\\mule_pair_init.rs": "8c1fe2e073a300725165e54c21643a272e05826381eac91c582f99eeb0636896",
+    "rust\\crates\\genewars-runtime\\src\\creature_world.rs": "a46aa2c2b613a4d55d358da29f16dd9176d046d48d3655eb06c196453ac155f1",
+    "scripts\\ghidra\\mule_pair_init_review.py": "001eb3960e9a7319e0929f812de0337372746a6a2b420b381d056e7a3b64b2df",
     "private\\review\\krell-pair-boundaries\\25c5283f90b7410c9354ca95be3c474a\\693ae\\creature-0.bin": "5f83a64351fb5287fc6c623559fa0522aa9ffb5ef05128d5e8c11c6bd54bc2cf",
     "private\\review\\krell-pair-boundaries\\25c5283f90b7410c9354ca95be3c474a\\693ae\\creature-2.bin": "7bb1bfd50ce4bb5515fc054d98bb8ed625cbc589871ea0af3e7d8a5f289e0455",
     "private\\review\\krell-pair-boundaries\\25c5283f90b7410c9354ca95be3c474a\\693ae\\plants.bin": "d13cdc9961e115c78415e04937bb915ab0c4440cddda02f4de0ee08f973ac9ef",
@@ -57,7 +81,17 @@
     "private\\review\\krell-pair-boundaries\\25c5283f90b7410c9354ca95be3c474a\\694d3\\creature-0.bin": "c21da2eaac6fe63c354aa9f87397db49df70ed7f8dfea09ddadf024aabae86b2",
     "private\\review\\krell-pair-boundaries\\25c5283f90b7410c9354ca95be3c474a\\694d3\\creature-2.bin": "9e469d29b3c19b71479482bcc66c8060ede8e64a00c5f9fb23768643886296d4",
     "private\\review\\krell-pair-boundaries\\25c5283f90b7410c9354ca95be3c474a\\694d3\\plants.bin": "7da02bc13a1584beeaa6855d8dfc729a9772948ce8933656b9e297c841021f99",
-    "private\\review\\krell-pair-boundaries\\25c5283f90b7410c9354ca95be3c474a\\694d3\\rng.bin": "e809db6606c62c786e48e9544c4c428725a81dbcf47597b4e61bf26c71317142"
+    "private\\review\\krell-pair-boundaries\\25c5283f90b7410c9354ca95be3c474a\\694d3\\rng.bin": "e809db6606c62c786e48e9544c4c428725a81dbcf47597b4e61bf26c71317142",
+    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\693ae\\creature-0.bin": "788b97fec0ec68f534299221cd6d723fb1b9a899699f3d8457c2108f08147f28",
+    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\693ae\\creature-1.bin": "524decb12238faae3fd3a12aae10686de6eac71580f04a56d78bf5bee194b54d",
+    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\693ae\\creature-2.bin": "2e3110abd14a253e4c86c36f32cc1b909b4e8db8effd45744c038782fdb62b40",
+    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\693ae\\plants.bin": "2c46b3b22b6e21b912c380e1d98c09eb8305d28a8bda11ce66d26cdfad0dac74",
+    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\693ae\\rng.bin": "c230cbb4abbdee3e4ae8eebe65c6c6f21eaca40dd201fee764835124f3494bda",
+    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\694d3\\creature-0.bin": "8d809f902bbad0e4f99f9f3ec729a59fbd896d980204f74df4a610cd482ee0b5",
+    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\694d3\\creature-1.bin": "0d7fc4c460bcd5574bb5e1f29fedb3feca56605efc350b0a82664710da97e8f5",
+    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\694d3\\creature-2.bin": "2e3110abd14a253e4c86c36f32cc1b909b4e8db8effd45744c038782fdb62b40",
+    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\694d3\\plants.bin": "8551ca87181cd2e3f9f773809f3e38b4a6798c22f10b37f9ab37064546a3d3d1",
+    "private\\review\\krell-pair-boundaries\\814d797157fe4f94944898b3d90bf07f\\694d3\\rng.bin": "c230cbb4abbdee3e4ae8eebe65c6c6f21eaca40dd201fee764835124f3494bda"
   },
   "source_pins": {
     "private\\ghidra\\player-creation\\instructions-0005ed20.txt": "ea29b165354042aaf33dc630322d89b577810f96c2ece1f8998799512e2feed0",
@@ -143,7 +177,9 @@
     "private\\ghidra\\display-geometry\\instructions-000979e8.txt": "0d63ac4c232eab793e7dad64df3c0316ca5092f861e397156972b27e1cd01f6a",
     "private\\ghidra\\plant-startup\\instructions-000409f0.txt": "a1a7d26d1931c802d72a5256a29c491208cde9651cd40d6b785a07043dffad55",
     "private\\ghidra\\krell-cell-entry\\instructions-00073f70.txt": "39d73c8ba1a4295079b7115b24a39c90ecbadb1df20fa840ed4d0441ee5e7d69",
-    "private\\ghidra\\krell-pair-target": "429dfe781c0d492a7bbeedc6d8702b57d1b1c821220a32c3576db48fdbb2ee8e"
+    "private\\ghidra\\krell-pair-target": "429dfe781c0d492a7bbeedc6d8702b57d1b1c821220a32c3576db48fdbb2ee8e",
+    "private\\ghidra\\countdown-expiry\\instructions-00013e60.txt": "c53006dcb695e17de2a4ffb232fa0223fc86b1a7ff0219a35caeaead047e4052",
+    "private\\ghidra\\construction-command\\instructions-0001ee50.txt": "c936d978ab504b821db0be8bbeddb1f31af7390e7c4b7a3ab33cdc5653e32c10"
   },
-  "scope": "Pair slice693AE..694D3, both124byte records and fullplantarray; zeroRNG. Current-species speed appliedboth, peertraits deliberatelydifferent. Caller qualification/selection and laterstate3 lifecycle excluded."
+  "scope": "Pair slice693AE..694D3, both124byte records and fullplantarray; zeroRNG. Current-species speed appliedboth, peertraits deliberatelydifferent. Actual820 state8 peer kind1 reset is local; old peer record unchanged; peer stage has no local gate. Caller qualification/selection and laterstate3 lifecycle excluded."
 }
