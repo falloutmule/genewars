@@ -395,6 +395,12 @@ pub fn plan_mule_after_admitted_prefix_with_cell_entry_and_postphysics<F,O,C,E,P
     physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
     contact:F,obstacle:O,animations:&MuleAnimations,choice:C,admit_water:bool,cell_entry:E,postphysics:P)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
+    plan_mule_after_admitted_prefix_with_cell_entry_and_postphysics_policy(before,prefix,working_target,map,context,physics,trig,contact,obstacle,animations,choice,admit_water,cell_entry,postphysics,false)
+}
+pub(crate) fn plan_mule_after_admitted_prefix_with_cell_entry_and_postphysics_policy<F,O,C,E,P>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
+    physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
+    contact:F,obstacle:O,animations:&MuleAnimations,choice:C,admit_water:bool,cell_entry:E,postphysics:P,live_hostile_choice:bool)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
     if matches!(before[0x5e],24..=27)||(before[0x5e]==8&&motion_word(before,0x66)==1&&mule_callback_phase(before,context.frame_counter)&1!=0) {
         return plan_mule_mortality_after_prefix(before,prefix,map,context,physics,trig,contact,obstacle,animations,admit_water);
     }
@@ -406,32 +412,34 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     let null_food_target=before[0x57]==0&&before[0x60]&0x42==0x40;
     let food_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&(before[0x57]==2||null_food_target);
     let corpse_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&before[0x57]==1&&before[0x52]==1&&before[0x50..0x53]==before[0x55..0x58];
+    let hostile_attack_hold=before[0x5e]==21&&before[0x61]==0x40&&matches!(before[0x60],8|0x88)&&before[0x78]==0
+        &&before[0x52]==1&&before[0x57]==1&&before[0x50..0x53]==before[0x55..0x58]&&motion_word(before,0x3f)==0&&motion_word(before,0x6c)>0;
     let paired_approach=before[0x5e]==3&&matches!(before[0x60],0|4|8|12|0x80|0x84|0x88|0x8c)&&before[0x57]==1&&((matches!(before[0x61],0|0x40)&&before[0x52]==1)||(matches!(before[0x61],0x20|0x60)&&before[0x52]==0));
     let paired_wait=before[0x5e]==10&&matches!(before[0x61],0x20|0x60)&&matches!(before[0x60],4|12|0x84|0x8c)&&before[0x57]==1&&before[0x52]==0&&motion_word(before,0x6c)>=0;
     let retained_food_idle=before[0x5e]==8&&before[0x60]==8&&before[0x61]==0x40&&before[0x57]==0&&before[0x52]==1&&before[0x50..0x52]==before[0x55..0x57];
     let lost_bones_wait=before[0x5e]==4&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==0&&before[0x52]==0;
     let corpse_wait=matches!(before[0x5e],4|5)&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==1&&before[0x52]==1&&before[0x50..0x53]==before[0x55..0x58];
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
-    if before[6]!=1||before[0x18]!=4||!(neutral||postbirth_idle||relocation||food_approach||corpse_approach||corpse_wait||lost_bones_wait||retained_food_idle||feeding_wait||paired_approach||paired_wait)||before[0x7a]!=4||before[0x76]>90
+    if before[6]!=1||before[0x18]!=4||!(neutral||postbirth_idle||relocation||food_approach||corpse_approach||corpse_wait||lost_bones_wait||retained_food_idle||feeding_wait||paired_approach||paired_wait||hostile_attack_hold)||before[0x7a]!=4||before[0x76]>90
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
-       ||before[0x4f]!=0||(before[0x52]!=0&&!paired_approach&&!corpse_approach&&!corpse_wait&&!retained_food_idle)||motion_word(before,0x49)as u16&!0x337f!=0
+       ||before[0x4f]!=0||(before[0x52]!=0&&!paired_approach&&!corpse_approach&&!corpse_wait&&!retained_food_idle&&!hostile_attack_hold)||motion_word(before,0x49)as u16&!0x337f!=0
        ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=if mule_callback_phase(before,context.frame_counter)&1==0{0}else{2}{return Err(CreatureError::UnsupportedMotionState);}
-    plan_mule_admitted_body_with_postphysics(before,prefix,working_target,map,context,physics,trig,contact,obstacle,animations,choice,admit_water,cell_entry,postphysics)
+    plan_mule_admitted_body_with_postphysics(before,prefix,working_target,map,context,physics,trig,contact,obstacle,animations,choice,admit_water,cell_entry,postphysics,live_hostile_choice)
 }
 /// Shared source body; caller MUST prove its owner/action domain independently.
 /// Postphysics runs the owned reveal at its original pre-AI boundary.
 pub(crate) fn plan_mule_admitted_body_with_postphysics<F,O,C,E,P>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
     physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
-    contact:F,mut obstacle:O,animations:&MuleAnimations,choice:C,admit_water:bool,cell_entry:E,mut postphysics:P)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+    contact:F,mut obstacle:O,animations:&MuleAnimations,choice:C,admit_water:bool,cell_entry:E,mut postphysics:P,live_hostile_choice:bool)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
     plan_mule_admitted_body_with_collision(before,prefix,working_target,map,context,physics,trig,contact,animations,choice,admit_water,cell_entry,|record,_|postphysics(record),|record| {
         if obstacle(motion_point(record))? {return Err(CreatureError::MotionEnvironment);} Ok(*record)
-    })
+    },live_hostile_choice)
 }
 /// Same shared callback with source-ordered airborne response supplied by the world.
 pub(crate) fn plan_mule_admitted_body_with_collision<F,C,E,P,H>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
  physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
- contact:F,animations:&MuleAnimations,mut choice:C,admit_water:bool,cell_entry:E,mut postphysics:P,airborne:H)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+ contact:F,animations:&MuleAnimations,mut choice:C,admit_water:bool,cell_entry:E,mut postphysics:P,airborne:H,live_hostile_choice:bool)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord,Option<CommonWaterEffect>)->Result<CreatureRecord,CreatureError>,H:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
     let waiting=before[0x49]&3==3;
     if waiting&&motion_word(prefix,0x3f)!=0{return Err(CreatureError::UnsupportedMotionState);}
@@ -502,6 +510,14 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
             if motion_word(&a,0x6c)&mask==0{let reserve=motion_word(&a,0x68);motion_put(&mut a,0x68,if reserve<1{0}else{reserve-1});}
         }
         if mule_callback_phase(before,context.frame_counter)&15<=1&&context.climate.wrapping_add(motion_word(map,motion_cell(motion_point(&a))*14+9))<=25{return Err(CreatureError::MotionEnvironment);}
+        if before[0x5e]==21 {
+            //5EBDF..5EC69 completes attack animation before dispatch60332.
+            //Damage/retaliation is still an explicit atomic boundary.
+            let id=usize::from(a[0x19]);let holds=animations.holds.get(id).ok_or(CreatureError::UnsupportedMotionState)?;
+            if holds.is_empty()||motion_word(&a,0x6c)<=0{return Err(CreatureError::UnsupportedMotionState);}
+            let complete=if animations.flags[id]&1!=0{a[0x1a]==0&&a[0x1b]==0}else{a[0x1a]==0&&a[0x1e]==0&&usize::from(a[0x1b])==holds.len()-1};
+            if complete{return Err(CreatureError::UnsupportedMotionState);}
+        }
         //5EB30 virtualAC is49bit200. Ordinary arrival clears the
         //owned task10 independently of the subsequent active-speed cleanup.
         if motion_word(&a,0x49)as u16&0x200!=0 {if a[0x5e]==0{a[0x60]&=0xdf;}a[0x60]&=0xef;}
@@ -516,8 +532,9 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
         //65B4D's owner4/skill<=90 approach callback5D360 is a no-op.
         //Arrival requires the separately visible plant reservation/state7
         //mutation; do not silently continue the walking-only plan.
-        if a[0x5e]==1&&(a[0x57]==0||(motion_word(&a,0x49)as u16&0x200!=0&&a[0x60]&0x80==0)) {a=choice(&a)?;}
+        if a[0x5e]==1&&(live_hostile_choice||a[0x57]==0||(motion_word(&a,0x49)as u16&0x200!=0&&a[0x60]&0x80==0)) {a=choice(&a)?;}
         if matches!(before[0x5e],3|10){a=choice(&a)?;}
+        if live_hostile_choice&&before[0x5e]==21&&a[0x5e]==21{a=choice(&a)?;}
         a[0x4a]&=0xfc;refresh_mule_lifecycle(&mut a);
         let timer=motion_word(&a,0x6c);if timer>0 {motion_put(&mut a,0x6c,timer-1);}
     }
@@ -529,6 +546,11 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
     if a[0x5e]==10 {
         //5EA66: paired countdown selects animation22 once, then retains it.
         if a[0x19]!=22 {a[0x19]=22;a[0x1e]=0;a[0x1c]=1;a[0x1d]=0;a[0x1a]=0;a[0x1b]=0;}
+    }else if a[0x5e]==21 {
+        //5E749 selects directional attack8..15;5E779 uses pinned Mule base10.
+        if !(8..16).contains(&a[0x19]){a[0x1e]=0;a[0x1c]=1;a[0x1d]=0;a[0x1a]=0;a[0x1b]=0;a[0x19]=(((((i32::from(yaw)>>7)+1)>>1)+1)&7)as u8+8;}
+        let skill=i32::from(a[0x76]).min(100);let threshold=(10*(50+50*skill/100)/100)>>1;
+        a[0x1d]=if i32::from(motion_word(&a,0x68))<threshold{2}else{1};
     }else if matches!(a[0x5e],4|5|7) {
         if a[0x19]!=19 {a[0x19]=19;a[0x1a]=0;a[0x1b]=0;a[0x1c]=1;a[0x1d]=2;a[0x1e]=0;}
     }else{

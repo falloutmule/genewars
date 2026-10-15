@@ -97,7 +97,7 @@ impl ActorWorld {
         let links_moved=std::cell::Cell::new(false);
         let mut pending_pair=None;let mut newborn_slots=Vec::new();let mut failed_action_dispatched=false;let mut retired_during_feeding=false;
         let mut feed_bones=None;let mut reserve_corpse=None;let mut reserve_plant=None;let mut release_plant=None;let mut fed_plant=None;let mut pending_audio=Vec::new();let mut pending_plant_retirements=Vec::new();
-        let(plan,water_effect)=creature_world::plan_mule_after_admitted_prefix_with_cell_entry_and_postphysics(&before,&prefix,working_target,self.map(),context,physics,trig,
+        let(plan,water_effect)=creature_world::plan_mule_after_admitted_prefix_with_cell_entry_and_postphysics_policy(&before,&prefix,working_target,self.map(),context,physics,trig,
             |record,normal,previous|query_world.borrow().mule_contact_speed(record,normal,previous).map_err(|_|CreatureError::MotionEnvironment),
             |point|query_world.borrow().move_obstacle_at(point).map_err(|_|CreatureError::MotionEnvironment),animations,|record|{
                 let mut world=query_world.borrow_mut();let mut rng=rng_state.borrow_mut();
@@ -153,7 +153,21 @@ impl ActorWorld {
                     reserve_corpse=Some((word(record,0x55)as u16,corpse[0x60],abandoned.target_after[0x60]));
                     *rng=abandoned.rng_after;return Ok(abandoned.current_after);
                 }
-                if hostile_enemy.is_some()&&record[0x5e]==1{return Ok(*record);}
+                if let Some(enemy)=hostile_enemy {
+                    if record[0x5e]==21{let mut after=*record;if creature_world::mule_callback_phase(record,context.frame_counter)&3==3{
+                        let dx=word(&enemy,7).wrapping_mul(2).wrapping_sub(word(record,7).wrapping_mul(2));let dy=word(&enemy,9).wrapping_mul(2).wrapping_sub(word(record,9).wrapping_mul(2));
+                        after[0x4b..0x4d].copy_from_slice(&crate::actor_motion::angle(i32::from(dx),i32::from(dy),physics.angles()).to_le_bytes());
+                    }return Ok(after);}
+                    if record[0x5e]==1 {
+                    if mule_pair_distance(record,&enemy)<=16384 {
+                        match crate::mule_hostile_contact::plan_false_contact(record,&enemy,physics){
+                            Ok(after)=>return Ok(after),Err(crate::mule_hostile_contact::HostileContactError::UnsupportedAttack)=>{
+                                let entry=crate::mule_hostile_attack_entry::plan_entry(record,&enemy,*rng,physics).map_err(|_|CreatureError::UnsupportedMotionState)?;
+                                *rng=entry.rng_after;if let Some(channel)=entry.pending_audio{pending_audio.push(channel);}let mut after=entry.after;after[0x60]&=0xbf;return Ok(after);
+                            },Err(_)=>return Err(CreatureError::UnsupportedMotionState),
+                        }
+                    }return Ok(*record);
+                }}
                 if record[0x5e]==1&&record[0x57]==1 {
                     let id=word(record,0x55)as u16;let corpse=world.creatures.as_ref().unwrap().record(id as usize)?;
                     let arrival=crate::mule_corpse_arrival::plan_arrival(record,corpse).map_err(|_|CreatureError::UnsupportedMotionState)?;
@@ -317,18 +331,18 @@ impl ActorWorld {
                 world.creatures.as_mut().unwrap().replace_record_checked(slot,&entered,&after)?;
                 links_moved.set(true);Ok(after)
             },|record|{
-                let mut after=*record;
-                if let Some(enemy)=hostile_enemy {
+                let after=*record;
+                if hostile_enemy.is_some()&&before[0x5e]==1 {
                     let phase=creature_world::mule_callback_phase(&before,context.frame_counter);
                     //65C60 runs on every odd callback, after physical motion.
                     //Only far pursuit with no abandonment draw is admitted.
                     if phase&1!=0 {
                         if phase&3==3&&32767-i32::from(word(record,0x6c))>256{return Err(CreatureError::UnsupportedMotionState);}
-                        if mule_pair_distance(record,&enemy)<=16384{after=crate::mule_hostile_contact::plan_false_contact(record,&enemy,physics).map_err(|_|CreatureError::UnsupportedMotionState)?;}
+                        //Contact response is dispatched after energy/food and action cleanup.
                     }
                 }
                 Ok(after)
-            })?;
+            },hostile_enemy.is_some())?;
         let rng=rng_state.into_inner();let mut staged=query_world.into_inner();
         // The entry hook already applied source unlink/prepend and virtual88.
         // Mortality uses the legacy bounded planner and still rejects its
@@ -398,7 +412,7 @@ impl ActorWorld {
         let own=[before[15],before[16],1];let current=[word(before,7),word(before,9)];
         let retained_food_association=before[24]==4&&before[0x5e]==8&&before[0x60]==8&&before[0x61]==0x40
             &&before[0x57]==0&&before[0x52]==1&&word(before,0x50)==word(before,0x55);
-        let associated_pair=matches!(before[0x5e],1|3|4|5)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55)||retained_food_association;
+        let associated_pair=matches!(before[0x5e],1|3|4|5|21)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55)||retained_food_association;
         let mut final_target=[word(before,11),word(before,13)];
         let mut a=*before;a[0x49]&=0x9f;
         if a[0x4f]!=0||(a[0x52]!=0&&!associated_pair)||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
@@ -539,11 +553,11 @@ impl ActorWorld {
     /// Bounded5B100 predicate shared by cell entry and waypoint waiting.
     /// Typed live hostile pursuit. Corpse feeding keeps its independent guard.
     fn mule_live_hostile_target(&self,r:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
-        if r[6]!=1||r[24]!=4||r[0x7a]!=4||r[0x5e]!=1||r[0x61]!=0x40||!matches!(r[0x60],0x48|0xc8)
+        if r[6]!=1||r[24]!=4||r[0x7a]!=4||!matches!(r[0x5e],1|21)||r[0x61]!=0x40||!(if r[0x5e]==1{matches!(r[0x60],0x48|0xc8)}else{matches!(r[0x60],8|0x88)})
             ||r[0x78]!=0||r[0x76]>90||r[0x4f]!=0||r[0x5d]!=0||r[0x57]!=1||r[0x52]!=1
             ||reference(r,0x50)!=reference(r,0x55)||word(r,0x49)as u16&0x100!=0{return Ok(None);}
         let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;let id=word(r,0x55)as usize;let target=*pool.record(id)?;
-        if target[6]==1&&target[24]==0&&target[0x7a]==4&&(target[0x5e]==8||(target[0x5e]==1&&target[0x78]==7&&target[0x61]==0&&target[0x60]==0xc8
+        if target[6]==1&&target[24]==0&&target[0x7a]==4&&(target[0x5e]==8||(matches!(target[0x5e],1|21)&&target[0x78]==7&&target[0x61]==0&&(if target[0x5e]==1{matches!(target[0x60],0x48|0xc8)}else{matches!(target[0x60],8|0x88)})
             &&target[0x4f]==0&&target[0x5d]==0&&reference(&target,0x50)==[r[15],r[16],1]
             &&reference(&target,0x55)==[r[15],r[16],1]&&reference(&target,0x58)==[r[15],r[16],1]))&&word(&target,0x6a)>0
             &&word(&target,0x49)as u16&0x400==0&&pool.binding(id)?==Some(CreatureAnimationBinding::MuleSelector4){Ok(Some(target))}else{Ok(None)}

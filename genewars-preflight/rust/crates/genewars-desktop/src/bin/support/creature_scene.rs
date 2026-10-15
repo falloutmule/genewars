@@ -200,6 +200,8 @@ pub fn draw_supported_mule_record(
         8 => animation <= 7 || animation == 22,
         //5EA66 selects22;59470 uses the established high-animation wrapper.
         10 => animation <= 7 || animation == 22,
+        //5E749 selects attack directions8..15;59470 uses its ordinary body.
+        21 => (8..=15).contains(&animation),
         // Literal mortality continuations pin state 24 to animation 17 and
         // state 25 to corpse animation 18. The ANB remains the authority for
         // their frame extents (7 and 3 frames respectively).
@@ -214,10 +216,11 @@ pub fn draw_supported_mule_record(
         || i16::from_le_bytes([record[0x68],record[0x69]]) <= (i16::from_le_bytes([record[0x62],record[0x63]]) >> 1);
     //59470 does not branch on task7 or these references in its body pass.
     //The world owns reciprocal live-target binding; this record-only renderer
-    //admits only the exact retained task7 pursuit shape, never combat states.
+    //admits the exact task7 pursuit or source-proved attack-entry shape.
     let target = i16::from_le_bytes([record[0x55],record[0x56]]);
-    let owned_hostile = record[0x5e]==1 && record[0x78]==7
-        && record[0x61]==0 && matches!(record[0x60],0x48|0xc8)
+    let owned_hostile = ((record[0x5e]==1 && matches!(record[0x60],0x48|0xc8))
+        || (record[0x5e]==21 && matches!(record[0x60],0x08|0x88)))
+        && record[0x78]==7 && record[0x61]==0
         && record[0x76]<=90 && record[0x4f]==0 && record[0x5d]==0
         && record[0x52]==1 && record[0x57]==1 && record[0x5a]==1
         && record[0x50..0x53]==record[0x55..0x58]
@@ -1187,9 +1190,16 @@ mod pair_stop_render_tests {
   let hostile_pool=std::fs::read(p.join("private/review/owned-mule-captured-width/42967be6fee844c78bec6cd127c7158f/creatures.bin")).unwrap();
   let hostile:[u8;124]=hostile_pool[124..248].try_into().unwrap();
   assert_eq!((hostile[94],hostile[0x78],hostile[0x60],hostile[0x61]),(1,7,0xc8,0));
+  let attack_pool=std::fs::read(p.join("private/review/neutral-mule-captured-width/2589f8c58e974fcc93f578007a2cc239/creatures.bin")).unwrap();
+  let mut attack:[u8;124]=attack_pool[5*124..6*124].try_into().unwrap();
+  assert_eq!((attack[94],attack[25],attack[27],attack[0x60],attack[0x61]),(21,14,1,0x88,0x40));
+  //Source-equal neutral attack body with explicit owned palette/task ports.
+  //Compositor evidence only; native owned combat is not claimed here.
+  attack[24]=0;attack[0x78]=7;attack[0x61]=0;
+  let target:[u8;3]=attack[0x55..0x58].try_into().unwrap();attack[0x58..0x5b].copy_from_slice(&target);
   let mut lines=Vec::new();let mut owner_images=Vec::new();
-  for owner in 0..4 {for variant in 0..6 {
-   let mut r=if variant==5{hostile}else{captured};r[24]=owner;let mut height=if variant==5{0}else{4312};let mut inherited=0;
+  for owner in 0..4 {for variant in 0..7 {
+   let mut r=if variant==6{attack}else if variant==5{hostile}else{captured};r[24]=owner;let mut height=if variant>=5{0}else{4312};let mut inherited=0;
    match variant {1=>{height=0;r[23]=5;},2=>{height=0;r[23]=5;r[21]|=2;inherited=1;},3=>{height=0;r[118]=100;r[119]=255;inherited=2;},4=>{r[121]=3;r[0x62..0x64].copy_from_slice(&127i16.to_le_bytes());r[0x68..0x6a].copy_from_slice(&16i16.to_le_bytes());},_=>{}}
    let mut pixels=vec![0xa5;68*128+4];let receipt=draw_supported_mule_record(&resources.mule,&r,[24,90],height,0,inherited,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut pixels).unwrap();
    assert!(receipt.components.iter().map(|p|p.pixels_written).sum::<usize>()>0);if variant==0{owner_images.push(pixels.clone());}
@@ -1201,6 +1211,10 @@ mod pair_stop_render_tests {
   //Unsupported task/reference/flag shapes must reject before destination writes.
   for(offset,value)in[(0x78,0),(0x52,0),(0x57,0),(0x5a,0),(0x61,0x40),(0x60,8)]{
    let mut bad=hostile;bad[offset]=value;let mut out=vec![0x55;68*128];let saved=out.clone();
+   assert_eq!(draw_supported_mule_record(&resources.mule,&bad,[24,90],0,0,0,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut out),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(out,saved);
+  }
+  for(offset,value)in[(0x19,7),(0x19,16),(0x5a,0),(0x61,0x40),(0x60,0xc8)]{
+   let mut bad=attack;bad[offset]=value;let mut out=vec![0x55;68*128];let saved=out.clone();
    assert_eq!(draw_supported_mule_record(&resources.mule,&bad,[24,90],0,0,0,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut out),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(out,saved);
   }
   let mut icon_required=captured;icon_required[121]=3;

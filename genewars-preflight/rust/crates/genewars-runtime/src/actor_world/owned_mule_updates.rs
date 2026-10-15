@@ -17,7 +17,7 @@ impl ActorWorld {
   if pool.binding(slot)?!=Some(CreatureAnimationBinding::MuleSelector4){return Err(CreatureError::UnsupportedMotionState.into());}
   let before=*pool.record(slot)?;if word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
   let hostile_enemy=self.owned_mule_live_hostile_target(&before)?;
-  if before[0x5e]==1&&hostile_enemy.is_none(){return Err(CreatureError::UnsupportedMotionState.into());}
+  if matches!(before[0x5e],1|21)&&hostile_enemy.is_none(){return Err(CreatureError::UnsupportedMotionState.into());}
   let mut rng=self.rng;let(prefix,target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng)?;
   let stage=std::cell::RefCell::new(self.clone());let random=std::cell::RefCell::new(rng);let reveals=std::cell::RefCell::new(Vec::new());let audio=std::cell::RefCell::new(Vec::new());
   let(plan,_water)=crate::owned_mule_callback::plan_owned_after_prefix(&before,&prefix,target,self.map(),context,physics,trig,
@@ -30,7 +30,23 @@ impl ActorWorld {
     }
    },animations,
    |record|{
-    if hostile_enemy.is_some()&&record[0x5e]==1{return Ok(*record);}
+    if let Some(enemy)=hostile_enemy {
+     if record[0x5e]==21{let mut after=*record;if creature_world::mule_callback_phase(record,context.frame_counter)&3==3{
+      let dx=word(&enemy,7).wrapping_mul(2).wrapping_sub(word(record,7).wrapping_mul(2));let dy=word(&enemy,9).wrapping_mul(2).wrapping_sub(word(record,9).wrapping_mul(2));
+      after[0x4b..0x4d].copy_from_slice(&crate::actor_motion::angle(i32::from(dx),i32::from(dy),physics.angles()).to_le_bytes());
+     }return Ok(after);}
+     if record[0x5e]==1 {
+     let xy=genewars_core::cd_candidate::distance_squared_wrapping_15([word(record,7),word(record,9)],[word(&enemy,7),word(&enemy,9)])as i32;
+     let z=(i32::from_le_bytes(enemy[39..43].try_into().unwrap()).wrapping_sub(i32::from_le_bytes(record[39..43].try_into().unwrap())))>>3;
+     if xy.wrapping_add(z.wrapping_mul(z))<=16384 {
+      match crate::mule_hostile_contact::plan_false_contact(record,&enemy,physics){
+       Ok(after)=>return Ok(after),Err(crate::mule_hostile_contact::HostileContactError::UnsupportedAttack)=>{
+        let entry=crate::mule_hostile_attack_entry::plan_entry(record,&enemy,*random.borrow(),physics).map_err(|_|CreatureError::UnsupportedMotionState)?;
+        *random.borrow_mut()=entry.rng_after;if let Some(channel)=entry.pending_audio{audio.borrow_mut().push(channel);}let mut after=entry.after;after[0x60]&=0xbf;return Ok(after);
+       },Err(_)=>return Err(CreatureError::UnsupportedMotionState),
+      }
+     }return Ok(*record);
+    }}
     let world=stage.borrow();let mut r=*record;if r[0x5e]==0{r[0x5e]=8;}
     if let Some(enemy)=world.owned_mule_single_hostile(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)? {
      let hostile=crate::mule_owned_hostile_acquisition::plan_acquisition(&r,&enemy,*random.borrow()).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
@@ -80,17 +96,17 @@ impl ActorWorld {
       world.creatures.as_mut().unwrap().replace_record_checked(slot,&linked,&damage.after)?;linked=damage.after;
      }
     }
-    if let Some(enemy)=hostile_enemy {
+    if let Some(enemy)=hostile_enemy.filter(|_|before[0x5e]==1) {
      let phase=creature_world::mule_callback_phase(&before,context.frame_counter);
      if phase&1!=0 {
       if phase&3==3&&32767-i32::from(word(&linked,0x6c))>256{return Err(CreatureError::UnsupportedMotionState);}
       let delta=[word(&linked,7),word(&linked,9)];let other=[word(&enemy,7),word(&enemy,9)];
       let z=(i32::from_le_bytes(enemy[39..43].try_into().unwrap()).wrapping_sub(i32::from_le_bytes(linked[39..43].try_into().unwrap())))>>3;
       let distance=(genewars_core::cd_candidate::distance_squared_wrapping_15(delta,other)as i32).wrapping_add(z.wrapping_mul(z));
-      if distance<=16384{linked=crate::mule_hostile_contact::plan_false_contact(&linked,&enemy,physics).map_err(|_|CreatureError::UnsupportedMotionState)?;}
+      //Contact disposition runs later at its original AI boundary.
       //5D360 owned phase3 requires the species4 player genetics predicate.
       //Only its actual zero/no-action branch is reconstructed here.
-      if phase&3==3&&(linked[0x61]&4!=0||world.player(0).map_err(|_|CreatureError::UnsupportedMotionState)?.bytes()[0x6cb]!=0){return Err(CreatureError::UnsupportedMotionState);}
+      if distance>16384&&phase&3==3&&(linked[0x61]&4!=0||world.player(0).map_err(|_|CreatureError::UnsupportedMotionState)?.bytes()[0x6cb]!=0){return Err(CreatureError::UnsupportedMotionState);}
      }
     }
     let record=&linked;
@@ -150,11 +166,11 @@ impl ActorWorld {
  }
  /// Typed reciprocal owned task7 pursuit, separate from plant/corpse food.
  pub(super) fn owned_mule_live_hostile_target(&self,r:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
-  if r[6]!=1||r[24]!=0||r[0x7a]!=4||r[0x5e]!=1||r[0x61]!=0||!matches!(r[0x60],0x48|0xc8)||r[0x78]!=7
+  if r[6]!=1||r[24]!=0||r[0x7a]!=4||!matches!(r[0x5e],1|21)||r[0x61]!=0||!(if r[0x5e]==1{matches!(r[0x60],0x48|0xc8)}else{matches!(r[0x60],8|0x88)})||r[0x78]!=7
    ||r[0x76]>90||r[0x4f]!=0||r[0x5d]!=0||r[0x52]!=1||r[0x57]!=1||r[0x5a]!=1||word(r,0x49)as u16&0x100!=0
    ||reference(r,0x50)!=reference(r,0x55)||reference(r,0x58)!=reference(r,0x55){return Ok(None);}
   let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;let id=word(r,0x55)as usize;let target=*pool.record(id)?;
-  if target[6]==1&&target[24]==4&&target[0x7a]==4&&target[0x5e]==1&&target[0x61]==0x40&&matches!(target[0x60],0x48|0xc8)
+  if target[6]==1&&target[24]==4&&target[0x7a]==4&&matches!(target[0x5e],1|21)&&target[0x61]==0x40&&(if target[0x5e]==1{matches!(target[0x60],0x48|0xc8)}else{matches!(target[0x60],8|0x88)})
    &&target[0x78]==0&&word(&target,0x6a)>0&&word(&target,0x49)as u16&0x400==0
    &&reference(&target,0x50)==[r[15],r[16],1]&&reference(&target,0x55)==[r[15],r[16],1]
    &&pool.binding(id)?==Some(CreatureAnimationBinding::MuleSelector4){Ok(Some(target))}else{Ok(None)}

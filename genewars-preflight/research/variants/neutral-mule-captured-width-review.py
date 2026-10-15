@@ -13,7 +13,7 @@ class Source(c.Source):
   super().__init__(backing)
   # Exact trivial virtual10 getters reached when a zone marker shares the
   # target-query cell. Keep real predicate returns, never skip the candidate.
-  extra=[P/'private/ghidra/countdown-expiry/instructions-0001eac0.txt']+[P/'private/ghidra/mule-contact-191'/f'instructions-000{x}.txt'for x in('6eda0','5c840')]
+  extra=[P/'private/ghidra/countdown-expiry/instructions-0001eac0.txt']+[P/'private/ghidra/mule-contact-191'/f'instructions-000{x}.txt'for x in('6eda0','5c840')]+[P/'private/ghidra/construction-command/instructions-0001f230.txt']
   self.files+=extra;added=g.k.m.m.Model(extra,b'').code
   for pc,(op,args)in list(added.items()):
    if op=='MOV'and '['in args[0]and not args[0].startswith(('byte ptr ','word ptr ','dword ptr '))and self.width(args[1])in(8,16):
@@ -33,19 +33,19 @@ def main():
   if not 0<=args.slot<300:raise ValueError('invalid creature slot')
   if not 0<=args.frame<=0xffffffff:raise ValueError('invalid source frame')
   record=buffers['creatures.bin'][args.slot*124:(args.slot+1)*124]
-  if record[6]!=1 or record[24]!=4 or record[122]!=4 or record[94] not in (0, 1, 8) or struct.unpack_from('<h',record,15)[0]!=args.slot:
+  if record[6]!=1 or record[24]!=4 or record[122]!=4 or record[94] not in (0, 1, 8, 21) or struct.unpack_from('<h',record,15)[0]!=args.slot:
    raise ValueError('requires actual neutral owner4 typed Mule state0/8 or exact hostile state1 with matching identity')
-  if record[94]==1:
+  if record[94]in(1,21):
    target=struct.unpack_from('<h',record,0x55)[0]
    if not 0<=target<300 or target==args.slot:raise ValueError('invalid hostile target identity')
    enemy=buffers['creatures.bin'][target*124:(target+1)*124]
-   if record[0x60] not in(0x48,0xc8)or record[0x61]!=0x40 or record[0x78]!=0 or record[0x76]>90 or record[0x4f]!=0 or record[0x5d]!=0 or record[0x52]!=1 or record[0x57]!=1 or record[0x50:0x53]!=record[0x55:0x58]:
+   if record[0x60] not in((0x48,0xc8)if record[94]==1 else(8,0x88))or record[0x61]!=0x40 or record[0x78]!=0 or record[0x76]>90 or record[0x4f]!=0 or record[0x5d]!=0 or record[0x52]!=1 or record[0x57]!=1 or record[0x50:0x53]!=record[0x55:0x58]:
     raise ValueError('unsupported hostile pursuit caller')
-   if enemy[6]!=1 or enemy[24]!=0 or enemy[122]!=4 or enemy[94] not in(1,8) or struct.unpack_from('<h',enemy,15)[0]!=target or struct.unpack_from('<H',enemy,0x49)[0]&0x400:
+   if enemy[6]!=1 or enemy[24]!=0 or enemy[122]!=4 or enemy[94] not in(1,8,21) or struct.unpack_from('<h',enemy,15)[0]!=target or struct.unpack_from('<H',enemy,0x49)[0]&0x400:
     raise ValueError('requires exact live owned Mule state8/reciprocalstate1 hostile target')
-   if enemy[94]==1:
+   if enemy[94]in(1,21):
     expected_ref=struct.pack('<hB',args.slot,1)
-    if enemy[0x78]!=7 or enemy[0x61]!=0 or enemy[0x60]!=0xc8 or enemy[0x4f]!=0 or enemy[0x5d]!=0 or any(enemy[off:off+3]!=expected_ref for off in(0x50,0x55,0x58)):
+    if enemy[0x78]!=7 or enemy[0x61]!=0 or enemy[0x60]not in((0x48,0xc8)if enemy[94]==1 else(8,0x88)) or enemy[0x4f]!=0 or enemy[0x5d]!=0 or any(enemy[off:off+3]!=expected_ref for off in(0x50,0x55,0x58)):
      raise ValueError('unsupported reciprocal owned hostile target')
   state,seed,resources=g.prepare(buffers);g.k.put(state,0x11878c,1,1)
   vm=Source(buffers['backing.bin'])
