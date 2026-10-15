@@ -53,7 +53,9 @@ impl ActorWorld {
         }
         if before[0x5e]==3 {
             let raw=reference(&before,0x55);let association=reference(&before,0x50);
-            if raw[2]!=1||association!=raw||before[0x61]&0x20!=0{return Err(CreatureError::UnsupportedMotionState.into());}
+            let approach=before[0x61]&0x20==0&&association==raw;
+            let rendezvous=before[0x61]&0x20!=0&&association[2]==0;
+            if raw[2]!=1||!(approach||rendezvous){return Err(CreatureError::UnsupportedMotionState.into());}
             let peer=self.creatures.as_ref().unwrap().record(word(&raw,0)as usize)?;
             if peer[0x5e]!=3||peer[0x18]!=4||peer[0x7a]!=4||reference(peer,0x55)!=own{return Err(CreatureError::UnsupportedMotionState.into());}
         }
@@ -78,8 +80,16 @@ impl ActorWorld {
                     let choice=creature_world::plan_mule_retry_wait(record,*rng)?;*rng=choice.rng_after;return Ok(choice.after);
                 }
                 if record[0x5e]==3{
-                    if record[0x61]&0x20!=0{return Err(CreatureError::UnsupportedMotionState);}
-                    let peer=world.entity(reference(record,0x55)).map_err(|_|CreatureError::UnsupportedMotionState)?;
+                    let raw=reference(record,0x55);
+                    let peer=world.creatures.as_ref().unwrap().record(word(&raw,0)as usize)?;
+                    if record[0x61]&0x20!=0{
+                        //69BE2..69C2B: wait/mark this arrival only. Starting
+                        //the next atomic center movement remains bounded out.
+                        if (word(record,0x60)as u16&word(peer,0x60)as u16&0x2004)!=0x2000{return Err(CreatureError::UnsupportedMotionState);}
+                        let mut after=*record;if word(record,0x49)as u16&0x200!=0{after[0x60]|=4;}
+                        if (word(&after,0x60)as u16&word(peer,0x60)as u16&0x2004)==0x2004{return Err(CreatureError::UnsupportedMotionState);}
+                        return Ok(after);
+                    }
                     let point=[word(peer,7),word(peer,9)];let saved_cell=floor_cell([word(record,7),word(record,9)]);
                     if floor_cell(point)==saved_cell{
                         let raw=reference(record,0x55);let id=word(&raw,0)as u16;
