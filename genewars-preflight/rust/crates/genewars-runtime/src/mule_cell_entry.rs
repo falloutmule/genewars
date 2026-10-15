@@ -6,7 +6,7 @@ pub enum CellEntryError<E>{Record,Cell,Rng,Query(E)}
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct CellEntryPlan{pub record_after:[u8;124],pub rng_after:BlueprintRng,pub queried_points:Vec<[i16;2]>,pub accepted:bool}
 pub fn plan_waypoint<E>(before:&[u8;124],new_cell:u16,mut rng:BlueprintRng,trig:&TrigTables,mut accepts:impl FnMut([i16;2])->Result<bool,E>)->Result<CellEntryPlan,CellEntryError<E>>{
- if before[6]!=1||before[0x5e]!=8{return Err(CellEntryError::Record);}
+ if before[6]!=1||!matches!(before[0x5e],1|8){return Err(CellEntryError::Record);}
  if new_cell>=16384{return Err(CellEntryError::Cell);}
  if rng.ring>=32{return Err(CellEntryError::Rng);}
  let word=|at|i16::from_le_bytes([before[at],before[at+1]]);

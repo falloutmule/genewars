@@ -2,6 +2,7 @@
   "status": "passed",
   "cases": [
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 0,
       "goal_equal": false,
@@ -9,6 +10,7 @@
       "instructions": 884
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 0,
       "goal_equal": true,
@@ -16,6 +18,7 @@
       "instructions": 889
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 1,
       "goal_equal": false,
@@ -23,6 +26,7 @@
       "instructions": 184
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 1,
       "goal_equal": true,
@@ -30,6 +34,7 @@
       "instructions": 189
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 2,
       "goal_equal": false,
@@ -37,6 +42,7 @@
       "instructions": 284
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 2,
       "goal_equal": true,
@@ -44,6 +50,7 @@
       "instructions": 289
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 3,
       "goal_equal": false,
@@ -51,6 +58,7 @@
       "instructions": 384
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 3,
       "goal_equal": true,
@@ -58,6 +66,7 @@
       "instructions": 389
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 4,
       "goal_equal": false,
@@ -65,6 +74,7 @@
       "instructions": 482
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 4,
       "goal_equal": true,
@@ -72,6 +82,7 @@
       "instructions": 487
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 5,
       "goal_equal": false,
@@ -79,6 +90,7 @@
       "instructions": 580
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 5,
       "goal_equal": true,
@@ -86,6 +98,7 @@
       "instructions": 585
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 6,
       "goal_equal": false,
@@ -93,6 +106,7 @@
       "instructions": 680
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 6,
       "goal_equal": true,
@@ -100,6 +114,7 @@
       "instructions": 685
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 7,
       "goal_equal": false,
@@ -107,6 +122,7 @@
       "instructions": 780
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 7,
       "goal_equal": true,
@@ -114,6 +130,7 @@
       "instructions": 785
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 8,
       "goal_equal": false,
@@ -121,6 +138,7 @@
       "instructions": 880
     },
     {
+      "state": 1,
       "seed": 1,
       "accepted_at": 8,
       "goal_equal": true,
@@ -128,6 +146,151 @@
       "instructions": 885
     },
     {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 0,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 884
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 0,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 889
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 1,
+      "goal_equal": false,
+      "queries": 1,
+      "instructions": 184
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 1,
+      "goal_equal": true,
+      "queries": 1,
+      "instructions": 189
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 2,
+      "goal_equal": false,
+      "queries": 2,
+      "instructions": 284
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 2,
+      "goal_equal": true,
+      "queries": 2,
+      "instructions": 289
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 3,
+      "goal_equal": false,
+      "queries": 3,
+      "instructions": 384
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 3,
+      "goal_equal": true,
+      "queries": 3,
+      "instructions": 389
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 4,
+      "goal_equal": false,
+      "queries": 4,
+      "instructions": 482
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 4,
+      "goal_equal": true,
+      "queries": 4,
+      "instructions": 487
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 5,
+      "goal_equal": false,
+      "queries": 5,
+      "instructions": 580
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 5,
+      "goal_equal": true,
+      "queries": 5,
+      "instructions": 585
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 6,
+      "goal_equal": false,
+      "queries": 6,
+      "instructions": 680
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 6,
+      "goal_equal": true,
+      "queries": 6,
+      "instructions": 685
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 7,
+      "goal_equal": false,
+      "queries": 7,
+      "instructions": 780
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 7,
+      "goal_equal": true,
+      "queries": 7,
+      "instructions": 785
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 8,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 880
+    },
+    {
+      "state": 8,
+      "seed": 1,
+      "accepted_at": 8,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 885
+    },
+    {
+      "state": 1,
       "seed": 2,
       "accepted_at": 0,
       "goal_equal": false,
@@ -135,6 +298,7 @@
       "instructions": 884
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 0,
       "goal_equal": true,
@@ -142,6 +306,7 @@
       "instructions": 889
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 1,
       "goal_equal": false,
@@ -149,6 +314,7 @@
       "instructions": 184
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 1,
       "goal_equal": true,
@@ -156,6 +322,7 @@
       "instructions": 189
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 2,
       "goal_equal": false,
@@ -163,6 +330,7 @@
       "instructions": 284
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 2,
       "goal_equal": true,
@@ -170,6 +338,7 @@
       "instructions": 289
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 3,
       "goal_equal": false,
@@ -177,6 +346,7 @@
       "instructions": 384
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 3,
       "goal_equal": true,
@@ -184,6 +354,7 @@
       "instructions": 389
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 4,
       "goal_equal": false,
@@ -191,6 +362,7 @@
       "instructions": 482
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 4,
       "goal_equal": true,
@@ -198,6 +370,7 @@
       "instructions": 487
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 5,
       "goal_equal": false,
@@ -205,6 +378,7 @@
       "instructions": 580
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 5,
       "goal_equal": true,
@@ -212,6 +386,7 @@
       "instructions": 585
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 6,
       "goal_equal": false,
@@ -219,6 +394,7 @@
       "instructions": 680
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 6,
       "goal_equal": true,
@@ -226,6 +402,7 @@
       "instructions": 685
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 7,
       "goal_equal": false,
@@ -233,6 +410,7 @@
       "instructions": 780
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 7,
       "goal_equal": true,
@@ -240,6 +418,7 @@
       "instructions": 785
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 8,
       "goal_equal": false,
@@ -247,6 +426,7 @@
       "instructions": 880
     },
     {
+      "state": 1,
       "seed": 2,
       "accepted_at": 8,
       "goal_equal": true,
@@ -254,6 +434,151 @@
       "instructions": 885
     },
     {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 0,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 884
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 0,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 889
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 1,
+      "goal_equal": false,
+      "queries": 1,
+      "instructions": 184
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 1,
+      "goal_equal": true,
+      "queries": 1,
+      "instructions": 189
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 2,
+      "goal_equal": false,
+      "queries": 2,
+      "instructions": 284
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 2,
+      "goal_equal": true,
+      "queries": 2,
+      "instructions": 289
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 3,
+      "goal_equal": false,
+      "queries": 3,
+      "instructions": 384
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 3,
+      "goal_equal": true,
+      "queries": 3,
+      "instructions": 389
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 4,
+      "goal_equal": false,
+      "queries": 4,
+      "instructions": 482
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 4,
+      "goal_equal": true,
+      "queries": 4,
+      "instructions": 487
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 5,
+      "goal_equal": false,
+      "queries": 5,
+      "instructions": 580
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 5,
+      "goal_equal": true,
+      "queries": 5,
+      "instructions": 585
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 6,
+      "goal_equal": false,
+      "queries": 6,
+      "instructions": 680
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 6,
+      "goal_equal": true,
+      "queries": 6,
+      "instructions": 685
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 7,
+      "goal_equal": false,
+      "queries": 7,
+      "instructions": 780
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 7,
+      "goal_equal": true,
+      "queries": 7,
+      "instructions": 785
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 8,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 880
+    },
+    {
+      "state": 8,
+      "seed": 2,
+      "accepted_at": 8,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 885
+    },
+    {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 0,
       "goal_equal": false,
@@ -261,6 +586,7 @@
       "instructions": 885
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 0,
       "goal_equal": true,
@@ -268,6 +594,7 @@
       "instructions": 890
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 1,
       "goal_equal": false,
@@ -275,6 +602,7 @@
       "instructions": 185
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 1,
       "goal_equal": true,
@@ -282,6 +610,7 @@
       "instructions": 190
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 2,
       "goal_equal": false,
@@ -289,6 +618,7 @@
       "instructions": 285
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 2,
       "goal_equal": true,
@@ -296,6 +626,7 @@
       "instructions": 290
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 3,
       "goal_equal": false,
@@ -303,6 +634,7 @@
       "instructions": 383
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 3,
       "goal_equal": true,
@@ -310,6 +642,7 @@
       "instructions": 388
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 4,
       "goal_equal": false,
@@ -317,6 +650,7 @@
       "instructions": 481
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 4,
       "goal_equal": true,
@@ -324,6 +658,7 @@
       "instructions": 486
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 5,
       "goal_equal": false,
@@ -331,6 +666,7 @@
       "instructions": 581
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 5,
       "goal_equal": true,
@@ -338,6 +674,7 @@
       "instructions": 586
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 6,
       "goal_equal": false,
@@ -345,6 +682,7 @@
       "instructions": 681
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 6,
       "goal_equal": true,
@@ -352,6 +690,7 @@
       "instructions": 686
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 7,
       "goal_equal": false,
@@ -359,6 +698,7 @@
       "instructions": 781
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 7,
       "goal_equal": true,
@@ -366,6 +706,7 @@
       "instructions": 786
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 8,
       "goal_equal": false,
@@ -373,6 +714,7 @@
       "instructions": 881
     },
     {
+      "state": 1,
       "seed": 29645,
       "accepted_at": 8,
       "goal_equal": true,
@@ -380,17 +722,180 @@
       "instructions": 886
     },
     {
-      "actual_frame8_intermediate": true,
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 0,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 885
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 0,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 890
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 1,
+      "goal_equal": false,
+      "queries": 1,
+      "instructions": 185
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 1,
+      "goal_equal": true,
+      "queries": 1,
+      "instructions": 190
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 2,
+      "goal_equal": false,
+      "queries": 2,
+      "instructions": 285
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 2,
+      "goal_equal": true,
+      "queries": 2,
+      "instructions": 290
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 3,
+      "goal_equal": false,
+      "queries": 3,
+      "instructions": 383
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 3,
+      "goal_equal": true,
+      "queries": 3,
+      "instructions": 388
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 4,
+      "goal_equal": false,
+      "queries": 4,
+      "instructions": 481
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 4,
+      "goal_equal": true,
+      "queries": 4,
+      "instructions": 486
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 5,
+      "goal_equal": false,
+      "queries": 5,
+      "instructions": 581
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 5,
+      "goal_equal": true,
+      "queries": 5,
+      "instructions": 586
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 6,
+      "goal_equal": false,
+      "queries": 6,
+      "instructions": 681
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 6,
+      "goal_equal": true,
+      "queries": 6,
+      "instructions": 686
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 7,
+      "goal_equal": false,
+      "queries": 7,
+      "instructions": 781
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 7,
+      "goal_equal": true,
+      "queries": 7,
+      "instructions": 786
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 8,
+      "goal_equal": false,
+      "queries": 8,
+      "instructions": 881
+    },
+    {
+      "state": 8,
+      "seed": 29645,
+      "accepted_at": 8,
+      "goal_equal": true,
+      "queries": 8,
+      "instructions": 886
+    },
+    {
+      "actual_intermediate_frame": 8,
       "record_sha256": "8ee9f16f08a7047bd5c9eb7d5c17450e75c65cdd8b4b929ead395b1f6c37227f",
       "context_sha256": "5e89c259b521dfe6732d9303900ef6fd3c96d5116f9e5bcc143f4308d1ea3ee6",
       "queries": 1,
       "instructions": 185
+    },
+    {
+      "actual_intermediate_frame": 498,
+      "record_sha256": "308375cf68937d7574d35b55c2c77cee042e2b650291fe9353a1358c167bcd55",
+      "context_sha256": "6f27d1262f618029325afefcb737f8510abfd88d39fc2359789a11e38556f454",
+      "queries": 1,
+      "instructions": 189
     }
   ],
-  "compared_bytes": 8320,
-  "rust_sha256": "a96c3016048c16ea5b977faad07a528ae744d8f117db1a82ddde9e60ece993e4",
-  "script_sha256": "0ec5f4b82bf4cd01710be0912eaedb85e311f1a94a95babaebf46c0c9699d791",
-  "private_run": "private\\review\\mule-cell-entry\\6857883da2e946f1867aac59b64ef62d",
+  "rejected_states": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    255
+  ],
+  "compared_bytes": 16640,
+  "rust_sha256": "8eef7b0b3e59d4faf653eeb687c539a1cf5f6a231fc00b1e6221a1504f546622",
+  "script_sha256": "cc1188ad9837d5ef52b72d35e7cb66342cbd6a1bcfef88c65219bcad26506d15",
+  "private_run": "private\\review\\mule-cell-entry\\f757e9a4f6444026a3c98c6940b38203",
   "source_pins": {
     "private\\ghidra\\krell-cell-entry\\instructions-00073f70.txt": "39d73c8ba1a4295079b7115b24a39c90ecbadb1df20fa840ed4d0441ee5e7d69",
     "private\\ghidra\\initial-creature\\instructions-0005b100.txt": "32f6824af152305c75e3639c1917ee35e5e80a2a801a90e768415e73ea51e02d",
@@ -403,5 +908,5 @@
     "virtual8C true",
     "74D90 deterministic accept ordinal; original querypoints preserved"
   ],
-  "scope": "54 synthetic callback fixtures and exact frame8 intermediate record, literal5B260/73F70. No world adapter/ordinary gameplay claim."
+  "scope": "108 synthetic state1/8 callback fixtures and exact frame8/498 intermediate records, literal5B260/73F70. No world adapter/ordinary gameplay claim."
 }

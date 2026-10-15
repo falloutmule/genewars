@@ -385,8 +385,12 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     let(plan,water_effect)=plan_common_nonflight_physics_with_cell_entry(&a,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,obstacle,admit_water,cell_entry)?;
     a=plan.after;
     if a[0x49]&3!=0 {
-        if a[0x54]>20{return Err(CreatureError::UnsupportedMotionState);}
-        if common_distance_squared(map,motion_point(&a),working_target)?<=4096{a[0x49]|=8;}
+        //70631..7067A: long avoidance waits use the prephysics working
+        //target and only complete when grounded, slow and within32 units.
+        if a[0x54]>20 {
+            if motion_word(&a,0x3d)<=256&&motion_dword(&a,0x27)<=motion_dword(&a,0x11)
+                &&common_distance_squared(map,motion_point(&a),working_target)?<=1024{a[0x49]|=3;}
+        }else if common_distance_squared(map,motion_point(&a),working_target)?<=4096{a[0x49]|=8;}
     }else if a[0x49]&0x10!=0&&motion_word(&a,0x3d)<=256&&motion_dword(&a,0x27)<=motion_dword(&a,0x11) {
         if common_distance_squared(map,motion_point(&a),working_target)?<=1024{
             //6E9E0 BL1 preserves physical height while snapping ground/shade,

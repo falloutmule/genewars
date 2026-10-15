@@ -43,7 +43,12 @@ impl ActorWorld {
         if pool.binding(slot)?!=Some(binding){return Err(CreatureError::UnsupportedMotionState.into());}
         let before=*pool.record(slot)?;let own=[slot as u8,(slot>>8)as u8,1];
         if before[6]!=1||before[24]!=4||word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
-        if matches!(before[0x5e],1|7) {let target=self.entity(reference(&before,0x55))?;let expected=if before[0x5e]==7{1}else{0};if before[0x57]!=2||target[0x18]!=4||self.mule_plant_flags(word(&before,0x55))?&9!=expected {return Err(CreatureError::UnsupportedMotionState.into());}}
+        if matches!(before[0x5e],1|7) {
+            let target=self.entity(reference(&before,0x55))?;let id=word(&before,0x55);let flags=self.mule_plant_flags(id)?&9;
+            //659A3 tests live health;659BF idempotently reserves on arrival.
+            //Another feeder's reservation is not source exclusivity.
+            if before[0x57]!=2||target[0x18]!=4||self.mule_plant_health(id)?<=0||if before[0x5e]==7{flags!=1}else{flags&8!=0}{return Err(CreatureError::UnsupportedMotionState.into());}
+        }
         let mut rng=self.rng;
         let (prefix,working_target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng)?;
         if before[0x5e]==27&&creature_world::mule_callback_phase(&before,context.frame_counter)&1!=0&&word(&before,0x6c)&15==0&&(0..=1).contains(&word(&before,0x68)) {
@@ -74,7 +79,7 @@ impl ActorWorld {
                     let choice=if retired {creature_world::plan_mule_plant_feed_after_retirement(record,params.nutrition_u8,*rng)?}else{creature_world::plan_mule_plant_feed(record,params.nutrition_u8,*rng)?};*rng=choice.rng_after;fed_plant=Some(id);let full=record[0x61]&0x40!=0&&choice.after[0x61]&0x40==0;pending_audio.push(if full{0x1b}else{0x12});if retired{pending_plant_retirements.push(id as u16);}else if choice.after[0x5e]==8{release_plant=Some(id);}return Ok(choice.after);
                 }
                 if record[0x5e]==1 {
-                    let raw=reference(record,0x55);if raw[2]!=2||world.mule_plant_flags(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?&9!=0{return Err(CreatureError::UnsupportedMotionState);}
+                    let raw=reference(record,0x55);if raw[2]!=2||world.mule_plant_flags(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?&8!=0||world.mule_plant_health(word(&raw,0)).map_err(|_|CreatureError::MotionEnvironment)?<=0{return Err(CreatureError::UnsupportedMotionState);}
                     let mut after=*record;after[0x3f..0x41].copy_from_slice(&creature_world::mule_requested_speed(record).to_le_bytes());after[0x5e]=7;after[0x6c..0x6e].copy_from_slice(&32767i16.to_le_bytes());after[0x72..0x76].copy_from_slice(&record[7..11]);after[0x60]|=8;after[0x60]&=0xbf;reserve_plant=Some(word(&raw,0));return Ok(after);
                 }
                 let mut record=*record;if record[0x5e]==0 {record[0x5e]=8;}
@@ -127,7 +132,7 @@ impl ActorWorld {
     #[cfg(debug_assertions)]
     fn capture_mule_callback(&self,slot:usize,frame:u32,phase:&str){
         let extra=std::env::var("GENEWARS_MULE_CALLBACK_FRAME").ok().and_then(|v|v.parse::<u32>().ok());
-        if frame>1&&extra!=Some(frame){return;} // First two plus one explicit failing frame.
+        if extra.map_or(frame>1,|requested|frame!=requested){return;} // Explicit frame or default first two.
         let Some(root)=std::env::var_os("GENEWARS_MULE_CALLBACK_FIXTURE") else{return;};
         let dir=std::path::PathBuf::from(root).join(format!("frame-{frame}-slot-{slot}-{phase}"));
         std::fs::create_dir(&dir).expect("new immutable Mule callback fixture");
@@ -240,9 +245,11 @@ impl ActorWorld {
 
     fn plan_mule_cell_entry(&self,slot:usize,record:&CreatureRecord,cell:usize,rng:&mut BlueprintRng,trig:&TrigTables)->Result<CreatureRecord,CreatureError>{
         let own=[slot as u8,(slot>>8)as u8,1];
-        //5B100 state8 asks8B780 for the last living kind1, after prepend.
-        //Other state-specific predicates and code11 effects remain bounded.
-        if record[0x5e]!=8 {self.check_mule_cell_entry(own,cell).map_err(|_|CreatureError::UnsupportedCellEntry)?;return Ok(*record);}
+        //5B100 state8, and state1 with a resolved kind2 target, ask8B780
+        //for the last living kind1 after prepend. Other predicates stay bounded.
+        let approach_plant=record[0x5e]==1&&record[0x57]==2&&self.entity(reference(record,0x55)).map_err(|_|CreatureError::UnsupportedCellEntry)?[6]==2;
+        if record[0x5e]!=8&&!approach_plant {self.check_mule_cell_entry(own,cell).map_err(|_|CreatureError::UnsupportedCellEntry)?;return Ok(*record);}
+        if word(record,0x49)as u16&0x0400!=0{return Err(CreatureError::UnsupportedCellEntry);}
         let mut raw=reference(self.map(),cell*14+6);let mut last=None;
         while raw[2]!=0{
             let entity=self.entity(raw).map_err(|_|CreatureError::UnsupportedCellEntry)?;
