@@ -1,0 +1,125 @@
+{
+  "status": "focused source comparisons passed; uncommitted195, full regression/release/native/campaign not performed",
+  "callbacks": [
+    {
+      "output": "private\\review\\owned-mule-captured-width\\efebc8a3fcb448ad9a5896daafa0b671",
+      "frame": 5892,
+      "slot": 1,
+      "draws": 1,
+      "instructions": 2889,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    },
+    {
+      "output": "private\\review\\owned-mule-captured-width\\afcfda58495c4cc98ef5b7d73a6f1978",
+      "frame": 5893,
+      "slot": 1,
+      "draws": 0,
+      "instructions": 1685,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    },
+    {
+      "output": "private\\review\\owned-mule-captured-width\\3a85b7e9fb4541e8942ac2fe69e3bdcc",
+      "frame": 5894,
+      "slot": 1,
+      "draws": 0,
+      "instructions": 2160,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    },
+    {
+      "output": "private\\review\\owned-mule-captured-width\\819b41f95f4643e2a6707f10ea939709",
+      "frame": 5895,
+      "slot": 1,
+      "draws": 0,
+      "instructions": 1685,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    },
+    {
+      "output": "private\\review\\owned-mule-captured-width\\d84849976c5b4e15ba72273c27d2a8ec",
+      "frame": 5892,
+      "slot": 1,
+      "draws": 8,
+      "instructions": 12772,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    },
+    {
+      "output": "private\\review\\owned-mule-captured-width\\46c91fa0879b458fb2cbf85308e934c5",
+      "frame": 5892,
+      "slot": 1,
+      "draws": 1,
+      "instructions": 2889,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    }
+  ],
+  "literal_miss_cases": 5,
+  "stop": "User requested stop and Markdown workflow report",
+  "review": "Supplementary independent review interrupted before completed report",
+  "pending": [
+    "Full regression/release195",
+    "Ordinary replay195",
+    "Native195",
+    "Prepared zero-reserve/operator miss fixture untested"
+  ],
+  "latest_verified_revision": "e5ee81c",
+  "latest_native_frame": 5892,
+  "missions_completed": 1
+}
