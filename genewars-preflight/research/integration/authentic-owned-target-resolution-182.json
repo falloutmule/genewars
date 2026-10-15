@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "scope": "actual4801 owned idle blocked target resolution; otherfamilies frozen; not campaign acceptance",
+  "source": {
+    "status": "passed",
+    "frame": 4801,
+    "slot": 1,
+    "draws": 0,
+    "compared_bytes": 427369,
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\c4951daa5634424191ecf4c8cea50bb2"
+  },
+  "original": "6FEAB..6FED3 calls74A50 for rejected kind1 targets independently of association50; existing target_resolver used unchanged. Terminal current point is queried then returned even if rejected, matching74C73..74CA1.",
+  "admission": "exact owned species4/state8/low60=88/high61=0/no command or association; other unsupported goals still guarded",
+  "review": "one supplementary agent independently confirmed association-independent source call and existing resolver query semantics",
+  "regression": {
+    "runtime_passed": 244,
+    "game_passed": 80,
+    "ignored_each": 1,
+    "release_build": "passed"
+  },
+  "campaign_missions": 1
+}
