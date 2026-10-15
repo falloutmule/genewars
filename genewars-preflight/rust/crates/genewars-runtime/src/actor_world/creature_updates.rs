@@ -59,7 +59,8 @@ impl ActorWorld {
         let corpse_approach=matches!(before[0x5e],1|5)&&before[0x57]==1&&before[0x52]==1&&reference(&before,0x50)==reference(&before,0x55);
         if corpse_approach {
             let id=word(&before,0x55)as usize;let corpse=pool.record(id)?;
-            if pool.binding(id)?!=Some(CreatureAnimationBinding::MuleSelector4)||corpse[24]!=4||corpse[0x7a]!=4||!matches!(corpse[0x5e],24|25){return Err(CreatureError::UnsupportedMotionState.into());}
+            let binding=if corpse[0x5e]>=26{CreatureAnimationBinding::BonesSelector4}else{CreatureAnimationBinding::MuleSelector4};
+            if pool.binding(id)?!=Some(binding)||corpse[24]!=4||corpse[0x7a]!=4||!matches!(corpse[0x5e],24..=27){return Err(CreatureError::UnsupportedMotionState.into());}
         }
         let retained_food_association=before[0x5e]==8&&before[0x60]==8&&before[0x61]==0x40&&before[0x57]==0
             &&before[0x52]==1&&word(&before,0x50)==word(&before,0x55);

@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "scope": "Bounded source-parametric target decay, other families frozen; NOT campaign acceptance",
+  "source_comparison": {
+    "status": "passed",
+    "frame": 3645,
+    "slot": 8,
+    "draws": 1,
+    "compared_bytes": 427369,
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\6fecdc89782f472c8d0f35ec4707c023"
+  },
+  "renderer": {
+    "source_equal_arrival": "private/review/isolated-corpse-arrival-after-165",
+    "state": 5,
+    "animation": 19,
+    "frames_checked": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "comparison": "same 59470 wrapper/color/shadow as admitted state7",
+    "negative_checks": [
+      "animation18",
+      "frame4",
+      "owned state5"
+    ],
+    "log": "private/integration/corpse-render-174.log"
+  },
+  "runtime": {
+    "passed": 238,
+    "ignored": 1
+  },
+  "limits": [
+    "Bones arrival state4 remains unsupported",
+    "Rich corpse consumption and true-cell escape remain unsupported",
+    "Actual replay174 and native checkpoint pending"
+  ],
+  "campaign_missions": 1
+}

@@ -18,6 +18,12 @@ Next ordinary release173: freezebinary/replay169 in NEW private/integration/cont
 
 Latest native159 matchesheadless3573 includingordinaryGenepodbodyselection andproductionactivation; receipt `research/integration/native-carried-krell-parity-159.json`. Newcorpse/effectcorrections needlatestnativecheckpoint. OriginalMulemouse frontend remains pendingviewport/familyhover priors; no hiddenLEreferences orpackedodd-immediatewriter established30400/303F0 liveuse. No fabricateddefault pickingflag.
 
+## Integration174 continuation
+
+Latest committed checkpoint before this batch:569b8aa. Actual replay173 passes failed-quality production and particle lifecycle, reaching3615; numeric corpse arrival commits, then renderer rejects state5/animation19. WorldSHA cfeb4d054849597afa9c50cb70feb46fb78e1ecf26ac9431349de30c914981f4. This batch admits source-proved state5 via existing59470 feeding animation19 path; all4frames and atomic invalid-animation/frame/owned cases pass. It also admits exactly typed retained Bones24..27 targets for low-reserve cleanup. Synthetic3645 callback compares427369bytes,0mismatches,1draw. Rich consumption, Bones arrival4 and true-cell escape stay guarded. Receipt research/integration/corpse-render-bones-cleanup-174.json. Runtime238passed/1ignored; release174 built.
+
+Ordinary replay174 currently runs from private/integration/continued-krell-174/replay.txt with report.json/frontier.bmp and captureparent private/review/authentic-krell-174 (sourceframes3615,3645,4200). Inspect compact report at completion, then run same-frozen native parity before further heavy jobs. Second ordinary production click is after600ticks only if no earlier blocked callback; replay already aborts immediately on blocked state. Missions remain1/24. Supplementary agent contributed only bounded mule_corpse_abandon target guard/tests and original source review; root integrated and verified.
+
 ## Focused verification and supporting primitives
 
 Runtime152: **232passed,1opt-in ignored**. Source-equal authentic callback corrections include1279 feeding-to-mating (2draws),1927 retained-pair retry (1),2051 circle scan (5),2601 idle mating (2),2602 satiated pair approach (0),2907 starvation (0), each comparing427,369worldbytes. Receipts are scoped under `research/integration/authentic-krell-*`.

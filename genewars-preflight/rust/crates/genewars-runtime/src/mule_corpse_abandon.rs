@@ -11,7 +11,8 @@ pub struct CorpseAbandonPlan {
     pub rng_after: BlueprintRng,
 }
 /// Caller already selected the source low-reserve branch and proved distance
-/// <=4096. Bones and the true-cell relocation continuation remain unsupported.
+/// <=4096. Existing corpse/Bones targets24..27 share the low-reserve reset;
+/// rich-reserve consumption and true-cell relocation remain unsupported.
 /// The live association50 survives even though target55's kind becomes null.
 pub fn plan_abandon(current: &CreatureRecord, corpse: &CreatureRecord,
     rng_before: BlueprintRng, current_cell_requires_escape: bool)
@@ -27,7 +28,7 @@ pub fn plan_abandon(current: &CreatureRecord, corpse: &CreatureRecord,
         || current[0x60]&0x22!=0 || word(current,0x6a)<=0 {
         return Err(CorpseAbandonError::Current);
     }
-    if corpse[6]!=1 || corpse[24]!=4 || corpse[0x7a]!=4 || !matches!(corpse[0x5e],24|25)
+    if corpse[6]!=1 || corpse[24]!=4 || corpse[0x7a]!=4 || !matches!(corpse[0x5e],24..=27)
         || word(corpse,0x62)<=0 || word(corpse,0x68)<0
         || word(corpse,0x68)>word(corpse,0x62)>>1 {
         return Err(CorpseAbandonError::Target);
@@ -80,10 +81,30 @@ mod tests {
         }
     }
     #[test]
-    fn consumption_bones_escape_and_unknown_associations_remain_unsupported() {
+    fn decayed_bones_target_releases_only_reservation_and_keeps_live_association() {
+        // Source-parametric3645 callback: target25 becomes26 before the
+        // current state5 processing gate. No reacquisition or consumption.
+        let(a,mut bones,rng)=fixture();bones[0x5e]=26;bones[0x19]=4;bones[0x1b]=0;
+        let p=plan_abandon(&a,&bones,rng,false).unwrap();
+        let mut released=bones;released[0x60]&=0xfe;
+        assert_eq!(p.target_after,released);
+        assert_eq!(p.target_after[0x5e],26);
+        assert_eq!(&p.current_after[0x50..0x53],&a[0x50..0x53]);
+        assert_eq!(p.current_after[0x57],0);
+        assert_eq!(p.current_after[0x5e],8);
+        assert_eq!(p.rng_after.draw_count,rng.draw_count.wrapping_add(1));
+        // The admitted decay cannot turn a rich Bones target into an
+        // abandonable one, or silently admit the escape continuation.
+        bones[0x68..0x6a].copy_from_slice(&72i16.to_le_bytes());
+        assert_eq!(plan_abandon(&a,&bones,rng,false),Err(CorpseAbandonError::Target));
+        bones[0x68..0x6a].copy_from_slice(&35i16.to_le_bytes());
+        assert_eq!(plan_abandon(&a,&bones,rng,true),Err(CorpseAbandonError::EscapeRequired));
+    }
+    #[test]
+    fn consumption_live_targets_escape_and_unknown_associations_remain_unsupported() {
         let(a,b,rng)=fixture();assert_eq!(plan_abandon(&a,&b,rng,true),Err(CorpseAbandonError::EscapeRequired));
         let mut rich=b;rich[0x68..0x6a].copy_from_slice(&72i16.to_le_bytes());assert_eq!(plan_abandon(&a,&rich,rng,false),Err(CorpseAbandonError::Target));
-        let mut bones=b;bones[0x5e]=26;assert!(plan_abandon(&a,&bones,rng,false).is_err());
+        let mut live=b;live[0x5e]=23;assert_eq!(plan_abandon(&a,&live,rng,false),Err(CorpseAbandonError::Target));
         for(off,v)in[(0x52,0),(0x57,2),(0x4f,4),(0x5d,5),(0x6c,1),(0x60,0x28),(0x78,1)]{let mut current=a;current[off]=v;assert!(plan_abandon(&current,&b,rng,false).is_err());}
         assert!(plan_abandon(&a,&b,BlueprintRng {ring:32,..rng},false).is_err());
         let mut half=b;half[0x68..0x6a].copy_from_slice(&71i16.to_le_bytes());assert!(plan_abandon(&a,&half,rng,false).is_ok());

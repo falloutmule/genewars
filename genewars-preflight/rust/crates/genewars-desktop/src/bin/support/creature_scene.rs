@@ -195,7 +195,8 @@ pub fn draw_supported_mule_record(
         // Source651 pair initialization selects directional frames;59470
         // shares the animation<16/state<26 branch with ordinary approach.
         1 | 3 => animation <= 7,
-        7 => animation == 19 && frame_index <= 3,
+        //65AEF corpse arrival selects state5;5E640 shares animation19 with state7.
+        5 | 7 => animation == 19 && frame_index <= 3,
         8 => animation <= 7 || animation == 22,
         //5EA66 selects22;59470 uses the established high-animation wrapper.
         10 => animation <= 7 || animation == 22,
@@ -1181,5 +1182,22 @@ mod pair_stop_render_tests {
   if let Some(output)=std::env::var_os("GENEWARS_OWNED_RENDER_OUTPUT"){assert!(!std::path::Path::new(&output).exists());std::fs::write(output,lines.join("\n")+"\n").unwrap();}
   let mut unsupported=captured;unsupported[123]=128;let mut pixels=vec![0x55;68*128];let saved=pixels.clone();
   assert_eq!(draw_supported_mule_record(&resources.mule,&unsupported,[24,90],4312,0,0,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pixels,saved);
+ }
+}
+
+#[cfg(test)]mod corpse_render_tests{
+ use super::*;
+ #[test]fn source_equal_corpse_arrival_renders_same_animation_as_plant_feeding(){
+  let p=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+  let(res,_,_)=crate::runtime_resources::Resources::load(&p.join("private/integration/game-runtime")).unwrap();
+  let bytes=std::fs::read(p.join("private/review/isolated-corpse-arrival-after-165/creatures.bin")).unwrap();
+  assert_eq!(genewars_runtime::identity::sha256_hex(&bytes),"8ec16ef0e98809378c50f622026d6cb8e592c02a1c943794dee2b3624b3da557");
+  let mut r:[u8;124]=bytes[8*124..9*124].try_into().unwrap();assert_eq!((r[94],r[25],r[27]),(5,19,1));
+  let height=i32::from_le_bytes(r[39..43].try_into().unwrap())-i32::from_le_bytes(r[17..21].try_into().unwrap());
+  let draw=|r:&[u8;124],out:&mut Vec<u8>|draw_supported_mule_record(&res.mule,r,[48,40],height,0,0,false,0,0,&res.fade,&res.gla,[96,80],96,out);
+  for frame in 0..4{r[27]=frame;let mut actual=vec![0x55;96*80];let receipt=draw(&r,&mut actual).unwrap();assert!(receipt.components.iter().map(|x|x.pixels_written).sum::<usize>()>0);
+   let mut plant=r;plant[94]=7;let mut expected=vec![0x55;96*80];draw(&plant,&mut expected).unwrap();assert_eq!(actual,expected);
+  }
+  for(offset,value)in[(25,18),(27,4),(24,0)]{let mut invalid=r;invalid[offset]=value;let mut out=vec![0x55;96*80];let saved=out.clone();assert_eq!(draw(&invalid,&mut out),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(out,saved);}
  }
 }
