@@ -402,7 +402,10 @@ impl ActorWorld {
                 let owned_idle_target=before[24]<4&&before[122]==4&&before[0x5e]==8
                     &&before[0x60]==0x88&&before[0x61]==0&&before[0x78]==0
                     &&before[0x4f]==0&&before[0x52]==0&&before[0x57]==0;
-                if !associated_pair&&!owned_idle_target{return Err(CreatureError::TargetSearchRequired.into());}
+                let owned_command_target=before[24]<4&&before[122]==4&&matches!(before[0x5e],0|8)
+                    &&matches!(before[0x60],0x18|0x98)&&before[0x61]==0x80&&before[0x78]==7
+                    &&before[0x4f]==0&&before[0x52]==0&&before[0x57]==0;
+                if !associated_pair&&!owned_idle_target&&!owned_command_target{return Err(CreatureError::TargetSearchRequired.into());}
                 final_target=crate::target_resolver::resolve_target(current,final_target,physics,trig,|point|self.common_move_point_accepted(own,point)).map_err(|_|CreatureError::TargetSearchRequired)?.point;
                 a[11..13].copy_from_slice(&final_target[0].to_le_bytes());a[13..15].copy_from_slice(&final_target[1].to_le_bytes());
                 if a[0x49]&3==0{working=final_target;}

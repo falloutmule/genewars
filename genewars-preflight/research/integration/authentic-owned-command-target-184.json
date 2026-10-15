@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "scope": "actual ordinary human-command4801 callback, otherfamilies frozen; not campaign acceptance",
+  "source": {
+    "status": "passed",
+    "frame": 4801,
+    "slot": 1,
+    "draws": 0,
+    "compared_bytes": 427369,
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\a5b112183be246ce8a21e9da3a06104d"
+  },
+  "correction": "6FEAB..6FED3 uses original74A50 for commanded targets independently of association. Admits exact owned0/8 low18/98 high80/task7/null refs as already required by owned callback. Existing resolver unchanged.",
+  "regression": {
+    "runtime_passed": 248,
+    "game_passed": 80,
+    "ignored_each": 1,
+    "release_build": "passed"
+  }
+}
