@@ -99,3 +99,5 @@ pub mod genepod_idle;
 pub mod mule_cell_entry;
 
 pub mod genepod_command;
+
+pub mod mule_waypoint_wait;

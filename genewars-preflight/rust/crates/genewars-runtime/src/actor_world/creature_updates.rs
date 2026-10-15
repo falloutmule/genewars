@@ -143,7 +143,11 @@ impl ActorWorld {
         let phase=creature_world::mule_callback_phase(before,frame);
         let own=[before[15],before[16],1];let current=[word(before,7),word(before,9)];let final_target=[word(before,11),word(before,13)];
         let mut a=*before;a[0x49]&=0x9f;
-        if a[0x49]&3==3||a[0x4f]!=0||a[0x52]!=0||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
+        if a[0x4f]!=0||a[0x52]!=0||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
+        if a[0x49]&3==3 {
+            let wait=crate::mule_waypoint_wait::plan_wait(&a,frame,physics,|goal|self.mule_cell_entry_predicate(&a,floor_cell(goal))).map_err(|_|CreatureError::UnsupportedMotionState)?;
+            return Ok((creature_world::plan_common_ground_steering(&wait.record_after,trig)?,final_target));
+        }
         if a[0x5e]<24&&a[0x49]&0x10==0&&phase&31==0&&!self.common_move_point_accepted(own,current)? {
             if let Some(point)=creature_world::find_common_idle_relocation(current,|point|self.common_move_point_accepted(own,point).map_err(|_|CreatureError::MotionEnvironment))? {a=creature_world::plan_mule_idle_relocation(&a,point)?;a[0x49]&=0xfe;}
         }
@@ -244,24 +248,26 @@ impl ActorWorld {
     }
 
     fn plan_mule_cell_entry(&self,slot:usize,record:&CreatureRecord,cell:usize,rng:&mut BlueprintRng,trig:&TrigTables)->Result<CreatureRecord,CreatureError>{
-        let own=[slot as u8,(slot>>8)as u8,1];
-        //5B100 state8, and state1 with a resolved kind2 target, ask8B780
-        //for the last living kind1 after prepend. Other predicates stay bounded.
-        let approach_plant=record[0x5e]==1&&record[0x57]==2&&self.entity(reference(record,0x55)).map_err(|_|CreatureError::UnsupportedCellEntry)?[6]==2;
-        if record[0x5e]!=8&&!approach_plant {self.check_mule_cell_entry(own,cell).map_err(|_|CreatureError::UnsupportedCellEntry)?;return Ok(*record);}
-        if word(record,0x49)as u16&0x0400!=0{return Err(CreatureError::UnsupportedCellEntry);}
-        let mut raw=reference(self.map(),cell*14+6);let mut last=None;
-        while raw[2]!=0{
-            let entity=self.entity(raw).map_err(|_|CreatureError::UnsupportedCellEntry)?;
-            if raw[2]==1{let candidate=self.creatures.as_ref().unwrap().record(word(&raw,0)as usize)?;if candidate[0x5e]<24{last=Some(raw);}}
-            if raw[2]==5&&self.effects.as_ref().ok_or(CreatureError::UnsupportedCellEntry)?.record(word(&raw,0)as usize).map_err(|_|CreatureError::UnsupportedCellEntry)?[0x45]==0x11{return Err(CreatureError::UnsupportedCellEntry);}
-            raw=reference(entity,3);
-        }
-        if last==Some(own){return Ok(*record);}
+        if !self.mule_cell_entry_predicate(record,cell).map_err(|_|CreatureError::UnsupportedCellEntry)?{return Ok(*record);}
         if record[0x53]!=1||record[0x4f]!=0{return Err(CreatureError::UnsupportedCellEntry);}
         let plan=crate::mule_cell_entry::plan_waypoint(record,cell as u16,*rng,trig,|point|self.mule_accepts(slot,point))
             .map_err(|_|CreatureError::UnsupportedCellEntry)?;
         *rng=plan.rng_after;Ok(plan.record_after)
+    }
+    /// Bounded5B100 predicate shared by cell entry and waypoint waiting.
+    fn mule_cell_entry_predicate(&self,record:&CreatureRecord,cell:usize)->Result<bool,ActorWorldError>{
+        let own=[record[15],record[16],1];
+        let approach_plant=record[0x5e]==1&&record[0x57]==2&&self.entity(reference(record,0x55))?[6]==2;
+        if record[0x5e]!=8&&!approach_plant{self.check_mule_cell_entry(own,cell)?;return Ok(false);}
+        if word(record,0x49)as u16&0x0400!=0{return Err(CreatureError::UnsupportedCellEntry.into());}
+        let mut raw=reference(self.map(),cell*14+6);let mut last=None;
+        while raw[2]!=0{
+            let entity=self.entity(raw)?;
+            if raw[2]==1{let candidate=self.creatures.as_ref().unwrap().record(word(&raw,0)as usize)?;if candidate[0x5e]<24{last=Some(raw);}}
+            if raw[2]==5&&self.effects.as_ref().ok_or(CreatureError::UnsupportedCellEntry)?.record(word(&raw,0)as usize)?[0x45]==0x11{return Err(CreatureError::UnsupportedCellEntry.into());}
+            raw=reference(entity,3);
+        }
+        Ok(last!=Some(own))
     }
     fn check_mule_cell_entry(&self,own:[u8;3],cell:usize)->Result<(),ActorWorldError> {
         let mut raw=reference(self.map(),cell*14+6);

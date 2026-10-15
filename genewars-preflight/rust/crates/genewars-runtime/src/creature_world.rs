@@ -379,12 +379,18 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
     if before[6]!=1||before[0x18]!=4||!(neutral||relocation||food_approach||feeding_wait)||before[0x7a]!=4||before[0x76]>90
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
-       ||before[0x4f]!=0||before[0x52]!=0||motion_word(before,0x49)as u16&!0x337f!=0||before[0x49]&3==3
+       ||before[0x4f]!=0||before[0x52]!=0||motion_word(before,0x49)as u16&!0x337f!=0
        ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=if mule_callback_phase(before,context.frame_counter)&1==0{0}else{2}{return Err(CreatureError::UnsupportedMotionState);}
+    let waiting=before[0x49]&3==3;
+    if waiting&&motion_word(prefix,0x3f)!=0{return Err(CreatureError::UnsupportedMotionState);}
     let mut a=*prefix;
     let(plan,water_effect)=plan_common_nonflight_physics_with_cell_entry(&a,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,obstacle,admit_water,cell_entry)?;
     a=plan.after;
-    if a[0x49]&3!=0 {
+    if waiting {
+        //6FD58..6FD80 restores the pre-steering target speed and returns
+        //from6FB60 before ordinary arrival/waypoint postphysics checks.
+        motion_put(&mut a,0x3f,motion_word(before,0x3f));
+    }else if a[0x49]&3!=0 {
         //70631..7067A: long avoidance waits use the prephysics working
         //target and only complete when grounded, slow and within32 units.
         if a[0x54]>20 {
