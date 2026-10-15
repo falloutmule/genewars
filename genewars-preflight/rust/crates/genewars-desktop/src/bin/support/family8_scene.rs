@@ -431,6 +431,30 @@ pub fn draw_family8_selector1_state1(
         record, record[0x19], origin, fade, gla, destination, clip, pitch)
 }
 
+///10EA0 selector1 bypasses state-specific decoration at111F6..11206,
+/// including zone-travel state2; same direction/height/shadow/color wrapper.
+pub fn draw_family8_selector1_state2(
+    resource: &EtherealAnimationDatabase,
+    record: &[u8; 102],
+    origin: [i16; 2],
+    fade: &TerrainFadeTable<'_>,
+    gla: &MainGlaTable<'_>,
+    destination: &mut [u8],
+    clip: [usize; 2],
+    pitch: usize,
+) -> Result<Family8DrawReceipt, Family8SceneError> {
+    if record[6] != 8 { return Err(Family8SceneError::WrongRecordKind(record[6])); }
+    if record[0x55] != 1 { return Err(Family8SceneError::UnsupportedSelector(record[0x55])); }
+    if record[0x56] != 2 { return Err(Family8SceneError::UnsupportedState(record[0x56])); }
+    let flags = u16::from_le_bytes([record[0x15], record[0x16]]);
+    if flags != 0x0020 { return Err(Family8SceneError::UnsupportedEntityFlags(flags)); }
+    if record[0x1b] != 0 || usize::from(record[0x19]) >= resource.selector1_directions.len() {
+        return Err(Family8SceneError::UnsupportedAnimation { animation: record[0x19], frame: record[0x1b] });
+    }
+    draw_family8_common(std::slice::from_ref(&resource.selector1_directions[usize::from(record[0x19])]),
+        record, record[0x19], origin, fade, gla, destination, clip, pitch)
+}
+
 /// Draw a selector-1/state-3 record through the same ordinary 0x10EA0 route.
 /// The common wrapper selects the direction-indexed frame and performs its
 /// shadow/height/color passes before the later state-specific decoration

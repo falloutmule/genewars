@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "cases": 214,
+  "compared_bytes": 26750,
+  "scope": "Isolated state2 travel through arrival; particlefactory explicit port; pure parent/RNG/request proof, not scheduler. Zone afterimage checked each callback; final source occupancy increment matches",
+  "production_sha256": "7f3a4da31140a763304627c7e024513dd99261ff803fe001891e15c50996a6db"
+}

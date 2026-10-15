@@ -339,9 +339,32 @@ pub fn plan_selector1_building_target(before:&Family8Record,map:&[u8],player_tar
 pub fn plan_selector1_state1_travel(before:&Family8Record,map:&[u8],frame:u32,water:i32,
     physics:&PhysicsTables,trig:&TrigTables,animations:&Family8DirectionalAnimations,rng:BlueprintRng)
     ->Result<Family8OnwardPlan,Family8MotionError>{
+    if before[0x56]!=1||before[0x57]!=1{return Err(Family8MotionError::UnsupportedRecord);}
+    plan_selector1_travel(before,map,frame,water,physics,trig,animations,rng,|_,_,rng|Ok(rng))
+}
+/// Source state2 travel shares common motion; arrival increments selected zone18.
+pub fn plan_selector1_state2_travel(before:&Family8Record,map:&[u8],frame:u32,water:i32,
+    physics:&PhysicsTables,trig:&TrigTables,animations:&Family8DirectionalAnimations,rng:BlueprintRng,zones:&[u8])
+    ->Result<Family8ZoneOnwardPlan,Family8MotionError>{
+    plan_selector1_state2_travel_with_particle(before,map,frame,water,physics,trig,animations,rng,zones,|_,_,rng|Ok(rng))
+}
+pub fn plan_selector1_state2_travel_with_particle<F>(before:&Family8Record,map:&[u8],frame:u32,water:i32,
+    physics:&PhysicsTables,trig:&TrigTables,animations:&Family8DirectionalAnimations,rng:BlueprintRng,zones:&[u8],particle_factory:F)
+    ->Result<Family8ZoneOnwardPlan,Family8MotionError>
+where F:FnMut(&Family8Record,Family8ParticleRequest,BlueprintRng)->Result<BlueprintRng,Family8MotionError>{
+    if before[0x56]!=2||zones.len()%19!=0||zones.len()>64*19||before[0x57]==0||usize::from(before[0x57])>zones.len()/19{return Err(Family8MotionError::UnsupportedRecord);}
+    let onward=plan_selector1_travel(before,map,frame,water,physics,trig,animations,rng,particle_factory)?;
+    let mut zones_after=zones.to_vec();
+    if w(&onward.motion.after,0x64)>0{let index=(usize::from(before[0x57])-1)*19+18;zones_after[index]=zones_after[index].wrapping_add(1);}
+    Ok(Family8ZoneOnwardPlan{onward,zones_after})
+}
+fn plan_selector1_travel<F>(before:&Family8Record,map:&[u8],frame:u32,water:i32,
+    physics:&PhysicsTables,trig:&TrigTables,animations:&Family8DirectionalAnimations,rng:BlueprintRng,mut particle_factory:F)
+    ->Result<Family8OnwardPlan,Family8MotionError>
+where F:FnMut(&Family8Record,Family8ParticleRequest,BlueprintRng)->Result<BlueprintRng,Family8MotionError>{
     if map.len()!=229376{return Err(Family8MotionError::MapLength);}
     if rng.ring>=32{return Err(Family8MotionError::InvalidRng);}
-    if before[6]!=8||!(0..16).contains(&w(before,15))||before[0x18]>=4||before[0x55]!=1||before[0x56]!=1||before[0x57]!=1
+    if before[6]!=8||!(0..16).contains(&w(before,15))||before[0x18]>=4||before[0x55]!=1||!matches!(before[0x56],1|2)||before[0x57]==0||before[0x57]>64
         ||before[0x15]!=0x20||before[0x16]!=0||w(before,0x49)as u16&!0x6024!=0x210
         ||before[0x4f]!=0||before[0x52]!=0||w(before,0x3f)<0||w(before,0x41)<0||w(before,0x64)!=0{
         return Err(Family8MotionError::UnsupportedRecord);
@@ -375,11 +398,12 @@ pub fn plan_selector1_state1_travel(before:&Family8Record,map:&[u8],frame:u32,wa
         let pitch=(i32::from(w(&a,0x3b))+1920+i32::from(rng_draw(&mut rng_after)))&2047;
         particle=Some(Family8ParticleRequest{code:0x1a,position:point(&a),physical_height:d(&a,0x27),angles:[yaw as u16,pitch as u16,(w(&a,0x3d)>>2)as u16]});
     }
+    if let Some(request)=particle{rng_after=particle_factory(&a,request,rng_after)?;if rng_after.ring>=32{return Err(Family8MotionError::InvalidRng);}}
     a[0x19]=(((((i32::from(w(&a,0x39))>>7)+1)>>1)+1)&7)as u8;
     if a[0x49]&0x20!=0 {
         pw(&mut a,0x3f,7680);
         let first=rng_draw(&mut rng_after);pw(&mut a,0x64,300+4*i16::from(first%100));
-        let second=rng_draw(&mut rng_after);pw(&mut a,0x64,50+4*i16::from(second%50));
+        let second=rng_draw(&mut rng_after);let timer=if before[0x56]==2 {500+4*i16::from(second%200)}else{50+4*i16::from(second%50)};pw(&mut a,0x64,timer);
     }
     let direction=usize::from(a[0x19]);animate(&mut a,&animations.directions[direction])?;
     Ok(Family8OnwardPlan{motion:Family8MotionPlan{new_cell:cell(point(&a)),after:a,rng_after,old_cell:cell(point(before)),child:None,
@@ -397,15 +421,49 @@ fn set_target_angles(a:&mut Family8Record,physics:&PhysicsTables)->Result<(),Fam
 /// State1 positive-timer hover and its empty-search transition to state3.
 /// The two list inputs close the actual first-mission empty-building/site
 /// searches at timer expiry; active targets are an unsupported boundary.
+#[derive(Debug,Clone,PartialEq,Eq)]
+pub struct Family8ZoneOnwardPlan {pub onward:Family8OnwardPlan,pub zones_after:Vec<u8>}
 pub fn plan_selector1_state1_hover(before:&Family8Record,map:&[u8],frame:u32,water:i32,
     physics:&PhysicsTables,trig:&TrigTables,animations:&Family8DirectionalAnimations,rng:BlueprintRng,
     owner_buildings:&[u8],site_count:u8,current_point_accepted:bool)->Result<Family8OnwardPlan,Family8MotionError>{
+    let plan=plan_selector1_state1_hover_with_zones(before,map,frame,water,physics,trig,animations,rng,owner_buildings,&[],current_point_accepted)?;
+    if site_count!=0&&plan.onward.motion.after[0x56]==3{return Err(Family8MotionError::UnsupportedRecord);}
+    Ok(plan.onward)
+}
+pub fn plan_selector1_state1_hover_with_zones(before:&Family8Record,map:&[u8],frame:u32,water:i32,
+    physics:&PhysicsTables,trig:&TrigTables,animations:&Family8DirectionalAnimations,rng:BlueprintRng,
+    owner_buildings:&[u8],zones:&[u8],current_point_accepted:bool)->Result<Family8ZoneOnwardPlan,Family8MotionError>{
+    plan_selector1_state1_hover_with_zones_and_particle(before,map,frame,water,physics,trig,animations,rng,owner_buildings,zones,current_point_accepted,|_,_,rng|Ok(rng))
+}
+/// The factory hook runs at source48790, before timer and114B0 target RNG.
+/// Caller must stage external mutations and commit only after this plan succeeds.
+pub fn plan_selector1_state1_hover_with_zones_and_particle<F>(before:&Family8Record,map:&[u8],frame:u32,water:i32,
+    physics:&PhysicsTables,trig:&TrigTables,animations:&Family8DirectionalAnimations,rng:BlueprintRng,
+    owner_buildings:&[u8],zones:&[u8],current_point_accepted:bool,mut particle_factory:F)->Result<Family8ZoneOnwardPlan,Family8MotionError>
+where F:FnMut(&Family8Record,Family8ParticleRequest,BlueprintRng)->Result<BlueprintRng,Family8MotionError>{
+    if before[0x56]!=1||before[0x57]!=1{return Err(Family8MotionError::UnsupportedRecord);}
+    plan_selector1_hover_with_zones_and_particle(before,map,frame,water,physics,trig,animations,rng,owner_buildings,zones,current_point_accepted,particle_factory)
+}
+pub fn plan_selector1_state2_hover_with_particle<F>(before:&Family8Record,map:&[u8],frame:u32,water:i32,
+    physics:&PhysicsTables,trig:&TrigTables,animations:&Family8DirectionalAnimations,rng:BlueprintRng,
+    zones:&[u8],current_point_accepted:bool,particle_factory:F)->Result<Family8ZoneOnwardPlan,Family8MotionError>
+where F:FnMut(&Family8Record,Family8ParticleRequest,BlueprintRng)->Result<BlueprintRng,Family8MotionError>{
+    let index=w(before,0x59);
+    if before[0x56]!=2||index<0||usize::from(index as u16)>=zones.len()/19||before[0x57]!=index as u8+1{return Err(Family8MotionError::UnsupportedRecord);}
+    plan_selector1_hover_with_zones_and_particle(before,map,frame,water,physics,trig,animations,rng,&[],zones,current_point_accepted,particle_factory)
+}
+fn plan_selector1_hover_with_zones_and_particle<F>(before:&Family8Record,map:&[u8],frame:u32,water:i32,
+    physics:&PhysicsTables,trig:&TrigTables,animations:&Family8DirectionalAnimations,rng:BlueprintRng,
+    owner_buildings:&[u8],zones:&[u8],current_point_accepted:bool,mut particle_factory:F)->Result<Family8ZoneOnwardPlan,Family8MotionError>
+where F:FnMut(&Family8Record,Family8ParticleRequest,BlueprintRng)->Result<BlueprintRng,Family8MotionError>{
+    if zones.len()%19!=0||zones.len()>64*19{return Err(Family8MotionError::UnsupportedRecord);}
+    let mut zones_after=zones.to_vec();
     if map.len()!=229376{return Err(Family8MotionError::MapLength);}
     if rng.ring>=32{return Err(Family8MotionError::InvalidRng);}
-    if before[6]!=8||!(0..16).contains(&w(before,15))||before[0x18]>=4||before[0x55]!=1||before[0x56]!=1||before[0x57]!=1
+    if before[6]!=8||!(0..16).contains(&w(before,15))||before[0x18]>=4||before[0x55]!=1||!matches!(before[0x56],1|2)||before[0x57]==0||before[0x57]>64
         ||before[0x15]!=0x20||before[0x16]!=0||w(before,0x49)as u16&!0x6020!=0x200
         ||before[0x4f]!=0||before[0x52]!=0||!matches!(before[0x5b],0|4)||w(before,0x3f)<0||w(before,0x41)<0||w(before,0x64)<=0
-        ||owner_buildings.len()!=64*67{
+        ||(before[0x56]==1&&owner_buildings.len()!=64*67){
         return Err(Family8MotionError::UnsupportedRecord);
     }
     // Family8 A8 is RET; the read-only neighborhood search has no numeric effect.
@@ -423,24 +481,28 @@ pub fn plan_selector1_state1_hover(before:&Family8Record,map:&[u8],frame:u32,wat
         let pitch=(i32::from(w(&a,0x3b))+1920+i32::from(rng_draw(&mut rng_after)))&2047;
         particle=Some(Family8ParticleRequest{code:0x1a,position:point(&a),physical_height:d(&a,0x27),angles:[yaw as u16,pitch as u16,(w(&a,0x3d)>>2)as u16]});
     }
+    if let Some(request)=particle {rng_after=particle_factory(&a,request,rng_after)?;if rng_after.ring>=32{return Err(Family8MotionError::InvalidRng);}}
     a[0x19]=(((((i32::from(w(&a,0x39))>>7)+1)>>1)+1)&7)as u8;
     let remaining=w(&a,0x64).wrapping_sub(1);pw(&mut a,0x64,remaining);
-    if remaining>0 {
+    let zone_live=before[0x56]!=2||i32::from_le_bytes(zones[w(before,0x59)as usize*19+10..w(before,0x59)as usize*19+14].try_into().unwrap())!=0;
+    if remaining>0&&zone_live {
         let center=[w(&a,0x5c),w(&a,0x5e)];let height=genewars_core::cd_candidate::interpolate_height(map,center[0],center[1]).map_err(|_|Family8MotionError::MapLength)?.wrapping_add(4800);
         hover_acceleration(&mut a,center,height,physics,trig)?;
     }else{
         //114B0 continues after the current building. With no next target,
         //site_count0 closes the state2 search and source130CE entersstate3.
-        if let Some(next)=plan_selector1_building_target(&a,map,[0,0],owner_buildings,trig,rng_after)? {
-            a=next.after;rng_after=next.rng_after;
-        }else{
-            if site_count!=0{return Err(Family8MotionError::UnsupportedRecord);}
-            a[0x57]=0;a[0x56]=3;a[0x5b]=0;a[0x33..0x39].fill(0);
+        let building=if before[0x56]==1{plan_selector1_building_target(&a,map,[0,0],owner_buildings,trig,rng_after)?}else{None};
+        if let Some(next)=building {a=next.after;rng_after=next.rng_after;}
+        else{
+            if before[0x56]==1{a[0x57]=0;a[0x56]=2;}
+            let next=crate::family8_zone_target::plan_zone_target(&a,map,zones,trig,rng_after)?;
+            a=next.after;rng_after=next.rng_after;zones_after=next.zones_after;
+            if next.selected.is_none(){a[0x57]=0;a[0x56]=3;a[0x5b]=0;a[0x33..0x39].fill(0);}
         }
     }
     let direction=usize::from(a[0x19]);animate(&mut a,&animations.directions[direction])?;
-    Ok(Family8OnwardPlan{motion:Family8MotionPlan{new_cell:cell(point(&a)),after:a,rng_after,old_cell:cell(point(before)),child:None,
-        pending_audio:audio,pending_ui_message:false,queue_requested:true},particle,target_selection_required:false})
+    Ok(Family8ZoneOnwardPlan{onward:Family8OnwardPlan{motion:Family8MotionPlan{new_cell:cell(point(&a)),after:a,rng_after,old_cell:cell(point(before)),child:None,
+        pending_audio:audio,pending_ui_message:false,queue_requested:true},particle,target_selection_required:false},zones_after})
 }
 fn hover_acceleration(a:&mut Family8Record,target:[i16;2],height:i32,physics:&PhysicsTables,trig:&TrigTables)->Result<(),Family8MotionError>{
     let dx=delta15(w(a,7),target[0]);let dy=delta15(w(a,9),target[1]);let dz=d(a,0x27).wrapping_sub(height)>>3;

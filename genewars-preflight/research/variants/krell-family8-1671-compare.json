@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "compared_bytes": 427369,
+  "differences": {},
+  "source": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-family8-zone-hover1671-fullfactory\\continuation",
+  "production": "private\\review\\krell-mule-callbacks-069\\frame-1671-slot-2-family8-after",
+  "ports": [
+    "audio engine requests not executed",
+    "pointerfields31..38 normalized",
+    "render queue request port"
+  ],
+  "source_script_sha256": "70ab1ffca7225a6bfc82fcdad1f80cf9eb46ca355d149b689f4c0317c6772532"
+}

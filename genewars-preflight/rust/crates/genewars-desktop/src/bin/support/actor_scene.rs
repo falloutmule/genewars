@@ -435,6 +435,7 @@ fn render_actor_world_layers(
                 (0,9)=>super::family8_scene::draw_family8_selector0_state9,
                 (1,0)=>super::family8_scene::draw_family8_selector1_state0,
                 (1,1)=>super::family8_scene::draw_family8_selector1_state1,
+                (1,2)=>super::family8_scene::draw_family8_selector1_state2,
                 (1,3)=>super::family8_scene::draw_family8_selector1_state3,
                 (2,10)=>super::family8_scene::draw_family8_selector2_state10,
                 state=>return Err(format!("family8 slot {slot}: unsupported draw state {state:?}")),

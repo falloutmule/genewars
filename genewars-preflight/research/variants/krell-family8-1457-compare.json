@@ -1,0 +1,104 @@
+{
+  "status": "error",
+  "compared_bytes": 427369,
+  "differences": {
+    "backing": {
+      "count": 2,
+      "first": [
+        {
+          "offset": 123064,
+          "source": 14,
+          "production": 2
+        },
+        {
+          "offset": 123066,
+          "source": 5,
+          "production": 8
+        }
+      ]
+    },
+    "actors": {
+      "count": 2,
+      "first": [
+        {
+          "offset": 200,
+          "source": 2,
+          "production": 14
+        },
+        {
+          "offset": 202,
+          "source": 8,
+          "production": 5
+        }
+      ]
+    },
+    "effects": {
+      "count": 5,
+      "first": [
+        {
+          "offset": 1134,
+          "source": 134,
+          "production": 2
+        },
+        {
+          "offset": 1135,
+          "source": 30,
+          "production": 0
+        },
+        {
+          "offset": 1136,
+          "source": 0,
+          "production": 8
+        },
+        {
+          "offset": 1137,
+          "source": 2,
+          "production": 1
+        },
+        {
+          "offset": 1139,
+          "source": 8,
+          "production": 3
+        }
+      ]
+    },
+    "family8": {
+      "count": 5,
+      "first": [
+        {
+          "offset": 204,
+          "source": 14,
+          "production": 134
+        },
+        {
+          "offset": 205,
+          "source": 0,
+          "production": 30
+        },
+        {
+          "offset": 206,
+          "source": 5,
+          "production": 0
+        },
+        {
+          "offset": 207,
+          "source": 1,
+          "production": 14
+        },
+        {
+          "offset": 209,
+          "source": 3,
+          "production": 5
+        }
+      ]
+    }
+  },
+  "source": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-family8-zone-travel1457-fullfactory\\continuation",
+  "production": "private\\review\\krell-mule-callbacks-066\\frame-1457-slot-2-family8-after",
+  "ports": [
+    "audio engine requests not executed",
+    "pointerfields31..38 normalized",
+    "render queue request port"
+  ],
+  "source_script_sha256": "ac6d72460d0666f4973770f99af036a55e9a9fcc3b8daed24ba791f2194a2d1c"
+}

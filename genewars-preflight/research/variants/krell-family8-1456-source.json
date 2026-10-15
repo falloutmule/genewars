@@ -1,0 +1,21 @@
+{
+  "status": "source_contract_recovered",
+  "production_comparison": "not_run",
+  "frame": 1456,
+  "slot": 2,
+  "reference": "QA BETA V5",
+  "blocked_action": "Distributor construction progression; Ethereal reaches next terrain-zone target during normal simulation",
+  "source_pins": {
+    "private\\ghidra\\countdown-expiry\\instructions-000114b0.txt": "b7b6789864e90543ef45c8435d14cf48448f23d12cdd2ef638aa38d24bf83a0b",
+    "private\\ghidra\\countdown-expiry\\instructions-00012e11.txt": "76bc16026dd7aaa66ab8f761b6f824fa594ab1c78be117dad435eac103038001"
+  },
+  "entry": "130AB sets state2 after state1 building exhaustion;57=0, then130AF calls114B0",
+  "scan": "11690: signed57>0 decrements previous zone18; ascending scan from signed57, stride19, limitcount11C218; first signed dword zone0E>0 qualifies, no selector/activation18 predicate",
+  "selected": "116FC center\u2192actor5C; zoneindex\u219257 and word59. Targetkind5B unchanged. Shared114D0 samples73E00 radius1024 (one RNG),7B140+2560\u219260; goalB;54=20;49 OR14 AND EFFC;16 AND BF then13E60 AND7F;4F/52zero;4A AND3F;virtual80 speed\u21923F;timer64zero;57increment",
+  "none": "AL0; caller checks57zero and setsstate3, clears5B and acceleration33..38 at130CE",
+  "limits": [
+    "Current mission snapshot precedes earlier callbacks; exact per-family062 fixture pending",
+    "Pure/full numeric implementation not yet compared",
+    "Previous-zone occupancy decrement must be transactional; first state1\u2192state2 switch does not decrement"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "cases": 12,
+  "compared_bytes": 1992,
+  "literal_instructions": 2500,
+  "scope": "Synthetic114B0state2 cases on actualKrell terrain, prior occupancy and positive/zero/negative quota; no full callback claim",
+  "production_sha256": "4311cb7f6421dde3ed4cd9991e593cc2ed5a14c19f80be7ad80dfa9fd38f4667",
+  "fixture": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-zone-target\\1c5ec295ba6f49b69af6b738ac9995c2"
+}

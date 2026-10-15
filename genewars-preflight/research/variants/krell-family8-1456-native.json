@@ -1,0 +1,49 @@
+{
+  "status": "error",
+  "classification": "gameplay_defect",
+  "frame": 1456,
+  "slot": 2,
+  "literal_instructions": 2826,
+  "parent_differences": [
+    {
+      "offset": "0xb",
+      "source": 30,
+      "production": 125
+    },
+    {
+      "offset": "0xc",
+      "source": 125,
+      "production": 1
+    },
+    {
+      "offset": "0xe",
+      "source": 95,
+      "production": 98
+    },
+    {
+      "offset": "0x60",
+      "source": 226,
+      "production": 17
+    },
+    {
+      "offset": "0x61",
+      "source": 38,
+      "production": 39
+    }
+  ],
+  "rng_equal": true,
+  "cause": "Production defers48790 effect26factory until after114B0 zone73E00 target draw; original factory consumes one draw before target sampling. Final RNG agrees but target position/height do not.",
+  "source_output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-family8-zone-hover1456-fullfactory",
+  "production": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callbacks-063\\frame-1456-slot-2-family8-after",
+  "required_order": [
+    "hover physics",
+    "particle angles two RNG draws",
+    "effect26 factory one RNG draw and links",
+    "timer expiry and zone target one RNG draw",
+    "animation/queue"
+  ],
+  "limits": [
+    "Source audio/UI presentation ports remain explicit",
+    "Full pool normalized comparison not yet finalized; parent mismatch sufficient to reject acceptance"
+  ]
+}

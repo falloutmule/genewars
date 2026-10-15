@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "cases": 1,
+  "compared_bytes": 125,
+  "scope": "Actual1671 state2 positivehover currentrecord/RNG/request/zone; no particle requested; full world comparison followsintegration",
+  "production_sha256": "4264afc18661373ae458fcadd04634a07e267006314d7323018c7ebb07f84197"
+}

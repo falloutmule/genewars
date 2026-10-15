@@ -121,7 +121,9 @@ impl ActorWorld {
         let expected=if before[0x55]==1 {Family8AnimationBinding::Base}else{Family8AnimationBinding::Offset80};
         if pool.binding(usize::from(slot))? != Some(expected) {return Err(ActorWorldError::Family8Binding(slot));}
         let mut retirement_parent=None;let mut parent_response=None;let mut parent_retirement=false;
-        let (plan,particle,target_required):(Family8StepPlan,_,_)=match (before[0x55],before[0x56]) {
+        let mut zones_after=None;
+        let mut particle_staged=None;let mut particle_precreated=None;let mut particle_hook_error=None;let mut particle_parent_cell=None;
+        let (mut plan,particle,target_required):(Family8StepPlan,_,_)=match (before[0x55],before[0x56]) {
             (2,10|11|12)=>{
                 if before[0x49]&0x10==0&&frame.wrapping_add(u32::from(slot))&31==0{let _=self.family8_current_point_accepted(slot,&before)?;}
                 (family8_motion::plan_zone_marker_wait(&before,self.map(),frame,water,physics,trig,animation,self.rng)?.into(),None,false)
@@ -161,9 +163,44 @@ impl ActorWorld {
                     else if word(&before,0x64)>0 {
                         let accepted=if frame.wrapping_add(u32::from(slot))&31==0{self.family8_current_point_accepted(slot,&before)?}else{true};
                         let buildings=self.owner_building_records(before[24])?;
-                        family8_motion::plan_selector1_state1_hover(&before,self.map(),frame,water,physics,trig,directions,self.rng,&buildings,self.backing[0x34b8],accepted)?
+                        let count=usize::from(self.backing[0x34b8]);
+                        if count>64{return Err(family8_motion::Family8MotionError::UnsupportedRecord.into());}
+                        let zones=&self.backing[0x2ff8..0x2ff8+count*19];
+                        let result=family8_motion::plan_selector1_state1_hover_with_zones_and_particle(&before,self.map(),frame,water,physics,trig,directions,self.rng,&buildings,zones,accepted,|parent,particle,rng|{
+                            let mut staged=self.clone();staged.rng=rng;
+                            particle_parent_cell=Some(staged.stage_family8_particle_parent(slot,parent).map_err(|error|{particle_hook_error=Some(error);family8_motion::Family8MotionError::UnsupportedRecord})?);
+                            let context=staged.mission_loading_physics();
+                            match staged.create_particle(particle.code,0,particle.position,particle.physical_height,particle.angles,false,context,trig){
+                                Ok(created)=>{particle_precreated=created;let after=staged.rng;particle_staged=Some(staged);Ok(after)},
+                                Err(error)=>{particle_hook_error=Some(error);Err(family8_motion::Family8MotionError::UnsupportedRecord)},
+                            }
+                        });
+                        if let Some(error)=particle_hook_error.take(){return Err(error);}
+                        let zone=result?;
+                        zones_after=Some(zone.zones_after);zone.onward
                     }else{family8_motion::plan_selector1_state1_travel(&before,self.map(),frame,water,physics,trig,directions,self.rng)?};
                 (onward.motion.into(),onward.particle,onward.target_selection_required)
+            },
+            (1,2)=>{
+                let count=usize::from(self.backing[0x34b8]);
+                if count>64{return Err(family8_motion::Family8MotionError::UnsupportedRecord.into());}
+                let zones=&self.backing[0x2ff8..0x2ff8+count*19];
+                let mut factory=|parent:&Family8Record,particle:family8_motion::Family8ParticleRequest,rng:BlueprintRng|{
+                    let mut staged=self.clone();staged.rng=rng;
+                    particle_parent_cell=Some(staged.stage_family8_particle_parent(slot,parent).map_err(|error|{particle_hook_error=Some(error);family8_motion::Family8MotionError::UnsupportedRecord})?);
+                    let context=staged.mission_loading_physics();
+                    match staged.create_particle(particle.code,0,particle.position,particle.physical_height,particle.angles,false,context,trig){
+                        Ok(created)=>{particle_precreated=created;let after=staged.rng;particle_staged=Some(staged);Ok(after)},
+                        Err(error)=>{particle_hook_error=Some(error);Err(family8_motion::Family8MotionError::UnsupportedRecord)},
+                    }
+                };
+                let result=if word(&before,0x64)>0{
+                    let accepted=if frame.wrapping_add(u32::from(slot))&31==0{self.family8_current_point_accepted(slot,&before)?}else{true};
+                    family8_motion::plan_selector1_state2_hover_with_particle(&before,self.map(),frame,water,physics,trig,directions,self.rng,zones,accepted,&mut factory)
+                }else{family8_motion::plan_selector1_state2_travel_with_particle(&before,self.map(),frame,water,physics,trig,directions,self.rng,zones,&mut factory)};
+                if let Some(error)=particle_hook_error.take(){return Err(error);}
+                let zone=result?;zones_after=Some(zone.zones_after);
+                (zone.onward.motion.into(),zone.onward.particle,zone.onward.target_selection_required)
             },
             (1,3)=>{
                 let accepted=if before[0x49]&0x10==0&&frame.wrapping_add(u32::from(slot))&31==0 {
@@ -175,20 +212,26 @@ impl ActorWorld {
             },
             _=>return Err(family8_motion::Family8MotionError::UnsupportedRecord.into()),
         };
-        let mut staged=self.clone();
-        if plan.old_cell!=plan.new_cell {staged.unlink_family8(slot)?;}
-        staged.family8.as_mut().unwrap().replace_record_checked(usize::from(slot),&before,&plan.after)?;
+        let particle_allocated_in_prefix=particle_staged.is_some();
+        let mut staged=particle_staged.unwrap_or_else(||self.clone());
+        let staged_cell=particle_parent_cell.unwrap_or(usize::from(plan.old_cell));
+        if staged_cell!=usize::from(plan.new_cell) {staged.unlink_family8(slot)?;}
+        let staged_before=*staged.family8.as_ref().unwrap().record(usize::from(slot))?;
+        // Factory insertion may patch this parent's links before its AI tail.
+        plan.after[..6].copy_from_slice(&staged_before[..6]);
+        staged.family8.as_mut().unwrap().replace_record_checked(usize::from(slot),&staged_before,&plan.after)?;
         staged.rng=plan.rng_after;
+        if let Some(zones)=zones_after{staged.backing[0x2ff8..0x2ff8+zones.len()].copy_from_slice(&zones);}
         if let Some(response)=&parent_response {
             let player=*staged.player(before[24])?.bytes();let mut after=player;
             after[0x11..0x15].copy_from_slice(&response.player_counter_after.to_le_bytes());
             staged.players[usize::from(before[24])].replace_bookkeeping_checked(&player,&after)?;
         }
-        if plan.old_cell!=plan.new_cell {staged.insert_family8_head(slot)?;}
+        if staged_cell!=usize::from(plan.new_cell) {staged.insert_family8_head(slot)?;}
         let child_created=if let Some(child)=plan.child {
             staged.create_family8(child.selector,child.owner,child.position,child.physical_height)?
         } else {None};
-        let particle_created=if let Some(particle)=particle {
+        let particle_created=if particle_allocated_in_prefix{particle_precreated}else if let Some(particle)=particle {
             let context=staged.mission_loading_physics();
             staged.create_particle(particle.code,0,particle.position,particle.physical_height,particle.angles,false,context,trig)?
         }else{None};
@@ -218,6 +261,19 @@ impl ActorWorld {
         staged.validate_links()?;staged.validate_family8_count()?;*self=staged;
         #[cfg(debug_assertions)] self.capture_numeric_callback(slot as usize,frame,"family8-after");
         Ok(Family8StepReceipt{slot,plan,child_created,particle_created,target_selection,retirement,parent_notified:retirement_parent,parent_response,rng_after})
+    }
+
+    /// Original common physics relocates the parent before48790's insertion.
+    /// Called only on the private callback transaction, before its AI tail.
+    fn stage_family8_particle_parent(&mut self,slot:u16,parent:&Family8Record)->Result<usize,ActorWorldError>{
+        let before=*self.family8.as_ref().unwrap().record(slot as usize)?;
+        let old=floor_cell([word(&before,7),word(&before,9)]);let new=floor_cell([word(parent,7),word(parent,9)]);
+        if old!=new{self.unlink_family8(slot)?;}
+        let current=*self.family8.as_ref().unwrap().record(slot as usize)?;let mut after=*parent;
+        after[..6].copy_from_slice(&current[..6]);
+        self.family8.as_mut().unwrap().replace_record_checked(slot as usize,&current,&after)?;
+        if old!=new{self.insert_family8_head(slot)?;}
+        Ok(new)
     }
 
     fn family8_current_point_accepted(&self,slot:u16,record:&Family8Record)->Result<bool,ActorWorldError>{
