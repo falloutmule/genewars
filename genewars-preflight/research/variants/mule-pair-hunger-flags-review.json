@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "scope": "Explicit SYNTHETIC hungerbit40-off domains, one original/live Rust callback per case with validlinked8buffer roundtrip. State10/postbirth8 fields artificially varied; retryonly61bit40off. NOT campaign progress, native acceptance, full shared scheduler or authentic birth reachability.",
+  "rows": [
+    {
+      "case": "state10-positive-countdown",
+      "frame": 2668,
+      "slot": 4,
+      "classification": "synthetic_source_parametric_fixture_NOT_campaign_progress",
+      "input": "private/review/mule-pair-hunger-flags/ae0ccfce57f44045bd9d71e61f60fc9b/state10-positive-countdown/before",
+      "source_output": "private/review/krell-mule-callback/18be8011896145fcac133000f74f99ee",
+      "source_instructions": 1973,
+      "source_draws": 0,
+      "rust_output": "private/review/mule-pair-hunger-flags/ae0ccfce57f44045bd9d71e61f60fc9b/state10-positive-countdown/rust-after",
+      "rust_draws": 0,
+      "compared_bytes": 427369,
+      "mismatches": {}
+    },
+    {
+      "case": "postbirth-state8-positive-delay",
+      "frame": 2668,
+      "slot": 4,
+      "classification": "synthetic_source_parametric_fixture_NOT_campaign_progress",
+      "input": "private/review/mule-pair-hunger-flags/ae0ccfce57f44045bd9d71e61f60fc9b/postbirth-state8-positive-delay/before",
+      "source_output": "private/review/krell-mule-callback/762be98d70704cca82e3420f030416ee",
+      "source_instructions": 1860,
+      "source_draws": 0,
+      "rust_output": "private/review/mule-pair-hunger-flags/ae0ccfce57f44045bd9d71e61f60fc9b/postbirth-state8-positive-delay/rust-after",
+      "rust_draws": 0,
+      "compared_bytes": 427369,
+      "mismatches": {}
+    },
+    {
+      "case": "retained-pair-retry",
+      "frame": 1927,
+      "slot": 0,
+      "classification": "synthetic_source_parametric_fixture_NOT_campaign_progress",
+      "input": "private/review/mule-pair-hunger-flags/ae0ccfce57f44045bd9d71e61f60fc9b/retained-pair-retry/before",
+      "source_output": "private/review/krell-mule-callback/0b738526a273457183e9144992544f1e",
+      "source_instructions": 2559,
+      "source_draws": 1,
+      "rust_output": "private/review/mule-pair-hunger-flags/ae0ccfce57f44045bd9d71e61f60fc9b/retained-pair-retry/rust-after",
+      "rust_draws": 1,
+      "compared_bytes": 427369,
+      "mismatches": {}
+    }
+  ],
+  "input_pins": {
+    "private/review/krell-mule-callback/c8cbf4a2af7f477da4c960f08762f1f0/backing.bin": "a37a9a2742337266256f4610ab6d23aab269fb33f058f17ce25c30adb11c6035",
+    "private/review/krell-mule-callback/c8cbf4a2af7f477da4c960f08762f1f0/players.bin": "32b3eb5591a877f70486a9d8728cb7b488dde97d54af4a8a242923d03b9b983e",
+    "private/review/krell-mule-callback/c8cbf4a2af7f477da4c960f08762f1f0/actors.bin": "9cec6ca9c5e0206cb7977d12af654bc0277829626e9aa7753665a827c07ecb75",
+    "private/review/krell-mule-callback/c8cbf4a2af7f477da4c960f08762f1f0/creatures.bin": "2def47125ed74232e9a0a81c5225a5029473d77d25d7a6a6a83daadee6e7f913",
+    "private/review/krell-mule-callback/c8cbf4a2af7f477da4c960f08762f1f0/effects.bin": "c99b9982786c0ee23e2213a877d377a268db13ed22e5596792713dbc906361bf",
+    "private/review/krell-mule-callback/c8cbf4a2af7f477da4c960f08762f1f0/family8.bin": "6a92043bcfd2566cc05936dbca40dd743682c824319bfeae71e9e5f44d41ae52",
+    "private/review/krell-mule-callback/c8cbf4a2af7f477da4c960f08762f1f0/buildings.bin": "a78de47dedf0fce746e3f61a9d15ea9f846f5b6a76dd86336ce530165e12adcc",
+    "private/review/krell-mule-callback/c8cbf4a2af7f477da4c960f08762f1f0/rng.bin": "fa61dbe9d393334ab2b167a0a35b922bd358c6c498ce5736cf3f07e07b010af8",
+    "private/review/authentic-krell-134/frame-1927-slot-0-blocked-before/backing.bin": "48b356dc532fa458a4c5142fe78c19d443a3c1e4864867276ecbb76000f48eac",
+    "private/review/authentic-krell-134/frame-1927-slot-0-blocked-before/players.bin": "73d1645f0bfb593467149e7528249f58a64029c1548aaa2ac992d92dd569d8ee",
+    "private/review/authentic-krell-134/frame-1927-slot-0-blocked-before/actors.bin": "eb93ba3ad9f0a139bcb6f8086dbea75cf2b1f43318e4699a68548786bf020ac3",
+    "private/review/authentic-krell-134/frame-1927-slot-0-blocked-before/creatures.bin": "a2d52e66bd91f2a8fab538ebd2263f826b2ac362da3586e429f6ef00760a7730",
+    "private/review/authentic-krell-134/frame-1927-slot-0-blocked-before/effects.bin": "6755baae6a53f9aab1f11d4ef0d5f944e429a9e1819c63e61698c4ccce9e07f2",
+    "private/review/authentic-krell-134/frame-1927-slot-0-blocked-before/family8.bin": "3b684abce4d76aa2b48d72bd4a3106b8b33fa8e92ac23878b3e1d98b9c9911da",
+    "private/review/authentic-krell-134/frame-1927-slot-0-blocked-before/buildings.bin": "543cfbc1e85ce98dee1d3092a24e0b57d98c011c1d9e01f9ce4c2b3e8a73f349",
+    "private/review/authentic-krell-134/frame-1927-slot-0-blocked-before/rng.bin": "7994dab4df9431f155b6bc651a326668c9c9d1e583401baac4a7395130106878"
+  },
+  "validator_sha256": "0380df580cd824a05943b3b645e98d8dd0d97ff6b64393d05652bddbb74199f0",
+  "private_run": "private/review/mule-pair-hunger-flags/ae0ccfce57f44045bd9d71e61f60fc9b",
+  "acceptance_classification": "synthetic source-parametric fixtures; NOT campaign progress"
+}

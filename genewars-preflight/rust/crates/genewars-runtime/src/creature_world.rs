@@ -383,12 +383,12 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     // The serialized idle Mule starts with action flags0; frame0 performs
     // ordinary physics before the first odd-frame choice establishes bit8.
     let neutral=before[0x5e]==8&&matches!(before[0x61],0|0x40|0x80)&&matches!(before[0x60],0|8|0x88);
-    let postbirth_idle=before[0x5e]==8&&before[0x61]==0x60&&matches!(before[0x60],0x0c|0x8c)&&before[0x52]==0&&before[0x57]==1&&motion_word(before,0x6c)>=0;
+    let postbirth_idle=before[0x5e]==8&&matches!(before[0x61],0x20|0x60)&&matches!(before[0x60],0x0c|0x8c)&&before[0x52]==0&&before[0x57]==1&&motion_word(before,0x6c)>=0;
     let relocation=before[0x5e]==0&&before[0x61]==0x80&&before[0x60]==8&&before[0x57]==0;
     let null_food_target=before[0x57]==0&&before[0x60]&0x42==0x40;
     let food_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&(before[0x57]==2||null_food_target);
-    let paired_approach=before[0x5e]==3&&matches!(before[0x60],0|4|8|12|0x80|0x84|0x88|0x8c)&&before[0x57]==1&&((before[0x61]==0x40&&before[0x52]==1)||(before[0x61]==0x60&&before[0x52]==0));
-    let paired_wait=before[0x5e]==10&&before[0x61]==0x60&&matches!(before[0x60],4|12|0x84|0x8c)&&before[0x57]==1&&before[0x52]==0&&motion_word(before,0x6c)>=0;
+    let paired_approach=before[0x5e]==3&&matches!(before[0x60],0|4|8|12|0x80|0x84|0x88|0x8c)&&before[0x57]==1&&((matches!(before[0x61],0|0x40)&&before[0x52]==1)||(matches!(before[0x61],0x20|0x60)&&before[0x52]==0));
+    let paired_wait=before[0x5e]==10&&matches!(before[0x61],0x20|0x60)&&matches!(before[0x60],4|12|0x84|0x8c)&&before[0x57]==1&&before[0x52]==0&&motion_word(before,0x6c)>=0;
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
     if before[6]!=1||before[0x18]!=4||!(neutral||postbirth_idle||relocation||food_approach||feeding_wait||paired_approach||paired_wait)||before[0x7a]!=4||before[0x76]>90
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
@@ -750,7 +750,7 @@ fn draw(rng:&mut crate::blueprint::BlueprintRng,purpose:CreatureRngPurpose,trace
 pub fn plan_mule_retry_wait(before:&CreatureRecord,rng_before:crate::blueprint::BlueprintRng)->Result<InitialMuleChoice,CreatureError> {
     // Authentic1927: state8 retains an old kind1 pair target, but has no
     // active association.5CC60 clears that local target without touching peer.
-    let retained_pair=before[0x5e]==8&&before[0x57]==1&&before[0x61]==0x60
+    let retained_pair=before[0x5e]==8&&before[0x57]==1&&matches!(before[0x61],0x20|0x60)
         &&matches!(before[0x60],0x0c|0x8c)&&before[0x52]==0
         &&(0..300).contains(&motion_word(before,0x55))&&motion_word(before,0x6c)==0;
     let action=before[0x5e]==8&&before[0x57]==0||before[0x5e]==1&&before[0x57]==2||retained_pair;
@@ -1088,7 +1088,7 @@ mod tests {
             assert_eq!(motion_word(&p.after,0x6c),10+i16::from((p.rng_after.seed>>8)as u8%20));
             assert_eq!(&p.after[7..15],&before[7..15]);
         }
-        for (offset,value) in [(0x57,3),(0x52,1),(0x61,0x20),(0x60,0x0e),(0x6c,1)] {
+        for (offset,value) in [(0x57,3),(0x52,1),(0x61,0),(0x60,0x0e),(0x6c,1)] {
             let mut bad=before;bad[offset]=value;assert!(plan_mule_retry_wait(&bad,rng).is_err());
         }
     }
