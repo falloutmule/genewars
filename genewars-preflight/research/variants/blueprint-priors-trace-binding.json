@@ -1,0 +1,30 @@
+{
+  "status": "bounded-audit-complete-qualification-remains",
+  "accepted_missions_changed": false,
+  "replay_run": false,
+  "production_edits": false,
+  "historical_zero_priors": "unestablished",
+  "remaining_gap": "All active actors trace-to-audited-subcallback-closure binding after pending setup, including category2 and restoration",
+  "winning_report_observation": {
+    "steps": 4630,
+    "blocked": null,
+    "outcome": "won",
+    "final_actor_states": [
+      1,
+      1
+    ],
+    "internal_dispatch_history": false,
+    "blueprint_equality_history": false
+  },
+  "pins": {
+    "research/variants/blueprint-priors-first-mission.md": "546c4d6689fb0741972f4acb7f0b1b7868d569c177679f4ffcb52527b2e0ee3e",
+    "private/ghidra/actor-motion/instructions-00057a10.txt": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a",
+    "private/ghidra/activation-rng-refs/instructions-00052780.txt": "048be1420c3c58c6e56a11954c565c2f3ea254710600c635d77605020d103a20",
+    "rust/crates/genewars-runtime/src/actor_world/construction_scheduler.rs": "337ad8e3bbb105eb973dc74f987d374ff0efd130b9f43ec486d333ba411510a3",
+    "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs": "63293557df9ee3f6ab3b831dd8946555bc50c39cdfd2b4d3e54e5e38edbb6169",
+    "rust/crates/genewars-runtime/src/actor_motion.rs": "3eec61b309f71a4c415293c706338fe070617e456a0755ede609c32f5c9bfe4a",
+    "private/integration/fresh-photon-chain-003/report.json": "ed38815674f051b1a5b4dd9f187eb397b239c99eaec51a853331d9ffcb73d619",
+    "private/integration/fresh-photon-chain-003/genewars-game.exe": "c49d66e4326e0851a1efb2ca41f9a6ecb81045b5e11b7d886df0ae737d557e70"
+  },
+  "report": "research/variants/blueprint-priors-trace-binding.md"
+}

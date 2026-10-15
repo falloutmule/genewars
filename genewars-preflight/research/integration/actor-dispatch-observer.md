@@ -1,0 +1,9 @@
+# Optional source-dispatch observer
+
+`step_actor_callbacks_with_construction_observed` adds a final `FnMut(&ActorDispatchObservation)` to the existing shared engine API. The old API delegates with a no-op callback. Every processed ready actor yields one observation, including nonselected category2. Notifications buffer until the entire staged actor/job pass commits; a failed pass emits none.
+
+The snapshot contains actor55 state, restore56, blueprint category/style, task7E/kind82/selector83 and opaque blueprint18/1B. `blueprint_equal()` tests equality without interpreting their value. Ordinary callback receipts carry the actual internal selected52780 idle or582D9 no-action branch and `Option<bool>` for a real empty-scorer evaluation. None means no evaluation; it must not be counted as true. Architect observations use the executed534D0 callback receipt and actual507D0 setup-after55 where present; rejected-site cancellation is explicit. This does not infer source dispatch from final state alone.
+
+The optional observer introduces no gameplay rule or RNG draw. One focused fixture test compares complete world/RNG, job pool and callback receipts between on/off execution for active categories0/2, continuing until a real empty-neighborhood discharge occurs. A late state5/restore10 fixture rejects the pass, restores the world/jobs and emits zero notifications. The observer never labels that unsupported state a gameplay loss.
+
+Host integration must separately bind activation identity/equality and persist aggregate dispatch/equality counts with executable/resources and source pins. Unready actors remain the existing no-action gate; activation is not guessed from later snapshots. No original mission count changes from this implementation. Exact test scope and hashes are in the adjacent JSON.

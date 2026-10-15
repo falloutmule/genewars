@@ -1,0 +1,41 @@
+{
+  "status": "passed-bounded-source-audit",
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "historical_zero_priors": "unestablished",
+  "activation": "80C65..80C6E and8190E..81918 copy blueprint18 to1B",
+  "periodic_invariant": "58395..5839B signed comparison of equal bytes skips increment for all256 byte values",
+  "arithmetic_check_cases": 256,
+  "literal_execution_test": "not run in this audit",
+  "first_mission_acceptance": "conditional: accepted trace must exclude consumers such as56530 and any mutation breaking18==1B; not a full replay variation proof",
+  "observable_dependency": "56530 at56A91..56AA6 reads signed blueprint18 into threshold predicate; arbitrary gameplay is not invariant",
+  "rng_ring": "bounded generator value independent of11872C; diagnostic memory/state identity remains dependent",
+  "source_sha256": {
+    "private/ghidra/activation-rng-refs/instructions-0007fad0.txt": "03967b02b2b15b977b81d3603bc886579c1db4427381ed65548e384e15d4833a",
+    "private/ghidra/activation-rng-refs/instructions-0007f580.txt": "456bf6a90497272367895c99d36f9e8e8a1c37fac1690388a0e6343667e9d305",
+    "private/ghidra/command-resolver/instructions-00080ae0.txt": "f6abb34796b3a71a8443f62f35547b049f371968f15a7365dea2c367858739a6",
+    "private/ghidra/activation-rng-refs/instructions-00081650.txt": "10a5e385c2fd58bcb6ec5d6fe1523797b54a1dfb6d528af0288489bfca72d00e",
+    "private/ghidra/actor-motion/instructions-00057a10.txt": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a",
+    "private/ghidra/activation-rng-refs/instructions-00056530.txt": "9c1b44fec033b799a13be2b4292fcbd0aa8f2325a1efc698b528ed59d39a22e6",
+    "private/ghidra/actor-panel-font-color/instructions-000265f0.txt": "df874ca820fe964791bd124419d200f57587c8c669907d1dadc76466d015b22f",
+    "private/ghidra/actor-draw/instructions-00056f10.txt": "722b64990b18d0983082381221494a695f1f317a30cd27ec7593532877106301",
+    "private/ghidra/construction-setup/instructions-000507d0.txt": "301fe1652f9d5cb11c92b8d692330cdb3d1363d6e087dc911de360131f99b15e",
+    "private/ghidra/building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "private/ghidra/mission-array-refs/instructions-0004fd30.txt": "0dfb420cafd52d6ebcf41de7e02299cf23938381f95ffc1ca1efaa0b91a29b60",
+    "private/ghidra/mission-tail-init/instructions-00056e20.txt": "ea9f9732b2e32af849a86de57a4a416a565f2fe4c6809fed6587fc0dcc99baa0",
+    "private/ghidra/validated/memory-.object1.bin": "92cb549a81ab565d62bbd233cf69b2470fad8186a52df31de6a5cd0faab280fe",
+    "private/ghidra/activation-rng-refs/instructions-00052780.txt": "048be1420c3c58c6e56a11954c565c2f3ea254710600c635d77605020d103a20"
+  },
+  "construction_dispatch": {
+    "source_table": "507BC",
+    "targets": [
+      "5122F",
+      "51738",
+      "5144C",
+      "5177A"
+    ],
+    "index": "blueprint16 category",
+    "category0": "51235 state9, independent of buildingselector",
+    "category1": "5173B state10",
+    "whole_route_limit": "Othercategory1 autonomouspendingwork/restoredstate10 stillrequires acceptance binding"
+  }
+}

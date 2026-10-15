@@ -9,6 +9,10 @@ use crate::actor_resources::ActorAnimationDatabase;
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct ActorMovingReceipt {
     pub actor_id:u16,
+    /// Actual selected source dispatch:52780 idle or582D9 no action.
+    pub source_dispatch:u32,
+    /// Present only when the real empty-neighborhood guard was evaluated.
+    pub idle_scorer_empty:Option<bool>,
     pub changed_cell:bool,
     pub acknowledgement:Option<MoveAcknowledgement>,
     pub footstep:Option<ActorFootstep>,
@@ -98,7 +102,9 @@ impl ActorWorld {
         }
 
         let moved=*staged.actors.record(usize::from(id))?;
+        let mut source_dispatch=0x582d9;let mut idle_scorer_empty=None;
         let (control_after,blueprint_after,acknowledgement,idle_draws)=if arrived {
+            source_dispatch=0x52780;
             let idle=idle.ok_or(ActorMotionError::UnsupportedState)?;
             if idle.player_mode!=staged.player(handle.player_id)?.bytes()[2]||idle.runtime_count_11c2bc!=word(&staged.backing,0x355c)as u16 {return Err(ActorMotionError::UnsupportedState.into())}
             let ground=genewars_core::cd_candidate::interpolate_height(staged.map(),target[0],target[1]).map_err(|e|ActorWorldError::Terrain(e.to_string()))?;
@@ -108,27 +114,29 @@ impl ActorWorld {
             let snap=*staged.actors.record(usize::from(id))?;
             let rng=ActorCallbackRng{seed:staged.rng.seed,ring:staged.rng.ring,draw_count:staged.rng.draw_count};
             let plan=match actor_motion::plan_actor_arrival_idle_with_empty_scorer(&snap,&blueprint,frame,rng,idle,false,class3_unpowered) {
-                Err(ActorMotionError::IdleNeighborhoodRequired) if staged.actor_idle_scorer_empty(id)?=>actor_motion::plan_actor_arrival_idle_with_empty_scorer(&snap,&blueprint,frame,rng,idle,true,class3_unpowered)?,
+                Err(ActorMotionError::IdleNeighborhoodRequired) if {let empty=staged.actor_idle_scorer_empty(id)?;idle_scorer_empty=Some(empty);empty}=>actor_motion::plan_actor_arrival_idle_with_empty_scorer(&snap,&blueprint,frame,rng,idle,true,class3_unpowered)?,
                 result=>result?,
             };
             staged.rng=BlueprintRng{seed:plan.rng_after.seed,ring:plan.rng_after.ring,draw_count:plan.rng_after.draw_count};
             (plan.after,plan.blueprint_after,None,plan.draws)
         }else if moved[0x55]==9&&moved[0x7e]==255&&moved[0x82]==0 {
+            source_dispatch=0x52780;
             let idle=idle.ok_or(ActorMotionError::UnsupportedState)?;
             if idle.player_mode!=staged.player(handle.player_id)?.bytes()[2]||idle.runtime_count_11c2bc!=word(&staged.backing,0x355c)as u16{return Err(ActorMotionError::UnsupportedState.into());}
             let rng=ActorCallbackRng{seed:staged.rng.seed,ring:staged.rng.ring,draw_count:staged.rng.draw_count};
             let plan=match crate::actor_construction_recovery::plan_cancelled_architect_idle(&moved,&blueprint,frame,rng,idle,false){
-                Err(ActorMotionError::IdleNeighborhoodRequired)if staged.actor_idle_scorer_empty(id)?=>crate::actor_construction_recovery::plan_cancelled_architect_idle(&moved,&blueprint,frame,rng,idle,true)?,
+                Err(ActorMotionError::IdleNeighborhoodRequired)if {let empty=staged.actor_idle_scorer_empty(id)?;idle_scorer_empty=Some(empty);empty}=>crate::actor_construction_recovery::plan_cancelled_architect_idle(&moved,&blueprint,frame,rng,idle,true)?,
                 result=>result?,
             };
             staged.rng=BlueprintRng{seed:plan.rng_after.seed,ring:plan.rng_after.ring,draw_count:plan.rng_after.draw_count};
             (plan.after,plan.blueprint_after,None,plan.draws)
         }else if moved[0x55]==1&&moved[0x57]&2==0 {
+            source_dispatch=0x52780;
             let idle=idle.ok_or(ActorMotionError::UnsupportedState)?;
             if idle.player_mode!=staged.player(handle.player_id)?.bytes()[2]||idle.runtime_count_11c2bc!=word(&staged.backing,0x355c)as u16 {return Err(ActorMotionError::UnsupportedState.into())}
             let rng=ActorCallbackRng{seed:staged.rng.seed,ring:staged.rng.ring,draw_count:staged.rng.draw_count};
             let plan=match actor_motion::plan_actor_idle_with_empty_scorer(&moved,&blueprint,frame,rng,idle,false,class3_unpowered) {
-                Err(ActorMotionError::IdleNeighborhoodRequired) if staged.actor_idle_scorer_empty(id)?=>actor_motion::plan_actor_idle_with_empty_scorer(&moved,&blueprint,frame,rng,idle,true,class3_unpowered)?,
+                Err(ActorMotionError::IdleNeighborhoodRequired) if {let empty=staged.actor_idle_scorer_empty(id)?;idle_scorer_empty=Some(empty);empty}=>actor_motion::plan_actor_idle_with_empty_scorer(&moved,&blueprint,frame,rng,idle,true,class3_unpowered)?,
                 result=>result?,
             };
             staged.rng=BlueprintRng{seed:plan.rng_after.seed,ring:plan.rng_after.ring,draw_count:plan.rng_after.draw_count};
@@ -145,7 +153,7 @@ impl ActorWorld {
         let actual_before=*staged.actors.record(usize::from(id))?;
         staged.actors.replace_record_checked(usize::from(id),&actual_before,&after)?;
         staged.players[usize::from(handle.player_id)].commit_activation_blueprint(usize::from(handle.blueprint_index),&blueprint,&blueprint_after)?;
-        let mut receipt=ActorMovingReceipt{actor_id:id,changed_cell:floor_cell([word(&before,7),word(&before,9)])!=floor_cell([word(&after,7),word(&after,9)]),acknowledgement,footstep:None,created_effect:None,water_effect,pending_events,factory_draw:None,queue_requested:true,rng_before:old_rng,rng_after:old_rng,arrived,idle_draws};
+        let mut receipt=ActorMovingReceipt{actor_id:id,source_dispatch,idle_scorer_empty,changed_cell:floor_cell([word(&before,7),word(&before,9)])!=floor_cell([word(&after,7),word(&after,9)]),acknowledgement,footstep:None,created_effect:None,water_effect,pending_events,factory_draw:None,queue_requested:true,rng_before:old_rng,rng_after:old_rng,arrived,idle_draws};
         let current=*staged.actors.record(usize::from(id))?;
         if let Some(point)=actor_motion::actor_footstep_query_position(&current,frame)? {
             let class=staged.terrain_class_at(point)?;

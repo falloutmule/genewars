@@ -1,0 +1,28 @@
+{
+  "status": "passed-bounded-observer-invariance",
+  "test": "actor_world::construction_scheduler::observer_tests::observer_preserves_two_actor_world_and_rolls_back_notifications",
+  "tests_passed": 1,
+  "tests_filtered": 195,
+  "pins": {
+    "rust/crates/genewars-runtime/src/actor_world/construction_scheduler.rs": "bfae246b9455f3182a7df604801efb34c48b7ba2895b111a3ea56a5d1860c6a2",
+    "rust/crates/genewars-runtime/src/actor_world/actor_updates.rs": "6bf3172d00a3e7cbb4fc44bce5ba0e225cd84e21b73457b0e5cb1c0d72512be5",
+    "rust/crates/genewars-runtime/src/actor_world.rs": "ab18856b2242e71a5e90cc12457fa512295aea4ed3653b3d71076ac05ea83e86"
+  },
+  "scope": [
+    "two activated actors categories0/2",
+    "same shared engine path with observer off/on",
+    "complete ActorWorld equality including RNG, player blueprints and allpools",
+    "TerrainJobPool and callbackreceipt equality",
+    "source52780 dispatch observed at internalbranch",
+    "real empty-scorer guard reached and recorded",
+    "late state5 restore10 rejects atomically and flusheszero observations"
+  ],
+  "limitations": [
+    "fixture initialization is not ordinary mission gameplay",
+    "no4630step replay",
+    "no activation journal yet; host integration is separate",
+    "construction postsetup tagged from actual existing setup receipt and selectedcallback, not independently exercised in this idlefixture",
+    "failed callbacks emit no committed observations; callers retain error status"
+  ],
+  "historical_failure": "Initial fixture animation direction1C waszero, causing InvalidAnimation. Fixture correctedto1; production animation logic unchanged."
+}

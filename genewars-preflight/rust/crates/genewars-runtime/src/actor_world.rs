@@ -51,6 +51,7 @@ pub use admitted_buildings::{AdmittedBuildingCallback,AdmittedBuildingPass};
 pub use building_scheduler::{IncompleteBuildingPass,Selector1BuildingPass,Selector1BuildingCallback};
 mod construction_scheduler;
 pub use construction_scheduler::ConstructionAwareActorCallback;
+pub use construction_scheduler::{ActorDispatchObservation,ActorDispatchSnapshot,ActorObservedBranch};
 mod family8_retirement;
 pub use family8_retirement::Family8RetirementReceipt;
 pub use building_updates::{ConstructionWorldError, ArchitectStage0Receipt, ArchitectMotionReceipt};
