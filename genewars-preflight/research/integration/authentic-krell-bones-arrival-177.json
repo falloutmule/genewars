@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "scope": "Actual4327Bonesarrival plus isolatedfollowing4328/4329waits; othercallbacks frozen, NOT Krell acceptance",
+  "comparisons": [
+    {
+      "status": "passed",
+      "frame": 4327,
+      "slot": 0,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\263561f4c5034df1b8d1094ee693c0bb"
+    },
+    {
+      "status": "passed",
+      "frame": 4328,
+      "slot": 0,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\c3453ed0fea6406a81ff1c01f3c9017e"
+    },
+    {
+      "status": "passed",
+      "frame": 4329,
+      "slot": 0,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\74552c5284584559ab623840438fa05b"
+    }
+  ],
+  "total_compared_bytes": 1282107,
+  "state4_processing": "Explicitlyguarded; syntheticprocessinggate test asserts entireworldrollback. State4 foodprocessing is not state5abandonment.",
+  "source_pins": "65AF5>=26 selects4 then same65B0C..65B44 reservation;5E5C4 state4/5/7 all5E718 animation19;679CE nonprocessingwait distance<=4096/timer&15!=0.",
+  "second_actual_genepod_terminal": {
+    "status": "passed",
+    "frame": 4200,
+    "slot": 2,
+    "draws": 28,
+    "compared_bytes": 427369,
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\genepod-captured\\9e42f003d0d24308aa256e2e035df9bf"
+  },
+  "runtime": {
+    "passed": 241,
+    "ignored": 1
+  },
+  "game": {
+    "passed": 76,
+    "ignored": 1
+  },
+  "campaign_missions": 1,
+  "native_checkpoint": "frozen1743627; newer177 paritypending"
+}

@@ -56,7 +56,7 @@ impl ActorWorld {
         let before=*pool.record(slot)?;let own=[slot as u8,(slot>>8)as u8,1];
         if before[6]!=1||before[24]!=4||word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
         let null_food_target=before[0x5e]==1&&before[0x57]==0&&before[0x60]&0x42==0x40;
-        let corpse_approach=matches!(before[0x5e],1|5)&&before[0x57]==1&&before[0x52]==1&&reference(&before,0x50)==reference(&before,0x55);
+        let corpse_approach=matches!(before[0x5e],1|4|5)&&before[0x57]==1&&before[0x52]==1&&reference(&before,0x50)==reference(&before,0x55);
         if corpse_approach {
             let id=word(&before,0x55)as usize;let corpse=pool.record(id)?;
             let binding=if corpse[0x5e]>=26{CreatureAnimationBinding::BonesSelector4}else{CreatureAnimationBinding::MuleSelector4};
@@ -123,6 +123,13 @@ impl ActorWorld {
                         *rng=relocation.rng_after;return Ok(relocation.record_after);
                     }
                     return Ok(choice.after);
+                }
+                if record[0x5e]==4 {
+                    //679CE/67A22: nearby retained Bones, nonprocessing timer gate.
+                    let bones=world.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?;
+                    if !matches!(bones[0x5e],26|27)||creature_world::common_distance_squared(world.map(),[word(record,7),word(record,9)],[word(bones,7),word(bones,9)])?>4096
+                        ||word(record,0x6c)&15==0{return Err(CreatureError::UnsupportedMotionState);}
+                    return Ok(*record);
                 }
                 if record[0x5e]==5 {
                     let corpse=world.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?;
@@ -355,7 +362,7 @@ impl ActorWorld {
         let own=[before[15],before[16],1];let current=[word(before,7),word(before,9)];
         let retained_food_association=before[24]==4&&before[0x5e]==8&&before[0x60]==8&&before[0x61]==0x40
             &&before[0x57]==0&&before[0x52]==1&&word(before,0x50)==word(before,0x55);
-        let associated_pair=matches!(before[0x5e],1|3|5)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55)||retained_food_association;
+        let associated_pair=matches!(before[0x5e],1|3|4|5)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55)||retained_food_association;
         let mut final_target=[word(before,11),word(before,13)];
         let mut a=*before;a[0x49]&=0x9f;
         if a[0x4f]!=0||(a[0x52]!=0&&!associated_pair)||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
@@ -467,7 +474,7 @@ impl ActorWorld {
             if distance<=i32::from(animation)*32+64 {desired=(i32::from(desired)*3/4)as i16;}
         }
         let target=[word(record,11),word(record,13)];
-        let distance=if (matches!(record[0x5e],1|3|5)||record[24]==4&&record[0x5e]==8)&&record[0x52]==1{
+        let distance=if (matches!(record[0x5e],1|3|4|5)||record[24]==4&&record[0x5e]==8)&&record[0x52]==1{
             //5AD70 virtualB8 uses the associated Mule's physical xyz,
             //even when74A50 repaired the ordinary goal back to self.
             let peer=self.creatures.as_ref().ok_or(CreatureError::MotionEnvironment)?.record(word(record,0x50)as usize)?;

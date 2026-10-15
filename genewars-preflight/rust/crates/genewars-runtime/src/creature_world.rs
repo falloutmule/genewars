@@ -391,7 +391,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     let paired_approach=before[0x5e]==3&&matches!(before[0x60],0|4|8|12|0x80|0x84|0x88|0x8c)&&before[0x57]==1&&((matches!(before[0x61],0|0x40)&&before[0x52]==1)||(matches!(before[0x61],0x20|0x60)&&before[0x52]==0));
     let paired_wait=before[0x5e]==10&&matches!(before[0x61],0x20|0x60)&&matches!(before[0x60],4|12|0x84|0x8c)&&before[0x57]==1&&before[0x52]==0&&motion_word(before,0x6c)>=0;
     let retained_food_idle=before[0x5e]==8&&before[0x60]==8&&before[0x61]==0x40&&before[0x57]==0&&before[0x52]==1&&before[0x50..0x52]==before[0x55..0x57];
-    let corpse_wait=before[0x5e]==5&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==1&&before[0x52]==1&&before[0x50..0x53]==before[0x55..0x58];
+    let corpse_wait=matches!(before[0x5e],4|5)&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==1&&before[0x52]==1&&before[0x50..0x53]==before[0x55..0x58];
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
     if before[6]!=1||before[0x18]!=4||!(neutral||postbirth_idle||relocation||food_approach||corpse_approach||corpse_wait||retained_food_idle||feeding_wait||paired_approach||paired_wait)||before[0x7a]!=4||before[0x76]>90
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
@@ -488,7 +488,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
         if motion_word(&a,0x49)as u16&0x200!=0 {if a[0x5e]==0{a[0x60]&=0xdf;}a[0x60]&=0xef;}
         if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;if a[0x61]&0x80!=0&&a[0x6e..0x72]==a[11..15]{a[0x61]&=0x7f;}motion_put(&mut a,0x6c,0);}
         if a[0x5e]==0&&motion_word(&a,0x6c)==0 {a=choice(&a)?;}
-        if before[0x5e]==5 {a=choice(&a)?;}
+        if matches!(before[0x5e],4|5) {a=choice(&a)?;}
         if before[0x5e]==7 {
             if common_distance_squared(map,motion_point(&a),working_target)?>4096 {return Err(CreatureError::UnsupportedMotionState);}
             if motion_word(&a,0x6c)&15==0 {a=choice(&a)?;}
@@ -510,7 +510,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
     if a[0x5e]==10 {
         //5EA66: paired countdown selects animation22 once, then retains it.
         if a[0x19]!=22 {a[0x19]=22;a[0x1e]=0;a[0x1c]=1;a[0x1d]=0;a[0x1a]=0;a[0x1b]=0;}
-    }else if matches!(a[0x5e],5|7) {
+    }else if matches!(a[0x5e],4|5|7) {
         if a[0x19]!=19 {a[0x19]=19;a[0x1a]=0;a[0x1b]=0;a[0x1c]=1;a[0x1d]=2;a[0x1e]=0;}
     }else{
         a[0x19]=(((((i32::from(yaw)>>7)+1)>>1)+1)&7)as u8;

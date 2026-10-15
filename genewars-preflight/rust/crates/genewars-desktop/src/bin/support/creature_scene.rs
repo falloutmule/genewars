@@ -196,7 +196,7 @@ pub fn draw_supported_mule_record(
         // shares the animation<16/state<26 branch with ordinary approach.
         1 | 3 => animation <= 7,
         //65AEF corpse arrival selects state5;5E640 shares animation19 with state7.
-        5 | 7 => animation == 19 && frame_index <= 3,
+        4 | 5 | 7 => animation == 19 && frame_index <= 3,
         8 => animation <= 7 || animation == 22,
         //5EA66 selects22;59470 uses the established high-animation wrapper.
         10 => animation <= 7 || animation == 22,
@@ -1195,9 +1195,9 @@ mod pair_stop_render_tests {
   let mut r:[u8;124]=bytes[8*124..9*124].try_into().unwrap();assert_eq!((r[94],r[25],r[27]),(5,19,1));
   let height=i32::from_le_bytes(r[39..43].try_into().unwrap())-i32::from_le_bytes(r[17..21].try_into().unwrap());
   let draw=|r:&[u8;124],out:&mut Vec<u8>|draw_supported_mule_record(&res.mule,r,[48,40],height,0,0,false,0,0,&res.fade,&res.gla,[96,80],96,out);
-  for frame in 0..4{r[27]=frame;let mut actual=vec![0x55;96*80];let receipt=draw(&r,&mut actual).unwrap();assert!(receipt.components.iter().map(|x|x.pixels_written).sum::<usize>()>0);
+  for state in [4,5]{r[94]=state;for frame in 0..4{r[27]=frame;let mut actual=vec![0x55;96*80];let receipt=draw(&r,&mut actual).unwrap();assert!(receipt.components.iter().map(|x|x.pixels_written).sum::<usize>()>0);
    let mut plant=r;plant[94]=7;let mut expected=vec![0x55;96*80];draw(&plant,&mut expected).unwrap();assert_eq!(actual,expected);
-  }
+  }}
   for(offset,value)in[(25,18),(27,4),(24,0)]{let mut invalid=r;invalid[offset]=value;let mut out=vec![0x55;96*80];let saved=out.clone();assert_eq!(draw(&invalid,&mut out),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(out,saved);}
  }
 }
