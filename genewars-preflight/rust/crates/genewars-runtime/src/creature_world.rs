@@ -148,8 +148,17 @@ where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->
  common_nonflight_physics_water(before,map,frame,gravity,water,physics,trig,contact,obstacle,admit_water,true,cell_entry)
 }
 fn common_nonflight_physics_water<const N:usize,F,O,C>(before:&[u8;N],map:&[u8],frame:u32,gravity:i16,water:i32,
- physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,mut contact:F,mut obstacle:O,admit_water:bool,virtual90:bool,mut cell_entry:C)->Result<(CommonPhysicsPlan<N>,Option<CommonWaterEffect>),CreatureError>
+ physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,contact:F,mut obstacle:O,admit_water:bool,virtual90:bool,cell_entry:C)->Result<(CommonPhysicsPlan<N>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&[u8;N],usize,usize)->Result<[u8;N],CreatureError>{
+    common_nonflight_physics_with_collision(before,map,frame,gravity,water,physics,trig,contact,admit_water,virtual90,cell_entry,|record| {
+        if obstacle(motion_point(record))? {return Err(CreatureError::MotionEnvironment);} Ok(*record)
+    })
+}
+/// Source74270/6DD50 hook after cell entry and before water. The caller must
+/// prove collision from the postphysics record, including animation height.
+fn common_nonflight_physics_with_collision<const N:usize,F,C,H>(before:&[u8;N],map:&[u8],frame:u32,gravity:i16,water:i32,
+ physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,mut contact:F,admit_water:bool,virtual90:bool,mut cell_entry:C,mut airborne:H)->Result<(CommonPhysicsPlan<N>,Option<CommonWaterEffect>),CreatureError>
+where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&[u8;N],usize,usize)->Result<[u8;N],CreatureError>,H:FnMut(&[u8;N])->Result<[u8;N],CreatureError>{
     if N<0x55||map.len()!=229376||before[0x16]&9!=0||before[0x15]&0x20!=0||motion_word(before,0x49)as u16&0x400!=0
         ||(motion_word(before,0x3f)<0&&!(motion_word(before,0x3f)==-1&&N>=124&&before[6]==1&&before[0x5e]>=24&&before[0x15]&0x80!=0
             &&motion_dword(before,0x27)<=motion_dword(before,0x11)&&(0..3).all(|i|motion_word(before,0x33+2*i)==0))) {return Err(CreatureError::UnsupportedMotionState);}
@@ -201,7 +210,7 @@ where F:FnMut(&[u8;N],[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->
     // Source only invokes74270 on the odd airborne path, and the water
     // callback every fourth frame. Query ordering remains observable.
     let parity=frame.wrapping_add(motion_word(&a,0x0f)as i32 as u32);
-    if parity&1!=0&&motion_dword(&a,0x27)>motion_dword(&a,0x11)&&obstacle(motion_point(&a))? {return Err(CreatureError::MotionEnvironment);}
+    if parity&1!=0&&motion_dword(&a,0x27)>motion_dword(&a,0x11) {a=airborne(&a)?;}
     let mut water_effect=None;
     if parity&3==3&&(water as u32).wrapping_add(320)>=motion_dword(&a,0x27)as u32 {
         let class=crate::world::map_terrain_class(map,motion_point(&a)).map_err(|_|CreatureError::MotionEnvironment)?;
@@ -391,12 +400,21 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
 /// Postphysics runs the owned reveal at its original pre-AI boundary.
 pub(crate) fn plan_mule_admitted_body_with_postphysics<F,O,C,E,P>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
     physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
-    contact:F,obstacle:O,animations:&MuleAnimations,mut choice:C,admit_water:bool,cell_entry:E,mut postphysics:P)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+    contact:F,mut obstacle:O,animations:&MuleAnimations,choice:C,admit_water:bool,cell_entry:E,postphysics:P)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
 where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i16;2])->Result<bool,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
+    plan_mule_admitted_body_with_collision(before,prefix,working_target,map,context,physics,trig,contact,animations,choice,admit_water,cell_entry,postphysics,|record| {
+        if obstacle(motion_point(record))? {return Err(CreatureError::MotionEnvironment);} Ok(*record)
+    })
+}
+/// Same shared callback with source-ordered airborne response supplied by the world.
+pub(crate) fn plan_mule_admitted_body_with_collision<F,C,E,P,H>(before:&CreatureRecord,prefix:&CreatureRecord,working_target:[i16;2],map:&[u8],context:MuleStepContext,
+ physics:&crate::physics_tables::PhysicsTables,trig:&crate::actor_activation::TrigTables,
+ contact:F,animations:&MuleAnimations,mut choice:C,admit_water:bool,cell_entry:E,mut postphysics:P,airborne:H)->Result<(CommonPhysicsPlan<124>,Option<CommonWaterEffect>),CreatureError>
+where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,E:FnMut(&CreatureRecord,usize,usize)->Result<CreatureRecord,CreatureError>,P:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError>,H:FnMut(&CreatureRecord)->Result<CreatureRecord,CreatureError> {
     let waiting=before[0x49]&3==3;
     if waiting&&motion_word(prefix,0x3f)!=0{return Err(CreatureError::UnsupportedMotionState);}
     let mut a=*prefix;
-    let(plan,water_effect)=plan_common_nonflight_physics_with_cell_entry(&a,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,obstacle,admit_water,cell_entry)?;
+    let(plan,water_effect)=common_nonflight_physics_with_collision(&a,map,context.frame_counter,context.gravity,context.water_height,physics,trig,contact,admit_water,true,cell_entry,airborne)?;
     a=postphysics(&plan.after)?;
     if waiting {
         //6FD58..6FD80 restores the pre-steering target speed and returns

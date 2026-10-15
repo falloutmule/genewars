@@ -1,0 +1,39 @@
+{
+  "status": "passed_bounded_production_and_rendering",
+  "campaign_missions_accepted": 1,
+  "scope": "Synthetic retained-carry diagnostic, ordinary Genepod control and source-proved owned callback/render; not authentic Krell/native acceptance",
+  "first_owned_frame_committed": 2724,
+  "next_outer_frame_reported": 2725,
+  "continued_through_outer_frame": 2853,
+  "continuation_frames": 128,
+  "source_callbacks": [
+    {
+      "frame": 2724,
+      "slot": 7,
+      "compared_bytes": 427369,
+      "draws": 6,
+      "private_source": "private/review/krell-mule-callback/c28a26db94114e1b8df7b932b876d070"
+    },
+    {
+      "frame": 2740,
+      "slot": 7,
+      "compared_bytes": 427369,
+      "draws": 0,
+      "private_source": "private/review/krell-mule-callback/88b7661f3c56473fa1132f130cb7bbb9"
+    }
+  ],
+  "query": "research/variants/airborne-building-query-review.json:115cases7820bytes0mismatches",
+  "impulse": "research/variants/airborne-building-collision-review.json:122cases15860bytes0mismatches",
+  "render": "research/integration/owned-mule-render-101.json:16cases139328bytes0mismatches, independent source-derived pixels",
+  "checks": [
+    "private/integration/krell-runtime-collision-104.log:214passed1ignored",
+    "private/integration/krell-render-regression-104.log:18passed",
+    "private/integration/owned-callback-replay-103-unbound.log:missinganimationresource rejects and rollsback allworldstate",
+    "private/integration/krell-production-102.log:ordinary construction/production/128renderedownedframes passed"
+  ],
+  "remaining": [
+    "Original action5 owned-Mule input bridge and native creature selection",
+    "Authentic zone-credit effect/RNG/exhaustion continuation",
+    "Authentic carried-gameplay Krell objective and campaign transition"
+  ]
+}

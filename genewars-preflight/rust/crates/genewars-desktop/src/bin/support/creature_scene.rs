@@ -206,7 +206,10 @@ pub fn draw_supported_mule_record(
         25 => animation == 18,
         _ => false,
     };
-    if record[6] != 1 || record[0x18] != 4 || record[0x7a] != 4 || !admitted_pair {
+    let owned = record[0x18] < 4;
+    let owned_ordinary = matches!(record[0x5e],0|8) && record[0x79] as i8 <= 0
+        && (record[0x7b]==0 || record[0x7b]>191) && !(record[0x5e]==0 && record[0x60]&0x20!=0);
+    if record[6] != 1 || record[0x18] > 4 || record[0x7a] != 4 || !admitted_pair || (owned && !owned_ordinary) {
         return Err(CreatureDrawError::UnsupportedRecordState);
     }
     let animation = usize::from(record[0x19]);
@@ -266,8 +269,17 @@ pub fn draw_supported_mule_record(
                 clip,pitch,&mut scratch)?);
         }
     }
-    let mut receipt = draw_mule_color_frame(&frame, origin, factor,
-        wrapper_flags, clip_flag_bit0, depth, 135, fade_row, clip, pitch, &mut scratch)?;
+    //59470 owned branch uses94D70/94400: one owner palette, with
+    //identity mapping when source supplies a NULL fade pointer.
+    let identity: [u8;256]=std::array::from_fn(|i|i as u8);
+    let owned_fade=if record[0x15]&2==0 && shade<30 {fade_row}else{&identity};
+    let mut receipt = if owned {
+        let base=record[0x18].wrapping_mul(16).wrapping_sub(64);
+        draw_mule_color_frame_palette(&frame,origin,factor,wrapper_flags,clip_flag_bit0,depth,135,
+            owned_fade,clip,pitch,&mut scratch,[base;2],true)?
+    } else {
+        draw_mule_color_frame(&frame, origin, factor,wrapper_flags,clip_flag_bit0,depth,135,fade_row,clip,pitch,&mut scratch)?
+    };
     destination.copy_from_slice(&scratch);
     receipt.shadow_pending = false;
     receipt.shadows=shadows;
@@ -377,6 +389,23 @@ pub fn draw_mule_color_frame(
     pitch: usize,
     destination: &mut [u8],
 ) -> Result<CreatureFrameReceipt, CreatureDrawError> {
+    draw_mule_color_frame_palette(frame,origin,factor,incoming_wrapper_flags,clip_flag_bit0,depth,threshold,fade_row,clip,pitch,destination,[192,208],false)
+}
+fn draw_mule_color_frame_palette(
+    frame: &CreatureFramePixels,
+    origin: [i32; 2],
+    factor: u16,
+    incoming_wrapper_flags: u8,
+    clip_flag_bit0: bool,
+    depth: u8,
+    threshold: u8,
+    fade_row: &[u8],
+    clip: [usize; 2],
+    pitch: usize,
+    destination: &mut [u8],
+    palette_bases: [u8;2],
+    truncate_offsets: bool,
+) -> Result<CreatureFrameReceipt, CreatureDrawError> {
     if incoming_wrapper_flags & !3 != 0 { return Err(CreatureDrawError::UnsupportedFlags(incoming_wrapper_flags)); }
     if factor == 0 { return Err(CreatureDrawError::InvalidScale); }
     let mut scratch = destination.to_vec();
@@ -386,8 +415,10 @@ pub fn draw_mule_color_frame(
             .ok_or(CreatureDrawError::ArithmeticOverflow)? >> 8;
         let out_h = usize::from(component.sprite.height).checked_mul(usize::from(factor))
             .ok_or(CreatureDrawError::ArithmeticOverflow)? >> 8;
-        let scaled_x = (i32::from(component.local_position.0) * i32::from(factor)) >> 8;
-        let scaled_y = (i32::from(component.local_position.1) * i32::from(factor)) >> 8;
+        let sx=i32::from(component.local_position.0)*i32::from(factor);
+        let scaled_x=if truncate_offsets{sx/256}else{sx>>8};
+        let sy=i32::from(component.local_position.1)*i32::from(factor);
+        let scaled_y=if truncate_offsets{sy/256}else{sy>>8};
         let flip_parent_x = incoming_wrapper_flags & 1 != 0;
         let flip_parent_y = incoming_wrapper_flags & 2 != 0;
         let x_offset = if flip_parent_x { -scaled_x - out_w as i32 } else { scaled_x };
@@ -404,7 +435,7 @@ pub fn draw_mule_color_frame(
             CreatureForegroundInputs {
                 factor,
                 flags: effective_flags,
-                palette_bases: [192, 208],
+                palette_bases,
                 clip_flag_bit0,
                 depth,
                 threshold,
@@ -1127,5 +1158,28 @@ mod pair_stop_render_tests {
   assert!(receipt.components.iter().map(|c|c.pixels_written).sum::<usize>()>0);assert!(receipt.shadows.iter().map(|c|c.pixels_written).sum::<usize>()>0);
   let mut stopped=peer;stopped[94]=10;let mut expected=vec![0x55;96*80];draw(&stopped,&mut expected).unwrap();assert_eq!(actual,expected);
   let mut invalid=peer;invalid[25]=23;let saved=actual.clone();assert_eq!(draw(&invalid,&mut actual),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(actual,saved);
+ }
+}
+
+#[cfg(test)] mod owned_render_tests {
+ use super::*;
+ #[test] fn captured_owned_mule_uses_owner_palette_and_source_fade_gate() {
+  let p=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+  let(resources,_,_)=crate::runtime_resources::Resources::load(&p.join("private/integration/game-runtime")).unwrap();
+  let raw=std::fs::read(p.join("private/review/krell-production-100/frame-2724-slot-7-owned-after/creatures.bin")).unwrap();
+  let captured:[u8;124]=raw[7*124..8*124].try_into().unwrap();assert_eq!((captured[24],captured[94],captured[25]),(0,8,3));
+  let mut lines=Vec::new();let mut owner_images=Vec::new();
+  for owner in 0..4 {for variant in 0..4 {
+   let mut r=captured;r[24]=owner;let mut height=4312;let mut inherited=0;
+   match variant {1=>{height=0;r[23]=5;},2=>{height=0;r[23]=5;r[21]|=2;inherited=1;},3=>{height=0;r[118]=100;r[119]=255;inherited=2;},_=>{}}
+   let mut pixels=vec![0xa5;68*128+4];let receipt=draw_supported_mule_record(&resources.mule,&r,[24,90],height,0,inherited,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut pixels).unwrap();
+   assert!(receipt.components.iter().map(|p|p.pixels_written).sum::<usize>()>0);if variant==0{owner_images.push(pixels.clone());}
+   let hex=|b:&[u8]|b.iter().map(|x|format!("{x:02x}")).collect::<String>();
+   lines.push(format!("{{\"owner\":{owner},\"variant\":{variant},\"record\":\"{}\",\"height\":{height},\"inherited\":{inherited},\"pixels\":\"{}\"}}",hex(&r),hex(&pixels)));
+  }}
+  for pair in owner_images.windows(2){assert_ne!(pair[0],pair[1]);}
+  if let Some(output)=std::env::var_os("GENEWARS_OWNED_RENDER_OUTPUT"){assert!(!std::path::Path::new(&output).exists());std::fs::write(output,lines.join("\n")+"\n").unwrap();}
+  let mut unsupported=captured;unsupported[123]=128;let mut pixels=vec![0x55;68*128];let saved=pixels.clone();
+  assert_eq!(draw_supported_mule_record(&resources.mule,&unsupported,[24,90],4312,0,0,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pixels,saved);
  }
 }

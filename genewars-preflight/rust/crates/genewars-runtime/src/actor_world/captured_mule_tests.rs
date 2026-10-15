@@ -74,6 +74,10 @@ fn captured_mule_callback() {
     let physics=crate::physics_tables::PhysicsTables::from_mapped_bytes(&std::fs::read(resources.join("physics/angle.bin")).unwrap(),&std::fs::read(resources.join("physics/bounce.bin")).unwrap()).unwrap()
         .with_corpse_friction(&std::fs::read(resources.join("physics/corpse-friction.bin")).unwrap()).unwrap();
     let trig=TrigTables::generate_pinned().unwrap();let animations=MuleAnimations::from_anb(&std::fs::read(resources.join("creatures/MULE.ANB")).unwrap()).unwrap();
+    use crate::source_building_resources::{SourceBuildingResourceDatabase,SourceBuildingBinding};
+    let building_resources=[(SourceBuildingBinding::CdBgeneSelector0,"BGENE"),(SourceBuildingBinding::CdBpoweSelector3,"BPOWE"),(SourceBuildingBinding::CdBmineSelector11,"BMINE")].into_iter()
+        .map(|(binding,name)|SourceBuildingResourceDatabase::load(binding,std::fs::read(resources.join(format!("buildings/{name}.ANB"))).unwrap()).unwrap()).collect::<Vec<_>>();
+    if std::env::var_os("GENEWARS_CAPTURED_MULE_NO_BUILDING_RESOURCES").is_none(){world.bind_building_collision_resources(&building_resources).unwrap();}
     let physics_context=world.mission_loading_physics();let climate=word(&world.backing,0x1c61);
     let before=world.clone();let result=world.step_owned_mule_slot(slot,0,0x3e,MuleStepContext{frame_counter:frame,gravity:physics_context.gravity,water_height:physics_context.water_height,climate},&physics,&trig,&animations);
     let (status,error)=match &result {Ok(_)=>("passed",String::new()),Err(e)=>{assert_eq!(world,before,"failed callback must rollback every world field");("blocked",format!("{e:?}"))}};

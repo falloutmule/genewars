@@ -189,6 +189,8 @@ impl SharedMission {
         let mut staged=self.clone();let event=staged.step_inner(resources)?;*self=staged;Ok(event)
     }
     fn step_inner(&mut self,resources:&Resources)->Result<String,String> {
+        if !self.world.building_collision_resources_bound(){self.world.bind_building_collision_resources(&resources.source_buildings).map_err(|e|e.to_string())?;}
+
         if self.awaiting_presentation{return Err("finish the previous frame presentation before another callback".into());}
         let player_count=self.runtime_context.as_ref().map_or(4,|c|c.participating_players());
         let runtime_flags=self.runtime_context.as_ref().map_or(0,|c|c.known_runtime_flags());
@@ -448,7 +450,7 @@ impl SharedMission {
                         std::fs::write(d.join("boundary.json"),format!("{{\"frame\":{},\"error\":{},\"scope\":\"before entire mission callback, not per-family\"}}",loaded.frame_counter,crate::runtime_scene::json_string(&error))).unwrap();
                     }
                     println!("Krell observed boundary frame{}: {error}",loaded.frame_counter);
-                    assert!(error.contains("Unsupported"),"unexpected probe error: {error}");assert_eq!(loaded.world,before.world);assert_eq!(loaded.ui_animations,before.ui_animations);assert_eq!(loaded.actor_dispatch_audit_json(),before.actor_dispatch_audit_json());
+                    assert!(error.contains("Unsupported")||error=="Creatures(MotionEnvironment)","unexpected probe error: {error}");assert_eq!(loaded.world,before.world);assert_eq!(loaded.ui_animations,before.ui_animations);assert_eq!(loaded.actor_dispatch_audit_json(),before.actor_dispatch_audit_json());
                     println!("Krell construction blocked frame{}: {error}; buildings{}; actors{}",loaded.frame_counter,loaded.building_state_json(),loaded.actor_state_json());
                     println!("{{\"status\":\"blocked\",\"classification\":\"unsupported_behavior\",\"source_frame\":{},\"transaction_unchanged\":true}}",loaded.frame_counter);return false;
                 }
@@ -491,12 +493,17 @@ impl SharedMission {
                 }
                 let work=i32::from_le_bytes(loaded.world.buildings().unwrap().record(usize::from(slot)).unwrap()[54..58].try_into().unwrap());
                 assert!(work>0,"ordinary captured control must start production without state injection");
+                let continue_frames=std::env::var("GENEWARS_KRELL_OWNED_CONTINUE_FRAMES").ok().map(|v|v.parse::<u64>().expect("bounded owned continuation frames")).unwrap_or(0);
+                assert!(continue_frames<=1024);let mut first_owned=None;
                 for _ in 0..2048{
                     if !advance(&mut loaded){return;}
                     let owned=loaded.world.creatures().unwrap().records().iter().filter(|r|r[6]==1&&r[24]==0).count();
-                    if owned>0{println!("Krell ordinary production yielded{owned} owned Mule frame{}; not mission acceptance",loaded.frame_counter);return;}
+                    if owned>0{
+                        let start=*first_owned.get_or_insert_with(||{println!("Krell ordinary production yielded{owned} owned Mule frame{}; not mission acceptance",loaded.frame_counter);loaded.frame_counter});
+                        if loaded.frame_counter>=start+continue_frames{println!("Krell owned continuation reached frame{}; not mission acceptance",loaded.frame_counter);return;}
+                    }
                     let building=loaded.world.buildings().unwrap().record(usize::from(slot)).unwrap();
-                    if i32::from_le_bytes(building[54..58].try_into().unwrap())<=0&&building[27]==0{
+                    if owned==0&&i32::from_le_bytes(building[54..58].try_into().unwrap())<=0&&building[27]==0{
                         println!("Krell ordinary production ended without owned Mule frame{}; preserve authentic quality outcome",loaded.frame_counter);return;
                     }
                 }

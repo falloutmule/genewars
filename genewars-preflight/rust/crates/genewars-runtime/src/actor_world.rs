@@ -224,6 +224,7 @@ pub struct ActorWorld {
     creatures: Option<Box<CreaturePool>>,
     family8: Option<Box<Family8Pool>>,
     buildings: Option<Box<BuildingPool>>,
+    building_collision_heights: std::collections::BTreeMap<u8,Vec<Vec<i16>>>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -352,7 +353,7 @@ impl ActorWorld {
         }
         let groups = source.groups();
         let actors = ActorPool::from_packed_inactive(groups[2].bytes(), prior_native, prior_bindings)?;
-        let result = Self { backing: source.bytes().to_vec(), layouts: groups.map(|g| g.layout()), actors, players, rng, plants: None, effects: None, creatures: None, family8: None, buildings: None };
+        let result = Self { backing: source.bytes().to_vec(), layouts: groups.map(|g| g.layout()), actors, players, rng, plants: None, effects: None, creatures: None, family8: None, buildings: None, building_collision_heights: Default::default() };
         result.validate_links()?;
         Ok(result)
     }
@@ -463,6 +464,20 @@ impl ActorWorld {
     pub fn terrain_class_at(&self, point: [i16; 2]) -> Result<u8, ActorWorldError> {
         Ok(crate::world::map_terrain_class(self.map(), point)?)
     }
+
+    /// Bind heights from already hash-validated source databases. Unsupported
+    /// animations/frames reject rather than using a rendered or guessed bound.
+    pub fn bind_building_collision_resources(&mut self,resources:&[crate::source_building_resources::SourceBuildingResourceDatabase])->Result<(),ActorWorldError> {
+        let mut heights=std::collections::BTreeMap::new();
+        for resource in resources {
+            let frames=(0..2).map(|animation|resource.animation(animation).map(|frames|frames.iter().map(|frame|frame.metadata.height_raw).collect::<Vec<_>>()))
+                .collect::<Result<Vec<_>,_>>().map_err(|_|ActorWorldError::UnsupportedBuildingQuery(0))?;
+            if heights.insert(resource.selector(),frames).is_some(){return Err(ActorWorldError::UnsupportedBuildingQuery(0));}
+        }
+        if !self.building_collision_heights.is_empty()&&self.building_collision_heights!=heights{return Err(ActorWorldError::UnsupportedBuildingQuery(0));}
+        self.building_collision_heights=heights;Ok(())
+    }
+    pub fn building_collision_resources_bound(&self)->bool { !self.building_collision_heights.is_empty() }
 
     /// Source74270/74160 mask0, negative-height movement query. Reserved
     /// cells without a linked building return NULL. Positive-height queries

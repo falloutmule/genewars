@@ -20,7 +20,13 @@ impl ActorWorld {
   let stage=std::cell::RefCell::new(self.clone());let random=std::cell::RefCell::new(rng);let reveals=std::cell::RefCell::new(Vec::new());
   let(plan,water)=crate::owned_mule_callback::plan_owned_after_prefix(&before,&prefix,target,self.map(),context,physics,trig,
    |r,n,p|stage.borrow().mule_contact_speed(r,n,p).map_err(|_|CreatureError::MotionEnvironment),
-   |p|stage.borrow().move_obstacle_at(p).map_err(|_|CreatureError::MotionEnvironment),animations,
+   |record| {
+    let world=stage.borrow();let point=[word(record,7),word(record,9)];let height=i32::from_le_bytes(record[39..43].try_into().unwrap());
+    match world.airborne_building_at(point,height).map_err(|_|CreatureError::MotionEnvironment)? {
+     None=>Ok(*record),Some(building)=>crate::airborne_building_collision::plan_collision(record,[word(&building,7),word(&building,9)],i32::from_le_bytes(building[17..21].try_into().unwrap()),physics,trig)
+        .map(|plan|plan.after).map_err(|_|CreatureError::MotionEnvironment)
+    }
+   },animations,
    |record|{
     let world=stage.borrow();let mut r=*record;if r[0x5e]==0{r[0x5e]=8;}
     world.owned_mule_neighborhood_no_action(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
@@ -51,6 +57,21 @@ impl ActorWorld {
   let prior=*world.creatures.as_ref().unwrap().record(slot)?;world.creatures.as_mut().unwrap().replace_record_checked(slot,&prior,&plan.after)?;world.rng=random.into_inner();world.validate_links()?;*self=world;
   Ok(OwnedMuleReceipt{motion:plan,pending_reveal_vertices:reveals.into_inner()})
  }
+ /// Source74270 mask0 query preserving candidate order and current-frame height.
+ fn airborne_building_at(&self,point:[i16;2],height:i32)->Result<Option<[u8;67]>,ActorWorldError> {
+  crate::building_obstacle::building_at_height(self.map(),point,height,0,|cell| {
+   let mut raw=reference(self.map(),cell*14+6);let mut seen=HashSet::new();
+   while raw[2]!=0 {
+    if !seen.insert(raw){return Err(ActorWorldError::DuplicateLink(raw));}
+    let record=self.entity(raw)?;
+    if raw[2]==4{return Ok(Some(record.try_into().map_err(|_|ActorWorldError::UnsupportedBuildingQuery(cell))?));}
+    raw=reference(record,3);
+   }Ok(None)
+  },|record| {
+   self.building_collision_heights.get(&record[45]).and_then(|animations|animations.get(usize::from(record[25])))
+    .and_then(|frames|frames.get(usize::from(record[27]))).copied().ok_or(ActorWorldError::UnsupportedBuildingQuery(floor_cell(point)))
+  }).map_err(|error|match error {crate::building_obstacle::BuildingObstacleError::Query(error)=>error,_=>ActorWorldError::UnsupportedBuildingQuery(floor_cell(point))})
+ }
  fn owned_mule_nearest_building(&self,owner:u8,mask:u8,flags:u8,at:[i16;2])->Result<Option<u16>,ActorWorldError>{
   if flags!=0x30{return Err(CreatureError::UnsupportedNeighborhood.into());}let p=self.player(owner)?.bytes();if p[0x4a1]!=owner{return Err(CreatureError::UnsupportedNeighborhood.into());}
   let pool=self.buildings.as_ref().ok_or(ActorWorldError::BuildingsNotAdmitted)?;let mut result=None;let mut distance=i32::MAX;
@@ -60,12 +81,15 @@ impl ActorWorld {
   }Ok(result)
  }
  /// Bounded no-action neighborhood: full reserve, only own Genepods and
- /// neutral plants around this creature. Other candidates require the scorer.
+ /// neutral plants, same-owner specialists and Genepod/Extractor buildings.
+ /// Source6BA47 kinds3/4 bypass food/pair scoring; building-action queries
+ /// still run separately. Other candidates require the scorer.
  fn owned_mule_neighborhood_no_action(&self,r:&CreatureRecord)->Result<(),ActorWorldError>{
   if word(r,0x68)<=word(r,0x62)>>1||r[0x61]&0x40!=0{return Err(CreatureError::UnsupportedNeighborhood.into());}
   let own=[r[15],r[16],1];let point=[word(r,7),word(r,9)];let cell=floor_cell(point);let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
-  for dy in -4..=4{for dx in -4..=4{let c=(((cy+dy)&127)*128+((cx+dx)&127))as usize;let mut raw=reference(self.map(),c*14+6);
-   while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{2 if e[24]==4=>{},4 if e[24]==r[24]&&self.buildings.as_ref().unwrap().record(word(&raw,0)as usize)?[0x2d]==0=>{},8=>{},_=>return Err(CreatureError::UnsupportedNeighborhood.into())}}raw=reference(e,3);}
+  //8D930 visits sample cells within radius1024, including its boundary.
+  for dy in -4..=4{for dx in -4..=4{if dx*dx+dy*dy>16{continue;}let c=(((cy+dy)&127)*128+((cx+dx)&127))as usize;let mut raw=reference(self.map(),c*14+6);
+   while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{2 if e[24]==4=>{},3 if e[24]==r[24]=>{},4 if e[24]==r[24]&&matches!(self.buildings.as_ref().unwrap().record(word(&raw,0)as usize)?[0x2d],0|11)=>{},8=>{},_=>return Err(CreatureError::UnsupportedNeighborhood.into())}}raw=reference(e,3);}
   }}Ok(())
  }
  fn owned_mule_reveal(&mut self,at:[i16;2])->Result<Vec<[i16;2]>,ActorWorldError>{
