@@ -387,12 +387,13 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     let relocation=before[0x5e]==0&&before[0x61]==0x80&&before[0x60]==8&&before[0x57]==0;
     let null_food_target=before[0x57]==0&&before[0x60]&0x42==0x40;
     let food_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&(before[0x57]==2||null_food_target);
+    let corpse_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&before[0x57]==1&&before[0x52]==1&&before[0x50..0x53]==before[0x55..0x58];
     let paired_approach=before[0x5e]==3&&matches!(before[0x60],0|4|8|12|0x80|0x84|0x88|0x8c)&&before[0x57]==1&&((matches!(before[0x61],0|0x40)&&before[0x52]==1)||(matches!(before[0x61],0x20|0x60)&&before[0x52]==0));
     let paired_wait=before[0x5e]==10&&matches!(before[0x61],0x20|0x60)&&matches!(before[0x60],4|12|0x84|0x8c)&&before[0x57]==1&&before[0x52]==0&&motion_word(before,0x6c)>=0;
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
-    if before[6]!=1||before[0x18]!=4||!(neutral||postbirth_idle||relocation||food_approach||feeding_wait||paired_approach||paired_wait)||before[0x7a]!=4||before[0x76]>90
+    if before[6]!=1||before[0x18]!=4||!(neutral||postbirth_idle||relocation||food_approach||corpse_approach||feeding_wait||paired_approach||paired_wait)||before[0x7a]!=4||before[0x76]>90
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
-       ||before[0x4f]!=0||(before[0x52]!=0&&!paired_approach)||motion_word(before,0x49)as u16&!0x337f!=0
+       ||before[0x4f]!=0||(before[0x52]!=0&&!paired_approach&&!corpse_approach)||motion_word(before,0x49)as u16&!0x337f!=0
        ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=if mule_callback_phase(before,context.frame_counter)&1==0{0}else{2}{return Err(CreatureError::UnsupportedMotionState);}
     plan_mule_admitted_body_with_postphysics(before,prefix,working_target,map,context,physics,trig,contact,obstacle,animations,choice,admit_water,cell_entry,|record|Ok(*record))
 }
@@ -800,6 +801,27 @@ where F:FnMut([i16;2])->Result<bool,CreatureError> {
         let speed=mule_requested_speed(&after);motion_put(&mut after,0x3f,speed);motion_put(&mut after,0x6c,32767);after[0x60]|=0x80;
     }
     Ok(InitialMuleChoice{before:*before,after,rng_before,rng_after:rng,draws,sampled_points,chosen_target,queue_requested:true})
+}
+///5B580/5B6C3: neutral Mule acquires a same-species edible corpse.
+///Caller proves original query winner/binding; no goalXY copy or corpse mutation.
+pub fn plan_mule_corpse_acquisition(before:&CreatureRecord,corpse:&CreatureRecord,rng_before:crate::blueprint::BlueprintRng)->Result<InitialMuleChoice,CreatureError>{
+    let id=motion_word(corpse,15);
+    if rng_before.ring>=32||before[6]!=1||before[24]!=4||before[0x7a]!=4||before[0x5e]!=8||before[0x76]>90
+        ||before[0x7b]!=255||motion_word(before,0x6c)!=0||before[0x78]!=0||before[0x60]&2!=0
+        ||before[0x57]!=0||before[0x52]!=0||before[0x5d]!=0||!matches!(before[0x61],0|0x40)
+        ||(motion_word(before,0x68)>motion_word(before,0x62)>>1&&before[0x61]&0x40==0)
+        ||corpse[6]!=1||corpse[24]!=4||corpse[0x7a]!=4||!matches!(corpse[0x5e],24|25)
+        ||motion_word(corpse,0x49)as u16&0x400!=0||!(0..300).contains(&id)||id==motion_word(before,15){return Err(CreatureError::UnsupportedMotionState);}
+    let mut a=*before;let mut rng=rng_before;let mut draws=Vec::new();
+    draw(&mut rng,CreatureRngPurpose::NeighborhoodX,&mut draws);draw(&mut rng,CreatureRngPurpose::NeighborhoodY,&mut draws);
+    a[0x61]|=0x40;a[0x15]&=0xdf;a[0x33..0x37].fill(0);
+    let flags=motion_word(&a,0x60)as u16&0xd71a;motion_put(&mut a,0x60,flags as i16);a[0x5d]=0;
+    motion_put(&mut a,0x55,id);a[0x57]=1;a[0x16]&=0x3f;
+    let flags=(motion_word(&a,0x49)as u16|0x14)&0xeffc;motion_put(&mut a,0x49,flags as i16);a[0x54]=20;a[0x4f]=0;
+    motion_put(&mut a,0x50,id);a[0x52]=1;
+    let speed=mule_requested_speed(&a);motion_put(&mut a,0x3f,speed);motion_put(&mut a,0x6c,32767);a[0x60]|=0xc0;a[0x5e]=1;
+    //65B4D/5D360 owner4 skill<=90 pursuit-speed branch makes no change.
+    Ok(InitialMuleChoice{before:*before,after:a,rng_before,rng_after:rng,draws,sampled_points:Vec::new(),chosen_target:None,queue_requested:true})
 }
 /// Exact neutral type2 acquisition at5B580 for the admitted Mule. The
 /// owned caller supplies the scorer-selected active plant and establishes

@@ -105,3 +105,87 @@ Root successfully exported95300 and its callee952A0 to private/ghidra/mule-picki
 The new pure creature_pick helper proves these numeric boundaries and5A140 with explicitly supplied virtual-relative-height and already-resolved frame components. It does not establish resource1E840 resolution, world visibility/mixed queue ordering, mouse selection or native acceptance. Sprite decoding remains useful to obtain dimensions, but opacity must not participate in selection. The earlier command remains a historical prepared command; actual bounded exports now exist at the following pinned paths:
 - `private/ghidra/mule-picking-148/instructions-00095300.txt` SHA256 `734798af301743f2e484cfd2ed60873c899917047702de7f30c54d480be9ccc3`
 - `private/ghidra/mule-picking-148/instructions-000952a0.txt` SHA256 `96d01e06dc49edfd09ca4d3828afc89dbe31260688f3734eb837c8465c4930de`
+
+
+## Viewport and input priors from saved source (read-only follow-up)
+
+These are static source findings, not native Mule selection acceptance. Viewport base16E0A8 gives flags+1C=16E0C4, sidebar margin+1D=16E0C5, family mask+1F=16E0C7, published hover+18=16E0C0. The mapped executable's initial viewport bytes are zero; mapped zero storage is not proof of live mission defaults.
+
+### Mission module and view geometry
+
+- `private/ghidra/entity-shadow-panel/instructions-0002b7e0.txt`:2B7E8 installs MAINPANL root vtable11259C on the object initialized at185DFC by8DC9D..8DCBD in `terrain-constructor/instructions-0008db90.txt`. Pinned object3 dword11259C+4=5A6, giving185DFC+5A6=1863A2. `entity-order/instructions-0002bbe0.txt`2BBE8..2BC0B computes that subobject and writes current module116974, establishing the real mission active-module identity required by83140.
+- `mission-bootstrap-mode/instructions-0007d090.txt`7D7C7..7D7D5 schedules next module116978=1863A2 while preserving previous module11697C; it does not immediately write current module116974.
+- `display-geometry/instructions-00082bd0.txt`82BDA writes margin+1D=128.82BE3..82BF0 writes origin+8=[128,0];82BF5..82C14 writes dimensions+33=[screenWidth-128,screenHeight]. Source82AC9 in `display-geometry/instructions-00082ac0.txt` is the separate full-width margin0 route, with corresponding origin/dimensions.
+- MAINPANL entry `entity-order/instructions-0002bbe0.txt`2BE54..2BE74 chooses82AC0 versus82BD0 from the existing margin. Sidebar state is an explicit original input, not a universal fresh-zero assumption. `display-geometry/instructions-00084310.txt`8432C..84363 refreshes origin/dimensions from the existing margin.
+- `display-geometry/instructions-0001caa0.txt`1CACE..1CAE0 explicitly installs screen dimensions640x480 on its software-mode branch. The other branch requests mode0D at640x480 through979A0. Preserve the existing admitted640x480 host extent rather than generalizing to arbitrary display sizes.
+- Absolute entity hit coordinates use `entity_view_position(...,margin0)`. Rendering into the512-wide viewport slice uses margin128 and destination offset128; adding another128 to margin0 projection is wrong.83140 adds viewport+1D to its local projectedX before virtual20.
+
+### Family mask, publication and unresolved flag
+
+- `actor-resource-refs/instructions-00020880.txt`20953..2095D installs maskFF5B; Genepod panel `actor-panel-font-color/instructions-00021a10.txt`21A6E..21A79 also installsFF5B.
+- `display-geometry/instructions-00025150.txt`2520E..2521A first installsFF5B and25249..2525D later installsFF5F. Mule selection `plant-command/instructions-0002cbe8.txt`2CBE8..2CBF0 installsFF5B then calls278D0; `display-geometry/instructions-000278d0.txt`27A78..27A81 installsFF5F. Both masks allow kind1;FF5F additionally allows plant kind2. Do not use one mask for every panel state.
+- `display-geometry/instructions-00083140.txt`83688..836A4 checks the kind bit in viewport word1F.834AA..834B3 requires ground projectedY >= current bestY; equalY may replace the winner.834BD..834C9 requires viewport byte1C bit0. Shade/visibility byte17 must be nonzero before this path. Preserve both groundY priority and source hit admission.
+- `display-geometry/instructions-00083930.txt`83ABB resets bestY+11D3 to-1;83ACA resets queue count+11BB;83ADC clears queuedirty+11D8;83AD9..83AEA publishes candidate+37 into hover+18 and clears candidate+37. Completed publication establishes these reset values, not the first-frame state before publication.
+- `display-geometry/instructions-00086c20.txt`86C2A..86C4C sets suppress-picking counter+11D6=3 when viewport flag1C bit1 is set; otherwise it decrements a positive counter. This affects plants/buildings, not the ordinary kind1 branch.
+- Remaining gap: saved bounded listings do not establish the initial writer/value of viewport byte1C bit0. Known direct writers modify drag/toggle bits (MAINPANL2C453 bit10,2D31D bit2; menu26890 higher bits). Mapped initial byte0 is not a live default. Do not manufacture flags1C=1 from successful rendering; bind this prerequisite with initializer/caller proof or a genuine live viewport capture.
+
+### Modifiers and original world control
+
+`keyboard-event-refs/instructions-000760b0.txt`760D8..760E1 extracts input packet byte4 bit2 into19D01A;760E6..760EB copies it into19D00E. An admitted unmodified input packet with bit2 clear proves both modifier bytes0 without guessed global defaults. Hardware mapping of that bit to a named keyboard key is not inferred.83140's83504..8354E applies friendly/allied exclusion when either byte is nonzero.
+
+The previously recorded source world control5 capture/release, parent suppression19FF71&0A, pause118968 bit2, simulation118770 bit4, group526/52F and child-handler-consumption gates remain necessary. Visibility, ownership and correct sprite hit alone do not establish this control context.
+
+### Competing-family gap before native selection
+
+Current Game `runtime_scene.rs::open_clicked_genepod` scans visible Source-resource buildings and rejects multiple building hits. It does not collect all original83140 candidates or model viewport mask/flags/publication. `actor_scene.rs` explicitly uses caller family order; a successful rendered frame does not prove original hover eligibility or queue capacity/order.
+
+A bounded no-overlap Mule route must account for every potential eligible hit: other creatures, plants, actors, buildings, source-selectable kind5 effects (code3B or code31 with extra predicates), source-selectable kind8 (55=2/56=12), and remaining active families admitted by the mask. Kind7 is explicitly unpickable. Unknown resource/hit geometry must return unsupported unless a source-proved enclosing bound excludes the mouse. A unique Mule hit plus zero building hits is insufficient. Shared queue capacity256 and source admission must also be established before treating a Mule as queued. No native selection, command, mission completion or full mixed-family ordering is claimed.
+
+### Viewport follow-up159/160: cleanup versus enable candidates
+
+New read-only export `private/ghidra/mule-viewport-enable-159/instructions-0002c0c0.txt` proves2C200..2C257 is selected-panel reference cleanup, not redraw. It conditionally clears MAINPANL selected references+19F/+1CC after comparing active panel+C8 and supplied entity pointer. Earlier redraw-candidate wording must not be carried forward; the callback interpreter already treats it as deferred UI cleanup.
+
+Preceding2C0C0 cleanup clears current module116974 at2C111, calls viewport resource teardown82A80 at2C117 with16E0A8, then calls86DF0 at2C121 with the same viewport. Mapped86DF0..86DF4 bytesC6401C00C3 are `MOV byte ptr[EAX+1C],0; RET`: explicit viewport flags reset on cleanup, not mission-entry defaults.
+
+Fresh reference graph159 exposes25AF6/25B06 without a containing function. Mapped25B06 bytes8025C4E01600BF clear bit40; follow-up25B12 calls86170. This is not the bit0 enable writer; do not export solely to reconfirm.
+
+A root-requested read-only raw-byte scan found exact OR-immediate1 candidate30400 bytes80481C01C3 (`OR byte ptr[EAX+1C],1; RET`), adjacent303F0 bytes80601CFEC3 (`AND byte ptr[EAX+1C],FE; RET`). These are raw mapped-code candidates, not a proved viewport call path. No direct E8/E9 branch or absolute DWORD30400/303F0 pointer was found in mappedobject1, nor an absolute30400 pointer in mappedobject3. Do not infer live mission input invokes either helper.
+
+Next exact bounded evidence request: `ExportExistingRange.java <new-output> 000303f0 0003040f`, plus `QueryReferences.java <new-output-directory> 00030400 000303f0` for caller discovery. Root coordinates future read-only Ghidra runs; none was launched by this analysis. Viewport bit0 remains unresolved until caller/data-flow is established.
+
+- New read-only MAINPANL range SHA256 `9dcc28bc36c3e7f608f91094f66b1732982e6ae0f1cd85974d3769db763f23a8`.
+
+
+## Authentic3573 corpse acquisition and bounded pursuit
+
+Capture: `private/review/authentic-krell-159/frame-3573-slot-8-blocked-before`. Original afterimage/trace: `private/review/krell-mule-callback/e7dca4ea6c7b4281b67b983e6aaa8732`. Root reports160 integrated acquisition passed all427369 world bytes with2 RNG draws. This clears an authentic callback, not Krell completion.161 isolated pursuit comparisons were still running at this append; no result is presumed.
+
+### Exact neutral food score and winner
+
+`player-creation/instructions-0005ed20.txt`624C6..624DD and62527..62552 bind Mule descriptor1045FC+45*4=1046B0; its food coefficients+1D/+1E/+1F are100/100/100. Query baseEBP-7C2 gives bonus bytes+1BD/+1BE/+1BF at stackf9FB/f9FC/f9FD. Literal625C3..626AC initialization seeded those bytesA5 and returned0/0/0 (143 instructions,0 RNG).62697 clearsBH;62699 storesBH to each bonus byte. Do not invent a preference bonus from the sorting prelude.
+
+`initial-creature/instructions-0006b700.txt`6BA8A..6BB57 treats friendly Mule24/25 as edible: virtual68=1EC50 testsstate>=24. Corpse60bit1clear doubles food-direction contribution and best-food score at6BB4B..6BB53:2*(sampleWeight+bonus0). With bit1set, score remains sampleWeight+0; reservation is not unconditional exclusion.6BC64..6BC72 replaces best-food only on strict signedgreater, preserving first source sample/link winner on ties. Plant6BCFC..6BD23 score=sampleWeight+bonus0. Preserve8D930's two RNG traversal draws, radius1024 sampled-cell circle and linked order.
+
+Bones>=26 jumps6BAF3 directly6BD58, publishing neither food nor mate while retaining directional contributions. Live friendly same-Mule food is suppressed by6BBAE (sentinel score/zero direction); caller77!=FF skips mate publication6BBCB..6BBDD. Combat/foreign/other-species domains remain unsupported.
+
+Actual3573 caller8 is immature77=75, reserve6. Its circle has exactly one edible corpse: Mule1state25 owner4/selector4 flags60=08, celloffset(+1,+1), weight662 score1324; no active plants. Nearby2/4/5/7 are live friends;6 is Bones27. This also fits narrower unique-corpse/no-plant admission.
+
+###5B580 kind1 acquisition differs from plants
+
+`terrain-map-refs/instructions-0005b580.txt` calls5CC60 local task cleanup first. Targetvirtual10 must pass5B59C..5B5B6; actualcorpse49=0 makes1EE20's0400 testfalse.5B5BC..5B5C9 writes target55=[corpseID,kind1]. Caller78=0 leaves optional58 untouched.
+
+Mapped5B56C[kind1-1]=5B6C3, unlike plantkind2's5B6F9.5B6C3..5B6F1 clears caller16upperbits, sets49=(49|14)&EFFC and54=20, clears reference4Dkind, and sets live association50=[corpseID,kind1]. It deliberately does NOT copy corpseXY into goal0B.5B773..5B7D1 sets requestedspeedvirtual80, timer32767, state1 andlow60|C0; hunger61|40 was set before acquisition. Commoncallbacktail decrements timer32766. Actualafterstate1 flagsC8/40 target55/association50kind1 retainsoldgoal; corpseunchanged.
+
+Newstate1 continuation executes in SAME callback:5B7E1 ->62EA2 ->63049 ->5EF46 ->65743. Initializer-only output is insufficient unless later branch has been proved no-action.
+
+### Associated pursuit and explicit arrival boundary
+
+`player-creation/instructions-0006fb60.txt` association50 refresh is state-agnostic.49bit4/8 triggers immediately; otherwise6FDE4..6FE23 needs nonnullassociation, phase(frame+signedID)&3=3 and49&3=0.6FE8C..6FEA2 resolves associated currentXY into goal0B. Validatedcorpse1 can share pairedapproach refresh gates without sharing readiness behavior.
+
+6FEAB..6FEB7 calls74D90 forkind1 with nominatedbuildingfrom4D (null here), checking buildingobstacle and terrain; blockedgoal invokes74A50 at6FECE. Use `common_move_point_accepted` plus existingresolver/ray predicates. The pairedadapter's initial terrain-only `mule_accepts` shortcut is not additionalsourceproof and must not be copied into corpseadmission.
+
+VirtualB8=5AD70 measures association physicalXYZ distance. Neutral76<=90 skipsflyspecial5ADBC..5ADFE and5AE57..5AE7B calls bothvirtual0 getters then73770. Existing `mule_pair_distance` implements this for twoMules. Repairedgoal terrainheight is wrong if corpsephysicalheightdiffers or74A50 repairsgoal.
+
+State1 in `player-creation/instructions-0005ed20.txt`65861..65957 accepts deadvirtual68 target. If arrivalvirtualAC (49bit200) isfalse OR60bit80 remainsset,65973/6597D goes65B4D: speedrefresh/distance/5D360. `initial-creature/instructions-0005d360.txt`5D399..5D3E2 returns withoutmutations for neutral76<=90; phase!=3 returns earlier. This nonarrivaldomain does not startcombat/feeding.
+
+Arrival remains explicitly unsupported:49bit200true AND60bit80clear dispatcheskind1via5ED04 to65AEF.65AEF..65B10 sets callerstate5 for corpse24/25 (state4 forBones>=26), ORs corpse60bit1 and sets callertimer32767.65B35..65B44 stores neutralcallerorigin72, sets60bit8 and clears60bit40. This changes BOTHrecords and enters a newfeeding lifecycle, not plantstate7. Preserve atomicrollback until independently proved.

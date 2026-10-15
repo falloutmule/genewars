@@ -56,7 +56,12 @@ impl ActorWorld {
         let before=*pool.record(slot)?;let own=[slot as u8,(slot>>8)as u8,1];
         if before[6]!=1||before[24]!=4||word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
         let null_food_target=before[0x5e]==1&&before[0x57]==0&&before[0x60]&0x42==0x40;
-        if matches!(before[0x5e],1|7)&&!null_food_target {
+        let corpse_approach=before[0x5e]==1&&before[0x57]==1&&before[0x52]==1&&reference(&before,0x50)==reference(&before,0x55);
+        if corpse_approach {
+            let id=word(&before,0x55)as usize;let corpse=pool.record(id)?;
+            if pool.binding(id)?!=Some(CreatureAnimationBinding::MuleSelector4)||corpse[24]!=4||corpse[0x7a]!=4||!matches!(corpse[0x5e],24|25){return Err(CreatureError::UnsupportedMotionState.into());}
+        }
+        if matches!(before[0x5e],1|7)&&!null_food_target&&!corpse_approach {
             if before[0x57]==0{return Err(CreatureError::UnsupportedMotionState.into());}
             let target=self.entity(reference(&before,0x55))?;let id=word(&before,0x55);let flags=self.mule_plant_flags(id)?&9;
             //659A3 tests live health;659BF idempotently reserves on arrival.
@@ -234,9 +239,9 @@ impl ActorWorld {
                         return Ok(after);
                     }
                 }
-                world.check_mule_neutral_neighbors(&record,own,[word(&record,7),word(&record,9)]).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+                //The food query validates every candidate, including edible corpses.
                 let target=world.mule_neutral_food_target(&record,*rng).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
-                let choice=if let Some((id,point))=target {creature_world::plan_mule_plant_acquisition(&record,id,point,*rng)?}else{
+                let choice=if let Some((raw,point))=target {if raw[2]==2{creature_world::plan_mule_plant_acquisition(&record,word(&raw,0),point,*rng)?}else{let corpse=world.creatures.as_ref().unwrap().record(word(&raw,0)as usize)?;creature_world::plan_mule_corpse_acquisition(&record,corpse,*rng)?}}else{
                     let forced=world.mule_cell_entry_predicate(&record,floor_cell([word(&record,7),word(&record,9)])).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
                     creature_world::plan_neutral_mule_rechoice_with_cell_predicate(&record,*rng,trig,forced,|point|world.mule_accepts(slot,point).map_err(|_|CreatureError::MotionEnvironment))?
                 };
@@ -309,7 +314,7 @@ impl ActorWorld {
     pub(super) fn mule_route_prefix(&self,before:&CreatureRecord,frame:u32,physics:&PhysicsTables,trig:&TrigTables,rng:&mut BlueprintRng)->Result<(CreatureRecord,[i16;2]),ActorWorldError> {
         let phase=creature_world::mule_callback_phase(before,frame);
         let own=[before[15],before[16],1];let current=[word(before,7),word(before,9)];
-        let associated_pair=before[0x5e]==3&&before[0x52]==1&&reference(before,0x50)==reference(before,0x55);
+        let associated_pair=matches!(before[0x5e],1|3)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55);
         let mut final_target=[word(before,11),word(before,13)];
         let mut a=*before;a[0x49]&=0x9f;
         if a[0x4f]!=0||(a[0x52]!=0&&!associated_pair)||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
@@ -324,7 +329,8 @@ impl ActorWorld {
         let mut immediate_heading=false;
         if a[0x49]&0x10!=0&&(a[0x49]&0x0c!=0||(associated_pair&&phase&3==3&&a[0x49]&3==0)) {
             if associated_pair{let peer=self.entity(reference(before,0x50))?;final_target=[word(peer,7),word(peer,9)];a[11..13].copy_from_slice(&final_target[0].to_le_bytes());a[13..15].copy_from_slice(&final_target[1].to_le_bytes());if a[0x49]&3==0{working=final_target;}}
-            let accepted=if associated_pair{self.mule_accepts(word(before,15)as usize,final_target)?}else{self.common_move_point_accepted(own,final_target)?};
+            //6FEAB..6FEB7 kind1 uses74D90 obstacle plus terrain admission.
+            let accepted=self.common_move_point_accepted(own,final_target)?;
             if !accepted {
                 if !associated_pair{return Err(CreatureError::TargetSearchRequired.into());}
                 final_target=crate::target_resolver::resolve_target(current,final_target,physics,trig,|point|self.common_move_point_accepted(own,point)).map_err(|_|CreatureError::TargetSearchRequired)?.point;
@@ -418,7 +424,7 @@ impl ActorWorld {
             if distance<=i32::from(animation)*32+64 {desired=(i32::from(desired)*3/4)as i16;}
         }
         let target=[word(record,11),word(record,13)];
-        let distance=if record[0x5e]==3&&record[0x52]==1{
+        let distance=if matches!(record[0x5e],1|3)&&record[0x52]==1{
             //5AD70 virtualB8 uses the associated Mule's physical xyz,
             //even when74A50 repaired the ordinary goal back to self.
             let peer=self.creatures.as_ref().ok_or(CreatureError::MotionEnvironment)?.record(word(record,0x50)as usize)?;
@@ -432,7 +438,7 @@ impl ActorWorld {
     pub(super) fn plan_mule_cell_entry(&self,slot:usize,record:&CreatureRecord,cell:usize,rng:&mut BlueprintRng,trig:&TrigTables)->Result<CreatureRecord,CreatureError>{
         if !self.mule_cell_entry_predicate(record,cell).map_err(|_|CreatureError::UnsupportedCellEntry)?{return Ok(*record);}
         if record[0x53]!=1||record[0x4f]!=0{return Err(CreatureError::UnsupportedCellEntry);}
-        let plan=crate::mule_cell_entry::plan_waypoint(record,cell as u16,*rng,trig,|point|self.mule_accepts(slot,point))
+        let plan=crate::mule_cell_entry::plan_waypoint(record,cell as u16,*rng,trig,|point|self.common_move_point_accepted([slot as u8,(slot>>8)as u8,1],point))
             .map_err(|_|CreatureError::UnsupportedCellEntry)?;
         *rng=plan.rng_after;Ok(plan.record_after)
     }
@@ -440,7 +446,9 @@ impl ActorWorld {
     pub(super) fn mule_cell_entry_predicate(&self,record:&CreatureRecord,cell:usize)->Result<bool,ActorWorldError>{
         let own=[record[15],record[16],1];
         let approach_plant=record[0x5e]==1&&record[0x57]==2&&self.entity(reference(record,0x55))?[6]==2;
-        if !matches!(record[0x5e],3|8)&&!approach_plant{self.check_mule_cell_entry(own,cell)?;return Ok(false);}
+        let approach_corpse=record[0x5e]==1&&record[0x57]==1&&record[0x52]==1&&reference(record,0x50)==reference(record,0x55)
+            &&matches!(self.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?[0x5e],24|25);
+        if !matches!(record[0x5e],3|8)&&!approach_plant&&!approach_corpse{self.check_mule_cell_entry(own,cell)?;return Ok(false);}
         if word(record,0x49)as u16&0x0400!=0{return Err(CreatureError::UnsupportedCellEntry.into());}
         let mut raw=reference(self.map(),cell*14+6);let mut last=None;
         while raw[2]!=0{
@@ -515,7 +523,7 @@ impl ActorWorld {
     }
     ///6B700 neutral type2 food score over8D930's radius1024 cell samples.
     /// The two live RNG values choose X/Y traversal signs, preserving ties.
-    fn mule_neutral_food_target(&self,record:&CreatureRecord,rng:BlueprintRng)->Result<Option<(i16,[i16;2])>,ActorWorldError> {
+    fn mule_neutral_food_target(&self,record:&CreatureRecord,rng:BlueprintRng)->Result<Option<([u8;3],[i16;2])>,ActorWorldError> {
         let own=[record[15],record[16],1];
         if word(record,0x68)>word(record,0x62)>>1&&record[0x61]&0x40==0 {return Ok(None);}
         let first=rng.seed.wrapping_mul(0xe62d);let second=first.wrapping_mul(0xe62d);
@@ -529,8 +537,18 @@ impl ActorWorld {
                 //6BD4F..58 skips kind8 before scoring, regardless of owner.
                 if raw[2]==8{raw=reference(entity,3);continue;}
                 if raw[2]==5 {if self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?.get(0x45)==Some(&0x11){return Err(CreatureError::UnsupportedNeighborhood.into());}raw=reference(entity,3);continue;}
-                if raw!=own {if self.mule_friendly_candidate_is_no_action(record,raw)?{raw=reference(entity,3);continue;}if raw[2]!=2||entity[0x18]!=4 {return Err(CreatureError::UnsupportedNeighborhood.into());}
-                    if self.mule_plant_flags(word(&raw,0))?&9==0&&self.mule_plant_health(word(&raw,0))?>0&&value>score {score=value;best=Some((word(&raw,0),[word(entity,7),word(entity,9)]));}}
+                if raw!=own {
+                    if raw[2]==1 {let corpse=self.creatures.as_ref().unwrap().record(word(&raw,0)as usize)?;
+                        if corpse[24]==4&&corpse[0x7a]==4&&matches!(corpse[0x5e],24|25)
+                            &&self.creatures.as_ref().unwrap().binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::MuleSelector4){
+                            //625C3..626AC Mule query bonuses are zero;6BB32..57 doubles unreserved corpses.
+                            let food=if corpse[0x60]&1==0{value*2}else{value};
+                            if food>score{score=food;best=Some((raw,[word(corpse,7),word(corpse,9)]));}
+                            raw=reference(entity,3);continue;
+                        }
+                    }
+                    if self.mule_friendly_candidate_is_no_action(record,raw)?{raw=reference(entity,3);continue;}if raw[2]!=2||entity[0x18]!=4 {return Err(CreatureError::UnsupportedNeighborhood.into());}
+                    if self.mule_plant_flags(word(&raw,0))?&9==0&&self.mule_plant_health(word(&raw,0))?>0&&value>score {score=value;best=Some((raw,[word(entity,7),word(entity,9)]));}}
                 raw=reference(entity,3);
             }
         }}Ok(best)

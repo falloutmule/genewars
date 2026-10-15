@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "scope": "Source-bound neutral Mule edible-corpse acquisition/pursuit. Only3573 is current authentic campaign frontier; isolated followups freeze other families. Arrival/feed remains explicit unsupported.",
+  "comparisons": [
+    {
+      "scope": "authentic3573 acquisition",
+      "frame": 3573,
+      "slot": 8,
+      "draws": 2,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\fec0f94e7e7e4f0b86c6101b271238a6",
+      "mismatches": 0
+    },
+    {
+      "scope": "isolated3574 pursuit",
+      "frame": 3574,
+      "slot": 8,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\41f6671456cb4bd693cf19db5683ad76",
+      "mismatches": 0
+    },
+    {
+      "scope": "isolated3575 phase3 pursuit",
+      "frame": 3575,
+      "slot": 8,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\d3f61aee2dc44a39ac8ce0a015a405b5",
+      "mismatches": 0
+    },
+    {
+      "scope": "isolated3581 cell entry",
+      "frame": 3581,
+      "slot": 8,
+      "draws": 1,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\7b23aed906024b85a6220713187d9f2e",
+      "mismatches": 0
+    }
+  ],
+  "total_compared_bytes": 1709476,
+  "runtime": {
+    "passed": 232,
+    "ignored": 1
+  },
+  "negative_case": {
+    "path": "private/review/corpse-acquisition-negative-result-163/result.json",
+    "scope": "synthetic target virtual10 flag0400; entire-world rollback"
+  },
+  "source_notes": "research/variants/mule-world-input-source.md",
+  "campaign_missions": 1
+}
