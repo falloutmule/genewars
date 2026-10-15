@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "scope": "same frozen192 ordinary campaign carry and Krell construction, native port controls versus headless",
+  "native_observation": "private\\integration\\native-carried-krell-192\\observations\\__blocked.json",
+  "headless_report": "private/integration/continued-krell-192/report.json",
+  "checks": {
+    "steps": true,
+    "blocked": true,
+    "world_sha256": true,
+    "actor_dispatch_audit": true,
+    "buildings": true,
+    "outcome": true,
+    "creature_states": true,
+    "issued_move_commands": true
+  },
+  "mule_trace": [
+    "PortMuleFocus:1",
+    "PortMuleOrder:1:[658, 24211]"
+  ],
+  "headless_step": 5876,
+  "native_step": 5876,
+  "headless_blocked": "Creatures(UnsupportedMotionState)",
+  "native_blocked": "Creatures(UnsupportedMotionState)",
+  "world_sha256": "1392ec027a112802e11ac19cb79d41ef73935444cb34009e57d2144e35a5d0a1",
+  "process_exit": 1,
+  "limitations": [
+    "Original hardware creature picking remains separate; this verifies current port construction controls",
+    "Not Krell completion; campaign count remains1/24"
+  ],
+  "bmp_equal": true,
+  "bmp_sha256": "a205b30ea89defb5a4dc2b537a9d441119cdb74c2eca31437a57143c093a1128",
+  "root_visual_inspection": "Native5876BMP inspected: attackbody/zone visible; score54/1000/resources311. Native andheadlessBMP byte-identical; no Krell completion claim."
+}

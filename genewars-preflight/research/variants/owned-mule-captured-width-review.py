@@ -8,6 +8,8 @@ import argparse,importlib.util,json,struct,uuid
 P=Path(__file__).resolve().parents[2]
 spec=importlib.util.spec_from_file_location('owned_width_source',Path(__file__).with_name('zone-credit-captured-review.py'))
 c=importlib.util.module_from_spec(spec);spec.loader.exec_module(c);g=c.g
+spec=importlib.util.spec_from_file_location('actor_blueprints',Path(__file__).with_name('actor-blueprint-captured-bindings.py'))
+ab=importlib.util.module_from_spec(spec);spec.loader.exec_module(ab)
 class Source(c.Source):
  def __init__(self,backing):
   super().__init__(backing)
@@ -44,9 +46,10 @@ def main():
    if enemy[6]!=1 or enemy[24]!=4 or enemy[122]!=4 or enemy[94]not in(1,21)or struct.unpack_from('<h',enemy,15)[0]!=target or struct.unpack_from('<H',enemy,0x49)[0]&0x400:
     raise ValueError('requires exact live neutralMule state1 hostile target')
   state,seed,resources=g.prepare(buffers);g.k.put(state,0x11878c,1,1)
+  actor_blueprints=ab.bind(state,buffers,g)if record[94]==21 else[]
   vm=Source(buffers['backing.bin'])
   run,_,trace=vm.run(entry=0x5ed20,counter=args.frame,seed=seed,state_before=state,registers={'EAX':0x1542be+args.slot*124},instruction_budget=500000)
-  result=g.export(vm,buffers)
+  result=g.export(vm,buffers);ab.restore(result,buffers,actor_blueprints)
   for name,data in result.items():(out/name).write_bytes(data)
   (out/'trace.txt').write_text('\n'.join(hex(pc)for pc in trace)+'\n',encoding='utf-8')
   differences=[];counts={name:0 for name in g.NAMES}
@@ -59,7 +62,7 @@ def main():
   participating_after=vm.load(0x11878c,1)
   if participating_after!=1:raise ValueError(('participating context changed',participating_after))
   executed=set(trace)
-  report.update(status=('passed'if not differences else'mismatch')if expected else'source_prepared',compared_bytes=sum(map(len,result.values()))if expected else None,mismatch_counts=counts if expected else None,differences=differences,draws=run['draws'],instructions=run['steps'],participating_before=1,participating_after=participating_after,executed_width_fixes=[pc for pc in vm.width_fixes if int(pc,16)in executed],calls=run['calls'],input_pins={n:g.pin(before/n)for n in g.NAMES},expected_pins={n:g.pin(expected/n)for n in g.NAMES}if expected else{},resource_pins=resources,source_pins={str(p.relative_to(P)):g.pin(p)for p in vm.files},harness_pins={str(p.relative_to(P)):g.pin(p)for p in [Path(__file__),Path(c.__file__),Path(g.__file__),Path(g.k.__file__),P/'research/variants/initial-creature-source.py',P/'research/variants/actor-environment-terrain-target.py',P/'private/ghidra/validated/memory-.object1.bin',P/'private/ghidra/validated/memory-.object3.bin']})
+  report.update(status=('passed'if not differences else'mismatch')if expected else'source_prepared',compared_bytes=sum(map(len,result.values()))if expected else None,mismatch_counts=counts if expected else None,differences=differences,draws=run['draws'],instructions=run['steps'],participating_before=1,participating_after=participating_after,executed_width_fixes=[pc for pc in vm.width_fixes if int(pc,16)in executed],calls=run['calls'],actor_blueprint_bindings=actor_blueprints,actor_binding_normalization='Source4FF2C pointer binding; restore immutable C0 from INPUT only after checking source kept pointer unchanged',environment_source_pins={str(p.relative_to(P)):g.pin(p)for p in[P/'private/ghidra/player-creation/instructions-0004fd30.txt',P/'private/ghidra/mission-array-refs/instructions-0005d700.txt']},input_pins={n:g.pin(before/n)for n in g.NAMES},expected_pins={n:g.pin(expected/n)for n in g.NAMES}if expected else{},resource_pins=resources,source_pins={str(p.relative_to(P)):g.pin(p)for p in vm.files},harness_pins={str(p.relative_to(P)):g.pin(p)for p in [Path(__file__),Path(ab.__file__),Path(c.__file__),Path(g.__file__),Path(g.k.__file__),P/'research/variants/initial-creature-source.py',P/'research/variants/actor-environment-terrain-target.py',P/'private/ghidra/validated/memory-.object1.bin',P/'private/ghidra/validated/memory-.object3.bin']})
  except Exception as error:report['reason']=repr(error)
  (out/'result.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
  summary={k:v for k,v in report.items()if not k.endswith('_pins')}

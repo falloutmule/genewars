@@ -1,0 +1,184 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "status": "passed",
+      "output": "private\\review\\neutral-mule-captured-width\\7fada9832eec458dbefa3af28c5d8f7c",
+      "draws": 0,
+      "instructions": 2640,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5860,
+      "kind": "neutral"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\neutral-mule-captured-width\\14d7eb5e9167404bafb68cafa3dc7559",
+      "draws": 0,
+      "instructions": 1620,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5861,
+      "kind": "neutral"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\neutral-mule-captured-width\\dcfd849b607444a2a7a4b402468701f7",
+      "draws": 0,
+      "instructions": 2669,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5862,
+      "kind": "neutral"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\neutral-mule-captured-width\\5aeca4afdb9149b0b5209c531abb29ae",
+      "draws": 0,
+      "instructions": 1620,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5863,
+      "kind": "neutral"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\neutral-mule-captured-width\\215fe4a255f4406b86098738865550be",
+      "draws": 0,
+      "instructions": 2609,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5864,
+      "kind": "neutral"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\neutral-mule-captured-width\\339ea443776e43a58c8284cefd3a0062",
+      "draws": 0,
+      "instructions": 1620,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5865,
+      "kind": "neutral"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\neutral-mule-captured-width\\3150b1c42dfd4310b2b66946baafbd10",
+      "draws": 0,
+      "instructions": 2608,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5866,
+      "kind": "neutral"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\neutral-mule-captured-width\\d9d23c475d1b4b7baceaa77c67ea0f34",
+      "draws": 0,
+      "instructions": 1620,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5867,
+      "kind": "neutral"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\owned-mule-captured-width\\37ba0d62654046d2b1d5c4774326d825",
+      "draws": 0,
+      "instructions": 2484,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5860,
+      "kind": "owned"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\owned-mule-captured-width\\31db2afd760f456aba9b9fccae1c05fb",
+      "draws": 0,
+      "instructions": 1806,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5861,
+      "kind": "owned"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\owned-mule-captured-width\\d18168b55c3f4e399f5c7cd223405a74",
+      "draws": 1,
+      "instructions": 23636,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5862,
+      "kind": "owned"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\owned-mule-captured-width\\356a376021504b2790c84fa1f6fff270",
+      "draws": 0,
+      "instructions": 1680,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5863,
+      "kind": "owned"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\owned-mule-captured-width\\65b402aca5054d0e94ccef7b565c5a12",
+      "draws": 0,
+      "instructions": 2196,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5864,
+      "kind": "owned"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\owned-mule-captured-width\\8e5e79261f524893a98fc3cfb9842f27",
+      "draws": 0,
+      "instructions": 1680,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5865,
+      "kind": "owned"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\owned-mule-captured-width\\55c10ed1314e4c2f8e5b0505ef96b1fa",
+      "draws": 0,
+      "instructions": 21689,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5866,
+      "kind": "owned"
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\owned-mule-captured-width\\4b8a8a57b785439ba0b0b71e035db8f2",
+      "draws": 0,
+      "instructions": 1509,
+      "compared_bytes": 427369,
+      "differences": [],
+      "reason": null,
+      "frame": 5867,
+      "kind": "owned"
+    }
+  ],
+  "scope": "16ACTUAL coupled owned1/neutral5callbacks5860..5867;427369B each/zero differences; owned attackentry5862one draw",
+  "preserved_path_error": "First source wrapper used incorrect ownedcapture naming; pending rows retained, corrected owned-only run passed all8",
+  "missions_complete": 1
+}
