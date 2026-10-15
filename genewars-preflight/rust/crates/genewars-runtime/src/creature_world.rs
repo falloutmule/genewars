@@ -748,7 +748,12 @@ fn draw(rng:&mut crate::blueprint::BlueprintRng,purpose:CreatureRngPurpose,trace
 /// predicate. The admitted idle Mule has no selected/live action to release.
 /// Call after the source energy/regeneration prefix, before ordinary AI.
 pub fn plan_mule_retry_wait(before:&CreatureRecord,rng_before:crate::blueprint::BlueprintRng)->Result<InitialMuleChoice,CreatureError> {
-    let action=before[0x5e]==8&&before[0x57]==0||before[0x5e]==1&&before[0x57]==2;
+    // Authentic1927: state8 retains an old kind1 pair target, but has no
+    // active association.5CC60 clears that local target without touching peer.
+    let retained_pair=before[0x5e]==8&&before[0x57]==1&&before[0x61]==0x60
+        &&matches!(before[0x60],0x0c|0x8c)&&before[0x52]==0
+        &&(0..300).contains(&motion_word(before,0x55))&&motion_word(before,0x6c)==0;
+    let action=before[0x5e]==8&&before[0x57]==0||before[0x5e]==1&&before[0x57]==2||retained_pair;
     // Live plant approach requires the caller to clear/prove clear plant2E bit4.
     if rng_before.ring>=32||before[6]!=1||before[0x18]!=4||!action||before[0x7a]!=4
        ||motion_word(before,0x49)as u16&0x100==0||before[0x60]&2!=0||before[0x5d]!=0 {return Err(CreatureError::UnsupportedMotionState);}
@@ -1069,6 +1074,23 @@ mod tests {
         assert_eq!(plan.rng_after,crate::blueprint::BlueprintRng{seed:46916,ring:0,draw_count:0});assert_eq!(plan.draws.len(),1);assert_eq!(motion_word(&plan.after,0x6c),13);
         assert_eq!(&plan.after[0x2d..0x33],&before[0x2d..0x33]);assert_eq!(&plan.after[0x3d..0x43],&before[0x3d..0x43]);assert_eq!(&plan.after[0x55..0x57],&before[0x55..0x57]);
         before[0x57]=2;assert!(plan_mule_retry_wait(&before,rng).is_err());before[0x57]=0;motion_put(&mut before,0x49,0x2050);assert!(plan_mule_retry_wait(&before,rng).is_err());
+    }
+    #[test]
+    fn retry_wait_clears_retained_pair_locally_without_peer_action() {
+        let mut before=[0;124];before[6]=1;before[0x5e]=8;before[0x18]=4;before[0x7a]=4;
+        motion_put(&mut before,0x49,0x150);before[0x60]=0x0c;before[0x61]=0x60;
+        before[0x55..0x58].copy_from_slice(&[1,0,1]);before[0x52]=0;before[0x5d]=0;motion_put(&mut before,0x6c,0);
+        let rng=crate::blueprint::BlueprintRng{seed:1,ring:31,draw_count:u32::MAX};
+        for low in [0x0c,0x8c] {
+            before[0x60]=low;let p=plan_mule_retry_wait(&before,rng).unwrap();
+            assert_eq!(&p.after[0x55..0x58],&[1,0,0]);assert_eq!(&p.after[0x60..0x62],&[8,0x40]);
+            assert_eq!(p.draws.len(),1);assert_eq!(p.rng_after.draw_count,0);assert_eq!(p.rng_after.ring,0);
+            assert_eq!(motion_word(&p.after,0x6c),10+i16::from((p.rng_after.seed>>8)as u8%20));
+            assert_eq!(&p.after[7..15],&before[7..15]);
+        }
+        for (offset,value) in [(0x57,3),(0x52,1),(0x61,0x20),(0x60,0x0e),(0x6c,1)] {
+            let mut bad=before;bad[offset]=value;assert!(plan_mule_retry_wait(&bad,rng).is_err());
+        }
     }
     #[test]
     fn relocation_finishes_current_group_and_keeps_last_accepted_point() {
