@@ -208,7 +208,11 @@ pub fn draw_supported_mule_record(
         _ => false,
     };
     let owned = record[0x18] < 4;
-    let owned_ordinary = matches!(record[0x5e],0|8) && record[0x79] as i8 <= 0
+    //59DD8..59DEC: positive lifecycle stage draws an extra icon only
+    //above half food reserve. Below that threshold the ordinary body is exact.
+    let no_lifecycle_icon = record[0x79] as i8 <= 0
+        || i16::from_le_bytes([record[0x68],record[0x69]]) <= (i16::from_le_bytes([record[0x62],record[0x63]]) >> 1);
+    let owned_ordinary = matches!(record[0x5e],0|8) && no_lifecycle_icon
         && (record[0x7b]==0 || record[0x7b]>191) && !(record[0x5e]==0 && record[0x60]&0x20!=0);
     if record[6] != 1 || record[0x18] > 4 || record[0x7a] != 4 || !admitted_pair || (owned && !owned_ordinary) {
         return Err(CreatureDrawError::UnsupportedRecordState);
@@ -1170,9 +1174,9 @@ mod pair_stop_render_tests {
   let raw=std::fs::read(p.join("private/review/krell-production-100/frame-2724-slot-7-owned-after/creatures.bin")).unwrap();
   let captured:[u8;124]=raw[7*124..8*124].try_into().unwrap();assert_eq!((captured[24],captured[94],captured[25]),(0,8,3));
   let mut lines=Vec::new();let mut owner_images=Vec::new();
-  for owner in 0..4 {for variant in 0..4 {
+  for owner in 0..4 {for variant in 0..5 {
    let mut r=captured;r[24]=owner;let mut height=4312;let mut inherited=0;
-   match variant {1=>{height=0;r[23]=5;},2=>{height=0;r[23]=5;r[21]|=2;inherited=1;},3=>{height=0;r[118]=100;r[119]=255;inherited=2;},_=>{}}
+   match variant {1=>{height=0;r[23]=5;},2=>{height=0;r[23]=5;r[21]|=2;inherited=1;},3=>{height=0;r[118]=100;r[119]=255;inherited=2;},4=>{r[121]=3;r[0x62..0x64].copy_from_slice(&127i16.to_le_bytes());r[0x68..0x6a].copy_from_slice(&16i16.to_le_bytes());},_=>{}}
    let mut pixels=vec![0xa5;68*128+4];let receipt=draw_supported_mule_record(&resources.mule,&r,[24,90],height,0,inherited,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut pixels).unwrap();
    assert!(receipt.components.iter().map(|p|p.pixels_written).sum::<usize>()>0);if variant==0{owner_images.push(pixels.clone());}
    let hex=|b:&[u8]|b.iter().map(|x|format!("{x:02x}")).collect::<String>();
@@ -1180,6 +1184,10 @@ mod pair_stop_render_tests {
   }}
   for pair in owner_images.windows(2){assert_ne!(pair[0],pair[1]);}
   if let Some(output)=std::env::var_os("GENEWARS_OWNED_RENDER_OUTPUT"){assert!(!std::path::Path::new(&output).exists());std::fs::write(output,lines.join("\n")+"\n").unwrap();}
+  let mut icon_required=captured;icon_required[121]=3;
+  icon_required[0x62..0x64].copy_from_slice(&127i16.to_le_bytes());icon_required[0x68..0x6a].copy_from_slice(&64i16.to_le_bytes());
+  let mut out=vec![0x55;68*128];let prior=out.clone();
+  assert_eq!(draw_supported_mule_record(&resources.mule,&icon_required,[24,90],4312,0,0,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut out),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(out,prior);
   let mut unsupported=captured;unsupported[123]=128;let mut pixels=vec![0x55;68*128];let saved=pixels.clone();
   assert_eq!(draw_supported_mule_record(&resources.mule,&unsupported,[24,90],4312,0,0,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pixels,saved);
  }

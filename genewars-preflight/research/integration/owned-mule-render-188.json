@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "cases": 20,
+  "compared_bytes": 174160,
+  "mismatch_count": 0,
+  "scope": "Independent decoded original-data/source-derived owned59470/94D70/94400 color and existing95100 shadow model; no original-execution/native acceptance claim",
+  "private_input": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\owned-render-188.jsonl",
+  "cases_summary": [
+    {
+      "owner": 0,
+      "variant": 0,
+      "sha256": "e01bc008181629cae11ddb33236a54c3910250d54b3411b15def25460c04fb6f"
+    },
+    {
+      "owner": 0,
+      "variant": 1,
+      "sha256": "a09474317270460a344e8b551567094a8bd3af3eafb9b6822024456f1ce97361"
+    },
+    {
+      "owner": 0,
+      "variant": 2,
+      "sha256": "f7fbfa81ba19cd1d1639cef6a7b90313fa2a784483744e87ebb9a86198911111"
+    },
+    {
+      "owner": 0,
+      "variant": 3,
+      "sha256": "7f72dd32e4799ce26a70de5ec25d22fb0dbcacb7183c613a9214264e8f5dda99"
+    },
+    {
+      "owner": 0,
+      "variant": 4,
+      "sha256": "e01bc008181629cae11ddb33236a54c3910250d54b3411b15def25460c04fb6f"
+    },
+    {
+      "owner": 1,
+      "variant": 0,
+      "sha256": "988ed203854fedb53de9dbfb9084ba0bcd47accc2d61028de2c3cb8ce49057eb"
+    },
+    {
+      "owner": 1,
+      "variant": 1,
+      "sha256": "13a0f7fd0bc7c384027e54ec9aac36a65f9c5fb3e48776f7f9e65223ab5b7867"
+    },
+    {
+      "owner": 1,
+      "variant": 2,
+      "sha256": "e5e91f794dd0daff68bdb3620c5ce24553b440663c5f08e498fbcbfc18149a7f"
+    },
+    {
+      "owner": 1,
+      "variant": 3,
+      "sha256": "a0cdaf0e0d41364e74e515c06b9d1bb5102e021eeac0c681b7370930094e70c7"
+    },
+    {
+      "owner": 1,
+      "variant": 4,
+      "sha256": "988ed203854fedb53de9dbfb9084ba0bcd47accc2d61028de2c3cb8ce49057eb"
+    },
+    {
+      "owner": 2,
+      "variant": 0,
+      "sha256": "6cf82155602c170909eefef0cdbf628f0a5dc29afe52f897086c44756ab827ac"
+    },
+    {
+      "owner": 2,
+      "variant": 1,
+      "sha256": "3494f677e338a0702eabdd29483f40d9942093dd932c0c50bf4a9ff842afa694"
+    },
+    {
+      "owner": 2,
+      "variant": 2,
+      "sha256": "a281296c7425957c0b585287671a9dc0b728f9584bb460204040c8be6803b933"
+    },
+    {
+      "owner": 2,
+      "variant": 3,
+      "sha256": "7b0e2510843625b2464382ead1624b8a5a17ecb60ee9f4ce8b1d918a4580020a"
+    },
+    {
+      "owner": 2,
+      "variant": 4,
+      "sha256": "6cf82155602c170909eefef0cdbf628f0a5dc29afe52f897086c44756ab827ac"
+    },
+    {
+      "owner": 3,
+      "variant": 0,
+      "sha256": "34a96dbcda50f6fd229254c243ad8c1d82d58380efdc7d575d89225cf1072cf4"
+    },
+    {
+      "owner": 3,
+      "variant": 1,
+      "sha256": "bc97933c3f7067d14f1857dc96687fabaee5edf7bed7fd17677373c27eeb3435"
+    },
+    {
+      "owner": 3,
+      "variant": 2,
+      "sha256": "4cea2fd7ff0faf39e3f908f547b8ea01b4ac8a77a623c30b025d286b995283cd"
+    },
+    {
+      "owner": 3,
+      "variant": 3,
+      "sha256": "46b567436aff9faa1a9e9b4937caa2fe19d8ad997da3643867530215a2157b5a"
+    },
+    {
+      "owner": 3,
+      "variant": 4,
+      "sha256": "34a96dbcda50f6fd229254c243ad8c1d82d58380efdc7d575d89225cf1072cf4"
+    }
+  ],
+  "pins": {
+    "scripts\\desktop\\validate_owned_mule_pixels.py": "40abcbc3149b31c64b241feaf917b12fd3ee659cc2bde30270ecf3fcf2e04f9b",
+    "scripts\\validate_mule_scene.py": "7e9bf0f2ed66b14e41e6b421eb190d93bae1603ad5b611ecc00ce198ea5c014a",
+    "rust\\crates\\genewars-desktop\\src\\bin\\support\\creature_scene.rs": "e26811f43554a456f7f14264611bdcbd134240cceb0d28194da79d8f4beee0ae",
+    "private\\ghidra\\terrain-viewport\\instructions-00059470.txt": "3eb7e965f3edfc676b298a79bc47958e5e558538e244c8a8ca78ddefeb75fd50",
+    "private\\ghidra\\bones-frame\\instructions-00094d70.txt": "ae2894ef062735e2404f99291a40b5a69ba31751c132cfa4ea32416245620b50",
+    "private\\ghidra\\bones-blit\\instructions-00094400.txt": "dce68160736b3d8a9aa7b035103da7c09b2f8900949af99289c4fff4ff7dc8f2"
+  },
+  "correction": "Original59DD8..59DEC permits positive lifecycle79 when reserve68<=max62/2; extra icon is not drawn. Retain rejection for positive79 with reserve above half, and existing state/7B/parity guards.",
+  "frozen_diagnostic": "private/review/owned-frozen-5452-after-188;52 callbacks from actual186frame5400; other families frozen, not exact campaign render record",
+  "regression": {
+    "desktop_game_passed": 80,
+    "desktop_game_ignored": 1,
+    "release_build": "passed",
+    "invalid_icon_branch": "rejects before destination mutation"
+  },
+  "campaign_missions": 1
+}
