@@ -562,10 +562,9 @@ impl ActorWorld {
         if raw[2]!=1||record[0x18]!=4||record[0x7a]!=4||record[0x76]>90{return Ok(false);}
         let other=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize)?;
         if other[6]!=1||other[0x18]!=4||other[0x7a]!=4{return Ok(false);}
-        //6BA96..6BAF3 Bones update direction only, bypassing food publication.
+        //6BAA6 reserved Bones skip scoring; unreserved6BAB6..6BAF3 only direction.
         //The surrounding no-pair/no-enemy domain does not consume that direction.
-        if matches!(other[0x5e],26|27){return Ok(other[0x60]&1==0
-            &&self.creatures.as_ref().unwrap().binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::BonesSelector4));}
+        if matches!(other[0x5e],26|27){return Ok(self.creatures.as_ref().unwrap().binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::BonesSelector4));}
         if record[0x77]==255&&(record[0x79]as i8)>0&&word(record,0x68)>(word(record,0x62)>>1){return Ok(false);}
         //6BA8A..6BB57 still score friendly corpses as food. Their score and
         //direction are unused only in this satiated, no-pair, no-enemy domain.
@@ -649,7 +648,7 @@ impl ActorWorld {
                     1=>{let other=self.creatures.as_ref().unwrap().record(word(&raw,0)as usize)?;
                         if other[0x18]!=4||other[0x7a]!=4{return Err(CreatureError::UnsupportedNeighborhood.into());}
                         //6BAF3 skips both best-mate and best-food publication.
-                        if matches!(other[0x5e],26|27)&&other[0x60]&1==0
+                        if matches!(other[0x5e],26|27)
                             &&self.creatures.as_ref().unwrap().binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::BonesSelector4){raw=reference(entity,3);continue;}
                         if other[0x5e]>=24{return Err(CreatureError::UnsupportedNeighborhood.into());}
                         if !matches!(other[0x5e],3|10|15)&&other[0x77]==255&&word(other,0x49)as u16&0x400==0{

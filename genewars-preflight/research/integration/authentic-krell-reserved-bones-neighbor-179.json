@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "scope": "Actual4515slot4 idle-neighborhood callback, otherfamiliesfrozen, NOT campaign acceptance",
+  "comparison": {
+    "status": "passed",
+    "frame": 4515,
+    "slot": 4,
+    "draws": 5,
+    "compared_bytes": 427369,
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\e7d4d6098aa14934a372dd4ec4899200"
+  },
+  "correction": "6BAA6 reservedBones skipallscoring; unreserved6BAB6..6BAF3 directiononly isunused underexistingneutral/noenemy/domainproof. BothMulefriendly_noaction andorderedfood/pairqueryexcludeexactBonesbinding.",
+  "negative": "Syntheticneighbor0owner4->0 rejectswithwholeworldrollback",
+  "runtime": {
+    "passed": 244,
+    "ignored": 1
+  },
+  "campaign_missions": 1,
+  "native_checkpoint": "frozen1774357passed; newer179pending"
+}

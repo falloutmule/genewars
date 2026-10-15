@@ -21,6 +21,14 @@ Independentc932045typedmarkerpool admitscode3C/EFF60factory/retirement,owner4ONL
 
 GLMexisting9routerverifiedtoolcycle+boundedcodingtask; noadditionalpaidrequests thisbatch. Desktop/Luna/Solunchanged. Independentgenerationlookup404/accountprivacycontrols unavailableunchanged;GLMsectionbelow. One supplementaryagentnewpureBonesfeeding/EFF60pool/Bonescleanup andsourceanalysis; rootworld/Git/native/verification. Oneheavyjobat a time,Rust2jobs. Crashcauseunresolved.
 
+## Integration179 current override
+
+Latestverifiedgameplaycommit9ee6395feeding. Actual178passesfeeding4357andfurthergates, reaches4515blockedMule4state8timer0query(UnsupportedNeighborhood), worldSHA3a797f1cf7770dab3969b9f21da450400ccd0d899484d57a351ed8004786f1ca. Exactinputprivate/review/authentic-krell-178/frame-4515-slot-4-blocked-before. Current179reservedBonesexclusionmatchesall427369B,0mismatches/5draws; source6BAA6reservedBones skipscoringentirely, unreservedonlydirectionunused. Foreignownernegativewholeworldrollback; runtime244passed/1ignored; release179built. Receiptresearch/integration/authentic-krell-reserved-bones-neighbor-179.json. Campaign1/24.
+
+ACTIVEordinary179 supersedes178:private/integration/continued-krell-179, captureparentprivate/review/authentic-krell-179, sourceframes4800/5400andautomaticblockedcapture. Same8ordinaryattemptschedulethrough7956onlyifready; parserabortsatfirstunsupportedcallback. Usecompactreadcommandabovechanging178to179. Noquality/resources/RNGinjection. Native177remainslatestaccepted4357; latercorrectionsneednextnativecheckpoint.
+
+Separateunfinishedfuturezonework(allUNCOMMITTED, noacceptance): actor_world/zone_marker_factory.rs atomiconeiteration prepared; sourcecomparatorresearch/variants/zone-marker-captured-review.py source-onlyone4515slot4case681instructions/4draws/F6,F6,F6,229,outputprivate/review/zone-marker-captured/470de88c6f464e6b8f0142d183cc2f2a. Rootregisteredmod/pubuse andignoredzone-markermode; notcompiled/testedyet becauseordinary179heavyactive. Aftermainfinishesverifyfull427369Bsourceequality/atomicinvaliddivisorbeforecommit. DoNOTclaimlivezonecreditoruseunsupported3Crender/callbacks. Nootheragent/build/Ghidrajobsrunning.
+
 ## Focused verification and supporting primitives
 
 Runtime152: **232passed,1opt-in ignored**. Source-equal authentic callback corrections include1279 feeding-to-mating (2draws),1927 retained-pair retry (1),2051 circle scan (5),2601 idle mating (2),2602 satiated pair approach (0),2907 starvation (0), each comparing427,369worldbytes. Receipts are scoped under `research/integration/authentic-krell-*`.
