@@ -56,7 +56,7 @@ impl ActorWorld {
         let before=*pool.record(slot)?;let own=[slot as u8,(slot>>8)as u8,1];
         if before[6]!=1||before[24]!=4||word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
         let null_food_target=before[0x5e]==1&&before[0x57]==0&&before[0x60]&0x42==0x40;
-        let corpse_approach=before[0x5e]==1&&before[0x57]==1&&before[0x52]==1&&reference(&before,0x50)==reference(&before,0x55);
+        let corpse_approach=matches!(before[0x5e],1|5)&&before[0x57]==1&&before[0x52]==1&&reference(&before,0x50)==reference(&before,0x55);
         if corpse_approach {
             let id=word(&before,0x55)as usize;let corpse=pool.record(id)?;
             if pool.binding(id)?!=Some(CreatureAnimationBinding::MuleSelector4)||corpse[24]!=4||corpse[0x7a]!=4||!matches!(corpse[0x5e],24|25){return Err(CreatureError::UnsupportedMotionState.into());}
@@ -87,7 +87,7 @@ impl ActorWorld {
         let query_world=std::cell::RefCell::new(self.clone());let rng_state=std::cell::RefCell::new(rng);
         let links_moved=std::cell::Cell::new(false);
         let mut pending_pair=None;let mut newborn_slots=Vec::new();let mut failed_action_dispatched=false;let mut retired_during_feeding=false;
-        let mut reserve_plant=None;let mut release_plant=None;let mut fed_plant=None;let mut pending_audio=Vec::new();let mut pending_plant_retirements=Vec::new();
+        let mut reserve_corpse=None;let mut reserve_plant=None;let mut release_plant=None;let mut fed_plant=None;let mut pending_audio=Vec::new();let mut pending_plant_retirements=Vec::new();
         let(plan,water_effect)=creature_world::plan_mule_after_admitted_prefix_with_cell_entry(&before,&prefix,working_target,self.map(),context,physics,trig,
             |record,normal,previous|query_world.borrow().mule_contact_speed(record,normal,previous).map_err(|_|CreatureError::MotionEnvironment),
             |point|query_world.borrow().move_obstacle_at(point).map_err(|_|CreatureError::MotionEnvironment),animations,|record|{
@@ -108,6 +108,21 @@ impl ActorWorld {
                         *rng=relocation.rng_after;return Ok(relocation.record_after);
                     }
                     return Ok(choice.after);
+                }
+                if record[0x5e]==5 {
+                    let corpse=world.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?;
+                    //667EE/66834: still nearby; first food-processing gate remains bounded out.
+                    if creature_world::common_distance_squared(world.map(),[word(record,7),word(record,9)],[word(corpse,7),word(corpse,9)])?>4096
+                        ||word(record,0x6c)&15==0{return Err(CreatureError::UnsupportedMotionState);}
+                    return Ok(*record);
+                }
+                if record[0x5e]==1&&record[0x57]==1 {
+                    let id=word(record,0x55)as u16;let corpse=world.creatures.as_ref().unwrap().record(id as usize)?;
+                    let arrival=crate::mule_corpse_arrival::plan_arrival(record,corpse).map_err(|_|CreatureError::UnsupportedMotionState)?;
+                    reserve_corpse=Some((id,corpse[0x60],arrival.target_after[0x60]));
+                    //65B4D refreshes requested speed after both arrival branches.
+                    let mut after=arrival.current_after;after[0x3f..0x41].copy_from_slice(&creature_world::mule_requested_speed(record).to_le_bytes());
+                    return Ok(after);
                 }
                 if record[0x5e]==10{
                     //69EF2..69F84 positive-countdown wait. Missing/far peers
@@ -267,6 +282,11 @@ impl ActorWorld {
         staged.creatures.as_mut().unwrap().replace_record_checked(slot,&prior,&plan.after)?;
         if plan.old_cell!=plan.physics_cell&&!links_moved.get() {staged.insert_mule_head(slot,plan.physics_cell)?;}
         if plan.physics_cell!=plan.new_cell {staged.unlink_mule_slot(slot,plan.physics_cell)?;staged.insert_mule_head(slot,plan.new_cell)?;}
+        if let Some((id,expected,flags))=reserve_corpse {
+            let prior=*staged.creatures.as_ref().unwrap().record(id as usize)?;
+            if prior[0x60]!=expected{return Err(CreatureError::UnsupportedMotionState.into());}
+            let mut after=prior;after[0x60]=flags;staged.creatures.as_mut().unwrap().replace_record_checked(id as usize,&prior,&after)?;
+        }
         if let Some(id)=reserve_plant {let l=staged.layouts[1];let at=l.file_offset+id as usize*l.packed_stride+0x26;staged.backing[at]|=1;}
         if let Some(id)=release_plant {let l=staged.layouts[1];let at=l.file_offset+id as usize*l.packed_stride+0x26;staged.backing[at]&=0xfe;}
         if let Some(id)=fed_plant {let l=staged.layouts[1];let at=l.file_offset+id as usize*l.packed_stride+0x24;let old=word(&staged.backing,at);staged.backing[at..at+2].copy_from_slice(&old.wrapping_sub(3).to_le_bytes());}
@@ -314,7 +334,7 @@ impl ActorWorld {
     pub(super) fn mule_route_prefix(&self,before:&CreatureRecord,frame:u32,physics:&PhysicsTables,trig:&TrigTables,rng:&mut BlueprintRng)->Result<(CreatureRecord,[i16;2]),ActorWorldError> {
         let phase=creature_world::mule_callback_phase(before,frame);
         let own=[before[15],before[16],1];let current=[word(before,7),word(before,9)];
-        let associated_pair=matches!(before[0x5e],1|3)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55);
+        let associated_pair=matches!(before[0x5e],1|3|5)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55);
         let mut final_target=[word(before,11),word(before,13)];
         let mut a=*before;a[0x49]&=0x9f;
         if a[0x4f]!=0||(a[0x52]!=0&&!associated_pair)||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
@@ -424,7 +444,7 @@ impl ActorWorld {
             if distance<=i32::from(animation)*32+64 {desired=(i32::from(desired)*3/4)as i16;}
         }
         let target=[word(record,11),word(record,13)];
-        let distance=if matches!(record[0x5e],1|3)&&record[0x52]==1{
+        let distance=if matches!(record[0x5e],1|3|5)&&record[0x52]==1{
             //5AD70 virtualB8 uses the associated Mule's physical xyz,
             //even when74A50 repaired the ordinary goal back to self.
             let peer=self.creatures.as_ref().ok_or(CreatureError::MotionEnvironment)?.record(word(record,0x50)as usize)?;

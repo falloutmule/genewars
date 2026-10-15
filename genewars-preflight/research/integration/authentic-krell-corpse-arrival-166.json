@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "scope": "Retained reference acquisition plus atomic corpse reservation/state5 arrival and nonprocessing waits. Only3583 is actual campaign frontier; isolated waits freeze other families. Food processing remains explicitly unsupported.",
+  "comparisons": [
+    {
+      "scope": "authentic3583 retained-target acquisition",
+      "frame": 3583,
+      "slot": 4,
+      "draws": 2,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\c52dd3b95ec04e14afd929532b26e14f",
+      "mismatches": 0
+    },
+    {
+      "scope": "isolated3615 atomic corpse arrival",
+      "frame": 3615,
+      "slot": 8,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\8dd0c5c2c0414145a0b934ea8ae2cf64",
+      "mismatches": 0
+    },
+    {
+      "scope": "isolated3616 feeding wait",
+      "frame": 3616,
+      "slot": 8,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\1fd0621a3af043c79cb2d302eac311a6",
+      "mismatches": 0
+    },
+    {
+      "scope": "isolated3617 feeding wait",
+      "frame": 3617,
+      "slot": 8,
+      "draws": 0,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\f1349424b84245a6bf84ab546066c6e2",
+      "mismatches": 0
+    }
+  ],
+  "total_compared_bytes": 1709476,
+  "runtime": {
+    "passed": 234,
+    "ignored": 1
+  },
+  "supplementary_agent": "owned_scheduler_review implemented pure mule_corpse_arrival module; root reviewed/integrated and fullworld compared",
+  "known_next_isolated_boundary": {
+    "frame": 3645,
+    "input": "private/review/isolated-corpse-feeding-gate-166",
+    "behavior": "source67780 releases corpse reservation, preserves association50 and delays20+RNG%20 after false5B100; separate from generic retry_wait"
+  },
+  "campaign_missions": 1
+}

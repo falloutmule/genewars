@@ -390,10 +390,11 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     let corpse_approach=before[0x5e]==1&&before[0x61]==0x40&&matches!(before[0x60],0x48|0xc8)&&before[0x57]==1&&before[0x52]==1&&before[0x50..0x53]==before[0x55..0x58];
     let paired_approach=before[0x5e]==3&&matches!(before[0x60],0|4|8|12|0x80|0x84|0x88|0x8c)&&before[0x57]==1&&((matches!(before[0x61],0|0x40)&&before[0x52]==1)||(matches!(before[0x61],0x20|0x60)&&before[0x52]==0));
     let paired_wait=before[0x5e]==10&&matches!(before[0x61],0x20|0x60)&&matches!(before[0x60],4|12|0x84|0x8c)&&before[0x57]==1&&before[0x52]==0&&motion_word(before,0x6c)>=0;
+    let corpse_wait=before[0x5e]==5&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==1&&before[0x52]==1&&before[0x50..0x53]==before[0x55..0x58];
     let feeding_wait=before[0x5e]==7&&before[0x61]==0x40&&before[0x60]==8&&before[0x57]==2;
-    if before[6]!=1||before[0x18]!=4||!(neutral||postbirth_idle||relocation||food_approach||corpse_approach||feeding_wait||paired_approach||paired_wait)||before[0x7a]!=4||before[0x76]>90
+    if before[6]!=1||before[0x18]!=4||!(neutral||postbirth_idle||relocation||food_approach||corpse_approach||corpse_wait||feeding_wait||paired_approach||paired_wait)||before[0x7a]!=4||before[0x76]>90
        ||before[0x7b]!=255||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)
-       ||before[0x4f]!=0||(before[0x52]!=0&&!paired_approach&&!corpse_approach)||motion_word(before,0x49)as u16&!0x337f!=0
+       ||before[0x4f]!=0||(before[0x52]!=0&&!paired_approach&&!corpse_approach&&!corpse_wait)||motion_word(before,0x49)as u16&!0x337f!=0
        ||motion_word(before,0x6c)<0||motion_word(before,0x66)<=if mule_callback_phase(before,context.frame_counter)&1==0{0}else{2}{return Err(CreatureError::UnsupportedMotionState);}
     plan_mule_admitted_body_with_postphysics(before,prefix,working_target,map,context,physics,trig,contact,obstacle,animations,choice,admit_water,cell_entry,|record|Ok(*record))
 }
@@ -486,6 +487,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
         if motion_word(&a,0x49)as u16&0x200!=0 {if a[0x5e]==0{a[0x60]&=0xdf;}a[0x60]&=0xef;}
         if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;if a[0x61]&0x80!=0&&a[0x6e..0x72]==a[11..15]{a[0x61]&=0x7f;}motion_put(&mut a,0x6c,0);}
         if a[0x5e]==0&&motion_word(&a,0x6c)==0 {a=choice(&a)?;}
+        if before[0x5e]==5 {a=choice(&a)?;}
         if before[0x5e]==7 {
             if common_distance_squared(map,motion_point(&a),working_target)?>4096 {return Err(CreatureError::UnsupportedMotionState);}
             if motion_word(&a,0x6c)&15==0 {a=choice(&a)?;}
@@ -507,7 +509,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
     if a[0x5e]==10 {
         //5EA66: paired countdown selects animation22 once, then retains it.
         if a[0x19]!=22 {a[0x19]=22;a[0x1e]=0;a[0x1c]=1;a[0x1d]=0;a[0x1a]=0;a[0x1b]=0;}
-    }else if a[0x5e]==7 {
+    }else if matches!(a[0x5e],5|7) {
         if a[0x19]!=19 {a[0x19]=19;a[0x1a]=0;a[0x1b]=0;a[0x1c]=1;a[0x1d]=2;a[0x1e]=0;}
     }else{
         a[0x19]=(((((i32::from(yaw)>>7)+1)>>1)+1)&7)as u8;
@@ -806,9 +808,13 @@ where F:FnMut([i16;2])->Result<bool,CreatureError> {
 ///Caller proves original query winner/binding; no goalXY copy or corpse mutation.
 pub fn plan_mule_corpse_acquisition(before:&CreatureRecord,corpse:&CreatureRecord,rng_before:crate::blueprint::BlueprintRng)->Result<InitialMuleChoice,CreatureError>{
     let id=motion_word(corpse,15);
+    //5CC60 state8 clears a retained pair target locally before acquisition.
+    let retained=before[0x57]==1&&matches!(before[0x61],0x20|0x60)&&matches!(before[0x60],0x0c|0x8c)
+        &&(0..300).contains(&motion_word(before,0x55));
+    let reference_domain=before[0x57]==0&&matches!(before[0x61],0|0x40)||retained;
     if rng_before.ring>=32||before[6]!=1||before[24]!=4||before[0x7a]!=4||before[0x5e]!=8||before[0x76]>90
         ||before[0x7b]!=255||motion_word(before,0x6c)!=0||before[0x78]!=0||before[0x60]&2!=0
-        ||before[0x57]!=0||before[0x52]!=0||before[0x5d]!=0||!matches!(before[0x61],0|0x40)
+        ||!reference_domain||before[0x52]!=0||before[0x5d]!=0
         ||(motion_word(before,0x68)>motion_word(before,0x62)>>1&&before[0x61]&0x40==0)
         ||corpse[6]!=1||corpse[24]!=4||corpse[0x7a]!=4||!matches!(corpse[0x5e],24|25)
         ||motion_word(corpse,0x49)as u16&0x400!=0||!(0..300).contains(&id)||id==motion_word(before,15){return Err(CreatureError::UnsupportedMotionState);}
