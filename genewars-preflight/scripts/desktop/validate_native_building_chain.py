@@ -33,7 +33,7 @@ def append_build(text,label,selector,choices,point,work_ticks):
         count+=ticks;text+=f'key space {ticks}\nobserve {label}-work{count}\n'
     return text+f'key c\nobserve {label}-next-choices\nkey escape\n'
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--probe',type=Path,required=True);parser.add_argument('--expect',choices=['completed','blocked'],required=True);parser.add_argument('--reference-startup',choices=['fresh']);parser.add_argument('--blocked-reason');parser.add_argument('--blocked-step',type=int);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--probe',type=Path,required=True);parser.add_argument('--expect',choices=['completed','blocked'],required=True);parser.add_argument('--reference-startup',choices=['fresh']);parser.add_argument('--blocked-reason');parser.add_argument('--blocked-step',type=int);parser.add_argument('--photons',action='store_true');parser.add_argument('--result-view',action='store_true');parser.add_argument('--campaign-view',action='store_true');args=parser.parse_args()
     if args.expect=='blocked' and (args.blocked_reason is None or args.blocked_step is None):parser.error('--expect blocked requires --blocked-reason and --blocked-step')
     initial_ticks=200 if args.reference_startup else 189
     startup_args=['--reference-startup','fresh']if args.reference_startup else['--landing-seed','5428']
@@ -47,16 +47,33 @@ def main():
     text=INPUT.split('pointer 320 234')[0].replace('key space 189',f'key space {initial_ticks}')
     text=append_build(text,'extractor',11,[11],[320,234],(100,200,300,500))
     text=append_build(text,'distributor',3,[11,3],[400,370],(100,200,300,600))
+    if args.photons:
+        if not args.reference_startup:parser.error('--photons requires --reference-startup fresh')
+        text=append_build(text,'rejected-photon',6,[11,3,6],[430,350],(30,))
+        for index,point in enumerate([[468,402],[348,394],[508,346]],1):
+            text=append_build(text,f'photon{index}',6,[11,3,6],point,(100,200,400))
+    if args.result_view:
+        if not args.photons:parser.error('--result-view requires --photons')
+        text+='key enter\nobserve victory-entry\n'
+    if args.campaign_view:
+        if not args.result_view:parser.error('--campaign-view requires --result-view')
+        text+='key enter\nobserve campaign-entry\n'
     (work/'input.txt').write_text(text);names=[line.split()[1]for line in text.splitlines()if line.startswith('observe ')]
     receipt=dict(status='error',utc=datetime.now(timezone.utc).isoformat(),scope='development native Extractor/Distributor construction',authentic_missions_completable=0,border_policy='generated',construction_border_sha256=TABLE_SHA,patterns_sha256=PATTERNS_SHA,binary_sha256=sha(binary),input_sha256=sha(work/'input.txt'),chooser_source_sha256=sha(menu),probe=str(probe.relative_to(ROOT)),work=str(work.relative_to(ROOT)),runs=[],limitations=['Development initialization and seed5428, not original campaign startup','Port-owned input mapping and chooser layout','No mission outcome or campaign transition asserted'])
-    receipt['startup_arguments']=startup_args;receipt['original_execution']=False
+    receipt['startup_arguments']=startup_args;receipt['original_execution']=False;receipt['photon_chain']=args.photons
     if args.reference_startup:
         receipt['scope']='native Extractor/Distributor construction from source-backed fresh startup'
         receipt['limitations'][0]='Fresh reference startup uses serialized RNG; full mission acceptance remains separate'
+    if args.photons:
+        receipt['scope']='native fresh Exceland construction chain and source-backed victory predicate'
+        receipt['limitations'][2]='Campaign continuation not accepted; no complete mission flow claimed'
+    if args.result_view:
+        receipt['scope']+=' with visible result-view entry'
+        receipt['limitations'].append('Result movie decoder and audio mixer unavailable; entering result screen alone is not campaign continuation')
     try:
         for run_name in ['first','repeat']:
             folder=work/run_name
-            result=subprocess.run([str(binary),str(ROOT/'private/integration/game-runtime'),*startup_args,'--native-input-replay',str(work/'input.txt'),'--observations',str(folder),'--seconds','300'],cwd=ROOT,capture_output=True,text=True,timeout=320)
+            result=subprocess.run([str(binary),str(ROOT/'private/integration/game-runtime'),*startup_args,'--native-input-replay',str(work/'input.txt'),'--observations',str(folder),'--seconds','300'],cwd=ROOT,capture_output=True,text=True,timeout=600)
             (work/f'{run_name}.stdout').write_text(result.stdout);(work/f'{run_name}.stderr').write_text(result.stderr)
             stopped=read_stopped_boundary(folder)
             if stopped is not None:
@@ -86,12 +103,36 @@ def main():
                 assert final['player_funds'][0]['balance']<assigned['player_funds'][0]['balance']
                 assert frames['distributor-next-choices']['construction_choices']==[11,3,6]
                 assert any(any(b['selector']==3 and not b['flags_word_31']&1 for b in frames[f'distributor-work{n}']['mission']['buildings'])for n in [100,300,600]),'no visible incomplete Distributor observation'
+            if args.photons:
+                rejected=frames['rejected-photon-work30']['mission']
+                assert rejected['steps']==2530 and rejected['blocked']is None
+                assert rejected['player_funds'][0]['balance']==1074
+                assert not rejected['actor_states'][0]['assignment_pending']
+                for index in range(1,4):
+                    result=frames[f'photon{index}-work700']['mission']
+                    completed=[b for b in result['buildings'] if b['selector']==6 and b['flags_word_31']&1 and b['progress_word_2b']==80]
+                    assert result['blocked']is None and len(completed)==index
+                result=frames['photon3-work700']['mission']
+                assert result['steps']==4630 and result['outcome']=={'state':'won','player':0}
+                assert result['player_funds'][0]['balance']==510
+            if args.result_view:
+                result=frames['victory-entry'];assert result['scene']=='Victory'
+                assert result['mission']['campaign_progress']==1
+                assert result['result_view']['stage']==5 and result['result_view']['feedback_text_index']==478
+                assert result['result_view']['movie']=='unavailable_decoder'
+                assert not result['result_view']['campaign_transition_accepted']
+            if args.campaign_view:
+                result=frames['campaign-entry'];assert result['scene']=='Campaign' and result['mission']is None
+                carry=result['campaign'];assert carry['progress']==1 and carry['next_mission']=='Krell'
+                assert carry['carry_projected'] and carry['retired_actors']==[0,1]
+                assert carry['mode_after_exit']==0 and carry['frame_after_view_resume']==4630
+                assert not carry['next_mission_initialized']
             assert all(f['error']is None for f in frames.values())
             receipt['runs'].append({n:dict(bmp_sha256=sha(folder/f'{n}.bmp'),world_sha256=None if f['mission']is None else f['mission']['world_sha256'],steps=None if f['mission']is None else f['mission']['steps'],blocked=None if f['mission']is None else f['mission']['blocked'])for n,f in frames.items()})
             print(run_name,'native building-chain captured',flush=True)
         assert sha(patterns)==PATTERNS_SHA
         assert receipt['runs'][0]==receipt['runs'][1],'replay mismatch'
-        receipt['status']='blocked'if args.expect=='blocked'else'passed';receipt['classification']='unsupported_behavior'if args.expect=='blocked'else('completed_fresh_distributor'if args.reference_startup else'completed_development_distributor')
+        receipt['status']='blocked'if args.expect=='blocked'else'passed';receipt['classification']='unsupported_behavior'if args.expect=='blocked'else('completed_fresh_photon_commands'if args.photons else'completed_fresh_distributor'if args.reference_startup else'completed_development_distributor')
     except BoundaryBlocked as e:
         receipt['status']='blocked';receipt['classification']='unsupported_behavior';receipt['error']=str(e)
         receipt['expected_boundary_check']='not_requested'

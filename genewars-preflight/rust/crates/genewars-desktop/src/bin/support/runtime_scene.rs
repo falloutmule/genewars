@@ -7,9 +7,10 @@ use genewars_runtime::world::MissionWorld;
 use super::{menu_art,runtime_resources::{read_bound,Resources,Frame},status_text};
 use super::shared_scene::SharedMission;
 #[path="building_menu.rs"] mod building_menu;
+#[path="campaign_scene.rs"] mod campaign_scene;
 
 #[derive(Clone,Copy,Debug,PartialEq,Eq)]
-pub enum Scene { Menu, Loading, Mission, Options, Error, Quit }
+pub enum Scene { Menu, Loading, Mission, Victory, Campaign, Options, Error, Quit }
 
 #[derive(Clone)]
 pub enum MissionState { Plants(MissionWorld), Landing(SharedMission) }
@@ -32,8 +33,8 @@ impl MissionState {
     fn extra_report(&self)->String {
         match self {
             Self::Plants(_)=>"\"world_mode\":\"plants\"".into(),
-            Self::Landing(w)=>format!("\"world_mode\":{},\"runtime_context\":{},\"outcome\":{},\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"plant_births\":{},\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"player_funds\":{},\"buildings\":{},\"terrain_jobs\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
-                json_string(if w.runtime_context.is_some(){"fresh-cd-explicit-opaque-priors"}else{"landing-study"}),json_string(&format!("{:?}",w.runtime_context)),w.outcome_json(),w.seed,w.world.rng().draw_count,w.selected.map(|s|s.to_string()).unwrap_or("null".into()),w.command_count,w.plant_births,w.pending_requests,
+            Self::Landing(w)=>format!("\"world_mode\":{},\"runtime_context\":{},\"outcome\":{},\"campaign_progress\":{},\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"plant_births\":{},\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"player_funds\":{},\"buildings\":{},\"terrain_jobs\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
+                json_string(if w.runtime_context.is_some(){"fresh-cd-explicit-opaque-priors"}else{"landing-study"}),json_string(&format!("{:?}",w.runtime_context)),w.outcome_json(),w.world.player(0).unwrap().bytes()[0x6e7],w.seed,w.world.rng().draw_count,w.selected.map(|s|s.to_string()).unwrap_or("null".into()),w.command_count,w.plant_births,w.pending_requests,
                 w.world.effects().unwrap().records().iter().filter(|r|r[6]!=0).count(),w.actor_state_json(),w.creature_state_json(),w.player_funds_json(),w.building_state_json(),w.terrain_job_state_json()),
         }
     }
@@ -44,15 +45,28 @@ pub struct Mission {
     pub ticks: u64, pub blocked: Option<String>, pub changed_frames: u64,
 }
 
+pub struct VictoryDisplay {
+    pub image:RgbImage,
+    pub receipt:super::result_scene::VictoryScreenReceipt,
+    pub entry:genewars_runtime::result_transition::VictoryEntryPlan,
+}
+
+pub struct CampaignState {
+    pub carry:genewars_runtime::result_carry::CampaignCarryPlan,
+    pub world_priors:[u8;150],pub rng_ring:u8,pub mode:u8,pub frame:u32,
+    pub display:campaign_scene::CampaignDisplay,
+}
+
 pub struct Game {
     root: PathBuf,
     pub building_menu_open:bool, building_menu_capture:Option<u8>, building_feedback:Option<String>, pub placement_selector:Option<u8>,
-    pub scene: Scene, pub mission: Option<Mission>,
+    pub scene: Scene, pub mission: Option<Mission>, pub victory:Option<VictoryDisplay>, pub campaign:Option<CampaignState>,
     images: Vec<RgbImage>, button: CdTitleButton,
     controls: MenuCallback0State, cursor: Option<(i32,i32)>, left: bool, right: bool, mask: u8,
     pub automatic: bool, pub start_running: bool, pub error: Option<String>,
     pub landing_seed: Option<u16>,
     pub reference_startup:bool,
+    campaign_system:u8, carry_records:[u8;600],
     pub trace: Vec<String>, pub ticks: Vec<String>, pub presented: u64,
 }
 
@@ -66,9 +80,9 @@ impl Game {
     pub fn open(root:&Path)->Result<Self,String> {
         let palette=Palette256::parse(&read_bound(&root.join("menu/titlescr.pal"))?,PaletteChannelMode::Rgb).map_err(|e|e.to_string())?;
         let (images,button,_,_)=menu_art::compose(&root.join("menu"),&palette)?;
-        Ok(Self { root:root.into(),building_menu_open:false,building_menu_capture:None,building_feedback:None,placement_selector:None, scene:Scene::Menu,mission:None,images,button,
+        Ok(Self { root:root.into(),building_menu_open:false,building_menu_capture:None,building_feedback:None,placement_selector:None, scene:Scene::Menu,mission:None,victory:None,campaign:None,images,button,
             controls:MenuCallback0State::default(),cursor:None,left:false,right:false,mask:0,
-            automatic:false,start_running:false,error:None,landing_seed:None,reference_startup:false,trace:vec!["Menu".into()],ticks:Vec::new(),presented:0 })
+            automatic:false,start_running:false,error:None,landing_seed:None,reference_startup:false,campaign_system:0,carry_records:[0;600],trace:vec!["Menu".into()],ticks:Vec::new(),presented:0 })
     }
 
     fn transition(&mut self, scene:Scene) {
@@ -237,6 +251,10 @@ impl Game {
         if self.scene!=Scene::Mission {return Err("build-start requires the mission scene".into());}
         let m=self.mission.as_mut().ok_or("mission scene lacks world")?;
         let MissionState::Landing(current)=&m.world else{return Err("build-start requires the architect development world".into());};
+        if current.runtime_context.is_some() {
+            let player=current.world.player(0).map_err(|e|e.to_string())?;
+            if !genewars_runtime::building_availability::available(player.bytes(),selector.unwrap_or(1)).map_err(|e|format!("{e:?}"))?{return Err("building is not available".into());}
+        }
         let mut proposed=current.clone();
         let slot=proposed.selected.ok_or("select an architect first")?;
         let plan=match selector{Some(selector)=>proposed.assign_selected_building(selector)?,None=>proposed.assign_selected_bturr()?};
@@ -251,9 +269,64 @@ impl Game {
     pub fn escape(&mut self) {
         if self.building_menu_open{self.building_menu_open=false;self.building_menu_capture=None;return;}
         if self.placement_selector.take().is_some(){self.building_feedback=None;return;}
-        match self.scene {Scene::Menu=>self.transition(Scene::Quit),Scene::Quit=>{},_=>{self.automatic=false;self.mission=None;self.error=None;self.transition(Scene::Menu);}}
+        match self.scene {Scene::Menu=>self.transition(Scene::Quit),Scene::Quit=>{},_=>{self.automatic=false;self.mission=None;self.victory=None;self.campaign=None;self.error=None;self.transition(Scene::Menu);}}
+    }
+    /// Packet21 continuation enters the source victory view on a fresh key edge.
+    fn enter_victory_view(&mut self)->Result<(),String>{
+        let m=self.mission.as_mut().ok_or("victory requires a mission")?;
+        if m.blocked.is_some(){return Err("resolve the engine boundary before result entry".into());}
+        let MissionState::Landing(current)=&m.world else{return Err("victory requires owned mission state".into());};
+        let mut proposed=current.clone();
+        let context=proposed.runtime_context.as_mut().ok_or("victory requires source runtime context")?;
+        let request=genewars_runtime::result_transition::continue_after_win(context.known_runtime_flags(),context.runtime_mode().ok_or("unknown runtime mode")?).map_err(|e|format!("{e:?}"))?;
+        if request!=Some(genewars_runtime::result_transition::ResultViewRequest::Victory1863DC){return Err("no original victory request".into());}
+        let ticket=proposed.world.prepare_victory_entry(context,0,0).map_err(|e|format!("{e:?}"))?;
+        let resources=super::result_scene::VictoryResources::load(&self.root)?;
+        let(image,receipt)=resources.render(&ticket.plan().players_after[0])?;
+        //7DBC0 ignores the movie service's failed-open return. This host has
+        //no admitted decoder or mixer, so record unavailable, never played.
+        //The original assets, palette mappings, text bounds and static view
+        //are prepared above; transition() closes controls and consumes input.
+        let services=genewars_runtime::actor_world::VictoryPresentationStatus::Completed{
+            ordered_service_calls:ticket.plan().service_calls.clone(),
+            biowin_receipt:"MovieUnavailable: Rust decoder not implemented; source1BF5D/7DBC0 ignores playback failure".into(),
+            audio_receipt:"AudioUnavailable: native mixer not implemented; no playback asserted".into(),
+        };
+        let entry=proposed.world.commit_victory_entry(context,&ticket,&services).map_err(|e|format!("{e:?}"))?;
+        let frame=proposed.render(&m.resources,m.target)?;
+        m.world=MissionState::Landing(proposed);m.frame=frame;
+        self.victory=Some(VictoryDisplay{image,receipt,entry});self.automatic=false;self.error=None;
+        self.transition(Scene::Victory);Ok(())
+    }
+    /// Source7DDD0 then72E50: project carried state and discard the old arena.
+    fn enter_campaign_view(&mut self)->Result<(),String>{
+        let m=self.mission.as_ref().ok_or("campaign continuation requires mission state")?;
+        let MissionState::Landing(w)=&m.world else{return Err("campaign continuation requires owned world".into());};
+        let context=w.runtime_context.as_ref().ok_or("campaign continuation requires runtime context")?;
+        let progress=w.world.player(0).map_err(|e|e.to_string())?.bytes()[0x6e7];
+        let request=genewars_runtime::result_transition::advance_victory(1,context.known_runtime_flags(),progress).map_err(|e|format!("{e:?}"))?;
+        if request!=Some(genewars_runtime::result_transition::ResultViewRequest::Campaign186F19){return Err("no original campaign request".into());}
+        let players=core::array::from_fn(|id|*w.world.player(id as u8).unwrap().bytes());
+        let bindings=core::array::from_fn(|id|w.world.actors().bindings(id).unwrap().blueprint.map(|b|(b.player_id,b.blueprint_index)));
+        let carry=genewars_runtime::result_carry::plan_campaign_carry(&players,w.world.actors().records(),&bindings,w.world.map(),&self.carry_records,context.known_runtime_flags(),context.runtime_mode().ok_or("unknown result mode")?,0,w.selected.map(|s|s as u8)).map_err(|e|format!("campaign carry: {e:?}"))?;
+        let resources=genewars_core::cd_candidate::CampaignResourcePlan::new(carry.players[0][0x6e7]as i8,self.campaign_system).map_err(|e|format!("{e:?}"))?;
+        let display=campaign_scene::CampaignDisplay::load(&self.root,resources)?;
+        let saved_frame=self.victory.as_ref().ok_or("campaign continuation lacks victory entry")?.entry.saved_frame;
+        let resume=genewars_runtime::result_transition::resume_after_view_entry(context.runtime_mode().unwrap()&!1,0,carry.frame_after,saved_frame);
+        let state=CampaignState{carry,world_priors:w.world.backing_bytes()[0x34ba..0x3550].try_into().unwrap(),rng_ring:w.world.rng().ring,mode:resume.mode_after,frame:resume.frame_after,display};
+        self.campaign_system=state.display.resources.effective_system;self.carry_records=state.carry.records_184d7c;
+        self.campaign=Some(state);self.victory=None;self.mission=None;self.automatic=false;self.error=None;
+        self.transition(Scene::Campaign);Ok(())
     }
     pub fn toggle_run(&mut self) {
+        if self.scene==Scene::Campaign {self.error=Some("Krell initialization is not implemented".into());return;}
+
+        if self.scene==Scene::Victory {
+            if let Err(error)=self.enter_campaign_view(){self.error=Some(error);}return;
+        }
+        if self.scene==Scene::Mission&&self.mission.as_ref().is_some_and(|m|matches!(&m.world,MissionState::Landing(w) if w.runtime_context.as_ref().is_some_and(|c|matches!(c.outcome(),genewars_runtime::mission_outcome::MissionOutcome::Won{..})))) {
+            if let Err(error)=self.enter_victory_view(){self.error=Some(error);}return;
+        }
         if self.scene==Scene::Options {self.start_running=!self.start_running;}
         else if self.scene==Scene::Mission && self.mission.as_ref().is_some_and(|m|m.blocked.is_none()) {self.automatic=!self.automatic;}
     }
@@ -269,7 +342,7 @@ impl Game {
                 let m=self.mission.as_ref().ok_or("mission scene lacks world")?;
                 let status=m.blocked.as_deref().map(|e|format!("STOPPED: {e}")).unwrap_or_else(||format!("{} - SPACE: STEP / ENTER: RUN / ESC: MENU",if self.automatic{"RUNNING"}else{"PAUSED"}));
                 let status=if let MissionState::Landing(w)=&m.world {
-                    match w.runtime_context.as_ref().map(|c|c.outcome()) {
+                    match w.runtime_context.as_ref().filter(|_|m.blocked.is_none()).map(|c|c.outcome()) {
                         Some(genewars_runtime::mission_outcome::MissionOutcome::Won{..})=>"MISSION WON - RESULT FLOW INTEGRATION PENDING".into(),
                         Some(genewars_runtime::mission_outcome::MissionOutcome::Lost{..})=>"MISSION LOST - RESULT FLOW INTEGRATION PENDING".into(),
                         _=>status,
@@ -277,9 +350,17 @@ impl Game {
                 }else{status};
                 let lines=if let MissionState::Landing(w)=&m.world {
                     vec![format!("{} - STEP {} - ACTOR {}",if w.runtime_context.is_some(){"EXCELAND - RECONSTRUCTION"}else{"LANDING STUDY"},m.ticks,w.selected.map(|s|s.to_string()).unwrap_or("NONE".into())),
-                        self.error.clone().or_else(||self.building_feedback.clone()).unwrap_or(status),"TAB: SELECT / RIGHT CLICK: MOVE OR PLACE / C: CONSTRUCTION".into(),"PORT CONTROLS; SOURCE OPCODE16 PLACEMENT / B: DEV BTURR".into()]
+                        self.error.clone().or_else(||w.feedback.clone()).or_else(||self.building_feedback.clone()).unwrap_or(status),"TAB: SELECT / RIGHT CLICK: MOVE OR PLACE / C: CONSTRUCTION".into(),if w.runtime_context.is_some(){let p=w.world.player(0).map_err(|e|e.to_string())?.bytes();format!("PHOTON PROCESSORS: {}/3 - RESOURCES: {}",p[0x606],i32::from_le_bytes(p[0x4a3..0x4a7].try_into().unwrap()))}else{"PORT CONTROLS; SOURCE OPCODE16 PLACEMENT / B: DEV BTURR".into()}]
                 }else{vec![format!("PLANTS {} - STEP {} - CURSOR {}",m.world.plant_count(),m.ticks,m.world.schedule_cursor()),status,"ARROWS: VIEW - OTHER ENTITY SYSTEMS SUSPENDED".into()]};
                 (&m.frame.image,lines)
+            },
+            Scene::Campaign=>{
+                let campaign=self.campaign.as_ref().ok_or("campaign scene lacks carried state")?;
+                (&campaign.display.image,vec![format!("NEXT MISSION: {}",campaign.display.name),self.error.clone().unwrap_or("ENTER: START MISSION".into())])
+            },
+            Scene::Victory=>{
+                let result=self.victory.as_ref().ok_or("victory scene lacks prepared display")?;
+                (&result.image,vec![self.error.clone().unwrap_or("ENTER: CONTINUE".into())])
             },
             Scene::Error=>(&flat,vec!["MISSION LOAD FAILED - NO WORLD COMMITTED".into(),self.error.clone().unwrap_or_default(),"ESC: RETURN TO MENU".into()]),
             Scene::Quit=>(&self.images[0],vec!["CLOSING".into()]),
@@ -290,12 +371,14 @@ impl Game {
             let funds=i32::from_le_bytes(player.bytes()[0x4a3..0x4a7].try_into().unwrap());
             return status_text::overlay(base,&building_menu::lines(&self.building_choices(),funds,w.selected,self.building_feedback.as_deref()));
         }
-        if self.scene==Scene::Mission {status_text::mission_overlay(base,&lines)}else{status_text::overlay(base,&lines)}
+        if matches!(self.scene,Scene::Mission|Scene::Victory) {status_text::mission_overlay(base,&lines)}else{status_text::overlay(base,&lines)}
     }
 
     pub fn report(&self)->String {
         let trace=self.trace.iter().map(|s|json_string(s)).collect::<Vec<_>>().join(",");
         let mission=self.mission.as_ref().map(|m|format!("{{\"steps\":{},\"plants\":{},\"cursor\":{},\"target\":[{},{}],\"changed_world_frames\":{},\"world_sha256\":{},\"rgb_sha256\":{},\"queue\":{:?},\"blocked\":{},{}}}",m.ticks,m.world.plant_count(),m.world.schedule_cursor(),m.target[0],m.target[1],m.changed_frames,json_string(&m.frame.world_sha256),json_string(&m.frame.rgb_sha256),m.frame.queue,m.blocked.as_ref().map(|s|json_string(s)).unwrap_or("null".into()),m.world.extra_report())).unwrap_or("null".into());
-        format!("{{\"scene\":{},\"scene_history\":[{}],\"mission\":{},\"ticks\":[{}],\"presented_frames\":{},\"error\":{},\"construction_menu_open\":{},\"construction_choices\":{:?},\"scene_dispatch\":true,\"gameplay\":false,\"full_world_tick\":false,\"original_startup_sequence\":false,\"timer_policy\":\"port-owned 10 Hz when enabled\",\"render_policy\":\"full redraw; source-player0 view; radius4096 view-only factor; GENEPANL development backing\"}}\n",json_string(&format!("{:?}",self.scene)),trace,mission,self.ticks.join(","),self.presented,self.error.as_ref().map(|s|json_string(s)).unwrap_or("null".into()),self.building_menu_open,self.building_choices())
+        let campaign=self.campaign.as_ref().map(|c|format!("{{\"progress\":{},\"next_mission\":{},\"carry_projected\":true,\"next_mission_initialized\":false,\"retired_actors\":{:?},\"players_sha256\":{},\"preserved_world_sha256\":{},\"rng_ring\":{},\"mode_after_exit\":{},\"frame_after_view_resume\":{}}}",c.carry.players[0][0x6e7],json_string(&c.display.name),c.carry.retired_actors,json_string(&genewars_runtime::identity::sha256_hex(&c.carry.players.concat())),json_string(&genewars_runtime::identity::sha256_hex(&c.world_priors)),c.rng_ring,c.mode,c.frame)).unwrap_or("null".into());
+        let result_view=self.victory.as_ref().map(|v|format!("{{\"stage\":{},\"saved_frame\":{},\"feedback_text_index\":{},\"statistics\":{:?},\"movie\":\"unavailable_decoder\",\"audio\":\"unavailable_mixer\",\"campaign_transition_accepted\":false}}",v.entry.stage_after,v.entry.saved_frame,v.receipt.feedback_text_index,v.receipt.statistic_values)).unwrap_or("null".into());
+        format!("{{\"scene\":{},\"scene_history\":[{}],\"result_view\":{},\"campaign\":{},\"mission\":{},\"ticks\":[{}],\"presented_frames\":{},\"error\":{},\"construction_menu_open\":{},\"construction_choices\":{:?},\"scene_dispatch\":true,\"gameplay\":false,\"full_world_tick\":false,\"original_startup_sequence\":false,\"timer_policy\":\"port-owned 10 Hz when enabled\",\"render_policy\":\"full redraw; source-player0 view; radius4096 view-only factor; GENEPANL development backing\"}}\n",json_string(&format!("{:?}",self.scene)),trace,result_view,campaign,mission,self.ticks.join(","),self.presented,self.error.as_ref().map(|s|json_string(s)).unwrap_or("null".into()),self.building_menu_open,self.building_choices())
     }
 }

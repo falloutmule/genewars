@@ -34,6 +34,7 @@ pub struct SharedMission {
     pub seed:u16,
     pub runtime_context:Option<genewars_runtime::mission_context::MissionRuntimeContext>,
     awaiting_presentation:bool,
+    pub feedback:Option<String>,
 }
 impl SharedMission {
     pub fn load(root:&Path,mission_bytes:&[u8],seed:u16)->Result<Self,String> {
@@ -93,7 +94,7 @@ impl SharedMission {
         }else{None};
         let plant_spread=SpreadDirections::from_mapped_bytes(&read_bound(&root.join("physics/plant-spread.bin"))?).map_err(|e|e.to_string())?;
         Ok(Self{world,trig:TrigTables::generate_pinned().map_err(|e|e.to_string())?,plant_spread,ui:RetirementUiState::native_empty(),
-            terrain_jobs,frame_counter:0,selected:None,command_count:0,pending_requests,plant_births:0,seed,runtime_context,awaiting_presentation:false})
+            terrain_jobs,frame_counter:0,selected:None,command_count:0,pending_requests,plant_births:0,seed,runtime_context,awaiting_presentation:false,feedback:None})
     }
     /// Typed terminal state; an engine block remains a separate host field.
     pub fn outcome_json(&self)->String {
@@ -180,6 +181,7 @@ impl SharedMission {
         for callback in &actors {match callback {
             ConstructionAwareActorCallback::Ordinary(r)=>self.pending_requests+=u64::from(r.acknowledgement.is_some())+r.pending_events.len()as u64,
             ConstructionAwareActorCallback::Architect{receipt:r,..}=>{
+                if r.rejected_site_message_index==Some(12){self.feedback=Some("Construction site blocked - choose another site".into());self.pending_requests+=1;}
                 self.pending_requests+=r.motion.pending_events.len()as u64;
                 self.pending_requests+=r.setup.as_ref().map_or(0,|p|p.viewport_invalidations.len()as u64+1);
                 self.pending_requests+=r.terraform.as_ref().map_or(0,|p|p.viewport_invalidations.len()as u64+u64::from(p.pending_audio.is_some()));
@@ -232,11 +234,13 @@ impl SharedMission {
         let terrain=self.world.step_terrain_jobs(&mut self.terrain_jobs,environment,&resources.construction_border)
             .map_err(|e|format!("terrain-job pass: {e:?}"))?;
         self.pending_requests+=terrain.iter().map(|r|r.viewport_invalidations.len()as u64).sum::<u64>();
+        let mut outcome_notice=String::new();
         //1C120 tail evaluates72ED0 after terrain maintenance, using this
         //frame's live context. A latched result is retained on later frames.
         if let Some(context)=self.runtime_context.as_mut(){
             if context.outcome()==genewars_runtime::mission_outcome::MissionOutcome::Running {
-                self.world.step_mission_outcome(context,0).map_err(|e|format!("mission-outcome pass: {e:?}"))?;
+                let plan=self.world.step_mission_outcome(context,0).map_err(|e|format!("mission-outcome pass: {e:?}"))?;
+                if plan.outcome!=genewars_runtime::mission_outcome::MissionOutcome::Running{outcome_notice=format!("; mission outcome {:?} at source frame {}",plan.outcome,context.frame());}
             }
         }
         self.frame_counter+=1;
@@ -254,7 +258,7 @@ impl SharedMission {
                 },
             }
         }
-        Ok(format!("world pass {}; actors {callbacks}; created {created}; retired {retired}; active {}; RNG draws {}; bounded world callbacks",
+        Ok(format!("world pass {}; actors {callbacks}; created {created}; retired {retired}; active {}; RNG draws {}; bounded world callbacks{outcome_notice}",
             self.frame_counter,result.queue_candidates.len(),self.world.rng().draw_count))
     }
     pub fn select(&mut self,slot:usize)->Result<(),String> {
@@ -300,7 +304,7 @@ impl SharedMission {
         let projected=project_terrain_target(self.world.map(),camera,screen).map_err(|e|e.to_string())?.point;
         let point=genewars_runtime::actor_construction_placement::construction_placement_point(projected,selector).map_err(|e|format!("{e:?}"))?;
         self.world.place_architect_construction(owner,u16::try_from(slot).map_err(|_|"actor slot outside native range")?,point,selector,&resources.physics,&self.trig,true,true).map_err(|e|format!("{e:?}"))?;
-        self.command_count+=1;
+        self.command_count+=1;self.feedback=None;
         Ok(format!("actor {slot}, selector {selector}, projected {projected:?}, placement {point:?}"))
     }
     pub fn actor_state_json(&self)->String {

@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "scope": "Ordinary-command fresh Exceland sequence reaches original victory predicate and static result entry; campaign transition not accepted",
+  "authentic_missions_completable": 0,
+  "reference": "GENEWARS QA BETA V5 CD",
+  "private_probe": "private/integration/fresh-photon-chain-003",
+  "pins": {
+    "genewars-game.exe": "c49d66e4326e0851a1efb2ca41f9a6ecb81045b5e11b7d886df0ae737d557e70",
+    "replay.txt": "2a409998f6a7c9dfb7a8d9065ae338c7c9bb3117239734a83c563ec1b7521219",
+    "report.json": "ed38815674f051b1a5b4dd9f187eb397b239c99eaec51a853331d9ffcb73d619",
+    "frame.bmp": "1f9b64914950329dccab3efbabab062956ce051a9bdd0706df005f215d304d9d"
+  },
+  "scene": "Victory",
+  "result_view": {
+    "stage": 5,
+    "saved_frame": 4630,
+    "feedback_text_index": 478,
+    "statistics": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "movie": "unavailable_decoder",
+    "audio": "unavailable_mixer",
+    "campaign_transition_accepted": false
+  },
+  "native_receipt": "research/integration/native-building-chain-fresh-photon-chain-003-passed.json",
+  "remaining": [
+    "Campaign cleanup nonisolated links",
+    "Opaque blueprint prior18 read-use proof",
+    "Result movie/audio unavailable"
+  ]
+}

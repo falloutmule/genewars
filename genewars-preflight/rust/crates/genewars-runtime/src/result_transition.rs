@@ -35,3 +35,20 @@ pub fn advance_victory(runtime_input_flags:u8,flags:u8,progress:u8)->Result<Opti
  if progress==24{return Err(ResultTransitionError::EndingSequenceRequired)}
  Ok(Some(ResultViewRequest::Campaign186F19))
 }
+
+/// Shared1BCE0..1BCFF after old-view exit and new-view entry.
+/// Campaign186F19 module flags6=0 is independently constructor-bound.
+#[derive(Debug,Clone,Copy,PartialEq,Eq)]
+pub struct ViewResumePlan{pub mode_after:u8,pub frame_after:u32,pub resumed:bool}
+pub fn resume_after_view_entry(mode:u8,module_flags:u8,frame:u32,saved_frame:u32)->ViewResumePlan{
+    let resumed=mode&2!=0&&module_flags&1==0;
+    ViewResumePlan{mode_after:if resumed{mode&!2}else{mode},frame_after:if resumed{saved_frame}else{frame},resumed}
+}
+#[cfg(test)]mod resume_tests{
+    use super::*;
+    #[test]fn source_dispatch_resume_preserves_other_bits_and_paused_modules(){
+        for (mode,module,expected_mode,expected_frame,resumed) in [(0,0,0,17,false),(2,0,0,4630,true),(3,0,1,4630,true),(2,1,2,17,false),(0x82,0,0x80,4630,true)]{
+            assert_eq!(resume_after_view_entry(mode,module,17,4630),ViewResumePlan{mode_after:expected_mode,frame_after:expected_frame,resumed});
+        }
+    }
+}

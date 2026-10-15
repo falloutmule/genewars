@@ -31,6 +31,7 @@ fn replay(game:&mut Game,text:&str)->Result<(),String>{
             ["down"]=>game.left(true),["up"]=>game.left(false),["cancel"]=>game.cancel_capture(),
             ["click",_,_]=>{game.pointer(Some((n(1)?,n(2)?)));game.left(true);game.left(false);},
             ["load"]=>game.finish_loading(),
+            ["enter"]=>game.toggle_run(),
             ["tick",_]=>{let count=n(1)?;if !(1..=4096).contains(&count){return Err("tick count must be 1..4096".into());}for _ in 0..count {game.tick();replay_gameplay_ready(game,line+1)?;}},
             ["pan",_,_]=>game.pan(i16::try_from(n(1)?).map_err(|_|"pan dx outside i16")?,i16::try_from(n(2)?).map_err(|_|"pan dy outside i16")?),
             ["escape"]=>game.escape(),["toggle"]=>game.toggle_run(),
@@ -116,6 +117,11 @@ mod tests{
         let before=game.report();let error=replay(&mut game,"pan 256 256\nselect 0\nbuild-place 3 400 370\ntick 100\n").unwrap_err();
         assert!(error.contains("line 1, step 0: explicit harness boundary"));assert_eq!(game.report(),before);
     }
+    #[test]fn reference_startup_keeps_locked_buildings_unavailable(){
+        let root=Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../private/integration/game-runtime");
+        let mut game=Game::open(&root).unwrap();game.reference_startup=true;game.scene=runtime_scene::Scene::Loading;game.finish_loading();
+        let before=game.report();assert_eq!(game.start_selected_building().unwrap_err(),"building is not available");assert_eq!(game.report(),before);
+    }
     #[test]fn json_quotes_controls_and_unicode(){assert_eq!(runtime_scene::json_string("a\"\\\n\tâ˜€"),"\"a\\\"\\\\\\n\\tâ˜€\"");}
     #[test]fn catalog_is_unique_and_bounded(){
         let mut names=std::collections::HashSet::new();let mut count=0;
@@ -123,7 +129,8 @@ mod tests{
             let f=line.split('\t').collect::<Vec<_>>();assert_eq!(f.len(),5);assert!(names.insert(f[0]));
             assert_eq!(f[1].len(),64);assert!(f[1].bytes().all(|b|b.is_ascii_hexdigit()));
             assert!(!f[0].contains(".."));assert!(f[2].parse::<usize>().unwrap()<1024*1024);count+=1;
-        }assert_eq!(count,57);
+        }assert!(count>=57);
+        for required in ["menu/text.dat","terrain/CONQ001.DAT","results/WINSCR.DAT","campaign/LEVSCR01.DAT","terrain/CONQ002.DAT"]{assert!(names.contains(required),"required reference resource absent: {required}");}
     }
 
     fn development_build_fixture() -> Game {

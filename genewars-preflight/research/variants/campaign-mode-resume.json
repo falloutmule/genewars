@@ -1,0 +1,42 @@
+{
+  "status": "source-inspected",
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "resume_predicate": "After view exit/entry, mode&2 !=0 and current_module[6]&1 ==0",
+  "resume_effect": "frame11877E=savedframe118786;mode118968&=0xFD",
+  "addresses": [
+    "1BCC3 old exit",
+    "1BCD1 new entry",
+    "1BCE0 mode test",
+    "1BCEA module flags test",
+    "1BCF2 savedframe load",
+    "1BCF7 clearbit2",
+    "1BCFA frame store",
+    "1BCFF mode store"
+  ],
+  "campaign_module": {
+    "base": "186548",
+    "module_offset": "9D1",
+    "module": "186F19",
+    "flags_address": "186F1F",
+    "initial_flags": 0,
+    "evidence": "Zero mapped module bytes;15B10 constructor leavesflag6 untouched;15B90 sets currentmodule at15CB8 withoutchangingflag6/mode."
+  },
+  "sequence": [
+    "Victoryexit leavesmode2",
+    "Campaignentry186F19 hasflag6bit1clear;shared dispatcher restores savedvictoryframe and clearsmode2",
+    "Campaignplanet exit7D020 resetsframe0",
+    "71B70 runtimeblock loadsCONQ002 frame0 andsavedframe0",
+    "7D090 retainsmode0;MAINPANLconstructor flag6bit1 no longerpreventsresume becausemode2alreadyclear"
+  ],
+  "scope": "Existing source and initial data inspection; no dynamic transition acceptance or new exports.",
+  "listing_sha256": {
+    "private/ghidra/mission-bootstrap-mode/instructions-0001bbc0.txt": "0fb22c2e71579e6128d50664eb5f40c886a0ed3e327b19b9f0fdfed330db28fb",
+    "private/ghidra/campaign-constructor-head.txt": "4eded971a84068514e2ea1c978e3c664de523f7285387d0b8ca833dab1b36d5d",
+    "private/ghidra/campaign-screen/instructions-00015b10.txt": "5d38695bf234584b10f8b28c6e8c39ec2f6b688f893e1e094a9dec0cfd2eff59",
+    "private/ghidra/campaign-screen/instructions-00015b90.txt": "d2e639da791ba69c9967189b128a3d39d03818f43b870d252e880e87dc354484",
+    "private/ghidra/campaign-level/instructions-0007d020.txt": "7d841bc60d1905cad202f920c6e176810c2de8fad551b1b1fe5731b9bbc84685",
+    "private/ghidra/campaign-level/instructions-0007d090.txt": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac",
+    "private/ghidra/campaign-level/instructions-00071b70.txt": "df0c9245caa952c20d3d319149413fc9d12382b8d65d036bba306ce8d7f19076",
+    "private/ghidra/validated/memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+  }
+}
