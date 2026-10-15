@@ -232,7 +232,19 @@ pub fn plan_common_water_tail<const N:usize>(before:&[u8;N],after:&[u8;N],frame:
   let above=(motion_dword(before,0x27)as u32)>water as u32;let deep=!above&&(water as u32).wrapping_sub(512)>height as u32;
   let ground=motion_dword(after,0x11);effect=Some(CommonWaterEffect{code:if deep{0x15}else{0x30},position:motion_point(after),physical_height:if deep{height}else{if ground as u32>water as u32{ground}else{water}},angles:if deep{[0,0,128]}else{[0;3]}});
  }
- if height==0&&class==0&&matches!(before[6],1|3)&&after[0x53]&1!=0{return Err(CreatureError::MotionEnvironment);}Ok(effect)
+ if common_water_damage_required(after,frame,water,class){
+  // Nonlethal owned state8 self damage only. The world applies this AFTER
+  // the preceding water factory and BEFORE reveal/AI; other domains reject.
+  let owned:&[u8;124]=after.as_slice().try_into().map_err(|_|CreatureError::MotionEnvironment)?;
+  crate::mule_self_water_damage::plan(owned).map_err(|_|CreatureError::MotionEnvironment)?;
+ }Ok(effect)
+}
+
+/// Exact6E810/6E919..6E944 self-damage eligibility; handler domain is separate.
+pub(crate) fn common_water_damage_required<const N:usize>(record:&[u8;N],frame:u32,water:i32,class:u8)->bool{
+ N>=0x54&&frame.wrapping_add(motion_word(record,15)as i32 as u32)&3==3
+  &&(water as u32).wrapping_add(320)>=motion_dword(record,0x27)as u32
+  &&motion_dword(record,0x27)==0&&class==0&&matches!(record[6],1|3)&&record[0x53]&1!=0
 }
 
 /// 6F980 steering for a non-flight class whose virtual74 forbids airborne

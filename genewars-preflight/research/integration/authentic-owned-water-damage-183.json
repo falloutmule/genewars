@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "scope": "actual4858 nonlethal owned idle self-water damage; other families frozen; not campaign acceptance",
+  "source": {
+    "status": "passed",
+    "frame": 4858,
+    "slot": 1,
+    "draws": 6,
+    "compared_bytes": 427369,
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\84ef72f9140f4868b33288ae87d03ddd"
+  },
+  "ordering": "actual water factory,5B9F0 selfdamage/5CC60 reset, owned reveal, normal AI/lifecycle; source effective damage1/health39 to38, no damage RNG/audio/blood/retaliation",
+  "admission": "owned state8/null reference kinds/task0/health>5/skill<=90; neutral, lethal, command and attachment damage remain guarded",
+  "negative": "health5 rejects with all world bytes and RNG unchanged",
+  "regression": {
+    "runtime_passed": 246,
+    "game_passed": 80,
+    "ignored_each": 1,
+    "release_build": "passed"
+  },
+  "corrected_oracle_audit": "private/review/narrow-store-audit/2e093b88222e4e7b953c0c72390de1b2/participating-context-check.json; exactnarrowMOVwidth/actualsingleplayerprior1 still427369B0mismatch6draws"
+}

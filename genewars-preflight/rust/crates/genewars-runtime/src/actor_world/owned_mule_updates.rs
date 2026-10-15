@@ -64,7 +64,16 @@ impl ActorWorld {
      }
      *random.borrow_mut()=world.rng;
     }
-    let linked=*world.creatures.as_ref().unwrap().record(slot)?;let record=&linked;
+    let mut linked=*world.creatures.as_ref().unwrap().record(slot)?;
+    if context.frame_counter.wrapping_add(i32::from(word(&linked,15))as u32)&3==3
+        &&i32::from_le_bytes(linked[39..43].try_into().unwrap())==0&&linked[0x53]&1!=0 {
+     let class=world.terrain_class_at([word(&linked,7),word(&linked,9)]).map_err(|_|CreatureError::MotionEnvironment)?;
+     if creature_world::common_water_damage_required(&linked,context.frame_counter,context.water_height,class){
+      let damage=crate::mule_self_water_damage::plan(&linked).map_err(|_|CreatureError::MotionEnvironment)?;
+      world.creatures.as_mut().unwrap().replace_record_checked(slot,&linked,&damage.after)?;linked=damage.after;
+     }
+    }
+    let record=&linked;
     let phase=context.frame_counter.wrapping_add(i32::from(word(record,15))as u32);
     let height=i32::from_le_bytes(record[39..43].try_into().unwrap());let ground=i32::from_le_bytes(record[17..21].try_into().unwrap());
     if record[0x16]&2!=0&&phase&3==3&&record[24]==selected&&(word(record,0x3d)>32||height>ground){let v=world.owned_mule_reveal([word(record,7),word(record,9)]).map_err(|_|CreatureError::MotionEnvironment)?;reveals.borrow_mut().extend(v);}

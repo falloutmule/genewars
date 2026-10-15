@@ -149,3 +149,5 @@ pub mod mule_owned_command;
 pub mod mule_corpse_arrival;
 pub mod mule_corpse_abandon;
 pub mod mule_bones_feeding;
+
+pub mod mule_self_water_damage;
