@@ -1,4 +1,4 @@
-The production hover planner matches174 literal callbacks from actual combined-world slot7 before6234 through its isolated timer expiry6407:21,750 numeric/RNG/particle-parameter bytes,252,389 interpreted instructions and701 admission/preservation checks. The fixture enters ground contact at6393; the first airborne-only draft rejected it and was never reported as passed.
+The production hover planner matches174 literal callbacks from actual combined-world slot7 before6234 through its isolated timer expiry6407:21,750 numeric/RNG/particle-parameter bytes,252,389 interpreted instructions and875 admission/preservation checks. The fixture enters ground contact at6393; the first airborne-only draft rejected it and was never reported as passed.
 
 The admitted contact branch reuses the already reviewed6DF30 ground/bounce arithmetic with zero gravity, supplies family8's free-flight A4 speed policy explicitly and preserves the original15mask20 byte. The airborne branch remains separate because it invokes A4 while airborne. This avoids treating the old ground-only implementation as a complete flight integrator.
 

@@ -9,6 +9,7 @@ fn main(){let p=PathBuf::from(std::env::args().nth(1).unwrap());let map=fs::read
   if let Some(q)=got.particle{particles.extend_from_slice(&[1,q.code]);for v in q.position{particles.extend_from_slice(&v.to_le_bytes());}particles.extend_from_slice(&q.physical_height.to_le_bytes());for v in q.angles{particles.extend_from_slice(&v.to_le_bytes());}}else{particles.extend_from_slice(&[0;16]);}
   assert_eq!(&got.motion.after[..6],&before[..6]);assert_eq!(&got.motion.after[31..39],&before[31..39]);checks+=2;
   assert!(plan_selector1_state1_hover(&before,&map,frame,1632,&physics,&trig,&animation,rng,&buildings,1,true).is_err());checks+=1;
-  let mut active=buildings.clone();active[6]=4;assert!(plan_selector1_state1_hover(&before,&map,frame,1632,&physics,&trig,&animation,rng,&active,0,true).is_err());checks+=1;
+  let mut active=buildings.clone();active[6]=4;active[0x2d]=3;assert_eq!(plan_selector1_state1_hover(&before,&map,frame,1632,&physics,&trig,&animation,rng,&active,0,true),Ok(got.clone()));checks+=1;
+  assert!(plan_selector1_state1_hover(&before,&map,frame,1632,&physics,&trig,&animation,rng,&buildings[..buildings.len()-1],0,true).is_err());checks+=1;
   if frame.wrapping_add(u32::from(before[15]))&31==0{assert_eq!(plan_selector1_state1_hover(&before,&map,frame,1632,&physics,&trig,&animation,rng,&buildings,0,false),Ok(got));checks+=1;}
  }fs::write(p.join("actual.bin"),actual).unwrap();fs::write(p.join("actual-particles.bin"),particles).unwrap();println!("{} hover afterimages;{checks} admission/preservation checks",input.len()/113);}
