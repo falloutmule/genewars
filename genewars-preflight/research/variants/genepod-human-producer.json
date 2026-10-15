@@ -1,0 +1,52 @@
+{
+  "status": "source_contract_recovered",
+  "native_ui": "not_run",
+  "reference_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "sources": [
+    {
+      "path": "private/ghidra/building-cost-refs/instructions-00021e20.txt",
+      "sha256": "9480cde06d65eb7071b4b73d1dbe1a6e6278176a6165e8eb6fbd8c8085d0b535"
+    },
+    {
+      "path": "private/ghidra/plant-command/instructions-00021a10.txt",
+      "sha256": "94948e1aaecb41421702b5396379338a6fb3100fb6913aa321fd749fba508bb1"
+    },
+    {
+      "path": "private/ghidra/actor-panel-font-color/instructions-00022fd0.txt",
+      "sha256": "1a2511b5cc20c1b99378e23a850cc5dad5aa1b117f9be38d9268595d1cd12404"
+    },
+    {
+      "path": "private/ghidra/portrait-detail-refs/instructions-00022760.txt",
+      "sha256": "e84fce4098965db010218e7557ae743838dc321369d079167995be3af59c6fa3"
+    },
+    {
+      "path": "private/ghidra/creature-paths/instructions-00024870.txt",
+      "sha256": "814ec4c737ebc5f5163da44dc3dcfc0baf8eb8b0402410bd6143071f8add1476"
+    },
+    {
+      "path": "private/ghidra/validated/memory-.object3.bin",
+      "sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+    },
+    {
+      "path": "private/ghidra/font-menu-bind/instructions-000a8320.txt",
+      "sha256": "782abc48942eed3858ada0401b148f8f55c96d0c7805815e71bfdf16dea42721"
+    },
+    {
+      "path": "private/ghidra/entity-order/instructions-0002bbe0.txt",
+      "sha256": "22f6962e80bfdcbb6dd4c8b03adb98963b3dd4f4d87d213f0961381d81835283"
+    }
+  ],
+  "remaining": [
+    "Resource-bound action8 hit dimensions",
+    "Owned completed panel enable/hit path",
+    "Actual Krell species list and research entry",
+    "Producer and native input acceptance"
+  ],
+  "control_descriptor_correction": {
+    "raw_offset": 6,
+    "record_stride": 6,
+    "record_index": 1,
+    "binding": "A836B byte offset addition; A8376..A838A descriptor4/5 dimensions;2BD93..2BDA4 binds106D6C usingMAINPANL+F3 from+EB; resource105698 data/genepanl.anb destination185EE7",
+    "warning": "Do not use sprite index6"
+  }
+}

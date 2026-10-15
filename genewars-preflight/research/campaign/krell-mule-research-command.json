@@ -1,0 +1,140 @@
+{
+  "status": "passed",
+  "reference_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "source_pins": {
+    "private/ghidra/campaign-start/instructions-00080460.txt": "15cf464ceb31fc599bc455e1cf53063eae7368d57cd66ffcd088d2a85ca70ce2",
+    "private/ghidra/camera-player-input/instructions-00080590.txt": "c454d8a02dd88524f21c3bc7381dc977804aabe214a5f3cdf56b6744757d44d6",
+    "private/ghidra/building-cost-refs/instructions-00021e20.txt": "9480cde06d65eb7071b4b73d1dbe1a6e6278176a6165e8eb6fbd8c8085d0b535",
+    "private/ghidra/plant-command/instructions-00021a10.txt": "94948e1aaecb41421702b5396379338a6fb3100fb6913aa321fd749fba508bb1",
+    "private/ghidra/entity-order/instructions-0002bbe0.txt": "22f6962e80bfdcbb6dd4c8b03adb98963b3dd4f4d87d213f0961381d81835283",
+    "private/ghidra/font-menu-bind/instructions-000a8320.txt": "782abc48942eed3858ada0401b148f8f55c96d0c7805815e71bfdf16dea42721",
+    "private/ghidra/descriptor-loader/instructions-0009a09c.txt": "b6750ccf4cf2f7e8ade257f259173d217d4aa974a3586cb6e5dddabaeba5ce5e",
+    "private/ghidra/sprite-functions/instructions-00098a60.txt": "75b266f751d4c7d29dc4d5bf83493b821cdb38f7e10838403daa29ac1fdc4a8a",
+    "private/ghidra/ui-controls/instructions-000a86d0.txt": "a4336dd52bebdb8311a05dc25bc64063e99d93928aaa23e335012aaf19bea470",
+    "private/ghidra/sprite-scaled/instructions-00098b60.txt": "2775e1d25062d7c9140240a007024e944448df5387bba3379ba185ce2bcaed43",
+    "private/ghidra/validated/memory-.object3.bin": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87"
+  },
+  "observation": {
+    "fixture": "private/review/krell-mule-callbacks-025/frame-660-slot-0-before/players.bin",
+    "sha256": "c657fe28d6975fec717a13ab8dd25930accfffd0120d107157ae85bfd8c51da7",
+    "player": 0,
+    "research_entry": 4,
+    "research_value": 71680,
+    "species_list_count": 1,
+    "species_list": [
+      4
+    ]
+  },
+  "constructor": {
+    "function": "80460",
+    "human_research_write": "80546",
+    "value": 71680,
+    "list_append": "804C1..80505"
+  },
+  "carry": {
+    "function": "80590",
+    "range_start": 1562,
+    "byte_count": 221
+  },
+  "conclusion": "No new Geneticist research action is required to initiate Mule production on this reference route.",
+  "production": {
+    "species_list_index": 0,
+    "species": 4,
+    "minimum_funds": 75,
+    "opcode": 12,
+    "words": [
+      "species=4",
+      "selected building slot",
+      "start=1"
+    ],
+    "research_gate": "nonzero"
+  },
+  "ui_correction": {
+    "control": "106DBC",
+    "descriptor_byte_offset": 6,
+    "descriptor_index": 1,
+    "resource_binding": "2BD08..2BDA4, receiver185DFC+EB",
+    "width_height_loader": "A8320 bit20; A8376..A838A"
+  },
+  "authenticity_scope": "Source constructor/carry/gate plus current native fixture observation; not a new native gameplay acceptance.",
+  "ui_resource": {
+    "entry_id": "root/2/disc/85",
+    "name": "GENEPANL.ANB",
+    "input_sha256": "83e7010ccc0631db4937ab96395d058f8931458124eb004a7fa91d1c01c3648e",
+    "decoded_sha256": "1df1e8fb436cc7030c40b94438c5e530a1b8a21716fad4354e0c82c94ba27f52",
+    "descriptor_index": 1,
+    "width": 29,
+    "height": 29,
+    "bounds_half_open": [
+      26,
+      344,
+      55,
+      373
+    ],
+    "mask_sha256": "e9a9a4ee65eaed6225afcda3eb90ba9db53eb34fa1aa3967df5fc35e79d13b5d",
+    "opaque_pixels": 665,
+    "literal_hit_cases": [
+      {
+        "local": [
+          -1,
+          14
+        ],
+        "hit": false
+      },
+      {
+        "local": [
+          0,
+          0
+        ],
+        "hit": false
+      },
+      {
+        "local": [
+          14,
+          14
+        ],
+        "hit": true
+      },
+      {
+        "local": [
+          28,
+          28
+        ],
+        "hit": false
+      },
+      {
+        "local": [
+          29,
+          14
+        ],
+        "hit": false
+      },
+      {
+        "local": [
+          14,
+          29
+        ],
+        "hit": false
+      },
+      {
+        "local": [
+          14,
+          0
+        ],
+        "hit": true
+      },
+      {
+        "local": [
+          0,
+          14
+        ],
+        "hit": true
+      }
+    ],
+    "owned_panel_enable": "21E96..21F0A: flags1 set, flags40 clear, owner equals selected"
+  },
+  "remaining": [
+    "Native production input acceptance; preserve original input/capture dispatch"
+  ],
+  "original_execution": false
+}
