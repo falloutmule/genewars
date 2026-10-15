@@ -446,7 +446,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
         }else if reserve<=0&&mule_callback_phase(before,context.frame_counter)&31<=1{
             //5E193..5E1C0: bounded owner4/null-reference starvation death.
             if health<=1 {
-                if health!=1||reserve!=0||energy<=0||before[0x18]!=4||before[0x5e]!=8||before[0x61]!=0x40
+                if health!=1||reserve!=0||energy<=0||before[0x18]!=4||before[0x5e]!=8||!matches!(before[0x61],0|0x40)
                     ||before[0x57]!=0||before[0x5d]!=0||before[0x4f]!=0||before[0x52]!=0||before[0x60]&2!=0
                     ||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)||before[0x78]!=0
                     ||motion_dword(&a,0x27)!=motion_dword(&a,0x11)||motion_word(&a,0x49)as u16&0x100!=0 {
