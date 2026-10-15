@@ -1,0 +1,104 @@
+{
+  "scope": "Actual193 campaign capture callbacks source-compared individually; other families frozen during comparison; not native194 or Krell completion",
+  "callbacks": [
+    {
+      "output": "private\\review\\owned-mule-captured-width\\6b1a794d3b63481eafc4e1839341df3e",
+      "frame": 5876,
+      "slot": 1,
+      "draws": 8,
+      "instructions": 12220,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    },
+    {
+      "output": "private\\review\\neutral-mule-captured-width\\ae13973efd21401fb0fb0ead352e2172",
+      "frame": 5876,
+      "slot": 5,
+      "draws": 0,
+      "instructions": 2241,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    },
+    {
+      "output": "private\\review\\neutral-mule-captured-width\\725aad628e1c479cadf452da0cdbdd30",
+      "frame": 5881,
+      "slot": 5,
+      "draws": 0,
+      "instructions": 1728,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    },
+    {
+      "output": "private\\review\\neutral-mule-captured-width\\1f0500d9eb264452b5f6183b21392b7c",
+      "frame": 5882,
+      "slot": 5,
+      "draws": 4,
+      "instructions": 11583,
+      "compared_bytes": 427369,
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      }
+    }
+  ],
+  "literal_reacquisition": "4 cases passed; source5F4C4/query5F5A9..5FBE7/5FF29->5B580",
+  "current_cell_guard": "Original8B7D0 scanskind5/code11 only. Query circle guard proves no such effect; source initial-creature/instructions-0008b7d0.txt",
+  "atomic_failure_cases": [
+    "flee",
+    "alternate disposition",
+    "dead target"
+  ],
+  "checks": {
+    "runtime": "260 passed/7 ignored; waypoint and reacquisition literal suites separately passed",
+    "desktop_game": "80 passed/1 ignored",
+    "other_desktop": "11/10/6 passed",
+    "release": "capture-enabled two-job build passed"
+  },
+  "ordinary_frontier": {
+    "revision": "193/a9285cf",
+    "frame": 5882,
+    "score": 54,
+    "required_score": 1000,
+    "outcome": "Running",
+    "missions": 1,
+    "blocked": "neutral5 completed hit animation"
+  },
+  "limitations": [
+    "Neutral blood/lethal/attack-completion paths guarded",
+    "Frozen flee caller remains unregistered experiment",
+    "Native acceptance remains192/frame5876 pending194 replay"
+  ]
+}

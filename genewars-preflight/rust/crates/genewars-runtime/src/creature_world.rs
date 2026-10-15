@@ -518,7 +518,7 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
             let id=usize::from(a[0x19]);let holds=animations.holds.get(id).ok_or(CreatureError::UnsupportedMotionState)?;
             if holds.is_empty(){return Err(CreatureError::UnsupportedMotionState);}
             let complete=if animations.flags[id]&1!=0{a[0x1a]==0&&a[0x1b]==0}else{a[0x1a]==0&&a[0x1e]==0&&usize::from(a[0x1b])==holds.len()-1};
-            if complete||motion_word(&a,0x6c)<=0{if before[0x5e]==20||!live_hostile_choice{return Err(CreatureError::UnsupportedMotionState);}motion_put(&mut a,0x6c,0);}
+            if complete||motion_word(&a,0x6c)<=0{if !live_hostile_choice{return Err(CreatureError::UnsupportedMotionState);}motion_put(&mut a,0x6c,0);}
         }
         //5EB30 virtualAC is49bit200. Ordinary arrival clears the
         //owned task10 independently of the subsequent active-speed cleanup.
@@ -537,6 +537,8 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
         if a[0x5e]==1&&(live_hostile_choice||a[0x57]==0||(motion_word(&a,0x49)as u16&0x200!=0&&a[0x60]&0x80==0)) {a=choice(&a)?;}
         if matches!(before[0x5e],3|10){a=choice(&a)?;}
         if live_hostile_choice&&before[0x5e]==21&&a[0x5e]==21{a=choice(&a)?;}
+        //5F4C4 completed neutral hit reaction chooses after5EB30, before shared tail.
+        if live_hostile_choice&&before[0x5e]==20&&a[0x5e]==20&&motion_word(&a,0x6c)==0{a=choice(&a)?;}
         a[0x4a]&=0xfc;refresh_mule_lifecycle(&mut a);
         let timer=motion_word(&a,0x6c);if timer>0 {motion_put(&mut a,0x6c,timer-1);}
     }

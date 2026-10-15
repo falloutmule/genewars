@@ -154,6 +154,13 @@ impl ActorWorld {
                     *rng=abandoned.rng_after;return Ok(abandoned.current_after);
                 }
                 if let Some(enemy)=hostile_enemy {
+                    if record[0x5e]==20&&word(record,0x6c)==0 {
+                        let sole=world.mule_hit_single_owned_enemy(record).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+                        //8B7D0 only scans for kind5/code11; sole-enemy helper proves none in this cell.
+                        if sole!=enemy{return Err(CreatureError::UnsupportedNeighborhood);}
+                        let reacquire=crate::mule_neutral_hit_reacquire::plan_reacquire(record,&sole,*rng).map_err(|_|CreatureError::UnsupportedMotionState)?;
+                        *rng=reacquire.rng_after;return Ok(reacquire.after);
+                    }
                     if record[0x5e]==21{if word(record,0x6c)<=0{return Err(CreatureError::UnsupportedMotionState);}let mut after=*record;if creature_world::mule_callback_phase(record,context.frame_counter)&3==3{
                         let dx=word(&enemy,7).wrapping_mul(2).wrapping_sub(word(record,7).wrapping_mul(2));let dy=word(&enemy,9).wrapping_mul(2).wrapping_sub(word(record,9).wrapping_mul(2));
                         after[0x4b..0x4d].copy_from_slice(&crate::actor_motion::angle(i32::from(dx),i32::from(dy),physics.angles()).to_le_bytes());
@@ -552,6 +559,21 @@ impl ActorWorld {
     }
     /// Bounded5B100 predicate shared by cell entry and waypoint waiting.
     /// Typed live hostile pursuit. Corpse feeding keeps its independent guard.
+    ///5F5A9 completed hit query: exactly one live owned enemy, no friends.
+    ///Owner4 classification treats owned0 as hostile independently of alliances.
+    ///Known non11 effects/kind8 skip before scoring; all other candidates remain guarded.
+    fn mule_hit_single_owned_enemy(&self,r:&CreatureRecord)->Result<CreatureRecord,ActorWorldError>{
+        let own=[r[15],r[16],1];let cell=floor_cell([word(r,7),word(r,9)]);let(cx,cy)=((cell%128)as i32,(cell/128)as i32);let mut enemy=None;
+        for dy in -4..=4{for dx in -4..=4{if dx*dx+dy*dy>16{continue;}let c=(((cy+dy)&127)*128+((cx+dx)&127))as usize;let mut raw=reference(self.map(),c*14+6);
+            while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{
+                1=>{let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;let other=*pool.record(word(&raw,0)as usize)?;
+                    if other[24]!=0||other[0x5e]!=21||other[0x7a]!=4||pool.binding(word(&raw,0)as usize)?!=Some(CreatureAnimationBinding::MuleSelector4)||enemy.is_some(){return Err(CreatureError::UnsupportedNeighborhood.into());}enemy=Some(other);
+                },
+                5=>{let pool=self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;if pool.record(word(&raw,0)as usize)?[69]==0x11||pool.binding(word(&raw,0)as usize)?.is_none(){return Err(CreatureError::UnsupportedNeighborhood.into());}},
+                8=>{},_=>return Err(CreatureError::UnsupportedNeighborhood.into()),
+            }}raw=reference(e,3);}
+        }}enemy.ok_or(CreatureError::UnsupportedNeighborhood.into())
+    }
     fn mule_live_hostile_target(&self,r:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
         if r[6]!=1||r[24]!=4||r[0x7a]!=4||!matches!(r[0x5e],1|20|21)||r[0x61]!=0x40||!(if r[0x5e]==1{matches!(r[0x60],0x48|0xc8)}else{matches!(r[0x60],8|0x88)})
             ||r[0x78]!=0||r[0x76]>90||r[0x4f]!=0||r[0x5d]!=0||r[0x57]!=1||r[0x52]!=1
