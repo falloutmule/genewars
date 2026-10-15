@@ -753,7 +753,8 @@ fn draw(rng:&mut crate::blueprint::BlueprintRng,purpose:CreatureRngPurpose,trace
     let value=(rng.seed>>8)as u8;trace.push(CreatureRngDraw{purpose,seed_before:before,seed_after:rng.seed,value});value
 }
 ///5E0B0 retry-exhaustion reset with a separately proved false5B100 cell
-/// predicate. The admitted idle Mule has no selected/live action to release.
+/// predicate. Caller proves any plant release; kind1 pursuit preserves target
+/// reservation and association50 while local reset clears target55.kind.
 /// Call after the source energy/regeneration prefix, before ordinary AI.
 pub fn plan_mule_retry_wait(before:&CreatureRecord,rng_before:crate::blueprint::BlueprintRng)->Result<InitialMuleChoice,CreatureError> {
     // Authentic1927: state8 retains an old kind1 pair target, but has no
@@ -761,7 +762,10 @@ pub fn plan_mule_retry_wait(before:&CreatureRecord,rng_before:crate::blueprint::
     let retained_pair=before[0x5e]==8&&before[0x57]==1&&matches!(before[0x61],0x20|0x60)
         &&matches!(before[0x60],0x0c|0x8c)&&before[0x52]==0
         &&(0..300).contains(&motion_word(before,0x55))&&motion_word(before,0x6c)>=0;
-    let action=before[0x5e]==8&&before[0x57]==0||before[0x5e]==1&&before[0x57]==2||retained_pair;
+    let retained_corpse=before[0x5e]==1&&before[0x57]==1&&before[0x52]==1
+        &&before[0x50..0x53]==before[0x55..0x58]&&before[0x60]==0xc8&&before[0x61]==0x40
+        &&(0..300).contains(&motion_word(before,0x55))&&motion_word(before,0x6c)>=0;
+    let action=before[0x5e]==8&&before[0x57]==0||before[0x5e]==1&&before[0x57]==2||retained_pair||retained_corpse;
     // Live plant approach requires the caller to clear/prove clear plant2E bit4.
     if rng_before.ring>=32||before[6]!=1||before[0x18]!=4||!action||before[0x7a]!=4
        ||motion_word(before,0x49)as u16&0x100==0||before[0x60]&2!=0||before[0x5d]!=0 {return Err(CreatureError::UnsupportedMotionState);}

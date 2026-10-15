@@ -21,6 +21,16 @@ Continue ordinary production, original owned-Mule controls and live zone credit/
 
 GLM route remains verified through existing9router; no additional paid requests during this integration. Desktop defaults/Luna/Sol preserved. One supplementary agent owned bounded Bones cleanup module/tests and read-only source review; root owns integration/native/Git. Do not infer agentmodel or OpenRouter subagent routing.
 
+## Integration176 current override
+
+Latest verified prior commit bb1461b; native174 matchesheadless3627. Actual175 passesassociatedwait and low-reservecleanup3645, reaches3706 blockedMule7state1 corpse/Bones27 retry exhaustion. Input private/review/authentic-krell-175/frame-3706-slot-7-blocked-before, report private/integration/continued-krell-175/report.json. WorldSHA c6dcf7799bf8e62d8fde3be4259c78632152754cfdb4e76ab55de6af9eaaeb59.
+
+Current176 correction admits boundedretainedcorpse action in5E0B0 retry; targetreservation remainsunchanged (5CD1A handleskind2plants only), association50preserved/55kindcleared, state8/timer19/1RNGdraw. Actual3706 plusdiscriminatingsyntheticreservedtarget variant compare854738worldbytes,0mismatches. Receipt research/integration/authentic-krell-corpse-retry-176.json. Runtime238passed/1ignored; release176built. Only2runtimepaths+receipt+checkpoint committed; unrelatedfilespreserved.
+
+Active ordinary176 replay: private/integration/continued-krell-176, captureparentprivate/review/authentic-krell-176, frames3645/4200 andautomaticblockedcapture. This supersedes175active replay above. Next exactcommand usesprivate/integration/continued-krell-176/report.json in the compactread command above afterprocessfinishes. Continue savedactualboundary; secondordinaryproductionat3756 onlyif priorframesready. No inventedquality/resources/victory; count1/24.
+
+Supplementarysource-only Bonesarrival preparation comparescallerstate4 vsstate5 andsameanimation19; sequentialsynthetic3616/3617waits established. State4processing67A22substracts2targetreserve then5C730(2,2), materiallydifferentfromstate5abandon. Private fixtures synthetic-bones-arrival/96318303e12a436da54f52187e9f3a7d andsourceoutputs e2126b4fd18d4abb9363b7e82dcaf100/09648f0c8b0240e1902e2f1d2241527d/83c3ea36527f4a60b877195c7b2b38e2. NoRustintegration/nativeclaim; reuseifactualboundaryrequiresit.
+
 ## Focused verification and supporting primitives
 
 Runtime152: **232passed,1opt-in ignored**. Source-equal authentic callback corrections include1279 feeding-to-mating (2draws),1927 retained-pair retry (1),2051 circle scan (5),2601 idle mating (2),2602 satiated pair approach (0),2907 starvation (0), each comparing427,369worldbytes. Receipts are scoped under `research/integration/authentic-krell-*`.

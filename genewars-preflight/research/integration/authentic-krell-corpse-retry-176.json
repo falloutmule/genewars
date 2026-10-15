@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "scope": "Actual3706slot7 retained corpse pursuit retry plus explicitly synthetic reserved-target variant; other callbacks frozen, not campaign acceptance",
+  "comparisons": [
+    {
+      "status": "passed",
+      "frame": 3706,
+      "slot": 7,
+      "draws": 1,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\1d521daf1eb64d0cb91edad79e5ac4d8"
+    },
+    {
+      "status": "passed",
+      "frame": 3706,
+      "slot": 7,
+      "draws": 1,
+      "compared_bytes": 427369,
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\krell-mule-callback\\5edf3da6a1044c24a538caa04c57a2f1"
+    }
+  ],
+  "total_compared_bytes": 854738,
+  "correction": "Admit neutralstate1 lowC8/high40 matching50/55kind1 retry. Original5CD1A releaseskind2plant only; kind1 target record remains unchanged. Local5CCA0 clears55.kind/preserves50; originalretrydelay10+rand%20; falsecell retains guarded relocation.",
+  "actual_result": {
+    "state": 8,
+    "timer": 19,
+    "rng_draws": 1,
+    "changed_creature_slots": [
+      7
+    ],
+    "target_unchanged": true
+  },
+  "runtime": {
+    "passed": 238,
+    "ignored": 1
+  },
+  "release": "private/integration/continued-krell-176/genewars-game.exe",
+  "campaign_missions": 1,
+  "limits": [
+    "Genuine full replay176 pending",
+    "Latest native checkpoint is frozen174/frame3627",
+    "Bones state4 arrival/consumption source-only fixtures are not integrated or accepted gameplay"
+  ]
+}

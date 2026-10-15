@@ -107,7 +107,14 @@ impl ActorWorld {
                     if record[0x5e]==1{
                         //5CD1A releases plant2E bit4, distinct from reservationbit1.
                         //Bounded no-op release; nonclear/live-kind variants remain explicit.
-                        if record[0x57]!=2||world.mule_plant_flags(word(record,0x55)).map_err(|_|CreatureError::UnsupportedMotionState)?&4!=0{return Err(CreatureError::UnsupportedMotionState);}
+                        if record[0x57]==2 {
+                            if world.mule_plant_flags(word(record,0x55)).map_err(|_|CreatureError::UnsupportedMotionState)?&4!=0{return Err(CreatureError::UnsupportedMotionState);}
+                        }else if record[0x57]==1 {
+                            //State1 reset5CD1A only releases kind2 plants; kind1
+                            //takes local5CCA0 reset, preserving corpse reservation.
+                            let id=word(record,0x55)as u16;let corpse=world.creatures.as_ref().unwrap().record(id as usize)?;
+                            if !matches!(corpse[0x5e],24..=27){return Err(CreatureError::UnsupportedMotionState);}
+                        }else{return Err(CreatureError::UnsupportedMotionState);}
                     }
                     let choice=creature_world::plan_mule_retry_wait(record,*rng)?;*rng=choice.rng_after;
                     let cell=floor_cell([word(record,7),word(record,9)]);
