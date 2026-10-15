@@ -36,6 +36,7 @@ pub struct SharedMission {
     awaiting_presentation:bool,
     pub feedback:Option<String>,
     pub ui_animations:[[u8;5];8],
+    dispatch_audit:super::actor_dispatch_audit::ActorDispatchAudit,
 }
 impl SharedMission {
     pub fn load(root:&Path,mission_bytes:&[u8],seed:u16)->Result<Self,String> {
@@ -115,7 +116,7 @@ impl SharedMission {
         }else{None};
         let plant_spread=SpreadDirections::from_mapped_bytes(&read_bound(&root.join("physics/plant-spread.bin"))?).map_err(|e|e.to_string())?;
         Ok(Self{world,trig:TrigTables::generate_pinned().map_err(|e|e.to_string())?,plant_spread,ui:RetirementUiState::native_empty(),
-            terrain_jobs,frame_counter:0,selected:None,command_count:0,pending_requests,plant_births:0,seed,runtime_context,awaiting_presentation:false,feedback:None,ui_animations:[genewars_runtime::ui_animation::FRESH_SOURCE_STATE;8]})
+            terrain_jobs,frame_counter:0,selected:None,command_count:0,pending_requests,plant_births:0,seed,runtime_context,awaiting_presentation:false,feedback:None,ui_animations:[genewars_runtime::ui_animation::FRESH_SOURCE_STATE;8],dispatch_audit:Default::default()})
     }
     /// Typed terminal state; an engine block remains a separate host field.
     pub fn outcome_json(&self)->String {
@@ -194,13 +195,15 @@ impl SharedMission {
         if self.runtime_context.as_ref().is_some_and(|c|c.callback_gate()!=genewars_runtime::mission_context::CallbackGate::Ready){return Err("mission callback gate is not ready".into());}
         let context=self.world.mission_loading_physics();
         let frame=self.runtime_context.as_ref().map_or_else(||u32::try_from(self.frame_counter+1).map_err(|_|"source frame counter exceeds u32"),|c|Ok(c.frame()))?;
+        let ready_before: [bool;20]=std::array::from_fn(|slot|{let actor=&self.world.actors().records()[slot];actor[6]==3&&actor[0x70]&1!=0});
+        let mut dispatch_observations=Vec::new();
         //1C760 runs7A280 before actor/building/creature callbacks.
         self.world.step_admitted_zone_callbacks(frame).map_err(|e|format!("zone pass: {e:?}"))?;
         // 58780 visits players and their current actor lists. 57A10 returns
         // immediately before the ready bit is set by the landing callback.
-        let actors=self.world.step_actor_callbacks_with_construction(player_count,frame,context,&resources.physics,&self.trig,
+        let actors=self.world.step_actor_callbacks_with_construction_observed(player_count,frame,context,&resources.physics,&self.trig,
             resources.actors.databases(),&mut self.terrain_jobs,&resources.construction_border,
-            0,self.selected.map(|slot|slot as u16),0,0).map_err(|e|format!("actor pass: {e:?}"))?;
+            0,self.selected.map(|slot|slot as u16),0,0,|event|dispatch_observations.push(event.clone())).map_err(|e|format!("actor pass: {e:?}"))?;
         let callbacks=actors.len();
         for callback in &actors {match callback {
             ConstructionAwareActorCallback::Ordinary(r)=>self.pending_requests+=u64::from(r.acknowledgement.is_some())+r.pending_events.len()as u64,
@@ -280,6 +283,15 @@ impl SharedMission {
                 if plan.outcome!=genewars_runtime::mission_outcome::MissionOutcome::Running{outcome_notice=format!("; mission outcome {:?} at source frame {}",plan.outcome,context.frame());}
             }
         }
+        let mut activations=Vec::new();
+        for (slot,was_ready) in ready_before.into_iter().enumerate(){
+            let actor=&self.world.actors().records()[slot];
+            if !was_ready&&actor[6]==3&&actor[0x70]&1!=0{
+                let snapshot=genewars_runtime::actor_world::ActorDispatchSnapshot::capture(&self.world,slot as u16).map_err(|e|format!("activation audit: {e:?}"))?;
+                activations.push(super::actor_dispatch_audit::ActivationObservation{frame,actor_id:slot as u16,snapshot});
+            }
+        }
+        self.dispatch_audit.append(dispatch_observations,activations);
         self.frame_counter+=1;
         self.awaiting_presentation=self.runtime_context.is_some();
         let(mut created,mut retired)=(0,0);
@@ -344,6 +356,7 @@ impl SharedMission {
         self.command_count+=1;self.feedback=None;
         Ok(format!("actor {slot}, selector {selector}, projected {projected:?}, placement {point:?}"))
     }
+    pub fn actor_dispatch_audit_json(&self)->String {self.dispatch_audit.report(std::env::var("GENEWARS_ACTOR_DISPATCH_TRACE").as_deref()==Ok("1"))}
     pub fn actor_state_json(&self)->String {
         let word=|r:&[u8],p:usize|i16::from_le_bytes([r[p],r[p+1]]);
         let entries=self.world.actors().records().iter().enumerate().filter(|(_,r)|r[6]==3).map(|(slot,r)|
@@ -412,6 +425,10 @@ impl SharedMission {
         assert_eq!(loaded.frame_counter,256);assert_eq!(loaded.outcome_json(),"{\"state\":\"running\"}");
         println!("Krell integration passed256 rendered frames; not mission acceptance");
         println!("Krell actors: {}",loaded.actor_state_json());
+        let audit=loaded.actor_dispatch_audit_json();
+        assert!(audit.contains("\"activations\":3"),"all landed actors must be observed: {audit}");
+        assert!(audit.contains("\"blueprint_equality_mismatches\":0"),"activation equality must hold: {audit}");
+        println!("Krell dispatch audit: {audit}");
         if let Some(path)=std::env::var_os("GENEWARS_KRELL_AFTER_LANDING_FIXTURE"){
             let d=std::path::PathBuf::from(path);std::fs::create_dir(&d).expect("new immutable after-landing fixture");
             for(name,bytes)in [("backing",loaded.world.backing_bytes().to_vec()),("players",(0..4u8).flat_map(|p|loaded.world.player(p).unwrap().bytes().iter().copied()).collect()),("actors",loaded.world.actors().records().concat()),("creatures",loaded.world.creatures().unwrap().records().concat()),("effects",loaded.world.effects().unwrap().records().concat()),("family8",loaded.world.family8().unwrap().records().concat()),("buildings",loaded.world.buildings().unwrap().records().concat())]{std::fs::write(d.join(format!("{name}.bin")),bytes).unwrap();}
@@ -426,9 +443,9 @@ impl SharedMission {
                     let before=loaded.clone();
                     if let Err(error)=loaded.step(&resources){
                         println!("Krell observed boundary frame{}: {error}",loaded.frame_counter);
-                        assert_eq!(loaded.frame_counter,294);assert_eq!(error,"Landing(UnsupportedPhysicsState)");assert_eq!(loaded.world,before.world);assert_eq!(loaded.ui_animations,before.ui_animations);
+                        assert_eq!(loaded.frame_counter,557);assert_eq!(error,"Creatures(UnsupportedMotionState)");assert_eq!(loaded.world,before.world);assert_eq!(loaded.ui_animations,before.ui_animations);assert_eq!(loaded.actor_dispatch_audit_json(),before.actor_dispatch_audit_json());
                         println!("Krell construction blocked frame{}: {error}; buildings{}; actors{}",loaded.frame_counter,loaded.building_state_json(),loaded.actor_state_json());
-                        println!("{{\"status\":\"blocked\",\"classification\":\"unsupported_behavior\",\"source_frame\":294,\"transaction_unchanged\":true}}");return;
+                        println!("{{\"status\":\"blocked\",\"classification\":\"unsupported_behavior\",\"source_frame\":557,\"transaction_unchanged\":true}}");return;
                     }
                     loaded.render(&resources,[1536,15360]).unwrap();loaded.finish_outer_frame();
                     completed=loaded.world.buildings().unwrap().records().iter().any(|r|r[6]==4&&r[45]==selector&&u16::from_le_bytes([r[49],r[50]])&1!=0);

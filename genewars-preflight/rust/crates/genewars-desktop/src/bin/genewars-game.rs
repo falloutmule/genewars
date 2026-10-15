@@ -6,6 +6,7 @@ use std::{env,fs,io::{Read,Write},path::{Path,PathBuf},process};
 #[path="support/building_scene.rs"] mod building_scene;
 #[path="support/family8_scene.rs"] mod family8_scene;
 #[path="support/effect_scene.rs"] mod effect_scene;
+#[path="support/actor_dispatch_audit.rs"] mod actor_dispatch_audit;
 #[path="support/shared_scene.rs"] mod shared_scene;
 #[path="support/runtime_scene.rs"] mod runtime_scene;
 #[path="support/status_text.rs"] mod status_text;
@@ -122,7 +123,7 @@ mod tests{
         let mut game=Game::open(&root).unwrap();game.reference_startup=true;game.scene=runtime_scene::Scene::Loading;game.finish_loading();
         let before=game.report();assert_eq!(game.start_selected_building().unwrap_err(),"building is not available");assert_eq!(game.report(),before);
     }
-    #[test]fn json_quotes_controls_and_unicode(){assert_eq!(runtime_scene::json_string("a\"\\\n\tâ˜€"),"\"a\\\"\\\\\\n\\tâ˜€\"");}
+    #[test]fn json_quotes_controls_and_unicode(){assert_eq!(runtime_scene::json_string("a\"\\\n\tÃ¢Ëœâ‚¬"),"\"a\\\"\\\\\\n\\tÃ¢Ëœâ‚¬\"");}
     #[test]fn catalog_is_unique_and_bounded(){
         let mut names=std::collections::HashSet::new();let mut count=0;
         for line in runtime_resources::CATALOG.lines().filter(|l|!l.starts_with('#')){

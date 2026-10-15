@@ -19,7 +19,7 @@ pub struct ActorDispatchSnapshot {
 }
 impl ActorDispatchSnapshot {
  pub fn blueprint_equal(&self)->bool{self.blueprint_prior==self.blueprint_current}
- fn capture(world:&ActorWorld,id:u16)->Result<Self,ActorWorldError>{
+ pub fn capture(world:&ActorWorld,id:u16)->Result<Self,ActorWorldError>{
   let r=world.actors.record(id as usize)?;let binding=world.actors.bindings(id as usize)?.blueprint.ok_or(ActorWorldError::MissingBlueprintBinding(id as i16))?;
   let b=world.player(binding.player_id)?.blueprint(binding.blueprint_index as usize)?;
   Ok(Self{state:r[0x55],restore_state:r[0x56],category:b[0x16],style:b[0x15],task:r[0x7e],task_kind:r[0x82],selector:r[0x83],blueprint_prior:b[0x18],blueprint_current:b[0x1b]})
@@ -29,6 +29,14 @@ impl ActorDispatchSnapshot {
 pub enum ActorObservedBranch { Ordinary{source_dispatch:u32,idle_scorer_empty:Option<bool>}, Architect{source_dispatch:u32,setup_after_state:Option<u8>,rejected_site:bool} }
 #[derive(Debug,Clone,PartialEq,Eq)]
 pub struct ActorDispatchObservation {pub frame:u32,pub actor_id:u16,pub before:ActorDispatchSnapshot,pub after:ActorDispatchSnapshot,pub branch:ActorObservedBranch}
+
+//57F92 selects the action from state55 AFTER pending setup/cancellation.
+//Receipt boundaries are pre-action/pre-tail evidence; final actor state is not.
+//Zero means unknown, not a claimed source call.
+fn architect_observed_dispatch(motion_state:u8,setup_state:Option<u8>,rejected:bool,cancellation_state:Option<u8>)->u32 {
+ let state=if rejected { cancellation_state } else { setup_state.or(Some(motion_state)) };
+ if state==Some(9){0x534d0}else{0}
+}
 
 impl ActorWorld {
     /// The live signed-byte player list is reread after every callback. A
@@ -103,7 +111,7 @@ impl ActorWorld {
                 };
                 let branch=match &callback {
                     ConstructionAwareActorCallback::Ordinary(r)=>ActorObservedBranch::Ordinary{source_dispatch:r.source_dispatch,idle_scorer_empty:r.idle_scorer_empty},
-                    ConstructionAwareActorCallback::Architect{receipt:r,..}=>ActorObservedBranch::Architect{source_dispatch:0x534d0,setup_after_state:r.setup.as_ref().map(|s|s.after[0x55]),rejected_site:r.rejected_site_message_index.is_some()},
+                    ConstructionAwareActorCallback::Architect{receipt:r,..}=>ActorObservedBranch::Architect{source_dispatch:architect_observed_dispatch(r.motion.after[0x55],r.setup.as_ref().map(|s|s.after[0x55]),r.rejected_site_message_index.is_some(),r.cancellation.as_ref().map(|c|c.after[0x55])),setup_after_state:r.setup.as_ref().map(|s|s.after[0x55]),rejected_site:r.rejected_site_message_index.is_some()},
                 };
                 observations.push(ActorDispatchObservation{frame,actor_id:id as u16,before:observed_before,after:ActorDispatchSnapshot::capture(&staged,id as u16)?,branch});
                 receipts.push(callback);
@@ -116,6 +124,22 @@ impl ActorWorld {
 #[cfg(test)]
 mod observer_tests {
  use super::*;
+ #[test]
+ fn architect_observer_requires_actual_pre_dispatch_state(){
+  //Ordinary construction, pending setup and arriving setup select state9.
+  assert_eq!(architect_observed_dispatch(9,None,false,None),0x534d0);
+  assert_eq!(architect_observed_dispatch(1,Some(9),false,None),0x534d0);
+  assert_eq!(architect_observed_dispatch(8,Some(9),false,None),0x534d0);
+  //Literal2523: rejected507D0/51E80 keeps9, then534D0 returns on taskFF.
+  assert_eq!(architect_observed_dispatch(8,None,true,Some(9)),0x534d0);
+  //Missing or non9 postsetup evidence never inherits the callback's label.
+  assert_eq!(architect_observed_dispatch(9,None,true,None),0);
+  assert_eq!(architect_observed_dispatch(9,None,true,Some(1)),0);
+  assert_eq!(architect_observed_dispatch(9,Some(1),false,None),0);
+  assert_eq!(architect_observed_dispatch(1,None,false,None),0);
+  assert_eq!(architect_observed_dispatch(8,None,false,None),0);
+ }
+
  #[test]
  fn observer_preserves_two_actor_world_and_rolls_back_notifications(){
   let mut bytes=vec![0;343958];bytes[..4].copy_from_slice(&0x55336u32.to_le_bytes());bytes[337054..337058].copy_from_slice(&0x6beu32.to_le_bytes());

@@ -33,9 +33,9 @@ impl MissionState {
     fn extra_report(&self)->String {
         match self {
             Self::Plants(_)=>"\"world_mode\":\"plants\"".into(),
-            Self::Landing(w)=>format!("\"world_mode\":{},\"runtime_context\":{},\"outcome\":{},\"campaign_progress\":{},\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"plant_births\":{},\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"family8_states\":{},\"player_funds\":{},\"buildings\":{},\"terrain_jobs\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
+            Self::Landing(w)=>format!("\"world_mode\":{},\"runtime_context\":{},\"outcome\":{},\"campaign_progress\":{},\"seed\":{},\"rng_draws\":{},\"selected_actor\":{},\"issued_move_commands\":{},\"plant_births\":{},\"pending_presentation_requests\":{},\"active_effects\":{},\"actor_states\":{},\"creature_states\":{},\"family8_states\":{},\"player_funds\":{},\"buildings\":{},\"terrain_jobs\":{},\"actor_dispatch_audit\":{},\"actor_movement\":true,\"plant_updates\":true,\"creature_ai\":true,\"other_families_frozen\":true",
                 json_string(match w.runtime_context.as_ref().map(|c|c.origin()){Some(genewars_runtime::mission_context::ContextOrigin::CarriedCdKrell)=>"carried-cd-explicit-opaque-priors",Some(_)=>"fresh-cd-explicit-opaque-priors",None=>"landing-study"}),json_string(&format!("{:?}",w.runtime_context)),w.outcome_json(),w.world.player(0).unwrap().bytes()[0x6e7],w.seed,w.world.rng().draw_count,w.selected.map(|s|s.to_string()).unwrap_or("null".into()),w.command_count,w.plant_births,w.pending_requests,
-                w.world.effects().unwrap().records().iter().filter(|r|r[6]!=0).count(),w.actor_state_json(),w.creature_state_json(),w.family8_state_json(),w.player_funds_json(),w.building_state_json(),w.terrain_job_state_json()),
+                w.world.effects().unwrap().records().iter().filter(|r|r[6]!=0).count(),w.actor_state_json(),w.creature_state_json(),w.family8_state_json(),w.player_funds_json(),w.building_state_json(),w.terrain_job_state_json(),w.actor_dispatch_audit_json()),
         }
     }
 }

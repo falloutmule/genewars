@@ -1,0 +1,22 @@
+{
+  "status": "passed-bounded-observer-dispatch",
+  "tests_passed": 2,
+  "tests_filtered": 196,
+  "command": "CARGO_BUILD_JOBS=2 CARGO_PROFILE_TEST_OPT_LEVEL=1 python scripts/cargo.py test --offline --locked -p genewars-runtime observer_tests",
+  "source_evidence": [
+    "57F92 reads state55 after setup/cancellation; state9 branch58271 calls534D0 at58274.",
+    "Actual rejected2523 literal comparison preserves state9 through51E80;534D0 returns on taskFF. See blocked-photon-source.json."
+  ],
+  "behavior": "Architect label alone no longer implies534D0. Rejected-site receipt uses cancellation.after state, successful setup uses setup.after state, otherwise pre-action motion.after state. Only9 maps534D0; other/missing evidence maps0 unknown. Final actor state is not consulted.",
+  "limitations": [
+    "Resolver unit fixtures cover construction/setup/rejection boundaries; they are not a new full construction source comparison.",
+    "Existing two-actor observer on/off wholeworld/RNG/jobs and rollback test rerun passed.",
+    "No complete mission replay; no acceptance count change."
+  ],
+  "pins": {
+    "rust/crates/genewars-runtime/src/actor_world/construction_scheduler.rs": "1c62b1061b751dd69ed2bbdc2234aea2525b6ee3f4ea4ee35e66fb2c0133b279",
+    "rust/crates/genewars-runtime/src/actor_world/building_updates.rs": "6c78e42327b56ad1f604c9a2eeacaabf19045dff5f760a41cb52832c028050cb",
+    "private/ghidra/actor-motion/instructions-00057a10.txt": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a",
+    "research/variants/blocked-photon-source.json": "22c1c08e315d55f422075e0296c417e92c6de11bba580d44fb9bab847e1754cc"
+  }
+}

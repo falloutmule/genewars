@@ -1,0 +1,6328 @@
+{
+  "status": "passed",
+  "scope": "Synthetic source-projected Krell carry,256 rendered SharedMission frames; not campaign acceptance",
+  "audit": {
+    "schema": "actor-dispatch-priors-v1",
+    "coverage": "committed activated-actor callbacks",
+    "activations": 3,
+    "dispatches": 201,
+    "actor_dispatch_counts": [
+      67,
+      67,
+      67,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "blueprint_equality_mismatches": 0,
+    "unknown_dispatches": 0,
+    "dependent_56530_dispatches": 0,
+    "trace_included": true,
+    "trace_complete": true,
+    "recorded_dispatches": 201,
+    "activation_events": [
+      {
+        "frame": 188,
+        "actor": 0,
+        "phase": "end_of_frame_after_effects",
+        "snapshot": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        }
+      },
+      {
+        "frame": 188,
+        "actor": 1,
+        "phase": "end_of_frame_after_effects",
+        "snapshot": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        }
+      },
+      {
+        "frame": 188,
+        "actor": 2,
+        "phase": "end_of_frame_after_effects",
+        "snapshot": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        }
+      }
+    ],
+    "events": [
+      {
+        "frame": 189,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 189,
+        "actor": 1,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 189,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 190,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 190,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 190,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 191,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 191,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 191,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 192,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 192,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 192,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 193,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 193,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 193,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 194,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 194,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 194,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 195,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 195,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 195,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 196,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 196,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 196,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 197,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 197,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 197,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 198,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 198,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 198,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 199,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 199,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 199,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 200,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 200,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 200,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 201,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 201,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 201,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 202,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 202,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 202,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 203,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 203,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 203,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 204,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 204,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 204,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 205,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 205,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 205,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 206,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 206,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 206,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 207,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 207,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 207,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 208,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 208,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 208,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 209,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 209,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 209,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 210,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 210,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 210,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 211,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 211,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 211,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 212,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 212,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 212,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 213,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 213,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 213,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 214,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 214,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 214,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 215,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 215,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 215,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 216,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 216,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 216,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 217,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 217,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 217,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 218,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 218,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 218,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 219,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 219,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 219,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 220,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 220,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 220,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 221,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 221,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 221,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 222,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 222,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 222,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 223,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 223,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 223,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 224,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 224,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 224,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 225,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 225,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 225,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 226,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 226,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 226,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 227,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 227,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 227,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 228,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 228,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 228,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 229,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 229,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 229,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 230,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 230,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 230,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 231,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 231,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 231,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 232,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 232,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 232,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 233,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 233,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 233,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 234,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 234,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 234,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 235,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 235,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 235,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 236,
+        "actor": 0,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 236,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 236,
+        "actor": 2,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 237,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 237,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 237,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 238,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 238,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 238,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 239,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 239,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 239,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 240,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 240,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 240,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 241,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 241,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 241,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 242,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 242,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 242,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 243,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 243,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 243,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 244,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 244,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 361177,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 244,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 245,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 245,
+        "actor": 1,
+        "before": {
+          "state": 8,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 245,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 246,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 246,
+        "actor": 1,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 246,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 247,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 247,
+        "actor": 1,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 247,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 248,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 248,
+        "actor": 1,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 248,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 249,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 249,
+        "actor": 1,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 249,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 250,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 250,
+        "actor": 1,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 250,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 251,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 251,
+        "actor": 1,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 251,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 252,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 252,
+        "actor": 1,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 252,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 253,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 253,
+        "actor": 1,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 253,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 254,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 254,
+        "actor": 1,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 254,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 255,
+        "actor": 0,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 255,
+        "actor": 1,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      },
+      {
+        "frame": 255,
+        "actor": 2,
+        "before": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "after": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        },
+        "branch": {
+          "kind": "ordinary",
+          "source_dispatch": 337792,
+          "idle_scorer_empty": null
+        }
+      }
+    ]
+  },
+  "log": "private\\integration\\krell-dispatch-audit-002.log",
+  "log_sha256": "631931dce1e158d0a380c639b8534c4f51553b8e9117cd16a87eb5fb0ee7a02f",
+  "source_pins": {
+    "rust\\crates\\genewars-desktop\\src\\bin\\support\\actor_dispatch_audit.rs": "e83211e4be05f4d8ed1a58b9b62c29dbb9d03d8623fd0721b59fe26bb9df794a",
+    "rust\\crates\\genewars-desktop\\src\\bin\\support\\shared_scene.rs": "174243f521766df17d165f8ac4596dc32b9f929468920787eb0e140e12c9aeb5",
+    "rust\\crates\\genewars-runtime\\src\\actor_world\\construction_scheduler.rs": "3167febe21e2fefb76252a702c7ed0fd984561486bd197e3dcd3633010291a80"
+  }
+}
