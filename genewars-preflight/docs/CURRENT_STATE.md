@@ -2,6 +2,16 @@
 
 Authentic campaign missions accepted: **1 / 24**. Exceland and its ordinary retained-carry transition to Krell are verified. Krell is not complete. User authorization is continuous implementation without interactive testing/login; old stop instructions are superseded. Complete faithful native Rust GeneWars remains the goal.
 
+## Current185 continuation update
+
+Latest verified implementation cfc51fe: actual commanded-water4858 now matches427369worldbytes/zero mismatches/2draws, health39→38, D71A preserves high80/task7 and ordinary explicit-target AI restores the same zone goal. Source water factory/damage/reveal/AI order unchanged. Runtime249/game80 tests passed, oneopt-in ignored each; release185built. Receipt research/integration/authentic-command-water-damage-185.json. Original health<=5/lethal/attachment/otherstate damage remains guarded; do not claim all damage paths implemented.
+
+Ordinary184 finished atsource4858 Creatures(MotionEnvironment), owned Mule1 still carrying goal[658,24211], reserve78/health39 atposition3496/14929. WorldSHAc5ee88aaf8406a51aae8b2048a7deb5e635084b3bfcd7c1e1dd500b9abb59de4. Immutable capture private/review/authentic-krell-184/frame-4858-slot-1-blocked-before-owned; replay/report/BMP/binary private/integration/continued-krell-184. Independent corrected-width source audits verify actual commanded movement4802 and commandedwater4858:854738bytes/zero mismatches,2draws each, actual participatingcount1 preserved. Receipt research/integration/authentic-owned-movement-width-audit-185.json.
+
+ACTIVE ordinary185: private/integration/continued-krell-185; freshcaptureparent private/review/authentic-krell-185. Same ordinary production/Mfocus/zonegroundorder inputs as184; continues600ticks after4801 unless anunsupportedcallback occurs. One root heavyreplayjob, no supplementarybuild/Ghidra jobs. Latest completed native183b stillproves originalbirth andactualportorder issuance at4801; next meaningful native movement/zone checkpoint pending. Campaign acceptance1/24; Krell notcomplete.
+
+Exact next read after185 exits: C:/Python314/python.exe -B -c "import json,pathlib;d=json.loads(pathlib.Path('private/integration/continued-krell-185/report.json').read_text());m=d['mission'];print({k:m.get(k)for k in ['steps','blocked','world_sha256','outcome']});print([x for x in m['creature_states'] if x['owner']<4])". Reuse automatic blocked capture and existing originalsource fixtures, source-compare locally, integrate precise correction and continue ordinary gameplay. No forced resources/quality/flags/outcomes. GLM/9router routeunchanged/noextra paidrequests; all earlier caveats remain.
+
 ## Current repository and live frontier
 
 Latest verified implementation commits: 1e176e3 (live bounded Krell zone scheduler), fcda503 (commanded target resolution), d69b6bd (native port Mule focus/orders),653ae46 (atomic credit/marker components),f89d5cd (owned idle self-water damage). Checkout C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight; parent Git Freecad, branch codex/genewars-reconstruction. Preserve unrelated historical changes/private captures; explicit scoped staging only.

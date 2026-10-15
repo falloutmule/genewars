@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "scope": "actual ordinary commanded first movement4802 andwater4858, corrected narrowMOVwidths andexplicit singleparticipatingplayer1; notcampaignacceptance",
+  "comparisons": [
+    {
+      "frame": 4802,
+      "slot": 1,
+      "compared_bytes": 427369,
+      "mismatches": 0,
+      "draws": 2,
+      "instructions": 28963,
+      "evidence": "private/review/owned-command-width-audit/bcad281045c24b6889c9a9dca7ee77d0/result.json"
+    },
+    {
+      "frame": 4858,
+      "slot": 1,
+      "compared_bytes": 427369,
+      "mismatches": 0,
+      "draws": 2,
+      "instructions": 29359,
+      "evidence": "private/review/command-water-width-audit/9fe2947f5dc44cadb11d7e7a1318351a/result.json"
+    }
+  ],
+  "participating_count_after": 1,
+  "compared_bytes": 854738,
+  "campaign_missions": 1
+}
