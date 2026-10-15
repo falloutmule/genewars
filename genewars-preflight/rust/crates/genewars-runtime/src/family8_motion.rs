@@ -405,7 +405,7 @@ pub fn plan_selector1_state1_hover(before:&Family8Record,map:&[u8],frame:u32,wat
     if before[6]!=8||!(0..16).contains(&w(before,15))||before[0x18]>=4||before[0x55]!=1||before[0x56]!=1||before[0x57]!=1
         ||before[0x15]!=0x20||before[0x16]!=0||w(before,0x49)as u16&!0x6020!=0x200
         ||before[0x4f]!=0||before[0x52]!=0||!matches!(before[0x5b],0|4)||w(before,0x3f)<0||w(before,0x41)<0||w(before,0x64)<=0
-        ||owner_buildings.len()!=64*67||site_count!=0{
+        ||owner_buildings.len()!=64*67{
         return Err(Family8MotionError::UnsupportedRecord);
     }
     // Family8 A8 is RET; the read-only neighborhood search has no numeric effect.
@@ -433,7 +433,10 @@ pub fn plan_selector1_state1_hover(before:&Family8Record,map:&[u8],frame:u32,wat
         //site_count0 closes the state2 search and source130CE entersstate3.
         if let Some(next)=plan_selector1_building_target(&a,map,[0,0],owner_buildings,trig,rng_after)? {
             a=next.after;rng_after=next.rng_after;
-        }else{a[0x57]=0;a[0x56]=3;a[0x5b]=0;a[0x33..0x39].fill(0);}
+        }else{
+            if site_count!=0{return Err(Family8MotionError::UnsupportedRecord);}
+            a[0x57]=0;a[0x56]=3;a[0x5b]=0;a[0x33..0x39].fill(0);
+        }
     }
     let direction=usize::from(a[0x19]);animate(&mut a,&animations.directions[direction])?;
     Ok(Family8OnwardPlan{motion:Family8MotionPlan{new_cell:cell(point(&a)),after:a,rng_after,old_cell:cell(point(before)),child:None,
