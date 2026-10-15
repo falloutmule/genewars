@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "scope": "twoexplicitmarkers fullcallbacklifecycle, otherfamiliesfrozen, NOlivezonecredit/campaignacceptance",
+  "callbacks": 30,
+  "compared_bytes": 12821070,
+  "final_frame": 4534,
+  "final_active_effects": 0,
+  "evidence": "private/review/zone-marker-lifecycle-181/result.json",
+  "rng_draws": 0,
+  "limitations": [
+    "Live zone credit and render integration remain guarded",
+    "Isolated marker callbacks; no campaign completion claim"
+  ],
+  "regression": {
+    "runtime_passed": 244,
+    "game_passed": 76,
+    "release_build": "passed"
+  }
+}

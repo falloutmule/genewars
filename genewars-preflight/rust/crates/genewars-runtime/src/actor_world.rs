@@ -1883,3 +1883,5 @@ pub use victory_entry::{VictoryEntryTicket,VictoryPresentationStatus,OwnedVictor
 
 mod zone_marker_factory;
 pub use zone_marker_factory::{ZoneScoreMarkerReceipt,ZoneScoreMarkerFactoryError};
+
+mod zone_marker_updates;
