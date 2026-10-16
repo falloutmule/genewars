@@ -16,14 +16,6 @@ impl ActorWorld {
   let slot=usize::from(slot);let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;
   if pool.binding(slot)?!=Some(CreatureAnimationBinding::MuleSelector4){return Err(CreatureError::UnsupportedMotionState.into());}
   let before=*pool.record(slot)?;if word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
-  if before[0x61]&1==0&&creature_world::mule_callback_phase(&before,context.frame_counter)&1==0{
-   //5ee25..5ee32 light parity gate; 5ee38..5eec6 light sequence. No route
-   //prefix6FB60, no physics, no AI choice and no RNG draws on this path.
-   let plan=creature_world::plan_mule_light_callback(&before,animations)?;
-   self.creatures.as_mut().unwrap().replace_record_checked(slot,&before,&plan.after)?;
-   self.validate_links()?;
-   return Ok(OwnedMuleReceipt{motion:plan,pending_reveal_vertices:Vec::new(),pending_audio:Vec::new()});
-  }
   let hostile_enemy=self.owned_mule_live_hostile_target(&before)?;
   if (matches!(before[0x5e],1|21)||before[0x5e]==8&&before[0x52]!=0)&&hostile_enemy.is_none(){return Err(CreatureError::UnsupportedMotionState.into());}
   let mut rng=self.rng;let(prefix,target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng)?;
