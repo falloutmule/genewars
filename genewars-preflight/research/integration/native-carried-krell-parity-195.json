@@ -1,0 +1,189 @@
+{
+  "status": "passed",
+  "scope": "same frozen195 executable, ordinary campaign carry and Krell construction, native port controls versus headless",
+  "batch": 195,
+  "verified_revision": "60ee31d (frozen195 executable)",
+  "frozen_executable": "private\\integration\\continued-krell-195\\genewars-game.exe",
+  "frozen_executable_sha256": "335d85ad947c480a1f0c174a0c7e4854ddb82d78bda236029f4844dfd85c6107",
+  "headless_report": "private\\integration\\continued-krell-195\\report.json",
+  "native_observation": "private\\integration\\native-carried-krell-195\\observations\\__blocked.json",
+  "headless_step": 5939,
+  "native_step": 5939,
+  "headless_blocked": "Creatures(UnsupportedMotionState)",
+  "native_blocked": "Creatures(UnsupportedMotionState)",
+  "world_sha256": "a4da3dd344fe195648208c603f341e47a189862e905d4d0e662e808a5a39ffd4",
+  "parity_checks": {
+    "steps": true,
+    "blocked": true,
+    "world_sha256": true,
+    "actor_dispatch_audit": true,
+    "buildings": true,
+    "outcome": true,
+    "creature_states": true,
+    "issued_move_commands": true
+  },
+  "mule_trace": [
+    "PortMuleFocus:1",
+    "PortMuleOrder:1:[658, 24211]"
+  ],
+  "process_exit": 1,
+  "process_exit_interpretation": "Exit1 is the saved explicit UnsupportedMotionState frontier, not a crash",
+  "framebuffer_equal": true,
+  "framebuffer_sha256": "11b943cbbc211580cd453bf0eec988f1c04336b142c71eb5062e826865b41c0a",
+  "framebuffer_bytes": 921654,
+  "framebuffer_visual_review": "Native 640x480 frame inspected: coherent rendered Krell scene (terrain, path, water, units, biomechanical HUD left panel, \"RALPH ENGINEER\"). Status line reads \"KRELL - RECONSTRUCTION - STEP 5939 - FOCUS ACTOR 0\"; blocker line begins \"STOPPED: CREATURE/\". HUD reads ZONE CREDIT: 84/1000, RESOURCES: 311.",
+  "zone_credit": 84,
+  "required_zone_credit": 1000,
+  "resources": 311,
+  "zone_credit_source": "read from the rendered native HUD in the byte-identical framebuffer; the JSON report carries no score field",
+  "campaign_missions": 1,
+  "required_campaign_missions": 24,
+  "focused_checks": {
+    "status": "passed",
+    "scope": "batch195 focused re-verification with FRESH output paths after the final guard-placement change",
+    "supersedes_for_rerun": "private/integration/../review artifacts of the Oct-15 pre-guard-change run; original receipt preserved",
+    "preserved_original_receipt": "research/integration/owned-attack-miss-195-focused.json",
+    "run_root": "private\\integration\\batch195-fresh-20261016T065311",
+    "output_root": "private\\review\\batch195-fresh-20261016T065311",
+    "passed": 9,
+    "total": 9,
+    "steps": [
+      {
+        "step": "A1-literal-miss",
+        "ok": true,
+        "detail": {
+          "rc": 0,
+          "out": [
+            "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 267 filtered out; finished in 0.00s"
+          ]
+        }
+      },
+      {
+        "step": "A2-compare5892",
+        "ok": true,
+        "detail": {
+          "status": "passed",
+          "draws": 1,
+          "instructions": 2889,
+          "compared_bytes": 427369,
+          "differences": [],
+          "reason": null
+        }
+      },
+      {
+        "step": "A2-compare5893",
+        "ok": true,
+        "detail": {
+          "status": "passed",
+          "draws": 0,
+          "instructions": 1685,
+          "compared_bytes": 427369,
+          "differences": [],
+          "reason": null
+        }
+      },
+      {
+        "step": "A2-compare5894",
+        "ok": true,
+        "detail": {
+          "status": "passed",
+          "draws": 0,
+          "instructions": 2160,
+          "compared_bytes": 427369,
+          "differences": [],
+          "reason": null
+        }
+      },
+      {
+        "step": "A2-compare5895",
+        "ok": true,
+        "detail": {
+          "status": "passed",
+          "draws": 0,
+          "instructions": 1685,
+          "compared_bytes": 427369,
+          "differences": [],
+          "reason": null
+        }
+      },
+      {
+        "step": "A3-compare-exact",
+        "ok": true,
+        "detail": {
+          "status": "passed",
+          "draws": 8,
+          "instructions": 12772,
+          "compared_bytes": 427369,
+          "differences": [],
+          "reason": null
+        }
+      },
+      {
+        "step": "A3-compare-outside",
+        "ok": true,
+        "detail": {
+          "status": "passed",
+          "draws": 1,
+          "instructions": 2889,
+          "compared_bytes": 427369,
+          "differences": [],
+          "reason": null
+        }
+      },
+      {
+        "step": "A4-zero-reserve-rust",
+        "ok": true,
+        "detail": {
+          "rc": 0,
+          "rust_result": {
+            "status": "passed",
+            "frame": 5892,
+            "slot": 1,
+            "input_roundtrip": true,
+            "error": "",
+            "rng_draws": 1,
+            "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+          },
+          "tail": null
+        }
+      },
+      {
+        "step": "A4-zero-reserve-compare",
+        "ok": true,
+        "detail": {
+          "status": "passed",
+          "draws": 1,
+          "instructions": 2884,
+          "compared_bytes": 427369,
+          "differences": [],
+          "reason": null
+        }
+      }
+    ],
+    "harness_note": "scripts/cargo.py test -p genewars-runtime (captured_mule_callback, opt-in ignored) and research/variants/owned-mule-captured-width-review.py unchanged; only output paths are fresh"
+  },
+  "regression_release": {
+    "runtime": [
+      "Finished `test` profile [optimized + debuginfo] target(s) in 12.61s",
+      "test result: ok. 260 passed; 0 failed; 8 ignored; 0 measured; 0 filtered out; finished in 0.36s",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+    ],
+    "desktop": [
+      "Finished `test` profile [optimized + debuginfo] target(s) in 5.05s",
+      "test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 80 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 21.95s",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+    ],
+    "release": [
+      "Finished `release` profile [optimized] target(s) in 19.11s"
+    ]
+  },
+  "limitations": [
+    "Not Krell completion; campaign count remains 1/24 and zone credit 84/1000 < 1000",
+    "Candidate-vs-retail CD equivalence remains unresolved; proofs are scoped to the pinned candidate 4bdf296f and the stated environment",
+    "Original hardware creature picking remains separate; this verifies current port construction controls",
+    "Native exit1 is the saved explicit gameplay blocker, not a crash"
+  ]
+}

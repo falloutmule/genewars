@@ -1,0 +1,124 @@
+{
+  "status": "passed",
+  "scope": "batch195 focused re-verification with FRESH output paths after the final guard-placement change",
+  "supersedes_for_rerun": "private/integration/../review artifacts of the Oct-15 pre-guard-change run; original receipt preserved",
+  "preserved_original_receipt": "research/integration/owned-attack-miss-195-focused.json",
+  "run_root": "private\\integration\\batch195-fresh-20261016T065311",
+  "output_root": "private\\review\\batch195-fresh-20261016T065311",
+  "passed": 9,
+  "total": 9,
+  "steps": [
+    {
+      "step": "A1-literal-miss",
+      "ok": true,
+      "detail": {
+        "rc": 0,
+        "out": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 267 filtered out; finished in 0.00s"
+        ]
+      }
+    },
+    {
+      "step": "A2-compare5892",
+      "ok": true,
+      "detail": {
+        "status": "passed",
+        "draws": 1,
+        "instructions": 2889,
+        "compared_bytes": 427369,
+        "differences": [],
+        "reason": null
+      }
+    },
+    {
+      "step": "A2-compare5893",
+      "ok": true,
+      "detail": {
+        "status": "passed",
+        "draws": 0,
+        "instructions": 1685,
+        "compared_bytes": 427369,
+        "differences": [],
+        "reason": null
+      }
+    },
+    {
+      "step": "A2-compare5894",
+      "ok": true,
+      "detail": {
+        "status": "passed",
+        "draws": 0,
+        "instructions": 2160,
+        "compared_bytes": 427369,
+        "differences": [],
+        "reason": null
+      }
+    },
+    {
+      "step": "A2-compare5895",
+      "ok": true,
+      "detail": {
+        "status": "passed",
+        "draws": 0,
+        "instructions": 1685,
+        "compared_bytes": 427369,
+        "differences": [],
+        "reason": null
+      }
+    },
+    {
+      "step": "A3-compare-exact",
+      "ok": true,
+      "detail": {
+        "status": "passed",
+        "draws": 8,
+        "instructions": 12772,
+        "compared_bytes": 427369,
+        "differences": [],
+        "reason": null
+      }
+    },
+    {
+      "step": "A3-compare-outside",
+      "ok": true,
+      "detail": {
+        "status": "passed",
+        "draws": 1,
+        "instructions": 2889,
+        "compared_bytes": 427369,
+        "differences": [],
+        "reason": null
+      }
+    },
+    {
+      "step": "A4-zero-reserve-rust",
+      "ok": true,
+      "detail": {
+        "rc": 0,
+        "rust_result": {
+          "status": "passed",
+          "frame": 5892,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 1,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        },
+        "tail": null
+      }
+    },
+    {
+      "step": "A4-zero-reserve-compare",
+      "ok": true,
+      "detail": {
+        "status": "passed",
+        "draws": 1,
+        "instructions": 2884,
+        "compared_bytes": 427369,
+        "differences": [],
+        "reason": null
+      }
+    }
+  ],
+  "harness_note": "scripts/cargo.py test -p genewars-runtime (captured_mule_callback, opt-in ignored) and research/variants/owned-mule-captured-width-review.py unchanged; only output paths are fresh"
+}
