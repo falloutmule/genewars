@@ -1,0 +1,37 @@
+{
+  "contract": "GW-5939C",
+  "frontier_before": {"batch": 195, "frame": 5939, "commit": "7347fbf"},
+  "objective": "implement source 5ee38..5eec6 owned-Mule LIGHT callback as its own unit, separate from the FULL path",
+  "status": "passed",
+  "child_runs": 1,
+  "child_model_stated": "z-ai/glm-5.3-flash",
+  "files_changed": [
+    "rust/crates/genewars-runtime/src/actor_world/owned_mule_updates.rs",
+    "rust/crates/genewars-runtime/src/creature_world.rs"
+  ],
+  "git_diff_stat": "2 files changed, 49 insertions(+), 1 deletion(-)",
+  "head_unchanged": "7347fbf",
+  "nothing_committed_or_staged": true,
+  "creature_updates_rs_426_untouched": true,
+  "gate": "before[0x61]&1==0 && creature_world::mule_callback_phase(&before,frame)&1==0 (5ee25): placed in owned_mule_updates.rs BEFORE the full-path hostile admission, so the full-path-only association admission at creature_updates.rs:426 is never reached by a light frame and is not weakened",
+  "new_unit": "creature_world::plan_mule_light_callback -> 5EB30 equivalent (0x5e==0x13 early return; virtualAC bit clears; 0x60&0x80 block incl. unconditional word(0x6c)=0; 5ebdf..5ec69 dispatch for 0xB/0x10/0x14..0x18 writing word(0x6c)=0 on completed animation) then the shared 5E640/7AC00 animation tail (extracted verbatim as plan_mule_animation_tail, also used by the full path). No 6FB60 route prefix, no 1EC50 physics, no state machine, no AI choice, no 0x6c decrement, no RNG. byte[0x1185a8]=1 and 83140 render enqueue are host/render-side (existing campaign position).",
+  "verification": {
+    "case_A": {"input": "private/review/authentic-krell-195/frame-5939-slot-1-blocked-before-owned", "frame": 5939, "output": "private/review/gw5939c-A2", "cargo_exit": 0, "result_status": "passed", "rng_draws": 0, "compare_status": "passed", "differences": [], "compared_bytes": 427369, "source_draws": 0, "source_instructions": 1503},
+    "case_B": {"input": "private/review/authentic-krell-195/frame-5939-slot-1-blocked-before-owned", "frame": 5940, "output": "private/review/gw5939c-B2", "cargo_exit": 0, "result_status": "blocked", "error": "Creatures(UnsupportedMotionState)", "rng_draws": 0, "compare_status": "mismatch", "note": "expected: 5940 full path is not implemented and stays explicitly unsupported"},
+    "case_C": {"input": "private/review/authentic-krell-194/frame-5892-slot-1-blocked-before-owned", "frame": 5893, "output": "private/review/gw5939c-C2", "cargo_exit": 0, "result_status": "passed", "rng_draws": 0, "compare_status": "passed", "differences": [], "compared_bytes": 427369, "source_draws": 0, "source_instructions": 1714, "slot1_writes": {"word(0x6c)": "32759->0", "0x1b": "7->0", "0x1e": "0->1"}},
+    "chain_regression_from_5892_capture": [
+      {"frame": 5892, "result_status": "passed", "rng_draws": 1, "compare_status": "passed", "differences": [], "compared_bytes": 427369},
+      {"frame": 5894, "result_status": "passed", "rng_draws": 1, "compare_status": "passed", "differences": [], "compared_bytes": 427369},
+      {"frame": 5895, "result_status": "passed", "rng_draws": 0, "compare_status": "passed", "differences": [], "compared_bytes": 427369}
+    ],
+    "runtime_suite": "cargo test -p genewars-runtime --offline --locked -> 260 passed; 0 failed; 8 ignored (exit 0, matches batch195 baseline)",
+    "compile_check": "cargo test -p genewars-runtime --offline --locked --no-run -> exit 0"
+  },
+  "acceptance_expectation_note": "The session shell pre-set GENEWARS_CAPTURED_MULE_EXPECT=blocked (the 5939 frontier pin). Per contract r2 (A must PASS, B must stay blocked, C must PASS) the expectation was set explicitly per case. First case-A run with the stale pin produced result.json status passed at exit 101 (harness assertion 'expected unresolved boundary passed; update acceptance expectation'); its artifacts remain at private/review/gw5939c-A and were not overwritten.",
+  "limitations": [
+    "5EB30 dispatch states other than 0x15 (and 0xB/0x10/0x14/0x16..0x18 generally) run the same predicate but have no dedicated frame capture proof.",
+    "The 0x60&0x80 inner block reuses the accepted shared body's 0x49&0x300 predicate; record 0x49==0 in every verified frame, so that branch is unexercised here.",
+    "Verified frames are callback-scoped (other families frozen): not campaign/native acceptance and no progress on 5940's full path."
+  ],
+  "next": "5940 (FULL path) remains the next blocker at the 5939 frontier; full-path semantics still unimplemented."
+}

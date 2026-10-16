@@ -546,6 +546,15 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
         if motion_word(&a,0x49)as u16&0x200!=0 {if a[0x5e]==0{a[0x60]&=0xdf;}a[0x60]&=0xef;}
         if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;if a[0x61]&0x80!=0&&a[0x6e..0x72]==a[11..15]{a[0x61]&=0x7f;}motion_put(&mut a,0x6c,0);}
     }
+    let a=plan_mule_animation_tail(a,animations)?;
+    Ok((CommonPhysicsPlan{new_cell:motion_cell(motion_point(&a)),after:a,old_cell:plan.old_cell,physics_cell:plan.new_cell},water_effect))
+}
+
+/// Shared 5E640 state animation selection (5EA66/5E817/5E825/5E749/5E779 dispatch)
+/// plus the shared 7AC00 frame advance, extracted verbatim from
+/// plan_mule_admitted_body_with_collision so the light callback 5ee38..5eec6
+/// reuses the identical animation tail without the full-path physics.
+fn plan_mule_animation_tail(mut a:CreatureRecord,animations:&MuleAnimations)->Result<CreatureRecord,CreatureError>{
     let yaw=motion_word(&a,0x39);if !(0..=2048).contains(&yaw){return Err(CreatureError::UnsupportedMotionState);}
     if a[0x5e]==10 {
         //5EA66: paired countdown selects animation22 once, then retains it.
@@ -575,7 +584,38 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
         if hold==0 {let next=frame as i32+i32::from(a[0x1c]as i8);let next=if next>last as i32 {if animation_flags&1!=0 {if last==0{return Err(CreatureError::UnsupportedMotionState);}a[0x1c]=255;last-1}else{0}}
           else if next<0 {if animation_flags&1!=0{a[0x1c]=1;1}else{last}}else{next as usize};a[0x1b]=next as u8;a[0x1a]=animation_holds[next];}
     }
-    Ok((CommonPhysicsPlan{new_cell:motion_cell(motion_point(&a)),after:a,old_cell:plan.old_cell,physics_cell:plan.new_cell},water_effect))
+    Ok(a)
+}
+/// Owned Mule light callback 5ee38..5eec6: CALL 5EB30, CALL 5E640,
+/// byte[0x1185a8]=1, CALL 7AC00, CALL 83140, return. Taken exactly when
+/// record[0x61]&1==0 and mule_callback_phase(record,frame)&1==0 (5ee25..5ee32).
+/// It runs no route prefix6FB60, no physics1EC50, no state machine, no AI
+/// choice and no 0x6c decrement, and draws no RNG. 5EB30 reuses the admitted
+/// virtualAC(49bit200)/virtualB0(49bit100) predicates from the shared body and
+/// its 5ebdf..5ec73 dispatch (states 0xB, 0x10, 0x14..0x18) reuses the shared
+/// body's completed-animation predicate (MuleAnimations holds/flags standing
+/// for the record+0x1f blueprint table) to write word0x6c=0 when complete.
+/// byte[0x1185a8] is a host render flag and 83140 is the caller-owned render
+/// enqueue; neither has a numeric world image.
+pub(crate) fn plan_mule_light_callback(before:&CreatureRecord,animations:&MuleAnimations)->Result<CommonPhysicsPlan<124>,CreatureError>{
+    let mut a=*before;
+    //5EB30 5eb38..5ebd9: 0x5e==0x13 returns from 5EB30 only; 5E640/7AC00 still run.
+    if a[0x5e]!=0x13 {
+        if motion_word(&a,0x49)as u16&0x200!=0 {if a[0x5e]==0{a[0x60]&=0xdf;}a[0x60]&=0xef;}
+        if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;if a[0x61]&0x80!=0&&a[0x6e..0x72]==a[11..15]{a[0x61]&=0x7f;}motion_put(&mut a,0x6c,0);}
+        //5EBDF..5EC69 dispatch (states 0xB, 0x10 and 0x14..0x18): a completed
+        //animation writes word0x6c=0. Same predicate as the shared body's
+        //5EB30 dispatch reconstruction for states20/21.
+        if a[0x5e]==0xb||a[0x5e]==0x10||matches!(a[0x5e],0x14..=0x18) {
+            let id=usize::from(a[0x19]);let holds=animations.holds.get(id).ok_or(CreatureError::UnsupportedMotionState)?;
+            if holds.is_empty(){return Err(CreatureError::UnsupportedMotionState);}
+            let complete=if animations.flags[id]&1!=0 {a[0x1a]==0&&a[0x1b]==0}else{a[0x1a]==0&&a[0x1e]==0&&usize::from(a[0x1b])==holds.len()-1};
+            if complete{motion_put(&mut a,0x6c,0);}
+        }
+    }
+    a=plan_mule_animation_tail(a,animations)?;
+    let cell=motion_cell(motion_point(&a));
+    Ok(CommonPhysicsPlan{new_cell:cell,after:a,old_cell:cell,physics_cell:cell})
 }
 /// Natural owner4 Mule mortality, grounded corpse friction and BONES decay.
 /// External references, airborne corpse motion and final retirement reject.
