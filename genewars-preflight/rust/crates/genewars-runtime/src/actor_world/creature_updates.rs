@@ -419,7 +419,8 @@ impl ActorWorld {
         let own=[before[15],before[16],1];let current=[word(before,7),word(before,9)];
         let retained_food_association=before[24]==4&&before[0x5e]==8&&before[0x60]==8&&before[0x61]==0x40
             &&before[0x57]==0&&before[0x52]==1&&word(before,0x50)==word(before,0x55);
-        let associated_pair=matches!(before[0x5e],1|3|4|5|20|21)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55)||retained_food_association;
+        let associated_pair=matches!(before[0x5e],1|3|4|5|20|21)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55)||retained_food_association
+            ||before[24]==0&&before[0x5e]==8&&before[0x60]==0x88&&before[0x61]==0&&before[0x78]==7&&word(before,0x6c)>0&&before[0x52]==1&&before[0x57]==1&&before[0x5a]==1&&reference(before,0x50)==reference(before,0x55)&&reference(before,0x58)==reference(before,0x55);
         let mut final_target=[word(before,11),word(before,13)];
         let mut a=*before;a[0x49]&=0x9f;
         if a[0x4f]!=0||(a[0x52]!=0&&!associated_pair)||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}

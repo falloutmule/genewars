@@ -17,7 +17,7 @@ impl ActorWorld {
   if pool.binding(slot)?!=Some(CreatureAnimationBinding::MuleSelector4){return Err(CreatureError::UnsupportedMotionState.into());}
   let before=*pool.record(slot)?;if word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
   let hostile_enemy=self.owned_mule_live_hostile_target(&before)?;
-  if matches!(before[0x5e],1|21)&&hostile_enemy.is_none(){return Err(CreatureError::UnsupportedMotionState.into());}
+  if (matches!(before[0x5e],1|21)||before[0x5e]==8&&before[0x52]!=0)&&hostile_enemy.is_none(){return Err(CreatureError::UnsupportedMotionState.into());}
   let mut rng=self.rng;let(prefix,target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng)?;
   let stage=std::cell::RefCell::new(self.clone());let random=std::cell::RefCell::new(rng);let reveals=std::cell::RefCell::new(Vec::new());let audio=std::cell::RefCell::new(Vec::new());
   let(plan,_water)=crate::owned_mule_callback::plan_owned_after_prefix(&before,&prefix,target,self.map(),context,physics,trig,
@@ -136,11 +136,18 @@ impl ActorWorld {
  ///Every stage is in the existing cloned transaction; late rejection restores
  ///the target, player/backing/map, all RNG and pending presentation requests.
  fn owned_mule_completed_attack(&mut self,record:&CreatureRecord,enemy:&CreatureRecord,rng:&mut BlueprintRng,physics:&PhysicsTables,audio:&mut Vec<u8>)->Result<CreatureRecord,CreatureError>{
-  if record[24]!=0||record[0x5e]!=21||record[0x61]!=0||record[0x60]!=0x88||record[0x78]!=7||word(record,0x6c)!=0||word(record,0x68)<=0||record[0x76]>90{return Err(CreatureError::UnsupportedMotionState);}
-  self.owned_attack_no_operator()?;
+  if record[24]!=0||record[0x5e]!=21||record[0x61]!=0||record[0x60]!=0x88||record[0x78]!=7||word(record,0x6c)!=0||word(record,0x68)<0||record[0x76]>90{return Err(CreatureError::UnsupportedMotionState);}
   let xy=genewars_core::cd_candidate::distance_squared_wrapping_15([word(record,7),word(record,9)],[word(enemy,7),word(enemy,9)])as i32;
   let z=(i32::from_le_bytes(enemy[39..43].try_into().unwrap()).wrapping_sub(i32::from_le_bytes(record[39..43].try_into().unwrap())))>>3;
-  if xy.wrapping_add(z.wrapping_mul(z))>16384{return Err(CreatureError::UnsupportedMotionState);}
+  if (xy.wrapping_add(z.wrapping_mul(z))as u32)>16384{
+   //603C0->6152C: a miss keeps references/reserve and waits oneBBD draw.
+   let mut waiting=*record;waiting[0x5e]=8;
+   let escape=self.mule_cell_entry_predicate(&waiting,floor_cell([word(&waiting,7),word(&waiting,9)])).map_err(|_|CreatureError::UnsupportedCellEntry)?;
+   let miss=crate::mule_owned_attack_miss::plan(record,*rng,escape).map_err(|_|CreatureError::UnsupportedMotionState)?;
+   *rng=miss.rng_after;return Ok(miss.after);
+  }
+  if word(record,0x68)==0{return Err(CreatureError::UnsupportedMotionState);}
+  self.owned_attack_no_operator()?;
   let mut after=*record;let trait_value=10*(50+50*i32::from(record[0x76])/100)/100;
   let cost=(trait_value>>2).min(i32::from(word(record,0x68)));after[0x68..0x6a].copy_from_slice(&(word(record,0x68)-cost as i16).to_le_bytes());
   let draw=|r:&mut BlueprintRng|{r.seed=r.seed.wrapping_mul(0xe62d);r.ring=r.ring.wrapping_add(1)&31;r.draw_count=r.draw_count.wrapping_add(1);(r.seed>>8)as u8};
@@ -203,7 +210,7 @@ impl ActorWorld {
  }
  /// Typed reciprocal owned task7 pursuit, separate from plant/corpse food.
  pub(super) fn owned_mule_live_hostile_target(&self,r:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
-  if r[6]!=1||r[24]!=0||r[0x7a]!=4||!matches!(r[0x5e],1|21)||r[0x61]!=0||!(if r[0x5e]==1{matches!(r[0x60],0x48|0xc8)}else{matches!(r[0x60],8|0x88)})||r[0x78]!=7
+  if r[6]!=1||r[24]!=0||r[0x7a]!=4||!(matches!(r[0x5e],1|21)||r[0x5e]==8&&word(r,0x6c)>0)||r[0x61]!=0||!(if r[0x5e]==1{matches!(r[0x60],0x48|0xc8)}else{matches!(r[0x60],8|0x88)})||r[0x78]!=7
    ||r[0x76]>90||r[0x4f]!=0||r[0x5d]!=0||r[0x52]!=1||r[0x57]!=1||r[0x5a]!=1||word(r,0x49)as u16&0x100!=0
    ||reference(r,0x50)!=reference(r,0x55)||reference(r,0x58)!=reference(r,0x55){return Ok(None);}
   let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;let id=word(r,0x55)as usize;let target=*pool.record(id)?;
