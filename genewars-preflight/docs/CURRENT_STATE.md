@@ -1,5 +1,22 @@
 # GeneWars authoritative continuation - 2026-10-16
 
+## Family F9 checkpoint - 2026-10-17 (campaign advances 5946 -> 5962, native-accepted)
+
+Same evidence chain as F4->F6, applied to the expired-timer boundary: F7 measured the refusal, F8 documented the TAKEN side of the
+timer test from the listing (0005ef40 JLE 0x65384 -> jump table entry 0x14 -> 0x5f4c4 -> 000602a2 state 20->8, 00060291 word(0x6c)=0
+-> rejoin 0005ef54/000653c3 -> the shared tail with 0006a4a0 DEC skipped and animation 0x10->0x05; the executed tail never reads the
+pointer triples, so the old 'mismatch' pin was an admission artifact), and F9 implemented the port arm against that output.
+
+- Authoritative output: source_prepared, 21226 instructions, 0 draws, 21 changed bytes in slot 1.
+- Port: `expired_hit` arm in owned_mule_callback.rs (+21/-3) + the choice arm in owned_mule_updates.rs (+16), placed FIRST so the
+  broader 5922 arm cannot pre-empt it; the first pointer triple is deliberately not pinned (admission-only, per the evidence).
+- Campaign: **5946 -> 5962** (world `f6e22870...`, rgb `417550fa...`). Native acceptance on one frozen executable (`0ad57ae2...`):
+  5962 headless and native, all eight keys equal, framebuffers byte-identical.
+- Negative coverage: R20 converted to positive with the source basis in-row; **R21 added** as a fail-closed negative (the same shape
+  with word(0x6a)=0, the side the evidence leaves unexecuted - derived fixture, labelled as such). Checker 33/2/42.
+- Next: the 5962 refusal is unmeasured. Family F10 measures it before anything is implemented.
+- Cumulative since the policy went operational: **5940 -> 5946 -> 5962**, with no gate relaxation.
+
 ## Family F6 checkpoint - 2026-10-17 (campaign advances 5940 -> 5946, native-accepted)
 
 The 5940 boundary was resolved by evidence in three ordered steps, not by relaxing a gate: F4 measured the live

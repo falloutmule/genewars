@@ -44,7 +44,7 @@
   },
   "unresolved": {
     "next_blocker": "5962 refusal is unmeasured (step/slot/shape unknown beyond the block string) - next family measures before implementing",
-    "native_parity": "not yet run for the 5962 frontier; launched after this checkpoint",
+    "native_parity": "PASSED: private/integration/f1-native-20261017T2245 - one frozen executable sha256 0ad57ae2099b141c, headless and native both stop at step 5962 with the identical block string Creatures(UnsupportedMotionState), all eight compared keys equal, frontier framebuffers byte-identical, world f6e22870557268bb6668...",
     "row_count_note": "the packet predicted 30/2/39; measured 33/2/42 - the difference is exactly the R20 conversion arithmetic (negative row = 2 recs, positive row = 3 recs) plus the R21 addition; no existing row changed outcome"
   },
   "cumulative": {
