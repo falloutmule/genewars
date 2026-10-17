@@ -1,0 +1,44 @@
+{
+  "receipt": "f5-interpreter-domain-extension-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "reference-model (interpreter) domain extension - the live 5940 record is now adjudicable; the port is unchanged and still fail-closed",
+  "policy": "private/integration/development-policy-20261017.md",
+  "supersedes_subject": "research/integration/f4-live-5940-measurement-checkpoint-20261017.json (which recorded the oracle rejection)",
+
+  "what_changed": {
+    "file": "research/variants/owned-mule-captured-width-review.py",
+    "shape": "one separate OR arm added to the owned admission predicate; the pre-existing hostile arm is bit-identical inside the OR and the raise, the target/enemy validation and every other line are unchanged (diff: 1 file, 2 insertions, 1 deletion)",
+    "new_arm_pins": "state 20 AND 0x60==0x18 AND 0x61==0x80 AND word(0x6c)>0 AND 0x78==7 AND 0x7a==4 AND 0x4f==0 AND 0x5d==0 AND 0x52==0 AND 0x57==1 AND 0x5a==1 AND 0x58..0x5b == 0x55..0x58",
+    "stays_rejected": "state 20 with word(0x6c)<=0 outside the proven completion shape; any state 1/21 failing the hostile predicate; any 0x60/0x61/0x52/0x7a outside the measured shape; enemy shapes failing the existing validation",
+    "evidence": "cited original-listing addresses with the literal executed path: 0005ed37/0005ed3b (0x61 bit0 -> head branch), 0005ee25-0005ee32 (parity gate -> FULL path), 0005eed5-0005ef1f (cell pointers), 0005ef22 (call 0x5e0b0), 0005ef32 (call 0x5eb30), 0005ef3a-0005ef40 (fresh timer -> the expired-timer arm is NOT taken), 0005ef49-0005ef68 + 0006a20d-0006a21f (state dispatch reaches the same generic tail), 0006a290-0006a53e (tail executed literally, zero RNG draws, 0006a4a0 DEC word(0x6c)), epilogue 0005e640 -> 0005e817 and 0007ac00",
+    "evidence_status": "Observed (literal original code). No provisional item on reachability.",
+    "doc": "research/variants/attempt18-owned-state20-fresh-timer-domain.md (new, untracked at write time)"
+  },
+
+  "authoritative_output_now_available": {
+    "fixture": "private/review/attempt17-live-5940-blocked-owned",
+    "status": "source_prepared", "instructions": 2307, "draws": 0,
+    "output_dir": "private/review/owned-mule-captured-width/2e412d033c0e43b9898e309d022b321e",
+    "deltas": "creatures.bin only, 20 bytes, all inside slot 1: 0x07,0x09,0x11,0x17,0x1b(1->2),0x27,0x2d,0x2f,0x31,0x3b,0x3d,0x3e,0x41,0x42,0x43,0x44,0x66(8657->8655),0x68(11->8),0x6a,0x6c(32767->32766). State 0x5e stays 20, animation 0x19 stays 16, 0x57 stays 1. Enemy slot 5 and all other seven buffers byte-identical. Independent rerun byte-identical.",
+    "scoped_patch": "C:/Users/fallo/Documents/ChatGPT/genewars-routing-probe/attempt18-interpreter-domain-scoped.patch"
+  },
+
+  "director_verification": {
+    "oracle_counts_reproduced": {"live 5940": "source_prepared 2307 / 0 draws", "capture4802 4801": "source_prepared 2224 / 0", "attempt13-fx-5940": "source_prepared 11594 / 5"},
+    "regression_counts_worker_reported": {"krell-194 5893": "1714 / 0", "krell-195 5939": "1503 / 0"},
+    "diff_scope": "git diff --stat shows exactly one file, 2 insertions / 1 deletion; the pre-existing dirty research files (admitted-building-pass.json, mission-outcome.md) are dated 10-14 and are NOT part of this change",
+    "port": "rust/ untouched; the port still refuses the live record, so the checker's R10 negative row remains correctly negative"
+  },
+
+  "next_family": {
+    "id": "F6",
+    "scope": "implement the port's owned state-20 fresh-timer continuation from the new authoritative oracle output (2307 instructions, 0 draws, the 20-byte delta set), bounded to the measured shape; convert the R10 negative row to positive in the same change set with the source basis stated; campaign must then advance past 5940",
+    "note": "this is now a standard measured family: the expected output exists, so the gate is byte equality plus exact lengths plus the zero-draw RNG check"
+  },
+
+  "open_items": [
+    "F1-R13: the provisional 6BA47 food-guard skip for 0x61=0x80 (state-invisible for that domain) - still unresolved, not touched here",
+    "F3's implemented arm remains possibly off the live path (its fixture came from the pre-F2 trajectory)",
+    "commit-history blemish: 7456e5a briefly tracked the two preserved experiment files before 439f3b4 restored them to untracked"
+  ]
+}

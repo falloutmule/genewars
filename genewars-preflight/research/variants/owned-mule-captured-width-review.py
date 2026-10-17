@@ -41,7 +41,8 @@ def main():
    target=struct.unpack_from('<h',record,0x55)[0]
    if not 0<=target<300 or target==args.slot:raise ValueError('invalid owned hostile target identity')
    enemy=buffers['creatures.bin'][target*124:(target+1)*124]
-   if record[0x60] not in((0x48,0xc8)if record[94]==1 else(8,0x88))or record[0x61]!=0 or record[0x78]!=7 or record[0x4f]!=0 or record[0x5d]!=0 or record[0x52]!=1 or record[0x57]!=1 or record[0x5a]!=1 or record[0x50:0x53]!=record[0x55:0x58]or record[0x58:0x5b]!=record[0x55:0x58]:
+   if not(((record[0x60] in((0x48,0xc8)if record[94]==1 else(8,0x88))and record[0x61]==0 and record[0x78]==7 and record[0x4f]==0 and record[0x5d]==0 and record[0x52]==1 and record[0x57]==1 and record[0x5a]==1 and record[0x50:0x53]==record[0x55:0x58]and record[0x58:0x5b]==record[0x55:0x58])
+   or (record[94]==20 and record[0x60]==0x18 and record[0x61]==0x80 and struct.unpack_from('<h',record,0x6c)[0]>0 and record[0x78]==7 and record[0x7a]==4 and record[0x4f]==0 and record[0x5d]==0 and record[0x52]==0 and record[0x57]==1 and record[0x5a]==1 and record[0x58:0x5b]==record[0x55:0x58]))):
     raise ValueError('unsupported owned hostile pursuit caller')
    if enemy[6]!=1 or enemy[24]!=4 or enemy[122]!=4 or enemy[94]not in(1,20,21)or struct.unpack_from('<h',enemy,15)[0]!=target or struct.unpack_from('<H',enemy,0x49)[0]&0x400:
     raise ValueError('requires exact live neutralMule state1 hostile target')
