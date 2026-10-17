@@ -20,7 +20,22 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut(&C
  let hit=before[24]==0&&before[0x5e]==20&&before[0x61]==0&&before[0x60]==8&&before[0x78]==7
   &&before[0x52]==1&&before[0x57]==1&&before[0x5a]==1&&before[0x5d]==0&&w(0x6c)>0
   &&before[0x50..0x53]==before[0x55..0x58]&&before[0x58..0x5b]==before[0x55..0x58];
- //5922 measured owned hit-reaction completion: same record domain as the hit
+ //5940 measured owned state-20 FRESH-timer continuation (live corrected-campaign
+//record, fixture attempt17-live-5940-blocked-owned slot 1, 0x6c=32767): the
+//literal source path 0005ed37/0005ed3b (0x61 bit0 clear -> light/head branch)
+//-> 0005ee25-0005ee32 parity gate FULL path -> 0005eed5-0005ef1f cell pointers
+//-> 0005ef22 call 0x5e0b0 -> 0005ef32 call 0x5eb30 -> 0005ef3a-0005ef40 fresh
+//timer (the expired-timer arm is NOT taken) -> 0005ef49-0005ef68 +
+//0006a20d-0006a21f state dispatch reaches the SAME generic tail
+//0006a290-0006a53e (0006a4a0 DEC word(0x6c)) -> epilogue 0005e640/0005e817 ->
+//0007ac00. Zero RNG draws: no 5EB30 dispatch site fires for this shape (0x49
+//mask 0x0010, no 0x100/0x200 virtual, 0x6c>0), so the port runs only the
+//shared even-branch/state dispatch, association handling and tail writes.
+//Pins are the interpreter's measured admission shape (attempt18).
+ let fresh_hit=before[24]==0&&before[0x5e]==20&&before[0x61]==0x80&&before[0x60]==0x18&&before[0x78]==7
+  &&before[0x52]==0&&before[0x57]==1&&before[0x5a]==1&&before[0x5d]==0&&w(0x6c)>0
+  &&before[0x58..0x5b]==before[0x55..0x58];
+//5922 measured owned hit-reaction completion: same record domain as the hit
  //hold with the expired 0x6c timer.5E0B0/5CC60 return to the explicit move
  //command shape (0x61=0x80,0x60=0x18), clear57 and restore animation. No RNG.
  let hit_complete=before[24]==0&&before[0x5e]==20&&before[0x61]==0&&before[0x60]==8&&before[0x78]==7
@@ -32,8 +47,8 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut(&C
  //same plan_choice/plan_explicit_target pieces as the accepted command path.
  let command_retained=before[0x5e]==8&&before[0x61]==0x80&&before[0x60]==0x18&&before[0x78]==7
   &&before[0x52]==1&&before[0x57]==0&&before[0x5a]==1;
- if before[6]!=1||before[24]>=4||before[0x7a]!=4||!(idle||command||hostile||hit||hit_complete||command_retained)||before[0x76]>90||before[0x7b]!=255
-  ||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)||before[0x4f]!=0||(before[0x52]!=0&&!(hostile||hit||hit_complete||command_retained))||(before[0x57]!=0&&!(hostile||hit||hit_complete))
+ if before[6]!=1||before[24]>=4||before[0x7a]!=4||!(idle||command||hostile||hit||hit_complete||fresh_hit||command_retained)||before[0x76]>90||before[0x7b]!=255
+  ||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)||before[0x4f]!=0||(before[0x52]!=0&&!(hostile||hit||hit_complete||command_retained))||(before[0x57]!=0&&!(hostile||hit||hit_complete||fresh_hit))
   ||w(0x49)as u16&!0x337f!=0||w(0x6c)<0||w(0x66)<=2||w(0x6a)<=0{return Err(CreatureError::UnsupportedMotionState);}
  creature_world::plan_mule_admitted_body_with_collision(before,prefix,working_target,map,context,physics,trig,contact,animations,choice,true,cell_entry,postphysics,obstacle,hostile||hit_complete)
 }

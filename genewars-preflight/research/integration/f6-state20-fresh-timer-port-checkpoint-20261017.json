@@ -1,0 +1,46 @@
+{
+  "receipt": "f6-state20-fresh-timer-port-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "family F6 integrated - the corrected campaign advanced past the live 5940 boundary (5940 -> 5946)",
+  "policy": "private/integration/development-policy-20261017.md",
+  "evidence_chain": ["research/integration/f4-live-5940-measurement-checkpoint-20261017.json (measured refusal)",
+                     "research/integration/f5-interpreter-domain-extension-checkpoint-20261017.json (reference-model extension from cited listing)",
+                     "this receipt (port arm implemented against the authoritative output)"],
+
+  "implementation": {
+    "file": "rust/crates/genewars-runtime/src/owned_mule_callback.rs",
+    "arm": "fresh_hit added to plan_owned_after_prefix's domain whitelist and to the two existing exception conditions",
+    "pins": "state 20 && 0x60==0x18 && 0x61==0x80 && word(0x6c)>0 && 0x78==7 && 0x7a==4 && 0x4f==0 && 0x5d==0 && 0x52==0 && 0x57==1 && 0x5a==1 && 0x58..0x5b == 0x55..0x58, on top of the pre-existing generic gates",
+    "comment_cites": "0005ed37/0005ed3b -> 0005ee25-0005ee32 -> 0005eed5-0005ef1f -> 0005ef22 -> 0005ef32 -> 0005ef3a-0005ef40 -> 0005ef49-0005ef68 + 0006a20d-0006a21f -> tail 0006a290-0006a53e (0006a4a0 DEC word(0x6c)) -> 0005e640/0005e817 -> 0007ac00",
+    "focused_fixture": "frame 5940 slot 1 on private/review/attempt17-live-5940-blocked-owned: status before bytes, all eight buffers at exact lengths (backing 343958 / total 427369), zero diffs against the oracle output, expected draws 0 and actual rng_draws 0 with a byte-identical rng.bin"
+  },
+
+  "frontier_advance": {
+    "before": {"steps": 5940, "world_sha256": "53a4d4ea70749d2b4194af78f6b51abf55045daddbf462f202f0b4aaac6a7d04", "rgb_sha256": "08e84edc5db2dab132da338eedca8e841e1f2b4bce3af851a7832aa96f4c88c3"},
+    "after": {"steps": 5946, "blocked": "Creatures(UnsupportedMotionState)",
+              "world_sha256": "59c957643eb64df0b5a1db9d93803610f1ff04110a165210e310777a44ce69e7",
+              "rgb_sha256": "1a0659426ff435aaadd34a869802e3ac35f4bffc38869d7f683e0a8bf190369c"},
+    "meaning": "first genuine frontier movement since F1, and it came from source evidence rather than a relaxed gate: the interpreter's proven domain was extended first, then the port implemented the now-authoritative output"
+  },
+
+  "director_verification": {
+    "run": "private/integration/F6-root-check-20261017T2015",
+    "result": {"positive": "30/30", "negative": "0/0", "checks": "37/37", "all_ok": true},
+    "campaign": "steps 5946, blocked Creatures(UnsupportedMotionState), world 59c95764..., rgb 1a065942... - matches the worker's report exactly",
+    "row_move": "R10-owned-state20-fresh-timer-5940 negative -> positive (source basis stated in-row); 27/2/36 -> 30/0/37"
+  },
+
+  "negative_coverage_gap_reopened": {
+    "state": "the checker again has ZERO negative rows because the only pinned unsupported domain was implemented",
+    "plan": "the new 5946 refusal is an unsupported domain and is being pinned as a negative row FIRST in the next assignment, before any implementation"
+  },
+
+  "new_blocker_reported": {
+    "frame": 5946, "slot": 1, "caller": "step_owned_mule_slot",
+    "shape": "state 20, animation 16, frame 0, 0x60=0x18, 0x61=0x80, word(0x6c)=0 (EXPIRED), 0x49=0x10, 0x78=7, 0x7a=4, 0x52=0, 0x57=1, 0x5a=1, 0x66=8651, 0x68=8, 0x55..0x58=05 00 01, 0x50..0x53=05 00 00 (triples NOT matching)",
+    "status": "reported by the worker, NOT yet measured by the director - next family F7 measures it before anything is implemented",
+    "note": "the pre-existing expired-timer completion arm requires matched pointer triples, which this shape lacks"
+  },
+
+  "native_parity": "launched after this checkpoint for the F6 build and the new 5946 frontier (one frozen executable, headless vs native + framebuffer comparison)"
+}

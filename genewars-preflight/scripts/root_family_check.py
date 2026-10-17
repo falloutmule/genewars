@@ -76,24 +76,24 @@ POSITIVE = [
     dict(id='R04-owned-full-path-5940', frame=5940, slot=1, draws=5, mode='direct',
          fixture='private/review/attempt13-fx-5940',
          expected='private/review/owned-mule-captured-width/606d12841ae14e6b87a2bd999f44e63a'),
+    # F6 conversion of the attempt17 negative row to POSITIVE (2026-10-17), per the
+    # family policy's "source-proved and intentionally expanded" condition. Source
+    # basis: the literal executed path 0005ed37/0005ed3b -> 0005ee25-0005ee32 (parity
+    # gate, FULL path) -> 0005eed5-0005ef1f -> 0005ef22 call 0x5e0b0 -> 0005ef32 call
+    # 0x5eb30 -> 0005ef3a-0005ef40 (fresh timer, expired arm NOT taken) ->
+    # 0005ef49-0005ef68 + 0006a20d-0006a21f -> tail 0006a290-0006a53e with 0006a4a0
+    # DEC word(0x6c) -> epilogue 0005e640/0005e817 -> 0007ac00; zero RNG draws
+    # (attempt18 note, research/variants/attempt18-owned-state20-fresh-timer-domain.md).
+    # The owned oracle now admits exactly this measured shape and produced the
+    # authoritative output below (source_prepared, 2307 instructions, 0 draws,
+    # creatures.bin slot-1-only 20-byte delta); the port implements the same pinned
+    # arm in plan_owned_after_prefix (fresh_hit). Same fixture as the former
+    # negative gate; this is NOT a conversion of any other row.
+    dict(id='R10-owned-state20-fresh-timer-5940', frame=5940, slot=1, draws=0, mode='direct',
+         fixture='private/review/attempt17-live-5940-blocked-owned',
+         expected='private/review/owned-mule-captured-width/2e412d033c0e43b9898e309d022b321e'),
 ]
 NEGATIVE = [
-    # attempt17 (2026-10-17): the LIVE corrected-campaign 5940 refused record,
-    # captured from the simulation's own Err path (owned caller step_owned_mule_slot,
-    # slot 1; capture private/integration/attempt17-live-capture/capture2, byte-identical
-    # to the F3-root-check-20261017T1545 campaign capture). Measured shape: state 0x5e=20
-    # (hit-reaction), animation 0x19=16, frame 0x1b=1, 0x60=0x18, 0x61=0x80,
-    # 0x6c=32767 (FRESH timer), 0x52=0, 0x57=1, 0x5a=1, 0x78=7, byte24=0, target 0x55=5
-    # (neutral Mule slot 5 state 21). The owned oracle rejects it as outside its domain
-    # ('unsupported owned hostile pursuit caller': it requires 0x60 in {8,0x88}, 0x52=1,
-    # 0x50..0x53==0x55..0x58 for states 1/20/21), so no authoritative interpreter output
-    # exists and the domain stays unsupported; the port's only implemented state-20 arm
-    # requires an expired 0x6c timer. F1-R04's proven FULL-path domain (state 8,
-    # 0x60=0x88, 0x6c=0) is a DIFFERENT record - this row restores the negative gate for
-    # the record the live campaign actually blocks on.
-    dict(id='R10-owned-state20-fresh-timer-5940', frame=5940, slot=1,
-         expect_error='Creatures(UnsupportedMotionState)',
-         fixture='private/review/attempt17-live-5940-blocked-owned'),
 ]
 
 
