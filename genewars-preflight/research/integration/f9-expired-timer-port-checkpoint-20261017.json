@@ -1,0 +1,53 @@
+{
+  "receipt": "f9-expired-timer-port-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "family F9 integrated - corrected campaign advanced 5946 -> 5962",
+  "policy": "private/integration/development-policy-20261017.md",
+  "evidence_chain": "F7 measured the 5946 refusal -> F8 extended the reference model from the taken side of the timer test -> F9 implemented the port arm against the authoritative output (21226 instructions, 0 draws)",
+  "implementation": {
+    "files": [
+      "rust/crates/genewars-runtime/src/owned_mule_callback.rs (+21/-3)",
+      "rust/crates/genewars-runtime/src/actor_world/owned_mule_updates.rs (+16)"
+    ],
+    "arm": "expired_hit, mirroring the interpreter's measured admission shape; the new choice arm is placed FIRST before the 5922 arm whose broader trigger would otherwise reject this shape",
+    "live_hostile_choice": "hostile||hit_complete||expired_hit so the shared odd-phase timer branch and the 5F4C4 choice dispatch fire exactly as the source path does",
+    "admission_only": "the first pointer triple 0x50..0x53 is intentionally NOT pinned, per the F8 evidence that the executed tail never reads it",
+    "comment_cites": "0005ef3a/0005ef3e/0005ef40 -> 0x65384 jump table (entry 0x14 -> 0x5f4c4) -> 0005f4c4-0005f521 -> 0005f532-0005f569 CALL 0x81c60 -> 0005f5bc JNZ 0x6029a -> 000602a2 state 8 / 00060291 word(0x6c)=0 -> 00060295 JMP 0x5ef46 -> 0005ef54 JBE -> 000653c3 -> tail 0006a290-0006a53e with 0006a4a0 DEC SKIPPED",
+    "focused_fixture": "byte-exact against the oracle in all eight buffers at exact lengths, expected draws 0 and a byte-identical rng.bin"
+  },
+  "frontier_advance": {
+    "before": {
+      "steps": 5946,
+      "world_sha256": "59c957643eb64df0b5a1db9d93803610f1ff04110a165210e310777a44ce69e7",
+      "rgb_sha256": "1a0659426ff435aaadd34a869802e3ac35f4bffc38869d7f683e0a8bf190369c"
+    },
+    "after": {
+      "steps": 5962,
+      "blocked": "Creatures(UnsupportedMotionState)",
+      "world_sha256": "f6e22870557268bb666888623314eb496aa22bc8bf58bc21ff7222058653c4be",
+      "rgb_sha256": "417550fafdf15a0e3a16273b60aa107628e9708a5ee2020e4860e486a8b337c8"
+    }
+  },
+  "negative_gate": {
+    "converted": "R20-owned-state20-expired-timer-zero-6a-5946 -> positive, with the source basis stated in-row",
+    "added": "R21-owned-state20-expired-timer-zero-6a-5946 (NEGATIVE) - the same expired shape with slot-1 word(0x6a) forced 58->0, the domain F8's evidence explicitly leaves unexecuted (the 0005f4d5-0005f4fc side). Fixture is DERIVED and labelled as such in-row. Verified fail-closed: blocked, all eight buffers byte-identical to input, 0 draws."
+  },
+  "director_verification": {
+    "run": "private/integration/F9-root-check-20261017T2230",
+    "result": {
+      "positive": "33/33",
+      "negative": "2/2",
+      "checks": "42/42",
+      "all_ok": true
+    },
+    "campaign": "steps 5962, blocked Creatures(UnsupportedMotionState), world f6e22870..., rgb 417550fa... - matches the worker's report exactly"
+  },
+  "unresolved": {
+    "next_blocker": "5962 refusal is unmeasured (step/slot/shape unknown beyond the block string) - next family measures before implementing",
+    "native_parity": "not yet run for the 5962 frontier; launched after this checkpoint",
+    "row_count_note": "the packet predicted 30/2/39; measured 33/2/42 - the difference is exactly the R20 conversion arithmetic (negative row = 2 recs, positive row = 3 recs) plus the R21 addition; no existing row changed outcome"
+  },
+  "cumulative": {
+    "since_policy_adoption": "5940 -> 5946 -> 5962, with no gate relaxation; each movement required measure -> source proof -> reference-model extension -> port arm"
+  }
+}

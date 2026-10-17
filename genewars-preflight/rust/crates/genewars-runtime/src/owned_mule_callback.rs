@@ -35,6 +35,24 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut(&C
  let fresh_hit=before[24]==0&&before[0x5e]==20&&before[0x61]==0x80&&before[0x60]==0x18&&before[0x78]==7
   &&before[0x52]==0&&before[0x57]==1&&before[0x5a]==1&&before[0x5d]==0&&w(0x6c)>0
   &&before[0x58..0x5b]==before[0x55..0x58];
+//5946 measured owned state-20 EXPIRED-timer completion (live corrected-campaign
+//record, fixture attempt20-live-5946-blocked-owned slot 1, word(0x6c)=0 with
+//0x50..0x53=05 00 00 != 0x55..0x58=05 00 01): the literal source path
+//0005ef3a/0005ef3e/0005ef40 (JLE 0x65384 TAKEN when word(0x6c)==0) ->
+//0x65384-0x65397 state dispatch via the jump table at 0x5ecf0 (entry 0x14 ->
+//0x5f4c4) -> 0005f4c4-0005f4d3 (word(0x6a)>0) -> 0005f501-0005f521 ->
+//0005f532-0005f569 (0005f564 CALL 0x81c60) -> 0005f5bc JNZ 0x6029a ->
+//0006029a-000602b0 (000602a2 MOV byte[0x5e],0x8; 00060291 MOV word[0x6c],0) ->
+//00060295 JMP 0x5ef46 -> 0005ef54 JBE 0x6539f -> 000653c3 JMP 0x6a290 -> the
+//same generic tail 0006a290-0006a53e (0006a4a0 DEC word(0x6c) SKIPPED:
+//0006a49b JLE; 0006a4a7 CALL 0x5e640 selects animation 0x19 0x10->0x05;
+//0006a4d5 CALL 0x7ac00; 0006a4e2 CALL 0x83140). Zero RNG draws. The first
+//triple 0x50..0x53 is consumed only by the admission predicate, never by the
+//executed tail, so only the 0x58..0x5b == 0x55..0x58 match is pinned (the
+//interpreter's measured admission arm, authoritative output 2a54ba4c...).
+ let expired_hit=before[24]==0&&before[0x5e]==20&&before[0x61]==0x80&&before[0x60]==0x18&&before[0x78]==7
+  &&before[0x52]==0&&before[0x57]==1&&before[0x5a]==1&&before[0x5d]==0&&w(0x6c)==0
+  &&before[0x58..0x5b]==before[0x55..0x58];
 //5922 measured owned hit-reaction completion: same record domain as the hit
  //hold with the expired 0x6c timer.5E0B0/5CC60 return to the explicit move
  //command shape (0x61=0x80,0x60=0x18), clear57 and restore animation. No RNG.
@@ -47,8 +65,8 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut(&C
  //same plan_choice/plan_explicit_target pieces as the accepted command path.
  let command_retained=before[0x5e]==8&&before[0x61]==0x80&&before[0x60]==0x18&&before[0x78]==7
   &&before[0x52]==1&&before[0x57]==0&&before[0x5a]==1;
- if before[6]!=1||before[24]>=4||before[0x7a]!=4||!(idle||command||hostile||hit||hit_complete||fresh_hit||command_retained)||before[0x76]>90||before[0x7b]!=255
-  ||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)||before[0x4f]!=0||(before[0x52]!=0&&!(hostile||hit||hit_complete||command_retained))||(before[0x57]!=0&&!(hostile||hit||hit_complete||fresh_hit))
+ if before[6]!=1||before[24]>=4||before[0x7a]!=4||!(idle||command||hostile||hit||hit_complete||fresh_hit||expired_hit||command_retained)||before[0x76]>90||before[0x7b]!=255
+  ||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)||before[0x4f]!=0||(before[0x52]!=0&&!(hostile||hit||hit_complete||command_retained))||(before[0x57]!=0&&!(hostile||hit||hit_complete||fresh_hit||expired_hit))
   ||w(0x49)as u16&!0x337f!=0||w(0x6c)<0||w(0x66)<=2||w(0x6a)<=0{return Err(CreatureError::UnsupportedMotionState);}
- creature_world::plan_mule_admitted_body_with_collision(before,prefix,working_target,map,context,physics,trig,contact,animations,choice,true,cell_entry,postphysics,obstacle,hostile||hit_complete)
+ creature_world::plan_mule_admitted_body_with_collision(before,prefix,working_target,map,context,physics,trig,contact,animations,choice,true,cell_entry,postphysics,obstacle,hostile||hit_complete||expired_hit)
 }

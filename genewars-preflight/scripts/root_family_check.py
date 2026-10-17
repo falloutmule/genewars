@@ -92,27 +92,43 @@ POSITIVE = [
     dict(id='R10-owned-state20-fresh-timer-5940', frame=5940, slot=1, draws=0, mode='direct',
          fixture='private/review/attempt17-live-5940-blocked-owned',
          expected='private/review/owned-mule-captured-width/2e412d033c0e43b9898e309d022b321e'),
+    # F9 conversion of the F7 negative row to POSITIVE (2026-10-17), per the family
+    # policy's "source-proved and intentionally expanded" condition. Source basis:
+    # the literal executed path 0005ef3a/0005ef3e/0005ef40 (JLE 0x65384 TAKEN when
+    # word(0x6c)==0) -> 0x65384-0x65397 state dispatch (jump table 0x5ecf0, entry
+    # 0x14 -> 0x5f4c4) -> 0005f4c4-0005f4d3 (word(0x6a)>0) -> 0005f501-0005f521 ->
+    # 0005f532-0005f569 (CALL 0x81c60) -> 0005f5bc JNZ 0x6029a -> 000602a2 state 8,
+    # 00060291 word(0x6c)=0 -> tail 0006a290-0006a53e (0006a4a0 DEC SKIPPED;
+    # 0006a4a7 CALL 0x5e640 animation 0x10->0x05); zero RNG draws. The first
+    # triple 0x50..0x53 is admission-only, so its mismatch does NOT refuse this
+    # shape. The reference model extended first (f8-interpreter-expired-timer-
+    # extension-checkpoint-20261017.json: source_prepared, 21226 instructions,
+    # 0 draws, deterministic across three runs, slot-1-only 21-byte delta), then
+    # the port implemented the same pinned arm (expired_hit in
+    # plan_owned_after_prefix + the 5F4C4/6029A completion in the choice callback).
+    # Same fixture as the former negative gate; this is NOT a conversion of any
+    # other row.
+    dict(id='R20-owned-state20-expired-timer-triple-mismatch-5946', frame=5946, slot=1, draws=0, mode='direct',
+         fixture='private/review/attempt20-live-5946-blocked-owned',
+         expected='private/review/owned-mule-captured-width/2a54ba4cd4344ba98d35d210c2d3d9b1'),
 ]
 NEGATIVE = [
-    # F7 negative gate (added 2026-10-17 BEFORE any implementation), restoring
-    # fail-closed coverage after the F6 conversion left zero negative rows.
-    # Pins the live frame-5946 refusal: owned Mule slot 1, caller
-    # step_owned_mule_slot, state 0x5e=20, animation 0x19=16, 0x1b=0, 0x60=0x18,
-    # 0x61=0x80, word(0x6c)=0 (EXPIRED timer), 0x49=0x10, 0x78=7, 0x7a=4, 0x4f=0,
-    # 0x5d=0, 0x52=0, 0x57=1, 0x5a=1, word(0x66)=8651, 0x68=8, 0x55..0x58 =
-    # 05 00 01 05 and 0x50..0x53 = 05 00 00 01: the 0x50/0x55 pointer triples do
-    # NOT match, so the pre-existing expired-timer completion arm refuses this
-    # shape. Measured record captured from a fresh campaign run
-    # (GENEWARS_MULE_CALLBACK_CAMPAIGN_PROGRESS=1 / GENEWARS_MULE_CALLBACK_FIXTURE,
-    # private/integration/attempt20-capture-20261017/capture/frame-5946-slot-1-
-    # blocked-before-owned, copied verbatim); the record fields were cross-checked
-    # against the blocked report's mission.creature_states slot 1 (state 20,
-    # animation 16, reserve 8, target_kind 1). The gate asserts the exact expected
-    # rejection AND complete transactional world/RNG preservation (all eight
-    # buffers byte-identical to the input). Unsupported until independently
-    # source-proved; never silently expanded.
-    dict(id='R20-owned-state20-expired-timer-triple-mismatch-5946', frame=5946, slot=1,
-         fixture='private/review/attempt20-live-5946-blocked-owned',
+    # F9 fail-closed negative gate (added 2026-10-17 in the same change set as the
+    # R20 conversion so the checker keeps at least one negative row). Pins the
+    # domain the F8 evidence EXPLICITLY leaves unexecuted: the identical expired
+    # state-20 shape (fixture attempt20-live-5946-blocked-owned, word(0x6c)=0,
+    # 0x60=0x18, 0x61=0x80, 0x52=0, 0x57=1, 0x5a=1) with word(0x6a) forced to 0.
+    # Source basis: the 0005f4d5-0005f4fc completion side of 5F4C4 requires
+    # word(0x6a)>0 (0005f4c4-0005f4d3 JG) and was never executed on the measured
+    # path, so word(0x6a)<=0 stays unsupported; the port's generic admission gate
+    # (w(0x6a)<=0) must refuse it. The fixture is DERIVED, not measured: slot 1
+    # word(0x6a) 58 -> 0, all other bytes of all eight buffers byte-identical to
+    # the live capture. The gate asserts the exact expected rejection AND complete
+    # transactional world/RNG preservation (verified: blocked
+    # Creatures(UnsupportedMotionState), all eight buffers byte-identical to the
+    # input, 0 draws). Never silently expanded.
+    dict(id='R21-owned-state20-expired-timer-zero-6a-5946', frame=5946, slot=1,
+         fixture='private/review/attempt22-owned-5946-expired-timer-zero-6a',
          expect_error='Creatures(UnsupportedMotionState)'),
 ]
 

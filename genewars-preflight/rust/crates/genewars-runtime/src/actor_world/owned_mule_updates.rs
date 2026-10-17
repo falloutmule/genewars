@@ -86,6 +86,22 @@ impl ActorWorld {
     }
    },animations,
    |record|{
+    if record[0x5e]==20&&word(record,0x6c)==0&&record[0x60]==0x18&&record[0x61]==0x80 {
+     //5946 measured owned state-20 EXPIRED-timer completion at5F4C4/6029A: the
+     //jump-table dispatch (0x65384 entry 0x14 -> 5F4C4) runs the completion
+     //block 0005f532-0005f569 (0005f564 CALL 0x81c60 -> 0005f5bc JNZ 0x6029a ->
+     //000602a2 MOV byte[0x5e],0x8; 00060291 MOV word[0x6c],0) and clears the
+     //retained pair target57 (measured 0x57 1->0) before the shared tail
+     //0006a290-0006a53e selects animation 0x19 0x10->0x05 via 5E640 (0006a4a0
+     //DEC word(0x6c) skipped: 0006a49b JLE). 0x60/0x61 keep the explicit move
+     //command shape; no RNG, no reattack. The first triple 0x50..0x53 is
+     //admission-only and is NOT pinned here (measured mismatch 05 00 00).
+     if record[24]!=0||record[0x78]!=7||record[0x7a]!=4||record[0x4f]!=0||record[0x5d]!=0
+      ||record[0x52]!=0||record[0x57]!=1||record[0x5a]!=1
+      ||record[0x58..0x5b]!=record[0x55..0x58]
+      ||i16::from_le_bytes([record[0x6a],record[0x6b]])<=0{return Err(CreatureError::UnsupportedMotionState);}
+     let mut after=*record;after[0x5e]=8;after[0x57]=0;return Ok(after);
+    }
     if record[0x5e]==20&&word(record,0x6c)==0 {
      //5922 measured owned hit-reaction completion at5E0B0/5CC60: the expired
      //0x6c timer returns the mule to state8 with the explicit move command
