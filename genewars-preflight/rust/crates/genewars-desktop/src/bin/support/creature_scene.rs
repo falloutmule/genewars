@@ -241,7 +241,18 @@ pub fn draw_supported_mule_record(
     // owned arm admits exactly that carried shape; the attack-entry
     // owned_hostile shape stays required for the completed-animation arm.
     let owned_hit_carry = record[0x5e] == 20 && animation <= 7;
-    let owned_ordinary = (matches!(record[0x5e],0|8) || owned_hostile || owned_hit_carry) && no_lifecycle_icon
+    // The same carried hit reaction after the Mule's own 5E614->5E817 callback
+    // has selected the hit animation 16: measured at the refused 5940
+    // presentation (state 20, animation 16, frame 1, 0x60=0x18, 0x61=0x80,
+    // 0x6c=32767, 0x78=7, reference 0x55=5) - the exact command bytes the
+    // proved 5922 completion wrote (F1-R07) and the F1-R14 carry already
+    // admits under animation <= 7. Bounded to those command bytes; the
+    // hostile attack-entry shape stays with owned_hostile, state 21 and
+    // every other guard untouched. Presentation scope decision: no
+    // interpreter oracle covers rendering.
+    let owned_hit_hold = record[0x5e] == 20 && animation == 16
+        && record[0x60] == 0x18 && record[0x61] == 0x80;
+    let owned_ordinary = (matches!(record[0x5e],0|8) || owned_hostile || owned_hit_carry || owned_hit_hold) && no_lifecycle_icon
         && (record[0x7b]==0 || record[0x7b]>191) && !(record[0x5e]==0 && record[0x60]&0x20!=0);
     if record[6] != 1 || record[0x18] > 4 || record[0x7a] != 4 || !admitted_pair || (owned && !owned_ordinary) {
         return Err(CreatureDrawError::UnsupportedRecordState);
@@ -1285,6 +1296,25 @@ mod pair_stop_render_tests {
   let mut bad=r;bad[0x19]=16;
   assert_eq!(draw(&bad).0,Err(CreatureDrawError::UnsupportedRecordState));
   assert_eq!(draw(&r).1,saved);
+ }
+
+ #[test]fn owned_hit_reaction_hold_admits_selected_hit_animation_with_carry_shape(){
+  let p=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+  let(resources,_,_)=crate::runtime_resources::Resources::load(&p.join("private/integration/game-runtime")).unwrap();
+  let raw=std::fs::read(p.join("private/review/neutral-hit-reaction-193/0e9f48028d9c4d95b20da0eb8c68991e/frame-5876/creatures.bin")).unwrap();
+  let mut r:[u8;124]=raw[5*124..6*124].try_into().unwrap();
+  //Measured refused 5940 presentation: the carried hit reaction after the
+  //Mule's own 5E614->5E817 callback selected the hit animation 16, with the
+  //exact command bytes the proved 5922 completion wrote (F1-R07/F1-R14).
+  r[0x18]=0;r[0x19]=16;r[0x60]=0x18;r[0x61]=0x80;r[0x57]=1;
+  let height=i32::from_le_bytes(r[39..43].try_into().unwrap())-i32::from_le_bytes(r[17..21].try_into().unwrap());
+  let mut px=vec![0x55u8;96*80];
+  let receipt=draw_supported_mule_record(&resources.mule,&r,[48,40],height,0,0,false,0,0,&resources.fade,&resources.gla,[96,80],96,&mut px).unwrap();
+  assert!(receipt.components.iter().map(|c|c.pixels_written).sum::<usize>()>0);
+  //Any other command-byte shape in the completed-animation arm stays closed.
+  let mut bad=r;bad[0x61]=0x40;let mut px=vec![0x55u8;96*80];let saved=px.clone();
+  assert_eq!(draw_supported_mule_record(&resources.mule,&bad,[48,40],height,0,0,false,0,0,&resources.fade,&resources.gla,[96,80],96,&mut px),Err(CreatureDrawError::UnsupportedRecordState));
+  assert_eq!(px,saved);
  }
 }
 
