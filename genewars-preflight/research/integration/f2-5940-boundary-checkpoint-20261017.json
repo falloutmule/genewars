@@ -4,17 +4,28 @@
   "kind": "family F2 checkpoint - presentation boundary resolved; native parity for the new frontier pending at commit time",
   "family": "F2 - the campaign's step-5940 advance boundary (presentation caller vs simulation caller)",
   "policy": "private/integration/development-policy-20261017.md",
-
   "measurement_first": {
     "method": "temporary env-gated dump in the presentation caller (instrumentation removed before the gate run; release tree clean)",
     "dump": "private/review/f2-5940-dump/refused-record.json",
-    "refused_record": {"slot": 1, "owner": 0, "state_0x5e": 20, "animation_0x19": 16, "frame_0x1b": 1,
-                        "f_0x60": 24, "f_0x61": 128, "f_0x6c": 32767, "f_0x78": 7,
-                        "f_0x52": 0, "f_0x57": 1, "f_0x5a": 1, "f_0x5d": 0, "f_0x4f": 0},
+    "refused_record": {
+      "slot": 1,
+      "owner": 0,
+      "state_0x5e": 20,
+      "animation_0x19": 16,
+      "frame_0x1b": 1,
+      "f_0x60": 24,
+      "f_0x61": 128,
+      "f_0x6c": 32767,
+      "f_0x78": 7,
+      "f_0x52": 0,
+      "f_0x57": 1,
+      "f_0x5a": 1,
+      "f_0x5d": 0,
+      "f_0x4f": 0
+    },
     "caller_identified": "compose_actor_scene (actor_scene.rs, MULE branch) -> draw_supported_mule_record; refusing guard = the owned_ordinary conjunction (the record is neither state 0/8, nor owned_hostile because 0x60=0x18 is not 0x08/0x88 and 0x52=0, nor the F1-R14 owned_hit_carry because animation 16 > 7)",
     "not_the_f1_r04_gate": "F1-R04 is the simulation-caller full-path motion transition (Creatures(UnsupportedMotionState)); this refusal was the draw layer (UnsupportedRecordState)"
   },
-
   "decision": {
     "choice": "(a) bounded presentation admission",
     "arm": "owned_hit_hold = state 0x5e==20 && animation==16 && 0x60==0x18 && 0x61==0x80, OR'd into owned_ordinary",
@@ -22,22 +33,48 @@
     "scope_note": "presentation SCOPE decision: no interpreter oracle covers rendering",
     "existing_pins_preserved": "the negative test pinning (20,16) with 0x60=0x08 / 0x57=0 stays green because the new arm requires exactly 0x60==0x18 && 0x61==0x80; no test, expected value, oracle or other guard was modified; one documentation test added"
   },
-
   "director_verification": {
     "tool": "scripts/root_family_check.py",
     "run": "private/integration/F2-root-check-20261017T1335",
-    "result": {"positive": "24/24", "negative": "2/2", "checks": "33/33", "all_ok": true},
-    "campaign": {"steps": 5940, "blocked": "Creatures(UnsupportedMotionState)",
-                 "world_sha256": "53a4d4ea70749d2b4194af78f6b51abf55045daddbf462f202f0b4aaac6a7d04",
-                 "rgb_sha256": "08e84edc5db2dab132da338eedca8e841e1f2b4bce3af851a7832aa96f4c88c3"},
+    "result": {
+      "positive": "24/24",
+      "negative": "2/2",
+      "checks": "33/33",
+      "all_ok": true
+    },
+    "campaign": {
+      "steps": 5940,
+      "blocked": "Creatures(UnsupportedMotionState)",
+      "world_sha256": "53a4d4ea70749d2b4194af78f6b51abf55045daddbf462f202f0b4aaac6a7d04",
+      "rgb_sha256": "08e84edc5db2dab132da338eedca8e841e1f2b4bce3af851a7832aa96f4c88c3"
+    },
     "note": "the campaign now stops in the SIMULATION at the declared unsupported owned full-path domain (F1-R04), not in the draw layer"
   },
-
   "frontier": {
     "previous_accepted_frontier": "step 5939 (F1 closure, native-accepted on frozen sha256 18442a3d...)",
     "new_frontier": "step 5940 committed; next refusal is the declared unsupported full-path transition",
     "next_family": "F3 - the owned full-path motion transition at this boundary (state 8 -> 15 family), which requires independent source proof (trace + interpreter) before any admission; F1-R04 stays the explicit negative gate until then"
   },
-
-  "not_run_at_commit": ["native input parity + framebuffer comparison for the 5940 frontier (launched immediately after this checkpoint)"]
+  "native_acceptance_5940": {
+    "run": "private/integration/f1-native-20261017T1410",
+    "script": "hermes scratch f1_native_parity2.py (same authentic native input sequence as the F1 milestone)",
+    "frozen_executable_sha256_prefix": "af9ca17729274fcb",
+    "status": "passed",
+    "checks": {
+      "steps": true,
+      "blocked": true,
+      "world_sha256": true,
+      "actor_dispatch_audit": true,
+      "buildings": true,
+      "outcome": true,
+      "creature_states": true,
+      "issued_move_commands": true
+    },
+    "headless": "step 5940, blocked Creatures(UnsupportedMotionState)",
+    "native": "step 5940, blocked Creatures(UnsupportedMotionState)",
+    "world_sha256": "53a4d4ea70749d2b4194af78f6b51abf55045daddbf462f202f0b4aaac6a7d04",
+    "rgb_sha256": "08e84edc5db2dab132da338eedca8e841e1f2b4bce3af851a7832aa96f4c88c3",
+    "framebuffer_bmp_equal": true,
+    "bmp_sha256": "416f075135400e4847ef007e266c3c18fac2642d2af788a18fd"
+  }
 }

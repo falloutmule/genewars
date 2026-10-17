@@ -1,5 +1,25 @@
 # GeneWars authoritative continuation - 2026-10-16
 
+## Family F2 checkpoint - 2026-10-17 (campaign reaches step 5940, native-accepted)
+
+F2 (the step-5940 advance boundary) resolved by measurement first: an env-gated dump captured the exact refused
+record (private/review/f2-5940-dump/refused-record.json; instrumentation removed before the gate run) - an owned
+Mule in state 20, animation 16, frame 1, 0x60=0x18, 0x61=0x80, 0x6c=32767, 0x52=0, 0x57=1 - and the call graph
+showed the refusing guard is the owned-ordinary conjunction in draw_supported_mule_record (not the startup
+wrapper, and not the F1-R04 simulation gate).
+
+- Bounded admission `owned_hit_hold = state 20 && animation 16 && 0x60==0x18 && 0x61==0x80`, recorded as a
+  presentation SCOPE decision (no interpreter oracle covers rendering). No test, expected value, oracle or other
+  guard changed: the existing negative pin for (20,16) with 0x60=0x08 stays green because the arm pins the carried
+  command bytes exactly.
+- Verified: family checker positive 24/24, negative 2/2, 33/33. Campaign now commits **step 5940**
+  (world `53a4d4ea...`, rgb `08e84edc...`) and stops in the SIMULATION at the declared unsupported owned
+  full-path transition (F1-R04), which stays explicitly blocked with transactional preservation.
+- Native parity for the 5940 frontier on one frozen executable (sha256 `af9ca177...`): all eight compared keys
+  equal and the frontier framebuffers byte-identical.
+- Next family **F3**: the owned full-path motion transition at this boundary - it requires independent source proof
+  (trace + interpreter) before any admission; F1-R04 stays the explicit negative gate until then.
+
 ## Family F1 closure checkpoint - 2026-10-17 (campaign step 5939 + native acceptance)
 
 F1 (Mule light/full callback sequencing, shared completed-animation and hit-reaction
