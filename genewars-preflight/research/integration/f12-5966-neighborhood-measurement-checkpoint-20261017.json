@@ -1,0 +1,34 @@
+{
+  "receipt": "f12-5966-neighborhood-measurement-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "measurement checkpoint - the 5966 refusal is an owner-side neighborhood catch-all after an arrival, not a record domain; nothing implemented",
+  "policy": "private/integration/development-policy-20261017.md",
+  "measured": {
+    "campaign": "attempt25-campaign-20261017T172307 - blocked at step 5966, world 039aee79..., rgb 45ebf3ba... (reproduces the F11 frontier exactly)",
+    "fixture": "private/review/attempt25-live-5966-blocked-owned",
+    "refusing_site": "owned_mule_neighborhood_no_action catch-all arm (actor_world/owned_mule_updates.rs:344 at measurement time), reached from the owned choice callback",
+    "sequence": "after the shared arrival block cleared the explicit command (0x61 0x80->0, 0x60 0x98->0x08, word(0x6c)->0) and dispatched ordinary owned idle AI (624B8/6BA47)",
+    "refused_neighbor": "a kind=1 owner-4 creature (the neutral Mule)",
+    "note": "also observed an early gate in step_owned_mule_slot_inner that returns UnsupportedNeighborhood when global_flags&1 != 0; the campaign path reaches the later catch-all instead"
+  },
+  "negative_gate": {
+    "row": "R24-owned-arrival-idle-kind1-neighbor-5966",
+    "pins": "the exact rejection Creatures(UnsupportedNeighborhood) plus complete transactional preservation",
+    "untouched": "every existing row"
+  },
+  "implementation": "none - no behavior was changed and rust/ has zero diffs; the domain stays explicitly unsupported until the source question below is answered",
+  "director_verification": {
+    "run": "private/integration/F12-root-check-20261017T1850",
+    "result": {
+      "positive": "39/39",
+      "negative": "4/4",
+      "checks": "50/50",
+      "all_ok": true
+    },
+    "campaign": "steps 5966, blocked Creatures(UnsupportedNeighborhood), world 039aee79..., rgb 45ebf3ba... (unchanged, as expected with no port change)"
+  },
+  "open_question_for_next_family": "what the original owned idle AI (624B8/6BA47) does with a kind=1 owner-4 neighbor - i.e. whether the neighborhood catch-all is an unimplemented branch or an over-strict guard. This needs cited listing evidence (the neighborhood walk and the kind/owner comparison), the same way F5/F8 closed their gaps.",
+  "cumulative": {
+    "since_policy_adoption": "5940 -> 5946 -> 5962 -> 5963 -> 5966; this checkpoint holds the frontier while the evidence question is answered"
+  }
+}

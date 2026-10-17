@@ -176,6 +176,21 @@ NEGATIVE = [
     dict(id='R21-owned-state20-expired-timer-zero-6a-5946', frame=5946, slot=1,
          fixture='private/review/attempt22-owned-5946-expired-timer-zero-6a',
          expect_error='Creatures(UnsupportedMotionState)'),
+    # F12 measurement-first NEGATIVE gate (added 2026-10-17, before any port
+    # change). Pins the live 5966 refusal: the corrected campaign
+    # (attempt25-campaign-20261017T172307) blocks at step 5966 with
+    # Creatures(UnsupportedNeighborhood) - a NEW error class, so the refusing
+    # site is owned_mule_updates.rs owned_mule_neighborhood_no_action's
+    # catch-all neighborhood arm (owned_mule_updates.rs:344 at measurement
+    # time), reached from the owned choice callback after the shared arrival
+    # block cleared the explicit command (0x61 0x80->0, 0x60 0x98->0x08,
+    # word(0x6c)->0) and dispatched ordinary owned idle AI (624B8/6BA47).
+    # The refused neighbor is a kind=1 owner-4 creature (the neutral Mule).
+    # The gate asserts the exact expected rejection AND complete transactional
+    # preservation. Never silently expanded.
+    dict(id='R24-owned-arrival-idle-kind1-neighbor-5966', frame=5966, slot=1,
+         fixture='private/review/attempt25-live-5966-blocked-owned',
+         expect_error='Creatures(UnsupportedNeighborhood)'),
 ]
 
 def main():
