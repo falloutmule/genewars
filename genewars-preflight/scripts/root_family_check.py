@@ -111,6 +111,30 @@ POSITIVE = [
     dict(id='R20-owned-state20-expired-timer-triple-mismatch-5946', frame=5946, slot=1, draws=0, mode='direct',
          fixture='private/review/attempt20-live-5946-blocked-owned',
          expected='private/review/owned-mule-captured-width/2a54ba4cd4344ba98d35d210c2d3d9b1'),
+    # F10: R22 was added FIRST as a measurement-first NEGATIVE gate pinning the
+    # live 5962 refusal, then CONVERTED TO POSITIVE in the same change set
+    # (2026-10-17) once the neutral oracle adjudicated the record, per the
+    # family policy's "source-proved and intentionally expanded" condition.
+    # Source basis: the literal executed path 0x5ed20 entry -> 0x5ef37/0x5ef3e/
+    # 0x5ef40 (JLE 0x65384 taken when word(0x6c)==0) -> 0x65384-0x65397 state
+    # dispatch -> 0x60332-0x6033b state-21 arm (target resolved from the
+    # attacker's own 0x55 link) -> 0x6d390 distance squared -> 0x60340-0x60347
+    # range compare (measured 85149 > 16384 FAILS) -> 0x60392-0x6039e
+    # out-of-range leave-pursuit branch -> 0x1f270 draw -> 0x73770 -> 0x6152c
+    # (animation 0x0b->0x05) -> 0x60291 -> 0x5ef46 -> tail 0x6a290-0x6a53e with
+    # 0x6a4a7 CALL 0x5e640; exactly one draw (seed 0x0a25->0x0681, ring 17->18,
+    # draw_count 50010->50011). Measured deltas are slot-5-only: state
+    # 0x5e 0x15->8, animation 0x19 0x0b->0x05, frame counters 0x1c..0x1e ->0,
+    # word(0x66) -2, word(0x6c) ->15; no position, enemy or other-buffer write.
+    # The neutral oracle produced the authoritative expected output
+    # 23a9b1f85a74452588e40de2712fe016 (source_prepared, 2376 instructions,
+    # 1 draw); the port implements the same measured branch in
+    # mule_neutral_completed_attack with its own field gate as the admission
+    # shape. Same fixture as the former negative gate; this is NOT a conversion
+    # of any other row.
+    dict(id='R22-neutral-state21-pursuit-5962', frame=5962, slot=5, draws=1, mode='direct',
+         fixture='private/review/attempt23-live-5962-blocked-neutral',
+         expected='private/review/neutral-mule-captured-width/23a9b1f85a74452588e40de2712fe016'),
 ]
 NEGATIVE = [
     # F9 fail-closed negative gate (added 2026-10-17 in the same change set as the

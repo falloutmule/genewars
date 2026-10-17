@@ -430,7 +430,30 @@ impl ActorWorld {
             {return Err(CreatureError::UnsupportedMotionState);}
         let xy=genewars_core::cd_candidate::distance_squared_wrapping_15([word(record,7),word(record,9)],[word(enemy,7),word(enemy,9)])as i32;
         let z=(i32::from_le_bytes(enemy[39..43].try_into().unwrap()).wrapping_sub(i32::from_le_bytes(record[39..43].try_into().unwrap())))>>3;
-        if (xy.wrapping_add(z.wrapping_mul(z))as u32)>16384{return Err(CreatureError::UnsupportedMotionState);}
+        if (xy.wrapping_add(z.wrapping_mul(z))as u32)>16384{
+            //60340/60392: the measured out-of-range branch of the state-21 arm
+            //(attempt23 live 5962 fixture, neutral oracle output
+            //23a9b1f85a74452588e40de2712fe016). The literal executed path
+            //0x5ef37/0x5ef3e/0x5ef40 -> 0x65384 state dispatch -> 0x60332
+            //(target from the attacker's own55 link) -> 0x6d390 distance ->
+            //0x60340-0x60347 compare -> 0x60392-0x6039e leaves the pursuit
+            //domain WITHOUT an attack: state 0x15->8, animation 0x19 0x0b->0x05,
+            //frame counters 0x1c..0x1e ->0, word(0x66) rewinds by 2 (via the
+            //shared 6E2xx decrement and 6A2BD refresh) and word(0x6c) is set
+            //to 16 so the shared tail DEC (creature_world.rs:547) lands on the
+            //measured 15; exactly one shared draw (0x1f270 via
+            //the seed*0xe62d ring+1 form, measured seed 0x0a25->0x0681, ring
+            //17->18, draw_count 50010->50011). No position, enemy or
+            //other-buffer write; the function's own field gate above stays the
+            //admission shape, so unmeasured alternates keep failing closed.
+            let mut after=*record;
+            after[0x5e]=8;after[0x19]=5;after[0x1c..0x1f].fill(0);
+            //word(0x66) is left untouched here: the shared odd-phase energy
+            after[0x6c..0x6e].copy_from_slice(&16i16.to_le_bytes());
+            if rng.ring>=32{return Err(CreatureError::UnsupportedMotionState);}
+            rng.seed=rng.seed.wrapping_mul(0xe62d);rng.ring=(rng.ring+1)&31;rng.draw_count=rng.draw_count.wrapping_add(1);
+            return Ok(after);
+        }
         let mut after=*record;
         let trait_value=10*(50+50*i32::from(record[0x76])/100)/100;
         let cost=(trait_value>>2).min(i32::from(word(record,0x68)));

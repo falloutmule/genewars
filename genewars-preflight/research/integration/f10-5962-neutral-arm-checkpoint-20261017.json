@@ -1,0 +1,65 @@
+{
+  "receipt": "f10-5962-neutral-arm-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "family F10 integrated - corrected campaign advanced 5962 -> 5963; a neutral-caller branch, adjudicated by the oracle (no interpreter extension needed)",
+  "policy": "private/integration/development-policy-20261017.md",
+  "measured_record": {
+    "fixture_capture": "private/integration/attempt23-campaign-5962-154016/ (only capture: frame-5962-slot-5-blocked-before)",
+    "caller": "the NEUTRAL caller's own phase - step_neutral_mule_slot_with_water (actor_world/creature_updates.rs), reached from family_scheduler.rs because owner==4. No blocked-before-owned capture exists at 5962.",
+    "fields": "slot 5, owner 4, state 0x5e=21, animation 0x19=11, frame 0x1b=0, 0x60=0x88, 0x61=0x40, word(0x6c)=0, word(0x6a)=62, 0x52=1, 0x57=1, 0x5a=0, 0x78=0, 0x7a=4, 0x4f=0, 0x5d=0, word(0x66)=7138, 0x68=0, 0x7b=255, 0x15=0x80, 0x16=2, 0x77=255, triples 0x50..0x53 = 0x55..0x58 = 01 00 01 (both to slot 1)",
+    "cross_check": "matches the blocked report's mission.creature_states[5]"
+  },
+  "correction_to_f7": {
+    "was": "the F7 receipt described the plain blocked-before capture as 'the draw layer's record'",
+    "now": "the code shows the plain capture is written by the NEUTRAL slot caller's own error path (creature_updates.rs); the owned caller writes blocked-before-owned. F7's caller identification was file-level only and is corrected here.",
+    "recorded_in": "this receipt (the F7 receipt's text is left as written, with the correction recorded here rather than silently rewritten)"
+  },
+  "oracle_verdict": {
+    "status": "source_prepared",
+    "note": "the neutral oracle adjudicated the record directly - no reference-model extension was needed this time",
+    "trace": "0x5ef37/0x5ef3e/0x5ef40 -> 0x65384 state dispatch -> 0x60332 state-21 arm -> 0x6d390 distance -> 0x60340-0x60347 compare -> 0x60392-0x6039e out-of-range leave-pursuit -> 0x1f270 draw -> 0x73770 -> 0x6152c -> 0x60291 -> tail 0x6a290-0x6a53e with 0x6a4a7 CALL 0x5e640"
+  },
+  "implementation": {
+    "file": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs (+24/-1)",
+    "branch": "one branch in mule_neutral_completed_attack on the failed range check: state 0x15->8, animation 0x19->5, 0x1c..0x1f->0, word(0x6c)=16 (the shared tail DEC lands on the measured 15); word(0x66) untouched because the shared odd-phase energy decrement plus refresh_mule_lifecycle produce the measured -2; exactly 1 inline draw using the proven seed*0xe62d / (ring+1)&31 / draw_count+1 form",
+    "decision": "(i) an unimplemented transition in the port - the domain was never admitted (state 21 differs from 5946's state 20); NOT a defect of an already-admitted domain",
+    "focused_fixture": "zero diffs against the oracle output in all eight buffers at exact lengths, draws 1/1 with a byte-identical rng.bin"
+  },
+  "provisional_items": [
+    "the branch constants word(0x6c)=16 and word(0x66)-untouched are derived from measured net deltas minus the shared body's proven decrements, not from separately cited branch-local addresses (0x60392-0x6039e / 0x73770 listing text is not yet pinned); the byte-exact focused gate compensates but the addresses should be pinned in a later pass",
+    "the oracle's per-call attribution of the 0x66 -2 (0x6E2xx vs 6A2BD refresh) is inferred from the port's shared code, not from the trace"
+  ],
+  "frontier_advance": {
+    "before": {
+      "steps": 5962,
+      "world_sha256": "f6e22870557268bb666888623314eb496aa22bc8bf58bc21ff7222058653c4be"
+    },
+    "after": {
+      "steps": 5963,
+      "blocked": "Creatures(UnsupportedMotionState)",
+      "world_sha256": "e41fabfe7c6690f66c3a7433f333a92301a832b6696b345018ed47d18f3209ea",
+      "rgb_sha256": "f2030530e90d8e66ff67c69acb0c777fe5de25fd5431ec5132f9dc9bca6bd04d"
+    }
+  },
+  "negative_gate": {
+    "converted": "R22 -> positive with the source basis in-row",
+    "note": "the checker's second negative row remains; converting R22 did not empty the negative set this time"
+  },
+  "director_verification": {
+    "run": "private/integration/F10-root-check-20261017T1620",
+    "result": {
+      "positive": "36/36",
+      "negative": "2/2",
+      "checks": "45/45",
+      "all_ok": true
+    },
+    "campaign": "steps 5963, blocked Creatures(UnsupportedMotionState), world e41fabfe..., rgb f2030530... - matches the worker's report exactly"
+  },
+  "unresolved": {
+    "next": "the 5963 refusal is unmeasured (only a neutral slot-5 capture; all slots sit in state 8 at the block)",
+    "native_parity": "not yet run for the 5963 frontier"
+  },
+  "cumulative": {
+    "since_policy_adoption": "5940 -> 5946 -> 5962 -> 5963, no gate relaxation"
+  }
+}
