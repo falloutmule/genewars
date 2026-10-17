@@ -86,7 +86,7 @@ impl ActorWorld {
             if peer[0x5e]!=3||peer[0x18]!=4||peer[0x7a]!=4||reference(peer,0x55)!=own{return Err(CreatureError::UnsupportedMotionState.into());}
         }
         let mut rng=self.rng;
-        let (prefix,working_target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng)?;
+        let (prefix,working_target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng,false)?;
         if before[0x5e]==27&&creature_world::mule_callback_phase(&before,context.frame_counter)&1!=0&&word(&before,0x6c)&15==0&&(0..=1).contains(&word(&before,0x68)) {
             let plan=creature_world::plan_mule_bones_retirement_after_prefix(&before,&prefix,self.map(),context,physics,trig,animations)?;
             let mut staged=self.clone();let retirement=staged.retire_mule_bones_after_callback(&before,&plan.motion)?;
@@ -161,7 +161,7 @@ impl ActorWorld {
                         let reacquire=crate::mule_neutral_hit_reacquire::plan_reacquire(record,&sole,*rng).map_err(|_|CreatureError::UnsupportedMotionState)?;
                         *rng=reacquire.rng_after;return Ok(reacquire.after);
                     }
-                    if record[0x5e]==21{if word(record,0x6c)<=0{return Err(CreatureError::UnsupportedMotionState);}let mut after=*record;if creature_world::mule_callback_phase(record,context.frame_counter)&3==3{
+                    if record[0x5e]==21{if word(record,0x6c)<=0{return world.mule_neutral_completed_attack(record,&enemy,&mut rng,physics,&mut pending_audio);}let mut after=*record;if creature_world::mule_callback_phase(record,context.frame_counter)&3==3{
                         let dx=word(&enemy,7).wrapping_mul(2).wrapping_sub(word(record,7).wrapping_mul(2));let dy=word(&enemy,9).wrapping_mul(2).wrapping_sub(word(record,9).wrapping_mul(2));
                         after[0x4b..0x4d].copy_from_slice(&crate::actor_motion::angle(i32::from(dx),i32::from(dy),physics.angles()).to_le_bytes());
                     }return Ok(after);}
@@ -397,6 +397,110 @@ impl ActorWorld {
         staged.validate_links()?;let mut result=plan;result.after=*staged.creatures.as_ref().unwrap().record(slot)?;*self=staged;Ok(MuleCallbackReceipt{motion:result,retirement:None,newborn_slots,pending_audio,pending_plant_retirements,pending_portrait_refresh:before[0x5e]==8&&prefix[0x5e]==0})
     }
 
+    ///60332 neutral owner4 completed attack: the expired attack timer hits the
+    ///pursued owned target through the shared5B9F0 damage body (direction
+    ///flipped from the proven owned packet) and immediately reattacks through
+    ///the 6096A..612B6 sole-enemy scan, 5B580's local reset and the proven
+    ///5C840/65DB5 entry planner. Mirrors ActorWorld::owned_mule_completed_attack
+    ///with the neutral caller domain (attacker owner4/0x61=0x40/task0). Every
+    ///stage runs inside the existing cloned transaction; late rejection
+    ///discards the target write, both records and every RNG draw together.
+    ///The 603C0 range miss (owner0-domain planner) and the5BC63 stop branch
+    ///stay explicit unsupported boundaries.
+    fn mule_neutral_completed_attack(&mut self,record:&CreatureRecord,enemy:&CreatureRecord,rng:&mut BlueprintRng,physics:&PhysicsTables,audio:&mut Vec<u8>)->Result<CreatureRecord,CreatureError>{
+        if record[24]!=4||record[0x5e]!=21||record[0x61]!=0x40||record[0x60]!=0x88||record[0x78]!=0||word(record,0x6c)!=0||record[0x76]>90
+            ||record[0x7a]!=4||record[0x7b]!=255||record[0x15]!=0x80||!matches!(record[0x16],2|0x82)||record[0x77]!=255
+            ||record[0x4f]!=0||record[0x5d]!=0||record[0x52]!=1||record[0x57]!=1
+            ||reference(record,0x50)!=reference(record,0x55)||word(record,0x49)as u16&0x100!=0||word(record,0x49)as u16&0x400!=0
+            {return Err(CreatureError::UnsupportedMotionState);}
+        let xy=genewars_core::cd_candidate::distance_squared_wrapping_15([word(record,7),word(record,9)],[word(enemy,7),word(enemy,9)])as i32;
+        let z=(i32::from_le_bytes(enemy[39..43].try_into().unwrap()).wrapping_sub(i32::from_le_bytes(record[39..43].try_into().unwrap())))>>3;
+        if (xy.wrapping_add(z.wrapping_mul(z))as u32)>16384{return Err(CreatureError::UnsupportedMotionState);}
+        let mut after=*record;
+        let trait_value=10*(50+50*i32::from(record[0x76])/100)/100;
+        let cost=(trait_value>>2).min(i32::from(word(record,0x68)));
+        after[0x68..0x6a].copy_from_slice(&(word(record,0x68)-cost as i16).to_le_bytes());
+        let draw=|r:&mut BlueprintRng|{r.seed=r.seed.wrapping_mul(0xe62d);r.ring=r.ring.wrapping_add(1)&31;r.draw_count=r.draw_count.wrapping_add(1);(r.seed>>8)as u8};
+        if rng.ring>=32{return Err(CreatureError::UnsupportedMotionState);}
+        let incoming=((trait_value>>1).max(cost*2)+i32::from(draw(rng)%10))as i16;
+        let target_id=word(enemy,15)as usize;
+        let prior=*self.creatures.as_ref().unwrap().record(target_id)?;if prior!=*enemy{return Err(CreatureError::UnsupportedMotionState);}
+        //5B9F0 shared nonlethal damage with the flipped direction: the target
+        //is the owned task7 Mule; defense uses the target trait and the packet
+        //keeps the proven nonlethal1..4/no-blood domain.
+        let percent=50+50*i32::from(prior[0x76])/100;let defense=6*percent/100;
+        let effective=(i32::from(incoming)-defense).max(1);
+        let attack_ref=[target_id as u8,(target_id>>8)as u8,1];
+        let attacker_ref=[record[15],record[16],1];
+        if incoming<=0||effective>4||i32::from(word(&prior,0x6a))<=effective
+            ||prior[0x50..0x53]!=attacker_ref||prior[0x55..0x58]!=attacker_ref
+            ||word(&prior,0x49)as u16&0x400!=0||word(&prior,0x6a)<=0{return Err(CreatureError::UnsupportedMotionState);}
+        let mut target_after=prior;
+        target_after[0x15]&=0xdf;target_after[0x33..0x37].fill(0);
+        target_after[0x60..0x62].copy_from_slice(&((word(&prior,0x60)as u16)&0xd71a).to_le_bytes());
+        target_after[0x5d]=0;target_after[0x57]=1;
+        target_after[0x6a..0x6c].copy_from_slice(&(word(&prior,0x6a)-effective as i16).to_le_bytes());
+        target_after[94]=20;target_after[0x6c..0x6e].copy_from_slice(&32767i16.to_le_bytes());
+        let mut damage_rng=*rng;
+        let first=draw(&mut damage_rng);
+        let damage_audio=if first%2!=0{8u8}else{28u8+draw(&mut damage_rng)%3};
+        self.creatures.as_mut().unwrap().replace_record_checked(target_id,&prior,&target_after)?;
+        *rng=damage_rng;audio.push(damage_audio);
+        if draw(rng)%100>90{return Err(CreatureError::UnsupportedNeighborhood);} //BA4; alternate branch unported
+        let sole=self.mule_neutral_attack_single_hostile(&after).map_err(|_|CreatureError::UnsupportedNeighborhood)?.ok_or(CreatureError::UnsupportedNeighborhood)?;
+        if word(&sole,15)!=target_id as i16{return Err(CreatureError::UnsupportedNeighborhood);}
+        //8B7D0 current-cell predicate: only a shared kind5/code11 effect forces
+        //escape; kind1 links (the hit target included) do not.
+        {let cell=floor_cell([word(&after,7),word(&after,9)]);let mut raw=reference(self.map(),cell*14+6);
+         while raw[2]!=0{let e=self.entity(raw).map_err(|_|CreatureError::UnsupportedNeighborhood)?;if raw[2]==5&&self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?.record(word(&raw,0)as usize).map_err(|_|CreatureError::UnsupportedNeighborhood)?[0x45]==0x11{return Err(CreatureError::UnsupportedNeighborhood);}raw=reference(e,3);}}
+        //60D91..60F53 query weight/confidence with four ordered draws, then
+        //5B580's local reset. 5B5CC's task7 reference58 retention does not run
+        //for the task0 neutral attacker; the shared entry planner re-enters21.
+        let cell_delta=|a:i16,b:i16|{let a=i32::from((a as u16&0x7fff)>>8);let b=i32::from((b as u16&0x7fff)>>8);(b-a+64).rem_euclid(128)-64};
+        let dx=cell_delta(word(&after,7),word(&sole,7));let dy=cell_delta(word(&after,9),word(&sole,9));
+        let distance=(dx*dx+dy*dy)*256*256;
+        if distance>=1024*1024||word(&after,0x64)<=0{return Err(CreatureError::UnsupportedNeighborhood);}
+        let weight=1024-genewars_core::cd_candidate::integer_sqrt(distance as u32)as i32;
+        let confidence=i32::from(word(&after,0x6a))*256/i32::from(word(&after,0x64))-((weight/512)<<5)+10;
+        if rng.ring>=32{return Err(CreatureError::UnsupportedMotionState);}
+        let draws=[draw(rng),draw(rng),draw(rng),draw(rng)];
+        if i32::from(draws[2])%100>90||i32::from(draws[3])>=confidence{return Err(CreatureError::UnsupportedNeighborhood);}
+        let mut reacquired=after;
+        reacquired[0x15]&=0xdf;reacquired[0x33..0x37].fill(0);reacquired[0x5d]=0;reacquired[0x4f]=0;reacquired[0x57]=0;
+        reacquired[0x60..0x62].copy_from_slice(&((word(&after,0x60)as u16&0xd71a)|0xc0).to_le_bytes());
+        reacquired[0x55..0x58].copy_from_slice(&attack_ref);reacquired[0x57]=1;
+        reacquired[0x16]&=0x3f;reacquired[0x49..0x4b].copy_from_slice(&((word(&after,0x49)as u16|0x14)&0xeffc).to_le_bytes());
+        reacquired[0x54]=20;reacquired[0x50..0x53].copy_from_slice(&attack_ref);reacquired[0x52]=1;
+        let speed=creature_world::mule_requested_speed(&reacquired);reacquired[0x3f..0x41].copy_from_slice(&speed.to_le_bytes());
+        reacquired[0x6c..0x6e].copy_from_slice(&32767i16.to_le_bytes());reacquired[94]=1;
+        let entry=crate::mule_hostile_attack_entry::plan_entry(&reacquired,&sole,*rng,physics).map_err(|_|CreatureError::UnsupportedMotionState)?;
+        *rng=entry.rng_after;if let Some(channel)=entry.pending_audio{audio.push(channel);}
+        let mut final_after=entry.after;final_after[0x60]&=0xbf;Ok(final_after)
+    }
+    ///Direction-flipped 6096A/8D930 sole-hostile circle scan behind the neutral
+    ///completed attack: exactly one live owned MuleSelector4 creature (task7
+    ///state8, or state20 hit reaction under this expired 0x88 query) and no
+    ///friends. Owner4 regards owner0 as hostile independently of alliances, so
+    ///no alliance gate applies; kind5 code11, plants and unknown kinds reject.
+    fn mule_neutral_attack_single_hostile(&self,r:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
+        let attack_query=r[0x5e]==21&&r[0x60]==0x88&&word(r,0x6c)==0;
+        if r[24]!=4||!(r[0x5e]==8&&r[0x60]==8||attack_query)||r[0x61]!=0x40||r[0x78]!=0{return Ok(None);}
+        let own=[r[15],r[16],1];let cell=floor_cell([word(r,7),word(r,9)]);let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
+        let mut hostile=None;let mut unsupported=false;
+        for dy in -4..=4{for dx in -4..=4{if dx*dx+dy*dy>16{continue;}let c=(((cy+dy)&127)*128+((cx+dx)&127))as usize;let mut raw=reference(self.map(),c*14+6);
+            while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{
+                1=>{let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;let other=*pool.record(word(&raw,0)as usize)?;
+                    if other[24]==0&&other[0x7a]==4&&(other[0x5e]==8||attack_query&&other[0x5e]==20)&&pool.binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::MuleSelector4){
+                        if hostile.is_some(){return Err(CreatureError::UnsupportedNeighborhood.into());}hostile=Some(other);
+                    }else{unsupported=true;}
+                },
+                5=>{let pool=self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;if pool.record(word(&raw,0)as usize)?[69]==0x11||pool.binding(word(&raw,0)as usize)?.is_none(){unsupported=true;}},
+                8=>{},_=>unsupported=true,
+            }}raw=reference(e,3);}
+        }}
+        if hostile.is_some()&&unsupported{return Err(CreatureError::UnsupportedNeighborhood.into());}
+        Ok(hostile)
+    }
     /// Opt-in immutable callback fixture for source comparison; absent in release.
     #[cfg(any(debug_assertions, feature = "callback-captures"))]
     pub(super) fn capture_numeric_callback(&self,slot:usize,frame:u32,phase:&str){
@@ -414,7 +518,7 @@ impl ActorWorld {
         for(name,bytes)in [("backing",self.backing_bytes().to_vec()),("players",(0..4u8).flat_map(|p|self.player(p).unwrap().bytes().iter().copied()).collect()),("actors",self.actors().records().concat()),("creatures",self.creatures().unwrap().records().concat()),("effects",self.effects().unwrap().records().concat()),("family8",self.family8().unwrap().records().concat()),("buildings",self.buildings().unwrap().records().concat())]{std::fs::write(dir.join(format!("{name}.bin")),bytes).unwrap();}
         let mut rng=self.rng.seed.to_le_bytes().to_vec();rng.push(self.rng.ring);rng.extend(self.rng.draw_count.to_le_bytes());std::fs::write(dir.join("rng.bin"),rng).unwrap();
     }
-    pub(super) fn mule_route_prefix(&self,before:&CreatureRecord,frame:u32,physics:&PhysicsTables,trig:&TrigTables,rng:&mut BlueprintRng)->Result<(CreatureRecord,[i16;2]),ActorWorldError> {
+    pub(super) fn mule_route_prefix(&self,before:&CreatureRecord,frame:u32,physics:&PhysicsTables,trig:&TrigTables,rng:&mut BlueprintRng,light:bool)->Result<(CreatureRecord,[i16;2]),ActorWorldError> {
         let phase=creature_world::mule_callback_phase(before,frame);
         let own=[before[15],before[16],1];let current=[word(before,7),word(before,9)];
         let retained_food_association=before[24]==4&&before[0x5e]==8&&before[0x60]==8&&before[0x61]==0x40
@@ -423,7 +527,7 @@ impl ActorWorld {
             ||before[24]==0&&before[0x5e]==8&&before[0x60]==0x88&&before[0x61]==0&&before[0x78]==7&&word(before,0x6c)>0&&before[0x52]==1&&before[0x57]==1&&before[0x5a]==1&&reference(before,0x50)==reference(before,0x55)&&reference(before,0x58)==reference(before,0x55);
         let mut final_target=[word(before,11),word(before,13)];
         let mut a=*before;a[0x49]&=0x9f;
-        if a[0x4f]!=0||(a[0x52]!=0&&!associated_pair)||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
+        if a[0x4f]!=0||(!light&&(a[0x52]!=0&&!associated_pair))||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
         if a[0x49]&3==3 {
             let associated_goal=if a[0x52]!=0{let peer=self.entity(reference(&a,0x50))?;Some([word(peer,7),word(peer,9)])}else{None};
             if let Some(goal)=associated_goal{final_target=goal;}

@@ -202,8 +202,14 @@ pub fn draw_supported_mule_record(
         10 => animation <= 7 || animation == 22,
         //5E749 selects attack directions8..15;59470 uses its ordinary body.
         21 => (8..=15).contains(&animation),
-        //5E614->5E817 selects16 for neutral hit reaction; owned20 excluded.
-        20 => record[0x18] == 4 && animation == 16,
+        //5E614->5E817 selects16 for the hit reaction; 5E640 shares the same
+        //dispatch for the owned hit reaction after the proved attack path.
+        //The animation<=7 arm is the measured source-callback state of the
+        //OWNED target right after the neutral attack (state 20 with the
+        //previous directional animation 7 still in place, before its own
+        //0x5E640 callback selects 16). It reuses the shared ordinary body
+        //that 59470 applies to every animation<16/state<26 record.
+        20 => animation <= 7 || animation == 16,
         // Literal mortality continuations pin state 24 to animation 17 and
         // state 25 to corpse animation 18. The ANB remains the authority for
         // their frame extents (7 and 3 frames respectively).
@@ -221,7 +227,7 @@ pub fn draw_supported_mule_record(
     //admits the exact task7 pursuit or source-proved attack-entry shape.
     let target = i16::from_le_bytes([record[0x55],record[0x56]]);
     let owned_hostile = ((record[0x5e]==1 && matches!(record[0x60],0x48|0xc8))
-        || (record[0x5e]==21 && matches!(record[0x60],0x08|0x88)))
+        || (matches!(record[0x5e],20|21) && matches!(record[0x60],0x08|0x88)))
         && record[0x78]==7 && record[0x61]==0
         && record[0x76]<=90 && record[0x4f]==0 && record[0x5d]==0
         && record[0x52]==1 && record[0x57]==1 && record[0x5a]==1

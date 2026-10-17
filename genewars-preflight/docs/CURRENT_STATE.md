@@ -1,5 +1,21 @@
 # GeneWars authoritative continuation - 2026-10-16
 
+## Source-corrected Krell trajectory checkpoint - 2026-10-17 (supersedes the 5939 frontier claim)
+
+The batch195 "5939 frontier" rested on a campaign state that is now **provably wrong from frame 5913 onward**. The bounded original-instruction interpreter (research/variants/neutral-mule-captured-width-review.py, fed the accepted baseline's own captured before-state at 5913 slot 5) shows the source writes slot5 word(0x6c)=0 there; the accepted baseline left 32756, and the candidate now reproduces the interpreter byte-for-byte. So world `a4da3dd3…` at 5939 is a port-internal state, not a source-authentic one: 5939 remains the last port-internal accepted point, but it is retracted as a source-authentic frontier. Everything after 5913 is being rebuilt one interpreter-adjudicated callback at a time.
+
+Committed checkpoint (this commit) — four source-corrected change sets, all root-verified on fresh paths:
+- **GW-5939F** owned Mule light callback (source 5EE38..5EEC6): `mule_route_prefix(..., light)` applies the association admission only to the full path; the 5EB30 5ebdf..5ec69 completed-animation dispatch is added to the shared body's even branch; the light branch drives the shared admitted body through the same staged cell-entry closure as the full path. Files: actor_world/creature_updates.rs, creature_world.rs, actor_world/owned_mule_updates.rs.
+- **Neutral Mule completed attack, frame 5914 slot 5**: hits its owned target (state 8->20, health -2, 0x6c 32767) consuming the source's 9 RNG draws. File: actor_world/creature_updates.rs.
+- **Owned hit-reaction draw admission**: state 20 with animation 16, or the carried-over directional animation <=7, in the owned hostile shape. File: genewars-desktop/src/bin/support/creature_scene.rs.
+- **Owned hit-reaction motion, frame 5916 slot 1**: state 20 admitted for the measured record domain; the 5E0B0/5EB30/5E640/5E817/7AC00 path performs the source's animation frame advance, energy -2 and countdown decrement with 0 draws. File: actor_world/owned_mule_callback.rs.
+
+Gates on this tree (root-run, fresh exclusive output dirs): captured 4801 (2224 instr), 5893 (0x6c 32759->0), 5939 (no-op, 1503 instr) and 5940 (explicitly blocked, world unchanged) each byte-exact over 427,369 bytes; frame-5914/slot-5 neutral fixture byte-exact vs the interpreter with 9 draws; frame-5916/slot-1 owned fixture byte-exact with 0 draws; batch195 focused 9/9; runtime suite 260 passed / 0 failed / 8 ignored; runtime and desktop both compile.
+
+Campaign: the ordinary carried Krell replay (`private/integration/continued-krell-5939F/replay.txt`, an extension of the accepted 195 replay) commits steps 5914-5921 and stops at **5922** on the next source-authentic behavior — owned state-20 hit-reaction completion (source deltas 0x19 16->7, 0x1c 1->0, 0x57 1->0, 0x5e 20->8, 0x60 0x08->0x18, 0x61 0->0x80, 0x66 227->225, 0 draws, 2345 instructions; input preserved at private/review/gw5922-source-fixture/frame-5922-slot-1-blocked-before-owned). **Native parity for this corrected trajectory has NOT yet been run**, so this is a checkpoint, not a new acceptance.
+
+Method (per new callback): capture the failing before-state with GENEWARS_MULE_CALLBACK_CAMPAIGN_PROGRESS=1, run the matching interpreter oracle (`research/variants/{owned,neutral}-mule-captured-width-review.py --before <capture> --frame N --slot S`) to obtain the authoritative output and instruction/draw counts, implement to byte-equality over the eight buffers, then re-run gates A-D + focused 9/9 + suite + the campaign. Adjudicate divergences against the interpreter before changing any port behavior; never adjust tests, oracles or expectations.
+
 Authentic campaign missions accepted: **1 / 24**. Exceland and its ordinary retained-carry transition to Krell are verified. Krell is not complete. User authorization is continuous implementation without interactive testing/login; old stop instructions are superseded. Complete faithful native Rust GeneWars remains the goal.
 
 ## Current repository and live frontier

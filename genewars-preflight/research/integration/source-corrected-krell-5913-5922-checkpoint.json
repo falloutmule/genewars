@@ -1,0 +1,65 @@
+{
+  "receipt": "source-corrected-krell-5913-5922-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "checkpoint, not an acceptance",
+  "scope": "Owned/neutral Mule callback corrections on the carried Krell campaign, adjudicated against the bounded original-instruction interpreter. No test, oracle, expected-output or acceptance file was modified.",
+
+  "baseline_retraction": {
+    "claim_retracted": "frame 5939 world a4da3dd344fe195648208c603f341e47a189862e905d4d0e662e808a5a39ffd4 as a source-authentic frontier",
+    "adjudication": "research/variants/neutral-mule-captured-width-review.py --before private/review/control-accepted195-5939F-capture/frame-5913-slot-5-before --expected <accepted after> --frame 5913 --slot 5 returned status mismatch with exactly 2 differing bytes at creatures.bin 728,729 (slot5 word 0x6c). The interpreter writes 0 where the accepted baseline kept 32756. The candidate's own 5913 output is byte-identical to the interpreter output.",
+    "consequence": "The accepted baseline's campaign state from 5913 onward is port-internal, not source-authentic; 5939 remains the last port-internal accepted point only."
+  },
+
+  "control_run": {
+    "purpose": "prove the replay text is sound and the candidate change caused the frontier move",
+    "executable": "private/integration/continued-krell-195/genewars-game.exe (sha256 335d85ad947c480a1f0c174a0c7e4854ddb82d78bda236029f4844dfd85c6107)",
+    "replay": "private/integration/continued-krell-5939F/replay.txt",
+    "result": "steps 5939, blocked Creatures(UnsupportedMotionState), world_sha256 a4da3dd344fe195648208c603f341e47a189862e905d4d0e662e808a5a39ffd4, campaign_progress 1, funds 311",
+    "evidence": "private/integration/control-accepted195-on-5939F-replay/"
+  },
+
+  "change_sets": [
+    {"name": "GW-5939F", "files": ["rust/crates/genewars-runtime/src/actor_world/creature_updates.rs", "rust/crates/genewars-runtime/src/creature_world.rs", "rust/crates/genewars-runtime/src/actor_world/owned_mule_updates.rs"],
+     "content": "mule_route_prefix(...,light) with the association admission applied to the full path only; 5EB30 5ebdf..5ec69 completed-animation dispatch added to the shared body even branch; light branch drives the shared admitted body through the full path's staged cell-entry closure",
+     "patch": "genewars-routing-probe/attempt6-gw5939f.patch"},
+    {"name": "neutral-completed-attack-5914-slot5", "files": ["rust/crates/genewars-runtime/src/actor_world/creature_updates.rs", "rust/crates/genewars-runtime/src/creature_world.rs"],
+     "content": "neutral Mule state-21/timer-0 completed attack: target state 8->20, health -2, 0x6c 32767, attacker 0x6c 32766, 9 RNG draws",
+     "patch": "genewars-routing-probe/attempt7-gw5914.patch"},
+    {"name": "owned-hit-reaction-draw-admission", "files": ["rust/crates/genewars-desktop/src/bin/support/creature_scene.rs"],
+     "content": "state 20 admitted with animation 16 or the carried-over directional animation <=7 in the owned hostile shape",
+     "patches": ["genewars-routing-probe/attempt8-gw5914draw.patch", "genewars-routing-probe/attempt9-gw5914draw2.patch"]},
+    {"name": "owned-hit-reaction-motion-5916-slot1", "files": ["rust/crates/genewars-runtime/src/actor_world/owned_mule_callback.rs"],
+     "content": "state-20 hit reaction admitted for the measured record domain; 5E0B0/5EB30/5E640/5E817/7AC00 path: 0x1b 1->2, 0x66 233->231, 0x6c 32767->32766, 0 draws, 1851 instructions",
+     "patch": "genewars-routing-probe/attempt10-gw5916.patch"}
+  ],
+
+  "root_verified_gates": {
+    "verifier": "root/director, fresh exclusive output dirs (private/review/gw5914r9-root-*, gw5916-root-*, private/review/gw5914-root-slot5)",
+    "captured_4801": {"rust": "passed", "oracle": "passed", "instructions": 2224, "draws": 0, "compared_bytes": 427369, "differences": []},
+    "captured_5893": {"rust": "passed", "oracle": "passed", "instructions": 1714, "draws": 0, "differences": [], "note": "slot1 word(0x6c) 32759 -> 0"},
+    "captured_5939": {"rust": "passed", "oracle": "passed", "instructions": 1503, "draws": 0, "differences": []},
+    "captured_5940": {"rust": "blocked", "error": "Creatures(UnsupportedMotionState)", "world_unchanged": true},
+    "fixture_5914_slot5_neutral": {"rust": "passed", "draws": 9, "compared_bytes": 427369, "differences": [], "oracle_output": "private/review/neutral-mule-captured-width/5683a83b87bb4ddcb207b4a26da2b84a"},
+    "fixture_5916_slot1_owned": {"rust": "passed", "draws": 0, "compared_bytes": 427369, "differences": [], "oracle_output": "private/review/owned-mule-captured-width/567ca731e64c4ba092a31cc5e2a8ab87"},
+    "focused_batch195": "9/9 (run195_focused_fresh.py, exit 0)",
+    "runtime_suite": "260 passed / 0 failed / 8 ignored",
+    "head": "866b410583360c1fab90a2ed583d65fbb157bb8d (pre-commit)",
+    "staged_before_commit": "none"
+  },
+
+  "campaign": {
+    "replay": "private/integration/continued-krell-5939F/replay.txt",
+    "steps_reached": 5922,
+    "blocked": "Creatures(UnsupportedMotionState)",
+    "new_blocker": "owned Mule slot 1 state-20 hit-reaction completion (timer 0): source deltas 0x19 16->7, 0x1c 1->0, 0x57 1->0, 0x5e 20->8, 0x60 0x08->0x18, 0x61 0->0x80, 0x66 227->225, 0 draws, 2345 instructions; call order 5ed20->6fb60->6df30->5e0b0->5eb30->5cc60->6b150->5e640->7ac00",
+    "blocker_fixture": "private/review/gw5922-source-fixture/frame-5922-slot-1-blocked-before-owned",
+    "blocker_interpreter_output": "private/review/owned-mule-captured-width/4036d5daf3834570827bfa7d1bd15c5b"
+  },
+
+  "not_run": [
+    "native input parity on the frozen executable for this corrected trajectory",
+    "capture-enabled release freeze and framebuffer byte comparison",
+    "visual inspection of the corrected frontier scene",
+    "mission outcome / zone-credit progression past 5922"
+  ]
+}

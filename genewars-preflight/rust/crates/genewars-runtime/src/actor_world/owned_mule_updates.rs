@@ -17,8 +17,62 @@ impl ActorWorld {
   if pool.binding(slot)?!=Some(CreatureAnimationBinding::MuleSelector4){return Err(CreatureError::UnsupportedMotionState.into());}
   let before=*pool.record(slot)?;if word(&before,15)!=slot as i16{return Err(CreatureError::UnsupportedMotionState.into());}
   let hostile_enemy=self.owned_mule_live_hostile_target(&before)?;
+  if before[0x61]&1==0&&creature_world::mule_callback_phase(&before,context.frame_counter)&1==0 {
+   //5ee25/5ee32 parity gate: 61 bit0 clear and even phase select the5ee38 light
+   //tail. 5ee1f/6FB60 runs with the full-path-only association admission
+   //skipped, then5EB30/5E640/7AC00 through the SAME admitted body and the SAME
+   //staged cell-entry closure the full path uses. No full state machine, no AI
+   //choice, no reveal, no6C decrement.
+   let mut rng=self.rng;
+   let(prefix,working_target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng,true)?;
+   let own=[before[15],before[16],1];
+   let query_world=std::cell::RefCell::new(self.clone());let rng_state=std::cell::RefCell::new(rng);
+   let links_moved=std::cell::Cell::new(false);let mut pending_audio=Vec::new();
+   let(plan,water_effect)=creature_world::plan_mule_admitted_body_with_postphysics(&before,&prefix,working_target,self.map(),context,physics,trig,
+    |record,normal,previous|query_world.borrow().mule_contact_speed(record,normal,previous).map_err(|_|CreatureError::MotionEnvironment),
+    |point|query_world.borrow().move_obstacle_at(point).map_err(|_|CreatureError::MotionEnvironment),animations,
+    //5EB30 choice callback never runs on even source parity.
+    |_|Err(CreatureError::UnsupportedMotionState),true,|record,old_cell,new_cell|{
+     let mut world=query_world.borrow_mut();
+     world.unlink_mule_slot(slot,old_cell).map_err(|_|CreatureError::UnsupportedCellEntry)?;
+     let prior=*world.creatures.as_ref().unwrap().record(slot)?;
+     world.creatures.as_mut().unwrap().replace_record_checked(slot,&prior,record)?;
+     world.insert_mule_head(slot,new_cell).map_err(|_|CreatureError::UnsupportedCellEntry)?;
+     let entered=*world.creatures.as_ref().unwrap().record(slot)?;
+     let after=world.plan_mule_cell_entry(slot,&entered,new_cell,&mut rng_state.borrow_mut(),trig)?;
+     world.creatures.as_mut().unwrap().replace_record_checked(slot,&entered,&after)?;
+     links_moved.set(true);Ok(after)
+    },|record|{
+     let after=*record;
+     if hostile_enemy.is_some()&&before[0x5e]==1 {
+      let phase=creature_world::mule_callback_phase(&before,context.frame_counter);
+      if phase&1!=0 {if phase&3==3&&32767-i32::from(word(record,0x6c))>256{return Err(CreatureError::UnsupportedMotionState);}}
+     }
+     Ok(after)
+    },hostile_enemy.is_some())?;
+   let rng=rng_state.into_inner();let mut staged=query_world.into_inner();
+   if plan.old_cell!=plan.physics_cell&&!links_moved.get() {self.check_mule_cell_entry(own,plan.physics_cell)?;staged.unlink_mule_slot(slot,plan.old_cell)?;}
+   if plan.physics_cell!=plan.new_cell {staged.check_mule_cell_entry(own,plan.new_cell)?;}
+   let prior=*staged.creatures.as_ref().unwrap().record(slot)?;
+   staged.creatures.as_mut().unwrap().replace_record_checked(slot,&prior,&plan.after)?;
+   if plan.old_cell!=plan.physics_cell&&!links_moved.get() {staged.insert_mule_head(slot,plan.physics_cell)?;}
+   if plan.physics_cell!=plan.new_cell {staged.unlink_mule_slot(slot,plan.physics_cell)?;staged.insert_mule_head(slot,plan.new_cell)?;}
+   if let Some(request)=water_effect {
+    if plan.physics_cell!=plan.new_cell {return Err(CreatureError::MotionEnvironment.into());}
+    match request.code {
+     0x30=>if let Some((_slot,events))=staged.create_water_splash(request.position,request.physical_height)? {
+      for event in events {if let crate::landing::LandingEvent::PlayAudio(index)=event {pending_audio.push(index.channel);}}
+     },
+     0x15=>{staged.create_water_effect(0x15,0,request.position,request.physical_height,request.angles,trig)?;},
+     _=>return Err(CreatureError::MotionEnvironment.into()),
+    }
+   }
+   staged.rng=rng;staged.validate_links()?;
+   let mut result=plan;result.after=*staged.creatures.as_ref().unwrap().record(slot)?;*self=staged;
+   return Ok(OwnedMuleReceipt{motion:result,pending_reveal_vertices:Vec::new(),pending_audio});
+  }
   if (matches!(before[0x5e],1|21)||before[0x5e]==8&&before[0x52]!=0)&&hostile_enemy.is_none(){return Err(CreatureError::UnsupportedMotionState.into());}
-  let mut rng=self.rng;let(prefix,target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng)?;
+  let mut rng=self.rng;let(prefix,target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng,false)?;
   let stage=std::cell::RefCell::new(self.clone());let random=std::cell::RefCell::new(rng);let reveals=std::cell::RefCell::new(Vec::new());let audio=std::cell::RefCell::new(Vec::new());
   let(plan,_water)=crate::owned_mule_callback::plan_owned_after_prefix(&before,&prefix,target,self.map(),context,physics,trig,
    |r,n,p|stage.borrow().mule_contact_speed(r,n,p).map_err(|_|CreatureError::MotionEnvironment),

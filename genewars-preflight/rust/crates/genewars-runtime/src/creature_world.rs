@@ -415,7 +415,11 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut([i
     let hostile_hit_hold=live_hostile_choice&&before[0x5e]==20&&before[0x61]==0x40&&before[0x60]==8&&before[0x78]==0
         &&before[0x52]==1&&before[0x57]==1&&before[0x50..0x53]==before[0x55..0x58]&&motion_word(before,0x6c)>0;
     let hostile_attack_hold=before[0x5e]==21&&before[0x61]==0x40&&matches!(before[0x60],8|0x88)&&before[0x78]==0
-        &&before[0x52]==1&&before[0x57]==1&&before[0x50..0x53]==before[0x55..0x58]&&motion_word(before,0x3f)==0&&motion_word(before,0x6c)>0;
+        &&before[0x52]==1&&before[0x57]==1&&before[0x50..0x53]==before[0x55..0x58]&&motion_word(before,0x3f)==0
+        //5EBDF..5EC69 also admits the expired timer0 state whose odd-phase
+        //choice dispatches the shared 60332 completed attack; negative timers
+        //stay rejected at the domain check below.
+        &&motion_word(before,0x6c)>=0;
     let paired_approach=before[0x5e]==3&&matches!(before[0x60],0|4|8|12|0x80|0x84|0x88|0x8c)&&before[0x57]==1&&((matches!(before[0x61],0|0x40)&&before[0x52]==1)||(matches!(before[0x61],0x20|0x60)&&before[0x52]==0));
     let paired_wait=before[0x5e]==10&&matches!(before[0x61],0x20|0x60)&&matches!(before[0x60],4|12|0x84|0x8c)&&before[0x57]==1&&before[0x52]==0&&motion_word(before,0x6c)>=0;
     let retained_food_idle=before[0x5e]==8&&before[0x60]==8&&before[0x61]==0x40&&before[0x57]==0&&before[0x52]==1&&before[0x50..0x52]==before[0x55..0x57];
@@ -545,6 +549,13 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,C:FnMut(&C
     else {
         if motion_word(&a,0x49)as u16&0x200!=0 {if a[0x5e]==0{a[0x60]&=0xdf;}a[0x60]&=0xef;}
         if a[0x60]&0x80!=0&&motion_word(&a,0x49)as u16&0x300!=0 {a[0x60]&=0x7f;if a[0x61]&0x80!=0&&a[0x6e..0x72]==a[11..15]{a[0x61]&=0x7f;}motion_put(&mut a,0x6c,0);}
+        //5EBDF..5EC69light-state dispatch: a completed animation clears6C.
+        if matches!(a[0x5e],0xb|0x10|0x14..=0x18) {
+            let id=usize::from(a[0x19]);let holds=animations.holds.get(id).ok_or(CreatureError::UnsupportedMotionState)?;
+            if holds.is_empty(){return Err(CreatureError::UnsupportedMotionState);}
+            let complete=if animations.flags[id]&1!=0 {a[0x1a]==0&&a[0x1b]==0}else{a[0x1a]==0&&a[0x1e]==0&&usize::from(a[0x1b])==holds.len()-1};
+            if complete{motion_put(&mut a,0x6c,0);}
+        }
     }
     let yaw=motion_word(&a,0x39);if !(0..=2048).contains(&yaw){return Err(CreatureError::UnsupportedMotionState);}
     if a[0x5e]==10 {
