@@ -94,6 +94,26 @@ POSITIVE = [
          expected='private/review/owned-mule-captured-width/2e412d033c0e43b9898e309d022b321e'),
 ]
 NEGATIVE = [
+    # F7 negative gate (added 2026-10-17 BEFORE any implementation), restoring
+    # fail-closed coverage after the F6 conversion left zero negative rows.
+    # Pins the live frame-5946 refusal: owned Mule slot 1, caller
+    # step_owned_mule_slot, state 0x5e=20, animation 0x19=16, 0x1b=0, 0x60=0x18,
+    # 0x61=0x80, word(0x6c)=0 (EXPIRED timer), 0x49=0x10, 0x78=7, 0x7a=4, 0x4f=0,
+    # 0x5d=0, 0x52=0, 0x57=1, 0x5a=1, word(0x66)=8651, 0x68=8, 0x55..0x58 =
+    # 05 00 01 05 and 0x50..0x53 = 05 00 00 01: the 0x50/0x55 pointer triples do
+    # NOT match, so the pre-existing expired-timer completion arm refuses this
+    # shape. Measured record captured from a fresh campaign run
+    # (GENEWARS_MULE_CALLBACK_CAMPAIGN_PROGRESS=1 / GENEWARS_MULE_CALLBACK_FIXTURE,
+    # private/integration/attempt20-capture-20261017/capture/frame-5946-slot-1-
+    # blocked-before-owned, copied verbatim); the record fields were cross-checked
+    # against the blocked report's mission.creature_states slot 1 (state 20,
+    # animation 16, reserve 8, target_kind 1). The gate asserts the exact expected
+    # rejection AND complete transactional world/RNG preservation (all eight
+    # buffers byte-identical to the input). Unsupported until independently
+    # source-proved; never silently expanded.
+    dict(id='R20-owned-state20-expired-timer-triple-mismatch-5946', frame=5946, slot=1,
+         fixture='private/review/attempt20-live-5946-blocked-owned',
+         expect_error='Creatures(UnsupportedMotionState)'),
 ]
 
 

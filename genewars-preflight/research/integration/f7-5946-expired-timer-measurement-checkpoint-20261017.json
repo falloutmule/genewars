@@ -1,0 +1,44 @@
+{
+  "receipt": "f7-5946-expired-timer-measurement-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "measurement checkpoint - the 5946 refusal is a second reference-model gap; nothing was implemented",
+  "policy": "private/integration/development-policy-20261017.md",
+
+  "measured_record": {
+    "fixture": "private/review/attempt20-live-5946-blocked-owned (copied from the campaign capture frame-5946-slot-1-blocked-before-owned)",
+    "caller": "step_owned_mule_slot (actor_world/owned_mule_updates.rs) - the owned caller's own phase, NOT the draw layer's record (the draw layer writes plain blocked-before at creature_updates.rs; no such capture exists at 5946)",
+    "fields": "state 0x5e=20, animation 0x19=16, frame 0x1b=0, 0x60=0x18, 0x61=0x80, word(0x6c)=0 (EXPIRED), 0x49=0x10, 0x78=7, 0x7a=4, 0x4f=0, 0x5d=0, 0x52=0, 0x57=1, 0x5a=1, word(0x66)=8651, 0x68=8, 0x55..0x58=05 00 01, 0x50..0x53=05 00 00 (triples do NOT match)",
+    "cross_check": "matches the blocked report's mission.creature_states slot 1 (state 20, animation 16, frame 0, reserve 8, target_kind 1)"
+  },
+
+  "oracle_verdict": {
+    "status": "error", "reason": "ValueError('unsupported owned hostile pursuit caller')",
+    "output_dir": "private/review/owned-mule-captured-width/c95be46abfff499aa95d817b97fe1b75 (no interpreted result)",
+    "why": "matches no admitted arm: the F5 fresh-timer arm requires word(0x6c)>0; the older hostile arm requires 0x60 in {8,0x88}, 0x61=0, 0x52=1 and matched triples",
+    "consequence": "no authoritative expected output exists for this shape, so the port correctly stays fail-closed at 5946 and NO implementation was attempted"
+  },
+
+  "negative_gate": {
+    "row": "R20-owned-state20-expired-timer-triple-mismatch-5946 (NEGATIVE)",
+    "pins": "the exact rejection (Creatures(UnsupportedMotionState)) plus complete transactional preservation (all eight buffers byte-identical to input)",
+    "coverage_note": "the zero-negative-rows gap is closed again; the fixture lives under the gitignored private/ tree (by repo design), so a fresh clone would need the capture facility to regenerate it"
+  },
+
+  "director_verification": {
+    "run": "private/integration/F7-root-check-20261017T2135",
+    "result": {"positive": "30/30", "negative": "2/2", "checks": "39/39", "all_ok": true},
+    "negative_rows_checked": ["R20-rejection", "R20-transactional-preservation"],
+    "rust": "zero diffs - confirmed no port change"
+  },
+
+  "next_family": {
+    "id": "F8",
+    "scope": "reference-model domain extension for the EXPIRED-timer path (word(0x6c)==0) with the non-matching 0x50/0x55 triple, from cited original-listing evidence only",
+    "evidence_needed": ["the taken branch when word(0x6c)==0 (target + literal executed path around 0005ef49-0005ef68 / 0006a20d-0006a21f into the tail 0006a290-0006a53e)",
+                        "the triple comparison block 0005eed5-0005ef1f and what happens on mismatch with 0x52=0",
+                        "draw proof (zero or some) and the expected per-field deltas"],
+    "port_rule": "no rust/ changes in F8; the port stays fail-closed at 5946 until the oracle can adjudicate and a separate bounded assignment implements it"
+  },
+
+  "pattern_note": "this is the second time the campaign's frontier has been bounded by the reference model rather than by the port (F4 -> F5 -> F6, now F7 -> F8). The workflow is holding: measure, prove from source, extend the reference model, then implement the port arm and re-prove the frontier with native parity."
+}
