@@ -56,7 +56,7 @@
   ],
   "next": {
     "family": "F12 - the 5966 refusal is a NEW error class (Creatures(UnsupportedNeighborhood)), unmeasured; measure before implementing",
-    "native_parity": "queued for the 5966 frontier on the current build"
+    "native_parity": "PASSED: private/integration/f1-native-20261017T1745 - one frozen executable sha256 b828fb9af368..., headless and native both stop at step 5966 with the identical block string Creatures(UnsupportedNeighborhood), all eight compared keys equal, frontier framebuffers byte-identical, world 039aee79e004..."
   },
   "cumulative": {
     "since_policy_adoption": "5940 -> 5946 -> 5962 -> 5963 -> 5966, no gate relaxation, negative set kept honest"
