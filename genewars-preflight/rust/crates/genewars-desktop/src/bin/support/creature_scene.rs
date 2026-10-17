@@ -234,7 +234,14 @@ pub fn draw_supported_mule_record(
         && record[0x50..0x53]==record[0x55..0x58]
         && record[0x58..0x5b]==record[0x55..0x58]
         && (0..300).contains(&target) && target!=i16::from_le_bytes([record[15],record[16]]);
-    let owned_ordinary = (matches!(record[0x5e],0|8) || owned_hostile) && no_lifecycle_icon
+    // The proved 5938 neutral attack hits a moving owned Mule whose shared
+    // hit reaction carries the previous directional animation (measured:
+    // 0x5e=20, 0x19=5, 0x60=0x18, 0x6c=32767). 59470 applies its shared
+    // ordinary body to every animation<16/state<26 record, so this bounded
+    // owned arm admits exactly that carried shape; the attack-entry
+    // owned_hostile shape stays required for the completed-animation arm.
+    let owned_hit_carry = record[0x5e] == 20 && animation <= 7;
+    let owned_ordinary = (matches!(record[0x5e],0|8) || owned_hostile || owned_hit_carry) && no_lifecycle_icon
         && (record[0x7b]==0 || record[0x7b]>191) && !(record[0x5e]==0 && record[0x60]&0x20!=0);
     if record[6] != 1 || record[0x18] > 4 || record[0x7a] != 4 || !admitted_pair || (owned && !owned_ordinary) {
         return Err(CreatureDrawError::UnsupportedRecordState);
@@ -1254,6 +1261,30 @@ mod pair_stop_render_tests {
   assert_eq!(draw_supported_mule_record(&resources.mule,&icon_required,[24,90],4312,0,0,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut out),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(out,prior);
   let mut unsupported=captured;unsupported[123]=128;let mut pixels=vec![0x55;68*128];let saved=pixels.clone();
   assert_eq!(draw_supported_mule_record(&resources.mule,&unsupported,[24,90],4312,0,0,false,23,3,&resources.fade,&resources.gla,[64,128],68,&mut pixels),Err(CreatureDrawError::UnsupportedRecordState));assert_eq!(pixels,saved);
+ }
+
+ #[test]fn owned_hit_reaction_carry_draws_without_attack_entry_shape(){
+  let p=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../..");
+  let(resources,_,_)=crate::runtime_resources::Resources::load(&p.join("private/integration/game-runtime")).unwrap();
+  let raw=std::fs::read(p.join("private/review/neutral-hit-reaction-193/0e9f48028d9c4d95b20da0eb8c68991e/frame-5876/creatures.bin")).unwrap();
+  let mut r:[u8;124]=raw[5*124..6*124].try_into().unwrap();
+  //Measured 5938 owned shape: hit reaction with the previous directional
+  //animation still selected and the post-completion idle command byte.
+  r[0x18]=0;r[0x19]=5;r[0x60]=0x18;r[0x57]=0;
+  let height=i32::from_le_bytes(r[39..43].try_into().unwrap())-i32::from_le_bytes(r[17..21].try_into().unwrap());
+  let draw=|r:&[u8;124]|{let mut p=vec![0x55u8;96*80];let out=draw_supported_mule_record(&resources.mule,r,[48,40],height,0,0,false,0,0,&resources.fade,&resources.gla,[96,80],96,&mut p);(out,p)};
+  let(out,pixels)=draw(&r);
+  let receipt=out.unwrap();
+  assert!(receipt.components.iter().map(|c|c.pixels_written).sum::<usize>()>0);
+  assert!(receipt.shadows.iter().map(|c|c.pixels_written).sum::<usize>()>0);
+  let saved=pixels.clone();
+  //The admitted pair still bounds the animation; the completed-animation
+  //arm keeps requiring the attack-entry hostile shape.
+  let mut bad=r;bad[0x19]=8;
+  assert_eq!(draw(&bad).0,Err(CreatureDrawError::UnsupportedRecordState));
+  let mut bad=r;bad[0x19]=16;
+  assert_eq!(draw(&bad).0,Err(CreatureDrawError::UnsupportedRecordState));
+  assert_eq!(draw(&r).1,saved);
  }
 }
 

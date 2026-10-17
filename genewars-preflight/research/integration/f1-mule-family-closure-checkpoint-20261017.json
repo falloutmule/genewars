@@ -1,0 +1,72 @@
+{
+  "receipt": "f1-mule-family-closure-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "family closure checkpoint with integrated campaign + native acceptance for the declared domains",
+  "family": "F1 Mule light/full callback sequencing, shared completed-animation and hit-reaction continuation, affected owned/neutral callers",
+  "policy": "private/integration/development-policy-20261017.md",
+  "matrix": "private/integration/mule-family-caller-domain-matrix.json (14 rows; family_status recorded)",
+
+  "assignment_under_policy": {
+    "packet": "genewars-routing-probe/worker_f1_r14.txt (first packet written from references/worker-task-packet-template.md)",
+    "row_moved": "F1-R14 in-flight -> integrated/proved",
+    "worker_correction_of_the_packet": "the packet attributed the refusal to the startup wrapper draw_initial_mule_record because of a line reference; the worker read the call graph and showed that wrapper has no production caller, the campaign reaching draw_supported_mule_record instead. The real refusal was the owned-ordinary gate's attack-entry shape requirement. Lesson recorded: attribute a guard from the call graph, never from a line number in a run's error message.",
+    "fix": "draw_supported_mule_record: owned_hit_carry = record[0x5e]==20 && animation<=7 admitted into owned_ordinary for owned records only; the completed-animation arm keeps requiring the attack-entry shape, state 21 and all other guards unchanged; draw_initial_mule_record untouched; one new regression test added (existing rejection tests unchanged).",
+    "presentation_scope_note": "the draw layer has no interpreter oracle. This admission is a bounded SCOPE decision with the documented basis already in the file (59470 applies its shared ordinary body to animation<16/state<26; attempt9 recorded the carried hit-reaction shape) plus the measured 5938-produced record. It is recorded as a scope decision, not as source-proved rendering."
+  },
+
+  "director_verification": {
+    "tool": "scripts/root_family_check.py",
+    "run": "private/integration/F1-R14-root-check-20261017T1115",
+    "result": {"positive": "24/24", "negative": "2/2", "checks": "33/33", "all_ok": true},
+    "enforcement": "execution success + intended frame/slot + input roundtrip before bytes; exact lengths of all eight buffers before equality (backing 343958 / total 427369); zero diffs; expected RNG draw count and byte-identical rng.bin; negative gate scored separately with transactional preservation",
+    "focused_batch": "9/9", "runtime_suite": "260 passed / 0 failed / 8 ignored",
+    "campaign": {"replay": "private/integration/continued-krell-5939F/replay.txt", "steps": 5939,
+                 "blocked": "creature slot 1: UnsupportedRecordState (presenting step 5940)",
+                 "world_sha256": "eb2fabf855ab32944e7400981ee2b32a0d4adb7428eb53d943a65a1a94e23099",
+                 "rgb_sha256": "b67579e5945b52bf2248f4a4f1f97fe786e82dcca79f3512a1600d247834131d"}
+  },
+
+  "native_acceptance": {
+    "script": "hermes scratch f1_native_parity2.py (adapted from the authentic batch195 native parity script; --seconds capped at 1200 by the CLI)",
+    "run": "private/integration/f1-native-20261017T1220",
+    "frozen_executable_sha256": "18442a3daabe6cda... (one build used for both runs)",
+    "checks": {"steps": true, "blocked": true, "world_sha256": true, "actor_dispatch_audit": true,
+               "buildings": true, "outcome": true, "creature_states": true, "issued_move_commands": true},
+    "headless_step": 5939, "native_step": 5939,
+    "headless_blocked": "creature slot 1: UnsupportedRecordState",
+    "native_blocked": "creature slot 1: UnsupportedRecordState",
+    "world_sha256": "eb2fabf855ab32944e7400981ee2b32a0d4adb7428eb53d943a65a1a94e23099",
+    "framebuffer": {"headless_bmp_sha256": "775a718d3a000cba2b8b7b46d506b5e943f0ec059c228fa0a3840b34acd1b898",
+                    "native_bmp_sha256": "775a718d3a000cba2b8b7b46d506b5e943f0ec059c228fa0a3840b34acd1b898",
+                    "bmp_equal": true},
+    "visual": "corrected frontier BMP reviewed: coherent scene, terrain/water/units, HUD portrait RALPH ENGINEER, status line 'KRELL - RECONSTRUCTION - STEP 5939 - FOCUS ACTOR 0', 'ZONE CREDIT: 84/1000 - RESOURCES: 311'",
+    "mule_trace": ["PortMuleFocus:1", "PortMuleOrder:1:[658, 24211]"],
+    "distinction": "the interpreter compares callbacks, the native run compares the port against itself under real input; neither is a retail-DOS execution trace"
+  },
+
+  "anomaly_resolutions": {
+    "4801_instruction_count": "resolved as a recovered intermediate-build artifact: the interpreter gives a stable 2224 for the authentic 4801 fixture in three independent measurements, while the worker's 2271 came from attempt11's line-ending-churn intermediate build (whose leftover output dir disagrees with the interpreter by 14 bytes in record 1). The committed tree is 0-diff.",
+    "background_task_notifications": "empty-output notifications were redirect artifacts; stage exit codes of 1 are the game process reporting a blocked campaign. Genuine tooling problems (timeout, wrong cargo package name, missing capture directory, two authoring bugs in the new checker) were recovered and none affected a verification result.",
+    "documented_at": "private/integration/verification-anomalies-20261017.md"
+  },
+
+  "open_items": [
+    "F1-R13: the 6BA47 food-guard path is still skipped for the 0x61=0x80 domain (state-invisible, path-fidelity gap, provisional)",
+    "next boundary: presenting step 5940 (owned full-path transition) - F1-R04 remains the explicit unsupported negative gate until that behaviour is independently source-proved",
+    "the 5939 corrected trajectory is 1 step short of the retracted old 5939 claim's step count only by coincidence of numbering; no frame target was pursued"
+  ],
+
+  "effort_estimates_not_reconciled": {
+    "worker_assignments_today": 6,
+    "worker_estimated_cost_usd": 1.773,
+    "director_session_estimated_cost_usd": 2.657,
+    "note": "estimates from state.db (cost_status 'estimated'); provider reconciliation not performed; no figure is claimed as actual spend"
+  },
+
+  "workflow_evaluation_first_milestone": {
+    "duplicated_investigation": "reduced for re-proof: the family checker re-establishes all 14 rows (33 checks) in one command instead of ad-hoc per-callback gate runs",
+    "repair_effort": "the line-ending-churn class of repair recurred for every attempt written under the old per-callback packets (attempts 8, 9, 12, 13 each hit it); attempt 14 hit it once but recovered byte-exactly within the same assignment",
+    "still_to_judge": "only one family-shaped assignment has completed, so no productivity claim is made; the policy asks for a judgement after two family milestones",
+    "regressions": "none observed: every previously proved row stayed byte-exact through the family's four change sets"
+  }
+}

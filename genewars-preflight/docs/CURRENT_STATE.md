@@ -1,5 +1,40 @@
 # GeneWars authoritative continuation - 2026-10-16
 
+## Family F1 closure checkpoint - 2026-10-17 (campaign step 5939 + native acceptance)
+
+F1 (Mule light/full callback sequencing, shared completed-animation and hit-reaction
+continuation, affected owned/neutral callers) is closed for its **declared domains**. Row F1-R14
+(the 5939 presentation refusal) moved `in-flight` -> `integrated/proved`.
+
+- **Corrected campaign now passes step 5939**: world `eb2fabf8...`, rgb `b67579e5...`; the next
+  refusal is presenting step 5940 (`creature slot 1: UnsupportedRecordState`), which is F1-R04's
+  declared unsupported boundary - kept as the explicit negative gate, not admitted.
+- **The 5939 fix is a bounded presentation-scope decision, not an oracle-proved rendering**: the
+  draw layer has no interpreter oracle, and the campaign reaches `draw_supported_mule_record`
+  (the startup wrapper `draw_initial_mule_record` has no production caller - an earlier packet
+  mis-attributed the guard from a line number). The owned-ordinary gate now admits the measured
+  carried hit-reaction shape (owned, state 20, animation <=7) while the completed-animation arm
+  keeps requiring the attack-entry shape; every other guard is untouched.
+- **Native acceptance on one frozen executable (sha256 18442a3d...)**:
+  private/integration/f1-native-20261017T1220 - headless and native both stop at step 5939 with
+  the identical block string; `steps`, `blocked`, `world_sha256`, `actor_dispatch_audit`,
+  `buildings`, `outcome`, `creature_states`, `issued_move_commands` all equal, and the frontier
+  framebuffers are byte-identical (BMP sha256 `775a718d...`). Visual check: coherent scene, HUD
+  `KRELL - RECONSTRUCTION - STEP 5939`, `ZONE CREDIT: 84/1000`, `RESOURCES: 311`.
+- **Director gates** (private/integration/F1-R14-root-check-20261017T1115, via
+  `scripts/root_family_check.py`): positive 24/24, negative 2/2, 33/33; focused batch 9/9;
+  runtime suite 260 passed / 0 failed / 8 ignored.
+- **Anomalies resolved and documented** (private/integration/verification-anomalies-20261017.md):
+  the 4801 instruction count is a stable 2224 - the 2271 reading came from an intermediate
+  line-ending-churn build whose leftover output dir also disagrees by 14 bytes; the empty
+  background-task notifications were redirect artifacts, and every genuine tooling failure was
+  recovered without affecting a verification result.
+- **Open**: F1-R13 (the 6BA47 food-guard path is skipped for the 0x61=0x80 domain - state-invisible
+  but a path-fidelity gap) and the next out-of-family boundary (step 5940's owned full-path
+  transition). Effort today (state.db estimates, not provider-reconciled): workers 6 assignments
+  ~$1.77, director session ~$2.66.
+
+
 ## Development policy adopted - 2026-10-17 (bounded behaviour families)
 
 The user authorized a workflow change on 2026-10-17 and it is now installed in the places that
