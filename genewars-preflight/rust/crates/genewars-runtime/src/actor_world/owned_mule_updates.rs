@@ -71,7 +71,9 @@ impl ActorWorld {
    let mut result=plan;result.after=*staged.creatures.as_ref().unwrap().record(slot)?;*self=staged;
    return Ok(OwnedMuleReceipt{motion:result,pending_reveal_vertices:Vec::new(),pending_audio});
   }
-  if (matches!(before[0x5e],1|21)||before[0x5e]==8&&before[0x52]!=0)&&hostile_enemy.is_none(){return Err(CreatureError::UnsupportedMotionState.into());}
+  let command_retained=before[0x5e]==8&&before[0x61]==0x80&&before[0x60]==0x18&&before[0x78]==7
+   &&before[0x52]==1&&before[0x57]==0&&before[0x5a]==1;
+  if !command_retained&&((matches!(before[0x5e],1|21)||before[0x5e]==8&&before[0x52]!=0))&&hostile_enemy.is_none(){return Err(CreatureError::UnsupportedMotionState.into());}
   let mut rng=self.rng;let(prefix,target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng,false)?;
   let stage=std::cell::RefCell::new(self.clone());let random=std::cell::RefCell::new(rng);let reveals=std::cell::RefCell::new(Vec::new());let audio=std::cell::RefCell::new(Vec::new());
   let(plan,_water)=crate::owned_mule_callback::plan_owned_after_prefix(&before,&prefix,target,self.map(),context,physics,trig,
@@ -84,6 +86,15 @@ impl ActorWorld {
     }
    },animations,
    |record|{
+    if record[0x5e]==20&&word(record,0x6c)==0 {
+     //5922 measured owned hit-reaction completion at5E0B0/5CC60: the expired
+     //0x6c timer returns the mule to state8 with the explicit move command
+ //shape (0x61=0x80,0x60=0x18) and clears the retained pair target57.
+     //No RNG, no target reattack, no animation writes here.
+     if record[24]!=0||record[0x60]!=8||record[0x61]!=0||record[0x78]!=7||record[0x52]!=1||record[0x57]!=1||record[0x5a]!=1||record[0x5d]!=0
+      ||record[0x50..0x53]!=record[0x55..0x58]||record[0x58..0x5b]!=record[0x55..0x58]{return Err(CreatureError::UnsupportedMotionState);}
+     let mut after=*record;after[0x5e]=8;after[0x60]=0x18;after[0x61]=0x80;after[0x57]=0;return Ok(after);
+    }
     if let Some(enemy)=hostile_enemy {
      if record[0x5e]==21{if word(record,0x6c)<=0{return stage.borrow_mut().owned_mule_completed_attack(record,&enemy,&mut random.borrow_mut(),physics,&mut audio.borrow_mut());}let mut after=*record;if creature_world::mule_callback_phase(record,context.frame_counter)&3==3{
       let dx=word(&enemy,7).wrapping_mul(2).wrapping_sub(word(record,7).wrapping_mul(2));let dy=word(&enemy,9).wrapping_mul(2).wrapping_sub(word(record,9).wrapping_mul(2));
@@ -106,7 +117,13 @@ impl ActorWorld {
      let hostile=crate::mule_owned_hostile_acquisition::plan_acquisition(&r,&enemy,*random.borrow()).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
      *random.borrow_mut()=hostile.rng_after;return Ok(hostile.after);
     }
-    world.owned_mule_neighborhood_no_action(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+    //5924 measured 0x61=0x80 dispatch: source 624B8 runs the ordinary AI
+
+    //without the 6BA47 food-guard neighborhood scan (measured call order
+
+    //5EB30->624B8->6B150). Skip it for the retained explicit-command domain.
+
+    if r[0x61]&0x80==0{world.owned_mule_neighborhood_no_action(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)?;}
     let mut rng=random.borrow_mut();for _ in 0..2{rng.seed=rng.seed.wrapping_mul(0xe62d);rng.ring=(rng.ring+1)&31;rng.draw_count=rng.draw_count.wrapping_add(1);}
     if r[0x61]&0x80!=0{
      return crate::owned_mule_ai::plan_explicit_target(&r,true,|p,_|world.mule_accepts(slot,p).map_err(|_|crate::owned_mule_ai::OwnedIdleError::QueryUnavailable)).map(|p|p.after).map_err(|_|CreatureError::UnsupportedMotionState);

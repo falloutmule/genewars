@@ -320,6 +320,21 @@ impl ActorWorld {
                         return Ok(after);
                     }
                 }
+                if record[24]==4&&record[0x5e]==21&&word(&record,0x6c)==0&&hostile_enemy.is_none()
+                    &&reference(&record,0x55)[2]==1 {
+                    //60332 resolves the pursued target from the attacker's own55
+                    //link after the state dispatch; the reciprocal50/55 kind byte
+                    //may already be cleared by13EB0 when the owned target entered
+                    //its hit domain, so identity is the link id, not the kind
+                    //byte. Only the measured live owned-Mule shape is admitted.
+                    let id=word(&record,0x55) as usize;
+                    let target=*world.creatures.as_ref().unwrap().record(id)?;
+                    if world.creatures.as_ref().unwrap().binding(id)?==Some(CreatureAnimationBinding::MuleSelector4)
+                        &&target[6]==1&&target[24]==0&&target[0x7a]==4&&word(&target,0x6a)>0
+                        &&word(&target,0x49) as u16&0x400==0{
+                        return world.mule_neutral_completed_attack(&record,&target,&mut rng,physics,&mut pending_audio);
+                    }
+                }
                 //The food query validates every candidate, including edible corpses.
                 let target=world.mule_neutral_food_target(&record,*rng).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
                 let choice=if let Some((raw,point))=target {if raw[2]==2{creature_world::plan_mule_plant_acquisition(&record,word(&raw,0),point,*rng)?}else{let corpse=world.creatures.as_ref().unwrap().record(word(&raw,0)as usize)?;creature_world::plan_mule_corpse_acquisition(&record,corpse,*rng)?}}else{
@@ -433,7 +448,7 @@ impl ActorWorld {
         let attack_ref=[target_id as u8,(target_id>>8)as u8,1];
         let attacker_ref=[record[15],record[16],1];
         if incoming<=0||effective>4||i32::from(word(&prior,0x6a))<=effective
-            ||prior[0x50..0x53]!=attacker_ref||prior[0x55..0x58]!=attacker_ref
+            ||word(&prior,0x50)!=i16::from(word(record,15))||word(&prior,0x55)!=i16::from(word(record,15))
             ||word(&prior,0x49)as u16&0x400!=0||word(&prior,0x6a)<=0{return Err(CreatureError::UnsupportedMotionState);}
         let mut target_after=prior;
         target_after[0x15]&=0xdf;target_after[0x33..0x37].fill(0);
@@ -524,8 +539,11 @@ impl ActorWorld {
         let retained_food_association=before[24]==4&&before[0x5e]==8&&before[0x60]==8&&before[0x61]==0x40
             &&before[0x57]==0&&before[0x52]==1&&word(before,0x50)==word(before,0x55);
         let associated_pair=matches!(before[0x5e],1|3|4|5|20|21)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55)||retained_food_association
-            ||before[24]==0&&before[0x5e]==8&&before[0x60]==0x88&&before[0x61]==0&&before[0x78]==7&&word(before,0x6c)>0&&before[0x52]==1&&before[0x57]==1&&before[0x5a]==1&&reference(before,0x50)==reference(before,0x55)&&reference(before,0x58)==reference(before,0x55);
-        let mut final_target=[word(before,11),word(before,13)];
+                        ||before[24]==0&&before[0x5e]==8&&before[0x60]==0x88&&before[0x61]==0&&before[0x78]==7&&word(before,0x6c)>0&&before[0x52]==1&&before[0x57]==1&&before[0x5a]==1&&reference(before,0x50)==reference(before,0x55)&&reference(before,0x58)==reference(before,0x55)
+            //5924 measured retained command dispatch: state8, 0x61=0x80,
+            //0x60=0x18, 0x6c==0, retained 0x52=1 with cleared57. The ordinary
+            //AI choice machinery (624B8) performs the dispatch.
+            ||before[24]==0&&before[0x5e]==8&&before[0x60]==0x18&&before[0x61]==0x80&&before[0x78]==7&&word(before,0x6c)==0&&before[0x52]==1&&before[0x57]==0&&before[0x5a]==1;        let mut final_target=[word(before,11),word(before,13)];
         let mut a=*before;a[0x49]&=0x9f;
         if a[0x4f]!=0||(!light&&(a[0x52]!=0&&!associated_pair))||a[0x4a]&0x04!=0{return Err(CreatureError::UnsupportedMotionState.into());}
         if a[0x49]&3==3 {

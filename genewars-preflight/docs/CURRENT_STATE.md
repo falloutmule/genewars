@@ -1,5 +1,42 @@
 # GeneWars authoritative continuation - 2026-10-16
 
+## Development policy adopted - 2026-10-17 (bounded behaviour families)
+
+The user authorized a workflow change on 2026-10-17 and it is now installed in the places that
+actually drive future work (not in a plan file):
+
+- **Active skill `genewars-reconstruction`** - `SKILL.md` reframed from frame-per-assignment to
+  family assignments, plus two new references the next packets must follow:
+  `references/family-assignment-policy.md` (standing policy) and
+  `references/worker-task-packet-template.md` (required packet shape). The short-lived duplicate
+  skill `genewars-callback-reconstruction` was absorbed and deleted.
+- **Repo copies** - `private/integration/development-policy-20261017.md` (same policy, citable
+  from inside the checkout) and `private/integration/mule-family-caller-domain-matrix.json`
+  (F1 caller/domain matrix with `integrated/proved`, `focused-only`, `unsupported`, `unknown`,
+  `provisional`, `in-flight` rows).
+- **Strengthened root result consumer** - `scripts/root_family_check.py`. It now gates a
+  positive case on execution first (cargo rc, `result.json.status == passed`, intended
+  frame/slot, `input_roundtrip`, no error), then **exact lengths of all eight buffers before any
+  equality check** (actors 4000, backing 343958, buildings 17152, creatures 37200, effects 16200,
+  family8 1632, players 7220, rng 7; total 427369), then zero byte differences plus the expected
+  RNG draw count and the `rng.bin` seed/ring (draw order). Negative gates are reported and
+  scored separately and must prove the expected rejection AND full transactional preservation;
+  rollback-produced equality is never a pass.
+
+**Initial family F1** - Mule light/full callback sequencing, shared completed-animation and
+hit-reaction continuation, affected owned/neutral callers; movement/cell-commit and linked-AI
+dependencies only where source evidence connects them. Rows R01-R13 are in the matrix JSON:
+4801/5893/5939 light fixtures, 5914 neutral attack, 5916/5922 owned hit hold+completion, 5924
+owned command -> AI dispatch (with a Provisional 6BA47 guard path), 5938 neutral zero-reserve
+completion (in flight), 5940 as the explicit negative gate, plus the still-unknown domains.
+Frame numbers are diagnostics: closure needs evidence-backed caller coverage plus ordinary
+campaign and same-executable native acceptance, not a larger step count.
+
+**Current acceptance status:** HEAD `b85098e` is a checkpoint (native parity for the corrected
+trajectory has NOT been run). The corrected ordinary campaign reached step 5938; the old batch195
+"5939 source-authentic frontier" stays retracted. Krell remains incomplete (1/24 missions).
+
+
 ## Source-corrected Krell trajectory checkpoint - 2026-10-17 (supersedes the 5939 frontier claim)
 
 The batch195 "5939 frontier" rested on a campaign state that is now **provably wrong from frame 5913 onward**. The bounded original-instruction interpreter (research/variants/neutral-mule-captured-width-review.py, fed the accepted baseline's own captured before-state at 5913 slot 5) shows the source writes slot5 word(0x6c)=0 there; the accepted baseline left 32756, and the candidate now reproduces the interpreter byte-for-byte. So world `a4da3dd3…` at 5939 is a port-internal state, not a source-authentic one: 5939 remains the last port-internal accepted point, but it is retracted as a source-authentic frontier. Everything after 5913 is being rebuilt one interpreter-adjudicated callback at a time.

@@ -18,8 +18,20 @@ where F:FnMut(&CreatureRecord,[i32;3],i16)->Result<i16,CreatureError>,O:FnMut(&C
  let hit=before[24]==0&&before[0x5e]==20&&before[0x61]==0&&before[0x60]==8&&before[0x78]==7
   &&before[0x52]==1&&before[0x57]==1&&before[0x5a]==1&&before[0x5d]==0&&w(0x6c)>0
   &&before[0x50..0x53]==before[0x55..0x58]&&before[0x58..0x5b]==before[0x55..0x58];
- if before[6]!=1||before[24]>=4||before[0x7a]!=4||!(idle||command||hostile||hit)||before[0x76]>90||before[0x7b]!=255
-  ||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)||before[0x4f]!=0||(before[0x52]!=0&&!(hostile||hit))||(before[0x57]!=0&&!(hostile||hit))
+ //5922 measured owned hit-reaction completion: same record domain as the hit
+ //hold with the expired 0x6c timer.5E0B0/5CC60 return to the explicit move
+ //command shape (0x61=0x80,0x60=0x18), clear57 and restore animation. No RNG.
+ let hit_complete=before[24]==0&&before[0x5e]==20&&before[0x61]==0&&before[0x60]==8&&before[0x78]==7
+  &&before[0x52]==1&&before[0x57]==1&&before[0x5a]==1&&before[0x5d]==0&&w(0x6c)==0
+  &&before[0x50..0x53]==before[0x55..0x58]&&before[0x58..0x5b]==before[0x55..0x58];
+ //5924 measured retained command dispatch (state8, 0x61=0x80, 0x60=0x18):
+ //the command domain carrying the retained pair association 0x52=1 with
+ //cleared57. Dispatch is the ordinary AI choice machinery (5EB30/624B8),
+ //same plan_choice/plan_explicit_target pieces as the accepted command path.
+ let command_retained=before[0x5e]==8&&before[0x61]==0x80&&before[0x60]==0x18&&before[0x78]==7
+  &&before[0x52]==1&&before[0x57]==0&&before[0x5a]==1;
+ if before[6]!=1||before[24]>=4||before[0x7a]!=4||!(idle||command||hostile||hit||hit_complete||command_retained)||before[0x76]>90||before[0x7b]!=255
+  ||before[0x15]!=0x80||!matches!(before[0x16],2|0x82)||before[0x4f]!=0||(before[0x52]!=0&&!(hostile||hit||hit_complete||command_retained))||(before[0x57]!=0&&!(hostile||hit||hit_complete))
   ||w(0x49)as u16&!0x337f!=0||w(0x6c)<0||w(0x66)<=2||w(0x6a)<=0{return Err(CreatureError::UnsupportedMotionState);}
- creature_world::plan_mule_admitted_body_with_collision(before,prefix,working_target,map,context,physics,trig,contact,animations,choice,true,cell_entry,postphysics,obstacle,hostile)
+ creature_world::plan_mule_admitted_body_with_collision(before,prefix,working_target,map,context,physics,trig,contact,animations,choice,true,cell_entry,postphysics,obstacle,hostile||hit_complete)
 }

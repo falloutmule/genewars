@@ -1,0 +1,64 @@
+{
+  "receipt": "f1-mule-family-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "family checkpoint - not an integrated acceptance",
+  "family": "F1 Mule light/full callback sequencing, shared completed-animation and hit-reaction continuation, affected owned/neutral callers",
+  "policy": "private/integration/development-policy-20261017.md (adopted this date; installed in the active skill genewars-reconstruction and in scripts/root_family_check.py)",
+  "matrix": "private/integration/mule-family-caller-domain-matrix.json (14 rows)",
+
+  "head_before_commit": "b85098e7a46fabe8e6f80b4b6330d9146215815b",
+
+  "new_change_sets_since_b85098e": [
+    {"name": "attempt11 owned hit-reaction completion (F1-R07)", "files": ["actor_world/owned_mule_updates.rs", "owned_mule_callback.rs"]},
+    {"name": "attempt12 owned command domain with retained 0x52 -> ordinary AI dispatch (F1-R08)", "files": ["actor_world/creature_updates.rs", "actor_world/owned_mule_updates.rs", "owned_mule_callback.rs"]},
+    {"name": "attempt13 neutral zero-reserve attack completion (F1-R09)", "files": ["actor_world/creature_updates.rs"]}
+  ],
+
+  "director_verification": {
+    "tool": "scripts/root_family_check.py (new, strengthened comparator)",
+    "run": "private/integration/F1-check-20261017T0945",
+    "result": {"positive": "24/24", "negative": "2/2", "checks": "33/33", "all_ok": true},
+    "per_case": {
+      "F1-R01 4801": "execution passed; exact lengths; oracle passed, 0 draws, 427369 B, 0 diffs",
+      "F1-R02 5893": "execution passed; exact lengths; oracle passed, 0 draws, 0 diffs",
+      "F1-R03 5939": "execution passed; exact lengths; oracle passed (1503 instr), 0 draws, 0 diffs",
+      "F1-R05 5914 slot5": "execution passed; lengths exact; rng 9 draws + ring match; 0 diffs",
+      "F1-R06 5916 slot1": "execution passed; lengths exact; rng 0 draws; 0 diffs",
+      "F1-R07 5922 slot1": "execution passed; lengths exact; rng 0 draws; 0 diffs",
+      "F1-R08 5924 slot1": "execution passed; lengths exact; rng 2 draws; 0 diffs",
+      "F1-R09 5938 slot5": "execution passed; lengths exact; rng 8 draws (seed e5b001ca -> 85d609d2); 0 diffs",
+      "F1-R04 5940 (negative)": "status blocked with Creatures(UnsupportedMotionState); all eight buffers byte-identical to input (transactional preservation)"
+    },
+    "focused_batch": "9/9, exit 0",
+    "runtime_suite": "260 passed / 0 failed / 8 ignored",
+    "campaign": {"replay": "private/integration/continued-krell-5939F/replay.txt", "steps": 5938,
+                 "blocked": "creature slot 1: UnsupportedRecordState",
+                 "world_sha256_at_5938": "87d76cecafa29e144402736ff59ba3bf20c022397a3421b75cf21d3f84a807cd",
+                 "rgb_sha256_at_5938": "63a8e212795285f0e7d428eb177b409de5a5e9cd0499d21d258980364e1214b4"}
+  },
+
+  "comparator_enforcement_tested": {
+    "execution_before_bytes": "every positive case requires cargo rc 0, result.json status passed, the intended frame/slot, input_roundtrip true and no error before any comparison",
+    "exact_lengths_before_equality": "actors 4000, backing 343958, buildings 17152, creatures 37200, effects 16200, family8 1632, players 7220, rng 7; total 427369 - asserted per buffer and for the total",
+    "rng": "expected draw count from result.json AND byte-identical rng.bin against the interpreter output (seed + ring = draw order), recorded as hex before/after",
+    "negative_separate": "the 5940 gate is scored as a negative case: expected rejection error plus byte-identical preservation of all eight buffers",
+    "self_test": "the checker was run end to end three times; two authoring bugs (an unguarded expected-dir path and a rec() arity error) were found and fixed before the recorded run"
+  },
+
+  "new_blocker": {
+    "id": "F1-R14",
+    "frame": 5939, "slot": 1,
+    "error": "CreatureDrawError::UnsupportedRecordState from the mule draw wrapper guard record[0x5e] != 8 (genewars-desktop/src/bin/support/creature_scene.rs, draw_initial_mule_record)",
+    "measured_record": "owned Mule presenting state 0x5e=20, animation 0x19=5, 0x60=0x18, 0x6c=32767 - the hit reaction applied by the authentic, interpreter-verified 5938 attack",
+    "in_family": true,
+    "note": "the inner draw_supported_mule_record already admits state 20 with animation <=7 or 16; the open question (routing a live Mule away from the startup-only wrapper vs widening that guard) must be answered from the scene-dispatch/render-policy code, not from convenience"
+  },
+
+  "not_run": [
+    "native input parity on one frozen executable for the corrected trajectory",
+    "framebuffer byte comparison on the frozen executable",
+    "visual inspection of the corrected frontier scene",
+    "mission outcome / zone-credit progression past 5938"
+  ],
+  "open_anomaly": "the batch-4801 interpreter instruction count printed 2271 in one run versus the 2224 pinned in the earlier receipt, while the oracle's byte comparison stayed 0-diff (5893/5939 matched their pinned counts); unexplained and to be pinned down, not papered over"
+}
