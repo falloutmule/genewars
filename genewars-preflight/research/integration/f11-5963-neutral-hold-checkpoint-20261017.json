@@ -1,0 +1,64 @@
+{
+  "receipt": "f11-5963-neutral-hold-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "family F11 integrated - corrected campaign advanced 5963 -> 5966; the refused callback turned out to be a no-op the port had not admitted",
+  "policy": "private/integration/development-policy-20261017.md",
+  "measured_record": {
+    "campaign": "private/integration/attempt24-campaign-20261017T164405 (blocked at 5963, world e41fabfe..., rgb f2030530... - the F10 frontier, so the measurement sits on the correct boundary)",
+    "capture": "frame-5963-slot-5-blocked-before",
+    "caller": "the NEUTRAL slot caller's own error path - step_neutral_mule_slot_with_water, actor_world/creature_updates.rs:47 (capture_numeric_callback(..., blocked-before); writer at :544-556), reached from family_scheduler.rs:48/63 (owner==4 routing). No blocked-before-owned capture exists at 5963.",
+    "fields": "slot 5, owner 4, state 0x5e=8, animation 0x19=5, 0x1b=0, 0x1c..0x20=0, 0x60=0x88, 0x61=0x40, word(0x6c)=15"
+  },
+  "oracle_verdict": {
+    "oracle": "neutral-mule-captured-width-review.py",
+    "status": "source_prepared",
+    "instructions": 1517,
+    "draws": 0,
+    "output": "private/review/neutral-mule-captured-width/4d36d9f1ee814938abd972b8808972b1",
+    "deltas": "ZERO - every buffer byte-identical to the input (backing 343958 / total 427369 verified)",
+    "executed_path": "0x5ed20 -> 0x5ed37/0x5ed3b (word(0x6c)=15 != 0, so JLE 0x65384 is NOT taken) -> 0x5ee1c/0x5ee1f -> shared body 0x6fb60..0x70790 with 0x6d390/0x8b340/0x8b520 cell walks -> 0x5ee25 -> 0x5eb30 -> 0x5ee3f -> 0x5e640 -> 0x7ac00; no 0x65384 state dispatch, no tail 0x6a290, no RNG draw",
+    "meaning": "the callback is a legitimate NO-OP for this record; the port refused a no-op it had never admitted"
+  },
+  "implementation": {
+    "file": "rust/crates/genewars-runtime/src/actor_world/creature_updates.rs",
+    "scope": "a bounded neutral hold arm admitting exactly the measured structural shape; no writes, no draws"
+  },
+  "negative_gate": {
+    "row": "R23-neutral-state8-pursuit-88-40-5963",
+    "note": "added FIRST as a negative gate, then converted to positive in the same change set once the oracle adjudicated it, with the source basis in-row; the checker still has 2 negative rows"
+  },
+  "director_verification": {
+    "run": "private/integration/F11-root-check-20261017T1730",
+    "result": {
+      "positive": "39/39",
+      "negative": "2/2",
+      "checks": "48/48",
+      "all_ok": true
+    },
+    "campaign": "steps 5966, blocked Creatures(UnsupportedNeighborhood), world 039aee79..., rgb 45ebf3ba... - matches the worker's report exactly"
+  },
+  "frontier_advance": {
+    "before": {
+      "steps": 5963,
+      "world_sha256": "e41fabfe7c6690f66c3a7433f333a92301a832b6696b345018ed47d18f3209ea"
+    },
+    "after": {
+      "steps": 5966,
+      "blocked": "Creatures(UnsupportedNeighborhood)",
+      "world_sha256": "039aee79e0041fe267482a9b6bbe21c68e75394c22a3aeacc00d9a7e3d9b595e",
+      "rgb_sha256": "45ebf3bacfde65e1f8f295ba496f168de87cddccdac3af262c41e13dff5de99b"
+    }
+  },
+  "open_items": [
+    "F10 writes word(0x6c)=16 as a constant; the source writes the pre-step word of global 0x11878a - measurement-equivalent on the R22 fixture but not source-derived (out of F11's scope, left open)",
+    "the second 0x66 -1 site on the 5962 path remains unpinned",
+    "F11's new hold admission gate is bounded to the measured structural shape"
+  ],
+  "next": {
+    "family": "F12 - the 5966 refusal is a NEW error class (Creatures(UnsupportedNeighborhood)), unmeasured; measure before implementing",
+    "native_parity": "queued for the 5966 frontier on the current build"
+  },
+  "cumulative": {
+    "since_policy_adoption": "5940 -> 5946 -> 5962 -> 5963 -> 5966, no gate relaxation, negative set kept honest"
+  }
+}

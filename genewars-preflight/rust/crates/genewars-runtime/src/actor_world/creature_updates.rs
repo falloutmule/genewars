@@ -86,6 +86,29 @@ impl ActorWorld {
             if peer[0x5e]!=3||peer[0x18]!=4||peer[0x7a]!=4||reference(peer,0x55)!=own{return Err(CreatureError::UnsupportedMotionState.into());}
         }
         let mut rng=self.rng;
+        //F11 measured 5963 hold (fixture attempt24-live-5963-blocked-neutral,
+        //frame 5963 slot 5): after the F10 out-of-range leave-pursuit
+        //completion the same neutral owner-4 Mule re-enters with state 8 while
+        //the pursuit fields survive (0x60=0x88, 0x61=0x40, word(0x6c)=15>0,
+        //word(0x6a)=62, 0x52=1, 0x57=1, 0x5a=0, 0x78=0, 0x7a=4, 0x4f=0,
+        //0x5d=0, 0x68=0, word(0x58)=0, and the 0x50/0x55 triples both pointing
+        //at the same live target). The neutral oracle executed 5ED20 on this
+        //exact record unchanged with zero draws (output
+        //neutral-mule-captured-width/4d36d9f1ee814938abd972b8808972b1,
+        //1517 instructions; no 0x65384 state dispatch, no tail 0x6a290 DEC,
+        //no RNG draw) - an admitted in-pursuit hold, not a transition. Only
+        //this measured shape is admitted; every other shape keeps refusing in
+        //mule_route_prefix below.
+        if before[0x18]==4&&before[0x5e]==8&&before[0x60]==0x88&&before[0x61]==0x40
+            &&before[0x78]==0&&word(&before,0x6c)>0&&word(&before,0x6a)>0
+            &&before[0x52]==1&&before[0x57]==1&&before[0x5a]==0&&before[0x4f]==0
+            &&before[0x5d]==0&&before[0x68]==0&&before[0x7a]==4&&word(&before,0x58)==0
+            &&reference(&before,0x50)==reference(&before,0x55){
+            self.entity(reference(&before,0x55))?;
+            let cell=floor_cell([word(&before,7),word(&before,9)]);
+            return Ok(MuleCallbackReceipt{motion:creature_world::CommonPhysicsPlan{after:before,old_cell:cell,new_cell:cell,physics_cell:cell},
+                retirement:None,newborn_slots:Vec::new(),pending_audio:Vec::new(),pending_plant_retirements:Vec::new(),pending_portrait_refresh:false});
+        }
         let (prefix,working_target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng,false)?;
         if before[0x5e]==27&&creature_world::mule_callback_phase(&before,context.frame_counter)&1!=0&&word(&before,0x6c)&15==0&&(0..=1).contains(&word(&before,0x68)) {
             let plan=creature_world::plan_mule_bones_retirement_after_prefix(&before,&prefix,self.map(),context,physics,trig,animations)?;

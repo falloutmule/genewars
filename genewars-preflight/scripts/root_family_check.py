@@ -135,6 +135,28 @@ POSITIVE = [
     dict(id='R22-neutral-state21-pursuit-5962', frame=5962, slot=5, draws=1, mode='direct',
          fixture='private/review/attempt23-live-5962-blocked-neutral',
          expected='private/review/neutral-mule-captured-width/23a9b1f85a74452588e40de2712fe016'),
+    # F11 conversion of the R23 negative row to POSITIVE (2026-10-17), per the
+    # family policy's "source-proved and intentionally expanded" condition.
+    # Source basis: the literal executed oracle path 0x5ed20 entry ->
+    # 0x5ed37/0x5ed3b (word(0x6c)=15 != 0, JLE 0x65384 NOT taken) ->
+    # 0x5ee1c/0x5ee1f in-pursuit fall-through -> shared body 0x6fb60..0x70790
+    # with 0x6d390 distance queries and 0x5b400/0x8b520/0x8b340 cell walks ->
+    # 0x5ee25 -> 0x5eb30 -> 0x5ec6b/0x5ec98 -> 0x5ee3f -> 0x5e640 ->
+    # 0x5ee48 -> 0x7ac00 epilogue -> 0x5ee73/0x5eec6; NO 0x65384 state
+    # dispatch, NO tail 0x6a290 DEC, and ZERO RNG draws. The neutral oracle
+    # produced the authoritative output 4d36d9f1ee814938abd972b8808972b1
+    # (source_prepared, 1517 instructions, 0 draws): all eight buffers
+    # byte-identical to the input - an admitted in-pursuit hold, not a
+    # transition. The port implements the same measured no-op hold in
+    # step_mule_followup_inner ahead of mule_route_prefix, gated to owner 4
+    # state 8 with the surviving pursuit fields (0x60=0x88, 0x61=0x40,
+    # word(0x6c)>0, word(0x6a)>0, 0x52=1, 0x57=1, 0x5a=0, 0x78=0, 0x7a=4,
+    # 0x4f=0, 0x5d=0, 0x68=0, word(0x58)=0, equal 0x50/0x55 triples and a
+    # resolvable live target). Same fixture as the former negative gate; this
+    # is NOT a conversion of any other row.
+    dict(id='R23-neutral-state8-pursuit-88-40-5963', frame=5963, slot=5, draws=0, mode='direct',
+         fixture='private/review/attempt24-live-5963-blocked-neutral',
+         expected='private/review/neutral-mule-captured-width/4d36d9f1ee814938abd972b8808972b1'),
 ]
 NEGATIVE = [
     # F9 fail-closed negative gate (added 2026-10-17 in the same change set as the
@@ -155,7 +177,6 @@ NEGATIVE = [
          fixture='private/review/attempt22-owned-5946-expired-timer-zero-6a',
          expect_error='Creatures(UnsupportedMotionState)'),
 ]
-
 
 def main():
     ap = argparse.ArgumentParser()
