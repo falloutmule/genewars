@@ -1,5 +1,24 @@
 # GeneWars authoritative continuation - 2026-10-16
 
+## Family F6 checkpoint - 2026-10-17 (campaign advances 5940 -> 5946, native-accepted)
+
+The 5940 boundary was resolved by evidence in three ordered steps, not by relaxing a gate: F4 measured the live
+refused record (owned state 20, animation 16, fresh timer 0x6c=32767, 0x52=0, 0x60=0x18) and showed the bounded
+interpreter could not adjudicate it; F5 extended the reference model with a separate OR arm justified by the
+literal original listing (0005ed37/0005ed3b -> 0005ee25-0005ee32 -> 0005eed5-0005ef1f -> 0005ef22 -> 0005ef32 ->
+0005ef3a-0005ef40 -> 0005ef49-0005ef68 + 0006a20d-0006a21f -> 0006a290-0006a53e with 0006a4a0 DEC word(0x6c)
+-> 0005e640/0005e817 -> 0007ac00, zero RNG draws); F6 implemented the port arm against that authoritative output.
+
+- Authoritative output: `source_prepared`, 2307 instructions, 0 draws, 20 changed bytes all inside slot 1.
+- Port arm `fresh_hit` in `owned_mule_callback.rs` pins exactly the measured shape; focused fixture byte-exact at
+  exact lengths with 0 draws and an identical rng.bin.
+- Campaign: **5940 -> 5946** (world `59c95764...`, rgb `1a065942...`). First genuine frontier movement since F1,
+  and it came from source evidence.
+- Native acceptance for the F6 build on one frozen executable (`95433f47...`): 5946 headless and native, all eight
+  compared keys equal, frontier framebuffers byte-identical. Director checker: 30/30 positive, 37/37 checks.
+- New blocker at 5946 (owned state-20 EXPIRED timer with a non-matching 0x50 triple) is reported, not measured;
+  the checker again has zero negative rows, so family F7 pins that domain as a negative row *before* implementing.
+
 ## Family F2 checkpoint - 2026-10-17 (campaign reaches step 5940, native-accepted)
 
 F2 (the step-5940 advance boundary) resolved by measurement first: an env-gated dump captured the exact refused
