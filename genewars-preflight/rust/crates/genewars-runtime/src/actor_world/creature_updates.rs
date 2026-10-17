@@ -540,6 +540,9 @@ impl ActorWorld {
             &&before[0x57]==0&&before[0x52]==1&&word(before,0x50)==word(before,0x55);
         let associated_pair=matches!(before[0x5e],1|3|4|5|20|21)&&before[0x52]==1&&before[0x57]==1&&reference(before,0x50)==reference(before,0x55)||retained_food_association
                         ||before[24]==0&&before[0x5e]==8&&before[0x60]==0x88&&before[0x61]==0&&before[0x78]==7&&word(before,0x6c)>0&&before[0x52]==1&&before[0x57]==1&&before[0x5a]==1&&reference(before,0x50)==reference(before,0x55)&&reference(before,0x58)==reference(before,0x55)
+            ||before[24]==0&&before[0x5e]==8&&before[0x60]==0x88&&before[0x61]==0&&before[0x78]==7
+             &&word(before,0x6c)==0&&before[0x52]==1&&before[0x57]==1&&before[0x5a]==1
+             &&reference(before,0x50)==reference(before,0x55)&&reference(before,0x58)==reference(before,0x55)
             //5924 measured retained command dispatch: state8, 0x61=0x80,
             //0x60=0x18, 0x6c==0, retained 0x52=1 with cleared57. The ordinary
             //AI choice machinery (624B8) performs the dispatch.

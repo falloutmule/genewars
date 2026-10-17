@@ -1,0 +1,47 @@
+{
+  "receipt": "f3-5940-fullpath-domain-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "family F3 checkpoint - a source-proved domain implemented, but the LIVE frontier did not move; next assignment re-scoped",
+  "family": "F3 - the owned full-path motion transition (the domain previously carried only as the negative gate F1-R04)",
+  "policy": "private/integration/development-policy-20261017.md",
+
+  "source_proof": {
+    "fixture": "the task-named private/review/authentic-krell-195/frame-5940-slot-1-blocked-before-owned does not exist; the byte-identical capture is private/review/attempt13-fx-5940 (all eight buffers SHA-equal to authentic-krell-195/frame-5939-slot-1-blocked-before-owned)",
+    "oracle": "private/review/owned-mule-captured-width/606d12841ae14e6b87a2bd999f44e63a",
+    "status": "source_prepared", "instructions": 11594, "draws": 5,
+    "deltas": "slot 1 only: 0x19 07->0f, 0x1b..0x1e 0->1, 0x4b 1482->1481, 0x5e 08->0x15, 0x66 8657->8655, 0x68 14->13, 0x6c 0->32766; rng seed 0x8595->0xd641, ring 0x1d->2, count 198->203",
+    "earlier_report_corrected": "the transition is state 8 -> 21 (0x15); the earlier cycle's 'state 8 -> 15' read the animation byte 0x19 as the state"
+  },
+
+  "implementation": {
+    "new_module": "rust/crates/genewars-runtime/src/mule_owned_reattack_resume.rs (plan_resume, bounded to the measured record domain)",
+    "edits": ["actor_world/creature_updates.rs (one associated_pair arm for the 0x6c==0 sibling)",
+              "actor_world/owned_mule_updates.rs (state-8 expired-timer target arm + choice-closure dispatch to plan_resume)",
+              "owned_mule_callback.rs (hostile predicate state-8 arm w(0x6c)>0 -> >=0, with 0x6c<0 still rejected by the common guard)"],
+    "provisional": "the 5-draw decomposition inside 624B8/5B580 is not per-site attributed; only the ordered chain is admitted (the final rng.bin is byte-exact, so there is no observable gap)",
+    "focused_fixture": "passed, frame 5940 slot 1, rng_draws 5, all eight buffers exact lengths (backing 343958 / total 427369), zero diffs against the interpreter output"
+  },
+
+  "frontier_unchanged": {
+    "campaign": {"steps": 5940, "blocked": "Creatures(UnsupportedMotionState)",
+                 "world_sha256": "53a4d4ea70749d2b4194af78f6b51abf55045daddbf462f202f0b4aaac6a7d04",
+                 "rgb_sha256": "08e84edc5db2dab132da338eedca8e841e1f2b4bce3af851a7832aa96f4c88c3"},
+    "comparison": "byte-identical to the pre-change F2 runs (f2-5940-gate-A, F1-native-20261017T1410) - the change neither regressed nor advanced the live trajectory",
+    "meaning": "the implemented domain is source-proved but is NOT the record the corrected campaign blocks on; the provenance caveat is that its fixture came from the pre-F2 attempt13 trajectory, so the arm may be unreachable on the corrected timeline"
+  },
+
+  "director_verification": {
+    "run": "private/integration/F3-root-check-20261017T1545",
+    "result": {"positive": "27/27", "negative": "0/0", "checks": "34/34", "all_ok": true},
+    "campaign": "identical hashes to F2 (53a4d4ea... / 08e84edc...)",
+    "note": "the checker's 5940 row was deliberately converted negative->positive in the same change set, with the oracle source basis stated (policy 'intentionally expanded' condition). The checker now has ZERO negative rows - an explicitly recorded coverage gap."
+  },
+
+  "live_blocker_not_yet_measured": {
+    "blocked_report_snapshot": "mission.creature_states at the blocked step shows slot 1 owned state 20 / animation 16 / frame 1 / reserve 11 AND slot 5 neutral state 21 / animation 11 / frame 0 / reserve 0 - the neutral slot is the more likely blocker, but this snapshot is the last COMMITTED step, not the refused record",
+    "worker_quoted_shape_unconfirmed": "the worker reported a live capture as 'owned Mule state 8, 0x60=0x88, 0x61=0x40, 0x6c=32740, 0x52=0'; the director could not confirm it - the only blocked-before-owned fixture under that run is the pre-F2 draw-refused record (state 20 / animation 16 / 0x60=0x18), and the oracle rejects it as outside its domain. Treat the quoted shape as unverified.",
+    "next_assignment": "measure the refused SIMULATION record for the live 5940 block with the matching (owned or neutral) oracle, add it as a negative checker row until it is proved, and only then implement - and keep the previously implemented F3 domain covered"
+  },
+
+  "native_parity": "re-run for the changed executable after this checkpoint (the frontier state is unchanged, but the binary changed, so the F2 acceptance does not silently carry over)"
+}

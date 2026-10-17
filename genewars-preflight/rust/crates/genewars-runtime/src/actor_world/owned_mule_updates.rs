@@ -96,6 +96,15 @@ impl ActorWorld {
      let mut after=*record;after[0x5e]=8;after[0x60]=0x18;after[0x61]=0x80;after[0x57]=0;return Ok(after);
     }
     if let Some(enemy)=hostile_enemy {
+     if record[0x5e]==8&&word(record,0x6c)==0&&record[0x60]==0x88&&record[0x61]==0&&record[0x78]==7
+      &&record[0x52]==1&&record[0x57]==1&&record[0x5a]==1&&record[0x5d]==0
+      &&record[0x50..0x53]==record[0x55..0x58]&&record[0x58..0x5b]==record[0x55..0x58]{
+      //5940 measured state8 attack-ready resume: 624B8 dispatches the retained
+      //pair straight back into state21 through 5B580/5CC60 (5 draws, enemy
+      //untouched; see mule_owned_reattack_resume for the measured deltas).
+      let plan=crate::mule_owned_reattack_resume::plan_resume(record,&enemy,*random.borrow(),physics).map_err(|_|CreatureError::UnsupportedMotionState)?;
+      *random.borrow_mut()=plan.rng_after;return Ok(plan.after);
+     }
      if record[0x5e]==21{if word(record,0x6c)<=0{return stage.borrow_mut().owned_mule_completed_attack(record,&enemy,&mut random.borrow_mut(),physics,&mut audio.borrow_mut());}let mut after=*record;if creature_world::mule_callback_phase(record,context.frame_counter)&3==3{
       let dx=word(&enemy,7).wrapping_mul(2).wrapping_sub(word(record,7).wrapping_mul(2));let dy=word(&enemy,9).wrapping_mul(2).wrapping_sub(word(record,9).wrapping_mul(2));
       after[0x4b..0x4d].copy_from_slice(&crate::actor_motion::angle(i32::from(dx),i32::from(dy),physics.angles()).to_le_bytes());
@@ -280,8 +289,11 @@ impl ActorWorld {
   Ok(hostile)
  }
  /// Typed reciprocal owned task7 pursuit, separate from plant/corpse food.
+/// 5940 measured extension: the expired state8 timer (0x6c==0) with the
+/// retained pair still selects the live peer through 624B8; the 0x6c>0 arm
+/// keeps the proven hold domain and the shared admission guard rejects 0x6c<0.
  pub(super) fn owned_mule_live_hostile_target(&self,r:&CreatureRecord)->Result<Option<CreatureRecord>,ActorWorldError>{
-  if r[6]!=1||r[24]!=0||r[0x7a]!=4||!(matches!(r[0x5e],1|21)||r[0x5e]==8&&word(r,0x6c)>0)||r[0x61]!=0||!(if r[0x5e]==1{matches!(r[0x60],0x48|0xc8)}else{matches!(r[0x60],8|0x88)})||r[0x78]!=7
+  if r[6]!=1||r[24]!=0||r[0x7a]!=4||!(matches!(r[0x5e],1|21)||r[0x5e]==8&&word(r,0x6c)>=0)||r[0x61]!=0||!(if r[0x5e]==1{matches!(r[0x60],0x48|0xc8)}else{matches!(r[0x60],8|0x88)})||r[0x78]!=7
    ||r[0x76]>90||r[0x4f]!=0||r[0x5d]!=0||r[0x52]!=1||r[0x57]!=1||r[0x5a]!=1||word(r,0x49)as u16&0x100!=0
    ||reference(r,0x50)!=reference(r,0x55)||reference(r,0x58)!=reference(r,0x55){return Ok(None);}
   let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedMotionState)?;let id=word(r,0x55)as usize;let target=*pool.record(id)?;

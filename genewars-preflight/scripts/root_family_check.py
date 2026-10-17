@@ -66,12 +66,18 @@ POSITIVE = [
     dict(id='R03-owned-light-5939', frame=5939, slot=1, draws=0, mode='oracle', oracle='owned',
          fixture='private/review/authentic-krell-195/frame-5939-slot-1-blocked-before-owned',
          instructions=1503),
+    # F1-R04 intentionally expanded (2026-10-17): the frame-5940 owned FULL-path
+    # transition is now independently source-proved by the owned oracle run on
+    # private/review/attempt13-fx-5940 (status source_prepared, 11594
+    # instructions, 5 draws, output 606d12841ae14e6b87a2bd999f44e63a, slot1-only
+    # deltas 0x19/0x1b..0x1e/0x4b/0x5e/0x66/0x68/0x6c); the former negative gate
+    # becomes this direct positive comparison per the family policy's
+    # "source-proved and intentionally expanded" condition.
+    dict(id='R04-owned-full-path-5940', frame=5940, slot=1, draws=5, mode='direct',
+         fixture='private/review/attempt13-fx-5940',
+         expected='private/review/owned-mule-captured-width/606d12841ae14e6b87a2bd999f44e63a'),
 ]
-NEGATIVE = [
-    dict(id='R04-owned-full-path-5940', frame=5940, slot=1,
-         fixture='private/review/authentic-krell-195/frame-5939-slot-1-blocked-before-owned',
-         expect_error='UnsupportedMotionState'),
-]
+NEGATIVE = []
 
 
 def main():
