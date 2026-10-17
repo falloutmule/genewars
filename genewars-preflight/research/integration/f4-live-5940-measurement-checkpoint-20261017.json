@@ -1,0 +1,48 @@
+{
+  "receipt": "f4-live-5940-measurement-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "measurement checkpoint - the live frontier is bounded by the interpreter's proven domain, not by the port",
+  "policy": "private/integration/development-policy-20261017.md",
+
+  "corrected_measurement": {
+    "supersedes": "the F3 receipt's 'worker-quoted shape' (owned Mule state 8, 0x60=0x88, 0x61=0x40, 0x6c=32740, 0x52=0) - CONTRADICTED by measurement and now withdrawn",
+    "live_refused_record": "OWNED Mule slot 1, state 0x5e=20, animation 0x19=16, frame 0x1b=1, 0x60=0x18, 0x61=0x80, 0x6c=32767 (fresh timer), 0x52=0, 0x57=1, 0x5a=1, 0x78=7; related neutral slot 5 state 21 with 0x6c=32766",
+    "fixture": "private/review/attempt17-live-5940-blocked-owned",
+    "method": "fresh campaign run with the progress facility; the capture phases fire on every caller Err, so no instrumentation was needed; exactly one blocked capture exists at 5940 and it is deterministic (all eight buffers identical to the F2-era run)",
+    "refusing_caller": "step_owned_mule_slot (actor_world/owned_mule_updates.rs) - its implemented state-20 arms require either the hostile attack-entry shape (0x60 in {0x08,0x88}, 0x52=1, matched pointer triples) or an expired timer (word(0x6c)==0); this record has neither. Slot 5 is not the blocker (no neutral blocked capture)."
+  },
+
+  "oracle_verdict": {
+    "command": "owned-mule-captured-width-review.py --before private/review/attempt17-live-5940-blocked-owned --frame 5940 --slot 1",
+    "status": "error",
+    "reason": "ValueError('unsupported owned hostile pursuit caller')",
+    "output_dir": "private/review/owned-mule-captured-width/40aab8a0bfff42b5bf37fdef0ab56c2c (no buffers produced)",
+    "meaning": "NO authoritative interpreter output exists for this record. The port must stay fail-closed at 5940 - it does."
+  },
+
+  "negative_gate_restored": {
+    "row": "R10-owned-state20-fresh-timer-5940 (NEGATIVE) in scripts/root_family_check.py",
+    "fixture": "private/review/attempt17-live-5940-blocked-owned",
+    "pins": "the live refused record stays explicitly blocked with full transactional preservation until the interpreter can adjudicate it and a separate bounded assignment implements it",
+    "note": "this closes the coverage gap recorded in the F3 receipt (zero negative rows)"
+  },
+
+  "director_verification": {
+    "run": "private/integration/F4-root-check-20261017T1845",
+    "result": {"positive": "27/27", "negative": "2/2", "checks": "36/36", "all_ok": true},
+    "negative_rows": ["R10-rejection: blocked, UnsupportedMotionState", "R10-transactional-preservation: all eight buffers byte-identical to input"],
+    "campaign": {"steps": 5940, "blocked": "Creatures(UnsupportedMotionState)",
+                 "world_sha256": "53a4d4ea70749d2b4194af78f6b51abf55045daddbf462f202f0b4aaac6a7d04",
+                 "rgb_sha256": "08e84edc5db2dab132da338eedca8e841e1f2b4bce3af851a7832aa96f4c88c3"},
+    "native_parity": "F3-era executable re-run on one frozen binary (sha256 45f6c146...): steps 5940 headless and native, identical block string, all eight compared keys equal, framebuffers byte-identical"
+  },
+
+  "next_family": {
+    "id": "F5",
+    "scope": "reference-model (interpreter) domain extension for the owned 5ED20 continuation at the state-20 / 0x60=0x18 / 0x52=0 shape, from source evidence only",
+    "why": "the port cannot be advanced authentically without an authoritative expected output; extending the interpreter's proven domain is the prerequisite, and it must be justified by cited disassembly/derived data, not by the fact that the campaign produced the shape",
+    "port_rule": "no Rust changes in F5; the port stays fail-closed at 5940 until the oracle can adjudicate and a separate bounded assignment implements it"
+  },
+
+  "commit_hygiene_note": "an earlier checkpoint (7456e5a) staged the rust tree wholesale and swept in the two preserved experiment files; commit 439f3b4 restored them to untracked with byte-identical contents. Since then all staging is by explicit path only."
+}
