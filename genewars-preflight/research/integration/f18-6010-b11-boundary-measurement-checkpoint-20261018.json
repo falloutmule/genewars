@@ -1,0 +1,35 @@
+{
+  "receipt": "f18-6010-b11-boundary-measurement-checkpoint",
+  "created": "2026-10-18 (America/Denver)",
+  "kind": "family F18 - measurement/coverage checkpoint: the 6010 refusal is the pre-prefix expired side of the B9 continuation, documented as B11, and deliberately NOT implemented",
+  "measurement": {
+    "fixture": "private/review/attempt31-6010-measure/campaign/capture/frame-6010-slot-1-blocked-before-owned (owned slot 1, owner 0, species 4)",
+    "record": "0x5e=1, 0x60=0x48, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1, 0x4f=0, 0x5d=0, 0x76=37, word(0x49)=0x2000, word(0x6c)=0 PRE-PREFIX, position == waypoint",
+    "refusing_site": "owned_mule_updates.rs:401 - the owned walk food guard (word(0x68)=5 <= word(0x62)>>1=65, not completed_command); both the F15 arm (post word(0x6c)>0) and the F17 arrival arm (pre-prefix word(0x6c)>0) skip the record, so it falls through to the guard",
+    "oracle": "source_prepared, 2431 instructions, 4 draws, output private/review/owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b; slot-1-only deltas (0x5e 1->8, 0x60 0x48->0x88, word(0x6c)->0x7ffe, 0x52/0x57->0, 0x54=0x14, 0x49->0x14, waypoint replanned, word(0x3f)=79, 0x2d..0x31 zeroed, 0x19 2->1, 0x66 139->137); every other buffer byte-identical",
+    "new_or_existing": "the THIRD side of the same B9 continuation - exactly the boundary F17 declared fail-closed (a pre-prefix expired timer). Not a port-authored defect this time.",
+    "trace": "same 5ef40 JLE -> 65384 -> entry-1 -> 5ef46 dispatch, but the continuation takes the LONG side at 65c7d JNZ ((word(0xf)+rng_ring)&3)==3 -> 65c9a (F17 took 65c7f JMP 65d4d), then the 65cb2 timer gate, 65cfe draw, 65d42 CALL 5cc60 -> flag -> 65d58 JNZ 65deb (F17 took the near-target block), then the 65deb idle re-acquisition block: draw, 65e68 byte[0x5e]=8, virtual+0x8c, 73c20 waypoint replan, 65ea1 0x49|=0x10, 65e97 0x54=0x14, 65ed6 word(0x6c)=0x7fff, 65eeb CALL 6bdd0, tail 6a4a0 DEC -> 0x7ffe"
+  },
+  "map": {
+    "new_branch": "B11-owned-state1-pursuit-expired-preprefix",
+    "boundary_reason": "the trace settles the decision structure but NOT 5c920 (clears 0x52/0x57/0x2d..0x31), the [EBX+0x8c]/[EDX+0x80] virtuals (8b780), 6bdd0/6c190, 2 of the 4 draw sites, or the creature-side activation-RNG refs (0x1185ac/0x11862c/0x1186ac). None of those has port machinery (grep for 6bdd0/6c190 in the runtime returns nothing) and hand-fabricating them would violate the no-fabrication rules.",
+    "unchanged": "B7, B9, B10 and the walk catch-alls untouched; no guard or catch-all relaxed"
+  },
+  "negative_gate": {
+    "R31": "owned-state1-pursuit-expired-preprefix-6010 added FIRST as a fail-closed negative from the MEASURED fixture (exact rejection + all eight buffers byte-identical, 0 draws) and deliberately NOT converted: the implementation is not proved. R21 and R25 remain fail-closed alongside it."
+  },
+  "implementation": "none - rust/ unchanged. Task B's 'only what is proved' applied: the oracle output is observed but the mechanism is unsettled from listing text, so the port stays closed rather than guessing.",
+  "director_verification": {
+    "run": "private/integration/F18-root-check (attempt31-f18-final)",
+    "result": {"positive": "51/51", "negative": "6/6", "checks": "64/64", "all_ok": true},
+    "campaign": "steps 6010, blocked Creatures(UnsupportedNeighborhood), world c52ac990df36..., rgb 80ea0788... - UNCHANGED, which is the correct outcome for a measurement-only family",
+    "note": "the worker's earlier 63/64 was the recurring stale-head bookkeeping row again (expected 623a574, HEAD had moved to 2adcfb3 mid-run). Documented, not hidden."
+  },
+  "also_recorded": "research/integration/reference-model-extension-degraded-enemy-20261018.json - the F15 oracle widening was sitting uncommitted in the working tree and is now a recorded extension with its provenance and gates.",
+  "native": "no new native parity run is needed: F18 changed no rust, so the F17 acceptance on frozen executable c0cb86c19642... at 6010 still stands.",
+  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008 -> 6010 (held).",
+  "open": {
+    "next_family": "F19 = settle B11's unsettled mechanisms from listing evidence, in dependency order - start with the 4 draw sites and their RNG/ring ordering (the trace already shows an rng_ring term at 65c7d), then 5c920, the 8b780 virtuals, 6bdd0/6c190 and the activation-RNG refs. Only then can the port arm be written without fabricating.",
+    "carry_forward": ["F10 word(0x6c) constant + second 0x66 attribution", "F11 hold shape bound", "B0 food-guard unclosed", "B8 kind-2-with-food-guard open"]
+  }
+}

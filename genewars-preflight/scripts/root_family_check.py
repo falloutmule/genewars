@@ -285,6 +285,36 @@ NEGATIVE = [
     dict(id='R25-owned-idle-kind1-state-over-19-5966', frame=5966, slot=1,
          fixture='private/review/attempt27-owned-5966-kind1-state-1a',
          expect_error='Creatures(UnsupportedNeighborhood)'),
+    # F18 fail-closed negative gate (added 2026-10-18, attempt31): pins the
+    # MEASURED 6010 refusal - the pre-prefix EXPIRED-TIMER side of the B9
+    # degraded-pursuit continuation, the boundary F17 explicitly left
+    # unsupported. Owned Mule slot 1 in the B9 arrival shape (0x5e=1,
+    # 0x60=0x48, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1, word(0x49)=0x2000) but with
+    # word(0x6c)=0 ALREADY BEFORE the callback (F17's arrival side carried
+    # word(0x6c)=0x7fea pre-prefix), so both the F15 fresh arm (word(0x6c)>0)
+    # and the F17 arrival arm (pre-prefix word(0x6c)>0) skip and the record
+    # falls into owned_mule_neighborhood_no_action, whose food guard
+    # (word(0x68)=5 <= word(0x62)>>1=65) refuses at owned_mule_updates.rs:401.
+    # The source oracle ADMITS this record: source_prepared, 2431 instructions,
+    # 4 draws, output
+    # private/review/owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b
+    # (slot-1-only deltas: 0x5e 1->8, 0x60 0x48->0x88, word(0x6c) -> 0x7ffe,
+    # 0x52/0x57 cleared, byte 0x54=0x14, word(0x49)|0x10, waypoint dword 0xb
+    # re-planned, word(0x3f)=79, bytes 0x2d..0x31 zeroed). The trace settles the
+    # DECISION STRUCTURE but not yet every mechanism: 65c7d JNZ
+    # ((word(0xf)+rng_ring)&3)==3 -> 65c9a; 65cb2 (0x7fff-word(0x6c))>0x100;
+    # 65cfe draw; 65d42 CALL 5cc60 -> flag -> 65d58 JNZ 65deb; 65deb draw;
+    # 65e68 byte[0x5e]=8; virtual+0x8c; 73c20 waypoint; 65ea1 0x49|=0x10;
+    # 65e97 byte[0x54]=0x14; 65ed6 word(0x6c)=0x7fff; 65eeb CALL 6bdd0; tail
+    # 6a4a0 DEC word(0x6c) -> 0x7ffe. NOT yet settled from listing text: 5c920
+    # (clears 0x52/0x57/0x2d..0x31), the [EBX+0x8c]/[EDX+0x80] virtuals (8b780),
+    # 6bdd0/6c190, the remaining 2 of 4 draw sites, and the creature-side
+    # activation-RNG refs (0x1185ac/0x11862c/0x1186ac). Deliberately NOT
+    # hand-fabricated; the gate asserts the exact expected rejection AND
+    # complete transactional world/RNG preservation. Never silently expanded.
+    dict(id='R31-owned-state1-pursuit-expired-preprefix-6010', frame=6010, slot=1,
+         fixture='private/review/attempt31-6010-measure/campaign/capture/frame-6010-slot-1-blocked-before-owned',
+         expect_error='Creatures(UnsupportedNeighborhood)'),
 ]
 
 def main():
