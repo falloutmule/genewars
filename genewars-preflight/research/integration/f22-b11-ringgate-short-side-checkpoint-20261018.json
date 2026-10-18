@@ -34,5 +34,6 @@
       "B8 kind-2-with-food-guard"
     ]
   },
-  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008 -> 6010 -> 6060 -> 6100"
+  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008 -> 6010 -> 6060 -> 6100",
+  "native_acceptance": "PASSED: private/integration/f1-native-20261018T0730 - frozen exe 8290d4f856298b2d..., headless and native both stop at 6100 with the identical block, all compared keys equal, frontier framebuffers byte-identical, world f06e9729f372..."
 }
