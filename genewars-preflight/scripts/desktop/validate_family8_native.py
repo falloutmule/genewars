@@ -51,6 +51,8 @@ def run_case(binary: Path, work: Path, name: str, *, steps: int, replay_text: st
     if window:
         command += ["--frames", "3", "--seconds", "20"]
     result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=900)
+    (folder / 'stdout.txt').write_text(result.stdout, encoding='utf-8')
+    (folder / 'stderr.txt').write_text(result.stderr, encoding='utf-8')
     if result.returncode:
         raise RuntimeError(f"{name} failed ({result.returncode}): {result.stderr[-2000:]}")
     stdout_report = json.loads(result.stdout)
@@ -95,7 +97,7 @@ def main() -> int:
     parser.add_argument('--steps',type=int,default=6143)
     parser.add_argument('--output',type=Path,default=ROOT/'research/integration/family8-native-validation-current.json')
     args=parser.parse_args()
-    assert 1<=args.steps<=16384
+    assert 1<=args.steps<=32768
     commands=['click 312 140','load']
     remaining=args.steps
     while remaining:
@@ -127,6 +129,13 @@ def main() -> int:
     catalog_sha = sha_file(ROOT / "research/integration/runtime-resource-catalog.tsv")
     assert catalog_sha == compilation_pins['research/integration/runtime-resource-catalog.tsv']
     (work / 'runtime-inputs.json').write_bytes(input_bytes)
+    (work / 'compilation.json').write_text(json.dumps({
+        'binary_sha256': binary_sha, 'compilation_source_pins': compilation_pins,
+        'resource_catalog_sha256': catalog_sha,
+        'runtime_inputs_receipt_sha256': sha_bytes(input_bytes),
+        'requested_steps': args.steps, 'replay': commands,
+        'original_execution': False,
+    }, indent=2, sort_keys=True) + '\n', encoding='utf-8')
     cases = [run_case(binary_copy, work, "headless-a",steps=args.steps,replay_text=replay_text), run_case(binary_copy, work, "headless-b",steps=args.steps,replay_text=replay_text)]
     if cases[0]["world_sha256"] != cases[1]["world_sha256"] or cases[0]["bmp_sha256"] != cases[1]["bmp_sha256"]:
         raise AssertionError("repeated headless family8 replay was not deterministic")

@@ -1,0 +1,45 @@
+{
+  "batch": 195,
+  "accepted_frontier": {"frame": 5939, "commit": "7347fbf"},
+  "next_blocker": {"frame": 5939, "slot": 1, "family": "owned Mule", "rust_error": "Creatures(UnsupportedMotionState)"},
+  "attempts": [
+    {
+      "id": "GW-5939A",
+      "hypothesis": "the entry admission guard in actor_world/owned_mule_updates.rs:20 rejects state8 + 0x52!=0 when word(0x6c)==0",
+      "patch": "add &&word(&before,0x6c)>0 to the state-8 term of that guard",
+      "outcome": "REJECTED - did not unblock frame5939",
+      "evidence": "the guard no longer fires (state8 term false) but the callback still returns UnsupportedMotionState. Real site is owned_mule_callback.rs line 19, term (before[0x52]!=0&&!hostile), because hostile requires word(0x6c)>0.",
+      "patch_saved": "C:/Users/fallo/Documents/ChatGPT/genewars-routing-probe/attempt1-gw5939a-rejected.patch",
+      "reverted": true,
+      "root_cause_of_failure": "wrong premise: assumed relaxing admission would unblock. Relaxing admission is also WRONG in principle - it would route a light-parity frame into the full state machine, i.e. give frame5939 frame5940's behaviour."
+    },
+    {
+      "id": "GW-5939B",
+      "hypothesis": "the callback has a FRAME-PARITY gate: record[0x61]&1==0 then (frame+word(record,0x0f))&1 selects light (even) vs full (odd). Rust lacks the light path.",
+      "status": "in progress"
+    }
+  ],
+  "source_structure_established": {
+    "entry": "5ed37 TEST byte[record+0x61],0x1 / 5ed3b JZ 5ee1c",
+    "parity_gate": "5ee25..5ee32: AL = byte[0x11877e] + record[0x0f]; AL &= 1; JNZ 5eed5 (odd => full path)",
+    "rust_equivalent_expression": "creature_world::mule_callback_phase(record, frame) = frame + motion_word(record,0x0f)",
+    "light_path": "5ee38 .. 5eec6: CALL 5eb30; CALL 5e640; byte[0x1185a8]=1; CALL 7ac00; CALL 83140 (render enqueue); return. No state machine, no RNG draw, NO decrement of word(record,0x6c).",
+    "full_path_tail": "reaches the same tail at 6a4a4..6a53e but additionally decrements word(record,0x6c) at 6a495-6a4a0",
+    "expired_timer_full_branch": "5ef3a MOVSX word[record+0x6c]; JLE 65384; 65384 = JMP CS:[state*4 + 0x5eca0] a STATE-INDEXED JUMP TABLE (not yet decoded)"
+  },
+  "measured": {
+    "frame5939_light": {"instructions": 1503, "draws": 0, "world_unchanged": true},
+    "frame5941_light": {"instructions": 1503, "draws": 0, "world_unchanged": true},
+    "frame5940_full": {"instructions": 11594, "draws": 5, "world_unchanged": false,
+      "changes": {"state": "08->15", "word0x6c": "0->0x7ffe", "0x68": "14->13", "0x19": "07->0f", "0x1b-0x1e": "->01", "0x4b": "ca->c9", "0x66": "d1->cf"}},
+    "synthetic_light_from_5892_capture_at_frame5893": {"instructions": 1714, "draws": 0, "world_unchanged": false,
+      "rust_vs_source": "MISMATCH: creatures.bin slot1 offsets 0x6c/0x6d - the source light path does NOT decrement word(0x6c); one Rust branch does",
+      "note": "SYNTHETIC probe (state21 on an even-counting light frame); proves the light path is not always a no-op, so a bare 'return unchanged' implementation would be wrong"},
+    "countdown_measured": {"frame5892_state21_word0x6c": 32759, "frame5893_state8_word0x6c": 23, "frame5894": 22, "frame5895": 22, "frame5939": 0}
+  },
+  "verification_lessons_learned": [
+    "GENEWARS_CAPTURED_MULE_OUTPUT must be an ABSOLUTE path: cargo runs the test with cwd = the crate dir, so a relative path fails with Os error 3 and creates nothing.",
+    "A world-byte comparison cannot certify a callback that returned Err: a blocked run emits unchanged buffers, so 427369/427369 often matches trivially. ALWAYS gate on result.json status first ('passed' vs 'blocked'), then compare bytes."
+  ],
+  "operating_note": "Do not exceed two unproductive attempts on one hypothesis; after that change the evidence inspected or reset the worker context."
+}

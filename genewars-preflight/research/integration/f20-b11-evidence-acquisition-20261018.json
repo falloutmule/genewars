@@ -1,0 +1,33 @@
+{
+ "receipt": "f20-b11-evidence-acquisition-20261018",
+ "created": "2026-10-18 (America/Denver)",
+ "kind": "family F20 - evidence acquisition for B11: missing listing produced, 0x2d..0x31 writer located in the executed chain, [0x11877e] producer located; nothing implemented",
+ "residuals": {
+  "i_6c190_listing": "SETTLED. Export command: python -B scripts/ghidra/run_headless.py -process GW-CD-candidate.exe -noanalysis -readOnly -scriptPath scripts/ghidra -postScript ExportRange.java private/ghidra/player-creation/instructions-0006c190.txt 0006c190 0006c8ff (log private/ghidra/player-creation-export-6c190.log, exit 0). Output: 558 instructions covering 0006c190..0006c8f5 (RET). Other callees on the executed chain checked and already covered: 6d390 (building-loader-refs), 73c20 (activation-rng-refs), 8b780/5a990/6b700/13e50/13e70 (initial-creature), 13eb0 (player-creation). No fabricated listing.",
+  "ii_writer_2d_31": "SETTLED, IN the executed chain - no reference-model extension needed or made. Store-watch probe private/integration/b11-writewatch-001.py (subclasses the unchanged owned-width Source with a store hook) replays the F18 capture (frame 6010 slot 1): instructions 2431, draws 4, trace identical to private/review/owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b/trace.txt. Overlapping writes during the run, in order: 0x6faf5 word[0x2d]=0x18, 0x6fb1d word[0x2f]=0xffb9, 0x6fb4b word[0x31]=0xc7 (6fb60 prefix); 0x6dfba word[0x2d]=0x18, 0x6dfc0 word[0x2f]=0xffb9, 0x6dfe9 word[0x31]=0xfcc7 (6df30 accumulation); final 0x6e2e7 word[0x2d]=0, 0x6e310 word[0x2f]=0, 0x6e33e word[0x31]=0 - the vector rebuild in 6df30 (listing private/ghidra/actor-activation/instructions-0006df30.txt): LEA ECX,[EDI+0x2d] at 6e29c, AX from dword[0x1086e8] table indexed by rec+0x39 frame value, dword[0x107ee8] for 0x2f/0x31. After bytes 0x2d..0x32 = 00*6, before 38 00 cc ff c8 00 - exactly the measured delta. All writer addresses are inside already-pinned listings.",
+  "iii_producer_11877e": "SETTLED. Writer: INC dword ptr [0x0011877e] at 0x1bd4f, private/ghidra/font-menu-state/instructions-0001bbc0.txt line 114 - the module main loop (loop head 1bc27; body CALLs 7a580, 70b00, 1c120, 8dfe0, 40c60, then the INC, then TEST byte[0x118770],1 / JZ 1bc27). Corroborating writes: pause-sync MOV [0x11877e],[0x118786] at 1bcfa (and mirror 1c4fe in 1c120) gated on byte[0x118968]&2; scenario/level resets to 0 at 15e59 (jump-table default in 15b90) and 7d038 (campaign level start 7d020); 0x118786 is a bidirectional mirror (719db, 23c8c, 23da9 read/write pairs), not the tick source. This is the global mission tick the interpreter already models as counter=args.frame; its consumers include the B11 ring gate 65c7d and the 6df30 parity gates 6e7c3/6e808. Producer is off-path as F19 expected (main loop, not the 5ed20 chain)."
+ },
+ "implementation": "none. Residuals (i)-(iii) as named by F19 are closed, but the port-machinery precondition fails: grep over rust/crates for 6bdd0/6c190/11877e/1185ac/11862c/1186ac returns nothing, and the activation-table consumers remain an unproved separate family. rust/ delta against HEAD 3e34aa0 is the pre-existing F17 dirty state (creature_world.rs pub(crate) diff + two untracked experiment files), untouched by this family.",
+ "gates": {
+  "command": "C:/Python314/python.exe -B scripts/root_family_check.py --tag attempt33-b11-evidence --head 3e34aa0 --campaign private/integration/continued-krell-5939F/replay.txt",
+  "exit_code": 0,
+  "result": {
+   "positive": "51/51",
+   "negative": "6/6",
+   "checks": "64/64",
+   "all_ok": true,
+   "head_unchanged": "PASS (3e34aa0)",
+   "staged_empty": "PASS"
+  },
+  "campaign": {
+   "steps": 6010,
+   "blocked": "Creatures(UnsupportedNeighborhood)",
+   "world_sha256": "c52ac990df3626e06c5e7faeced2cbc32c44af30bc946e5ffe0551a22f43ce5c",
+   "rgb_sha256": "80ea0788c8d87d1388eb229d4f4ca4bef90f4f9a6448ec438ff864acb5e192c5",
+   "unchanged": true
+  },
+  "patch": "C:/Users/fallo/Documents/ChatGPT/genewars-routing-probe/attempt33-b11-evidence.patch (unstaged working-tree diff; rust portion is the pre-existing F17 dirty state only)"
+ },
+ "map": "B11 branch status updated in research/integration/neighborhood-branch-caller-map-20261017.json with the three evidence pointers above.",
+ "cumulative": "6010 held (third honest non-advance; this one converts missing evidence into located evidence)."
+}

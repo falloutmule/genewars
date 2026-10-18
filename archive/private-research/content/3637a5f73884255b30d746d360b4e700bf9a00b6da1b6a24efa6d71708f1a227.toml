@@ -1,0 +1,10 @@
+[package]
+name = "genewars-tools"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+genewars-assets = { path = "../genewars-assets" }
+genewars-core = { path = "../genewars-core" }
+genewars-render = { path = "../genewars-render" }

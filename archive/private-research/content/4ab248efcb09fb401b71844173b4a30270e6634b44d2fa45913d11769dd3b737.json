@@ -1,0 +1,39 @@
+{
+  "log_id": "attempt-log-5939-r5",
+  "created": "2026-10-16T18:15 America/Denver",
+  "note": "NEW uniquely-named log. Previous evidence NOT modified. Accepted tree restored and verified (HEAD 866b410, 0 staged, rust tree clean, 165 dirty).",
+
+  "attempt_4_GW_5939D": {
+    "result": "MIXED -> REJECTED as a whole (one required gate newly PASSES, one REGRESSED, one still blocked)",
+    "patch_preserved": "genewars-routing-probe/attempt4-gw5939d-rejected.patch (8039 bytes, 1 file, +59/-2)",
+    "approach": "gate placed AFTER the existing mule_route_prefix call, replacing the plan_mule_light_callback shortcut with the shared source body creature_world::plan_mule_admitted_body_with_postphysics plus the same cell-entry closure shape as the full path (three distinct old/physics/new cells)",
+
+    "gates": {
+      "A_4801_NEW_MANDATORY": "PASS - result status passed, 0 draws, oracle passed, 427369 bytes, zero differences, 2224 instructions; the 12 motion fields the previous candidate got wrong are now reproduced exactly",
+      "B_5893": "FAIL/REGRESSION - Rust status passed and 0 draws, but oracle exit 1: 2 differing bytes at creatures.bin offsets 232,233 = slot1 word(0x6c). Source writes 32759->0; Rust left 32759. The accepted baseline reproduced this correctly through the full path.",
+      "C_5939": "FAIL - still blocked, error Creatures(UnsupportedMotionState); test exit 101. (Oracle 'passed' on the output dir is a ROLLBACK ARTIFACT, not acceptance: the source itself is a no-op there so the bytes coincide with the input for the wrong reason.)",
+      "D_5940": "PASS - remains explicitly blocked/fail-closed."
+    },
+
+    "two_distinct_defects_now_characterized": {
+      "defect_1_5939_prefix_admission": "The 0x5ee1f virtual call resolves to 0x6FB60; the Rust equivalent is ActorWorld::mule_route_prefix (creature_updates.rs:417). For the 5939 record (state 8, 0x61=0x00, 0x52=1, 0x57=1) the associated_pair disjunction requires state in {1,3,4,5,20,21}, so state 8 falls through to the creature_updates.rs:426 admission a[0x52]!=0&&!associated_pair -> UnsupportedMotionState. Because the gate sits AFTER the prefix call, the light branch is unreachable for any record the prefix rejects. This is a full-path-only association admission applied to the light path - exactly the class of error warned about in the handoff.",
+      "defect_2_5893_0x6c_write": "At 5893 (state 0x15 = 21, so the prefix admission passes and the light body does run), the shared body's 5EB30-equivalent performed no word(0x6c) write, while the source writes 0. The 5EB30 state dispatch (states 0xB,0x10,0x14..0x18, including 0x15) must write word(record+0x6c)=0 when the animation is complete; the shared body's reconstruction of that dispatch is incomplete for this state."
+    },
+
+    "progress_this_cycle": [
+      "GW-5939D's 4801 gate is now source-exact - the mandatory new regression is satisfied by the shared-body approach, confirming the route prefix belongs on the light path.",
+      "The 5939 blocker is localized to the prefix's association admission (creature_updates.rs:426), NOT the 5eed5 state machine.",
+      "The 5893 regression is localized to the 5EB30-equivalent completed-animation word(0x6c)=0 write for state 0x15."
+    ],
+
+    "next_contract_direction_GW_5939E": [
+      "Separate the 0x6FB60 prefix's pure work from the full-path-only association admission at creature_updates.rs:426 so a light frame can run the prefix without that admission, while the full path keeps it unchanged.",
+      "Complete the 5EB30-equivalent's word(0x6c)=0 write for the light body's completed-animation dispatch (state 0x15 proven by 5893).",
+      "Keep gates A(4801), B(5893), C(5939), D(5940 blocked) and the batch195 9/9 focused set; then the integrated gates (regression/release, ordinary campaign replay with the frontier not below 5939, native parity)."
+    ],
+
+    "costs": {"director_5939d_usd_estimated": 0.1302, "note": "from the run usage file; child GLM cost additionally in genewars state.db; not provider-reconciled"},
+    "artifacts": {"case_dirs": "private/review/gw5939d-A/B/C/D", "patch": "genewars-routing-probe/attempt4-gw5939d-rejected.patch"},
+    "state_after_restore": {"head": "866b410", "staged": 0, "rust_tree": "clean (only the two pre-existing untracked experiment files)", "dirty_entries": 165, "accepted_frontier": "batch195 / frame5939"}
+  }
+}

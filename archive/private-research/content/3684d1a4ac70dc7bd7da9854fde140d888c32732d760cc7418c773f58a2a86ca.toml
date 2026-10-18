@@ -1,0 +1,6 @@
+[package]
+name="associated-activation-harness"
+version="0.1.0"
+edition="2021"
+[dependencies]
+genewars-runtime={path="../../../rust/crates/genewars-runtime"}

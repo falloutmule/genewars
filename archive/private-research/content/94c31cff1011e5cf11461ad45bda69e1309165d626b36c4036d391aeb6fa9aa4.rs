@@ -1,0 +1,1 @@
+fn main(){genewars_runtime::actor_world::review_power_producers(std::path::Path::new(r"C:\Users\fallo\Documents\ChatGPT\Freecad\genewars-preflight"),std::path::Path::new(r"C:\Users\fallo\Documents\ChatGPT\Freecad\genewars-preflight\private\review\building-power-producer\3f79b14b17dc4f4885fce5a7f095fc1f"));}

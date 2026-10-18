@@ -1,0 +1,15 @@
+{
+  "status": "blocked",
+  "steps": 2636,
+  "reason": "actor pass: World(Creatures(TargetSearchRequired))",
+  "outcome": {
+    "state": "running"
+  },
+  "ordinary_rejected_site_response_passed": true,
+  "next_action": "Source-verified actor target repair committed; rerun same commands on next frozen build",
+  "sha256": {
+    "genewars-game.exe": "528bf8e1bc8d1eb158e5ddb30648ecbe06ff92d2190c8b0d8fd3c2ddedb4ef0d",
+    "replay.txt": "220c66cf38b206150e9164b3fe5fa3e9c09b9b26c24cdb13e283037a3889b5a7",
+    "report.json": "a1b92f18145d6104e98c5bbbad886aebdc674fdac98fee061ae7adb1358c2408"
+  }
+}

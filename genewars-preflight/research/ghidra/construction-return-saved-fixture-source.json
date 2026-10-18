@@ -1,0 +1,131 @@
+{
+  "status": "Passed literal source vs production saved-world movement and whole callback afterimages",
+  "fixture": "Saved desktop pre-callback161, frame514, nominated completed building0",
+  "fixture_pins": {
+    "actors.bin": "ca703dcb3d6f2eb4e0eb2c829fdaa35789955c72fe72904df96d6403bb0939d2",
+    "backing.bin": "a43ba63af5f8ff13aaaa8abf5d55bdcd062306bb9679877c5f9e8c122c090e95",
+    "buildings.bin": "de9a2514e7cd51ba313e4743f25787a63502fe39ba4506bba37cc2cca56baa83",
+    "creatures.bin": "566e012e79a3aefed8a7c9ecf27994917fbcb5f979bcf1a8727f4ed3b3a76495",
+    "effects.bin": "de625e0305e3ef5e7c4bc1934f2ca51815f8d21a9fa448baf4f50fd918f18ebf",
+    "family8.bin": "6f3ac5ca44788176f31f2edb0605f657c76777052ff7b0b212ac72d2158ddf98",
+    "player-0.bin": "d78b70798f73a5fa3ea706b7967139e31ebb13d6b67223c1cec8f44f5ba346d8",
+    "player-1.bin": "aecfe7d9f528d397302163e3be41974bf6ec8dbc88a45fe72a4b176d356b6ccd",
+    "player-2.bin": "365b1999cb1d9032644e5331184334c18007600555d203bb32bea72f60cff1b2",
+    "player-3.bin": "1e2d24c67da7df9d633af4bab3ac6bf12421b0bc5110843abdebfe49216e8350"
+  },
+  "source_actor_before_sha256": "bfeba68e073ae33d6628db836d8dc152a047dca81c0d6030c303c82c633cd147",
+  "source_actor_after_sha256": "f1a91db0d878a36a2ee2e91a216cc2c25bb27b7a6515bfa2403b20e375a39963",
+  "literal_instructions": 5372,
+  "shared_rng": {
+    "seed": 17956,
+    "ring": 1,
+    "draw_count": 1345,
+    "draws": 0
+  },
+  "map_changed_bytes": 0,
+  "queue_requests": 1,
+  "stack_fill_00_ff_afterimage_equal": true,
+  "typed_resource": {
+    "category": 0,
+    "style": 2,
+    "key": 8,
+    "sha256": "03c147fb87ad0d30a2de2f4e91ee755575b07a2d63078c9c2bb5611ded2b040f"
+  },
+  "positions": {
+    "before": [
+      20095,
+      12671
+    ],
+    "after": [
+      20094,
+      12671
+    ]
+  },
+  "calls": [
+    "0x1ee10",
+    "0x1ee20",
+    "0x1ee30",
+    "0x1ee40",
+    "0x1f060",
+    "0x526c0",
+    "0x534d0",
+    "0x6d390",
+    "0x6db00",
+    "0x6df30",
+    "0x6f760",
+    "0x6f8f0",
+    "0x6f980",
+    "0x6fb60",
+    "0x733a0",
+    "0x736f0",
+    "0x74160",
+    "0x74270",
+    "0x743c0",
+    "0x74d90",
+    "0x7ac00",
+    "0x7b140",
+    "0x7b380",
+    "0x83140",
+    "0x8b130",
+    "0x8b520",
+    "0x97910",
+    "0xae028"
+  ],
+  "comparison_scope": "Whole literal57A10 and6FB60 match separately executed production APIs on exact saved desktop pre161 fixture. ActualMARCHresource and native map/pools; queue explicit request; no RNG/map mutation. Production private harness capture supplied by assets lane, SHA pinned.",
+  "independent_recovery_gate": "scripts/ghidra/validate_actor_construction_recovery_callback.py",
+  "production_capture_pins": {
+    "callback-after-actor.bin": "a62db1aa835b7e0e30497e636f16b4e78d0a2f6fd8a725e74b66881b6194496c",
+    "callback-after-backing.bin": "a43ba63af5f8ff13aaaa8abf5d55bdcd062306bb9679877c5f9e8c122c090e95",
+    "callback-after-buildings.bin": "de9a2514e7cd51ba313e4743f25787a63502fe39ba4506bba37cc2cca56baa83",
+    "callback-after-creatures.bin": "566e012e79a3aefed8a7c9ecf27994917fbcb5f979bcf1a8727f4ed3b3a76495",
+    "callback-after-effects.bin": "de625e0305e3ef5e7c4bc1934f2ca51815f8d21a9fa448baf4f50fd918f18ebf",
+    "callback-after-family8.bin": "6f3ac5ca44788176f31f2edb0605f657c76777052ff7b0b212ac72d2158ddf98",
+    "callback-after-jobs.bin": "82373fd67350d6fa838d88698c37b808d495c22729b649656c85082dd6851a87",
+    "callback-after-player-0.bin": "d78b70798f73a5fa3ea706b7967139e31ebb13d6b67223c1cec8f44f5ba346d8",
+    "callback-after-player-1.bin": "aecfe7d9f528d397302163e3be41974bf6ec8dbc88a45fe72a4b176d356b6ccd",
+    "callback-after-player-2.bin": "365b1999cb1d9032644e5331184334c18007600555d203bb32bea72f60cff1b2",
+    "callback-after-player-3.bin": "1e2d24c67da7df9d633af4bab3ac6bf12421b0bc5110843abdebfe49216e8350",
+    "callback-report.txt": "d427f4ecd6e1282c177b51bddbb38abf08165d8babb9f409bca12eb589a39a11",
+    "main.rs": "7fa468b6f0c0e82c979306e7c7cf149fa23e5d73799a4ddc00d04f23456d1427",
+    "motion-after-actor.bin": "78a906ed47ff376aae069e490bfe2c5c799dcd2dbfe7fdac59fe64923bf301e7",
+    "motion-after-backing.bin": "a43ba63af5f8ff13aaaa8abf5d55bdcd062306bb9679877c5f9e8c122c090e95",
+    "motion-after-buildings.bin": "de9a2514e7cd51ba313e4743f25787a63502fe39ba4506bba37cc2cca56baa83",
+    "motion-after-creatures.bin": "566e012e79a3aefed8a7c9ecf27994917fbcb5f979bcf1a8727f4ed3b3a76495",
+    "motion-after-effects.bin": "de625e0305e3ef5e7c4bc1934f2ca51815f8d21a9fa448baf4f50fd918f18ebf",
+    "motion-after-family8.bin": "6f3ac5ca44788176f31f2edb0605f657c76777052ff7b0b212ac72d2158ddf98",
+    "motion-after-player-0.bin": "d78b70798f73a5fa3ea706b7967139e31ebb13d6b67223c1cec8f44f5ba346d8",
+    "motion-after-player-1.bin": "aecfe7d9f528d397302163e3be41974bf6ec8dbc88a45fe72a4b176d356b6ccd",
+    "motion-after-player-2.bin": "365b1999cb1d9032644e5331184334c18007600555d203bb32bea72f60cff1b2",
+    "motion-after-player-3.bin": "1e2d24c67da7df9d633af4bab3ac6bf12421b0bc5110843abdebfe49216e8350",
+    "motion-report.txt": "2d6444146a5ddf5563dc33c69531991447ca603952d380c92223308c6b4fd31e",
+    "pre-actor.bin": "bfeba68e073ae33d6628db836d8dc152a047dca81c0d6030c303c82c633cd147",
+    "probe.exe": "47770259a71fb655a271588eb57616443c35e29d1d1262412c1e3477e75002cb"
+  },
+  "normalized_actor_ranges": [
+    [
+      31,
+      39
+    ],
+    [
+      176,
+      180
+    ],
+    [
+      192,
+      200
+    ]
+  ],
+  "normalization_reason": "Typed animation/resource/vtable/blueprint/internal handles: actor_initialization ACTOR_HANDLE_BYTE_RANGES plusnativevtable23..27. Numeric bytes preserved.",
+  "compared_actor_bytes_per_case": 180,
+  "unchanged_world_snapshots": [
+    "backing",
+    "creatures",
+    "buildings",
+    "effects",
+    "family8",
+    "player-0",
+    "player-1",
+    "player-2",
+    "player-3"
+  ]
+}

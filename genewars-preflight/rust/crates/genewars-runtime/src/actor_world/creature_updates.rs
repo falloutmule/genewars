@@ -819,7 +819,13 @@ impl ActorWorld {
                         let binding=if other[0x5e]>=26{CreatureAnimationBinding::BonesSelector4}else{CreatureAnimationBinding::MuleSelector4};
                         if other[6]!=1||other[0x7a]!=4||pool.binding(word(&raw,0)as usize)?!=Some(binding){unsupported=true;}
                         else if other[24]==4 {if !matches!(other[0x5e],0|1|3|4|5|7|8|10|15|24..=27){unsupported=true;}}
-                        else if other[24]==0&&other[0x5e]==8&&binding==CreatureAnimationBinding::MuleSelector4 {
+                        else if other[24]==0&&(other[0x5e]==8||other[0x5e]==1)&&binding==CreatureAnimationBinding::MuleSelector4 {
+                            //6119 measured state-1 shape: the scorer's hostile
+                            //kind-1 arm 6B9B0..6B9C3 gates only on state!=0xF,
+                            //and hostility 6B7C9..6B806 follows from self owner4
+                            //vs candidate owner0, so a live walking owner0
+                            //MuleSelector4 (0x7a==4, checked above) is a hostile
+                            //candidate like the state-8 arm, not unsupported.
                             if enemy.is_some(){return Err(CreatureError::UnsupportedNeighborhood.into());}enemy=Some(other);
                         }else{unsupported=true;}
                     },

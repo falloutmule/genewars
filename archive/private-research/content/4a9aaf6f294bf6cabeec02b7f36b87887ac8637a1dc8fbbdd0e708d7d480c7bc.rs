@@ -1,0 +1,5 @@
+mod creature_world {type CreatureRecord=[u8;124];fn mule_skill_percent(record:&CreatureRecord,minimum:i32)->i32 {
+    minimum+i32::from(record[0x76].min(100))*(100-minimum)/100
+}pub(crate) fn mule_requested_speed(record:&CreatureRecord)->i16 {
+    ((704*mule_skill_percent(record,75)/100)*(i32::from(record[0x7b])+1)>>8) as i16
+}}extern crate genewars_runtime;pub use genewars_runtime::*;#[path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-runtime/src/mule_retry_relocation.rs"] mod relocation;use std::io::{Read,Write};fn main(){let mut b=Vec::new();std::io::stdin().read_to_end(&mut b).unwrap();let q=relocation::plan_relocation(b[..124].try_into().unwrap(),blueprint::BlueprintRng{seed:u16::from_le_bytes(b[124..126].try_into().unwrap()),ring:b[126],draw_count:u32::from_le_bytes(b[127..131].try_into().unwrap())},&actor_activation::TrigTables::generate_pinned().unwrap()).unwrap();let mut o=q.record_after.to_vec();o.extend(q.rng_after.seed.to_le_bytes());o.push(q.rng_after.ring);o.extend(q.rng_after.draw_count.to_le_bytes());std::io::stdout().write_all(&o).unwrap();}

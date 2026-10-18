@@ -1,0 +1,28 @@
+{
+  "status": "blocked",
+  "utc": "2026-10-14T11:17:57.396581+00:00",
+  "scope": "development native Extractor/Distributor construction",
+  "authentic_missions_completable": 0,
+  "border_policy": "generated",
+  "construction_border_sha256": "422f124eac806197ba95d2438516284c3bf828a1db8e8aabe330661fff23ef8a",
+  "patterns_sha256": "d848e423b7a76a2c2dbf517fc595e33a789df7382697b56f382cc7606b18939e",
+  "binary_sha256": "fd242a41aee788bc3d7837c9be4a9680d28e200f2a84400fae8d79d77487bc18",
+  "input_sha256": "ecd0f23297c8b59b3090b1448f32d4e3d9245f225367002ea0c630838a797ca5",
+  "chooser_source_sha256": "1bdb2cfd64c13c596c4903ffe1d97637d8b30bb40bac54fa101eef2f51ab705e",
+  "probe": "private\\integration\\distributor-command-004",
+  "work": "private\\integration\\native-building-chain\\233edf3f590e4b8d8ad011e67c2e7cb5",
+  "runs": [],
+  "limitations": [
+    "Development initialization and seed5428, not original campaign startup",
+    "Port-owned input mapping and chooser layout",
+    "No mission outcome or campaign transition asserted"
+  ],
+  "blocked_observation": {
+    "name": "distributor-work1200",
+    "steps": 1919,
+    "reason": "InvalidBinding { slot: 0, code: 33, binding: Some(EffAnimation33) }",
+    "world_sha256": "a0ae3a9273c3641ee2578a58a94084481e5a144c9527b41eea65cd370ad234cd"
+  },
+  "classification": "unsupported_behavior",
+  "error": "InvalidBinding { slot: 0, code: 33, binding: Some(EffAnimation33) }"
+}

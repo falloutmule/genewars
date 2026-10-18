@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "scope": "Synthetic source-projected Krell carry,256 rendered SharedMission frames; not campaign acceptance",
+  "audit": {
+    "schema": "actor-dispatch-priors-v1",
+    "coverage": "committed activated-actor callbacks",
+    "activations": 3,
+    "dispatches": 201,
+    "actor_dispatch_counts": [
+      67,
+      67,
+      67,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "blueprint_equality_mismatches": 0,
+    "unknown_dispatches": 0,
+    "dependent_56530_dispatches": 0,
+    "trace_included": false,
+    "activation_events": [
+      {
+        "frame": 188,
+        "actor": 0,
+        "snapshot": {
+          "state": 1,
+          "restore": 0,
+          "category": 0,
+          "style": 2,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        }
+      },
+      {
+        "frame": 188,
+        "actor": 1,
+        "snapshot": {
+          "state": 1,
+          "restore": 0,
+          "category": 1,
+          "style": 3,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        }
+      },
+      {
+        "frame": 188,
+        "actor": 2,
+        "snapshot": {
+          "state": 1,
+          "restore": 0,
+          "category": 2,
+          "style": 0,
+          "task": 0,
+          "task_kind": 0,
+          "selector": 0,
+          "blueprint18": 165,
+          "blueprint1b": 165
+        }
+      }
+    ],
+    "events": []
+  },
+  "command": "CARGO_BUILD_JOBS=2 CARGO_PROFILE_TEST_OPT_LEVEL=1 python -B scripts/cargo.py test -p genewars-desktop --bin genewars-game krell_first_256 --offline --locked -- --nocapture",
+  "log": "private\\integration\\krell-dispatch-audit-001.log",
+  "log_sha256": "bc8e38f1c4402d42d196a8a545a31d94e7052481c24ff28eae40bb25d4905691",
+  "source_pins": {
+    "rust/crates/genewars-desktop/src/bin/support/actor_dispatch_audit.rs": "47ed953939542f8f6da32f4dd29c473b7d9422431dd6f109f173390e43b88c8a",
+    "rust/crates/genewars-desktop/src/bin/support/shared_scene.rs": "6465e3ab35171709777dd6d5f5910a439c270b84988abbe1841bedc565f34abb",
+    "rust/crates/genewars-runtime/src/actor_world/construction_scheduler.rs": "3167febe21e2fefb76252a702c7ed0fd984561486bd197e3dcd3633010291a80"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "status": "blocked",
+  "classification": "unsupported required gameplay path",
+  "reason": "Source-frame0 creature callback reaches historical UnsupportedMotionState boundary; no frame commits.",
+  "original_campaign_missions_completable": 0,
+  "private_fixture": "private\\integration\\fresh-startup-001",
+  "steps": 0,
+  "blocked": "Creatures(UnsupportedMotionState)",
+  "runtime_context": "Some(MissionRuntimeContext { origin: FreshCdConq001, participating_players: 1, runtime_flags: 62, runtime_mode: Some(0), countdown: 1000, frame: 0, rng: CdConq001SerializedThenBlueprints { seed: 10548, draw_count: 16919, diagnostic_ring: 0 } })",
+  "hashes": {
+    "genewars-game.exe": "f3d4a4eacd40c84f331e4a6ad3ab7a6c003b2c455c00606a59764eb1e5e54226",
+    "replay.txt": "92c5c4a0897e6c915a2c450df02bf6e00a43c77e2b73fed2112c00dbbeffba47",
+    "report.json": "a00efdfff720fc0d6dc13cc60a583c0866cfb1ebd403452b7a897d2457b0fdda",
+    "frame.bmp": "d62024294b11aeced62ab7507f520553ce9277c1137b09f06ddd6a6730985ce5"
+  },
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba"
+}

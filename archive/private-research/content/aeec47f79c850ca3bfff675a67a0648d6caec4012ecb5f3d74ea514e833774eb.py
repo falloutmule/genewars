@@ -1,0 +1,10 @@
+from pathlib import Path
+P=Path.cwd();s=(P/'research/variants/family8-hover-source.py').read_text()
+s=s.replace('private/integration/family8-combined011-seed5428-frame6234/before','private/review/family8-trajectory/579c9bdb947e4419926cb281b7bf0f38/frame6332/before').replace('private/review/family8-hover','private/review/family8-idle').replace('192<=i<256','0<=i<64').replace('pool[7*102:8*102]','pool[4*102:5*102]').replace('base=m.BASE+7*102','base=m.BASE+4*102').replace('range(6234,7234)','range(6332,6333)').replace("else:raise AssertionError('hover did not expire within1000callbacks')",'').replace('if a[0x56]!=1:break','')
+s=s.replace('P=Path(__file__).resolve().parents[2]','P=Path.cwd()')
+for f in ['family8-state4-source.py','initial-creature-source.py','actor-environment-terrain-target.py']:s=s.replace("Path(__file__).with_name('"+f+"')","P/'research/variants/"+f+"'")
+s=s.replace("after,nrng,n,requests,trace=model.step(a,map_data,frame,rng,extra_state=state,base=base)","after,nrng,n,requests,trace=model.step(a,map_data,frame,rng,extra_state=state,base=base)\n  assert 0x305f0 in trace and 0x1ea80 in trace\n  print('search instructions',len(trace),'queries',trace.count(0x6d230),'A8 calls',trace.count(0x1ea80),'draws',(nrng[2]-rng[2])&0xffffffff)")
+(P/'private/review/family8-idle/source.py').write_text(s)
+prefix=s.replace("inputs=bytearray();expected=bytearray();particles=bytearray();timeline=[];steps=0","model.code[0x6fc52]=('JMP',['0x00070790'])\n inputs=bytearray();expected=bytearray();particles=bytearray();timeline=[];steps=0").replace('extra_state=state,base=base)','extra_state=state,base=base,entry=0x6fb60)')
+prefix=prefix.replace("assert 0x305f0 in trace and 0x1ea80 in trace","assert 0x305f0 in trace and 0x1ea80 in trace\n  assert after==a and nrng==rng\n  assert bytes(model.saved_state[0x11c2be+i]for i in range(229376))==map_data\n  print('prefix record/map/RNG unchanged')")
+(P/'private/review/family8-idle/prefix.py').write_text(prefix)

@@ -1,0 +1,124 @@
+{
+  "status": "passed_bones_owner4_wrapper_pixel_oracle",
+  "scope": "Independent Python ANB/RLE, scale, flip, fade, and GLA model compared against complete Rust destination buffers; not original-execution parity.",
+  "cases": 2,
+  "states_frames": [
+    [
+      26,
+      0
+    ],
+    [
+      27,
+      1
+    ]
+  ],
+  "framebuffer_bytes_compared": 6536,
+  "foreground_pixels_reported": 196,
+  "shadow_pixels_reported": 52,
+  "resources": {
+    "bones_sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f",
+    "fade_sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392",
+    "main_gla_sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3"
+  },
+  "source_pins": [
+    {
+      "path": "scripts/desktop/validate_bones_pixels.py",
+      "bytes": 6404,
+      "sha256": "dde17bcc99ffde1346baf66383bed7685cf05696d926eada1e4041c9989e67fc"
+    },
+    {
+      "path": "scripts/validate_mule_scene.py",
+      "bytes": 14343,
+      "sha256": "7e9bf0f2ed66b14e41e6b421eb190d93bae1603ad5b611ecc00ce198ea5c014a"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/creature_scene.rs",
+      "bytes": 59939,
+      "sha256": "39d6498f5fa26cae30ac4f0b0d5708bdac8a63a95024d1514e0e47ba75c1ecfc"
+    },
+    {
+      "path": "rust/crates/genewars-desktop/src/bin/support/runtime_resources.rs",
+      "bytes": 35927,
+      "sha256": "22d38ec989d86397f652d9308adccf96f69664169217f6fa91a510ff8db2b652"
+    },
+    {
+      "path": "research/ghidra/bones-evidence.json",
+      "bytes": 7120,
+      "sha256": "4b1db1b6460690083065c5a806daf5e476594fc704f3fd8291c4008a06462d76"
+    },
+    {
+      "path": "research/formats/mule-render-contract.md",
+      "bytes": 8211,
+      "sha256": "235dfe730eb1c3869f312c3214eab74debc09c76151ac36a1f6c120ee820e073"
+    },
+    {
+      "path": "research/formats/bones-render-contract.md",
+      "bytes": 1634,
+      "sha256": "04915df86e704aea8224dfd56fea1f7a8664489ef851ebc873614cb640a92594"
+    },
+    {
+      "path": "private/ghidra/terrain-viewport/instructions-00059470.txt",
+      "bytes": 28361,
+      "sha256": "3eb7e965f3edfc676b298a79bc47958e5e558538e244c8a8ca78ddefeb75fd50"
+    },
+    {
+      "path": "private/ghidra/entity-draw-refs/instructions-00094f30.txt",
+      "bytes": 4229,
+      "sha256": "f00cc3c296626d8487b01ac6b3536387aadb4cca21b344504d861a9c0cff0d38"
+    },
+    {
+      "path": "private/ghidra/entity-draw-refs/instructions-00095100.txt",
+      "bytes": 6024,
+      "sha256": "4353aa2e5f3e508ebe9a3cfe62a3ba37396eace84ef1ce6e179e3a42a70402de"
+    },
+    {
+      "path": "private/ghidra/entity-draw-refs/instructions-00093f80.txt",
+      "bytes": 19408,
+      "sha256": "ada3e0049482a07eb14db2a04532039edc38bb7d0294165212279df399075dd7"
+    },
+    {
+      "path": "private/ghidra/entity-draw-refs/instructions-000937a0.txt",
+      "bytes": 7215,
+      "sha256": "768ee45a47755bee8ba3c5e8256d2b6bc96d82a941faf66fd071dedb06fe63a0"
+    },
+    {
+      "path": "private/ghidra/display-geometry/instructions-0008f8f0.txt",
+      "bytes": 7386,
+      "sha256": "d27a9d7772a8a565db1cca9bc08e054516f91fe342077377f3919e8c3eb87097"
+    },
+    {
+      "path": "private/integration/game-runtime/creatures/BONES.ANB",
+      "bytes": 4077,
+      "sha256": "2106ce79deaafe53d5fbb6292c78a8c71fb6920b08d1a11b5c44ea3b0ab75e9f"
+    },
+    {
+      "path": "private/integration/game-runtime/terrain/FADE.DAT",
+      "bytes": 16384,
+      "sha256": "b1297e2c767573164d8f2f9266a0bfd9923bb1608d0d1a22f3f3682da03d5392"
+    },
+    {
+      "path": "private/integration/game-runtime/terrain/MAIN.GLA",
+      "bytes": 65536,
+      "sha256": "bf841a1c4fca2a80fbef3c2fd6b502c4af34ede8e67b41ff69f64836726ea5b3"
+    },
+    {
+      "path": "private/review/mule-bones/expected.bin",
+      "bytes": 13888,
+      "sha256": "3caf566c97710117610366577f92ebb86d269cf0f5078c16b577be08a2622e38"
+    },
+    {
+      "path": "private/review/mule-bones/wrapper-trace.json",
+      "bytes": 2365,
+      "sha256": "a1620e56940be59a4e85a0db127a785efafe5b3735c9ed617e11f547f23cff35"
+    }
+  ],
+  "private_rust_output": {
+    "path": "private/review/bones-pixel-oracle-31c1687790b94e5ebfd6342844ea22a6/rust.jsonl",
+    "bytes": 13631,
+    "sha256": "bbc29606e17da3070f30375252ffed1350e3782957805c163b4e24e914bdfe54"
+  },
+  "limitations": [
+    "Owner 4 only: this matches the 59470 branch to 94F30; owner 0..3 use 94D70 and remain unsupported.",
+    "Caller projection and global wrapper inputs are explicit; no full visibility, queue, or scene-order claim."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "receipt": "f17-6008-degraded-pursuit-arrival-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "family F17 - map-first pairing with B9: the 6008 refusal is the degraded-pursuit continuation's arrival side; campaign 6008 -> 6010",
+  "measurement": {
+    "fixture": "private/review/attempt30-6008-measure/campaign/capture/frame-6008-slot-1-blocked-before-owned",
+    "record": "owned slot 1, owner 0, species 4, the B9 degraded-pursuit shape at ARRIVAL: 0x5e=1, 0x60=0xc8, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1, word(0x6c)=0x7fea, 0x76=37, word(0x49)=0x2010, position already at destination word(0x0b/0x0d)=[584,23923] (the pursuit target's cell, committed by the F16 arm)",
+    "refusing_site": "owned_mule_updates.rs F15 degraded arm's word(record,0x6c)>0 freshness test on the POST-prefix record: the prefix already carries 0x60=0x48/word(0x6c)=0 (source5EB30 zeroing 0005eb9b AND byte[0x60],0x7f; 0005ebd9 MOV word[0x6c],0), so the test could never pass on the arrival side - port-authored per map rule 1. Localized with temporary tagged probes (removed); logs kept in the run dirs.",
+    "oracle": "source_prepared, 2818 instructions, 0 draws; output private/review/owned-mule-captured-width/b3ac36ab78474896ab7e200a37250f8b; slot-1-only deltas (32 bytes: physics commit, 0x60 0xc8->0x48, word(0x66) 0x8d->0x8b, word(0x6c) ->0, word(0x4b) 1024->0); no reference-model extension needed"
+  },
+  "source_basis": "0005ef3a/0005ef3e/0005ef40 JLE (word(0x6c)==0) -> 00065384 state dispatch, jump table 0x5eca0 entry 1 = 0005ef46 (same no-AI/no-6B700 continuation as the fresh side; validated image private/ghidra/validated/memory-.object1.bin, load base 0x10000); continuation near-target block 00065d80..00065dce: 73770 distance <= 0x4000, 6EDA0/7A6C0 shortest delta 551 > 0x100 -> FALSE side writes word(0x4b)=0 via 73970/AE028 (zero doubled delta against the reached route waypoint)",
+  "port": "owned_mule_updates.rs: widened degraded continuation to the measured arrival side + pinned 65d80..65dce near-target arm (motion_point == waypoint word(0x0b/0x0d), aligned side refuses); creature_world.rs: motion_word/motion_point pub(crate). No oracle change.",
+  "checker_row": "R30-owned-degraded-pursuit-arrival-6008 added FIRST as a NEGATIVE gate (exact rejection Creatures(UnsupportedNeighborhood) + all eight buffers byte-identical, 0 draws, private/review/attempt30-6008-portrun/out2), then CONVERTED POSITIVE in the same change set with the source basis in-row; R21/R25 remain fail-closed",
+  "checker":"attempt30-f17: 51/51 positive, 4/4 negative, 62/62 checks, all_ok true, head 97b3870; frontier moved 6008 -> 6010, new blocker Creatures(UnsupportedNeighborhood) at world c52ac990... unmeasured",
+ "boundary": {
+    "still_closed": [
+      "pre-prefix expired timer word(0x6c)==0 before the callback",
+      "aligned virtual38/5C840 side 00065da7..00065db5",
+      "other degraded-target kinds",
+      "B6/B8 walk catch-alls",
+      "neutral callers"
+    ]
+  }
+}

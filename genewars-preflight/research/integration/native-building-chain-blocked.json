@@ -1,0 +1,33 @@
+{
+  "status": "blocked",
+  "utc": "2026-10-14T11:27:47.805113+00:00",
+  "scope": "native Extractor/Distributor construction from source-backed fresh startup",
+  "authentic_missions_completable": 0,
+  "border_policy": "generated",
+  "construction_border_sha256": "422f124eac806197ba95d2438516284c3bf828a1db8e8aabe330661fff23ef8a",
+  "patterns_sha256": "d848e423b7a76a2c2dbf517fc595e33a789df7382697b56f382cc7606b18939e",
+  "binary_sha256": "99b3414128b74ed7a0e482947609564cdd711f455fcbd6f5d5f05e0d257ec885",
+  "input_sha256": "cc4f1ad5545fbd15f8cdd29aa51ea317be01f082ef7901acd3ae631a26174db7",
+  "chooser_source_sha256": "1bdb2cfd64c13c596c4903ffe1d97637d8b30bb40bac54fa101eef2f51ab705e",
+  "probe": "private\\integration\\fresh-building-chain-001",
+  "work": "private\\integration\\native-building-chain\\b1bda115d8284903bdd8b774972c2fe7",
+  "runs": [],
+  "limitations": [
+    "Fresh reference startup uses serialized RNG; full mission acceptance remains separate",
+    "Port-owned input mapping and chooser layout",
+    "No mission outcome or campaign transition asserted"
+  ],
+  "startup_arguments": [
+    "--reference-startup",
+    "fresh"
+  ],
+  "original_execution": false,
+  "blocked_observation": {
+    "name": "extractor-work1100",
+    "steps": 1137,
+    "reason": "Family8Motion(UnsupportedRecord)",
+    "world_sha256": "762fea159e16dafa21a56d48c6f63234cd09efb8d9a8e21f0660d2c26fbb3bd0"
+  },
+  "classification": "unsupported_behavior",
+  "error": "Family8Motion(UnsupportedRecord)"
+}

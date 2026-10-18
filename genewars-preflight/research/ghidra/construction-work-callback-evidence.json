@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "cases": 192,
+  "compared_bytes": 39360,
+  "literal_instructions": 90469,
+  "progress_requests": 96,
+  "source_pins": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "activation-rng-refs/instructions-00073c20.txt": "b1192da02ccb17b0c4e9117aa0432c6bd47d8a4ee542bea4936bdd60498ad65e",
+    "countdown-expiry/instructions-00013e60.txt": "c53006dcb695e17de2a4ffb232fa0223fc86b1a7ff0219a35caeaead047e4052",
+    "actor-motion/instructions-00051930.txt": "f9f2552e82a11b93d3ee858ce9073185ef0e5c74a9bba48775a019b5383730c3",
+    "actor-motion/instructions-00057a10.txt": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a",
+    "actor-motion/instructions-0001ee30.txt": "3590a299b0f529da8f941168d806f9a5a8edbcc2365e36192d863a006d34d539"
+  },
+  "module_sha256": "747f8e1d31c6aebb803f24cb552b2832ce6246264d9d7339580754fcf0cfabb0",
+  "validator_sha256": "0c664796a5be8f2015e9700c584b00d14b1decb09c4e26defb008ec313b22c0f",
+  "implementation_pins": {
+    "actor_motion": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
+    "actor_construction_tail": "422ea3e71110f4db1782f5880592cb856ac8d8b0c3ef37a2d82c000a62eeb8bb"
+  },
+  "scope": "Whole57A10 after commonmotion port:534D0 selector1 stage5 terminal work tick:health1->63 noncomplete and63->120 completion441C0 port; exact shared parity draw/audio, actual73C20 two-draw radius256 sampler/trig and actor move/departure tail; all3 blueprint archetype speeds.441C0/yaw/audio requests explicit, no building callback/scheduler claim."
+}

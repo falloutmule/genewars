@@ -1,0 +1,21 @@
+from pathlib import Path
+import ast,struct,subprocess,hashlib,json
+p=Path(__file__).resolve().parents[2];work=p/'private/ghidra/landing-departure';work.mkdir(exist_ok=True);source=p/'scripts/ghidra/validate_landing_bridge.py';tree=ast.parse(source.read_text());node=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='factory');scope={'struct':struct};exec(compile(ast.Module(body=[node],type_ignores=[]),str(source),'exec'),scope);factory=scope['factory'];data=bytearray(struct.pack('<I',65536*4));expected=bytearray()
+pins=[]
+assert hashlib.sha256((p/'private/ghidra/GW-CD-candidate.exe').read_bytes()).hexdigest()=='4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba'
+pin_path=p/'private/ghidra/plant-command/instructions-0004b630.txt';pin_bytes=pin_path.read_bytes();assert '0004d8e3 MOV byte ptr [EAX + 0x498],CH' in pin_bytes.decode();pins.append(dict(path='private/ghidra/plant-command/instructions-0004b630.txt',sha256=hashlib.sha256(pin_bytes).hexdigest()))
+for seed in range(65536):
+ for phase,timer in [(2,30),(2,1),(3,20),(3,1)]:
+  a=bytearray(factory(bytes(81),7,2,[20736,13568],6272,40));a[70]=phase;struct.pack_into('<i',a,39,20000);struct.pack_into('<hhh',a,57,0,0,1152);struct.pack_into('<hhh',a,45,0,0,1152);struct.pack_into('<h',a,74,timer);data.extend(a+struct.pack('<H',seed));out=bytearray(a);struct.pack_into('<h',out,74,timer-1);s=seed;journals=[];angles=[0,0,0];code=0;owner=0;retire=0
+  def draw(journal):
+   global s
+   s=s*0xe62d&65535;journals.append(journal);return s>>8
+  if phase==2:
+   if timer==1:struct.pack_into('<h',out,74,20);struct.pack_into('<h',out,55,640);out[70]=3
+   else:
+    speed=(60+draw(0x806)%10)*64;pitch=1024-draw(0x806)%128;yaw=draw(0x806)*8;angles=[yaw,pitch,speed];code=6
+  elif timer==1:retire=1
+  else:angles=[(1920+draw(0x822))&2047,(1920+draw(0x823))&2047,288];code=47;owner=2
+  expected.extend(out+struct.pack('<HBIBBB3H',s,(31+len(journals))&31,(0xfffffffe+len(journals))&0xffffffff,code,owner,retire,*angles));expected.extend(bytes([len(journals)]));expected.extend(struct.pack('<'+'H'*len(journals),*journals))
+module=(p/'rust/crates/genewars-runtime/src/landing.rs').as_posix();h=work/'departure-oracle.rs';h.write_text(f'#[path="{module}"]mod landing;\n'+r'''use landing::*;use std::io::{Read,Write};fn take<'a>(b:&'a[u8],p:&mut usize,n:usize)->&'a[u8]{let q=*p;*p+=n;&b[q..*p]}fn main(){let mut b=Vec::new();std::io::stdin().read_to_end(&mut b).unwrap();let mut p=0;let n=u32::from_le_bytes(take(&b,&mut p,4).try_into().unwrap());let mut out=Vec::new();for _ in 0..n{let a:LandingRecord=take(&b,&mut p,81).try_into().unwrap();let seed=u16::from_le_bytes(take(&b,&mut p,2).try_into().unwrap());let rng=LandingRng{seed,ring:31,draw_count:0xfffffffe};let r=if a[70]==2{plan_landing_phase2_after_physics(&a,rng)}else{plan_landing_phase3_after_physics(&a,rng)}.unwrap();let mut code=0;let mut owner=0;let mut retire=0;let mut angles=[0;3];for e in&r.events{match e{LandingEvent::CreateEffect{object_code,owner:o,angles:a,..}=>{code=*object_code;owner=*o;angles=*a},LandingEvent::RetireLanding{owner:2,reference:LandingReference{index:7,kind:5},player_counter_after:700}=>retire=1,_=>{}}}out.extend(r.after);out.extend(r.rng_after.seed.to_le_bytes());out.push(r.rng_after.ring);out.extend(r.rng_after.draw_count.to_le_bytes());out.extend([code,owner,retire]);for a in angles{out.extend(a.to_le_bytes());}out.push(r.draws.len()as u8);for d in r.draws{out.extend(d.journal_code.to_le_bytes());}}assert_eq!(p,b.len());std::io::stdout().write_all(&out).unwrap();}''');exe=work/'departure-oracle.exe';rustc=p/'private/tools/rust/rustup/toolchains/1.99.0-x86_64-pc-windows-gnu/bin/rustc.exe';subprocess.run([str(rustc),'--edition=2021','-Awarnings',str(h),'-o',str(exe)],check=True);out=subprocess.run([str(exe)],input=data,capture_output=True,check=True).stdout;assert out==expected
+r={'instruction_contracts':pins,'cases':65536*4,'phase_timer_pairs':[[2,30],[2,1],[3,20],[3,1]],'seed_cases':65536,'compared_bytes':len(out),'output_sha256':hashlib.sha256(out).hexdigest(),'source_sha256':hashlib.sha256((p/'rust/crates/genewars-runtime/src/landing.rs').read_bytes()).hexdigest()};(p/'research/ghidra/landing-departure-evidence.json').write_text(json.dumps(r,indent=2)+'\n');print(r)

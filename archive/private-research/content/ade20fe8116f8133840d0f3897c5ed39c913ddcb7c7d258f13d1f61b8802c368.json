@@ -1,0 +1,87 @@
+{
+  "status": "pending_captures",
+  "scope": "Actual190only; no source calls run before genuine captures are present; no gameplay/native acceptance",
+  "replay_report_exists": false,
+  "cases": [
+    {
+      "kind": "owned",
+      "frame": 5832,
+      "slot": 1,
+      "status": "pending",
+      "before": "private\\review\\authentic-krell-190\\frame-5832-slot-1-owned-before",
+      "after": "private\\review\\authentic-krell-190\\frame-5832-slot-1-owned-after",
+      "before_exists": false,
+      "after_exists": false
+    },
+    {
+      "kind": "neutral",
+      "frame": 5832,
+      "slot": 5,
+      "status": "pending",
+      "before": "private\\review\\authentic-krell-190\\frame-5832-slot-5-before",
+      "after": "private\\review\\authentic-krell-190\\frame-5832-slot-5-after",
+      "before_exists": false,
+      "after_exists": false
+    },
+    {
+      "kind": "owned",
+      "frame": 5833,
+      "slot": 1,
+      "status": "pending",
+      "before": "private\\review\\authentic-krell-190\\frame-5833-slot-1-owned-before",
+      "after": "private\\review\\authentic-krell-190\\frame-5833-slot-1-owned-after",
+      "before_exists": false,
+      "after_exists": false
+    },
+    {
+      "kind": "neutral",
+      "frame": 5833,
+      "slot": 5,
+      "status": "pending",
+      "before": "private\\review\\authentic-krell-190\\frame-5833-slot-5-before",
+      "after": "private\\review\\authentic-krell-190\\frame-5833-slot-5-after",
+      "before_exists": false,
+      "after_exists": false
+    },
+    {
+      "kind": "owned",
+      "frame": 5834,
+      "slot": 1,
+      "status": "pending",
+      "before": "private\\review\\authentic-krell-190\\frame-5834-slot-1-owned-before",
+      "after": "private\\review\\authentic-krell-190\\frame-5834-slot-1-owned-after",
+      "before_exists": false,
+      "after_exists": false
+    },
+    {
+      "kind": "neutral",
+      "frame": 5834,
+      "slot": 5,
+      "status": "pending",
+      "before": "private\\review\\authentic-krell-190\\frame-5834-slot-5-before",
+      "after": "private\\review\\authentic-krell-190\\frame-5834-slot-5-after",
+      "before_exists": false,
+      "after_exists": false
+    },
+    {
+      "kind": "zone",
+      "frame": 5824,
+      "slot": 0,
+      "status": "pending",
+      "before": "private\\review\\authentic-krell-190\\frame-5824-slot-0-zone-schedule-before",
+      "after": "private\\review\\authentic-krell-190\\frame-5824-slot-0-zone-schedule-after",
+      "before_exists": false,
+      "after_exists": false
+    },
+    {
+      "kind": "zone",
+      "frame": 5856,
+      "slot": 0,
+      "status": "pending",
+      "before": "private\\review\\authentic-krell-190\\frame-5856-slot-0-zone-schedule-before",
+      "after": "private\\review\\authentic-krell-190\\frame-5856-slot-0-zone-schedule-after",
+      "before_exists": false,
+      "after_exists": false
+    }
+  ]
+}

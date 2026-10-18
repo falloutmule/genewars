@@ -1,0 +1,188 @@
+{
+  "scope": "frozen5882 zero20 subbranch before707A0; seed variations synthetic not campaign",
+  "case_bytes": 390,
+  "actualseed": 18153,
+  "accepted": 4,
+  "cases": [
+    {
+      "seed": 18153,
+      "confidence": [
+        {
+          "confidence": 194,
+          "enemy_sector": 3
+        }
+      ],
+      "heading": 1440,
+      "distance": 348,
+      "draws": 6,
+      "journals": [
+        {
+          "ring_slot": 20,
+          "journal": 1725,
+          "pc": "0x8d7d5"
+        },
+        {
+          "ring_slot": 21,
+          "journal": 1726,
+          "pc": "0x8d864"
+        },
+        {
+          "ring_slot": 22,
+          "journal": 3286,
+          "pc": "0x5faf2"
+        },
+        {
+          "ring_slot": 23,
+          "journal": 3286,
+          "pc": "0x5fb73"
+        },
+        {
+          "ring_slot": 24,
+          "journal": 3299,
+          "pc": "0x5fe44"
+        },
+        {
+          "ring_slot": 25,
+          "journal": 33,
+          "pc": "0x5fe89"
+        }
+      ],
+      "steps": 9260
+    },
+    {
+      "seed": 20,
+      "confidence": [
+        {
+          "confidence": 194,
+          "enemy_sector": 3
+        }
+      ],
+      "heading": 1465,
+      "distance": 694,
+      "draws": 6,
+      "journals": [
+        {
+          "ring_slot": 20,
+          "journal": 1725,
+          "pc": "0x8d7d5"
+        },
+        {
+          "ring_slot": 21,
+          "journal": 1726,
+          "pc": "0x8d864"
+        },
+        {
+          "ring_slot": 22,
+          "journal": 3286,
+          "pc": "0x5faf2"
+        },
+        {
+          "ring_slot": 23,
+          "journal": 3286,
+          "pc": "0x5fb73"
+        },
+        {
+          "ring_slot": 24,
+          "journal": 3299,
+          "pc": "0x5fe44"
+        },
+        {
+          "ring_slot": 25,
+          "journal": 33,
+          "pc": "0x5fe89"
+        }
+      ],
+      "steps": 9260
+    },
+    {
+      "seed": 23,
+      "confidence": [
+        {
+          "confidence": 194,
+          "enemy_sector": 3
+        }
+      ],
+      "heading": 1518,
+      "distance": 760,
+      "draws": 6,
+      "journals": [
+        {
+          "ring_slot": 20,
+          "journal": 1725,
+          "pc": "0x8d7d5"
+        },
+        {
+          "ring_slot": 21,
+          "journal": 1726,
+          "pc": "0x8d864"
+        },
+        {
+          "ring_slot": 22,
+          "journal": 3286,
+          "pc": "0x5faf2"
+        },
+        {
+          "ring_slot": 23,
+          "journal": 3286,
+          "pc": "0x5fb73"
+        },
+        {
+          "ring_slot": 24,
+          "journal": 3299,
+          "pc": "0x5fe44"
+        },
+        {
+          "ring_slot": 25,
+          "journal": 33,
+          "pc": "0x5fe89"
+        }
+      ],
+      "steps": 9260
+    },
+    {
+      "seed": 24,
+      "confidence": [
+        {
+          "confidence": 194,
+          "enemy_sector": 3
+        }
+      ],
+      "heading": 1451,
+      "distance": 270,
+      "draws": 6,
+      "journals": [
+        {
+          "ring_slot": 20,
+          "journal": 1725,
+          "pc": "0x8d7d5"
+        },
+        {
+          "ring_slot": 21,
+          "journal": 1726,
+          "pc": "0x8d864"
+        },
+        {
+          "ring_slot": 22,
+          "journal": 3286,
+          "pc": "0x5faf2"
+        },
+        {
+          "ring_slot": 23,
+          "journal": 3286,
+          "pc": "0x5fb73"
+        },
+        {
+          "ring_slot": 24,
+          "journal": 3299,
+          "pc": "0x5fe44"
+        },
+        {
+          "ring_slot": 25,
+          "journal": 33,
+          "pc": "0x5fe89"
+        }
+      ],
+      "steps": 9260
+    }
+  ]
+}

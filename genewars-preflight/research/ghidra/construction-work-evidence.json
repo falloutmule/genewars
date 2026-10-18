@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "cases": 384,
+  "compared_bytes": 78720,
+  "literal_instructions": 42432,
+  "progress_requests": 64,
+  "source_pins": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1"
+  },
+  "module_sha256": "747f8e1d31c6aebb803f24cb552b2832ce6246264d9d7339580754fcf0cfabb0",
+  "validator_sha256": "b9c084d193cdb8e82269a46d2b69b700ad5e518987528019c657e0a869a377f5",
+  "scope": "534D0 selector1 incomplete stage5 arrival initialization, exact inclusive yaw flip and audio4A, signed timer decrement and parity-gated shared LCG/audio; zero timer stops before progress/debit tail at53FAC. Movement/yaw/audio ports explicit; no construction completion claim."
+}

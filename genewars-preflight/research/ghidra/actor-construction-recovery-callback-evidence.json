@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "validator_sha256": "53c27bff1fe6d018caa689f9f9cc71bf6ae817b8d3af21d7a64a712b276ce0dd",
+  "cases": 256,
+  "compared_bytes": 63936,
+  "literal_instruction_steps": 95461,
+  "source_sha256": "43d1a9c61f2f62fdedd209067039ee29105078e4556cac32106e464a4c7f1a09",
+  "shared_idle_sha256": "26bc16bb62a42fcc54b2ece2d4b3c241dfd414fdbaae38a95b11c246cba6f400",
+  "listing_sha256": {
+    "actor-motion/instructions-00057a10.txt": "01c1e7947bedc42beae3087e94c62840c1d31efd3319f76a7891fecc89a5c50a",
+    "activation-rng-refs/instructions-00052780.txt": "048be1420c3c58c6e56a11954c565c2f3ea254710600c635d77605020d103a20"
+  },
+  "scope": "57A10 cancelledstate9->idle1 thenactual52780;wholeactor/blueprint/liveRNG+journals;movementexplicitport;actualanimationtail8frames/holds0/flags0;queueexplicitport;skill31nonperiodic/skill0periodicavoidsrequiredneighborhoodscorer;count0/6000"
+}

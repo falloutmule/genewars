@@ -1,0 +1,9 @@
+{
+  "source_files_verified": 1970,
+  "private_source_paths_verified": 12387,
+  "source_and_archived_bytes_match": true,
+  "credential_pattern_findings": 0,
+  "report_local_citations_relinked": true,
+  "game_tests_run": false,
+  "verification_kind": "Archive integrity and limited credential-pattern scan, not gameplay or full license validation"
+}

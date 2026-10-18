@@ -84,11 +84,11 @@ pub fn plan_common_contact_speed(input: CommonSpeedInput)->Result<i16,CreatureEr
        else {input.speed.wrapping_add(input.width as i16)})
 }
 
-fn motion_word(r:&[u8],p:usize)->i16 {i16::from_le_bytes([r[p],r[p+1]])}
+pub(crate) fn motion_word(r:&[u8],p:usize)->i16 {i16::from_le_bytes([r[p],r[p+1]])}
 fn motion_dword(r:&[u8],p:usize)->i32 {i32::from_le_bytes(r[p..p+4].try_into().unwrap())}
 fn motion_put(r:&mut[u8],p:usize,v:i16){r[p..p+2].copy_from_slice(&v.to_le_bytes());}
 fn motion_put32(r:&mut[u8],p:usize,v:i32){r[p..p+4].copy_from_slice(&v.to_le_bytes());}
-fn motion_point(r:&[u8])->[i16;2] {[motion_word(r,7),motion_word(r,9)]}
+pub(crate) fn motion_point(r:&[u8])->[i16;2] {[motion_word(r,7),motion_word(r,9)]}
 fn motion_cell(at:[i16;2])->usize {((at[1] as u16>>8)&127)as usize*128+((at[0]as u16>>8)&127)as usize}
 fn motion_angles(r:&mut[u8],physics:&crate::physics_tables::PhysicsTables) {
     let (x,y,z)=(i32::from(motion_word(r,0x2d)),i32::from(motion_word(r,0x2f)),i32::from(motion_word(r,0x31)));

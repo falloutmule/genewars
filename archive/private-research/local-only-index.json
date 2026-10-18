@@ -1,0 +1,206 @@
+{
+  "format": "partitioned-path-size-inventory-v1",
+  "total_files": 245544,
+  "parts": [
+    {
+      "path": "local-only-parts/part-001.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-002.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-003.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-004.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-005.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-006.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-007.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-008.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-009.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-010.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-011.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-012.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-013.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-014.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-015.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-016.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-017.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-018.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-019.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-020.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-021.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-022.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-023.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-024.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-025.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-026.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-027.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-028.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-029.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-030.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-031.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-032.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-033.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-034.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-035.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-036.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-037.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-038.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-039.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-040.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-041.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-042.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-043.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-044.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-045.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-046.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-047.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-048.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-049.json",
+      "records": 5000
+    },
+    {
+      "path": "local-only-parts/part-050.json",
+      "records": 544
+    }
+  ]
+}

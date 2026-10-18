@@ -1,0 +1,27 @@
+{
+  "status": "superseded-source-oracle-width-failure",
+  "failed_private_runs": [
+    {
+      "path": "private/review/building-composed-pass/1c9cb801816c467eb20d0c83c49be7bc",
+      "probe_sha256": "aef795ba31c317aa2a03fe54e4caae374a3c5cf8b9a91bb33ca80928d7af68f6",
+      "case8_before_sha256": "4b3d504c661bfe5d7d6818763372c9cb2f8d2199f1ce14b4ac5a34963bc6ba8f",
+      "case8_native_after_sha256": "7b7c94e82cad9a39bfaff7775efcad8e007c7328e64d9ab761baaa7bca07bbad"
+    },
+    {
+      "path": "private/review/building-composed-pass/9dc2cbcb018c4b0cb093fa24d963d9d9",
+      "probe_sha256": "b6aed8afad9c5055f255b57a18df34dc332e9b91532cf47aba08f4b8c56842ad",
+      "case8_before_sha256": "4b3d504c661bfe5d7d6818763372c9cb2f8d2199f1ce14b4ac5a34963bc6ba8f",
+      "case8_native_after_sha256": "7b7c94e82cad9a39bfaff7775efcad8e007c7328e64d9ab761baaa7bca07bbad"
+    },
+    {
+      "path": "private/review/building-composed-pass/bf9a0d77347044759da5c8768d3ca846",
+      "probe_sha256": "ec02c7c8180e62f1882cd53c3e303d986c4fc193c2878421d457d60c3475bdbe",
+      "case8_before_sha256": "4b3d504c661bfe5d7d6818763372c9cb2f8d2199f1ce14b4ac5a34963bc6ba8f",
+      "case8_native_after_sha256": "7b7c94e82cad9a39bfaff7775efcad8e007c7328e64d9ab761baaa7bca07bbad"
+    }
+  ],
+  "native_failure": false,
+  "source_cause": "Unsized MOV [11878A],AX at8D81F and8D8A3 was interpreted as32bits, incorrectly clearing adjacent playercount11878C. Raw66A38A871100 proves16bits. The corrected local annotations preserve playercount and the mixed16-case whole-pass comparison passes.",
+  "current_receipt": "research/variants/building-composed-pass-review.json",
+  "original_execution": false
+}

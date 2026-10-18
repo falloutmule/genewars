@@ -1,0 +1,36 @@
+{
+  "status": "blocked",
+  "classification": "unsupported required gameplay path",
+  "reason": "Source startup reachesframe95, then unsupported creature motion; capture/reconstruction in progress.",
+  "original_campaign_missions_completable": 0,
+  "private_fixture": "private\\integration\\fresh-startup-003",
+  "steps": 95,
+  "blocked": "Creatures(UnsupportedMotionState)",
+  "runtime_context": "Some(MissionRuntimeContext { origin: FreshCdConq001, participating_players: 1, runtime_flags: 62, runtime_mode: Some(0), countdown: 905, frame: 95, rng: CdConq001SerializedThenBlueprints { seed: 10548, draw_count: 16919, diagnostic_ring: 0 } })",
+  "buildings": [],
+  "funds": [
+    {
+      "slot": 0,
+      "balance": 2000
+    },
+    {
+      "slot": 1,
+      "balance": 0
+    },
+    {
+      "slot": 2,
+      "balance": 0
+    },
+    {
+      "slot": 3,
+      "balance": 0
+    }
+  ],
+  "hashes": {
+    "genewars-game.exe": "2b5f4d8dda98d81d0c07ebdc8ce4d162cf3515744a05c7e360f73f83f0ca4231",
+    "replay.txt": "92c5c4a0897e6c915a2c450df02bf6e00a43c77e2b73fed2112c00dbbeffba47",
+    "report.json": "888d643f0d5539e9e21c4e5b0a2968543c1da82cf19ec79a300195f3cb5cba1b",
+    "frame.bmp": "3da862eb36f733fa16d463168eef528f268e3ede9dfa71e11a04c1a8cfdeb316"
+  },
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba"
+}

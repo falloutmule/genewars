@@ -1,0 +1,1036 @@
+{
+  "tag": "F21-root-check-20261018T0345",
+  "run": "private\\integration\\F21-root-check-20261018T0345",
+  "head": "11608d1a1f2acc5696ca761493d4b4b2c2af460a",
+  "positive": {
+    "passed": 54,
+    "total": 54
+  },
+  "negative": {
+    "passed": 4,
+    "total": 4
+  },
+  "checks": {
+    "passed": 65,
+    "total": 65
+  },
+  "all_ok": true,
+  "steps": [
+    {
+      "step": "compile-workspace",
+      "ok": true,
+      "kind": "check",
+      "detail": {
+        "rc": 0
+      }
+    },
+    {
+      "step": "R05-neutral-completed-attack-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5914,
+          "slot": 5,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 9,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R05-neutral-completed-attack-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R05-neutral-completed-attack-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 9,
+        "expected_draws": 9,
+        "rng_in": "d5d60d56c20000",
+        "rng_out": "91d4165fc20000",
+        "rng_expected": "91d4165fc20000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R06-owned-hit-hold-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5916,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R06-owned-hit-hold-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R06-owned-hit-hold-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 0,
+        "expected_draws": 0,
+        "rng_in": "b18b1e67c20000",
+        "rng_out": "b18b1e67c20000",
+        "rng_expected": "b18b1e67c20000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R07-owned-hit-complete-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5922,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R07-owned-hit-complete-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R07-owned-hit-complete-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 0,
+        "expected_draws": 0,
+        "rng_in": "45221982c20000",
+        "rng_out": "45221982c20000",
+        "rng_expected": "45221982c20000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R08-owned-command-ai-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5924,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 2,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R08-owned-command-ai-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R08-owned-command-ai-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 2,
+        "expected_draws": 2,
+        "rng_in": "29a3048dc20000",
+        "rng_out": "51db068fc20000",
+        "rng_expected": "51db068fc20000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R09-neutral-zero-reserve-complete-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5938,
+          "slot": 5,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 8,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R09-neutral-zero-reserve-complete-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R09-neutral-zero-reserve-complete-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 8,
+        "expected_draws": 8,
+        "rng_in": "e5b001cac20000",
+        "rng_out": "85d609d2c20000",
+        "rng_expected": "85d609d2c20000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R01-owned-light-4801-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 4801,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R01-owned-light-4801-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R01-owned-light-4801-oracle+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "status": "passed",
+        "draws": 0,
+        "instructions": 2224,
+        "compared_bytes": 427369,
+        "differences": [],
+        "parse_error": null,
+        "expected_instructions": 2224,
+        "rust_draws": 0
+      }
+    },
+    {
+      "step": "R02-owned-light-5893-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5893,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R02-owned-light-5893-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R02-owned-light-5893-oracle+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "status": "passed",
+        "draws": 0,
+        "instructions": 1714,
+        "compared_bytes": 427369,
+        "differences": [],
+        "parse_error": null,
+        "expected_instructions": 1714,
+        "rust_draws": 0
+      }
+    },
+    {
+      "step": "R03-owned-light-5939-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5939,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R03-owned-light-5939-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R03-owned-light-5939-oracle+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "status": "passed",
+        "draws": 0,
+        "instructions": 1503,
+        "compared_bytes": 427369,
+        "differences": [],
+        "parse_error": null,
+        "expected_instructions": 1503,
+        "rust_draws": 0
+      }
+    },
+    {
+      "step": "R04-owned-full-path-5940-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5940,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 5,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R04-owned-full-path-5940-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R04-owned-full-path-5940-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 5,
+        "expected_draws": 5,
+        "rng_in": "95851dc6c20000",
+        "rng_out": "41d602cbc20000",
+        "rng_expected": "41d602cbc20000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R10-owned-state20-fresh-timer-5940-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5940,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R10-owned-state20-fresh-timer-5940-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R10-owned-state20-fresh-timer-5940-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 0,
+        "expected_draws": 0,
+        "rng_in": "69cc14ddc20000",
+        "rng_out": "69cc14ddc20000",
+        "rng_expected": "69cc14ddc20000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R20-owned-state20-expired-timer-triple-mismatch-5946-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5946,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R20-owned-state20-expired-timer-triple-mismatch-5946-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R20-owned-state20-expired-timer-triple-mismatch-5946-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 0,
+        "expected_draws": 0,
+        "rng_in": "5dbb0ff8c20000",
+        "rng_out": "5dbb0ff8c20000",
+        "rng_expected": "5dbb0ff8c20000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R22-neutral-state21-pursuit-5962-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5962,
+          "slot": 5,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 1,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R22-neutral-state21-pursuit-5962-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R22-neutral-state21-pursuit-5962-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 1,
+        "expected_draws": 1,
+        "rng_in": "250a115ac30000",
+        "rng_out": "8106125bc30000",
+        "rng_expected": "8106125bc30000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R23-neutral-state8-pursuit-88-40-5963-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5963,
+          "slot": 5,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R23-neutral-state8-pursuit-88-40-5963-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R23-neutral-state8-pursuit-88-40-5963-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 0,
+        "expected_draws": 0,
+        "rng_in": "9178165fc30000",
+        "rng_out": "9178165fc30000",
+        "rng_expected": "9178165fc30000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R24-owned-arrival-idle-kind1-neighbor-5966-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5966,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 4,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R24-owned-arrival-idle-kind1-neighbor-5966-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R24-owned-arrival-idle-kind1-neighbor-5966-oracle+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "status": "passed",
+        "draws": 4,
+        "instructions": 31638,
+        "compared_bytes": 427369,
+        "differences": [],
+        "parse_error": null,
+        "expected_instructions": 31638,
+        "rust_draws": 4
+      }
+    },
+    {
+      "step": "R28-owned-state1-degraded-target-5968-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5968,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R28-owned-state1-degraded-target-5968-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R28-owned-state1-degraded-target-5968-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 0,
+        "expected_draws": 0,
+        "rng_in": "45161982c30000",
+        "rng_out": "45161982c30000",
+        "rng_expected": "45161982c30000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R29-owned-state1-pursuit-target-cell-5992-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 5992,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R29-owned-state1-pursuit-target-cell-5992-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R29-owned-state1-pursuit-target-cell-5992-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 0,
+        "expected_draws": 0,
+        "rng_in": "39ad08f1c30000",
+        "rng_out": "39ad08f1c30000",
+        "rng_expected": "39ad08f1c30000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R30-owned-degraded-pursuit-arrival-6008-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 6008,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R30-owned-degraded-pursuit-arrival-6008-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R30-owned-degraded-pursuit-arrival-6008-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 0,
+        "expected_draws": 0,
+        "rng_in": "017e123bc40000",
+        "rng_out": "017e123bc40000",
+        "rng_expected": "017e123bc40000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R31-owned-state1-pursuit-expired-preprefix-6010-execution",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "passed",
+          "frame": 6010,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "",
+          "rng_draws": 4,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R31-owned-state1-pursuit-expired-preprefix-6010-exact-lengths",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": []
+      }
+    },
+    {
+      "step": "R31-owned-state1-pursuit-expired-preprefix-6010-rng+bytes",
+      "ok": true,
+      "kind": "positive",
+      "detail": {
+        "draws": 4,
+        "expected_draws": 4,
+        "rng_in": "21931a43c40000",
+        "rng_out": "310f1e47c40000",
+        "rng_expected": "310f1e47c40000",
+        "buffer_diffs": {}
+      }
+    },
+    {
+      "step": "R21-owned-state20-expired-timer-zero-6a-5946-rejection",
+      "ok": true,
+      "kind": "negative",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "blocked",
+          "frame": 5946,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "Creatures(UnsupportedMotionState)",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R21-owned-state20-expired-timer-zero-6a-5946-transactional-preservation",
+      "ok": true,
+      "kind": "negative",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": [],
+        "buffer_diffs_vs_input": {}
+      }
+    },
+    {
+      "step": "R25-owned-idle-kind1-state-over-19-5966-rejection",
+      "ok": true,
+      "kind": "negative",
+      "detail": {
+        "rc": 0,
+        "rust": {
+          "status": "blocked",
+          "frame": 5966,
+          "slot": 1,
+          "input_roundtrip": true,
+          "error": "Creatures(UnsupportedNeighborhood)",
+          "rng_draws": 0,
+          "scope": "captured mule callbacks with other families frozen; not campaign acceptance"
+        }
+      }
+    },
+    {
+      "step": "R25-owned-idle-kind1-state-over-19-5966-transactional-preservation",
+      "ok": true,
+      "kind": "negative",
+      "detail": {
+        "lengths": {
+          "actors.bin": 4000,
+          "backing.bin": 343958,
+          "buildings.bin": 17152,
+          "creatures.bin": 37200,
+          "effects.bin": 16200,
+          "family8.bin": 1632,
+          "players.bin": 7220,
+          "rng.bin": 7
+        },
+        "problems": [],
+        "buffer_diffs_vs_input": {}
+      }
+    },
+    {
+      "step": "focused-batch-9of9",
+      "ok": true,
+      "kind": "check",
+      "detail": {
+        "rc": 0,
+        "tail": [
+          "  ],",
+          "  \"passed\": 9,",
+          "  \"total\": 9",
+          "}"
+        ]
+      }
+    },
+    {
+      "step": "runtime-suite",
+      "ok": true,
+      "kind": "check",
+      "detail": {
+        "results": [
+          "test result: ok. 260 passed; 0 failed; 8 ignored; 0 measured; 0 filtered out; finished in 0.46s",
+          "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+        ]
+      }
+    },
+    {
+      "step": "release-build",
+      "ok": true,
+      "kind": "check",
+      "detail": {
+        "rc": 0,
+        "exe": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\build\\rust-target\\release\\genewars-game.exe"
+      }
+    },
+    {
+      "step": "campaign-run",
+      "ok": true,
+      "kind": "check",
+      "detail": {
+        "rc": 1,
+        "steps": 6060,
+        "blocked": "Creatures(UnsupportedMotionState)",
+        "world_sha256": "17e006760c8aa24c28d6c83efe2a31234afd76404ee5616ea2a5a97b691b1815",
+        "rgb_sha256": "60d409393b8891f231b5160c8fe864fc612c18cde722af28f5021928b84b1280",
+        "campaign_progress": 1
+      }
+    },
+    {
+      "step": "head-unchanged",
+      "ok": true,
+      "kind": "check",
+      "detail": {
+        "head": "11608d1a1f2acc5696ca761493d4b4b2c2af460a",
+        "expected": "11608d1"
+      }
+    },
+    {
+      "step": "staged-empty",
+      "ok": true,
+      "kind": "check",
+      "detail": {
+        "staged": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+use genewars_assets::ConqMissionSource;
+use genewars_runtime::{actor_world::{ActorWorld,ActorWorldError},actor_pool::ActorHandleBindings,
+ blueprint::BlueprintRng,player_state::PlayerState,building_resources::BuildingResourceDatabase,
+ completed_building::QuietBuildingError};
+use std::{fs,path::Path,io::Write};
+fn snapshot(w:&ActorWorld)->Vec<u8>{let mut b=w.backing_bytes().to_vec();for r in w.actors().records(){b.extend(r)}for r in w.creatures().unwrap().records(){b.extend(r)}for r in w.buildings().unwrap().records(){b.extend(r)}for p in 0..4{b.extend(w.player(p).unwrap().bytes())}let r=w.rng();b.extend(r.seed.to_le_bytes());b.push(r.ring);b.extend(r.draw_count.to_le_bytes());for i in 0..256{b.push(w.buildings().unwrap().binding(i).unwrap().map(|v|v.selector+1).unwrap_or(0))}b}
+fn main(){let a:Vec<_>=std::env::args().collect();let p=Path::new(&a[1]);let out=Path::new(&a[2]);let raw=fs::read(p.join("private/integration/game-runtime/terrain/CONQ001.DAT")).unwrap();let src=ConqMissionSource::parse(&raw).unwrap();let resource=BuildingResourceDatabase::load_selector1_bturr(fs::read(p.join("private/reference-run/run-006/drive-c/GAME/DATA/BUILDING/BTURR.ANB")).unwrap()).unwrap();let mut ledger=fs::File::create(out.join("cases.tsv")).unwrap();
+ for owner in 0..4u8 {for allied in [false,true]{
+  let players=core::array::from_fn(|i|{let mut b=*PlayerState::fresh_campaign(i as u8,[20736,13568],b"fixture\0").unwrap().bytes();if allied{b[0x6e5]=16}PlayerState::from_record(&b).unwrap()});
+  let mut w=ActorWorld::from_mission(&src,&[[0;200];20],[ActorHandleBindings::empty();20],players,BlueprintRng{seed:[0,1,5428,65535][usize::from(owner)],ring:31,draw_count:u32::MAX}).unwrap();w.admit_creatures(&[[0;124];300]).unwrap();w.admit_buildings(&[[0;67];256],[None;256]).unwrap();
+  let at=if allied{[16896,15616]}else{[19839,12927]};let slot=w.create_building(owner,1,at).unwrap().unwrap().slot;w.progress_selector1_building(slot,120,true).unwrap();
+  for step in 0..102 {let capture=[0,1,97,98,99,100,101].contains(&step);let name=format!("owner{owner}-allied{allied}-step{step}");let dir=out.join(&name);if capture{fs::create_dir(&dir).unwrap();fs::write(dir.join("before.bin"),snapshot(&w)).unwrap();}
+   let plan=w.step_quiet_completed_selector1_building(slot,&resource).unwrap();assert!(plan.queue_requested);
+   if capture{fs::write(dir.join("after.bin"),snapshot(&w)).unwrap();writeln!(ledger,"{name}\t{slot}\t0\t{}",plan.search_cells).unwrap();}
+  }
+ }}
+ let players=core::array::from_fn(|i|PlayerState::fresh_campaign(i as u8,[0,0],b"fixture\0").unwrap());let mut w=ActorWorld::from_mission(&src,&[[0;200];20],[ActorHandleBindings::empty();20],players,BlueprintRng{seed:5428,ring:31,draw_count:u32::MAX}).unwrap();w.admit_creatures(&[[0;124];300]).unwrap();w.admit_buildings(&[[0;67];256],[None;256]).unwrap();let slot=w.create_building(0,1,[16896,15616]).unwrap().unwrap().slot;w.progress_selector1_building(slot,120,true).unwrap();let before=w.clone();let dir=out.join("accepted-target-reject");fs::create_dir(&dir).unwrap();fs::write(dir.join("before.bin"),snapshot(&w)).unwrap();assert!(matches!(w.step_quiet_completed_selector1_building(slot,&resource),Err(ActorWorldError::QuietBuilding(QuietBuildingError::AcceptedAttackTarget))));assert_eq!(w,before);fs::write(dir.join("after.bin"),snapshot(&w)).unwrap();writeln!(ledger,"accepted-target-reject\t{slot}\t1\t0").unwrap();println!("56 full callbacks and one accepted-target rollback");}

@@ -1,0 +1,79 @@
+[
+  {
+    "status": "passed",
+    "output": "private\\review\\neutral-mule-captured-width\\6f84567021774f63bf8d98e3f0be8492",
+    "compared_bytes": 427369,
+    "draws": 3,
+    "instructions": 11024,
+    "differences": [],
+    "mismatch_counts": {
+      "backing.bin": 0,
+      "creatures.bin": 0,
+      "actors.bin": 0,
+      "buildings.bin": 0,
+      "effects.bin": 0,
+      "family8.bin": 0,
+      "players.bin": 0,
+      "rng.bin": 0
+    },
+    "reason": null,
+    "kind": "neutral",
+    "frame": 5596
+  },
+  {
+    "status": "passed",
+    "output": "private\\review\\neutral-mule-captured-width\\5fd6ce7d32b2449fb28852c6cc57efe5",
+    "compared_bytes": 427369,
+    "draws": 0,
+    "instructions": 6669,
+    "differences": [],
+    "mismatch_counts": {
+      "backing.bin": 0,
+      "creatures.bin": 0,
+      "actors.bin": 0,
+      "buildings.bin": 0,
+      "effects.bin": 0,
+      "family8.bin": 0,
+      "players.bin": 0,
+      "rng.bin": 0
+    },
+    "reason": null,
+    "kind": "neutral",
+    "frame": 5597
+  },
+  {
+    "status": "passed",
+    "output": "private\\review\\neutral-mule-captured-width\\3d26e574888e4635b69b27a3b3a76ce3",
+    "compared_bytes": 427369,
+    "draws": 0,
+    "instructions": 7383,
+    "differences": [],
+    "mismatch_counts": {
+      "backing.bin": 0,
+      "creatures.bin": 0,
+      "actors.bin": 0,
+      "buildings.bin": 0,
+      "effects.bin": 0,
+      "family8.bin": 0,
+      "players.bin": 0,
+      "rng.bin": 0
+    },
+    "reason": null,
+    "kind": "neutral",
+    "frame": 5598
+  },
+  {
+    "status": "passed",
+    "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\d37fbdbbff5d4b03a8b88cb491f93de8",
+    "compared_bytes": 427369,
+    "draws": 15,
+    "instructions": 3978,
+    "differences": [],
+    "mismatch_counts": null,
+    "reason": null,
+    "kind": "zone",
+    "frame": 5760,
+    "score_before": 0,
+    "score_after": 24
+  }
+]

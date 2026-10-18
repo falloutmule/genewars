@@ -1,0 +1,41 @@
+{
+  "log_id": "attempt-log-5939-r2",
+  "created": "2026-10-16T11:13 America/Denver",
+  "note": "NEW uniquely-named log. Previous evidence files were NOT modified: private/integration/attempt-log-5939.json (attempt 1), next-blocker-5939-contract.json, next-blocker-5939-source-195.json, next-blocker-5939-contract-r2.json (full detail of the source-authorised light sequence and the GW-5939C contract).",
+
+  "preflight_verification": {
+    "head": "7347fbf Localize the 5939 frontier: source callback is a no-op",
+    "branch": "codex/genewars-reconstruction",
+    "rust_tree_uncommitted_modifications": "NONE - both failed attempts reverted",
+    "rust_tree_untracked": ["src/loss_transition.rs", "src/mule_neutral_hit_escape.rs"],
+    "untracked_note": "pre-existing, separate unfinished experiment, deliberately not staged",
+    "total_dirty_entries": 165,
+    "accepted_batch195_baseline_reverified": {
+      "run": "private/integration/batch195-fresh-20261016T111305",
+      "result": "9/9 focused checks passed",
+      "detail": "literal miss; authentic 5892 (1 draw) 5893/5894/5895 (0 draws); synthetic range exact (8 draws) / outside (1 draw); zero-reserve/operator miss (1 draw); each 427369 bytes, zero differences"
+    },
+    "rejected_patches_preserved": {
+      "attempt1": "genewars-routing-probe/attempt1-gw5939a-rejected.patch (1531 bytes, 1 hunk)",
+      "attempt2": "genewars-routing-probe/attempt2-gw5939b-rejected.patch (3497 bytes, 2 hunks)"
+    }
+  },
+
+  "attempts": [
+    {"id": "GW-5939A", "result": "rejected", "new_evidence": "the entry admission guard was not the only rejecting site; real site owned_mule_callback.rs:19 (0x52/0x57 && !hostile)"},
+    {"id": "GW-5939B", "result": "rejected", "new_evidence": "frame-parity gate confirmed real; two defects located in the reused Rust units (full-path-only association admission at creature_updates.rs:426 inside the 5EB30 equivalent; plan_mule_admitted_body_with_collision conflating full-path work with the shared tail); SOURCE measured to SET word(0x6c)=0 on the light path (my earlier inference had the direction backwards)"},
+    {"id": "GW-5939C", "result": "in progress", "change_of_approach": "source-authorise the light sequence as its own unit instead of reusing full-path admission; 5EB30 semantics decoded from private/ghidra/player-creation/instructions-0005eb30.txt"}
+  ],
+
+  "progress_signal": "each attempt produced distinct new source-backed findings; not a stagnation loop. Distinct branch coverage added: command-vs-noncommand entry, light/full parity split, 5EB30 state dispatch and its three word(0x6c)=0 write sites, and the 5940 full-path expired-timer branch signature.",
+
+  "gw5939c_gates": {
+    "A": "5939 capture frame5939 -> result.json status PASSED, 0 draws, all eight buffers match the source (empty differences)",
+    "B": "5939 capture frame5940 -> result.json status BLOCKED; explicitly unsupported until its full-path behaviour is implemented",
+    "C": "5892 capture frame5893 -> status PASSED and source-accurate word(0x6c) countdown update (32759 -> 0)",
+    "regressions": "the 9/9 focused suite above must remain green",
+    "rules": ["ABSOLUTE fresh output paths", "gate on result.json status BEFORE comparing bytes", "no frame/slot special-casing", "no bare return-unchanged no-op", "no test weakening", "no commit by the worker"]
+  },
+
+  "continuation_after_pass": "implement the authentic frame-5940 full-path expired-timer transition (measured: 11594 instructions, 5 draws, state 08->15, word(0x6c) 0->0x7ffe, 0x68 14->13, 0x19 07->0f, 0x1b-0x1e ->01, 0x4b ca->c9, 0x66 d1->cf; source path 5ef3a JLE 65384 then a STATE-INDEXED JUMP TABLE at CS:[state*4 + 0x5eca0]), then campaign replay and native acceptance, then the next authentic blocker."
+}

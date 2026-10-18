@@ -1,0 +1,12 @@
+[package]
+name="bturr-common-pixel-oracle"
+version="0.1.0"
+edition="2021"
+
+[[bin]]
+name="bturr-common-pixel-oracle"
+path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/scripts/desktop/bturr_common_pixel_harness.rs"
+[dependencies]
+genewars-render={path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-render"}
+genewars-runtime={path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-runtime"}
+[workspace]

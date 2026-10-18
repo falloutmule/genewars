@@ -1,0 +1,12 @@
+{
+  "source": "private/ghidra/validated/memory-.object3.bin",
+  "source_sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
+  "source_va_base": "0x100000",
+  "table_va": "0x112D24",
+  "table_offset_in_object3": 77092,
+  "table_size": 8192,
+  "table_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+  "destination": "private/integration/physics-tables/border.bin",
+  "validator": "scripts/ghidra/validate_construction_border.py",
+  "original_execution": false
+}

@@ -1,0 +1,15 @@
+{
+  "source_commit": "3bcf6ff9b2d40212c2f501a9bff489fbf83e8f71",
+  "source_branch": "codex/genewars-reconstruction",
+  "source_subdirectory": "genewars-preflight",
+  "imported_committed_head": "3bcf6ff9b2d40212c2f501a9bff489fbf83e8f71",
+  "history_commits": 214,
+  "current_files": 1970,
+  "untracked_files": 136,
+  "source_bytes": 34671711,
+  "history_policy": "Only GeneWars paths exported. The imported HEAD matches the original SHA; unrelated parent-workspace files were untracked and not part of this history.",
+  "private_inputs": "Excluded original game data, disassembly, installed tools, caches and build outputs; source local tree unchanged.",
+  "tests": "Not run: archival publication only.",
+  "report_original_sha256": "4c290fee69fba1d5d69a357d8dab205531e61323bbdee8b7c162102b4cc72a78",
+  "report_github_sha256": "aedee784c3fc419533ef867d5e527eef76275a894515946943b891ec7e02db32"
+}

@@ -1,0 +1,5 @@
+use std::{fs,path::Path};#[path="runtime.rs"]mod loss_transition;use loss_transition::*;
+fn main(){let w=std::env::args().nth(1).unwrap();let w=Path::new(&w);let bytes=fs::read(w.join("input.bin")).unwrap();let mut out=Vec::new();for b in bytes.chunks_exact(7228){let players:[[u8;1805];4]=std::array::from_fn(|i|b[i*1805..(i+1)*1805].try_into().unwrap());let c=&b[7220..];let frame=u32::from_le_bytes(c[4..8].try_into().unwrap());let p=enter_loss(c[1],c[2],frame,0).unwrap();out.extend(players.concat());out.extend([p.flags_after,p.mode_after,p.stage_after]);out.extend(p.frame_after.to_le_bytes());out.extend(p.saved_frame.to_le_bytes());out.push(p.service_calls.len()as u8);for a in p.service_calls{out.extend(a.to_le_bytes())}
+assert_eq!(pending_loss(c[1],c[2]),Some(LossViewRequest::Loss186400));assert_eq!(pending_loss(c[1]&0x7f,c[2]),None);assert_eq!(pending_loss(c[1],c[2]|1),None);assert_eq!(advance_loss(0),None);assert_eq!(advance_loss(1),Some(LossViewRequest::Title185008));assert!(enter_loss(c[1],c[2]|1,frame,0).is_err());assert!(enter_loss(c[1],c[2],frame,1).is_err());}
+
+fs::write(w.join("actual.bin"),out).unwrap();}

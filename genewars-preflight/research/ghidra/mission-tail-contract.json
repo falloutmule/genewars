@@ -1,0 +1,103 @@
+{
+  "status": "Observed static source; not yet independently executed as a whole tail",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "listing_sha256": {
+    "font-menu-state/instructions-00072ed0.txt": "6e946043309c2166a5666ed7c7d97ad202f05b822e3cebb533a7f499c82382d7",
+    "construction-command/instructions-0008ab30.txt": "49395029ce01325efe16d5d11fdfce3011ec88c7923a5f5b1cdde99c22556672",
+    "campaign-level/instructions-00071b70.txt": "df0c9245caa952c20d3d319149413fc9d12382b8d65d036bba306ce8d7f19076"
+  },
+  "entry": "72ED0 EAX=backing118D60, after79220 terrain pass",
+  "early_return": "runtime byte118770 bit40 returns at7338E without mutation.",
+  "8AB30": {
+    "entry": "8AB30 ignores EAX and preserves EDX.",
+    "behavior": "AL=1 unless runtime118770 bit20 set and some slot1..active_count-1 has byte18386A+slot*6BE bit2 clear; thenAL=0. Active_count<=1 returns1.",
+    "caller": "72EF5 return AL is not tested or used before EAX is overwritten; DH remainsFF from72EF3. This call is not an admission guard."
+  },
+  "ordered_ports": [
+    {
+      "site": "72F28",
+      "callee": "7F3B0",
+      "gate": "backing1EC2 nonzero equals runtime11877E; selected player+15 passed",
+      "status": "Unknown mutation; must close before admitting this branch."
+    },
+    {
+      "site": "73021",
+      "callee": "805E0",
+      "gate": "selected player only, campaign flags20, no winner, backing1EC2 zero",
+      "status": "Parent independently proved predicate and world adapter."
+    },
+    {
+      "site": "731F0/7322F",
+      "callee": "A5AC4",
+      "gate": "winner outcome and runtime118968 bit1",
+      "status": "Explicit unresolved outcome formatting port."
+    },
+    {
+      "site": "7320F",
+      "callee": "2F810",
+      "gate": "selected player wins and runtime118968 bit1 clear",
+      "status": "Unresolved outcome module transition."
+    },
+    {
+      "site": "73315",
+      "callee": "79D50",
+      "gate": "loss presentation branch and nonzero positive terrain-object entries",
+      "status": "Unresolved terrain mutation."
+    },
+    {
+      "site": "73341",
+      "callee": "101D0",
+      "gate": "same branch and BL nonzero",
+      "status": "Unresolved effect creation."
+    },
+    {
+      "site": "73356",
+      "callee": "8AAE0",
+      "status": "Unresolved global/object update."
+    },
+    {
+      "site": "73375",
+      "callee": "75B00",
+      "status": "Existing reveal numeric implementation; exact enclosing branch must be preserved."
+    },
+    {
+      "site": "7337F",
+      "callee": "72960",
+      "status": "Unresolved map maintenance."
+    },
+    {
+      "site": "73389",
+      "callee": "84310",
+      "status": "Unresolved viewport presentation."
+    }
+  ],
+  "runtime_fields": {
+    "118770": "runtime flags:20 campaign-mode branch,40 terminal early-return,80 outcome already processed",
+    "11878C": "unsigned active-player byte; tail iterates dynamically read count",
+    "11873D": "unsigned selected-player index",
+    "118968": "runtime mode bit1 selects outcome presentation/tail",
+    "11877E": "runtime dword compared backing1EC2",
+    "118968_bit1": "also suppresses one campaign special winning predicate",
+    "18386A": "slot extension byte at stride6BE read by8AB30; source extension opaque otherwise"
+  },
+  "bootstrap": {
+    "71B70": "loads52-byte mission tail into118770 at72345/7235A, overwriting earlier zero11877E at71C72/71DA9",
+    "CONQ001": "existing mission-load-evidence.json binds tailflags38 and activecount1; selectedindex retained from menu, not inferred from file",
+    "extension": "opaque6BE-tag payload1AF4; do not invent extension flags or mode"
+  },
+  "player_mutations": "6E3 elimination flag can be set before winner found. Winner handling sets runtime40 for selected winner or runtime80 for other winner/loss. Numeric loop and terminal ports still need whole-tail independent proof.",
+  "scope": "Metadata mapping only. No mission-tail integration, winner semantics, or full startup claim.",
+  "aliases": {
+    "global11AC22": "exact backing1EC2; one u32 field, not separate available count",
+    "global11C218": "exact backing34B8; one u8 terrain-object-list count",
+    "73107 comparison left": "backing2FF8+4C0 =34B8, same terrain count; compare against byte34B9"
+  },
+  "private_numeric_prefix": {
+    "status": "1024 literal cases passed including exact capability query IDs/order",
+    "compared_bytes": 7401472,
+    "literal_instructions": 98249,
+    "stop": "731B6 before terminal runtime-flag/outcome/map branches",
+    "capability_callback": "fallible lazy explicit port, independently proved805E0 supplied by adapter later",
+    "required_branch": "nonzero backing1EC2 equal frame requires7F3B0, currently rejected"
+  }
+}

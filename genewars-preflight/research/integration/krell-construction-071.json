@@ -1,0 +1,16 @@
+{
+  "status": "passed-construction-integration",
+  "mission": "Krell",
+  "accepted_campaign_mission": false,
+  "reference": "QA BETA V5 CD",
+  "scope": "Synthetic carried initialization, ordinary construction commands and callbacks, rendered each step. No native window or mission outcome acceptance.",
+  "completed": {
+    "Extractor11": 909,
+    "Distributor3": 1505,
+    "Genepod0": 2275
+  },
+  "log_sha256": "fc7796495445ecf62ea81a05aeba7dcb9b90f373ccf74ad10b5b8a0a8ab004aa",
+  "head": "ee59177d7b203aa94843d725b92eeee80b18ba8b",
+  "working_tree_changes": true,
+  "pending": "2124 Extractor full source comparison; owned callback live routing; ordinary production/zone/outcome/native acceptance"
+}

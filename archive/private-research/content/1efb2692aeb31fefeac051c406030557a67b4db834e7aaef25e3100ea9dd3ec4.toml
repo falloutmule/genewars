@@ -1,0 +1,13 @@
+[package]
+name="family8-parent-pixel-probe"
+version="0.1.0"
+edition="2021"
+
+[[bin]]
+name="family8-parent-pixel-probe"
+path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/scripts/desktop/family8_parent_pixel_harness.rs"
+[dependencies]
+genewars-assets={path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-assets"}
+genewars-render={path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-render"}
+genewars-runtime={path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-runtime"}
+[workspace]

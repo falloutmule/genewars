@@ -1,0 +1,5 @@
+mod creature_world{type CreatureRecord=[u8;124];fn mule_skill_percent(record:&CreatureRecord,minimum:i32)->i32 {
+    minimum+i32::from(record[0x76].min(100))*(100-minimum)/100
+}pub(crate) fn mule_requested_speed(record:&CreatureRecord)->i16 {
+    ((704*mule_skill_percent(record,75)/100)*(i32::from(record[0x7b])+1)>>8) as i16
+}}#[path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-runtime/src/mule_pair_center.rs"]mod pair;use std::io::{Read,Write};fn main(){let mut b=Vec::new();std::io::stdin().read_to_end(&mut b).unwrap();let mut output=Vec::new();for c in b.chunks_exact(250){let q=pair::plan_center(c[..124].try_into().unwrap(),c[124..248].try_into().unwrap(),u16::from_le_bytes(c[248..250].try_into().unwrap()));if std::env::args().any(|a|a=="reject"){assert!(q.is_err());output.push(1);continue;}let q=q.unwrap();output.extend(q.current_after);output.extend(q.peer_after);}std::io::stdout().write_all(&output).unwrap();}

@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "test": "genepod_native_fixture_tests::original_alpha_and_game_dispatch_drive_capture_without_forced_activation",
+  "tests_passed": 1,
+  "elapsed_seconds": 0.17,
+  "pins": {
+    "rust/crates/genewars-desktop/src/bin/support/runtime_scene.rs": "278911f02f3ebbefdfbef8a0d01ee20279805ea57111c1f45f511954008b6324",
+    "rust/crates/genewars-desktop/src/bin/support/building_pick.rs": "58548b2b63b37fd37d94e76d5e8c4d4f494550be431fc1d454c9742c740e65a7",
+    "rust/crates/genewars-desktop/src/bin/support/genepod_panel.rs": "cc69326501278f4dd97a5f56b4e3c2afc4cdf959124e5c68d4bd78155caff7a1",
+    "rust/crates/genewars-desktop/src/bin/genewars-game.rs": "2e121c38729e7581088cd2dddbfd7010b3c70e0f68ab802dc3415039455f2f74",
+    "research/integration/runtime-resource-catalog.tsv": "3a33ebe4403f413fdd45bbb829d2e8a4ae1f8840e0580cf4a27db0d1993dcc43",
+    "private/integration/krell-native-genepod-input-tests-001.log": "cc334382205d6d091359461ede6d69466ec4c13b3deccb47a836ca158b0e3d33"
+  },
+  "scope": "Synthetic completed Genepod fixture exercises actual Game pointer/left dispatch, sprite alpha selection, capture/down/up/cancel, lazy asset load, feedback and rendering. Not mission or construction acceptance.",
+  "limitations": [
+    "mixed-family overlap priority unresolved",
+    "multiple building hits rejected",
+    "BTURR competing hit excluded",
+    "fixture directly creates and completes building",
+    "original panel animation/disabled/pressed variants omitted",
+    "full native campaign route unverified"
+  ]
+}

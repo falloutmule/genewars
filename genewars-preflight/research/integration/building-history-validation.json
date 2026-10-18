@@ -1,0 +1,22 @@
+{
+  "status": "passed-post-callback-selector1-maintenance",
+  "utc": "2026-10-14T10:13:38.184138+00:00",
+  "cases": 128,
+  "player_records": 512,
+  "compared_bytes": 924160,
+  "literal_instructions": 209848,
+  "pins": {
+    "private/ghidra/mission-array-refs/instructions-00047f80.txt": "bae7d9800c80bce7b1419e5b7a2193b1f934b5080dd30285c7a2a15b50a2a4e4",
+    "private/ghidra/mission-array-refs/instructions-000437a0.txt": "7aa65558885556472096f9f32bc7e469dcc4f227385c258451ba4c105343156d"
+  },
+  "module_sha256": "53138bf3ac2e84522b611d406fa5c7af3bf7cdf7a666cb8859b55030916fed95",
+  "validator_sha256": "75f87771c6fae16276d4c5b1339afc772c67e7bbe2cbdc2d8b5ddaf6c70bd8fa",
+  "boundaries": [
+    "451F0 virtual callback is a no-mutation return0 port; records are caller-supplied post-callback state",
+    "No target-search, RNG, attack or completed-building callback claim",
+    "Audio/UI services are explicit ports",
+    "Dense and sparse selector1 grade0 partitions including slots1/3/31/63; initial min1000/max-1000 sentinels and signed truncating mean preserved"
+  ],
+  "private_run": "private/review/building-history/49e0ec2afa5a4e52bbffb448e45d9424",
+  "original_execution": false
+}

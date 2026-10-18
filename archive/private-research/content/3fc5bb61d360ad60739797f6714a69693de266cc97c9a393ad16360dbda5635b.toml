@@ -1,0 +1,12 @@
+[package]
+name="building-scene-pixel-probe"
+version="0.1.0"
+edition="2021"
+
+[[bin]]
+name="building-scene-pixel-probe"
+path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/scripts/desktop/building_scene_pixel_harness.rs"
+[dependencies]
+genewars-render={path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-render"}
+genewars-runtime={path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-runtime"}
+[workspace]

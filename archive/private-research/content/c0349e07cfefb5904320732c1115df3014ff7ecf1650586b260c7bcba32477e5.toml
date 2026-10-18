@@ -1,0 +1,10 @@
+[package]
+name = "genewars-runtime"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+description = "Owned mission state and bounded source-backed GeneWars updates"
+
+[dependencies]
+genewars-assets = { path = "../genewars-assets" }
+genewars-core = { path = "../genewars-core" }

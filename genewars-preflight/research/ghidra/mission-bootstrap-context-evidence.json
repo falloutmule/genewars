@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "status": "passed-static-mission-bootstrap-context-contract",
+  "original_execution": false,
+  "whole_startup_executed": false,
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "mission_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+  "listing_sha256": {
+    "campaign-level/instructions-00071b70.txt": "df0c9245caa952c20d3d319149413fc9d12382b8d65d036bba306ce8d7f19076",
+    "terrain-camera-refs/instructions-0007d090.txt": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac",
+    "campaign-actions/instructions-00016170.txt": "5f8950f98883bea43b558d6e976e29aa6494b833ccb4e0c7bf2e6df091b00456",
+    "font-menu-state/instructions-0001bbc0.txt": "0fb22c2e71579e6128d50664eb5f40c886a0ed3e327b19b9f0fdfed330db28fb",
+    "campaign-refs/instructions-0001c120.txt": "fd6d61b6f562770b3e34fe65b6fa6ecb9c700ae7aaaa3876f3826e3285670255",
+    "entity-order/instructions-0002bbe0.txt": "22f6962e80bfdcbb6dd4c8b03adb98963b3dd4f4d87d213f0961381d81835283",
+    "mission-array-refs/instructions-00058780.txt": "e7f66d33d468912942e86f875cf4d9e1d0157ce8671a911104b8cb9ad6fcb623",
+    "mission-array-refs/instructions-00047f80.txt": "bae7d9800c80bce7b1419e5b7a2193b1f934b5080dd30285c7a2a15b50a2a4e4",
+    "mission-array-refs/instructions-00013780.txt": "634efec82d190cdf793a444a423709cd2e962031a6b2e20ec05c8606bc3a36b4",
+    "mission-array-refs/instructions-0006a540.txt": "d947fde62e1f4a044d4c74953d8c95a1b25b0e4144fd43f64a1d148f4b5cca1b",
+    "terrain-map-refs/instructions-00072ed0.txt": "6e946043309c2166a5666ed7c7d97ad202f05b822e3cebb533a7f499c82382d7"
+  },
+  "source_fields": {
+    "runtime_flags_118770": 56,
+    "frame_counter_11877e": 0,
+    "active_player_count_11878c": 1,
+    "serialized_countdown_11c2bc": 0,
+    "deferred_event_frame_backing_1ec2": 0
+  },
+  "corroborated_instruction_facts": [
+    "71B70 reads the 52-byte serialized tail into118770; it includes flags, frame counter and active-player count.",
+    "7D090 campaign branch preserves loaded active count, writes countdown1000, calls884D0 and then ORs flags with2.",
+    "16170 clears only mode118968 bit0; it does not establish that the whole mode byte is zero.",
+    "1C120 performs simulation callbacks only with flags bit4 set and mode bit2 clear.",
+    "The conditional initial MAINPANL path through2BBE0 sets flags bit4 after25150; object+C8 and prior module context remain required.",
+    "1BBC0 increments11877E after1C120 and presentation calls. Its value is a frame counter; selected player is11873D.",
+    "58780/47F80/13780 use the active-player count;6A540 uses it for player maintenance while creature owner4 is independently neutral.",
+    "72ED0 compares backing1EC2 to the frame counter before its deferred selected-player event."
+  ],
+  "native_development_route_gaps": [
+    "SharedMission currently supplies4 to player schedulers, though this mission file contains1.",
+    "The development route starts its countdown from serialized backing rather than executing the7D090 countdown1000 write.",
+    "The route advances frame context before callbacks; original1BBC0 increments after them. Module/startup timing before the first world pass remains unestablished.",
+    "Runtime mode, module gates, inherited native priors, seed generation and all transitive startup effects are not a completed original-startup reconstruction."
+  ],
+  "next_step": "Admit explicit source-backed bootstrap context and close its transitive gates before treating the development route as original campaign entry or enabling72ED0 outcomes."
+}

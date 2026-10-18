@@ -20,10 +20,19 @@ def sha256(path):
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
+def production_pins():
+    paths = sorted((ROOT / 'rust').glob('Cargo.*'))
+    paths += sorted((ROOT / 'rust/crates').glob('*/Cargo.toml'))
+    paths += sorted((ROOT / 'rust/crates').glob('*/src/**/*.rs'))
+    paths += [ROOT / 'research/integration/runtime-resource-catalog.tsv']
+    return {p.relative_to(ROOT).as_posix(): sha256(p) for p in paths}
+
+
 def main():
     commands = []
     checks = {}
     started_utc = datetime.now(timezone.utc).isoformat()
+    source_pins_before = production_pins()
     journal = ROOT / 'private/integration' / ('verification-progress-' + uuid.uuid4().hex + '.json')
     journal.parent.mkdir(parents=True, exist_ok=True)
     print('Progress journal: ' + str(journal.relative_to(ROOT)), flush=True)
@@ -40,10 +49,18 @@ def main():
     def run(label, command, timeout=120, acceptable=(0,)):
         print('Running ' + label, flush=True)
         write_progress(label)
-        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=timeout)
+        timed_out = False
+        try:
+            result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=timeout)
+        except subprocess.TimeoutExpired as error:
+            timed_out = True
+            def decoded(value):
+                return value.decode('utf-8', errors='replace') if isinstance(value, bytes) else (value or '')
+            result = subprocess.CompletedProcess(command, 124, decoded(error.stdout),
+                decoded(error.stderr) + '\nVerification command exceeded its ' + str(timeout) + ' second limit.\n')
         commands.append({'label': label, 'command': command, 'exit_code': result.returncode,
-                         'stdout': result.stdout, 'stderr': result.stderr})
-        checks[label] = result.returncode in acceptable
+                         'stdout': result.stdout, 'stderr': result.stderr, 'timed_out': timed_out})
+        checks[label] = not timed_out and result.returncode in acceptable
         command_directory = journal.with_suffix('')
         command_directory.mkdir(exist_ok=True)
         (command_directory / (label + '.json')).write_text(
@@ -128,6 +145,14 @@ def main():
     run('hungry_creature_acquisition', py + ['research/variants/creature-hungry-review.py'], timeout=180)
     run('creature_relocation_search', py + ['research/variants/creature-relocation-review.py'], timeout=180)
     run('empty_world_bookkeeping', py + ['scripts/validate_bookkeeping.py'], timeout=300)
+    run('incomplete_building_scheduler', py + ['research/variants/building-scheduler-review.py'], timeout=180)
+    run('selector1_player_history', py + ['scripts/validate_building_history.py'], timeout=180)
+    run('completed_building_callback', py + ['research/variants/completed-building-review.py'], timeout=180)
+    run('completed_building_world', py + ['research/variants/completed-building-world-review.py'], timeout=180)
+    run('mixed_selector1_building_pass', py + ['research/variants/building-composed-pass-review.py'], timeout=180)
+    run('turret_target_tracking', py + ['research/variants/turret-tracking-review.py'], timeout=180)
+    run('turret_target_tracking_world', py + ['research/variants/turret-tracking-world-review.py'], timeout=180)
+    run('turret_target_tracking_pass', py + ['research/variants/turret-tracking-pass-review.py'], timeout=180)
     run('countdown_expiry_requests', py + ['scripts/validate_countdown_expiry.py'], timeout=180)
     run('countdown_timer_transition', py + ['scripts/validate_countdown_transition.py'], timeout=180)
     run('family8_state4_callback', py + ['research/variants/family8-state4-review.py'], timeout=240)
@@ -159,6 +184,9 @@ def main():
     run('neutral_plant_factory', py + ['scripts/validate_plant_factory.py'], timeout=180)
     run('owned_mule_water', py + ['research/variants/creature-water-review.py'], timeout=180)
     run('mule_mortality', py + ['research/variants/mule-mortality-review.py'], timeout=180)
+    run('mule_bones', py + ['research/variants/mule-bones-review.py'], timeout=180)
+    run('mule_bones_retirement', py + ['research/variants/mule-bones-retirement-review.py'], timeout=180)
+    run('mule_bones_retirement_world', py + ['research/variants/mule-bones-retirement-world-review.py'], timeout=180)
     run('water_effect_factories_and_lifetime', py + ['research/variants/water-effect-review.py'], timeout=180)
     run('mule_deep_water_world', py + ['research/variants/mule-deep-water-world-review.py'], timeout=180)
     run('water_effect_captured_passes', py + ['research/variants/water-effect-captured-review.py'], timeout=180)
@@ -190,6 +218,7 @@ def main():
     run('actor_player_list_order', py + ['scripts/ghidra/validate_actor_order.py'])
     run('owned_actor_motion', py + ['scripts/ghidra/validate_actor_owned.py'], timeout=300)
     run('actor_waypoint_motion', py + ['scripts/ghidra/validate_actor_waypoint.py'], timeout=300)
+    run('saved_architect_return', py + ['scripts/validate_architect_return.py'], timeout=300)
     run('landing_factory_world', py + ['scripts/validate_landing_world.py'])
     run('landing_steps_world', py + ['scripts/validate_landing_steps.py'])
     run('landing_effect_scheduler', py + ['scripts/validate_landing_scheduler.py'], timeout=180)
@@ -242,6 +271,7 @@ def main():
     run('building_owned_world', py + ['scripts/validate_building_world.py'], timeout=240)
     run('building_progress_world', py + ['scripts/validate_building_world.py','--progress'], timeout=240)
     run('building_movement_obstacle', py + ['scripts/validate_building_obstacle.py'], timeout=180)
+    run('nominated_building_movement_obstacle', py + ['scripts/validate_nominated_building_obstacle.py'], timeout=180)
     run('building_selector1_resource_rust', py + ['scripts/validate_bturr_animation0_rust.py'], timeout=180)
     run('building_selector1_common_pixels', py + ['scripts/desktop/validate_bturr_common_pixels.py'], timeout=240)
     run('building_scene_common_pixels', py + ['scripts/desktop/validate_building_scene_common.py'], timeout=180)
@@ -269,6 +299,7 @@ def main():
     run('construction_cancellation', py + ['scripts/ghidra/validate_construction_cancellation.py'], timeout=180)
     run('construction_actor_animation', py + ['scripts/ghidra/validate_actor_construction_animation.py'], timeout=180)
     run('construction_actor_recovery', py + ['scripts/ghidra/validate_actor_construction_recovery.py'], timeout=180)
+    run('construction_actor_recovery_callback', py + ['scripts/ghidra/validate_actor_construction_recovery_callback.py'], timeout=180)
     run('construction_actor_tail', py + ['scripts/ghidra/validate_actor_construction_tail.py'], timeout=180)
     run('terrain_jobs_world', py + ['scripts/validate_terrain_jobs_world.py'], timeout=240)
     run('construction_wait', py + ['scripts/ghidra/validate_construction_wait.py'], timeout=180)
@@ -277,6 +308,21 @@ def main():
     run('architect_terraform_callback', py + ['scripts/ghidra/validate_architect_terraform_callback.py'], timeout=180)
     run('architect_cycle', py + ['scripts/ghidra/validate_architect_cycle.py'], timeout=180)
     run('construction_stage3_callback', py + ['scripts/ghidra/validate_construction_stage3_callback.py'], timeout=180)
+    run('mission_start_funds', py + ['scripts/validate_mission_funds.py'], timeout=180)
+    run('mission_construction_capability', py + ['scripts/validate_mission_status.py'], timeout=180)
+    run('mission_bootstrap_context', py + ['scripts/ghidra/validate_mission_bootstrap_context.py'], timeout=180)
+    run('building_effect_world', py + ['scripts/validate_code2c_world.py'], timeout=180)
+    run('bones_owner4_pixels', py + ['scripts/desktop/validate_bones_pixels.py'], timeout=180)
+    run('mule_corpse_motion', py + ['research/variants/mule-corpse-motion-review.py'], timeout=180)
+    run('construction_stage4', py + ['scripts/ghidra/validate_construction_stage4.py'], timeout=180)
+    run('construction_stage4_callback', py + ['scripts/ghidra/validate_construction_stage4_callback.py'], timeout=180)
+    run('pending_architect_callback', py + ['scripts/ghidra/validate_pending_architect_callback.py'], timeout=180)
+    run('construction_work_prefix', py + ['scripts/ghidra/validate_construction_work.py'], timeout=180)
+    run('construction_work_progress', py + ['scripts/ghidra/validate_construction_work_progress.py'], timeout=180)
+    run('construction_work_callback', py + ['scripts/ghidra/validate_construction_work_callback.py'], timeout=180)
+    run('construction_finished', py + ['scripts/ghidra/validate_construction_finished.py'], timeout=180)
+    run('construction_finished_callback', py + ['scripts/ghidra/validate_construction_finished_callback.py'], timeout=180)
+    run('building_plant_blocker', py + ['scripts/ghidra/validate_building_blocker.py'], timeout=180)
     run('construction_completion', py + ['scripts/ghidra/validate_construction_completion.py'], timeout=180)
     run('building_effect_creation', py + ['scripts/ghidra/validate_building_effect.py'], timeout=180)
     run('building_effect_lifecycle', py + ['scripts/ghidra/validate_building_effect_lifecycle.py'], timeout=180)
@@ -329,6 +375,7 @@ def main():
         run('native_runtime_flow_and_failures', py + ['scripts/validate_runtime.py', '--window-smoke'], timeout=180)
         run('owned_world_reveal', py + ['scripts/validate_reveal.py'])
         run('owned_landing_runtime', py + ['scripts/validate_shared_runtime.py', '--release', '--window-smoke'], timeout=1800)
+        run('native_construction_completion', py + ['scripts/desktop/validate_build_completion_native.py'], timeout=600)
         run('independent_runtime_world', py + ['research/variants/runtime-world-review.py'], timeout=180)
         run('recorded_runtime_ui', py + ['scripts/validate_runtime_ui.py'])
     run('first_world_command_eligibility', py + ['research/variants/first-world-command-review.py'])
@@ -349,11 +396,18 @@ def main():
     ignored = subprocess.run(git + ['check-ignore', '--no-index', '-z', '--stdin'],
                              input='\0'.join(private_files) + '\0', capture_output=True, text=True)
     checks['all_private_files_ignored'] = ignored.returncode == 0 and set(ignored.stdout.rstrip('\0').split('\0')) == set(private_files)
+    source_pins_after = production_pins()
+    changed_sources = sorted(path for path in source_pins_before.keys() | source_pins_after.keys()
+                             if source_pins_before.get(path) != source_pins_after.get(path))
+    checks['production_sources_stable_during_run'] = not changed_sources
     record = {
         'schema_version': 1, 'completed_utc': datetime.now(timezone.utc).isoformat(),
         'all_passed': all(checks.values()), 'checks': checks, 'commands': commands,
         'private_files_checked': len(private_files), 'baseline_sha256': BASELINE_HASHES,
         'source_archive_sha256': manifest['source']['planning_sha256'],
+        'production_source_pins_before': source_pins_before,
+        'production_source_pins_after': source_pins_after,
+        'production_sources_changed_during_run': changed_sources,
         'scope': 'Rust/parser/static checks, real panel rendering, native asset/control-window presentation and dated-preflight preservation. Strict metadata bounds and separate hash-bound packed4 creature/BONES admissions supersede the unsafe full-file sprite result. One GPF ANB record remains unresolved. The earlier 12 checks are historical evidence; no broad re-extraction was performed. This verifier does not execute original programs; separately approved reference observations and supervised native-input tests have their own receipts. No gameplay parity or playable game is claimed here.',
     }
     destination = ROOT / 'research/integration/verification.json'

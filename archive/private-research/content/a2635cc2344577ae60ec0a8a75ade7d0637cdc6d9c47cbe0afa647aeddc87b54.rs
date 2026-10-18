@@ -1,0 +1,6 @@
+extern crate self as genewars_runtime;
+pub mod building_resources {
+pub struct Metadata{pub component_count:u8}pub struct Record{pub flags:u8,pub x:i16,pub y:i16}impl Record{pub fn local_position(&self)->(i16,i16){(self.x,self.y)}}
+pub struct Sprite{pub width:u8,pub height:u8,pub opaque:Vec<bool>}pub struct Component{pub record:Record,pub sprite:Sprite}pub struct BuildingAnimation0Frame{pub metadata:Metadata,pub components:Vec<Component>}}
+#[path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-desktop/src/bin/support/building_pick.rs"]mod pick;
+use building_resources::*;use std::io::{Read,Write};fn main(){let mut b=Vec::new();std::io::stdin().read_to_end(&mut b).unwrap();let mut out=Vec::new();for c in b.chunks_exact(6){let flags=c[0];let frame=c[1];let x=i16::from_le_bytes([c[2],c[3]]);let y=i16::from_le_bytes([c[4],c[5]]);let frames:Vec<_>=(0..2).map(|f|BuildingAnimation0Frame{metadata:Metadata{component_count:2},components:(0..2).map(|i|Component{record:Record{flags,x:i-1,y:f},sprite:Sprite{width:3,height:2,opaque:vec![true,false,true,false,true,false]}}).collect()}).collect();out.push(pick::hit_animation(&frames,frame,[100,200],[x as i32,y as i32]).unwrap().map(|i|i as u8).unwrap_or(255));}std::io::stdout().write_all(&out).unwrap();}

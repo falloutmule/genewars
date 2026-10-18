@@ -1,0 +1,153 @@
+ M genewars-preflight/docs/GAME_FEATURE_MATRIX.md
+ M genewars-preflight/docs/NEXT_ACTIONS.md
+ M genewars-preflight/docs/RUNTIME.md
+ M genewars-preflight/docs/WORK_STATUS.md
+ M genewars-preflight/research/integration/admitted-building-pass.json
+ M genewars-preflight/research/variants/mission-outcome.md
+ M genewars-preflight/rust/crates/genewars-runtime/src/actor_world/creature_updates.rs
+ M genewars-preflight/rust/crates/genewars-runtime/src/creature_world.rs
+ M genewars-preflight/rust/crates/genewars-runtime/src/mule_hostile_acquisition.rs
+ M genewars-preflight/scripts/desktop/validate_family8_native.py
+ M genewars-preflight/scripts/family8_trajectory_probe.rs
+ M genewars-preflight/scripts/ghidra/architect_cycle_probe.rs
+ M genewars-preflight/scripts/ghidra/validate_architect_cycle.py
+ M genewars-preflight/scripts/landing_scheduler_probe.rs
+ M genewars-preflight/scripts/landing_step_probe.rs
+ M genewars-preflight/scripts/validate_family8_trajectory.py
+ M genewars-preflight/scripts/verify.py
+?? genewars-preflight/research/campaign/genepod-native-game-input-review.json
+?? genewars-preflight/research/formats/bones-render-contract.md
+?? genewars-preflight/research/formats/bturr-status-overlay.md
+?? genewars-preflight/research/formats/genepod-resources.md
+?? genewars-preflight/research/ghidra/actor-construction-recovery-callback-evidence.json
+?? genewars-preflight/research/ghidra/architect-return-validation.json
+?? genewars-preflight/research/ghidra/building-blocker-evidence.json
+?? genewars-preflight/research/ghidra/building-plgbl-overlay-contract.json
+?? genewars-preflight/research/ghidra/construction-finished-evidence.json
+?? genewars-preflight/research/ghidra/construction-return-saved-fixture-source.json
+?? genewars-preflight/research/ghidra/construction-stage4-callback-evidence.json
+?? genewars-preflight/research/ghidra/construction-stage4-evidence.json
+?? genewars-preflight/research/ghidra/construction-work-callback-evidence.json
+?? genewars-preflight/research/ghidra/construction-work-evidence.json
+?? genewars-preflight/research/ghidra/construction-work-progress-evidence.json
+?? genewars-preflight/research/ghidra/mission-bootstrap-context-evidence.json
+?? genewars-preflight/research/ghidra/mission-tail-contract.json
+?? genewars-preflight/research/ghidra/pending-architect-callback-evidence.json
+?? genewars-preflight/research/integration/bones-native-32768-failure.json
+?? genewars-preflight/research/integration/bones-native-32768-validation.json
+?? genewars-preflight/research/integration/bones-native-interrupted-20261013.json
+?? genewars-preflight/research/integration/bones-pixel-validation-current.json
+?? genewars-preflight/research/integration/bones-trajectory-seed5428.json
+?? genewars-preflight/research/integration/bturr-status-overlay-pixels-current.json
+?? genewars-preflight/research/integration/building-history-validation.json
+?? genewars-preflight/research/integration/code2c-world-validation.json
+?? genewars-preflight/research/integration/construction-border-inputs.json
+?? genewars-preflight/research/integration/distributor-command-002.json
+?? genewars-preflight/research/integration/distributor-command-003.json
+?? genewars-preflight/research/integration/distributor-command-004.json
+?? genewars-preflight/research/integration/distributor-stall-source.json
+?? genewars-preflight/research/integration/f17-6008-degraded-pursuit-arrival-checkpoint-20261017.json
+?? genewars-preflight/research/integration/f20-b11-evidence-acquisition-20261018.json
+?? genewars-preflight/research/integration/fresh-photon-chain-002.json
+?? genewars-preflight/research/integration/fresh-startup-001.json
+?? genewars-preflight/research/integration/fresh-startup-002.json
+?? genewars-preflight/research/integration/fresh-startup-003.json
+?? genewars-preflight/research/integration/fresh-startup-004.json
+?? genewars-preflight/research/integration/fresh-startup-stall-capture.json
+?? genewars-preflight/research/integration/krell-construction-071.json
+?? genewars-preflight/research/integration/krell-dispatch-audit-001.json
+?? genewars-preflight/research/integration/mission-funds-validation.json
+?? genewars-preflight/research/integration/mission-status-validation.json
+?? genewars-preflight/research/integration/native-building-chain-blocked.json
+?? genewars-preflight/research/integration/native-building-chain-distributor-command-002-blocked.json
+?? genewars-preflight/research/integration/native-building-chain-distributor-command-003-blocked.json
+?? genewars-preflight/research/integration/native-building-chain-distributor-command-004-blocked.json
+?? genewars-preflight/research/integration/native-building-chain-error.json
+?? genewars-preflight/research/integration/native-building-chain-fresh-building-chain-001-blocked.json
+?? genewars-preflight/research/integration/native-building-chain-passed.json
+?? genewars-preflight/research/integration/nominated-building-obstacle-validation.json
+?? genewars-preflight/research/integration/retirement-capture-seed5428.json
+?? genewars-preflight/research/integration/retirement-capture-seed65535.json
+?? genewars-preflight/research/integration/retirement-long-trajectory-seed5428.json
+?? genewars-preflight/research/integration/retirement-long-trajectory-seed65535.json
+?? genewars-preflight/research/variants/building-composed-pass-review.json
+?? genewars-preflight/research/variants/building-composed-pass-review.py
+?? genewars-preflight/research/variants/building-composed-pass-review.rs
+?? genewars-preflight/research/variants/building-scheduler-review.json
+?? genewars-preflight/research/variants/building-scheduler-review.md
+?? genewars-preflight/research/variants/building-scheduler-review.py
+?? genewars-preflight/research/variants/building-scheduler-review.rs
+?? genewars-preflight/research/variants/completed-building-oracle-correction.json
+?? genewars-preflight/research/variants/completed-building-review.json
+?? genewars-preflight/research/variants/completed-building-review.md
+?? genewars-preflight/research/variants/completed-building-review.py
+?? genewars-preflight/research/variants/completed-building-review.rs
+?? genewars-preflight/research/variants/completed-building-world-review.json
+?? genewars-preflight/research/variants/completed-building-world-review.py
+?? genewars-preflight/research/variants/completed-building-world-review.rs
+?? genewars-preflight/research/variants/genepod-terminal-world-review.json
+?? genewars-preflight/research/variants/krell-family8-1457-070-compare.py
+?? genewars-preflight/research/variants/krell-family8-1457-070-source.py
+?? genewars-preflight/research/variants/krell-family8-1671-070-compare.py
+?? genewars-preflight/research/variants/krell-family8-1671-070-source.py
+?? genewars-preflight/research/variants/krell-family8-1671-compare.py
+?? genewars-preflight/research/variants/krell-newborn-wait-expiry-boundaries.py
+?? genewars-preflight/research/variants/krell-pair-cleared-action.json
+?? genewars-preflight/research/variants/krell-state10-expiry-isolated.json
+?? genewars-preflight/research/variants/loss-transition-review.json
+?? genewars-preflight/research/variants/loss-transition-review.py
+?? genewars-preflight/research/variants/loss-transition-review.rs
+?? genewars-preflight/research/variants/loss-transition.md
+?? genewars-preflight/research/variants/mule-bones-retirement-review.json
+?? genewars-preflight/research/variants/mule-bones-retirement-review.md
+?? genewars-preflight/research/variants/mule-bones-retirement-review.py
+?? genewars-preflight/research/variants/mule-bones-retirement-review.rs
+?? genewars-preflight/research/variants/mule-bones-retirement-source.py
+?? genewars-preflight/research/variants/mule-bones-retirement-world-review.json
+?? genewars-preflight/research/variants/mule-bones-retirement-world-review.py
+?? genewars-preflight/research/variants/mule-bones-review.json
+?? genewars-preflight/research/variants/mule-bones-review.py
+?? genewars-preflight/research/variants/mule-bones-review.rs
+?? genewars-preflight/research/variants/mule-bones-source.py
+?? genewars-preflight/research/variants/mule-corpse-motion-review.json
+?? genewars-preflight/research/variants/mule-corpse-motion-review.py
+?? genewars-preflight/research/variants/mule-corpse-motion-review.rs
+?? genewars-preflight/research/variants/mule-corpse-motion-source.py
+?? genewars-preflight/research/variants/result-carry.md
+?? genewars-preflight/research/variants/result-transition.md
+?? genewars-preflight/research/variants/turret-geometry-review.py
+?? genewars-preflight/research/variants/turret-geometry-review.rs
+?? genewars-preflight/research/variants/turret-projectile-review.py
+?? genewars-preflight/research/variants/turret-projectile-review.rs
+?? genewars-preflight/research/variants/turret-projectile-source.py
+?? genewars-preflight/research/variants/turret-tracking-pass-review.json
+?? genewars-preflight/research/variants/turret-tracking-pass-review.py
+?? genewars-preflight/research/variants/turret-tracking-pass-review.rs
+?? genewars-preflight/research/variants/turret-tracking-review.json
+?? genewars-preflight/research/variants/turret-tracking-review.md
+?? genewars-preflight/research/variants/turret-tracking-review.py
+?? genewars-preflight/research/variants/turret-tracking-review.rs
+?? genewars-preflight/research/variants/turret-tracking-world-review.json
+?? genewars-preflight/research/variants/turret-tracking-world-review.py
+?? genewars-preflight/research/variants/turret-tracking-world-review.rs
+?? genewars-preflight/rust/crates/genewars-runtime/src/loss_transition.rs
+?? genewars-preflight/rust/crates/genewars-runtime/src/mule_neutral_hit_escape.rs
+?? genewars-preflight/scripts/architect_return_probe.rs
+?? genewars-preflight/scripts/code2c_world_probe.rs
+?? genewars-preflight/scripts/desktop/bturr_status_overlay_harness.rs
+?? genewars-preflight/scripts/desktop/fresh_startup_stall_probe.py
+?? genewars-preflight/scripts/desktop/fresh_startup_stall_probe.rs
+?? genewars-preflight/scripts/desktop/validate_bones_pixels.py
+?? genewars-preflight/scripts/desktop/validate_bturr_status_overlay_pixels.py
+?? genewars-preflight/scripts/desktop/validate_distributor_stall_source.py
+?? genewars-preflight/scripts/ghidra/validate_actor_construction_recovery_callback.py
+?? genewars-preflight/scripts/ghidra/validate_building_blocker.py
+?? genewars-preflight/scripts/ghidra/validate_construction_stage4_callback.py
+?? genewars-preflight/scripts/ghidra/validate_construction_work_callback.py
+?? genewars-preflight/scripts/ghidra/validate_mission_bootstrap_context.py
+?? genewars-preflight/scripts/validate_architect_return.py
+?? genewars-preflight/scripts/validate_building_history.py
+?? genewars-preflight/scripts/validate_code2c_world.py
+?? genewars-preflight/scripts/validate_mission_funds.py
+?? genewars-preflight/scripts/validate_mission_status.py
+?? genewars-preflight/scripts/validate_nominated_building_obstacle.py

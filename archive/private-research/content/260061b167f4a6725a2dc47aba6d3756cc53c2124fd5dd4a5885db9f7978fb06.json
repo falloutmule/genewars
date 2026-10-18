@@ -1,0 +1,150 @@
+{
+  "scope": "actual5876 postBA4 entry; seed variants synthetic; local stop before5C840",
+  "case_bytes": 386,
+  "accepted": 4,
+  "actual_seed": 15709,
+  "cases": [
+    {
+      "seed": 15709,
+      "accepted": true,
+      "scores": [
+        {
+          "confidence": 202
+        }
+      ],
+      "journals": [
+        {
+          "ring_slot": 15,
+          "journal": 1725,
+          "pc": "0x8d7d5"
+        },
+        {
+          "ring_slot": 16,
+          "journal": 1726,
+          "pc": "0x8d864"
+        },
+        {
+          "ring_slot": 17,
+          "journal": 3286,
+          "pc": "0x60e60"
+        },
+        {
+          "ring_slot": 18,
+          "journal": 3286,
+          "pc": "0x60ee8"
+        }
+      ],
+      "draws": 4,
+      "steps": 9450
+    },
+    {
+      "seed": 0,
+      "accepted": true,
+      "scores": [
+        {
+          "confidence": 202
+        }
+      ],
+      "journals": [
+        {
+          "ring_slot": 15,
+          "journal": 1725,
+          "pc": "0x8d7d5"
+        },
+        {
+          "ring_slot": 16,
+          "journal": 1726,
+          "pc": "0x8d864"
+        },
+        {
+          "ring_slot": 17,
+          "journal": 3286,
+          "pc": "0x60e60"
+        },
+        {
+          "ring_slot": 18,
+          "journal": 3286,
+          "pc": "0x60ee8"
+        }
+      ],
+      "draws": 4,
+      "steps": 9449
+    },
+    {
+      "seed": 1,
+      "accepted": true,
+      "scores": [
+        {
+          "confidence": 202
+        }
+      ],
+      "journals": [
+        {
+          "ring_slot": 15,
+          "journal": 1725,
+          "pc": "0x8d7d5"
+        },
+        {
+          "ring_slot": 16,
+          "journal": 1726,
+          "pc": "0x8d864"
+        },
+        {
+          "ring_slot": 17,
+          "journal": 3286,
+          "pc": "0x60e60"
+        },
+        {
+          "ring_slot": 18,
+          "journal": 3286,
+          "pc": "0x60ee8"
+        }
+      ],
+      "draws": 4,
+      "steps": 9450
+    },
+    {
+      "seed": 3,
+      "accepted": true,
+      "scores": [
+        {
+          "confidence": 202
+        }
+      ],
+      "journals": [
+        {
+          "ring_slot": 15,
+          "journal": 1725,
+          "pc": "0x8d7d5"
+        },
+        {
+          "ring_slot": 16,
+          "journal": 1726,
+          "pc": "0x8d864"
+        },
+        {
+          "ring_slot": 17,
+          "journal": 3286,
+          "pc": "0x60e60"
+        },
+        {
+          "ring_slot": 18,
+          "journal": 3286,
+          "pc": "0x60ee8"
+        }
+      ],
+      "draws": 4,
+      "steps": 9450
+    },
+    {
+      "seed": 28533,
+      "status": "unsupported_source_branch",
+      "reason": "AssertionError(('missing listing', '0x707a0', ['0x73690', '0x73690', '0x8b7d0', '0x6d390', '0x6d390', '0x6d390', '0x5cc60', '0x5c920', '0x5a990', '0x5a990', '0x6bdd0', '0x707a0'], 'recent', ['0x61202', '0x61207', '0x6120d', '0x6120f', '0x61216', '0x61219', '0x6121f', '0x61225', '0x6122c', '0x61233', '0x61239', '0x6123f', '0x61241', '0x61247', '0x61249', '0x6124c', '0x61252', '0x61257', '0x61259', '0x6125c', '0x6125e', '0x61260', '0x61266', '0x61269', '0x6126b', '0x6126e', '0x61271', '0x61276', '0x61279', '0x6127b'], 'state', 8, 'owner', 4, '6c', 5))",
+      "scores": [
+        {
+          "confidence": 202
+        }
+      ]
+    }
+  ]
+}

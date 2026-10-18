@@ -1,0 +1,159 @@
+{
+  "scope": "actual190genuinecapturedcallbacks; no native/campaign acceptance",
+  "cases": [
+    {
+      "status": "passed",
+      "output": "private\\review\\owned-mule-captured-width\\38d3b060a5be407fbedd32d28b4d75a4",
+      "compared_bytes": 427369,
+      "draws": 4,
+      "instructions": 11774,
+      "differences": [],
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "reason": null,
+      "kind": "owned",
+      "frame": 5832,
+      "slot": 1
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\neutral-mule-captured-width\\a47f0f60761b47b498cd2899c6dc342f",
+      "compared_bytes": 427369,
+      "draws": 0,
+      "instructions": 2425,
+      "differences": [],
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "reason": null,
+      "kind": "neutral",
+      "frame": 5832,
+      "slot": 5
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\owned-mule-captured-width\\43a3291beba44d7ab9311fe61f99c705",
+      "compared_bytes": 427369,
+      "draws": 0,
+      "instructions": 6113,
+      "differences": [],
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "reason": null,
+      "kind": "owned",
+      "frame": 5833,
+      "slot": 1
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\neutral-mule-captured-width\\118ba278d5114519844f948d751d1a68",
+      "compared_bytes": 427369,
+      "draws": 0,
+      "instructions": 1740,
+      "differences": [],
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "reason": null,
+      "kind": "neutral",
+      "frame": 5833,
+      "slot": 5
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\owned-mule-captured-width\\6b781d2f31fe4e1a9fdeecce9a67804c",
+      "compared_bytes": 427369,
+      "draws": 0,
+      "instructions": 6654,
+      "differences": [],
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "reason": null,
+      "kind": "owned",
+      "frame": 5834,
+      "slot": 1
+    },
+    {
+      "status": "passed",
+      "output": "private\\review\\neutral-mule-captured-width\\522f3fb0fad24699a74523c20e0382a2",
+      "compared_bytes": 427369,
+      "draws": 0,
+      "instructions": 6384,
+      "differences": [],
+      "mismatch_counts": {
+        "backing.bin": 0,
+        "creatures.bin": 0,
+        "actors.bin": 0,
+        "buildings.bin": 0,
+        "effects.bin": 0,
+        "family8.bin": 0,
+        "players.bin": 0,
+        "rng.bin": 0
+      },
+      "reason": null,
+      "kind": "neutral",
+      "frame": 5834,
+      "slot": 5
+    },
+    {
+      "status": "passed",
+      "output": "C:\\Users\\fallo\\Documents\\ChatGPT\\Freecad\\genewars-preflight\\private\\review\\zone-credit-captured\\8728c82863354c1d9436651c85896914",
+      "compared_bytes": 427369,
+      "draws": 27,
+      "instructions": 6723,
+      "differences": [],
+      "mismatch_counts": null,
+      "reason": null,
+      "kind": "zone",
+      "frame": 5824,
+      "slot": 0,
+      "score_before": 24,
+      "score_after": 54
+    },
+    {
+      "kind": "zone",
+      "frame": 5856,
+      "status": "pending",
+      "before_exists": false,
+      "after_exists": false
+    }
+  ]
+}

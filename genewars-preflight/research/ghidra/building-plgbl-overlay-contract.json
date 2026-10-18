@@ -1,0 +1,57 @@
+{
+  "status": "Corroborated static candidate loader and consumer; no original execution",
+  "candidate_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba",
+  "object3_sha256": "aaab09272771ee7f3fbe71e9a3dc75add592fcca42fdd8d982e069629ac1ce87",
+  "descriptor": {
+    "va": "103D88",
+    "stride": 44,
+    "filename": "data/plgbl.anb",
+    "destination_at_plus1c": "116808"
+  },
+  "loader_chain": [
+    "1D9AA supplies descriptor list10388C;6AC50 preservesEDX;1D9BF calls154B0.",
+    "154B0 walks44-byte descriptors;15410 invokes9A09C allocation/reader, writes file pointer through descriptor+1C.",
+    "1DF60 reads116808;1DF6B calls98A60;1DF70 stores returned animation-table pointer at11680C."
+  ],
+  "relocation": [
+    "98A60 rebases file header section offsets at+2/+6/+A/+E.",
+    "98AFB..98B12 rebases each14-byte frame component pointer and arithmetic-halves signed width/height.",
+    "98AB3..98ACC arithmetic-halves signed component offsets; high componentflag80 remaps at98AC8..98ADE.",
+    "98B46..98B50 rebases10-byte animation entry first/last pointers by frame-table base.",
+    "98B55 returns file+E animation-table pointer, not file base."
+  ],
+  "building_overlays": [
+    {
+      "global_offset": "14",
+      "animation": 2,
+      "frame_selection": "first frame",
+      "callsite": "43D6F..43D72"
+    },
+    {
+      "global_offset": "6E",
+      "animation": 11,
+      "frame_selection": "first frame",
+      "callsite": "43CDB..43CE4"
+    },
+    {
+      "global_offset": "78",
+      "animation": 12,
+      "frame_selection": "first frame",
+      "callsite": "43DC6..43DCF"
+    },
+    {
+      "global_offset": "82",
+      "animation": 13,
+      "frame_selection": "first frame",
+      "callsite": "43D90..43D96"
+    }
+  ],
+  "scope": "Resource identity, animation-table base and descriptor selection. Pixel helper982E0 and caller gates are separate render evidence.",
+  "listing_sha256": {
+    "building-loader-refs/instructions-0001d770.txt": "064e00b67727ce32908724ff09f4f7e243104bac664674023f7aef5344261784",
+    "sprite-functions/instructions-00098a60.txt": "75b266f751d4c7d29dc4d5bf83493b821cdb38f7e10838403daa29ac1fdc4a8a",
+    "building-draw/instructions-00043a40.txt": "62a4377cb232402be9cf5a1fb0c7da61d29cc582632c60c217b0357e2961ff1b",
+    "resource-loader/instructions-00015410.txt": "6a790f3e02decb1ee2d7c45a1ec559b053ecf0a2c91f8999f9f23c62081c904b",
+    "palette-functions/instructions-000154b0.txt": "fbbc626a1091a8bd8cef2128396a4246e9e7025065ef415ee1843ad5482ab93c"
+  }
+}

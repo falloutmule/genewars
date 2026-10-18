@@ -1,0 +1,47 @@
+{
+  "log_id": "attempt-log-5939-r3",
+  "created": "2026-10-16T12:08 America/Denver",
+  "note": "NEW uniquely-named log. Previous evidence files were NOT modified.",
+
+  "attempt_3_GW_5939C": {
+    "result": "callback gates PASSED, but CAMPAIGN REPLAY REGRESSED -> reverted",
+    "commit_attempt": "8642fd9",
+    "commit_revert": "866b410",
+    "patch_preserved": "genewars-routing-probe/gw5939c-committed-then-reverted.patch (12414 bytes, full commit)",
+    "design": "new creature_world::plan_mule_light_callback implementing source 5ee38..5eec6 (5EB30 equivalent + shared 5E640/7AC00 tail, extracted as plan_mule_animation_tail); parity gate placed before the full-path hostile admission so creature_updates.rs:426 is never reached by a light frame and was NOT weakened",
+
+    "callback_gates_all_passed_independently_verified_by_root": {
+      "A_frame5939": "rust status passed, 0 draws; source comparison passed, 1503 instr, 427369 bytes, EMPTY differences; world byte-identical to input",
+      "B_frame5940": "rust status blocked - correctly fail-closed, full path still unimplemented",
+      "C_frame5893": "rust status passed, 0 draws; source comparison passed, 1714 instr, EMPTY differences; word(0x6c) 32759 -> 0 (source-accurate)",
+      "focused_regression": "9/9 pass (literal, 5892, 5893, 5894, 5895, synthetic exact/outside, zero-reserve/operator)"
+    },
+
+    "why_it_was_reverted": {
+      "gate": "ordinary campaign replay is an acceptance requirement; it must not regress",
+      "measured": "fresh release build + ordinary replay -> BLOCKED AT STEP 4806 (previously the accepted run reached 5939)",
+      "causality_proof": "the captured frame-4806 record is state 8, 0x61=0x80 (command flag), 0x60=0x98, 0x78=7, word(0x6c)=32765, parity (4806+1)&1 = 1 = FULL. The new gate does NOT fire at 4806, so the Rust's behaviour at that frame is IDENTICAL before and after the change. The 4806 block is therefore caused by world divergence accumulated on EVEN-parity frames earlier in the campaign, i.e. the light path changes the campaign timeline.",
+      "evidence_preserved": "private/review/authentic-krell-5939c/frame-4806-slot-1-blocked-before-owned",
+      "open_question": "whether the corrected (gated) timeline is MORE faithful than the pre-gate timeline and 4806 is a legitimately exposed next blocker, or whether the light path is wrong for some state encountered before 4806. Both are consistent with the evidence so far; neither is proven."
+    },
+
+    "state_after_revert": {
+      "head": "866b410",
+      "tree_equals_accepted_revision": true,
+      "accepted_frontier": "batch195 / frame5939 (commit 7347fbf)",
+      "rust_tree": "no uncommitted modifications; only the two pre-existing untracked experiment files"
+    },
+
+    "next_approach_recommended": [
+      "do NOT re-apply the light path blindly",
+      "run the ORDINARY campaign replay with the light-path patch but with per-frame Mule captures enabled across the even frames BEFORE 4806, then compare each captured callback frame-by-frame against the original-source interpreter, to find the first frame where the gated Rust output differs from the source",
+      "that first divergence frame is the true defect; fix that, then re-run the campaign gate",
+      "alternatively, if the corrected timeline is judged more faithful, the 4806 command-path blocker must be implemented and the frontier documented as changed rather than regressed"
+    ],
+
+    "costs": {
+      "GW5939C_director_usd": 0.1938,
+      "note": "estimated from the run usage file; child GLM cost additionally recorded in genewars state.db; not provider-reconciled"
+    }
+  }
+}

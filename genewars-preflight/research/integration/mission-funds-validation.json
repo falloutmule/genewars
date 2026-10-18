@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "utc": "2026-10-13T23:59:01.101125+00:00",
+  "cases": 108,
+  "applied": 45,
+  "unchanged": 63,
+  "compared_bytes": 195048,
+  "literal_instructions": 888,
+  "listing_sha256": "b9a4d6c79119564ba2ec9bf4cc120ce206530663808300faeab3c3c2993d98ac",
+  "module_sha256": "e569e64c5180e22aff20b3e3c5b8bfa06372fffc1cafd5db4056210d17066516",
+  "validator_sha256": "aac56a8de3d33ea08d5bc9eaa407a0f98a1912588d0e4d5a1a5be442b3c54c69",
+  "output_sha256": "eacf406475ddf4831e09d38a830e3d34439cb3eb00020479d1c6d14f85dd76c2",
+  "private_output": "private/integration/mission-funds/77442daeb80d41c1993312a4f72457d8",
+  "mission_sha256": "72368fc1827142a2fc5da0b30d62c7b9907480f9e6514c1b587cea38159e34d2",
+  "mission_units": 20,
+  "block_entry": "7D744",
+  "block_exits": [
+    "7D58F",
+    "7D68D"
+  ],
+  "original_execution": false,
+  "scope": "Exact player record after the active-player/mode/funds block; earlier identity and mode setup and later startup calls are explicit boundaries."
+}

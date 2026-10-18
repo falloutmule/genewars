@@ -1,0 +1,11 @@
+{
+  "status": "interrupted-pending-renderer-review",
+  "utc": "2026-10-13T22:26:46.716094+00:00",
+  "private_run_directory": "private/integration/family8-native/153109027f334394a48af6c1ad6e1aff",
+  "reason": "A listing review raised a BONES draw-branch concern; root stopped the copied binary during the first replay pending independent tracing. No20,000-frame native validation completed.",
+  "original_execution": false,
+  "completed_native_20000_validation": false,
+  "source_snapshot": "private/integration/family8-native/153109027f334394a48af6c1ad6e1aff/compilation_sources",
+  "subsequent_resolution": "Literal59470 trace distinguishes owners: owner4 neutral BONES uses94F30 at5993B and shadow95100 at595A6. The94D70 branch belongs to owners0..3. Full-buffer owner4 pixel oracle remains pending.",
+  "wrapper_trace_sha256": "a1620e56940be59a4e85a0db127a785efafe5b3735c9ed617e11f547f23cff35"
+}

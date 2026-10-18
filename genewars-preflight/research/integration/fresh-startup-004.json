@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "scope": "200 callbacks through recovered fresh CD startup with explicit zero opaque blueprint scratch and diagnostic ring0; not mission acceptance",
+  "original_campaign_missions_completable": 0,
+  "steps": 200,
+  "runtime_context": "Some(MissionRuntimeContext { origin: FreshCdConq001, participating_players: 1, runtime_flags: 62, runtime_mode: Some(0), countdown: 800, frame: 200, rng: CdConq001SerializedThenBlueprints { seed: 10548, draw_count: 16919, diagnostic_ring: 0 } })",
+  "rng_draws": 17683,
+  "actor_states": [
+    {
+      "slot": 0,
+      "owner": 0,
+      "position": [
+        20772,
+        13573
+      ],
+      "destination": [
+        21242,
+        13643
+      ],
+      "pending_destination": [
+        21242,
+        13643
+      ],
+      "state": 8,
+      "ready": true,
+      "pending_move": false,
+      "assignment_pending": false,
+      "building_selector": 0,
+      "animation": 3,
+      "frame": 3,
+      "action_byte_59": 0,
+      "construction_stage_word_88": 0,
+      "job_slot_byte_90": 0
+    },
+    {
+      "slot": 1,
+      "owner": 0,
+      "position": [
+        20750,
+        13606
+      ],
+      "destination": [
+        20920,
+        14045
+      ],
+      "pending_destination": [
+        20920,
+        14045
+      ],
+      "state": 8,
+      "ready": true,
+      "pending_move": false,
+      "assignment_pending": false,
+      "building_selector": 0,
+      "animation": 5,
+      "frame": 3,
+      "action_byte_59": 0,
+      "construction_stage_word_88": 0,
+      "job_slot_byte_90": 0
+    }
+  ],
+  "private_fixture": "private\\integration\\fresh-startup-004",
+  "hashes": {
+    "genewars-game.exe": "d5d4d5a7f97d1b53b55e527e4fb8b3f39f7e906802eb246288a129460a283eb3",
+    "replay.txt": "92c5c4a0897e6c915a2c450df02bf6e00a43c77e2b73fed2112c00dbbeffba47",
+    "report.json": "4aedb699553dd7c87ead85b1e004f20229d67cd8d91c0e55b2988158c5f01c38",
+    "frame.bmp": "149871c68f6c8c16ae1fc948569420f9cde65eec417bd5c5997149404ccf2d41"
+  }
+}

@@ -1,0 +1,3 @@
+use genewars_runtime::{landing,water_effect};
+#[path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-runtime/src/effect20_factory.rs"]mod effect20_factory;
+use std::io::{Read,Write};fn main(){let mut b=Vec::new();std::io::stdin().read_to_end(&mut b).unwrap();let mut out=Vec::new();for c in b.chunks_exact(81){let p=effect20_factory::plan_animation_after_physics(c.try_into().unwrap()).unwrap();out.push(p.retirement_required as u8);out.extend(p.after);}std::io::stdout().write_all(&out).unwrap();}

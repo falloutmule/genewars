@@ -1,0 +1,12 @@
+[package]
+name = "actor-panel-text-pixel-harness"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+genewars-assets = { path = "../../../rust/crates/genewars-assets" }
+genewars-render = { path = "../../../rust/crates/genewars-render" }
+genewars-runtime = { path = "../../../rust/crates/genewars-runtime" }

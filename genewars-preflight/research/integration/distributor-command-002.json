@@ -1,0 +1,17 @@
+{
+  "status": "blocked",
+  "classification": "unsupported required gameplay path",
+  "reason": "Original opcode16 pending movement plus assignment reaches UnsupportedState; callback composition under repair.",
+  "original_campaign_missions_completable": 0,
+  "private_fixture": "private\\integration\\distributor-command-002",
+  "steps": 1289,
+  "blocked": "actor pass: World(ActorMotion(UnsupportedState))",
+  "runtime_context": null,
+  "hashes": {
+    "genewars-game.exe": "314a3d07d47e9a8a0edfc3cf0c6859eb9f4be22932fb84dd8b85e3d4811928f8",
+    "replay.txt": "fd7d0e5668bb75dd9b9c337e5892b478b78bb7e58c1204a0fe70a18c8bce3856",
+    "report.json": "82a54963ab79e629757304d9b6f5b947b5e0644a71492f2d86a9670f3c711baa",
+    "frame.bmp": "7a808319ad4062c3228644adf90f7fa8d2cb6d93c4f344a9bad6082fd68ffddf"
+  },
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba"
+}

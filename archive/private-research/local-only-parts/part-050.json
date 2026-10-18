@@ -1,0 +1,2722 @@
+[
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4523-slot-1/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-0/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-0/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-0/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-0/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-0/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-0/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-0/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-0/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-0/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-1/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-1/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-1/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-1/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-1/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-1/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-1/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-1/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4524-slot-1/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4525-slot-0/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4525-slot-0/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4525-slot-0/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4525-slot-0/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4525-slot-0/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4525-slot-0/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4525-slot-0/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4525-slot-0/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4525-slot-0/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4526-slot-0/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4526-slot-0/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4526-slot-0/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4526-slot-0/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4526-slot-0/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4526-slot-0/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4526-slot-0/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4526-slot-0/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4526-slot-0/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4527-slot-0/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4527-slot-0/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4527-slot-0/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4527-slot-0/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4527-slot-0/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4527-slot-0/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4527-slot-0/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4527-slot-0/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4527-slot-0/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4528-slot-0/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4528-slot-0/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4528-slot-0/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4528-slot-0/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4528-slot-0/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4528-slot-0/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4528-slot-0/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4528-slot-0/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4528-slot-0/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4529-slot-0/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4529-slot-0/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4529-slot-0/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4529-slot-0/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4529-slot-0/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4529-slot-0/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4529-slot-0/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4529-slot-0/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4529-slot-0/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4530-slot-0/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4530-slot-0/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4530-slot-0/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4530-slot-0/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4530-slot-0/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4530-slot-0/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4530-slot-0/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4530-slot-0/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4530-slot-0/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4531-slot-0/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4531-slot-0/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4531-slot-0/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4531-slot-0/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4531-slot-0/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4531-slot-0/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4531-slot-0/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4531-slot-0/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4531-slot-0/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4532-slot-0/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4532-slot-0/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4532-slot-0/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4532-slot-0/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4532-slot-0/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4532-slot-0/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4532-slot-0/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4532-slot-0/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4532-slot-0/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4533-slot-0/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4533-slot-0/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4533-slot-0/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4533-slot-0/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4533-slot-0/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4533-slot-0/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4533-slot-0/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4533-slot-0/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4533-slot-0/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4534-slot-0/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4534-slot-0/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4534-slot-0/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4534-slot-0/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4534-slot-0/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4534-slot-0/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4534-slot-0/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4534-slot-0/result.json",
+    "bytes": 192,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-lifecycle-181/frame-4534-slot-0/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/actual.bin",
+    "bytes": 12320,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/angles.bin",
+    "bytes": 514,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/bounce.bin",
+    "bytes": 16,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/ethereal.anb",
+    "bytes": 91123,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/expected.bin",
+    "bytes": 12320,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/input.bin",
+    "bytes": 12430,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/libgenewars_assets.rlib",
+    "bytes": 600456,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/libgenewars_core.rlib",
+    "bytes": 523016,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/libgenewars_runtime.rlib",
+    "bytes": 9255772,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/map.bin",
+    "bytes": 229376,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/review.exe",
+    "bytes": 6129617,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/6e894207fa584350a20b6d9251c5a193/source.json",
+    "bytes": 26430,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/ac97ff6a450541b59cea9f2c9120a02f/angles.bin",
+    "bytes": 514,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/ac97ff6a450541b59cea9f2c9120a02f/bounce.bin",
+    "bytes": 16,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/ac97ff6a450541b59cea9f2c9120a02f/ethereal.anb",
+    "bytes": 91123,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/ac97ff6a450541b59cea9f2c9120a02f/expected.bin",
+    "bytes": 12320,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/ac97ff6a450541b59cea9f2c9120a02f/input.bin",
+    "bytes": 12430,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/ac97ff6a450541b59cea9f2c9120a02f/map.bin",
+    "bytes": 229376,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/ac97ff6a450541b59cea9f2c9120a02f/source.json",
+    "bytes": 26430,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/actual.bin",
+    "bytes": 12320,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/angles.bin",
+    "bytes": 514,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/bounce.bin",
+    "bytes": 16,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/ethereal.anb",
+    "bytes": 91123,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/expected.bin",
+    "bytes": 12320,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/input.bin",
+    "bytes": 12430,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/libgenewars_assets.rlib",
+    "bytes": 600456,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/libgenewars_core.rlib",
+    "bytes": 523016,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/libgenewars_runtime.rlib",
+    "bytes": 9255772,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/map.bin",
+    "bytes": 229376,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/review.exe",
+    "bytes": 6129617,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-motion/c59459093bcf4e978d5e0e5dc0b22706/source.json",
+    "bytes": 26430,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/result.json",
+    "bytes": 3430,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4515/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4515/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4515/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4515/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4515/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4515/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4515/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4515/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4515/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4516/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4516/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4516/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4516/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4516/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4516/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4516/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4516/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4516/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4517/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4517/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4517/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4517/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4517/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4517/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4517/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4517/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4517/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4518/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4518/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4518/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4518/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4518/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4518/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4518/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4518/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4518/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4519/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4519/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4519/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4519/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4519/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4519/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4519/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4519/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4519/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4520/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4520/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4520/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4520/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4520/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4520/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4520/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4520/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4520/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4521/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4521/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4521/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4521/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4521/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4521/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4521/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4521/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4521/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4522/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4522/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4522/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4522/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4522/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4522/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4522/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4522/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4522/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4523/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4523/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4523/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4523/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4523/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4523/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4523/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4523/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4523/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4524/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4524/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4524/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4524/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4524/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4524/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4524/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4524/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4524/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4525/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4525/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4525/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4525/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4525/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4525/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4525/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4525/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4525/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4526/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4526/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4526/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4526/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4526/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4526/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4526/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4526/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4526/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4527/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4527/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4527/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4527/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4527/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4527/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4527/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4527/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4527/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4528/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4528/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4528/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4528/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4528/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4528/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4528/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4528/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4528/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4529/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4529/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4529/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4529/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4529/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4529/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4529/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4529/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4529/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4530/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4530/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4530/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4530/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4530/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4530/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4530/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4530/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4530/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4531/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4531/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4531/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4531/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4531/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4531/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4531/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4531/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4531/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4532/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4532/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4532/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4532/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4532/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4532/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4532/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4532/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4532/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4533/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4533/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4533/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4533/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4533/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4533/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4533/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4533/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4533/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4534/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4534/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4534/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4534/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4534/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4534/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4534/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4534/result.json",
+    "bytes": 188,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-scheduler-183/frame-4534/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/result.json",
+    "bytes": 1855,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/first/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/first/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/first/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/first/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/first/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/first/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/first/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/first/result.json",
+    "bytes": 183,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/first/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/invalid-divisor/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/invalid-divisor/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/invalid-divisor/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/invalid-divisor/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/invalid-divisor/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/invalid-divisor/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/invalid-divisor/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/invalid-divisor/result.json",
+    "bytes": 206,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/invalid-divisor/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/second/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/second/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/second/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/second/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/second/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/second/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/second/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/second/result.json",
+    "bytes": 183,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-marker-world-180/second/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/after/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/after/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/after/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/after/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/after/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/after/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/after/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/after/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/before/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/before/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/before/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/before/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/before/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/before/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/before/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-001/before/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/source-actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/source-backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/source-buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/source-creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/source-effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/source-family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/source-players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/source-rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/after/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/after/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/after/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/after/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/after/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/after/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/after/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/after/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/before/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/before/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/before/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/before/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/before/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/before/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/before/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-002/before/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/after/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/after/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/after/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/after/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/after/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/after/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/after/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/after/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/before/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/before/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/before/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/before/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/before/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/before/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/before/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-003/before/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/source-actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/source-backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/source-buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/source-creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/source-effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/source-family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/source-jobs.bin",
+    "bytes": 4400,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/source-players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/source-rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/after/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/after/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/after/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/after/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/after/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/after/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/after/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/after/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/before/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/before/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/before/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/before/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/before/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/before/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/before/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/before/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-after/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-after/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-after/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-after/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-after/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-after/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-after/jobs.bin",
+    "bytes": 4400,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-after/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-after/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-before/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-before/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-before/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-before/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-before/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-before/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-before/jobs.bin",
+    "bytes": 4400,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-before/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-refresh-004/job-before/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/result.json",
+    "bytes": 2288,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/already-exhausted/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/already-exhausted/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/already-exhausted/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/already-exhausted/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/already-exhausted/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/already-exhausted/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/already-exhausted/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/already-exhausted/result.json",
+    "bytes": 185,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/already-exhausted/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/countdown/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/countdown/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/countdown/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/countdown/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/countdown/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/countdown/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/countdown/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/countdown/result.json",
+    "bytes": 185,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/countdown/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/exhaustion-negative/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/exhaustion-negative/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/exhaustion-negative/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/exhaustion-negative/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/exhaustion-negative/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/exhaustion-negative/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/exhaustion-negative/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/exhaustion-negative/result.json",
+    "bytes": 208,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/exhaustion-negative/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/many/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/many/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/many/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/many/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/many/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/many/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/many/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/many/result.json",
+    "bytes": 186,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/many/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/neutral/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/neutral/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/neutral/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/neutral/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/neutral/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/neutral/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/neutral/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/neutral/result.json",
+    "bytes": 186,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/neutral/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/off-phase/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/off-phase/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/off-phase/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/off-phase/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/off-phase/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/off-phase/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/off-phase/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/off-phase/result.json",
+    "bytes": 185,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/off-phase/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/owned/actors.bin",
+    "bytes": 4000,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/owned/backing.bin",
+    "bytes": 343958,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/owned/buildings.bin",
+    "bytes": 17152,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/owned/creatures.bin",
+    "bytes": 37200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/owned/effects.bin",
+    "bytes": 16200,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/owned/family8.bin",
+    "bytes": 1632,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/owned/players.bin",
+    "bytes": 7220,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/owned/result.json",
+    "bytes": 186,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-schedule-world-184/owned/rng.bin",
+    "bytes": 7,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker/5ad47c1854a447e78a34f743462126c7/actual.bin",
+    "bytes": 389448,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker/5ad47c1854a447e78a34f743462126c7/build.log",
+    "bytes": 2650,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker/5ad47c1854a447e78a34f743462126c7/compile.log",
+    "bytes": 0,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker/5ad47c1854a447e78a34f743462126c7/expected.bin",
+    "bytes": 389448,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker/5ad47c1854a447e78a34f743462126c7/input.bin",
+    "bytes": 392280,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker/5ad47c1854a447e78a34f743462126c7/probe.exe",
+    "bytes": 23684029,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker/5ad47c1854a447e78a34f743462126c7/result.json",
+    "bytes": 19334,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker/85800e100ce5418e8de8393ceaf1df28/expected.bin",
+    "bytes": 389448,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker/85800e100ce5418e8de8393ceaf1df28/input.bin",
+    "bytes": 392280,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker/85800e100ce5418e8de8393ceaf1df28/source-result.json",
+    "bytes": 18959,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/0187af8668c04f22a23ef2e5bd1c2191/compile.log",
+    "bytes": 0,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/0187af8668c04f22a23ef2e5bd1c2191/expected.bin",
+    "bytes": 25010,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/0187af8668c04f22a23ef2e5bd1c2191/input.bin",
+    "bytes": 24705,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/0187af8668c04f22a23ef2e5bd1c2191/probe.exe",
+    "bytes": 23731206,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/248d51f9faab4f07a0c358c67156311c/expected.bin",
+    "bytes": 25010,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/248d51f9faab4f07a0c358c67156311c/input.bin",
+    "bytes": 24705,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/248d51f9faab4f07a0c358c67156311c/source-result.json",
+    "bytes": 50376,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/3fdf998788c043f5b3fda692df375075/actual.bin",
+    "bytes": 48626,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/3fdf998788c043f5b3fda692df375075/build.log",
+    "bytes": 2650,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/3fdf998788c043f5b3fda692df375075/compile.log",
+    "bytes": 0,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/3fdf998788c043f5b3fda692df375075/expected.bin",
+    "bytes": 48626,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/3fdf998788c043f5b3fda692df375075/input.bin",
+    "bytes": 48033,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/3fdf998788c043f5b3fda692df375075/probe-stderr.log",
+    "bytes": 0,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/3fdf998788c043f5b3fda692df375075/probe.exe",
+    "bytes": 23740905,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/3fdf998788c043f5b3fda692df375075/result.json",
+    "bytes": 88193,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/778d649e78144c94b354d0b1ac2df6d3/expected.bin",
+    "bytes": 48626,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/778d649e78144c94b354d0b1ac2df6d3/input.bin",
+    "bytes": 48033,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/review/zone-score-marker-motion/778d649e78144c94b354d0b1ac2df6d3/source-result.json",
+    "bytes": 88100,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/recovery/20261014T090523Z/manifest.json",
+    "bytes": 141324,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/recovery/20261014T090523Z/project-code-metadata.zip",
+    "bytes": 5096286,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/associated-activation-validation/actual.txt",
+    "bytes": 350153,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  },
+  {
+    "path": "private/associated-activation-validation/cases.bin",
+    "bytes": 23138,
+    "reason": "raw input/output, tool/third-party material, or nonselected metadata"
+  }
+]

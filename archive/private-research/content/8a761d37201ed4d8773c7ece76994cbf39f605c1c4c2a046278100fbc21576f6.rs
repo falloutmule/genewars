@@ -1,0 +1,4 @@
+#[path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-runtime/src/actor_construction.rs"] mod actor_construction;
+#[path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-runtime/src/actor_construction_placement.rs"] mod actor_construction_placement;
+
+fn main(){let args:Vec<_>=std::env::args().collect();let input=std::fs::read(&args[1]).unwrap();let mut output=Vec::new();for c in input.chunks_exact(248){let a:[u8;200]=c[..200].try_into().unwrap();let b:[u8;36]=c[200..236].try_into().unwrap();let w=|p|u16::from_le_bytes(c[p..p+2].try_into().unwrap());let plan=actor_construction_placement::plan_architect_placement(&a,&b,w(236),w(238),[[w(240)as i16,w(242)as i16],[w(244)as i16,w(246)as i16]],true,false).unwrap();output.extend_from_slice(&plan.after);}std::fs::write(&args[2],output).unwrap();}

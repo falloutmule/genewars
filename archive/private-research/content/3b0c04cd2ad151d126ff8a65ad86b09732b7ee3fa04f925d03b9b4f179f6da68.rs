@@ -1,0 +1,8 @@
+use std::io::{Read,Write};
+mod blueprint{#[derive(Debug,Clone,Copy,PartialEq,Eq)]pub struct BlueprintRng{pub seed:u16,pub ring:u8,pub draw_count:u32}}
+mod creature_world{pub type CreatureRecord=[u8;124];}
+mod actor_activation{pub struct TrigTables{pub s:Vec<i32>,pub c:Vec<i32>}impl TrigTables{pub fn sine(&self)->&[i32]{&self.s}pub fn cosine(&self)->&[i32]{&self.c}}}
+#[path="C:/Users/fallo/Documents/ChatGPT/Freecad/genewars-preflight/rust/crates/genewars-runtime/src/mule_factory.rs"]mod factory;
+fn main(){let mut b=Vec::new();std::io::stdin().read_to_end(&mut b).unwrap();let prior=b[..124].try_into().unwrap();let p:&[u8;124]=b[124..248].try_into().unwrap();let mut o=249;macro_rules! get{($t:ty)=>{{let n=std::mem::size_of::<$t>();let x=<$t>::from_le_bytes(b[o..o+n].try_into().unwrap());o+=n;x}}}
+let input=factory::MuleFactoryInput{slot:get!(u16),owner:get!(u8),position:[get!(i16),get!(i16)],quality:get!(u8),ground:get!(i32),shade:get!(u8)};let rng=blueprint::BlueprintRng{seed:get!(u16),ring:get!(u8),draw_count:get!(u32)};
+let s=(0..2048).map(|_|get!(i32)).collect();let c=(0..2048).map(|_|get!(i32)).collect();let t=actor_activation::TrigTables{s,c};let q=factory::plan_mule_factory(prior,input,if b[248]!=0{Some(p)}else{None},rng,&t).unwrap();let mut out=q.record_after.to_vec();out.extend(q.rng_after.seed.to_le_bytes());out.push(q.rng_after.ring);out.extend(q.rng_after.draw_count.to_le_bytes());std::io::stdout().write_all(&out).unwrap();}

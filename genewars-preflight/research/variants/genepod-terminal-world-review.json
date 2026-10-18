@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "compared_bytes": 290955,
+  "instructions": 1558,
+  "draws": 7,
+  "differences": {
+    "map.bin": [],
+    "players.bin": [],
+    "buildings.bin": [],
+    "creatures.bin": [],
+    "rng.bin": []
+  },
+  "private_run": "private\\review\\genepod-terminal-literal\\e13ef5bb4cd44c5e94d38067d9dcd6c7",
+  "pins": {
+    "private\\ghidra\\building-update\\instructions-000451f0.txt": "96ae07f71164d8b7c36df513ff37bcb66b3cc3962e63d060727ce723e2172875",
+    "private\\ghidra\\activation-rng-refs\\instructions-0005a210.txt": "a4231db59c02f98437afd6d7ea71e84d071c425c5fa7ef0b6a48d9c49053cf60",
+    "private\\ghidra\\genepod-mule-initializer.txt": "22a5a173bc2b3167f6d4ead3e6d621f37f98fa32ef8d22fea3d5fc16b607f942",
+    "private\\ghidra\\construction-command\\instructions-0001ee50.txt": "c936d978ab504b821db0be8bbeddb1f31af7390e7c4b7a3ab33cdc5653e32c10",
+    "private\\ghidra\\bones-frame\\instructions-0005a1c0.txt": "02f55f81e196715d686d5427c1475d280f0e4fbf13499355dd7974c629d989b9",
+    "private\\ghidra\\player-creation\\instructions-0001f480.txt": "77d8ec6d64004960b0bb970a66612c76b1ffe3cfcfd4b949f8174e5662441744",
+    "private\\ghidra\\terrain-map-refs\\instructions-0007b240.txt": "2f96fb7289506e9382a8eed3576dfd894b5fba8eaad980b71cdaca39db0451cb",
+    "scripts\\ghidra\\genepod_terminal_world_review.py": "45069722ff3786b8b02ea4ea2e95cbb05ce0bc0f3a99df57486b81ef9a8ba55c",
+    "rust\\crates\\genewars-runtime\\src\\actor_world\\genepod_production.rs": "ee5d65cb0d91f35e4a9eadf4b076903965855cf31632826199a6ee1230d21ee2",
+    "private\\review\\genepod-terminal-world-002\\success-before\\backing.bin": "1e20851a10fcd59f91e77a77e33a6f14e048d2029d64f89235bd67b06d2679ec",
+    "private\\review\\genepod-terminal-world-002\\success-before\\buildings.bin": "2653e1e33d4d49800b26d89bd4b0d9e68cf8d903d442175195f1e8447e3b8d4c",
+    "private\\review\\genepod-terminal-world-002\\success-before\\creatures.bin": "f7c8fbbc4f9932c059e1548232e2ddde4165d400a1b854aba6bff2bf0bfaba91",
+    "private\\review\\genepod-terminal-world-002\\success-before\\map.bin": "d00ae7dc99612e4e125cba77388dde39d5f8545e83b12a5f932b8038f1d670af",
+    "private\\review\\genepod-terminal-world-002\\success-before\\players.bin": "db1a9156b19f749447483d3b66727cb11aceab5d1a013bb5d2eb911d61f3bfe6",
+    "private\\review\\genepod-terminal-world-002\\success-before\\rng.bin": "ddfeaa12a6a06291a6613b5d0cb1f5e36cc27b7ae5bb496904d53910a5e5d31a",
+    "private\\review\\genepod-terminal-world-002\\success-after\\backing.bin": "1500268ec4f8ec8dc62dce072856768938cd2d6a96944a07470114189ebe75fa",
+    "private\\review\\genepod-terminal-world-002\\success-after\\buildings.bin": "2ee331c192c121a2b5e012ce27b55835b412bb4a58bb446cfdf3ab79b50b86a5",
+    "private\\review\\genepod-terminal-world-002\\success-after\\creatures.bin": "e325adff8a10a8e448ba573151b30615b54dd399d1bc697e05a53f8b57aae895",
+    "private\\review\\genepod-terminal-world-002\\success-after\\map.bin": "16ec73bbbfbb7803d71a086313101ac1bc9a79f254c919f2494898bf479db975",
+    "private\\review\\genepod-terminal-world-002\\success-after\\players.bin": "28cdda6833e44ce09ef04373e494d50d37f92d6730dd6b4b4732901eb3eb1138",
+    "private\\review\\genepod-terminal-world-002\\success-after\\rng.bin": "f3df11c7366576be3006a63b2b54ca6ad0a33f3c117f0f78519847e1f9fd3463"
+  },
+  "scope": "Full451F0 success, real5A210 nullparent+ejection, all buildings/creatures/map/players/RNG; opaque31:39 normalization. Audio1E810/98210 and renderqueue explicit ports. Fixture synthetic completed Genepod, not ordinary mission acceptance."
+}

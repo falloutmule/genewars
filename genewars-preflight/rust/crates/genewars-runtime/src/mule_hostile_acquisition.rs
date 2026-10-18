@@ -35,7 +35,7 @@ pub fn plan_acquisition(current: &CreatureRecord, enemy: &CreatureRecord, rng_be
     let id=word(current,15);let target=word(enemy,15);
     if !(0..300).contains(&id)||!(0..300).contains(&target)||id==target{return Err(Error::Identity);}
     if current[6]!=1||current[24]!=4||current[122]!=4||current[94]!=8
-        ||current[0x60]!=8||current[0x61]!=0x40||current[0x78]!=0
+        ||current[0x60]!=8||!(current[0x61]==0x40||current[0x61]==0)||current[0x78]!=0
         ||current[0x76]>90||current[0x77]!=255||current[0x7b]!=255
         ||current[0x15]!=0x80||!matches!(current[0x16],2|0x82)
         ||current[0x4f]!=0||current[0x52]!=0||current[0x57]!=0||current[0x5d]!=0
@@ -43,18 +43,42 @@ pub fn plan_acquisition(current: &CreatureRecord, enemy: &CreatureRecord, rng_be
         ||word(current,0x68)<0||word(current,0x62)<=0
         ||word(current,0x68)>(word(current,0x62)>>1)
         ||word(current,0x49)as u16&0x100!=0{return Err(Error::Current);}
-    if enemy[6]!=1||enemy[24]!=0||enemy[122]!=4||enemy[94]!=8
+    //6119 measured enemy shape: a live WALKING owner0 MuleSelector4 in state1
+    //(0x60=0xc8, 0x52/0x57 retained 1 from its own pursuit). 5B580 reads the
+    //enemy's id/kind/virtual10 and species only (0005b5bc..0005b6f4: ESI+0xf,
+    //ESI+6, ESI+0x2d, the 1ee20 virtual10 call); 5CC60 reads the CURRENT record
+    //(EDX=current), not the enemy - so the prior enemy 0x52/0x57==0 and
+    //state==8 gates were narrowings to the first measured shape, not source
+    //predicates. The hostile classification itself is 6B9B0 (state!=0xF).
+    if enemy[6]!=1||enemy[24]!=0||enemy[122]!=4
+        ||!(enemy[94]==8||enemy[94]==1&&enemy[0x60]==0xc8)
         ||word(enemy,0x49)as u16&0x400!=0||word(enemy,0x6a)<=0
-        ||enemy[0x4f]!=0||enemy[0x52]!=0||enemy[0x57]!=0||enemy[0x5d]!=0
+        ||enemy[0x4f]!=0||enemy[0x5d]!=0
+        ||enemy[0x52]>1||enemy[0x57]>1
     {return Err(Error::Enemy);}
     if rng_before.ring>=32{return Err(Error::InvalidRng);}
     let mut rng=rng_before;
-    let draws=[HostileDrawPurpose::NeighborhoodX,HostileDrawPurpose::NeighborhoodY,HostileDrawPurpose::Disposition].map(|purpose|{
+    //629C0..62ACE (instructions-0005ed20.txt): the disposition is TWO draws of
+    //the shared 0x11878a LCG after the two query-traversal draws. Draw3 gates:
+    //(v>>8&0x7fff)/100 CMP [EBX+0x24](=90), JG 62e11 REFUSES when >90 (the old
+    //3-draw roll>90-only admission was a narrowing to the first measured
+    //shape). Draw4: (v>>8&0x7fff)/256 CMP confidence, JL 62e11 refuses when
+    //>= confidence; confidence = word(0x6a)*256/word(0x64) -
+    //((weight/512)<<5) + 10 with weight = 1024 - sqrt(sample distance^2)
+    //(6B7BE subtracts the sample distance; 62935..62987 builds ECX), the same
+    //pinned formula the F14/F24 owned planner uses. The measured 6119 record
+    //admits: gate 55 <= 90, confidence 266 > roll 167.
+    let dx=cell_delta(word(current,7),word(enemy,7));let dy=cell_delta(word(current,9),word(enemy,9));
+    let distance=(dx*dx+dy*dy)*256*256;
+    let weight=1024-genewars_core::cd_candidate::integer_sqrt(distance.max(0)as u32)as i32;
+    let confidence=i32::from(word(current,0x6a))*256/i32::from(word(current,0x64))
+        -((weight/512)<<5)+10;
+    let draws=[HostileDrawPurpose::NeighborhoodX,HostileDrawPurpose::NeighborhoodY,HostileDrawPurpose::DispositionGate,HostileDrawPurpose::ConfidenceGate].map(|purpose|{
         let before=rng.seed;rng.seed=rng.seed.wrapping_mul(0xe62d);
-        rng.ring=rng.ring.wrapping_add(1)&31;rng.draw_count=rng.draw_count.wrapping_add(1);
+        rng.rng_ring_update();
         HostileDraw{purpose,seed_before:before,seed_after:rng.seed,value:(rng.seed>>8)as u8}
     });
-    if draws[2].value%100<=90{return Err(Error::UnsupportedDisposition);}
+    if draws[2].value%100>90||i32::from(draws[3].value)>=confidence{return Err(Error::UnsupportedDisposition);}
     let mut after=*current;
     //5B58A→5CC60 state8 local reset; null reference indices remain opaque.
     after[0x15]&=0xdf;after[0x33..0x37].fill(0);

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "cases": 192,
+  "compared_bytes": 39360,
+  "literal_instructions": 47424,
+  "progress_requests": 96,
+  "source_pins": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "activation-rng-refs/instructions-00073c20.txt": "b1192da02ccb17b0c4e9117aa0432c6bd47d8a4ee542bea4936bdd60498ad65e",
+    "countdown-expiry/instructions-00013e60.txt": "c53006dcb695e17de2a4ffb232fa0223fc86b1a7ff0219a35caeaead047e4052",
+    "actor-motion/instructions-00051930.txt": "f9f2552e82a11b93d3ee858ce9073185ef0e5c74a9bba48775a019b5383730c3"
+  },
+  "module_sha256": "747f8e1d31c6aebb803f24cb552b2832ce6246264d9d7339580754fcf0cfabb0",
+  "validator_sha256": "2031acf3a562c12e8575a3ec13074cc98e03295dd486b701c752cc2cd7cc1e45",
+  "scope": "534D0 selector1 stage5 terminal work tick:health1->63 noncomplete and63->120 completion441C0 port; exact shared parity draw/audio, actual73C20 two-draw radius256 sampler/trig and actor move/departure tail; all3 blueprint archetype speeds.441C0/yaw/audio requests explicit, no building callback/scheduler claim."
+}

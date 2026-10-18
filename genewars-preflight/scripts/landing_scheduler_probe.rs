@@ -48,7 +48,7 @@ fn main(){
                     },
                     LandingEffectCallback::Smoke(e)=>retired+=usize::from(e.retired),
                     LandingEffectCallback::EtherealParticle(e)|LandingEffectCallback::DepartureParticle(e)=>departure_retired+=usize::from(e.retired),
-                    LandingEffectCallback::WaterSplash(_)=>panic!("water splash is outside this landing-only fixture"),
+                    LandingEffectCallback::Construction(_)|LandingEffectCallback::WaterSplash(_)=>panic!("water splash is outside this landing-only fixture"),
                 }
             }
             assert!(world.effects().unwrap().records().iter().all(|r|r[6]==0||r[21]&1==0));

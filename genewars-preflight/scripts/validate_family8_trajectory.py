@@ -14,7 +14,7 @@ def main():
     parser.add_argument('--capture-start',type=int,default=6001)
     parser.add_argument('--output',type=Path,help='optional distinct public receipt; failed runs retain private results only')
     args=parser.parse_args()
-    assert 1<=args.frames<=20000 and 0<=args.seed<=65535 and 1<=args.capture_stride<=20000 and 1<=args.capture_start<=20000
+    assert 1<=args.frames<=32768 and 0<=args.seed<=65535 and 1<=args.capture_stride<=32768 and 1<=args.capture_start<=32768
     runtime,input_receipt=stage()
     work=P/'private/review/family8-trajectory'/uuid.uuid4().hex;work.mkdir(parents=True)
     source_files=[p for crate in ['assets','core','runtime'] for p in(P/f'rust/crates/genewars-{crate}/src').rglob('*.rs')]

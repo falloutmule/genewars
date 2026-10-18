@@ -1,0 +1,53 @@
+{
+  "log_id": "attempt-log-5939-r4",
+  "created": "2026-10-16T16:15 America/Denver",
+  "note": "NEW uniquely-named log. Previous evidence files NOT modified. Accepted baseline untouched throughout (HEAD 866b410, rust tree clean, 165 dirty entries).",
+
+  "question": "Is the first difference between the accepted Rust timeline and the GW-5939C candidate timeline a source-accurate correction, or a defect?",
+  "answer": "DEFECT. The candidate diverges from the original source; the accepted code reproduces the source exactly at that callback.",
+
+  "method": {
+    "timeline_hashes": "parsed the per-step world_sha256 ticks already recorded in both replay stdout logs - no new builds needed for this step",
+    "result": "identical through step 4801; FIRST DIVERGENT STEP = 4802",
+    "note_on_step_vs_frame": "the tick hash is evidently computed at a point in the frame preceding/independent of the creature callbacks, so the callback-level divergence appears one frame earlier than the step-hash divergence",
+    "capture_runs": [
+      "accepted: re-used the already-frozen accepted executable private/integration/continued-krell-195/genewars-game.exe with GENEWARS_MULE_CALLBACK_FRAME=4798..4811 -> private/review/authentic-krell-capture4802 (reproduced the accepted frontier, capture frame-5939-slot-1-blocked-before-owned present)",
+      "candidate: built the GW-5939C commit in the working tree, froze the exe to genewars-routing-probe/genewars-game-candidate-5939c.exe, ran the same capture replay -> private/review/authentic-krell-candidate4802 (reproduced steps=4806 blocked)"
+    ],
+    "earliest_changed_callback": {
+      "frame": 4801, "slot": 1, "family": "owned Mule",
+      "parity": "(4801 + 1) & 1 = 0 -> LIGHT, so the new gate fires here",
+      "inputs_identical": true,
+      "differing_bytes": "creatures.bin slot1 record offsets 0x07,0x09,0x0b,0x0d,0x27,0x28,0x32,0x3b,0x3e,0x43,0x44,0x49 (position/heading/height fields)"
+    },
+    "oracle_comparison_at_4801_slot1": {
+      "accepted_vs_source": {"status": "passed", "draws": 0, "instructions": 2224, "compared_bytes": 427369, "differences": []},
+      "candidate_vs_source": {"status": "mismatch", "draws": 0, "instructions": 2224, "compared_bytes": 427369, "differences": [{"buffer": "creatures.bin", "count": 12}]}
+    }
+  },
+
+  "conclusions": [
+    "GW-5939C's light path is INCORRECT for the state at frame 4801: it fails to reproduce the source's position/heading updates.",
+    "The accepted (pre-GW-5939C) code reproduces the original source exactly at that same callback, so the earlier timeline was NOT wrong there.",
+    "Frame 4806 is therefore the DOWNSTREAM CONSEQUENCE of incorrect implementation, NOT a newly exposed authentic blocker.",
+    "Important nuance: the Rust full path already reproduces the source's light-path result at some light-parity states (proven at 4801 and previously at 5893). The genuine, narrower defect remains the ADMISSION rejection at 5939 (state8, 0x52!=0, word(0x6c)==0 with no live target), where the source takes the light path and the Rust errors.",
+    "A correct repair must reproduce the source 5EB30/5E640/7AC00 light sequence INCLUDING its position/animation effects, not merely skip the state machine."
+  ],
+
+  "next_step": {
+    "objective": "repair the light path so it matches the original source at frame 4801 slot 1 (position/heading fields) while still passing 5893 and 5939",
+    "regression_that_must_now_be_added": "a captured comparison at frame 4801 slot 1 with the accepted input, which currently PASSES for the accepted code and must PASS for any repaired code",
+    "then": "re-run the ordinary campaign replay; the frontier must not fall below 5939",
+    "explicitly_rejected": "re-reaching 5939 by reproducing an incorrect earlier simulation; the standard is reproducing the original game's behaviour"
+  },
+
+  "costs_this_phase": {"model_calls": 0, "note": "entirely local tooling: log hash comparison, capture replays, one candidate release build, source-interpreter oracle runs"},
+
+  "artifacts": {
+    "accepted_captures": "private/review/authentic-krell-capture4802",
+    "candidate_captures": "private/review/authentic-krell-candidate4802",
+    "candidate_exe": "genewars-routing-probe/genewars-game-candidate-5939c.exe",
+    "candidate_patch_zw": "genewars-routing-probe/gw5939c-committed-then-reverted.patch",
+    "accepted_frontier": "batch195 / frame5939 (commit 7347fbf); revert commit 866b410"
+  }
+}

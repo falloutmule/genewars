@@ -1,0 +1,36 @@
+{
+  "status": "blocked",
+  "classification": "unsupported required gameplay path",
+  "reason": "Frame0 succeeds; frame1 hits obsolete packed-initial-state creature shortcut.",
+  "original_campaign_missions_completable": 0,
+  "private_fixture": "private\\integration\\fresh-startup-002",
+  "steps": 1,
+  "blocked": "Creatures(UnsupportedInitialState)",
+  "runtime_context": "Some(MissionRuntimeContext { origin: FreshCdConq001, participating_players: 1, runtime_flags: 62, runtime_mode: Some(0), countdown: 999, frame: 1, rng: CdConq001SerializedThenBlueprints { seed: 10548, draw_count: 16919, diagnostic_ring: 0 } })",
+  "buildings": [],
+  "funds": [
+    {
+      "slot": 0,
+      "balance": 2000
+    },
+    {
+      "slot": 1,
+      "balance": 0
+    },
+    {
+      "slot": 2,
+      "balance": 0
+    },
+    {
+      "slot": 3,
+      "balance": 0
+    }
+  ],
+  "hashes": {
+    "genewars-game.exe": "ef05a49e203e458c91033e112c03eac91df271f3d440de3d103e31ae3b087527",
+    "replay.txt": "92c5c4a0897e6c915a2c450df02bf6e00a43c77e2b73fed2112c00dbbeffba47",
+    "report.json": "36c31436513673519e9539cf2a6e1d92a0455289b8ac10d9d7c89051be21a9e1",
+    "frame.bmp": "75fc70a9f3f454ce200900fe4964042e122604d34bec70ecf0c5c9060a2d334e"
+  },
+  "reference_executable_sha256": "4bdf296febc88984aab6939fe3f3ef3196891f0be9bcb84a9283ab3b668a60ba"
+}

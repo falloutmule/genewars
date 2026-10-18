@@ -1,0 +1,15 @@
+{
+  "cases": 48,
+  "compared_bytes": 11019648,
+  "literal_instruction_steps": 8448,
+  "source_sha256": "063c74a1afa50fef775382b08597fb48ec6c7ced687edf6457b1fea19d4f881c",
+  "listing_sha256": {
+    "building-cost-refs/instructions-000534d0.txt": "4fe274a37c60b76c26cd12c335d8cbd68d1c2387419b8a7d881f922b68d4c141",
+    "construction-command/instructions-00051e80.txt": "38a7ad744f800c438cf7b208ed596f919c38c4309a8e8d2cd68f679976202839",
+    "construction-command/instructions-0001ee40.txt": "06f7520c321f8fe75c77d092e1630a04c955bb5e0ae29d35dd4a92e191bb59b1",
+    "terrain-map-refs/instructions-000753f0.txt": "ea2554be981b0acae18e192ba9827ebdf4e4dea2d8e6fbee83f889ec15f390c5",
+    "validated/instructions-0008d580.txt": "08fc85698d73460faaef4a6dd81457eb199a60c9aacda9380239e5f3278034c3",
+    "validated/instructions-0008d5f0.txt": "c66a1e05095397611f83ecfa25aab5c3b1e42f72b165a2b86550b682cc33c23f"
+  },
+  "scope": "534D0 completed selector1 stage5 readiness ->message17/51E80; whole200B actor and229376B map, both58bit1states,1EE50 stop. Crucially stage5 keeps terrain reservation flags; reason7A preserved. Formatting/presentation explicit ports, owner unselected; no idle fabrication."
+}

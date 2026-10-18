@@ -1,0 +1,8 @@
+[package]
+name = "actor-resource-validation"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+genewars-assets = { path = "../../../../rust/crates/genewars-assets" }
+genewars-runtime = { path = "../../../../rust/crates/genewars-runtime" }

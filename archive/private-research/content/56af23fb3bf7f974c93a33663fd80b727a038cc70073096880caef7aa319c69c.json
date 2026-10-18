@@ -1,0 +1,92 @@
+{
+  "scope": "actual5876 source preparation with source4FF2C typed blueprint pointer reconstruction; NO Rust/native/campaign acceptance",
+  "input": "private\\review\\authentic-krell-192\\frame-5876-slot-1-blocked-before-owned",
+  "bindings": [
+    {
+      "slot": 0,
+      "owner": 0,
+      "selector": 0,
+      "blueprint": "0x118d8a",
+      "category": 0,
+      "boost": 31
+    },
+    {
+      "slot": 1,
+      "owner": 0,
+      "selector": 5,
+      "blueprint": "0x118e3e",
+      "category": 1,
+      "boost": 28
+    },
+    {
+      "slot": 2,
+      "owner": 0,
+      "selector": 10,
+      "blueprint": "0x118ef2",
+      "category": 2,
+      "boost": 29
+    }
+  ],
+  "source_pins": {
+    "private\\ghidra\\player-creation\\instructions-0004fd30.txt": "0dfb420cafd52d6ebcf41de7e02299cf23938381f95ffc1ca1efaa0b91a29b60",
+    "private\\ghidra\\mission-array-refs\\instructions-0005d700.txt": "46db7123380194986cc4598e5cb9cc8f44f2b8f48cb4b9f79a4ac41327a4cf33"
+  },
+  "input_pins": {
+    "backing.bin": "5fdceec557d2cc2b6d3bde014a3360dcdccaeb11e536178db5c4dc36e0f4d546",
+    "creatures.bin": "cefc8cb8b6b1758d133209a906e4ef9d629cf26232dd246ba723cac27cf07f1e",
+    "actors.bin": "e6190a615f864e22753d3943249ed2fda88e742f1bbc64d1d6ec3766a13b59a1",
+    "buildings.bin": "5e3460190c45738b76cb42ba203f91a2d610b34e00758f5d1f7507849349a3d8",
+    "effects.bin": "7f82787cb490aad14eaf22cf8870f7f997e2eefc274df4b2a273a0479fb17ab9",
+    "family8.bin": "0622b08696aa1d168a3fe4f25c4e6e04afe7dff23a112d77adcb7899d2541abd",
+    "players.bin": "b19fda72df3dd19f0e850811286da249c9d1210f4fe7e3c1b80d6dc02b6a677b",
+    "rng.bin": "62384345f412db537d5ea65053bc1f90481f71b87d7d151dc471a6b411416cbf"
+  },
+  "status": "source_prepared",
+  "draws": 8,
+  "instructions": 12220,
+  "journals": [
+    {
+      "ring_slot": 12,
+      "journal": 2918,
+      "pc": "0x60447"
+    },
+    {
+      "ring_slot": 13,
+      "journal": 1669,
+      "pc": "0x5c40e"
+    },
+    {
+      "ring_slot": 14,
+      "journal": 2980,
+      "pc": "0x60759"
+    },
+    {
+      "ring_slot": 15,
+      "journal": 1725,
+      "pc": "0x8d7d5"
+    },
+    {
+      "ring_slot": 16,
+      "journal": 1726,
+      "pc": "0x8d864"
+    },
+    {
+      "ring_slot": 17,
+      "journal": 3286,
+      "pc": "0x60e60"
+    },
+    {
+      "ring_slot": 18,
+      "journal": 3286,
+      "pc": "0x60ee8"
+    },
+    {
+      "ring_slot": 19,
+      "journal": 1761,
+      "pc": "0x5c888"
+    }
+  ],
+  "normalization": "source typed actor C0 pointer bytes restored only to captured INPUT; g.export existing31:39/input normalization unchanged",
+  "boost_query_iterations": 3,
+  "boost_category_accepted": false
+}

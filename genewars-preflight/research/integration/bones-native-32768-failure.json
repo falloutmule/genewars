@@ -1,0 +1,16 @@
+{
+  "status": "failed-rendered-replay",
+  "requested_steps": 32768,
+  "completed_steps": 19784,
+  "blocked": "Creatures(UnsupportedMotionState)",
+  "private_run": "private/integration/family8-native/fbfb868a56eb4d34855ee778feadef2a",
+  "binary_sha256": "03818e3c50f88dd96e7f92ef576a4d6eb90eb222d4278a90023af24763f2f129",
+  "report_sha256": "98c6f198d6144ef3ff325a03a6482958097b9ba7809f243bbd2e884b7b346f1b",
+  "bmp_sha256": "812b2c91f992a372104de101ff127bbc2fa1b4163da1dd30fdd9086894cae0f7",
+  "catalog_sha256": "70f1003763e64c16de1d77d009238d6e2b55e0840b115d0b3ae14e072548e6f9",
+  "archived_resource_loader_sha256": "a48b2f60b981a18ddc9fd3605e046f450ccde257e1c7142bed32a59d7d8a0db0",
+  "observation": "Resources loaded BONES artwork but constructed MuleAnimations without with_bones_anb. Numeric probe binds that metadata and had separately passed32768. Fix and rerun pending.",
+  "original_execution": false,
+  "determinism_repeat": "not run after first-case failure",
+  "window_case": "not run after first-case failure"
+}

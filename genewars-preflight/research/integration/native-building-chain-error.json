@@ -1,0 +1,22 @@
+{
+  "status": "error",
+  "utc": "2026-10-14T11:08:10.748766+00:00",
+  "scope": "development native Extractor/Distributor construction",
+  "authentic_missions_completable": 0,
+  "border_policy": "generated",
+  "construction_border_sha256": "422f124eac806197ba95d2438516284c3bf828a1db8e8aabe330661fff23ef8a",
+  "patterns_sha256": "d848e423b7a76a2c2dbf517fc595e33a789df7382697b56f382cc7606b18939e",
+  "binary_sha256": "314a3d07d47e9a8a0edfc3cf0c6859eb9f4be22932fb84dd8b85e3d4811928f8",
+  "input_sha256": "ecd0f23297c8b59b3090b1448f32d4e3d9245f225367002ea0c630838a797ca5",
+  "chooser_source_sha256": "1bdb2cfd64c13c596c4903ffe1d97637d8b30bb40bac54fa101eef2f51ab705e",
+  "probe": "private\\integration\\distributor-command-002",
+  "work": "private\\integration\\native-building-chain\\8706d605e929417884a47ada1e4f2dd2",
+  "runs": [],
+  "limitations": [
+    "Development initialization and seed5428, not original campaign startup",
+    "Port-owned input mapping and chooser layout",
+    "No mission outcome or campaign transition asserted"
+  ],
+  "error": "AssertionError()",
+  "classification": "harness_or_unexpected_behavior"
+}

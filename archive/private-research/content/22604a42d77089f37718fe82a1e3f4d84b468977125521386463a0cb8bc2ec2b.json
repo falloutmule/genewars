@@ -1,0 +1,286 @@
+{
+  "scope": "707A0 function proof; original frozen5882 entry, synthetic acceptance-port variants NOTworld/campaign acceptance",
+  "case_bytes": 335,
+  "cases": [
+    {
+      "label": "actual",
+      "angle": 1440,
+      "distance": 348,
+      "cl": 1,
+      "accepted": 0,
+      "draws": 1,
+      "candidates": [
+        [
+          236,
+          24043
+        ]
+      ],
+      "actual_equal": true
+    },
+    {
+      "label": "0",
+      "angle": 0,
+      "distance": 256,
+      "cl": 0,
+      "accepted": 0,
+      "draws": 1,
+      "candidates": [
+        [
+          570,
+          23686
+        ]
+      ],
+      "actual_equal": null
+    },
+    {
+      "label": "1",
+      "angle": 511,
+      "distance": 1024,
+      "cl": 1,
+      "accepted": 3,
+      "draws": 1,
+      "candidates": [
+        [
+          1593,
+          23938
+        ],
+        [
+          1514,
+          23547
+        ],
+        [
+          1291,
+          23215
+        ],
+        [
+          958,
+          22994
+        ]
+      ],
+      "actual_equal": null
+    },
+    {
+      "label": "2",
+      "angle": 512,
+      "distance": 256,
+      "cl": 0,
+      "accepted": 15,
+      "draws": 1,
+      "candidates": [
+        [
+          826,
+          23942
+        ],
+        [
+          806,
+          23844
+        ],
+        [
+          751,
+          23760
+        ],
+        [
+          667,
+          23705
+        ],
+        [
+          570,
+          23686
+        ],
+        [
+          472,
+          23705
+        ],
+        [
+          388,
+          23760
+        ],
+        [
+          333,
+          23844
+        ],
+        [
+          314,
+          23942
+        ],
+        [
+          333,
+          24039
+        ],
+        [
+          388,
+          24123
+        ],
+        [
+          472,
+          24178
+        ],
+        [
+          570,
+          24198
+        ],
+        [
+          667,
+          24178
+        ],
+        [
+          751,
+          24123
+        ],
+        [
+          806,
+          24039
+        ]
+      ],
+      "actual_equal": null
+    },
+    {
+      "label": "3",
+      "angle": 2047,
+      "distance": 1024,
+      "cl": 1,
+      "accepted": -1,
+      "draws": 1,
+      "candidates": [
+        [
+          566,
+          22918
+        ],
+        [
+          958,
+          22994
+        ],
+        [
+          1291,
+          23215
+        ],
+        [
+          1514,
+          23547
+        ],
+        [
+          1593,
+          23938
+        ],
+        [
+          1517,
+          24330
+        ],
+        [
+          1296,
+          24663
+        ],
+        [
+          964,
+          24886
+        ],
+        [
+          573,
+          24965
+        ],
+        [
+          181,
+          24889
+        ],
+        [
+          -152,
+          24668
+        ],
+        [
+          -375,
+          24336
+        ],
+        [
+          -454,
+          23945
+        ],
+        [
+          -378,
+          23553
+        ],
+        [
+          -157,
+          23220
+        ],
+        [
+          175,
+          22997
+        ]
+      ],
+      "actual_equal": null
+    },
+    {
+      "label": "4",
+      "angle": 0,
+      "distance": 0,
+      "cl": 0,
+      "accepted": 0,
+      "draws": 1,
+      "candidates": [
+        [
+          570,
+          23942
+        ]
+      ],
+      "actual_equal": null
+    },
+    {
+      "label": "5",
+      "angle": 2047,
+      "distance": 32767,
+      "cl": 1,
+      "accepted": 2,
+      "draws": 1,
+      "candidates": [
+        [
+          32659,
+          -32759
+        ],
+        [
+          20127,
+          -30227
+        ],
+        [
+          9519,
+          -23091
+        ]
+      ],
+      "actual_equal": null
+    },
+    {
+      "label": "6",
+      "angle": 512,
+      "distance": 1024,
+      "cl": 0,
+      "accepted": 1,
+      "draws": 1,
+      "candidates": [
+        [
+          1032,
+          32760
+        ],
+        [
+          954,
+          32368
+        ]
+      ],
+      "actual_equal": null
+    }
+  ],
+  "actual_regs": {
+    "EAX": 1393962,
+    "EBX": 348,
+    "ECX": 1,
+    "EDX": 1440,
+    "ESI": 1393962,
+    "EDI": 1393962,
+    "EBP": 3145298,
+    "ESP": 3140888
+  },
+  "original_candidates": [
+    [
+      236,
+      24043
+    ]
+  ]
+}

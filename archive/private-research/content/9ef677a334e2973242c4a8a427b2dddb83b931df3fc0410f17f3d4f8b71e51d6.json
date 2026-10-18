@@ -1,0 +1,36 @@
+{
+  "log_id": "attempt-log-5939-r6",
+  "created": "2026-10-16T20:05 America/Denver",
+  "note": "NEW uniquely-named log. Previous evidence NOT modified. Accepted tree restored and verified (HEAD 866b410, 0 staged, rust tree clean, 165 dirty).",
+
+  "attempt_5_GW_5939E": {
+    "result": "REJECTED as a whole (B and C now PASS; the mandatory new A regression still FAILS, 9 bytes)",
+    "patch_preserved": "genewars-routing-probe/attempt5-gw5939e-rejected.patch (11369 bytes, 3 files, +61/-5)",
+    "approach": "gate after the 6FB60 prefix; mule_route_prefix gained an explicit `light: bool` parameter (true for the light branch, false for the full path so the full path is unchanged); the light body is an explicit plan_mule_light_callback(before, prefix, animations) taking the prefix result, keeping the three cells distinct (old_cell from the prefix, physics_cell mid-tail, new_cell after the tail) and writing word(0x6c)=0 on a completed animation for states 0xB/0x10/0x14..0x18",
+
+    "gates_independently_verified_by_root": {
+      "A_4801": {"rust_status": "passed", "rng_draws": 0, "oracle": "mismatch", "differences": [{"buffer": "creatures.bin", "count": 9, "offsets": [131,133,163,164,174,183,186,191,192]}], "verdict": "FAIL - required zero differences"},
+      "B_5893": {"rust_status": "passed", "rng_draws": 0, "oracle": "passed", "compared_bytes": 427369, "differences": [], "verdict": "PASS - regression fixed, 0x6c 32759->0 reproduced"},
+      "C_5939": {"rust_status": "passed", "rng_draws": 0, "oracle": "passed", "compared_bytes": 427369, "differences": [], "verdict": "PASS - the frontier callback now succeeds"},
+      "D_5940": {"rust_status": "blocked", "error": "Creatures(UnsupportedMotionState)", "verdict": "PASS - remains fail-closed"}
+    },
+
+    "CONVERGENCE_THIS_IS_THE_KEY_RESULT": {
+      "GW_5939D": "prefix + shared body plan_mule_admitted_body_with_postphysics + the full path's staged cell-entry closure -> A PASS (4801 source-exact), B FAIL (5893 lost the 0x6c write)",
+      "GW_5939E": "prefix (light flag) + explicit plan_mule_light_callback + direct replace_record_checked -> B PASS, C PASS, A FAIL (9 bytes)",
+      "offset_analysis": "Stage 1 (GW-5939C, no prefix) wrongly differed at record 0x07,0x09,0x0b,0x0d,0x27,0x28,0x32,0x3b,0x3e,0x43,0x44,0x49 (12 bytes). Adding the prefix (GW-5939E) CORRECTED 0x0b,0x0d and 0x49, leaving 0x07,0x09,0x27,0x28,0x32,0x3b,0x3e,0x43,0x44 (9 bytes). So the 6FB60 prefix supplies the destination/heading fields; the residual CURRENT POSITION (0x07,0x09) and motion fields are exactly what the full path's staged cell-entry/physics commit machinery supplies.",
+      "identified_remaining_defect": "GW-5939E's light branch commits by self.creatures.replace_record_checked(slot,&before,&plan.after) + validate_links() and NEVER runs the staged cell-entry closure (unlink_mule_slot -> replace_record_checked -> insert_mule_head -> plan_mule_cell_entry) that creature_updates.rs uses for the full path. GW-5939D DID use that closure and got 4801 exact, which is the independent confirmation of this diagnosis."
+    },
+
+    "next_contract_direction_GW_5939F": [
+      "Combine the two correct halves: use GW-5939D's commit mechanism (gate AFTER the prefix, and the full path's staged cell-entry closure with the three distinct cells) TOGETHER WITH GW-5939E's explicit 5EB30 countdown write (the plan_mule_light_callback 5ebdf..5ec69 completed-animation word(0x6c)=0 for states 0xB/0x10/0x14..0x18).",
+      "Concretely: run the 6FB60 prefix with the light flag (as GW-5939E does, which is correct and leaves the full path unchanged), then compute the light body, then COMMIT through the same staged cell-entry closure the full path uses rather than replace_record_checked + validate_links alone.",
+      "Gates: A(4801) zero differences, B(5893) 0x6c 32759->0 and zero differences, C(5939) passed and 427369 bytes unchanged, D(5940) blocked, batch195 focused 9/9 with fresh paths.",
+      "Then the integrated gates: runtime/desktop regression + capture-enabled release build, freeze the exe, ordinary campaign replay (frontier must not fall below frame 5939; compare against the accepted 84/1000 baseline), and native input parity with the same frozen exe plus framebuffer byte equality and a visual check."
+    ],
+
+    "costs": {"director_5939e_usd_estimated": 0.2087, "note": "from the run usage file; child GLM cost additionally in genewars state.db; not provider-reconciled"},
+    "artifacts": {"cases": "private/review/gw5939e-A/B/C/D", "patch": "genewars-routing-probe/attempt5-gw5939e-rejected.patch", "source_trace_5939": "private/review/owned-mule-captured-width/ca4bdbaa20fd4140b12c473ab227b2ab/trace.txt", "source_trace_4801": "private/review/owned-mule-captured-width/a40c14e5e8bc47df9bcfd8e982a7d4e3/trace.txt"},
+    "state_after_restore": {"head": "866b410", "staged": 0, "rust_tree": "clean (only the two pre-existing untracked experiment files)", "dirty_entries": 165, "accepted_frontier": "batch195 / frame5939"}
+  }
+}

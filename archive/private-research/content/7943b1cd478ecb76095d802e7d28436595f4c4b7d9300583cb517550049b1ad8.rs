@@ -1,0 +1,1 @@
+fn main(){let a:Vec<_>=std::env::args().collect();genewars_runtime::actor_world::terrain_refresh_fixture::run(std::path::Path::new(&a[1]),std::path::Path::new(&a[2]));}

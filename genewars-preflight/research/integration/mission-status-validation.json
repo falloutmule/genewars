@@ -1,0 +1,14 @@
+{
+  "status": "passed-read-only-predicate",
+  "utc": "2026-10-13T23:59:11.074232+00:00",
+  "cases": 360,
+  "compared_result_and_lookup_bytes": 2520,
+  "unchanged_player_bytes": 649800,
+  "literal_instructions": 15066,
+  "source_listing_sha256": "80457cbdfa523ff53483969fb346115555b6dfe375672f5ae902ee78dce9dbe4",
+  "module_sha256": "bbf80de06f576ef05c3ade9a3b85370a4b9a55b5744bc3370dba06f2392b438a",
+  "validator_sha256": "27ff7cfd88bc65808344dfd93dcb679d7b9bbf88d14537f9c25a656f421f29ed",
+  "private_run": "private/review/mission-status/72b1f48b9ee24730b0e8897692adf9a8",
+  "original_execution": false,
+  "scope": "Complete805E0 literal body, signed live counts, lazy typed actor category lookup and all32 stored blueprints. Does not establish field616/600/605 semantic names, the enclosing72ED0 mission rules, UI transitions or complete win/loss."
+}

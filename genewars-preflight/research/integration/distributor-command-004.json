@@ -1,0 +1,45 @@
+{
+  "status": "blocked",
+  "classification": "required rendering behavior unsupported",
+  "steps": 1919,
+  "blocked": "InvalidBinding { slot: 0, code: 33, binding: Some(EffAnimation33) }",
+  "scope": "Extractor and poweredDistributor constructed but completeframe cannotrender33 power effect; not accepted",
+  "original_campaign_missions_completable": 0,
+  "private_fixture": "private\\integration\\distributor-command-004",
+  "buildings": [
+    {
+      "slot": 0,
+      "owner": 0,
+      "selector": 11,
+      "position": [
+        19839,
+        12927
+      ],
+      "animation": 1,
+      "frame": 0,
+      "progress_word_2b": 280,
+      "phase_byte_2f": 0,
+      "flags_word_31": 1
+    },
+    {
+      "slot": 1,
+      "owner": 0,
+      "selector": 3,
+      "position": [
+        21119,
+        13439
+      ],
+      "animation": 1,
+      "frame": 0,
+      "progress_word_2b": 240,
+      "phase_byte_2f": 0,
+      "flags_word_31": 5
+    }
+  ],
+  "hashes": {
+    "genewars-game.exe": "fd242a41aee788bc3d7837c9be4a9680d28e200f2a84400fae8d79d77487bc18",
+    "replay.txt": "7279254c6de27a3c9234f31445d9dafecf434a9b760ee9a798590f0ad9a35ec1",
+    "report.json": "e6cf1b0bc3078642ea8eff05e9ce5d927bf7c74fc1b0bb73c51999b266969517",
+    "frame.bmp": "feddc3d70909e62985087a89bf5e8fce05946e60d038be7d1e43c835f2dadeb7"
+  }
+}
