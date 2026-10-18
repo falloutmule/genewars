@@ -20,17 +20,35 @@
   },
   "director_verification": {
     "run": "private/integration/F16-root-check-20261017T2240",
-    "result": {"positive": "48/48", "negative": "4/4", "checks": "59/59", "all_ok": true},
+    "result": {
+      "positive": "48/48",
+      "negative": "4/4",
+      "checks": "59/59",
+      "all_ok": true
+    },
     "campaign": "steps 6008, blocked Creatures(UnsupportedNeighborhood), world ef3dd21256b783463d0e2d3f4f8cf3b2698c4dba171020bb5e0a152db6189994, rgb e069f91477e92b86ec3473d36e7e5b32a7827ea3da52201355a153ad4...",
     "note": "the worker own run reported 58/59 solely because its head-unchanged bookkeeping row expected 8c1bb5d while HEAD was 0704954 - the director later native-acceptance commit. Behaviour was already fully green; re-verified with the correct head."
   },
   "frontier": {
-    "before": {"steps": 5992, "world": "e77af60d"},
-    "after": {"steps": 6008, "blocked": "Creatures(UnsupportedNeighborhood)", "world_sha256": "ef3dd21256b783463d0e2d3f4f8cf3b2698c4dba171020bb5e0a152db6189994"}
+    "before": {
+      "steps": 5992,
+      "world": "e77af60d"
+    },
+    "after": {
+      "steps": 6008,
+      "blocked": "Creatures(UnsupportedNeighborhood)",
+      "world_sha256": "ef3dd21256b783463d0e2d3f4f8cf3b2698c4dba171020bb5e0a152db6189994"
+    }
   },
   "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008. F16 is the second family chosen by pairing on shared semantics rather than adjacency in time: the cell-entry predicate and the degraded-pursuit caller are the same continuation.",
   "open": {
     "next": "Creatures(UnsupportedNeighborhood) at 6008 - unmeasured",
-    "carry_forward": ["F10 word(0x6c) constant + second 0x66 attribution", "F11 hold shape bound", "B0 food-guard unclosed", "B8 kind-2-with-food-guard open"]
-  }
+    "carry_forward": [
+      "F10 word(0x6c) constant + second 0x66 attribution",
+      "F11 hold shape bound",
+      "B0 food-guard unclosed",
+      "B8 kind-2-with-food-guard open"
+    ]
+  },
+  "native_acceptance": "PASSED: private/integration/f1-native-20261017T2320 - one frozen executable sha256 cc257dfab056..., headless and native both stop at step 6008 with the identical block string, all eight compared keys equal, frontier framebuffers byte-identical, world ef3dd21256b7..."
 }
