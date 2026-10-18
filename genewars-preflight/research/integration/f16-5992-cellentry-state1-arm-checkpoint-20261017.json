@@ -1,0 +1,36 @@
+{
+  "receipt": "f16-5992-cellentry-state1-arm-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "family F16 - map-first: the 5992 refusal paired with the B9 caller family; campaign 5992 -> 6008",
+  "measurement": {
+    "fixture": "private/review/attempt29-5992-measure/campaign/capture - frame-5992-slot-1-blocked-before-owned",
+    "record": "owned slot 1, owner 0, species 4, state-1 pursuit with word(0x6c)=0x7ff2, 0x76=37, ref50==ref55==ref58=slot5 - the B9 shape now reaching its DESTINATION cell 11906, which already contains its own pursuit target (the degraded neutral slot 5)",
+    "refusing_site": "check_mule_cell_entry (creature_updates.rs:777) via plan_mule_cell_entry -> mule_cell_entry_predicate, rejecting a kind-1 occupant; localized with temporary tagged probes removed before the fix (logs kept under private/review/attempt29-5992-measure/)",
+    "oracle": "source_prepared, 2856 instructions, 0 draws; output private/review/owned-mule-captured-width/d076d8fe60f547eb8c391064778a55aa commits slot 1 into cell 11906 and advances it 2px; deltas slot-1 only (24 creature bytes) + 2 backing bytes, every other buffer identical"
+  },
+  "source_basis": "the shared cell-entry predicate 5B100 has a dedicated STATE-1 arm 0005b18c..0005b204 (6D390 resolves ref55; 0005b1af..0005b204 admits occupant==self, or an occupant kind1 at its own cell == the queried cell unless the target virtual+0x68 refuses - measured FALSE) instead of the default head check 0005b242 that the port had implemented",
+  "map": {
+    "new_branch": "B10-cellentry-state1-pursuit-target-occupant",
+    "pairing": "same caller family as B9 (the degraded-pursuit continuation committing into the target cell) - the reason both were closed in one family",
+    "boundary": "B0-B8 walk branches and the neutral callers untouched; deliberately still fail-closed for multiple kind-1 occupants, kind-2 occupants, 0x11 effects and non-state-8 targets"
+  },
+  "negative_gate": {
+    "R29": "added FIRST as a negative (exact rejection + all eight buffers byte-identical, 0 draws), then converted positive in the same change set with the source basis in-row",
+    "remaining": "R21 and R25 fail-closed; 4 negatives"
+  },
+  "director_verification": {
+    "run": "private/integration/F16-root-check-20261017T2240",
+    "result": {"positive": "48/48", "negative": "4/4", "checks": "59/59", "all_ok": true},
+    "campaign": "steps 6008, blocked Creatures(UnsupportedNeighborhood), world ef3dd21256b783463d0e2d3f4f8cf3b2698c4dba171020bb5e0a152db6189994, rgb e069f91477e92b86ec3473d36e7e5b32a7827ea3da52201355a153ad4...",
+    "note": "the worker own run reported 58/59 solely because its head-unchanged bookkeeping row expected 8c1bb5d while HEAD was 0704954 - the director later native-acceptance commit. Behaviour was already fully green; re-verified with the correct head."
+  },
+  "frontier": {
+    "before": {"steps": 5992, "world": "e77af60d"},
+    "after": {"steps": 6008, "blocked": "Creatures(UnsupportedNeighborhood)", "world_sha256": "ef3dd21256b783463d0e2d3f4f8cf3b2698c4dba171020bb5e0a152db6189994"}
+  },
+  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008. F16 is the second family chosen by pairing on shared semantics rather than adjacency in time: the cell-entry predicate and the degraded-pursuit caller are the same continuation.",
+  "open": {
+    "next": "Creatures(UnsupportedNeighborhood) at 6008 - unmeasured",
+    "carry_forward": ["F10 word(0x6c) constant + second 0x66 attribution", "F11 hold shape bound", "B0 food-guard unclosed", "B8 kind-2-with-food-guard open"]
+  }
+}

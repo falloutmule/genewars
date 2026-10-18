@@ -68,6 +68,12 @@
       "condition": "owned full-path admission (odd phase, 0x61=0, NOT the 6B700 walk): 0x5e==1 hostile pursuit, 0x60 in {0x48,0xc8}, 0x78=7, 0x52/0x57/0x5a=1, refs 0x50/0x58==0x55, 0x4f=0, 0x5d=0, 0x76<=90, word(0x49)&0x100==0, where the 0x55-target is no longer a live state-1/20/21 hostile (measured: neutral Mule slot 5 state 8, 0x60=0x88, 0x61=0x40, 0x78=0, 0x55-ref back at the owned mule, word(0x6c)=0x7ffe fresh timer)",
       "current": "accept - the source full path (0x5ed20->0x5ed3b JZ 0x5ee1c->0x6fb60 virtual94 movement prefix->0x5ee25..0x5ee32 parity gate JNZ odd->0x5eed5..0x5ef1f->0x5ef22 CALL 0x5e0b0->0x5ef32 CALL 0x5eb30->0x5ef37..0x5ef40 fresh-timer side->0x5ef49->0x6a22b..0x6a2dd->0x65743..0x65de6 movement continuation->tail 0x6a290..0x6a53e with 0x6a4a0 DEC word(0x6c)->0x7ac00) NEVER reads the enemy record, runs NO 624B8 AI and NO 6B700 scan (2542 instructions, 0 draws; probe private/review/attempt28-5968-probe-2a44a5da). The prior port refusal at owned_mule_updates.rs line 76 (hostile_enemy.is_none) was a port-authored predicate, per map rule 1.",
       "status": "integrated/proved (F15 attempt28: R28 negative->positive; oracle extension in owned-mule-captured-width-review.py admits the measured degraded shape, output owned-mule-captured-width/22da7a68d74f407b80611ca51ad602d0; port degraded_pursuit admission + 5EB30 no-AI continuation arm, byte-identical, 0 draws). word(0x6c)==0 expired-timer variants and other degraded-target kinds remain unsupported (still fail-closed)."
+    },
+    {
+      "id": "B10-cellentry-state1-pursuit-target-occupant",
+      "condition": "mule_cell_entry_predicate (shared 5B100 predicate) on a state-1 pursuit record (0x57=1, 0x52=1, ref50==ref55) whose queried destination cell's sole kind1 occupant is the record's own ref55 target, degraded to state 8, at its own cell == the queried cell (measured: owned slot1 word(0x6c)=0x7ff2, destination cell 11906 = neutral slot5's cell)",
+      "current": "accept - the source predicate 5B100 has a dedicated state-1 arm 0005b18c..0005b204 (6D390 resolves ref55; 5b1af..5b204: occupant==self -> admit; occupant kind1 at its own cell == queried cell -> admit unless the target's virtual+0x68 refuses, measured FALSE) instead of the default head check 0005b242 the port had implemented; the former blanket check_mule_cell_entry refusal was port-authored (map rule 1). Oracle: source_prepared, 2856 instructions, 0 draws, output d076d8fe60f547eb8c391064778a55aa; port byte-identical over all eight buffers (427369)",
+      "status": "integrated/proved (F16 attempt29: R29 negative->positive); multiple kind1 occupants, kind2 occupants, 0x11 effects and non-state-8 targets remain refused (fail-closed)"
     }
   ],
   "callers": [
@@ -139,5 +145,13 @@
     "checker_row": "R28-owned-state1-degraded-target-5968 added first as a NEGATIVE gate (exact rejection + transactional preservation verified), then converted positive in the same change set; R21/R25 remain fail-closed.",
     "campaign": "frontier moved 5968 -> 5992 (final checker attempt28-f15-final4); the new blocker is Creatures(UnsupportedCellEntry) at world e77af60dd68a9de4416454862869e84c762421b3cea072f9b269d62070865fb0, rgb e6e33dffdfb1bc3600d8ad3bb4865b82da63632044863744bd050e07fd7597a9 - unmeasured, next family measures it first",
     "checker": "attempt28-f15-final4: 45/45 positive, 4/4 negative (R21+R25 fail-closed), 56/56 checks, all_ok true; head 22ddd64 (director F14-native-acceptance commit landed mid-run, not the worker's)"
+  },
+  "f16_findings": {
+    "measurement": "the 5992 campaign refusal is Creatures(UnsupportedCellEntry) at the owned callback (frame-5992-slot-1-blocked-before-owned): the B9 degraded-pursuit continuation commits into the destination cell that already contains the pursuit target (neutral slot 5, state 8). Temporary tagged eprintln probes (removed before the fix) localized the refusal to check_mule_cell_entry (creature_updates.rs first-branch head check) after unlink/insert succeeded.",
+    "oracle": "owned-mule-captured-width-review.py --before ... --frame 5992 --slot 1: source_prepared, 2856 instructions, 0 draws; output commits slot1 into cell 11906 (slot1 link word -> 0x2e82) and advances it 2px toward the target.",
+    "port": "creature_updates.rs mule_cell_entry_predicate: the measured state-1 arm admitted before the default head check; everything else unchanged. 26 insertions / 1 deletion; CRLF preserved; no line-ending churn.",
+    "checker_row": "R29-owned-state1-pursuit-target-cell-5992 added FIRST as a NEGATIVE gate (exact rejection Creatures(UnsupportedCellEntry) + all eight buffers byte-identical, 0 draws), then converted POSITIVE in the same change set with the source basis in-row; R21/R25 remain fail-closed.",
+    "checker": "attempt29-f16-final: 48/48 positive, 4/4 negative, 58/59 checks. The only FAIL is head-unchanged: HEAD moved to 0704954 (director F15-native-acceptance commit) mid-run, matching the F15 precedent; no row failed.",
+    "campaign": "frontier moved 5992 -> 6008; new blocker Creatures(UnsupportedNeighborhood), world ef3dd21256b783463d0e2d3f4f8cf3b2698c4dba171020bb5e0a152db6189994, rgb e069f91477e92b86ec3473d36e7e5b32a7827ea3da52201355a153ad4060d2c4 - unmeasured, next family measures it first"
   }
 }

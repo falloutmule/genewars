@@ -206,8 +206,28 @@ POSITIVE = [
     dict(id='R28-owned-state1-degraded-target-5968', frame=5968, slot=1, draws=0, mode='direct',
          fixture='private/review/attempt28-5968-measure/capture/frame-5968-slot-1-blocked-before-owned',
          expected='private/review/owned-mule-captured-width/22da7a68d74f407b80611ca51ad602d0'),
+    dict(id='R29-owned-state1-pursuit-target-cell-5992', frame=5992, slot=1, draws=0, mode='direct',
+         fixture='private/review/attempt29-5992-measure/campaign/capture/frame-5992-slot-1-blocked-before-owned',
+         expected='private/review/owned-mule-captured-width/d076d8fe60f547eb8c391064778a55aa'),
 ]
 NEGATIVE = [
+    # F16 measurement-first NEGATIVE gate (added 2026-10-17, attempt29): pins the
+    # measured 5992 refusal. Owned Mule slot 1 in the B9 degraded-pursuit shape
+    # (0x5e=1, 0x60=0xc8, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1, word(0x6c)=0x7ff2)
+    # whose continuation now commits into the DESTINATION cell (plan.new_cell =
+    # 11906) that already contains creature slot 5 - the record's own ref55
+    # pursuit target (degraded to state 8, its own cell == the queried cell).
+    # The port's mule_cell_entry_predicate first branch runs the blanket
+    # check_mule_cell_entry head-check (any kind1 occupant refuses), while the
+    # source predicate 5B100 has a dedicated STATE-1 ARM 0005b18c..0005b204 that
+    # special-cases the ref55 target (5b1af..5b204: occupant==self -> admit;
+    # occupant kind1 at its own cell == queried cell -> admit unless the target's
+    # virtual+0x68 refuses; the measured oracle run admitted: slot1 committed,
+    # link word -> 0x2e82). Oracle: source_prepared, 2856 instructions, 0 draws
+    # (private/review/owned-mule-captured-width/d076d8fe60f547eb8c391064778a55aa).
+    # The gate asserts the exact expected rejection AND complete transactional
+    # world/RNG preservation. Converted to POSITIVE in this same change set; R21
+    # and R25 remain fail-closed. Never silently expanded to other occupants.
     # F9 fail-closed negative gate (added 2026-10-17 in the same change set as the
     # R20 conversion so the checker keeps at least one negative row). Pins the
     # domain the F8 evidence EXPLICITLY leaves unexecuted: the identical expired

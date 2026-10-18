@@ -761,7 +761,31 @@ impl ActorWorld {
         let approach_plant=record[0x5e]==1&&record[0x57]==2&&self.entity(reference(record,0x55))?[6]==2;
         let approach_corpse=record[0x5e]==1&&record[0x57]==1&&record[0x52]==1&&reference(record,0x50)==reference(record,0x55)
             &&matches!(self.creatures.as_ref().unwrap().record(word(record,0x55)as usize)?[0x5e],24..=27);
-        if !matches!(record[0x5e],3|8)&&!approach_plant&&!approach_corpse&&self.mule_live_hostile_target(record)?.is_none()&&self.owned_mule_live_hostile_target(record)?.is_none(){self.check_mule_cell_entry(own,cell)?;return Ok(false);}
+        if !matches!(record[0x5e],3|8)&&!approach_plant&&!approach_corpse&&self.mule_live_hostile_target(record)?.is_none()&&self.owned_mule_live_hostile_target(record)?.is_none(){
+            //5B100 state-1 arm (0005b18c..0005b204): state==1 resolves ref55 via
+            //6D390 and special-cases the pursuit target as the sole occupant of
+            //the queried cell: occupant==self -> admit; occupant kind1 at its OWN
+            //cell == queried cell -> admit unless the target's virtual+0x68
+            //refuses (measured FALSE for the degraded state-8 Mule, attempt29
+            //oracle d076d8fe60f547eb8c391064778a55aa, 2856 instructions, 0
+            //draws). The default head check (0005b242) covers every other shape
+            //unchanged; a kind2 occupant and unmeasured target states stay
+            //refused (5b220/5b1f5).
+            if record[0x5e]==1&&record[0x57]==1&&record[0x52]==1&&reference(record,0x50)==reference(record,0x55) {
+                let target_id=word(record,0x55)as usize;
+                let mut raw=reference(self.map(),cell*14+6);let mut occupant:Option<usize>=None;
+                while raw[2]!=0 {
+                    if raw[2]==5 {let pool=self.effects.as_ref().ok_or(CreatureError::UnsupportedCellEntry)?;if pool.record(word(&raw,0)as usize)?.get(0x45)==Some(&0x11){return Err(CreatureError::UnsupportedCellEntry.into());}}
+                    if raw[2]==1&&raw!=own {if occupant.is_some(){return Err(CreatureError::UnsupportedCellEntry.into());}occupant=Some(word(&raw,0)as usize);}
+                    raw=reference(self.entity(raw)?,3);
+                }
+                if let Some(id)=occupant {
+                    let target=*self.creatures.as_ref().unwrap().record(id)?;
+                    if id==target_id&&target[0x5e]==8&&floor_cell([word(&target,7),word(&target,9)])==cell {return Ok(false);}
+                    return Err(CreatureError::UnsupportedCellEntry.into());
+                }
+            }
+            self.check_mule_cell_entry(own,cell)?;return Ok(false);}
         if word(record,0x49)as u16&0x0400!=0{return Err(CreatureError::UnsupportedCellEntry.into());}
         let mut raw=reference(self.map(),cell*14+6);let mut last=None;
         while raw[2]!=0{
