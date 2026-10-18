@@ -1,0 +1,56 @@
+{
+  "receipt": "f21-b11-machinery-and-arm-checkpoint",
+  "created": "2026-10-18 (America/Denver)",
+  "kind": "family F21 - the machinery-blocked branch B11 built and implemented; campaign 6010 -> 6060",
+  "task_a_machinery": {
+    "new_module": "rust/crates/genewars-runtime/src/mule_owned_expired_replan.rs",
+    "a_6bdd0": "implemented data-driven: AL = byte[0x104a64 + 2*byte[rec+0x7a]] == 3, from an extracted 8-entry species-flag table; measured species 4 reads 0x04 -> false -> 65ef2 JZ 6a290 taken. 6c190 judged UNNECESSARY and not implemented - reachable only on the 6bdd0-true side (65ef8/65c4d) which the measured path never executes; it stays fail-closed as UnsupportedMotionState.",
+    "b_activation_tables": "implemented WRITE-ONLY, exactly as far as this path's own writes require: 0x9aa/0x10e4d8 (65cbe), 0xa03/0x10e4e5 (65deb), 0x59c/0x10e6b7 and 0x59d/0x10e6c0 (73c20), each with ring-value [0x11877e]. Cursor arithmetic mirrored by BlueprintRng.ring (rng.bin byte 2), counter by draw_count, LCG state by seed. No world-state table added because the path READS none of the entries and the consumers remain a separate unproved family - guessing them was forbidden.",
+    "c_6df30_vector": "judged NECESSARY but already present: the existing prefix produced identical 0x2d..0x31 / 0x39..0x3e deltas byte-identically on the passing R29/R30 gates, so no new machinery was added.",
+    "d_tick": "already modelled as counter=args.frame (F20 receipt); the ring gate mirrors it via (frame + word(0xf)) & 3 == 3. No new machinery.",
+    "supporting_ports": "5cc60/5c920/5cca0 zeroing block, 13e50/13e70/13eb0, 73c20's two-stage waypoint rebuild over the 0x107ee8/0x1086e8 slope tables, 5a990's word(0x3f) formula",
+    "static_data": "6bdd0 flags, 5a990 per-species dwords and both 2048-dword slope tables extracted from GW-CD-candidate.exe (sha256 4bdf296f..., LE object 3) with the repo's validated page-mapping recipe -> private/integration/game-runtime/creature/b11-tables.bin, FNV-1a64-pinned in the loader; missing or unpinned data refuses fail-closed; receipt private/integration/b11-tables-extraction.json. Loader offset sanity-checked against the cited INC dword ptr [0x11877e] at 0x1bd4f (bytes FF 05 7E 87 01 00)."
+  },
+  "task_b_arm": {
+    "function": "plan_expired_reacquisition, wired in owned_mule_updates.rs behind hostile_enemy.is_none() && record[0x5e]==1 && record[0x60]==0x48 && word(record,0x6c)==0 && word(&before,0x6c)==0",
+    "structure": "the full measured decision structure: 65c7d long side -> 65cb2 timer gate -> 65cbe -> 65cfe draw 1 -> 5cc60 flag -> 65d58 JNZ 65deb -> the 65deb block -> 8b780 -> 73c20 -> 0x54=0x14, word(0x49) 0x2000->0x2014, byte[0x4f]/[0x52]=0 -> 5a990 word(0x3f)=591 -> word(0x6c)=0x7fff, 0x60|=0x80 -> 6bdd0 false side -> shared tail DEC -> 0x7ffe"
+  },
+  "negative_gate": {
+    "R31": "converted negative -> positive in the same change set with the source basis in-row",
+    "remaining": "4 negative checks - the set was not emptied"
+  },
+  "director_verification": {
+    "run": "private/integration/F21-root-check-20261018T0345",
+    "result": {
+      "positive": "54/54",
+      "negative": "4/4",
+      "checks": "65/65",
+      "all_ok": true
+    },
+    "campaign": "steps 6060, blocked Creatures(UnsupportedMotionState), world 17e006760c8aa24c28d6c83efe2a31234afd76404ee5616ea2a5a97b691b1815, rgb 60d40939... - identical to the worker run",
+    "diff": "owned_mule_updates.rs +28/-0, lib.rs +1/-0, checker +73/-30 (to be checked for line-ending churn), creature_world.rs +2/-2 is the PRE-EXISTING F17 pub(crate) dirty diff, not F21's"
+  },
+  "frontier": {
+    "before": {
+      "steps": 6010,
+      "world": "c52ac990df36..."
+    },
+    "after": {
+      "steps": 6060,
+      "blocked": "Creatures(UnsupportedMotionState)",
+      "world_sha256": "17e006760c8aa24c28d6c83efe2a31234afd76404ee5616ea2a5a97b691b1815"
+    }
+  },
+  "significance": "B11 was machinery-blocked, not evidence-blocked (F20). F21 built only the machinery the measured path actually uses, explicitly skipped 6c190 as unexecuted, and refused to guess the activation-table consumers. The 50-step advance is the largest single family advance so far and follows directly from having closed the evidence gap first instead of guessing.",
+  "open": {
+    "next": "Creatures(UnsupportedMotionState) at 6060 - unmeasured",
+    "carry_forward": [
+      "F10 word(0x6c) constant + second 0x66 attribution",
+      "F11 hold shape bound",
+      "B0 food-guard unclosed",
+      "B8 kind-2-with-food-guard open",
+      "6c190 fail-closed side"
+    ]
+  },
+  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008 -> 6010 -> 6060"
+}

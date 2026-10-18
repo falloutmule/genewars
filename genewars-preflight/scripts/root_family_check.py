@@ -233,6 +233,79 @@ POSITIVE = [
     dict(id='R30-owned-degraded-pursuit-arrival-6008', frame=6008, slot=1, draws=0, mode='direct',
          fixture='private/review/attempt30-6008-measure/campaign/capture/frame-6008-slot-1-blocked-before-owned',
          expected='private/review/owned-mule-captured-width/b3ac36ab78474896ab7e200a37250f8b'),
+    # F18 fail-closed negative gate (added 2026-10-18, attempt31): pins the
+    # MEASURED 6010 refusal - the pre-prefix EXPIRED-TIMER side of the B9
+    # degraded-pursuit continuation, the boundary F17 explicitly left
+    # unsupported. Owned Mule slot 1 in the B9 arrival shape (0x5e=1,
+    # 0x60=0x48, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1, word(0x49)=0x2000) but with
+    # word(0x6c)=0 ALREADY BEFORE the callback (F17's arrival side carried
+    # word(0x6c)=0x7fea pre-prefix), so both the F15 fresh arm (word(0x6c)>0)
+    # and the F17 arrival arm (pre-prefix word(0x6c)>0) skip and the record
+    # falls into owned_mule_neighborhood_no_action, whose food guard
+    # (word(0x68)=5 <= word(0x62)>>1=65) refuses at owned_mule_updates.rs:401.
+    # The source oracle ADMITS this record: source_prepared, 2431 instructions,
+    # 4 draws, output
+    # private/review/owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b
+    # (slot-1-only deltas: 0x5e 1->8, 0x60 0x48->0x88, word(0x6c) -> 0x7ffe,
+    # 0x52/0x57 cleared, byte 0x54=0x14, word(0x49)|0x10, waypoint dword 0xb
+    # re-planned, word(0x3f)=79, bytes 0x2d..0x31 zeroed). The trace settles the
+    # DECISION STRUCTURE but not yet every mechanism: 65c7d JNZ
+    # ((word(0xf)+rng_ring)&3)==3 -> 65c9a; 65cb2 (0x7fff-word(0x6c))>0x100;
+    # 65cfe draw; 65d42 CALL 5cc60 -> flag -> 65d58 JNZ 65deb; 65deb draw;
+    # 65e68 byte[0x5e]=8; virtual+0x8c; 73c20 waypoint; 65ea1 0x49|=0x10;
+    # 65e97 byte[0x54]=0x14; 65ed6 word(0x6c)=0x7fff; 65eeb CALL 6bdd0; tail
+    # 6a4a0 DEC word(0x6c) -> 0x7ffe. NOT yet settled from listing text: 5c920
+    # (clears 0x52/0x57/0x2d..0x31), the [EBX+0x8c]/[EDX+0x80] virtuals (8b780),
+    # 6bdd0/6c190, the remaining 2 of 4 draw sites, and the creature-side
+    # activation-RNG refs (0x1185ac/0x11862c/0x1186ac). Deliberately NOT
+    # hand-fabricated; the gate asserts the exact expected rejection AND
+    # complete transactional world/RNG preservation. Never silently expanded.
+    # F21 CONVERSION of the R31 negative row to POSITIVE (2026-10-18, attempt34),
+    # per the family policy's "source-proved and intentionally expanded"
+    # condition. Source basis: the MEASURED 6010 record is the PRE-prefix
+    # EXPIRED-timer side of the B9 degraded-pursuit continuation (0x5e=1,
+    # 0x60=0x48, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1, word(0x49)=0x2000, word(0x6c)=0
+    # ALREADY before the callback), reaching the 65c60 ring gate on the state-1
+    # continuation 65743..65de6: LONG side ((word(0xf)+[0x11877e])&3)==3 =
+    # (6010+1)&3==3 ([0x11877e] = the mission tick, modeled as counter=args.frame
+    # per the F20 receipt, producer INC dword ptr [0x11877e] at 0x1bd4f); 65cb2
+    # timer gate (0x7fff-word(0x6c))>0x100; 65cbe activation write 0x9aa/0x10e4d8
+    # (cursor 26->27); 65cfe draw 1 (LCG -0x19d3, counter 50243->50244);
+    # 65d42 CALL 5cc60 -> 5c920 (0x60&2=0) -> jump-table entry 0 -> the 5cca0
+    # zeroing block (word[0x35]=0, byte[0x15]&=0xdf, word[0x33]=0,
+    # word[0x60]&=0xd71a 0x48->0x08, byte[0x5d]=0, byte[0x57]=0, word[0x6c]=0)
+    # with the flag (BH=1) preserved -> 65d58 JNZ 65deb taken; 65deb activation
+    # write 0xa03/0x10e4e5 (cursor 27->28) + draw 2 (LCG -0x44bf19d3, counter
+    # ->50245); 65e68 byte[0x5e]=8; 65e7a CALL [vtable+0x8c]=8b780 (measured
+    # AL!=0; the ECX arg 10..29 is never read by 8b780); 65e88 CALL 73c20:
+    # activation writes 0x59c/0x10e6b7 (cursor 28->29, counter +=2) and
+    # 0x59d/0x10e6c0 (cursor 29->30), draws 3-4 (counter ->50247), and the
+    # waypoint dword 0xb replanned from the 0x107ee8/0x1086e8 slope tables with
+    # index norm(rem3*8): measured 0x??48/0x??73 -> 0x23a/0x5d6c; 65e97
+    # byte[0x54]=0x14; 65ea1 word(0x49)|0x10; 65eaf CALL 13e50 (OR 0x4); 65eb4
+    # CALL 13e70 (AND word[0x49],0xeffc; AND byte[0x16],0x7f); 65ebb/65ec3 CALL
+    # 13eb0 (+0x4d, +0x50: byte[0x4f]=0, byte[0x52]=0); 65ed0 CALL
+    # [vtable+0x80]=5a990 -> word(0x3f)=((75+min(0x76,100)*25/100)*
+    # dword[0x1045fc+45*0x7a+6]/100*(0x7b+1))>>8 = 591; 65ed6 word(0x6c)=0x7fff;
+    # 65ee3 byte[0x60]|=0x80 -> 0x88; 65eeb CALL 6bdd0: AL = byte[0x104a64 +
+    # 2*byte[0x7a]]==3, species 4 reads 0x04 -> 65ef2 JZ 6a290 taken; shared
+    # tail 6a4a0 DEC word(0x6c) -> 0x7ffe. Seed 37665 -> 3889, ring 26 -> 30,
+    # counter 50243 -> 50247 corroborated by rng.bin. Oracle: source_prepared,
+    # 2431 instructions, 4 draws, output
+    # private/review/owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b;
+    # the port implements the same pinned arm in
+    # mule_owned_expired_replan::plan_expired_reacquisition (wired at
+    # owned_mule_updates.rs, pre word(0x6c)==0 gate). Table data extracted to
+    # private/integration/game-runtime/creature/b11-tables.bin from
+    # GW-CD-candidate.exe (receipt private/integration/b11-tables-extraction.json);
+    # missing/unpinned data refuses fail-closed. Every unmeasured side of the
+    # block stays fail-closed: ring-gate short side 65d4d/65d5e, timer-gate
+    # short side 65cb8 (and the unmodeled 65c84 kind==3 ECX doubling), draw-1
+    # flag JG side 65d3c, 8b780 AL==0 side 65c57, 6bdd0 true side 65ef8 with
+    # 6c190 (never executed on the measured path). R21/R25 remain fail-closed.
+    dict(id='R31-owned-state1-pursuit-expired-preprefix-6010', frame=6010, slot=1, draws=4, mode='direct',
+         fixture='private/review/attempt31-6010-measure/campaign/capture/frame-6010-slot-1-blocked-before-owned',
+         expected='private/review/owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b'),
 ]
 NEGATIVE = [
     # F16 measurement-first NEGATIVE gate (added 2026-10-17, attempt29): pins the
@@ -284,36 +357,6 @@ NEGATIVE = [
     # silently expanded.
     dict(id='R25-owned-idle-kind1-state-over-19-5966', frame=5966, slot=1,
          fixture='private/review/attempt27-owned-5966-kind1-state-1a',
-         expect_error='Creatures(UnsupportedNeighborhood)'),
-    # F18 fail-closed negative gate (added 2026-10-18, attempt31): pins the
-    # MEASURED 6010 refusal - the pre-prefix EXPIRED-TIMER side of the B9
-    # degraded-pursuit continuation, the boundary F17 explicitly left
-    # unsupported. Owned Mule slot 1 in the B9 arrival shape (0x5e=1,
-    # 0x60=0x48, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1, word(0x49)=0x2000) but with
-    # word(0x6c)=0 ALREADY BEFORE the callback (F17's arrival side carried
-    # word(0x6c)=0x7fea pre-prefix), so both the F15 fresh arm (word(0x6c)>0)
-    # and the F17 arrival arm (pre-prefix word(0x6c)>0) skip and the record
-    # falls into owned_mule_neighborhood_no_action, whose food guard
-    # (word(0x68)=5 <= word(0x62)>>1=65) refuses at owned_mule_updates.rs:401.
-    # The source oracle ADMITS this record: source_prepared, 2431 instructions,
-    # 4 draws, output
-    # private/review/owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b
-    # (slot-1-only deltas: 0x5e 1->8, 0x60 0x48->0x88, word(0x6c) -> 0x7ffe,
-    # 0x52/0x57 cleared, byte 0x54=0x14, word(0x49)|0x10, waypoint dword 0xb
-    # re-planned, word(0x3f)=79, bytes 0x2d..0x31 zeroed). The trace settles the
-    # DECISION STRUCTURE but not yet every mechanism: 65c7d JNZ
-    # ((word(0xf)+rng_ring)&3)==3 -> 65c9a; 65cb2 (0x7fff-word(0x6c))>0x100;
-    # 65cfe draw; 65d42 CALL 5cc60 -> flag -> 65d58 JNZ 65deb; 65deb draw;
-    # 65e68 byte[0x5e]=8; virtual+0x8c; 73c20 waypoint; 65ea1 0x49|=0x10;
-    # 65e97 byte[0x54]=0x14; 65ed6 word(0x6c)=0x7fff; 65eeb CALL 6bdd0; tail
-    # 6a4a0 DEC word(0x6c) -> 0x7ffe. NOT yet settled from listing text: 5c920
-    # (clears 0x52/0x57/0x2d..0x31), the [EBX+0x8c]/[EDX+0x80] virtuals (8b780),
-    # 6bdd0/6c190, the remaining 2 of 4 draw sites, and the creature-side
-    # activation-RNG refs (0x1185ac/0x11862c/0x1186ac). Deliberately NOT
-    # hand-fabricated; the gate asserts the exact expected rejection AND
-    # complete transactional world/RNG preservation. Never silently expanded.
-    dict(id='R31-owned-state1-pursuit-expired-preprefix-6010', frame=6010, slot=1,
-         fixture='private/review/attempt31-6010-measure/campaign/capture/frame-6010-slot-1-blocked-before-owned',
          expect_error='Creatures(UnsupportedNeighborhood)'),
 ]
 

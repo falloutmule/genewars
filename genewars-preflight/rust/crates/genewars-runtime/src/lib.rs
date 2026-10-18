@@ -155,6 +155,7 @@ pub mod owned_mule_ai;
 pub mod owned_mule_common_choice;
 pub mod owned_mule_callback;
 pub mod mule_owned_command;
+pub mod mule_owned_expired_replan;
 
 pub mod mule_corpse_arrival;
 pub mod mule_corpse_abandon;

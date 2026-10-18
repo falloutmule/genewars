@@ -190,6 +190,34 @@ impl ActorWorld {
      if delta.abs()<=256||!(0..2048).contains(&yaw){return Err(CreatureError::UnsupportedMotionState);}
      let mut after=*record;after[0x4b..0x4d].copy_from_slice(&0i16.to_le_bytes());return Ok(after);
     }
+    //F21/attempt34 B11 CONVERSION of the R31 negative row to POSITIVE in this
+    //same change set, per the family policy's "source-proved and intentionally
+    //expanded" condition. The PRE-prefix EXPIRED-timer side of the same B9
+    //degraded-pursuit continuation (word(&before,0x6c)==0 ALREADY before the
+    //callback; fixture attempt31-6010-measure, frame 6010): the source reaches
+    //the 65c60 ring gate on the state-1 continuation 65743..65de6 and takes
+    //the LONG side ((word(0xf)+[0x11877e])&3)==3 = (6010+1)&3==3, the 65cb2
+    //timer gate (0x7fff-0 > 0x100), then 65cbe activation write 0x9aa/
+    //0x10e4d8, 65cfe draw 1, 65d42 CALL 5cc60 -> 5cca0 zeroing block ->
+    //65d58 JNZ 65deb taken, 65deb activation write 0xa03/0x10e4e5 + draw 2,
+    //65e68 byte[0x5e]=8, 65e7a CALL [vtable+0x8c]=8b780 (measured AL!=0),
+    //65e88 CALL 73c20 (activation writes 0x59c/0x10e6b7 and 0x59d/0x10e6c0,
+    //draws 3-4, waypoint dword 0xb replanned from the 0x107ee8/0x1086e8 slope
+    //tables), 0x54=0x14, word(0x49)|0x10|0x4 &0xeffc, byte[0x4f]=0 (13eb0
+    //+0x4d), byte[0x52]=0 (13eb0 +0x50), 65ed0 CALL 5a990 -> word(0x3f),
+    //word(0x6c)=0x7fff, byte[0x60]|=0x80, 65eeb CALL 6bdd0 (species byte
+    //0x104a64+2*0x7a = 0x04 != 3 -> 65ef2 JZ 6a290) and the shared tail
+    //6a4a0 DEC word(0x6c) -> 0x7ffe. Oracle: source_prepared, 2431
+    //instructions, 4 draws, output
+    //private/review/owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b
+    //(slot-1-only deltas match the pinned arm). The machinery lives in
+    //mule_owned_expired_replan; every unmeasured side of this block (ring
+    //short side, timer-gate short side, draw-1 flag JG side, 8b780 AL==0 side,
+    //6bdd0 true side/6c190) stays fail-closed there. The activation-table
+    //consumers are a separate unproved family and are NOT guessed.
+    if hostile_enemy.is_none()&&record[0x5e]==1&&record[0x60]==0x48&&word(record,0x6c)==0&&word(&before,0x6c)==0{
+     return crate::mule_owned_expired_replan::plan_expired_reacquisition(record,&mut random.borrow_mut(),context.frame_counter);
+    }
     let world=stage.borrow();let mut r=*record;if r[0x5e]==0{r[0x5e]=8;}
 
     if let Some(enemy)=world.owned_mule_single_hostile(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)? {
