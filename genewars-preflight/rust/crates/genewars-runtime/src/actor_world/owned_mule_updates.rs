@@ -73,7 +73,25 @@ impl ActorWorld {
   }
   let command_retained=before[0x5e]==8&&before[0x61]==0x80&&before[0x60]==0x18&&before[0x78]==7
    &&before[0x52]==1&&before[0x57]==0&&before[0x5a]==1;
-  if !command_retained&&((matches!(before[0x5e],1|21)||before[0x5e]==8&&before[0x52]!=0))&&hostile_enemy.is_none(){return Err(CreatureError::UnsupportedMotionState.into());}
+  //5968 measured state-1 pursuit continuation over a DEGRADED target: the
+  //enemy (neutral Mule slot 5) reached state 8 (0x60=0x88, 0x61=0x40, 0x78=0,
+  //0x55-ref back at the owned mule) while the owned mule keeps pursuit
+  //(0x5e=1, 0x60=0xc8, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1, 0x6c=0x7ffe). The
+  //source full path 0x5ed20->0x5ed3b(JZ 0x5ee1c)->0x6fb60 virtual94 movement
+  //prefix->0x5ee25..0x5ee32 parity gate (odd) ->0x5eed5..0x5ef1f->0x5ef22
+  //CALL 0x5e0b0->0x5ef32 CALL 0x5eb30->0x5ef37..0x5ef40 (word(0x6c) fresh side)
+  //->0x5ef49->0x6a22b..0x6a2dd->0x65743..0x65de6 (state-1 movement
+  //continuation)->tail 0x6a290..0x6a53e (0x6a4a0 DEC word(0x6c))->0x7ac00
+  //epilogue (2542 instructions, 0 draws) NEVER reads the enemy record
+  //(private/review/attempt28-5968-probe-2a44a5da; oracle output
+  //owned-mule-captured-width/22da7a68d74f407b80611ca51ad602d0). The enemy
+  //state is admission-only on this path, so the pursuit admission stands
+  //without target liveness; everything outside this shape keeps refusing.
+  let degraded_pursuit=before[0x5e]==1&&matches!(before[0x60],0x48|0xc8)&&before[0x61]==0
+   &&before[0x78]==7&&before[0x4f]==0&&before[0x5d]==0&&before[0x52]==1&&before[0x57]==1&&before[0x5a]==1
+   &&reference(&before,0x50)==reference(&before,0x55)&&reference(&before,0x58)==reference(&before,0x55)
+   &&before[0x76]<=90&&word(&before,0x49)as u16&0x100==0;
+  if !command_retained&&!degraded_pursuit&&((matches!(before[0x5e],1|21)||before[0x5e]==8&&before[0x52]!=0))&&hostile_enemy.is_none(){return Err(CreatureError::UnsupportedMotionState.into());}
   let mut rng=self.rng;let(prefix,target)=self.mule_route_prefix(&before,context.frame_counter,physics,trig,&mut rng,false)?;
   let stage=std::cell::RefCell::new(self.clone());let random=std::cell::RefCell::new(rng);let reveals=std::cell::RefCell::new(Vec::new());let audio=std::cell::RefCell::new(Vec::new());
   let(plan,_water)=crate::owned_mule_callback::plan_owned_after_prefix(&before,&prefix,target,self.map(),context,physics,trig,
@@ -137,6 +155,15 @@ impl ActorWorld {
       }
      }return Ok(*record);
     }}
+    //5968 measured degraded-target pursuit continuation: with a live enemy the
+    //state-1 arm above returns the record unchanged beyond contact distance;
+    //the measured source path (5ef32 CALL 5eb30 -> 5eb36..5ec98 -> 5ef37
+    //JLE NOT taken, word(0x6c)=0x7ffe -> 5ef49 -> movement continuation ->
+    //tail) likewise runs NO 624B8 AI and NO 6B700 neighborhood scan - the
+    //trace never reaches 624B8 (private/review/attempt28-5968-probe-2a44a5da).
+    //Pin exactly that arm for the degraded shape; expired timers (word(0x6c)==0)
+    //and other kinds keep refusing below.
+    if hostile_enemy.is_none()&&record[0x5e]==1&&matches!(record[0x60],0x48|0xc8)&&word(record,0x6c)>0{return Ok(*record);}
     let world=stage.borrow();let mut r=*record;if r[0x5e]==0{r[0x5e]=8;}
 
     if let Some(enemy)=world.owned_mule_single_hostile(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)? {

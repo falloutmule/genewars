@@ -182,6 +182,30 @@ POSITIVE = [
     dict(id='R24-owned-arrival-idle-kind1-neighbor-5966', frame=5966, slot=1, draws=4, mode='oracle', oracle='owned',
          fixture='private/review/attempt25-live-5966-blocked-owned',
          instructions=31638),
+    # F15 attempt28: the R28 measurement-first NEGATIVE gate (same fixture)
+    # CONVERTED TO POSITIVE (2026-10-17) per the family policy's
+    # "source-proved and intentionally expanded" condition. Source basis: the
+    # literal executed path 0x5ed20 -> 0x5ed3b (JZ 0x5ee1c) -> 0x6fb60
+    # virtual94 movement prefix -> 0x5ee25..0x5ee32 parity gate (JNZ taken:
+    # byte[0x11877e]+[esi+0xf] odd) -> 0x5eed5..0x5ef1f -> 0x5ef22 CALL
+    # 0x5e0b0 -> 0x5ef32 CALL 0x5eb30 -> 0x5ef37..0x5ef40 (word(0x6c)=0x7ffe,
+    # fresh-timer side) -> 0x5ef49 -> 0x6a22b..0x6a2dd -> 0x65743..0x65de6
+    # (state-1 movement continuation) -> tail 0x6a290..0x6a53e (0x6a4a0 DEC
+    # word(0x6c) executed) -> 0x7ac00 epilogue; 2542 instructions, 0 draws,
+    # and ZERO accesses to the enemy record region (probe
+    # private/review/attempt28-5968-probe-2a44a5da): the degraded target
+    # (enemy state 8, 0x55-ref back at the owned mule) is admission-only
+    # data on this path. The reference model extended first
+    # (owned-mule-captured-width-review.py degraded-enemy admission; output
+    # source_prepared 22da7a68d74f407b80611ca51ad602d0, 2542 instructions,
+    # 0 draws, slot-1-only 12-byte delta), then the port implemented the
+    # same pinned arm (degraded_pursuit admission at owned_mule_updates.rs
+    # + the 5EB30 no-AI continuation in the choice callback). Same fixture
+    # as the former negative gate; this is NOT a conversion of any other
+    # row. R21/R25 remain as fail-closed negatives.
+    dict(id='R28-owned-state1-degraded-target-5968', frame=5968, slot=1, draws=0, mode='direct',
+         fixture='private/review/attempt28-5968-measure/capture/frame-5968-slot-1-blocked-before-owned',
+         expected='private/review/owned-mule-captured-width/22da7a68d74f407b80611ca51ad602d0'),
 ]
 NEGATIVE = [
     # F9 fail-closed negative gate (added 2026-10-17 in the same change set as the

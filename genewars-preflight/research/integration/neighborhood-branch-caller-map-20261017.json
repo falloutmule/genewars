@@ -62,6 +62,12 @@
       "condition": "raw[2]==2 && food_guard",
       "current": "falls into B6",
       "status": "source-known/not integrated - 6BD3D/6B72A skip branches should decide this, not the catch-all"
+    },
+    {
+      "id": "B9-owned-state1-pursuit-degraded-target",
+      "condition": "owned full-path admission (odd phase, 0x61=0, NOT the 6B700 walk): 0x5e==1 hostile pursuit, 0x60 in {0x48,0xc8}, 0x78=7, 0x52/0x57/0x5a=1, refs 0x50/0x58==0x55, 0x4f=0, 0x5d=0, 0x76<=90, word(0x49)&0x100==0, where the 0x55-target is no longer a live state-1/20/21 hostile (measured: neutral Mule slot 5 state 8, 0x60=0x88, 0x61=0x40, 0x78=0, 0x55-ref back at the owned mule, word(0x6c)=0x7ffe fresh timer)",
+      "current": "accept - the source full path (0x5ed20->0x5ed3b JZ 0x5ee1c->0x6fb60 virtual94 movement prefix->0x5ee25..0x5ee32 parity gate JNZ odd->0x5eed5..0x5ef1f->0x5ef22 CALL 0x5e0b0->0x5ef32 CALL 0x5eb30->0x5ef37..0x5ef40 fresh-timer side->0x5ef49->0x6a22b..0x6a2dd->0x65743..0x65de6 movement continuation->tail 0x6a290..0x6a53e with 0x6a4a0 DEC word(0x6c)->0x7ac00) NEVER reads the enemy record, runs NO 624B8 AI and NO 6B700 scan (2542 instructions, 0 draws; probe private/review/attempt28-5968-probe-2a44a5da). The prior port refusal at owned_mule_updates.rs line 76 (hostile_enemy.is_none) was a port-authored predicate, per map rule 1.",
+      "status": "integrated/proved (F15 attempt28: R28 negative->positive; oracle extension in owned-mule-captured-width-review.py admits the measured degraded shape, output owned-mule-captured-width/22da7a68d74f407b80611ca51ad602d0; port degraded_pursuit admission + 5EB30 no-AI continuation arm, byte-identical, 0 draws). word(0x6c)==0 expired-timer variants and other degraded-target kinds remain unsupported (still fail-closed)."
     }
   ],
   "callers": [
@@ -125,5 +131,13 @@
     "hostile_kind1": "0x6B9B0..0x6B9C3 sets action-eligible=1 and state!=0xF; 0x6B9CF..0x6B9FE updates best distance and bucket [player*4+0x2D]; 0x6BA09..0x6BA40 updates the best action, bucket [player*4+0x6D] and [0x1AD]; 0x6BA47..0x6BA4C (kind 1<2) -> 0x6BD2B, JZ 0x6BA8A taken; 0x6BA8A..0x6BAF3 increments the kind-1 counter and applies the weighted score [player*4+0xED] += ([0x1E0]+0x1F)*EDI/100",
     "f1_r13_resolved": "the 6BA47 food-guard question is now pinned: 0x6BA47..0x6BA4C takes kind 1 < 2 to 0x6BD2B, and 0x6BD2D JZ 0x6BA8A is taken, which is exactly the 'enters 0x6ba3b..0x6ba4c, leaves at 0x6bd2b' observation. It was never a food-guard skip - it is the kind-dispatch path into the kind-1 scoring arm.",
     "checker": "attempt26-neighborhood-refcheck: 39/39 positive, 4/4 negative (R24 correctly still negative), 50/50 checks, campaign unchanged at 5966 - a research-only change, as instructed"
+  },
+  "f15_findings": {
+    "measurement": "the 5968 campaign refusal is Creatures(UnsupportedMotionState) at the OWNED callback (frame-5968-slot-1-blocked-before-owned), NOT the 6B700 neighborhood walk: owned Mule slot 1 in state-1 hostile pursuit (0x60=0xc8) whose target degraded to state 8. Genuinely a different branch from B0..B8 - it is the owned full-path pursuit admission, kept as its own map branch (B9).",
+    "oracle": "owned-mule-captured-width-review.py rejected the record until the degraded-enemy admission was added (F8-pattern extension, cited executed path); then source_prepared, 2542 instructions, 0 draws.",
+    "port": "owned_mule_updates.rs: degraded_pursuit admission (pursuit shape without target liveness) + a choice-callback arm returning the record unchanged for 0x5e==1, 0x60 in {0x48,0xc8}, word(0x6c)>0 without a live enemy (source: 5EB30 returns without 624B8).",
+    "checker_row": "R28-owned-state1-degraded-target-5968 added first as a NEGATIVE gate (exact rejection + transactional preservation verified), then converted positive in the same change set; R21/R25 remain fail-closed.",
+    "campaign": "frontier moved 5968 -> 5992 (final checker attempt28-f15-final4); the new blocker is Creatures(UnsupportedCellEntry) at world e77af60dd68a9de4416454862869e84c762421b3cea072f9b269d62070865fb0, rgb e6e33dffdfb1bc3600d8ad3bb4865b82da63632044863744bd050e07fd7597a9 - unmeasured, next family measures it first",
+    "checker": "attempt28-f15-final4: 45/45 positive, 4/4 negative (R21+R25 fail-closed), 56/56 checks, all_ok true; head 22ddd64 (director F14-native-acceptance commit landed mid-run, not the worker's)"
   }
 }

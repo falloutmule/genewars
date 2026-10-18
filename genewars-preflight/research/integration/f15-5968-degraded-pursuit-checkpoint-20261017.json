@@ -1,0 +1,61 @@
+{
+  "receipt": "f15-5968-degraded-pursuit-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "family F15 - map-first selection applied to a MEASURED branch that is NOT on the walk map; campaign 5968 -> 5992",
+  "measurement": {
+    "fixture": "private/review/attempt28-5968-probe-2a44a5da / capture frame-5968-slot-1-blocked-before-owned",
+    "caller": "the owned Mule step callback (owned_mule_updates.rs:11) - NOT the 6B700 neighbourhood walk",
+    "record": "slot 1, owner 0, state-1 hostile pursuit (0x5e=1, 0x60=0xc8, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1, 0x6c=0x7ffe, 0x76=37); target (neutral slot 5) DEGRADED to state 8 (0x60=0x88, 0x61=0x40, 0x6c=0xf)",
+    "oracle": "rejects unextended ('requires exact live neutralMule state1 hostile target')",
+    "source_probe": "widening only the enemy admission executed the full path 0x5ed20->...->0x5ef22 CALL 0x5e0b0->0x5ef32 CALL 0x5eb30->0x6a22b..0x6a2dd->0x65743..0x65de6->tail 0x6a290..0x6a53e (0x6a4a0 DEC word(0x6c))->0x7ac00: 2542 instructions, 0 draws, ZERO enemy-record accesses",
+    "conclusion": "the port's refusal was a port-authored predicate - map rule 1 applied, the admitted source path never reads the field the guard uses"
+  },
+  "map": {
+    "new_branch": "B9-owned-state1-pursuit-degraded-target",
+    "boundary": "B6/B8 walk branches untouched; neutral-side caller queries untouched (different caller semantics)",
+    "rule": "the 5968 refusal is a genuinely separate branch from the 6B700 walk"
+  },
+  "implementation": {
+    "files": [
+      "rust/crates/genewars-runtime/src/actor_world/owned_mule_updates.rs"
+    ],
+    "content": "a bounded `degraded_pursuit` admission (pursuit shape without target liveness) at the former line-76 refusal, plus a choice-callback arm returning the record unchanged for 0x5e==1, 0x60 in {0x48,0xc8}, word(0x6c)>0, no live target",
+    "diff": "28 insertions / 1 deletion in the port; 24 / 0 in the checker - no line-ending churn this time"
+  },
+  "negative_gate": {
+    "R28": "added FIRST to the negative list, verified as exact rejection + complete transactional preservation (8 buffers byte-identical, 0 draws), then converted positive in the same change set with the source basis in-row",
+    "remaining": "R21 and R25 stay fail-closed; 4 negative checks - the set was never emptied",
+    "invalidated_runs": "final/final2/final3 were invalidated by a misplaced R28 row and an IndentationError, both caught and documented by the worker; final4 is authoritative"
+  },
+  "director_verification": {
+    "run": "private/integration/F15-root-check-20261017T2150",
+    "result": {
+      "positive": "45/45",
+      "negative": "4/4",
+      "checks": "56/56",
+      "all_ok": true
+    },
+    "campaign": "steps 5992, blocked Creatures(UnsupportedCellEntry), world e77af60dd68a9de4416454862869e84c762421b3cea072f9b269d62070865fb0, rgb e6e33dffdfb1bc3600d8ad3bb4865b82da63632044863744bd050e07fd75... - identical to the worker's attempt28-f15-final4"
+  },
+  "frontier": {
+    "before": {
+      "steps": 5968,
+      "world": "b59ff966e73836ad231f9900715687d0bd59c5187bb58d6f79de1493780f5f31"
+    },
+    "after": {
+      "steps": 5992,
+      "blocked": "Creatures(UnsupportedCellEntry)",
+      "world_sha256": "e77af60dd68a9de4416454862869e84c762421b3cea072f9b269d62070865fb0"
+    }
+  },
+  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992. The map-first rule is already visible in the result: F15 did not chase the walk after F14 closed it - it measured, found the refusing caller was not the walk at all, and closed the correct branch while leaving the walk branches untouched.",
+  "open": {
+    "next": "Creatures(UnsupportedCellEntry) at 5992 - unmeasured; measure before implementing",
+    "carry_forward": [
+      "F10 word(0x6c) constant + second 0x66 attribution",
+      "F11 hold shape bound",
+      "B0 food-guard still unclosed",
+      "B8 kind-2-with-food-guard open"
+    ]
+  }
+}
