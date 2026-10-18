@@ -41,14 +41,24 @@ pub fn plan_acquisition(current:&CreatureRecord,enemy:&CreatureRecord,rng_before
   ||current[0x60]!=8||current[0x61]!=0||current[0x78]!=7
   ||current[0x76]>90||current[0x77]!=255||current[0x7b]!=255
   ||current[0x15]!=0x80||!matches!(current[0x16],2|0x82)
-  ||current[0x4f]!=0||current[0x52]!=0||current[0x57]!=0||current[0x5a]!=0||current[0x5d]!=0
+  //F14: the measured 5966 idle record retains 0x5a=1 through the arrival
+  //clear; 5B580's 5B5CC..5B5E8 writes w58/0x5a exactly when 0x78!=0, so the
+  //retained-task flag is admitted only in that domain.
+  ||current[0x4f]!=0||current[0x52]!=0||current[0x57]!=0||current[0x5a]!=0&&current[0x78]==0||current[0x5d]!=0
   ||word(current,0x6c)!=0||word(current,0x6a)<=0||word(current,0x64)<=0
   ||word(current,0x6a)>word(current,0x64)||word(current,0x66)<=2
   ||word(current,0x68)<=0||word(current,0x62)<=0
   ||word(current,0x68)>(word(current,0x62)>>1)
   ||word(current,0x49)as u16&0x100!=0{return Err(Error::Current);}
- if enemy[6]!=1||enemy[24]!=4||enemy[122]!=4||enemy[94]!=1
-  ||enemy[0x60]!=0xc8||enemy[0x61]!=0x40||enemy[0x78]!=0
+ //F14 (2026-10-17): the 624B8 idle walk's hostile kind-1 arm (scorer 6B700:
+ //6B7DF..6B7FE alliance TEST with the validated 75 04 decode; kind dispatch
+ //6B81E..6B830 table 6BD70[0] -> 6B9B0; 6B9B0..6B9C3 state!=0xF; 6BA8A..6BAF3
+ //state<0x1A, [ESI+0x60]&1==0) also selects a live neutral Mule in the state8
+ //in-pursuit shape 0x5e=8/0x60=0x88, executed on the measured 5966 record
+ //(oracle trace private/review/owned-mule-captured-width/
+ //9c48d067bdd04c5d807ca4c4ce3140d3: 4 draws, slot1 -> state1/0xc8 acquisition).
+ if enemy[6]!=1||enemy[24]!=4||enemy[122]!=4||!(enemy[94]==1&&enemy[0x60]==0xc8||enemy[94]==8&&enemy[0x60]==0x88)
+  ||enemy[0x61]!=0x40||enemy[0x78]!=0
   ||enemy[0x4f]!=0||enemy[0x5d]!=0||enemy[0x52]!=1||enemy[0x57]!=1
   ||word(enemy,0x50)!=id||word(enemy,0x55)!=id
   ||word(enemy,0x49)as u16&0x400!=0||word(enemy,0x6a)<=0

@@ -157,6 +157,31 @@ POSITIVE = [
     dict(id='R23-neutral-state8-pursuit-88-40-5963', frame=5963, slot=5, draws=0, mode='direct',
          fixture='private/review/attempt24-live-5963-blocked-neutral',
          expected='private/review/neutral-mule-captured-width/4d36d9f1ee814938abd972b8808972b1'),
+    # F14 CONVERSION of the R24 negative row to POSITIVE (2026-10-17), per the
+    # family policy's "source-proved and intentionally expanded" condition.
+    # Source basis (F13/F14): the corrected campaign blocked here ONLY because
+    # the port had no hostile kind-1 candidate arm; the original EXECUTES a
+    # specific branch. Scorer 0x6B700: alliance test 0x6B7DF..0x6B7FE computes
+    # DL=[self_owner*0x70d+0x6e5], EAX=1<<cand_owner, TEST EDX,EAX with the
+    # VALIDATED bytes 75 04 (JNZ 0x6B804; the Ghidra listing's 0x6B800 render is
+    # wrong), so with player0's mask 0 the neutral Mule is HOSTILE; kind
+    # dispatch 0x6B81E..0x6B830 -> jump table 0x6BD70[0]=0x6B9B0 (confirmed
+    # executed); hostile arm 0x6B9B0..0x6B9C3 (state!=0xF), 0x6BA8A..0x6BAF3
+    # (candidate state<0x1A, [ESI+0x60]&1==0). The owned idle AI then dispatches
+    # the 5B580 case-1 acquisition (trace call order ... 0x62874 -> 0x5b580 ->
+    # 0x5cc60 ... -> 0x62e24 -> tail 0x6a290..). The owned oracle executed the
+    # whole callback on this exact fixture (trace
+    # private/review/owned-mule-captured-width/9c48d067bdd04c5d807ca4c4ce3140d3:
+    # 31638 instructions, 4 draws, slot1-only 32-byte creature delta + one
+    # reveal backing byte) and adjudicates this row through --expected; the
+    # port implements the same arm in owned_mule_single_hostile's hostile
+    # kind-1 classification plus the widened
+    # mule_owned_hostile_acquisition::plan_acquisition (enemy state8/0x88
+    # pursuit shape; retained 0x5a=1 with 0x78=7). This is NOT a conversion of
+    # any other row; the catch-all still refuses every unproved candidate.
+    dict(id='R24-owned-arrival-idle-kind1-neighbor-5966', frame=5966, slot=1, draws=4, mode='oracle', oracle='owned',
+         fixture='private/review/attempt25-live-5966-blocked-owned',
+         instructions=31638),
 ]
 NEGATIVE = [
     # F9 fail-closed negative gate (added 2026-10-17 in the same change set as the
@@ -176,20 +201,21 @@ NEGATIVE = [
     dict(id='R21-owned-state20-expired-timer-zero-6a-5946', frame=5946, slot=1,
          fixture='private/review/attempt22-owned-5946-expired-timer-zero-6a',
          expect_error='Creatures(UnsupportedMotionState)'),
-    # F12 measurement-first NEGATIVE gate (added 2026-10-17, before any port
-    # change). Pins the live 5966 refusal: the corrected campaign
-    # (attempt25-campaign-20261017T172307) blocks at step 5966 with
-    # Creatures(UnsupportedNeighborhood) - a NEW error class, so the refusing
-    # site is owned_mule_updates.rs owned_mule_neighborhood_no_action's
-    # catch-all neighborhood arm (owned_mule_updates.rs:344 at measurement
-    # time), reached from the owned choice callback after the shared arrival
-    # block cleared the explicit command (0x61 0x80->0, 0x60 0x98->0x08,
-    # word(0x6c)->0) and dispatched ordinary owned idle AI (624B8/6BA47).
-    # The refused neighbor is a kind=1 owner-4 creature (the neutral Mule).
-    # The gate asserts the exact expected rejection AND complete transactional
-    # preservation. Never silently expanded.
-    dict(id='R24-owned-arrival-idle-kind1-neighbor-5966', frame=5966, slot=1,
-         fixture='private/review/attempt25-live-5966-blocked-owned',
+    # F14 fail-closed negative gate (added 2026-10-17 in the same change set as
+    # the R24 conversion so the checker keeps at least two honest negatives).
+    # Pins the domain the F14 evidence EXPLICITLY leaves uncounted: the same
+    # 5966 owned idle walk with the kind-1 candidate's state forced to 0x1A,
+    # where the scorer's hostile arm 0x6BA8A..0x6BAF3 requires candidate
+    # state<0x1A, so the Mule is not counted and the downstream idle
+    # continuation is UNEXECUTED by the oracle (31638-instruction trace
+    # 9c48d067bdd04c5d807ca4c4ce3140d3 ran with state=8). The fixture is
+    # DERIVED, not measured: creatures.bin slot 5 byte 0x5e 8 -> 0x1A, all
+    # other bytes of all eight buffers byte-identical to the live capture.
+    # The port's catch-all must refuse it. The gate asserts the exact expected
+    # rejection AND complete transactional world/RNG preservation. Never
+    # silently expanded.
+    dict(id='R25-owned-idle-kind1-state-over-19-5966', frame=5966, slot=1,
+         fixture='private/review/attempt27-owned-5966-kind1-state-1a',
          expect_error='Creatures(UnsupportedNeighborhood)'),
 ]
 

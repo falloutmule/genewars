@@ -13,7 +13,7 @@
       "id": "B0-food-guard",
       "condition": "food_guard = word(0x68) <= word(0x62)>>1 || 0x61&0x40 != 0",
       "current": "returns Err(UnsupportedNeighborhood) unless completed_command (state 8, 0x61=0, 0x60 in {8,0x88}, 0x78=7)",
-      "status": "focused-only / PROVISIONAL - this is the F1-R13 6BA47 food-guard item, still unclosed"
+      "status": "RESOLVED 2026-10-17 (F13/F14): 6BA47..6BA4C is the kind dispatch (kind 1<2 -> 6BD2B, JZ 6BA8A), not a food-guard skip; the F1-R13 provisional note in private/integration/verification-anomalies-20261017.md carries the correction"
     },
     {
       "id": "B1-kind2-plant",
@@ -47,15 +47,15 @@
     },
     {
       "id": "B6-CATCH-ALL",
-      "condition": "any other raw[2] (including kind 1 = creature), or a known kind failing its inner condition",
-      "current": "Err(UnsupportedNeighborhood) - THE LIVE 5966 BLOCKER",
-      "status": "unknown/out of scope - NOT established by source that the original refuses; the error name alone is not evidence"
+      "condition": "any other raw[2], or a known kind failing its inner condition (including kind 1 at/above state 0x1A, non-sole hostile candidates, and kind 2 with food_guard = B8)",
+      "current": "Err(UnsupportedNeighborhood) - no longer the 5966 blocker (the hostile kind-1 arm landed), still fail-closed for every unproved candidate",
+      "status": "unsupported by policy - refuse-and-preserve; each remaining branch is decided only as its source proof lands"
     },
     {
       "id": "B7-kind1-creature",
       "condition": "raw[2]==1 (creature candidate in the walk)",
-      "current": "falls into B6",
-      "status": "source-known/not integrated - the source classification for creature candidates in 8D930 is the open question"
+      "current": "hostile kind-1 arm integrated (owned_mule_single_hostile): alliance test 6B7DF..6B7FE with the validated 75 04 decode (aligned candidates skipped), kind dispatch 6B81E..6B830 table 6BD70[0]=6B9B0, state!=0xF, state<0x1A, [ESI+0x60]&1==0, then the 5B580 case-1 acquisition via widened mule_owned_hostile_acquisition::plan_acquisition; byte-identical to the owned oracle on the 5966 record (4 draws). A kind-1 candidate at/above state 0x1A is still refused by the catch-all (R25 fail-closed negative)",
+      "status": "integrated/proved for the measured sole-hostile idle domain (R24 converted positive); kind-1 state>=0x1A and non-sole candidates remain unsupported (R25 negative)"
     },
     {
       "id": "B8-kind2-with-food-guard",
@@ -67,8 +67,8 @@
   "callers": [
     {
       "caller": "owned idle AI (624B8/6BA47) via the owned choice callback",
-      "uses": "owned_mule_neighborhood_no_action",
-      "status": "integrated for the proved candidate kinds; blocker is B6/B7"
+      "uses": "owned_mule_single_hostile (hostile kind-1 classification) + mule_owned_hostile_acquisition::plan_acquisition; owned_mule_neighborhood_no_action only when no hostile is selected",
+      "status": "integrated for the proved candidate kinds including the hostile kind-1 arm (F14); the catch-all (B6/B8) is unchanged"
     },
     {
       "caller": "neutral slot",

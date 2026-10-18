@@ -138,6 +138,7 @@ impl ActorWorld {
      }return Ok(*record);
     }}
     let world=stage.borrow();let mut r=*record;if r[0x5e]==0{r[0x5e]=8;}
+
     if let Some(enemy)=world.owned_mule_single_hostile(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)? {
      let hostile=crate::mule_owned_hostile_acquisition::plan_acquisition(&r,&enemy,*random.borrow()).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
      *random.borrow_mut()=hostile.rng_after;return Ok(hostile.after);
@@ -293,7 +294,22 @@ impl ActorWorld {
   for dy in -4..=4{for dx in -4..=4{if dx*dx+dy*dy>16{continue;}let c=(((cy+dy)&127)*128+((cx+dx)&127))as usize;let mut raw=reference(self.map(),c*14+6);
    while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{
     1=>{let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;let other=*pool.record(word(&raw,0)as usize)?;
+     //F14 hostile kind-1 classification (scorer 6B700, owned idle context):
+     //6B7DF..6B7FE computes the self owner's alliance mask [owner*0x70d+0x6e5],
+     //EAX=1<<cand_owner, TEST EDX,EAX; the VALIDATED bytes 75 04 (JNZ 0x6B804;
+     //the listing's 0x6B800 render is wrong) skip ALIGNED candidates, so a
+     //candidate is hostile only when the mask bit is clear. Kind dispatch
+     //6B81E..6B830 -> jump table 6BD70[0]=0x6B9B0; 6B9B0..0x6B9C3 requires
+     //state!=0xF; 0x6BA8A..0x6BAF3 requires candidate state<0x1A and
+     //[ESI+0x60]&1==0. Liveness (word(0x6a)>0, word(0x49)bit0x400 clear) and
+     //the typed MuleSelector4 binding are the caller-proved admission.
+     let allied=(u32::from(self.player(r[24])?.bytes()[0x6e5])>>u32::from(other[24]&31))&1!=0;
      if other[24]==4&&other[0x7a]==4&&(other[0x5e]==1||attack_query&&other[0x5e]==20)&&pool.binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::MuleSelector4){
+      if hostile.is_some(){return Err(CreatureError::UnsupportedNeighborhood.into());}hostile=Some(other);
+     }else if allied{}
+     else if !attack_query&&other[0x7a]==4&&other[0x5e]<0x1a&&other[0x5e]!=0xf&&other[0x61]&1==0
+      &&word(&other,0x6a)>0&&word(&other,0x49)as u16&0x400==0
+      &&pool.binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::MuleSelector4){
       if hostile.is_some(){return Err(CreatureError::UnsupportedNeighborhood.into());}hostile=Some(other);
      }else{unsupported=true;}
     },

@@ -1,0 +1,52 @@
+{
+  "receipt": "f14-5966-hostile-kind1-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "family F14 - map-derived (not frame-derived): the owned hostile kind-1 candidate arm; campaign 5966 -> 5968",
+  "policy": "private/integration/development-policy-20261017.md",
+  "steering": "GENEWARS_HERMES_STEERING_HANDOFF_F12.md - chosen from research/integration/neighborhood-branch-caller-map-20261017.json",
+  "map_branches_closed": [
+    "B7-kind1-creature (the hostile kind-1 classification, now integrated)",
+    "B6-CATCH-ALL shrank by exactly that branch - it was not relaxed"
+  ],
+  "implementation": {
+    "files": [
+      "rust/crates/genewars-runtime/src/actor_world/owned_mule_updates.rs",
+      "rust/crates/genewars-runtime/src/mule_owned_hostile_acquisition.rs"
+    ],
+    "note": "the hostile candidate acquisition lives in its own bounded module per the F13 evidence (alliance test with the corrected 75 04 decode, kind dispatch to the hostile arm, action-eligibility, best-distance/action updates, kind-1 counter and weighted score)"
+  },
+  "f1_r13_closure": "recorded: the 6BA47 item is the kind-dispatch path (0x6BA47..0x6BA4C -> 0x6BD2B -> 0x6BD2D JZ 0x6BA8A), not a food-guard skip",
+  "negative_gate": {
+    "R24": "converted negative -> positive in the same change set with the source basis in-row",
+    "negative_count": "4 negative checks remain - the negative set was NOT emptied"
+  },
+  "director_verification": {
+    "run": "private/integration/F14-root-check-20261017T2015",
+    "result": {
+      "positive": "42/42",
+      "negative": "4/4",
+      "checks": "53/53",
+      "all_ok": true
+    },
+    "campaign": "steps 5968, blocked Creatures(UnsupportedMotionState), world b59ff966..., rgb 4e03afaa... - identical to the worker's own attempt27b run"
+  },
+  "frontier": {
+    "before": {
+      "steps": 5966,
+      "world_sha256": "039aee79e0041fe267482a9b6bbe21c68e75394c22a3aeacc00d9a7e3d9b595e"
+    },
+    "after": {
+      "steps": 5968,
+      "blocked": "Creatures(UnsupportedMotionState)",
+      "world_sha256": "b59ff966e73836ad231f9900715687d0bd59c5187bb58d6f79de1493780f5f31",
+      "rgb_sha256": "4e03afaad4763eb838eae4243f827f125001d28c1d5d2cf732ad060d59592a83"
+    }
+  },
+  "cumulative": {
+    "note": "first family selected from the branch/caller map and the first to close a branch that was NOT the immediate next callback: the hostile kind-1 arm covers the walk class behind the 5966 catch-all. Campaign since policy adoption: 5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968."
+  },
+  "open": {
+    "next": "the 5968 refusal is unmeasured; measure before implementing",
+    "worker_note": "F14's session ended without a final narrative report; its deliverable is fully verifiable from the tree (diff) and the checker summaries, both independently reproduced by the director"
+  }
+}
