@@ -1,0 +1,35 @@
+{
+  "receipt": "f23-6100-two-stage-overadmission-checkpoint",
+  "created": "2026-10-18 (America/Denver)",
+  "family": "F23 - measurement-only family; campaign HELD at 6100. Measured a two-stage port over-admission and identified the entry route as the long-open B0 food-guard family. Nothing implemented (rust/ delta zero).",
+  "task_a_measurement": {
+    "run": "private/integration/f23-measure-6100-042826",
+    "campaign": "6100, blocked Creatures(UnsupportedNeighborhood), world f06e9729f372..., rgb 318f84a5... - byte-identical capture to the F22 checker run (all 8 buffers cmp-same)",
+    "fixture": "owned slot 1, owner 0, species 0x7a=4, 0x5e=8, 0x60=0x88, 0x61=0, 0x78=7, word(0x6c)=0x7fee, 0x52=0, 0x57=0, food word(0x68)=5; cross-checked against mission.creature_states",
+    "refusing_site": "a TWO-STAGE chain, not what the variant name suggests. (1) mule_route_prefix consumes the timer: the prefix record has 0x60=8, word(0x6c)=0, 0x52=0, 0x57=0. (2) owned_mule_single_hostile (owned_mule_updates.rs) then walks the cell and matches branchB on TWO neutral-Mule candidates - slot 2 then slot 5, both 0x5e=8/0x60=0x88/owner 4/MuleSelector 4 - and refuses on the SECOND (the line-395-region DUP refusal). With only that admission probe-widened, the record reaches owned_mule_neighborhood_no_action's cellwalk catch-all on a kind-1 reference with food_guard=true - exactly the map's long-open B0-food-guard family.",
+    "oracle": "owned-mule-captured-width-review.py --before <fixture> --frame 6100 --slot 1 -> source_prepared, 12109 instructions, 4 draws, output private/review/owned-mule-captured-width/e4f43b9e6d9a4f8aa13054f5d4760c06. NO reference-model extension needed. The 6b700 classification runs 6b9cf..6ba47, which ACCUMULATES the best candidate per category (JLE keeps the closer one - there is no second-candidate refusal in the source), then executes 65743..65d6d and 5a990, transitioning slot 1 to the degraded-pursuit replan: 0x5e 8->1, 0x60 8->0xc8, 0x52/0x58/0x5b->1, word(0x3f)=0x024f, word(0x49) 0x0010->0x2034, word(0x74)=0x7ffe, 0x19 6->7, 0x66 0x31->0x2f, plus the 6df30 vector rebuild"
+  },
+  "verdict": "new-existing-continuation: the source reaches continuation machinery F21/F22 already implemented (the 65743 block) but by a NEW ENTRY ROUTE - a state-8 idle scan with PAIR candidates - which the port does not model. The refusal itself is a port-authored over-admission in the same class as F17's mis-scoped gate.",
+  "implementation": "none. rust/ delta zero (the only dirty rust file is the pre-existing F17 creature_world.rs diff). Checker +27 (2 new fail-closed negative rows). Campaign held at 6100.",
+  "director_verification": {
+    "run": "private/integration/attempt36-f23-decline-045311",
+    "result": {
+      "positive": "57/57",
+      "negative": "6/6",
+      "checks": "70/70",
+      "all_ok": true
+    },
+    "campaign": "6100, world f06e9729f372... - unchanged, correct for a measurement-only family"
+  },
+  "new_branch": "B12 - owned state-8 idle-scan pair-candidate entry route into the 65743 continuation, with the two-stage prefix-consumption/over-admission shape. Left unimplemented and fail-closed.",
+  "why_not_implemented": "the entry route touches the walk family's own candidate classification (B0's food guard) and the port's over-admission simultaneously; implementing one without the other would either relax a guard or invent an entry route the source reaches differently. Held, correctly, rather than guessed.",
+  "open": {
+    "next": "the B12 entry route plus the over-admission, to be closed together; B0 food-guard still open",
+    "carry_forward": [
+      "F21's remaining B11 short sides (timer-gate 65cb8, draw-1 JG 65d3c, 8b780 AL==0, 6c190)",
+      "F10/F11 provisional items",
+      "B8 kind-2-with-food-guard"
+    ]
+  },
+  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008 -> 6010 -> 6060 -> 6100 (held one family)"
+}

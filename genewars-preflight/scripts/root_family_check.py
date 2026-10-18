@@ -390,6 +390,33 @@ NEGATIVE = [
     dict(id='R25-owned-idle-kind1-state-over-19-5966', frame=5966, slot=1,
          fixture='private/review/attempt27-owned-5966-kind1-state-1a',
          expect_error='Creatures(UnsupportedNeighborhood)'),
+    # F23/attempt36 measurement-first NEGATIVE gate (added 2026-10-18): pins the
+    # measured 6100 refusal. Owned Mule slot 1 (0x5e=8, 0x60=0x88, 0x61=0,
+    # 0x78=7, word(0x6c)=0x7fee, 0x52=0, 0x57=0, food word(0x68)=5) whose
+    # mule_route_prefix consumes the timer (prefix record 0x60=8, word(0x6c)=0,
+    # 0x52=0/0x57=0: probe private/review/f23-instrument5.py output) and then
+    # reaches owned_mule_single_hostile, whose cell walk finds TWO branchB
+    # neutral-Mule candidates (slot 2 then slot 5, both 0x5e=8/0x60=0x88/owner4/
+    # MuleSelector4) and refuses on the second. The SOURCE does not refuse:
+    # oracle source_prepared, 12109 instructions, 4 draws
+    # (private/review/owned-mule-captured-width/e4f43b9e6d9a4f8aa13054f5d4760c06)
+    # - trace executes the 6b700 classification (6b9cf..6ba47 accumulates the
+    # BEST candidate per category, JLE keeps the closer one, no second-candidate
+    # refusal), the 65743..65d6d shared continuation block (65c60 ring gate,
+    # 65d4d/65d5e) and 5a990, transitioning slot 1 to the degraded-pursuit
+    # replan (0x5e 8->1, 0x60 8->0xc8, 0x52/0x58/0x5b ->1, word(0x3f)=0x024f,
+    # word(0x49) 0x0010->0x2034, word(0x74)=0x7ffe, 0x19 6->7, 0x66 0x31->0x2f).
+    # Probe-widening (private/review/f23-instrument6.py + f23-instrument7.py)
+    # shows the port's downstream plan_choice stays idle (state8, 3 draws, 10
+    # slot-1 byte diffs) - the pursuit-entry arm that consumes the scan's
+    # accumulated pair candidate is NOT modeled. The gate asserts the exact
+    # expected rejection AND complete transactional world/RNG preservation.
+    # The next family settles (in order) the scan's kind-1-under-food_guard
+    # admission (6B7DF..6B808 alliance mask) and the pursuit-entry arm. Never
+    # silently expanded.
+    dict(id='R33-owned-state8-timer-consumed-two-pair-candidates-6100', frame=6100, slot=1,
+         fixture='private/review/attempt36-6100-measure/frame-6100-slot-1-blocked-before-owned',
+         expect_error='Creatures(UnsupportedNeighborhood)'),
 ]
 
 def main():
