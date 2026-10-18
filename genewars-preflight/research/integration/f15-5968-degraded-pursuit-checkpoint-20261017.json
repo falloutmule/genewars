@@ -57,5 +57,6 @@
       "B0 food-guard still unclosed",
       "B8 kind-2-with-food-guard open"
     ]
-  }
+  },
+  "native_acceptance": "PASSED: private/integration/f1-native-20261017T2210 - one frozen executable sha256 0cc695f03ec3..., headless and native both stop at step 5992 with the identical block string, all eight compared keys equal, frontier framebuffers byte-identical, world e77af60dd68a..."
 }
