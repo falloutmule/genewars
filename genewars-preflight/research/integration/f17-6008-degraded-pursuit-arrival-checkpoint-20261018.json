@@ -21,16 +21,34 @@
   },
   "director_verification": {
     "run": "private/integration/F17-root-check-20261018T0010",
-    "result": {"positive": "51/51", "negative": "4/4", "checks": "62/62", "all_ok": true},
+    "result": {
+      "positive": "51/51",
+      "negative": "4/4",
+      "checks": "62/62",
+      "all_ok": true
+    },
     "campaign": "steps 6010, blocked Creatures(UnsupportedNeighborhood), world c52ac990df3626e06c5e7faeced2cbc32c44af30bc946e5ffe0551a22f43ce5c, rgb 80ea0788c8d87d1388eb229d4f4... - identical to the worker attempt30-f17 run"
   },
   "frontier": {
-    "before": {"steps": 6008, "world": "ef3dd212"},
-    "after": {"steps": 6010, "blocked": "Creatures(UnsupportedNeighborhood)", "world_sha256": "c52ac990df3626e06c5e7faeced2cbc32c44af30bc946e5ffe0551a22f43ce5c"}
+    "before": {
+      "steps": 6008,
+      "world": "ef3dd212"
+    },
+    "after": {
+      "steps": 6010,
+      "blocked": "Creatures(UnsupportedNeighborhood)",
+      "world_sha256": "c52ac990df3626e06c5e7faeced2cbc32c44af30bc946e5ffe0551a22f43ce5c"
+    }
   },
   "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008 -> 6010.",
   "open": {
     "next": "Creatures(UnsupportedNeighborhood) at 6010 - unmeasured",
-    "carry_forward": ["F10 word(0x6c) constant + second 0x66 attribution", "F11 hold shape bound", "B0 food-guard unclosed", "B8 kind-2-with-food-guard open"]
-  }
+    "carry_forward": [
+      "F10 word(0x6c) constant + second 0x66 attribution",
+      "F11 hold shape bound",
+      "B0 food-guard unclosed",
+      "B8 kind-2-with-food-guard open"
+    ]
+  },
+  "native_acceptance": "PASSED: private/integration/f1-native-20261018T0035 - one frozen executable sha256 c0cb86c19642..., headless and native both stop at step 6010 with the identical block string, all eight compared keys equal, frontier framebuffers byte-identical, world c52ac990df36..."
 }
