@@ -52,5 +52,6 @@
   "known_artifacts": [
     "root_family_check.py shows a 776-line diff (490 insertions / 386 deletions) in this commit that is LINE-ENDING churn, not logic: the worker's edit rewrote the whole file to CRLF (the file now holds 401 CRLF and zero bare LF) while the real change is the R24 row conversion. The file is functionally green (independently re-run: 42/4/53) but the diff is unreviewable as written. Recorded here rather than hidden; a scoped EOL-normalisation commit is the follow-up if the repo convention is LF.",
     "F14's worker session ended without a closing narrative report; its deliverable is fully verifiable from the diff and the summaries, both independently reproduced by the director."
-  ]
+  ],
+  "native_acceptance": "PASSED: private/integration/f1-native-20261017T2035 - one frozen executable sha256 bb7e61e84cb8..., headless and native both stop at step 5968 with the identical block string, all eight compared keys equal, frontier framebuffers byte-identical, world b59ff966e738..."
 }
