@@ -209,6 +209,30 @@ POSITIVE = [
     dict(id='R29-owned-state1-pursuit-target-cell-5992', frame=5992, slot=1, draws=0, mode='direct',
          fixture='private/review/attempt29-5992-measure/campaign/capture/frame-5992-slot-1-blocked-before-owned',
          expected='private/review/owned-mule-captured-width/d076d8fe60f547eb8c391064778a55aa'),
+    # F17: R30 was added FIRST as a measurement-first NEGATIVE gate pinning the
+    # measured 6008 refusal (Creatures(UnsupportedNeighborhood) at the owned
+    # callback, exact rejection + all eight buffers byte-identical, 0 draws,
+    # private/review/attempt30-6008-portrun/out2), then CONVERTED POSITIVE in
+    # the same change set. Source basis: the measured record IS the B9
+    # degraded-pursuit shape (0x5e=1, 0x60=0xc8, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1,
+    # word(0x6c)=0x7fea, 0x76=37, word(0x49)&0x100==0) reaching ARRIVAL: the
+    # source5EB30 body ran its zeroing block (0005eb9b AND byte[0x60],0x7f ->
+    # 0x48; 0005ebd9 MOV word[0x6c],0), then 0005ef3a/0005ef40 reads the FRESH
+    # word(0x6c)==0 and JLEs to 00065384 whose jump table 0x5eca0 entry 1 ->
+    # 0005ef46 - the same no-AI/no-6B700 continuation as the fresh side - and
+    # the continuation's near-target block 00065d80..00065dce (73770 distance
+    # <= 0x4000; 6EDA0/7A6C0 shortest delta 551 > 0x100) writes word(0x4b)=0
+    # through 73970/AE028's zero delta. The former word(record,0x6c)>0
+    # freshness test on the POST-prefix record was port-authored (map rule 1):
+    # the prefix itself produces the zeroed timer. Oracle: source_prepared,
+    # 2818 instructions, 0 draws, output
+    # owned-mule-captured-width/b3ac36ab78474896ab7e200a37250f8b; port
+    # byte-identical over all eight buffers (427369). A PRE-prefix expired
+    # timer (word(0x6c)==0 before the callback), the aligned virtual38 side
+    # and other degraded-target kinds keep refusing (fail-closed).
+    dict(id='R30-owned-degraded-pursuit-arrival-6008', frame=6008, slot=1, draws=0, mode='direct',
+         fixture='private/review/attempt30-6008-measure/campaign/capture/frame-6008-slot-1-blocked-before-owned',
+         expected='private/review/owned-mule-captured-width/b3ac36ab78474896ab7e200a37250f8b'),
 ]
 NEGATIVE = [
     # F16 measurement-first NEGATIVE gate (added 2026-10-17, attempt29): pins the

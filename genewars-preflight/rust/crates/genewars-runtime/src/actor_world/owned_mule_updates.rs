@@ -164,6 +164,32 @@ impl ActorWorld {
     //Pin exactly that arm for the degraded shape; expired timers (word(0x6c)==0)
     //and other kinds keep refusing below.
     if hostile_enemy.is_none()&&record[0x5e]==1&&matches!(record[0x60],0x48|0xc8)&&word(record,0x6c)>0{return Ok(*record);}
+    //6008 measured arrival side of the SAME degraded-target pursuit: the
+    //source5EB30 body ran its zeroing block (0005eb9b AND byte[0x60],0x7f:
+    //0xc8->0x48; 0005ebd9 MOV word[0x6c],0), then 0005ef3a/0005ef3e/0005ef40
+    //reads the FRESH word(0x6c) and JLEs to 00065384, whose state dispatch
+    //(0006538a CMP al,0x18 / 00065397 JMP [eax*4+0x5eca0]) takes entry 1 ->
+    //0005ef46 - the same continuation as the fresh side above; it runs NO
+    //624B8 AI and NO 6B700 walk (trace private/review/owned-mule-captured-
+    //width/b3ac36ab78474896ab7e200a37250f8b, 2818 instructions, 0 draws).
+    //The former word(record,0x6c)>0 freshness test on the POST-prefix record
+    //was port-authored: the prefix itself produces the zeroed timer. A pre-
+    //prefix expired timer (word(&before,0x6c)==0) and other 0x60 sides keep
+    //refusing below.
+    if hostile_enemy.is_none()&&record[0x5e]==1&&record[0x60]==0x48&&word(record,0x6c)==0&&word(&before,0x6c)>0{
+     //65d80..65dce continuation near-target block, degraded state-1 arrival:
+     //the record has reached its own route waypoint (word 0x0b/0x0d == the
+     //position the continuation context point carries), so 73970's doubled
+     //delta is zero and AE028 yields yaw0; 7a6c0's shortest delta against
+     //word(0x39) exceeds 0x100 (measured 551) so the FALSE side runs and
+     //writes word(0x4b)=0 (measured oracle 0x4b 1024->0). The aligned side
+     //(virtual38/5C840, 65da7..65db5) is unmeasured and refuses.
+     if creature_world::motion_point(record)!=[word(record,0xb),word(record,0xd)]||word(record,0x6a)<=0{return Err(CreatureError::UnsupportedMotionState);}
+     let yaw=word(record,0x39);let direct=-i32::from(yaw);let alternative=direct-2048*direct.signum();
+     let delta=if direct.abs()<=alternative.abs(){direct}else{alternative};
+     if delta.abs()<=256||!(0..2048).contains(&yaw){return Err(CreatureError::UnsupportedMotionState);}
+     let mut after=*record;after[0x4b..0x4d].copy_from_slice(&0i16.to_le_bytes());return Ok(after);
+    }
     let world=stage.borrow();let mut r=*record;if r[0x5e]==0{r[0x5e]=8;}
 
     if let Some(enemy)=world.owned_mule_single_hostile(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)? {

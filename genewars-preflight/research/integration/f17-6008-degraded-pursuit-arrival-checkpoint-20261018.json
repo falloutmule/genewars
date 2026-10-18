@@ -1,0 +1,36 @@
+{
+  "receipt": "f17-6008-degraded-pursuit-arrival-checkpoint",
+  "created": "2026-10-18 (America/Denver)",
+  "kind": "family F17 - the 6008 refusal is the ARRIVAL side of the same B9 continuation; campaign 6008 -> 6010",
+  "measurement": {
+    "fixture": "private/review/attempt30-6008-measure/campaign/capture - frame-6008-slot-1-blocked-before-owned (owned slot 1, owner 0, species 4)",
+    "record": "0x5e=1, 0x60=0xc8, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1, 0x5d=0, word(0x6c)=0x7fea, 0x76=37 - the B9 degraded-pursuit shape AT ARRIVAL (position already at the destination cell committed by the F16 arm)",
+    "refusing_site": "owned_mule_updates.rs - the F15 degraded arm's own word(0x6c)>0 freshness test evaluated on the POST-prefix record; the prefix already zeroes it (source 5EB30 at 0005eb9b clears byte[0x60]'s 0x7f and 0005ebd9 MOV word(0x6c),0), so the test could never pass on the arrival side. Port-authored per map rule 1 - NOT a new walk caller.",
+    "self_correction": "this is a defect in the arm licensed by F15, not new behaviour: the F15 admission was proved only for the pre-arrival shape and its freshness gate was mis-scoped for the arrival record. Recorded plainly.",
+    "oracle": "source_prepared, 2818 instructions, 0 draws; output private/review/owned-mule-captured-width/b3ac36ab78474896ab7e200a37250f8b (slot-1-only 32-byte deltas including 0x4b 1024 -> 0); NO reference-model extension needed"
+  },
+  "source_basis": "0005ef3a / 0005ef40 JLE (word(0x6c)==0) -> 00065384 dispatch, jump table 0x5eca0 entry 1 = 0005ef46 - the same no-AI / no-6B700 continuation as the fresh side - plus the near-target block 00065d80..00065dce (73770 distance <= 0x4000; 6EDA0/7A6C0 shortest delta 551 > 0x100 -> FALSE side) writing word(0x4b)=0 via 73970/AE028",
+  "map": {
+    "branch": "B9-owned-state1-pursuit-degraded-target EXTENDED to its arrival side (same continuation; the already-mapped gate re-read at its site)",
+    "boundary": "deliberately still fail-closed: a pre-prefix expired timer word(0x6c)==0 before the callback; the aligned virtual38/5C840 side 00065da7..00065db5; other degraded-target kinds; the B6/B8 walk catch-alls; the neutral callers",
+    "note": "no catch-all or guard relaxed beyond the measured shape"
+  },
+  "negative_gate": {
+    "R30": "owned-degraded-pursuit-arrival-6008 added FIRST as a negative (exact rejection + all eight buffers byte-identical, 0 draws, private/review/attempt30-6008-portrun/out2), then converted positive in the same change set with the source basis in-row",
+    "remaining": "R21 and R25 fail-closed; 4 negatives retained"
+  },
+  "director_verification": {
+    "run": "private/integration/F17-root-check-20261018T0010",
+    "result": {"positive": "51/51", "negative": "4/4", "checks": "62/62", "all_ok": true},
+    "campaign": "steps 6010, blocked Creatures(UnsupportedNeighborhood), world c52ac990df3626e06c5e7faeced2cbc32c44af30bc946e5ffe0551a22f43ce5c, rgb 80ea0788c8d87d1388eb229d4f4... - identical to the worker attempt30-f17 run"
+  },
+  "frontier": {
+    "before": {"steps": 6008, "world": "ef3dd212"},
+    "after": {"steps": 6010, "blocked": "Creatures(UnsupportedNeighborhood)", "world_sha256": "c52ac990df3626e06c5e7faeced2cbc32c44af30bc946e5ffe0551a22f43ce5c"}
+  },
+  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008 -> 6010.",
+  "open": {
+    "next": "Creatures(UnsupportedNeighborhood) at 6010 - unmeasured",
+    "carry_forward": ["F10 word(0x6c) constant + second 0x66 attribution", "F11 hold shape bound", "B0 food-guard unclosed", "B8 kind-2-with-food-guard open"]
+  }
+}
