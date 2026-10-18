@@ -1,0 +1,23 @@
+{
+  "receipt": "f13-5966-neighborhood-answer-checkpoint",
+  "created": "2026-10-17 (America/Denver)",
+  "kind": "research checkpoint - the 5966 neighbourhood question answered (A) with address-level evidence; no port change, R24 stays negative",
+  "answer": "(A): the original executes a specific branch; the record was already adjudicable by the owned oracle",
+  "key_findings": {
+    "answer": "(A) the original executes a specific branch; the owned oracle already adjudicates the record, so no reference-model extension was needed and rust/ stayed untouched",
+    "evidence": "private/ghidra/initial-creature/instructions-0006b700.txt + validated image private/ghidra/validated/memory-.object1.bin (load base 0x10000); executed-path claims from private/review/owned-mule-captured-width/9c48d067bdd04c5d807ca4c4ce3140d3/trace.txt",
+    "walk": "0x8D930 samples cells within radius 1024 and calls the scorer 0x6B700 once per cell reference chain; the owned idle context is built by the state-8 block 0x624B1..0x626AD inside 5ED20, storing the self record at context+0x29 (0x6250d)",
+    "alliance": "0x6B7DF..0x6B7FE computes DL=[self_owner*0x70d+0x118d74+0x6e5] (alliance mask), EAX=1<<cand_owner, TEST EDX,EAX; the VALIDATED bytes at 0x6B7FE are 75 04 (JNZ 0x6B804), while the Ghidra listing misrenders the target as 0x6B800. With mask 0 the neutral Mule is HOSTILE to the owned idle AI.",
+    "kind_dispatch": "0x6B81E..0x6B830: kind 1 -> JMP CS:[0*4+0x6BD70]; validated dword table at 0x6BD70 = [0x6B9B0, 0x6B838, 0x6B975, 0x6B9A2], so the hostile kind=1 arm is 0x6B9B0 (confirmed executed in the trace)",
+    "hostile_kind1": "0x6B9B0..0x6B9C3 sets action-eligible=1 and state!=0xF; 0x6B9CF..0x6B9FE updates best distance and bucket [player*4+0x2D]; 0x6BA09..0x6BA40 updates the best action, bucket [player*4+0x6D] and [0x1AD]; 0x6BA47..0x6BA4C (kind 1<2) -> 0x6BD2B, JZ 0x6BA8A taken; 0x6BA8A..0x6BAF3 increments the kind-1 counter and applies the weighted score [player*4+0xED] += ([0x1E0]+0x1F)*EDI/100",
+    "f1_r13_resolved": "the 6BA47 food-guard question is now pinned: 0x6BA47..0x6BA4C takes kind 1 < 2 to 0x6BD2B, and 0x6BD2D JZ 0x6BA8A is taken, which is exactly the 'enters 0x6ba3b..0x6ba4c, leaves at 0x6bd2b' observation. It was never a food-guard skip - it is the kind-dispatch path into the kind-1 scoring arm.",
+    "checker": "attempt26-neighborhood-refcheck: 39/39 positive, 4/4 negative (R24 correctly still negative), 50/50 checks, campaign unchanged at 5966 - a research-only change, as instructed"
+  },
+  "map": "research/integration/neighborhood-branch-caller-map-20261017.json",
+  "director_verification": {
+    "checker": "attempt26-neighborhood-refcheck: 39/39 positive, 4/4 negative, 50/50 checks, all_ok; campaign unchanged at 5966 with identical world/rgb",
+    "rust": "zero diffs (research-only, as instructed)"
+  },
+  "steering": "map-first family selection installed at skill reference `references/map-first-family-selection.md`; the next packet is chosen from the map, not from the next frame number",
+  "next": "F14 - implement the hostile kind-1 candidate classification/scoring arm and close F1-R13; nothing about the catch-all is relaxed, the catch-all shrinks only as proved branches land"
+}

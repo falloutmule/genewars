@@ -1,0 +1,129 @@
+{
+  "map": "neighborhood candidate classification - branch/caller map",
+  "created": "2026-10-17 (America/Denver)",
+  "steering": "GENEWARS_HERMES_STEERING_HANDOFF_F12.md - map-first family selection instead of one F-number per frontier callback",
+  "trigger": "Creatures(UnsupportedNeighborhood) at step 5966 (F12 measured: owned shared arrival clears the explicit command then dispatches ordinary owned idle AI; the neighborhood walk refuses a kind=1 owner-4 neighbour, the neutral Mule)",
+  "routine": {
+    "owned": "ActorWorld::owned_mule_neighborhood_no_action - rust/crates/genewars-runtime/src/actor_world/owned_mule_updates.rs:327",
+    "source_notes_in_code": "the doc comment already records source facts: 6BA47 kinds 3/4 bypass food/pair scoring; 6BD3D->6B72A skips code 0x1A (all effects except 0x11) before classification; 8D930 visits sample cells within radius 1024 including the boundary",
+    "walk": "9x9 cell sample (dx*dx+dy*dy<=16), entity chain via reference(...,3), skip self (raw==own), then classify raw[2]"
+  },
+  "branches": [
+    {
+      "id": "B0-food-guard",
+      "condition": "food_guard = word(0x68) <= word(0x62)>>1 || 0x61&0x40 != 0",
+      "current": "returns Err(UnsupportedNeighborhood) unless completed_command (state 8, 0x61=0, 0x60 in {8,0x88}, 0x78=7)",
+      "status": "focused-only / PROVISIONAL - this is the F1-R13 6BA47 food-guard item, still unclosed"
+    },
+    {
+      "id": "B1-kind2-plant",
+      "condition": "raw[2]==2 && !food_guard && e[24]==4",
+      "current": "accept",
+      "status": "integrated/proved (owned no-action fixture)"
+    },
+    {
+      "id": "B2-kind3-same-owner",
+      "condition": "raw[2]==3 && !food_guard && e[24]==r[24]",
+      "current": "accept",
+      "status": "integrated/proved"
+    },
+    {
+      "id": "B3-kind4-building",
+      "condition": "raw[2]==4 && !food_guard && same owner && building grade in {0,11}",
+      "current": "accept",
+      "status": "integrated/proved"
+    },
+    {
+      "id": "B4-kind5-effect",
+      "condition": "raw[2]==5 && effect kind != 0x11 && binding present",
+      "current": "accept",
+      "status": "integrated/proved"
+    },
+    {
+      "id": "B5-kind8",
+      "condition": "raw[2]==8",
+      "current": "accept",
+      "status": "integrated/proved"
+    },
+    {
+      "id": "B6-CATCH-ALL",
+      "condition": "any other raw[2] (including kind 1 = creature), or a known kind failing its inner condition",
+      "current": "Err(UnsupportedNeighborhood) - THE LIVE 5966 BLOCKER",
+      "status": "unknown/out of scope - NOT established by source that the original refuses; the error name alone is not evidence"
+    },
+    {
+      "id": "B7-kind1-creature",
+      "condition": "raw[2]==1 (creature candidate in the walk)",
+      "current": "falls into B6",
+      "status": "source-known/not integrated - the source classification for creature candidates in 8D930 is the open question"
+    },
+    {
+      "id": "B8-kind2-with-food-guard",
+      "condition": "raw[2]==2 && food_guard",
+      "current": "falls into B6",
+      "status": "source-known/not integrated - 6BD3D/6B72A skip branches should decide this, not the catch-all"
+    }
+  ],
+  "callers": [
+    {
+      "caller": "owned idle AI (624B8/6BA47) via the owned choice callback",
+      "uses": "owned_mule_neighborhood_no_action",
+      "status": "integrated for the proved candidate kinds; blocker is B6/B7"
+    },
+    {
+      "caller": "neutral slot",
+      "fn": "check_mule_neutral_neighbors",
+      "status": "focused-only; throws UnsupportedNeighborhood on unproved neighbour sets"
+    },
+    {
+      "caller": "neutral slot",
+      "fn": "mule_neutral_pair_candidate",
+      "status": "focused-only"
+    },
+    {
+      "caller": "neutral slot",
+      "fn": "check_mule_bones_feeding_no_action",
+      "status": "focused-only (bones/feeding path)"
+    },
+    {
+      "caller": "neutral slot",
+      "fn": "mule_hit_single_owned_enemy",
+      "status": "focused-only"
+    },
+    {
+      "caller": "actor_updates.rs:282",
+      "fn": "creature record lookup on UnsupportedNeighborhood",
+      "status": "unknown/out of scope - a different error use of the same variant"
+    }
+  ],
+  "existing_evidence": {
+    "ghidra": "research/ghidra/actor-idle-evidence.json (arrival/idle/empty-scorer/seed case counts, instruction contracts for 0006e9e0 and siblings, scope notes on arrival/idle globals)",
+    "receipts": [
+      "research/integration/f12-5966-neighborhood-measurement-checkpoint-20261017.json",
+      "F1-R13 6BA47 note in private/integration/verification-anomalies-20261017.md"
+    ],
+    "interpreter": "research/variants/owned-mule-captured-width-review.py + neutral-mule-captured-width-review.py (the reference model)"
+  },
+  "family_decision": {
+    "chosen": "F14 = the owned idle-AI HOSTILE kind-1 candidate classification and scoring arm (0x6B9B0 hostile arm, 0x6BA47 kind dispatch, 0x6BA8A kind-1 counter and weighted score), plus closing the F1-R13 6BA47 item with the now-pinned branch. Excluded: neutral pair/bones neighbours, actor_updates.rs:282, and the rest of the 0x6B700 scorer for candidate kinds already covered.",
+    "excluded": [
+      "actor_updates.rs:282's unrelated use of the same error variant",
+      "bones/feeding and pair-candidate paths beyond their admission predicates (separate semantics, separate fixtures)",
+      "any blanket removal of the catch-all"
+    ],
+    "why_this_is_coherent": "all branches share the one walk, one classification table and one admission site; the catch-all, the food guard and the creature-candidate question are decided by the same listing text",
+    "boundary": "if the listing does not settle the creature-candidate classification, the family closes at the measured boundary with B7 recorded as source-unknown and the catch-all kept",
+    "supersedes": "F13's answer sharpens the family: the open question is no longer 'what does the walk do with a kind-1 neighbour' but 'the port has no hostile kind-1 candidate arm at all, while the source scores hostile creature candidates'"
+  },
+  "reporting": "two or three family milestones after this steering change, assess whether the wider scope reduced repeated repairs; no causal claim from an uncontrolled comparison",
+  "f13_findings": {
+    "answer": "(A) the original executes a specific branch; the owned oracle already adjudicates the record, so no reference-model extension was needed and rust/ stayed untouched",
+    "evidence": "private/ghidra/initial-creature/instructions-0006b700.txt + validated image private/ghidra/validated/memory-.object1.bin (load base 0x10000); executed-path claims from private/review/owned-mule-captured-width/9c48d067bdd04c5d807ca4c4ce3140d3/trace.txt",
+    "walk": "0x8D930 samples cells within radius 1024 and calls the scorer 0x6B700 once per cell reference chain; the owned idle context is built by the state-8 block 0x624B1..0x626AD inside 5ED20, storing the self record at context+0x29 (0x6250d)",
+    "alliance": "0x6B7DF..0x6B7FE computes DL=[self_owner*0x70d+0x118d74+0x6e5] (alliance mask), EAX=1<<cand_owner, TEST EDX,EAX; the VALIDATED bytes at 0x6B7FE are 75 04 (JNZ 0x6B804), while the Ghidra listing misrenders the target as 0x6B800. With mask 0 the neutral Mule is HOSTILE to the owned idle AI.",
+    "kind_dispatch": "0x6B81E..0x6B830: kind 1 -> JMP CS:[0*4+0x6BD70]; validated dword table at 0x6BD70 = [0x6B9B0, 0x6B838, 0x6B975, 0x6B9A2], so the hostile kind=1 arm is 0x6B9B0 (confirmed executed in the trace)",
+    "hostile_kind1": "0x6B9B0..0x6B9C3 sets action-eligible=1 and state!=0xF; 0x6B9CF..0x6B9FE updates best distance and bucket [player*4+0x2D]; 0x6BA09..0x6BA40 updates the best action, bucket [player*4+0x6D] and [0x1AD]; 0x6BA47..0x6BA4C (kind 1<2) -> 0x6BD2B, JZ 0x6BA8A taken; 0x6BA8A..0x6BAF3 increments the kind-1 counter and applies the weighted score [player*4+0xED] += ([0x1E0]+0x1F)*EDI/100",
+    "f1_r13_resolved": "the 6BA47 food-guard question is now pinned: 0x6BA47..0x6BA4C takes kind 1 < 2 to 0x6BD2B, and 0x6BD2D JZ 0x6BA8A is taken, which is exactly the 'enters 0x6ba3b..0x6ba4c, leaves at 0x6bd2b' observation. It was never a food-guard skip - it is the kind-dispatch path into the kind-1 scoring arm.",
+    "checker": "attempt26-neighborhood-refcheck: 39/39 positive, 4/4 negative (R24 correctly still negative), 50/50 checks, campaign unchanged at 5966 - a research-only change, as instructed"
+  }
+}
