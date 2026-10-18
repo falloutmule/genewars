@@ -156,7 +156,15 @@ fn tables()->Option<&'static SourceTables>{
 pub fn plan_expired_reacquisition(record:&CreatureRecord,rng:&mut BlueprintRng,tick:u32)->Result<CreatureRecord,CreatureError>{
  let t=tables().ok_or(CreatureError::UnsupportedMotionState)?;
  //65c7d ring gate; [0x11877e] modeled as counter=args.frame (F20 receipt).
- if tick.wrapping_add(i32::from(w16(record,0xf)) as u32)&3!=3{return Err(CreatureError::UnsupportedMotionState);}
+ //SHORT side (F35/attempt35, 2026-10-18): 65c7f JMP 65d4d; byte[EBP+0x186]
+ //holds the ENTRY AL (65c66), and the only entry to 65c60 is 65951 JZ
+ //(CALL [ctx+0x68] result zero), so AL==0 deterministically; 65d56 TEST CL,CL
+ //is NOT taken and 65d5e runs the 65d80..65dce near-target block - the SAME
+ //block the F17 arrival side reaches (measured trace
+ //private/review/owned-mule-captured-width/d386493180e14ca7bc14f28d32e22e5f,
+ //1736 instructions, 0 draws). The timer gate / draws / 5cc60 / 65deb block
+ //are NOT executed on this side; return the near-target record directly.
+ if tick.wrapping_add(i32::from(w16(record,0xf)) as u32)&3!=3{return near_target(record);}
  //65c9a/65cb2 timer gate. The byte[[EBP+0xa6]+6]==3 ECX doubling (65c84) is
  //unmodeled; both sides pass the >0x100 gate for the admitted shape.
  let ecx=i32::from(0x7fff)-i32::from(w16(record,0x6c));
@@ -207,4 +215,27 @@ pub fn plan_expired_reacquisition(record:&CreatureRecord,rng:&mut BlueprintRng,t
  //the shared tail). The true side (65ef8 CALL 6c190) is unimplemented.
  if t.species_is_three(after[0x7a])?{return Err(CreatureError::UnsupportedMotionState);}
  Ok(after)
+}
+
+/// The shared 65d80..65dce continuation near-target block for the state-1
+/// degraded arrival (reached from BOTH the F17 arrival arm - owned_mule_updates
+/// "6008 measured arrival side" - and the B11 ring-gate SHORT side above), so
+/// there is exactly one implementation of the source block:
+/// - 65d85 CALL 73770 (doubled distance, EDI=ESI+7); 65d8a CMP 0x4000 JG 65dd7:
+///   the >0x4000 side (65dd7..) is UNMEASURED and stays refused. For the
+///   measured shapes the record sits ON its own route waypoint
+///   (motion_point == word(0x0b)/0x0d), which pins the <=0x4000 side.
+/// - 65d9e CALL 6eda0; 65da5 JZ 65dbe taken (measured FALSE side; the aligned
+///   virtual38 side 65da7..65db5 - AND byte[0x60],0xbf, JMP 6a290 - is
+///   unmeasured and refuses). word(0x6a)>0 is the measured freshness shape.
+/// - 65dc9 CALL 73970 with the 0x100 arg; 65dce MOV word[ESI+0x4b],AX - the
+///   measured records reach the waypoint, so AE028 yields yaw 0 and the write
+///   is word(0x4b)=0 (oracle 0x4b 1024->0 on R30, 0x31a->0 on the 6060 record).
+///   65da7..65db5 and 65dd7.. stay fail-closed (UnsupportedMotionState).
+pub(crate) fn near_target(record:&CreatureRecord)->Result<CreatureRecord,CreatureError>{
+ if crate::creature_world::motion_point(record)!=[w16(record,0xb),w16(record,0xd)]||w16(record,0x6a)<=0{return Err(CreatureError::UnsupportedMotionState);}
+ let yaw=w16(record,0x39);let direct=-i32::from(yaw);let alternative=direct-2048*direct.signum();
+ let delta=if direct.abs()<=alternative.abs(){direct}else{alternative};
+ if delta.abs()<=256||!(0..2048).contains(&yaw){return Err(CreatureError::UnsupportedMotionState);}
+ let mut after=*record;after[0x4b..0x4d].copy_from_slice(&0i16.to_le_bytes());Ok(after)
 }

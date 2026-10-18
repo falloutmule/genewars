@@ -306,6 +306,38 @@ POSITIVE = [
     dict(id='R31-owned-state1-pursuit-expired-preprefix-6010', frame=6010, slot=1, draws=4, mode='direct',
          fixture='private/review/attempt31-6010-measure/campaign/capture/frame-6010-slot-1-blocked-before-owned',
          expected='private/review/owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b'),
+    # F35 measurement-first gate (added 2026-10-18, attempt35; CONVERTED from
+    # negative to POSITIVE in the same change set per the family policy's
+    # "source-proved and intentionally expanded" condition): pins the measured
+    # 6060 record - the B11 ring-gate SHORT side (65c7f JMP 65d4d), the F21
+    # fail-closed boundary. Owned Mule slot 1 in the same B9/B11 shape
+    # (0x5e=1, 0x60=0x48, 0x61=0, 0x78=7, 0x52/0x57/0x5a=1, 0x76=0x25,
+    # word(0x49)=0x220, word(0x6c)=0 pre AND post) at frame 6060, where the ring
+    # gate ((word(0xf)+[0x11877e])&3)==3 = (6060+1)&3 = 1 FAILS. Source basis
+    # (addresses; listing private/ghidra/player-creation/instructions-0005ed20.txt
+    # and trace private/review/owned-mule-captured-width/d386493180e14ca7bc14f28d32e22e5f,
+    # 1736 instructions, 0 draws): the ONLY entry to 65c60 is 65951 JZ (taken
+    # when CALL [ctx+0x68] returns AL==0), so byte[EBP+0x186] = entry AL = 0
+    # deterministically; 65c7f JMP 65d4d -> 65d56 TEST CL,CL NOT taken ->
+    # 65d5e virtual pair (1f270 twice) -> the 65d80..65dce near-target block
+    # (73770 <=0x4000, 6eda0 FALSE side 65da5 JZ 65dbe, 73970 -> 65dce
+    # word(0x4b)=0) -> JMP 6a290. The timer gate/draws/5cc60/65deb block are
+    # NOT executed on this side. The near-target block is the SAME block the
+    # F17 arrival arm already proved (R30); F35 moved it into the shared helper
+    # mule_owned_expired_replan::near_target so both sides run one
+    # implementation. The port arm: ring-gate failure inside
+    # plan_expired_reacquisition returns near_target(record). Oracle:
+    # source_prepared, 1736 instructions, 0 draws, output
+    # private/review/owned-mule-captured-width/d386493180e14ca7bc14f28d32e22e5f
+    # (slot-1-only deltas: 0x19 4->2, 0x27 0x1e->0x1d, 6df30 vector rebuild
+    # 0x2d..0x31 / 0x39..0x3d, word(0x49) 0x220->0, word(0x4b) 0x31a->0,
+    # 0x66 0x59->0x57; rng.bin byte-identical). Port vs oracle: zero diffs over
+    # all eight buffers (427,369 compared). 65da7..65db5 (aligned virtual38)
+    # and 65dd7.. (>0x4000 distance) stay fail-closed; R21/R25 remain
+    # fail-closed negatives. Never silently expanded.
+    dict(id='R32-owned-state1-pursuit-ring-short-6060', frame=6060, slot=1, draws=0, mode='direct',
+         fixture='private/review/attempt35-6060-measure/capture/frame-6060-slot-1-blocked-before-owned',
+         expected='private/review/owned-mule-captured-width/d386493180e14ca7bc14f28d32e22e5f'),
 ]
 NEGATIVE = [
     # F16 measurement-first NEGATIVE gate (added 2026-10-17, attempt29): pins the

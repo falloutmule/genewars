@@ -184,11 +184,12 @@ impl ActorWorld {
      //word(0x39) exceeds 0x100 (measured 551) so the FALSE side runs and
      //writes word(0x4b)=0 (measured oracle 0x4b 1024->0). The aligned side
      //(virtual38/5C840, 65da7..65db5) is unmeasured and refuses.
-     if creature_world::motion_point(record)!=[word(record,0xb),word(record,0xd)]||word(record,0x6a)<=0{return Err(CreatureError::UnsupportedMotionState);}
-     let yaw=word(record,0x39);let direct=-i32::from(yaw);let alternative=direct-2048*direct.signum();
-     let delta=if direct.abs()<=alternative.abs(){direct}else{alternative};
-     if delta.abs()<=256||!(0..2048).contains(&yaw){return Err(CreatureError::UnsupportedMotionState);}
-     let mut after=*record;after[0x4b..0x4d].copy_from_slice(&0i16.to_le_bytes());return Ok(after);
+     //F35 (attempt35) moved the block into the SHARED helper
+     //mule_owned_expired_replan::near_target so the B11 ring-gate SHORT side
+     //(65c7f JMP 65d4d, measured at frame 6060) and this arrival side run ONE
+     //implementation; the refusal conditions and the word(0x4b)=0 write are
+     //unchanged from the F17 arm that R30 proved byte-identical.
+     return crate::mule_owned_expired_replan::near_target(record);
     }
     //F21/attempt34 B11 CONVERSION of the R31 negative row to POSITIVE in this
     //same change set, per the family policy's "source-proved and intentionally

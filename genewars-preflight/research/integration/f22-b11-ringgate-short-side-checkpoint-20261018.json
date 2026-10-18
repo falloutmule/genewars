@@ -1,0 +1,38 @@
+{
+  "receipt": "f22-b11-ringgate-short-side-checkpoint",
+  "created": "2026-10-18 (America/Denver)",
+  "family": "F22 - the B11 ring-gate SHORT side (65d4d/65d5e, the 65d80 near-target block) that F21 deliberately left fail-closed; campaign 6060 -> 6100",
+  "task_a_measurement": {
+    "record": "the B11 pre-prefix expired shape again: 0x5e=1, 0x60=0x48, word(0x6c)=0, 0x78=7, 0x52/0x57/0x5a=1, 0x76=0x25, word(0x49)=0x220, species 0x7a=4",
+    "verdict": "NOT a new family and NOT the walk family - it is the ring-gate short side of the continuation already touched. Oracle adjudicated directly: source_prepared, 1736 instructions, 0 draws, call list 73770/7a6c0/73970/ae028 with no 5cc60/73c20/8b780/6bdd0 = the 65d80 near-target block. No oracle extension was needed.",
+    "deltas": "slot-1 only, zero draws, rng byte-identical: 0x19 4->2, 0x27 0x1e->0x1d, the 6df30 vector rebuild (0x2d..0x31, 0x39..0x3e), word(0x49) 0x220->0, word(0x4b) 0x31a->0 (the 73970/AE028 near-target zero), 0x66 0x59->0x57 - the same near-target block as F17's arrival arm"
+  },
+  "implementation": "mule_owned_expired_replan.rs +32/-1 (the short side), owned_mule_updates.rs +6/-5 (the gate), checker +32/-0 (row conversion)",
+  "negative_gate": "4 negative checks remain - not emptied",
+  "director_verification": {
+    "run": "private/integration/F22-root-check-20261018T0645",
+    "result": {
+      "positive": "57/57",
+      "negative": "4/4",
+      "checks": "68/68",
+      "all_ok": true
+    },
+    "campaign": "steps 6100, blocked Creatures(UnsupportedNeighborhood), world f06e9729f37246db18334f8e7b51bdee1d6e56913f66c054d60a65e2e0a8cdd6 - identical to the worker run"
+  },
+  "significance": "F21 left four short sides fail-closed rather than guessing; F22 came back and closed one of them from the listing with the oracle adjudicating directly. This is the machinery-and-arm pattern paying off a second time in a row: 6010 -> 6060 -> 6100 with no guard relaxed.",
+  "frontier": {
+    "before": 6060,
+    "after": 6100,
+    "blocked": "Creatures(UnsupportedNeighborhood)"
+  },
+  "open": {
+    "next": "UnsupportedNeighborhood at 6100 - unmeasured",
+    "carry_forward": [
+      "F21's remaining B11 short sides (timer-gate 65cb8, draw-1 JG 65d3c, 8b780 AL==0, 6c190)",
+      "F10/F11 provisional items",
+      "B0 food-guard",
+      "B8 kind-2-with-food-guard"
+    ]
+  },
+  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008 -> 6010 -> 6060 -> 6100"
+}

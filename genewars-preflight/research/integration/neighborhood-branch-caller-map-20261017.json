@@ -79,7 +79,7 @@
    "id": "B11-owned-state1-pursuit-expired-preprefix",
    "condition": "the B9 degraded-pursuit shape (0x5e==1, 0x60 in {0x48,0xc8}, 0x61==0, 0x78==7, 0x52/0x57/0x5a==1, 0x4f==0, 0x5d==0, 0x76<=90, word(0x49)&0x100==0) with word(0x6c)==0 ALREADY BEFORE the callback (F17's arrival side carried word(0x6c)=0x7fea pre-prefix; measured: owned slot1 word(0x49)=0x2000, position == waypoint word(0x0b/0x0d))",
    "current": "fail-closed (R31 negative): both the F15 fresh arm (post word(0x6c)>0) and the F17 arrival arm (pre word(0x6c)>0) skip, the record falls into owned_mule_neighborhood_no_action and the food guard (word(0x68)=5 <= word(0x62)>>1=65) refuses at owned_mule_updates.rs:401. The source ADMITS the record (oracle source_prepared, 2431 instructions, 4 draws, output owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b, slot-1-only deltas: 0x5e 1->8, 0x60 0x48->0x88, word(0x6c)->0x7ffe, 0x52/0x57 cleared, 0x54=0x14, 0x49|=0x10, waypoint re-planned via 73c20, word(0x3f)=79, 0x2d..0x31 zeroed). Same 5ef40 JLE -> 65384 -> entry-1 -> 5ef46 dispatch as F17, but the continuation takes the LONG side at 65c7d: JNZ ((word(0xf)+rng_ring)&3)==3 -> 65c9a; 65cb2 (0x7fff-word(0x6c))>0x100; 65cfe draw; 65d42 CALL 5cc60 -> flag -> 65d58 JNZ 65deb; 65deb draw; 65e68 byte[0x5e]=8; virtual+0x8c; 65ea1 0x49|=0x10; 65e97 0x54=0x14; 65ed6 word(0x6c)=0x7fff; 65eeb CALL 6bdd0; tail 6a4a0 DEC word(0x6c) -> 0x7ffe",
-   "status": "INTEGRATED/PROVED (F21 attempt34, focused + checker): the measured pre-prefix expired-timer shape (0x5e=1, 0x60=0x48 post-prefix, word(0x6c)==0 pre AND post) now runs the 65c60 ring-gate LONG side ((word(0xf)+tick)&3==3, tick modeled as counter=args.frame per F20), the 65cb2 timer gate, the 65cbe/65deb/73c20 activation writes (codes 0x9aa/0xa03/0x59c/0x59d with pointers 0x10e4d8/0x10e4e5/0x10e6b7/0x10e6c0 and ring-value=[0x11877e]), draws 1-4 (seed 37665->3889, ring 26->30, counter 50243->50247), the 5cc60/5cca0 zeroing block, 8b780 pinned AL!=0, the 73c20 waypoint rebuild from the extracted 0x107ee8/0x1086e8 slope tables (measured 0x23a/0x5d6c), 5a990 word(0x3f)=591, word(0x6c)=0x7fff, 0x60|=0x80 and the 6bdd0 false side (species byte 0x104a64+2*4=0x04!=3) with the shared tail DEC -> 0x7ffe. Port arm mule_owned_expired_replan::plan_expired_reacquisition wired at owned_mule_updates.rs (pre word(0x6c)==0 gate); table data private/integration/game-runtime/creature/b11-tables.bin (receipt private/integration/b11-tables-extraction.json) refuses fail-closed when missing or unpinned. Oracle 59dc2afb22b64ab6bf89e1ccb85df79b: zero diffs over all eight buffers, 4 draws; R31 converted POSITIVE in-row; every unmeasured side of the block stays fail-closed (see f21_findings)."
+   "status": "INTEGRATED/PROVED (F21 attempt34, focused + checker): the measured pre-prefix expired-timer shape (0x5e=1, 0x60=0x48 post-prefix, word(0x6c)==0 pre AND post) now runs the 65c60 ring-gate LONG side ((word(0xf)+tick)&3==3, tick modeled as counter=args.frame per F20), the 65cb2 timer gate, the 65cbe/65deb/73c20 activation writes (codes 0x9aa/0xa03/0x59c/0x59d with pointers 0x10e4d8/0x10e4e5/0x10e6b7/0x10e6c0 and ring-value=[0x11877e]), draws 1-4 (seed 37665->3889, ring 26->30, counter 50243->50247), the 5cc60/5cca0 zeroing block, 8b780 pinned AL!=0, the 73c20 waypoint rebuild from the extracted 0x107ee8/0x1086e8 slope tables (measured 0x23a/0x5d6c), 5a990 word(0x3f)=591, word(0x6c)=0x7fff, 0x60|=0x80 and the 6bdd0 false side (species byte 0x104a64+2*4=0x04!=3) with the shared tail DEC -> 0x7ffe. Port arm mule_owned_expired_replan::plan_expired_reacquisition wired at owned_mule_updates.rs (pre word(0x6c)==0 gate); table data private/integration/game-runtime/creature/b11-tables.bin (receipt private/integration/b11-tables-extraction.json) refuses fail-closed when missing or unpinned. Oracle 59dc2afb22b64ab6bf89e1ccb85df79b: zero diffs over all eight buffers, 4 draws; R31 converted POSITIVE in-row; every unmeasured side of the block stays fail-closed (see f21_findings). F35 (attempt35, 2026-10-18): the ring-gate SHORT side is now MEASURED and integrated as the same branch - 65c7f JMP 65d4d, and because the ONLY entry to 65c60 is 65951 JZ (entry AL==0 deterministically), 65d56 TEST CL,CL is NOT taken and 65d5e runs the SAME 65d80..65dce near-target block the F17 arrival side proved (73770<=0x4000, 6eda0 FALSE, 73970 word(0x4b)=0); the near-target code moved into the shared helper mule_owned_expired_replan::near_target (one implementation, both sides). R32 (measured 6060 fixture) added as NEGATIVE first then converted POSITIVE in the same change set; oracle d386493180e14ca7bc14f28d32e22e5f, 1736 instructions, 0 draws, zero diffs over all eight buffers. Still fail-closed: 65da7..65db5 aligned virtual38, 65dd7.. >0x4000 distance, timer-gate short side 65cb8, draw-1 JG 65d3c, 8b780 AL==0 65c57, 6bdd0 true side/6c190."
   }
  ],
  "callers": [
@@ -173,31 +173,48 @@
   "oracle": "owned-mule-captured-width-review.py on the measured fixture: source_prepared, 2431 instructions, 4 draws, output owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b; slot-1-only creature deltas (0x5e 1->8, 0x60 0x48->0x88, word(0x6c) 0->0x7ffe, 0x52/0x57 ->0, byte 0x54 0->0x14, byte 0x49 0->0x14 (0x10 from 65ea7 plus 0x04 from an unlocated writer), waypoint bytes 0xb/0xd re-planned, word(0x3f) 0->79, bytes 0x2d..0x31 zeroed, byte 0x19 2->1, yaw word 0x39 and words 0x3b/0x3d/0x3f rewritten, byte 0x66 139->137). RNG seed/ring/draw_count changed as expected; backing/players/buildings/effects/family8/actors byte-identical. NO reference-model extension needed.",
   "decision": "new map branch B11 (same B9 continuation, third side: expired pre-prefix timer). The trace settles the decision structure (65c7d ring&3 gate, 65c9a timer gate, 65d42 5cc60 flag, 65deb state rewrite + waypoint replan, 6bdd0 fresh timer, tail DEC) but NOT 5c920, the +0x8c/+0x80 virtuals, 6bdd0/6c190, 2 of 4 draw sites, or the activation-RNG refs - so the arm is deliberately NOT implemented; R31 pins it fail-closed.",
   "boundary": "R31 fail-closed negative added; no catch-all or guard relaxed; B9/B10/B7 and the walk catch-alls unchanged"
- }
-,
+ },
  "f21_findings": {
- "machinery_added": [
-  "6bdd0 species==3 flag table (VA 0x104a64, 4 instructions, instructions-0006b700.txt lines 482-486) - data-driven, 8 species entries extracted; measured species 4 -> false, so the measured shape takes 65ef2 JZ 6a290",
-  "activation-table write machinery: 32-entry cursor-indexed (code, pointer, ring-value) triples (0x11862c/0x1185ac/0x1186ac, cursor byte 0x11872c&0x1f) implemented WRITE-ONLY as far as the B11 path's own writes require (four entries cited in the B11 status); cursor arithmetic is mirrored by BlueprintRng.ring and the counter by draw_count; the CONSUMERS remain a separate unproved family and are NOT guessed, so no world-state table was added",
-  "73c20 waypoint replan (instructions-00073c20.txt): two activation writes, counter+=2, draws 3-4, and the slope-table rebuild norm(rem3*8) -> new waypoint ((2*p + slope*2*rem4>>16)>>1)&0x7fff, verified offline to reproduce the measured 0x23a/0x5d6c",
-  "5a990 (instructions-0005a990.txt): word(0x3f) formula with dword[0x1045fc+45*byte[0x7a]+6], measured 591",
-  "5cc60/5cca0 zeroing block (instructions-0005cc60.txt) and 13e50/13e70/13eb0 helpers",
-  "6df30 movement vector rebuild producing the 0x2d..0x31 delta: judged NECESSARY but ALREADY PRESENT - the existing prefix produced the identical 0x2d..0x31/0x39..0x3e deltas byte-identically on R29/R30, so no new machinery was added",
-  "the [0x11877e] mission tick: already modeled as counter=args.frame; mirrored from that evidence, no new machinery"
- ],
- "unnecessary_or_skipped": [
-  "6c190: reachable ONLY on the 6bdd0-true side (65ef8/65c4d); the measured path never executes it -> kept fail-closed (UnsupportedMotionState), not implemented",
-  "activation-table consumers: separate unproved family, not implemented",
-  "new fail-closed negative row: NOT added - the negative set keeps R21 and R25 (4 rows), which is not thin"
- ],
- "still_open_fail_closed": [
-  "B11 ring-gate SHORT side 65d4d/65d5e (flag from the caller's entry AL, unmeasured)",
-  "B11 timer-gate short side 65cb8 and the unmodeled 65c84 byte[[EBP+0xa6]+6]==3 ECX doubling",
-  "draw-1 flag JG side 65d3c",
-  "8b780's chain walk and vtable+0x68 virtuals: PROVISIONAL - only the measured AL!=0 outcome and its zero eight-buffer deltas are pinned; the AL==0 side 65c57 stays unreachable/fail-closed",
-  "6bdd0 true side 65ef8 with 6c190 (unimplemented)",
-  "B0 food-guard and B8 kind-2-with-food-guard neighborhood shapes (owned_mule_updates.rs:396-407) remain refused"
- ],
- "verdicts": "all four Task A items judged against the executed trace; see mule_owned_expired_replan.rs header for the full address-by-address basis"
-}
+  "machinery_added": [
+   "6bdd0 species==3 flag table (VA 0x104a64, 4 instructions, instructions-0006b700.txt lines 482-486) - data-driven, 8 species entries extracted; measured species 4 -> false, so the measured shape takes 65ef2 JZ 6a290",
+   "activation-table write machinery: 32-entry cursor-indexed (code, pointer, ring-value) triples (0x11862c/0x1185ac/0x1186ac, cursor byte 0x11872c&0x1f) implemented WRITE-ONLY as far as the B11 path's own writes require (four entries cited in the B11 status); cursor arithmetic is mirrored by BlueprintRng.ring and the counter by draw_count; the CONSUMERS remain a separate unproved family and are NOT guessed, so no world-state table was added",
+   "73c20 waypoint replan (instructions-00073c20.txt): two activation writes, counter+=2, draws 3-4, and the slope-table rebuild norm(rem3*8) -> new waypoint ((2*p + slope*2*rem4>>16)>>1)&0x7fff, verified offline to reproduce the measured 0x23a/0x5d6c",
+   "5a990 (instructions-0005a990.txt): word(0x3f) formula with dword[0x1045fc+45*byte[0x7a]+6], measured 591",
+   "5cc60/5cca0 zeroing block (instructions-0005cc60.txt) and 13e50/13e70/13eb0 helpers",
+   "6df30 movement vector rebuild producing the 0x2d..0x31 delta: judged NECESSARY but ALREADY PRESENT - the existing prefix produced the identical 0x2d..0x31/0x39..0x3e deltas byte-identically on R29/R30, so no new machinery was added",
+   "the [0x11877e] mission tick: already modeled as counter=args.frame; mirrored from that evidence, no new machinery"
+  ],
+  "unnecessary_or_skipped": [
+   "6c190: reachable ONLY on the 6bdd0-true side (65ef8/65c4d); the measured path never executes it -> kept fail-closed (UnsupportedMotionState), not implemented",
+   "activation-table consumers: separate unproved family, not implemented",
+   "new fail-closed negative row: NOT added - the negative set keeps R21 and R25 (4 rows), which is not thin"
+  ],
+  "still_open_fail_closed": [
+   "B11 ring-gate SHORT side 65d4d/65d5e (flag from the caller's entry AL, unmeasured)",
+   "B11 timer-gate short side 65cb8 and the unmodeled 65c84 byte[[EBP+0xa6]+6]==3 ECX doubling",
+   "draw-1 flag JG side 65d3c",
+   "8b780's chain walk and vtable+0x68 virtuals: PROVISIONAL - only the measured AL!=0 outcome and its zero eight-buffer deltas are pinned; the AL==0 side 65c57 stays unreachable/fail-closed",
+   "6bdd0 true side 65ef8 with 6c190 (unimplemented)",
+   "B0 food-guard and B8 kind-2-with-food-guard neighborhood shapes (owned_mule_updates.rs:396-407) remain refused"
+  ],
+  "verdicts": "all four Task A items judged against the executed trace; see mule_owned_expired_replan.rs header for the full address-by-address basis"
+ },
+ "f35_findings": {
+  "measurement": "the 6060 campaign refusal is Creatures(UnsupportedMotionState) at the OWNED callback (frame-6060-slot-1-blocked-before-owned, reproduced fresh: world 17e00676..., rgb 60d40939..., steps 6060). The record is the B11 pre-prefix expired shape (0x5e=1, 0x60=0x48, word(0x6c)=0 pre AND post, word(0x49)=0x220) at frame 6060, where the ring gate ((word(0xf)+tick)&3)==3 = (6060+1)&3 = 1 FAILS - F21's declared ring-gate short-side boundary, the SAME branch, not a new family.",
+  "oracle": "source_prepared, 1736 instructions, 0 draws, output owned-mule-captured-width/d386493180e14ca7bc14f28d32e22e5f; slot-1-only deltas (0x19 4->2, 0x27 0x1e->0x1d, 6df30 vector 0x2d..0x31/0x39..0x3d, word(0x49) 0x220->0, word(0x4b) 0x31a->0, 0x66 0x59->0x57), rng.bin byte-identical. NO reference-model extension needed.",
+  "refusing_site": "mule_owned_expired_replan.rs line 159 ring-gate refusal (the F21 arm was reached and refused; wiring owned_mule_updates.rs:218 matched).",
+  "source_decision": "65c7f JMP 65d4d; byte[EBP+0x186] = ENTRY AL (65c66) and the ONLY entry to 65c60 is 65951 JZ (CALL [ctx+0x68]==0), so CL==0 deterministically; 65d5e virtual pair (1f270 x2) -> the 65d80..65dce near-target block -> JMP 6a290.",
+  "port": "near-target block moved into shared mule_owned_expired_replan::near_target; the F17 arrival arm and the ring-gate short side both call it; ring-gate failure returns near_target(record). One implementation, no duplication; no guard relaxed.",
+  "checker_row": "R32 added FIRST as NEGATIVE (exact rejection + preservation verified, 0 draws), then converted POSITIVE in the same change set with the basis in-row; R21/R25 (+2) remain fail-closed (4 negatives).",
+  "checker": "attempt35-f35-final: 57/57 positive, 4/4 negative, 68/68 checks, all_ok true, head 62fdb5a.",
+  "campaign": "frontier moved 6060 -> 6100; new blocker Creatures(UnsupportedNeighborhood) at world f06e9729f37246db18334f8e7b51bdee1d6e56913f66c054d60a65e2e0a8cdd6, rgb 318f84a5a2789676e528c7aba6b90fa2384b09a5840418fe5f6ce160f31b7ad3 - unmeasured, the next family measures it fresh first.",
+  "still_fail_closed": [
+   "65da7..65db5 aligned virtual38 side",
+   "65dd7.. >0x4000 distance side",
+   "timer-gate short side 65cb8 (+65c84 kind==3 ECX doubling)",
+   "draw-1 flag JG side 65d3c",
+   "8b780 AL==0 side 65c57",
+   "6bdd0 true side 65ef8 with 6c190"
+  ]
+ }
 }
