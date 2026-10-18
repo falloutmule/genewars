@@ -1,177 +1,177 @@
 {
-  "map": "neighborhood candidate classification - branch/caller map",
-  "created": "2026-10-17 (America/Denver)",
-  "steering": "GENEWARS_HERMES_STEERING_HANDOFF_F12.md - map-first family selection instead of one F-number per frontier callback",
-  "trigger": "Creatures(UnsupportedNeighborhood) at step 5966 (F12 measured: owned shared arrival clears the explicit command then dispatches ordinary owned idle AI; the neighborhood walk refuses a kind=1 owner-4 neighbour, the neutral Mule)",
-  "routine": {
-    "owned": "ActorWorld::owned_mule_neighborhood_no_action - rust/crates/genewars-runtime/src/actor_world/owned_mule_updates.rs:327",
-    "source_notes_in_code": "the doc comment already records source facts: 6BA47 kinds 3/4 bypass food/pair scoring; 6BD3D->6B72A skips code 0x1A (all effects except 0x11) before classification; 8D930 visits sample cells within radius 1024 including the boundary",
-    "walk": "9x9 cell sample (dx*dx+dy*dy<=16), entity chain via reference(...,3), skip self (raw==own), then classify raw[2]"
+ "map": "neighborhood candidate classification - branch/caller map",
+ "created": "2026-10-17 (America/Denver)",
+ "steering": "GENEWARS_HERMES_STEERING_HANDOFF_F12.md - map-first family selection instead of one F-number per frontier callback",
+ "trigger": "Creatures(UnsupportedNeighborhood) at step 5966 (F12 measured: owned shared arrival clears the explicit command then dispatches ordinary owned idle AI; the neighborhood walk refuses a kind=1 owner-4 neighbour, the neutral Mule)",
+ "routine": {
+  "owned": "ActorWorld::owned_mule_neighborhood_no_action - rust/crates/genewars-runtime/src/actor_world/owned_mule_updates.rs:327",
+  "source_notes_in_code": "the doc comment already records source facts: 6BA47 kinds 3/4 bypass food/pair scoring; 6BD3D->6B72A skips code 0x1A (all effects except 0x11) before classification; 8D930 visits sample cells within radius 1024 including the boundary",
+  "walk": "9x9 cell sample (dx*dx+dy*dy<=16), entity chain via reference(...,3), skip self (raw==own), then classify raw[2]"
+ },
+ "branches": [
+  {
+   "id": "B0-food-guard",
+   "condition": "food_guard = word(0x68) <= word(0x62)>>1 || 0x61&0x40 != 0",
+   "current": "returns Err(UnsupportedNeighborhood) unless completed_command (state 8, 0x61=0, 0x60 in {8,0x88}, 0x78=7)",
+   "status": "RESOLVED 2026-10-17 (F13/F14): 6BA47..6BA4C is the kind dispatch (kind 1<2 -> 6BD2B, JZ 6BA8A), not a food-guard skip; the F1-R13 provisional note in private/integration/verification-anomalies-20261017.md carries the correction"
   },
-  "branches": [
-    {
-      "id": "B0-food-guard",
-      "condition": "food_guard = word(0x68) <= word(0x62)>>1 || 0x61&0x40 != 0",
-      "current": "returns Err(UnsupportedNeighborhood) unless completed_command (state 8, 0x61=0, 0x60 in {8,0x88}, 0x78=7)",
-      "status": "RESOLVED 2026-10-17 (F13/F14): 6BA47..6BA4C is the kind dispatch (kind 1<2 -> 6BD2B, JZ 6BA8A), not a food-guard skip; the F1-R13 provisional note in private/integration/verification-anomalies-20261017.md carries the correction"
-    },
-    {
-      "id": "B1-kind2-plant",
-      "condition": "raw[2]==2 && !food_guard && e[24]==4",
-      "current": "accept",
-      "status": "integrated/proved (owned no-action fixture)"
-    },
-    {
-      "id": "B2-kind3-same-owner",
-      "condition": "raw[2]==3 && !food_guard && e[24]==r[24]",
-      "current": "accept",
-      "status": "integrated/proved"
-    },
-    {
-      "id": "B3-kind4-building",
-      "condition": "raw[2]==4 && !food_guard && same owner && building grade in {0,11}",
-      "current": "accept",
-      "status": "integrated/proved"
-    },
-    {
-      "id": "B4-kind5-effect",
-      "condition": "raw[2]==5 && effect kind != 0x11 && binding present",
-      "current": "accept",
-      "status": "integrated/proved"
-    },
-    {
-      "id": "B5-kind8",
-      "condition": "raw[2]==8",
-      "current": "accept",
-      "status": "integrated/proved"
-    },
-    {
-      "id": "B6-CATCH-ALL",
-      "condition": "any other raw[2], or a known kind failing its inner condition (including kind 1 at/above state 0x1A, non-sole hostile candidates, and kind 2 with food_guard = B8)",
-      "current": "Err(UnsupportedNeighborhood) - no longer the 5966 blocker (the hostile kind-1 arm landed), still fail-closed for every unproved candidate",
-      "status": "unsupported by policy - refuse-and-preserve; each remaining branch is decided only as its source proof lands"
-    },
-    {
-      "id": "B7-kind1-creature",
-      "condition": "raw[2]==1 (creature candidate in the walk)",
-      "current": "hostile kind-1 arm integrated (owned_mule_single_hostile): alliance test 6B7DF..6B7FE with the validated 75 04 decode (aligned candidates skipped), kind dispatch 6B81E..6B830 table 6BD70[0]=6B9B0, state!=0xF, state<0x1A, [ESI+0x60]&1==0, then the 5B580 case-1 acquisition via widened mule_owned_hostile_acquisition::plan_acquisition; byte-identical to the owned oracle on the 5966 record (4 draws). A kind-1 candidate at/above state 0x1A is still refused by the catch-all (R25 fail-closed negative)",
-      "status": "integrated/proved for the measured sole-hostile idle domain (R24 converted positive); kind-1 state>=0x1A and non-sole candidates remain unsupported (R25 negative)"
-    },
-    {
-      "id": "B8-kind2-with-food-guard",
-      "condition": "raw[2]==2 && food_guard",
-      "current": "falls into B6",
-      "status": "source-known/not integrated - 6BD3D/6B72A skip branches should decide this, not the catch-all"
-    },
-    {
-      "id": "B9-owned-state1-pursuit-degraded-target",
-      "condition": "owned full-path admission (odd phase, 0x61=0, NOT the 6B700 walk): 0x5e==1 hostile pursuit, 0x60 in {0x48,0xc8}, 0x78=7, 0x52/0x57/0x5a=1, refs 0x50/0x58==0x55, 0x4f=0, 0x5d=0, 0x76<=90, word(0x49)&0x100==0, where the 0x55-target is no longer a live state-1/20/21 hostile (measured: neutral Mule slot 5 state 8, 0x60=0x88, 0x61=0x40, 0x78=0, 0x55-ref back at the owned mule, word(0x6c)=0x7ffe fresh timer)",
-      "current": "accept - the source full path (0x5ed20->0x5ed3b JZ 0x5ee1c->0x6fb60 virtual94 movement prefix->0x5ee25..0x5ee32 parity gate JNZ odd->0x5eed5..0x5ef1f->0x5ef22 CALL 0x5e0b0->0x5ef32 CALL 0x5eb30->0x5ef37..0x5ef40 fresh-timer side->0x5ef49->0x6a22b..0x6a2dd->0x65743..0x65de6 movement continuation->tail 0x6a290..0x6a53e with 0x6a4a0 DEC word(0x6c)->0x7ac00) NEVER reads the enemy record, runs NO 624B8 AI and NO 6B700 scan (2542 instructions, 0 draws; probe private/review/attempt28-5968-probe-2a44a5da). The prior port refusal at owned_mule_updates.rs line 76 (hostile_enemy.is_none) was a port-authored predicate, per map rule 1.",
-      "status": "integrated/proved (F15 attempt28: R28 negative->positive; oracle extension in owned-mule-captured-width-review.py admits the measured degraded shape, output owned-mule-captured-width/22da7a68d74f407b80611ca51ad602d0; port degraded_pursuit admission + 5EB30 no-AI continuation arm, byte-identical, 0 draws). F17 (attempt30) extends the SAME branch to its ARRIVAL side: the post-prefix record with 0x60=0x48/word(0x6c)=0 (source5EB30 zeroing 0005eb9b/0005ebd9, JLE 0005ef40 -> table 0x5eca0 entry 1 -> 0005ef46) plus the near-target block 00065d80..00065dce writing word(0x4b)=0 (R30 positive, byte-identical). A PRE-prefix expired timer (word(0x6c)==0 before the callback) and the aligned virtual38 side (65da7..65db5) remain unsupported (still fail-closed)."
-    },
-    {
-      "id": "B10-cellentry-state1-pursuit-target-occupant",
-      "condition": "mule_cell_entry_predicate (shared 5B100 predicate) on a state-1 pursuit record (0x57=1, 0x52=1, ref50==ref55) whose queried destination cell's sole kind1 occupant is the record's own ref55 target, degraded to state 8, at its own cell == the queried cell (measured: owned slot1 word(0x6c)=0x7ff2, destination cell 11906 = neutral slot5's cell)",
-      "current": "accept - the source predicate 5B100 has a dedicated state-1 arm 0005b18c..0005b204 (6D390 resolves ref55; 5b1af..5b204: occupant==self -> admit; occupant kind1 at its own cell == queried cell -> admit unless the target's virtual+0x68 refuses, measured FALSE) instead of the default head check 0005b242 the port had implemented; the former blanket check_mule_cell_entry refusal was port-authored (map rule 1). Oracle: source_prepared, 2856 instructions, 0 draws, output d076d8fe60f547eb8c391064778a55aa; port byte-identical over all eight buffers (427369)",
-      "status": "integrated/proved (F16 attempt29: R29 negative->positive); multiple kind1 occupants, kind2 occupants, 0x11 effects and non-state-8 targets remain refused (fail-closed)"
-    },
-    {
-      "id": "B11-owned-state1-pursuit-expired-preprefix",
-      "condition": "the B9 degraded-pursuit shape (0x5e==1, 0x60 in {0x48,0xc8}, 0x61==0, 0x78==7, 0x52/0x57/0x5a==1, 0x4f==0, 0x5d==0, 0x76<=90, word(0x49)&0x100==0) with word(0x6c)==0 ALREADY BEFORE the callback (F17's arrival side carried word(0x6c)=0x7fea pre-prefix; measured: owned slot1 word(0x49)=0x2000, position == waypoint word(0x0b/0x0d))",
-      "current": "fail-closed (R31 negative): both the F15 fresh arm (post word(0x6c)>0) and the F17 arrival arm (pre word(0x6c)>0) skip, the record falls into owned_mule_neighborhood_no_action and the food guard (word(0x68)=5 <= word(0x62)>>1=65) refuses at owned_mule_updates.rs:401. The source ADMITS the record (oracle source_prepared, 2431 instructions, 4 draws, output owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b, slot-1-only deltas: 0x5e 1->8, 0x60 0x48->0x88, word(0x6c)->0x7ffe, 0x52/0x57 cleared, 0x54=0x14, 0x49|=0x10, waypoint re-planned via 73c20, word(0x3f)=79, 0x2d..0x31 zeroed). Same 5ef40 JLE -> 65384 -> entry-1 -> 5ef46 dispatch as F17, but the continuation takes the LONG side at 65c7d: JNZ ((word(0xf)+rng_ring)&3)==3 -> 65c9a; 65cb2 (0x7fff-word(0x6c))>0x100; 65cfe draw; 65d42 CALL 5cc60 -> flag -> 65d58 JNZ 65deb; 65deb draw; 65e68 byte[0x5e]=8; virtual+0x8c; 65ea1 0x49|=0x10; 65e97 0x54=0x14; 65ed6 word(0x6c)=0x7fff; 65eeb CALL 6bdd0; tail 6a4a0 DEC word(0x6c) -> 0x7ffe",
-      "status": "source-known/oracle-prepared, NOT integrated - F19 (attempt32) settled the mechanism from listing text: the FULL path is pinned (listing private/ghidra/player-creation/instructions-0005ed20.txt lines 7500-7680; executed trace private/review/owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b/trace.txt): 65c60 flag=[AL]; 65c7d LONG side when (word(0xf)+dword[0x11877e])&3==3; ECX=0x7fff-word(0x6c) (doubled iff byte[[EBP+0xa6]+6]==3 && byte[[[EBP+0xa6]+0xc0]+0x15]==2); >0x100 gate; activation entry (0x9aa,0x10e4d8,[0x11877e]) written to tables [idx*4+0x11862c/0x1185ac/0x1186ac] at cursor byte[0x11872c], cursor=(cursor+1)&0x1f; DRAW1 65cfe (LCG word[0x11878a] *= -0x19d3, counter dword[0x118782]+1, 65d2d); flag=1 unless draw%150 > ECX-0x100 (deterministically flag=1 at word(0x6c)==0); CALL 5cc60: byte[0x5e]!=0x12 -> 5cd81 CALL 5c920 (executed body = prologue only: byte[0x60]&2==0 -> JZ 5cc27 epilogue, NO side effects, NO draw); 5cd88 jump-table 0x5cc34 entry0=5cd1a (corroborated by trace, table bytes unvalidated) -> 5cca0 clear block: word[0x35]=0, word[0x33]=0, byte[0x15]&=0xdf, word[0x60]&=0xd71a (0x48->0x08), byte[0x5d]=0, byte[0x57]=0 (5cce1), word[0x6c]=0; 65deb block: activation entry (0xa03,0x10e4e5,[0x11877e]), cursor+1, counter+1; DRAW2 65e3d (mult -0x44bf19d3); v=((state>>8)&0x7fff)%20+10; byte[0x5e]=8; CALL vtable+0x8c = 8b780 (listing initial-creature/instructions-0008b780.txt: walks record+0xd chain via 6d390, counts byte[node+6]==1 && vtable+0x68-false nodes, dword[out=EBP+0xa2 field]=count, returns last node; AL==0 would exit via 65c57 word(0x6c)=CX); CALL 73c20 (listing activation-rng-refs/instructions-00073c20.txt): DRAW3 73c61 (counter+=2 via 73c92 ADD EDI,0x2, entry 0x59c/0x10e6b7, cursor+1 at 73c95) and DRAW4 73cd7 (entry 0x59d/0x10e6c0, cursor+1 at 73d0a, counter+0 - no increment), single cursor store 73de9, returns new waypoint -> dword[0xb] (65ea4); byte[0x54]=0x14; byte[0x16]&=0xbf; byte[0x49]|=0x10 (65ea7); 13e50: byte[0x49]|=0x4 (settles F18's unlocated 0x04 writer); 13e70: word[0x49]&=0xeffc, byte[0x16]&=0x7f; 13eb0(ESI+0x4d): byte[0x4f]=0; 13eb0(ESI+0x50): byte[0x52]=0; CALL vtable+0x80 = 5a990 (listing initial-creature/instructions-0005a990.txt: 75+min(byte[0x76],100)*25/100 scaled by dword[0x1045fc+45*byte[0x7a]+6] and (byte[0x7b]+1), >>8) -> word[0x3f]=79; word[0x6c]=0x7fff; byte[0x60]|=0x80; CALL 6bdd0 (4 instructions at 0006bdd0 in initial-creature/instructions-0006b700.txt: AL = byte[0x104a64+2*byte[rec+0x7a]]==3; measured 0 -> JZ 6a290, tail DEC word[0x6c] -> 0x7ffe). RNG totals corroborated by rng.bin before/after: draws 50243->50247 (+4), cursor/ring byte 26->30 (+1 at 65cf8, +1 at 65e37, +2 in 73c20). REMAINING UNSETTLED: (1) the writer that zeroes record bytes 0x2d..0x31 (measured delta, no writer located in the executed listings - needs a write-log oracle extension or the missing callee listings); (2) the producer of global dword [0x11877e] (read at 65c60/65cd0/65e09/73cc3/65775, never written in this path); (3) 6c190 has NO listing export (find returned nothing) and is not executed on this path (only on the 6bdd0-true side and at 65c4d) - must stay fail-closed; (4) the consumers of the 0x1185ac/0x11862c/0x1186ac activation tables are outside this path (creature-side activation, separate family); (5) jump-table bytes at 0x5cc34 beyond entry 0 unvalidated. Port arm therefore still NOT implemented: rust/ untouched in this family; R31 stays fail-closed."
-    }
-  ],
-  "callers": [
-    {
-      "caller": "owned idle AI (624B8/6BA47) via the owned choice callback",
-      "uses": "owned_mule_single_hostile (hostile kind-1 classification) + mule_owned_hostile_acquisition::plan_acquisition; owned_mule_neighborhood_no_action only when no hostile is selected",
-      "status": "integrated for the proved candidate kinds including the hostile kind-1 arm (F14); the catch-all (B6/B8) is unchanged"
-    },
-    {
-      "caller": "neutral slot",
-      "fn": "check_mule_neutral_neighbors",
-      "status": "focused-only; throws UnsupportedNeighborhood on unproved neighbour sets"
-    },
-    {
-      "caller": "neutral slot",
-      "fn": "mule_neutral_pair_candidate",
-      "status": "focused-only"
-    },
-    {
-      "caller": "neutral slot",
-      "fn": "check_mule_bones_feeding_no_action",
-      "status": "focused-only (bones/feeding path)"
-    },
-    {
-      "caller": "neutral slot",
-      "fn": "mule_hit_single_owned_enemy",
-      "status": "focused-only"
-    },
-    {
-      "caller": "actor_updates.rs:282",
-      "fn": "creature record lookup on UnsupportedNeighborhood",
-      "status": "unknown/out of scope - a different error use of the same variant"
-    }
-  ],
-  "existing_evidence": {
-    "ghidra": "research/ghidra/actor-idle-evidence.json (arrival/idle/empty-scorer/seed case counts, instruction contracts for 0006e9e0 and siblings, scope notes on arrival/idle globals)",
-    "receipts": [
-      "research/integration/f12-5966-neighborhood-measurement-checkpoint-20261017.json",
-      "F1-R13 6BA47 note in private/integration/verification-anomalies-20261017.md"
-    ],
-    "interpreter": "research/variants/owned-mule-captured-width-review.py + neutral-mule-captured-width-review.py (the reference model)"
+  {
+   "id": "B1-kind2-plant",
+   "condition": "raw[2]==2 && !food_guard && e[24]==4",
+   "current": "accept",
+   "status": "integrated/proved (owned no-action fixture)"
   },
-  "family_decision": {
-    "chosen": "F14 = the owned idle-AI HOSTILE kind-1 candidate classification and scoring arm (0x6B9B0 hostile arm, 0x6BA47 kind dispatch, 0x6BA8A kind-1 counter and weighted score), plus closing the F1-R13 6BA47 item with the now-pinned branch. Excluded: neutral pair/bones neighbours, actor_updates.rs:282, and the rest of the 0x6B700 scorer for candidate kinds already covered.",
-    "excluded": [
-      "actor_updates.rs:282's unrelated use of the same error variant",
-      "bones/feeding and pair-candidate paths beyond their admission predicates (separate semantics, separate fixtures)",
-      "any blanket removal of the catch-all"
-    ],
-    "why_this_is_coherent": "all branches share the one walk, one classification table and one admission site; the catch-all, the food guard and the creature-candidate question are decided by the same listing text",
-    "boundary": "if the listing does not settle the creature-candidate classification, the family closes at the measured boundary with B7 recorded as source-unknown and the catch-all kept",
-    "supersedes": "F13's answer sharpens the family: the open question is no longer 'what does the walk do with a kind-1 neighbour' but 'the port has no hostile kind-1 candidate arm at all, while the source scores hostile creature candidates'"
+  {
+   "id": "B2-kind3-same-owner",
+   "condition": "raw[2]==3 && !food_guard && e[24]==r[24]",
+   "current": "accept",
+   "status": "integrated/proved"
   },
-  "reporting": "two or three family milestones after this steering change, assess whether the wider scope reduced repeated repairs; no causal claim from an uncontrolled comparison",
-  "f13_findings": {
-    "answer": "(A) the original executes a specific branch; the owned oracle already adjudicates the record, so no reference-model extension was needed and rust/ stayed untouched",
-    "evidence": "private/ghidra/initial-creature/instructions-0006b700.txt + validated image private/ghidra/validated/memory-.object1.bin (load base 0x10000); executed-path claims from private/review/owned-mule-captured-width/9c48d067bdd04c5d807ca4c4ce3140d3/trace.txt",
-    "walk": "0x8D930 samples cells within radius 1024 and calls the scorer 0x6B700 once per cell reference chain; the owned idle context is built by the state-8 block 0x624B1..0x626AD inside 5ED20, storing the self record at context+0x29 (0x6250d)",
-    "alliance": "0x6B7DF..0x6B7FE computes DL=[self_owner*0x70d+0x118d74+0x6e5] (alliance mask), EAX=1<<cand_owner, TEST EDX,EAX; the VALIDATED bytes at 0x6B7FE are 75 04 (JNZ 0x6B804), while the Ghidra listing misrenders the target as 0x6B800. With mask 0 the neutral Mule is HOSTILE to the owned idle AI.",
-    "kind_dispatch": "0x6B81E..0x6B830: kind 1 -> JMP CS:[0*4+0x6BD70]; validated dword table at 0x6BD70 = [0x6B9B0, 0x6B838, 0x6B975, 0x6B9A2], so the hostile kind=1 arm is 0x6B9B0 (confirmed executed in the trace)",
-    "hostile_kind1": "0x6B9B0..0x6B9C3 sets action-eligible=1 and state!=0xF; 0x6B9CF..0x6B9FE updates best distance and bucket [player*4+0x2D]; 0x6BA09..0x6BA40 updates the best action, bucket [player*4+0x6D] and [0x1AD]; 0x6BA47..0x6BA4C (kind 1<2) -> 0x6BD2B, JZ 0x6BA8A taken; 0x6BA8A..0x6BAF3 increments the kind-1 counter and applies the weighted score [player*4+0xED] += ([0x1E0]+0x1F)*EDI/100",
-    "f1_r13_resolved": "the 6BA47 food-guard question is now pinned: 0x6BA47..0x6BA4C takes kind 1 < 2 to 0x6BD2B, and 0x6BD2D JZ 0x6BA8A is taken, which is exactly the 'enters 0x6ba3b..0x6ba4c, leaves at 0x6bd2b' observation. It was never a food-guard skip - it is the kind-dispatch path into the kind-1 scoring arm.",
-    "checker": "attempt26-neighborhood-refcheck: 39/39 positive, 4/4 negative (R24 correctly still negative), 50/50 checks, campaign unchanged at 5966 - a research-only change, as instructed"
+  {
+   "id": "B3-kind4-building",
+   "condition": "raw[2]==4 && !food_guard && same owner && building grade in {0,11}",
+   "current": "accept",
+   "status": "integrated/proved"
   },
-  "f15_findings": {
-    "measurement": "the 5968 campaign refusal is Creatures(UnsupportedMotionState) at the OWNED callback (frame-5968-slot-1-blocked-before-owned), NOT the 6B700 neighborhood walk: owned Mule slot 1 in state-1 hostile pursuit (0x60=0xc8) whose target degraded to state 8. Genuinely a different branch from B0..B8 - it is the owned full-path pursuit admission, kept as its own map branch (B9).",
-    "oracle": "owned-mule-captured-width-review.py rejected the record until the degraded-enemy admission was added (F8-pattern extension, cited executed path); then source_prepared, 2542 instructions, 0 draws.",
-    "port": "owned_mule_updates.rs: degraded_pursuit admission (pursuit shape without target liveness) + a choice-callback arm returning the record unchanged for 0x5e==1, 0x60 in {0x48,0xc8}, word(0x6c)>0 without a live enemy (source: 5EB30 returns without 624B8).",
-    "checker_row": "R28-owned-state1-degraded-target-5968 added first as a NEGATIVE gate (exact rejection + transactional preservation verified), then converted positive in the same change set; R21/R25 remain fail-closed.",
-    "campaign": "frontier moved 5968 -> 5992 (final checker attempt28-f15-final4); the new blocker is Creatures(UnsupportedCellEntry) at world e77af60dd68a9de4416454862869e84c762421b3cea072f9b269d62070865fb0, rgb e6e33dffdfb1bc3600d8ad3bb4865b82da63632044863744bd050e07fd7597a9 - unmeasured, next family measures it first",
-    "checker": "attempt28-f15-final4: 45/45 positive, 4/4 negative (R21+R25 fail-closed), 56/56 checks, all_ok true; head 22ddd64 (director F14-native-acceptance commit landed mid-run, not the worker's)"
+  {
+   "id": "B4-kind5-effect",
+   "condition": "raw[2]==5 && effect kind != 0x11 && binding present",
+   "current": "accept",
+   "status": "integrated/proved"
   },
-  "f16_findings": {
-    "measurement": "the 5992 campaign refusal is Creatures(UnsupportedCellEntry) at the owned callback (frame-5992-slot-1-blocked-before-owned): the B9 degraded-pursuit continuation commits into the destination cell that already contains the pursuit target (neutral slot 5, state 8). Temporary tagged eprintln probes (removed before the fix) localized the refusal to check_mule_cell_entry (creature_updates.rs first-branch head check) after unlink/insert succeeded.",
-    "oracle": "owned-mule-captured-width-review.py --before ... --frame 5992 --slot 1: source_prepared, 2856 instructions, 0 draws; output commits slot1 into cell 11906 (slot1 link word -> 0x2e82) and advances it 2px toward the target.",
-    "port": "creature_updates.rs mule_cell_entry_predicate: the measured state-1 arm admitted before the default head check; everything else unchanged. 26 insertions / 1 deletion; CRLF preserved; no line-ending churn.",
-    "checker_row": "R29-owned-state1-pursuit-target-cell-5992 added FIRST as a NEGATIVE gate (exact rejection Creatures(UnsupportedCellEntry) + all eight buffers byte-identical, 0 draws), then converted POSITIVE in the same change set with the source basis in-row; R21/R25 remain fail-closed.",
-    "checker": "attempt29-f16-final: 48/48 positive, 4/4 negative, 58/59 checks. The only FAIL is head-unchanged: HEAD moved to 0704954 (director F15-native-acceptance commit) mid-run, matching the F15 precedent; no row failed.",
-    "campaign": "frontier moved 5992 -> 6008; new blocker Creatures(UnsupportedNeighborhood), world ef3dd21256b783463d0e2d3f4f8cf3b2698c4dba171020bb5e0a152db6189994, rgb e069f91477e92b86ec3473d36e7e5b32a7827ea3da52201355a153ad4060d2c4 - unmeasured, next family measures it first"
+  {
+   "id": "B5-kind8",
+   "condition": "raw[2]==8",
+   "current": "accept",
+   "status": "integrated/proved"
   },
-  "f17_findings": {
-    "measurement": "the 6008 campaign refusal is Creatures(UnsupportedNeighborhood) at the OWNED callback (frame-6008-slot-1-blocked-before-owned). The record is the B9 degraded-pursuit shape (0x5e=1, 0x60=0xc8, word(0x6c)=0x7fea, 0x78=7, 0x76=37, word(0x49)=0x2010) at ARRIVAL - the same continuation as B9, not a new walk caller. Temporary tagged probes (removed) localized the refusal to the F15 degraded arm's word(record,0x6c)>0 freshness test in owned_mule_updates.rs: the post-prefix record already carries 0x60=0x48/word(0x6c)=0 produced by the source5EB30 zeroing block (0005eb9b AND byte[0x60],0x7f; 0005ebd9 MOV word[0x6c],0), so the test could never pass on the arrival side - port-authored per map rule 1.",
-    "source": "after 5EB30, 0005ef3a/0005ef3e/0005ef40 reads word(0x6c)==0 and JLEs to 00065384 (CMP al,0x18 / JMP [eax*4+0x5eca0]); entry 1 = 0005ef46, the same no-AI/no-6B700 continuation as the fresh side. The continuation near-target block 00065d80..00065dce: 73770 distance <= 0x4000, 6EDA0/7A6C0 shortest delta 551 > 0x100 -> FALSE side writes word(0x4b)=0 via 73970/AE028 (zero delta: the record has reached its own route waypoint word(0x0b/0x0d)). No 624B8/6B700 in the trace (2818 instructions, 0 draws).",
-    "oracle": "owned-mule-captured-width-review.py on private/review/attempt30-6008-measure/campaign/capture/frame-6008-slot-1-blocked-before-owned: source_prepared, 2818 instructions, 0 draws, output owned-mule-captured-width/b3ac36ab78474896ab7e200a37250f8b; slot-1-only deltas, no reference-model extension needed.",
-    "port": "owned_mule_updates.rs: widened the degraded continuation to the measured arrival side (record[0x5e]==1, 0x60==0x48, word(0x6c)==0, pre-prefix word(0x6c)>0) and pinned the 65d80..65dce near-target arm (motion_point==waypoint word(0x0b/0x0d), 7a6c0 shortest delta > 0x100 else refuse, word(0x4b)=0). creature_world.rs: motion_word/motion_point made pub(crate) for the citation. R30 added first as NEGATIVE (out2) then converted positive in the same change set.",
-    "checker": "attempt30-f17: 51/51 positive, 4/4 negative (R21+R25 fail-closed), 62/62 checks, all_ok true, head 97b3870.",
-    "campaign": "frontier moved 6008 -> 6010 (attempt30-f17 campaign); the new blocker is Creatures(UnsupportedNeighborhood) at world c52ac990df3626e06c5e7faeced2cbc32c44af30bc946e5ffe0551a22f43ce5c, rgb 80ea0788c8d87d1388eb229d4f4ca4bef90f4f9a6448ec438ff864acb5e192c5 - unmeasured, the next family measures it fresh first."
+  {
+   "id": "B6-CATCH-ALL",
+   "condition": "any other raw[2], or a known kind failing its inner condition (including kind 1 at/above state 0x1A, non-sole hostile candidates, and kind 2 with food_guard = B8)",
+   "current": "Err(UnsupportedNeighborhood) - no longer the 5966 blocker (the hostile kind-1 arm landed), still fail-closed for every unproved candidate",
+   "status": "unsupported by policy - refuse-and-preserve; each remaining branch is decided only as its source proof lands"
   },
-  "f18_findings": {
-    "measurement": "the 6010 campaign refusal is Creatures(UnsupportedNeighborhood) at the OWNED callback (frame-6010-slot-1-blocked-before-owned, reproduced fresh: world c52ac990..., rgb 80ea0788..., steps 6010). The record is the B9 arrival shape but with word(0x6c)=0 ALREADY PRE-PREFIX - the boundary F17 explicitly left fail-closed. Refusing site: owned_mule_updates.rs:401 (owned_mule_neighborhood_no_action food guard, word(0x68)=5 <= word(0x62)>>1=65) reached because both the F15 and F17 word(0x6c)>0 arms skip. Not a port-authored defect this time: the F17 arrival arm's pre-prefix freshness test is exactly the declared boundary, and the source continuation for this side is materially different (see B11), not the near-target block.",
-    "oracle": "owned-mule-captured-width-review.py on the measured fixture: source_prepared, 2431 instructions, 4 draws, output owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b; slot-1-only creature deltas (0x5e 1->8, 0x60 0x48->0x88, word(0x6c) 0->0x7ffe, 0x52/0x57 ->0, byte 0x54 0->0x14, byte 0x49 0->0x14 (0x10 from 65ea7 plus 0x04 from an unlocated writer), waypoint bytes 0xb/0xd re-planned, word(0x3f) 0->79, bytes 0x2d..0x31 zeroed, byte 0x19 2->1, yaw word 0x39 and words 0x3b/0x3d/0x3f rewritten, byte 0x66 139->137). RNG seed/ring/draw_count changed as expected; backing/players/buildings/effects/family8/actors byte-identical. NO reference-model extension needed.",
-    "decision": "new map branch B11 (same B9 continuation, third side: expired pre-prefix timer). The trace settles the decision structure (65c7d ring&3 gate, 65c9a timer gate, 65d42 5cc60 flag, 65deb state rewrite + waypoint replan, 6bdd0 fresh timer, tail DEC) but NOT 5c920, the +0x8c/+0x80 virtuals, 6bdd0/6c190, 2 of 4 draw sites, or the activation-RNG refs - so the arm is deliberately NOT implemented; R31 pins it fail-closed.",
-    "boundary": "R31 fail-closed negative added; no catch-all or guard relaxed; B9/B10/B7 and the walk catch-alls unchanged"
+  {
+   "id": "B7-kind1-creature",
+   "condition": "raw[2]==1 (creature candidate in the walk)",
+   "current": "hostile kind-1 arm integrated (owned_mule_single_hostile): alliance test 6B7DF..6B7FE with the validated 75 04 decode (aligned candidates skipped), kind dispatch 6B81E..6B830 table 6BD70[0]=6B9B0, state!=0xF, state<0x1A, [ESI+0x60]&1==0, then the 5B580 case-1 acquisition via widened mule_owned_hostile_acquisition::plan_acquisition; byte-identical to the owned oracle on the 5966 record (4 draws). A kind-1 candidate at/above state 0x1A is still refused by the catch-all (R25 fail-closed negative)",
+   "status": "integrated/proved for the measured sole-hostile idle domain (R24 converted positive); kind-1 state>=0x1A and non-sole candidates remain unsupported (R25 negative)"
+  },
+  {
+   "id": "B8-kind2-with-food-guard",
+   "condition": "raw[2]==2 && food_guard",
+   "current": "falls into B6",
+   "status": "source-known/not integrated - 6BD3D/6B72A skip branches should decide this, not the catch-all"
+  },
+  {
+   "id": "B9-owned-state1-pursuit-degraded-target",
+   "condition": "owned full-path admission (odd phase, 0x61=0, NOT the 6B700 walk): 0x5e==1 hostile pursuit, 0x60 in {0x48,0xc8}, 0x78=7, 0x52/0x57/0x5a=1, refs 0x50/0x58==0x55, 0x4f=0, 0x5d=0, 0x76<=90, word(0x49)&0x100==0, where the 0x55-target is no longer a live state-1/20/21 hostile (measured: neutral Mule slot 5 state 8, 0x60=0x88, 0x61=0x40, 0x78=0, 0x55-ref back at the owned mule, word(0x6c)=0x7ffe fresh timer)",
+   "current": "accept - the source full path (0x5ed20->0x5ed3b JZ 0x5ee1c->0x6fb60 virtual94 movement prefix->0x5ee25..0x5ee32 parity gate JNZ odd->0x5eed5..0x5ef1f->0x5ef22 CALL 0x5e0b0->0x5ef32 CALL 0x5eb30->0x5ef37..0x5ef40 fresh-timer side->0x5ef49->0x6a22b..0x6a2dd->0x65743..0x65de6 movement continuation->tail 0x6a290..0x6a53e with 0x6a4a0 DEC word(0x6c)->0x7ac00) NEVER reads the enemy record, runs NO 624B8 AI and NO 6B700 scan (2542 instructions, 0 draws; probe private/review/attempt28-5968-probe-2a44a5da). The prior port refusal at owned_mule_updates.rs line 76 (hostile_enemy.is_none) was a port-authored predicate, per map rule 1.",
+   "status": "integrated/proved (F15 attempt28: R28 negative->positive; oracle extension in owned-mule-captured-width-review.py admits the measured degraded shape, output owned-mule-captured-width/22da7a68d74f407b80611ca51ad602d0; port degraded_pursuit admission + 5EB30 no-AI continuation arm, byte-identical, 0 draws). F17 (attempt30) extends the SAME branch to its ARRIVAL side: the post-prefix record with 0x60=0x48/word(0x6c)=0 (source5EB30 zeroing 0005eb9b/0005ebd9, JLE 0005ef40 -> table 0x5eca0 entry 1 -> 0005ef46) plus the near-target block 00065d80..00065dce writing word(0x4b)=0 (R30 positive, byte-identical). A PRE-prefix expired timer (word(0x6c)==0 before the callback) and the aligned virtual38 side (65da7..65db5) remain unsupported (still fail-closed)."
+  },
+  {
+   "id": "B10-cellentry-state1-pursuit-target-occupant",
+   "condition": "mule_cell_entry_predicate (shared 5B100 predicate) on a state-1 pursuit record (0x57=1, 0x52=1, ref50==ref55) whose queried destination cell's sole kind1 occupant is the record's own ref55 target, degraded to state 8, at its own cell == the queried cell (measured: owned slot1 word(0x6c)=0x7ff2, destination cell 11906 = neutral slot5's cell)",
+   "current": "accept - the source predicate 5B100 has a dedicated state-1 arm 0005b18c..0005b204 (6D390 resolves ref55; 5b1af..5b204: occupant==self -> admit; occupant kind1 at its own cell == queried cell -> admit unless the target's virtual+0x68 refuses, measured FALSE) instead of the default head check 0005b242 the port had implemented; the former blanket check_mule_cell_entry refusal was port-authored (map rule 1). Oracle: source_prepared, 2856 instructions, 0 draws, output d076d8fe60f547eb8c391064778a55aa; port byte-identical over all eight buffers (427369)",
+   "status": "integrated/proved (F16 attempt29: R29 negative->positive); multiple kind1 occupants, kind2 occupants, 0x11 effects and non-state-8 targets remain refused (fail-closed)"
+  },
+  {
+   "id": "B11-owned-state1-pursuit-expired-preprefix",
+   "condition": "the B9 degraded-pursuit shape (0x5e==1, 0x60 in {0x48,0xc8}, 0x61==0, 0x78==7, 0x52/0x57/0x5a==1, 0x4f==0, 0x5d==0, 0x76<=90, word(0x49)&0x100==0) with word(0x6c)==0 ALREADY BEFORE the callback (F17's arrival side carried word(0x6c)=0x7fea pre-prefix; measured: owned slot1 word(0x49)=0x2000, position == waypoint word(0x0b/0x0d))",
+   "current": "fail-closed (R31 negative): both the F15 fresh arm (post word(0x6c)>0) and the F17 arrival arm (pre word(0x6c)>0) skip, the record falls into owned_mule_neighborhood_no_action and the food guard (word(0x68)=5 <= word(0x62)>>1=65) refuses at owned_mule_updates.rs:401. The source ADMITS the record (oracle source_prepared, 2431 instructions, 4 draws, output owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b, slot-1-only deltas: 0x5e 1->8, 0x60 0x48->0x88, word(0x6c)->0x7ffe, 0x52/0x57 cleared, 0x54=0x14, 0x49|=0x10, waypoint re-planned via 73c20, word(0x3f)=79, 0x2d..0x31 zeroed). Same 5ef40 JLE -> 65384 -> entry-1 -> 5ef46 dispatch as F17, but the continuation takes the LONG side at 65c7d: JNZ ((word(0xf)+rng_ring)&3)==3 -> 65c9a; 65cb2 (0x7fff-word(0x6c))>0x100; 65cfe draw; 65d42 CALL 5cc60 -> flag -> 65d58 JNZ 65deb; 65deb draw; 65e68 byte[0x5e]=8; virtual+0x8c; 65ea1 0x49|=0x10; 65e97 0x54=0x14; 65ed6 word(0x6c)=0x7fff; 65eeb CALL 6bdd0; tail 6a4a0 DEC word(0x6c) -> 0x7ffe",
+   "status": "evidence-complete/oracle-prepared, NOT integrated - F20 (attempt33) closed the three named residuals without implementing: (i) listing produced for 0006c190 via the repo's own pinned headless Ghidra tooling (python -B scripts/ghidra/run_headless.py -process GW-CD-candidate.exe -noanalysis -readOnly -postScript ExportRange.java private/ghidra/player-creation/instructions-0006c190.txt 0006c190 0006c8ff; 558 instructions, 0006c190..0006c8f5, log private/ghidra/player-creation-export-6c190.log; no other callee on the executed chain lacked a listing - 6d390, 73c20, 8b780, 5a990, 6bdd0, 13e50/13e70/13eb0 all already covered); (ii) the rec+0x2d..0x31 zeroing writer is IN the executed chain, in the already-listed 6df30 movement routine (private/ghidra/actor-activation/instructions-0006df30.txt): after the 6faf5/6fb1d/6fb4b prefix writes and 6dfba/6dfc0/6dfe9 accumulations, the vector rebuild block LEA ECX,[EDI+0x2d] at 6e29c stores word[rec+0x2d] at 6e2e7, word[rec+0x2f] at 6e310, word[rec+0x31] at 6e33e from the dword[0x1086e8]/dword[0x107ee8] slope tables indexed by rec+0x39..0x3e, all measured 0 - byte-exact store watch on the F18 capture replay (private/integration/b11-writewatch-001.py, output in receipt) reproduced the capture trace identically (2431 instructions, 4 draws, trace_matches_capture=true) and shows after-bytes 0x2d..0x32 all 00 vs before 38 00 cc ff c8 00; (iii) the producer of dword [0x11877e] is the main-loop tick INC dword ptr [0x0011877e] at 0x1bd4f (private/ghidra/font-menu-state/instructions-0001bbc0.txt line 114, module main loop 1bc27..1bd55, CALL 7a580/70b00/1c120/8dfe0/40c60 then INC then TEST [0x118770],1 loop), corroborated by pause-sync MOV [0x11877e],[0x118786] at 1bcfa/1c4fe (flag byte[0x118968]&2) and scenario/level resets to 0 at 15e59 and 7d038 - i.e. the global mission tick the interpreter already models as counter=args.frame; NO reference-model write-log extension was needed and none was made. Implementation still NOT permitted: the runtime has zero machinery for 6bdd0/6c190/[0x11877e]/activation tables (grep over rust/crates returns nothing) and the activation-table consumers remain a separate family; rust/ delta against HEAD 3e34aa0 is the pre-existing F17 dirty state only."
   }
+ ],
+ "callers": [
+  {
+   "caller": "owned idle AI (624B8/6BA47) via the owned choice callback",
+   "uses": "owned_mule_single_hostile (hostile kind-1 classification) + mule_owned_hostile_acquisition::plan_acquisition; owned_mule_neighborhood_no_action only when no hostile is selected",
+   "status": "integrated for the proved candidate kinds including the hostile kind-1 arm (F14); the catch-all (B6/B8) is unchanged"
+  },
+  {
+   "caller": "neutral slot",
+   "fn": "check_mule_neutral_neighbors",
+   "status": "focused-only; throws UnsupportedNeighborhood on unproved neighbour sets"
+  },
+  {
+   "caller": "neutral slot",
+   "fn": "mule_neutral_pair_candidate",
+   "status": "focused-only"
+  },
+  {
+   "caller": "neutral slot",
+   "fn": "check_mule_bones_feeding_no_action",
+   "status": "focused-only (bones/feeding path)"
+  },
+  {
+   "caller": "neutral slot",
+   "fn": "mule_hit_single_owned_enemy",
+   "status": "focused-only"
+  },
+  {
+   "caller": "actor_updates.rs:282",
+   "fn": "creature record lookup on UnsupportedNeighborhood",
+   "status": "unknown/out of scope - a different error use of the same variant"
+  }
+ ],
+ "existing_evidence": {
+  "ghidra": "research/ghidra/actor-idle-evidence.json (arrival/idle/empty-scorer/seed case counts, instruction contracts for 0006e9e0 and siblings, scope notes on arrival/idle globals)",
+  "receipts": [
+   "research/integration/f12-5966-neighborhood-measurement-checkpoint-20261017.json",
+   "F1-R13 6BA47 note in private/integration/verification-anomalies-20261017.md"
+  ],
+  "interpreter": "research/variants/owned-mule-captured-width-review.py + neutral-mule-captured-width-review.py (the reference model)"
+ },
+ "family_decision": {
+  "chosen": "F14 = the owned idle-AI HOSTILE kind-1 candidate classification and scoring arm (0x6B9B0 hostile arm, 0x6BA47 kind dispatch, 0x6BA8A kind-1 counter and weighted score), plus closing the F1-R13 6BA47 item with the now-pinned branch. Excluded: neutral pair/bones neighbours, actor_updates.rs:282, and the rest of the 0x6B700 scorer for candidate kinds already covered.",
+  "excluded": [
+   "actor_updates.rs:282's unrelated use of the same error variant",
+   "bones/feeding and pair-candidate paths beyond their admission predicates (separate semantics, separate fixtures)",
+   "any blanket removal of the catch-all"
+  ],
+  "why_this_is_coherent": "all branches share the one walk, one classification table and one admission site; the catch-all, the food guard and the creature-candidate question are decided by the same listing text",
+  "boundary": "if the listing does not settle the creature-candidate classification, the family closes at the measured boundary with B7 recorded as source-unknown and the catch-all kept",
+  "supersedes": "F13's answer sharpens the family: the open question is no longer 'what does the walk do with a kind-1 neighbour' but 'the port has no hostile kind-1 candidate arm at all, while the source scores hostile creature candidates'"
+ },
+ "reporting": "two or three family milestones after this steering change, assess whether the wider scope reduced repeated repairs; no causal claim from an uncontrolled comparison",
+ "f13_findings": {
+  "answer": "(A) the original executes a specific branch; the owned oracle already adjudicates the record, so no reference-model extension was needed and rust/ stayed untouched",
+  "evidence": "private/ghidra/initial-creature/instructions-0006b700.txt + validated image private/ghidra/validated/memory-.object1.bin (load base 0x10000); executed-path claims from private/review/owned-mule-captured-width/9c48d067bdd04c5d807ca4c4ce3140d3/trace.txt",
+  "walk": "0x8D930 samples cells within radius 1024 and calls the scorer 0x6B700 once per cell reference chain; the owned idle context is built by the state-8 block 0x624B1..0x626AD inside 5ED20, storing the self record at context+0x29 (0x6250d)",
+  "alliance": "0x6B7DF..0x6B7FE computes DL=[self_owner*0x70d+0x118d74+0x6e5] (alliance mask), EAX=1<<cand_owner, TEST EDX,EAX; the VALIDATED bytes at 0x6B7FE are 75 04 (JNZ 0x6B804), while the Ghidra listing misrenders the target as 0x6B800. With mask 0 the neutral Mule is HOSTILE to the owned idle AI.",
+  "kind_dispatch": "0x6B81E..0x6B830: kind 1 -> JMP CS:[0*4+0x6BD70]; validated dword table at 0x6BD70 = [0x6B9B0, 0x6B838, 0x6B975, 0x6B9A2], so the hostile kind=1 arm is 0x6B9B0 (confirmed executed in the trace)",
+  "hostile_kind1": "0x6B9B0..0x6B9C3 sets action-eligible=1 and state!=0xF; 0x6B9CF..0x6B9FE updates best distance and bucket [player*4+0x2D]; 0x6BA09..0x6BA40 updates the best action, bucket [player*4+0x6D] and [0x1AD]; 0x6BA47..0x6BA4C (kind 1<2) -> 0x6BD2B, JZ 0x6BA8A taken; 0x6BA8A..0x6BAF3 increments the kind-1 counter and applies the weighted score [player*4+0xED] += ([0x1E0]+0x1F)*EDI/100",
+  "f1_r13_resolved": "the 6BA47 food-guard question is now pinned: 0x6BA47..0x6BA4C takes kind 1 < 2 to 0x6BD2B, and 0x6BD2D JZ 0x6BA8A is taken, which is exactly the 'enters 0x6ba3b..0x6ba4c, leaves at 0x6bd2b' observation. It was never a food-guard skip - it is the kind-dispatch path into the kind-1 scoring arm.",
+  "checker": "attempt26-neighborhood-refcheck: 39/39 positive, 4/4 negative (R24 correctly still negative), 50/50 checks, campaign unchanged at 5966 - a research-only change, as instructed"
+ },
+ "f15_findings": {
+  "measurement": "the 5968 campaign refusal is Creatures(UnsupportedMotionState) at the OWNED callback (frame-5968-slot-1-blocked-before-owned), NOT the 6B700 neighborhood walk: owned Mule slot 1 in state-1 hostile pursuit (0x60=0xc8) whose target degraded to state 8. Genuinely a different branch from B0..B8 - it is the owned full-path pursuit admission, kept as its own map branch (B9).",
+  "oracle": "owned-mule-captured-width-review.py rejected the record until the degraded-enemy admission was added (F8-pattern extension, cited executed path); then source_prepared, 2542 instructions, 0 draws.",
+  "port": "owned_mule_updates.rs: degraded_pursuit admission (pursuit shape without target liveness) + a choice-callback arm returning the record unchanged for 0x5e==1, 0x60 in {0x48,0xc8}, word(0x6c)>0 without a live enemy (source: 5EB30 returns without 624B8).",
+  "checker_row": "R28-owned-state1-degraded-target-5968 added first as a NEGATIVE gate (exact rejection + transactional preservation verified), then converted positive in the same change set; R21/R25 remain fail-closed.",
+  "campaign": "frontier moved 5968 -> 5992 (final checker attempt28-f15-final4); the new blocker is Creatures(UnsupportedCellEntry) at world e77af60dd68a9de4416454862869e84c762421b3cea072f9b269d62070865fb0, rgb e6e33dffdfb1bc3600d8ad3bb4865b82da63632044863744bd050e07fd7597a9 - unmeasured, next family measures it first",
+  "checker": "attempt28-f15-final4: 45/45 positive, 4/4 negative (R21+R25 fail-closed), 56/56 checks, all_ok true; head 22ddd64 (director F14-native-acceptance commit landed mid-run, not the worker's)"
+ },
+ "f16_findings": {
+  "measurement": "the 5992 campaign refusal is Creatures(UnsupportedCellEntry) at the owned callback (frame-5992-slot-1-blocked-before-owned): the B9 degraded-pursuit continuation commits into the destination cell that already contains the pursuit target (neutral slot 5, state 8). Temporary tagged eprintln probes (removed before the fix) localized the refusal to check_mule_cell_entry (creature_updates.rs first-branch head check) after unlink/insert succeeded.",
+  "oracle": "owned-mule-captured-width-review.py --before ... --frame 5992 --slot 1: source_prepared, 2856 instructions, 0 draws; output commits slot1 into cell 11906 (slot1 link word -> 0x2e82) and advances it 2px toward the target.",
+  "port": "creature_updates.rs mule_cell_entry_predicate: the measured state-1 arm admitted before the default head check; everything else unchanged. 26 insertions / 1 deletion; CRLF preserved; no line-ending churn.",
+  "checker_row": "R29-owned-state1-pursuit-target-cell-5992 added FIRST as a NEGATIVE gate (exact rejection Creatures(UnsupportedCellEntry) + all eight buffers byte-identical, 0 draws), then converted POSITIVE in the same change set with the source basis in-row; R21/R25 remain fail-closed.",
+  "checker": "attempt29-f16-final: 48/48 positive, 4/4 negative, 58/59 checks. The only FAIL is head-unchanged: HEAD moved to 0704954 (director F15-native-acceptance commit) mid-run, matching the F15 precedent; no row failed.",
+  "campaign": "frontier moved 5992 -> 6008; new blocker Creatures(UnsupportedNeighborhood), world ef3dd21256b783463d0e2d3f4f8cf3b2698c4dba171020bb5e0a152db6189994, rgb e069f91477e92b86ec3473d36e7e5b32a7827ea3da52201355a153ad4060d2c4 - unmeasured, next family measures it first"
+ },
+ "f17_findings": {
+  "measurement": "the 6008 campaign refusal is Creatures(UnsupportedNeighborhood) at the OWNED callback (frame-6008-slot-1-blocked-before-owned). The record is the B9 degraded-pursuit shape (0x5e=1, 0x60=0xc8, word(0x6c)=0x7fea, 0x78=7, 0x76=37, word(0x49)=0x2010) at ARRIVAL - the same continuation as B9, not a new walk caller. Temporary tagged probes (removed) localized the refusal to the F15 degraded arm's word(record,0x6c)>0 freshness test in owned_mule_updates.rs: the post-prefix record already carries 0x60=0x48/word(0x6c)=0 produced by the source5EB30 zeroing block (0005eb9b AND byte[0x60],0x7f; 0005ebd9 MOV word[0x6c],0), so the test could never pass on the arrival side - port-authored per map rule 1.",
+  "source": "after 5EB30, 0005ef3a/0005ef3e/0005ef40 reads word(0x6c)==0 and JLEs to 00065384 (CMP al,0x18 / JMP [eax*4+0x5eca0]); entry 1 = 0005ef46, the same no-AI/no-6B700 continuation as the fresh side. The continuation near-target block 00065d80..00065dce: 73770 distance <= 0x4000, 6EDA0/7A6C0 shortest delta 551 > 0x100 -> FALSE side writes word(0x4b)=0 via 73970/AE028 (zero delta: the record has reached its own route waypoint word(0x0b/0x0d)). No 624B8/6B700 in the trace (2818 instructions, 0 draws).",
+  "oracle": "owned-mule-captured-width-review.py on private/review/attempt30-6008-measure/campaign/capture/frame-6008-slot-1-blocked-before-owned: source_prepared, 2818 instructions, 0 draws, output owned-mule-captured-width/b3ac36ab78474896ab7e200a37250f8b; slot-1-only deltas, no reference-model extension needed.",
+  "port": "owned_mule_updates.rs: widened the degraded continuation to the measured arrival side (record[0x5e]==1, 0x60==0x48, word(0x6c)==0, pre-prefix word(0x6c)>0) and pinned the 65d80..65dce near-target arm (motion_point==waypoint word(0x0b/0x0d), 7a6c0 shortest delta > 0x100 else refuse, word(0x4b)=0). creature_world.rs: motion_word/motion_point made pub(crate) for the citation. R30 added first as NEGATIVE (out2) then converted positive in the same change set.",
+  "checker": "attempt30-f17: 51/51 positive, 4/4 negative (R21+R25 fail-closed), 62/62 checks, all_ok true, head 97b3870.",
+  "campaign": "frontier moved 6008 -> 6010 (attempt30-f17 campaign); the new blocker is Creatures(UnsupportedNeighborhood) at world c52ac990df3626e06c5e7faeced2cbc32c44af30bc946e5ffe0551a22f43ce5c, rgb 80ea0788c8d87d1388eb229d4f4ca4bef90f4f9a6448ec438ff864acb5e192c5 - unmeasured, the next family measures it fresh first."
+ },
+ "f18_findings": {
+  "measurement": "the 6010 campaign refusal is Creatures(UnsupportedNeighborhood) at the OWNED callback (frame-6010-slot-1-blocked-before-owned, reproduced fresh: world c52ac990..., rgb 80ea0788..., steps 6010). The record is the B9 arrival shape but with word(0x6c)=0 ALREADY PRE-PREFIX - the boundary F17 explicitly left fail-closed. Refusing site: owned_mule_updates.rs:401 (owned_mule_neighborhood_no_action food guard, word(0x68)=5 <= word(0x62)>>1=65) reached because both the F15 and F17 word(0x6c)>0 arms skip. Not a port-authored defect this time: the F17 arrival arm's pre-prefix freshness test is exactly the declared boundary, and the source continuation for this side is materially different (see B11), not the near-target block.",
+  "oracle": "owned-mule-captured-width-review.py on the measured fixture: source_prepared, 2431 instructions, 4 draws, output owned-mule-captured-width/59dc2afb22b64ab6bf89e1ccb85df79b; slot-1-only creature deltas (0x5e 1->8, 0x60 0x48->0x88, word(0x6c) 0->0x7ffe, 0x52/0x57 ->0, byte 0x54 0->0x14, byte 0x49 0->0x14 (0x10 from 65ea7 plus 0x04 from an unlocated writer), waypoint bytes 0xb/0xd re-planned, word(0x3f) 0->79, bytes 0x2d..0x31 zeroed, byte 0x19 2->1, yaw word 0x39 and words 0x3b/0x3d/0x3f rewritten, byte 0x66 139->137). RNG seed/ring/draw_count changed as expected; backing/players/buildings/effects/family8/actors byte-identical. NO reference-model extension needed.",
+  "decision": "new map branch B11 (same B9 continuation, third side: expired pre-prefix timer). The trace settles the decision structure (65c7d ring&3 gate, 65c9a timer gate, 65d42 5cc60 flag, 65deb state rewrite + waypoint replan, 6bdd0 fresh timer, tail DEC) but NOT 5c920, the +0x8c/+0x80 virtuals, 6bdd0/6c190, 2 of 4 draw sites, or the activation-RNG refs - so the arm is deliberately NOT implemented; R31 pins it fail-closed.",
+  "boundary": "R31 fail-closed negative added; no catch-all or guard relaxed; B9/B10/B7 and the walk catch-alls unchanged"
+ }
 }
