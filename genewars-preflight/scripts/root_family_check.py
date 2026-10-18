@@ -338,6 +338,38 @@ POSITIVE = [
     dict(id='R32-owned-state1-pursuit-ring-short-6060', frame=6060, slot=1, draws=0, mode='direct',
          fixture='private/review/attempt35-6060-measure/capture/frame-6060-slot-1-blocked-before-owned',
          expected='private/review/owned-mule-captured-width/d386493180e14ca7bc14f28d32e22e5f'),
+    # F23/attempt36: R33 was added FIRST as a measurement-first NEGATIVE gate
+    # pinning the measured 6100 refusal, then CONVERTED TO POSITIVE in the same
+    # change set (2026-10-18, attempt37) per the family policy's
+    # "source-proved and intentionally expanded" condition. Source basis: the
+    # 6100 refusal was a TWO-STAGE PORT OVER-ADMISSION, not a source behaviour.
+    # Stage 1: the port's mule_route_prefix consumes the timer (prefix record
+    # 0x60=8, word(0x6c)=0, 0x52=0/0x57=0; probe private/review/f23-instrument5.py).
+    # Stage 2: owned_mule_single_hostile's walk matched branchB on TWO
+    # neutral-Mule candidates (slot 2 then slot 5, both 0x5e=8/0x60=0x88/owner4/
+    # MuleSelector4) and refused on the SECOND (the line-395-region DUP refusal).
+    # The SOURCE does not refuse: scorer 6b700's hostile kind-1 tail
+    # 6b9cf..6b9e9 ACCUMULATES the best candidate per category (CMP EDI,
+    # [EBX+0x1dc]; JLE 6b9ea keeps the existing one; the strictly closer
+    # candidate replaces it at 6b9de/6b9e4 storing the candidate pointer at
+    # [EBX+0x1cc]) - there is NO second-candidate refusal (listing private/
+    # ghidra/initial-creature/instructions-0006b700.txt). The measured winner is
+    # slot 5 (closer: walk-subject distance weight 768 vs slot 2's 0; slot 2's
+    # 0x50/0x55 refs are null so the 5b580 Enemy admission cannot take it), and
+    # the acquisition path 5b580/5cc60/5a990 then runs through the 65743
+    # continuation whose tail DEC writes word(0x6c)=0x7ffe. The source path runs
+    # through the ORDINARY AI (0 draws prefix/continuation + the 4-draw 5b580
+    # acquisition = the 4-draw oracle total). Port: the state-8 acquisition
+    # admission is bounded to the timer-expired domain (word(0x6c)==0
+    # post-prefix) and the walk accumulates the best same-arm branchB candidate
+    # instead of refusing on the second. Oracle: source_prepared, 12109
+    # instructions, 4 draws, output
+    # private/review/owned-mule-captured-width/e4f43b9e6d9a4f8aa13054f5d4760c06;
+    # port zero diffs over all eight buffers (427,369), byte-identical rng.bin.
+    # Mixed first-arm/second-arm candidates stay refused (unmeasured).
+    dict(id='R33-owned-state8-timer-consumed-two-pair-candidates-6100', frame=6100, slot=1, draws=4, mode='direct',
+         fixture='private/review/attempt36-6100-measure/frame-6100-slot-1-blocked-before-owned',
+         expected='private/review/owned-mule-captured-width/e4f43b9e6d9a4f8aa13054f5d4760c06'),
 ]
 NEGATIVE = [
     # F16 measurement-first NEGATIVE gate (added 2026-10-17, attempt29): pins the
@@ -390,32 +422,24 @@ NEGATIVE = [
     dict(id='R25-owned-idle-kind1-state-over-19-5966', frame=5966, slot=1,
          fixture='private/review/attempt27-owned-5966-kind1-state-1a',
          expect_error='Creatures(UnsupportedNeighborhood)'),
-    # F23/attempt36 measurement-first NEGATIVE gate (added 2026-10-18): pins the
-    # measured 6100 refusal. Owned Mule slot 1 (0x5e=8, 0x60=0x88, 0x61=0,
-    # 0x78=7, word(0x6c)=0x7fee, 0x52=0, 0x57=0, food word(0x68)=5) whose
-    # mule_route_prefix consumes the timer (prefix record 0x60=8, word(0x6c)=0,
-    # 0x52=0/0x57=0: probe private/review/f23-instrument5.py output) and then
-    # reaches owned_mule_single_hostile, whose cell walk finds TWO branchB
-    # neutral-Mule candidates (slot 2 then slot 5, both 0x5e=8/0x60=0x88/owner4/
-    # MuleSelector4) and refuses on the second. The SOURCE does not refuse:
-    # oracle source_prepared, 12109 instructions, 4 draws
-    # (private/review/owned-mule-captured-width/e4f43b9e6d9a4f8aa13054f5d4760c06)
-    # - trace executes the 6b700 classification (6b9cf..6ba47 accumulates the
-    # BEST candidate per category, JLE keeps the closer one, no second-candidate
-    # refusal), the 65743..65d6d shared continuation block (65c60 ring gate,
-    # 65d4d/65d5e) and 5a990, transitioning slot 1 to the degraded-pursuit
-    # replan (0x5e 8->1, 0x60 8->0xc8, 0x52/0x58/0x5b ->1, word(0x3f)=0x024f,
-    # word(0x49) 0x0010->0x2034, word(0x74)=0x7ffe, 0x19 6->7, 0x66 0x31->0x2f).
-    # Probe-widening (private/review/f23-instrument6.py + f23-instrument7.py)
-    # shows the port's downstream plan_choice stays idle (state8, 3 draws, 10
-    # slot-1 byte diffs) - the pursuit-entry arm that consumes the scan's
-    # accumulated pair candidate is NOT modeled. The gate asserts the exact
-    # expected rejection AND complete transactional world/RNG preservation.
-    # The next family settles (in order) the scan's kind-1-under-food_guard
-    # admission (6B7DF..6B808 alliance mask) and the pursuit-entry arm. Never
-    # silently expanded.
-    dict(id='R33-owned-state8-timer-consumed-two-pair-candidates-6100', frame=6100, slot=1,
-         fixture='private/review/attempt36-6100-measure/frame-6100-slot-1-blocked-before-owned',
+    # F23/attempt37: R33 moved to POSITIVE above (converted in the same change
+    # set, 2026-10-18, after the accumulation + timer-expired-domain bound made
+    # the port byte-identical to the oracle). This row replaces it as the new
+    # fail-closed negative, keeping at least two honest negatives alongside
+    # R21/R25. DERIVED, not measured: the 6100 measured fixture
+    # (attempt36-6100-measure/frame-6100-slot-1-blocked-before-owned) with the
+    # scan winner's (slot 5) state byte 0x5e 8 -> 0x1A, all other bytes of all
+    # eight buffers byte-identical. Source basis: the scorer's hostile kind-1
+    # arm 0x6BA8A..0x6BAF3 requires candidate state<0x1A, so the winner is not
+    # counted and the walk yields no hostile; the record then falls through the
+    # timer-expired acquisition gate to the neighborhood catch-all, whose
+    # kind-1-under-food_guard arm is UNPROVED source (B0) and must refuse. The
+    # gate asserts the exact expected rejection AND complete transactional
+    # world/RNG preservation (verified: blocked Creatures(UnsupportedNeighborhood),
+    # 0 draws, all eight buffers byte-identical to the input). Never silently
+    # expanded.
+    dict(id='R34-owned-state8-timer-consumed-scan-winner-state-1a-6100', frame=6100, slot=1,
+         fixture='private/review/attempt37-owned-6100-scan-winner-state-1a/frame-6100-slot-1-blocked-before-owned',
          expect_error='Creatures(UnsupportedNeighborhood)'),
 ]
 

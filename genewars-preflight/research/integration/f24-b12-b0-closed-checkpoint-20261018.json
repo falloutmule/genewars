@@ -1,0 +1,37 @@
+{
+  "receipt": "f24-b12-b0-closed-checkpoint",
+  "created": "2026-10-18 (America/Denver)",
+  "family": "F24 - B12 and the B0 food-guard walk closed together; campaign 6100 -> 6119",
+  "measurement": "The 6100 refusal re-derived as the two-stage port over-admission F23 established. Stage 2: owned_mule_single_hostile, the Err(UnsupportedNeighborhood) inside the SECOND branchB arm (other[0x5e]<0x1a idle arm) - the first measured candidate (slot 2) set hostile, the second (slot 5) hit the DUP refusal; both 0x5e=8/0x60=0x88/owner 4/MuleSelector 4. Stage 3: owned_mule_neighborhood_no_action cellwalk catch-all on a kind-1 reference with food_guard=true.",
+  "accumulation_semantics": "cited from private/ghidra/initial-creature/instructions-0006b700.txt: 6b9cf..6b9e9 CMP EDI,dword[EBX+0x1dc]; JLE 6b9ea keeps the existing one; only a strictly closer candidate replaces it (MOV dword[EBX+0x1dc],EDI; MOV dword[EBX+0x1cc],ESI). Same at 6ba14..6ba27 via [EBX+0x1d8]/[EBX+0x1c8]. EDI = dword[EBX+0x21] - 97910(...) per candidate (6b7b6..6b7c1), larger = closer. THERE IS NO SECOND-CANDIDATE REFUSAL in the source.",
+  "kind_dispatch": "6ba47..6ba4c (AL=[ESI+6]; CMP AL,2; JC 6bd2b / JBE 6bc8e / JMP 6bd58) is the kind dispatch, not a food-guard skip - consistent with F13/F14. The B0 catch-all is the port unproved kind-1-under-food_guard walk, not a source refusal on this record.",
+  "oracle": "private/review/owned-mule-captured-width/e4f43b9e6d9a4f8aa13054f5d4760c06 - source_prepared, 12109 instructions, 4 draws, no extension needed. Slot-1-only deltas: 0x5e 8->1, 0x60 0x88->0xc8, 0x52/0x57->1, word(0x3f)=0x024f, word(0x49) 0x0010->0x2034, word(0x6c)->0x7ffe via tail DEC, movement/vector deltas.",
+  "correction": "The F23 map note word(0x74)=0x7ffe was a MIS-ATTRIBUTION: the timer is at 0x6c. Recorded, with F23 text left as written.",
+  "verdict": "new-existing-continuation: the oracle call list includes 0x5b580/0x5cc60/0x5a990 - the source path for this record is the EXISTING ordinary AI continuation (624B8 -> 6b700 scan -> 5b580 acquisition -> 65743 continuation + tail DEC), which the port already had nearly all of; what was missing was the admission bound and the accumulating classification arm.",
+  "implementation": "owned_mule_updates.rs +25/-5 (the admission bound to the timer-expired domain plus the accumulating candidate classification), checker +50/-26 (row conversions), map +9/-2 (B12/B0 status). rust/ otherwise untouched.",
+  "director_verification": {
+    "run": "private/integration/F24-root-check-20261018T1000",
+    "result": {
+      "positive": "60/60",
+      "negative": "6/6",
+      "checks": "73/73",
+      "all_ok": true
+    },
+    "campaign": "6119, blocked Creatures(UnsupportedNeighborhood), world 1184f851372039bd982200b2274c613273cfe922744e616849589790d8804f37 - identical to the worker run"
+  },
+  "frontier": {
+    "before": 6100,
+    "after": 6119,
+    "blocked": "Creatures(UnsupportedNeighborhood)"
+  },
+  "significance": "F23 measured and held; F24 then closed both stages and the long-open B0 family together in one family, without relaxing a guard - the same measure-hold-close rhythm as F18/F19/F20/F21.",
+  "open": {
+    "next": "UnsupportedNeighborhood at 6119 - unmeasured",
+    "carry_forward": [
+      "F21's remaining B11 short sides (timer-gate 65cb8, draw-1 JG 65d3c, 8b780 AL==0, 6c190)",
+      "F10/F11 provisional items",
+      "B8 kind-2-with-food-guard"
+    ]
+  },
+  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008 -> 6010 -> 6060 -> 6100 -> 6119"
+}

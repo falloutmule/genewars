@@ -221,9 +221,15 @@ impl ActorWorld {
     }
     let world=stage.borrow();let mut r=*record;if r[0x5e]==0{r[0x5e]=8;}
 
-    if let Some(enemy)=world.owned_mule_single_hostile(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)? {
-     let hostile=crate::mule_owned_hostile_acquisition::plan_acquisition(&r,&enemy,*random.borrow()).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
-     *random.borrow_mut()=hostile.rng_after;return Ok(hostile.after);
+    //F23/attempt37 B12: the state-8 acquisition admission is bounded to the
+    //timer-expired domain (word(0x6c)==0 post-prefix, the 5940/5946/5966/6100
+    //measured shapes). A live-timer record falls through to the ordinary AI
+    //path below instead of refusing here.
+    if word(&r,0x6c)==0{
+     if let Some(enemy)=world.owned_mule_single_hostile(&r).map_err(|_|CreatureError::UnsupportedNeighborhood)? {
+      let hostile=crate::mule_owned_hostile_acquisition::plan_acquisition(&r,&enemy,*random.borrow()).map_err(|_|CreatureError::UnsupportedNeighborhood)?;
+      *random.borrow_mut()=hostile.rng_after;return Ok(hostile.after);
+     }
     }
     //5924 measured 0x61=0x80 dispatch: source 624B8 runs the ordinary AI
 
@@ -372,7 +378,7 @@ impl ActorWorld {
   let attack_query=r[0x5e]==21&&r[0x60]==0x88&&word(r,0x6c)==0;
   if r[24]!=0||!(r[0x5e]==8&&r[0x60]==8||attack_query)||r[0x61]!=0||r[0x78]!=7{return Ok(None);}
   let own=[r[15],r[16],1];let cell=floor_cell([word(r,7),word(r,9)]);let(cx,cy)=((cell%128)as i32,(cell/128)as i32);
-  let mut hostile=None;let mut unsupported=false;
+  let mut hostile=None;let mut unsupported=false;let mut best=0i32;let mut best_from_scan=false;
   for dy in -4..=4{for dx in -4..=4{if dx*dx+dy*dy>16{continue;}let c=(((cy+dy)&127)*128+((cx+dx)&127))as usize;let mut raw=reference(self.map(),c*14+6);
    while raw[2]!=0{let e=self.entity(raw)?;if raw!=own{match raw[2]{
     1=>{let pool=self.creatures.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;let other=*pool.record(word(&raw,0)as usize)?;
@@ -392,7 +398,21 @@ impl ActorWorld {
      else if !attack_query&&other[0x7a]==4&&other[0x5e]<0x1a&&other[0x5e]!=0xf&&other[0x61]&1==0
       &&word(&other,0x6a)>0&&word(&other,0x49)as u16&0x400==0
       &&pool.binding(word(&raw,0)as usize)?==Some(CreatureAnimationBinding::MuleSelector4){
-      if hostile.is_some(){return Err(CreatureError::UnsupportedNeighborhood.into());}hostile=Some(other);
+      //F23/attempt37 B12: the scorer tail 6B9CF..6B9E9 ACCUMULATES the best
+      //candidate per category (CMP EDI,[EBX+0x1dc]; JLE 6b9ea keeps the
+      //existing one; the strictly closer candidate replaces it at
+      //6b9de/6b9e4) - there is NO second-candidate refusal. Bounded to this
+      //measured arm: a candidate from the first-branchB arm keeps refusing
+      //(mixed categories unmeasured); the walk-subject distance weight
+      //(larger = closer, per 6B7BE subtracts sample distance) decides, ties
+      //keep the first (JLE).
+      let cd=|a:i16,b:i16|{let a=i32::from((a as u16&0x7fff)>>8);let b=i32::from((b as u16&0x7fff)>>8);(b-a+64).rem_euclid(128)-64};
+      let dx=cd(word(r,7),word(&other,7));let dy=cd(word(r,9),word(&other,9));
+      let dist2=(dx*dx+dy*dy)*256*256;
+      if hostile.is_some(){
+       if !best_from_scan{return Err(CreatureError::UnsupportedNeighborhood.into());}
+       if dist2<best{hostile=Some(other);best=dist2;}
+      }else{hostile=Some(other);best=dist2;best_from_scan=true;}
      }else{unsupported=true;}
     },
     5=>{let pool=self.effects.as_ref().ok_or(CreatureError::UnsupportedNeighborhood)?;if pool.record(word(&raw,0)as usize)?[69]==0x11||pool.binding(word(&raw,0)as usize)?.is_none(){unsupported=true;}},
