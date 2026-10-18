@@ -52,5 +52,6 @@
       "6c190 fail-closed side"
     ]
   },
-  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008 -> 6010 -> 6060"
+  "cumulative": "5940 -> 5946 -> 5962 -> 5963 -> 5966 -> 5968 -> 5992 -> 6008 -> 6010 -> 6060",
+  "native_acceptance": "PASSED: private/integration/f1-native-20261018T0420 - one frozen executable sha256 3e13bd3c9ffd..., headless and native both stop at step 6060 with the identical block string, all eight compared keys equal, frontier framebuffers byte-identical, world 17e006760c8a..."
 }
