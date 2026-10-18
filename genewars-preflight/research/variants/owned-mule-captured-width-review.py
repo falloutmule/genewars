@@ -41,10 +41,31 @@ def main():
    target=struct.unpack_from('<h',record,0x55)[0]
    if not 0<=target<300 or target==args.slot:raise ValueError('invalid owned hostile target identity')
    enemy=buffers['creatures.bin'][target*124:(target+1)*124]
+   # F15 attempt28 extension (2026-10-17): the measured 5968 record has a
+   # DEGRADED enemy - the pursuit target (neutral Mule slot 5) reached state 8
+   # (0x60=0x88, 0x61=0x40, 0x78=0, 0x55-ref back at the owned mule) while the
+   # owned mule keeps state-1 pursuit (0x60=0xc8). The source probe
+   # (private/review/attempt28-5968-probe-2a44a5da, 2542 instructions,
+   # 0 draws, trace 0x5ed20->0x6a53e) shows the executed full path
+   # 0x5ed20->0x5ed3b(JZ 0x5ee1c)->0x6fb60 virtual94 movement prefix->
+   # 0x5ee25..0x5ee32 parity gate (JNZ taken: byte[0x11877e]+[esi+0xf] odd)->
+   # 0x5eed5..0x5ef1f->0x5ef22 CALL 0x5e0b0->0x5ef32 CALL 0x5eb30->
+   # 0x5ef37..0x5ef40 (word(0x6c)=0x7ffe fresh-timer side)->0x5ef49->
+   # 0x6a22b..0x6a2dd->0x65743..0x65de6 (state-1 movement continuation)->
+   # tail 0x6a290..0x6a53e (0x6a4a0 DEC word(0x6c) executed)->0x7ac00
+   # epilogue, with ZERO accesses to the enemy record region. The enemy state
+   # is therefore admission-only data on this path; admit exactly this
+   # measured degraded shape alongside the live state-1 hostile target.
+   degraded=(record[94]==1 and enemy[6]==1 and enemy[24]==4 and enemy[122]==4
+    and enemy[94]==8 and enemy[0x60]==0x88 and enemy[0x61]==0x40 and enemy[0x78]==0
+    and struct.unpack_from('<H',enemy,0x49)[0]&0x400==0
+    and enemy[0x50:0x53]==enemy[0x55:0x58]==bytes([args.slot,0,1]))
    if not(((record[0x60] in((0x48,0xc8)if record[94]==1 else(8,0x88))and record[0x61]==0 and record[0x78]==7 and record[0x4f]==0 and record[0x5d]==0 and record[0x52]==1 and record[0x57]==1 and record[0x5a]==1 and record[0x50:0x53]==record[0x55:0x58]and record[0x58:0x5b]==record[0x55:0x58])
    or (record[94]==20 and record[0x60]==0x18 and record[0x61]==0x80 and struct.unpack_from('<h',record,0x6c)[0]>0 and record[0x78]==7 and record[0x7a]==4 and record[0x4f]==0 and record[0x5d]==0 and record[0x52]==0 and record[0x57]==1 and record[0x5a]==1 and record[0x58:0x5b]==record[0x55:0x58]) or (record[94]==20 and record[0x60]==0x18 and record[0x61]==0x80 and struct.unpack_from('<h',record,0x6c)[0]==0 and struct.unpack_from('<h',record,0x6a)[0]>0 and record[0x78]==7 and record[0x7a]==4 and record[0x4f]==0 and record[0x5d]==0 and record[0x52]==0 and record[0x57]==1 and record[0x5a]==1 and record[0x58:0x5b]==record[0x55:0x58]))):
     raise ValueError('unsupported owned hostile pursuit caller')
-   if enemy[6]!=1 or enemy[24]!=4 or enemy[122]!=4 or enemy[94]not in(1,20,21)or struct.unpack_from('<h',enemy,15)[0]!=target or struct.unpack_from('<H',enemy,0x49)[0]&0x400:
+   if not degraded and(enemy[6]!=1 or enemy[24]!=4 or enemy[122]!=4 or enemy[94]not in(1,20,21)or struct.unpack_from('<h',enemy,15)[0]!=target or struct.unpack_from('<H',enemy,0x49)[0]&0x400):
+    raise ValueError('requires exact live neutralMule state1 hostile target')
+   if not degraded and not(((enemy[0x60] in((0x48,0xc8)if enemy[94]==1 else(8,0x88))and enemy[0x61]==0x40 and enemy[0x78]==0 and struct.unpack_from('<h',enemy,0x6a)[0]>0 and struct.unpack_from('<H',enemy,0x49)[0]&0x400==0))):
     raise ValueError('requires exact live neutralMule state1 hostile target')
   state,seed,resources=g.prepare(buffers);g.k.put(state,0x11878c,1,1)
   actor_blueprints=ab.bind(state,buffers,g)if record[94]==21 else[]
